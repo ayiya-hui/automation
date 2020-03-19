@@ -1,3 +1,0 @@
-class pickleClass(object):
-    pass
-
