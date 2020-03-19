@@ -1,0 +1,558 @@
+
+<html>
+    <head>
+        <script src="sorttable.js" type="text/javascript"></script>
+        <style type="text/css">
+            #new { padding: 5px; 
+                    border-collapse: collapse; 
+                    border: 1px solid #000000; 
+                    width: 50%;
+                    }
+            #new td { border: 1px solid #000000; 
+                       padding: 3px;
+                       font-size: .9em;
+                    }
+            #new th { border: 1px solid #000000;
+                       background-color: #CCFFCC;
+                    }
+            #old { padding: 5px; 
+                    border-collapse: collapse; 
+                    border: 1px solid #000000; 
+                    width: 50%;
+                    }
+            #old td { border: 1px solid #000000; 
+                       padding: 3px;
+                       font-size: .9em;
+                    }
+            #old th { border: 1px solid #000000;
+                       background-color: #00FFCC;
+                    }
+        </style>
+        <title>Accelops Automation EventParsing Implementation Progess</title>
+    </head>
+    <body>
+        <h2>Total 125. New Parsers of 24 need to add to Automation</h2>
+        <table id="new" class="sortable">
+            <tr>
+                <th>Module Name</th>
+            </tr>
+            
+        <tbody>
+            
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/SendMailPopImapParser.html>SendMailPopImapParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/H3CComwareHPParser.html>H3CComwareHPParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/IBMISSProventiaParser.html>IBMISSProventiaParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/NCircleVAParser.html>NCircleVAParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/RuckusParser.html>RuckusParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/WebsenseMailParser.html>WebsenseMailParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/FimParser.html>FimParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/UCMCDR.html>UCMCDR</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/TipPointNMSParser.html>TipPointNMSParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/CitrixNetScalerParser.html>CitrixNetScalerParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/MySQLDBParser.html>MySQLDBParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/CommonStructuredEventParser.html>CommonStructuredEventParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/WebsenseWebParser.html>WebsenseWebParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/IBMDB2DiagParser.html>IBMDB2DiagParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/RiverbedSteelheadParser.html>RiverbedSteelheadParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/QOSMOSParser.html>QOSMOSParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/IBMDB2AuditParser.html>IBMDB2AuditParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/ForeScoutCounterACTParser.html>ForeScoutCounterACTParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/HPProCurveParser.html>HPProCurveParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/CiscoACSParserPlus.html>CiscoACSParserPlus</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/JunipNSM-SSG.html>JunipNSM-SSG</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/ReconnextLogParser.html>ReconnextLogParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/McAfeeVulnMgrParser.html>McAfeeVulnMgrParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/WinOSPullParser.html>WinOSPullParser</a></td>
+        </tr>
+
+        </tbody>
+
+        </table>
+        <hr/>
+        <h2>Total 101 Existintg Parsers are in Automation</h2>
+        <table id="old" class="sortable">
+            <tr>
+                <th>Module Name</th>
+            </tr>
+            
+        <tbody>
+            
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/SolarisLogParser.html>SolarisLogParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/SonicWallAventailWorkPlaceParser.html>SonicWallAventailWorkPlaceParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/BarracudaFirewallParser.html>BarracudaFirewallParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/SymantecAVParser.html>SymantecAVParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/CiscoNxOSParser.html>CiscoNxOSParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/F5Big-IP-LTMParser.html>F5Big-IP-LTMParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/FoundryIronwareParserPlus.html>FoundryIronwareParserPlus</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/WinDNSParser.html>WinDNSParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/BindDNSParser.html>BindDNSParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/McAfeeAVParser.html>McAfeeAVParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/DellHwStorageTrapParser.html>DellHwStorageTrapParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/ArubaWLANParser.html>ArubaWLANParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/InfoBloxTrapParser.html>InfoBloxTrapParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/NessusParser.html>NessusParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/CiscoWLC2Parser.html>CiscoWLC2Parser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/TrendMicroOfficeScanParser.html>TrendMicroOfficeScanParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/TrendMicroIDFParser.html>TrendMicroIDFParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/WebLogicParser.html>WebLogicParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/NginxParser.html>NginxParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/IISViaSnareParser.html>IISViaSnareParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/F5WebAcceleratorParser.html>F5WebAcceleratorParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/McAfeeWebGatewayParser.html>McAfeeWebGatewayParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/UnixParser.html>UnixParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/BlueCoatAuthParser.html>BlueCoatAuthParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/BluecoatWebProxyParser.html>BluecoatWebProxyParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/SendmailParser.html>SendmailParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/MicrosoftIASParser.html>MicrosoftIASParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/NagiosParser.html>NagiosParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/LinuxDHCPParser.html>LinuxDHCPParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/NetBotzCMCTrapParser.html>NetBotzCMCTrapParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/VMwareEventParser.html>VMwareEventParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/HPHwChassisTrapParser.html>HPHwChassisTrapParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/ArubaPolicyManagerParser.html>ArubaPolicyManagerParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/ESETNode32Parser.html>ESETNode32Parser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/FortiGuardParser.html>FortiGuardParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/FireEyeParser.html>FireEyeParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/NeXposeParser.html>NeXposeParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/JunOSParser.html>JunOSParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/IBMDirectorParser.html>IBMDirectorParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/CiscoWLC3Parser.html>CiscoWLC3Parser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/JunipNSM-IDP.html>JunipNSM-IDP</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/ApacheViaSnareParser.html>ApacheViaSnareParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/JunipSSGFirewallLog.html>JunipSSGFirewallLog</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/ISAServerParser.html>ISAServerParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/ZenithARCAParser.html>ZenithARCAParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/IronportMailParser.html>IronportMailParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/JunipSSLVPN.html>JunipSSLVPN</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/AstaroSecureGwParser.html>AstaroSecureGwParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/SonicWallAventailSyslogParser.html>SonicWallAventailSyslogParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/JuniperSteelBeltAAAParser.html>JuniperSteelBeltAAAParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/WatchGuardFirewallParser.html>WatchGuardFirewallParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/McAfeeFwSyslogParser.html>McAfeeFwSyslogParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/SnortParser.html>SnortParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/WinOSWmiParser.html>WinOSWmiParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/CiscoPIXParser.html>CiscoPIXParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/CiscoASAParser.html>CiscoASAParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/HPHwStorageTrapParser.html>HPHwStorageTrapParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/MicrosoftExchangeTrackingLogParser.html>MicrosoftExchangeTrackingLogParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/SourcefireParser.html>SourcefireParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/SquidParser.html>SquidParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/QualysParser.html>QualysParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/H3CComwareParser.html>H3CComwareParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/MicrosoftIASODBCParser.html>MicrosoftIASODBCParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/PaloAltoParser.html>PaloAltoParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/CiscoACSParser.html>CiscoACSParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/JEEAppServerParser.html>JEEAppServerParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/McAfeeIPSSyslogParser.html>McAfeeIPSSyslogParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/AS400CEFParser.html>AS400CEFParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/SophosParser.html>SophosParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/AIXParser.html>AIXParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/CiscoACEParser.html>CiscoACEParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/LinuxInotifyParser.html>LinuxInotifyParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/GenericDHCPParser.html>GenericDHCPParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/IronportWebParser.html>IronportWebParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/TipPointSysAuditParser.html>TipPointSysAuditParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/SonicwallFirewallParser.html>SonicwallFirewallParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/WinOSParser.html>WinOSParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/BlueCoatParser.html>BlueCoatParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/CiscoCSAParser.html>CiscoCSAParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/CiscoIPSParser.html>CiscoIPSParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/TipPointIPSParser.html>TipPointIPSParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/MobilitySystemAdminParser.html>MobilitySystemAdminParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/HuaweiVRPParser.html>HuaweiVRPParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/CiscoFWSMParser.html>CiscoFWSMParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/CheckpointParser.html>CheckpointParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/CiscoWLCParser.html>CiscoWLCParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/DellHwChassisTrapParser.html>DellHwChassisTrapParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/MSSQLParser.html>MSSQLParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/OracleViaSnareParser.html>OracleViaSnareParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/SonicWallAventailNetWorkAndWebProxyParser.html>SonicWallAventailNetWorkAndWebProxyParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/UntangleWebProxyParser.html>UntangleWebProxyParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/WinDHCPParser.html>WinDHCPParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/CiscoIOSParser.html>CiscoIOSParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/MicrosoftPPTPParser.html>MicrosoftPPTPParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/RadvisionParser.html>RadvisionParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/F5ASMCEFParser.html>F5ASMCEFParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/OracleDBParser.html>OracleDBParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/FoundryIronwareParser.html>FoundryIronwareParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/CiscoVPN3KParser.html>CiscoVPN3KParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/ExtremeSwitchParser.html>ExtremeSwitchParser</a></td>
+        </tr>
+
+        <tr>
+            <td><a href=http://192.168.20.214/parsersInfo/F5BigIP-OSTrapParser.html>F5BigIP-OSTrapParser</a></td>
+        </tr>
+
+        </tbody>
+
+        </table>
+    </body>
+</html>
