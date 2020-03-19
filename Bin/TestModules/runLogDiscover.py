@@ -51,8 +51,6 @@ class logDiscoverTest(baseTest):
         return map
 
     def run(self, myType, testKey):
-        import pdb
-        pdb.set_trace()
         if myType.isApp:
             appDev=True
         else:

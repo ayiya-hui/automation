@@ -1,7 +1,7 @@
 eventType,name,module,reptDevIpAddr,key,method
 FortiGate-event-login-failure,FortiGate_1,FortiGate,$localhost,user:root,syslog
 FortiGate-event-login-failure,FortiGate_2,FortiGate,$localhost,user:admin,syslog
-FortiGate-event-login-success,FortiGate_3,FortiGate,$localhost,,syslog
+FortiGate-event-admin-login-success,FortiGate_3,FortiGate,$localhost,,syslog
 FortiGate-event-admin-logout,FortiGate_4,FortiGate,$localhost,,syslog
 FortiGate-event-protection-profile-change,FortiGate_5,FortiGate,$localhost,,syslog
 FortiGate-event-interface-up,FortiGate_6,FortiGate,$localhost,,syslog
