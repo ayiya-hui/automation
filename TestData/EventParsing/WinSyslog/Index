@@ -1,0 +1,4 @@
+eventType,name,module,reptDevIpAddr,key,method
+Win-Security-4776,WinSyslog_1,WinSyslog,10.1.2.65,,syslog
+Win-Directory-Service-NTDS-ISAM-700,WinSyslog_2,WinSyslog,$localhost,,syslog
+Win-Directory-Service-NTDS-ISAM-701,WinSyslog_3,WinSyslog,$localhost,,syslog

@@ -26,5 +26,3 @@ Win-Security-578,WinOS_26,WinOS,52.52.52.52,,syslog
 Win-Security-560,WinOS_27,WinOS,52.52.52.52,,syslog
 Win-Security-567,WinOS_28,WinOS,52.52.52.52,,syslog
 Win-System-MSFTPSVC-100,WinOS_29,WinOS,$localhost,,syslog
-Win-Directory-Service-NTDS-ISAM-700,WinOS_30,WinOS,$localhost,,syslog
-Win-Directory-Service-NTDS-ISAM-701,WinOS_31,WinOS,$localhost,,syslog

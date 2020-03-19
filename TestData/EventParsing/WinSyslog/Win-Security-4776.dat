@@ -4,7 +4,7 @@
 <13>Feb 3 06:29:39 $reporter MSWinEventLog	1	Security	5883084	Wed Feb 03 06:29:33 2016	4776	Microsoft-Windows-Security-Auditing	N/A	N/A	Information	DC3.copera.org	None	The computer attempted to validate the credentials for an account. Authentication Package: MICROSOFT_AUTHENTICATION_PACKAGE_V1_0 Logon Account: $discovery	Source Workstation: AO	Error Code: 0x0	5875524
 [params]
 deviceTime=any
-parserName=WinOSParser
+parserName=WinSyslogParser
 eventType=Win-Security-4776
 destIpAddr=$reporter
 computer=AO

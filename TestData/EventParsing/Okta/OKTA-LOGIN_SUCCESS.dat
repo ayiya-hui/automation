@@ -5,7 +5,7 @@ Wed Jul  9 15:10:24 2014 AccelOps-Okta [action/message]=Sign-in successful [acti
 [params]
 deviceTime=any
 parserName=OktaParser
-eventType=OKTA-.LOGIN_SUCCESS
+eventType=OKTA-LOGIN_SUCCESS
 userType=Client
 srcIpAddr=211.144.207.10
 targetName=YaXin Hu
@@ -14,7 +14,7 @@ eventId=any
 eventTime=Wed Jul 09 07:04:54 CST 2014
 eventParsedOk=1
 eventSeverity=1
-eventName=OKTA-.LOGIN_SUCCESS
+eventName=Okta login success
 extEventRecvProto=Syslog
 phEventCategory=0 (External)
 msg=core.user_auth.login_success

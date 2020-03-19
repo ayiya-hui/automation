@@ -47,6 +47,5 @@ Win-System-Microsoft-Windows-DistributedCOM-10028,WinOSWmi_42,WinOSWmi,192.168.0
 
 Win-Security-531,WinOSWmi_43,WinOSWmi,10.162.24.101,,syslog
 Win-Security-LOGbndSC-47,WinOSWmi_44,WinOSWmi,20.20.20.20,,syslog
-Win-Security-4776,WinOSWmi_45,WinOSWmi,10.1.2.65,,syslog
 Win-Security-4801,WinOSWmi_46,WinOSWmi,10.1.2.65,,syslog
 Win-Security-4800,WinOSWmi_47,WinOSWmi,10.1.2.65,,syslog

@@ -6,7 +6,7 @@
 deviceTime=any
 eventType=FortiGate-event-authenticate-lockout
 phCustId=$sender
-reptGeoState=Connecticut
+reptGeoState=any
 srcIpAddr=10.1.20.21
 usrMsg=Usre at 10.1.20.21 failed authentication too many times.
 reptModel=FortiOS

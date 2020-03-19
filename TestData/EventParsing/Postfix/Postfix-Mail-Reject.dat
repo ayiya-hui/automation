@@ -6,7 +6,7 @@ $localhost
 deviceTime=any
 destGeoOrg=any
 parserName=PostfixParser
-receiverMailAddr=mmutisya@cdsckenya.com
+receiverMailAddr=chunying.yang@accelops.com 
 eventType=Postfix-Mail-Reject
 destGeoState=Nairobi Area
 destIpAddr=41.78.26.196

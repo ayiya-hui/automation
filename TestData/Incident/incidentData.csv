@@ -32,8 +32,8 @@ PH_RULE_RV_HW_REMOVE,Radvision Hardware Removed,$localhost,,,,,1,syslog
 PH_RULE_RV_ISDN_DOWN,Radvision ISDN Loss,$localhost,,,,,1,syslog
 PH_RULE_SERVER_HW_CRITICAL,Server Hardware Critical,11.3.0.1,TRUE,automator11Dot3Dot0Dot1,linux,,1,syslog
 PH_RULE_SERVER_HW_WARN,Server Hardware Warning,11.4.0.1,TRUE,automator11Dot4Dot0Dot1,linux,,1,syslog
-PH_RULE_DEGRADED_PING_SERVER,Server Degraded-Lossy Ping Response,11.2.0.1,TRUE,automator11Dot2Dot0Dot1,linux,,1,syslog
-PH_RULE_NON_RESPONSIVE_SERVER,Server Down-no ping response,11.1.0.1,TRUE,automator11Dot1Dot0Dot1,linux,,1,syslog
+PH_RULE_DEGRADED_PING_SERVER,Server Degraded: Lossy Ping Response,11.2.0.1,TRUE,automator11Dot2Dot0Dot1,linux,,1,syslog
+PH_RULE_NON_RESPONSIVE_SERVER,Server Down: No Ping Response,11.1.0.1,TRUE,automator11Dot1Dot0Dot1,linux,,1,syslog
 PH_RULE_ACCELOPS_HIGH_EPS,System License Warning: High Event Rate,13.4.0.1,,,,,1,syslog
 PH_RULE_ACCELOPS_MAX_DEVICE_EXCEEDED,System License Warning: Max Number of Devices Exceeded License,$localhost,,,,,1,syslog
 PH_RULE_ACCELOPS_LOW_STORAGE,System Warning: Low Storage,13.4.0.2,,,,,1,syslog
