@@ -109,7 +109,6 @@ NetApp,30.200.150.1,DataONTAP,NetApp,
 NetBotzCMCTrap,30.200.151.1,NetBotz,APC,
 Okta,30.200.153.1,OKTA,OKTA.com,
 PfSense,30.200.156.1,BSD Firewall,pfSense,
-PHBeacon,30.200.157.1,FortiSIEM,Fortinet,TRUE
 PulseSecure,30.200.158.1,Pulse Connect,Pulse Secure,
 QNAP,30.200.160.1,Turbo NAS,QNAP,
 QOSMOS,30.200.161.1,DeepFlow,Qosmos,
