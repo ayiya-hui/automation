@@ -1,0 +1,34 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<133>[2016-04-26 16:10:25] EFW: TCP_FLAG: prio=2 id=03300004 rev=1 event=tcp_flag_set action=strip_flag bad_flag=ECN rule=TCPECN recvif=If3 srcip=192.168.99.10 destip=76.77.136.44 ipproto=TCP ipdatalen=32 srcport=59888 destport=443 tcphdrlen=32 syn=1 ece=1 cwr=1
+[params]
+deviceTime=any
+tcpLen=32
+parserName=ClavisterParser
+eventType=Clavister-tcp-flag-set
+ipProto=6 (TCP)
+srcIpAddr=192.168.99.10
+reptModel=cOS Firewall
+eventId=any
+logID=3300004
+eventParsedOk=1
+eventSeverity=3
+fwAction=strip_flag
+eventName=Clavister-tcp-flag-set
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+ipTotalLength=32
+count=1
+srcIpPort=59888
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+destIpPort=443 (HTTPS)
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Clavister
+fwRule=TCPECN

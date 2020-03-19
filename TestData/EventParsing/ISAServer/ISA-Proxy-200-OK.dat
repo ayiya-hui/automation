@@ -1,0 +1,76 @@
+[reptDevIpAddr(key)]
+$localhost (fwRule:Local Machine)
+[eventMsg]
+<13>Mar  6 20:56:03 ISA.test.local ISAWebLog	0	192.168.69.9	anonymous	Mozilla/5.0 (Windows; U; Windows NT 5.2; en-GB; rv:1.9.2.12) Gecko/20101026 Firefox/3.6.12	Y	2011-03-05	21:33:55	w3proxy	ISA	-	92.122.217.139	92.122.217.139	80	625	440	62544	http	TCP	GET	http://92.122.217.139/news/rss.xml?edition=uk	text/xml	Inet	200	0x61a00102	Local Machine	Req ID: 07c10448; Compression: client=No, server=No, compress rate=0% decompress rate=0%	Local Host	External	0x400	Allowed	2011-03-05	21:33:55	-
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+count=1
+phCustId=$sender
+destName=92.122.217.139
+destIpAddr=92.122.217.139
+destIntfName=External
+destIpPort=80 (HTTP)
+deviceTime=any
+durationMSec=625
+eventId=any
+eventName=OK
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=1
+eventSeverityCat=LOW
+eventType=ISA-Proxy-200-OK
+fwRule=Local Machine
+httpMethod=GET
+httpStatusCode=200 (The request has succeeded)
+httpUserAgent=Mozilla/5.0 (Windows; U; Windows NT 5.2; en-GB; rv:1.9.2.12) Gecko/20101026 Firefox/3.6.12
+ipProto=6 (TCP)
+infoURL=http://92.122.217.139/news/rss.xml?edition=uk
+fwAction=Allowed
+recvBytes=440
+reptDevIpAddr=$reporter
+reptModel=ISA Server
+reptVendor=Microsoft
+sentBytes=62544
+srcIpAddr=192.168.69.9
+srcIntfName=Local Host
+user=anonymous
+srvInstName=w3proxy
+[reptDevIpAddr(key)]
+$localhost (fwRule:Web Outgoing)
+[eventMsg]
+<13>Mar 16 21:08:46 ISA.test.local ISAWebLog   0	192.168.69.20	anonymous	-	Y	2011-03-16	21:08:31	w3proxy	ISA	-	stork63.dropbox.com	174.36.30.16	80	74156	191	266	http	TCP	GET	http://stork63.dropbox.com:80/subscribe?host_int=38969578&ns_map=29944581_55864519429,29945077_42979618037&ts=1300309632	text/html; charset=ISO-8859-1	Inet	200	0x40040000	Web Outgoing	Req ID: 028453a1; Compression: client=No, server=No, compress rate=0% decompress rate=0%	Internal	External	0xd80	Allowed	2011-03-16 21:08:31	-
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+count=1
+phCustId=$sender
+destName=stork63.dropbox.com
+destIpAddr=174.36.30.16
+destIntfName=External
+destIpPort=80 (HTTP)
+deviceTime=any
+durationMSec=74156
+eventId=any
+eventName=OK
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=1
+eventSeverityCat=LOW
+eventType=ISA-Proxy-200-OK
+fwRule=Web Outgoing
+httpMethod=GET
+httpStatusCode=200 (The request has succeeded)
+httpUserAgent=-
+ipProto=6 (TCP)
+infoURL=http://stork63.dropbox.com:80/subscribe?host_int=38969578&ns_map=29944581_55864519429,29945077_42979618037&ts=1300309632
+fwAction=Allowed
+recvBytes=191
+reptDevIpAddr=$reporter
+reptModel=ISA Server
+reptVendor=Microsoft
+sentBytes=266
+srcIpAddr=192.168.69.20
+srcIntfName=Internal
+user=anonymous
+srvInstName=w3proxy

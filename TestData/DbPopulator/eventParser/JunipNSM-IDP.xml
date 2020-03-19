@@ -1,0 +1,157 @@
+<eventParser name="JunipNSM-IDP">
+
+	<deviceType>
+		<Vendor>Generic</Vendor>
+		<Model>Generic</Model>
+		<Version>ANY</Version>
+	</deviceType>
+
+	<appType>
+		<Vendor>Juniper</Vendor>
+		<Model>NSM</Model>
+		<Version>ANY</Version>
+		<Name>Network and Security Manager</Name>
+	</appType>
+
+	<attachedDeviceType>
+		<Vendor>Juniper</Vendor>
+		<Model>IDP</Model>
+		<Version>ANY</Version>
+	</attachedDeviceType>
+
+	<patternDefinitions>
+		<pattern name="patLogInOut"><![CDATA[in|out]]></pattern>
+		<pattern name="patMethod"><![CDATA[http|https|ssh]]></pattern>
+	</patternDefinitions>
+
+	<eventFormatRecognizer><![CDATA[(<:gPatSyslogPRI><:gPatMon>\s+<:gPatDay>\s+<:gPatTime>\s+<:gPatIpV4Dot>\s+<:gPatInt>,\s+<:gPatInt>,\s+<:gPatYear>/<:gPatMon>/<:gPatDay>\s+<:gPatTime>,\s+<:gPatYear>/<:gPatMon>/<:gPatDay>\s+<:gPatTime>,\s+.*IDP,)|(<:gPatSyslogPRI><:gPatMon>\s+<:gPatDay>\s+<:gPatTime>\s+<:gPatIpV4Dot>\s+<:gPatInt>,\s+<:gPatInt>,\s+<:gPatYear>/<:gPatMon>/<:gPatDay>\s+<:gPatTime>,\s+<:gPatYear>/<:gPatMon>/<:gPatDay>\s+<:gPatTime>,\s+<:gPatStrComma>,\s+<:gPatInt>,\s+<:gPatStrComma>,\s+<:gPatStrComma>,\s+predefined)|(<:gPatSyslogPRI><:gPatMon>\s+<:gPatDay>\s+<:gPatTime>\s+<:gPatIpV4Dot>\s+<:gPatInt>,\s+<:gPatInt>,\s+<:gPatYear>/<:gPatMon>/<:gPatDay>\s+<:gPatTime>,\s+<:gPatYear>/<:gPatMon>/<:gPatDay>\s+<:gPatTime>,\s+<:gPatStrComma>,\s+<:gPatInt>,\s+<:gPatStrComma>,\s+<:gPatStrComma>,\s+traffic,\s+<:gPatStrComma>,\s+<:gPatStrComma>,\s+<:gPatStrComma>,\s+<:gPatStrComma>,\s+<:gPatStrComma>,\s+<:gPatStrComma>,\s+<:gPatStrComma>,\s+<:gPatStrComma>,\s+<:gPatStrComma>,\s+<:gPatStrComma>,\s+<:gPatStrComma>,\s+<:gPatStrComma>,\s+<:gPatStrComma>,\s+<:gPatStrComma>,\s+<:gPatStrComma>,\s+<:gPatStrComma>,\s+<:gPatStrComma>,\s+traffic anomalies)]]></eventFormatRecognizer>
+	
+	<testEvents>
+	      <testEvent><![CDATA[<25>Oct 11 14:29:27 10.146.68.68 20101011, 58420089, 2010/10/11 18:29:25, 2010/10/11 18:33:12, global.IDP, 1631, par-real-idp200, 10.146.68.73, traffic, udp port scan in progress, (NULL), (NULL), 161.178.223.221, 0, 0.0.0.0, 0, (NULL), (NULL), 10.248.8.110, 0, 0.0.0.0, 0, udp, global.IDP, 1631, Metro IDP IP / Port Scan Policy, traffic anomalies, 2, accepted, info, yes, 'interface=eth3', (NULL), (NULL), (NULL), 0, 0, 0, 0, 0, 0, 0, 0, no, 25, Not]]></testEvent>
+	  </testEvents>
+
+	<parsingInstructions>
+
+		<setEventAttribute attr="eventType">combineMsgId("Juniper_IDP", "-", "Generic")</setEventAttribute>
+
+		<collectFieldsByRegex src="$_rawmsg">
+			<regex><![CDATA[<:gPatSyslogPRI>\s*<:gPatMon>\s+<:gPatDay>\s+<:gPatTime>\s+<relayDevIpAddr:gPatIpV4Dot>\s+<:gPatInt>,\s+<:gPatInt>,\s+<:gPatYear>/<:gPatMon>/<:gPatDay>\s+<:gPatTime>,\s+<_year:gPatYear>/<_mon:gPatMon>/<_day:gPatDay>\s+<_time:gPatTime>,\s+<_traffictype:gPatStrComma>,\s+<:gPatInt>,\s+<reptDevName:gPatStrComma>,\s+<_ipOrCategory:gPatStrComma>,\s+<_body:gPatMesgBody>]]></regex>
+		</collectFieldsByRegex>
+
+		<choose>
+			<when test="matches($_ipOrCategory, gPatIpV4Dot)">
+				<setEventAttribute attr="reptDevIpAddr">$_ipOrCategory</setEventAttribute>
+				<collectFieldsByRegex src="$_body">
+					<regex><![CDATA[<_logtype:gPatStrComma>,\s+<_threatname:gPatStrComma>,\s+<_body:gPatMesgBody>]]></regex>
+				</collectFieldsByRegex>
+			</when>
+			<otherwise>
+				<collectFieldsByRegex src="$_body">
+					<regex><![CDATA[<_logtype:gPatStrComma>,\s+<_body:gPatMesgBody>]]></regex>
+				</collectFieldsByRegex>
+			</otherwise>
+		</choose>
+
+		<when test="$reptDevIpAddr = '0.0.0.0'">
+			<setEventAttribute attr="reptDevIpAddr">$relayDevIpAddr</setEventAttribute>
+		</when>
+
+		<setEventAttribute attr="deviceTime">toDateTime($_mon, $_day, $_year, $_time)</setEventAttribute>
+		<collectAndSetAttrByPos src="$_body" sep=", ">
+			<attrPosMap attr="srcFwZone" pos='1'/>
+			<attrPosMap attr="_srcIntfName" pos='2'/>
+			<attrPosMap attr="srcIpAddr" pos='3'/>
+			<attrPosMap attr="srcIpPort" pos='4'/>
+			<attrPosMap attr="postNATSrcIpAddr" pos='5'/>
+			<attrPosMap attr="postNATSrcIpPort" pos='6'/>
+			<attrPosMap attr="destFwZone" pos='7'/>
+			<attrPosMap attr="_destIntfName" pos='8'/>
+			<attrPosMap attr="preNATDestIpAddr" pos='9'/>
+			<attrPosMap attr="preNATDestIpPort" pos='10'/>
+			<attrPosMap attr="destIpAddr" pos='11'/>
+			<attrPosMap attr="destIpPort" pos='12'/>
+			<attrPosMap attr="_proto" pos='13'/>
+			<attrPosMap attr="policyName" pos='16'/>
+			<attrPosMap attr="_rulebase" pos='17'/>
+			<attrPosMap attr="_action" pos='19'/>
+			<attrPosMap attr="_severity" pos='20'/>
+			<attrPosMap attr="_custommsg" pos='23'/>
+			<attrPosMap attr="_uriStem" pos='25'/>
+			<attrPosMap attr="_connDuration" pos='26'/>
+			<attrPosMap attr="sentBytes" pos='27'/>
+			<attrPosMap attr="recvBytes" pos='28'/>
+			<attrPosMap attr="totBytes" pos='29'/>
+			<attrPosMap attr="sentPkts" pos='30'/>
+			<attrPosMap attr="recvPkts" pos='31'/>
+			<attrPosMap attr="totPkts" pos='32'/>
+		</collectAndSetAttrByPos>
+
+		<when test="$_srcIntfName != '(NULL)'">
+			<setEventAttribute attr="srcIntfName">$_srcIntfName</setEventAttribute>
+		</when>
+
+		<when test="$_destIntfName != '(NULL)'">
+			<setEventAttribute attr="destIntfName">$_destIntfName</setEventAttribute>
+		</when>
+
+		<setEventAttribute attr="ipProto">convertStrToIntIpProto($_proto)</setEventAttribute>
+
+		<when test="$_logtype = 'predefined'">
+			<when test="$_rulebase = 'idp'">
+				<setEventAttribute attr="eventType">combineMsgId("Juniper_IDP", "-", "$_threatname")</setEventAttribute>
+			</when>
+		</when>
+
+		<when test="$_logtype = 'traffic'">
+		     <setEventAttribute attr="eventType">combineMsgId("Juniper_IDP", "-", "$_threatname")</setEventAttribute>
+		     <!--        <when test="$_rulebase = 'traffic anomalies'"> -->
+                     <!--                                 <setEventAttribute attr="eventType">combineMsgId("Juniper_IDP", "-", "$_threatname")</setEventAttribute> -->
+		     <!--        </when> -->
+		</when>	
+
+		<choose>
+			<when test="$_severity = 'info'">
+				<setEventAttribute attr="eventSeverity">2</setEventAttribute>
+			</when>
+			<when test="$_severity = 'warning">
+				<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+			</when>
+			<when test="$_severity = 'minor">
+				<setEventAttribute attr="eventSeverity">4</setEventAttribute>
+			</when>
+			<when test="$_severity = 'major">
+				<setEventAttribute attr="eventSeverity">6</setEventAttribute>
+			</when>
+			<when test="$_severity = 'critical'">
+				<setEventAttribute attr="eventSeverity">8</setEventAttribute>
+			</when>
+			<otherwise>
+				<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+			</otherwise>
+		</choose>
+
+		<!-- User Field is Not Set Correctly, Commenting this out
+		<when test="$_custommsg != '(NULL)'">
+			<setEventAttribute attr="user">$_custommsg</setEventAttribute>
+		</when>
+		-->
+
+		<when test="$_uriStem != '(NULL)'">
+			<setEventAttribute attr="uriStem">$_uriStem</setEventAttribute>
+		</when>
+
+		<setEventAttribute attr="durationMSec">combineMsgId($_connDuration,"000")</setEventAttribute>
+
+		<when test="$postNATSrcIpAddr = '0.0.0.0'">
+			<setEventAttribute attr="postNATSrcIpAddr">$srcIpAddr</setEventAttribute>
+			<setEventAttribute attr="postNATSrcIpPort">$srcIpPort</setEventAttribute>
+		</when>
+
+		<when test="$destIpAddr = '0.0.0.0'">
+			<setEventAttribute attr="destIpAddr">$preNATDestIpAddr</setEventAttribute>
+			<setEventAttribute attr="destIpPort">$preNATDestIpPort</setEventAttribute>
+		</when>
+
+	</parsingInstructions>
+
+</eventParser>

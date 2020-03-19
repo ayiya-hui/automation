@@ -1,0 +1,24 @@
+[reptDevIpAddr(key)]
+1.2.3.4
+[eventMsg]
+<16>Apr 18 12:21:50 1.2.3.4 su: BAD SU from nrautela to rels at /dev/pts/0--automator
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=5
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=MEDIUM
+destIpAddr=any
+eventAction=1 (Deny)
+eventName=Failed switch user
+targetUser=rels
+reptVendor=Generic
+eventType=Generic_Unix_Failed_Switch_User
+user=nrautela
+phEventCategory=0 (External)
+reptDevIpAddr=any
+reptModel=Unix

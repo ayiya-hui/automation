@@ -1,0 +1,8 @@
+eventType,name,module,reptDevIpAddr,key,method
+Aventail-System-Session-Auth-Restore,SonicWallAventailSyslog_1,SonicWallAventailSyslog,$localhost,,syslog
+Aventail-System-EWACL-Success,SonicWallAventailSyslog_2,SonicWallAventailSyslog,$localhost,,syslog
+Aventail-System-Audit-Generic,SonicWallAventailSyslog_3,SonicWallAventailSyslog,$localhost,,syslog
+Aventail-System-Session-Generic,SonicWallAventailSyslog_4,SonicWallAventailSyslog,$localhost,,syslog
+Aventail-System-CSACL-Success,SonicWallAventailSyslog_5,SonicWallAventailSyslog,$localhost,,syslog
+Aventail-System-Policy-Generic,SonicWallAventailSyslog_6,SonicWallAventailSyslog,$localhost,,syslog
+Aventail-System-VPNLoginSuccess,SonicWallAventailSyslog_7,SonicWallAventailSyslog,$localhost,,syslog

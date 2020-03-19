@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<22>Feb  2 17:25:37 mlinzi postfix/postfix-script[32738]: stopping the Postfix mail system
+[params]
+deviceTime=any
+parserName=PostfixParser
+eventType=Postfix-Mail-Stop
+procName=postfix-script
+reptGeoState=Shanghai
+reptModel=Postfix
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=SMTP mail system stopped
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+eventRuleTrigger=1
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+reptDevName=mlinzi
+customer=Super
+reptGeoCity=any
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Generic

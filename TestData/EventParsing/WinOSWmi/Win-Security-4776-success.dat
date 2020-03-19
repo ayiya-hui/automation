@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+20.20.20.120
+[eventMsg]
+Fri Oct 30 18:19:58 2009 $reporter AccelOps-WinLog-WMI  [Category]="14336" [CategoryString]="Credential Validation" [ComputerName]="sf1dc03.jha.local" [Data]="NULL" [EventCode]="4776" [EventIdentifier]="4776" [EventType]="4" [Logfile]="Security" [RecordNumber]="184035361" [SourceName]="Microsoft-Windows-Security-Auditing" [TimeGenerated]="20100505222913.353301-000" [TimeWritten]="20100505222913.353301-000" [Type]="Audit Success" [User]="(null)" [Authentication Package]="MICROSOFT_AUTHENTICATION_PACKAGE_V1_0" [Logon Account]="riverbedadmin" [Source Workstation]="SF01VMAC"
+[params]
+rawEventMsg=any
+type=Audit Success
+eventAction=0 (Permit)
+count=1
+eventId=any
+winLogonFailCode=0
+deviceTime=any
+eventParsedOk=1
+reptVendor=Microsoft
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=$reporter
+eventName=Windows local or domain-via-NTLM authentication successful
+computer=sf1dc03.jha.local
+eventType=Win-Security-4776-success
+user=riverbedadmin
+phEventCategory=0 (External)
+reptDevIpAddr=$reporter
+reptModel=Windows
+eventSource=Microsoft-Windows-Security-Auditing

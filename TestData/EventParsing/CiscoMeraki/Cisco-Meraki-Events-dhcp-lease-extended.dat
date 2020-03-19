@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+192.168.10.1
+[eventMsg]
+May 10 18:46:04 192.168.10.1 1 948080570.911780502 MX60 events dhcp lease of ip 192.168.10.252 from server mac 00:18:0A:12.34.56 for client mac 58:67:1A:12.34.56 from router 192.168.10.1 on subnet 255.255.255.0 with dns 8.8.8.8, 8.8.4.4
+[params]
+destMACAddr=00:18:0a:12:34:56
+parserName=CiscoMerakiParser
+eventType=Cisco-Meraki-Events-dhcp-lease-extended
+destIpAddr=192.168.10.1
+srcIpAddr=192.168.10.252
+reptModel=Meraki Firewall
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Cisco-Meraki-Events-dhcp-lease-extended
+phEventCategory=0 (External)
+eventRuleTrigger=1
+count=1
+srcMACAddr=58:67:1a:12:34:56
+eventSeverityCat=LOW
+collectorId=any
+reptDevName=any
+customer=Super
+dhcpSubnetAddr=255.255.255.0
+dnsServer=8.8.8.8
+phRecvTime=any
+reptDevIpAddr=192.168.10.1
+reptVendor=Cisco

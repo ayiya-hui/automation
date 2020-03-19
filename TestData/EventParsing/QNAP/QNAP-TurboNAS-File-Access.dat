@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<30>Jun 25 14:41:36 Galaxy qlogd[8029]: conn log: Users: TWINSTATE\cmaulding143, Source IP: 192.168.1.111, Computer name: 192.168.1.111, Connection type: SAMBA, Accessed resources: RMAT/AN Deringer - MPLS Project/desktop.ini, Action: Read
+[params]
+domain=TWINSTATE
+parserName=QNAPParser
+eventType=QNAP-TurboNAS-File-Access
+srcIpAddr=192.168.1.111
+reptModel=Turbo NAS
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=QNAP-TurboNAS-File-Access
+appTransportProto=SAMBA
+phEventCategory=0 (External)
+eventRuleTrigger=1
+count=1
+fileAccess=Read
+eventSeverityCat=LOW
+collectorId=any
+fileName=RMAT/AN Deringer - MPLS Project/desktop.ini
+relayDevIpAddr=$localhost
+user=cmaulding143
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=QNAP

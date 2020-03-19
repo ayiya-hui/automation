@@ -1,0 +1,2 @@
+[eventMsg]
+<174>Jan 20 05:06:19 CO135 phPerfMonitor[2861]: [PH_DEV_MON_UPS_METRIC]:[eventSeverity]=PHL_INFO,[procName]=phPerfMonitor,[fileName]=phPerfJob.cpp,[lineNumber]=4802,[hostName]=Automator15Dot0Dot8Dot1,[hostIpAddr]=15.0.8.1,[upsRemainBatteryChargePct]=97,[upsBatteryStatus]=2,[upsTimeOnBattery]=0,[upsEstSecRemain]=5460,[upsBatteryVoltage]=545.200000,[upsBatteryCurrent]=0.700000,[upsBatteryTempC]=24,[upsBatteryTempF]=75,[upsAdvOutputFreq]=75,[upsAdvOutputVoltage]=90,[phLogDetail]=

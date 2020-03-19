@@ -1,0 +1,24 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<52>Apr 11 13:08:22 SymantecServer $localhost: 4200-MONSTER,Category: 2,LiveUpdate Manager,An update for Intrusion Prevention Signatures was successfully installed.  The new sequence number is 140410012.
+[params]
+customer=Super
+eventId=any
+parserName=SymantecAVParser
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=MEDIUM
+count=1
+eventSeverity=5
+eventType=Symantec-AV-Updated
+reptDevIpAddr=$localhost
+collectorId=any
+eventName=An update for Intrusion Prevention Signatures from LiveUpdate was successfully installed
+reptVendor=Symantec
+relayDevIpAddr=$localhost
+phRecvTime=any
+seqNum=140410012
+reptDevName=any
+reptModel=Endpoint Protection Service

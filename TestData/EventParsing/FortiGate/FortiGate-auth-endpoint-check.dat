@@ -1,0 +1,30 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<181>date=2013-05-01 time=11:20:50 devname=FortiGate80C devid=FGT80C3912622808 logid=0102043021 type=event subtype=user level=notice vd=root dst=2.2.2.2 ui=HTTP(0.0.0.0) msg=forticlient msg
+[params]
+deviceTime=any
+destGeoOrg=any
+eventType=FortiGate-auth-endpoint-check
+phCustId=$sender
+destIpAddr=2.2.2.2
+destGeoCountry=any
+usrMsg=forticlient msg
+reptModel=FortiOS
+eventId=any
+eventParsedOk=1
+eventSeverity=3
+eventName=FortiGate Endpoint check
+appTransportProto=HTTP
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+reptDevName=any
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+destName=any
+reptVendor=Fortinet
+destGeoCity=any

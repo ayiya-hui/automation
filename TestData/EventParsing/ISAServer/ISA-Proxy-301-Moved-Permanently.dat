@@ -1,0 +1,38 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<13>Mar  6 20:56:03 $reporter ISAWebLog	0	192.168.69.9	anonymous	Mozilla/5.0 (Windows; U; Windows NT 5.2; en-GB; rv:1.9.2.12) Gecko/20101026 Firefox/3.6.12	Y	2011-03-05	21:33:55	w3proxy	ISA	-	212.58.246.82	212.58.246.82	80	156	636	634	http	TCP	GET	http://212.58.246.82/rss/newsonline_uk_edition/front_page/rss.xml	text/html; charset=iso-8859-1	Inet	301	0x41200100	Local Machine	Req ID: 07c10445; Compression: client=No, server=No, compress rate=0% decompress rate=0%	Local Host	External	0x400	Allowed	2011-03-05 21:33:55	-
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+count=1
+phCustId=$sender
+destName=212.58.246.82
+destIpAddr=212.58.246.82
+destIntfName=External
+destIpPort=80 (HTTP)
+deviceTime=any
+durationMSec=156
+eventId=any
+eventName=Moved Permanently
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=1
+eventSeverityCat=LOW
+eventType=ISA-Proxy-301-Moved-Permanently
+fwRule=Local Machine
+httpMethod=GET
+httpStatusCode=301 (Moved Permanently - The requested resource has been assigned a new permanent URI and any future references to this resource SHOULD use one of the returned URI)
+httpUserAgent=Mozilla/5.0 (Windows; U; Windows NT 5.2; en-GB; rv:1.9.2.12) Gecko/20101026 Firefox/3.6.12
+ipProto=6 (TCP)
+infoURL=http://212.58.246.82/rss/newsonline_uk_edition/front_page/rss.xml
+fwAction=Allowed
+recvBytes=636
+reptDevIpAddr=$reporter
+reptModel=ISA Server
+reptVendor=Microsoft
+sentBytes=634
+srcIpAddr=192.168.69.9
+srcIntfName=Local Host
+user=anonymous
+srvInstName=w3proxy

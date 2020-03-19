@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+2015-11-11T13:12:27.550411-05:00 usmafrarfs70001 %USER-3-ERR: hslogin.c: CP Login: Invalid query string, POST form is not complete
+[params]
+errReason=hslogin.c: CP Login: Invalid query string, POST form is not complete
+customer=Super
+eventSeverityCat=MEDIUM
+eventParsedOk=1
+phEventCategory=0 (External)
+parserName=MotorolaWiNGParser
+count=1
+eventSeverity=5
+eventType=Motorola-WiNG-USER-ERR
+reptDevIpAddr=$localhost
+collectorId=any
+eventName=Motorola WLAN AP: User Error
+reptVendor=Motorola
+relayDevIpAddr=$localhost
+extEventRecvProto=Syslog
+phRecvTime=any
+eventRuleTrigger=1
+eventId=any
+reptDevName=usmafrarfs70001
+reptModel=WiNG WLAN AP

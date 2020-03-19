@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>Dec 05 2008 13:02:16: %ASA-6-109006: Authentication failed for user admin from 10.10.10.10/2456 to 192.168.20.20/1537 on interface eth04.
+[params]
+rawEventMsg=any
+deviceTime=any
+eventType=ASA-109006
+phCustId=$sender
+destIpAddr=192.168.20.20
+srcIpAddr=10.10.10.10
+reptModel=ASA
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=AAA Authen failed - likely bad credentials
+phEventCategory=0 (External)
+srcIntfName=eth04
+srcIpPort=2456
+eventSeverityCat=LOW
+user=admin
+destIpPort=1537
+count=1
+phRecvTime=any
+reptDevIpAddr=$reporter
+eventAction=1 (Deny)
+reptVendor=Cisco

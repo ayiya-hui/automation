@@ -1,0 +1,23 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>Juniper: 2008-10-28 03:30:29 - ive - [172.16.3.150] admin(Admin Users)[.Administrators] - Session timed out for admin/Admin Users due to inactivity (last access at 03:11:40 2008/10/28). Idle session identified during routine system scan.
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+eventAction=0 (Permit)
+eventName=Session timed out for users
+reptVendor=Juniper
+eventType=Juniper-SecureAccess-Session-Timeout
+user=admin
+phEventCategory=0 (External)
+reptDevIpAddr=$localhost
+userGrp=.Administrators
+reptModel=Secure Access

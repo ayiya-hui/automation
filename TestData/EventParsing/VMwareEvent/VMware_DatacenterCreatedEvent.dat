@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+192.168.24.11
+[eventMsg]
+<134>Nov 18 17:22:54 192.168.24.11 java: [VMware_DatacenterCreatedEvent], [eventTime]=2009-11-18 17:22:21:207, [rptIp]=192.168.24.11, [user]=Administrator, [vmwEventId]=67653, [vmwEventCat]=info, [datacenter]=New Datacenter, [folder]=Datacenters, [vmwEventMsg]=Created datacenter New Datacenter in folder Datacenters
+[params]
+rawEventMsg=any
+count=1
+datacenter=New Datacenter
+deviceTime=any
+eventParsedOk=1
+vmwEventCat=info
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+vmwEventMsg=Created datacenter New Datacenter in folder Datacenters
+eventName=Datacenter created
+reptDevIpAddr=192.168.24.11
+reptVendor=VMware
+eventType=VMware_DatacenterCreatedEvent
+user=Administrator
+phEventCategory=0 (External)
+folder=Datacenters
+eventId=any
+reptModel=Generic

@@ -1,0 +1,49 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+Mar 30 17:46:56 $reporter ISAWebLog 0 10.1.2.10	anonymous	-	Y	2011-05-30	09:46:29	w3proxy	SH-WIN03-QA	-	125.39.149.44	125.39.149.44	80	1	142	2251	http	TCP	POST	http://125.39.149.44/	-	-	12202	0x0	Default rule	Req ID: 15a18b1d; Compression: client=No, server=No, compress rate=0% decompress rate=0%	Local Host	External	0x200	Denied	2011-05-30	09:46:29	-
+[params]
+deviceTime=any
+destGeoOrg=any
+parserName=ISAServerParser
+eventType=ISA-Proxy-202-Accepted
+destGeoState=any
+destIpAddr=125.39.149.44
+srvInstName=w3proxy
+totBytes=2393
+destIpPort=80 (HTTP)
+destGeoCountry=any
+srcIpAddr=10.1.2.10
+reptModel=ISA Server
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+fwAction=Denied
+eventName=Accepted
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+eventRuleTrigger=1
+destName=125.39.149.44
+count=1
+srcIntfName=Local Host
+recvBytes=142
+eventSeverityCat=LOW
+collectorId=any
+httpMethod=POST
+destIntfName=External
+relayDevIpAddr=$localhost
+user=anonymous
+rawEventMsg=any
+ipProto=6 (TCP)
+httpStatusCode=12202
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$reporter
+fwRule=Default rule
+infoURL=http://125.39.149.44/
+reptVendor=Microsoft
+durationMSec=1
+destGeoCity=any
+httpUserAgent=-
+sentBytes=2251

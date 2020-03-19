@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+enterprises.3401 6 5 enterprises.3401.12.2.1.1.4.1.1.9.245 s "To SJ-Dev-S-RH-DNS-01"     enterprises.3401.12.2.1.1.4.1.1.11.245 s "My Organization"  enterprises.3401.12.2.1.1.4.1.1.12.245 s "Directory"        enterprises.3401.12.2.1.1.4.1.1.18.245 s "Any"      enterprises.3401.12.2.1.1.4.1.1.19.245 s "Any"     enterprises.3401.12.2.1.1.4.1.1.33.245 s "(Any)"     enterprises.3401.12.2.1.1.4.1.1.15.245 s "4/16/08 3:07:04 AM"      enterprises.3401.12.2.1.1.4.1.1.31.245 s "1278"      enterprises.3401.12.2.1.1.4.1.1.32.245 s "file infected.  No cleaner  available, file deleted successfully"  enterprises.3401.12.2.1.1.4.1.1.16.245 s "1"        enterprises.3401.12.2.1.1.4.1.1.17.245 s "1"        enterprises.3401.12.2.1.1.4.1.1.13.245 s "VirusScan"        enterprises.3401.12.2.1.1.4.1.1.14.245 s "Virus detected and removed"       enterprises.3401.12.2.1.1.4.1.1.22.245 s "EICAR test file"  enterprises.3401.12.2.1.1.4.1.1.23.245 s "Not Available"    enterprises.3401.12.2.1.1.4.1.1.24.245 s "192.168.1.6"      enterprises.3401.12.2.1.1.4.1.1.25.245 s "SJDEVSWINIIS01"   enterprises.3401.12.2.1.1.4.1.1.26.245 s "C:\Documents and Settings\administrator.PROSPECTHILLS\Desktop\eicar.com"      enterprises.3401.12.2.1.1.4.1.1.27.245 s "3"        enterprises.3401.12.2.1.1.4.1.1.6.245 s "4/16/08 3:07:04 AM"
+[params]
+rawEventMsg=any
+eventSeverity=1
+eventSeverityCat=LOW
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+virusName=EICAR test file
+reptVendor=McAfee
+phRecvTime=any
+phCustId=$sender
+hostName=SJDEVSWINIIS01
+destIpAddr=192.168.1.6
+hostIpAddr=192.168.1.6
+fileName=C:\Documents and Settings\administrator.PROSPECTHILLS\Desktop\eicar.com
+eventName=Clean error - no cleaner available; deleted successfully
+computer=SJDEVSWINIIS01
+eventType=McAfee-EPO-1278
+phEventCategory=0 (External)
+reptDevIpAddr=$localhost
+destName=SJDEVSWINIIS01
+reptModel=ePolicy Orchestrator

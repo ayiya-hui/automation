@@ -1,0 +1,37 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<22>Feb  2 17:31:32 mlinzi postfix/smtpd[690]: NOQUEUE: reject: RCPT from mailgate.xtranet.co.ke[41.78.26.196]: 554 5.7.1 <mmutisya@cdsckenya.com>: Recipient address rejected: Policy rejection; from=<chunying.yang@accelops.com> to=<mmutisya@cdsckenya.com> proto=ESMTP helo=<mailgate.xtranet.co.ke>
+[params]
+deviceTime=any
+destGeoOrg=any
+parserName=PostfixParser
+receiverMailAddr=mmutisya@cdsckenya.com
+eventType=Postfix-Mail-Reject
+destGeoState=Nairobi Area
+destIpAddr=41.78.26.196
+procName=smtpd
+destGeoCountry=any
+reptGeoState=Shanghai
+reptModel=Postfix
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Mail recipient address rejected
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+eventRuleTrigger=1
+destName=mailgate.xtranet.co.ke
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+reptDevIpAddr=$localhost
+reptDevName=mlinzi
+customer=Super
+reptGeoCity=any
+senderMailAddr=chunying.yang@accelops.com
+phRecvTime=any
+mailGatewayName=mailgate.xtranet.co.ke
+reptVendor=Generic
+destGeoCity=any

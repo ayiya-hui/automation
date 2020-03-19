@@ -1,0 +1,30 @@
+[reptDevIpAddr(key)]
+192.168.10.1
+[eventMsg]
+May 10 17:51:56 192.168.10.1 1 948077314.907556162 MX60 urls src=192.168.10.3:62526 dst=1.2.3.4 mac=00:1A:A0:12:34:56 request: GET http://www.meraki.com
+[params]
+destGeoOrg=any
+parserName=CiscoMerakiParser
+eventType=Cisco-Meraki-WebTraffic-Permit
+destIpAddr=1.2.3.4
+destGeoCountry=any
+srcIpAddr=192.168.10.3
+reptModel=Meraki Firewall
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Web traffic permitted
+phEventCategory=0 (External)
+eventRuleTrigger=1
+hostMACAddr=00:1a:a0:12:34:56
+count=1
+srcIpPort=62526
+eventSeverityCat=LOW
+collectorId=any
+httpMethod=GET
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=192.168.10.1
+infoURL=http://www.meraki.com
+reptVendor=Cisco

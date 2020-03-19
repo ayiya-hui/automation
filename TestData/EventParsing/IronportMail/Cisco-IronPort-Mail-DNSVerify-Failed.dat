@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<22>Feb 15 16:01:32 IronPort-Mail: Info: New SMTP ICID 1574454 interface External (187.0.198.8) address 10.21.0.55 reverse dns host unknown verified no
+[params]
+deviceTime=any
+parserName=IronportMailParser
+eventType=Cisco-IronPort-Mail-DNSVerify-Failed
+hostName=unknown
+reptModel=IronPort AsyncOS Mail
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+hostIpAddr=10.21.0.55
+eventName=IronPort reverse DNS lookup failed
+ironportMailICID=1574454
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=1 (Deny)
+reptVendor=Cisco

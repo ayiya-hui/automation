@@ -1,0 +1,30 @@
+[reptDevIpAddr(key)]
+10.1.20.171
+[eventMsg]
+<134>May 29 02:16:27 10.1.20.171 java: [IBMDB2_CHECKING_OBJECT]:[eventSeverity]=PHL_INFO, [objName]=SYSSH200, [srcApp]=DB2HMON, [dbName]=SAMPLE, [eventTime]=2013-05-10-08.47.08.802001, [srcName]=WIN-6IDDILU233L, [user]=db2admin,
+[params]
+deviceTime=any
+parserName=IBMDB2AuditParser
+eventType=IBMDB2_CHECKING_OBJECT
+srcName=WIN-6IDDILU233L
+reptModel=DB2
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Database object checking
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+srcApp=DB2HMON
+count=1
+dbObjName=SYSSH200
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=10.1.20.171
+user=db2admin
+rawEventMsg=any
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=10.1.20.171
+reptVendor=IBM
+dbName=SAMPLE

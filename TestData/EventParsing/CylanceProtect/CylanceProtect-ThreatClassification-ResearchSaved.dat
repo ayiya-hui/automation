@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+CylancePROTECT: Event Type: ThreatClassification, Event Name: ResearchSaved, Threat Class: Malware, Threat Subclass: Worm, SHA256: 1218493137321C1D1F897B0C25BEF17CDD0BE9C99B84B4DD8B51EAC8F9794F65
+[params]
+customer=Super
+eventId=any
+eventSeverityCat=LOW
+eventParsedOk=1
+phEventCategory=0 (External)
+parserName=CylanceProtectParser
+count=1
+eventSeverity=1
+eventType=CylanceProtect-ThreatClassification-ResearchSaved
+reptDevIpAddr=$localhost
+collectorId=any
+hashCode=1218493137321C1D1F897B0C25BEF17CDD0BE9C99B84B4DD8B51EAC8F9794F65
+eventName=CylanceProtect-ThreatClassification-ResearchSaved
+extEventRecvProto=Syslog
+reptVendor=Cylance
+relayDevIpAddr=$localhost
+threatCategory=Malware
+phRecvTime=any
+eventRuleTrigger=1
+reptDevName=any
+reptModel=Protect

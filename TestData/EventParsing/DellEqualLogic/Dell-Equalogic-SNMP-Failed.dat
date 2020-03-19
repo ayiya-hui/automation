@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>13769:1136:agent:28-Jan-2016 16:56:47.461136:agent.c:1735:AUDIT:Unknown:22.7.1:SNMP packet validation failed, request received from 10.3.5.50
+[params]
+deviceTime=any
+parserName=DellEqualLogicParser
+eventType=Dell-Equalogic-SNMP-Failed
+srcIpAddr=10.3.5.50
+reptModel=EqualLogic
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Dell-Equalogic-SNMP-Failed
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Dell

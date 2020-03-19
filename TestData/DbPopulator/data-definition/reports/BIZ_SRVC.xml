@@ -1,0 +1,278 @@
+
+<Reports>
+
+<Report group="PH_SYS_REPORT_BizSvc,PH_SYS_REPORT_Security_Overall" id="PH_Report_OVERALL_STATUS_BIZ_SRVC_SEC_INCIDENT_DETAILS">
+    <Name>Biz Srvc: Top Business Services and Security Incident Details By Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the affected business services and security incidents by count</Description>
+    <SelectClause numEntries="All">
+        <AttrList>bizService,eventType,eventSeverityCat,incidentSrc,incidentTarget,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_OVERALL_STATUS" name="Filter_OVERALL_STATUS">
+           <SingleEvtConstr>phEventCategory = 1 AND eventType IN (Group@PH_SYS_EVENT_PH_RULE_SEC) AND bizService != "" </SingleEvtConstr>
+           <GroupByAttr>bizService,eventType,eventSeverityCat,incidentSrc,incidentTarget</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <inline>false</inline>
+    <active>false</active>
+    <RelevantFilterAttr>bizService</RelevantFilterAttr>
+</Report>
+
+<Report group="PH_SYS_REPORT_BizSvc,PH_SYS_REPORT_Avail_Overall" id="PH_Report_OVERALL_STATUS_BIZ_SRVC_AVAIL_INCIDENT_DETAILS">
+    <Name>Biz Srvc: Top Business Services and Availability Incident Details By Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the affected business services and availability incidents by count</Description>
+    <SelectClause numEntries="All">
+        <AttrList>bizService,eventType,eventSeverityCat,incidentSrc,incidentTarget,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_OVERALL_STATUS" name="Filter_OVERALL_STATUS">
+           <SingleEvtConstr>phEventCategory = 1 AND eventType IN (Group@PH_SYS_EVENT_PH_RULE_AVAIL) AND bizService != "" </SingleEvtConstr>
+           <GroupByAttr>bizService,eventType,eventSeverityCat,incidentSrc,incidentTarget</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <inline>false</inline>
+    <active>false</active>
+    <RelevantFilterAttr>bizService</RelevantFilterAttr>
+</Report>
+
+<Report group="PH_SYS_REPORT_BizSvc,PH_SYS_REPORT_Perf_Overall" id="PH_Report_OVERALL_STATUS_BIZ_SRVC_PERF_INCIDENT_DETAILS">
+    <Name>Biz Srvc: Top Business Services and Performance Incident Details By Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the affected business services and performance related incidents by count </Description>
+    <SelectClause numEntries="All">
+        <AttrList>bizService,eventType,eventSeverityCat,incidentSrc,incidentTarget,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_OVERALL_STATUS" name="Filter_OVERALL_STATUS">
+           <SingleEvtConstr>phEventCategory = 1 AND eventType IN (Group@PH_SYS_EVENT_PH_RULE_PERF) AND bizService != "" </SingleEvtConstr>
+           <GroupByAttr>bizService,eventType,eventSeverityCat,incidentSrc,incidentTarget</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <inline>false</inline>
+    <active>false</active>
+    <RelevantFilterAttr>bizService</RelevantFilterAttr>
+</Report>
+
+<Report group="PH_SYS_REPORT_BizSvc" id="PH_Report_OVERALL_STATUS_BIZ_SRVC_ALL_INCIDENT_DETAILS">
+    <Name>Biz Srvc: Top Business Services and Incident Details By Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the business services and incidents by count. This is over all incidents. </Description>
+    <SelectClause numEntries="All">
+        <AttrList>bizService,eventType,eventSeverityCat,incidentSrc,incidentTarget,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter" name="Filter">
+           <SingleEvtConstr>phEventCategory = 1  AND bizService != ""</SingleEvtConstr>
+           <GroupByAttr>bizService,eventType,eventSeverityCat,incidentSrc,incidentTarget</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <inline>false</inline>
+    <active>false</active>
+    <RelevantFilterAttr>bizService</RelevantFilterAttr>
+</Report>
+
+
+<Report group="PH_SYS_REPORT_BizSvc,PH_SYS_REPORT_Security_Overall" id="PH_Report_OVERALL_STATUS_BIZ_SRVC_SEC_INCIDENT_NAME">
+    <Name>Biz Srvc: Top Business Services and Security Incident Names By Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the affected business services and security incident names by count</Description>
+    <SelectClause numEntries="All">
+        <AttrList>eventSeverityCat,eventType,bizService,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>eventSeverityCat ASC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_OVERALL_STATUS" name="Filter_OVERALL_STATUS">
+           <SingleEvtConstr>phEventCategory = 1 AND eventType IN (Group@PH_SYS_EVENT_PH_RULE_SEC) AND bizService != "" </SingleEvtConstr>
+           <GroupByAttr>eventSeverityCat,eventType,bizService</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <inline>false</inline>
+    <active>false</active>
+    <RelevantFilterAttr>bizService</RelevantFilterAttr>
+</Report>
+
+<Report group="PH_SYS_REPORT_BizSvc,PH_SYS_REPORT_Avail_Overall" id="PH_Report_OVERALL_STATUS_BIZ_SRVC_AVAIL_INCIDENT_NAME">
+    <Name>Biz Srvc: Top Business Services and Availability Incident Names By Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the affected business services and availability related incident names by the total number of times they have occured </Description>
+    <SelectClause numEntries="All">
+        <AttrList>eventSeverityCat,eventType,bizService,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>eventSeverityCat ASC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_OVERALL_STATUS" name="Filter_OVERALL_STATUS">
+           <SingleEvtConstr>phEventCategory = 1 AND eventType IN (Group@PH_SYS_EVENT_PH_RULE_AVAIL) AND bizService != "" </SingleEvtConstr>
+           <GroupByAttr>eventSeverityCat,eventType,bizService</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <inline>false</inline>
+    <active>false</active>
+    <RelevantFilterAttr>bizService</RelevantFilterAttr>
+</Report>
+
+<Report group="PH_SYS_REPORT_BizSvc,PH_SYS_REPORT_Perf_Overall" id="PH_Report_OVERALL_STATUS_BIZ_SRVC_PERF_INCIDENT_NAME">
+    <Name>Biz Srvc: Top Business Services and Performance Incident Names By Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the affected business services and performance related incident names by count </Description>
+    <SelectClause numEntries="All">
+        <AttrList>eventSeverityCat,eventType,bizService,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>eventSeverityCat ASC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_OVERALL_STATUS" name="Filter_OVERALL_STATUS">
+           <SingleEvtConstr>phEventCategory = 1 AND eventType IN (Group@PH_SYS_EVENT_PH_RULE_PERF) AND bizService != "" </SingleEvtConstr>
+           <GroupByAttr>eventSeverityCat,eventType,bizService</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <inline>false</inline>
+    <active>false</active>
+    <RelevantFilterAttr>bizService</RelevantFilterAttr>
+</Report>
+
+<Report group="PH_SYS_REPORT_BizSvc" id="PH_Report_OVERALL_STATUS_BIZ_SRVC_ALL_INCIDENT_NAME">
+    <Name>Biz Srvc: Top Business Services and Incident Names By Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the business services and incidents by count. The ranking is over all incidents. </Description>
+    <SelectClause numEntries="All">
+        <AttrList>eventSeverityCat,eventType,bizService,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>eventSeverityCat ASC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter" name="Filter">
+           <SingleEvtConstr>phEventCategory = 1  AND bizService != ""</SingleEvtConstr>
+           <GroupByAttr>eventSeverityCat,eventType,bizService</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <inline>false</inline>
+    <active>false</active>
+    <RelevantFilterAttr>bizService</RelevantFilterAttr>
+</Report>
+
+<Report group="PH_SYS_REPORT_BizSvc" id="PH_Report_OVERALL_STATUS_BIZ_SRVC_ALL_ACTIVE_INCIDENT_NAME">
+    <Name>Biz Srvc: Top Business Services and Active Incident Names By Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the business services and incidents by count. The ranking is over all incidents. </Description>
+    <SelectClause numEntries="All">
+        <AttrList>eventSeverityCat,eventType,bizService,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>eventSeverityCat ASC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter" name="Filter">
+           <SingleEvtConstr>phEventCategory = 1  AND incidentStatus = 0 AND bizService != ""</SingleEvtConstr>
+           <GroupByAttr>eventSeverityCat,eventType,bizService</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>bizService</RelevantFilterAttr>
+</Report>
+
+<Report group="PH_SYS_REPORT_BizSvc" id="PH_Report_OVERALL_STATUS_BIZ_SRVC_ALL_ACTIVE_INCIDENT_CNT">
+    <Name>Biz Srvc: Top Business Services and Active Incident Names By Biz Service, Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the business services and active incidents by count. The ranking is over all active incidents. </Description>
+    <SelectClause numEntries="All">
+        <AttrList>eventSeverityCat,bizService,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>eventSeverityCat ASC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter" name="Filter">
+           <SingleEvtConstr>phEventCategory = 1  AND incidentStatus = 0 AND bizService != ""</SingleEvtConstr>
+           <GroupByAttr>eventSeverityCat,bizService</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>bizService</RelevantFilterAttr>
+</Report>
+
+
+<Report group="PH_SYS_REPORT_BizSvc" id="PH_Report_OVERALL_STATUS_INCIDENT_BIZ_SRVC">
+    <Name>Biz Srvc: Top Unique Business Service Incident Names By Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the incidents and business services by unique incident count.</Description>
+    <SelectClause numEntries="All">
+        <AttrList>eventSeverityCat,eventType,bizService,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter" name="Filter">
+           <SingleEvtConstr>phEventCategory = 1  AND bizService != ""</SingleEvtConstr>
+           <GroupByAttr>eventSeverityCat,eventType,bizService</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <inline>false</inline>
+    <active>false</active>
+    <RelevantFilterAttr>bizService</RelevantFilterAttr>
+</Report>
+
+<Report group="PH_SYS_REPORT_BizSvc" id="PH_Report_OVERALL_STATUS_INCIDENT_BIZ_SRVC_BY_SEV">
+    <Name>Biz Srvc: Top Unique Business Service Incident Names By Severity, Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the incidents and business services by first severity and then by count </Description>
+    <SelectClause numEntries="All">
+        <AttrList>eventSeverity,eventType,bizService,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>eventSeverity DESC, COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter" name="Filter">
+           <SingleEvtConstr>phEventCategory = 1  AND bizService != ""</SingleEvtConstr>
+           <GroupByAttr>eventSeverity,eventType,bizService</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <inline>false</inline>
+    <active>false</active>
+    <RelevantFilterAttr>bizService</RelevantFilterAttr>
+</Report>
+
+<Report group="PH_SYS_REPORT_BizSvc" id="PH_Report_OVERALL_STATUS_ACTV_INCIDENT_BIZ_SRVC_BY_SEV">
+    <Name>Biz Srvc: Top Unique Business Service Active Incident Names By Severity, Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the incidents and business services by first severity and then by count </Description>
+    <SelectClause numEntries="All">
+        <AttrList>eventSeverity,eventType,bizService,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>eventSeverity DESC, COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter" name="Filter">
+           <SingleEvtConstr>phEventCategory = 1  AND bizService != "" AND incidentStatus = 0</SingleEvtConstr>
+           <GroupByAttr>eventSeverity,eventType,bizService</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>bizService</RelevantFilterAttr>
+</Report>
+
+<Report group="PH_SYS_REPORT_BizSvc" id="PH_Report_OVERALL_STATUS_ACTV_INCIDENT_BIZ_SRVC_BY_SEV_CNT">
+    <Name>Biz Srvc: Top Unique Business Service Active Incident Names By Severity, Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the incidents and business services by first severity and then by count for all incidents</Description>
+    <SelectClause numEntries="All">
+        <AttrList>eventSeverity,bizService,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>eventSeverity DESC, COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter" name="Filter">
+           <SingleEvtConstr>phEventCategory = 1  AND bizService != "" AND incidentStatus = 0</SingleEvtConstr>
+           <GroupByAttr>eventSeverity,bizService</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>bizService</RelevantFilterAttr>
+</Report>
+
+</Reports>

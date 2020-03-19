@@ -1,0 +1,34 @@
+[reptDevIpAddr(key)]
+10.1.2.18
+[eventMsg]
+Fri Aug  1 19:08:40 2014 10.1.2.18 AccelOps-WinLog-WMI [Category]="12800" [CategoryString]="File System" [ComputerName]="SH-WIN08R2-VC50" [Data]="NULL" [EventCode]="4985" [EventIdentifier]="4985" [EventType]="4" [Logfile]="Security" [RecordNumber]="394296254" [SourceName]="Microsoft-Windows-Security-Auditing" [TimeGenerated]="20140801110558.281250-000" [TimeWritten]="20140801110558.281250-000" [Type]="Audit Success" [User]="(null)" [Message]="The state of a transaction has changed." [[Subject]]  [Security ID]="S-1-5-18"  [Account Name]="SH-WIN08R2-VC50$"  [Account Domain]="WORKGROUP"  [Logon ID]="0x3e7" [[Transaction Information]]  [RM Transaction ID]="{F8E516DB-114C-11E4-A422-000C29D0C75B}"  [New State]="48"  [Resource Manager]="{22730156-69CD-11E1-BDA5-E207F467BDB8}" [[Process Information]]  [Process ID]="0x32c"  [Process Name]="C:\Windows\System32\svchost.exe "
+[params]
+domain=WORKGROUP
+deviceTime=any
+parserName=WinOSWmiParser
+eventType=Win-Security-4985
+hostName=SH-WIN08R2-VC50
+destIpAddr=10.1.2.18
+procName=C:\Windows\System32\svchost.exe
+eventSource=Microsoft-Windows-Security-Auditing
+reptModel=Windows
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+swProcName=C:\Windows\System32\svchost.exe
+eventName=The state of a transaction has changed
+phEventCategory=0 (External)
+msg=The state of a transaction has changed.
+eventRuleTrigger=1
+type=Audit Success
+count=1
+seqNum=394296254
+eventSeverityCat=LOW
+collectorId=any
+user=SH-WIN08R2-VC50$
+customer=Super
+winLogonId=0x3e7
+phRecvTime=any
+reptDevIpAddr=10.1.2.18
+eventAction=0 (Permit)
+reptVendor=Microsoft

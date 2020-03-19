@@ -1,0 +1,4 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+nCircle_Vuln_Score_Exceeded,NCircleVA_1,NCircleVA,172.22.1.118,,syslog
+nCircle_New_Host_Detected,NCircleVA_2,NCircleVA,172.22.1.118,,syslog

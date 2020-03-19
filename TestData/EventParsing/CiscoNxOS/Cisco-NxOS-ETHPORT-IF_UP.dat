@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<189>: 2011 Oct 19 17:59:50 UTC: %ETHPORT-5-IF_UP: Interface Ethernet108/1/25 is up in mode access
+[params]
+rawEventMsg=any
+deviceTime=any
+isHostIntfCritical=No
+eventType=Cisco-NxOS-ETHPORT-IF_UP
+phCustId=$sender
+intfName=Ethernet108/1/25
+reptModel=NX-OS
+eventId=any
+eventParsedOk=1
+eventSeverity=2
+testEvent=Real Event(0)
+hostIpAddr=$localhost
+eventName=Interface is up
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+collectorId=any
+reptDevName=any
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Cisco

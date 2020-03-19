@@ -1,0 +1,104 @@
+<eventParser name="OracleDBParser">
+  <deviceType>
+    <Vendor>Generic</Vendor>
+    <Model>Generic</Model>
+    <Version>ANY</Version>
+  </deviceType>
+
+  <appType>
+    <Vendor>Oracle</Vendor>
+    <Model>Database Server</Model>
+    <Version>ANY</Version>
+    <Name>Oracle Database Server</Name>
+  </appType>
+
+  <patternDefinitions>
+    <pattern name="patStrEndWithRightSquareBracket"><![CDATA[[^\]]*]]></pattern>
+    <pattern name="patStrEndBrack"><![CDATA[[^\]+]]></pattern>
+  </patternDefinitions>
+  <eventFormatRecognizer><![CDATA[\[ORADB_]]></eventFormatRecognizer>
+  
+  <testEvents>
+      <testEvent><![CDATA[<134>Apr 10 12:51:42 partha-desktop java: [ORADB_PH_Logoff]:[eventSeverity]=PHL_INFO, [retCode]=0, [eventTime]=2009-04-10 14:29:22:111420, [rptIp]=172.16.10.40, [srcIp]=QA-V-CtOS-ora.prospect-hills.net, [user]=DBSNMP, [logonTime]=2009-04-10 14:29:22:111420, [logoffTime]=2009-04-10 14:29:22, [privUsed]=CREATE_SESSION,]]></testEvent>
+  </testEvents>
+
+  <parsingInstructions>
+
+    <!--
+      Apr 10 12:51:42 partha-desktop java: [ORADB_PH_Logoff]:[eventSeverity]=PHL_INFO, [retCode]=0, [eventTime]=2009-04-10 14:29:22:111420, [rptIp]=172.16.10.40, [srcIp]=QA-V-CtOS-ora.prospect-hills.net, [user]=DBSNMP, [logonTime]=2009-04-10 14:29:22:111420, [logoffTime]=2009-04-10 14:29:22, [privUsed]=CREATE_SESSION,
+    -->
+
+    <collectFieldsByRegex src="$_rawmsg">
+      <regex><![CDATA[<:gPatSyslogPRI><:gPatMon>\s+<:gPatDay>\s+<:gPatTime>\s+<:gPatStr>\s+java:\s+\[<eventType:patStrEndWithRightSquareBracket>\]<_body:gPatMesgBody>]]></regex>
+    </collectFieldsByRegex>
+    
+    <collectAndSetAttrByKeyValuePair sep=',' src="$_body">
+      <attrKeyMap attr="_severity" key="[eventSeverity]="/>
+      <attrKeyMap attr="_eventTime" key="[eventTime]="/>
+      <attrKeyMap attr="reptDevIpAddr" key="[rptIp]="/>
+      <attrKeyMap attr="relayDevIpAddr" key="[relayIp]="/>
+      <attrKeyMap attr="_srcIp" key="[srcIp]="/>
+      <attrKeyMap attr="user" key="[user]="/>
+      <attrKeyMap attr="_logonTime" key="[logonTime]="/>
+      <attrKeyMap attr="_logoffTime" key="[logoffTime]="/>
+      <attrKeyMap attr="srcTerminal" key="[srcTerminal]="/>
+      <attrKeyMap attr="dbRetCode" key="[retCode]="/>
+      <attrKeyMap attr="dbObjName" key="[objName]="/>
+      <attrKeyMap attr="dbPrivUsed" key="[privUsed]="/>
+      <attrKeyMap attr="dbSysPriv" key="[sysPriv]="/>
+      <attrKeyMap attr="dbObjPriv" key="[objPriv]="/>
+    </collectAndSetAttrByKeyValuePair>
+    
+    <!-- parse this 2009-03-26 19:27:52:752505 -->
+    <collectFieldsByRegex src="$_eventTime">
+      <regex><![CDATA[<_year:gPatYear>-<_mon:gPatMonNum>-<_day:gPatDay>\s+<_time:gPatTime>:.*]]></regex>
+    </collectFieldsByRegex>
+
+    <setEventAttribute attr="deviceTime">toDateTime($_mon, $_day, $_year, $_time)</setEventAttribute>
+    
+    <!-- parse this 2009-03-26 19:27:52:752505 -->
+    <when test='exist _logonTime'>
+      <collectFieldsByRegex src="$_logonTime">
+	<regex><![CDATA[<_year:gPatYear>-<_mon:gPatMonNum>-<_day:gPatDay>\s+<_time:gPatTime>:\d+]]></regex>
+      </collectFieldsByRegex>
+      <setEventAttribute attr="logonTime">toDateTime($_mon, $_day, $_year, $_time)</setEventAttribute>
+    </when>
+    
+    <!-- parse this 2009-03-26 19:27:52:752505 -->
+    <when test='exist _logoffTime'>
+      <collectFieldsByRegex src="$_logoffTime">
+	<regex><![CDATA[<_year:gPatYear>-<_mon:gPatMonNum>-<_day:gPatDay>\s+<_time:gPatTime>]]></regex>
+      </collectFieldsByRegex>
+      <setEventAttribute attr="logoffTime">toDateTime($_mon, $_day, $_year, $_time)</setEventAttribute>
+    </when>
+    
+    <choose> 
+      <when test="matches($_srcIp, '\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}')"> 
+	<setEventAttribute attr="srcIpAddr">$_srcIp</setEventAttribute>
+      </when>
+      <otherwise>
+	<setEventAttribute attr="srcName">$_srcIp</setEventAttribute>
+      </otherwise>
+    </choose>
+    
+    <!-- event severity -->
+    <choose>
+      <when test='$_severity = "PHL_ALERT"'>
+	<setEventAttribute attr="eventSeverity">10</setEventAttribute>
+      </when>
+      
+      <when test='$_severity = "PHL_CRITICAL"'>
+	<setEventAttribute attr="eventSeverity">8</setEventAttribute>
+      </when>
+      
+      <when test='$_severity IN "PHL_ERROR, PHL_WARNING"'>
+	<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+      </when>
+      
+      <when test='$_severity = "PHL_INFO"'>
+	<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+      </when>
+    </choose>
+
+  </parsingInstructions>
+</eventParser>

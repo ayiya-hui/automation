@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134> 11/25/2013:11:27:56  clxns 0-PPE-0 : APPFW APPFW_SQL 12316086 0 :  209.55.115.233 3855301-PPE0 jgCTJDYDJZIkK6Rgm/FA+JDTB38A000 appfw-cliis02 https://tonto.indiansfrontoffice.com/tontosvc/journalentry/ SQL Keyword check failed for field notes=..where i aloud him plenty of time to express himself & he t(') <not blocked>
+[params]
+rawEventMsg=any
+deviceTime=any
+totFlows=1
+eventType=NETSCALER-APPFW-APPFW_SQL
+phCustId=$sender
+srcName=any
+srcIpAddr=209.55.115.233
+reptModel=NetScaler
+eventId=any
+eventParsedOk=1
+eventSeverity=3
+fwAction=not blocked
+eventName=AppFw SQL Injection violation
+phEventCategory=0 (External)
+infoURL=https://tonto.indiansfrontoffice.com/tontosvc/journalentry/
+eventSeverityCat=LOW
+collectorId=any
+reptDevName=any
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Citrix

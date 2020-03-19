@@ -1,0 +1,36 @@
+[reptDevIpAddr(key)]
+10.30.23.82
+[eventMsg]
+2018-04-27T09:12:04Z wlmultiserver.fortinet.wulei.com 10.30.23.82 AccelOps-WUA-DNS [monitorStatus]="Success" [Locale]="en-US" [MachineGuid]="3abd3913-3151-4201-afef-fa98878cd545" [timeZone]="+0800" [srcIpAddr]="10.30.0.26" [srcIpPort]="53" [destName]="localhost" [destIpAddr]="1.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0" [destIpPort]="53" [destCName]="" [recvBytes]="182" [msg]="4/27/2018 5:10:44 PM 00E4 PACKET  00000000036FB720 UDP Rcv 10.30.0.26      5c4f R Q [9085 A DR  NOERROR] PTR    (1)1(1)0(1)0(1)0(1)0(1)0(1)0(1)0(1)0(1)0(1)0(1)0(1)0(1)0(1)0(1)0(1)0(1)0(1)0(1)0(1)0(1)0(1)0(1)0(1)0(1)0(1)0(1)0(1)0(1)0(1)0(1)0(3)ip6(4)arpa(0)"
+[params]
+deviceTime=any
+parserName=AOWUA_DNSParser
+eventType=AO-WUA-DNS-PTR-Query-Success
+srcName=HOST-10.30.0.26
+srcIpAddr=10.30.0.26
+reptModel=DNS
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Successful IP to domain name DNS query
+extEventRecvProto=Windows Agent
+phEventCategory=0 (External)
+msg=4/27/2018 5:10:44 PM 00E4 PACKET  00000000036FB720 UDP Rcv 10.30.0.26      5c4f R Q [9085 A DR  NOERROR] PTR    (1)1(1)0(1)0(1)0(1)0(1)0(1)0(1)0(1)0(1)0(1)0(1)0(1)0(1)0(1)0(1)0(1)0(1)0(1)0(1)0(1)0(1)0(1)0(1)0(1)0(1)0(1)0(1)0(1)0(1)0(1)0(1)0(3)ip6(4)arpa(0)
+destName=localhost
+status=Success
+count=1
+domainEntropy=7.82
+recvBytes=182
+srcIpPort=53
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=10.30.23.82
+rawEventMsg=any
+destIpPort=53
+reptDevName=wlmultiserver.fortinet.wulei.com
+customer=Super
+dnsServer=10.30.0.26
+phRecvTime=any
+reptDevIpAddr=10.30.23.82
+reptVendor=Microsoft
+machineGUID=3abd3913-3151-4201-afef-fa98878cd545

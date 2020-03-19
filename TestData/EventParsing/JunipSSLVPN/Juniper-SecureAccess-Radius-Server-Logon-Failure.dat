@@ -1,0 +1,24 @@
+[reptDevIpAddr(key)]
+172.16.3.130
+[eventMsg]
+<132>Mar 30 16:11:32 172.16.3.130 Juniper: 2010-03-30 08:11:15 - ive - [192.168.22.4] root(Users)[] - Radius Server SteelBelted: Login failed for root because host 172.16.3.150:1812 is unreachable.
+[params]
+rawEventMsg=any
+srcIpPort=1812
+phEventCategory=0 (External)
+count=1
+phCustId=$sender
+deviceTime=any
+eventAction=1 (Deny)
+eventId=any
+eventName=Radius Server logon failed 
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=6
+eventSeverityCat=MEDIUM
+eventType=Juniper-SecureAccess-Radius-Server-Logon-Failure
+reptDevIpAddr=$reporter
+reptModel=Secure Access
+reptVendor=Juniper
+srcIpAddr=172.16.3.150
+user=root

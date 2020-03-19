@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<187>710: : : 69712: fife-ccmpub.telecomlabsinc.com: Feb 03 2015 07:23:56 PM.633 UTC : %UC_CDRREP-3-CDRFileDeliveryFailureContinues: %[BillingServerAddress=192.168.1.69][AppID=Cisco CDR Repository Manager][ClusterID=][NodeID=fife-ccmpub]: (s)FTP delivery of CDR files failed on retries.
+[params]
+customer=Super
+eventId=any
+parserName=CiscoCMParser
+count=1
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=MEDIUM
+appName=Cisco CDR Repository Manager
+eventSeverity=7
+eventType=Cisco_UC_CDRREP-CDRFileDeliveryFailureContinues
+reptDevIpAddr=$localhost
+collectorId=any
+eventName=(s)FTP delivery of CDR files to the Billing Server outside of the cluster failed on retries after the initial failure.
+reptVendor=Cisco
+relayDevIpAddr=$localhost
+phRecvTime=any
+hostName=fife-ccmpub
+eventRuleTrigger=1
+reptDevName=any
+reptModel=Call Manager

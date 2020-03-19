@@ -1,0 +1,54 @@
+[reptDevIpAddr(key)]
+172.16.1.100
+[eventMsg]
+<15> Aug 28 22:36:06 172.16.1.100 CDP: CDP mCdpCtrl:cdp pkt received on port : 145
+[params]
+deviceTime=any
+parserName=HPProCurveParser
+isHostIntfCritical=No
+eventType=HP-ProCurve-CDP-Received-Successful
+intfName=145
+reptModel=ProCurve
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=HP-ProCurve-CDP-Received-Successful
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=172.16.1.100
+rawEventMsg=any
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=172.16.1.100
+reptVendor=HP
+[reptDevIpAddr(key)]
+172.16.1.100
+[eventMsg]
+<15> Aug 28 22:36:06 172.16.1.100 CDP: CDP mCdpCtrl:received pkt version is 1 and TLV received mask is 3f on port 145.
+[params]
+deviceTime=any
+parserName=HPProCurveParser
+isHostIntfCritical=No
+eventType=HP-ProCurve-CDP-Received-Successful
+intfName=145
+reptModel=ProCurve
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=HP-ProCurve-CDP-Received-Successful
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=172.16.1.100
+rawEventMsg=any
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=172.16.1.100
+reptVendor=HP

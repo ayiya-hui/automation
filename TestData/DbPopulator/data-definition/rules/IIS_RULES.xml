@@ -1,0 +1,40 @@
+<Rules>
+
+ <!-- ******************CPU********************* -->
+  <Rule group="PH_SYS_RULE_Perf_App" id="PH_Rule_Perf_IIS_1" fireInternalIncident = "false" phIncidentCategory="Application">
+    <Name>IIS Virtual Memory Critical </Name>
+    <active>true</active>
+    <Description>Detects that IIS is using at least 1.9 GB of virtual memory and is fast approaching the 2 GB limit.</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_APP_IIS_VM_CRIT" severity="9"  >
+      <ArgList>
+        hostIpAddr = IISVMWarn.hostIpAddr, hostName = IISVMWarn.hostName, virtMemKBytes = IISVMWarn.AVG(virtMemKBytes)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+       <SubPattern displayName="IISVMWarn" name="IISVMWarn">
+	 <Description>Average Virtual Memory Utilization is greater than 1.9 GB for 2 readings over 10 min period </Description>
+	 <SingleEvtConstr>eventType = "PH_DEV_MON_PROC_RESOURCE_UTIL" AND appName = "Microsoft IIS" </SingleEvtConstr>
+         <GroupEvtConstr> AVG(virtMemKBytes) &gt;= 1900000  AND COUNT(*) &gt;= 2 </GroupEvtConstr>
+         <GroupByAttr>hostIpAddr,hostName</GroupByAttr>
+       </SubPattern>
+    </PatternClause>  
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,hostIpAddr,hostName,swProcName, appName, memUtil,cpuUtil, realMemPeakKBytes,virtMemKBytes,peakVirtMemKBytes,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "patternbased">
+      <ClearIncidentDef name="PH_RULE_APP_IIS_VM_CRIT_CLEAR">
+	<ArgList>hostIpAddr = IISVMWarn_CLEAR.hostIpAddr, hostName = IISVMWarn_CLEAR.hostName,virtMemKBytes = IISVMWarn_CLEAR.AVG(virtMemKBytes)</ArgList>
+      </ClearIncidentDef>
+      <ClearConstr> PH_RULE_APP_IIS_VM_CRIT.hostIpAddr = PH_RULE_APP_IIS_VM_CRIT_CLEAR.hostIpAddr </ClearConstr>
+      <PatternClause window="600">
+	<SubPattern displayName="IISVMWarn_CLEAR" name="IISVMWarn_CLEAR">
+          <SingleEvtConstr> eventType = "PH_DEV_MON_PROC_RESOURCE_UTIL" AND appName = "Microsoft IIS"  </SingleEvtConstr>
+	  <GroupEvtConstr> AVG(virtMemKBytes) &lt;= 1700000  AND COUNT(*) &gt;= 2 </GroupEvtConstr>
+	  <GroupByAttr>hostIpAddr,hostName</GroupByAttr>
+	</SubPattern>
+      </PatternClause>
+    </ClearCondition>
+  </Rule>   
+
+</Rules>

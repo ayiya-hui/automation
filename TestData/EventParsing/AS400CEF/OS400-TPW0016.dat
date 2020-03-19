@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+83.83.83.83
+[eventMsg]
+May 16 11:59:13 83.83.83.83 CEF :0|PowerTech|Interact|3.0|TPW0016|An invalid password was entered for user profile VALKA.|2| src =192.168.1.57 dst =192.168.1.50 msg=TYPE:JRN CLS :IDS JJOB :QBASE JUSER :QSYS JNBR :414190 PGM :QWTMCMNL OBJECT : LIBRARY: MEMBER: DETAIL: P VALKA QPADEV0001
+[params]
+rawEventMsg=any
+eventId=any
+count=1
+eventSeverityCat=LOW
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverity=2
+eventType=OS400-TPW0016
+phCustId=$sender
+reptDevIpAddr=83.83.83.83
+destIpAddr=192.168.1.50
+collectorId=any
+testEvent=Real Event(0)
+eventName=Incorrect password
+reptVendor=IBM
+user=QSYS
+phRecvTime=any
+srcIpAddr=192.168.1.57
+reptDevName=any
+reptModel=OS400

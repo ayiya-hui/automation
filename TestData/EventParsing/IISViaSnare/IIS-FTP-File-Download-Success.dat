@@ -1,0 +1,35 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<46>Jan 28 15:51:42 Filer.ProspectHills.net FTPSvcLog	0	2009-01-28 23:51:42 192.168.20.39 wenyong@accelops.net MSFTPSVC1 FILER 192.168.0.40 21 [124]sent /test.txt - 226 0 6 0 15 FTP - - - -
+[params]
+rawEventMsg=any
+deviceTime=any
+eventSeverityCat=LOW
+reptVendor=Microsoft
+ftpMethod=[124]sent
+eventType=IIS-FTP-File-Download-Success
+phCustId=$sender
+destIpAddr=192.168.0.40
+srvInstName=MSFTPSVC1
+ftpStatusCode=226 (Closing data connection. Requested file action successful)
+srcIpAddr=192.168.20.39
+reptModel=IIS
+eventId=any
+ipConnId=124
+eventParsedOk=1
+eventSeverity=2
+eventName=Successful FTP file download
+phEventCategory=0 (External)
+destName=FILER
+recvBytes=6
+user=wenyong@accelops.net
+destIpPort=21
+count=1
+uriStem=/test.txt
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+uriQuery=-
+durationMSec=15
+sentBytes=0

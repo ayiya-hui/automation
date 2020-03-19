@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<181>date=2014-04-12 time=17:25:08 devname=Fortigate90D devid=FGT90D3Z13006177 logid=0100041000 type=event subtype=system level=notice vd="root" status=update virdb=yes idsdb=yes libav=yes aven=yes imap=yes smtp=yes pop3=yes http=yes ftp=yes fcni=yes fdni=yes idsmn=yes idssn=yes msg="Fortigate scheduled update        from 208.91.112.71:443"
+[params]
+customer=Super
+eventId=any
+parserName=FortiGateParser
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+count=1
+totFlows=1
+eventType=FortiGate-event-system-update
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+collectorId=any
+eventName=User changed system update setting
+eventSeverity=3
+reptVendor=Fortinet
+relayDevIpAddr=$localhost
+phRecvTime=any
+usrMsg=Fortigate scheduled update        from 208.91.112.71:443
+reptModel=FortiOS

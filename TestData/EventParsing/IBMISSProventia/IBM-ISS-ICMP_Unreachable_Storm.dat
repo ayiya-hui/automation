@@ -1,0 +1,30 @@
+[reptDevIpAddr(key)]
+172.16.64.60
+[eventMsg]
+2013-09-16 16:41:23 172.16.146.241(via UDP: [172.23.20.27]:58471) TRAP, SNMP v1, community public SNMPv2-SMI::enterprises.2499 Enterprise Specific Trap (4) Uptime: 0:00:00.00 SNMPv2-SMI::enterprises.2499.1.1.2.1.1.1.1.1 = STRING: SiteProtector_Central_Response (C485E662-12D0-4163-9CE3-A2AAB276A3E6) SNMPv2-SMI::enterprises.2499.1.1.2.1.1.1.1.2 = STRING: 16:42:49 2013-09-16 SNMPv2-SMI::enterprises.2499.1.1.2.1.1.1.1.3 = STRING: 1 SNMPv2-SMI::enterprises.2499.1.1.2.1.1.1.1.4 = STRING: 0.0.0.0 SNMPv2-SMI::enterprises.2499.1.1.2.1.1.1.1.5 = STRING: 10.94.0.16 SNMPv2-SMI::enterprises.2499.1.1.2.1.1.1.1.6 = STRING: 3 SNMPv2-SMI::enterprises.2499.1.1.2.1.1.1.1.7 = STRING: 3 SNMPv2-SMI::enterprises.2499.1.1.2.1.1.1.1.8 = SNMPv2-SMI::enterprises.2499.1.1.2.1.1.1.1.9 = SNMPv2-SMI::enterprises.2499.1.1.2.1.1.1.1.10 = SNMPv2-SMI::enterprises.2499.1.1.2.1.1.1.1.11 = STRING: AlertName: ICMP_Unreachable_Storm AlertDateTime: 16:41:46 2013-09-16 SensorIPAddress: 172.16.64.60 SensorName: IPSEC VulnStatus: Detected attack (vuln not scanned recently)
+[params]
+vulnReportStatus=Detected attack (vuln not scanned recently)
+deviceTime=any
+parserName=IBMISSProventiaParser
+eventType=IBM-ISS-ICMP_Unreachable_Storm
+destIpAddr=10.94.0.16
+icmpCode=3 (Destination  port unreachable)
+reptModel=ISS Proventia
+eventId=any
+eventParsedOk=1
+eventSeverity=5
+icmpType=3 (Destination unreachable)
+eventName=ICMP unreachables could be used to tear down connections (ICMP unreachable storm)
+extEventRecvProto=Snmp Trap
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=MEDIUM
+collectorId=any
+relayDevIpAddr=172.23.20.27
+rawEventMsg=any
+ipProto=1 (ICMP)
+reptDevName=IPSEC
+customer=Super
+phRecvTime=any
+reptDevIpAddr=172.16.64.60
+reptVendor=IBM

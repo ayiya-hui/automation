@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+70.70.70.70
+[eventMsg]
+May 17 18:51:34 70.70.70.70 ikeyserver[3582]: {Success}, {Configuration}, {S-008001}, {Server configuration was successful.}, {0x2968E89D7754F4C208520C5F21345CDA}, {Client Location:10.1.2.3}, {User ID:username}, {Domain:company.com}, {Input Details: {Configuration Section : SystemMonitoring} {Configuration Data : <SystemMonitoring>     <Enabled type='bool' data='False'/>     <Filters/>     <Targets>       <target1>         <Name type='string' data='OVO'/>         <Type type='string' data='SNMP'/>         <Email>           <From type='string' data=''/>           <To type='string' data=''/>           <Subject type='string' data=''/>         </Email>         <SMS>           <Mobile type='string' data=''/>         </SMS>         <SNMP>           <Host type='string' data='nedovonmprd1'/>           <Type type='string' data='TRAPv2c'/>           <Version type='string' data='undefined'/>           <SNMPv2>             <CommunityString type='string' data='public'/>           </SNMPv2>           <SNMPv3>             <Authentication>               <Type type='string' data='None'/>               <Secret encrypt='AuthSecretPassword' type='string' data=''/>             </Authentication>             <Privacy>               <Type type='string' data='None'/>        ...}, {Object:Server Configuration}, {Client Type:Administration Program}
+[params]
+domain=company.com
+parserName=VascoParser
+eventType=Vasco-DigiPass-KeyServer-ServerConfigSuccess
+reptModel=DigiPass
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Server configuration was successful
+appTransportProto=Syslog
+phEventCategory=0 (External)
+msg=Server configuration was successful.
+eventRuleTrigger=1
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=70.70.70.70
+user=username
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=70.70.70.70
+reptVendor=Vasco

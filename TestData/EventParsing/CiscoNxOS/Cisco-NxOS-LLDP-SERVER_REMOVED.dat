@@ -1,0 +1,54 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<189>: 2014 Dec 16 21:57:01 CST: %LLDP-FEX4  -5-SERVER_REMOVED: Server with Chassis ID c89c.1d5a.77e4 Port ID c89c.1d5a.77e4 on local port Eth4/1/1 has been removed
+[params]
+deviceTime=any
+parserName=CiscoNxOSParser
+totFlows=1
+eventType=Cisco-NxOS-LLDP-SERVER_REMOVED
+reptModel=NX-OS
+eventId=any
+eventParsedOk=1
+eventSeverity=2
+hostIpAddr=$localhost
+eventName=A peer is removed
+phEventCategory=0 (External)
+eventRuleTrigger=1
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Cisco
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<189>: 2014 Dec 16 21:57:01 CST: %LLDP-FEX4  -5-SERVER_REMOVED: Server with Chassis ID c89c.1d5a.77e4 Port ID c89c.1d5a.77e4 on local port Eth4/1/1 has been removed
+[params]
+deviceTime=any
+parserName=CiscoNxOSParser
+totFlows=1
+eventType=Cisco-NxOS-LLDP-SERVER_REMOVED
+reptModel=NX-OS
+eventId=any
+eventParsedOk=1
+eventSeverity=2
+hostIpAddr=$localhost
+eventName=A peer is removed
+phEventCategory=0 (External)
+eventRuleTrigger=1
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Cisco

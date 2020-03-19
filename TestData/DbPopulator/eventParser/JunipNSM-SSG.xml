@@ -1,0 +1,207 @@
+<eventParser name="JunipNSM-SSG">
+
+	<deviceType>
+		<Vendor>Generic</Vendor>
+		<Model>Generic</Model>
+		<Version>ANY</Version>
+	</deviceType>
+
+	<appType>
+		<Vendor>Juniper</Vendor>
+		<Model>NSM</Model>
+		<Version>ANY</Version>
+		<Name>Network and Security Manager</Name>
+	</appType>
+
+	<attachedDeviceType>
+		<Vendor>Juniper</Vendor>
+		<Model>SSG ScreenOS</Model>
+		<Version>ANY</Version>
+	</attachedDeviceType>
+
+	<patternDefinitions>
+		<pattern name="patLogInOut"><![CDATA[in|out]]></pattern>
+		<pattern name="patMethod"><![CDATA[http|https|ssh]]></pattern>
+	</patternDefinitions>
+
+	<eventFormatRecognizer><![CDATA[<:gPatSyslogPRI><:gPatMon>\s+<:gPatDay>\s+<:gPatTime>\s+<:gPatIpV4Dot>\s+<:gPatInt>,\s+<:gPatInt>,\s+<:gPatYear>/<:gPatMon>/<:gPatDay>\s+<:gPatTime>,\s+<:gPatYear>/<:gPatMon>/<:gPatDay>\s+<:gPatTime>,\s+<:gPatStrComma>,\s+<:gPatInt>,\s+<:gPatStrComma>,\s+<:gPatStrComma>,\s+(info|traffic|Sub-Category)]]></eventFormatRecognizer>
+
+	<testEvents>
+		<testEvent><![CDATA[]]></testEvent>
+	</testEvents>
+  
+	<parsingInstructions>
+
+		<setEventAttribute attr="eventType">combineMsgId("Juniper_SSG", "-", "Generic")</setEventAttribute>
+
+		<collectFieldsByRegex src="$_rawmsg">
+			<regex><![CDATA[<:gPatSyslogPRI>\s*<:gPatMon>\s+<:gPatDay>\s+<:gPatTime>\s+<relayDevIpAddr:gPatIpV4Dot>\s+<:gPatInt>,\s+<:gPatInt>,\s+<:gPatYear>/<:gPatMon>/<:gPatDay>\s+<:gPatTime>,\s+<_year:gPatYear>/<_mon:gPatMon>/<_day:gPatDay>\s+<_time:gPatTime>,\s+<_traffictype:gPatStrComma>,\s+<:gPatInt>,\s+<reptDevName:gPatStrComma>,\s+<_ipOrCategory:gPatStrComma>,\s+<_body:gPatMesgBody>]]></regex>
+		</collectFieldsByRegex>
+
+		<choose>
+			<when test="matches($_ipOrCategory, gPatIpV4Dot)">
+				<setEventAttribute attr="reptDevIpAddr">$_ipOrCategory</setEventAttribute>
+				<collectFieldsByRegex src="$_body">
+					<regex><![CDATA[<_logtype:gPatStrComma>,\s+<_threatname:gPatStrComma>,\s+<_body:gPatMesgBody>]]></regex>
+				</collectFieldsByRegex>
+			</when>
+			<otherwise>
+				<collectFieldsByRegex src="$_body">
+					<regex><![CDATA[<_logtype:gPatStrComma>,\s+<_body:gPatMesgBody>]]></regex>
+				</collectFieldsByRegex>
+			</otherwise>
+		</choose>
+
+		<when test="$reptDevIpAddr = '0.0.0.0'">
+			<setEventAttribute attr="reptDevIpAddr">$relayDevIpAddr</setEventAttribute>
+		</when>
+
+		<setEventAttribute attr="deviceTime">toDateTime($_mon, $_day, $_year, $_time)</setEventAttribute>
+		<collectAndSetAttrByPos src="$_body" sep=", ">
+			<attrPosMap attr="srcFwZone" pos='1'/>
+			<attrPosMap attr="_srcIntfName" pos='2'/>
+			<attrPosMap attr="srcIpAddr" pos='3'/>
+			<attrPosMap attr="srcIpPort" pos='4'/>
+			<attrPosMap attr="postNATSrcIpAddr" pos='5'/>
+			<attrPosMap attr="postNATSrcIpPort" pos='6'/>
+			<attrPosMap attr="destFwZone" pos='7'/>
+			<attrPosMap attr="_destIntfName" pos='8'/>
+			<attrPosMap attr="preNATDestIpAddr" pos='9'/>
+			<attrPosMap attr="preNATDestIpPort" pos='10'/>
+			<attrPosMap attr="destIpAddr" pos='11'/>
+			<attrPosMap attr="destIpPort" pos='12'/>
+			<attrPosMap attr="_proto" pos='13'/>
+			<attrPosMap attr="policyName" pos='16'/>
+			<attrPosMap attr="_rulebase" pos='17'/>
+			<attrPosMap attr="_action" pos='19'/>
+			<attrPosMap attr="_severity" pos='20'/>
+			<attrPosMap attr="_custommsg" pos='23'/>
+			<attrPosMap attr="_uriStem" pos='25'/>
+			<attrPosMap attr="_connDuration" pos='26'/>
+			<attrPosMap attr="sentBytes" pos='27'/>
+			<attrPosMap attr="recvBytes" pos='28'/>
+			<attrPosMap attr="totBytes" pos='29'/>
+			<attrPosMap attr="sentPkts" pos='30'/>
+			<attrPosMap attr="recvPkts" pos='31'/>
+			<attrPosMap attr="totPkts" pos='32'/>
+		</collectAndSetAttrByPos>
+
+		<when test="$_srcIntfName != '(NULL)'">
+			<setEventAttribute attr="srcIntfName">$_srcIntfName</setEventAttribute>
+		</when>
+
+		<when test="$_destIntfName != '(NULL)'">
+			<setEventAttribute attr="destIntfName">$_destIntfName</setEventAttribute>
+		</when>
+
+		<setEventAttribute attr="ipProto">convertStrToIntIpProto($_proto)</setEventAttribute>
+
+		<when test="$_logtype = 'info'">
+			<setEventAttribute attr="eventType">combineMsgId("Juniper_SSG", "-", "$_threatname")</setEventAttribute>
+
+			<setEventAttribute attr="errorString">$_custommsg</setEventAttribute>
+			<switch>
+				<!-- For http login success -->
+				<case>
+					<collectAndSetAttrByRegex src="$_custommsg">
+						<regex><![CDATA[Admin user \"<user:gPatStr>\" logged <_inout:patLogInOut> for Web\(<_method:patMethod>\) management \(port <destIpPort:gPatIpPort>\) from <srcIpAddr:gPatIpV4Dot>:<srcIpPort:gPatIpPort><:gPatMesgBody>]]></regex>
+					</collectAndSetAttrByRegex>
+
+					<setEventAttribute attr="eventType">combineMsgId(Juniper-SSG,"-", $_method, "-log",$_inout)</setEventAttribute>
+				</case>
+				<!-- For More General Case (Trying to include SSH) login success -->
+				<case>
+					<collectFieldsByRegex src="$_body">
+						<regex><![CDATA[Admin user \"<user:gPatStr>\" logged <_inout:patLogInOut> for <_logMeth:gPatStr> from <srcIpAddr:gPatIpV4Dot>:<srcIpPort:gPatIpPort><:gPatMesgBody>]]></regex>
+					</collectFieldsByRegex>
+
+					<setEventAttribute attr="eventType">combineMsgId(Juniper-SSG,"-", $_method, "-log",$_inout)</setEventAttribute>
+				</case>
+				<!-- For everything that starts with "admin" failed logins -->
+				<case>
+					<collectFieldsByRegex src="$_custommsg">
+						<regex><![CDATA[Admin user \"<user:gPatStr>\" login attempt for Web\(<_method:patMethod>\) <_resbody:gPatMesgBody>]]></regex>
+					</collectFieldsByRegex>
+
+					<collectFieldsByRegex src="$_resbody">
+						<regex><![CDATA[management \(port <destIpPort:gPatIpPort>\) from <srcIpAddr:gPatIpV4Dot>:<srcIpPort:gPatIpPort> failed.]]></regex>
+					</collectFieldsByRegex>
+					<setEventAttribute attr="eventType">combineMsgId(Juniper-SSG,"-", $_method, "-login-fail")</setEventAttribute>
+				</case>				
+				<!-- For everything that start with "ADM", failed logins -->
+				<case>
+					<collectAndSetAttrByRegex src="$_body">
+						<regex><![CDATA[ADM: Local admin authentication failed for login name <user:gPatStr>: invalid <:gPatMesgBody>]]></regex>
+					</collectAndSetAttrByRegex>
+					<setEventAttribute attr="eventType">combineMsgId(Juniper-SSG,"-", "local-login-fail")</setEventAttribute>
+				</case>
+				<!-- SSH Login Failure (Guess) -->
+				<case>
+					<collectAndSetAttrByRegex src="$_body">
+						<regex><![CDATA[SSH Password authentication failed for admin user <user:gPatStr> at <:gPatStr> <srcIpAddr:gPatIpV4Dot><:gPatMesgBody>]]></regex>
+					</collectAndSetAttrByRegex>
+					<setEventAttribute attr="eventType">combineMsgId(Juniper-SSG,"-", "ssh-login-fail")</setEventAttribute>
+				</case>
+			</switch>
+		</when>
+
+		<when test="$_logtype = 'traffic'">
+			<when test="$_threatname = 'traffic log'">
+				<setEventAttribute attr="errorString">$_action</setEventAttribute>
+				<when test="$_severity = 'accepted'">
+					<setEventAttribute attr="eventAction">0</setEventAttribute>
+					<setEventAttribute attr="eventType">combineMsgId("Juniper-SSG-traffic", "-", "permit")</setEventAttribute>
+				</when>
+				<when test="matches($_severity, 'dropped')">
+					<setEventAttribute attr="eventAction">1</setEventAttribute>
+					<setEventAttribute attr="eventType">combineMsgId("Juniper-SSG-traffic", "-", "deny")</setEventAttribute>
+				</when>
+			</when>
+		</when>
+
+		<choose>
+			<when test="$_severity = 'info'">
+				<setEventAttribute attr="eventSeverity">2</setEventAttribute>
+			</when>
+			<when test="$_severity = 'warning">
+				<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+			</when>
+			<when test="$_severity = 'minor">
+				<setEventAttribute attr="eventSeverity">4</setEventAttribute>
+			</when>
+			<when test="$_severity = 'major">
+				<setEventAttribute attr="eventSeverity">6</setEventAttribute>
+			</when>
+			<when test="$_severity = 'critical'">
+				<setEventAttribute attr="eventSeverity">8</setEventAttribute>
+			</when>
+			<otherwise>
+				<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+			</otherwise>
+		</choose>
+
+		<!-- User Field is Not Set Correctly, Commenting this out
+		<when test="$_custommsg != '(NULL)'">
+			<setEventAttribute attr="user">$_custommsg</setEventAttribute>
+		</when>
+		-->
+
+		<when test="$_uriStem != '(NULL)'">
+			<setEventAttribute attr="uriStem">$_uriStem</setEventAttribute>
+		</when>
+
+		<setEventAttribute attr="durationMSec">combineMsgId($_connDuration,"000")</setEventAttribute>
+
+		<when test="$postNATSrcIpAddr = '0.0.0.0'">
+			<setEventAttribute attr="postNATSrcIpAddr">$srcIpAddr</setEventAttribute>
+			<setEventAttribute attr="postNATSrcIpPort">$srcIpPort</setEventAttribute>
+		</when>
+
+		<when test="$destIpAddr = '0.0.0.0'">
+			<setEventAttribute attr="destIpAddr">$preNATDestIpAddr</setEventAttribute>
+			<setEventAttribute attr="destIpPort">$preNATDestIpPort</setEventAttribute>
+		</when>
+
+	</parsingInstructions>
+
+</eventParser>

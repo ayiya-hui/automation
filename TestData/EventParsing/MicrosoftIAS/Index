@@ -1,0 +1,5 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+Win-IAS-AcptReq,MicrosoftIAS_1,MicrosoftIAS,$localhost,user:haitian.fang,syslog
+Win-IAS-FailedAuth,MicrosoftIAS_2,MicrosoftIAS,$localhost,user:Partha_Hacker,syslog
+Win-IAS-PassedAuth,MicrosoftIAS_3,MicrosoftIAS,$localhost,user:haitian.fang,syslog

@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>[2016-04-26 16:10:13] EFW: ALG: prio=1 id=00200002 rev=1 event=alg_session_closed algmod=ftp algsesid=95238
+[params]
+deviceTime=any
+parserName=ClavisterParser
+eventType=Clavister-alg-session-closed
+reptModel=cOS Firewall
+eventId=any
+logID=200002
+eventParsedOk=1
+eventSeverity=1
+eventName=Clavister-alg-session-closed
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Clavister

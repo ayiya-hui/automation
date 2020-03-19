@@ -1,0 +1,22 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+enterprises.232.6 6 6045 sysName.0 s "Insight"
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=10
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=HIGH
+hostIpAddr=$localhost
+eventName=Power converter redundancy lost
+reptVendor=Generic
+eventType=HP-6045-PowerConverterRedundancyLost
+phEventCategory=0 (External)
+hostName=Insight
+reptDevIpAddr=$localhost
+reptModel=Generic

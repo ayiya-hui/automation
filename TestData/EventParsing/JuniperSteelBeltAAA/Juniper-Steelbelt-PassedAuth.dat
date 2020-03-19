@@ -1,0 +1,47 @@
+[reptDevIpAddr(key)]
+72.72.72.72
+[eventMsg]
+<45>Jul  9 03:07:23 72.72.72.72 SteelBeltedLog	0	"2008-07-09","03:07:20","SJ-QA-A-CAT-COR","\\PROSPECT-HILLS\WENYONG","wenyong","172.16.10.1","172.16.1.11","5"--automator
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+reptDevIpAddr=72.72.72.72
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=172.16.10.1
+eventAction=0 (Permit)
+eventName=AAA authentication successful
+reptVendor=Juniper
+eventType=Juniper-Steelbelt-PassedAuth
+user=wenyong
+phEventCategory=0 (External)
+nepDevIpAddr=172.16.10.1
+reptDevName=any
+reptModel=Steel-Belted RADIUS
+[reptDevIpAddr(key)]
+172.16.10.15
+[eventMsg]
+<13>Mar 29 11:28:51 172.16.10.15 SteelBeltedLog	0	"2010-03-29","11:28:49","JUNIPER-OFFICE-IOS","\\PROSPECT-HILLS\PHOENIX_AGENT","phoenix_agent","172.16.3.2","172.16.20.126","5" --automator
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+reptDevIpAddr=172.16.10.15
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=172.16.3.2
+eventAction=0 (Permit)
+eventName=AAA authentication successful
+reptVendor=Juniper
+eventType=Juniper-Steelbelt-PassedAuth
+user=phoenix_agent
+phEventCategory=0 (External)
+nepDevIpAddr=172.16.3.2
+reptModel=Steel-Belted RADIUS

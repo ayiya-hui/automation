@@ -1,0 +1,84 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<14>May  6 15:51:04 1,2010/05/06 15:51:04,0006C101167,TRAFFIC,start,1,2010/05/06 15:50:58,192.168.28.21,172.16.255.78,::172.16.255.78,172.16.255.78,rule3,,,icmp,vsys1,untrust,untrust,ethernet1/1,ethernet1/1,syslog-172.16.20.152,2010/05/06 15:51:04,600,2,0,0,0,0,0x40,icmp,allow,196,196,196,2,2010/05/06 15:50:58,0,any,0
+[params]
+rawEventMsg=any
+appName=icmp
+eventType=PAN-OS-TRAFFIC-start-allow
+phCustId=$sender
+destIpAddr=172.16.255.78
+totBytes=196
+destIpPort=0
+srcIpAddr=192.168.28.21
+reptModel=PAN-OS
+eventId=any
+ipConnId=600
+eventParsedOk=1
+eventSeverity=1
+preNATDestIpAddr=172.16.255.78
+eventName=Permitted traffic flow started
+appTransportProto=icmp
+phEventCategory=4 (Traffic)
+paFwAction=allow
+webCategory=any
+srcIntfName=ethernet1/1
+srcFwZone=untrust
+srcIpPort=0
+preNATDestIpPort=0
+eventSeverityCat=LOW
+totPkts=2
+destIntfName=ethernet1/1
+postNATSrcIpAddr=172.16.255.78
+ipProto=1 (ICMP)
+destFwZone=untrust
+postNATSrcIpPort=0
+count=2
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Palo Alto
+durationMSec=0
+fwRule=rule3
+[reptDevIpAddr(key)]
+20.20.20.23
+[eventMsg]
+<14>May 19 12:33:34 $reporter 12:33:34,0006C101167,TRAFFIC,start,7,2010/05/19 12:33:33,172.16.2.11,172.16.20.161,::172.16.2.11,172.16.20.161,rule3,,,rpc,vsys1,trust,untrust,ethernet1/2,ethernet1/1,forward_syslog,2010/05/19 12:33:34,12571,1,1023,908,1023,908,0x40,udp,allow,142,142,142,1,2010/05/19 12:33:33,0,any,0
+[params]
+rawEventMsg=any
+appName=rpc
+eventType=PAN-OS-TRAFFIC-start-allow
+phCustId=$sender
+destIpAddr=172.16.20.161
+totBytes=142
+destIpPort=908
+srcIpAddr=172.16.2.11
+reptModel=PAN-OS
+eventId=any
+ipConnId=12571
+eventParsedOk=1
+eventSeverity=1
+preNATDestIpAddr=172.16.20.161
+eventName=Permitted traffic flow started
+appTransportProto=rpc
+phEventCategory=4 (Traffic)
+paFwAction=allow
+webCategory=any
+srcIntfName=ethernet1/2
+srcFwZone=trust
+srcIpPort=1023
+preNATDestIpPort=908
+eventSeverityCat=LOW
+totPkts=1
+destIntfName=ethernet1/1
+postNATSrcIpAddr=172.16.2.11
+ipProto=17 (UDP)
+destFwZone=untrust
+postNATSrcIpPort=1023
+count=1
+phRecvTime=any
+reptDevIpAddr=$reporter
+eventAction=0 (Permit)
+reptVendor=Palo Alto
+durationMSec=0
+fwRule=rule3

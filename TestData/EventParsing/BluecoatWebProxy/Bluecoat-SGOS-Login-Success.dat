@@ -1,0 +1,23 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<29>Jan 29 05:13:53 ProxySG: 26001E Administrator login from 192.168.20.35, user 'admin'(0) NORMAL_EVENT ../../AuthConsole.cpp 275
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+srcIpAddr=192.168.20.35
+eventAction=0 (Permit)
+eventName=Successful Admin Login
+reptVendor=Blue Coat
+eventType=Bluecoat-SGOS-Login-Success
+user=admin
+phEventCategory=0 (External)
+reptDevIpAddr=$localhost
+reptModel=SGOS Web Proxy

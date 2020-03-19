@@ -1,0 +1,58 @@
+[reptDevIpAddr(key)]
+$localhost (ipConnId:76119)
+[eventMsg]
+<134>Nov 28 2007 17:22:08: %ASA-6-302014: Teardown TCP connection 76119 for outside:77.67.126.83/80 to inside:192.168.20.31/3531 duration 0:01:05 bytes 6410 TCP Reset-I
+[params]
+rawEventMsg=any
+ipProto=6 (TCP)
+srcIpPort=80
+destIpPort=3530
+durationMSec=65000
+deviceTime=any
+eventType=ASA-302014
+phCustId=$sender
+destIpAddr=any
+totBytes=6410
+srcIpAddr=any
+reptModel=ASA
+eventId=any
+ipConnId=76119
+eventParsedOk=1
+eventSeverity=1
+eventName=Teardown TCP connection
+phEventCategory=4 (Traffic)
+eventSeverityCat=LOW
+count=1
+phRecvTime=any
+reptDevIpAddr=$reporter
+eventAction=0 (Permit)
+reptVendor=Cisco
+[reptDevIpAddr(key)]
+$localhost (ipConnId:76118)
+[eventMsg]
+<134>Nov 28 2007 17:22:08: %ASA-6-302014: Teardown TCP connection 76118 for outside:77.67.126.83/80 to inside:192.168.20.31/3531 duration 0:01:05 bytes 6410 TCP Reset-I
+[params]
+rawEventMsg=any
+ipProto=6 (TCP)
+srcIpPort=80
+destIpPort=3530
+durationMSec=65000
+deviceTime=any
+eventType=ASA-302014
+phCustId=$sender
+destIpAddr=any
+totBytes=6410
+srcIpAddr=any
+reptModel=ASA
+eventId=any
+ipConnId=76118
+eventParsedOk=1
+eventSeverity=1
+eventName=Teardown TCP connection
+phEventCategory=4 (Traffic)
+eventSeverityCat=LOW
+count=1
+phRecvTime=any
+reptDevIpAddr=$reporter
+eventAction=0 (Permit)
+reptVendor=Cisco

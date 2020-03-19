@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<30>2016:03:11-08:51:56 ActiveUTM-1 confd[3738]: I main::top-level:615() => id="3111" severity="info" sys="System" sub="confd" name="object deleted" class="packetfilter" type="packetfilter" ref="REF_PacPacAnyFromInter" objname="Any from Internal (Network) to LAN-Summit" user="ha_sync" srcip="198.19.250.2" sid="FLCFxOhczLlVPppZmEta" facility="system" client="confd-sync" pid="11924"
+[params]
+parserName=SophosUTMParser
+eventType=Sophos-UTM-object-deleted
+procName=confd
+srcIpAddr=198.19.250.2
+reptModel=UTM
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Sophos UTM object deleted
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+eventRuleTrigger=1
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+user=ha_sync
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Sophos

@@ -1,0 +1,48 @@
+[reptDevIpAddr(key)]
+$localhost (hostName:AU-LEEY1-5)
+[eventMsg]
+<52>Nov 25 22:23:34 SymantecServer USEA-SEPMAS: AU-LEEY1-5,"Host Integrity check failed Requirement: ""Default Deny Check"" passed Requirement: ""Disable Windows Autoplay features on all device types (Windows 2000)"" passed Requirement: ""Disable Windows Autoplay features on all device types ( Windows XP, Windows2003)"" passed Requirement: ""Disable Windows Autoplay features on all device types (Windows Vista, Windows 7, Windows2008)"" passed Requirement: ""System Event Notification Service Start XP-Srv2003"" passed Requirement: ""System Event Notification Service Start Vista-Win7-Srv2008"" passed Requirement: ""Windows XP Service Pack Check"" passed Requirement: ""Windows XP 64 Bit Service Pack Check"" passed Requirement: ""Windows 2000 Service Pack Check"" passed Requirement: ""Windows 2003 Service Pack Check"" passed Requirement: ""Windows Vista Service Pack Check"" passed Requirement: ""SCCM Installed Check"" passed Requirement: ""SCCM Service Start"" passed Requirement: ""SEP NetworkThreat Protection Installed Check"" passed Requirement: ""SEP Network Threat Protection Running Check"" passed Requirement: ""SEP Antivirus Installed Check"" passed Requirement: ""SEP Antivirus Running Check"" failed Requirement: ""SEP Antivirus Definitions Check"" passed Requirement: ""SCCM Running Check"" failed",Local: 0.0.0.0,Local: 000000000000,Remote: ,Remote: 0.0.0.0,Remote: 000000000000,Unknown,OTHERS,,Begin: 2013-11-25 06:02:35,End: 2013-11-25 06:02:35,Occurrences: 1,Application: ,Location: NonUnisys,User: LeeY1,Domain: AP,Local Port 0,Remote Port 0,CIDS Signature ID: 0,CIDS Signature string: ,CIDS Signature SubID: 0,Intrusion URL: ,Intrusion Payload URL:
+[params]
+rawEventMsg=any
+domain=AP
+deviceTime=any
+eventType=Symantec-AV-HostIntegrity-Failed
+phCustId=$sender
+hostName=AU-LEEY1-5
+computer=AU-LEEY1-5
+reptModel=Endpoint Protection Service
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Symantec AV host integrity failed
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+collectorId=any
+user=LeeY1
+reptDevName=USEA-SEPMAS
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Symantec
+
+[reptDevIpAddr(key)]
+$localhost (hostName:USMV-SCOFA02)
+[eventMsg]
+<52>Nov 25 23:22:29 SymantecServer USEA-SEPMAS: USMV-SCOFA02,"Host Integrity check failed Requirement: ""Default Deny Check"" failed Requirement: ""Disable Windows Autoplay features on all device types (Windows 2000)"" passed Requirement: ""Disable Windows Autoplay features on all device types ( Windows XP, Windows2003)"" passed Requirement: ""Disable Windows Autoplay features on all device types (Windows Vista, Windows 7, Windows2008)"" passed Requirement: ""System Event Notification Service Start XP-Srv2003"" passed Requirement: ""System Event Notification Service Start Vista-Win7-Srv2008"" passed Requirement: ""Windows XP Service Pack Check"" passed Requirement: ""Windows XP 64 Bit Service Pack Check"" passed Requirement: ""Windows 2000 Service Pack Check"" passed Requirement: ""Windows 2003 Service Pack Check"" passed Requirement: ""Windows Vista Service Pack Check"" passed Requirement: ""SCCM Installed Check"" passed Requirement: ""SCCM Service Start"" passed Requirement: ""SEP NetworkThreat Protection Installed Check"" passed Requirement: ""SEP Network Threat Protection Running Check"" passed Requirement: ""SEP Antivirus Installed Check"" passed Requirement: ""SEP Antivirus Running Check"" passed Requirement: ""SEP Antivirus Definitions Check"" passed Requirement: ""SCCM Running Check"" passed",Local: 129.224.199.19,Local: 00304862A23B,Remote: ,Remote: 0.0.0.0,Remote: 000000000000,Unknown,OTHERS,,Begin: 2013-11-25 23:18:42,End: 2013-11-25 23:18:42,Occurrences: 1,Application: ,Location: Office,User: Administrator1,Domain: USMV-SCOFA02,Local Port 0,Remote Port 0,CIDS Signature ID: 0,CIDS Signature string: ,CIDS Signature SubID: 0,Intrusion URL: ,Intrusion Payload URL:
+[params]
+rawEventMsg=any
+domain=USMV-SCOFA02
+deviceTime=any
+eventType=Symantec-AV-HostIntegrity-Failed
+phCustId=$sender
+hostName=USMV-SCOFA02
+computer=USMV-SCOFA02
+reptModel=Endpoint Protection Service
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Symantec AV host integrity failed
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+collectorId=any
+user=Administrator1

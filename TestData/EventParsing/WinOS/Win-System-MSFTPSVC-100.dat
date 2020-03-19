@@ -1,0 +1,21 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<13>Jan 28 15:50:51 Filer.ProspectHills.net MSWinEventLog	1	System	147810	Wed Jan 28 15:50:51 2009	100	MSFTPSVC	Unknown User	N/A	Warning	FILER	None	0000: 2e 05 00 00 a8 fe 3f 00   ......  	The server was unable to logon the Windows NT account 'root' due to the following error: Logon failure: unknown user name or bad password.  The data is the error code.  	273
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=$localhost
+eventName=Win-System-MSFTPSVC-100
+reptVendor=Microsoft
+eventType=Win-System-MSFTPSVC-100
+phEventCategory=0 (External)
+reptDevIpAddr=$localhost
+reptModel=Windows

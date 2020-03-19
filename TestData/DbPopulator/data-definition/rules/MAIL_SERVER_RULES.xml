@@ -1,0 +1,110 @@
+<Rules>
+  <Rule group="PH_SYS_RULE_Perf_Mail" id="PH_Rule_Mail_1" phIncidentCategory="Application">
+    <Name>Exchange Server SMTP Queue high </Name>
+    <active>true</active>
+    <Description> Detects that one or more of SMTP Server queues have crossed critical threshold </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_EXCH_SMTP_QUEUE_CRIT" severity="9">
+      <ArgList>
+        hostName = QueueHigh.hostName, 
+	exchCatQueue = QueueHigh.AVG(exchCatQueue),
+	exchSMTPLocalQueue = QueueHigh.AVG(exchSMTPLocalQueue),
+	exchSMTPRemoteQueue = QueueHigh.AVG(exchSMTPRemoteQueue)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="300">
+      <SubPattern displayName="QueueHigh" name="QueueHigh">
+        <SingleEvtConstr> eventType = "PH_DEV_MON_APP_MSEXCH_SMTP_MET"</SingleEvtConstr>
+	<GroupByAttr> hostName  </GroupByAttr>
+	<GroupEvtConstr> COUNT (*) &gt;= 2 AND (AVG(exchCatQueue) &gt;= 10 OR AVG(exchSMTPLocalQueue) &gt;= 1000 OR AVG(exchSMTPRemoteQueue) &gt; 1000) </GroupEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType, hostName, exchCatQueue,exchSMTPLocalQueue,exchSMTPRemoteQueue,exchSMTPInConn,exchSMTPOutConn,exchSMTPRetries,exchSMTPLocalRetryQueue,exchSMTPRemoteRetryQueue</AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "timebased">
+      <QuietPeriod>1200</QuietPeriod>
+    </ClearCondition>
+  </Rule>
+
+  <Rule group="PH_SYS_RULE_Perf_Mail" id="PH_Rule_Mail_2" phIncidentCategory="Application">
+    <Name>Exchange Server Mailbox Queue high </Name>
+    <active>true</active>
+    <Description> Detects that one or more of Exchange mailbox store queues have crossed critical threshold </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_EXCH_MBOX_QUEUE_CRIT" severity="9">
+      <ArgList>
+        hostName = QueueHigh.hostName, 
+	exchMboxName = QueueHigh.exchMboxName,
+	exchMboxSendQueue = QueueHigh.AVG(exchMboxSendQueue),
+	exchMboxRecvQueue = QueueHigh.AVG(exchMboxRecvQueue)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="300">
+      <SubPattern displayName="QueueHigh" name="QueueHigh">
+        <SingleEvtConstr> eventType = "PH_DEV_MON_APP_MSEXCH_MBOX_MET"</SingleEvtConstr>
+	<GroupByAttr> hostName,exchMboxName  </GroupByAttr>
+	<GroupEvtConstr> COUNT (*) &gt;= 2 AND (AVG(exchMboxSendQueue) &gt;= 500 OR AVG(exchMboxRecvQueue) &gt;= 500) </GroupEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType, hostName, exchMboxName,exchMboxSendQueue,exchMboxRecvQueue,exchMboxSentMsg,exchMboxSubmitMsg,exchMboxDelivMsg,exchMboxActiveUserCount,exchMboxPeakUserCount</AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "timebased">
+      <QuietPeriod>1200</QuietPeriod>
+    </ClearCondition>
+  </Rule>
+
+  <Rule group="PH_SYS_RULE_Perf_Mail" id="PH_Rule_Mail_3" phIncidentCategory="Application">
+    <Name>Exchange Server RPC request high </Name>
+    <active>true</active>
+    <Description> Detects a spike in exchange server RPC requests </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_EXCH_RPC_REQ_CRIT" severity="9">
+      <ArgList>
+        hostName = RPCHigh.hostName, 
+	exchRPCReq = RPCHigh.AVG(exchRPCReq)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="300">
+      <SubPattern displayName="RPCHigh" name="RPCHigh">
+        <SingleEvtConstr> eventType = "PH_DEV_MON_APP_MSEXCH_MET"</SingleEvtConstr>
+	<GroupByAttr> hostName </GroupByAttr>
+	<GroupEvtConstr> COUNT (*) &gt;= 2 AND AVG(exchRPCReq) &gt;= 30 </GroupEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType, hostName, exchRPCReq,exchRPCAvgLatency,exchRPCOpsPerSec,exchRPCReqPeak,exchUserCount,exchActiveUserCount,exchPeakUserCount,exchActiveConnCount,exchMaxConn</AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "timebased">
+      <QuietPeriod>1200</QuietPeriod>
+    </ClearCondition>
+  </Rule>
+
+  <Rule group="PH_SYS_RULE_Perf_Mail" id="PH_Rule_Mail_4" phIncidentCategory="Application">
+    <Name>Exchange Server RPC latency high </Name>
+    <active>true</active>
+    <Description> Detects excessive exchange server RPC request latency </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_EXCH_RPC_LATENCY_CRIT" severity="9">
+      <ArgList>
+        hostName = RPCLatencyHigh.hostName, 
+	exchRPCAvgLatency = RPCLatencyHigh.AVG(exchRPCAvgLatency)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="300">
+      <SubPattern displayName="RPCLatencyHigh" name="RPCLatencyHigh">
+        <SingleEvtConstr> eventType = "PH_DEV_MON_APP_MSEXCH_MET"</SingleEvtConstr>
+	<GroupByAttr> hostName </GroupByAttr>
+	<GroupEvtConstr> COUNT (*) &gt;= 2 AND AVG(exchRPCAvgLatency) &gt;= 50 </GroupEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType, hostName, exchRPCReq,exchRPCAvgLatency,exchRPCOpsPerSec,exchRPCReqPeak,exchUserCount,exchActiveUserCount,exchPeakUserCount,exchActiveConnCount,exchMaxConn</AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "timebased">
+      <QuietPeriod>1200</QuietPeriod>
+    </ClearCondition>
+  </Rule>
+
+</Rules>

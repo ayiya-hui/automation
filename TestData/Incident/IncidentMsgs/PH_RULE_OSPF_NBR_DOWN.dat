@@ -1,0 +1,5 @@
+[eventMsg]
+<187>May 12 01:10:52 12.10.0.1 201: May 12 01:10:52.807: %OSPF-5-ADJCHG: Process 1, Nbr 12.10.0.2 on Ethernet0/1 from FULL to DOWN, Neighbor Down: Interface down or detached
+
+[clearEventMsg]
+<187>May 12 01:30:52 12.10.0.1 201: May 12 01:30:52.807: %OSPF-5-ADJCHG: Process 1, Nbr 12.10.0.2 on Ethernet0/1 from LOADING to FULL, Loading Done

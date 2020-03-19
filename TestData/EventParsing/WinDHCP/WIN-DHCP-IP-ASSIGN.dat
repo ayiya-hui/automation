@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<15>Jun 20 12:20:58 ADS-Pri.ProspectHills.net WinDHCPLog	0	10,06/20/08,12:20:58,Assign,192.168.20.35,mission.,000D5639076C,
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+reptVendor=Microsoft
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+eventAction=0 (Permit)
+hostIpAddr=192.168.20.35
+eventName=DHCP IP assigned
+computer=mission
+eventType=WIN-DHCP-IP-ASSIGN
+phEventCategory=0 (External)
+hostName=mission
+reptDevIpAddr=$localhost
+hostMACAddr=00:0d:56:39:07:6c
+reptModel=DHCP

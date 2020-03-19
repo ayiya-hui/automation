@@ -1,0 +1,40 @@
+[reptDevIpAddr(key)]
+10.146.68.73
+[eventMsg]
+<25>Oct 11 14:31:50 $reporter 20101011, 58653547, 2010/10/11 18:31:49, 2010/10/11 18:35:34, global.IDP, 1631, par-real-idp200, 10.146.68.73, traffic, backdoor detected, (NULL), (NULL), 10.146.67.51, 52362, 0.0.0.0, 0, (NULL), (NULL), 10.72.138.4, 23, 0.0.0.0, 0, tcp, global.IDP, 1631, Metro IDP IP / Port Scan Policy, backdoor, 2, accepted, info, no, 'interface=eth3', (NULL), (NULL), (NULL), 0, 0, 0, 0, 0, 0, 0, 0, yes, 0, Not
+[params]
+phEventCategory=0 (External)
+count=1
+phCustId=$sender
+destFwZone=(NULL)
+destIpAddr=10.72.138.4
+destIpPort=23 (TELNET)
+deviceTime=any
+durationMSec=0
+eventId=any
+eventName=Juniper_IDP-backdoor detected
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=2
+eventSeverityCat=LOW
+eventType=Juniper_IDP-backdoor detected
+ipProto=6 (TCP)
+policyName=Metro IDP IP / Port Scan Policy
+postNATSrcIpAddr=10.146.67.51
+postNATSrcIpPort=52362
+preNATDestIpAddr=10.72.138.4
+preNATDestIpPort=23 (TELNET)
+recvPkts=0
+recvBytes=0
+relayDevIpAddr=10.146.68.73
+reptDevName=par-real-idp200
+reptDevIpAddr=$reporter
+reptModel=IDP
+reptVendor=Juniper
+sentBytes=0
+sentPkts=0
+srcFwZone=(NULL)
+srcIpAddr=10.146.67.51
+srcIpPort=52362
+totBytes=0
+totPkts=0

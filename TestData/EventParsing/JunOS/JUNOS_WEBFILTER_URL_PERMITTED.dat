@@ -1,0 +1,32 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<28>Nov 15 09:23:36 $localhost CL-GW-ISP-01: utmd_av[90892]: WEBFILTER_URL_PERMITTED: WebFilter: ACTION=URL Permitted 172.16.7.20(60621)->173.194.46.89(80) CATEGORY=N/A REASON=by other category PROFILE=default-web-filter URL=pubads.g.doubleclick.net OBJ=/gampad/adx?iu=2620/nbcnews/homepage_spotlight&sz=300x250&c=44473636&ord=505740012&t=pm=1&qsg=2006,1956,1914,384,383,378,334,326,318,316&u=mnbyiww08&ksg=mbhcdcvd6,mlhro9dv4,nppsi01xf,mvqo6w89x,muus38edp,m7zaj3jop,mkcovyh3b,mvqhiob2c,m04jtomxk,nka40c0rb,m04cb6ytl,mq7a6u6z3,nka13d6fi,nmyqps29v,na16y3mtq,m0c7u6xwg,m9qwbeg7w,m04b6c5a0,m1wj9lk70,ncl3scp9f,mvlr0kg1f,mkc5ip5ua,nr1jekp3n,m72etwn6o,mvqh23rni,md3qar4f7,m04bza4ny,mvqoag0nd,m04btcm4e,mi5ews5ge,m5rxyeh0o,mbhby9gex,mi5dz9jfz,mvqmnpsg4,nn6nonyh5,nqh8ug2us,ndgjfyse7,mh2ed2p17,nhvmznyew,m0455slda,mwan7xx6b,mp2xwkv6t,niy406663,nwso7uqjd,nox09rfn8,mit07rc0v,m1o56qa5j,mmj19wdh4,mvqqsyeby,m3nq832gc,m0468nm4f,m046czhj7,l904x40e4,nka3qadu9,ntvzh2plz,nn9qztmhz,nmyr0ud24,m7iiho0be,ntwfo6psh,mzkven5eg,md3z2r
+[params]
+rawEventMsg=any
+deviceTime=any
+webCategory=N/A
+eventType=JUNOS_WEBFILTER_URL_PERMITTED
+phCustId=$sender
+destIpAddr=173.194.46.89
+srcIpAddr=172.16.7.20
+reptModel=JunOS
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=A web request is permitted
+phEventCategory=0 (External)
+destName=pubads.g.doubleclick.net
+errReason=by other category
+count=1
+srcIpPort=60621
+eventSeverityCat=LOW
+collectorId=any
+destIpPort=80
+reptDevName=any
+infoURL=pubads.g.doubleclick.net/gampad/adx?iu=2620/nbcnews/homepage_spotlight&sz=300x250&c=44473636&ord=505740012&t=pm=1&qsg=2006,1956,1914,384,383,378,334,326,318,316&u=mnbyiww08&ksg=mbhcdcvd6,mlhro9dv4,nppsi01xf,mvqo6w89x,muus38edp,m7zaj3jop,mkcovyh3b,mvqhiob2c,m04jtomxk,nka40c0rb,m04cb6ytl,mq7a6u6z3,nka13d6fi,nmyqps29v,na16y3mtq,m0c7u6xwg,m9qwbeg7w,m04b6c5a0,m1wj9lk70,ncl3scp9f,mvlr0kg1f,mkc5ip5ua,nr1jekp3n,m72etwn6o,mvqh23rni,md3qar4f7,m04bza4ny,mvqoag0nd,m04btcm4e,mi5ews5ge,m5rxyeh0o,mbhby9gex,mi5dz9jfz,mvqmnpsg4,nn6nonyh5,nqh8ug2us,ndgjfyse7,mh2ed2p17,nhvmznyew,m0455slda,mwan7xx6b,mp2xwkv6t,niy406663,nwso7uqjd,nox09rfn8,mit07rc0v,m1o56qa5j,mmj19wdh4,mvqqsyeby,m3nq832gc,m0468nm4f,m046czhj7,l904x40e4,nka3qadu9,ntvzh2plz,nn9qztmhz,nmyr0ud24,m7iiho0be,ntwfo6psh,mzkven5eg,md3z2r
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Juniper
+fwRule=default-web-filter

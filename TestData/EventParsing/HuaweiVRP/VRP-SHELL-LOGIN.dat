@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<189>Apr 13 2008 18:42:07 SH-Quidway-SW1 %%01SHELL/5/LOGIN(l):  admin login from 10.1.20.21.
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+count=1
+phCustId=$sender
+deviceTime=any
+eventAction=0 (Permit)
+eventId=any
+eventName=user login from shell
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=1
+eventSeverityCat=LOW
+eventType=VRP-SHELL-LOGIN
+hostName=SH-Quidway-SW1
+reptDevName=SH-Quidway-SW1
+reptDevIpAddr=$reporter
+reptModel=VRP
+reptVendor=Huawei
+srcIpAddr=10.1.20.21
+user=admin

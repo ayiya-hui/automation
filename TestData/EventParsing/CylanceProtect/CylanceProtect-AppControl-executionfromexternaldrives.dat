@@ -1,0 +1,29 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+CylancePROTECT: Event Type: AppControl, Event Name: executionfromexternaldrives, Device Name: WIN-7entSh64, IP Address: (192.168.119.128), Action: PEFileChange, Action Type: Allow, File Path: \\shared1\psexec.exe, SHA256: F8DBABDFA03068130C277CE49C60E35C029FF29D9E3C74C362521F3FB02670D5
+[params]
+parserName=CylanceProtectParser
+eventType=CylanceProtect-AppControl-executionfromexternaldrives
+hostName=WIN-7entSh64
+fwAction=PEFileChange
+reptModel=Protect
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+hashCode=F8DBABDFA03068130C277CE49C60E35C029FF29D9E3C74C362521F3FB02670D5
+eventName=CylanceProtect-AppControl-executionfromexternaldrives
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+eventRuleTrigger=1
+count=1
+filePath=\\shared1\psexec.exe
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Cylance

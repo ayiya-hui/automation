@@ -1,0 +1,30 @@
+[reptDevIpAddr(key)]
+70.70.70.70
+[eventMsg]
+May 14 22:03:28 70.70.70.70 ikeyserver[3575]: {Failure}, {Authentication}, {F-002001}, {User authentication failed.}, {0xB7A12A0C7E69FD23CDF7F7BA7C2A0132}, {Source Location:10.1.2.3}, {Client Location:10.3.2.1}, {Reason:The user account is locked}, {User ID:flast}, {Domain:company.com}, {Input Details: {User ID : flast} {Raw User ID : 0x7468727061303031} {Password Format : 3} {MS-CHAP Challenge : 0x519EB3CEC063B0BEA286D7A09A2CC067} {MS-CHAP2 Peer Challenge : 0x1BD28FA2928C0B171C41EAC184A10245} {MS-CHAP NT Response : 0x1474043F60167902C2B87666BA929D025954FC2AD93F6CFE} {Component Type : SBR Plug-In} {User Attribute Group : Radius}}, {Output Details: {Status Message : The user account is locked} {Auxiliary Message :  {Error Code: '(1007)' ; Error Message: 'Digipass User account is locked'}}}, {Policy ID:Identikey Local Authentication}, {Local Authentication:no}, {Back-End Authentication:None}, {Client Type:SBR Plug-In}
+[params]
+domain=company.com
+parserName=VascoParser
+eventType=Vasco-DigiPass-KeyServer-UserAuth-Failed
+srcIpAddr=10.1.2.3
+reptModel=DigiPass
+eventId=any
+policyName=Identikey Local Authentication
+eventParsedOk=1
+eventSeverity=7
+eventName=DigiPass User authentication was rejected
+appTransportProto=Syslog
+phEventCategory=0 (External)
+msg=User authentication failed.
+eventRuleTrigger=1
+errReason=The user account is locked
+count=1
+eventSeverityCat=MEDIUM
+collectorId=any
+relayDevIpAddr=70.70.70.70
+user=flast
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=70.70.70.70
+reptVendor=Vasco

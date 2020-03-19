@@ -1,0 +1,1914 @@
+<eventParser name="JunOSParser">
+  <deviceType>
+    <Vendor>Juniper</Vendor>
+    <Model>JunOS</Model>
+    <Version>ANY</Version>
+  </deviceType>
+  
+  <patternDefinitions>
+    <pattern name="patJunOSMod" list="begin"><![CDATA[ACCT|ALARMD|ANCPD|ANTISPAM|APPIDD|APPTRACK|APPPXY|ASP|AUDITD|]]></pattern>
+    <pattern name="patJunOSMod" list="continue"><![CDATA[AUTHD|AUTOCONFD|AUTOD|AV|BFDD|BOOTPD|CFMD|CHASSISD|CONNECTION|CONTENT|]]></pattern>
+    <pattern name="patJunOSMod" list="continue"><![CDATA[COSD|DCD|DFCD|DFWD|DHCPD|DYNAMIC|ESWD|EVENTD|FCD|FLOW|]]></pattern>
+     <pattern name="patJunOSMod" list="continue"><![CDATA[FPCLOSGIN|FSAD|FUD|FWAUTH|GPRSD|HNCACHED|ICCPD|IDP|JADE|JCS|]]></pattern>
+      <pattern name="patJunOSMod" list="continue"><![CDATA[JDIAMETERD|JPTSPD|JSRPD|KMD|L2ALD|L2CPD|L2TPD|LACPD|LFMD|LIBESPTASK|]]></pattern>
+      <pattern name="patJunOSMod" list="continue"><![CDATA[LIBJNX|LIBJSNMP|LIBMSPRPC|LICENSE|LLDPD|LOGIN|LPDFD|LRMUX|MCSNOOPD|MIB2D|]]></pattern>
+      <pattern name="patJunOSMod" list="continue"><![CDATA[MPLS|NEXTHOP|NSD|NSTRACED|PFE|PFED|PGCPD|PING|PPMD|PPPD|]]></pattern>
+      <pattern name="patJunOSMod" list="continue"><![CDATA[PROFILER|RDD|RMOPD|RPD|RT|RTLOG|RTLOGD|RTPERF|SAVAL|SDXD|]]></pattern>
+      <pattern name="patJunOSMod" list="continue"><![CDATA[SMTPD|SNMP|SNMPD|SPD|SSH|SSHD|TASK|TFTPD|UI|UTMD|]]></pattern>
+    <pattern name="patJunOSMod" list="end"><![CDATA[VCCPD|VRRPD|VSYSD|WEB|WEBFILTER]]></pattern>
+    <pattern name="patStrEndQuote"><![CDATA[[^']+]]></pattern>
+  </patternDefinitions> 
+
+  <eventFormatRecognizer><![CDATA[<:gPatStr>(\[\d+\])?:\s+(?:%<:gPatStr>-\d-)?<:patJunOSMod>_<:gPatStrEndColon>:]]></eventFormatRecognizer>
+  
+  <testEvents>
+      <testEvent><![CDATA[<190>May 11 13:54:10 20.20.20.20 mgd[5518]: UI_LOGIN_EVENT: User 'phoenix_agent' login, class 'j-super-user' [5518], ssh-connection '192.168.28.21 39109 172.16.5.64 22', client-mode 'cli']]></testEvent>
+      <testEvent><![CDATA[<38>Nov 18 17:50:46 login: %AUTH-6-LOGIN_INFORMATION: User phoenix_agent logged in from host 192.168.20.116 on device ttyp0]]></testEvent>
+  </testEvents>
+  
+  <parsingInstructions>
+    <switch>
+	<case>
+    		<collectFieldsByRegex src="$_rawmsg">
+          		<regex><![CDATA[<:gPatSyslogPRI><_mon:gPatMon>\s+<_day:gPatDay>\s+<_time:gPatTime>\s+<:gPatStrEndColon>:\s+%[A-Z]+-<_num:gPatInt>-<_event:gPatStrEndColon>:\s+<_body:gPatMesgBody>]]></regex>
+    		</collectFieldsByRegex>
+	</case>
+	<case>
+    		<collectFieldsByRegex src="$_rawmsg">
+          		<regex><![CDATA[<:gPatSyslogPRI><_mon:gPatMon>\s+<_day:gPatDay>\s+<_time:gPatTime>\s+<_reptIPStr:gPatStr>\s+<:gPatStrEndColon>:\s+%[A-Z]+-<_num:gPatInt>-<_event:gPatStrEndColon>:\s+<_body:gPatMesgBody>]]></regex>
+    		</collectFieldsByRegex>
+	</case>
+
+	<case>
+    		<collectFieldsByRegex src="$_rawmsg">
+          		<regex><![CDATA[<:gPatSyslogPRI><_mon:gPatMon>\s+<_day:gPatDay>\s+<_time:gPatTime>\s+<_reptIPStr:gPatStr>\s+<:gPatStrEndColon>:\s+<_event:gPatStrEndColon>:\s+<_body:gPatMesgBody>]]></regex>
+    		</collectFieldsByRegex>
+	</case>
+	<case>
+    		<collectFieldsByRegex src="$_rawmsg">
+          		<regex><![CDATA[<:gPatSyslogPRI><_mon:gPatMon>\s+<_day:gPatDay>\s+<_time:gPatTime>\s+<:gPatStrEndColon>:\s+<_event:gPatStrEndColon>:\s+<_body:gPatMesgBody>]]></regex>
+    		</collectFieldsByRegex>
+	</case>
+    </switch>
+
+    <setEventAttribute attr="deviceTime">toDateTime($_mon, $_day, $_time)</setEventAttribute>
+    <setEventAttribute attr="eventAction">0</setEventAttribute>
+    <setEventAttribute attr="eventType">combineMsgId("JUNOS_", $_event)</setEventAttribute>
+    <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+    
+    <!-- Severity level: Information 1, Notification 3, Warning 4, Error 5, Critical 7, Alert 8, Emergency 9-->
+    
+    <when test='exist _reptIPStr'>
+	<collectFieldsByRegex src="$_reptIPStr">
+		<regex><![CDATA[<reptDevIpAddr:gPatIpV4Dot>]]></regex>
+	</collectFieldsByRegex>
+   </when>
+
+   <when test='exist _event'>
+	<collectFieldsByRegex src="$_event">
+		<regex><![CDATA[<_type:patJunOSMod>_.*]]></regex>
+	</collectFieldsByRegex>
+   </when>
+
+   
+   <when test='exist _type'>	
+	<when test='$_type = "FLOW"'>
+		<when test='$_event IN "FLOW_HIGH_WATERMARK_TRIGGERED, FLOW_LOW_WATERMARK_TRIGGERED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Number of sessions\s+<totFlows:gPatInt>\s+(exceed|dropp)ed(?:\s+below)? the (high|low) watermark\s+<:gPatInt>.*]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "FLOW_IP_ACTION"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Flow IP action detected attack attempts:<srcIpAddr:gPatIpV4Dot>/<srcIpPort:gPatIpPort>--><destIpAddr:gPatIpV4Dot>/<destIpPort:gPatIpPort>\s+from interface\s+<intfName:gPatStr> <:gPatStr>\.]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event IN "FLOW_SESSION_CREATE, FLOW_SESSION_CLOSE, FLOW_SESSION_DENY"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Session (creat|clos|deni)ed(?:\s+<errReason:gPatStr>:)?\s+<srcIpAddr:gPatIpV4Dot>/<srcIpPort:gPatIpPort>--><destIpAddr:gPatIpV4Dot>/<destIpPort:gPatIpPort>,<ipProto:gPatStr>:<policyName:gPatStr>(?:,<recvPkts:gPatInt>,<recvBytes:gPatInt>,<sentBytes:gPatInt><durationMSec:gPatInt>)?]]></regex>
+			</collectFieldsByRegex>
+		</when>
+	</when>
+	<when test='$_type = "ANTISPAM"'>
+		<!-- ANTISPAM_SPAM_DETECTED, ANTISPAM_SPAM_DETECTED_MT -->
+		<collectFieldsByRegex src="$_body">
+			<regex><![CDATA[AntiSpam: SPAM detected: <srcName:gPatStr> \(<srcIpAddr:gPatIpV4Dot>\) <osObjAction:gPatStr> reason:<errReason:gPatMesgBody>]]></regex>
+		</collectFieldsByRegex>
+	</when>
+	
+	<when test='$_type = "APPTRACK"'>
+		<!-- APPTRACK_SESSION_APP_UPDATE, APPTRACK_SESSION_CLOSEA, PPTRACK_SESSION_VOL_UPDATE, APPTRACK_SESSION_CREATE -->
+		<collectFieldsByRegex src="$_body">
+			<regex><![CDATA[AppTrack\s+(app|session|volume)\s+(created|update|closed)(?:\s+<errReason:gPatStr>)?:<srcIpAddr:gPatIpV4Dot>/<srcIpPort:gPatIpPort>-><destIpAddr:gPatIpV4Dot>/<destIpPort:gPatIpPort>\s+<serviceName:gPatStr>\s+<appName:gPatStr>\s+<:gPatStr>\s+<postNATSrcIpAddr:gPatIpV4Dot>/<postNATSrcIpPort:gPatIpPort>-><preNATDestIpAddr:gPatIpV4Dot>/<preNATDestIpPort:gPatIpPort>\s+<:gPatStr>\s+<:gPatStr>\s+<appTransportProto:gPatInt>\s+<policyName:gPatStr>\s+<srcFwZone:gPatStr>\s+<destFwZone:gPatStr>\s+<ipConnId:gPatStr>(?:\s+<sentPkts:gPatInt>\(<sentBytes:gPatInt>\)\s+<recvPkts:gPatInt>\(<recvBytes:gPatInt>\)\s+<durationMSec:gPatInt>)?]]></regex>
+		</collectFieldsByRegex>				
+	</when>
+	
+	<when test='$_type = "ASP"'>
+		<setEventAttribute attr="eventSeverity">3</setEventAttribute>					
+		<when test='$_event = "ASP_L2TP_MESSAGE_INCOMPLETE"'>
+			<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+		</when>			
+		<when test='$_event IN "ASP_IDS_NO_MEM_SHOW_CMD, ASP_IDS_NULL_CLEAR_QUERY, ASP_IDS_NULL_SHOW_QUERY, ASP_SFW_NEW_POLICY"'>
+			<setEventAttribute attr="eventSeverity">7</setEventAttribute>
+		</when>
+		<when test='$_event IN "ASP_COS_RULE_MATCH, ASP_IDS_LIMIT_FLOW_RATE_BY_DEST, ASP_IDS_LIMIT_FLOW_RATE_BY_PAIR, ASP_IDS_LIMIT_FLOW_RATE_BY_SRC, ASP_IDS_LIMIT_OPEN_FLOWS_BY_DEST, ASP_IDS_LIMIT_OPEN_FLOWS_BY_PAIR, ASP_IDS_LIMIT_OPEN_FLOWS_BY_SRC, ASP_IDS_LIMIT_PKT_RATE_BY_DEST, ASP_IDS_LIMIT_PKT_RATE_BY_PAIR,ASP_IDS_LIMIT_PKT_RATE_BY_SRC, ASP_IDS_RULE_MATCH, ASP_NAT_RULE_MATCH, ASP_SFW_APP_MSG_TOO_LONG, ASP_SFW_CREATE_ACCEPT_FLOW, ASP_SFW_CREATE_DISCARD_FLOW, ASP_SFW_CREATE_REJECT_FLOW, ASP_SFW_FTP_ACTIVE_ACCEPT, ASP_SFW_FTP_PASSIVE_ACCEPT, ASP_SFW_ICMP_ERROR_DROP, ASP_SFW_ICMP_HEADER_LEN_ERROR, ASP_SFW_ICMP_PACKET_ERROR_LENGTH, ASP_SFW_IP_FRAG_ASSEMBLY_TIMEOUT, ASP_SFW_IP_FRAG_OVERLAP, ASP_SFW_IP_OPTION_DROP_PACKET, ASP_SFW_IP_PACKET_CHECKSUM_ERROR, ASP_SFW_IP_PACKET_DST_BAD, ASP_SFW_IP_PACKET_FRAG_LEN_INV, ASP_SFW_IP_PACKET_INCORRECT_LEN, ASP_SFW_IP_PACKET_LAND_ATTACK, ASP_SFW_IP_PACKET_NOT_VERSION_4, ASP_SFW_IP_PACKET_PROTOCOL_ERROR, ASP_SFW_IP_PACKET_SRC_BAD, ASP_SFW_IP_PACKET_TOO_LONG, ASP_SFW_IP_PACKET_TOO_SHORT, ASP_SFW_IP_PACKET_TTL_ERROR, ASP_SFW_NO_IP_PACKET, ASP_SFW_NO_RULE_DROP, ASP_SWF_PING_DUPLICATED_SEQNO, ASP_SFW_PING_MISMATCHED_SEQNO, ASP_SFW_PING_OUTFO_SEQNO_CACHE, ASP_SFW_RULE_ACCEPT, ASP_SFW_RULE_DISCARD, ASP_SFW_RULE_REJECT, ASP_SFW_SYN_DEFENSE, ASP_SFW_TCP_BAD_SYN_COOKIE_RESP, ASP_SFW_TCP_FLAGS_ERROR, ASP_SFW_TCP_HEADER_LEN_ERROR, ASP_SFW_TCP_NON_SYN_FIRST_PACKET, ASP_SFW_TCP_PORT_ZERO, ASP_SFW_TCP_RECONSTRUCT_DROP, ASP_SFW_TCP_SCAN, SAP_SFW_TCP_SEQNO_AND_FLAGS_ZERO, ASP_SFW_TCP_SEQNO_ZERO_FLAGS_SET, ASP_SFW_UDP_HEADER_LEN_ERROR, ASP_SFW_UDP_PORT_ZERO, ASP_SFW_UDP_SCAN, ASP_SFW_VERY_BAD_PACKET"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[<:gPatSyslogPRI>\s+<:gPatInt>:\s+proto\s+<:gPatInt>\(<appTransportProto:gPatStr>\)(?:\s+applicaiton:\s+<appName:gPatStr>)?,\s+<srcIntfName:gPatStr>:<srcIpAddr:gPatIpV4Dot>:<srcIpPort:gPatIpPort>-><destIpAddr:gPatIpV4Dot>:<destIpPort:gPatIpPort>,<:gPatStr>(?:\s+rule-set:<:gPatStr>,\s+rule:<fwRule:gPatStr>,\s+term:\s+<:gPatStr>)?(?:\s+<:gPatStr>)?]]></regex>
+			</collectFieldsByRegex>
+			<when test='$_event IN "ASP_COS_RULE_MATCH, ASP_IDS_RULE_MATCH, ASP_NAT_RULE_MATCH, ASP_SFW_CREATE_ACCEPT_FLOW, ASP_SFW_RULE_ACCEPT"'>
+				<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+			</when>
+			<when test='$_event = "ASP_IDS_TCP_SYN_ATTACK"'>
+				<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+			</when>
+			<when test='$_event = "ASP_SFW_VERY_BAD_PACKET"'>
+				<setEventAttribute attr="eventSeverity">7</setEventAttribute>
+			</when>				
+		</when>
+		<when test='$_event IN "ASP_IDS_HOST_RATE, ASP_IDS_HOST_RATE_APP"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Host\s+<destIpAddr:gPatIpV4Dot>(?:\s+\(<appName:gPatStr>\))?,\s+<:gPatStr>\.\.\.\s+rate=<eventsPerSec:gPatInt>\s+events/sec]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+		</when>
+		<when test='$_event IN "ASP_IDS_INV_CLEAR_QUERY, ASP_IDS_INV_CLEAR_QUERY_VER, ASP_IDS_INV_SHOW_QUERY, ASP_IDS_INV_SHOW_QUERY_VER"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[[CLEAR|SHOW]:\s+Invalid query (type|version) <:gPatInt> expecting <:gPatInt>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">7</setEventAttribute>
+		</when>
+		<when test='$_event IN "ASP_IDS_SYN_COOKIE_OFF, ASP_IDS_SYN_COOKIE_ON"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Host\s+<destIpAddr:gPatIpV4Dot>,\s+SYN-COOKIE\s+protection (?:de)?activated]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+		</when>
+		<when test='$_event = "ASP_SVC_SET_MAX_FLOWS_EXCEEDED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Number of flows \(currently <totFlows:gPatInt>\) exceeded configuration limit \(<:gPatInt>\) <:gPatInt> times in previoius 60 seconds]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "ASP_L2TP_NO_MEM"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Unable\s+to allocate memory for L2TP flow for tunnel <:gPatStr>, session <ipConnId:gPatInt>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+		</when>
+		<when test='$_event = "ASP_L2TP_OBJ_CAC_FAIL"'>			
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Unable\s+to allocate object-cache memory for flow \(unit <:gPatInt>, tunnel <:gPatStr>, session <ipConnId:gPatInt>\)]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+		</when>	
+		<when test='$_event = "ASP_L2TP_STATS_BULK_QUERY_FAILED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Number of queries \(<:gPatInt>\) in statistics request exceeded limt \(<:gPatInt>\)]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+		</when>			
+		<when test='$_event = "ASP_L2TP_STATS_VERSION_INVALID"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Invalid version <:gPatInt> on statistics request \(expected <:gPatInt>\)]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+		</when>
+		<when test='$_event IN "ASP_L2TP_TUN_GRP_ADD_FAIL_ALLOC, ASP_L2TP_TUN_GRP_CHG_FAIL_ALLOC"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Unable to (add|change) tunnel group for service set <:gPatStr>: could not allocate ID]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+		</when>	
+		<when test='$_event IN "ASP_L2TP_TUN_GRP_ADD_FAIL_EXISTS, ASP_L2TP_TUN_GRP_CHG_FAIL_INVLD, ASP_L2TP_TUN_GRP_DEL_FAIL_INVLD"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Unable to (add|change|delete) tunnel group <:gPatInt>:\s+.*]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+		</when>
+		<when test='$_event IN "ASP_PGCP_IPC_MSG_WRITE_FAILED, ASP_PGCP_IPC_PIPE_WRITE_FAILED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Unable to write IPC message \(type <:gPatStr>, subtype <:gPatStr>\)(?:\s+to\s+pipe)?: status code <:gPatInt>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+		</when>	
+		<when test='$_event = "ASP_SFW_NO_POLICY"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[<srcIpAddr:gPatIpV4Dot>-><destIpAddr:gPatIpV4Dot>\s+No policy]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">7</setEventAttribute>
+		</when>
+		<when test='$_event IN "ASP_SFW_NEW_POLICY, ASP_SFW_CHANGE_INACTIVITY_TIMER"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[change\s+global inactivity timer to <:gPatInt> open timeout to <:gPatInt>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">7</setEventAttribute>
+		</when>
+		<when test='$_event = "ASP_SFW_ALG_PROMOTION_FAILED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[ALG promotion failed. Stateful firewall applicaiton\s+<appName:gPatStr>\s+conflicts with NAT application <:gPatStr>\s+.*]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">4</setEventAttribute>
+		</when>
+		<when test='$_event = "ASP_SFW_ALG_LEVEL_ADJUSTED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[ALG\s+<appName:gPatStr>\s+specified by stateful firewall or CoS rule was reduced to <:gPatStr>, because twirce NAT does not support ALG <:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">4</setEventAttribute>
+		</when>
+		<when test='$_event IN "ASP_NAT_OUTOF_ADDRESSES, ASP_NAT_OUTOF_PORTS"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[natpool\s+<:gPatStr> is out of (addresse|port)s]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">4</setEventAttribute>
+		</when>
+		<when test='$_event = "ASP_NAT_POOL_RELEASE"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[natpool\s+release\s+<hostIpAddr:gPatIpV4Dot>\[<:gPatInt>\]]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		</when>
+		<when test='$_event IN "ASP_SFW_POLICY_REJECT"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[reject configuration because <errReason:gPatMesgBody>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">7</setEventAttribute>
+		</when>
+	</when>
+	<when test='$_type = "AV"'>	
+		<setEventAttribute attr="eventSeverity">4</setEventAttribute>	
+		<when test='$_event = "AV_SCANNER_READY"'>
+			<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		</when>
+		<when test='$_event IN "AV_HUGE_FILE_DROPPED,AV_HUGH_FILE_DROPPED_MT,AV_HUGH_FILE_NOT_SCANNED,AV_HUGH_FILE_NOT_SCANNED_MT,AV_MANY_MSGS_DROPPED,AV_MANY_MSGS_DROPPED_MT,AV_MANY_MSGS_NOT_SCANNED,AV_MANY_MSGS_NOT_SCANNED_MT"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[AntiVirus:Content from <srcIpAddr:gPatIpV4Dot>:<srcIpPort:gPatIpPort> to <destIpAddr:gPatIpV4Dot>:<destIpPort:gPatIpPort> <fileName:gPatStr>.*]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event IN "AV_SCANNER_DROP_FILE, AV_SCANNER_DROP_FILE_MT, AV_SCANNER_ERROR_SKIPPED, AV_SCANNER_ERROR_SKIPPED_MT"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[AntiVirus:Content from <srcIpAddr:gPatIpV4Dot>:<srcIpPort:gPatIpPort> to <destIpAddr:gPatIpV4Dot>:<destIpPort:gPatIpPort> <fileName:gPatStr> was dropped because scan-engine error or constraint with code <:gPatStr> for <errReason:gPatMesgBody>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "AV_PATTERN_GET_FAILED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[AntiVirus:cannot retrieve pattern <errString:gPatStr> file due to <errNo:gPatInt>\(<:gPatInt>\)\.]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		</when>
+		<when  test='$_event = "AV_PATTERN_KEY_EXPIRED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[AntiVirus:Attempt to <:gPatStr> failed due to <:gPatStr>, please renew to receive udpates\.]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		</when>
+		<when  test='$_event = "AV_PATTERN_KL_CHECK_FAILED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[AntiVirus:db file signature mismatch:<errReason:gPatStr>\.]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">7</setEventAttribute>
+		</when>
+		<when test='$_event = "AV_PATTERN_TOO_BIG"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[AntiVirus:The pattern file specified in server is too large\(<_fileSize:gPatInt>\s+bytes\)]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">8</setEventAttribute>
+		</when>
+		<when test='$_event = "AV_PATTERN_UPDATED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[AntiVirus:Pattern file updated.\s+Version:<virdbVer:gPatStr>;size<_fileSize:gPatInt>\s+bytes\)]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		</when>
+		<when test='$_event = "AV_PATTERN_WRITE_FS_FAILED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[AntiVirus:db dated save failed:<errReason:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">7</setEventAttribute>
+		</when>
+		<when test='$_event IN "AV_VIRUS_DETECTED, AV_VIRUS_DETECTED_MT"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[AntiVirus:Virus detected: from <srcIpAddr:gPatIpV4Dot>:<srcIpPort:gPatIpPort> to <destIpAddr:gPatIpV4Dot>:<destIpPort:gPatIpPort> <fileName:gPatStr> file <:gPatStr> virus <virusName:gPatStr>(?:\s+ URL:http://www.viruslist.com/en/search\?VN=<infoURL:gPatStr>)?]]></regex>
+			</collectFieldsByRegex>
+		</when>
+	</when>
+	<when test='$_type = "CONTENT"'>
+		<!-- CONTENT_FILTERING_BLOCKED, CONTENT_FILTERING_BLOCKED_MT -->
+		<collectFieldsByRegex src="$_body">
+			<regex><![CDATA[Content Filtering: <:gPatStr> \(<:gPatStr>\)  from <srcIpAddr:gPatIpV4Dot> is <:gPatStr> due to <errReason:gPatMesgBody>]]></regex>
+		</collectFieldsByRegex>
+	</when>
+	
+	<when test='$_type = "DFWD"'>
+		<!-- DFWD_MALLOC_FAILED_INIT, 	DFWD_PARSE_FILTER_EMERGENCY-->
+		<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+		<when test='$_event = "DFWD_PARSE_STATE_EMERGENCY"'>
+			<setEventAttribute attr="eventSeverity">9</setEventAttribute>
+		</when>
+		<when test='$_event = "DFWD_POLICER_LIMIT_EXCEEDED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Number of interface policers configured is exceeding maximum allowed <:gPatInt>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+	</when>
+	
+	<when test='$_type = "DYNAMIC"'>
+		<!-- DYNAMIC_VPN_LICENSE_EXHAUSTED, DYNAMIC_VPN_LICENSE_REQUIRED -->
+		<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+		<!-- DYNAMIC_VPN_INIT_SUCCESSFUL -->
+		<when test='$_event = "DYNAMIC_VPN_INIT_SUCCESSFUL"'>
+			<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		</when>
+		<when test='$_event = "DYNAMIC_VPN_AUTH_CONNECT_FAIL"'>
+			<collectFieldsByRegex src="$_body"> 
+				<regex><![CDATA[Unable to connect to fwauthd on socket <:gPatStr>:<errReason:gPatMesgBody>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "DYNAMIC_VPN_AUTH_FAIL"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Username/password and token are <user:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "DYNAMIC_VPN_AUTH_INVALID"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[<:gPatStr> <user:gPatStr> is invalid]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "DYNAMIC_VPN_AUTH_MUL_CONN"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Connection exists for <:gPatStr> <user:gPatStr> at <:gPatStr> <:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event IN "DYNAMIC_VPN_AUTH_NO_CONFIG, DYNAMIC_VPN_AUTH_NO_LICENSE"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Authentication failed for <:gPatStr> <user:gPatStr> due.*]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "DYNAMIC_VPN_AUTH_OK"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[<:gPatStr> <user:gPatStr> with <:gPatStr> <:gPatStr> authenticated successfully\.]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		</when>
+		<when test='$_event = "DYNAMIC_VPN_CLIENT_CONFIG_WRITE"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Client VPN config is saved in file <fileName:gPatStr> for user <user:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		</when>
+		<when test='$_event = "DYNAMIC_VPN_CONN_DEL_REQUEST"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Connection manager receives delete request from the client for user <user:gPatStr> ike-id <:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		</when>
+		<when test='$_event IN "DYNAMIC_VPN_CONN_DEL_NOTIFY, DYNAMIC_VPN_CONN_EST_NOTIFY"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Connection manager receives SA\s+.*\s+ike-id <:gPatInt>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		</when>
+		<when test='$_event IN "DYNAMIC_VPN_LICENSE_ASSIGNED, DYNAMIC_VPN_LICNESE_FREED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Dynamic VPN license(grant|return)ed, license <:gPatInt> free, <:gPatInt> overdrafted, <:gPatInt> used]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		</when>
+		<when test='$_event IN "DYNAMIC_VPN_LICENSE_INSTALLED, DYNAMIC_VPN_LICENSE_UNINSTALLED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Dynamic VPN license <:gPatStr> (install|delet)ed, license <:gPatInt>, <:gPatInt> free]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		</when>
+		<when test='$_event IN "DYNAMIC_VPN_LICENSE_CHECK_FAILED, DYNAMIC_VPN_LICENSE_CHECK_OK"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Dynamic VPN license check (fail|succe)ed for user <user:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+			<when test='$_event = "DYNAMIC_VPN_LICENSE_CHECK_OK"'>
+				<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+			</when>
+		</when>
+		<when test='$_event IN "DYNAMIC_VPN_LICENSE_FREE_FAILED, DYNAMIC_VPN_LICENSE_GET_FAILED, DYNAMIC_VPN_LICENSE_FREE_OK, DYNAMIC_VPN_LICENSE_GET_OK"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Server (failed|successfully)\s+.*\s+for <user:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+			<when test='$_event IN "DYNAMIC_VPN_LICENSE_FREE_OK, DYNAMIC_VPN_LICENSE_GET_OK"'>
+				<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+			</when>
+		</when>
+	</when>
+	<when test='$_type = "FWAUTH"'>
+		<!-- FWAUTH_FTP_LONG_PASSWORD, FWAUTH_FTP_LONG_USERNAME, FWAUTH_TELNET_LONG_PASSWORD, FWAUTH_TELNET_LONG_USERNAME, 
+			FWAUTH_FTP_USR_AUTH_ACCEPTED,  FWAUTH_HTTP_USR_AUTH_ACCEPTED, FWAUTH_TELNET_USR_AUTH_ACCEPTED,
+			FWAUTH_FTP_USR_AUTH_FAIL, FWAUTH_HTTP_USR_AUTH_FAIL, FWAUTH_TELNET_USR_AUTH_FAIL, FWAUTH_WEBAUTH_FAIL, FWAUTH_WEBAUTH_SUCCESS
+		-->
+		<collectFieldsByRegex src="$_body">
+			<regex><![CDATA[(?:WebAuth|(Authentication\s+for\s+))?[Uu]ser\s+<user:gPatStr>(?:\s+of group\s+<userGrp:gPatStr>)?\s+at\s+<srcIpAddr:gPatIpV4Dot>\s+.*]]></regex>
+		</collectFieldsByRegex>			
+	</when>
+      
+	<when test='$_type = "IDP"'>
+		<when test='$_event IN "IDP_COMMIT_COMPLETED, IDP_POLICY_UNLOAD_SUCCEEDED"'>
+			<setEventAttribute attr="eventSeverity">3</setEventAttribute>	
+		</when>
+		<when test='$_event = "IDP_COMMIT_FAILED"'>
+			<setEventAttribute attr="eventSeverity">5</setEventAttribute>	
+		</when>
+		<when test='$_event IN "IDP_APPDDOS_APP_ATTACK_EVENT"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[DDOS Attack at\s+<:gPatStr>\s+on\s+<appName:gPatStr>,\<<srcFwZone:gPatStr>:<srcIntfName:gPatStr>:<srcIpAddr:gPatIpV4Dot>:<srcIpPort:gPatIpPort>-\><destwZone:gPatStr>:<destIntfName:gPatStr>:<destIpAddr:gPatIpV4Dot>:<destIpPort:gPatIpPort>\>\s+for\s+<_ipProtoName:gPatStr>\s+protocol and service\s+<:gPatStr>\s+by rule\s+<fwRule:gPatStr>\s+of rulebase\s+<:gPatStr>\s+in policy\s+<policyName:gPatStr>\.\s+attack: repeats <:gPatInt> action <:gPatStr> severity <:gPatInt>, connection-hit-rate <:gPatStr>, context-name <:gPatStr>, hit-rate <:gPatInt>, value-hit-rate <:gPatInt> time-scope <:gPatInt> time-count <:gPatInt> time-period <:gPatInt> secs, context value: <:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "IDP_APPDDOS_APP_STATE_EVENT"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[DDOS Application threshold crossed at\s+<:gPatStr>\s+on\s+<appName:gPatStr>,\<<destwZone:gPatStr>:<destIntfName:gPatStr>:<destIpAddr:gPatIpV4Dot>:<destIpPort:gPatIpPort>\>\s+for\s+<_ipProtoName:gPatStr>\s+protocol and service\s+<:gPatStr>\s+by rule\s+<fwRule:gPatStr>\s+of rulebase\s+<:gPatStr>\s+in policy\s+<policyName:gPatStr>.\s+repeats <:gPatStr> message: <usrMsg:gPatMesgBody> context-value: <:gPatStr>]]></regex>
+			</collectFieldsByRegex>			
+		</when>
+		<when test='$_event = "IDP_ATTACK_LOG_EVENT"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[IDP: at\s+<:gPatStr>,\s+<:gPatStr> Attack log\s+\<<srcIpAddr:gPatIpV4Dot>:<srcIpPort:gPatIpPort>-\><destIpAddr:gPatIpV4Dot>:<destIpPort:gPatIpPort>\>\s+for\s+<_ipProtoName:gPatStr>\s+protocol and service\s+<:gPatStr>\s+by rule\s+<fwRule:gPatStr>\s+of rulebase\s+<:gPatStr>\s+in policy\s+<policyName:gPatStr>\.\s+attack:repeat=<:gPatInt>,action=<:gPatStr>,severity=<:gPatInt>, name=<:gPatStr>, NAT\s+\<<postNATSrcIpAddr:gPatIpV4Dot>:<postNATSrcIpPort:gPatIpPort>-\><preNATDestIpAddr:gPatIpV4Dot>:<preNATDestIpPort:gPatIpPort>\>,time-elapsed=<durationMSec:gPatInt>,inbytes=<recvBytes:gPatInt>,outbytes=<sentBytes:gPatInt>,inpackets=<recvPkts:gPatInt>,outpackets=<sentPkts:gPatInt>,intf:<srcFwZone:gPatStr>:<srcIntfName:gPatStr>\><destFwZone:gPatStr>:<destIntfName:gPatStr>,packet-log-id:<:gPatInt> and misc-message\s+<usrMsg:gPatMesgBody>]]></regex>
+			</collectFieldsByRegex>		
+		</when>
+		<when test='$_event IN "IDP_DAEMON_INIT_FAILED, IDP_INTERNAL_ERROR, IDP_POLICY_UNLOAD_FAILED IDP_POLICY_SCHEDULEDUPDATE_START_FAILED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[(Aborting|Encountered|Failed).*(?:(?::|\(error:\))?\s+<errReason:gPatMesgBody>(\))?]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">5</setEventAttribute>	
+		</when>
+		<when test='$_event = "IDP_POLICY_COMPILATION_FAILED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[IDP compilation of policy\[<policyName:gPatStr>\]failed:\[<errReason:gPatMesgBody>\]]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">5</setEventAttribute>	
+		</when>
+		<when test='$_event = "IDP_POLICY_LOAD_FAILED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[IDP policy loading failed:policy\[<policyName:gPatStr>\],detector\[<:gPatStr>\],failure detail\[<errReason:gPatMesgBody>\]]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">5</setEventAttribute>	
+		</when>
+		<when test='$_event = "IDP_POLICY_LOAD_SUCCEEDED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[IDP policy\[<policyName:gPatStr>\]and detector\[<:gPatStr>\]loaded successfully\(<errReason:gPatMesgBody>\)]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">3</setEventAttribute>	
+		</when>
+		<when test='$_event = "IDP_SCHEDULED_UPDATE_STARTED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Scheduled update has started\(at <:gPatStr>\)]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">3</setEventAttribute>	
+		</when>
+		<when test='$_event = "IDP_SECURITY_INSTALL_RESULT"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[security package install result\(<:gPatStr>\)]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">3</setEventAttribute>	
+		</when>
+		<when test='$_event = "IDP_SESSION_LOG_EVENT"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[IDP: at\s+<:gPatStr>,<:gPatStr> log generated]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "IDP_SIGNATURE_LICENSE_EXPIRED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[IDP Signature update li8cense\(ID=<:gPatInt>\) has expired]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">4</setEventAttribute>	
+		</when>	
+	</when>
+      
+	<when test='$_type = "KMD"'>
+		<!--  KMD_DPD_FAILOVER_NO_TUNNEL_CFG -->
+		<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+		<when test='$_event IN "KMD_CFG_IF_ID_POOL_NOT_FOUND, KMD_CFG_IF_ID_POOL_NO_ENTRY, KMD_CFG_IF_ID_POOL_NO_INTERFACE, KMD_CFG_IF_ID_POOL_RETURN_FAILED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Unable to (allocate|return) logical interface(?:\s+for\s+IPSec\s+interface)?(?:<intfName:gPatStr>\.<:gPatStr>)? (from|to) pool\s+<:gPatStr>: .*]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event IN "KMD_DPD_FAILOVER_MANUAL_TUNNEL, KMD_DPD_FAILOVER_NO_ACTIVE_PEER, KMD_DPD_FAILOVER_NO_BACKUP_PEER"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Tunnel <vpnTunnelName:gPatStr> did not fail over: .*]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "KMD_DPD_FAILOVER_MAX_ATTEMPTS"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Number of failover attempts exceeded limit <:gPatInt> for tunnel <vpnTunnelName:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event IN "KMD_DPD_IKE_SERVER_NOT_FOUND, KMD_DPD_INVALID_SEQUENCE_NUMBER"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Unable to send DPD reply(:|(\s+to) remote peer <destIpAddr:gPatIpV4Dot>:<destIpPort:gPatIpPort>"\s+.*local peer <srcIpAddr:gPatIpV4Dot>:<srcIpPort:gPatIpPort>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "KMD_DPD_INVALID_ADDRESS"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Unable to send DPD reply:\s+local peer <srcIpAddr:gPatIpV4Dot>;\s+remote peer <destIpAddr:gPatIpV4Dot>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "KMD_DPD_NO_LOCAL_ADDRESS"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Unable to send DPD hello message from\s+local peer <srcIpAddr:gPatIpV4Dot>/<srcIpPort:gPatIpPort>:\s+address not found in instance <:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "KMD_DPD_REMOTE_ADDRESS_CHANGED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Remote peer address for tunnel <vpnTunnelName:gPatStr> changed from <:gPatIpV4Dot> to <destIpAddr:gPatIpV4Dot>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		</when>
+		<when test='$_event = "KMD_DPD_REMOTE_PEER_NOT_FOUND"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Unable to send DPD reply:\s+DPD entry for remote peer <destIpAddr:gPatIpV4Dot>:<destIpPort:gPatIpPort>\s+not found in IKE server instance <:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "KMD_DPD_UNEXPECTED_IKE_STATUS"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[DPD reply to remote peer <destIpAddr:gPatIpV4Dot>:<destIpPort:gPatIpPort>\s+failed with unexpected status <:gPatStr> for IKE server instance <:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "KMD_PM_AUTH_ALGORITHM_INVALID"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Invalid authentication algorithm <:gPatInt> negotiated in transform <:gPatInt> for use by <_ipProtoName:gPatStr> in tunnel <vpnTunnelName:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "KMD_PM_DUPLICATE_LIFE_DURATION"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Duplicate SA life duration value given in Quick Mode notfication from <destIpAddr:gPatIpV4Dot>:<destIpPort:gPatIpPort>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "KMD_PM_DYNAMIC_SA_INSTALL_FAILED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Unable to install dynamic SA for tunnel <vpnTunnelName:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "KMD_PM_ENCRYPTION_INVALID"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Invalid encryption algorithm negotiated <:gPatStr> for use by ESP in tunnel <vpnTunnelName:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "KMD_PM_IKE_SERVER_LOOKUP_FAILED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[No IKE server to connect Phase-1 to <destIpAddr:gPatIpV4Dot>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "KMD_PM_IKE_SERVER_NOT_FOUND"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Failed to connect to <destIpAddr:gPatIpV4Dot>:<destIpPort:gPatIpPort>\s+as there is no IKE server context available in instance <:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "KMD_PM_IKE_SRV_NOT_FOUND_CREATE"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Local peer <srcIpAddr:gPatIpV4Dot>:<srcIpPort:gPatIpPort>\s+could not inform remote peer <destIpAddr:gPatIpV4Dot>:<destIpPort:gPatIpPort> of SA creation failure: IKE server not found]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "KMD_PM_IKE_SRV_NOT_FOUND_DELETE"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Unable to notify remote peer <destIpAddr:gPatIpV4Dot>:<destIpPort:gPatIpPort>\s+that SPI was deleted:\s+no IKE server for service set <:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event IN "KMD_VPN_DOWN_ALARM_USER, KMD_VPN_UP_ALARM_USER"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[VPN <vpnTunnelName:gPatStr> from <destIpAddr:gPatIpV4Dot> is (down|up)\.]]></regex>
+			</collectFieldsByRegex>
+		</when>
+	</when>
+	
+	<when test='$_type = "L2TPD"'>
+		<!--  L2TPD_DB_TUN_GRP_ALLOC_FAILED, L2TPD_DEFAULT_PROTO_CREATE_FAIL, L2TPD-EVLIB_FD_DEREGISTER_FAILED, L2TPD_EVLIB_FD_NOT_REGISTERED,
+			L2TPD_MLPPP_BUNDLE_ALLOC_FAILED, L2TPD_MLPPP_BUNDLE_INVALID_ID, L2TPD_MLPPP_ID_ALLOC_FAILED, L2TPD_MLPPP_ID_BITMAP_ALLOC_FAIL,
+			L2TP_MLPPP_ID_ROOT_ALLOC_FAILED, L2TPD_RADIUS_ACCT_PORT_ZERO, L2TPD_RPD_SOCKET_ALLOC_FAILED, L2TPD_TUNNEL_GROUP_RESTART_FAIL-->
+		<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+		<when test='$_event IN "L2TPD_COS_PROFILE_ADD, L2TPD_POLICER_ADD_FAILED, L2TPD_POLICER_PROFILE_DEL_FAILED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Unable to add (Cos|policer)(?:\s+profile)?\s+<osObjName:gPatStr> \(L2TP tunnel <:gPatStr>, session <ipConnId:gPatInt>\):<errReason:gPatMesgBody>]]></regex>
+			</collectFieldsByRegex>
+		</when>			
+		<when test='$_event = "L2TPD_COS_PROFILE_DELETE"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Unable to\s+delete\s+Cos profile \(L2TP tunnel <:gPatStr>, session <ipConnId:gPatInt>\): <errReason:gPatMesgBody>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event IN "L2TPD_IFL_NOT_FOUND, L2TPD_MLPPP_BUNDLE_CREATE_FAILED, L2TPD_MLPPP_COPY_CFG_FAILED, L2TPD_MLPPP__LINK_CREATE_FAILED, L2TPD_MLPPP_SESSION_CREATE_FAIL, L2TPD_POOL_ADDRESS_FAILED, L2TPD_PPP_ROUTE_ADD_FAILED, L2TPD_PPP_ROUTE_DELETE_FAILED, L2TPD_RADIUS_SERVER_NOT_FOUND, L2TPD_SUBUNIT_ROUTE_ALLOC_FAILED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Unable to\s+(find|create|copy|assign|add|allocate)\s+((logical\s+interface)|((ML)?PPP\s+(bundle|configuration|session|(peer\+route))(?:\s+links)?)|(pool\s+address)|(RADIUS\s+server)|(L2TP\s+route))\s+\(L2TP tunnel <:gPatStr>, session <ipConnId:gPatInt>\)]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "L2TPD_MLPPP_SESSION_DELETE_FAIL"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Unable to\s+delete\s+session\s+for\s+MLPPP\s+bundle\s+<:gPatStr>\s+\(L2TP tunnel <:gPatStr>, session <ipConnId:gPatInt>, errno <:gPatInt>\)]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event IN "L2TPD_DB_ADD_FAILED, L2TPD_DB_DELETE_FAILED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Unable to (add|delete)\s+node for <osObjName:gPatStr> to internal database]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "L2TPD_DB_INIT_FAILED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Unable to initialize\s+root node for <osObjName:gPatStr> to internal database: <errReason:gPatMesgBody>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event IN "L2TPD_EVLIB_CREATE_FAILED, L2TPD_EVLIB_FD_DESLECT_FAILED, L2TPD_EVLIB_TIMER_CLEAR_FAILED, L2TPD_EVLIB_TIMER_SET_FAILED, L2TPD_IFD_MSG_REGISTER_FAILED, L2TPD_IFD_ROOT_ALLOC_FAILED, L2TPD_IFL_MSG_REGISTER_FAILED, L2TPD_MESSAGE_REGISTER_FAILED, IFL_ROOT_ALLOC_FAILED, L2TPD_RADIUS_GETHOSTNAME_FAILED, L2TPD_TRACE_FILE_OPEN_FAILED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Unable to (create|deselect|clear|set|register|allocate|obtain|open) ((event\s+(context|timer))|(file\s+descriptor)|(message\s+handler\s+for\s+interface(?:\s+device)?)|(memory\s+for\s+interface(?:\s+device)?\s+root\s+node)|(L2TP\s+message\s+handler)|(hostname\s+for\s+outgoing\+RADIUS\s+message)|(trace\+file)):\s+<errReason:gPatMesgBody>]]></regex>
+			</collectFieldsByRegex>
+			<when test='$_event = "L2TPD_EVLIB_CREATE_FAILED"'>
+				<setEventAttribute attr="eventSeverity">9</setEventAttribute>
+			</when>
+		</when>
+		<when test='$_event = "L2TPD_EVLIB_FD_SELECT_FAILED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Unable to select file descriptor for events <:gPatStr>:\s+<errReason:gPatMesgBody>]]></regex>
+			</collectFieldsByRegex>
+		</when>	
+		<when test='$_event = "L2TPD_FILTER_FILE_OPEN_FAILED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Unable to open file\s+<fileName:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event IN "L2TPD_GLOBAL_CFG_ADD_FAILED, L2TPD_GLOBAL_CFG_CHANGE_FAILED, L2TPD_GLOBAL_CFG_DELETE_FAILED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Unable to (add|change|delete) global configuration for PIC <:gPatStr> \(errno <errorNo:gPatInt>\)]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event IN "L2TPD_IFD_ADD_FAILED, L2TPD_IFD_DELETE_FAILED, L2TPD_IFL_ADD_FAILED, L2TPD_IFL_DELETE_FAILED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[<funName:gPatStr>:\s+unable to (add|delete|find|(allocate\s+memory\s+for\s+session\s+tree\s+for)) interface(?:\s+device)? <intfName:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event IN "L2TPD_INSTANCE_CREATE_FAILED, L2TPD_INSTANCE_RESTART_FAILED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Unable to (create|(trigger\s+restart\s+of)) L2TP instance <:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "L2TPD_INTERFACE_ID_NOT_FOUND"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Unable to find interface ID <intfName:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "L2TPD_MLPPP_ID_NODE_ADD_FAILED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Unable to add node for bundle <:gPatStr> to MLPPP ID map]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event IN "L2TPD_MLPPP_LINK_MAX_EXCEEDED, L2TPD_MLPPP_POOL_ADDRESS_FAILED, L2TPD_MLPPP_SPEED_MISMATCH"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Unable to ((add link:)|assign)\s+((((maximum\s+number\s+of\s+sessions\s+exceeded)|(pool\s+address))\s+for\s+MLPPP)|(speed\s+differs\s+for)) bundle <:gPatStr> \(L2TP tunnel <:gPatStr>, session <ipConnId:gPatInt>\)]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "L2TPD_NH_DELETE_FAILED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Unable to delete next hop <:gPatInt>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "L2TPD_POOL_ASSIGN_ADDRESS_FAILED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Unable to assign L2TP pool address: pool <:gPatStr>.*]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "L2TPD_PROFILE_NOT_FOUND"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Profile <osObjName:gPatInt> not found]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "L2TPD_PROFILE_NOT_RADIUS_SERVERS"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Can't find radius servers for profile <osObjName:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "L2TPD_RADIUS_RT_INST_ENOENT"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Ignoring RADIUS server <:gPatStr>: routing instance <:gPatStr> did not exist]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		</when>
+		<when test='$_event = "L2TPD_RADIUS_RT_INST_NOT_FOUND"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Ignoring RADIUS server <:gPatStr>: unable to retrieve routing instance <:gPatStr> \(<errReason:gPatMesgBody>\)]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "L2TPD_RADIUS_SRC_ADDR_BIND_FAIL"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Ignoring RADIUS server <:gPatStr>: unable to bind to source address <srcIpAddr:gPatIpV4Dot> \(<errReason:gPatMesgBody>\)]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "L2TPD_RADIUS_SRC_ADDR_ENOENT"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Ignoring RADIUS server <:gPatStr>: source address <srcIpAdd:gPatIpV4Dot> did not exist]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		</when>
+		<when test='$_event IN "L2TPD_RPD_ASYNC_UNREG_FAILED, L2TPD_RPD_SESS_CREATE_FAILED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Unable to ((establish\s+session)|unregister) with rpd \(<:gPatStr>\)]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event IN "L2TPD_RPD_ROUTE_ADD_CB_FAILED, L2TPD_RPD_ROUTE_DELETE_CB_FAILED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Unable to (add|delete) route <:gPatIpV4Dot>/<:gPatInt> asynchronously \(gateway <:gPatInt> \[<:gPatStr>\],\s+L2TP tunnel <:gPatStr>, session <ipConnId:gPatInt>\): <errNo:gPatInt>]]></regex>
+			</collectFieldsByRegex>
+		</when>	
+		<when test='$_event IN "L2TPD_RPD_ROUTE_ADD_FAILED, L2TPD_RPD_ROUTE_DELETE_FAILED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Unable to (add|delete) route <:gPatIpV4Dot>/<:gPatInt> asynchronously \(gateway <:gPatInt> \[<:gPatStr>\],\s+L2TP tunnel <:gPatStr>, session <ipConnId:gPatInt>\)(?:: <errReason:gPatMesgBody> \(<errNo:gPatInt>\))?]]></regex>
+			</collectFieldsByRegex>
+		</when>	
+		<when test='$_event = "L2TPD_RPD_ROUTE_PREFIX_TOO_LONG"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Unable to add route <:gPatIpV4Dot>/<:gPatInt>:\s+prefix too long \(L2TP tunnel <:gPatStr>, session <ipConnId:gPatInt>\)]]></regex>
+			</collectFieldsByRegex>
+		</when>	
+		<when test='$_event IN "L2TPD_RPD_SESS_HANDLE_ALLOC_FAIL, L2TPD_RPD_TBL_LOCATE_BY_NAME"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Unable to allocate ((session\s+handle\s+for\s+rpd\s+connection)|(rpd\s+table\s+by\s+name)):\s+<errReason:gPatMesgBody> \(<errNo:gPatInt>\)]]></regex>
+			</collectFieldsByRegex>
+		</when>	
+		<when test='$_event = "L2TPD_RPD_TBL_LOCATE_FAILED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Unable to locate table <osObjName:gPatStr> for <:gPatInt>\(<:gPatInt>\)]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "L2TPD_SERVICE_NH_ADD_FAILED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Unable to add service next hop \(L2TP tunnel <:gPatStr>, session <ipConnId:gPatInt>\): <errReason:gPatMesgBody> \(<errNo:gPatInt>\)]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "L2TPD_SERVICE_NH_DELETE_FAILED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Unable to remove service next hop\s+<:gPatStr> \(VRF <:gPatStr>,\s+L2TP tunnel <:gPatStr>, session <ipConnId:gPatInt>\)]]></regex>
+			</collectFieldsByRegex>
+		</when>	
+		<when test='$_event IN "L2TPD_SESSION_CFG_ADD_FAILED, L2TPD_SESSION_CFG_DELETE_FAILED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Unable to (add|remove) L2TP tunnel <:gPatStr>, session <ipConnId:gPatInt>\s+(to|from)\s+PIC configuration]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "L2TPD_TUNNEL_CFG_ADD_FAILED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Unable to add L2TP tunnel <:gPatStr>\s+to\s+PIC configuration\s+\(errno <errNo:gPatInt>\)]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "L2TPD_TUNNEL_CFG_ADD_INV_ADDR"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Unable to add L2TP tunnel <:gPatStr>\s+to\s+PIC configuration:\s+address invalid]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "L2TPD_TUNNEL_CFG_DELETE_FAILED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Unable to remove L2TP tunnel <:gPatStr>\s+from\s+PIC configuration]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "L2TPD_SESSION_CFG_ADD_ERROR"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Unable to add L2TP tunnel <:gPatStr>, session <ipConnId:gPatInt>\s+to\s+PIC configuration\s+\(errno <errNo:gPatInt>\)]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "L2TPD_TUNNEL_DELETE_FAILED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Unable to delete L2TP tunnel <:gPatStr>\s+\(errno <errNo:gPatInt>\)]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "L2TPD_TUNNEL_DEST_IF_LOOKUP_FAIL"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Unable to find destination interface for L2TP tunnel <:gPatStr>\s+remote address: <errReason:gPatMesgBody>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "L2TPD_SESSION_CFG_ADD_ERROR"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Unable to add L2TP tunnel <:gPatStr>, session <ipConnId:gPatInt>\s+to\s+PIC configuration\s+\(errno <errNo:gPatInt>\)]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "L2TPD_SESSION_DELETE_FAILED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Unable to delete session \(L2TP tunnel <:gPatStr>, session <ipConnId:gPatInt>, errno <errNo:gPatInt>\)]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "L2TPD_SESSION_IFF_NOT_FOUND"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Unable to find family structure for interface <intfName:gPatStr> \(L2TP tunnel <:gPatStr>, session <ipConnId:gPatInt>, errno <errNo:gPatInt>\)]]></regex>
+			</collectFieldsByRegex>
+		</when>	
+		<when test='$_event IN "L2TPD_SESSION_IFL_ADD_FAILED, L2TPD_SESSION_IFL_ALLOC_FAILED, L2TPD_IFL_ADD_FAILED, L2TPD_IFL_DELETE_FAILED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[<funName:gPatStr>:\s+unable to (assign|delete|(allocate\s+memory\s+for)) session <ipConnId:gPatInt>(,|(s\+to) interface <intfName:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+		</when>	
+		<when test='$_event = "L2TPD_SESSION_IFL_CLI_TREE_ALLOC"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Unable to allocate\s+memory\s+for\s+session\s+tree\s+for interface <intfName:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event IN "L2TPD_SESSION_IFL_DELETED, L2TPD_SESSION_IFL_NOT_EQUAL"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[<funName:gPatStr>:\s+interface <intfName:gPatStr> ((is\s+deleted)|(not\s+equal))]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "L2TPD_SESSION_IFL_DELETE_FAILED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[<funName:gPatStr>:\s+unable to delete session <:gPatStr> from interface <intfName:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "L2TPD_SESSION_IFL_GET_FAILED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[<funName:gPatStr>:\s+unable to find interface <intfName:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "L2TPD_SESSION_IFL_NOT_FOUND"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Unable to find interface <intfName:gPatStr> \(L2TP tunnel <:gPatStr>, session <ipConnId:gPatInt>\)]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "L2TPD_SESSION_IFL_OCCUPIED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[<funName:gPatStr>:\s+interface <intfName:gPatStr> already has associated session \(<:gPatInt>/<:gPatInt>\)]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "L2TPD_SESSION_IFL_REMOVE_FAILED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Unable to remove L2TP tunnel <:gPatStr>, session <ipConnId:gPatInt> from logical interface \(errno <errNo:gPatInt>\)]]></regex>
+			</collectFieldsByRegex>
+		</when>	
+		<when test='$_event = "L2TPD_SESSION_INVALID_PEER_IP"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Invalid peer address <:gPatIpV4Dot> in IPCP UP \(L2TP tunnel <:gPatStr>, session <ipConnId:gPatInt>\); closing session]]></regex>
+			</collectFieldsByRegex>
+		</when>	
+		<when test='$_event = "L2TPD_SESSION_ROUTE_ADD_FAILED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Unable to add PPP route \(L2TP tunnel <:gPatStr>, session <ipConnId:gPatInt>, errno <errNo:gPatInt>\)]]></regex>
+			</collectFieldsByRegex>
+		</when>	
+		<when test='$_event = "L2TPD_SESSION_RT_TBL_NOT_FOUND"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Unable to find route table <:gPatInt> for interface <intfName:gPatStr> \(L2TP tunnel <:gPatStr>, session <ipConnId:gPatInt>\)]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "L2TPD_SESSION_TUNNEL_ID_MISMATCH"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Tunnel ID <:gPatInt>  in message does not match L2TP tunnel <:gPatStr>, session <ipConnId:gPatInt>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "L2TPD_SETSOCKOPT_FAILED, L2TPD_SOCKET_FAILED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[(setsockopt|socket)\(\) failed <opName:gPatStr>:\s+<errReason:gPatMesgBody>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		</when>
+		<when test='$_event = "L2TPD_SET_ASYNC_CONTEXT"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Unable to set asynchronous context \(errno <errNo:gPatInt>\)]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		</when>
+		<when test='$_event IN "L2TPD_SHOW_MULTILINK, L2TPD_SHOW_SESSION, L2TPD_SHOW_TUNNEL"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Detail level <:gPatInt> is not supported by 'show services l2tp (multilink|session|tunnel)' command]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		</when>
+		<when test='$_event = "L2TPD_TUNNEL_GROUP_CFG_ADD_FAIL"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Unable to add tunnel group <:gPatStr> \(service set <:gPatStr>\) to configure for PIC <:gPatStr>:\s+<errReason:gPatMesgBody>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "L2TPD_TUNNEL_GROUP_CFG_DEL_FAIL"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Unable to delete tunnel group <:gPatStr> \(service set <:gPatStr>\):\s+<errNo:gPatInt>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "L2TPD_TUNNEL_GROUP_CFG_CREATE_FAILED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Unable to create L2TP module for tunnel group <:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "L2TPD_TUNNEL_GROUP_DELETE_FAILED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Unable to delete L2TP tunnel group <:gPatStr> \(errno <errNo:gPatInt>\)]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "L2TPD_TUNNEL_GROUP_IDX_MISMATCH"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Tunnel gropu index <:gPatStr> in message does not match index <:gPatStr> stored for L2TP tunnel  <:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "L2TPD_USER_AUTHN_NOT_FOUND"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Unable to find user profile <user:gPatStr> during PPP authentication]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "L2TPD_USER_AUTHN_PWD_NOT_FOUND"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Unable to retrive password during PPP authentication of user <user:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "L2TPD_USER_AUTHN_ORDER_UNKNOWN"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Unknown authentication order <:gPatStr> \(tunnel <:gPatStr>, session <ipConnId:gPatInt>\)]]></regex>
+			</collectFieldsByRegex>
+		</when>
+	</when>
+	
+	<when test='$_type = "LOGIN"'>
+		<!--  LOGIN_ABORTED-->
+		<when test='$_event = "LOGIN_FAILED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Login failed for user <user:gPatStr> from host <hostName:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		</when>
+		<when test='$_event = "LOGIN_FAILED_LIMIT"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Specified number of login failures \(<:gPatInt>\) for user '<user:gPatStr>' reached from '<srcIpAddr:gPatIpV4Dot>']]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		</when>
+		<when test='$_event = "LOGIN_PAM_AUTHENTICATION_ERROR"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[PAM authentication error for user <user:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+		</when>
+		<when test='$_event = "LOGIN_MALFORMED_USER"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Invalid username: <_user:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+			<when test='exist _user'>
+				<when test='$_user != "empty"'>
+					<setEventAttribute attr="user">$_user</setEventAttribute>
+				</when>
+			</when>
+		</when>
+		<when test='$_event = "LOGIN_FAILED_SET_CONTEXT"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Failed\s+to\s+set\s+context\s+for\s+user <user:gPatStr>]]></regex>
+			</collectFieldsByRegex>	
+			<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+		</when>
+		<when test='$_event = "LOGIN_LOCAL_PASSWORD"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Requested local password from user\s+<user:gPatStr>]]></regex>
+			</collectFieldsByRegex>	
+		</when>
+		<when test='$_event = "LOGIN_PAM_MAX_RETRIES"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Too many retries while authenticating\s+user <user:gPatStr>]]></regex>
+			</collectFieldsByRegex>	
+			<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+		</when>
+		<when test='$_event = "LOGIN_PAM_USER_UNKNOWN"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Attempt to authenticate unknown user <user:gPatStr>]]></regex>
+			</collectFieldsByRegex>	
+			<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+		</when>
+		<when test='$_event = LOGIN_PASSWORD_EXPIRED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Forcing change of expired password for user <user:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event IN "LOGIN_FAILED_SET_LOGIN, LOGIN_PAM_ERROR"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Failed\s+.*\s+user <user:gPatStr>:\s+<errReason:gPatMesgBody>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+		</when>
+		<when test='$_event = "LOGIN_HOSTNAME_UNRESOLVED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Unable to resolve hostname <hostName:gPatStr>:\s+<errReason:gPatMesgBody>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+		</when>
+		<when test='$_event IN "LOGIN_INFORMATION, LOGIN_ROOT"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[User <user:gPatStr> logged in\s+(?:as\s+root\s+)?from\s+host\s+<hostIpAddr:gPatIpV4Dot>\s+on\s+device\s+<:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "LOGIN_REFUSED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Login of user <user:gPatStr> from host <hostName:gPatStr> on device <:gPatStr> was refused:\s+<errReason:gPatMesgBody>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		</when>
+		<when test='$_event = "LOGIN_TIMED_OUT"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Login attempt timed out after <durationMSec:gPatInt> seconds]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "LOGIN_PAM_STOP"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Failed to end PAM session: <errReason:gPatMesgBody>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+		</when>		
+	</when>
+	
+	<when test='$_type = "PPPD"'>
+		<!--  PPPD_CHAP_LOCAL_NAME_UNABAILABLE, PPPD_PAP_LOCAL_PASSWORD_UNAVAIL -->
+		<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+		<when test='$_event = "PPPD_GETHOSTNAME_FAILED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[<intfName:gPatStr>: \s+Unable to obtain hostname for outgoing CHAP message:<errReason:gPatMesgBody>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event IN "PPPD_AUTH_CREATE_FAILED, PPPD_GETHOSTNAME_FAILED, PPPD_EVLIB_CREATE_FAILURE, PPPD_LOCAL_CREATE_FAILED, PPPD_RADIUS_CREATE_FAILED, PPPD_RADIUS_CREATE_REQ_FAILED, PPPD_RADIUS_GETHOSTNAME_FAILED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[(Unable to (allocate|create|obtain)\s+(((authentication|((LOCAL|RADIUS)\s+module))\s+handle)|(RADIUS\s+access\s+request\s+message)|(event\s+context)|(hostname\s+for\s+outgoing\s+RADIUS\s+message)):<errReason:gPatMesgBody>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event IN "PPPD_MEMORY_ALLOCATION_FAILURE, "'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[(Unable to allocate\s+memeory\s+for\s+object\s+<osObjName:gPatStr>:<errReason:gPatMesgBody>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "PPPD_PAP_INVALID_OPCODE"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Interface <intfName:gPatStr> received '<opName:gPatStr>' message with PAP ID <:gPatInt> and invalid operation code <:gPatInt>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "PPPD_CHAP_AUTH_IN_PROGRESS"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Interface <intfName:gPatStr> received\s+response\s+'<opName:gPatStr>' with CHAP ID <:gPatInt>, .*]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event IN "PPPD_CHAP_INVALID_IDENTIFIER, PPPD_PAP_INVALID_IDENTIFIER"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Interface <intfName:gPatStr> received '<opName:gPatStr>' message with (P|CH)AP ID <:gPatInt> instead of expected ID <:gPatInt>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		</when>
+		<when test='$_event IN "PPPD_CHAP_INVALID_OPCODE, PPPD_CHAP_OPERATION_UNEXPECTED, PPPD_PAP_OPERATION_UNEXPECTED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[<intfName:gPatStr>: ((received\s+invalid)|unexpected)\s+operation\s+(code|type) <opName:gPatStr> \((?:type\s+<:gPatStr>,\s+)?(P|CH)AP ID <:gPatInt>\)]]></regex>
+			</collectFieldsByRegex>
+			<when test='$_event = "PPPD_CHAP_OPERATION_UNEXPECTED"'>
+				<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+			</when>
+		</when>
+		<when test='$_event = "PPPD_CHAP_REPLAY_ATTCACK_DETECTED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[<intfName:gPatStr>: received\s+<opName:gPatStr> with CHAP ID <:gPatInt>.*]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "PPPD_PAP_GETHOSTNAME_FAILED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Unable to obtain hostname for PAP message sent from interface <intfName:gPatStr>:<errReason:gPatMesgBody>]]></regex>
+			</collectFieldsByRegex>
+		</when>	
+		<when test='$_event = "PPPD_RADIUS_ADD_SERVER_FAILED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Unable to add RADIUS server <:gPatStr> for profile <:gPatStr>:<errReason:gPatMesgBody>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "PPPD_RADIUS_ALLOC_PASSWD_FAILED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Unable to allocate RADIUS password of size <:gPatInt>:<errReason:gPatMesgBody>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "PPPD_RADIUS_NO_VALID_SERVERS"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Unable to find valid RADIUS server for profile <:gPatInt>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "PPPD_POOL_ADDRESSES_EXHAUSTED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[No addresses available in pool "<:gPatStr>" to assign to remote peer on interface <intfName:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "PPPD_RADIUS_OPEN_FAILED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[rad_auth_open failed:<errReason:gPatMesgBody>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "PPPD_RADIUS_ROUTE_INST_ENOENT"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Ignored RADIUS server <:gPatStr> for profile <:gPatStr> because routing instance <:gPatStr> did not exist]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		</when>
+		<when test='$_event = "PPPD_RADIUS_MESSAGE_UNEXPECTED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Unknown response from RADIUS server: <:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+	</when>	
+	
+	<when test='$_type = "RT"'>
+		<!--  RT_MGCP_DECODE_FAIL, RT_MGCP_REG_RM_FAIL, RT_MGCP_RM_CLIENTID_FAIL, RT_MGCP_UNREG_BY_RM, RT_SCCP_NAT_COOKIE_NOT_FOUND, RT_SCCP_REM_NAT_VEC_FAIL, RT_SCCP_UNREG_RM_FAIL, RT_SIP_CALL_LIMIT_EXCEED, 
+			RT_SIP_INIT_EP_FAIL, RT_SIP_INIT_LISTENER_FAIL, RT_SIP_REG_NAT_VEC_FAIL, RT_SIP_REG_RM_FAIL, RT_SIP_REM_NAT_VEC_FAIL, RT_SIP_UNREG_BY_RM-->
+		<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+		<when test='$_event = "RT_FLOW_SESSION_CLOSE"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[session closed <:gPatMesgBody>:\s+<srcIpAddr:gPatIpV4Dot>/<srcIpPort:gPatIpPort>-\><destIpAddr:gPatIpV4Dot>/<destIpPort:gPatIpPort> <serviceName:gPatStr> <postNATSrcIpAddr:gPatIpV4Dot>/<postNATSrcIpPort:gPatIpPort>-\><preNATDestIpAddr:gPatIpV4Dot>/<preNATDestIpPort:gPatIpPort> <:gPatStr> <:gPatStr> <ipProto:gPatInt> <policyName:gPatStr> <srcFwZone:gPatStr> <destFwZone:gPatStr>\s+<ipConnId:gPatInt>\s+<recvPkts:gPatInt>\(<recvBytes:gPatInt>\) <sentPkts:gPatInt>\(<sentBytes:gPatInt>\) <durationMSec:gPatInt>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		</when>
+		<when test='$_event = "RT_FLOW_SESSION_CREATE"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[session created <srcIpAddr:gPatIpV4Dot>/<srcIpPort:gPatIpPort>-\><destIpAddr:gPatIpV4Dot>/<destIpPort:gPatIpPort> <serviceName:gPatStr> <postNATSrcIpAddr:gPatIpV4Dot>/<postNATSrcIpPort:gPatIpPort>-\><preNATDestIpAddr:gPatIpV4Dot>/<preNATDestIpPort:gPatIpPort> <:gPatStr> <:gPatStr> <ipProto:gPatInt> <policyName:gPatStr> <srcFwZone:gPatStr> <destFwZone:gPatStr>\s+<ipConnId:gPatInt>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		</when>
+		<when test='$_event = "RT_FLOW_SESSION_DENY"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[session denied <srcIpAddr:gPatIpV4Dot>/<srcIpPort:gPatIpPort>-\><destIpAddr:gPatIpV4Dot>/<destIpPort:gPatIpPort> <serviceName:gPatStr> <postNATSrcIpAddr:gPatIpV4Dot>/<postNATSrcIpPort:gPatIpPort>-\><preNATDestIpAddr:gPatIpV4Dot>/<preNATDestIpPort:gPatIpPort> <:gPatStr> <:gPatStr> <ipProto:gPatInt> <policyName:gPatStr> <srcFwZone:gPatStr> <destFwZone:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		</when>
+		<when test='$_event = "RT_GTP_BAD_LICENSE"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[GTP invalid license \(gtpP <:gPatStr>\)]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event IN "RT_GTP_DEL_TUNNEL_V0, RT_GTP_DEL_TUNNEL_V1"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Delete tunnel (for\s+)?V[01] <:gPatStr> \((SGSN\s+)?te?id <:gPatInt>\), in <:gPatInt> out <:gPatInt>,duration:<durationMSec:gPatInt>  seconds]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		</when>
+		<when test='$_event = "RT_GTP_PKT_APN_IE"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[APN IE:<osObjName:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		</when>
+		<when test='$_event IN "RT_GTP_PKT_DESCRIPTION_V0, RT_GTP_PKT_DESCRIPTION_V1"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[GTP <srcIpAddr:gPatIpV4Dot>-\><destIpAddr:gPatIpV4Dot> (Te?ID|charging) <:gPatInt>(\s+\(index <:gPatInt>\))?]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		</when>
+		<when test='$_event IN " RT_GTP_PKT_ENDUSER_ADDR_IE_IPV4, RT_GTP_PKT_GSNADDR_IE"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[(EndUserAddr|GSNaddr) IE:<hostIpAddr:gPatIpV4Dot>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		</when>
+		<when test='$_event IN "RT_GTP_PKT_IMSI_IE, RT_GTP_PKT_MSISDN_IE"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[(IMSI|MSisdn) IE:<:gPatInt>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		</when>
+		<when test='$_event IN "RT_GTP_SANITY_EXTENSION_HEADER, RT_GTP_SYSTEM_ERROR"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[\*{3}GTP-DROP <:gPatStr>(?:\s+\(sanity\))?:.*(\(<:gPatInt>\))?]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "RT_H323_CALL_LIMIT_EXCEED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Failed to process the packet, active call limit exceeded <:gPatInt>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "RT_H323_NAT_COOKIE_NOT_FOUND"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[<osObjName:gPatStr> cannot find cookie from session]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "RT_H323_RAS_REQ_FLOOD"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[RAS Request flood to gatekeeper <destIpAddr:gPatIpV4Dot> detected, request threshold <:gPatInt>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "RT_IPSEC_BAD_SPI"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[IPSec tunnel on <intfName:gPatStr> with tunnel ID 0x<:gPatStr> received a packet with a bad SPI\.\s+<srcIpAddr:gPatIpV4Dot> to <destIpAddr:gPatIpV4Dot>/<:gPatInt>,<:gPatStr>,SPI 0x<:gPatStr>, SEQ 0x<:gPatInt>\.]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "RT_IPSEC_REPLAY"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Replay packet detected on IPSec tunnel on <intfName:gPatStr> with tunnel ID 0x<:gPatStr>! From <srcIpAddr:gPatIpV4Dot> to <destIpAddr:gPatIpV4Dot>/<:gPatInt>,<:gPatStr>,SPI 0x<:gPatStr>, SEQ 0x<:gPatInt>\.]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "RT_MGCP_CALL_LIMIT_EXCEED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Exceed maximum call <:gPatInt> <:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event IN "RT_MGCP_MEM_ALLOC_FAILED, RT_SIP_MEM_ALLOC_FAILED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[(SIP\s+)?Failed to allocate memory for\s+<osObjName:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event IN "RT_MGCP_REG_NAT_VEC_FAIL, RT_MGCP_REM_NAT_VEC_FAIL"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Failed to (add|remove) MGCP <osObjName:gPatStr> .*]]></regex>
+			</collectFieldsByRegex>
+		</when>		
+		<when test='$_event IN "RT_SCCP_CALL_LIMIT_EXCEED, RT_SCCP_CALL_RATE_EXCEED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[.*SCCP.* limit <:gPatInt> .*]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "RT_SCCP_DECODE_FAIL"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Failed to decode SCCP packet\ from\s+<srcIpAddr:gPatIpV4Dot>-\><destIpAddr:gPatIpV4Dot>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event IN "RT_SCREEN_ICMP, RT_SCREEN_ICMP_FLOOD, RT_SCREEN_ICMP_FRAG, RT_SCREEN_ICMP_ID, RT_SCREEN_ICMP_LARGE, RT_SCREEN_ICMP_PING_DEATH, RT_SCREEN_IP, RT_SCREEN_IP_BAD_OPT, RT_SCREEN_IP_FRAG, RT_SCREEN_IP_LAND, RT_SCREEN_IP_OPT_FILTER_ROUTE, RT_SCREEN_IP_OPT_LSR, RT_SCREEN_IP_OPT_RECORD, RT_SCREEN_IP_OPT_SCHT, RT_SCREN_IP_OPT_SSR, RT_SCREEN_IP_OPT_STREAM, RT_SCREEN_IP_OPT_TIMESTAMP, RT_SCREEN_IP_SPOOFING, RT_SCREEN_IP_SWEEP, RT_SCREEN_IP_UNKNOWN_PROT, RT_SCREEN_MAL_URL, RT_SCREEN_OVER_SESSION_DST, RT_SCREEN_OVER_SESSION_SRC, RT_SCREEN_PORT_SCAN, RT_SCREEN_SESSION_LIMIT (need more info on this), RT_SCREEN_SYN_ACK_ACK, RT_SCREEN_TCP, RT_SCREEN_TCP_DST_IP, RT_SCREEN_TCP_FIN_NO_ACK, RT_SCREEN_TCP_FRAG, RT_SCREEN_TCP_NO_FLAG, RT_SCREEN_TCP_SRC_IP, RT_SCREEN_TCP_SYN_FIN, RT_SCREEN_TCP_SYN_FLOOD, RT_SCREEN_UDP, RT_SCREEN_TEAR_DROP, RT_SCREEN_UDP_FLOOD, RT_SCREEN_WINNUKE"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[(?:<osObjAction:gPatStr>\s+)?(?:source:<srcIpAddr:gPatIpV4Dot>(?:(:|-)<srcIpPort:gPatIpPort>)?,)?(?:destination:<destIpAddr:gPatIpV4Dot>(?:(:|-)<destIpPort:gPatIpPort>)?,)?(?:protocol-id:<ipProto:gPatInt>,)?zone name:<srcFwZone:gPatStr>,interface name:<intfName:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "RT_SCTP_LOG_INFO"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[\*{3}SCTP configuration:\s+<usrMsg:gPatMesgBody>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		</when>
+		<when test='$_event = "RT_SCTP_PKT_INFO"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[\*{3}SCTP\s+\(type <:gPatStr> <srcIpAddr:gPatIpV4Dot>/<srcIpPort:gPatIpPort>-\><destIpAddr:gPatIpV4Dot>/<destIpPort:gPatIpPort>\)\s+<usrMsg:gPatMesgBody>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		</when>
+		<when test='$_event = "RT_SIP_DECODED_FAIL"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Failed to decode SIP packet\s+<errReason:gPatMesgBody>]]></regex>
+			</collectFieldsByRegex>
+		</when>	
+		<when test='$_event IN "RT_SOURCE_NAT_ALARM_CLEAR, RT_SOURCE_NAT_ALARM_RAISE"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Utilization of source nat pool\s+<:gPatStr> hits raise threshold\s+<:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "RT_GTP_PKT_RESULT"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[\*{3}<usrMsg:gPatMesgBody>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		</when>
+	</when>	
+	
+	<when test='$_type = "SMTPD"'>
+		<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+		<when test='$_event = "SMTPD_DROP_MAIL_PAYLOAD"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Dropped mail to user:<errReason:gPatMesgBody>\.<:gPatMesgBody>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "SMTPD_NO_CONFIGURED_SERVER"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Unable to send mail to <errReason:gPatMesgBody>\.<:gPatMesgBody>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+	</when>
+	
+	<when test='$_type = "SNMPD"'>
+		<!-- SNMPD_CONFIG_ERROR-->
+		<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+		<when test='$_event = "SNMPD_AUTH_FAILURE"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[<funName:gPatStrEndColon>:\s+<errReason:gPatMesgBody> from <srcIpAddr:gPatIpV4Dot> to <_dest:gPatStr> <:gPatMesgBody>]]></regex>
+			</collectFieldsByRegex>
+			<when test='exist _dest'>
+				<switch>
+					<case>
+						<collectFieldsByRegex src="$_dest">
+							<regex><![CDATA[<destIpAddr:gPatIpV4Dot>]]></regex>
+						</collectFieldsByRegex>
+					</case>
+					<default>
+						<setEventAttribute attr="destName">$_dest</setEventAttribute>
+					</default>
+				</switch>
+			</when>
+			<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		</when>
+		<when test='$_event = "SNMPD_AUTH_PRIVILEGES_EXCEEDED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[<funName:gPatStr>: <srcIpAddr:gPatIpV4Dot>: request exceeded community privileges]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		</when>
+		<when test='$_event = "SNMPD_AUTH_RESTRICTED_ADDRESS"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[<funName:gPatStr>: request from address <srcIpAddr:gPatIpV4Dot> not allowed]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		</when>
+		<when test='$_event = "SNMPD_AUTH_WRONG_PDU_TYPE"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[<funName:gPatStr>: <srcIpAddr:gPatIpV4Dot>: unauthorized SNMP PDU type: <:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		</when>
+		<when test='$_event = "SNMPD_BIND_INFO"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Source\s+address for trap socket was set to <hostIpAddr:gPatIpV4Dot>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		</when>
+		<when test='$_event = "SNMPD_CONTEXT_ERROR"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[<funName:gPatStr>: error in <opName:gPatStr>\s+context <:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "SNMPD_FILE_FAILURE"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[<funName:gPatStr>: fopen <fileName:gPatStr>:\s+<errReason:gPatMesgBody>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">9</setEventAttribute>
+		</when>
+		<when test='$_event = "SNMPD_GROUP_ERROR"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[<funName:gPatStr>: error in\s+<opName:gPatStr> group:\s+'<userGrp:gPatStr>' user '<user:gPatStr>' model '<:gPatStr>']]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "SNMPD_HEALTH_MON_THRESH_CROSS"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[<:gPatSyslogPRI> <:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "SNMPD_RMON_EVENTLOG"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[<:gPatSyslogPRI> <usrMsg:gPatMesgBody>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">4</setEventAttribute>
+		</when>
+		<when test='$_event = "SNMPD_INIT_FAILED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[snmpd initialization failure:\s+<errReason:gPatMesgBody>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "SNMPD_LIBJU NIPER_FAILURE, SNMPD_RADIX_FAILURE, SNMPD_RECEIVE_FAILURE"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[<funName:gPatStr>: (system_default_inaddr|(radix_add\s+failed)|(receive\s+message\s+failure)):\s+<errReason:gPatMesgBody>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "SNMPD_RMON_COOKIE"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[<funName:gPatStr>:\s+Null cookie]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+		</when>
+		<when test='$_event = "SNMPD_RMONFILE_FAILURE"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[<funName:gPatStr>: operation:\s+<opName:gPatStr> <fileName:gPatStr>:\s+<errReason:gPatMesgBody>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">7</setEventAttribute>
+		</when>
+		<when test='$_event = "SNMPD_RMON_MIBERROR"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[<funName:gPatStr>: internal Get request error: <:gPatStr>,alarm <:gPatStr>,error <errReason:gPatMesgBody>, variable: <:gPatStr> \(<:gPatStr>\)]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "SNMPD_RTSLIB_ASYNC_EVENT"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[<funName:gPatStr>: sequence mismatch\s+\(<:gPatStr>, <:gPatStr>\), resyncing]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		</when>
+		<when test='$_event = "SNMPD_SEND_FAILURE"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[<funName:gPatStr>: send <:gPatStr> \(<:gPatInt>\) failure: <errReason:gPatMesgBody>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "SNMPD_SET_FAILED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Snmp set failed: <errReason:gPatMesgBody>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "SNMPD_SMOID_GEN_FAILURE"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Unable to generate OID from <:gPatStr> \(<errReason:gPatMesgBody>\)]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event IN "SNMPD_SOCKET_FAILURE, SNMPD_SOCKET_FATAL_FAILURE"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[<funName:gPatStr>: socket failure: <errString:gPatStr> \(<errReason:gPatMesgBody>\)]]></regex>
+			</collectFieldsByRegex>
+			<when test='$_event = "SNMPD_SOCKET_FATAL_FAILURE"'>
+				<setEventAttribute attr="eventSeverity">9</setEventAttribute>
+			</when>
+		</when>
+		<when test='$_event = "SNMPD_SYSLIB_FAILURE"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[<funName:gPatStr>: system function '<:gPatStr>' failied: <errReason:gPatMesgBody>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "SNMPD_SYSOID_FAILURE"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Unable to determine sysObjectID\s+from internal model: <:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "SNMPD_SYSOID_GEN_FAILURE"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Unable to determine OID for product <:gPatStr> \(<errReason:gPatMesgBody>\)]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "SNMPD_THROTTLE_QUEUE_DRAINED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[<funName:gPatStr>: cleared all throttled traps]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		</when>
+		<when test='$_event IN "SNMPD_TRAP_COLD_START, SNMPD_TRAP_WARM_START"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[<funName:gPatStr>:\s+(SNMP\s+)?trap[s]?: (cold|warm) start]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">7</setEventAttribute>
+		</when>
+		<when test='$_event = "SNMPD_TRAP_GEN_FAILURE"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[<funName:gPatStr>: SNMP trap error: <:gPatStr> \(<errReason:gPatMesgBody>\)]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "SNMPD_TRAP_INVALID_DATA"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[<funName:gPatStr>: SNMP trap error: invalid <errReason:gPatMesgBody> \(<:gPatStr>\) received]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+		</when>
+		<when test='$_event = "SNMPD_TRAP_QUEUED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Adding trap to <destIpAddr:gPatIpV4Dot> to <:gPatStr> queue, <:gPatInt> traps in queue]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		</when>
+		<when test='$_event = "SNMPD_TRAP_QUEUE_DRAINED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[<funName:gPatStr>: traps queued to <destIpAddr:gPatIpV4Dot> sent successfully]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		</when>
+		<when test='$_event = "SNMPD_TRAP_QUEUE_MAX_ATTEMPTS"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[<funName:gPatStr>: after <:gPatStr> attempts, deleting <:gPatInt> traps queued to <destIpAddr:gPatIpV4Dot>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "SNMPD_TRAP_QUEUE_MAX_SIZE"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[<funName:gPatStr>: maximum queue size exceeded \(<:gPatInt>\), discarding trap to <destIpAddr:gPatIpV4Dot> from <:gPatStr> queue]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		</when>
+		<when test='$_event = "SNMPD_TRAP_THROTTLED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[<funName:gPatStr>: traps throttled after <:gPatStr> traps]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		</when>
+		<when test='$_event = "SNMPD_USER_ERROR"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[<funName:gPatStr>: error in <:gPatStr> user '<user:gPatStr>' auth '<:gPatStr>' priv '<:gPatStr>']]></regex>
+			</collectFieldsByRegex>
+		</when>
+	</when>
+	
+	<when test='$_type = "SSH"'>
+		<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+		<when test='$_event IN "SSH_RELAY_CONNECT_ERROR, SSH_RELAY_SERVER_ERROR"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[((Unable\s+to\s+connect\s+to)|(SSH\s+relay\s+error\s+for)) <serviceName:gPatStr>:\s+<errReason:gPatMesgBody>]]></regex>
+			</collectFieldsByRegex>	
+		</when>
+		<when test='$_event = "SSH_RELAY_USAGE"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Usage: ssh-relay -s <serviceName:gPatStr>]]></regex>
+			</collectFieldsByRegex>	
+		</when>
+	</when>
+	
+	<when test='$_type = "SSHD"'>
+		<!-- SSHD_LOGIN_FAILED_LIMIT -->
+		<collectFieldsByRegex src="$_body">
+			<regex><![CDATA[Specified number of login failures \(<:gPatInt>\) for user '<user:gPatStr>' reached from '<destIpAddr:gPatIpV4Dot>']]></regex>
+		</collectFieldsByRegex>	
+		<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+	</when>
+	
+	<when test='$_type = "UI"'> 
+		<!-- UI_COMMIT_ROLLBACK_FAILED, UI_LCC_NO_MASTER-->
+		<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+		<when test='$_event IN "UI_COMMIT_AT_COMPLETED, UI_COMMIT_SYNC_FORCE, UI_FACTORY_OPERATION, UI_INITIALSETUP_OPERATION, UI_RESCUE_OPERATION"'>
+			<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		</when>
+		<when test='$_event IN "UI_DBASE_REBUILD_SCHEMA_FAILED, UI_DBASE_REOPEN_FAILED, UI_SCHEMA_CHECKOUT_FAILED, UI_SCHEMA_SEQUENCE_ERROR"'>
+			<setEventAttribute attr="eventSeverity">8</setEventAttribute>
+		</when>
+		<when test='$_event = "UI_AUTH_EVENT"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Authenticated user\s+'<user:gPatStr>'\s+at permission level\s+'<_authLevel:gPatStr>']]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		</when>
+		<when test='$_event = "UI_AUTH_INVALID_CHALLENGE"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Received invalid authentication challeng for user\s+'<user:gPatStr>':\s+<:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "UI_BOOTTIME_FAILED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Unable to fetch boot time:<errReason:gPatMesgBody>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event IN "UI_CFG_AUDIT_NEW, UI_CFG_AUDIT_SET_SECRET"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[User\s+'<user:gPatStr>'\s+<:gPatStr>: <:gPatStr> <osObjName:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		</when>
+		<when test='$_event = "UI_CFG_AUDIT_OTHER"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[User\s+'<user:gPatStr>'\s+<:gPatStr>: <:gPatStr> <:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		</when>
+		<when test='$_event = "UI_CFG_AUDIT_SET"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[User\s+'<user:gPatStr>'\s+<:gPatStr>: <:gPatStr> <:gPatStr>-> "<:gPatInt>"]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		</when>
+		<when test='$_event = "UI_CHILD_ARGS_EXCEEDED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Too many arguments for child process\s+'<command:gPatStr>']]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "UI_CHILD_CHANGE_USER"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Unable to switch to local user:\s+<user:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event IN "UI_CHILD_EXEC, UI_CHILD_PIPE_FAILED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[((Child\s+exec\s+failed)|(Unable\s+to\s+create\s+pipe))\s+for\s+command)\+'<command:gPatStr>':\s+<errReason:gPatMesgBody>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "UI_CHILD_EXITED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Child exited:PID\s+<:gPatInt>,status\s+<:gPatStr>,command\s+'<command:gPatStr>']]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		</when>
+		<when test='$_event = "UI_CHILD_FOPEN"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Unable to append to log\s+'<fileName:gPatStr>':\s+<errReason:gPatMesgBody>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "UI_CHILD_START"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Starting\s+child\s+'<osObjName:patStrEndQuote>']]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		</when>
+		<when test='$_event = "UI_CHILD_STATUS"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Cleanup\s+child\s+'<osObjName:patStrEndQuote>',\s+PID\s+<:gPatInt>,\s+status\s+<:gPatInt>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		</when>
+		<when test='$_event = "UI_CHILD_STOPPED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Child stopped:PID\s+<:gPatInt>,signal=<:gPatStr>,command='<command:gPatStr>']]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		</when>
+		<when test='$_event = "UI_CHILD_WAITPID"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[waitpid failed:PID\s+<:gPatInt>,rc\s+<:gPatInt>,status\s+<:gPatStr>:<errReason:gPatMesgBody>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "UI_CMDLINE_READ_LINE"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[User\s+'<user:gPatStr>',\s+command\s+'<command:patStrEndQuote>']]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		</when>
+		<when test='$_event = "UI_CMD_AUTH_REGEX_INVALID"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Invalid\s+'<_keyword:gPatStr>'\s+command authorization regular expression\s+<:gPatStr>:<errReason:gPatMesgBody>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "UI_COMMIT"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[User\s+'<user:gPatStr>'\s+requested\s+'<command:gPatStr>'\s+operation\s+\(comment:<usrMsg:gPatMesgBody>\)]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		</when>
+		<when test='$_event IN "UI_COMMIT_AT_ABORT, UI_COMMIT_AT_FAILED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[<errReason:gPatMesgBody>, ((will\s+try\s+again)|(scheduled\s+commit\s+cleared))]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "UI_COMMIT_COMPRESS_FAILED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Unable to compress file\s+'<fileName:gPatStr>']]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "UI_COMMIT_CONFIRMED_REMINDER"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA['commit comfirmed'\s+must be confirmed within\s+<durationMSec:gPatInt>\s+minutes]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		</when>
+		<when test='$_event = "UI_COMMIT_EMPTY_CONTAINER"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Skipped empty object\s+'<osObjName:gPatStr>']]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		</when>
+		<when test='$_event = "UI_COMMIT_NOT_CONFIRMED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Commit was not confirmed:<usrMsg:gPatMesgBody>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		</when>
+		<when test='$_event = "UI_COMMIT_PROGRESS"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Commit operation in progress:\s+<usrMsg:gPatMesgBody>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		</when>		
+		<when test='$_event IN "UI_CONFIGURATION_ERROR, UI_CONFIGUATION_WARNING"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Process:<procName:gPatStr>,path:<:gPatStr>,statement:<:gPatMesgBody>,<errReason:gPatMesgBody>]]></regex>
+			</collectFieldsByRegex>
+			<when test='$_event = "UI_CONFIGUATION_WARNING"'>
+				<setEventAttribute attr="eventSeverity">4</setEventAttribute>
+			</when>
+		</when>
+		<when test='$_event IN "UI_DAEMON_ACCEPT_FAILED, UI_DAEMON_SOCKET_FAILED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[<appName:gPatStr> socket ((connection\s+accept)|create) failed:<errReason:gPatMesgBody>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event IN "UI_DAEMON_FORK_FAILED, UI_DAEMON_SELECT_FAILED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[((Unable\s+to\s+create)|select)\s+((session\s+child)\failed):<errReason:gPatMesgBody>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "UI_DBASE_ACCESS_FAILED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Unable to reaccess configuration database file\s+'<fileName:gPatStr>',address<destIpAddr:gPatIpV4Dot>, size <dbDataFileSizeKB:gPatInt>:<errReason:gPatMesgBody>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "UI_DBASE_CHECKOUT_FAILED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Database\s+'<fileName:gPatStr>'\s+is out of data and needs to be rebuilt]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">8</setEventAttribute>
+		</when>
+		<when test='$_event = "UI_DBASE_EXTEND_FAILED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Unable to extend configuration database file\s+'<fileName:gPatStr>' to size <dbDataFileSizeKB:gPatInt>:<errReason:gPatMesgBody>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event IN "UI_DBASE_LOGIN_EVENT, UI_DBASE_LOGOUT_EVENT"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[User '<user:gPatStr>'\s+e(nter|xit)ing configuration mode]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		</when>
+		<when test='$_event IN "UI_DBASE_MISMATCH_EXTENT, UI_DBASE_MISMATCH_MAJOR, UI_DBASE_MISMATCH_MINOR, UI_DBASE_MISMATCH_SIZE"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Database header\s+(extent|(m(aj|in)or\s+version\s+number)) mismatch for file\s+'<fileName:gPatStr>':expecting\s+<:gPatInt>, got<:gPatInt>]]></regex>
+			</collectFieldsByRegex> 
+		</when>
+		<when test='$_event = "UI_DBASE_MISMATCH_SEQUENCE"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Database header\s+sequence numbers mismatch for file\s+'<fileName:gPatStr>'.*]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "UI_DBASE_OPEN_FAILED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Database open failed for file\s+'<fileName:gPatStr>': <errReason:gPatMesgBody>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event IN ""UI_DBASE_REBUILD_FAILED, UI_DBASE_REBUILD_STARTED'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[<user:gPatStr>\s+rebuild(/rollback)? of the datebase '<fileName:gPatStr>' (fail|start)ed]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">8</setEventAttribute>
+		</when>
+		<when test='$_event = "UI_DBASE_RECREATE"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[User '<user:gPatStr>' attempting database re-creation]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		</when>
+		<when test='$_event = "UI_DUPLICATE_UID"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Users <user:gPatStr> and <:gPatStr> have the same UID <:gPatInt>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		</when>
+		<when test='$_event = "UI_INVALID_REMOTE_PERMISSION"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[invalid permission from authorization server: <:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "UI_JUNOSCRIPT_CMD"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[User '<user:gPatStr>' used JUNOScript client to run command '<command:patStrEndQuote>']]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		</when>
+		<when test='$_event IN "UI_JUNOSCRIPT_ERROR, UI_NETCONF_ERROR, UI_TACPLUS_ERROR, UI_VERSION_FAILED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[(JUNOScript|NETCONF|(TACACS\+)|(Unable\s+to\s+fetch)) (error|failure|system): <errReason:gPatMesgBody>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">4</setEventAttribute>
+			<when test='$_event = "UI_TACPLUS_ERROR"'>
+				<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+			</when>
+		</when>
+		<when test='$_event = "UI_LOAD_EVENT"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Users <user:gPatStr> is performing a '<opName:gPatStr>']]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		</when>
+		<when test='$_event = "UI_LOAD_JUNOS_DEFAULT_FILE_EVENT"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Loading the default config from <:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		</when>
+		<!-- <190>May 11 13:54:10 172.16.5.64 mgd[5518]: UI_LOGIN_EVENT: User 'phoenix_agent' login, class 'j-super-user' [5518], ssh-connection '192.168.28.21 39109 172.16.5.64 22', client-mode 'cli' -->
+		<when test='$_event = "UI_LOGIN_EVENT"'>
+			<switch>
+				<case>
+					<collectFieldsByRegex src="$_body">
+						<regex><![CDATA[User '<user:gPatStr>' login, class '<osObjName:gPatStr>' \[<:gPatInt>\], ssh-connection '<_con:patStrEndQuote>', client-mode '<appTransportProto:gPatStr>']]></regex>
+					</collectFieldsByRegex>
+				</case>
+				<case>
+					<collectFieldsByRegex src="$_body">
+						<regex><![CDATA[User '<user:gPatStr>' login, class '<osObjName:gPatStr>' \[<:gPatInt>\], ssh-connection '', client-mode '<appTransportProto:gPatStr>']]></regex>
+					</collectFieldsByRegex>
+				</case>
+			</switch>
+			<when test='exist _con'>
+				<collectFieldsByRegex src="$_con">
+					<regex><![CDATA[<srcIpAddr:gPatIpV4Dot>\s+<srcIpPort:gPatIpPort>\s+<destIpAddr:gPatIpV4Dot>\s+<destIpPort:gPatIpPort>]]></regex>
+				</collectFieldsByRegex>
+			</when>
+			<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		</when>
+		<when test='$_event = "UI_LOGOUT_EVENT"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[User '<user:gPatStr>' logout]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		</when>
+		<when test='$_event = "UI_LOST_CONN"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Lost connection to daemon '<procName:gPatStr>']]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "UI_MASTERSHIP_EVENT"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[<:gPatStr> <:gPatStr> mastership by '<user:gPatStr>']]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">4</setEventAttribute>
+		</when>
+		<when test='$_event = "UI_MOTD_PROPAGATE_ERROR"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Unable to propagate login announcement \(motd\) to <:gPatStr>']]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "UI_NETCONF_CMD"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[User '<user:gPatStr>' used NETCONF client to run command '<command:gPatStr>']]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		</when>
+		<when test='$_event = "UI_PARSE_JUNOSCRIPT_ATTRIBUTES"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Error parsing attributes in client <:gPatStr> tag]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "UI_READ_FAILED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[read failed for peer <:gPatStr>: <errReason:gPatMesgBody>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event IN "UI_READ_TIMEOUT, UI_WRITE_RECONNECT"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[((Timeout\s+on\s+read\s+of)|(Re-establishing\s+connection\s+to)) peer <:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		</when>
+		<when test='$_event = "UI_REBOOT_EVENT"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[System <:gPatStr> by <user:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">4</setEventAttribute>
+		</when>
+		<when test='$_event = "UI_RESTART_EVENT"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[User <user:gPatStr> restarting daemon '<procName:gPatStr>' <usrMsg:gPatMesgBody>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">4</setEventAttribute>
+		</when>
+		<when test='$_event = "UI_SCHEMA_MISMATCH_MAJOR"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Schema major version mismatch for package <:gPatStr> \(<:gPatStr> vs. <:gPatStr>\)]]></regex>
+			</collectFieldsByRegex>
+		</when>
+		<when test='$_event = "UI_SCHEMA_MISMATCH_SEQUENCE"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Schema header sequence numbers mismatch for package <:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+		</when>
+	</when>
+	
+	
+	<when test='$_type = "WEB"'>
+		<!--WEB_AUTH_TIME_EXCEEDED, WEB_COULDNT_START_HTTPD, WEB_MGD_CHMOD_ERROR, WEB_MGD_CONNECT_ERROR, WEB_MGD_FCNTL_ERROR, WEB_MGD_RECVMSG_PEEK_ERROR, WEB_MGD_SOCKET_ERROR-->
+		<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+		<when test='$_event IN "WEB_AUTH_FAIL, WEB_AUTH_SUCCESS"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[(?:Unable\s+to\s+)?[aA]uthenticate httpd client \(username <user:gPatStr>\)]]></regex>
+			</collectFieldsByRegex>	
+			<setEventAttribute attr="eventSeverity">3</setEventAttribute>				
+		</when>
+		<when test='$_event IN "WEB_CERT_FILE_NOT_FOUND, WEB_CONFIG_OPEN_ERROR, WEB_CONFIG_WRITE_ERROR, WEB_KEYPAIR_FILE_NOT_FOUND"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Could not (find|open|write)(?:\s+(certificate|(\s+key\s+pair))\s+file)? '<fileName:gPatStr>'.*]]></regex>
+			</collectFieldsByRegex>	
+		</when>
+		<when test='$_event IN "WEB_CHILD_STATE, WEB_CONFIG_OPEN_ERROR, WEB_CONFIG_WRITE_ERROR, WEB_MGD_LISTEN_ERROR, WEB_UNAME_FAILED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[((Unable\s+to)|(Could\s+not)) (retrieve|initialize|bind|listen) ((child\s+state)|(event\s+library)|(mgd\s+listener\s+socket)|(system\s+hostname)): <errReason:gPatMesgBody>]]></regex>
+			</collectFieldsByRegex>	
+		</when>
+		<when test='$_event IN "WEB_PIDFILE_LOCK, WEB_PIDFILE_UPDATE"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Unable\s+to (lock|update) PID file <:gPatStr>: <errReason:gPatMesgBody>]]></regex>
+			</collectFieldsByRegex>	
+		</when>
+		<when test='$_event IN "WEB_WEBAUTH_AUTH_FAIL, WEB_WEBAUTH_AUTH_OK"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Web-authenticate of user <user:gPatStr> with fwauthd (failed|successful)]]></regex>
+			</collectFieldsByRegex>	
+			<setEventAttribute attr="eventSeverity">3</setEventAttribute>				
+		</when>
+		<when test='$_event IN "WEB_CHILD_STATE, WEB_CONFIG_OPEN_ERROR, WEB_CONFIG_WRITE_ERROR, WEB_MGD_LISTEN_ERROR, WEB_UNAME_FAILED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Unable\s+to connect to fwauthd on socket <:gPatStr>: <errReason:gPatMesgBody>]]></regex>
+			</collectFieldsByRegex>	
+		</when>
+	</when>
+	
+	<when test='$_type = "WEBFILTER"'>
+		<!--WEBFILTER_CACHE_NOT_ENABLED, L2TPD_SHOW_MULTILINK, L2TPD_SHOW_SESSION, L2TPD_SHOW_TUNNEL-->
+		<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+		<when test='$_event IN "WEBFILTER_INTERNAL_ERROR, WEBFILTER_REQUEST_NOT_CHECKED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Error encountered:(?:\s+server\s+down,\s+failed\s+to\s+check\s+request)? <errReason:gPatMesgBody>]]></regex>
+			</collectFieldsByRegex>				
+		</when>
+		<when test='$_event = "WEBFILTER_SERVER_CONNECTED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Successfully connected to webfilter server <hostName:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">3</setEventAttribute>				
+		</when>
+		<when test='$_event = "WEBFILTER_SERVER_DISCONNECTED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Webfilter: server <hostName:gPatStr> disconnected]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">3</setEventAttribute>				
+		</when>
+		<when test='$_event = "WEBFILTER_SERVER_ERROR"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Webfilter: An error is received from server <hostName:gPatStr> \(0x<:gPatInt>\): <errReason:gPatMesgBody>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">3</setEventAttribute>				
+		</when>
+		<when test='$_event IN "WEBFILTER_URL_BLOCKED, WEBFILTER_URL_PERMITTED"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA[Webfilter: ACTION="URL (Block|Permitt)ed" <srcIpAddr:gPatIpV4Dot>\(<srcIpPort:gPatIpPort>\)-\><destIpAddr:gPatIpV4Dot>\(<destIpPort:gPatIpPort>\) CATEGORY="<osObjName:gPatStr>" REASON="<errReason:gPatMesgBody>" PROFILE="<:gPatStr>" URL=<infoURL:gPatStr> OBJ=<:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventSeverity">7</setEventAttribute>	
+			<when test='$_event = "WEBFILTER_URL_PERMITTED"'>
+				<setEventAttribute attr="eventSeverity">1</setEventAttribute>	
+			</when>
+		</when>
+	</when>
+   
+   </when>
+      
+    <when test='exist _num'>
+	<setEventAttribute attr="eventSeverity">$_num</setEventAttribute>
+    </when>
+    
+    <when test='exist sentPkts'>
+	<when test='exist recvPkts'>
+		<setEventAttribute attr="totPkts">add($sentPkts, $recvPkts)</setEventAttribute>
+	</when>
+      </when>
+      
+      <when test='exist sentBytes'>
+	<when test='exist recvBytes'>
+		<setEventAttribute attr="totBytes">add($sentBytes, $recvBytes)</setEventAttribute>
+	</when>
+      </when>
+      
+      <when test='exist _ipProtoName'>
+       <setEventAttribute attr="ipProto">convertStrToIntIpProto($_ipProtoName)</setEventAttribute>
+    </when>
+
+  </parsingInstructions>
+</eventParser>

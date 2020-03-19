@@ -1,0 +1,2 @@
+[eventMsg]
+[PH_DEV_MON_NETAPP_FCP_MET]:[eventSeverity]=PHL_INFO,[hostName]=automator14Dot0Dot3Dot2,[hostIpAddr]=14.0.3.2,[fcpReadOpsPerSec]=180,[fcpWriteOpsPerSec]=177,[fcpReadLatency]=45.67,[fcpWriteLatency]=32,[fcpReadKBytesPerSec]=3456,[fcpWriteKBytesPerSec]=3234

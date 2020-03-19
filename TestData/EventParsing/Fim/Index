@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+PH_DEV_MON_CUST_FILE_CREATE,Fim_1,Fim,$localhost,,syslog

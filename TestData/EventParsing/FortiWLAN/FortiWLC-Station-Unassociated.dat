@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+172.18.37.203
+[eventMsg]
+Apr 09 13:25:28 172.18.37.203 coordinator: Wireless Associations, Unassociated for STA 00:1f:3b:6c:62:e7 in BSSID 00:0c:e6:56:dd:3b ESS 4088clear AP_ID 1 at Time Fri Apr 9 13:41:49 2010
+[params]
+deviceTime=any
+parserName=FortiWLANParser
+eventType=FortiWLC-Station-Unassociated
+reptModel=FortiWLC
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Station disassociated with an AP
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+hostMACAddr=00:0c:e6:56:dd:3b
+count=1
+srcMACAddr=00:1f:3b:6c:62:e7
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=172.18.37.203
+rawEventMsg=any
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=172.18.37.203
+reptVendor=Fortinet

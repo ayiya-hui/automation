@@ -1,0 +1,23 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>Dec 04 2008 20:00:45: %ASA-2-106017: Deny IP due to Land Attack from 20.20.20.20 to 192.168.20.20
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=8
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=MEDIUM
+destIpAddr=192.168.20.20
+eventAction=1 (Deny)
+eventName=Denied IP traffic - land attack
+srcIpAddr=20.20.20.20
+reptVendor=Cisco
+eventType=ASA-106017
+phEventCategory=0 (External)
+reptDevIpAddr=$reporter
+reptModel=ASA

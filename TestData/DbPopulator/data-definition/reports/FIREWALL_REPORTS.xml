@@ -1,0 +1,1232 @@
+
+<Reports>
+ 
+  <Report id="PH_Report_FW_1" group="PH_SYS_REPORT_Firewall">
+    <Name>Logon: Top Firewall Admin Users Ranked By Successful Logon</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Top Firewall Admin Users Ranked By Successful Logon Count </Description>
+    <SelectClause numEntries="All">
+        <AttrList>destIpAddr,srcIpAddr,srcName,user,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT ( * )</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW_1" name="Filter_FW_1">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_DEVICE_FIREWALL)  AND  eventType IN ( Group@PH_SYS_EVENT_HostLogonSuccess)</SingleEvtConstr>
+           <GroupByAttr>destIpAddr,srcIpAddr,srcName,user</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr,destIpAddr</RelevantFilterAttr>
+  </Report>
+	   
+  <Report id="PH_Report_FW_2" group="PH_SYS_REPORT_Firewall">
+    <Name> Logon: Top Firewall Admin Users Ranked By Failed Logon</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report describes failed admin logon to a firewall</Description>
+    <SelectClause numEntries="All">
+        <AttrList>destIpAddr,srcIpAddr,srcName,user,COUNT( *) </AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT ( * )</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW_2" name="Filter_FW_2">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_DEVICE_FIREWALL)  AND  eventType IN ( Group@PH_SYS_EVENT_HostLogonFailure)</SingleEvtConstr>
+           <GroupByAttr>destIpAddr,srcIpAddr,srcName,user</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr,destIpAddr</RelevantFilterAttr>
+  </Report>
+	   
+  <Report id="PH_Report_FW_3" group="PH_SYS_REPORT_Firewall">
+    <Name>Logon: Successful Firewall Admin Logon Details </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Details about successful firewall logons </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr,eventType,srcIpAddr,srcName,user,srcIntfName,destIpPort,rawEventMsg</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW_3" name="Filter_FW_3">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_HostLogonSuccess))</SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr,destIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_FW_4" group="PH_SYS_REPORT_Firewall">
+    <Name>Logon: Failed Firewall Admin Logon Details </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Details about failed firewall logons</Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr,eventType,srcIpAddr,srcName,user,srcIntfName,destIpPort,rawEventMsg</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW_4" name="Filter_FW_4">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_HostLogonFailure))</SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr,destIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_FW_5" group="PH_SYS_REPORT_Firewall">
+    <Name> Firewall Deny: Top Firewalls By Denies </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Top Firewalls Ranked By Total Blocked Connections </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList></AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW_5" name="Filter_FW_5">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_DenyTraffic) </SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_FW_6" group="PH_SYS_REPORT_Firewall">
+    <Name> Firewall Deny: Top Firewalls By Inbound Denies </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Top Firewalls Ranked By Total Blocked Inbound Connections </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList></AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW_6" name="Filter_FW_6">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_DenyTraffic) AND srcIpAddr NOT IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) AND destIpAddr IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) </SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_FW_7" group="PH_SYS_REPORT_Firewall">
+    <Name> Firewall Deny: Top Firewalls By Outbound Denies </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Top Firewalls Ranked By Total Blocked Outbound Connections </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList></AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW_7" name="Filter_FW_7">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_DenyTraffic) AND srcIpAddr IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) AND destIpAddr NOT IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) </SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_FW_8" group="PH_SYS_REPORT_Firewall">
+    <Name>Firewall Permit: Top Firewall Originated Or Destined Connections By Count</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the firewall originated or destined connections - these connections would be typically be for administrative and monitoring purposes</Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,srcIpAddr,srcName,destIpAddr,destName,ipProto,destIpPort,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList></AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW_8" name="Filter_FW_8">
+           <SingleEvtConstr> reptDevIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic) AND (srcIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) OR destIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL)) </SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr,srcIpAddr,srcName,destIpAddr,destName,ipProto,destIpPort</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr,srcIpAddr,destIpAddr,destName</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_FW_9" group="PH_SYS_REPORT_Firewall">
+    <Name> Firewall Deny: Top Blocked Sources By Connection Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Top Blocked Sources Ranked By Connection Count </Description>
+    <SelectClause numEntries="All">
+        <AttrList>srcIpAddr,srcName,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList></AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW_9" name="Filter_FW_9">
+           <SingleEvtConstr> reptDevIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_DenyTraffic) </SingleEvtConstr>
+           <GroupByAttr>srcIpAddr,srcName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>srcIpAddr,srcName</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_FW_10" group="PH_SYS_REPORT_Firewall">
+    <Name> Firewall Deny: Top Blocked Sources, Ports By Connection Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Top Blocked Sources Ranked By Connection Count </Description>
+    <SelectClause numEntries="All">
+        <AttrList>srcIpAddr,srcName,ipProto, destIpPort,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList></AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW_10" name="Filter_FW_10">
+           <SingleEvtConstr> reptDevIpAddr IN ( Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_DenyTraffic) </SingleEvtConstr>
+           <GroupByAttr>srcIpAddr,srcName,ipProto,destIpPort</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>srcIpAddr,destIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_FW_11" group="PH_SYS_REPORT_Firewall">
+    <Name> Firewall Deny: Top Blocked Destinations By Connection Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Top Blocked Destinations Ranked By Connection Count </Description>
+    <SelectClause numEntries="All">
+        <AttrList>destIpAddr,destName,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList></AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW_11" name="Filter_FW_11">
+           <SingleEvtConstr> reptDevIpAddr IN ( Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_DenyTraffic) </SingleEvtConstr>
+           <GroupByAttr>destIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>destIpAddr</RelevantFilterAttr>
+  </Report>
+
+
+  <Report id="PH_Report_FW_12" group="PH_SYS_REPORT_Firewall">
+    <Name> Firewall Deny: Top Blocked Internal Sources, Ports By Connection Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Top Blocked Internal Sources Ranked By Connection Count </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,srcIpAddr,srcName,ipProto,destIpPort,srcIntfName,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList></AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW_12" name="Filter_FW_12">
+           <SingleEvtConstr> reptDevIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_DenyTraffic) AND srcIpAddr IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) </SingleEvtConstr>
+           <GroupByAttr>srcIpAddr,srcName,reptDevIpAddr,srcIntfName,ipProto,destIpPort </GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>srcIpAddr,reptDevIpAddr,destIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_FW_13" group="PH_SYS_REPORT_Firewall">
+    <Name> Firewall Deny: Top Blocked Internal Sources, Ports, Destinations </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Top Blocked Internal Sources, Services, Destinations Ranked By Connection Count </Description>
+    <SelectClause numEntries="All">
+        <AttrList>srcIpAddr,srcName,reptDevIpAddr,srcIntfName,ipProto, destIpPort, destIpAddr,destName, COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList></AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW_13" name="Filter_FW_13">
+           <SingleEvtConstr> reptDevIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_DenyTraffic) AND srcIpAddr IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) </SingleEvtConstr>
+           <GroupByAttr>srcIpAddr,srcName,reptDevIpAddr,srcIntfName,ipProto, destIpPort, destIpAddr,destName </GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>srcIpAddr,destIpAddr,reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_FW_14" group="PH_SYS_REPORT_Firewall">
+    <Name> Firewall Deny: Top Blocked Internal Destinations By Connection Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Top Blocked Internal Destinations Ranked By Connection Count </Description>
+    <SelectClause numEntries="All">
+        <AttrList>destIpAddr,destName, reptDevIpAddr,destIntfName, COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList></AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW_14" name="Filter_FW_14">
+           <SingleEvtConstr> reptDevIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_DenyTraffic) AND destIpAddr IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) </SingleEvtConstr>
+           <GroupByAttr>destIpAddr,destName,reptDevIpAddr,destIntfName </GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>destIpAddr,reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_FW_15" group="PH_SYS_REPORT_Firewall">
+    <Name> Firewall Deny: Top Blocked Internal Destinations,Ports By Connection Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Top Blocked Internal Destinations, Services Ranked By Connection Count </Description>
+    <SelectClause numEntries="All">
+        <AttrList>destIpAddr,destName,ipProto, destIpPort, reptDevIpAddr,destIntfName, COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList></AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW_15" name="Filter_FW_15">
+           <SingleEvtConstr> reptDevIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_DenyTraffic) AND destIpAddr IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) </SingleEvtConstr>
+           <GroupByAttr>destIpAddr,destName,ipProto, destIpPort, reptDevIpAddr,destIntfName </GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>destIpAddr,reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_FW_16" group="PH_SYS_REPORT_Firewall">
+    <Name>Firewall Permit: Top Firewalls By Total Permitted Connections, Bytes </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the firewalls by the total number of permitted connections and the number of exchanged bytes. This answers the question: which firewall handles the most traffic</Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,COUNT(*), SUM(totBytes) </AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> COUNT(*) DESC, SUM(totBytes) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW_16" name="Filter_FW_16">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic) </SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>destIpAddr,reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_FW_17" group="PH_SYS_REPORT_Firewall">
+    <Name> Firewall Permit: Top Firewalls Ranked By Inbound Connections, Bytes </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the firewalls by the total number of permitted inbound connections and exchanged bytes. This answers the question: which firewall answers the most inbound traffic. </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,COUNT(*), SUM(sentBytes), SUM(recvBytes), SUM (totBytes) </AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> COUNT(*)  DESC, SUM(totBytes) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW_17" name="Filter_FW_17">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic) AND srcIpAddr NOT IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) AND destIpAddr IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) </SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+     <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_FW_18" group="PH_SYS_REPORT_Firewall">
+    <Name>Firewall Permit: Top Firewalls By Total Outbound Connections, Bytes </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the firewalls by the total number of permitted outbound connections and exchanged bytes. This answers the question: which firewall answers the most outbound traffic.</Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,COUNT(*),SUM(sentBytes), SUM(recvBytes), SUM (totBytes)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> COUNT(*)  DESC, SUM(totBytes) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW_18" name="Filter_FW_18">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic) AND srcIpAddr IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) AND destIpAddr NOT IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) </SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+     <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_FW_19" group="PH_SYS_REPORT_Firewall">
+    <Name>Firewall Permit: Top Ports By Connections, Bytes </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks permitted ports through that firewall by first the total number of connections and then by the bytes used by that service</Description>
+    <SelectClause numEntries="All">
+        <AttrList>ipProto, destIpPort, COUNT(*),SUM(sentBytes), SUM(recvBytes), SUM (totBytes)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> COUNT(*)  DESC, SUM(totBytes) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW_19" name="FIlter_FW_19">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic)  </SingleEvtConstr>
+           <GroupByAttr>ipProto, destIpPort</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+     <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_FW_20" group="PH_SYS_REPORT_Firewall">
+    <Name>Firewall Permit: Top Outbound Ports By Connections, Bytes</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks firewalls and permitted outbound services by first the total number of connections and then by bytes for that service</Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,ipProto, destIpPort, srcIntfName,destIntfName,COUNT(*),SUM(sentBytes), SUM(recvBytes), SUM (totBytes)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> COUNT(*)  DESC, SUM(totBytes) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW_20" name="Filter_FW_20">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic) AND srcIpAddr IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) AND destIpAddr NOT IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) </SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr,ipProto, destIpPort,srcIntfName,destIntfName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+     <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_FW_21" group="PH_SYS_REPORT_Firewall">
+    <Name>Firewall Permit: Top Inbound Ports By Connections, Bytes</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks firewalls and permitted inbound services by first the total number of connections and then by bytes for that service</Description>
+    <SelectClause numEntries="All">
+        <AttrList>ipProto, destIpPort,srcIntfName,destIntfName, COUNT(*),SUM(sentBytes), SUM(recvBytes), SUM (totBytes)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> COUNT(*)  DESC, SUM(totBytes) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW_21" name="Filter_FW_21">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic) AND srcIpAddr NOT IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) AND destIpAddr IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) </SingleEvtConstr>
+           <GroupByAttr>ipProto, destIpPort,srcIntfName,destIntfName </GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+     <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_FW_22" group="PH_SYS_REPORT_Firewall">
+    <Name>Firewall Permit: Top Internal Sources By Connections, Bytes </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Top Internal Sources By Total Permitted Connections, Bytes </Description>
+    <SelectClause numEntries="All">
+        <AttrList>srcIpAddr,srcName,COUNT(*),SUM(sentBytes), SUM(recvBytes), SUM (totBytes) </AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> COUNT(*)  DESC, SUM(totBytes) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW_22" name="Filter_FW_22">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic) AND srcIpAddr IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) </SingleEvtConstr>
+           <GroupByAttr>srcIpAddr,srcName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+     <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_FW_23" group="PH_SYS_REPORT_Firewall">
+    <Name>Firewall Permit: Top Outbound Conversations By Connections, Bytes</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Top Internal Sources, Services, Destinations Ranked By Total Permitted Connections, Bytes </Description>
+    <SelectClause numEntries="All">
+        <AttrList>srcIpAddr,srcName,ipProto, destIpPort, destIpAddr,destName, COUNT(*), SUM(sentBytes), SUM(recvBytes), SUM (totBytes) </AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> COUNT(*)  DESC, SUM(totBytes) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW_23" name="Filter_FW_23">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic) AND srcIpAddr IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) </SingleEvtConstr>
+           <GroupByAttr>srcIpAddr,srcName,ipProto, destIpPort, destIpAddr,destName </GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+     <RelevantFilterAttr>srcIpAddr,destIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_FW_24" group="PH_SYS_REPORT_Firewall">
+    <Name>Firewall Permit: Top External Sources By Connections, Bytes</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Top External Sources Ranked By Total Permitted Connections, Bytes </Description>
+    <SelectClause numEntries="All">
+        <AttrList>srcIpAddr,srcName,COUNT(*),SUM(sentBytes), SUM(recvBytes), SUM (totBytes) </AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> COUNT(*)  DESC, SUM(totBytes) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW_24" name="Filter_FW_24">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic) AND srcIpAddr NOT IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) </SingleEvtConstr>
+           <GroupByAttr>srcIpAddr,srcName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+     <RelevantFilterAttr>srcIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_FW_25" group="PH_SYS_REPORT_Firewall">
+    <Name>Firewall Permit: Top Inbound Conversations By Connections, Bytes</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Top External Sources, Services, Destinations Ranked By Total Permitted Connections, Bytes </Description>
+    <SelectClause numEntries="All">
+        <AttrList>srcIpAddr,srcName,ipProto, destIpPort, destIpAddr,destName, COUNT(*), SUM(sentBytes), SUM(recvBytes), SUM (totBytes) </AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> COUNT(*)  DESC, SUM(totBytes) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW_25" name="Filter_FW_25">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic) AND srcIpAddr NOT IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) </SingleEvtConstr>
+           <GroupByAttr>srcIpAddr,srcName,ipProto, destIpPort, destIpAddr,destName </GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+     <RelevantFilterAttr>srcIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_FW_26" group="PH_SYS_REPORT_Firewall">
+    <Name>Firewall Permit: Top Internal Destinations, Ports By Connections, Bytes</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Top External Destinations and Services Ranked By Total Permitted Connections, Bytes </Description>
+    <SelectClause numEntries="All">
+        <AttrList>destIpAddr,destName,ipProto, destIpPort, COUNT(*), SUM(sentBytes), SUM(recvBytes), SUM (totBytes) </AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> COUNT(*)  DESC, SUM(totBytes) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW_26" name="Filter_FW_26">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic) AND srcIpAddr NOT IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) </SingleEvtConstr>
+           <GroupByAttr> destIpAddr,destName,ipProto, destIpPort </GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+     <RelevantFilterAttr>destIpAddr</RelevantFilterAttr>
+   </Report>
+
+   <Report id="PH_Report_FW_27" group="PH_SYS_REPORT_Firewall">
+    <Name>Firewall Permit: Top Inbound Conversations By Count, Bytes</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Top Inbound Permitted Connections Ranked By Count </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,srcIpAddr,srcName,destIpAddr,destName,ipProto, destIpPort, COUNT(*),SUM(sentBytes), SUM(recvBytes), SUM (totBytes)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> COUNT(*)  DESC, SUM(totBytes) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW_27" name="Filter_FW_27">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic) AND srcIpAddr NOT IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) AND destIpAddr IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) </SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr,srcIpAddr,srcName,destIpAddr,destName,ipProto, destIpPort </GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+     <RelevantFilterAttr>srcIpAddr,destIpAddr,reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_FW_28" group="PH_SYS_REPORT_Firewall,PH_SYS_REPORT_Freq">
+    <Name>Firewall Deny: Top Blocked Inbound Connections By Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Top Inbound Denied Connections Ranked By Count </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,srcIpAddr,srcName, destIpAddr,destName, ipProto, destIpPort, COUNT(*) </AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> COUNT(*)  DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW_28" name="Filter_FW_28">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_DenyTraffic) AND srcIpAddr NOT IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) AND destIpAddr IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) </SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr, srcIpAddr,srcName, destIpAddr,destName, ipProto, destIpPort </GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+     <RelevantFilterAttr>destIpAddr,reptDevIpAddr,srcIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_FW_29" group="PH_SYS_REPORT_Firewall">
+    <Name>Firewall Permit: Top Outbound Conversations By Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Top Inbound Permitted Connections Ranked By Count </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,srcIpAddr,srcName,destIpAddr,destName,ipProto, destIpPort, COUNT(*),SUM(sentBytes), SUM(recvBytes), SUM (totBytes)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> COUNT(*)  DESC, SUM(totBytes) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW_29" name="Filter_FW_29">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic) AND srcIpAddr IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) AND destIpAddr NOT IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) </SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr,srcIpAddr,srcName,destIpAddr,destName,ipProto, destIpPort </GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+     <RelevantFilterAttr>destIpAddr,reptDevIpAddr,srcIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_FW_30" group="PH_SYS_REPORT_Firewall,PH_SYS_REPORT_Freq">
+    <Name>Firewall Deny: Top Blocked Outbound Connections By Count  </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Top Blocked Outbound Connections Ranked By Count </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,srcIpAddr,srcName, destIpAddr,destName, ipProto, destIpPort, COUNT(*) </AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> COUNT(*)  DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW_30" name="Filter_FW_30">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_DenyTraffic) AND srcIpAddr IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) AND destIpAddr NOT IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) </SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr, srcIpAddr,srcName, destIpAddr,destName, ipProto, destIpPort </GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+     <RelevantFilterAttr>srcIpAddr,destIpAddr,reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_FW_31" group="PH_SYS_REPORT_Firewall">
+    <Name>All Events: Top Reporting Firewalls By Event Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report ranks the firewalls by the number of events sent </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList></AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW_31" name="Filter_FW_31">
+           <SingleEvtConstr> reptDevIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) </SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+     <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_FW_31B" group="PH_SYS_REPORT_Firewall">
+    <Name>All Events: Top Firewall Events By Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report ranks the firewalls events by count </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,eventType,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList></AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW_31" name="Filter_FW_31">
+           <SingleEvtConstr> reptDevIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) </SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr,eventType</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+     <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_FW_32" group="PH_SYS_REPORT_Firewall">
+    <Name>Firewall Permit: NAT Translations</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report captures the NAT translations over a time window </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr,srcIpAddr,srcName,srcIpPort,preNATDestIpAddr,preNATDestIpPort, ipProto,postNATSrcIpAddr, postNATSrcIpPort,destIpAddr,destName,destIpPort </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW_32" name="Filter_FW_32">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN ("ASA-302013","ASA-302015", "PIX-302013","PIX-302015","FWSM-302013","FWSM-302015","CheckPoint-permit traffic","Juniper-SSG-traffic-permit","FortiGate-traffic-allowed")</SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+     <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_FW_33" group="PH_SYS_REPORT_Firewall">
+    <Name>Errors: Firewall Operational Errors  </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report captures firewall operational errors </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr, eventType, rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW_33" name="Filter_FW_33">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_Error) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_FW_34" group="PH_SYS_REPORT_Firewall">
+    <Name>Logon: Firewall Admin Activity Details</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Provides details about firewall admin activity - logons, command executions and logoff </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr,eventType,srcIpAddr,srcName,user,rawEventMsg</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW_34" name="Filter_FW_34">
+           <SingleEvtConstr> reptDevIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_HostLogonSuccess,Group@PH_SYS_EVENT_ConfigChange,Group@PH_SYS_EVENT_HostLogoff) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>srcIpAddr,reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_FW_35" group="PH_SYS_REPORT_Firewall,PH_SYS_REPORT_Change">
+    <Name>Change: Firewall Run vs Startup Config Difference Via Login </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report captures detected differences between a routers running and startup config </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,hostName,hostIpAddr,eventType,startUpConfVer,runningConfVer,addedItem,deletedItem </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW_35" name="Filter_FW_35">
+           <SingleEvtConstr> hostIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) AND eventType = "PH_DEV_MON_DELTA_CONFIG" </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+  
+  <Report id="PH_Report_FW_36" group="PH_SYS_REPORT_Firewall,PH_SYS_REPORT_Change">
+    <Name>Change: Firewall Config Changes Detected Via Login </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report captures detected startup or running config changes - the changes are detected by logging into the device and hence is accurate. </Description>
+    <SelectClause numEntries="All">
+      <AttrList>phRecvTime,hostName,hostIpAddr,eventType,oldSVNVersion,newSVNVersion,addedItem,deletedItem </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_FW_36" name="Filter_FW_36">
+        <SingleEvtConstr> hostIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN ("PH_DEV_MON_CHANGE_RUN_CONFIG","PH_DEV_MON_CHANGE_STARTUP_CONFIG") </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+  
+  <Report id="PH_Report_FW_37" group="PH_SYS_REPORT_Firewall">
+    <Name>Exploit: Attacks Blocked by Firewall </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report captures attacks blocked by a firewall </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,eventType,srcIpAddr,srcName,COUNT(*) </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW_37" name="Filter_FW_37">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_DEVICE_FIREWALL) AND eventAction = 1 AND eventType NOT IN (Group@PH_SYS_EVENT_DenyTraffic,Group@PH_SYS_EVENT_Info) </SingleEvtConstr>
+           <GroupByAttr>srcIpAddr,srcName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>srcIpAddr,reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_FW_37B" group="PH_SYS_REPORT_Firewall">
+    <Name>Exploit: Top Inbound Scanned Ports By Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report ranked the ports by the number of denied distinct source IPs</Description>
+    <SelectClause numEntries="All">
+        <AttrList>ipProto, destIpPort, COUNT(DISTINCT srcIpAddr) </AttrList>
+    </SelectClause>
+     <OrderByClause><AttrList> COUNT (DISTINCT srcIpAddr) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_FW_37" name="Filter_FW_37">
+        <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_DEVICE_FIREWALL) AND eventAction = 1 AND eventType IN (Group@PH_SYS_EVENT_DenyTraffic)  AND srcIpAddr NOT IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) AND destIpAddr IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) </SingleEvtConstr>
+        <GroupByAttr>srcIpAddr,srcName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>srcIpAddr,reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_FW_38" group="PH_SYS_REPORT_Firewall">
+    <Name>Firewall Permit: Top Outbound High Port Conversations By Connections, Bytes</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Reports the outbound conversations on high (i.e. greater than 1024) destination ports  ranked by the volume of permitted high port services - these services may pose security risk </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,srcIpAddr,srcName,destIpAddr,destName,ipProto,destIpPort,srcIntfName,destIntfName,COUNT(*), SUM (totBytes), SUM(sentBytes), SUM(recvBytes) </AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> SUM (totBytes) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_FW_38" name="Filter_FW_38">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic) AND (destIpPort > 1024) AND srcIpAddr IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) AND destIpAddr NOT IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) </SingleEvtConstr>
+        <GroupByAttr>reptDevIpAddr,srcIpAddr,srcName,destIpAddr,destName,ipProto,destIpPort,srcIntfName,destIntfName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+     <RelevantFilterAttr>srcIpAddr,destIpAddr,reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_FW_38B" group="PH_SYS_REPORT_Firewall">
+    <Name>Firewall Permit: Top Firewalls By Outbound High Ports Bytes</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks the high port services permitted by firewalls - these services may pose security risk </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,SUM (totBytes) </AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> SUM (totBytes) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_FW_38" name="Filter_FW_38">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic) AND (destIpPort > 1024) AND srcIpAddr IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) AND destIpAddr NOT IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) </SingleEvtConstr>
+        <GroupByAttr>reptDevIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+     <RelevantFilterAttr>srcIpAddr,destIpAddr,reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_FW_38C" group="PH_SYS_REPORT_Firewall">
+    <Name>Firewall Permit: Top Outbound High Port Talkers Ranked By Bytes</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> Ranks the sources that communicate over the firewall by high ports by the total traffic transferred - these services may pose security risk </Description>
+    <SelectClause numEntries="All">
+      <AttrList>srcIpAddr,srcName,SUM (totBytes) </AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> SUM (totBytes) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_FW_38" name="Filter_FW_38">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic) AND (destIpPort > 1024) AND srcIpAddr IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) AND destIpAddr NOT IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) </SingleEvtConstr>
+        <GroupByAttr>srcIpAddr,srcName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+     <RelevantFilterAttr>srcIpAddr,destIpAddr,reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_FW_39" group="PH_SYS_REPORT_Firewall">
+    <Name>Firewall Permit: Top Outbound Uncommon Port Conversations By Bytes</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks uncommon services permitted by firewalls - common services include DNS, SMTP, Web </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,srcIpAddr,srcName,destIpAddr,destName,ipProto,destIpPort,srcIntfName,destIntfName, SUM (totBytes), COUNT(*), SUM(sentBytes), SUM(recvBytes) </AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> SUM (totBytes) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_FW_39" name="Filter_FW_39">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic) AND destIpPort NOT IN (25,53,80,443,123) AND srcIpAddr IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) AND destIpAddr NOT IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) </SingleEvtConstr>
+        <GroupByAttr>reptDevIpAddr,srcIpAddr,srcName,destIpAddr,destName,ipProto,destIpPort,srcIntfName,destIntfName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+     <RelevantFilterAttr>srcIpAddr,srcName,destIpAddr,reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_FW_39B" group="PH_SYS_REPORT_Firewall">
+    <Name>Firewall Permit: Top Outbound Uncommon Port Talkers By Bytes</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks uncommon services permitted by firewalls - common services include DNS, SMTP, Web </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,srcIpAddr,srcName, SUM(totBytes), COUNT(*) </AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> SUM (totBytes) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_FW_39" name="Filter_FW_39">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic) AND destIpPort NOT IN (25,53,80,443,123) AND srcIpAddr IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) AND destIpAddr NOT IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) </SingleEvtConstr>
+        <GroupByAttr>reptDevIpAddr,srcIpAddr,srcName </GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+     <RelevantFilterAttr>srcIpAddr,srcName,destIpAddr,reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_FW_40" group="PH_SYS_REPORT_Firewall">
+    <Name>Firewall Permit: Top Outbound Vulnerable Low Port Conversations By Connections, Bytes</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks uncommon services permitted by firewalls - vulnerable services include Microsoft services such as MS-RPC (135), NETBIOS-SSN (139), MICROSOFT-DS (445), MS-SQL (1433,1434), FTP (23), TELNET (21)</Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,srcIpAddr,srcName,destIpAddr,destName,ipProto,destIpPort,srcIntfName,destIntfName,COUNT(*),SUM (totBytes) </AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> COUNT (*) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_FW_40" name="Filter_FW_40">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic) AND destIpPort IN (135,139,445,1433,1434,23,21) AND srcIpAddr IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) AND destIpAddr NOT IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) </SingleEvtConstr>
+        <GroupByAttr>reptDevIpAddr,srcIpAddr,srcName,destIpAddr,destName,ipProto,destIpPort,srcIntfName,destIntfName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+     <RelevantFilterAttr>srcIpAddr,destIpAddr,reptDevIpAddr</RelevantFilterAttr>
+  </Report> 
+
+  <Report id="PH_Report_FW_40B" group="PH_SYS_REPORT_Firewall">
+    <Name>Firewall Permit: Top Outbound Vulnerable Low Ports By Bytes</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks uncommon services permitted by firewalls - vulnerable services include Microsoft services such as MS-RPC (135), NETBIOS-SSN (139), MICROSOFT-DS (445), MS-SQL (1433,1434), FTP (23), TELNET (21)</Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,SUM (totBytes) </AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> SUM(totBytes) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_FW_40" name="Filter_FW_40">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic) AND destIpPort IN (135,139,445,1433,1434,23,21) AND srcIpAddr IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) AND destIpAddr NOT IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) </SingleEvtConstr>
+        <GroupByAttr>reptDevIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+     <RelevantFilterAttr>srcIpAddr,destIpAddr,reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+   <Report id="PH_Report_FW_40C" group="PH_SYS_REPORT_Firewall">
+    <Name>Firewall Permit: Top Outbound Vulnerable Low Port Talkers By Bytes </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the sources that transfer the most bytes using traditionally vulnerable protocols including Microsoft services such as MS-RPC (135), NETBIOS-SSN (139), MICROSOFT-DS (445), MS-SQL (1433,1434), FTP (23), TELNET (21)</Description>
+    <SelectClause numEntries="All">
+      <AttrList>srcIpAddr,srcName,SUM (totBytes), COUNT(*)  </AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> SUM(totBytes) DESC, COUNT (*) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_FW_40" name="Filter_FW_40">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic) AND destIpPort IN (135,139,445,1433,1434,23,21) AND srcIpAddr IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) AND destIpAddr NOT IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) </SingleEvtConstr>
+        <GroupByAttr>srcIpAddr,srcName </GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+     <RelevantFilterAttr>srcIpAddr,destIpAddr,reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+   
+  <Report id="PH_Report_FW_40D" group="PH_SYS_REPORT_Firewall">
+    <Name>All Traffic: Top Distinct-Destination-Host Talkers Ranked By Connections </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the sources by the number of distinct destination hosts that the source communicates with</Description>
+    <SelectClause numEntries="All">
+      <AttrList>srcIpAddr,srcName,COUNT(DISTINCT destIpAddr) </AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> COUNT(DISTINCT destIpAddr) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_FW_40" name="Filter_FW_40">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) </SingleEvtConstr>
+        <GroupByAttr>srcIpAddr,srcName </GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+     <RelevantFilterAttr>srcIpAddr,destIpAddr,reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+   
+   <Report id="PH_Report_FW_40E" group="PH_SYS_REPORT_Firewall">
+    <Name>All Traffic: Top Distinct-Destination-Port Talkers Ranked By Connections </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the sources by the number of distinct destination ports that the source communicates on</Description>
+    <SelectClause numEntries="All">
+      <AttrList>srcIpAddr,srcName,COUNT(DISTINCT destIpPort) </AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> COUNT(DISTINCT destIpPort) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_FW_40" name="Filter_FW_40">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) </SingleEvtConstr>
+        <GroupByAttr>srcIpAddr,srcName </GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+     <RelevantFilterAttr>srcIpAddr,destIpAddr,reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_FW_41" group="PH_SYS_REPORT_Firewall">
+    <Name>Firewall Permit: Top Firewalls By Inbound Connections</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks firewalls by permitted inbound Connections </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW" name="Filter_FW">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic) AND srcIpAddr NOT IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) AND destIpAddr IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) </SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+     <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_FW_42" group="PH_SYS_REPORT_Firewall">
+    <Name>Firewall Permit: Top Firewalls By Inbound Bytes</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks firewalls by average number of bytes per connection </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,AVG(totBytes) </AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(totBytes) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW" name="Filter_FW">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic) AND srcIpAddr NOT IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) AND destIpAddr IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) </SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_FW_43" group="PH_SYS_REPORT_Firewall">
+    <Name>Firewall Permit: Top Inbound Ports By Connections </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks firewalls and permitted inbound services by the total number of connections </Description>
+    <SelectClause numEntries="All">
+        <AttrList>ipProto, destIpPort,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW" name="Filter_FW">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic) AND srcIpAddr NOT IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) AND destIpAddr IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) </SingleEvtConstr>
+           <GroupByAttr>ipProto, destIpPort</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+     <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_FW_44" group="PH_SYS_REPORT_Firewall">
+    <Name>Firewall Permit: Top Inbound Ports By Bytes </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks firewalls and permitted inbound services by the average bytes per connection</Description>
+    <SelectClause numEntries="All">
+        <AttrList>ipProto, destIpPort, AVG(totBytes)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>AVG(totBytes) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW" name="Filter_FW">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic) AND srcIpAddr NOT IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) AND destIpAddr IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) </SingleEvtConstr>
+           <GroupByAttr>ipProto, destIpPort</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+     <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_FW_45" group="PH_SYS_REPORT_Firewall">
+    <Name>Firewall Permit: Top Firewalls By Outbound Connections </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks firewalls by the total number of permitted outbound connections </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,COUNT(*) </AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> COUNT(*)DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW" name="Filter_FW">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic) AND srcIpAddr IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) AND destIpAddr NOT IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) </SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_FW_46" group="PH_SYS_REPORT_Firewall">
+    <Name>Firewall Permit: Top Firewalls By Outbound Bytes </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks firewalls by the average bytes per connection for outbound connections </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr, AVG(totBytes)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(totBytes) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW" name="Filter_FW">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic) AND srcIpAddr IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) AND destIpAddr NOT IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) </SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+     <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_FW_47" group="PH_SYS_REPORT_Firewall">
+    <Name>Firewall Permit: Top Outbound Ports By Connections </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks firewalls and permitted outbound services by the total number of connections </Description>
+    <SelectClause numEntries="All">
+        <AttrList>ipProto, destIpPort,COUNT(*) </AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> COUNT(*) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW" name="Filter_FW">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic) AND srcIpAddr IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) AND destIpAddr NOT IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) </SingleEvtConstr>
+           <GroupByAttr>ipProto, destIpPort</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+     <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_FW_48" group="PH_SYS_REPORT_Firewall">
+    <Name>Firewall Permit: Top Outbound Ports By Bytes </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks firewalls and permitted outbound services by the average number of bytes per connection </Description>
+    <SelectClause numEntries="All">
+        <AttrList>ipProto, destIpPort, AVG(totBytes)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(totBytes) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW" name="Filter_FW">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic) AND srcIpAddr IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) AND destIpAddr NOT IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) </SingleEvtConstr>
+           <GroupByAttr>ipProto,destIpPort</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+     <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_FW_49" group="PH_SYS_REPORT_Firewall">
+     <Name>Performance: Top Firewalls By CPU Utilization</Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description> Ranks the firewalls by average cpu utilization over a window </Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName,AVG(cpuUtil),MAX(cpuUtil)</AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(cpuUtil) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600" >
+         <SubPattern displayName="Filter_PERF_MON_2" name="Filter_PERF_MON_2">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_SYS_CPU_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) </SingleEvtConstr>
+           <GroupByAttr>hostName</GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+      <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_FW_50" group="PH_SYS_REPORT_Firewall">
+     <Name>Performance: Top Firewalls By Connection Count</Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description> Ranks the firewalls by average connection count over a window. The ratio of the connection count to the max connection count since startup is also provided. If the ratio is close 1 and the firewall is up for a long time, the the firewall must be busy from a firewalled connection point of view. </Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName,AVG(fwConnCount), AVG(fwConnPct) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(fwConnCount) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_PERF_MON_7" name="Filter_PERF_MON_7">
+           <SingleEvtConstr> eventType = "PH_DEV_MON_FW_CONN_UTIL" </SingleEvtConstr>
+           <GroupByAttr>hostName</GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_FW_51" group="PH_SYS_REPORT_Firewall">
+     <Name>Performance: Top Firewall Network Intf By Util, Error, Discards </Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+   <Description> Ranks the firewalls and their network interfaces by first average inbound and then by outbound interface utilization. The utilization is computed by accounting for the link bandwidth. </Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName,intfName,AVG(inIntfUtil),SUM(recvBytes),AVG(inIntfPktErrPct), AVG(inIntfPktDiscardedPct), AVG(outIntfUtil), SUM(sentBytes), AVG(outIntfPktErrPct), AVG(outIntfPktDiscardedPct) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(inIntfUtil) DESC, AVG(outIntfUtil) DESC </AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_PERF_MON_8" name="Filter_PERF_MON_8">
+           <SingleEvtConstr> eventType = "PH_DEV_MON_NET_INTF_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) </SingleEvtConstr>
+           <GroupByAttr>hostName,intfName </GroupByAttr>  
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_FW_52" group="PH_SYS_REPORT_Firewall">
+     <Name>Performance: Top Firewalls By Memory Utilization</Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description>Ranks the firewalls by average memory utilization over a window</Description> 
+     <SelectClause numEntries="All">
+         <AttrList> hostName,hostIpAddr,memName,AVG(memUtil) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(memUtil) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_PERF_MON_3" name="Filter_PERF_MON_3">
+           <SingleEvtConstr> eventType = "PH_DEV_MON_SYS_MEM_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL)</SingleEvtConstr>
+           <GroupByAttr>hostName,hostIpAddr,memName</GroupByAttr>  
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_FW_53" group="PH_SYS_REPORT_Firewall">
+     <Name>Availability: Ping Monitor Statistics </Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description>Tracks the PING response times and packet loss for the monitored devices </Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostIpAddr, AVG(avgDurationMSec),MIN(minDurationMSec),MAX(maxDurationMSec),AVG(pktLossPct) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(avgDurationMSec) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600" >
+       <SubPattern displayName="Filter_PERF_MON_17" name="Filter_PERF_MON_17">
+         <SingleEvtConstr> eventType = "PH_DEV_MON_PING_STAT" AND hostIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) </SingleEvtConstr>
+	 <GroupByAttr>hostIpAddr </GroupByAttr> 
+       </SubPattern>
+     </PatternClause>
+     <inline>true</inline>
+    <active>true</active>
+      <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_FW_54" group="PH_SYS_REPORT_Firewall">
+    <Name>Availability: Firewall Network Interface Down/Up</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks network device interface down and up events</Description>
+    <SelectClause numEntries="All">
+      <AttrList>phRecvTime,reptDevIpAddr,eventType,intfName,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_OVERALL_AVAIL_6" name="Filter_OVERALL_AVAIL_6">
+        <SingleEvtConstr>eventType IN (Group@PH_SYS_EVENT_NetIntfShutdown,Group@PH_SYS_EVENT_NetIntfRestart) AND (reptDevIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL))</SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_FW_55" group="PH_SYS_REPORT_Firewall">
+    <Name>Availability: Firewall Down/Restart </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks network device down and restart events</Description>
+    <SelectClause numEntries="All">
+      <AttrList>phRecvTime,reptDevIpAddr,eventType,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_OVERALL_AVAIL_1" name="Filter_OVERALL_AVAIL_1">
+        <SingleEvtConstr>eventType IN (Group@PH_SYS_EVENT_SystemShutdown,Group@PH_SYS_EVENT_SystemRestart) AND (reptDevIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) OR hostIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL))</SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+     <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+   <Report id="PH_Report_FW_56" group="PH_SYS_REPORT_Firewall">
+    <Name>Availability: Network Device Failover</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks network device failovers</Description>
+    <SelectClause numEntries="All">
+      <AttrList>phRecvTime,reptDevIpAddr,eventType,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_OVERALL_AVAIL_5" name="Filter_OVERALL_AVAIL_5">
+        <SingleEvtConstr>eventType IN (Group@PH_SYS_EVENT_Failover) AND (reptDevIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL))</SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report group="PH_SYS_REPORT_Firewall" id="PH_Report_FW_57"  >
+  <Name>Firewall Permit: Top non-(TCP,UDP) Protocols By Count</Name>
+  <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+  <Description>Ranks the firewall permitted non-TCP/UDP protocols by the number of received connections </Description>
+  <SelectClause numEntries="All">
+    <AttrList>ipProto,COUNT(*)</AttrList>
+  </SelectClause>
+  <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+  <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+  <PatternClause window="3600">
+    <SubPattern displayName="Filter_OVERALL_STATUS" name="Filter_OVERALL_STATUS">
+      <SingleEvtConstr>ipProto != 17 AND ipProto != 6 AND reptDevIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic) </SingleEvtConstr>
+      <GroupByAttr>ipProto</GroupByAttr>
+    </SubPattern>
+  </PatternClause>
+    <inline>true</inline>
+    <active>true</active>
+    <RelevantFilterAttr>srcIpAddr,destIpAddr,reptDevIpAddr,relayDevIpAddr</RelevantFilterAttr>
+</Report>
+
+<Report group="PH_SYS_REPORT_Firewall" id="PH_Report_FW_58">
+  <Name>Firewall Permit: Top non-TCP/UDP Connections By Count</Name>
+  <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+  <Description>Ranks firewall permitted source IP, destination IP, non-TCP/UDP ports, and event types first by event severity and then by event count</Description>
+  <SelectClause numEntries="All">
+    <AttrList>eventType,eventSeverity,srcIpAddr,srcName, destIpAddr,destName, ipProto, reptDevIpAddr,COUNT(*)</AttrList>
+  </SelectClause>
+  <OrderByClause><AttrList>eventSeverity DESC,COUNT(*) DESC</AttrList></OrderByClause>
+  <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+  <PatternClause window="3600">
+    <SubPattern displayName="Filter_OVERALL_STATUS" name="Filter_OVERALL_STATUS">
+      <SingleEvtConstr>ipProto != 17 AND ipProto != 6 AND reptDevIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic) </SingleEvtConstr>
+      <GroupByAttr>srcIpAddr,srcName, destIpAddr,destName, ipProto, reptDevIpAddr, eventType,eventSeverity</GroupByAttr>
+    </SubPattern>
+  </PatternClause>
+  <inline>true</inline>
+  <active>true</active>
+  <RelevantFilterAttr>srcIpAddr,destIpAddr,reptDevIpAddr,relayDevIpAddr</RelevantFilterAttr>
+</Report>
+
+<Report group="PH_SYS_REPORT_Firewall" id="PH_Report_FW_59">
+  <Name>Firewall Permit: Top ICMP Connections By Severity, Count</Name>
+  <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+  <Description> Ranks source IP, destination IP, reporting devices and event types for permitted ICMP connections, first by event severity and then by event count. </Description>
+  <SelectClause numEntries="All">
+    <AttrList>eventType,eventSeverity,srcIpAddr,srcName, destIpAddr,destName, ipProto, icmpType, icmpCode, COUNT(*)</AttrList>
+  </SelectClause>
+  <OrderByClause><AttrList>eventSeverity DESC,COUNT(*) DESC</AttrList></OrderByClause>
+  <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+  <PatternClause window="3600">
+    <SubPattern displayName="Filter_OVERALL_STATUS" name="Filter_OVERALL_STATUS">
+      <SingleEvtConstr>ipProto =1 AND reptDevIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic) </SingleEvtConstr>
+      <GroupByAttr>srcIpAddr,srcName, destIpAddr,destName, ipProto, icmpType, icmpCode, eventType,eventSeverity</GroupByAttr>
+    </SubPattern>
+  </PatternClause>
+  <inline>true</inline>
+    <active>true</active>
+    <RelevantFilterAttr>srcIpAddr,destIpAddr,reptDevIpAddr,relayDevIpAddr</RelevantFilterAttr>
+</Report>
+
+</Reports> 	   
+  

@@ -1,0 +1,292 @@
+<eventParser name="JunipSSGFirewallLog">
+
+	<deviceType>
+		<Vendor>Juniper</Vendor>
+		<Model>SSG ScreenOS</Model>
+		<Version>ANY</Version>
+	</deviceType>
+
+	<!-- STEP 1: device type recognizer -->
+
+	<!-- log prefix for parsing eventFormatRecognizer  
+	<132>SH-QA-A-Jnp-FW-01: NetScreen device_id=SH-QA-A-Jnp-FW-01  [Root]system-warning-00519:
+	-->
+
+	<eventFormatRecognizer><![CDATA[NetScreen\s+device_id=]]></eventFormatRecognizer>
+	
+	<testEvents>
+		<testEvent><![CDATA[<132>SH-QA-A-Jnp-FW-01: NetScreen device_id=SH-QA-A-Jnp-FW-01  [Root]system-warning-00519: Admin user "netscreen" logged in for Web(http) management (port 80) from 172.16.10.10:37939 (2001-10-20 21:00:20).]]></testEvent>
+	</testEvents>
+
+	<parsingInstructions>
+
+		<!-- STEP 2: parse common fields -->
+
+		<!-- parsing common fields (sample log for parsing common fields) 
+		<132>SH-QA-A-Jnp-FW-01: NetScreen device_id=SH-QA-A-Jnp-FW-01  [Root]system-warning-00519:
+		-->
+
+		<switch>
+			<case>
+				<collectFieldsByRegex src="$_rawmsg">
+					<regex><![CDATA[<:gPatSyslogPRI><:gPatStr>\s+NetScreen\s+device_id=<:gPatStr>\s+\[Root\]<_eventType:gPatStr>:\s+<_body:gPatMesgBody>]]></regex>
+				</collectFieldsByRegex>
+			</case>
+			<case>
+				<collectFieldsByRegex src="$_rawmsg">
+					<regex><![CDATA[<:gPatSyslogPRI><_NGHeader:gPatSyslogNGHeader> <:gPatStr>\s+NetScreen\s+device_id=<:gPatStr>\s+\[Root\]<_eventType:gPatStr>:\s+<_body:gPatMesgBody>]]></regex>
+				</collectFieldsByRegex>
+				<collectFieldsByRegex src="$_NGHeader">
+					<regex><![CDATA[<:gPatMon>\s+<:gPatDay>\s<:gPatTime>\s<reptDevIpAddr:gPatIpV4Dot>]]></regex>
+				</collectFieldsByRegex>
+			</case>
+			<case>
+				<collectFieldsByRegex src="$_rawmsg">
+					<regex><![CDATA[<_NGHeader:gPatSyslogNGHeader> <:gPatStr>\s+NetScreen\s+device_id=<:gPatStr>\s+\[Root\]<_eventType:gPatStr>:\s+<_body:gPatMesgBody>]]></regex>
+				</collectFieldsByRegex>
+				<collectFieldsByRegex src="$_NGHeader">
+					<regex><![CDATA[<:gPatMon>\s+<:gPatDay>\s<:gPatTime>\s<reptDevIpAddr:gPatIpV4Dot>]]></regex>
+				</collectFieldsByRegex>
+			</case>
+		</switch>
+
+		<setEventAttribute attr="destIpAddr">$reptDevIpAddr</setEventAttribute>
+		<setEventAttribute attr="eventAction">0</setEventAttribute>
+		<setEventAttribute attr="eventType">combineMsgId("Juniper-SSG-", $_eventType)</setEventAttribute>
+
+		<!-- set event severity 
+		parse middle field from strings like "system-notification-00612", "system-warning-00515"
+		-->
+
+		<collectFieldsByRegex src="$_eventType">
+			<regex><![CDATA[system-<_severity:gPatStr>-\d+]]></regex>
+		</collectFieldsByRegex>
+
+		<!--
+		<choose>  
+			<when test="matches($_severity, '^warning')">
+				<setEventAttribute attr="eventSeverity">0</setEventAttribute>
+			</when>
+
+			<when test="matches($_severity, '^notification)">       
+				<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+			</when>
+		</choose>
+		-->
+
+		<!-- STEP 3: parse log specific fields -->
+
+		<choose> 
+
+			<!-- SUCCESSFUL ADMIN LOGIN  (HTTP) -->
+
+			<when test='$_eventType = "system-warning-00519"'>
+				<!--
+			<132>SH-QA-A-Jnp-FW-01: NetScreen device_id=SH-QA-A-Jnp-FW-01  [Root]system-warning-00519: Admin user "netscreen" logged in for Web(http) management (port 80) from 172.16.10.10:37939 (2001-10-20 21:00:20).
+            -->
+				<collectAndSetAttrByRegex src="$_body">
+					<regex><![CDATA[Admin user <user:gPatStr> logged in for Web\(http\) management \(port <destIpPort:gPatIpPort>\) from <srcIpAddr:gPatIpV4Dot>:<srcIpPort:gPatIpPort> \(<_year:gPatYear>-<_mon:gPatMonNum>-<_day:gPatDay> <_time:gPatTime>\).]]></regex>
+				</collectAndSetAttrByRegex>
+				<setEventAttribute attr="deviceTime">toDateTime($_mon, $_day, $_year, $_time)</setEventAttribute>
+				<setEventAttribute attr="eventType">"Juniper-SSG-http-login"</setEventAttribute>
+				<setEventAttribute attr="destIpAddr">$reptDevIpAddr</setEventAttribute>
+			</when>
+
+			<!-- SUCCESSFUL ADMIN LOGIN  (SSH) -->
+			<!-- SUCCESSFUL ADMIN LOGOFF (SSH) -->
+			<!-- SUCCESSFUL ADMIN LOGOFF (HTTP) -->
+
+			<when test='$_eventType = "system-warning-00515"'>
+				<!--
+			<132>SH-QA-A-Jnp-FW-01: NetScreen device_id=SH-QA-A-Jnp-FW-01  [Root]system-warning-00515: Admin user netscreen has logged on via SSH from 172.16.10.10:46565 (2001-10-20 21:14:10).
+			<132>SH-QA-A-Jnp-FW-01: NetScreen device_id=SH-QA-A-Jnp-FW-01  [Root]system-warning-00515: Admin user netscreen has logged out via SSH from 172.16.10.10:0 (2001-10-20 21:14:28).
+			<132>SH-QA-A-Jnp-FW-01: NetScreen device_id=SH-QA-A-Jnp-FW-01  [Root]system-warning-00515: Admin user "netscreen" logged out for Web(http) management (port 80) from 172.16.10.10:40220 (2001-10-20 21:09:00).
+			-->
+				<collectFieldsByRegex src="$_body">
+					<regex><![CDATA[Admin user <user:gPatStr> [has ]*logged <_logOnOrOff:gPatStr> <:gPatStr> <_logMeth:gPatStr> <_resbody:gPatMesgBody>]]></regex>
+				</collectFieldsByRegex>
+
+				<when test='$_logMeth = "Web(http)"'>
+					<collectFieldsByRegex src="$_resbody">
+						<regex><![CDATA[management \(port <destIpPort:gPatIpPort>\) from <srcIpAddr:gPatIpV4Dot>:<srcIpPort:gPatIpPort> \(<_year:gPatYear>-<_mon:gPatMonNum>-<_day:gPatDay> <_time:gPatTime>\).]]></regex>
+					</collectFieldsByRegex>
+					<setEventAttribute attr="eventType">"Juniper-SSG-http-logout"</setEventAttribute>
+					<setEventAttribute attr="eventSeverity">4</setEventAttribute>
+				</when>      
+
+				<when test='$_logMeth = "SSH"'>
+					<collectFieldsByRegex src="$_resbody">
+						<regex><![CDATA[from <srcIpAddr:gPatIpV4Dot>:<srcIpPort:gPatIpPort> \(<_year:gPatYear>-<_mon:gPatMonNum>-<_day:gPatDay> <_time:gPatTime>\).]]></regex>
+					</collectFieldsByRegex>
+
+					<when test='$_logOnOrOff = "on"'>
+						<setEventAttribute attr="eventType">"Juniper-SSG-ssh-login"</setEventAttribute>
+						<setEventAttribute attr="eventSeverity">4</setEventAttribute>
+					</when>
+
+					<when test='$_logOnOrOff = "out"'>
+						<setEventAttribute attr="eventType">"Juniper-SSG-ssh-logout"</setEventAttribute>
+						<setEventAttribute attr="eventSeverity">2</setEventAttribute>
+					</when>
+				</when>
+				<setEventAttribute attr="deviceTime">toDateTime($_mon, $_day, $_year, $_time)</setEventAttribute>
+				<setEventAttribute attr="destIpAddr">$reptDevIpAddr</setEventAttribute>
+			</when>
+
+			<!-- TRAFFIC LOG -->
+
+			<when test='$_eventType = "system-notification-00257(traffic)"'>
+
+				<!--
+			<133>SH-QA-A-Jnp-FW-01: NetScreen device_id=SH-QA-A-Jnp-FW-01  [Root]system-notification-00257(traffic): start_time="2001-10-21 18:08:23" duration=4 policy_id=2 service=http proto=6 src zone=Trust dst zone=Untrust action=Permit sent=1924 rcvd=35434 src=172.16.3.160 dst=209.131.36.158 src_port=1210 dst_port=80 src-xlated ip=172.16.3.13 port=1025 dst-xlated ip=209.131.36.158 port=80 session_id=3998 reason=Close - TCP FIN.
+
+			<133>SH-QA-A-Jnp-FW-01: NetScreen device_id=SH-QA-A-Jnp-FW-01  [Root]system-notification-00257(traffic): start_time="2001-10-21 18:09:11" duration=2 policy_id=2 service=http proto=6 src zone=Trust dst zone=Untrust action=Permit sent=1037 rcvd=724 src=172.16.3.139 dst=207.46.197.32 src_port=1271 dst_port=80 src-xlated ip=172.16.3.27 port=1271 dst-xlated ip=207.46.197.32 port=80 session_id=4051 reason=Close - TCP FIN.
+
+			<133>SH-QA-A-Jnp-FW-01: NetScreen device_id=SH-QA-A-Jnp-FW-01  [Root]system-notification-00257(traffic): start_time="2001-10-21 18:09:12" duration=1 policy_id=2 service=dns proto=17 src zone=Trust dst zone=Untrust action=Permit sent=80 rcvd=401 src=172.16.3.139 dst=172.16.10.8 src_port=1026 dst_port=53 src-xlated ip=172.16.3.27 port=1026 dst-xlated ip=172.16.10.8 port=53 session_id=4028 reason=Close - RESP. 
+
+			<133>SH-QA-A-Jnp-FW-01: NetScreen device_id=SH-QA-A-Jnp-FW-01  [Root]system-notification-00257(traffic): start_time="2001-10-21 18:09:12" duration=1 policy_id=2 service=icmp proto=17 src zone=Trust dst zone=Untrust action=Permit sent=80 rcvd=401 src=172.16.3.139 dst=172.16.10.8 icmp type=8 src-xlated ip=172.16.3.27 port=1026 dst-xlated ip=172.16.10.8 port=53 session_id=4028 reason=Close - RESP.
+
+			<133>SH-QA-A-Jnp-FW-01: NetScreen device_id=SH-QA-A-Jnp-FW-01  [Root]system-notification-00257(traffic): start_time="2001-10-21 18:32:59" duration=0 policy_id=6 service=http proto=6 src zone=Untrust dst zone=Global action=Deny sent=0 rcvd=0 src=172.16.2.5 dst=172.16.3.27 src_port=36949 dst_port=80 session_id=0.
+
+			<133>SH-QA-A-Jnp-FW-01: NetScreen device_id=SH-QA-A-Jnp-FW-01  [Root]system-notification-00257(traffic): start_time="2001-10-21 18:32:43" duration=0 policy_id=6 service=icmp proto=1 src zone=Untrust dst zone=Global action=Deny sent=0 rcvd=0 src=172.16.2.5 dst=172.16.3.27 icmp type=8 session_id=0.
+
+			-->
+
+				<collectAndSetAttrByRegex src="$_body">
+					<regex><![CDATA[start_time=\"<_year:gPatYear>-<_mon:gPatMonNum>-<_day:gPatDay> <_time:gPatTime>\" duration=<durationMSec:gPatInt> policy_id=<policyName:gPatStr> service=<_ipService:gPatStr> proto=<ipProto:gPatInt> src zone=<_srcZone:gPatStr> dst zone=<_destZone:gPatStr> action=<_evAction:gPatStr> sent=<sentBytes:gPatInt> rcvd=<recvBytes:gPatInt> src=<srcIpAddr:gPatIpV4Dot> dst=<preNATDestIpAddr:gPatIpV4Dot> <_bodyRest:gPatMesgBody>]]></regex>
+				</collectAndSetAttrByRegex> 
+
+				<setEventAttribute attr="deviceTime">toDateTime($_mon, $_day, $_year, $_time)</setEventAttribute>
+				<setEventAttribute attr="destIpAddr">$preNATDestIpAddr</setEventAttribute>
+
+				<when test='$_evAction = "Permit"'>
+					<when test='$_ipService != "icmp"'>
+						<collectAndSetAttrByRegex src="$_bodyRest">
+							<regex><![CDATA[src_port=<srcIpPort:gPatInt> dst_port=<destIpPort:gPatInt> src-xlated ip=<postNATSrcIpAddr:gPatIpV4Dot> port=<postNATSrcIpPort:gPatIpPort> dst-xlated ip=<destIpAddr:gPatIpV4Dot> port=<destIpPort:gPatIpPort> session_id=\d+.*]]></regex>
+						</collectAndSetAttrByRegex> 
+					</when>
+
+					<when test='$_ipService = "icmp"'>
+						<collectAndSetAttrByRegex src="$_bodyRest">
+							<regex><![CDATA[icmp type=\d+ src-xlated ip=<postNATSrcIpAddr:gPatIpV4Dot> port=<postNATSrcIpPort:gPatIpPort> dst-xlated ip=<destIpAddr:gPatIpV4Dot> port=<destIpPort:gPatIpPort> session_id=\d+.*]]></regex>
+						</collectAndSetAttrByRegex> 
+					</when>
+
+					<setEventAttribute attr="eventType">"Juniper-SSG-traffic-permit"</setEventAttribute>
+					<setEventAttribute attr="eventAction">0</setEventAttribute>
+					<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+				</when>
+
+				<when test='$_evAction = "Deny"'>
+					<setEventAttribute attr="eventType">"Juniper-SSG-traffic-deny"</setEventAttribute>
+					<setEventAttribute attr="eventAction">1</setEventAttribute>
+					<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+					<when test='$_ipService != "icmp"'>
+						<collectAndSetAttrByRegex src="$_bodyRest">
+							<regex><![CDATA[src_port=<srcIpPort:gPatInt> dst_port=<destIpPort:gPatInt><:gPatMesgBody>]]></regex>
+						</collectAndSetAttrByRegex> 
+					</when>
+				</when>
+
+			</when>
+
+
+			<!-- LOCAL LOGON FAIL  -->
+
+			<when test='$_eventType = "system-warning-00518"'>
+				<!--
+				<132>SH-QA-A-Jnp-FW-01: NetScreen device_id=SH-QA-A-Jnp-FW-01  [Root]system-warning-00518: ADM: Local admin authentication failed for login name 'netscreen': invalid password (2001-10-20 21:14:31).
+				-->
+
+				<collectAndSetAttrByRegex src="$_body">
+					<regex><![CDATA[ADM: Local admin authentication failed for login name <user:gPatStr>: invalid password \(<_year:gPatYear>-<_mon:gPatMonNum>-<_day:gPatDay> <_time:gPatTime>\).]]></regex>
+				</collectAndSetAttrByRegex>
+				<setEventAttribute attr="deviceTime">toDateTime($_mon, $_day, $_year, $_time)</setEventAttribute>
+				<setEventAttribute attr="eventType">"Juniper-SSG-local-login-fail"</setEventAttribute>
+				<setEventAttribute attr="eventSeverity">6</setEventAttribute>
+			</when>
+
+			<!-- SSH LOGON FAIL  -->
+
+			<when test='$_eventType = "system-warning-00528"'>
+				<!--
+				<132>SH-QA-A-Jnp-FW-01: NetScreen device_id=SH-QA-A-Jnp-FW-01  [Root]system-warning-00528: SSH: Password authentication failed for admin user 'netscreen' at host. 172.16.10.10 (2001-10-20 21:14:31).
+			-->
+
+				<collectAndSetAttrByRegex src="$_body">
+					<regex><![CDATA[<:gPatStr> Password authentication failed for admin user <user:gPatStr> at <:gPatStr> <srcIpAddr:gPatIpV4Dot> \(<_year:gPatYear>-<_mon:gPatMonNum>-<_day:gPatDay> <_time:gPatTime>\).]]></regex>
+				</collectAndSetAttrByRegex>
+				<setEventAttribute attr="srcIpPort">22</setEventAttribute>
+				<setEventAttribute attr="deviceTime">toDateTime($_mon, $_day, $_year, $_time)</setEventAttribute>
+				<setEventAttribute attr="eventType">"Juniper-SSG-ssh-login-fail"</setEventAttribute>
+				<setEventAttribute attr="eventSeverity">6</setEventAttribute>
+			</when>
+
+			<!-- Interface Down  -->
+			<!-- Interface Up  -->
+
+			<when test='$_eventType = "system-notification-00513"'>
+				<!--
+			<133>SH-QA-A-Jnp-FW-01: NetScreen device_id=SH-QA-A-Jnp-FW-01  [Root]system-notification-00513: The physical state of interface ethernet0/6 has changed to Down. (2001-10-20 21:51:48).
+			-->
+
+				<collectAndSetAttrByRegex src="$_body">
+					<regex><![CDATA[The physical state of interface <srcIntfName:gPatStr> has changed to <_intfStatus:gPatStr> \(<_year:gPatYear>-<_mon:gPatMonNum>-<_day:gPatDay> <_time:gPatTime>\).]]></regex>
+				</collectAndSetAttrByRegex>
+				<setEventAttribute attr="deviceTime">toDateTime($_mon, $_day, $_year, $_time)</setEventAttribute>
+				<setEventAttribute attr="destIpAddr">$reptDevIpAddr</setEventAttribute>
+				<when test="matches($_intfStatus, '^Down.')">
+					<setEventAttribute attr="eventType">"Juniper-SSG-intf-down"</setEventAttribute>
+					<setEventAttribute attr="eventSeverity">7</setEventAttribute>
+				</when>
+				<when test="matches($_intfStatus, '^Up.')">
+					<setEventAttribute attr="eventType">"Juniper-SSG-intf-up"</setEventAttribute>
+					<setEventAttribute attr="eventSeverity">2</setEventAttribute>
+				</when>
+			</when>
+			
+			<when test='$_eventType = "system-notification-00001"'>
+				<!--
+			Mar  3 11:19:01 10.1.32.3 ht1-dc1-b2-isg2: NetScreen device_id=ht1-dc1-b2-isg2  [Root]system-notification-00001: Address proptablet4-duo for IP address 10.3.34.167/255.255.255.255 in zone public has been added by akuo-admin via web from host 10.1.37.250 to 10.1.32.1:443 session. (2011-03-03 11:18:59)-->
+				<switch>
+					<case>
+						<collectAndSetAttrByRegex src="$_body">
+							<regex><![CDATA[<addedItem:gPatMesgBody>\s+has been added by\s+<user:gPatStr>\s+via\s+<appTransportProto:gPatStr>\s+from host\s+<srcIpAddr:gPatIpV4Dot>\s+to\s+<destIpAddr:gPatIpV4Dot>:<destIpPort:gPatIpPort>\s+session\.\s+\(<_year:gPatYear>-<_mon:gPatMon>-<_day:gPatDay>\s+<_time:gPatTime>\)]]></regex>
+						</collectAndSetAttrByRegex>
+					</case>
+					<case>
+						<collectAndSetAttrByRegex src="$_body">
+							<regex><![CDATA[<addedItem:gPatMesgBody>\s+was added by\s+<user:gPatStr>\s+via\s+<appTransportProto:gPatStr>\s+from host\s+<srcIpAddr:gPatIpV4Dot>\s+to\s+<destIpAddr:gPatIpV4Dot>:<destIpPort:gPatIpPort>\.\s+\(<_year:gPatYear>-<_mon:gPatMon>-<_day:gPatDay>\s+<_time:gPatTime>\)]]></regex>
+						</collectAndSetAttrByRegex>
+					</case>
+				</switch>
+				<setEventAttribute attr="deviceTime">toDateTime($_mon, $_day, $_year, $_time)</setEventAttribute>
+				<setEventAttribute attr="eventType">"Juniper-SSG-config-add"</setEventAttribute>
+				<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+			</when>
+			<when test='$_eventType = "system-notification-00018"'>
+				<!--
+			Mar  3 11:19:01 10.1.32.3 ht1-dc1-b2-isg2: NetScreen device_id=ht1-dc1-b2-isg2  [Root]system-notification-00001: Address proptablet4-duo for IP address 10.3.34.167/255.255.255.255 in zone public has been added by akuo-admin via web from host 10.1.37.250 to 10.1.32.1:443 session. (2011-03-03 11:18:59)-->
+				<switch>
+					<case>
+						<collectAndSetAttrByRegex src="$_body">
+							<regex><![CDATA[<addedItem:gPatMesgBody>\s+has been modified by\s+<user:gPatStr>\s+via\s+<appTransportProto:gPatStr>\s+from host\s+<srcIpAddr:gPatIpV4Dot>\s+to\s+<destIpAddr:gPatIpV4Dot>:<destIpPort:gPatIpPort>\s+session\.\s+\(<_year:gPatYear>-<_mon:gPatMon>-<_day:gPatDay>\s+<_time:gPatTime>\)]]></regex>
+						</collectAndSetAttrByRegex>
+					</case>
+					<case>
+						<collectAndSetAttrByRegex src="$_body">
+							<regex><![CDATA[<modifiedItem:gPatMesgBody>\s+was modified by\s+<user:gPatStr>\s+via\s+<appTransportProto:gPatStr>\s+from host\s+<srcIpAddr:gPatIpV4Dot>\s+to\s+<destIpAddr:gPatIpV4Dot>:<destIpPort:gPatIpPort>\.\s+\(<_year:gPatYear>-<_mon:gPatMon>-<_day:gPatDay>\s+<_time:gPatTime>\)]]></regex>
+						</collectAndSetAttrByRegex>
+					</case>
+				</switch>
+				<setEventAttribute attr="deviceTime">toDateTime($_mon, $_day, $_year, $_time)</setEventAttribute>
+				<setEventAttribute attr="eventType">"Juniper-SSG-config-modify"</setEventAttribute>
+				<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+			</when>
+
+
+		</choose>
+
+	</parsingInstructions>
+
+</eventParser>

@@ -1,0 +1,52 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<38>May 14 23:38:14 sshd[3650]: [ID 800047 auth.info] Accepted keyboard-interactive for root from 192.168.1.2 port 43421 ssh2
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=3
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=$localhost
+eventAction=0 (Permit)
+eventName=Successful SSH logon
+srcIpAddr=192.168.1.2
+reptVendor=Sun
+eventType=Solaris_Successful_SSH_Login
+user=root
+phEventCategory=0 (External)
+destIpPort=22
+reptDevIpAddr=$localhost
+srcIpPort=43421
+reptModel=Solaris
+[reptDevIpAddr(key)]
+25.25.25.26
+[eventMsg]
+<38>Mar 30 15:08:57 25.25.25.26 sshd[5044]: [ID 800047 auth.info] Accepted keyboard-interactive for root from 192.168.22.4 port 57586 ssh2
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=3
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=25.25.25.26
+eventAction=0 (Permit)
+eventName=Successful SSH logon
+srcIpAddr=192.168.22.4
+reptVendor=Sun
+eventType=Solaris_Successful_SSH_Login
+user=root
+phEventCategory=0 (External)
+destIpPort=22
+reptDevIpAddr=25.25.25.26
+srcIpPort=57586
+reptModel=Solaris

@@ -1,0 +1,48 @@
+[reptDevIpAddr(key)]
+100.1.1.1
+[eventMsg]
+<158>Jan 28 20:41:46 100.1.1.1 named[3135]: 28-Jan-2010 20:40:28.809 client 192.168.29.18#34065: query: www.google.com IN A +  --automator
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+srcIpAddr=192.168.29.18
+eventAction=0 (Permit)
+eventName=DNS host name to IP query
+reptVendor=ISC
+eventType=BIND_DNS_A_Query
+phEventCategory=0 (External)
+destIpPort=53
+reptDevIpAddr=100.1.1.1
+destName=www.google.com
+reptModel=BIND DNS
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<158>named[21625]: 25-Mar-2010 18:49:06.354 client 172.16.10.18#33119: query: c2.accelops.net IN AAAA +
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+srcIpAddr=172.16.10.18
+eventAction=0 (Permit)
+eventName=DNS host name to IP query
+reptVendor=ISC
+eventType=BIND_DNS_A_Query
+phEventCategory=0 (External)
+destIpPort=53
+reptDevIpAddr=$localhost
+destName=c2.accelops.net
+reptModel=BIND DNS

@@ -1,0 +1,30 @@
+[reptDevIpAddr(key)]
+20.20.20.120
+[eventMsg]
+Fri Oct 30 18:19:58 2009 $reporter AccelOps-WinLog-WMI  [Category]="13056" [CategoryString]="Sensitive Privilege Use" [ComputerName]="sf1dc03.jha.local" [Data]="NULL" [EventCode]="4673" [EventIdentifier]="4673" [EventType]="4" [Logfile]="Security" [RecordNumber]="184011202" [SourceName]="Microsoft-Windows-Security-Auditing" [TimeGenerated]="20100505220000.171945-000" [TimeWritten]="20100505220000.171945-000" [Type]="Audit Success" [User]="(null)" [[Subject]][Security ID]="S-1-5-18" [Account Name]="SF1DC03$" [Account Domain]="JHA" [Logon ID]="0x3e7" [[Service]][Server]="NT Local Security Authority / Authentication Service" [Service Name]="LsaRegisterLogonProcess()" [[Process]][Process ID]="0x240" [Process Name]="C:\Windows\System32\lsass.exe" [[Service Request Information]]
+[params]
+rawEventMsg=any
+type=Audit Success
+swProcName=C:\Windows\System32\lsass.exe
+winSrvcName=LsaRegisterLogonProcess()
+eventAction=0 (Permit)
+count=1
+eventId=any
+domain=JHA
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=$reporter
+winLogonId=0x3e7
+eventName=A privileged service was called
+procName=C:\Windows\System32\lsass.exe
+reptVendor=Microsoft
+eventType=Win-Security-4673
+user=SF1DC03$
+phEventCategory=0 (External)
+reptDevIpAddr=$reporter
+reptModel=Windows
+eventSource=Microsoft-Windows-Security-Auditing

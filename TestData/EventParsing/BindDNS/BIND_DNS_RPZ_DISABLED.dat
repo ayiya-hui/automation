@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+10.1.5.23
+[eventMsg]
+<30>Nov 11 12:14:50 10.1.5.23 named[7750]: disabled rpz IP NXDOMAIN rewrite @ via 32.42.72.43.8.rpz-ip.malware.rpz.infoblox.local
+[params]
+customer=Super
+eventId=any
+parserName=BindDNSParser
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+count=1
+eventSeverity=1
+eventType=BIND_DNS_RPZ_DISABLED
+reptDevIpAddr=10.1.5.23
+eventAction=0 (Permit)
+collectorId=any
+eventName=DNS Response Policy Zone (RPZ) disabled
+reptVendor=ISC
+relayDevIpAddr=10.1.5.23
+phRecvTime=any
+eventRuleTrigger=1
+appTransportProto=Syslog
+reptModel=BIND DNS

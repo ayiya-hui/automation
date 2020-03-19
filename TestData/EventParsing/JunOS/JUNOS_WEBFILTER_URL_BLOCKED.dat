@@ -1,0 +1,31 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<28>Nov 20 11:09:58 $localhost CL-GW-ISP-01: utmd[90892]: WEBFILTER_URL_BLOCKED: WebFilter: ACTION="URL Blocked" 10.10.8.201(59449)->216.239.120.212(80) CATEGORY="N/A" REASON="by site reputation HARMFUL" PROFILE="default-web-filter" URL=static.phx2.tvgcdn.net OBJ=/mediabin/content/131118/homepage/3_wed/131120photo-james-spader1.jpg
+[params]
+rawEventMsg=any
+deviceTime=any
+webCategory=N/A
+eventType=JUNOS_WEBFILTER_URL_BLOCKED
+phCustId=$sender
+destIpAddr=216.239.120.212
+srcIpAddr=10.10.8.201
+reptModel=JunOS
+eventId=any
+eventParsedOk=1
+eventSeverity=7
+eventName=A web request is blocked
+phEventCategory=0 (External)
+destName=static.phx2.tvgcdn.net
+errReason=by site reputation HARMFUL
+count=1
+srcIpPort=59449
+eventSeverityCat=MEDIUM
+collectorId=any
+destIpPort=80
+reptDevName=any
+infoURL=static.phx2.tvgcdn.net/mediabin/content/131118/homepage/3_wed/131120photo-james-spader1.jpg
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Juniper

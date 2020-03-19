@@ -1,0 +1,7 @@
+eventType,name,module,reptDevIpAddr,key,method
+Extremeware-Successful-Login,ExtremeSwitch_1,ExtremeSwitch,90.90.90.91,,syslog
+Extremeware-Successful-Logout,ExtremeSwitch_2,ExtremeSwitch,90.90.90.92,,syslog
+Extremeware-Failed-Login,ExtremeSwitch_3,ExtremeSwitch,90.90.90.93,,syslog
+Extremeware-Config-Change,ExtremeSwitch_4,ExtremeSwitch,90.90.90.94,,syslog
+Extremeware-Link-Down,ExtremeSwitch_5,ExtremeSwitch,90.90.90.95,,syslog
+Extremeware-Link-Up,ExtremeSwitch_6,ExtremeSwitch,90.90.90.96,,syslog

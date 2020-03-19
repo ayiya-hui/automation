@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+enterprises.14823.1.1.10 6 1104 enterprises.14823.2.3.1.11.1.1.60 x "07 D8 0B 0B 08 15 2E 00 2D 08 00" 	enterprises.14823.2.3.1.11.1.1.5.0 x "00 21 55 4D DD 30" 	enterprises.14823.2.3.1.11.1.1.6.0 s "ProspectHills"	enterprises.14823.2.3.1.11.1.1.1.0 x "00 1A 1E C0 5C 4C" 	enterprises.14823.2.3.1.11.1.1.56.0 i 2	enterprises.14823.2.3.1.11.1.1.8.0 x "00 90 4B 13 B2 6E"
+[params]
+rawEventMsg=any
+eventSeverity=1
+eventSeverityCat=LOW
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+wlanRadioId=2
+srcMACAddr=00:90:4b:13:b2:6e
+phRecvTime=any
+phCustId=$sender
+reptDevIpAddr=$localhost
+eventAction=1 (Deny)
+eventName=Previously detected unsecure AP association is no longer present
+reptVendor=Aruba
+eventType=Aruba-1104-wlsxStaUnAssociatedFromUnsecureAP
+phEventCategory=0 (External)
+nepMACAddr=00:21:55:4d:dd:30
+reptModel=ArubaOS WLAN Controller
+wlanSsid=ProspectHills

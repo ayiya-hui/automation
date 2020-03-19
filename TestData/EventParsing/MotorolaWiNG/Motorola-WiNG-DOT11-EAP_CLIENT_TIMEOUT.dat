@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+2015-11-11T13:00:25.053044-06:00 caskcc1regi-ap14 %DOT11-5-EAP_CLIENT_TIMEOUT: Client '9C-FC-01-5C-CC-65' timeout attempting 802.1x/EAP authentication on wlan 'OFFICE-WAREHOUSE-RADIUS-WLAN' radio 'caskcc1regi-ap14:R2'
+[params]
+radioBand=R2
+parserName=MotorolaWiNGParser
+eventType=Motorola-WiNG-DOT11-EAP_CLIENT_TIMEOUT
+reptModel=WiNG WLAN AP
+eventId=any
+eventParsedOk=1
+eventSeverity=2
+eventName=Motorola WLAN AP: EAP client timeout
+extEventRecvProto=Syslog
+wlanSsid=OFFICE-WAREHOUSE-RADIUS-WLAN
+eventRuleTrigger=1
+count=1
+srcMACAddr=9c:fc:01:5c:cc:65
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+reptDevName=caskcc1regi-ap14
+customer=Super
+phEventCategory=0 (External)
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Motorola
+authenMethod=802.1x/EAP

@@ -1,0 +1,85 @@
+[reptDevIpAddr(key)]
+$localhost (srcIpAddr:2.1.2.1)
+[eventMsg]
+<!-- CISCO IPS --><evAlert eventId="1203541079317487802" severity="low"><originator><hostId>MainFW-IPS</hostId><appName>sensorApp</appName><appInstanceId>376</appInstanceId></originator><time offset="0" timeZone="UTC">1204938398491122000</time><signature sigName="ICMP Network Sweep w/Echo" sigId="2100" subSigId="0" version="S2"></signature><interfaceGroup>vs1</interfaceGroup><vlan>0</vlan><participants><attack><attacker><addr locality="OUT">2.1.2.1</addr></attacker><victim><addr locality="OUT">171.64.10.225</addr><os idSource="unknown" type="unknown" relevance="relevant"></os></victim><victim><addr locality="OUT">171.66.255.87</addr><os idSource="unknown" type="unknown" relevance="relevant"></os></victim><victim><addr locality="OUT">171.66.255.86</addr><os idSource="unknown" type="unknown" relevance="relevant"></os></victim><victim><addr locality="OUT">171.66.255.84</addr><os idSource="unknown" type="unknown" relevance="relevant"></os></victim><victim><addr locality="OUT">171.66.255.85</addr><os idSource="unknown" type="unknown" relevance="relevant"></os></victim><victim><addr locality="OUT">171.66.255.82</addr><os idSource="unknown" type="unknown" relevance="relevant"></os></victim></attack></participants><alertDetails>InterfaceAttributes:  context="single_vf" physical="Unknown" backplane="GigabitEthernet0/1" ; </alertDetails></evAlert>
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+appName=sensorApp
+count=1
+phCustId=$sender
+destIpAddr=171.64.10.225
+eventId=any
+eventName=ICMP Network Sweep w/Echo
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=2
+eventSeverityCat=LOW
+eventType=Cisco_IPS-2100/0
+ipsFPCheckStatus=0 (Couldnot determine)
+intfName=GigabitEthernet0/1
+reptDevName=MainFW-IPS
+reptDevIpAddr=$reporter
+reptModel=IPS
+reptVendor=Cisco
+srcIpAddr=2.1.2.1
+
+[reptDevIpAddr(key)]
+$localhost (srcIpAddr:2.1.2.3)
+[eventMsg]
+<!-- CISCO IPS --><evIdsAlert eventId="1252555306296791617" vendor="Cisco" severity="low"><originator><hostId>SJ-SaaS-ASA-IPS</hostId><appName>sensorApp</appName><appInstanceId>445</appInstanceId></originator><time offset="-420" timeZone="UTC">1288309474384329000</time><signature  description="ICMP Network Sweep w/Echo" id="2100" version="S2" type="anomaly" created="20010202"><subsigId>0</subsigId><marsCategory>Probe/HostSweep/Non-stealth</marsCategory></signature><interfaceGroup>vs1</interfaceGroup><vlan>0</vlan><participants><attacker><addr locality="OUT">2.1.2.3</addr></attacker><target><addr locality="OUT">192.168.204.28</addr><os idSource="unknown" type="unknown" relevance="relevant" /></target><target><addr locality="OUT">192.168.204.39</addr><os idSource="unknown" type="unknown" relevance="relevant" /></target><target><addr locality="OUT">192.168.204.44</addr><os idSource="unknown" type="unknown" relevance="relevant" /></target><target><addr locality="OUT">192.168.204.45</addr><os idSource="unknown" type="unknown" relevance="relevant" /></target><target><addr locality="OUT">192.168.204.46</addr><os idSource="unknown" type="unknown" relevance="relevant" /></target><target><addr locality="OUT">192.168.204.47</addr><os idSource="unknown" type="unknown" relevance="relevant" /></target></participants><alertDetails>InterfaceAttributes:  context="single_vf" physical="Unknown" backplane="GigabitEthernet0/1" ; </alertDetails><riskRatingValue targetValueRating="medium" attackRelevanceRating="relevant">60</riskRatingValue><threatRatingValue>60</threatRatingValue><interface context="single_vf" physical="Unknown" backplane="GigabitEthernet0/1">GigabitEthernet0/1</interface><protocol>icmp</protocol><globalCorrelation><globalCorrelationScore>0</globalCorrelationScore><globalCorrelationRiskDelta>0</globalCorrelationRiskDelta><globalCorrelationModifiedRiskRating>false</globalCorrelationModifiedRiskRating><globalCorrelationDenyPacket>false</globalCorrelationDenyPacket><globalCorrelationDenyAttacker>false</globalCorrelationDenyAttacker><globalCorrelationOtherOverrides>false</globalCorrelationOtherOverrides><globalCorrelationAuditMode>false</globalCorrelationAuditMode></globalCorrelation></evIdsAlert>
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+appName=sensorApp
+count=1
+phCustId=$sender
+destIpAddr=192.168.204.28
+eventId=any
+eventName=ICMP Network Sweep w/Echo
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=2
+eventSeverityCat=LOW
+eventType=Cisco_IPS-2100/0
+ipsFPCheckStatus=0 (Couldnot determine)
+intfName=GigabitEthernet0/1
+ipProto=1 (ICMP)
+ipsEvRR=60
+ipsEvTR=60
+reptDevName=SJ-SaaS-ASA-IPS
+reptDevIpAddr=$reporter
+reptModel=IPS
+reptVendor=Cisco
+srcIpAddr=2.1.2.3
+devEventTypeGrp=Probe/HostSweep/Non-stealth
+
+[reptDevIpAddr(key)]
+$localhost (srcIpAddr:2.1.2.6)
+[eventMsg]
+<!-- CISCO IPS --><evIdsAlert eventId="1252555306296791635" vendor="Cisco" severity="low"><originator><hostId>SJ-SaaS-ASA-IPS</hostId><appName>sensorApp</appName><appInstanceId>445</appInstanceId></originator><time offset="-420" timeZone="UTC">1288309496442322000</time><signature  description="ICMP Network Sweep w/Echo" id="2100" version="S2" type="anomaly" created="20010202"><subsigId>0</subsigId><marsCategory>Probe/HostSweep/Non-stealth</marsCategory></signature><interfaceGroup>vs1</interfaceGroup><vlan>0</vlan><participants><attacker><addr locality="OUT">2.1.2.6</addr></attacker><target><addr locality="OUT">192.168.208.15</addr><os idSource="unknown" type="unknown" relevance="relevant" /></target><target><addr locality="OUT">192.168.208.16</addr><os idSource="unknown" type="unknown" relevance="relevant" /></target><target><addr locality="OUT">192.168.208.17</addr><os idSource="unknown" type="unknown" relevance="relevant" /></target><target><addr locality="OUT">192.168.208.18</addr><os idSource="unknown" type="unknown" relevance="relevant" /></target><target><addr locality="OUT">192.168.208.19</addr><os idSource="unknown" type="unknown" relevance="relevant" /></target><target><addr locality="OUT">192.168.208.20</addr><os idSource="unknown" type="unknown" relevance="relevant" /></target></participants><alertDetails>InterfaceAttributes:  context="single_vf" physical="Unknown" backplane="GigabitEthernet0/1" ; </alertDetails><riskRatingValue targetValueRating="medium" attackRelevanceRating="relevant">60</riskRatingValue><threatRatingValue>60</threatRatingValue><interface context="single_vf" physical="Unknown" backplane="GigabitEthernet0/1">GigabitEthernet0/1</interface><protocol>icmp</protocol><globalCorrelation><globalCorrelationScore>0</globalCorrelationScore><globalCorrelationRiskDelta>0</globalCorrelationRiskDelta><globalCorrelationModifiedRiskRating>false</globalCorrelationModifiedRiskRating><globalCorrelationDenyPacket>false</globalCorrelationDenyPacket><globalCorrelationDenyAttacker>false</globalCorrelationDenyAttacker><globalCorrelationOtherOverrides>false</globalCorrelationOtherOverrides><globalCorrelationAuditMode>false</globalCorrelationAuditMode></globalCorrelation></evIdsAlert>
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+appName=sensorApp
+count=1
+phCustId=$sender
+destIpAddr=192.168.208.15
+eventId=any
+eventName=ICMP Network Sweep w/Echo
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=2
+eventSeverityCat=LOW
+eventType=Cisco_IPS-2100/0
+ipsFPCheckStatus=0 (Couldnot determine)
+intfName=GigabitEthernet0/1
+ipProto=1 (ICMP)
+ipsEvRR=60
+ipsEvTR=60
+reptDevName=SJ-SaaS-ASA-IPS
+reptDevIpAddr=$reporter
+reptModel=IPS
+reptVendor=Cisco
+srcIpAddr=2.1.2.6
+devEventTypeGrp=Probe/HostSweep/Non-stealth

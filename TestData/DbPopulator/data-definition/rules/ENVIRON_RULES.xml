@@ -1,0 +1,262 @@
+<Rules>
+  <Rule group="PH_SYS_RULE_Environ" id="PH_Rule_Environ_1" phIncidentCategory="Environmental">
+    <Name>UPS Battery Metrics Critical </Name>
+    <active>true</active>
+    <Description> Detects that key UPS operational etrics are outside of normal operational range </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_UPS_BATTERY_METRIC_CRIT" severity="9">
+      <ArgList>
+	hostIpAddr = LowBattery1.hostIpAddr,
+        hostName = LowBattery1.hostName, 
+	upsAdvOutputFreq = LowBattery1.AVG(upsAdvOutputFreq),
+	upsAdvOutputVoltage = LowBattery1.AVG(upsAdvOutputVoltage),
+	upsAdvOutputLoad = LowBattery1.AVG(upsAdvOutputLoad)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="300">
+      <SubPattern displayName="LowBattery1" name="LowBattery1">
+        <SingleEvtConstr> eventType = "PH_DEV_MON_UPS_METRIC" AND upsAdvOutputFreq IS NOT NULL AND upsAdvOutputVoltage IS NOT NULL </SingleEvtConstr>
+	<GroupByAttr> hostIpAddr, hostName  </GroupByAttr>
+	<GroupEvtConstr> COUNT (*) &gt;= 2 AND ( AVG(upsAdvOutputFreq) &lt;= 55 OR AVG(upsAdvOutputFreq) &gt;= 65 OR AVG(upsAdvOutputVoltage) &lt; 110 OR AVG(upsAdvOutputVoltage) &gt; 125 OR AVG(upsAdvOutputLoad) &gt;= 50) </GroupEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType, hostName, upsRemainBatteryChargePct,upsBatteryStatus,upsReplaceBatteryIndicator,upsTimeOnBattery,upsBasicOutputStatus,upsAdvOutputLoad,upsAdvOutputVoltage,upsAdvOutputFreq </AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "timebased">
+      <QuietPeriod>1200</QuietPeriod>
+    </ClearCondition>
+  </Rule>
+
+  <!--      -->
+  <Rule group="PH_SYS_RULE_Environ" id="PH_Rule_Environ_2" phIncidentCategory="Environmental">
+    <Name>UPS Battery Status Critical </Name>
+    <active>true</active>
+    <Description> Detects that key UPS battery status are reflecting critical state </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_UPS_BATTERY_STAT_CRIT" severity="9">
+      <ArgList>
+	hostIpAddr = LowBattery2.hostIpAddr,
+        hostName = LowBattery2.hostName,
+	upsTimeOnBattery = LowBattery2.AVG(upsTimeOnBattery),
+	upsBatteryStatus =  LowBattery2.AVG(upsBatteryStatus), 
+	upsRemainBatteryChargePct = LowBattery2.AVG(upsRemainBatteryChargePct), 
+	upsReplaceBatteryIndicator = LowBattery2.AVG(upsReplaceBatteryIndicator),
+	upsBasicOutputStatus = LowBattery2.AVG(upsBasicOutputStatus)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="120">
+      <SubPattern displayName="LowBattery2" name="LowBattery2">
+        <SingleEvtConstr> eventType = "PH_DEV_MON_UPS_METRIC" AND (upsBatteryStatus = 3 OR upsBatteryStatus = 4 OR upsRemainBatteryChargePct &lt; 50 OR upsTimeOnBattery &gt;= 120 OR upsBasicOutputStatus != 2 OR upsReplaceBatteryIndicator = 2) </SingleEvtConstr>
+	<GroupByAttr> hostIpAddr, hostName </GroupByAttr>
+	<GroupEvtConstr> COUNT (*) &gt;= 1 AND ( AVG(upsBatteryStatus) &gt; 2 OR AVG(upsRemainBatteryChargePct) &lt; 50 OR  AVG(upsTimeOnBattery) &gt;= 120 OR AVG(upsBasicOutputStatus) &gt; 2 OR AVG(upsReplaceBatteryIndicator) &gt; 1) </GroupEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType, hostName, upsRemainBatteryChargePct,upsBatteryStatus,upsReplaceBatteryIndicator,upsTimeOnBattery,upsBasicOutputStatus,upsAdvOutputLoad,upsAdvOutputVoltage,upsAdvOutputFreq </AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "timebased">
+      <QuietPeriod>1200</QuietPeriod>
+    </ClearCondition>
+  </Rule>
+
+  <!--      -->
+  <Rule group="PH_SYS_RULE_Environ" id="PH_Rule_Environ_3" phIncidentCategory="Environmental">
+    <Name>HVAC temp high</Name>
+    <active>true</active>
+    <Description> Detects that HVAC temperature is less than 5 degree Fahrenheit from upper threshold </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_HVAC_TOO_HOT" severity="9">
+      <ArgList>
+	hostIpAddr = HVAC_Hot.hostIpAddr,
+        hostName = HVAC_Hot.hostName,
+	envTempOffHighDegF = HVAC_Hot.AVG(envTempOffHighDegF)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="300">
+      <SubPattern displayName="HVAC_Hot" name="HVAC_Hot">
+        <SingleEvtConstr> eventType = "PH_DEV_MON_HVAC_LIEBERT_METRIC" </SingleEvtConstr>
+	<GroupByAttr> hostName,hostIpAddr </GroupByAttr>
+	<GroupEvtConstr> COUNT (*) &gt;= 2 AND AVG(envTempOffHighDegF) &lt; 5  </GroupEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType, hostName, envTempDegF,envTempHighThreshDegF,envTempLowThreshDegF,envTempOffHighDegF,envTempOffLowDegF </AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "timebased">
+      <QuietPeriod>1200</QuietPeriod>
+    </ClearCondition>
+  </Rule>
+
+  <Rule group="PH_SYS_RULE_Environ" id="PH_Rule_Environ_4" phIncidentCategory="Environmental">
+    <Name>HVAC temp low</Name>
+    <active>true</active>
+    <Description> Detects that HVAC temperature is less than 5 degree Fahrenheit from the lower threshold </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_HVAC_TOO_COLD" severity="9">
+      <ArgList>
+	hostIpAddr = HVAC_Cold.hostIpAddr,
+        hostName = HVAC_Cold.hostName,
+	envTempOffLowDegF = HVAC_Cold.AVG(envTempOffLowDegF)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="300">
+      <SubPattern displayName="HVAC_Cold" name="HVAC_Cold">
+        <SingleEvtConstr> eventType = "PH_DEV_MON_HVAC_LIEBERT_METRIC" </SingleEvtConstr>
+	<GroupByAttr> hostName,hostIpAddr </GroupByAttr>
+	<GroupEvtConstr> COUNT (*) &gt;= 2 AND AVG(envTempOffLowDegF) &lt; 5  </GroupEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType, hostName, envTempDegF,envTempHighThreshDegF,envTempLowThreshDegF,envHumidityRel,envHumidityRelHighThresh,envHumidityRelLowThresh </AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "timebased">
+      <QuietPeriod>1200</QuietPeriod>
+    </ClearCondition>
+  </Rule>
+
+  <!-- **** -->
+  <Rule group="PH_SYS_RULE_Environ" id="PH_Rule_Environ_5" phIncidentCategory="Environmental">
+    <Name>HVAC humidity high</Name>
+    <active>true</active>
+    <Description> Detects that HVAC relative humidity is less than 5 units from upper threshold </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_HVAC_TOO_HUMID" severity="9">
+      <ArgList>
+	hostIpAddr = HVAC_Humid.hostIpAddr,
+        hostName = HVAC_Humid.hostName,
+	envHumidityOffHigh = HVAC_Humid.AVG(envHumidityOffHigh)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="300">
+      <SubPattern displayName="HVAC_Humid" name="HVAC_Humid">
+        <SingleEvtConstr> eventType = "PH_DEV_MON_HVAC_LIEBERT_METRIC"  </SingleEvtConstr>
+	<GroupByAttr> hostName,hostIpAddr </GroupByAttr>
+	<GroupEvtConstr> COUNT (*) &gt;= 2 AND AVG(envHumidityOffHigh) &lt; 5  </GroupEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType, hostName, envTempDegF,envTempHighThreshDegF,envTempLowThreshDegF,envHumidityRel,envHumidityRelHighThresh,envHumidityRelLowThresh </AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "timebased">
+      <QuietPeriod>1200</QuietPeriod>
+    </ClearCondition>
+  </Rule>
+
+  <!-- **** -->
+  <Rule group="PH_SYS_RULE_Environ" id="PH_Rule_Environ_6" phIncidentCategory="Environmental">
+    <Name>HVAC humidity low</Name>
+    <active>true</active>
+    <Description> Detects that HVAC relative humidity is less than 5 units from lower threshold </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_HVAC_TOO_DRY" severity="9">
+      <ArgList>
+	hostIpAddr = HVAC_Humid.hostIpAddr,
+        hostName = HVAC_Humid.hostName,
+	envHumidityOffLow = HVAC_Humid.AVG(envHumidityOffLow)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="300">
+      <SubPattern displayName="HVAC_Humid" name="HVAC_Humid">
+        <SingleEvtConstr> eventType = "PH_DEV_MON_HVAC_LIEBERT_METRIC"  </SingleEvtConstr>
+	<GroupByAttr> hostName,hostIpAddr </GroupByAttr>
+	<GroupEvtConstr> COUNT (*) &gt;= 2 AND AVG(envHumidityOffLow) &lt; 5  </GroupEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType, hostName, envTempDegF,envTempHighThreshDegF,envTempLowThreshDegF,envHumidityRel,envHumidityRelHighThresh,envHumidityRelLowThresh </AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "timebased">
+      <QuietPeriod>1200</QuietPeriod>
+    </ClearCondition>
+  </Rule>
+
+  <!-- **** -->
+  <Rule group="PH_SYS_RULE_Environ" id="PH_Rule_Environ_7" phIncidentCategory="Environmental">
+    <Name>FPC Voltage THD high</Name>
+    <active>true</active>
+    <Description> Detects that Voltage total harmonic distortion is more than 0.15 pct</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_FPC_VHD_HIGH" severity="9">
+      <ArgList>
+	hostIpAddr = FPC_VHD_high.hostIpAddr,
+        hostName = FPC_VHD_high.hostName,
+	outputVxTHD = FPC_VHD_high.AVG(outputVxTHD),
+	outputVyTHD = FPC_VHD_high.AVG(outputVyTHD),
+	outputVzTHD = FPC_VHD_high.AVG(outputVzTHD)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="300">
+      <SubPattern displayName="FPC_VHD_high" name="FPC_VHD_high">
+        <SingleEvtConstr> eventType = "PH_DEV_MON_FPC_LIEBERT_METRIC"  </SingleEvtConstr>
+	<GroupByAttr> hostName,hostIpAddr </GroupByAttr>
+	<GroupEvtConstr> COUNT (*) &gt;= 2 AND (AVG(outputVxTHD) &gt;= 15 OR AVG(outputVyTHD) &gt; 15 OR AVG(outputVzTHD) &gt;= 15)  </GroupEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType, hostName,outputVoltageXNVolts,outputVoltageYNVolts,outputVoltageZNVolts,outputVxTHD,outputVyTHD,outputVzTHD </AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "timebased">
+      <QuietPeriod>1200</QuietPeriod>
+    </ClearCondition>
+  </Rule>
+
+  <!-- **** -->
+  <Rule group="PH_SYS_RULE_Environ" id="PH_Rule_Environ_8" phIncidentCategory="Environmental">
+    <Name>FPC Current THD high</Name>
+    <active>true</active>
+    <Description> Detects that current total harmonic distortion is more than 0.15 pct</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_FPC_CHD_HIGH" severity="9">
+      <ArgList>
+	hostIpAddr = FPC_CHD_high.hostIpAddr,
+        hostName = FPC_CHD_high.hostName,
+	outputLxTHD = FPC_CHD_high.AVG(outputLxTHD),
+	outputLyTHD = FPC_CHD_high.AVG(outputLyTHD),
+	outputLzTHD = FPC_CHD_high.AVG(outputLzTHD)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="300">
+      <SubPattern displayName="FPC_CHD_high" name="FPC_CHD_high">
+        <SingleEvtConstr> eventType = "PH_DEV_MON_FPC_LIEBERT_METRIC"  </SingleEvtConstr>
+	<GroupByAttr> hostName,hostIpAddr </GroupByAttr>
+	<GroupEvtConstr> COUNT (*) &gt;= 2 AND (AVG(outputLxTHD) &gt;= 5 OR AVG(outputLyTHD) &gt; 5 OR AVG(outputLzTHD) &gt;= 5)  </GroupEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType, hostName, outputCurrentXAmps,outputCurrentYAmps,outputCurrentZAmps,outputLxTHD,outputLyTHD,outputLzTHD </AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "timebased">
+      <QuietPeriod>1200</QuietPeriod>
+    </ClearCondition>
+  </Rule>
+
+  <!-- **** -->
+  <Rule group="PH_SYS_RULE_Environ" id="PH_Rule_Environ_9" phIncidentCategory="Environmental">
+    <Name>FPC ground current high</Name>
+    <active>true</active>
+    <Description> Detects that ground current is more than 0.12 amps</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_FPC_GROUND_CURR_HIGH" severity="9">
+      <ArgList>
+	hostIpAddr = FPC_GC_high.hostIpAddr,
+        hostName = FPC_GC_high.hostName,
+	groundCurrentAmps = FPC_GC_high.AVG(groundCurrentAmps)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="300">
+      <SubPattern displayName="FPC_GC_high" name="FPC_GC_high">
+        <SingleEvtConstr> eventType = "PH_DEV_MON_FPC_LIEBERT_METRIC"  </SingleEvtConstr>
+	<GroupByAttr> hostName,hostIpAddr </GroupByAttr>
+	<GroupEvtConstr> COUNT (*) &gt;= 2 AND AVG(groundCurrentAmps) &gt;= .12   </GroupEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType, hostName, neutralCurrentAmps,groundCurrentAmps </AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "timebased">
+      <QuietPeriod>1200</QuietPeriod>
+    </ClearCondition>
+  </Rule>
+
+</Rules>

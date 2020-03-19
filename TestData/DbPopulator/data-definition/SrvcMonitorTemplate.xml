@@ -1,0 +1,347 @@
+<serviceServerMonitorDef>
+
+ <serviceMonitorDef id="1">
+    <name>DNS Probe</name>
+    <desc>Default DNS server probe by querying for the ip addresses of www.google.com</desc>
+    <possibleAppGroupList>
+      <appGroup>Microsoft DNS</appGroup>
+      <appGroup>Bind DNS</appGroup>
+      <appGroup>Generic DNS Server</appGroup>
+      <appGroup>InfoBlox DNS</appGroup>
+    </possibleAppGroupList>
+    <frequency>180</frequency>
+    <actions>
+      <probeAction><![CDATA[
+        <dns_query name="query google's IP" timeout="15">
+          <question>www.google.com</question>
+          <resourceRecType>A</resourceRecType>
+        </dns_query>
+      ]]></probeAction>
+    </actions>
+ </serviceMonitorDef>
+
+ <serviceServer svcMonId="1">
+   <appName>DNS Server</appName>
+   <hostAddr></hostAddr>
+   <servicePorts>53</servicePorts>
+ </serviceServer>
+
+ <serviceMonitorDef id="2">
+    <name>HTTP Probe</name>
+    <desc>Default web server probe by downloading the root page</desc>
+    <possibleAppGroupList>
+      <appGroup>Generic Web Server</appGroup>
+      <appGroup>Apache Webserver</appGroup>
+      <appGroup>Microsoft IIS</appGroup>
+    </possibleAppGroupList>
+    <frequency>180</frequency>
+    <actions><probeAction><![CDATA[
+      <web_fetch name="download root page" timeout="15">
+        <url method="GET">/</url>
+        <expect>
+          <statusCode>200-499</statusCode>
+        </expect>
+      </web_fetch>
+    ]]></probeAction></actions>
+ </serviceMonitorDef>
+
+ <serviceServer svcMonId="2">
+   <appName>Web Server</appName>
+   <hostAddr></hostAddr>
+   <servicePorts>80</servicePorts>
+ </serviceServer>
+
+ <serviceMonitorDef id="3">
+    <name>HTTPS Probe</name>
+    <desc>Default web server probe (over ssl) by downloading the root page</desc>
+    <possibleAppGroupList>
+      <appGroup>Generic Web Server</appGroup>
+      <appGroup>Apache Webserver</appGroup>
+      <appGroup>Microsoft IIS</appGroup>
+    </possibleAppGroupList>
+    <frequency>180</frequency>
+    <actions>
+      <probeAction><![CDATA[
+      <web_fetch name="download root page" timeout="15">
+        <url method="GET" secure="true">/</url>
+        <expect>
+          <statusCode>200-499</statusCode>
+        </expect>
+      </web_fetch>
+      ]]></probeAction>
+    </actions>
+ </serviceMonitorDef>
+
+ <serviceServer svcMonId="3">
+   <appName>Web Server</appName>
+   <hostAddr></hostAddr>
+   <servicePorts>443</servicePorts>
+ </serviceServer>
+
+ <serviceMonitorDef id="4">
+    <name>SMTP Probe</name>
+    <desc>Default SMTP server probe by connecting and logging into it</desc>
+    <possibleAppGroupList>
+      <appGroup>Sendmail Server</appGroup>
+      <appGroup>Postfix Mail Server</appGroup>
+      <appGroup>Generic Mail Server</appGroup>
+      <appGroup>Microsoft Exchange</appGroup>
+    </possibleAppGroupList>
+    <frequency>180</frequency>
+    <actions>
+      <probeAction><![CDATA[
+      <smtp_probe name="connect to server" timeout="15">
+        <overSSL>false</overSSL>
+      </smtp_probe>
+      ]]></probeAction>
+    </actions>
+ </serviceMonitorDef>
+
+ <serviceServer svcMonId="4">
+   <appName>Mail Server</appName>
+   <hostAddr></hostAddr>
+   <servicePorts>25</servicePorts>
+ </serviceServer>
+
+ <serviceMonitorDef id="5">
+    <name>SMTPS Probe</name>
+    <desc>Default SMTP server probe (over ssl) by connecting and logging into it</desc>
+    <possibleAppGroupList>
+      <appGroup>Sendmail Server</appGroup>
+      <appGroup>Postfix Mail Server</appGroup>
+      <appGroup>Generic Mail Server</appGroup>
+      <appGroup>Microsoft Exchange</appGroup>
+    </possibleAppGroupList>
+    <frequency>180</frequency>
+    <actions>
+      <probeAction><![CDATA[
+      <smtp_probe name="connect to server" timeout="15">
+        <overSSL>true</overSSL>
+      </smtp_probe>
+      ]]></probeAction>
+    </actions>
+ </serviceMonitorDef>
+
+ <serviceServer svcMonId="5">
+   <appName>Mail Server</appName>
+   <hostAddr></hostAddr>
+   <servicePorts>465</servicePorts>
+ </serviceServer>
+
+ <serviceMonitorDef id="6">
+    <name>IMAP Probe</name>
+    <desc>Default IMAP server probe by connecting and logging into it</desc>
+    <possibleAppGroupList>
+      <appGroup>Sendmail Server</appGroup>
+      <appGroup>Postfix Mail Server</appGroup>
+      <appGroup>Generic Mail Server</appGroup>
+      <appGroup>Microsoft Exchange</appGroup>
+    </possibleAppGroupList>
+    <frequency>180</frequency>
+    <actions>
+      <probeAction><![CDATA[
+      <imap_probe name="connect to server" timeout="15">
+        <overSSL>false</overSSL>
+      </imap_probe>
+      ]]></probeAction>
+    </actions>
+ </serviceMonitorDef>
+
+ <serviceServer svcMonId="6">
+   <appName>Mail Server</appName>
+   <hostAddr></hostAddr>
+   <servicePorts>143</servicePorts>
+ </serviceServer>
+
+ <serviceMonitorDef id="7">
+    <name>IMAPS Probe</name>
+    <desc>Default IMAP server probe (over ssl) by connecting and logging into it</desc>
+    <possibleAppGroupList>
+      <appGroup>Sendmail Server</appGroup>
+      <appGroup>Postfix Mail Server</appGroup>
+      <appGroup>Generic Mail Server</appGroup>
+      <appGroup>Microsoft Exchange</appGroup>
+    </possibleAppGroupList>
+    <frequency>180</frequency>
+    <actions>
+      <probeAction><![CDATA[
+      <imap_probe name="connect to server" timeout="15">
+         <overSSL>true</overSSL>
+      </imap_probe>
+      ]]></probeAction>
+    </actions>
+ </serviceMonitorDef>
+
+ <serviceServer svcMonId="7">
+   <appName>Mail Server</appName>
+   <hostAddr></hostAddr>
+   <servicePorts>993</servicePorts>
+ </serviceServer>
+
+ <serviceMonitorDef id="8">
+    <name>POP3 Probe</name>
+    <desc>Default POP server probe by connecting and logging into it</desc>
+    <possibleAppGroupList>
+      <appGroup>Sendmail Server</appGroup>
+      <appGroup>Postfix Mail Server</appGroup>
+      <appGroup>Generic Mail Server</appGroup>
+      <appGroup>Microsoft Exchange</appGroup>
+    </possibleAppGroupList>
+    <frequency>180</frequency>
+    <actions>
+      <probeAction><![CDATA[
+      <pop_probe name="connect to server" timeout="15">
+         <overSSL>false</overSSL>
+      </pop_probe>
+      ]]></probeAction>
+    </actions>
+ </serviceMonitorDef>
+
+ <serviceServer svcMonId="8">
+   <appName>Mail Server</appName>
+   <hostAddr></hostAddr>
+   <servicePorts>110</servicePorts>
+ </serviceServer>
+
+ <serviceMonitorDef id="9">
+    <name>POP3S Probe</name>
+    <desc>Default POP server probe (over ssl) by connecting and logging into it</desc>
+    <possibleAppGroupList>
+      <appGroup>Sendmail Server</appGroup>
+      <appGroup>Postfix Mail Server</appGroup>
+      <appGroup>Generic Mail Server</appGroup>
+      <appGroup>Microsoft Exchange</appGroup>
+    </possibleAppGroupList>
+    <frequency>180</frequency>
+    <actions>
+      <probeAction><![CDATA[
+      <pop_probe name="connect to server" timeout="15">
+        <overSSL>true</overSSL>
+      </pop_probe>
+      ]]></probeAction>
+    </actions>
+ </serviceMonitorDef>
+
+ <serviceServer svcMonId="9">
+   <appName>Mail Server</appName>
+   <hostAddr></hostAddr>
+   <servicePorts>995</servicePorts>
+ </serviceServer>
+
+ <serviceMonitorDef id="10">
+    <name>FTP Probe</name>
+    <desc>Default FTP server probe by connecting and logging into it</desc>
+    <possibleAppGroupList>
+      <appGroup>FTP Server</appGroup>
+      <appGroup>Very Secure FTP Server</appGroup>
+      <appGroup>Microsoft IIS</appGroup>
+    </possibleAppGroupList>
+    <frequency>180</frequency>
+    <actions>
+      <probeAction><![CDATA[
+      <ftp_probe name="connect to server" timeout="15">
+         <overSSL>false</overSSL>
+      </ftp_probe>
+      ]]></probeAction>
+    </actions>
+ </serviceMonitorDef>
+
+ <serviceServer svcMonId="10">
+   <appName>FTP Server</appName>
+   <hostAddr></hostAddr>
+   <servicePorts>110</servicePorts>
+ </serviceServer>
+
+ <serviceMonitorDef id="11">
+    <name>FTPS Probe</name>
+    <desc>Default FTP server probe (over ssl) by connecting and logging into it</desc>
+    <possibleAppGroupList>
+      <appGroup>FTP Server</appGroup>
+      <appGroup>Very Secure FTP Server</appGroup>
+      <appGroup>Microsoft IIS</appGroup>
+    </possibleAppGroupList>
+    <frequency>180</frequency>
+    <actions>
+      <probeAction><![CDATA[
+      <ftp_probe name="connect to server" timeout="15">
+        <overSSL>true</overSSL>
+      </ftp_probe>
+      ]]></probeAction>
+    </actions>
+ </serviceMonitorDef>
+
+ <serviceServer svcMonId="11">
+   <appName>FTP Server</appName>
+   <hostAddr></hostAddr>
+   <servicePorts>995</servicePorts>
+ </serviceServer>
+
+ <serviceMonitorDef id="12">
+    <name>LDAP Probe</name>
+    <desc>Default ldap server probe by connecting to it</desc>
+    <possibleAppGroupList>
+      <appGroup>LDAP Directory Service</appGroup>
+      <appGroup>Unix LDAP Directory Service</appGroup>
+    </possibleAppGroupList>
+    <frequency>180</frequency>
+    <actions>
+      <probeAction><![CDATA[
+      <ldap_probe name="connect to server" timeout="15">
+        <overSSL>false</overSSL>
+      </ldap_probe>
+      ]]></probeAction>
+    </actions>
+ </serviceMonitorDef>
+
+ <serviceServer svcMonId="12">
+   <appName>LDAP Server</appName>
+   <hostAddr></hostAddr>
+   <servicePorts>389</servicePorts>
+ </serviceServer>
+
+ <serviceMonitorDef id="13">
+    <name>LDAPS Probe</name>
+    <desc>Default ldap server probe (over ssl) by connecting to it</desc>
+    <possibleAppGroupList>
+      <appGroup>LDAP Directory Service</appGroup>
+      <appGroup>Unix LDAP Directory Service</appGroup>
+    </possibleAppGroupList>
+    <frequency>180</frequency>
+    <actions>
+      <probeAction><![CDATA[
+      <ldap_probe name="connect to server" timeout="15">
+        <overSSL>true</overSSL>
+      </ldap_probe>
+      ]]></probeAction>
+    </actions>
+ </serviceMonitorDef>
+
+ <serviceServer svcMonId="13">
+   <appName>LDAP Server</appName>
+   <hostAddr></hostAddr>
+   <servicePorts>636</servicePorts>
+ </serviceServer>
+
+ <serviceMonitorDef id="14">
+    <name>SSH Probe</name>
+    <desc>Default SSH server probe by checking the response banner</desc>
+    <possibleAppGroupList>
+      <appGroup>Generic SSH Server</appGroup>
+      <appGroup>OpenSSH Server</appGroup>
+    </possibleAppGroupList>
+    <frequency>180</frequency>
+    <actions>
+      <probeAction><![CDATA[
+      <ssh_probe name="connect to server" timeout="15">
+      </ssh_probe>
+      ]]></probeAction>
+    </actions>
+ </serviceMonitorDef>
+
+ <serviceServer svcMonId="14">
+   <appName>SSH Server</appName>
+   <hostAddr></hostAddr>
+   <servicePorts>22</servicePorts>
+ </serviceServer>
+
+</serviceServerMonitorDef>

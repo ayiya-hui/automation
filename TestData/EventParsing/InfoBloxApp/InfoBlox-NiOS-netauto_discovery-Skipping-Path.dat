@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+10.210.252.42
+[eventMsg]
+<13>Apr 28 14:56:06 10.210.252.42 netauto_discovery[17395]: PathCollector.pl: Skipping path collection for CIDR 10.6.84.96/27 due to blackout period in effect.
+[params]
+deviceTime=any
+parserName=InfoBloxAppParser
+eventType=InfoBlox-NiOS-netauto_discovery-Skipping-Path
+destIpAddr=10.6.84.96
+reptModel=NiOS
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Netauto discovery skipping path collection
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=10.210.252.42
+rawEventMsg=any
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=10.210.252.42
+reptVendor=InfoBlox

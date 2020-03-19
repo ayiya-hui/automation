@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+Symantec-DLP-Passed,SymantecDLP_1,SymantecDLP,$localhost,,syslog

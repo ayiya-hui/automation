@@ -1,0 +1,4 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+PH_BEACON_APPROVED_DEV,PHBeacon_1,PHBeacon,192.168.65.158,,syslog
+PH_BEACON_EVENT_STAT,PHBeacon_2,PHBeacon,192.168.65.158,,syslog

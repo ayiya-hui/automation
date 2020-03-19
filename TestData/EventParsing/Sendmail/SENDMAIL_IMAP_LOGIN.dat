@@ -1,0 +1,22 @@
+[reptDevIpAddr(key)]
+137.146.28.76
+[eventMsg]
+<21>Mar 10 19:33:17 137.146.28.76 1938176090  IMAP.USER.LOGIN ssl[67.223.64.86]:             neblanch             plaintext
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+srcIpAddr=67.223.64.86
+eventName=User Logged Into Mailbox via IMAP
+reptVendor=Sendmail.org
+eventType=SENDMAIL_IMAP_LOGIN
+user=neblanch
+phEventCategory=0 (External)
+reptDevIpAddr=137.146.28.76
+reptModel=Sendmail Mail Server

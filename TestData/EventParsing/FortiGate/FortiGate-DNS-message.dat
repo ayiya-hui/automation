@@ -1,0 +1,33 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<182>date=2013-05-01 time=11:20:50 devname=FortiGate80C devid=FGT80C3912622808 logid=0103044288 type=event subtype=router level=information vd=root policyid=22 src=1.2.4.3 dst=aaaa:bbbb:cccc:dddd:eeee:ffff:7777:9999 src_int=eth0 dst_int=switch0 user=user group=group dns_name=fotinet dns dns_ip=1.1.1.1
+[params]
+deviceTime=any
+eventType=FortiGate-DNS-message
+phCustId=$sender
+hostGeoLongitude=133
+srcIpAddr=1.2.4.3
+reptModel=FortiOS
+eventId=any
+eventParsedOk=1
+eventSeverity=5
+hostIpAddr=1.1.1.1
+eventName=DNS traffic
+phEventCategory=0 (External)
+srcIntfName=eth0
+eventSeverityCat=MEDIUM
+collectorId=any
+hostGeoLatitude=-27
+destIntfName=switch0
+relayDevIpAddr=$localhost
+user=user
+reptDevName=any
+count=1
+hostGeoCountry=Australia
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Fortinet
+userGrp=group
+hostGeoOrg=APNIC Debogon Project

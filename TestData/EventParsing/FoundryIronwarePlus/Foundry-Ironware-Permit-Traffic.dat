@@ -1,0 +1,30 @@
+[reptDevIpAddr(key)]
+58.58.58.61
+[eventMsg]
+<12>Jun  4 03:12:53 58.58.58.61 ACL: ACL: List GWI-in permitted tcp 61.158.162.230(6000)(Ethernet 1/4 0023.3368.f500) -> 137.146.0.0(8082), 1 event(s)
+[params]
+rawEventMsg=any
+eventType=Foundry-Ironware-Permit-Traffic
+phCustId=$sender
+destIpAddr=137.146.0.0
+destIpPort=8082 (BLACKICE-ALERTS)
+srcIpAddr=61.158.162.230
+reptModel=Ironware
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Foundry network traffic permitted
+phEventCategory=0 (External)
+srcIntfName=Ethernet1/4
+srcMACAddr=00:23:33:68:f5:00
+srcIpPort=6000
+eventSeverityCat=LOW
+ipProto=6 (TCP)
+count=1
+phRecvTime=any
+reptDevIpAddr=58.58.58.61
+eventAction=0 (Permit)
+reptVendor=Foundry
+fwRule=GWI-in
+
+

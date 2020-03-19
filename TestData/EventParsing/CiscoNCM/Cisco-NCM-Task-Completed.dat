@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+10.1.2.3
+[eventMsg]
+455183021 Fri Nov 06 06:48:29 EST 2015 LastF Task Completed lnxncmpras01 10.1.2.3 The following task completed:    230699781: Task Name: Send Email Digest Added by: LastF (First Last) Start Date: 2015-11-06 06:45:00.0 Repeat type: Non-recurring Status: Succeeded Comments: System task to send email digest of system events.  $DeviceID$ $IPAddress$ $OrignatorEmail$ LastF Send Email Digest 2013-10-17 13:00:00.0 None Succeeded System task to send email digest of system events
+[params]
+customer=Super
+eventId=any
+eventSeverityCat=LOW
+eventParsedOk=1
+phEventCategory=0 (External)
+parserName=CiscoNCMParser
+count=1
+eventSeverity=1
+eventType=Cisco-NCM-Task-Completed
+reptDevIpAddr=10.1.2.3
+collectorId=any
+eventName=Cisco-NCM-Task-Completed
+reptVendor=Cisco
+relayDevIpAddr=10.1.2.3
+user=LastF
+phRecvTime=any
+eventRuleTrigger=1
+appTransportProto=Syslog
+reptDevName=lnxncmpras01
+reptModel=CiscoWorks NCM

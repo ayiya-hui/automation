@@ -1,0 +1,1838 @@
+<eventParser name="WinOSPullParser">
+    <!-- To Do: only take first three letters of _sourceName -->
+
+   <deviceType>
+     <Vendor>Microsoft</Vendor>
+     <Model>Windows</Model>
+     <Version>ANY</Version>
+   </deviceType>
+   
+   <eventFormatRecognizer><![CDATA[PH_WIN_LOG_PULL]]></eventFormatRecognizer>
+   
+   <testEvents>
+      <testEvent><![CDATA[]]></testEvent>
+  </testEvents>
+   
+   <parsingInstructions>
+     
+     <!-- parsing common fields -->
+     
+     <!-- 
+      -->
+
+     <collectAndSetAttrByKeyValuePair sep=',[' src="$_rawmsg">
+           <attrKeyMap attr="_encoding" key="[EncodingFormat]="/>
+           <attrKeyMap attr="deviceTime" key="[DeviceTime]="/>
+           <attrKeyMap attr="_sourceName" key="[SourceName]="/>
+           <attrKeyMap attr="_id" key="[EventType]="/>
+           <attrKeyMap attr="eventAction" key="[EventAction]="/>
+           <attrKeyMap attr="reptDevIpAddr" key="[ReptDevIp]="/>
+           <attrKeyMap attr="reptDevName" key="[ReptDevName]="/>
+           <attrKeyMap attr="_body" key="[EventString]="/>
+     </collectAndSetAttrByKeyValuePair>
+
+     <setEventAttribute attr="eventType">combineMsgId("Win", "-", $_sourceName, "-", $_id)</setEventAttribute>
+     <setEventAttribute attr="destIpAddr">$reptDevIpAddr</setEventAttribute> 
+
+     <choose>
+
+       <when test='$_id IN "528, 538"'>
+
+         <collectAndSetAttrByPos src="$_body" sep='::SEP::'>
+           <attrPosMap attr="user" pos='1'/>
+           <attrPosMap attr="domain" pos='2'/>
+           <attrPosMap attr="winLogonId" pos='3'/>
+           <attrPosMap attr="winLogonType" pos='4'/>
+	   <attrKeyMap attr="srcIpAddr" pos='13'/>
+           <attrKeyMap attr="srcIpPort" pos='14'/>
+	 </collectAndSetAttrByPos>
+
+         <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+       </when>
+
+
+       <when test='$_id = "539"'>
+
+         <collectAndSetAttrByPos src="$_body" sep='::SEP::'>
+           <attrPosMap attr="user" pos='1'/>
+           <attrPosMap attr="domain" pos='2'/>
+           <attrPosMap attr="winLogonId" pos='3'/>
+           <attrPosMap attr="winLogonType" pos='4'/>
+	 </collectAndSetAttrByPos>
+
+         <setEventAttribute attr="eventSeverity">10</setEventAttribute>
+       </when>
+
+       <when test='$_id IN "529, 530, 531, 532, 533, 534, 535, 536, 537"'>
+         <collectAndSetAttrByPos src="$_body" sep='::SEP::'>
+           <attrPosMap attr="user" pos='1'/>
+           <attrPosMap attr="domain" pos='2'/>
+           <attrPosMap attr="winLogonId" pos='3'/>
+           <attrPosMap attr="winLogonType" pos='4'/>
+	   <attrKeyMap attr="srcIpAddr" pos='13'/>
+	 </collectAndSetAttrByPos>
+
+         <setEventAttribute attr="eventSeverity">3</setEventAttribute>
+       </when>
+
+
+       <when test='$_id = "540"'>
+         <!--
+          -->
+         <collectAndSetAttrByPos sep='::SEP::' src="$_body">
+           <attrPosMap attr="user" pos='1'/>
+           <attrPosMap attr="domain" pos='2'/>
+           <attrPosMap attr="winLogonId" pos='3'/>
+           <attrPosMap attr="winLogonType" pos='4'/>
+	   <attrPosMap attr="srcIpAddr" pos='14'/>
+           <attrPosMap attr="srcIpPort" pos='15'/>
+         </collectAndSetAttrByPos>
+
+         <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+       </when>
+
+
+       <when test='$_id = "552"'>
+         <collectAndSetAttrByPos sep='::SEP::' src="$_body">
+           <attrPosMap attr="user" pos='1'/>
+           <attrPosMap attr="domain" pos='2'/>
+           <attrPosMap attr="winLogonId" pos='3'/>
+           <attrPosMap attr="targetUser" pos='6'/>
+	   <attrPosMap attr="targetDomain" pos='7'/>
+	   <attrPosMap attr="srcIpAddr" pos='14'/>
+           <attrPosMap attr="srcIpPort" pos='15'/>
+         </collectAndSetAttrByPos>
+
+         <setEventAttribute attr="eventSeverity">3</setEventAttribute>
+       </when>
+       
+       <when test='$_id = "560"'>
+         <!-- various
+          -->
+         
+         <collectAndSetAttrByPos sep='::SEP::' src="$_body">
+           <attrPosMap attr="osObjType" pos='2'/>
+           <attrPosMap attr="osObjName" pos='3'/>
+           <attrPosMap attr="osObjHandleID" pos='4'/>
+           <attrPosMap attr="_user" pos='11'/>
+	   <attrPosMap attr="osObjAccessType" pos='14'/>
+           <attrPosMap attr="procName" pos='16'/>
+         </collectAndSetAttrByPos>
+         
+	 <choose>
+           <when test='$_user != "-"'>
+             <collectAndSetAttrByPos sep='::SEP::' src="$_body">
+               <attrPosMap attr="user" pos='11'/>
+               <attrPosMap attr="domain" pos='12'/>
+               <attrPosMap attr="winLogonId" pos='13'/>
+             </collectAndSetAttrByPos>
+           </when>
+           <otherwise>
+             <collectAndSetAttrByPos sep='::SEP::' src="$_body">
+               <attrPosMap attr="user" pos='8'/>
+               <attrPosMap attr="domain" pos='9'/>
+               <attrPosMap attr="winLogonId" pos='10'/>
+             </collectAndSetAttrByPos>
+           </otherwise>
+         </choose>
+         
+         <collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-540 OR Win-Security-528">
+           <when test = '$winLogonId = $AnotherEvent.winLogonId'>
+             <setEventAttribute attr="srcIpAddr">$AnotherEvent.srcIpAddr</setEventAttribute>
+           </when>
+         </collectAndSetAttrFromAnotherEvent>	
+         
+         <choose>
+             <when test='$eventAction = "8"'>
+	          <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+             </when>
+             <otherwise>      
+	          <setEventAttribute attr="eventSeverity">3</setEventAttribute>
+             </otherwise>
+         </choose>
+
+       </when>
+
+
+
+       <when test='$_id = "567"'>
+         <!-- various
+          -->
+         
+         <collectAndSetAttrByPos src="$_body" sep='::SEP::'>
+           <attrPosMap attr="procName"  pos='1'/>
+ 	   <attrPosMap attr="osObjType" pos='2'/>
+           <attrPosMap attr="osObjHandleID" pos='3'/>
+           <attrPosMap attr="osObjAccessType" pos='4'/>
+         </collectAndSetAttrByPos>
+         <collectAndSetAttrFromAnotherEvent AnotherEventType="Win-Security-560">
+           <when test = '$osObjHandleID = $AnotherEvent.osObjHandleID'>
+             <setEventAttribute attr="srcIpAddr">$AnotherEvent.srcIpAddr</setEventAttribute>
+	       <setEventAttribute attr="user">$AnotherEvent.user</setEventAttribute>
+             <setEventAttribute attr="domain">$AnotherEvent.domain</setEventAttribute>
+             <setEventAttribute attr="winLogonId">$AnotherEvent.winLogonId</setEventAttribute>
+	     <setEventAttribute attr="osObjName">$AnotherEvent.osObjName</setEventAttribute>
+           </when>
+         </collectAndSetAttrFromAnotherEvent>
+
+         <choose>
+             <when test='$eventAction = "8"'>
+	          <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+             </when>
+             <otherwise>      
+	          <setEventAttribute attr="eventSeverity">3</setEventAttribute>
+             </otherwise>
+         </choose>
+       </when>
+       
+       <when test='$_id = "578"'>
+         <!--  SUCCESSFUL NETWORK LOGON
+          -->
+         <collectAndSetAttrByPos src="$_body" sep='::SEP::'>
+           <attrKeyMap attr="_user" key="Client User Name: "/>
+         </collectAndSetAttrByPos>
+	   <choose>
+           <when test='$_user != "-"'>
+             <collectAndSetAttrByPos src="$_body" sep='::SEP::'>
+               <attrPosMap attr="user" pos='7'/>
+               <attrPosMap attr="domain" pos='8'/>
+               <attrPosMap attr="winLogonId" pos='9'/>
+             </collectAndSetAttrByPos>
+           </when>
+           <otherwise>
+             <collectAndSetAttrByPos src="$_body" sep='::SEP::'>
+               <attrPosMap attr="user" pos='4'/>
+               <attrPosMap attr="domain" pos='5'/>
+               <attrPosMap attr="winLogonId" pos='6'/>
+             </collectAndSetAttrByPos>
+           </otherwise>
+         </choose>
+
+         <collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-540 OR Win-Security-528">
+           <when test = '$winLogonId = $AnotherEvent.winLogonId'>
+             <setEventAttribute attr="srcIpAddr">$AnotherEvent.srcIpAddr</setEventAttribute>
+           </when>
+         </collectAndSetAttrFromAnotherEvent>	
+
+         <choose>
+             <when test='$eventAction = "8"'>
+	          <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+             </when>
+             <otherwise>      
+	          <setEventAttribute attr="eventSeverity">3</setEventAttribute>
+             </otherwise>
+         </choose>
+
+       </when>
+       
+
+       <when test='$_id IN "592, 593"'>
+         <!--  SUCCESSFUL NETWORK LOGON
+          -->
+         <collectAndSetAttrByPos src="$_body" sep='::SEP::'>
+           <attrPosMap attr="fileName" pos='2'/>
+           <attrPosMap attr="user" pos='4'/>
+           <attrPosMap attr="domain" pos='5'/>
+           <attrPosMap attr="winLogonId" pos='6'/>
+         </collectAndSetAttrByPos>
+
+         <collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-540 OR Win-Security-528">
+           <when test = '$winLogonId = $AnotherEvent.winLogonId'>
+             <setEventAttribute attr="srcIpAddr">$AnotherEvent.srcIpAddr</setEventAttribute>
+           </when>
+         </collectAndSetAttrFromAnotherEvent>	
+
+         <choose>
+             <when test='$eventAction = "8"'>
+	          <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+             </when>
+             <otherwise>      
+	          <setEventAttribute attr="eventSeverity">3</setEventAttribute>
+             </otherwise>
+         </choose>
+       </when>
+
+
+       <when test='$_id = "672"'>
+         <collectAndSetAttrByPos src="$_body" sep='::SEP::'>
+           <attrPosMap attr="winKerbFailCode" pos='10'/>
+         </collectAndSetAttrByPos>
+         
+         <choose>
+           <when test='$winKerbFailCode != "-"'>
+             <setEventAttribute attr="eventType">combineMsgId("Win", "-", $_sourceName, "-", $_id, "-", "failure")</setEventAttribute>
+             <setEventAttribute attr="eventSeverity">3</setEventAttribute>
+           </when>
+           <otherwise>
+             <setEventAttribute attr="eventType">combineMsgId("Win", "-", $_sourceName, "-", $_id, "-", "success")</setEventAttribute>
+             <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+           </otherwise>
+         </choose>
+
+         <collectAndSetAttrByPos src="$_body" sep='::SEP::'>
+           <attrPosMap attr="user" pos='1'/>
+           <attrPosMap attr="domain" pos='2'/>
+           <attrPosMap attr="winSrvcName" pos='4'/>
+           <attrPosMap attr="srcIpAddr" pos='9'/>
+         </collectAndSetAttrByPos>
+       </when>
+       
+
+       <when test='$_id = "675"'>
+         <!-- FAILED DOMAIN AUTH VIA KERBEROS
+          -->
+         
+         <collectAndSetAttrByPos src="$_body" sep='::SEP::'>
+           <attrPosMap attr="user" pos='1'/>
+           <attrPosMap attr="domain" pos='2'/>
+           <attrPosMap attr="srcIpAddr" pos='6'/>
+         </collectAndSetAttrByPos>
+         
+         <setEventAttribute attr="eventSeverity">3</setEventAttribute>
+       </when>
+       
+       
+       <when test='$_id = "673"'>
+         <collectAndSetAttrByPos src="$_body" sep='::SEP::'>
+           <attrPosMap attr="user" pos='1'/>
+           <attrPosMap attr="domain" pos='2'/>
+           <attrPosMap attr="winSrvcName" pos='3'/>
+           <attrPosMap attr="srcIpAddr" pos='6'/>
+         </collectAndSetAttrByPos>
+         <choose>
+           <when test='$eventAction = "8"'>
+             <setEventAttribute attr="eventType">combineMsgId("Win", "-", $_sourceName, "-", $_id, "-", "success")</setEventAttribute>
+             <setEventAttribute attr="eventSeverity">2</setEventAttribute>
+           </when>
+           <otherwise>      
+             <setEventAttribute attr="eventType">combineMsgId("Win", "-", $_sourceName, "-", $_id, "-", "failure")</setEventAttribute>
+             <setEventAttribute attr="eventSeverity">5</setEventAttribute>
+           </otherwise>
+         </choose>		
+       </when>
+
+       <when test='$_id = "676"'>
+         <collectAndSetAttrByPos src="$_body" sep='::SEP::'>
+           <attrPosMap attr="user" pos='1'/>
+           <attrPosMap attr="domain" pos='2'/>
+           <attrPosMap attr="winSrvcName" pos='3'/>
+           <attrPosMap attr="srcIpAddr" pos='6'/>
+         </collectAndSetAttrByPos>
+         <setEventAttribute attr="eventSeverity">3</setEventAttribute>	
+       </when>
+
+
+       <when test='$_id IN "682, 683"'>
+         <collectAndSetAttrByPos src="$_body" sep='::SEP::'>
+           <attrPosMap attr="user" pos='1'/>
+           <attrPosMap attr="domain" pos='2'/>
+           <attrPosMap attr="winLogonId" pos='3'/>
+           <attrPosMap attr="computer" pos='5'/>
+	   <attrPosMap attr="srcIpAddr" pos='6'/>
+         </collectAndSetAttrByPos>
+         <setEventAttribute attr="eventSeverity">1</setEventAttribute>		
+       </when>
+
+
+       <when test='$_id IN "624, 645"'>
+         <!-- USER ACCOUNT CREATED
+          -->
+
+         <collectAndSetAttrByPos src="$_body" sep='::SEP::'>
+           <attrPosMap attr="targetUser" pos='1'/>
+	   <attrPosMap attr="targetDomain" pos='2'/>
+           <attrPosMap attr="user" pos='4'/>
+           <attrPosMap attr="domain" pos='5'/>
+           <attrPosMap attr="winLogonId" pos='6'/>
+         </collectAndSetAttrByPos>
+
+         
+         <collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-540 OR Win-Security-528">
+           <when test = '$winLogonId = $AnotherEvent.winLogonId'>
+             <setEventAttribute attr="srcIpAddr">$AnotherEvent.srcIpAddr</setEventAttribute>
+           </when>
+         </collectAndSetAttrFromAnotherEvent>
+
+         <choose>
+           <when test='$eventAction = "8"'>
+             <setEventAttribute attr="eventSeverity">4</setEventAttribute>
+           </when>
+           <otherwise>      
+             <setEventAttribute attr="eventSeverity">7</setEventAttribute>
+           </otherwise>
+         </choose>		
+       </when>
+       
+       
+
+       <when test='$_id IN "625, 626, 642, 627, 629, 630, 643, 646, 647"'>
+
+         <collectAndSetAttrByPos src="$_body" sep='::SEP::'>
+           <attrPosMap attr="targetUser" pos='1'/>
+	   <attrPosMap attr="targetDomain" pos='2'/>
+           <attrPosMap attr="user" pos='4'/>
+           <attrPosMap attr="domain" pos='5'/>
+           <attrPosMap attr="winLogonId" pos='6'/>
+         </collectAndSetAttrByPos>
+
+         <collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-540 OR Win-Security-528">
+            <when test = '$winLogonId = $AnotherEventType.winLogonId'>
+               <setEventAttribute attr="srcIpAddr">$AnotherEventType.srcIpAddr</setEventAttribute>
+            </when>
+         </collectAndSetAttrFromAnotherEvent>
+		
+         <choose>
+           <when test='$eventAction = "8"'>
+             <setEventAttribute attr="eventSeverity">4</setEventAttribute>
+           </when>
+           <otherwise>      
+             <setEventAttribute attr="eventSeverity">7</setEventAttribute>
+           </otherwise>
+         </choose>		
+       </when>
+
+       <when test='$_id = "644"'>
+
+       <!-- USER ACCOUNT LOCKED OUT
+         -->
+
+         <collectAndSetAttrByPos src="$_body" sep='::SEP::'>
+	   <attrPosMap attr="user" pos='1'/>
+           <attrPosMap attr="computer" pos='3'/>
+	   <attrPosMap attr="domain" pos='5'/>
+	   <attrPosMap attr="winLogonId" pos='6'/>         
+         </collectAndSetAttrByPos>
+
+         <collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-540 OR Win-Security-528">
+           <when test = '$winLogonId = $AnotherEventType.winLogonId'>
+             <setEventAttribute attr="srcIpAddr">$AnotherEventType.srcIpAddr</setEventAttribute>
+           </when>
+         </collectAndSetAttrFromAnotherEvent>
+        <setEventAttribute attr="eventSeverity">10</setEventAttribute>		
+       </when>
+       
+       <when test='$_id IN "631, 635, 648, 653, 658, 663"'>
+
+           <!-- SECURITY ENABLED/DISABLED LOCAL/GLOBAL/UNIVERSAL GROUP CREATED
+            -->
+
+         <collectAndSetAttrByPos src="$_body" sep='::SEP::'>
+           <attrPosMap attr="targetUser" pos='1'/>
+	   <attrPosMap attr="targetDomain" pos='2'/>
+           <attrPosMap attr="user" pos='4'/>
+           <attrPosMap attr="domain" pos='5'/>
+           <attrPosMap attr="winLogonId" pos='6'/>
+         </collectAndSetAttrByPos>
+
+          <collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-540 OR Win-Security-528">
+             <when test = '$winLogonId = $AnotherEventType.winLogonId'>
+                <setEventAttribute attr="srcIpAddr">$AnotherEventType.srcIpAddr</setEventAttribute>
+             </when>
+          </collectAndSetAttrFromAnotherEvent>
+
+          <choose>
+           <when test='$eventAction = "8"'>
+             <setEventAttribute attr="eventSeverity">5</setEventAttribute>
+           </when>
+           <otherwise>      
+             <setEventAttribute attr="eventSeverity">7</setEventAttribute>
+           </otherwise>
+          </choose>
+		
+       </when>
+
+       <when test='$_id IN "632, 636, 650, 655, 660, 665"'>
+
+         <!-- SECURITY ENABLED/DISABLED LOCAL/GLOBAL/UNIVERSAL GROUP MEMBER ADDED
+           -->
+
+         <collectAndSetAttrByPos src="$_body" sep='::SEP::'>
+	   <attrPosMap attr="targetUser" pos='1'/>
+           <attrPosMap attr="targetUserGrp" pos='3'/>
+	   <attrPosMap attr="targetDomain" pos='4'/>
+           <attrPosMap attr="user" pos='6'/>
+           <attrPosMap attr="domain" pos='7'/>
+           <attrPosMap attr="winLogonId" pos='8'/>
+         </collectAndSetAttrByPos>
+
+         <collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-540 OR Win-Security-528">
+           <when test = '$winLogonId = $AnotherEventType.winLogonId'>
+              <setEventAttribute attr="srcIpAddr">$AnotherEventType.srcIpAddr</setEventAttribute>
+           </when>
+        </collectAndSetAttrFromAnotherEvent>
+
+          <choose>
+           <when test='$eventAction = "8"'>
+             <setEventAttribute attr="eventSeverity">5</setEventAttribute>
+           </when>
+           <otherwise>      
+             <setEventAttribute attr="eventSeverity">7</setEventAttribute>
+           </otherwise>
+          </choose>
+		
+      </when>
+
+      <when test='$_id IN "633, 637, 651, 656, 661, 666"'>
+
+       <!-- SECURITY ENABLED/DISABLED LOCAL/GLOBAL/UNIVERSAL GROUP MEMBER REMOVED
+         -->
+
+         <collectAndSetAttrByPos src="$_body" sep='::SEP::'>
+           <attrPosMap attr="targetUser" pos='1'/>
+	   <attrPosMap attr="targetUserGrp" pos='3'/>
+	   <attrPosMap attr="targetDomain" pos='4'/>
+           <attrPosMap attr="user" pos='6'/>
+           <attrPosMap attr="domain" pos='7'/>
+           <attrPosMap attr="winLogonId" pos='8'/>
+         </collectAndSetAttrByPos>
+
+         <collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-540 OR Win-Security-528">
+           <when test = '$winLogonId = $AnotherEventType.winLogonId'>
+             <setEventAttribute attr="srcIpAddr">$AnotherEventType.srcIpAddr</setEventAttribute>
+           </when>
+         </collectAndSetAttrFromAnotherEvent>
+       
+         <choose>
+           <when test='$eventAction = "8"'>
+             <setEventAttribute attr="eventSeverity">5</setEventAttribute>
+           </when>
+           <otherwise>      
+             <setEventAttribute attr="eventSeverity">7</setEventAttribute>
+           </otherwise>
+         </choose>
+     </when>
+
+     <when test='$_id IN "634, 638, 652, 657, 662, 667, 639, 641, 649, 654, 659, 664"'>
+
+        <!-- SECURITY ENABLED/DISABLED LOCAL/GLOBAL/UNIVERSAL GROUP DELETED
+          -->
+
+        <!-- SECURITY ENABLED/DISABLED LOCAL/GLOBAL/UNIVERSAL GROUP CHANGED
+          -->
+
+         <collectAndSetAttrByPos src="$_body" sep='::SEP::'>
+           <attrPosMap attr="targetUser" pos='1'/>
+	   <attrPosMap attr="targetDomain" pos='2'/>
+           <attrPosMap attr="user" pos='4'/>
+           <attrPosMap attr="domain" pos='5'/>
+           <attrPosMap attr="winLogonId" pos='6'/>
+         </collectAndSetAttrByPos>
+
+         <collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-540 OR Win-Security-528">
+           <when test = '$winLogonId = $AnotherEventType.winLogonId'>
+             <setEventAttribute attr="srcIpAddr">$AnotherEventType.srcIpAddr</setEventAttribute>
+           </when>
+         </collectAndSetAttrFromAnotherEvent>
+       
+         <choose>
+           <when test='$eventAction = "8"'>
+             <setEventAttribute attr="eventSeverity">5</setEventAttribute>
+           </when>
+           <otherwise>      
+             <setEventAttribute attr="eventSeverity">7</setEventAttribute>
+           </otherwise>
+         </choose>
+     </when>
+
+     <when test='$_id IN "670, 671"'>
+         <!-- 670: add SID hostory failure, 671: account unlocked
+           -->
+
+         <collectAndSetAttrByPos src="$_body" sep='::SEP::'>
+           <attrPosMap attr="targetUser" pos='1'/>
+	   <attrPosMap attr="targetDomain" pos='2'/>
+           <attrPosMap attr="user" pos='4'/>
+           <attrPosMap attr="domain" pos='5'/>
+           <attrPosMap attr="winLogonId" pos='6'/>
+         </collectAndSetAttrByPos>
+
+         <collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-540 OR Win-Security-528">
+           <when test = '$winLogonId = $AnotherEventType.winLogonId'>
+             <setEventAttribute attr="srcIpAddr">$AnotherEventType.srcIpAddr</setEventAttribute>
+           </when>
+         </collectAndSetAttrFromAnotherEvent>
+
+         <setEventAttribute attr="eventSeverity">5</setEventAttribute>	
+     </when>
+
+     <when test='$_id = "669"'>
+         <!-- 670: add SID hostory success
+           -->
+
+         <collectAndSetAttrByPos src="$_body" sep='::SEP::'>
+           <attrPosMap attr="targetUser" pos='1'/>
+	   <attrPosMap attr="targetDomain" pos='2'/>
+           <attrPosMap attr="user" pos='4'/>
+           <attrPosMap attr="domain" pos='5'/>
+           <attrPosMap attr="winLogonId" pos='6'/>
+         </collectAndSetAttrByPos>
+
+       <collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-540 OR Win-Security-528">
+          <when test = '$winLogonId = $AnotherEventType.winLogonId'>
+             <setEventAttribute attr="srcIpAddr">$AnotherEventType.srcIpAddr</setEventAttribute>
+          </when>
+       </collectAndSetAttrFromAnotherEvent>
+
+       <setEventAttribute attr="eventSeverity">4</setEventAttribute>	
+     </when>
+
+     <when test='$_id IN "640, 668"'>
+         <!-- 640: account database change, 668: group type change
+       <13>Dec 12 10:09:00 ADS-Pri.ProspectHills.net MSWinEventLog	1	Security	1756	Wed Dec 12 10:08:53 2007	668	Security	SYSTEM	User	Success Audit	ADS-PRI	Group Type changed		Caller User Name: partha   Caller Domain: PROSPECTHILLS		Caller Logon ID: (0x0, 0x158E87) 	Target Account Name: johnDoe  Target Domain: PROSPECTHILLS	Target Account ID: PROSPECTHILLS\johnDoe 
+      -->
+
+         <collectAndSetAttrByPos src="$_body" sep='::SEP::'>
+           <attrPosMap attr="targetUser" pos='1'/>
+	   <attrPosMap attr="targetDomain" pos='2'/>
+           <attrPosMap attr="user" pos='4'/>
+           <attrPosMap attr="domain" pos='5'/>
+           <attrPosMap attr="winLogonId" pos='6'/>
+         </collectAndSetAttrByPos>
+
+         <collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-540 OR Win-Security-528">
+           <when test = '$winLogonId = $AnotherEventType.winLogonId'>
+             <setEventAttribute attr="srcIpAddr">$AnotherEventType.srcIpAddr</setEventAttribute>
+           </when>
+         </collectAndSetAttrFromAnotherEvent>
+       
+         <choose>
+           <when test='$eventAction = "8"'>
+             <setEventAttribute attr="eventSeverity">5</setEventAttribute>
+           </when>
+           <otherwise>      
+             <setEventAttribute attr="eventSeverity">7</setEventAttribute>
+           </otherwise>
+         </choose>
+     </when>
+
+
+      <when test='$_id = "680"'>
+
+      <!-- SUCCESSFUL / FAILED DOMAIN RESOURCE ACCESS VIA NTLM 
+       -->
+
+         <collectAndSetAttrByPos src="$_body" sep='::SEP::'>
+           <attrPosMap attr="winLogonId" pos='1'/>
+	   <attrPosMap attr="user" pos='2'/>
+           <attrPosMap attr="computer" pos='3'/>
+           <attrPosMap attr="winLogonFailCode" pos='4'/>
+         </collectAndSetAttrByPos>
+
+       <choose>
+         <when test='$winLogonFailCode != "-"'>
+              <setEventAttribute attr="eventType">combineMsgId("Win", "-", $_sourceName, "-", $_id, "-", "failure")</setEventAttribute>
+              <setEventAttribute attr="eventSeverity">3</setEventAttribute>
+          </when>
+          <otherwise>
+              <setEventAttribute attr="eventType">combineMsgId("Win", "-", $_sourceName, "-", $_id, "-", "success")</setEventAttribute>
+              <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+          </otherwise>
+       </choose>
+     </when>
+     <when test='$_id = "595"'>
+
+     <!-- 
+      -->
+
+         <collectAndSetAttrByPos src="$_body" sep='::SEP::'>
+           <attrPosMap attr="user" pos='4'/>
+           <attrPosMap attr="domain" pos='5'/>
+           <attrPosMap attr="winLogonId" pos='6'/>
+         </collectAndSetAttrByPos>
+
+         <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+     </when>
+
+
+       <when test='$_id = "576"'>
+         <!--
+          -->
+         <collectAndSetAttrByPos sep='::SEP::' src="$_body">
+           <attrPosMap attr="user" pos='1'/>
+           <attrPosMap attr="domain" pos='2'/>
+           <attrPosMap attr="winLogonId" pos='3'/>
+         </collectAndSetAttrByPos>
+
+         <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+       </when>
+
+     <when test='$_id = "684"'>
+     <!-- 
+         best effort guessing.  no documentation on the position of fields.
+      -->
+
+         <collectAndSetAttrByPos sep='::SEP::' src="$_body">
+           <attrPosMap attr="targetUser" pos='1'/>
+           <attrPosMap attr="targetDomain" pos='2'/>
+           <attrKeyMap attr="_targetAcct" pos='3'/>
+           <attrPosMap attr="user" pos='4'/>
+           <attrPosMap attr="domain" pos='5'/>
+           <attrPosMap attr="winLogonId" pos='6'/>
+         </collectAndSetAttrByPos>
+
+       <collectFieldsByRegex src="$_targetAcct">
+           <regex> <![CDATA[<_targetDomain:gPatWord>\<:gPatWord>]]> </regex>
+       </collectFieldsByRegex>
+ 
+       <setEventAttribute attr="targetDomain">$_targetDomain</setEventAttribute> 
+
+       <collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-540 OR Win-Security-528">
+          <when test = '$winLogonId = $AnotherEventType.winLogonId'>
+             <setEventAttribute attr="srcIpAddr">$AnotherEventType.srcIpAddr</setEventAttribute>
+          </when>
+       </collectAndSetAttrFromAnotherEvent>
+
+       <setEventAttribute attr="eventSeverity">1</setEventAttribute>	
+     </when>
+
+
+     <when test='$_id = "685"'>
+     <!-- ACCOUNT NAME CHANGED
+      -->
+
+         <collectAndSetAttrByPos sep='::SEP::' src="$_body">
+          <attrPosMap attr="targetUser" pos='1'/>
+	  <attrPosMap attr="targetDomain" pos='3'/>
+          <attrPosMap attr="user" pos='5'/>
+          <attrPosMap attr="domain" pos='6'/>
+          <attrPosMap attr="winLogonId" pos='7'/>
+         </collectAndSetAttrByPos>
+
+       <collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-540 OR Win-Security-528">
+          <when test = '$winLogonId = $AnotherEventType.winLogonId'>
+             <setEventAttribute attr="srcIpAddr">$AnotherEventType.srcIpAddr</setEventAttribute>
+          </when>
+       </collectAndSetAttrFromAnotherEvent>
+
+       <setEventAttribute attr="eventSeverity">2</setEventAttribute>			
+     </when>
+
+     <when test='$_id = "686"'>
+     <!-- password of user accessed
+      -->
+
+         <collectAndSetAttrByPos sep='::SEP::' src="$_body">
+           <attrPosMap attr="targetUser" pos='1'/>
+           <attrPosMap attr="targetDomain" pos='2'/>
+           <attrPosMap attr="user" pos='3'/>
+           <attrPosMap attr="domain" pos='4'/>
+           <attrPosMap attr="winLogonId" pos='5'/>
+         </collectAndSetAttrByPos>
+
+       <collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-540 OR Win-Security-528">
+          <when test = '$winLogonId = $AnotherEventType.winLogonId'>
+             <setEventAttribute attr="srcIpAddr">$AnotherEventType.srcIpAddr</setEventAttribute>
+          </when>
+       </collectAndSetAttrFromAnotherEvent>	
+
+       <setEventAttribute attr="eventSeverity">1</setEventAttribute>	
+     </when>      
+
+
+     <when test='$_id IN "687, 688"'>
+     <!-- various
+      -->
+
+         <collectAndSetAttrByPos sep='::SEP::' src="$_body">
+           <attrPosMap attr="targetUser" pos='1'/>
+           <attrPosMap attr="targetDomain" pos='2'/>
+           <attrPosMap attr="user" pos='4'/>
+           <attrPosMap attr="domain" pos='5'/>
+           <attrPosMap attr="winLogonId" pos='6'/>
+         </collectAndSetAttrByPos>
+
+       <collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-540 OR Win-Security-528">
+          <when test = '$winLogonId = $AnotherEventType.winLogonId'>
+             <setEventAttribute attr="srcIpAddr">$AnotherEventType.srcIpAddr</setEventAttribute>
+          </when>
+       </collectAndSetAttrFromAnotherEvent>
+
+       <setEventAttribute attr="eventSeverity">1</setEventAttribute>			
+   </when>
+
+
+
+   <when test='$_id IN "689, 690, 691, 692, 693, 694, 695, 696"'>
+     <!-- various
+      -->
+
+         <collectAndSetAttrByPos sep='::SEP::' src="$_body">
+           <attrPosMap attr="targetUser" pos='3'/>
+           <attrPosMap attr="targetDomain" pos='4'/>
+           <attrPosMap attr="user" pos='6'/>
+           <attrPosMap attr="domain" pos='7'/>
+           <attrPosMap attr="winLogonId" pos='8'/>
+         </collectAndSetAttrByPos>
+
+       <collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-540 OR Win-Security-528">
+          <when test = '$winLogonId = $AnotherEventType.winLogonId'>
+             <setEventAttribute attr="srcIpAddr">$AnotherEventType.srcIpAddr</setEventAttribute>
+          </when>
+       </collectAndSetAttrFromAnotherEvent>
+
+         <choose>
+           <when test='$eventAction = "8"'>
+             <setEventAttribute attr="eventSeverity">3</setEventAttribute>
+           </when>
+           <otherwise>      
+             <setEventAttribute attr="eventSeverity">5</setEventAttribute>
+           </otherwise>
+         </choose>
+		
+   </when>
+
+
+   <when test='$_id = "608"'>
+     <!-- user right assigned
+      -->
+
+         <collectAndSetAttrByPos sep='::SEP::' src="$_body">
+          <attrPosMap attr="_targetDomUser" pos='2'/>
+          <attrPosMap attr="user" pos='3'/>
+          <attrPosMap attr="domain" pos='4'/>
+          <attrPosMap attr="winLogonId" pos='5'/>
+         </collectAndSetAttrByPos>
+
+       <collectFieldsByRegex src="$_targetDomUser">
+           <regex> <![CDATA[ <_targetDomain:gPatWord>\<_targetUser:gPatWord>  ]]> </regex>
+       </collectFieldsByRegex>
+ 
+       <setEventAttribute attr="targetDomain">$_targetDomain</setEventAttribute> 
+       <setEventAttribute attr="targetUser">$_targetUser</setEventAttribute> 
+
+       <collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-540 OR Win-Security-528">
+          <when test = '$winLogonId = $AnotherEventType.winLogonId'>
+             <setEventAttribute attr="srcIpAddr">$AnotherEventType.srcIpAddr</setEventAttribute>
+          </when>
+       </collectAndSetAttrFromAnotherEvent>
+
+         <choose>
+           <when test='$eventAction = "8"'>
+             <setEventAttribute attr="eventSeverity">4</setEventAttribute>
+           </when>
+           <otherwise>      
+             <setEventAttribute attr="eventSeverity">7</setEventAttribute>
+           </otherwise>
+         </choose>
+   </when>
+
+
+   <when test='$_id = "609"'>
+     <!-- user right removed
+      -->
+
+         <collectAndSetAttrByPos sep='::SEP::' src="$_body">
+           <attrPosMap attr="_userRight" pos='1'/>
+           <attrPosMap attr="user" pos='3'/>
+           <attrPosMap attr="domain" pos='4'/>
+           <attrPosMap attr="winLogonId" pos='5'/>
+         </collectAndSetAttrByPos>
+
+       <collectFieldsByRegex src="$_userRight">
+           <regex> <![CDATA[ <_targetUser:gPatWord> Removed From <_targetUserGrp:gPatWord>]]> </regex>
+       </collectFieldsByRegex>
+ 
+       <setEventAttribute attr="targetUserGrp">$_targetUserGrp</setEventAttribute> 
+       <setEventAttribute attr="targetUser">$_targetUser</setEventAttribute> 
+
+       <collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-540 OR Win-Security-528">
+          <when test = '$winLogonId = $AnotherEventType.winLogonId'>
+             <setEventAttribute attr="srcIpAddr">$AnotherEventType.srcIpAddr</setEventAttribute>
+          </when>
+       </collectAndSetAttrFromAnotherEvent>
+
+         <choose>
+           <when test='$eventAction = "8"'>
+             <setEventAttribute attr="eventSeverity">4</setEventAttribute>
+           </when>
+           <otherwise>      
+             <setEventAttribute attr="eventSeverity">7</setEventAttribute>
+           </otherwise>
+         </choose>
+   </when>
+
+   <when test='$_id IN "610, 611, 620"'>
+     <!-- windows trust domain added/modified/removed
+      -->
+
+         <collectAndSetAttrByPos sep='::SEP::' src="$_body">
+	    <attrPosMap attr="targetDomain" pos='1'/>
+            <attrPosMap attr="user" pos='3'/>
+            <attrPosMap attr="domain" pos='4'/>
+            <attrPosMap attr="winLogonId" pos='5'/>
+         </collectAndSetAttrByPos>
+
+       <collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-540 OR Win-Security-528">
+          <when test = '$winLogonId = $AnotherEventType.winLogonId'>
+             <setEventAttribute attr="srcIpAddr">$AnotherEventType.srcIpAddr</setEventAttribute>
+          </when>
+       </collectAndSetAttrFromAnotherEvent>
+
+         <choose>
+           <when test='$eventAction = "8"'>
+             <setEventAttribute attr="eventSeverity">5</setEventAttribute>
+           </when>
+           <otherwise>      
+             <setEventAttribute attr="eventSeverity">8</setEventAttribute>
+           </otherwise>
+         </choose>
+   </when>   
+
+      <when test='$_id IN "621, 622"'>
+       <!-- 
+          best effort guessing, no documentation
+         -->
+
+         <collectAndSetAttrByPos sep='::SEP::' src="$_body">
+           <attrPosMap attr="_targetUser" pos='2'/>
+           <attrPosMap attr="user" pos='4'/>
+           <attrPosMap attr="domain" pos='5'/>
+           <attrPosMap attr="winLogonId" pos='6'/>
+         </collectAndSetAttrByPos>
+
+       <collectAndSetAttrByRegex src="$_targetUser">
+           <regex> <![CDATA[ <targetUserDomain:gPatWord>\<targetUser:gPatWord>  ]]> </regex>
+       </collectAndSetAttrByRegex>
+
+       <collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-540 OR Win-Security-528">
+          <when test = '$winLogonId = $AnotherEventType.winLogonId'>
+             <setEventAttribute attr="srcIpAddr">$AnotherEventType.srcIpAddr</setEventAttribute>
+          </when>
+       </collectAndSetAttrFromAnotherEvent>
+	
+         <choose>
+           <when test='$eventAction = "8"'>
+             <setEventAttribute attr="eventSeverity">5</setEventAttribute>
+           </when>
+           <otherwise>      
+             <setEventAttribute attr="eventSeverity">8</setEventAttribute>
+           </otherwise>
+         </choose>
+      </when>
+
+      <when test='$_id = "612"'>
+
+        <!-- kerberos policy, QoS policy, audit policy
+         -->
+
+         <collectAndSetAttrByPos sep='::SEP::' src="$_body">
+           <attrPosMap attr="user" pos='15'/>
+           <attrPosMap attr="domain" pos='16'/>
+           <attrPosMap attr="winLogonId" pos='17'/>
+         </collectAndSetAttrByPos>
+
+       <collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-540 OR Win-Security-528">
+          <when test = '$winLogonId = $AnotherEventType.winLogonId'>
+             <setEventAttribute attr="srcIpAddr">$AnotherEventType.srcIpAddr</setEventAttribute>
+          </when>
+       </collectAndSetAttrFromAnotherEvent>
+		
+         <choose>
+           <when test='$eventAction = "8"'>
+             <setEventAttribute attr="eventSeverity">5</setEventAttribute>
+           </when>
+           <otherwise>      
+             <setEventAttribute attr="eventSeverity">7</setEventAttribute>
+           </otherwise>
+         </choose>
+    </when>
+
+      <when test='$_id IN "617, 618, 619"'>
+
+        <!-- kerberos policy, QoS policy, audit policy
+         -->
+
+         <collectAndSetAttrByPos sep='::SEP::' src="$_body">
+           <attrPosMap attr="user" pos='1'/>
+           <attrPosMap attr="domain" pos='2'/>
+           <attrPosMap attr="winLogonId" pos='3'/>
+         </collectAndSetAttrByPos>
+
+       <collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-540 OR Win-Security-528">
+          <when test = '$winLogonId = $AnotherEventType.winLogonId'>
+             <setEventAttribute attr="srcIpAddr">$AnotherEventType.srcIpAddr</setEventAttribute>
+          </when>
+       </collectAndSetAttrFromAnotherEvent>
+		
+         <choose>
+           <when test='$eventAction = "8"'>
+             <setEventAttribute attr="eventSeverity">5</setEventAttribute>
+           </when>
+           <otherwise>      
+             <setEventAttribute attr="eventSeverity">7</setEventAttribute>
+           </otherwise>
+         </choose>
+    </when>
+
+
+    <when test='$_id = "517"'>
+     <!-- audit log cleared
+      -->
+
+         <collectAndSetAttrByPos sep='::SEP::' src="$_body">
+           <attrPosMap attr="user" pos='4'/>
+           <attrPosMap attr="domain" pos='5'/>
+           <attrPosMap attr="winLogonId" pos='6'/>
+         </collectAndSetAttrByPos>
+
+       <collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-540 OR Win-Security-528">
+          <when test = '$winLogonId = $AnotherEventType.winLogonId'>
+             <setEventAttribute attr="srcIpAddr">$AnotherEventType.srcIpAddr</setEventAttribute>
+          </when>
+       </collectAndSetAttrFromAnotherEvent>		
+
+         <choose>
+           <when test='$eventAction = "8"'>
+             <setEventAttribute attr="eventSeverity">5</setEventAttribute>
+           </when>
+           <otherwise>      
+             <setEventAttribute attr="eventSeverity">7</setEventAttribute>
+           </otherwise>
+         </choose>
+   </when>
+
+
+   <when test='$_id IN "514, 515, 518"'>
+     <!-- auth package loaded, trusted logon process registered, notofication package loaded 
+      -->
+
+         <collectAndSetAttrByPos sep='::SEP::' src="$_body">
+           <attrPosMap attr="procName" pos='1'/>
+         </collectAndSetAttrByPos>
+
+         <choose>
+           <when test='$eventAction = "8"'>
+             <setEventAttribute attr="eventSeverity">3</setEventAttribute>
+           </when>
+           <otherwise>      
+             <setEventAttribute attr="eventSeverity">6</setEventAttribute>
+           </otherwise>
+         </choose>
+
+   </when>
+
+   <when test='$_id = "520"'>
+     <!-- system time changed
+      -->
+
+
+         <collectAndSetAttrByPos sep='::SEP::' src="$_body">
+           <attrPosMap attr="procName" pos='2'/>           	
+           <attrPosMap attr="user" pos='6'/>
+           <attrPosMap attr="domain" pos='7'/>
+           <attrPosMap attr="winLogonId" pos='8'/>
+         </collectAndSetAttrByPos>
+
+       <collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-540 OR Win-Security-528">
+          <when test = '$winLogonId = $AnotherEventType.winLogonId'>
+             <setEventAttribute attr="srcIpAddr">$AnotherEventType.srcIpAddr</setEventAttribute>
+          </when>
+       </collectAndSetAttrFromAnotherEvent>
+
+         <choose>
+           <when test='$eventAction = "8"'>
+             <setEventAttribute attr="eventSeverity">3</setEventAttribute>
+           </when>
+           <otherwise>      
+             <setEventAttribute attr="eventSeverity">6</setEventAttribute>
+           </otherwise>
+         </choose>
+
+   </when>
+
+   <when test='$_id = "512"'>
+      <!-- windows staring up -->
+      <setEventAttribute attr="eventSeverity">2</setEventAttribute>
+   </when>
+
+   <when test='$_id = "513"'>
+      <!-- windows shutting down -->
+      <setEventAttribute attr="eventSeverity">2</setEventAttribute>
+   </when>
+
+   <when test='$_id = "613"'>
+      <!-- ipsec policy agent started -->
+      <setEventAttribute attr="eventSeverity">2</setEventAttribute>
+   </when>
+
+   <when test='$_id = "614"'>
+      <!-- windows policy agent disabled -->
+      <setEventAttribute attr="eventSeverity">5</setEventAttribute>
+   </when>
+
+   <when test='$_id = "616"'>
+      <!-- windows policy agent serious failure
+        -->
+      <setEventAttribute attr="eventSeverity">5</setEventAttribute>
+   </when>
+
+   <when test='$_id = "516"'>
+      <!-- internal resources for queueing audit messages exhausted
+        -->
+      <setEventAttribute attr="eventSeverity">7</setEventAttribute>
+   </when>
+
+   <when test='$_id = "519"'>
+      <!-- process using invalid LPC port
+        -->
+      <setEventAttribute attr="eventSeverity">5</setEventAttribute>
+   </when>
+
+
+
+   <when test='$_id = "562"'>
+     <!-- windows object closed 
+          best effort guessing, no doc
+      -->
+         <collectAndSetAttrByPos sep='::SEP::' src="$_body">
+           <attrPosMap attr="osObjHandleID" pos='2'/>
+       	   <attrPosMap attr="procName" pos='4'/>
+         </collectAndSetAttrByPos>
+
+         <collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-560">
+           <when test = '$osObjHandleID = $AnotherEventType.osObjHandleID'>
+              <setEventAttribute attr="srcIpAddr">$AnotherEventType.srcIpAddr</setEventAttribute>
+	      <setEventAttribute attr="user">$AnotherEventType.user</setEventAttribute>
+              <setEventAttribute attr="domain">$AnotherEventType.domain</setEventAttribute>
+              <setEventAttribute attr="winLogonId">$AnotherEventType.winLogonId</setEventAttribute>
+	      <setEventAttribute attr="osObjName">$AnotherEventType.osObjName</setEventAttribute>
+           </when>
+       </collectAndSetAttrFromAnotherEvent>
+
+         <choose>
+           <when test='$eventAction = "8"'>
+             <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+           </when>
+           <otherwise>      
+             <setEventAttribute attr="eventSeverity">4</setEventAttribute>
+           </otherwise>
+         </choose>
+  </when>
+
+  <when test='$_id = "563"'>
+     <!-- windows object open for delete
+       <13>Dec 12 10:09:00 ADS-Pri.ProspectHills.net MSWinEventLog	1	Security	1756	Wed Dec 12 10:08:53 2007	563	Security	SYSTEM	User	Success Audit	ADS-PRI	Object Open for Delete		Client User Name: partha   Client Domain: PROSPECTHILLS		Client Logon ID: (0x0, 0x158E87)  Object Type: File  New Handle ID: 144 	Image File Name: C:\WINDOWS\system32\notepad.exe Object Name:C:\ConfidentialFiles\ ProjectPlan.doc.txt  Accesses: WriteData (or AddFile) AppendData (or AddSubdirectory or CreatePipeInstance)
+      -->
+
+         <collectAndSetAttrByPos sep='::SEP::' src="$_body">
+          <attrPosMap attr="osObjType" pos='2'/>
+          <attrPosMap attr="osObjName" pos='3'/>
+          <attrPosMap attr="osObjHandleID" pos='4'/>
+          <attrPosMap attr="_user2" pos='8'/>
+          <attrPosMap attr="_domain2" pos='9'/>
+          <attrPosMap attr="_winLogonId2" pos='10'/>
+          <attrPosMap attr="_user1" pos='11'/>
+          <attrPosMap attr="_domain1" pos='12'/>
+          <attrPosMap attr="_winLogonId1" pos='13'/>
+          <attrPosMap attr="osObjAccessType" pos='14'/>
+         </collectAndSetAttrByPos>
+
+	 <choose>
+          <when test='$_user1 != "-"'>
+             <setEventAttribute attr="user">$_user1</setEventAttribute>
+             <setEventAttribute attr="domain">$_domain1</setEventAttribute>
+             <setEventAttribute attr="winLogonId">$_winLogonId1</setEventAttribute>
+          </when>
+          <otherwise>
+             <setEventAttribute attr="user">$_user2</setEventAttribute>
+             <setEventAttribute attr="domain">$_domain2</setEventAttribute>
+             <setEventAttribute attr="winLogonId">$_winLogonId2</setEventAttribute>
+          </otherwise>
+
+          <collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-540 OR Win-Security-528">
+             <when test = '$winLogonId = $AnotherEventType.winLogonId'>
+                <setEventAttribute attr="srcIpAddr">$AnotherEventType.srcIpAddr</setEventAttribute>
+             </when>
+          </collectAndSetAttrFromAnotherEvent>
+        </choose>
+
+         <choose>
+           <when test='$eventAction = "8"'>
+             <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+           </when>
+           <otherwise>      
+             <setEventAttribute attr="eventSeverity">4</setEventAttribute>
+           </otherwise>
+         </choose>
+   </when>
+
+      <when test='$_id = "564"'>
+        <!-- windows object deleted
+         -->
+         <collectAndSetAttrByPos sep='::SEP::' src="$_body">
+            <attrPosMap attr="osObjHandleID" pos='2'/>
+            <attrPosMap attr="procName" pos='4'/>
+         </collectAndSetAttrByPos>
+
+         <collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-560">
+            <when test = '$osObjHandleID = $AnotherEventType.osObjHandleID'>
+               <setEventAttribute attr="srcIpAddr">$AnotherEventType.srcIpAddr</setEventAttribute>
+	       <setEventAttribute attr="user">$AnotherEventType.user</setEventAttribute>
+               <setEventAttribute attr="domain">$AnotherEventType.domain</setEventAttribute>
+               <setEventAttribute attr="winLogonId">$AnotherEventType.winLogonId</setEventAttribute>
+	       <setEventAttribute attr="osObjName">$AnotherEventType.osObjName</setEventAttribute>
+            </when>
+         </collectAndSetAttrFromAnotherEvent>	
+
+         <choose>
+           <when test='$eventAction = "8"'>
+             <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+           </when>
+           <otherwise>      
+             <setEventAttribute attr="eventSeverity">4</setEventAttribute>
+           </otherwise>
+         </choose>
+     </when>
+
+
+   <when test='$_id = "806"'>
+      <!-- per user audit policy refreshed
+        -->
+         <choose>
+           <when test='$eventAction = "8"'>
+             <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+           </when>
+           <otherwise>      
+             <setEventAttribute attr="eventSeverity">3</setEventAttribute>
+           </otherwise>
+         </choose>
+   </when>
+
+   <when test='$_id = "807"'>
+      <!-- per user audit policy set
+        -->
+         <choose>
+           <when test='$eventAction = "8"'>
+             <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+           </when>
+           <otherwise>      
+             <setEventAttribute attr="eventSeverity">3</setEventAttribute>
+           </otherwise>
+         </choose>
+   </when>
+
+   <when test='$_id = "615"'>
+      <!-- windows ipsec policy changed
+        -->
+         <choose>
+           <when test='$eventAction = "8"'>
+             <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+           </when>
+           <otherwise>      
+             <setEventAttribute attr="eventSeverity">3</setEventAttribute>
+           </otherwise>
+         </choose>
+   </when>
+
+
+   <when test='$_id = "674"'>
+         <collectAndSetAttrByPos sep='::SEP::' src="$_body">
+           <attrPosMap attr="user" pos='1'/>
+           <attrPosMap attr="domain" pos='2'/>
+           <attrPosMap attr="winLogonId" pos='3'/>
+           <attrPosMap attr="srcIpAddr" pos='7'/>
+         </collectAndSetAttrByPos>
+      <setEventAttribute attr="eventSeverity">1</setEventAttribute>		
+   </when>
+
+   <when test='$_id = "677"'>
+     <collectAndSetAttrByPos sep='::SEP::' src="$_body">
+       <attrPosMap attr="user" pos='1'/>
+       <attrPosMap attr="domain" pos='2'/>
+       <attrPosMap attr="winLogonId" pos='3'/>
+       <attrPosMap attr="srcIpAddr" pos='6'/>
+     </collectAndSetAttrByPos>
+     <setEventAttribute attr="eventSeverity">3</setEventAttribute>		
+   </when>
+
+   <when test='$_id = "4672"'>
+     <collectAndSetAttrByPos sep='::SEP::' src="$_body">     
+       <attrPosMap attr="user" pos='2'/>
+       <attrPosMap attr="domain" pos='3'/>
+       <attrPosMap attr="winLogonId" pos='4'/>
+     </collectAndSetAttrByPos>
+     <setEventAttribute attr="eventSeverity">1</setEventAttribute>		
+   </when>
+
+   <when test='$_id = "4624"'>
+     <collectAndSetAttrByPos sep='::SEP::' src="$_body">     
+       <attrPosMap attr="user" pos='6'/>
+       <attrPosMap attr="domain" pos='7'/>
+       <attrPosMap attr="winLogonId" pos='8'/>
+       <attrPosMap attr="winLogonType" pos='9'/>
+       <attrPosMap attr="computer" pos='12'/>
+       <attrPosMap attr="procName" pos='18'/>
+       <attrPosMap attr="srcIpAddr" pos='19'/>
+       <attrPosMap attr="srcIpPort" pos='20'/>
+     </collectAndSetAttrByPos>
+     <setEventAttribute attr="eventSeverity">1</setEventAttribute>		
+   </when>
+
+     <when test='$_id = "4634"'>
+        <collectAndSetAttrByPos sep='::SEP::' src="$_body">     
+          <attrPosMap attr="user" pos='2'/>
+          <attrPosMap attr="domain" pos='3'/>
+          <attrPosMap attr="winLogonId" pos='4'/>
+	  <attrPosMap attr="winLogonType" pos='5'/>
+        </collectAndSetAttrByPos>
+        <setEventAttribute attr="eventSeverity">1</setEventAttribute>		
+     </when>
+
+     <when test='$_id = "4647"'>
+        <collectAndSetAttrByPos sep='::SEP::' src="$_body">     
+          <attrPosMap attr="user" pos='2'/>
+          <attrPosMap attr="domain" pos='3'/>
+          <attrPosMap attr="winLogonId" pos='4'/>
+        </collectAndSetAttrByPos>
+        <setEventAttribute attr="eventSeverity">1</setEventAttribute>		
+     </when>
+
+     <when test='$_id = "4740"'>
+        <collectAndSetAttrByPos sep='::SEP::' src="$_body">     
+          <attrPosMap attr="user" pos='1'/>
+          <attrPosMap attr="srcIpPort" pos='2'/>
+          <attrPosMap attr="domain" pos='6'/>
+          <attrPosMap attr="winLogonId" pos='7'/>
+        </collectAndSetAttrByPos>
+        <setEventAttribute attr="eventSeverity">10</setEventAttribute>		
+     </when>
+
+     <when test='$_id = "4625"'>
+        <collectAndSetAttrByPos sep='::SEP::' src="$_body">     
+          <attrPosMap attr="winLogonId" pos='4'/>
+          <attrPosMap attr="user" pos='6'/>
+          <attrPosMap attr="domain" pos='7'/>
+          <attrPosMap attr="failCodeStr" pos='9'/>
+          <attrPosMap attr="winLogonType" pos='11'/>
+          <attrPosMap attr="computer" pos='14'/>
+          <attrPosMap attr="procName" pos='19'/>
+          <attrPosMap attr="srcIpAddr" pos='20'/>
+          <attrPosMap attr="srcIpPort" pos='21'/>
+        </collectAndSetAttrByPos>
+        <setEventAttribute attr="eventSeverity">3</setEventAttribute>		
+     </when>
+
+      <when test='$_id = "4648"'>
+        <collectAndSetAttrByPos sep='::SEP::' src="$_body">     
+          <attrPosMap attr="user" pos='2'/>
+          <attrPosMap attr="domain" pos='3'/>
+          <attrPosMap attr="winLogonId" pos='4'/>
+          <attrPosMap attr="targetUser" pos='6'/>
+          <attrPosMap attr="targetDomain" pos='7'/>
+          <attrPosMap attr="srcIpAddr" pos='13'/>
+          <attrPosMap attr="srcIpPort" pos='14'/>
+        </collectAndSetAttrByPos>
+        <setEventAttribute attr="eventSeverity">3</setEventAttribute>		
+     </when>
+
+     <when test='$_id = "4768"'>
+        <collectAndSetAttrByPos sep='::SEP::' src="$_body">     
+          <attrPosMap attr="user" pos='1'/>
+          <attrPosMap attr="domain" pos='2'/>
+	   <attrPosMap attr="_resultCode" pos='7'/>
+          <attrPosMap attr="srcIpAddr" pos='10'/>
+          <attrPosMap attr="srcIpPort" pos='11'/>
+        </collectAndSetAttrByPos>
+        <choose> 
+           <when test='$result IN "-, 0x0"'>
+             <setEventAttribute attr="eventType">combineMsgId("Win", "-", $_OSModule, "-", $_id, "-", "success")</setEventAttribute>
+             <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+           </when>
+           <otherwise>
+             <setEventAttribute attr="eventType">combineMsgId("Win", "-", $_OSModule, "-", $_id, "-", "failure")</setEventAttribute>
+             <setEventAttribute attr="eventSeverity">3</setEventAttribute>
+           </otherwise>
+         </choose>		
+     </when>
+
+     <when test='$_id = "4778"'>
+        <collectAndSetAttrByPos sep='::SEP::' src="$_body">     
+          <attrPosMap attr="user" pos='1'/>
+          <attrPosMap attr="domain" pos='2'/>
+          <attrPosMap attr="winLogonId" pos='3'/>
+          <attrPosMap attr="srcIpAddr" pos='6'/>
+        </collectAndSetAttrByPos>
+        <setEventAttribute attr="eventSeverity">1</setEventAttribute>		
+     </when>
+
+     <when test='$_id = "4771"'>
+        <collectAndSetAttrByPos sep='::SEP::' src="$_body">     
+          <attrPosMap attr="user" pos='1'/>
+          <attrPosMap attr="winSrvcName" pos='3'/>
+          <attrPosMap attr="winKerbFailCode" pos='5'/> 
+	  <attrPosMap attr="srcIpAddr" pos='7'/>
+          <attrPosMap attr="srcIpPort" pos='8'/>
+        </collectAndSetAttrByPos>
+        <setEventAttribute attr="eventSeverity">3</setEventAttribute>		
+     </when>
+
+     <when test='$_id = "4769"'>
+        <collectAndSetAttrByPos sep='::SEP::' src="$_body">     
+          <attrPosMap attr="user" pos='1'/>
+          <attrPosMap attr="domain" pos='2'/>
+	  <attrPosMap attr="srcIpAddr" pos='7'/>
+          <attrPosMap attr="srcIpPort" pos='8'/>
+          <attrPosMap attr="_result" pos='9'/> 
+        </collectAndSetAttrByPos>
+	<choose> 
+           <when test='$result IN "-, 0x0"'>
+             <setEventAttribute attr="eventType">combineMsgId("Win", "-", $_OSModule, "-", $_id, "-", "success")</setEventAttribute>
+             <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+           </when>
+           <otherwise>
+             <setEventAttribute attr="eventType">combineMsgId("Win", "-", $_OSModule, "-", $_id, "-", "failure")</setEventAttribute>
+             <setEventAttribute attr="eventSeverity">3</setEventAttribute>
+           </otherwise>
+         </choose>		
+     </when>
+
+     <when test='$_id = "4773"'>
+        <collectAndSetAttrByPos sep='::SEP::' src="$_body">     
+          <attrPosMap attr="user" pos='1'/>
+	  <attrPosMap attr="domain" pos='2'/>
+          <attrPosMap attr="winSrvcName" pos='3'/>
+          <attrPosMap attr="winKerbFailCode" pos='5'/> 
+	  <attrPosMap attr="srcIpAddr" pos='6'/>
+          <attrPosMap attr="srcIpPort" pos='7'/>
+        </collectAndSetAttrByPos>
+        <setEventAttribute attr="eventSeverity">3</setEventAttribute>		
+     </when>
+
+     <when test='$_id = "4770"'>
+        <collectAndSetAttrByPos sep='::SEP::' src="$_body">     
+          <attrPosMap attr="user" pos='1'/>
+	  <attrPosMap attr="domain" pos='2'/>
+          <attrPosMap attr="winSrvcName" pos='3'/>
+	  <attrPosMap attr="srcIpAddr" pos='7'/>
+          <attrPosMap attr="srcIpPort" pos='8'/> 
+        </collectAndSetAttrByPos>
+        <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+     </when>
+
+     <when test='$_id = "4776"'>
+        <collectAndSetAttrByPos sep='::SEP::' src="$_body">     
+          <attrPosMap attr="user" pos='2'/>
+          <attrPosMap attr="srcIpAddr" pos='3'/>
+	  <attrPosMap attr="winLogonFailCode" pos='4'/>
+        </collectAndSetAttrByPos>
+	<choose>
+         <when test='$winLogonFailCode IN "-, 0x0"'>
+            <setEventAttribute attr="eventType">combineMsgId("Win", "-", $_OSModule, "-", $_id, "-", "success")</setEventAttribute>
+            <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+         </when>
+         <otherwise>
+           <setEventAttribute attr="eventType">combineMsgId("Win", "-", $_OSModule, "-", $_id, "-", "failure")</setEventAttribute>
+           <setEventAttribute attr="eventSeverity">3</setEventAttribute>            
+         </otherwise>
+       </choose>
+     </when>
+
+     <when test='$_id = "4777"'>
+        <collectAndSetAttrByPos sep='::SEP::' src="$_body">     
+          <attrPosMap attr="user" pos='2'/>
+	  <attrPosMap attr="computer" pos='3'/>
+          <attrPosMap attr="_errCode" pos='4'/>
+        </collectAndSetAttrByPos>
+        <setEventAttribute attr="eventSeverity">3</setEventAttribute>		
+     </when>
+
+     <when test='$_id = "4775"'>
+        <collectAndSetAttrByPos sep='::SEP::' src="$_body">     
+          <attrPosMap attr="user" pos='2'/>
+        </collectAndSetAttrByPos>
+        <setEventAttribute attr="eventSeverity">3</setEventAttribute>		
+     </when>
+
+     <when test='$_id = "4720"'>
+        <collectAndSetAttrByPos sep='::SEP::' src="$_body">     
+	  <attrPosMap attr="targetUser" pos='1'/>
+	  <attrPosMap attr="targetDomain" pos='2'/>
+          <attrPosMap attr="user" pos='5'/>
+	  <attrPosMap attr="domain" pos='6'/>
+          <attrPosMap attr="winLogonId" pos='7'/>
+        </collectAndSetAttrByPos>
+        
+	<collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-4624">
+         <when test = '$winLogonId = $AnotherEvent.winLogonId'>
+           <setEventAttribute attr="srcIpAddr">$AnotherEvent.srcIpAddr</setEventAttribute>
+         </when>
+       </collectAndSetAttrFromAnotherEvent>
+       
+       <choose>
+         <when test="matches($_action, '^Success')">
+	   <setEventAttribute attr="eventSeverity">4</setEventAttribute>
+         </when>
+	 
+         <when test="matches($_action, '^Failure)">       
+	   <setEventAttribute attr="eventSeverity">7</setEventAttribute>
+         </when>
+       </choose>
+     </when>
+
+     <when test='$_id = "4726"'>
+        <collectAndSetAttrByPos sep='::SEP::' src="$_body">     
+	  <attrPosMap attr="targetUser" pos='1'/>
+	  <attrPosMap attr="targetDomain" pos='2'/>
+          <attrPosMap attr="user" pos='5'/>
+	  <attrPosMap attr="domain" pos='6'/>
+          <attrPosMap attr="winLogonId" pos='7'/>
+        </collectAndSetAttrByPos>
+        <setEventAttribute attr="eventSeverity">3</setEventAttribute>
+
+	<collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-4624">
+         <when test = '$winLogonId = $AnotherEvent.winLogonId'>
+           <setEventAttribute attr="srcIpAddr">$AnotherEvent.srcIpAddr</setEventAttribute>
+         </when>
+       </collectAndSetAttrFromAnotherEvent>
+       <setEventAttribute attr="eventSeverity">4</setEventAttribute>
+     </when>
+
+     <when test='$_id IN "4722,4725,4723,4724,4741,4742,4743"'>
+        <collectAndSetAttrByPos sep='::SEP::' src="$_body">     
+	  <attrPosMap attr="targetUser" pos='1'/>
+	  <attrPosMap attr="targetDomain" pos='2'/>
+          <attrPosMap attr="user" pos='5'/>
+	  <attrPosMap attr="domain" pos='6'/>
+          <attrPosMap attr="winLogonId" pos='7'/>
+        </collectAndSetAttrByPos>
+       
+	<collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-4624">
+         <when test = '$winLogonId = $AnotherEvent.winLogonId'>
+           <setEventAttribute attr="srcIpAddr">$AnotherEvent.srcIpAddr</setEventAttribute>
+         </when>
+       </collectAndSetAttrFromAnotherEvent>
+       <choose>
+           <when test="matches($_action, '^Success')">
+	     <setEventAttribute attr="eventSeverity">5</setEventAttribute>
+           </when>
+	   
+           <when test="matches($_action, '^Failure)">       
+	     <setEventAttribute attr="eventSeverity">7</setEventAttribute>
+           </when>
+	 </choose>
+     </when>
+
+     <when test='$_id = "4738"'>
+        <collectAndSetAttrByPos sep='::SEP::' src="$_body">     
+	  <attrPosMap attr="targetUser" pos='2'/>
+	  <attrPosMap attr="targetDomain" pos='3'/>
+          <attrPosMap attr="user" pos='6'/>
+	  <attrPosMap attr="domain" pos='7'/>
+          <attrPosMap attr="winLogonId" pos='8'/>
+        </collectAndSetAttrByPos>
+       
+	<collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-4624">
+         <when test = '$winLogonId = $AnotherEvent.winLogonId'>
+           <setEventAttribute attr="srcIpAddr">$AnotherEvent.srcIpAddr</setEventAttribute>
+         </when>
+       </collectAndSetAttrFromAnotherEvent>
+       <choose>
+           <when test="matches($_action, '^Success')">
+	     <setEventAttribute attr="eventSeverity">5</setEventAttribute>
+           </when>
+	   
+           <when test="matches($_action, '^Failure)">       
+	     <setEventAttribute attr="eventSeverity">7</setEventAttribute>
+           </when>
+	 </choose>
+     </when>
+
+     <when test='$_id IN "4731,4744,4727,4749,4754,4759"'>
+        <collectAndSetAttrByPos sep='::SEP::' src="$_body">     
+	  <attrPosMap attr="targetUserGrp" pos='1'/>
+	  <attrPosMap attr="targetDomain" pos='2'/>
+          <attrPosMap attr="user" pos='5'/>
+	  <attrPosMap attr="domain" pos='6'/>
+          <attrPosMap attr="winLogonId" pos='7'/>
+        </collectAndSetAttrByPos>
+       
+	<collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-4624">
+         <when test = '$winLogonId = $AnotherEvent.winLogonId'>
+           <setEventAttribute attr="srcIpAddr">$AnotherEvent.srcIpAddr</setEventAttribute>
+         </when>
+       </collectAndSetAttrFromAnotherEvent>
+       <choose>
+           <when test="matches($_action, '^Success')">
+	     <setEventAttribute attr="eventSeverity">5</setEventAttribute>
+           </when>
+	   
+           <when test="matches($_action, '^Failure)">       
+	     <setEventAttribute attr="eventSeverity">7</setEventAttribute>
+           </when>
+	 </choose>
+     </when>
+     
+     <!-- A security-enabled/disabled local/global/universal group was deleted -->
+     <when test='$_id IN "4734,4748,4730,4753,4758,4763,4789"'>
+        <collectAndSetAttrByPos sep='::SEP::' src="$_body">     
+	  <attrPosMap attr="targetUserGrp" pos='1'/>
+	  <attrPosMap attr="targetDomain" pos='2'/>
+          <attrPosMap attr="user" pos='5'/>
+	  <attrPosMap attr="domain" pos='6'/>
+          <attrPosMap attr="winLogonId" pos='7'/>
+        </collectAndSetAttrByPos>
+       
+	<collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-4624">
+         <when test = '$winLogonId = $AnotherEvent.winLogonId'>
+           <setEventAttribute attr="srcIpAddr">$AnotherEvent.srcIpAddr</setEventAttribute>
+         </when>
+       </collectAndSetAttrFromAnotherEvent>
+       <choose>
+           <when test="matches($_action, '^Success')">
+	     <setEventAttribute attr="eventSeverity">5</setEventAttribute>
+           </when>
+	   
+           <when test="matches($_action, '^Failure)">       
+	     <setEventAttribute attr="eventSeverity">7</setEventAttribute>
+           </when>
+	 </choose>
+     </when>
+
+     <!-- A security-enabled/disabled local/global/unversal group was modified -->
+      <when test='$_id IN "4735,4745,4737,4750,4755,4760"'>
+        <collectAndSetAttrByPos sep='::SEP::' src="$_body">     
+	  <attrPosMap attr="targetUserGrp" pos='1'/>
+	  <attrPosMap attr="targetDomain" pos='2'/>
+          <attrPosMap attr="user" pos='5'/>
+	  <attrPosMap attr="domain" pos='6'/>
+          <attrPosMap attr="winLogonId" pos='7'/>
+        </collectAndSetAttrByPos>
+       
+	<collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-4624">
+         <when test = '$winLogonId = $AnotherEvent.winLogonId'>
+           <setEventAttribute attr="srcIpAddr">$AnotherEvent.srcIpAddr</setEventAttribute>
+         </when>
+       </collectAndSetAttrFromAnotherEvent>
+       <choose>
+           <when test="matches($_action, '^Success')">
+	     <setEventAttribute attr="eventSeverity">5</setEventAttribute>
+           </when>
+	   
+           <when test="matches($_action, '^Failure)">       
+	     <setEventAttribute attr="eventSeverity">7</setEventAttribute>
+           </when>
+	 </choose>
+     </when>
+
+      <!-- A member was added to a security-enabled global group -->
+      <when test='$_id IN "4732,4746,4728,4751,4756,4761,4785,4787"'>
+        <collectAndSetAttrByPos sep='::SEP::' src="$_body">     
+	  <attrPosMap attr="targetUser" pos='1'/>
+	  <attrPosMap attr="targetUserGrp" pos='3'/>
+	  <attrPosMap attr="targetDomain" pos='4'/>
+          <attrPosMap attr="user" pos='7'/>
+	  <attrPosMap attr="domain" pos='8'/>
+          <attrPosMap attr="winLogonId" pos='9'/>
+        </collectAndSetAttrByPos>
+       
+	<collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-4624">
+         <when test = '$winLogonId = $AnotherEvent.winLogonId'>
+           <setEventAttribute attr="srcIpAddr">$AnotherEvent.srcIpAddr</setEventAttribute>
+         </when>
+       </collectAndSetAttrFromAnotherEvent>
+       <choose>
+           <when test="matches($_action, '^Success')">
+	     <setEventAttribute attr="eventSeverity">5</setEventAttribute>
+           </when>
+	   
+           <when test="matches($_action, '^Failure)">       
+	     <setEventAttribute attr="eventSeverity">7</setEventAttribute>
+           </when>
+	 </choose>
+     </when>
+
+      <!-- A member was removed from a security-enabled global group -->
+      <when test='$_id IN "4733,4747,4729,4752,4757,4762,4786,4788"'>
+        <collectAndSetAttrByPos sep='::SEP::' src="$_body">     
+	  <attrPosMap attr="targetUser" pos='1'/>
+	  <attrPosMap attr="targetUserGrp" pos='3'/>
+	  <attrPosMap attr="targetDomain" pos='4'/>
+          <attrPosMap attr="user" pos='7'/>
+	  <attrPosMap attr="domain" pos='8'/>
+          <attrPosMap attr="winLogonId" pos='9'/>
+        </collectAndSetAttrByPos>
+       
+	<collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-4624">
+         <when test = '$winLogonId = $AnotherEvent.winLogonId'>
+           <setEventAttribute attr="srcIpAddr">$AnotherEvent.srcIpAddr</setEventAttribute>
+         </when>
+       </collectAndSetAttrFromAnotherEvent>
+       <choose>
+           <when test="matches($_action, '^Success')">
+	     <setEventAttribute attr="eventSeverity">5</setEventAttribute>
+           </when>
+	   
+           <when test="matches($_action, '^Failure)">       
+	     <setEventAttribute attr="eventSeverity">7</setEventAttribute>
+           </when>
+	 </choose>
+     </when>
+
+      <!-- basic application group created/changed -->
+      <when test='$_id IN "4783,4784"'>
+        <collectAndSetAttrByPos sep='::SEP::' src="$_body">     
+	  <attrPosMap attr="targetUser" pos='1'/>
+	  <attrPosMap attr="targetDomain" pos='2'/>
+          <attrPosMap attr="user" pos='5'/>
+	  <attrPosMap attr="domain" pos='6'/>
+          <attrPosMap attr="winLogonId" pos='7'/>
+        </collectAndSetAttrByPos>
+       
+	<collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-4624">
+         <when test = '$winLogonId = $AnotherEvent.winLogonId'>
+           <setEventAttribute attr="srcIpAddr">$AnotherEvent.srcIpAddr</setEventAttribute>
+         </when>
+       </collectAndSetAttrFromAnotherEvent>
+       <choose>
+           <when test="matches($_action, '^Success')">
+	     <setEventAttribute attr="eventSeverity">4</setEventAttribute>
+           </when>
+	   
+           <when test="matches($_action, '^Failure)">       
+	     <setEventAttribute attr="eventSeverity">7</setEventAttribute>
+           </when>
+	 </choose>
+     </when>
+
+      <when test='$_id = "4764"'>
+        <collectAndSetAttrByPos sep='::SEP::' src="$_body">     
+	  <attrPosMap attr="targetUserGrp" pos='2'/>
+	  <attrPosMap attr="targetDomain" pos='3'/>
+          <attrPosMap attr="user" pos='6'/>
+	  <attrPosMap attr="domain" pos='7'/>
+          <attrPosMap attr="winLogonId" pos='8'/>
+        </collectAndSetAttrByPos>
+       
+	<collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-4624">
+          <when test = '$winLogonId = $AnotherEvent.winLogonId'>
+             <setEventAttribute attr="srcIpAddr">$AnotherEvent.srcIpAddr</setEventAttribute>
+          </when>
+        </collectAndSetAttrFromAnotherEvent>
+	<setEventAttribute attr="eventSeverity">4</setEventAttribute>
+      </when>	
+
+      <when test='$_id IN "4765"'>
+        <collectAndSetAttrByPos sep='::SEP::' src="$_body">     
+	  <attrPosMap attr="targetUser" pos='3'/>
+	  <attrPosMap attr="targetDomain" pos='4'/>
+          <attrPosMap attr="user" pos='7'/>
+	  <attrPosMap attr="domain" pos='8'/>
+          <attrPosMap attr="winLogonId" pos='9'/>
+        </collectAndSetAttrByPos>
+       
+	<collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-4624">
+          <when test = '$winLogonId = $AnotherEvent.winLogonId'>
+             <setEventAttribute attr="srcIpAddr">$AnotherEvent.srcIpAddr</setEventAttribute>
+          </when>
+        </collectAndSetAttrFromAnotherEvent>
+	<setEventAttribute attr="eventSeverity">4</setEventAttribute>
+      </when>
+
+      <when test='$_id = "4766"'>
+        <collectAndSetAttrByPos sep='::SEP::' src="$_body">     
+	  <attrPosMap attr="targetUser" pos='2'/>
+	  <attrPosMap attr="targetDomain" pos='3'/>
+          <attrPosMap attr="user" pos='5'/>
+	  <attrPosMap attr="domain" pos='6'/>
+          <attrPosMap attr="winLogonId" pos='7'/>
+        </collectAndSetAttrByPos>
+       
+	<collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-4624">
+          <when test = '$winLogonId = $AnotherEvent.winLogonId'>
+             <setEventAttribute attr="srcIpAddr">$AnotherEvent.srcIpAddr</setEventAttribute>
+          </when>
+        </collectAndSetAttrFromAnotherEvent>
+	<setEventAttribute attr="eventSeverity">4</setEventAttribute>
+      </when>
+
+      <when test='$_id = "4790"'>
+        <collectAndSetAttrByPos sep='::SEP::' src="$_body">     
+	  <attrPosMap attr="targetUser" pos='1'/>
+	  <attrPosMap attr="targetDomain" pos='2'/>
+          <attrPosMap attr="user" pos='5'/>
+	  <attrPosMap attr="domain" pos='6'/>
+          <attrPosMap attr="winLogonId" pos='7'/>
+        </collectAndSetAttrByPos>
+       
+	<collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-4624">
+          <when test = '$winLogonId = $AnotherEvent.winLogonId'>
+             <setEventAttribute attr="srcIpAddr">$AnotherEvent.srcIpAddr</setEventAttribute>
+          </when>
+        </collectAndSetAttrFromAnotherEvent>
+	<setEventAttribute attr="eventSeverity">4</setEventAttribute>
+      </when>
+
+       <when test='$_id = "5030"'>
+	 <setEventAttribute attr="eventSeverity">9</setEventAttribute>
+       </when>	 
+
+       <when test='$_id = "4902"'>
+	 <setEventAttribute attr="eventSeverity">5</setEventAttribute>
+       </when>	
+
+       <when test='$_id IN "4715,4719"'>
+        <collectAndSetAttrByPos sep='::SEP::' src="$_body">     
+          <attrPosMap attr="user" pos='2'/>
+	  <attrPosMap attr="domain" pos='3'/>
+          <attrPosMap attr="winLogonId" pos='4'/>
+        </collectAndSetAttrByPos>
+       
+	<collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-4624">
+          <when test = '$winLogonId = $AnotherEvent.winLogonId'>
+             <setEventAttribute attr="srcIpAddr">$AnotherEvent.srcIpAddr</setEventAttribute>
+          </when>
+        </collectAndSetAttrFromAnotherEvent>
+	<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+      </when>
+
+       <when test='$_id = "5156"'>
+        <collectAndSetAttrByPos sep='::SEP::' src="$_body">
+	  <attrPosMap attr="appName" pos='2'/>
+          <attrPosMap attr="srcIpAddr" pos='4'/>
+	  <attrPosMap attr="srcIpPort" pos='5'/>
+          <attrPosMap attr="destIpAddr" pos='6'/>
+	   <attrPosMap attr="destIpPort" pos='7'/>
+          <attrPosMap attr="ipProto" pos='8'/>
+        </collectAndSetAttrByPos>
+	<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+       </when>
+
+       <when test='$_id = "5157"'>
+        <collectAndSetAttrByPos sep='::SEP::' src="$_body">
+	  <attrPosMap attr="appName" pos='2'/>
+          <attrPosMap attr="srcIpAddr" pos='4'/>
+	  <attrPosMap attr="srcIpPort" pos='5'/>
+          <attrPosMap attr="destIpAddr" pos='6'/>
+	   <attrPosMap attr="destIpPort" pos='7'/>
+          <attrPosMap attr="ipProto" pos='8'/>
+        </collectAndSetAttrByPos>
+	<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+       </when>
+
+       <!--The workstation was locked/unlocked-->
+       <when test='$_id IN "4800,4801"'>
+        <collectAndSetAttrByPos sep='::SEP::' src="$_body">
+	  <attrPosMap attr="user" pos='2'/>
+          <attrPosMap attr="domain" pos='3'/>
+	  <attrPosMap attr="winLogonId" pos='4'/>
+        </collectAndSetAttrByPos>
+	<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+       </when>
+
+       <!--Network Policy Server allowing access -->
+       <when test='$_id = "6272"'>
+        <collectAndSetAttrByPos sep='::SEP::' src="$_body">
+	  <attrPosMap attr="user" pos='2'/>
+          <attrPosMap attr="domain" pos='3'/>
+	  <attrPosMap attr="nepDevIpAddr" pos='11'/>
+	  <attrPosMap attr="nepDevPort" pos='12'/>
+	  <attrPosMap attr="policyName" pos='19'/>
+        </collectAndSetAttrByPos>
+	<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+       </when>
+
+    </choose>
+          
+   </parsingInstructions>
+</eventParser>
+

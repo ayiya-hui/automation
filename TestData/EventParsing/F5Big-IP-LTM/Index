@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+F5-LTM-Packet-Accept,F5Big-IP-LTM_1,F5Big-IP-LTM,$localhost,,syslog

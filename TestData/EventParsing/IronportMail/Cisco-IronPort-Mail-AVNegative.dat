@@ -1,0 +1,46 @@
+[reptDevIpAddr(key)]
+187.0.198.8
+[eventMsg]
+Sep 24 11:39:49 187.0.198.8 IronPort-Mail: Info: MID 1347076 antivirus negative
+[params]
+rawEventMsg=any
+eventId=any
+count=1
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+eventSeverity=1
+eventType=Cisco-IronPort-Mail-AVNegative
+phCustId=$sender
+reptDevIpAddr=187.0.198.8
+collectorId=any
+eventName=IronPort mail tested negative for Anti-virus
+reptVendor=Cisco
+phRecvTime=any
+ironportMailMID=1347076
+reptDevName=mx2.arcon.com.br
+reptModel=IronPort AsyncOS Mail
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<38>Oct 18 17:35:45 antivirus: Info: sophos antivirus - MID 19597403 - Result 'CLEAN' ()
+[params]
+rawEventMsg=any
+eventId=any
+count=1
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+eventSeverity=1
+eventType=Cisco-IronPort-Mail-AVNegative
+phCustId=$sender
+reptDevIpAddr=$localhost
+collectorId=any
+eventName=IronPort mail tested negative for Anti-virus
+reptVendor=Cisco
+phRecvTime=any
+ironportMailMID=19597403
+reptDevName=any
+reptModel=IronPort AsyncOS Mail

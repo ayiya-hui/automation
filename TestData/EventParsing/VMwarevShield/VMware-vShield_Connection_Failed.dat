@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<43>Nov 10 16:03:35 vShieldEdge syslog-ng[169]: Initiating connection failed, reconnecting; time_reopen='10'
+[params]
+deviceTime=any
+parserName=VMwarevShieldParser
+eventType=VMware-vShield_Connection_Failed
+reptModel=vShield
+eventId=any
+eventParsedOk=1
+uuid=vShieldEdge
+eventSeverity=1
+eventName=VMware vShield connection failed
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=VMware

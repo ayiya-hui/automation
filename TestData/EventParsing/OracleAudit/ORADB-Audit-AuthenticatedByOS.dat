@@ -1,0 +1,32 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<172>Oracle Audit[22459]: LENGTH: 334 SESSIONID:[8] 81386919 ENTRYID:[1] 1 STATEMENT:[1] 1 USERID:[12] ORA$user USERHOST:[14] host ACTION:[3] 100 RETURNCODE:[1] 0 COMMENT$TEXT:[95] Authenticated by: OS; Client address: (ADDRESS=(PROTOCOL=tcp)(HOST=192.168.217.88)(PORT=28175)) OS$USERID:[8] user DBID:[9] 866609593 PRIV$USED:[1] 5
+[params]
+parserName=OracleAuditParser
+eventType=ORADB-Audit-AuthenticatedByOS
+computer=host
+srcIpAddr=192.168.217.88
+reptModel=Database Server
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+dbId=866609593
+eventName=ORADB-Audit-AuthenticatedByOS
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+srcIpPort=28175
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+user=ORA$user
+rawEventMsg=any
+ipProto=6 (TCP)
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+sessionId=81386919
+reptVendor=Oracle
+oraAuditAction=100

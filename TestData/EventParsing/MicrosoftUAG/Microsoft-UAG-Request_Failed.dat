@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+172.20.9.102
+[eventMsg]
+<36>Aug  2 09:02:08 172.20.9.102 6513:ACFPRDUAG1:172.20.9.101:Filter:[MsgID: 51]A request from source IP address 107.198.96.8, user  on trunk trunkoutlook; Secure=1 for application Unknown application name of type Unknown application type failed because the  method used OPTIONS is not valid for requested URL /Microsoft-Server-ActiveSync.
+[params]
+deviceTime=any
+parserName=MicrosoftUAGParser
+eventType=Microsoft-UAG-Request_Failed
+srcName=107-198-96-8.lightspeed.cicril.sbcglobal.net
+srcIpAddr=107.198.96.8
+reptModel=Forefront UAG
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Remote Request failed
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=172.20.9.102
+rawEventMsg=any
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=172.20.9.102
+reptVendor=Microsoft

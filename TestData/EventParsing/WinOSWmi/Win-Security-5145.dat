@@ -1,0 +1,42 @@
+[reptDevIpAddr(key)]
+11.160.121.87
+[eventMsg]
+Tue May 13 09:48:22 2014 11.160.121.87 AccelOps-WinLog-WMI [Category]="12811" [CategoryString]="Detailed File Share" [ComputerName]="srvfile02.OSINERGIN.GOB.PE" [Data]="NULL" [EventCode]="5145" [EventIdentifier]="5145" [EventType]="4" [Logfile]="Security" [RecordNumber]="1314052870" [SourceName]="Microsoft-Windows-Security-Auditing" [TimeGenerated]="20140227152359.855170-000" [TimeWritten]="20140227152359.855170-000" [Type]="Audit Success" [User]="(null)" [Message]="A network share object was checked to see whether client can be granted desired access." [[Subject]] [Security ID]="S-1-5-21-1801674531-682003330-1644491937-1373" [Account Name]="gtoribio" [Account Domain]="OSINERGIN" [Logon ID]="0x860dd687" [Network Information]="" [Object Type]="File" [Source Address]="11.170.3.29" [Source Port]="56860" [[Share Information]] [Share Name]="\\*\UCOM" [Share Path]="\??\D:\G_Electricidad\UCOM" [Relative Target Name]="4-CR\Base_de_Datos\01_Base_de_Datos_Anexos_P182-P283\2010\06-EOR\08Ago2010" [[Access Request Information]] [Access Mask]="0x100081" [Accesses]="SYNCHRONIZE,ReadData (or ListDirectory),ReadAttributes," [[Access Check Results]] [SYNCHRONIZE]="Granted by D:(A;;0x1301bf;;;S-1-5-21-1801674531-682003330-1644491937-16687)" [ReadData (or ListDirectory)]="Granted by    D:(A;;0x1301bf;;;S-1-5-21-1801674531-682003330-1644491937-16687)" [ReadAttributes]="Granted by D:(A;;0x1301bf;;;S-1-5-21-1801674531-682003330-1644491937-16687)"
+[params]
+domain=OSINERGIN
+deviceTime=any
+destGeoOrg=any
+parserName=WinOSWmiParser
+eventType=Win-Security-5145
+destGeoState=Ohio
+hostName=srvfile02.OSINERGIN.GOB.PE
+osObjType=File
+eventSource=Microsoft-Windows-Security-Auditing
+reptGeoState=Ohio
+srcIpAddr=11.170.3.29
+reptModel=Windows
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Network share object checked to see a client can be granted desired access
+phEventCategory=0 (External)
+msg=A network share object was checked to see whether client can be granted desired access.
+eventRuleTrigger=1
+type=Audit Success
+srcIpPort=56860
+count=1
+seqNum=1314052870
+eventSeverityCat=LOW
+collectorId=any
+destGeoCountry=any
+fileName=\??\D:\G_Electricidad\UCOM
+user=gtoribio
+customer=Super
+winLogonId=0x860dd687
+reptGeoCity=any
+phRecvTime=any
+reptDevIpAddr=11.160.121.87
+eventAction=0 (Permit)
+reptVendor=Microsoft
+destIpAddr=11.160.121.87
+destGeoCity=any

@@ -1,0 +1,23 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<165>Nov 23 2010 08:55:32: %ASA-5-338303: Address 128.242.240.180 (twitter.com) timed out. Removing rule  N/A  False Positive Tuning
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+count=1
+phCustId=$sender
+destIpAddr=128.242.240.180
+destDomain=twitter.com
+deviceTime=any
+eventAction=0 (Permit)
+eventId=any
+eventName=Address timed out, Removing rule
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=2
+eventSeverityCat=LOW
+eventType=ASA-338303
+reptDevIpAddr=$reporter
+reptModel=ASA
+reptVendor=Cisco

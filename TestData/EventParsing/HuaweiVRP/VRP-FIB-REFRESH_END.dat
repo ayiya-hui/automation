@@ -1,0 +1,23 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<187>Apr 14 2008 00:01:06 SH-Quidway-SW1 %%01FIB/3/REFRESH_END(l): FIB refreshing end, the refresh group map is 0!
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+count=1
+phCustId=$sender
+deviceTime=any
+eventAction=0 (Permit)
+eventId=any
+eventName=Forwarding Information Base refreshing end
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=5
+eventSeverityCat=MEDIUM
+eventType=VRP-FIB-REFRESH_END
+hostName=SH-Quidway-SW1
+reptDevName=SH-Quidway-SW1
+reptDevIpAddr=$reporter
+reptModel=VRP
+reptVendor=Huawei

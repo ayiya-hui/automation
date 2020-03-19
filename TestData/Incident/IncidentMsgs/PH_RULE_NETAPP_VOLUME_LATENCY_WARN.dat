@@ -1,0 +1,3 @@
+[eventMsg]
+[PH_DEV_MON_NETAPP_VOL_MET]:[eventSeverity]=PHL_INFO,[hostName]=automator14Dot0Dot6Dot2,[hostIpAddr]=14.0.6.2,[volName]=/data,[diskReadReqPerSec]=180,[diskWriteReqPerSec]=177,[devDiskRdLatency]=45.67,[devDiskWrLatency]=42,[nfsReadOpsPerSec]=156,[nfsWriteOpsPerSec]=134,[nfsReadLatency]=43,[nfsWriteLatency]=34,[cifsReadOpsPerSec]=124,[cifsWriteOpsPerSec]=134,[cifsReadLatency]=43,[cifsWriteLatency]=34,[sanReadOpsPerSec]=124,[sanWriteOpsPerSec]=134,[sanReadLatency]=43,[sanWriteLatency]=34
+

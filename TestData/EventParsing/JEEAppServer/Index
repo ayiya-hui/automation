@@ -1,0 +1,6 @@
+eventType,name,module,reptDevIpAddr,key,method
+JEE_AppServer_Perf,JEEAppServer_5,JEEAppServer,4.4.4.2,,syslog
+JEE_AppServer_Perf,JEEAppServer_4,JEEAppServer,4.4.4.3,,syslog
+JEE_AppServer_Perf,JEEAppServer_1,JEEAppServer,4.4.4.5,,syslog
+JEE_AppServer_Perf,JEEAppServer_3,JEEAppServer,4.4.4.1,,syslog
+JEE_AppServer_Perf,JEEAppServer_2,JEEAppServer,4.4.4.4,,syslog

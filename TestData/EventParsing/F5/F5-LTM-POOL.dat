@@ -1,0 +1,30 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+Hostname=f5-51-01.safehost.net,Entity=POOL,AVRProfileName=/FLA_PROD_WEB/FLA_PROD_WEB_ANALYTICS,AggrInterval=299,EOCTimestamp=1387536600,HitCount=1,ApplicationName=<Unassigned>,VSName=/FLA_PROD_WEB/FLA-PROD-WEB-SSL,POOLIP=172.22.7.55,POOLIPRouteDomain=172,POOLPort=443,TPSMax=0.000000,ClientLatencyHitCount=0,ClientLatencyMax=0,ClientLatencyTotal=0,ServerLatencyMax=184,ServerLatencyTotal=184,ThroughputReqMax=0,ThroughputReqTotal=402,ThroughputRespMax=0,ThroughputRespTotal=2869
+[params]
+rawEventMsg=any
+deviceTime=any
+averageClientNetworkTime=0
+parserName=F5Parser
+eventType=F5-LTM-POOL
+phCustId=$sender
+reptModel=Big-IPOS
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=F5 HTTP pool
+phEventCategory=0 (External)
+customer=Super
+eventSeverityCat=LOW
+collectorId=any
+serverNetworkTimeMax=184
+relayDevIpAddr=$localhost
+ruleName=/FLA_PROD_WEB/FLA_PROD_WEB_ANALYTICS
+reptDevName=f5-51-01.safehost.net
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=F5
+averageServerNetworkTime=184
+clientNetworkTimeMax=0

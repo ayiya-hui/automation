@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<188>Jul  4 15:07:46 Sourcefire3D Snort: [139:1:1] sensitive_data: sensitive data global threshold exceeded [Impact: Unknown] From DetectionEngine_IPS_DMZ2/SourcefireIPS at Thu Jul  4 14:07:44 2013 UTC [Classification: Sensitive Data] [Priority: 2] {divert} 10.20.1.92->63.247.78.146
+[params]
+rawEventMsg=any
+eventType=Snort-1
+phCustId=$sender
+devEventTypeGrp=Sensitive Data
+destIpAddr=63.247.78.146
+srcIpAddr=10.20.1.92
+reptModel=Sourcefire3D IPS
+eventId=any
+eventParsedOk=1
+eventSeverity=5
+eventName=Snort-1
+phEventCategory=0 (External)
+eventSeverityCat=MEDIUM
+collectorId=any
+ipProto=255
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+destName=any
+reptVendor=Sourcefire

@@ -1,0 +1,1429 @@
+<eventParser name="ArubaWLANParser">
+  <deviceType>
+    <Vendor>Aruba</Vendor>
+    <Model>ArubaOS WLAN Controller</Model>
+    <Version>ANY</Version>
+  </deviceType>
+  
+  <eventFormatRecognizer><![CDATA[SNMPv2-SMI::enterprises.14823]]></eventFormatRecognizer>
+  
+  <testEvents>
+      <testEvent><![CDATA[2008-06-11 11:38:34 192.168.20.7 [192.168.20.7]:SNMPv2-MIB::sysUpTime.0 = Timeticks: (1355400) 3:45:54.00       SNMPv2-MIB::snmpTrapOID.0 = OID: SNMPv2-SMI::enterprises.14823.2.2.1.1.100.1003 SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.60 = Hex-STRING: 07 D8 06 0B 13 2E 39 00 2D 07 00    SNMPv2-SMI::enterprises.14823.2.2.1.1.2.1.1.2.192.168.180.1 = Hex-STRING: 00 1E 52 72 AF 4B]]></testEvent>
+  </testEvents>
+  
+  <parsingInstructions>
+
+    <!-- parsing common fields -->
+    <!-- sample message  
+         
+         2008-06-11 11:29:44 192.168.20.7 [192.168.20.7]:SNMPv2-MIB::sysUpTime.0 = Timeticks: (1302900) 3:37:09.00	SNMPv2-MIB::snmpTrapOID.0 = OID: SNMPv2-SMI::enterprises.14823.2.3.1.11.1.2.1018	SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.60 = Hex-STRING: 07 D8 06 0B 13 26 07 00  <when test='exist _hostMACAddr'>
+      <setEventAttribute attr="hostMACAddr">normalizeMAC($_hostMACAddr)</setEventAttribute>
+    </when>2D 07 00 	SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.51.0 = IpAddress: 192.168.20.50	SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.52.0 = Hex-STRING: 00 1E 52 72 AF 4B 
+         
+         2008-06-11 11:35:55 192.168.20.7 [192.168.20.7]:SNMPv2-MIB::sysUpTime.0 = Timeticks: (1339600) 3:43:16.00       SNMPv2-MIB::snmpTrapOID.0 = OID: SNMPv2-SMI::enterprises.14823.2.2.1.1.100.1004 SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.60 = Hex-STRING: 07 D8 06 0B 13 2C 12 00 2D 07 00    SNMPv2-SMI::enterprises.14823.2.2.1.1.2.1.1.2.172.16.73.1 = Hex-STRING: 00 1E 52 72 AF 4B
+         
+         2008-06-12 00:43:33 192.168.20.7 [192.168.20.7]:SNMPv2-MIB::sysUpTime.0 = Timeticks: (6018600) 16:43:06.00      SNMPv2-MIB::snmpTrapOID.0 = OID: SNMPv2-SMI::enterprises.14823.2.3.1.11.1.2.1094        SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.60 = Hex-STRING: 07 D8 06 0C 08 33 39 00 2D 07 00    SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.15.0 = INTEGER: 12   SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.9.0 = Hex-STRING: 00 1A 1E 85 C4 C1  SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.13.0 = INTEGER: 51   SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.1.0 = Hex-STRING: 00 1A 1E C0 60 7A  SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: 2    SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "00:1a:1e:c0:60:7a"
+         
+         2008-06-11 11:38:34 192.168.20.7 [192.168.20.7]:SNMPv2-MIB::sysUpTime.0 = Timeticks: (1355400) 3:45:54.00       SNMPv2-MIB::snmpTrapOID.0 = OID: SNMPv2-SMI::enterprises.14823.2.2.1.1.100.1003 SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.60 = Hex-STRING: 07 D8 06 0B 13 2E 39 00 2D 07 00    SNMPv2-SMI::enterprises.14823.2.2.1.1.2.1.1.2.192.168.180.1 = Hex-STRING: 00 1E 52 72 AF 4B
+         
+         2008-06-12 00:39:29 192.168.20.7 [192.168.20.7]:SNMPv2-MIB::sysUpTime.0 = Timeticks: (5994500) 16:39:05.00      SNMPv2-MIB::snmpTrapOID.0 = OID: SNMPv2-SMI::enterprises.14823.2.2.1.1.100.1004 SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.60 = Hex-STRING: 07 D8 06 0C 08 2F 36 00 2D 07 00    SNMPv2-SMI::enterprises.14823.2.2.1.1.2.1.1.2.169.254.235.220 = Hex-STRING: 00 1E 52 72 AF 4B
+         
+         2008-06-12 00:39:30 192.168.20.7 [192.168.20.7]:SNMPv2-MIB::sysUpTime.0 = Timeticks: (5994600) 16:39:06.00      SNMPv2-MIB::snmpTrapOID.0 = OID: SNMPv2-SMI::enterprises.14823.2.3.1.11.1.2.1014        SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.60 = Hex-STRING: 07 D8 06 0C 08 2F 36 00 2D 07 00    SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.51.0 = IpAddress: 192.168.20.48      SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.52.0 = Hex-STRING: 00 1E 52 72 AF 4B
+         
+         2008-06-12 00:52:32 192.168.20.7 [192.168.20.7]:SNMPv2-MIB::sysUpTime.0 = Timeticks: (6072000) 16:52:00.00      SNMPv2-MIB::snmpTrapOID.0 = OID: SNMPv2-SMI::enterprises.14823.2.2.1.1.100.1034 SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.60 = Hex-STRING: 07 D8 06 0C 09 00 38 00 2D 07 00    SNMPv2-SMI::enterprises.14823.2.2.1.1.100.100.10.0 = Hex-STRING: 00 1E 52 72 AF 4B      SNMPv2-SMI::enterprises.14823.2.2.1.1.100.100.11.0 = INTEGER: 7
+         
+         2008-06-11 11:35:55 192.168.20.7 [192.168.20.7]:SNMPv2-MIB::sysUpTime.0 = Timeticks: (1339600) 3:43:16.00       SNMPv2-MIB::snmpTrapOID.0 = OID: SNMPv2-SMI::enterprises.14823.2.2.1.1.100.1004 SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.60 = Hex-STRING: 07 D8 06 0B 13 2C 12 00 2D 07 00    SNMPv2-SMI::enterprises.14823.2.2.1.1.2.1.1.2.172.16.73.1 = Hex-STRING: 00 1E 52 72 AF 4B
+         
+         2008-06-12 00:52:32 192.168.20.7 [192.168.20.7]:SNMPv2-MIB::sysUpTime.0 = Timeticks: (6072000) 16:52:00.00      SNMPv2-MIB::snmpTrapOID.0 = OID: SNMPv2-SMI::enterprises.14823.2.3.1.11.1.2.1044        SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.60 = Hex-STRING: 07 D8 06 0C 09 00 38 00 2D 07 00    SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.8.0 = Hex-STRING: 00 1E 52 72 AF 4B  SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.34.0 = INTEGER: 7
+         
+         2008-06-11 11:38:26 192.168.20.7 [192.168.20.7]:SNMPv2-MIB::sysUpTime.0 = Timeticks: (1354600) 3:45:46.00       SNMPv2-MIB::snmpTrapOID.0 = OID: SNMPv2-SMI::enterprises.14823.2.2.1.1.100.1003 SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.60 = Hex-STRING: 07 D8 06 0B 13 2E 32 00 2D 07 00    SNMPv2-SMI::enterprises.14823.2.2.1.1.2.1.1.2.192.168.20.48 = Hex-STRING: 00 1E 52 72 AF 4B
+         
+         2008-06-11 11:12:36 192.168.20.7(via 192.168.20.7) TRAP, SNMP v1, community public      SNMPv2-SMI::enterprises.14823.1.1.10 Enterprise Specific Trap (1097) Uptime: 3:20:11.00 SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.60 = Hex-STRING: 07 D8 06 0B 13 15 00 00 2D 07 00    SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.11.0 = Hex-STRING: 00 16 B6 DB 12 22         SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.12.0 = Hex-STRING: 00 21 55 4D 66 B0         SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.13.0 = INTEGER: 36   SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.1.0 = Hex-STRING: 00 1A 1E C0 60 7A  SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: 2    SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "00:1a:1e:c0:60:7a"
+         
+         <attrKeyMap attr="_eventType" key="SNMPv2-MIB::snmpTrapOID.0 = OID: SNMPv2-SMI::enterprises.14823.2.3.1.11.1.2."/>
+         <attrKeyMap attr="srcIpAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.51.0 = IpAddress: "/>
+         <attrKeyMap attr="_srcMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.52.0 = Hex-STRING: "/>
+         -->
+
+    <switch>
+      <case>
+        <collectFieldsByRegex src="$_rawmsg">
+          <regex><![CDATA[<_year:gPatYear>-<_mon:gPatMonNum>-<_day:gPatDay>\s+<_time:gPatTime>\s+<:gPatIpV4Dot><_body:gPatMesgBody>]]>
+          </regex>
+        </collectFieldsByRegex>
+      </case>
+      <case>
+        <collectFieldsByRegex src="$_rawmsg">
+          <regex><![CDATA[<_year:gPatYear>-<_mon:gPatMonNum>-<_day:gPatDay>\s+<_time:gPatTime>\s+<hostName:gPatStr> <:gPatStr> <_body:gPatMesgBody>]]>
+          </regex>
+        </collectFieldsByRegex>
+      </case>
+    </switch>
+    
+    <setEventAttribute attr="deviceTime">toDateTime($_mon, $_day, $_year, $_time)</setEventAttribute>
+    <setEventAttribute attr="eventAction">0</setEventAttribute>
+     <setEventAttribute attr="eventType">Aruba-WLAN-Generic</setEventAttribute>
+   <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+
+    <!-- obtain event type and few attributes  --> 
+    <collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+      <attrKeyMap attr="_eventType" key="SNMPv2-MIB::snmpTrapOID.0 = OID: SNMPv2-SMI::enterprises.14823.2.3.1.11.1.2."/>
+    </collectAndSetAttrByKeyValuePair>
+
+    <collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+      <attrKeyMap attr="_eventType" key="SNMPv2-MIB::snmpTrapOID.0 = OID: SNMPv2-SMI::enterprises.14823.2.2.1.1.100."/>
+      <attrKeyMap attr="_hostMACAddr" key="SNMPv2-SMI::enterprises.14823.2.2.1.1.2.1.1.2.192.168.20.50 = Hex-STRING: "/>
+    </collectAndSetAttrByKeyValuePair>
+
+    <collectAndSetAttrByKeyValuePair sep='\t\\| SNMP\\|) Uptime' src="$_body">
+      <attrKeyMap attr="_eventType" key="SNMPv2-SMI::enterprises.14823.1.1.10 Enterprise Specific Trap ("/>
+    </collectAndSetAttrByKeyValuePair>
+    
+    <!-- get attributes on trap by trap basis -->
+ 
+    <choose>
+      
+      <!--    system status related -->
+      <when test='$_eventType = "1000"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxVlanLinkUp")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+          <attrKeyMap attr="hostVLAN" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.23.0 = Hex-STRING: "/>
+        </collectAndSetAttrByKeyValuePair>
+      </when>
+      
+      <when test='$_eventType = "1001"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxVlanLinkDown")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+          <attrKeyMap attr="hostVLAN" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.23.0 = Hex-STRING: "/>
+        </collectAndSetAttrByKeyValuePair>
+      </when>
+  
+      <when test='$_eventType = "1107"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxPortUp")</setEventAttribute>
+      </when>
+      
+      <when test='$_eventType = "1108"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxPortDown")</setEventAttribute>
+      </when>
+      
+      <when test='$_eventType = "1109"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxBSSIDIsUp")</setEventAttribute>
+      </when>
+      
+      <when test='$_eventType = "1110"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxBSSIDIsDown")</setEventAttribute>
+      </when>
+      
+      <when test='$_eventType = "1040"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxNAccessPointIsUp")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+          <attrKeyMap attr="_hostMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.1.0 = Hex-STRING: "/>
+        </collectAndSetAttrByKeyValuePair>
+      </when>
+      
+      <when test='$_eventType = "1041"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxNAccessPointIsDown")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+          <attrKeyMap attr="_hostMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.1.0 = Hex-STRING: "/>
+        </collectAndSetAttrByKeyValuePair>
+      </when>
+
+      <when test='$_eventType = "1154"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxTunnelUp")</setEventAttribute>
+      </when>
+
+      <when test='$_eventType = "1155"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxTunnelDown")</setEventAttribute>
+      </when>
+
+      <when test='$_eventType = "1050"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxNESIServerUp")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+          <attrKeyMap attr="hostName" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.46.0 = STRING: "/>
+	  <attrKeyMap attr="hostIpAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.47.0 = IpAddress: "/>
+        </collectAndSetAttrByKeyValuePair>
+      </when>
+      
+      <when test='$_eventType = "1051"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxNESIServerDown")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+          <attrKeyMap attr="hostName" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.46.0 = STRING: "/>
+	  <attrKeyMap attr="hostIpAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.47.0 = IpAddress: "/>
+        </collectAndSetAttrByKeyValuePair>
+      </when>
+
+       <when test='$_eventType = "1080"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxLoadbalancingEnabled")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+          <attrKeyMap attr="_hostMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.1.0 = Hex-STRING: "/>
+        </collectAndSetAttrByKeyValuePair>
+      </when>
+      
+      <when test='$_eventType = "1081"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxLoadbalancingDisabled")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+          <attrKeyMap attr="_hostMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.1.0 = Hex-STRING: "/>
+        </collectAndSetAttrByKeyValuePair>
+      </when>
+
+      <when test='$_eventType = "1019"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxNAuthServerReqTimedOut")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+          <attrKeyMap attr="hostName" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.26.0 = STRING: "/>
+        </collectAndSetAttrByKeyValuePair>
+      </when>
+      
+      <when test='$_eventType = "1020"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxNAuthServerTimedOut")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+          <attrKeyMap attr="hostName" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.26.0 = STRING: "/>
+        </collectAndSetAttrByKeyValuePair>
+      </when>
+      
+      <when test='$_eventType = "1021"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxNAuthServerIsUp")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+          <attrKeyMap attr="hostName" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.26.0 = STRING: "/>
+        </collectAndSetAttrByKeyValuePair>
+      </when>    
+ 
+      <when test='$_eventType = "1115"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxNAuthServerIsDown")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+          <attrKeyMap attr="hostName" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.26.0 = STRING: "/>
+        </collectAndSetAttrByKeyValuePair>
+      </when>
+      
+      <when test='$_eventType = "1111"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxColdStart")</setEventAttribute>
+      </when>
+      
+      <when test='$_eventType = "1112"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxWarmStart")</setEventAttribute>
+      </when> 
+      
+      <when test='$_eventType = "1047"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxNDBCommunicationFailure")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="hostIpAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.40.0 = IpAddress: "/>
+	  <attrKeyMap attr="user" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.39.0 = STRING: "/>
+        </collectAndSetAttrByKeyValuePair>
+      </when>
+  
+      <when test='$_eventType = "1052"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxNLicenseExpiry")</setEventAttribute>
+      </when>
+
+      <when test='$_eventType = "1025"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxNPowerSupplyFailure")</setEventAttribute>
+      </when>
+      
+      <when test='$_eventType = "1026"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxNFanFailure")</setEventAttribute>
+      </when>
+      
+      <when test='$_eventType = "1027"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxNOutOfRangeVoltage")</setEventAttribute>
+      </when>
+      
+      <when test='$_eventType = "1028"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxNOutOfRangeTemperature")</setEventAttribute>
+      </when>
+      
+      <when test='$_eventType = "1032"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxNProcessDied")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+          <attrKeyMap attr="swProcName" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.30.0 = STRING: "/>
+        </collectAndSetAttrByKeyValuePair>
+      </when>
+      
+      <when test='$_eventType = "1033"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxNProcessExceedsMemoryLimits")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+          <attrKeyMap attr="swProcName" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.30.0 = STRING: "/>
+        </collectAndSetAttrByKeyValuePair>
+      </when>
+      
+      <when test='$_eventType = "1034"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxNLowOnFlashSpace")</setEventAttribute>
+      </when>
+      
+      <when test='$_eventType = "1035"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxNLowMemory")</setEventAttribute>
+      </when>
+
+      <when test='$_eventType = "1004"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxNormalTemperature")</setEventAttribute>
+      </when>
+      
+      <when test='$_eventType = "1005"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxProcessRestart")</setEventAttribute>
+      </when>
+      
+      <when test='$_eventType = "1006"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxFlashSpaceOK")</setEventAttribute>
+      </when>      
+      
+      <when test='$_eventType = "1007"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxMemoryUsageOK")</setEventAttribute>
+      </when>
+      
+      <when test='$_eventType = "1008"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxPowerSupplyOK")</setEventAttribute>
+      </when>
+      
+      <when test='$_eventType = "1009"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxFanOK")</setEventAttribute>
+      </when>
+    
+      <when test='$_eventType = "1010"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxInRangeVoltage")</setEventAttribute>
+      </when>
+
+      <when test='$_eventType = "1068"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxChannelInterferenceDetected")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+          <attrKeyMap attr="_hostMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.1.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="hostLocation" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "/>
+	  <attrKeyMap attr="wlanChannelId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.18.0 = INTEGER: "/>
+        </collectAndSetAttrByKeyValuePair>
+      </when>
+      
+      <when test='$_eventType = "1069"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxChannelInterferenceCleared")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_hostMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.1.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="hostLocation" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "/>
+	  <attrKeyMap attr="wlanChannelId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.18.0 = INTEGER: "/>
+	</collectAndSetAttrByKeyValuePair>
+      </when>
+      
+      <when test='$_eventType = "1070"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxAPInterferenceDetected")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_hostMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.1.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="hostLocation" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "/>
+	  <attrKeyMap attr="wlanChannelId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.18.0 = INTEGER: "/>
+	  <attrKeyMap attr="wlanRadioId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: "/>
+	  <attrKeyMap attr="_targetHostMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.5.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="wlanSSID" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.6.0 = STRING: "/>
+	</collectAndSetAttrByKeyValuePair> 
+      </when>
+      
+      <when test='$_eventType = "1071"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxAPInterferenceCleared")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_hostMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.1.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="hostLocation" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "/>
+	  <attrKeyMap attr="wlanChannelId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.18.0 = INTEGER: "/>
+	  <attrKeyMap attr="wlanRadioId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: "/>
+	  <attrKeyMap attr="_targetHostMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.5.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="wlanSSID" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.6.0 = STRING: "/>
+	</collectAndSetAttrByKeyValuePair> 
+      </when>
+      
+      <when test='$_eventType = "1072"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxStaInterferenceDetected")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_hostMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.1.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="hostLocation" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "/>
+	  <attrKeyMap attr="wlanChannelId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.18.0 = INTEGER: "/>
+	  <attrKeyMap attr="wlanRadioId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: "/>
+	  <attrKeyMap attr="_targetHostMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.5.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="wlanSSID" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.6.0 = STRING: "/>
+	</collectAndSetAttrByKeyValuePair> 
+      </when>
+      
+      <when test='$_eventType = "1073"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxStaInterferenceCleared")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_hostMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.1.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="hostLocation" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "/>
+	  <attrKeyMap attr="wlanChannelId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.18.0 = INTEGER: "/>
+	  <attrKeyMap attr="wlanRadioId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: "/>
+	  <attrKeyMap attr="_targetHostMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.5.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="wlanSSID" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.6.0 = STRING: "/>
+	</collectAndSetAttrByKeyValuePair> 
+      </when>
+      
+      <when test='$_eventType = "1074"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxFrameRetryRateExceeded")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_hostMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.1.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="hostLocation" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "/>
+	  <attrKeyMap attr="wlanChannelId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.18.0 = INTEGER: "/>
+	  <attrKeyMap attr="wlanRadioId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: "/>
+	  <attrKeyMap attr="_targetHostMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.5.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="wlanSSID" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.6.0 = STRING: "/>
+	</collectAndSetAttrByKeyValuePair> 
+      </when>
+      
+      <when test='$_eventType = "1075"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxFrameReceiveErrorRateExceeded")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_hostMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.1.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="hostLocation" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "/>
+	  <attrKeyMap attr="wlanChannelId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.18.0 = INTEGER: "/>
+	  <attrKeyMap attr="wlanRadioId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: "/>
+	  <attrKeyMap attr="_targetHostMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.5.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="wlanSSID" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.6.0 = STRING: "/>
+	</collectAndSetAttrByKeyValuePair> 
+      </when>
+      
+      <when test='$_eventType = "1076"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxFrameFragmentationRateExceeded")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_hostMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.1.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="hostLocation" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "/>
+	  <attrKeyMap attr="wlanChannelId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.18.0 = INTEGER: "/>
+	  <attrKeyMap attr="wlanRadioId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: "/>
+	  <attrKeyMap attr="_targetHostMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.5.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="wlanSSID" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.6.0 = STRING: "/>
+	</collectAndSetAttrByKeyValuePair> 
+      </when>
+      
+      <when test='$_eventType = "1077"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxFrameBandWidthRateExceeded")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_hostMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.1.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="hostLocation" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "/>
+	  <attrKeyMap attr="wlanChannelId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.18.0 = INTEGER: "/>
+	  <attrKeyMap attr="wlanRadioId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: "/>
+	  <attrKeyMap attr="_targetHostMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.5.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="wlanSSID" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.6.0 = STRING: "/>
+	</collectAndSetAttrByKeyValuePair> 
+      </when>
+
+      <when test='$_eventType = "1078"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxFrameLowSpeedRateExceeded")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_hostMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.1.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="hostLocation" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "/>
+	  <attrKeyMap attr="wlanChannelId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.18.0 = INTEGER: "/>
+	  <attrKeyMap attr="wlanRadioId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: "/>
+	  <attrKeyMap attr="_targetHostMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.5.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="wlanSSID" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.6.0 = STRING: "/>
+	</collectAndSetAttrByKeyValuePair> 
+      </when>
+      
+      <when test='$_eventType = "1079"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxFrameNonUnicastRateExceeded")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_hostMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.1.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="hostLocation" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "/>
+	  <attrKeyMap attr="wlanChannelId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.18.0 = INTEGER: "/>
+	  <attrKeyMap attr="wlanRadioId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: "/>
+	  <attrKeyMap attr="_targetHostMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.5.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="wlanSSID" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.6.0 = STRING: "/>
+	</collectAndSetAttrByKeyValuePair> 
+      </when>
+      
+      <when test='$_eventType = "1082"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxChannelFrameRetryRateExceeded")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_hostMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.1.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="hostLocation" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "/>
+	  <attrKeyMap attr="wlanChannelId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.18.0 = INTEGER: "/>
+	  <attrKeyMap attr="wlanRadioId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: "/>
+	  <attrKeyMap attr="_targetHostMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.5.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="wlanSSID" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.6.0 = STRING: "/>
+	</collectAndSetAttrByKeyValuePair> 
+      </when>
+      
+      <when test='$_eventType = "1083"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxChannelFrameFragmentationRateExceeded")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_hostMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.1.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="hostLocation" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "/>
+	  <attrKeyMap attr="wlanChannelId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.18.0 = INTEGER: "/>
+	  <attrKeyMap attr="wlanRadioId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: "/>
+	  <attrKeyMap attr="_targetHostMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.5.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="wlanSSID" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.6.0 = STRING: "/>
+	</collectAndSetAttrByKeyValuePair> 
+      </when>
+      
+      <when test='$_eventType = "1084"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxChannelFrameErrorRateExceeded")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_hostMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.1.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="hostLocation" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "/>
+	  <attrKeyMap attr="wlanChannelId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.18.0 = INTEGER: "/>
+	  <attrKeyMap attr="wlanRadioId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: "/>
+	  <attrKeyMap attr="_targetHostMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.5.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="wlanSSID" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.6.0 = STRING: "/>
+	</collectAndSetAttrByKeyValuePair> 
+      </when>
+
+      <when test='$_eventType = "1022"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxNAuthMaxUserEntries")</setEventAttribute>
+      </when>
+      
+      <when test='$_eventType = "1023"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxNAuthMaxAclEntries")</setEventAttribute>
+      </when>
+      
+      <when test='$_eventType = "1024"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxNAuthMaxBWContracts")</setEventAttribute>
+      </when>
+
+      <when test='$_eventType = "1114"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxInformQueueOverFlow")</setEventAttribute>
+      </when>
+
+      <when test='$_eventType = "1153"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxVoiceCdrBufferThresholdReached")</setEventAttribute>
+      </when>
+      
+      <!-- change related -->
+
+      <when test='$_eventType = "1036"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxNFanTrayRemoved")</setEventAttribute>
+      </when>
+      
+      <when test='$_eventType = "1037"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxNFanTrayInserted")</setEventAttribute>
+      </when>
+      
+      <when test='$_eventType = "1038"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxNLCRemoved")</setEventAttribute>
+      </when>
+      
+      <when test='$_eventType = "1039"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxNPowerSupplyMissing")</setEventAttribute>
+      </when>
+
+      <when test='$_eventType = "1029"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxNLCInserted")</setEventAttribute>
+      </when>
+      
+      <when test='$_eventType = "1030"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxNSCInserted")</setEventAttribute>
+      </when>
+      
+      <when test='$_eventType = "1031"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxNGBICInserted")</setEventAttribute>
+      </when>
+
+       <when test='$_eventType = "1116"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxCTSTransferError")</setEventAttribute>
+      </when>
+      
+      <when test='$_eventType = "1117"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxCTSTransferSucceeded")</setEventAttribute>
+      </when>
+      
+      <when test='$_eventType = "1118"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxConfigurationUpdateError")</setEventAttribute>
+      </when>
+
+      <when test='$_eventType = "1119"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxConfigurationUpdateSucceeded")</setEventAttribute>
+      </when>
+      
+      <when test='$_eventType = "1120"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxGlobalConfigurationChangeNotification")</setEventAttribute>
+      </when>
+      
+      <when test='$_eventType = "1121"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxUserEntryChanged")</setEventAttribute>	
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_hostMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.1.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="wlanRadioId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: "/>
+	  <attrKeyMap attr="wlanSSID" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.6.0 = STRING: "/>
+	</collectAndSetAttrByKeyValuePair>
+      </when>
+      
+      <when test='$_eventType = "1122"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxAPBssidEntryChanged")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_hostMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.1.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="_targetHostMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.3.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="wlanRadioId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: "/>
+	</collectAndSetAttrByKeyValuePair> 
+      </when>
+      
+      <when test='$_eventType = "1123"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxAPRadioEntryChanged")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_hostMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.1.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="wlanRadioId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: "/>
+	  <attrKeyMap attr="wlanChannelId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.18.0 = INTEGER: "/>
+	</collectAndSetAttrByKeyValuePair> 
+      </when>
+      
+      <when test='$_eventType = "1124"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxAPEntryChanged")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_hostMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.1.0 = Hex-STRING: "/>
+	</collectAndSetAttrByKeyValuePair> 
+      </when>
+      
+      <when test='$_eventType = "1125"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxSwitchListEntryChanged")</setEventAttribute>
+      </when>
+      
+      <when test='$_eventType = "1126"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxPortEntryChanged")</setEventAttribute>
+      </when>
+      
+      <when test='$_eventType = "1127"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxVlanEntryChanged")</setEventAttribute>
+      </when>
+      
+      <when test='$_eventType = "1128"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxVlanInterfaceEntryChanged")</setEventAttribute>
+      </when>
+
+        <when test='$_eventType = "1048"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxNVrrpStateChange")</setEventAttribute>
+      </when>
+      
+      <when test='$_eventType = "1049"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxNRadioAttributesChanged")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_hostMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.1.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="wlanRadioId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: "/>
+	</collectAndSetAttrByKeyValuePair> 
+      </when>
+
+      <when test='$_eventType = "1012"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxNSwitchIPChanged")</setEventAttribute>
+      </when>
+      
+      <when test='$_eventType = "1013"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxNSwitchRoleChange")</setEventAttribute>
+      </when>
+
+      <when test='$_eventType = "1130"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxLicenseEntryChanged")</setEventAttribute>
+      </when>
+      
+      <when test='$_eventType = "1131"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxEsiServerChanged")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="hostName" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.46.0 = STRING: "/>
+	</collectAndSetAttrByKeyValuePair>  
+      </when>
+      
+      <when test='$_eventType = "1132"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxMonAPEntryChanged")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_hostMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.1.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="wlanChannelId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.18.0 = INTEGER: "/>
+	  <attrKeyMap attr="wlanRadioId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: "/>
+	  <attrKeyMap attr="wlanSSID" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.6.0 = STRING: "/>
+	</collectAndSetAttrByKeyValuePair> 
+      </when>
+      
+      <when test='$_eventType = "1133"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxMonStationEntryChanged")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_hostMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.1.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="wlanChannelId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.18.0 = INTEGER: "/>
+	  <attrKeyMap attr="wlanRadioId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: "/>
+	  <attrKeyMap attr="wlanSSID" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.6.0 = STRING: "/>
+	</collectAndSetAttrByKeyValuePair> 
+      </when>
+
+      <when test='$_eventType = "1156"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxMeshNodeEntryChanged")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_hostMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.1.0 = Hex-STRING: "/>
+	</collectAndSetAttrByKeyValuePair> 
+      </when>
+
+      <when test='$_eventType = "1043"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxNChannelChanged")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_hostMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.1.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="hostLocation" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "/>
+	  <attrKeyMap attr="wlanChannelId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.18.0 = INTEGER: "/>
+	</collectAndSetAttrByKeyValuePair> 
+      </when>
+
+      <!-- config error -->
+      <when test='$_eventType = "1056"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxReservedChannelViolation")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_hostMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.5.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="hostLocation" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "/>
+	  <attrKeyMap attr="wlanChannelId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.18.0 = INTEGER: "/>
+	  <attrKeyMap attr="wlanRadioId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: "/>
+	  <attrKeyMap attr="wlanSSID" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.6.0 = STRING: "/>
+	</collectAndSetAttrByKeyValuePair>
+      </when>
+      
+      <when test='$_eventType = "1057"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxValidSSIDViolation")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_hostMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.5.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="hostLocation" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "/>
+	  <attrKeyMap attr="wlanChannelId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.18.0 = INTEGER: "/>
+	  <attrKeyMap attr="wlanRadioId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: "/>
+	  <attrKeyMap attr="wlanSSID" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.6.0 = STRING: "/>
+	</collectAndSetAttrByKeyValuePair>
+      </when>
+      
+      <when test='$_eventType = "1058"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxChannelMisconfiguration")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_hostMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.5.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="hostLocation" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "/>
+	  <attrKeyMap attr="wlanChannelId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.18.0 = INTEGER: "/>
+	  <attrKeyMap attr="wlanRadioId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: "/>
+	  <attrKeyMap attr="wlanSSID" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.6.0 = STRING: "/>
+	</collectAndSetAttrByKeyValuePair>
+      </when>
+      
+      <when test='$_eventType = "1059"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxOUIMisconfiguration")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_hostMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.5.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="hostLocation" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "/>
+	  <attrKeyMap attr="wlanChannelId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.18.0 = INTEGER: "/>
+	  <attrKeyMap attr="wlanRadioId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: "/>
+	  <attrKeyMap attr="wlanSSID" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.6.0 = STRING: "/>
+	</collectAndSetAttrByKeyValuePair>
+      </when>
+      
+      <when test='$_eventType = "1060"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxSSIDMisconfiguration")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_hostMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.5.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="hostLocation" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "/>
+	  <attrKeyMap attr="wlanChannelId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.18.0 = INTEGER: "/>
+	  <attrKeyMap attr="wlanRadioId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: "/>
+	  <attrKeyMap attr="wlanSSID" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.6.0 = STRING: "/>
+	</collectAndSetAttrByKeyValuePair>
+      </when>
+      
+      <when test='$_eventType = "1061"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxShortPreableMisconfiguration")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_hostMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.5.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="hostLocation" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "/>
+	  <attrKeyMap attr="wlanChannelId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.18.0 = INTEGER: "/>
+	  <attrKeyMap attr="wlanRadioId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: "/>
+	  <attrKeyMap attr="wlanSSID" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.6.0 = STRING: "/>
+	</collectAndSetAttrByKeyValuePair>
+      </when>
+      
+      <when test='$_eventType = "1062"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxWPAMisconfiguration")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_hostMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.5.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="hostLocation" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "/>
+	  <attrKeyMap attr="wlanChannelId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.18.0 = INTEGER: "/>
+	  <attrKeyMap attr="wlanRadioId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: "/>
+	  <attrKeyMap attr="wlanSSID" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.6.0 = STRING: "/>
+	</collectAndSetAttrByKeyValuePair>
+      </when>
+
+      <when test='$_eventType = "1152"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxConfigurationLicenseMismatch")</setEventAttribute>
+      </when>
+
+      <when test='$_eventType = "1098"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxInvalidMacOUIAP")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_hostMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.5.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="hostLocation" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "/>
+	  <attrKeyMap attr="wlanChannelId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.18.0 = INTEGER: "/>
+	  <attrKeyMap attr="wlanRadioId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: "/>
+	  <attrKeyMap attr="wlanSSID" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.6.0 = STRING: "/>
+	</collectAndSetAttrByKeyValuePair>
+      </when>
+      
+      <when test='$_eventType = "1099"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxInvalidMacOUISta")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_hostMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.5.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="hostLocation" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "/>
+	  <attrKeyMap attr="wlanChannelId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.18.0 = INTEGER: "/>
+	  <attrKeyMap attr="wlanRadioId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: "/>
+	  <attrKeyMap attr="wlanSSID" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.6.0 = STRING: "/>
+	</collectAndSetAttrByKeyValuePair>
+      </when>
+      
+      <when test='$_eventType = "1100"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxWEPMisconfiguration")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_hostMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.5.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="hostLocation" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "/>
+	  <attrKeyMap attr="wlanChannelId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.18.0 = INTEGER: "/>
+	  <attrKeyMap attr="wlanRadioId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: "/>
+	  <attrKeyMap attr="wlanSSID" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.6.0 = STRING: "/>
+	</collectAndSetAttrByKeyValuePair>
+      </when>
+
+      <!-- user auth  -->
+
+      <when test='$_eventType = "1014"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxNUserEntryCreated")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="srcIpAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.51.0 = IpAddress: "/>
+	  <attrKeyMap attr="_srcMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.52.0 = Hex-STRING: "/>
+	</collectAndSetAttrByKeyValuePair>
+      </when>
+      
+      <when test='$_eventType = "1015"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxNUserEntryDeleted")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="srcIpAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.51.0 = IpAddress: "/>
+	  <attrKeyMap attr="_srcMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.52.0 = Hex-STRING: "/>
+	</collectAndSetAttrByKeyValuePair>
+      </when>
+      
+      <when test='$_eventType = "1016"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxNUserEntryAuthenticated")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="srcIpAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.51.0 = IpAddress: "/>
+	  <attrKeyMap attr="_srcMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.52.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="user" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.53.0 = STRING: "/>
+	</collectAndSetAttrByKeyValuePair>
+      </when>
+      
+      <when test='$_eventType = "1017"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxNUserEntryDeAuthenticated")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="srcIpAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.51.0 = IpAddress: "/>
+	  <attrKeyMap attr="_srcMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.52.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="user" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.53.0 = STRING: "/>
+	</collectAndSetAttrByKeyValuePair>
+      </when>
+      
+      <when test='$_eventType = "1018"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxNUserAuthenticationFailed")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="srcIpAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.51.0 = IpAddress: "/>
+	  <attrKeyMap attr="_srcMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.52.0 = Hex-STRING: "/>
+	</collectAndSetAttrByKeyValuePair>
+      </when>
+         
+      <when test='$_eventType = "1044"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxNStationAddedToBlackList")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_srcMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.8.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="wirelessBlacklistReasonCode" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.34.0 = INTEGER: "/>
+	</collectAndSetAttrByKeyValuePair>
+      </when>
+      
+      <when test='$_eventType = "1045"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxNStationRemovedFromBlackList")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_srcMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.8.0 = Hex-STRING: "/>
+	</collectAndSetAttrByKeyValuePair>
+      </when>
+
+      <!-- IPS kind -->
+
+      <when test='$_eventType = "1085"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxSignatureMatchAP")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_srcMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.5.0 = Hex-STRING: "/>
+	   <attrKeyMap attr="wlanSSID" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.6.0 = STRING: "/>
+	  <attrKeyMap attr="hostLocation" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "/>
+	  <attrKeyMap attr="wlanChannelId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.18.0 = INTEGER: "/>
+	  <attrKeyMap attr="wlanRadioId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: "/>
+	  <attrKeyMap attr="wirelessSigName" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.14.0 = STRING: "/>
+	</collectAndSetAttrByKeyValuePair>
+      </when>
+      
+      <when test='$_eventType = "1086"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxSignatureMatchSta")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_srcMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.9.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="hostLocation" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "/>
+	  <attrKeyMap attr="wlanRadioId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: "/>
+	  <attrKeyMap attr="wirelessSigName" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.14.0 = STRING: "/>
+	</collectAndSetAttrByKeyValuePair>
+      </when>
+
+      <when test='$_eventType = "1002"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxSignatureMatch")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_srcMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.9.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="hostLocation" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "/>
+	  <attrKeyMap attr="wirelessSigName" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.14.0 = STRING: "/>
+	</collectAndSetAttrByKeyValuePair>
+      </when>
+
+       <when test='$_eventType = "1134"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxSignAPNetstumbler")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_srcMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.5.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="wlanSSID" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.6.0 = STRING: "/>
+	  <attrKeyMap attr="wlanRadioId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: "/>
+	  <attrKeyMap attr="hostLocation" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "/>
+	</collectAndSetAttrByKeyValuePair>
+      </when>
+      
+      <when test='$_eventType = "1135"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxSignStaNetstumbler")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_srcMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.9.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="wlanSSID" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.6.0 = STRING: "/>
+	  <attrKeyMap attr="wlanRadioId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: "/>
+	  <attrKeyMap attr="hostLocation" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "/>
+	</collectAndSetAttrByKeyValuePair>
+      </when>
+      
+      <when test='$_eventType = "1136"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxSignAPAsleap")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_srcMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.5.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="wlanSSID" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.6.0 = STRING: "/>
+	  <attrKeyMap attr="wlanRadioId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: "/>
+	  <attrKeyMap attr="hostLocation" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "/>
+	</collectAndSetAttrByKeyValuePair>
+      </when>
+
+      <when test='$_eventType = "1137"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxSignStaAsleap")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_srcMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.9.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="wlanSSID" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.6.0 = STRING: "/>
+	  <attrKeyMap attr="wlanRadioId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: "/>
+	  <attrKeyMap attr="hostLocation" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "/>
+	</collectAndSetAttrByKeyValuePair>
+      </when>
+      
+      <when test='$_eventType = "1138"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxSignAPAirjack")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_srcMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.5.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="wlanSSID" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.6.0 = STRING: "/>
+	  <attrKeyMap attr="wlanRadioId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: "/>
+	  <attrKeyMap attr="hostLocation" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "/>
+	</collectAndSetAttrByKeyValuePair>
+      </when>
+      
+      <when test='$_eventType = "1139"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxSignStaAirjack")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_srcMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.9.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="wlanSSID" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.6.0 = STRING: "/>
+	  <attrKeyMap attr="wlanRadioId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: "/>
+	  <attrKeyMap attr="hostLocation" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "/>
+	</collectAndSetAttrByKeyValuePair>
+      </when>
+      
+      <when test='$_eventType = "1140"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxSignAPNullProbeResp")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_srcMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.5.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="wlanSSID" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.6.0 = STRING: "/>
+	  <attrKeyMap attr="wlanRadioId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: "/>
+	  <attrKeyMap attr="hostLocation" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "/>
+	</collectAndSetAttrByKeyValuePair>
+      </when>
+      
+      <when test='$_eventType = "1141"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxSignStaNullProbeResp")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_srcMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.9.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="wlanSSID" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.6.0 = STRING: "/>
+	  <attrKeyMap attr="wlanRadioId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: "/>
+	  <attrKeyMap attr="hostLocation" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "/>
+	</collectAndSetAttrByKeyValuePair>
+      </when>
+      
+      <when test='$_eventType = "1142"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxSignAPDeauthBcast")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_srcMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.5.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="wlanSSID" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.6.0 = STRING: "/>
+	  <attrKeyMap attr="wlanRadioId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: "/>
+	  <attrKeyMap attr="hostLocation" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "/>
+	</collectAndSetAttrByKeyValuePair>
+      </when>
+
+      <when test='$_eventType = "1143"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxSignStaDeauthBcast")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_srcMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.9.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="wlanSSID" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.6.0 = STRING: "/>
+	  <attrKeyMap attr="wlanRadioId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: "/>
+	  <attrKeyMap attr="hostLocation" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "/>
+	</collectAndSetAttrByKeyValuePair>
+      </when>
+
+      <when test='$_eventType = "1094"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxDisconnectStationAttack")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_srcMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.9.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="wlanSSID" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.6.0 = STRING: "/>
+	  <attrKeyMap attr="wlanRadioId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: "/>
+	  <attrKeyMap attr="hostLocation" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "/>
+	</collectAndSetAttrByKeyValuePair>
+      </when>
+      
+      <when test='$_eventType = "1095"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxApFloodAttack")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_hostMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.5.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="wlanSSID" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.6.0 = STRING: "/>
+	  <attrKeyMap attr="wlanRadioId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: "/>
+	  <attrKeyMap attr="hostLocation" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "/>
+	</collectAndSetAttrByKeyValuePair>
+      </when>
+
+      <when test='$_eventType = "1065"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxStaPolicyViolation")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_srcMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.8.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="wlanSSID" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.6.0 = STRING: "/>
+	  <attrKeyMap attr="wlanRadioId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: "/>
+	  <attrKeyMap attr="hostLocation" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "/>
+	  <attrKeyMap attr="wlanChannelId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.18.0 = INTEGER: "/>
+	</collectAndSetAttrByKeyValuePair>
+      </when>
+      
+      <when test='$_eventType = "1066"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxRepeatWEPIVViolation")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_srcMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.5.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="wlanSSID" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.6.0 = STRING: "/>
+	  <attrKeyMap attr="wlanRadioId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: "/>
+	  <attrKeyMap attr="hostLocation" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "/>
+	  <attrKeyMap attr="wlanChannelId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.18.0 = INTEGER: "/>
+	</collectAndSetAttrByKeyValuePair>
+      </when>
+      
+      <when test='$_eventType = "1067"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxWeakWEPIVViolation")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_srcMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.5.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="wlanSSID" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.6.0 = STRING: "/>
+	  <attrKeyMap attr="wlanRadioId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: "/>
+	  <attrKeyMap attr="hostLocation" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "/>
+	  <attrKeyMap attr="wlanChannelId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.18.0 = INTEGER: "/>
+	</collectAndSetAttrByKeyValuePair>
+      </when>
+
+       <when test='$_eventType = "1101"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxStaRepeatWEPIVViolation")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_srcMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.8.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="wlanSSID" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.6.0 = STRING: "/>
+	  <attrKeyMap attr="wlanRadioId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: "/>
+	  <attrKeyMap attr="hostLocation" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "/>
+	  <attrKeyMap attr="wlanChannelId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.18.0 = INTEGER: "/>
+	</collectAndSetAttrByKeyValuePair>
+      </when>
+      
+      <when test='$_eventType = "1102"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxStaWeakWEPIVViolation")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_srcMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.8.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="wlanSSID" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.6.0 = STRING: "/>
+	  <attrKeyMap attr="wlanRadioId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: "/>
+	  <attrKeyMap attr="hostLocation" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "/>
+	  <attrKeyMap attr="wlanChannelId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.18.0 = INTEGER: "/>
+	</collectAndSetAttrByKeyValuePair>
+      </when>
+
+      <when test='$_eventType = "1148"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxDisconnectStationAttackAP")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_srcMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.5.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="wlanSSID" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.6.0 = STRING: "/>
+	  <attrKeyMap attr="wlanRadioId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: "/>
+	  <attrKeyMap attr="hostLocation" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "/>
+	</collectAndSetAttrByKeyValuePair>
+      </when>
+
+      <when test='$_eventType = "1149"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxDisconnectStationAttackSta")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_srcMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.9.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="wlanSSID" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.6.0 = STRING: "/>
+	  <attrKeyMap attr="wlanRadioId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: "/>
+	  <attrKeyMap attr="hostLocation" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "/>
+	</collectAndSetAttrByKeyValuePair>
+      </when>
+
+       <when test='$_eventType = "1003"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxNodeRateAnomaly")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_srcMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.8.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="_hostMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.5.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="hostLocation" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "/>
+	</collectAndSetAttrByKeyValuePair>
+      </when>
+
+       <when test='$_eventType = "1087"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxChannelRateAnomaly")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_srcMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.1.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="wlanRadioId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: "/>
+	  <attrKeyMap attr="hostLocation" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "/>
+	  <attrKeyMap attr="wlanChannelId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.18.0 = INTEGER: "/>
+	</collectAndSetAttrByKeyValuePair>
+      </when>
+      
+      <when test='$_eventType = "1088"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxNodeRateAnomalyAP")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_srcMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.5.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="wlanSSID" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.6.0 = STRING: "/>
+	  <attrKeyMap attr="wlanRadioId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: "/>
+	  <attrKeyMap attr="hostLocation" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "/>
+	  <attrKeyMap attr="wlanChannelId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.18.0 = INTEGER: "/>
+	  <attrKeyMap attr="frameType" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.15.0 = INTEGER: "/>
+	</collectAndSetAttrByKeyValuePair>
+      </when>
+      
+      <when test='$_eventType = "1089"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxNodeRateAnomalySta")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_srcMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.8.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="wlanSSID" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.6.0 = STRING: "/>
+	  <attrKeyMap attr="wlanRadioId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: "/>
+	  <attrKeyMap attr="hostLocation" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "/>
+	  <attrKeyMap attr="wlanChannelId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.18.0 = INTEGER: "/>
+	  <attrKeyMap attr="frameType" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.15.0 = INTEGER: "/>
+	</collectAndSetAttrByKeyValuePair>
+      </when>
+      
+      <when test='$_eventType = "1090"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxEAPRateAnomaly")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_srcMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.1.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="wlanRadioId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: "/>
+	  <attrKeyMap attr="hostLocation" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "/>
+	  <attrKeyMap attr="wlanChannelId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.18.0 = INTEGER: "/>
+	</collectAndSetAttrByKeyValuePair>
+      </when>
+      
+      <when test='$_eventType = "1091"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxSignalAnomaly")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_srcMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.1.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="wlanRadioId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: "/>
+	  <attrKeyMap attr="hostLocation" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "/>
+	  <attrKeyMap attr="wlanChannelId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.18.0 = INTEGER: "/>
+	</collectAndSetAttrByKeyValuePair>
+      </when>
+      
+      <when test='$_eventType = "1092"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxSequenceNumberAnomalyAP")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_srcMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.5.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="wlanSSID" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.6.0 = STRING: "/>
+	  <attrKeyMap attr="hostLocation" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "/>
+	  <attrKeyMap attr="wlanRadioId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: "/>
+	</collectAndSetAttrByKeyValuePair>
+      </when>
+      
+      <when test='$_eventType = "1093"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxSequenceNumberAnomalySta")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_srcMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.9.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="wlanSSID" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.6.0 = STRING: "/>
+	  <attrKeyMap attr="hostLocation" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "/>
+	  <attrKeyMap attr="wlanRadioId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: "/>
+	</collectAndSetAttrByKeyValuePair>
+      </when>
+      
+      <when test='$_eventType = "1042"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxNCoverageHoleDetected")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_hostMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.5.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="hostLocation" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "/>
+	  <attrKeyMap attr="wlanChannelId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.18.0 = INTEGER: "/>
+	</collectAndSetAttrByKeyValuePair>
+      </when>
+
+      <when test='$_eventType = "1011"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxCoverageHoleResolved")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_hostMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.5.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="hostLocation" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "/>
+	  <attrKeyMap attr="wlanChannelId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.18.0 = INTEGER: "/>
+	</collectAndSetAttrByKeyValuePair>
+      </when>
+  
+      <when test='$_eventType = "1053"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxUnsecureAPDetected")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_srcMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.20.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="srcIPAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.21.0 = IpAddress: "/>
+	  <attrKeyMap attr="wlanSSID" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.6.0 = STRING: "/>
+	  <attrKeyMap attr="wlanRadioId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: "/>
+	  <attrKeyMap attr="hostLocation" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "/>
+	  <attrKeyMap attr="wlanChannelId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.18.0 = INTEGER: "/>
+	</collectAndSetAttrByKeyValuePair>
+      </when>
+  
+      <when test='$_eventType = "1054"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxUnsecureAPResolved")</setEventAttribute>
+	<setEventAttribute attr="eventAction">1</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_srcMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.5.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="wlanSSID" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.6.0 = STRING: "/>
+	  <attrKeyMap attr="wlanRadioId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: "/>
+	  <attrKeyMap attr="hostLocation" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "/>
+	  <attrKeyMap attr="wlanChannelId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.18.0 = INTEGER: "/>
+	</collectAndSetAttrByKeyValuePair>
+      </when>
+
+      <when test='$_eventType = "1063"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxAdhocNetworkDetected")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_srcMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.5.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="wlanSSID" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.6.0 = STRING: "/>
+	  <attrKeyMap attr="wlanRadioId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: "/>
+	  <attrKeyMap attr="hostLocation" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "/>
+	  <attrKeyMap attr="wlanChannelId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.18.0 = INTEGER: "/>
+	</collectAndSetAttrByKeyValuePair>
+      </when>
+      
+      <when test='$_eventType = "1064"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxAdhocNetworkRemoved")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_srcMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.5.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="wlanSSID" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.6.0 = STRING: "/>
+	  <attrKeyMap attr="wlanRadioId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: "/>
+	  <attrKeyMap attr="hostLocation" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "/>
+	  <attrKeyMap attr="wlanChannelId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.18.0 = INTEGER: "/>
+	</collectAndSetAttrByKeyValuePair>
+      </when>
+    
+      <when test='$_eventType = "1096"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxAdhocNetwork")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_srcMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.9.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="_nepMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.5.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="wlanSSID" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.6.0 = STRING: "/>
+	  <attrKeyMap attr="wlanRadioId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: "/>
+	  <attrKeyMap attr="hostLocation" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "/>
+	</collectAndSetAttrByKeyValuePair>
+      </when>
+
+      <when test='$_eventType = "1150"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxSuspectUnsecureAPDetected")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_srcMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.5.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="wlanSSID" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.6.0 = STRING: "/>
+	  <attrKeyMap attr="wlanRadioId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: "/>
+	  <attrKeyMap attr="hostLocation" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "/>
+	  <attrKeyMap attr="wlanChannelId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.18.0 = INTEGER: "/>
+	</collectAndSetAttrByKeyValuePair>
+      </when>
+
+      <when test='$_eventType = "1151"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxSuspectUnsecureAPResolved")</setEventAttribute>
+	<setEventAttribute attr="eventAction">1</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_srcMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.5.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="wlanSSID" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.6.0 = STRING: "/>
+	  <attrKeyMap attr="wlanRadioId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: "/>
+	</collectAndSetAttrByKeyValuePair>
+      </when>
+
+      <when test='$_eventType = "1103"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxStaAssociatedToUnsecureAP")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_srcMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.8.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="_nepMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.5.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="wlanSSID" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.6.0 = STRING: "/>
+	  <attrKeyMap attr="wlanRadioId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: "/>
+	  <attrKeyMap attr="hostLocation" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "/>
+	  <attrKeyMap attr="wlanChannelId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.18.0 = INTEGER: "/>
+	</collectAndSetAttrByKeyValuePair>
+      </when>
+      
+      <when test='$_eventType = "1104"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxStaUnAssociatedFromUnsecureAP")</setEventAttribute>
+	<setEventAttribute attr="eventAction">1</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_srcMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.8.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="_nepMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.5.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="wlanSSID" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.6.0 = STRING: "/>
+	  <attrKeyMap attr="wlanRadioId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: "/>
+	</collectAndSetAttrByKeyValuePair>
+      </when>
+
+      <when test='$_eventType = "1106"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxInterferingApDetected")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_srcMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.5.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="wlanSSID" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.6.0 = STRING: "/>
+	  <attrKeyMap attr="wlanRadioId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: "/>
+	  <attrKeyMap attr="hostLocation" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "/>
+	  <attrKeyMap attr="wlanChannelId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.18.0 = INTEGER: "/>
+	</collectAndSetAttrByKeyValuePair>
+      </when>
+      
+      <when test='$_eventType = "1113"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxAPImpersonation")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_srcMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.5.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="wlanSSID" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.6.0 = STRING: "/>
+	  <attrKeyMap attr="wlanRadioId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: "/>
+	  <attrKeyMap attr="hostLocation" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "/>
+	  <attrKeyMap attr="wlanChannelId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.18.0 = INTEGER: "/>
+	</collectAndSetAttrByKeyValuePair>
+      </when>
+
+      <when test='$_eventType = "1055"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxStaImpersonation")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_srcMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.8.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="wlanSSID" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.6.0 = STRING: "/>
+	  <attrKeyMap attr="wlanRadioId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: "/>
+	  <attrKeyMap attr="hostLocation" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "/>
+	  <attrKeyMap attr="wlanChannelId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.18.0 = INTEGER: "/>
+	</collectAndSetAttrByKeyValuePair>
+      </when>
+
+      <when test='$_eventType = "1046"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxNIpSpoofingDetected")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_srcMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.37.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="srcIpAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.35.0 = IpAddress: "/>
+	</collectAndSetAttrByKeyValuePair>
+      </when>
+      
+      <when test='$_eventType = "1097"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxWirelessBridge")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_srcMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.11.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="_destMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.12.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="wlanSSID" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.6.0 = STRING: "/>
+	  <attrKeyMap attr="wlanRadioId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: "/>
+	  <attrKeyMap attr="hostLocation" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "/>
+	</collectAndSetAttrByKeyValuePair>
+      </when>
+
+      <when test='$_eventType = "1129"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxWindowsBridgeDetected")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_srcMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.9.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="_nepMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.5.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="wlanSSID" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.6.0 = STRING: "/>
+	  <attrKeyMap attr="wlanRadioId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: "/>
+	  <attrKeyMap attr="hostLocation" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "/>
+	  <attrKeyMap attr="wlanChannelId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.18.0 = INTEGER: "/>
+	</collectAndSetAttrByKeyValuePair>
+      </when>
+
+      <when test='$_eventType = "1144"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxWindowsBridgeDetectedAP")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_srcMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.5.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="wlanSSID" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.6.0 = STRING: "/>
+	  <attrKeyMap attr="wlanRadioId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: "/>
+	  <attrKeyMap attr="hostLocation" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "/>
+	  <attrKeyMap attr="wlanChannelId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.18.0 = INTEGER: "/>
+	</collectAndSetAttrByKeyValuePair>
+      </when>
+
+      <when test='$_eventType = "1145"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxWindowsBridgeDetectedSta")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_srcMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.9.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="_nepMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.5.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="wlanSSID" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.6.0 = STRING: "/>
+	  <attrKeyMap attr="wlanRadioId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: "/>
+	  <attrKeyMap attr="hostLocation" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "/>
+	  <attrKeyMap attr="wlanChannelId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.18.0 = INTEGER: "/>
+	</collectAndSetAttrByKeyValuePair>
+      </when>
+
+      <when test='$_eventType = "1105"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxAdhocNetworkBridgeDetected")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_srcMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.9.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="_nepMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.5.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="wlanSSID" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.6.0 = STRING: "/>
+	  <attrKeyMap attr="wlanRadioId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: "/>
+	  <attrKeyMap attr="hostLocation" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "/>
+	  <attrKeyMap attr="wlanChannelId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.18.0 = INTEGER: "/>
+	</collectAndSetAttrByKeyValuePair>
+      </when>
+
+      <when test='$_eventType = "1146"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxAdhocNetworkBridgeDetectedAP")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_srcMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.5.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="wlanSSID" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.6.0 = STRING: "/>
+	  <attrKeyMap attr="wlanRadioId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: "/>
+	  <attrKeyMap attr="hostLocation" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "/>
+	  <attrKeyMap attr="wlanChannelId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.18.0 = INTEGER: "/>
+	</collectAndSetAttrByKeyValuePair>
+      </when>
+
+      <when test='$_eventType = "1147"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxAdhocNetworkBridgeDetectedSta")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_srcMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.9.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="_nepMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.5.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="wlanSSID" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.6.0 = STRING: "/>
+	  <attrKeyMap attr="wlanRadioId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: "/>
+	  <attrKeyMap attr="hostLocation" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "/>
+	  <attrKeyMap attr="wlanChannelId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.18.0 = INTEGER: "/>
+	</collectAndSetAttrByKeyValuePair>
+      </when>
+
+      <!-- other stuff -->
+
+      <when test='$_eventType = "1157"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxHtGreenfieldSupported")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_hostMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.5.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="wlanSSID" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.6.0 = STRING: "/>
+	  <attrKeyMap attr="wlanRadioId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: "/>
+	  <attrKeyMap attr="hostLocation" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "/>
+	  <attrKeyMap attr="wlanChannelId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.18.0 = INTEGER: "/>
+	</collectAndSetAttrByKeyValuePair>
+      </when>
+
+      <when test='$_eventType = "1158"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxHT40MHzIntoleranceAP")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_hostMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.5.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="wlanSSID" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.6.0 = STRING: "/>
+	  <attrKeyMap attr="wlanRadioId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: "/>
+	  <attrKeyMap attr="hostLocation" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "/>
+	  <attrKeyMap attr="wlanChannelId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.18.0 = INTEGER: "/>
+	</collectAndSetAttrByKeyValuePair>
+      </when>
+
+      <when test='$_eventType = "1159"'>
+	<setEventAttribute attr="eventType">combineMsgId("Aruba","-",$_eventType,"-","wlsxHT40MHzIntoleranceSta")</setEventAttribute>
+	<collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+	  <attrKeyMap attr="_hostMACAddr" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.9.0 = Hex-STRING: "/>
+	  <attrKeyMap attr="wlanSSID" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.6.0 = STRING: "/>
+	  <attrKeyMap attr="wlanRadioId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.56.0 = INTEGER: "/>
+	  <attrKeyMap attr="hostLocation" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.17.0 = STRING: "/>
+	  <attrKeyMap attr="wlanChannelId" key="SNMPv2-SMI::enterprises.14823.2.3.1.11.1.1.18.0 = INTEGER: "/>
+	</collectAndSetAttrByKeyValuePair>
+      </when>
+   
+    </choose>
+
+    <when test='exist _srcMACAddr'>
+      <setEventAttribute attr="srcMACAddr">normalizeMAC($_srcMACAddr)</setEventAttribute>
+    </when>
+
+    <when test='exist _destMACAddr'>
+      <setEventAttribute attr="destMACAddr">normalizeMAC($_destMACAddr)</setEventAttribute>
+    </when>
+
+    <when test='exist _nepMACAddr'>
+      <setEventAttribute attr="nepMACAddr">normalizeMAC($_nepMACAddr)</setEventAttribute>
+    </when>
+
+    <when test='exist _hostMACAddr'>
+      <setEventAttribute attr="hostMACAddr">normalizeMAC($_hostMACAddr)</setEventAttribute>
+    </when>
+
+     <when test='exist _targetHostMACAddr'>
+      <setEventAttribute attr="targetHostMACAddr">normalizeMAC($_targetHostMACAddr)</setEventAttribute>
+    </when>
+
+  </parsingInstructions>
+  
+</eventParser>

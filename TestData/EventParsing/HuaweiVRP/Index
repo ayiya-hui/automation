@@ -1,0 +1,14 @@
+eventType,name,module,reptDevIpAddr,key,method
+VRP-SHELL-TELNETFAILED,HuaweiVRP_1,HuaweiVRP,$localhost,,syslog
+VRP-SHELL-LOGIN,HuaweiVRP_2,HuaweiVRP,$localhost,,syslog
+VRP-SHELL-LOGOUT,HuaweiVRP_3,HuaweiVRP,$localhost,,syslog
+VRP-SHELL-TIMEOUT,HuaweiVRP_4,HuaweiVRP,$localhost,,syslog
+VRP-SHELL-AUTHCMDNONEED,HuaweiVRP_5,HuaweiVRP,$localhost,,syslog
+VRP-SHELL-CMDRECORD,HuaweiVRP_6,HuaweiVRP,$localhost,,syslog
+VRP-SHELL-DISPLAY_CMDRECORD,HuaweiVRP_7,HuaweiVRP,$localhost,,syslog
+VRP-DRV-LINKDOWN,HuaweiVRP_8,HuaweiVRP,$localhost,,syslog
+VRP-DRV-LINKUP,HuaweiVRP_9,HuaweiVRP,$localhost,,syslog
+VRP-IFNET-UPDOWN-TO-DOWN,HuaweiVRP_10,HuaweiVRP,$localhost,,syslog
+VRP-IFNET-UPDOWN-TO-UP,HuaweiVRP_11,HuaweiVRP,$localhost,,syslog
+VRP-FIB-REFRESH_START,HuaweiVRP_12,HuaweiVRP,$localhost,,syslog
+VRP-FIB-REFRESH_END,HuaweiVRP_13,HuaweiVRP,$localhost,,syslog

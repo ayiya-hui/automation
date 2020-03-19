@@ -1,0 +1,34 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<188>97785: Dec 4 17:22:27.054 EST: %SW_DAI-4-DHCP_SNOOPING_DENY: 1 Invalid ARPs (Req) on abc/44, vlan 75.([5c95.ae96.2696/10.30.75.129/0000.0000.0000/10.30.75.1/17:22:24 EST Wed Dec 4 2013])
+[params]
+rawEventMsg=any
+deviceTime=any
+parserName=CiscoIOSParser
+totFlows=1
+eventType=IOS-SW_DAI-DHCP_SNOOPING_DENY
+phCustId=$sender
+destIpAddr=10.30.75.1
+srcIpAddr=10.30.75.129
+intfName=abc/44
+reptModel=IOS
+eventId=any
+eventParsedOk=1
+eventSeverity=5
+hostIpAddr=$localhost
+eventName=Invalid ARPs indicating possible spoof attack
+isHostIntfCritical=No
+phEventCategory=0 (External)
+customer=Super
+srcMACAddr=5c:95:ae:96:26:96
+eventSeverityCat=MEDIUM
+collectorId=any
+relayDevIpAddr=$localhost
+reptDevName=any
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Cisco
+hostVLAN=75

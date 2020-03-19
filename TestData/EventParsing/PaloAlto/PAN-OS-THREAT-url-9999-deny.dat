@@ -1,0 +1,40 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<14>May  9 17:55:21 1,2010/05/09 17:55:21,0006C101167,THREAT,url,6,2010/05/09 17:55:20,172.16.2.2,216.163.137.68,::172.16.255.78,216.163.137.68,DynamicDefault,,,web-browsing,vsys1,trust,untrust,ethernet1/2,ethernet1/1,syslog-172.16.20.152,2010/05/09 17:55:21,976,1,1126,80,38931,80,0x40,tcp,block-url,"www.playboy.com/favicon.ico",(9999),adult-and-pornography,informational,0
+[params]
+rawEventMsg=any
+appName=web-browsing
+eventType=PAN-OS-THREAT-url-9999-deny
+phCustId=$sender
+destIpAddr=216.163.137.68
+destIpPort=80 (HTTP)
+srcIpAddr=172.16.2.2
+reptModel=PAN-OS
+eventId=any
+ipConnId=976
+eventParsedOk=1
+eventSeverity=1
+preNATDestIpAddr=216.163.137.68
+eventName=URL inspected traffic denied
+appTransportProto=web-browsing
+phEventCategory=0 (External)
+paFwAction=block-url
+destName="www.playboy.com/favicon.ico"
+webCategory=adult-and-pornography
+srcIntfName=ethernet1/2
+srcFwZone=trust
+srcIpPort=1126
+preNATDestIpPort=80 (HTTP)
+eventSeverityCat=LOW
+destIntfName=ethernet1/1
+postNATSrcIpAddr=172.16.255.78
+ipProto=6 (TCP)
+destFwZone=untrust
+postNATSrcIpPort=38931
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=1 (Deny)
+reptVendor=Palo Alto
+fwRule=DynamicDefault

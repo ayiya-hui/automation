@@ -1,0 +1,13 @@
+eventType,name,module,reptDevIpAddr,key,method
+Sophos-HIPS-Suspicious-File,Sophos_1,Sophos,172.16.10.115,,syslog
+Sophos-HIPS-Suspicious-File,Sophos_2,Sophos,172.22.10.3,,syslog
+Sophos-HIPS-Suspicious-Process,Sophos_3,Sophos,172.17.30.40,,syslog
+Sophos-HIPS-Suspicious-Process,Sophos_4,Sophos,172.22.10.21,,syslog
+Sophos-WebURL-Block,Sophos_5,Sophos,172.22.10.22,,syslog
+Sophos-Malware-Found,Sophos_6,Sophos,172.15.30.8,,syslog
+Sophos-Malware-Found,Sophos_7,Sophos,172.17.30.41,,syslog
+Sophos-Malware-Removed,Sophos_8,Sophos,172.15.30.8,,syslog
+Sophos-Malware-Removed,Sophos_9,Sophos,172.17.30.41,,syslog
+Sophos-DLP-Violation,Sophos_10,Sophos,172.22.30.52,,syslog
+Sophos-DLP-Violation,Sophos_11,Sophos,172.22.30.54,,syslog
+Sophos-DLP-Violation,Sophos_12,Sophos,172.22.30.59,,syslog

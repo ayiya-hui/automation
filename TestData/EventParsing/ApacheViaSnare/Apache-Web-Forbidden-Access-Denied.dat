@@ -1,0 +1,62 @@
+[reptDevIpAddr(key)]
+125.15.125.15
+[eventMsg]
+<142>Sep 17 13:27:37 SJ-Dev-S-RH-VMW-01.prospecthills.net ApacheLog   192.168.20.35 - - [17/Sep/2009:13:27:37 -0700] "GET /icons/apache_pb2.gif HTTP/1.1" 403 2414 "http://192.168.0.30/" "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 2.0.50727)".--automator
+[params]
+rawEventMsg=any
+user=-
+deviceTime=any
+eventType=Apache-Web-Forbidden-Access-Denied
+phCustId=$sender
+destIpAddr=125.15.125.15
+httpReferrer=http://192.168.0.30/
+srcIpAddr=192.168.20.35
+reptModel=Apache Tomcat
+eventId=any
+eventParsedOk=1
+eventSeverity=5
+eventName=Web request denied - forbidden access
+phEventCategory=0 (External)
+recvBytes=2414
+eventSeverityCat=MEDIUM
+httpMethod=GET
+httpStatusCode=403 (Forbidden - The server understood the request, but is refusing to fulfill it. Authorization will not help)
+httpVersion=HTTP/1.1
+count=1
+uriStem=/icons/apache_pb2.gif
+phRecvTime=any
+reptDevIpAddr=125.15.125.15
+eventAction=0 (Permit)
+reptVendor=Apache
+httpUserAgent=Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 2.0.50727)
+[reptDevIpAddr(key)]
+172.16.10.8
+[eventMsg]
+<2>Mar 26 14:09:56 172.16.10.8 ApacheLog	0	192.168.22.4 - - [26/Mar/2010:14:09:55 -0700] "GET / HTTP/1.1" 403 3985 "-" "Mozilla/5.0 (Windows; U; Windows NT 6.0; en-US; rv:1.9.0.18) Gecko/2010020220 Firefox/3.0.18 (.NET CLR 3.5.30729)" --automator
+[params]
+rawEventMsg=any
+deviceTime=any
+eventType=Apache-Web-Forbidden-Access-Denied
+phCustId=$sender
+destIpAddr=$reporter
+httpReferrer=-
+srcIpAddr=192.168.22.4
+reptModel=Apache Tomcat
+eventId=any
+eventParsedOk=1
+eventSeverity=5
+eventName=Web request denied - forbidden access
+phEventCategory=0 (External)
+recvBytes=3985
+eventSeverityCat=MEDIUM
+httpMethod=GET
+user=-
+httpStatusCode=403 (Forbidden - The server understood the request, but is refusing to fulfill it. Authorization will not help)
+httpVersion=HTTP/1.1
+count=1
+uriStem=/
+phRecvTime=any
+reptDevIpAddr=$reporter
+eventAction=0 (Permit)
+reptVendor=Apache
+httpUserAgent=any

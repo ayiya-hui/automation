@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+172.16.10.18
+[eventMsg]
+2011-12-28 00:23:51 0.0.0.0(via UDP: [172.16.10.18]:38296) TRAP2, SNMP v2c, community public    . Cold Start Trap (0) Uptime: 0:00:00.00        DISMAN-EVENT-MIB::sysUpTimeInstance = Timeticks: (16272252) 1 day, 21:12:02.52  SNMPv2-MIB::snmpTrapOID.0 = OID: SNMPv2-SMI::enterprises.2.6.159.201.1.2.2.1    SNMPv2-SMI::enterprises.2.6.159.202.1 = STRING: ""Director.Director Agent.MONCPU.2872344980.Low Error"" SNMPv2-SMI::enterprises.2.6.159.202.2 = STRING: ""Critical""    SNMPv2-SMI::enterprises.2.6.159.202.3 = STRING: ""AIX6.1p5""    SNMPv2-SMI::enterprises.2.6.159.202.4 = STRING: ""AIX6.1p5""    SNMPv2-SMI::enterprises.2.6.159.202.5 = Hex-STRING: 4D 6F 6E 69 74 6F 72 20 27 E7 BB 84 20 E6 89 80 E6 9C 89 E6 93 8D E4 BD 9C E7 B3 BB E7 BB 9F 20 E7 9A 84 20 43 50 55 20 25 20 E4 BD BF E7 94 A8 E7 8E 87 20 E7 9A 84 E7 BB 84 E9 98 88 E5 80 BC 27 20 4C 6F 77 20 45 72 72 6F 72 20 27 43 50 55 20 55 74 69 6C 69 7A 61 74 69 6F 6E 27 20 68 61 73 20 62 65 65 6E 20 62 65 6C 6F 77 20 6F 72 20 65 71 75 61 6C 20 74 6F 20 35 20 66 6F 72 20 30 3A 30 35 3A 33 30 2E 20 56 61 6C 75 65 20 72 65 70 6F 72 74 65 64 20 69 73 20 32 2E 30 36   SNMPv2-SMI::enterprises.2.6.159.202.6 = STRING: ""Alert""
+[params]
+rawEventMsg=any
+deviceTime=any
+eventType=IBM-Director-Alert
+phCustId=$sender
+hostName=AIX6.1p5
+reptModel=Systems Director
+eventId=any
+eventParsedOk=1
+eventSeverity=5
+testEvent=Real Event(0)
+eventName=IBM-Director-Alert
+phEventCategory=0 (External)
+msg=4D 6F 6E 69 74 6F 72 20 27 E7 BB 84 20 E6 89 80 E6 9C 89 E6 93 8D E4 BD 9C E7 B3 BB E7 BB 9F 20 E7 9A 84 20 43 50 55 20 25 20 E4 BD BF E7 94 A8 E7 8E 87 20 E7 9A 84 E7 BB 84 E9 98 88 E5 80 BC 27 20 4C 6F 77 20 45 72 72 6F 72 20 27 43 50 55 20 55 74 69 6C 69 7A 61 74 69 6F 6E 27 20 68 61 73 20 62 65 65 6E 20 62 65 6C 6F 77 20 6F 72 20 65 71 75 61 6C 20 74 6F 20 35 20 66 6F 72 20 30 3A 30 35 3A 33 30 2E 20 56 61 6C 75 65 20 72 65 70 6F 72 74 65 64 20 69 73 20 32 2E 30 36
+eventDesc=Director.Director Agent.MONCPU.2872344980.Low Error
+destName=AIX6.1p5
+eventSeverityCat=MEDIUM
+collectorId=any
+reptDevName=AIX6.1p5
+count=1
+phRecvTime=any
+reptDevIpAddr=172.16.10.18
+reptVendor=IBM

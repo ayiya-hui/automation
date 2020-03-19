@@ -1,0 +1,23 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+enterprises.14823.1.1.10 6 1014 enterprises.14823.2.3.1.11.1.1.60 x "07 D8 0B 06 11 10 24 00 2D 08 00" 	enterprises.14823.2.3.1.11.1.1.51.0 a "192.168.20.78"	enterprises.14823.2.3.1.11.1.1.52.0 x "00 1D D9 55 82 0A"
+[params]
+rawEventMsg=any
+eventSeverity=1
+eventSeverityCat=LOW
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+srcMACAddr=00:1d:d9:55:82:0a
+phRecvTime=any
+phCustId=$sender
+reptDevIpAddr=$localhost
+srcIpAddr=192.168.20.78
+eventAction=0 (Permit)
+eventName=A new user was created
+reptVendor=Aruba
+eventType=Aruba-1014-wlsxNUserEntryCreated
+phEventCategory=0 (External)
+reptModel=ArubaOS WLAN Controller

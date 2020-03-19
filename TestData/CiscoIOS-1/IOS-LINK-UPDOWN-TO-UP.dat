@@ -1,0 +1,50 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+43: Dec 14 23:35:01.463: %LINK-5-UPDOWN: Interface Ethernet2/1, changed state to up
+[params]
+deviceTime=any
+isHostIntfCritical=No
+eventType=IOS-LINK-UPDOWN-TO-UP
+phCustId=$sender
+intfName=Ethernet2/1
+reptModel=IOS
+eventId=any
+eventParsedOk=1
+eventSeverity=4
+hostIpAddr=any
+eventName=Interface came up
+phEventCategory=0
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+count=1
+phRecvTime=any
+reptDevIpAddr=any
+eventAction=Success(0)
+reptVendor=Cisco
+[reptDevIpAddr(key)]
+55.55.55.55
+[eventMsg]
+Mar 29 16:13:01 55.55.55.55 Mar 29 23:13:00.005: %LINK-3-UPDOWN: Interface FastEthernet0/10, changed state to up
+[params]
+deviceTime=any
+isHostIntfCritical=No
+eventType=IOS-LINK-UPDOWN-TO-UP
+phCustId=$sender
+intfName=FastEthernet0/10
+reptModel=IOS
+eventId=any
+eventParsedOk=1
+eventSeverity=4
+hostIpAddr=any
+eventName=Interface came up
+phEventCategory=0
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+count=1
+phRecvTime=any
+reptDevIpAddr=55.55.55.55
+eventAction=Success(0)
+reptVendor=Cisco

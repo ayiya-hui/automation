@@ -1,0 +1,4 @@
+[eventMsg]
+<174>Jan 20 05:10:42 CO135 phPerfMonitor[2861]: [PH_DEV_MON_FPC_LIEBERT_METRIC]:[eventSeverity]=PHL_INFO,[procName]=phPerfMonitor,[fileName]=phPerfJob.cpp,[lineNumber]=7000,[hostName]=Automator15Dot0Dot1Dot1,[hostIpAddr]=15.0.1.1,[outputVoltageXNVolts]=121,[outputVoltageYNVolts]=119,[outputVoltageZNVolts]=119,[outputCurrentXAmps]=280,[outputCurrentYAmps]=356,[outputCurrentZAmps]=247,[neutralCurrentAmps]=112,[groundCurrentAmps]=0.100000,[outputPowerWatts]=104,[powerFactor]=97,[outputFrequency]=59,[outputVxTHD]=0.100000,[outputVyTHD]=0.100000,[outputVzTHD]=0.090000,[outputLxTHD]=11.000000,[outputLyTHD]=12.000000,[outputLzTHD]=12.000000,[outputKWh]=31.633000,[outputLxCrestFactor]=1.000000,[outputLyCrestFactor]=1.000000,[outputLzCrestFactor]=1.000000,[outputLxKFactor]=1.000000,[outputLyKFactor]=1.000000,[outputLzKFactor]=1.000000,[outputLxCapacity]=67,[outputLyCapacity]=85,[outputLzCapacity]=59,[phLogDetail]=
+
+[clearEventMsg]

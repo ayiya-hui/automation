@@ -1,0 +1,44 @@
+<eventParser name="SonicWallAventailWorkPlaceParser">
+  <deviceType>
+    <Vendor>Sonicwall</Vendor>
+    <Model>Aventail VPN</Model>
+    <Version>ANY</Version>
+  </deviceType>
+  
+  <eventFormatRecognizer><![CDATA[<:gPatMon>\s+<:gPatDay>\s+<:gPatTime>\s+<:gPatIpV4Dot>/<:gPatIpV4Dot>\s+]]></eventFormatRecognizer>
+  
+  <testEvents>
+      <testEvent><![CDATA[<6>Oct 16 05:26:55 127.0.0.1/127.0.0.1 IFMON:HB:lost contact with standby node!]]></testEvent>
+  </testEvents>
+  
+  <parsingInstructions>
+    
+    <!-- parsing common fields -->
+    <collectFieldsByRegex src="$_rawmsg">
+      <regex><![CDATA[<:gPatSyslogPRI><_mon:gPatMon>\s+<_day:gPatDay>\s+<_time:gPatTime>\s+<:gPatIpV4Dot>/<:gPatIpV4Dot>\s+<_body:gPatMesgBody>]]></regex>
+    </collectFieldsByRegex>
+    <setEventAttribute attr="deviceTime">toDateTime($_mon, $_day, $_time)</setEventAttribute>
+    <setEventAttribute attr="eventType">Aventail-WorkPlace-Generic</setEventAttribute>
+
+    <switch>
+      <case>
+        <collectFieldsByRegex src="_body">
+          <regex><![CDATA[.*uri=<uriStem:gPatStr>\\s+status=<_status:gPatStr>]]></regex>
+        </collectFieldsByRegex>
+      </case>
+    </switch>
+
+    <when test='exist _status'>
+	    <choose>
+	      <when test='$_status = "SUCCESS"'>
+		<setEventAttribute attr="eventType">Aventail-WorkPlace-Success</setEventAttribute>
+		<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+	      </when>
+	      <when test='$_status = "FAILURE"'>
+		<setEventAttribute attr="eventType">Aventail-WorkPlace-Failure</setEventAttribute>
+		<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+	      </when>
+	    </choose>
+     </when>
+  </parsingInstructions>
+</eventParser>

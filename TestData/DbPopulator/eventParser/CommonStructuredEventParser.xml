@@ -1,0 +1,93 @@
+<eventParser name="CommonStructuredEventParser">
+  <deviceType>
+    <Vendor>ArcSight</Vendor>
+    <Model>CEF</Model>
+    <Version>ANY</Version>
+  </deviceType>
+  
+  <!-- examples
+Format main ELFF
+date time time-taken c-ip sc-status s-action sc-bytes cs-bytes cs-method cs-uri-scheme cs-host cs-uri-port cs-uri-path cs-uri-query cs-username cs-auth-group s-hierarchy s-supplier-name rs(Content-Type) cs(Referer) cs(User-Agent) sc-filter-result cs-categories x-virus-id s-ip
+<2> Jun 24 16:10:28 SJ-QA-W-FDR-Test-01.prospect-hills.net BluecoatWebLog	0	2010-06-24 23:09:52 2 192.168.22.21 304 TCP_HIT 345 1091 GET http img3.catalog.video.msn.com 80 /image.aspx ?uuid=b088c104-bba5-4ed9-8b51-5c11622e537e&w=136&h=102 - - DIRECT 65.54.87.101 image/jpeg - "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.1; Trident/4.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; InfoPath.2; Windows Live Messenger 14.0.8089.0726)" PROXIED "none" - 172.16.0.141
+	   -->
+  
+  <eventFormatRecognizer><![CDATA[ CEF\s*:\d]]></eventFormatRecognizer>
+  
+  <testEvents>
+      <testEvent><![CDATA[]]></testEvent>
+  </testEvents>
+
+  <patternDefinitions>
+      <pattern name="patStrEndSep"><![CDATA[[^|]+]]></pattern>
+  </patternDefinitions>
+  
+  <parsingInstructions>
+
+    <collectFieldsByRegex src="$_rawmsg">
+      <regex><![CDATA[<:gPatSyslogPRI>?\s*<:gPatMon>\s+<:gPatDay>\s+<:gPatTime>\s+<:gPatStr>\s+CEF\s*:<_body:gPatMesgBody>]]></regex>
+    </collectFieldsByRegex>
+
+    <setEventAttribute attr="eventType">CEF-Generic</setEventAttribute>
+
+    <when test="matches($_body, '\\\|')">
+        <setEventAttribute attr="_body">replaceStrInStr($_body, "\|", "::TEMP::")</setEventAttribute>
+    </when>
+    <setEventAttribute attr="_body">replaceStrInStr($_body, "|", "::SEP::")</setEventAttribute>
+    <when test="matches($_body, '::TEMP::')">
+        <setEventAttribute attr="_body">replaceStrInStr($_body, "::TEMP::", "|")</setEventAttribute>
+    </when>
+
+    <collectAndSetAttrByPos sep='::SEP::' src="$_body">
+        <attrPosMap attr="_version" pos='1'/>
+        <attrPosMap attr="_devVendor" pos='2'/>
+        <attrPosMap attr="_devProduct" pos='3'/>
+        <attrPosMap attr="_devVersion" pos='4'/>
+        <attrPosMap attr="_sigId" pos='5'/>
+	<attrPosMap attr="_name" pos='6'/>
+        <attrPosMap attr="_severity" pos='7'/>
+        <attrPosMap attr="_extension" pos='8'/>
+    </collectAndSetAttrByPos>
+
+    <collectAndSetAttrByKeyValuePair sep=' ' src="$_extension">
+        <attrKeyMap attr="appTransportProto" key="app="/>
+        <attrKeyMap attr="_in" key="in="/>
+        <attrKeyMap attr="_out" key="out="/>
+        <attrKeyMap attr="destIpAddr" key="dst="/>
+        <attrKeyMap attr="destIpAddr" key="dst ="/>
+        <attrKeyMap attr="destName" key="dhost="/>
+        <attrKeyMap attr="destMACAddr" key="dmac="/>
+        <attrKeyMap attr="destDomain" key="dntdom="/>
+        <attrKeyMap attr="destIpPort" key="dpt="/>
+        <attrKeyMap attr="_destProc" key="dproc="/>
+        <attrKeyMap attr="_destUID" key="duid="/>
+        <attrKeyMap attr="_destPriv" key="dpriv="/>
+        <attrKeyMap attr="_destUser" key="duser="/>
+        <attrKeyMap attr="_endTime" key="end="/>
+        <attrKeyMap attr="fileName" key="fname="/>
+        <attrKeyMap attr="_fileSize" key="fsize="/>
+        <attrKeyMap attr="_receiptTime" key="rt="/>
+        <attrKeyMap attr="_request" key="request"/>
+        <attrKeyMap attr="srcIpAddr" key="src="/>
+        <attrKeyMap attr="srcIpAddr" key="src ="/>
+        <attrKeyMap attr="srcName" key="shost="/>
+        <attrKeyMap attr="srcMACAddr" key="smac="/>
+        <attrKeyMap attr="srcDomain" key="sntdom="/>
+        <attrKeyMap attr="srcIpPort" key="spt="/>
+        <attrKeyMap attr="_srcUID" key="suid="/>
+        <attrKeyMap attr="_srcPriv" key="spriv="/>
+        <attrKeyMap attr="_srcUser" key="suser="/>
+        <attrKeyMap attr="startTime" key="start="/>
+        <attrKeyMap attr="ipProto" key="proto"/>
+    </collectAndSetAttrByKeyValuePair>
+    
+    <choose>
+        <when test='$_severity = "0"'>
+            <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+        </when>
+        <otherwise>
+            <setEventAttribute attr="eventSeverity">$_severity</setEventAttribute>
+        </otherwise>
+    </choose>
+    
+  </parsingInstructions>
+</eventParser>

@@ -1,0 +1,54 @@
+[reptDevIpAddr(key)]
+$localhost (intfName:Gi3/0/31)
+[eventMsg]
+Oct 7 21:17:30.485: %PM-4-ERR_DISABLE: security-violation error detected on Gi3/0/31, putting Gi3/0/31 in err-disable state (switch-2b-1-3)
+[params]
+rawEventMsg=any
+deviceTime=any
+isHostIntfCritical=No
+eventType=IOS-PM-ERR_DISABLE
+phCustId=$sender
+hostName=switch-2b-1-3
+intfName=Gi3/0/31
+reptModel=IOS
+eventId=any
+eventParsedOk=1
+eventSeverity=5
+hostIpAddr=$localhost
+eventName=Put interface in security violation error disable state
+phEventCategory=0 (External)
+eventSeverityCat=MEDIUM
+collectorId=any
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Cisco
+[reptDevIpAddr(key)]
+$localhost (intfName:Gi1/0/9)
+[eventMsg]
+<188>45627: Apr  3 2014 15:44:38.133 EDT: %PM-4-ERR_DISABLE: psecure-violation error detected on Gi1/0/9, putting Gi1/0/9 in err-disable state
+[params]
+rawEventMsg=any
+deviceTime=any
+parserName=CiscoIOSParser
+totFlows=1
+eventType=IOS-PM-ERR_DISABLE
+intfName=Gi1/0/9
+reptModel=IOS
+eventId=any
+eventParsedOk=1
+eventSeverity=5
+hostIpAddr=$localhost
+eventName=Put interface in security violation error disable state
+isHostIntfCritical=No
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=MEDIUM
+collectorId=any
+relayDevIpAddr=$localhost
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Cisco

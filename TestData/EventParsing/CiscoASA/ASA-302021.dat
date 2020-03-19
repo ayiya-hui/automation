@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>Nov 28 2007 17:20:50: %ASA-6-302021: Teardown ICMP connection for faddr 192.168.0.30/0 gaddr 192.168.0.1/0 laddr 192.168.0.1/0
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=192.168.0.1
+eventAction=0 (Permit)
+icmpType=Echo Reply(0)
+eventName=Teardown ICMP connection
+srcIpAddr=192.168.0.30
+reptVendor=Cisco
+eventType=ASA-302021
+phEventCategory=4 (Traffic)
+ipProto=1 (ICMP)
+reptDevIpAddr=$reporter
+reptModel=ASA

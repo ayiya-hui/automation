@@ -1,0 +1,2 @@
+[eventMsg]
+<133>automator30Dot0Dot0Dot0Dot11: NetScreen device_id=SH-QA-A-Jnp-FW-01  [Root]system-notification-00257(traffic): start_time="2001-10-20 21:00:13" duration=20 policy_id=3 service=http proto=6 src zone=Untrust dst zone=Global action=Permit sent=5242881 rcvd=0 src=172.16.3.12 dst=140.16.3.18 src_port=49721 dst_port=80 src-xlated ip=172.16.10.10 port=49721 dst-xlated ip=99.99.99.99 port=80 session_id=3940 reason=Close - AGE OUT

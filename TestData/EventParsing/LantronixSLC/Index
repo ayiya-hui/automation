@@ -1,0 +1,9 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+Lantronix-SLC-Syslog-ServerChange,LantronixSLC_1,LantronixSLC,$localhost,,syslog
+Lantronix-SLC-User-Logoff,LantronixSLC_2,LantronixSLC,$localhost,,syslog
+Lantronix-SLC-User-Logon-Success,LantronixSLC_3,LantronixSLC,$localhost,,syslog
+Lantronix-SLC-Update,LantronixSLC_4,LantronixSLC,$localhost,,syslog
+Lantronix-SLC-RunCmd,LantronixSLC_5,LantronixSLC,$localhost,,syslog
+Lantronix-SLC-ChildExit,LantronixSLC_6,LantronixSLC,$localhost,,syslog
+Lantronix-SLC-ProcessStarted,LantronixSLC_7,LantronixSLC,$localhost,,syslog

@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<11>Nov 15 09:33:39 RT_UTM: APPPXY_RESOURCE_OVERUSED_MT: ApplicationProxy: Suspicious client 172.16.54.2:2394 (->50.18.173.48:80) used 51 connections, which exceeded the maximum allowed 50 connections
+[params]
+rawEventMsg=any
+deviceTime=any
+eventType=JUNOS_APPPXY_RESOURCE_OVERUSED_MT
+phCustId=$sender
+destIpAddr=50.18.173.48
+srcIpAddr=172.16.54.2
+reptModel=JunOS
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=JUNOS_APPPXY_RESOURCE_OVERUSED_MT
+phEventCategory=0 (External)
+destName=any
+srcIpPort=2394
+eventSeverityCat=LOW
+collectorId=any
+destIpPort=80
+reptDevName=any
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Juniper

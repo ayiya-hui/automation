@@ -1,0 +1,2 @@
+[eventMsg]
+<30>Mar 11 15:06:41 HOST-30.200.169.1 ep=1: sxl=n h=10.4.42.213 u="na\\dchoma" s=200 X=+ t=1457707885 T=- Ts=- act=1 cat="0x0300000000" app="-" rsn=- threat="-" type="-" ctype="-" sav-ev=- sav-dv=- uri-dv=- cache=- in=0 out=0 meth=CONNECT ref="-" ua="-" req="CONNECT https://ssl.gstatic.com HTTP/1.1" dom="gstatic.com" filetype="-" rule="-" filesize=- axtime=- fttime=- scantime=- src_cat="-" labs_cat="-" dcat_prox="-" target_ip="216.58.193.131" labs_rule_id="-" reqtime=- adtime=- ftbypass=- os=- authn=- auth_by=- dnstime=- quotatime=- sandbox=-

@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+172.18.37.201
+[eventMsg]
+Oct 13 11:15:07 172.18.37.201 xems: 1255433051l | security | info | WAU | Controller Access User admin@172.18.37.12 login to controller at time Tue Oct 13 11:24:11 2009 is OK
+[params]
+deviceTime=any
+parserName=FortiWLANParser
+eventType=FortiWLC-Admin-Logon-Sucess
+srcName=HOST-172.18.37.12
+srcIpAddr=172.18.37.12
+reptModel=FortiWLC
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=FortiWLC-Admin-Logon-Sucess
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=172.18.37.201
+user=admin
+rawEventMsg=any
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=172.18.37.201
+reptVendor=Fortinet

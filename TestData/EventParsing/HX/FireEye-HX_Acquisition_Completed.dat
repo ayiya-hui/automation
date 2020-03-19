@@ -1,0 +1,36 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<15>Feb 18 13:02:39 mso app-proc[5194]: CEF:0|mandiant|mso|1.4.1|Mandiant Acquisition Completed|Mandiant Acquisition Completed|0|rt=Feb 18 2014 13:02:39 UTC dvchost=71.71.71.71 categoryDeviceGroup=/IDS/Application/Service categoryDeviceType=Forensic Investigation categoryObject=/Host cs1Label=Host Agent Cert Hash cs1=YEWZT76tA45fgcegWMFMQY dst=192.168.69.105 dmac=00-50-56-9e-13-a1 dhost=VICTIM-5 dntdom=TESTDOMAIN cd1Label=Agent Last Audit cd1=Feb 18 2014 13:02:10 UTC cs2Label=Mandiant Agent Version cs2=10.6.16 cs5Label=Target GMT Offset cs5=-PT5H cs6Label=Target OS cs6=Microsoft Windows XP 2600 Service Pack 3 externalId=1 cs3Label=Script Name cs3=Triage devAction=Acquisition Status msg=Host VICTIM-5 acquisition completed categoryOutcome=/Success categorySignificance=/Informational categoryBehavior=/Access/Start in=775963 request=https://mso.testdomain:3000/triages/1/content categoryTupleDescription=A Host Acquisition was successfully completed.
+[params]
+domain=TESTDOMAIN
+parserName=HXParser
+eventType=FireEye-HX_Acquisition_Completed
+hxAgentCertHash=YEWZT76tA45fgcegWMFMQY
+hostName=VICTIM-5
+hxDirectURL=https://mso.testdomain:3000/triages/1/content
+computer=VICTIM-5
+osType=Microsoft Windows XP 2600 Service Pack 3
+reptModel=HX
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+hostIpAddr=192.168.69.105
+eventName=FireEye Mandiant completed host triage, system or file acquisition
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+msg=Host VICTIM-5 acquisition completed
+hostMACAddr=00-50-56-9e-13-a1
+count=1
+eventSeverityCat=LOW
+collectorId=any
+hxAcqType=Triage
+relayDevIpAddr=$localhost
+rawEventMsg=any
+reptDevName=71.71.71.71
+customer=Super
+hxAgentLastAudit=Tue Feb 18 21:02:10 CST 2014
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=FireEye
+hxAgentVersion=10.6.16

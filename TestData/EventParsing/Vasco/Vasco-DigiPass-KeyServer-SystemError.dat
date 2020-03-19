@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+70.70.70.70
+[eventMsg]
+May 17 18:41:55 70.70.70.70 ikeyserver[20663]: {Error}, {Communication}, {E-000001}, {A system error has occurred.}, {0xE54C52917A67AB0313FF0E16E716BCEA}, {Area:SEAL message processing}, {Operation:IdentikeySealMessage creation}, {Error Code:-3}, {Error Message:Memory error}, {Error Details:}
+[params]
+customer=Super
+eventId=any
+eventSeverityCat=MEDIUM
+eventParsedOk=1
+phEventCategory=0 (External)
+parserName=VascoParser
+count=1
+eventSeverity=7
+eventType=Vasco-DigiPass-KeyServer-SystemError
+reptDevIpAddr=70.70.70.70
+collectorId=any
+eventName=A system error has occurred
+reptVendor=Vasco
+relayDevIpAddr=70.70.70.70
+phRecvTime=any
+msg=A system error has occurred.
+eventRuleTrigger=1
+appTransportProto=Syslog
+reptDevName=any
+reptModel=DigiPass

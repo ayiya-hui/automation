@@ -1,0 +1,105 @@
+<eventParser name="TipPointSysAuditParser">
+
+ <deviceType>
+    <Vendor>3Com</Vendor>
+    <Model>TippingPoint UnityOne IPS</Model>
+    <Version>ANY</Version>
+ </deviceType>
+ 
+ <patternDefinitions>
+    <pattern name="patTipLogInfo"><![CDATA[sys|audit]]></pattern>
+    <pattern name="patTipMon"><![CDATA[JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC|\d{1,2}]]></pattern>
+ </patternDefinitions>
+ 
+ <eventFormatRecognizer><![CDATA[<:patTipMon>\s+<:gPatDay> <:gPatTime> <:gPatYear>\s+<:gPatStr> \[<_tiptype:patTipLogInfo>\]]]></eventFormatRecognizer>
+ 
+ <testEvents>
+      <testEvent><![CDATA[<5>NOV 05 18:59:02 2009  PH-QA-TIP1 [audit] user=[phoenix_agent] src=192.168.64.12 iface=3 access=0 Invalid password for my1 agent]]></testEvent>
+       <testEvent><![CDATA[<6>OCT 15 15:59:39 2009 PH-QA-TIP1 [sys] Port 1B link state is now UP]]></testEvent>
+  </testEvents>
+
+ <parsingInstructions>
+ 
+   <collectFieldsByRegex src="$_rawmsg">
+      <regex><![CDATA[<:gPatSyslogPRI><:patTipMon>\s+<:gPatDay> <:gPatTime> <:gPatYear>\s+<:gPatStr> \[<_tiptype:patTipLogInfo>\] <_body:gPatMesgBody>]]></regex>
+   </collectFieldsByRegex>
+  
+  <setEventAttribute attr="eventType">combineMsgId("TipPoint", "_", "$_tiptype")</setEventAttribute>
+  <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+  <when test='$_tiptype = "sys"'>
+    
+    <switch>
+        <case>
+          <collectFieldsByRegex src="$_body">
+            <regex><![CDATA[<:gPatMesgBody>link state is now DOWN]]></regex>
+          </collectFieldsByRegex>
+	  
+	  <setEventAttribute attr="eventType">Tipp_Link_Down</setEventAttribute>
+	  <setEventAttribute attr="eventSeverity">9</setEventAttribute>
+        </case>
+	<case>
+          <collectFieldsByRegex src="$_body">
+            <regex><![CDATA[<:gPatMesgBody>link state is now UP]]></regex>
+          </collectFieldsByRegex>	  
+	  <setEventAttribute attr="eventType">Tipp_Link_Up</setEventAttribute>	  
+        </case>
+	<default>
+		<setEventAttribute attr="eventType">"Tipp_Sys_Generic"</setEventAttribute>
+	</default>
+    </switch>
+    
+  </when>
+  
+  <when test='$_tiptype = "audit"'>
+  
+    <switch>
+        <case>
+          <collectFieldsByRegex src="$_body">
+            <regex><![CDATA[user=\[<user:gPatStr>\] src=<srcIpAddr:gPatIpV4Dot> iface=<:gPatInt> access=<:gPatInt>\s+Logged into system<:gPatMesgBody>]]></regex>
+          </collectFieldsByRegex>
+	  
+	  <setEventAttribute attr="eventType">Tipp_Login_Success</setEventAttribute>
+	  <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+        </case>
+	<case>
+          <collectFieldsByRegex src="$_body">
+            <regex><![CDATA[user=\[<user:gPatStr>\] src=<srcIpAddr:gPatIpV4Dot> iface=<:gPatInt> access=<:gPatInt>\s+Logged out of system<_tipmesg:gPatMesgBody>]]></regex>
+          </collectFieldsByRegex>
+	  
+	  <setEventAttribute attr="eventType">Tipp_Logout</setEventAttribute>
+	  <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+        </case>
+	<case>
+          <collectFieldsByRegex src="$_body">
+            <regex><![CDATA[user=\[SYS\] src=<srcIpAddr:gPatIpV4Dot> iface=<:gPatInt> access=<:gPatInt>\s+Login failure - user <user:gPatSentence> not found]]></regex>
+          </collectFieldsByRegex>
+	  
+	  <setEventAttribute attr="eventType">Tipp_Login_Failure</setEventAttribute>
+	  <setEventAttribute attr="eventSeverity">3</setEventAttribute>
+        </case>
+	<case>
+          <collectFieldsByRegex src="$_body">
+            <regex><![CDATA[user=\[<:gPatStr>\] src=<srcIpAddr:gPatIpV4Dot> iface=<:gPatInt> access=<:gPatInt>\s+Login failed for user <user:gPatSentence>]]></regex>
+          </collectFieldsByRegex>
+	  
+	  <setEventAttribute attr="eventType">Tipp_Login_Failure</setEventAttribute>
+	  <setEventAttribute attr="eventSeverity">3</setEventAttribute>
+        </case>
+	<case>
+          <collectFieldsByRegex src="$_body">
+            <regex><![CDATA[user=\[<:gPatStr>\] src=<srcIpAddr:gPatIpV4Dot> iface=<:gPatInt> access=<:gPatInt>\s+Invalid password for <user:gPatSentence>]]></regex>
+          </collectFieldsByRegex>
+	  
+	  <setEventAttribute attr="eventType">Tipp_Login_Failure</setEventAttribute>
+	  <setEventAttribute attr="eventSeverity">3</setEventAttribute>
+        </case>
+	<default>
+		<setEventAttribute attr="eventType">"Tipp_Audit_Generic"</setEventAttribute>
+	</default>
+    </switch>
+  
+  </when>
+  
+ </parsingInstructions>
+ 
+</eventParser>

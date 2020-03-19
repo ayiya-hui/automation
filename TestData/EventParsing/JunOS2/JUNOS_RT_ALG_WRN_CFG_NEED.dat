@@ -1,0 +1,24 @@
+[reptDevIpAddr(key)]
+86.86.86.86
+[eventMsg]
+<12>1 2014-01-30T06:54:30.762 TMG-FW-CO-SPRINGS junos-alg - RT_ALG_WRN_CFG_NEED [junos@2636.1.1.1.2.39 alg-name=MSRPC advice=detected packet from 192.168.2.102/62658 which need extra policy config with UUID:f5cc59b4-4264-101a-8c59-08002b2f8426 or 'junos-ms-rpc-any' to let it pass-through on ASL session]
+[params]
+customer=Super
+eventId=any
+parserName=JunOS2Parser
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+count=1
+eventSeverity=1
+eventType=JUNOS_RT_ALG_WRN_CFG_NEED
+reptDevIpAddr=86.86.86.86
+collectorId=any
+eventName=JUNOS_RT_ALG_WRN_CFG_NEED
+reptVendor=Juniper
+relayDevIpAddr=86.86.86.86
+extEventRecvProto=Syslog
+phRecvTime=any
+eventRuleTrigger=1
+reptModel=SRX JunOS

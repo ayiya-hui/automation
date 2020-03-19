@@ -1,0 +1,2 @@
+[eventMsg]
+[PH_DEV_MON_NETAPP_ISCSI_MET]:[eventSeverity]=PHL_INFO,[hostName]=automator14Dot0Dot4Dot1,[hostIpAddr]=14.0.4.1,[iscsiReadOpsPerSec]=180,[iscsiWriteOpsPerSec]=177,[iscsiReadLatency]=55.67,[iscsiWriteLatency]=52,[iscsiReadKBytesPerSec]=3456,[iscsiWriteKBytesPerSec]=3234

@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+83.83.83.83
+[eventMsg]
+Dec  7 06:59:38 83.83.83.83 CEF :0|PowerTech|Interact|2.0|TCO0014|The user space QDIRSRV2/QGLDPQ02E5  has been newly created.|3| src =10.0.1.74 dst =0.0.0.0 msg=TYPE:JRN CLS :AUD JJOB :QGLDPUBA JUSER :QDIRSRV JNBR :033295 PGM :QCMD OBJECT : LIBRARY : MEMBER: DETAIL: N QGLDPQ02E5 QDIRSRV2 *USRSPC     0000 00000
+[params]
+rawEventMsg=any
+eventType=OS400-TCO0014
+phCustId=$sender
+osObjType=*USRSPC
+osObjName=QGLDPQ02E5
+srcIpAddr=10.0.1.74
+reptModel=OS400
+eventId=any
+eventParsedOk=1
+eventSeverity=3
+testEvent=Real Event(0)
+eventName=Create object
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+collectorId=any
+user=QDIRSRV
+reptDevName=any
+count=1
+phRecvTime=any
+reptDevIpAddr=83.83.83.83
+reptVendor=IBM
+command=N

@@ -1,0 +1,4 @@
+[eventMsg]
+[PH_DEV_MON_SYS_CPU_UTIL]:[eventSeverity]=PHL_INFO,[fileName]=phPerfJob.cpp,[lineNumber]=1125,[cpuName]=CPU x 1,[hostName]=automator9Dot4Dot0Dot1,[hostIpAddr]=9.4.0.1,[cpuUtil]=80.949281,[pollIntv]=180,[phLogDetail]=
+
+[clearEventMsg]

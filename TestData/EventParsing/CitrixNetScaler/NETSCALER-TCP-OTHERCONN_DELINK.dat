@@ -1,0 +1,32 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134> 11/25/2013:11:06:43  clxns 0-PPE-0 : TCP OTHERCONN_DELINK 2916071 0 :  Source 172.22.36.78:62994 - Vserver 172.22.36.79:22 - NatIP 172.22.36.78:62994 - Destination 172.22.36.79:22 - Delink Time 11/25/2013:11:06:43  Total_bytes_send 1808 - Total_bytes_recv 2472
+[params]
+rawEventMsg=any
+deviceTime=any
+totFlows=1
+eventType=NETSCALER-TCP-OTHERCONN_DELINK
+phCustId=$sender
+destIpAddr=172.22.36.79
+srcIpAddr=172.22.36.78
+reptModel=NetScaler
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+hostIpAddr=172.22.36.79
+eventName=NetScaler other connection delinked
+phEventCategory=0 (External)
+ipPort=22
+recvBytes=2472
+srcIpPort=62994
+eventSeverityCat=LOW
+collectorId=any
+destIpPort=22
+reptDevName=any
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Citrix
+sentBytes=1808

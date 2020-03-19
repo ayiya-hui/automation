@@ -1,0 +1,22 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<190>date=2010-06-09 time=23:33:34 devname=FortiGate-Shang device_id=APS3012404201140 log_id=0100020099 type=event subtype=system pri=information vd=root action=interface-stat-change status=UP msg="Link monitor: Interface external was turned up"
+[params]
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+eventAction=0 (Permit)
+eventName=Interface came back up
+reptVendor=Fortinet
+eventType=FortiGate-event-interface-up
+phEventCategory=0 (External)
+relayDevIpAddr=$reporter
+reptDevIpAddr=$reporter
+usrMsg=Link monitor: Interface external was turned up
+reptModel=FortiOS

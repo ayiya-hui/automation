@@ -1,0 +1,23 @@
+[reptDevIpAddr(key)]
+120.10.10.10
+[eventMsg]
+[PH_DEV_MON_SYS_PROC_COUNT]:[eventSeverity]=PHL_INFO,[fileName]=phPerfJob.cpp,[lineNumber]=9541,[hostName]=sharepoint.accelops.net,[hostIpAddr]=120.10.10.10,[procCount]=53,[pollIntv]=176,[phLogDetail]=
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+eventType=PH_DEV_MON_SYS_PROC_COUNT
+fileName=phPerfJob.cpp
+hostIpAddr=120.10.10.10
+hostName=sharepoint.accelops.net
+iphEventCategory=6(Performance Event)
+reptDevIpAddr=120.10.10.10
+procCount=53
+pollIntv=176
+reptVendor=Fortinet
+reptModel=FortiSIEM

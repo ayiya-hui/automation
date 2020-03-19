@@ -1,0 +1,113 @@
+<eventParser name="NCircleVAParser">
+ 
+  <deviceType>
+    <Vendor>Generic</Vendor>
+    <Model>Generic</Model>
+    <Version>ANY</Version>
+  </deviceType>
+
+  <appType>
+    <Vendor>nCircle</Vendor>
+    <Model>Suite360</Model>
+    <Version>ANY</Version>
+    <Name>nCircle Suite360 Vulnerability Mgmt</Name>
+  </appType>
+
+ <eventFormatRecognizer><![CDATA[SNMPv2-SMI::enterprises.11833]]></eventFormatRecognizer>
+ 
+ <testEvents>
+      <testEvent><![CDATA[]]></testEvent>
+  </testEvents>
+ 
+  <parsingInstructions>
+
+    <switch>
+      <case>
+        <collectFieldsByRegex src="$_rawmsg">
+          <regex><![CDATA[<_year:gPatYear>-<_mon:gPatMonNum>-<_day:gPatDay> <_time:gPatTime> <:gPatIpV4Dot><_body:gPatMesgBody>]]>
+          </regex>
+        </collectFieldsByRegex>
+      </case>
+      <case>
+        <collectFieldsByRegex src="$_rawmsg">
+          <regex><![CDATA[<_year:gPatYear>-<_mon:gPatMonNum>-<_day:gPatDay> <_time:gPatTime> <:gPatStr> <_body:gPatMesgBody>]]>
+          </regex>
+        </collectFieldsByRegex>
+      </case>
+    </switch>
+
+    <setEventAttribute attr="deviceTime">toDateTime($_mon, $_day, $_year, $_time)</setEventAttribute>
+    <setEventAttribute attr="eventType">nCircle_Generic)</setEventAttribute>
+    <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+
+    <collectAndSetAttrByKeyValuePair sep='\t' src="$_body">
+      <attrKeyMap attr="reptDevName"  key="SNMPv2-SMI::enterprises.11833.2.2.1.1.1.2.1.1 = STRING: "/>
+      <attrKeyMap attr="eventDesc"    key="SNMPv2-SMI::enterprises.11833.2.2.1.1.1.2.2.1.1 = STRING: "/>
+      <attrKeyMap attr="fileName"     key="SNMPv2-SMI::enterprises.11833.2.2.1.1.1.2.2.1.2 = STRING: "/>
+      <attrKeyMap attr="remedyAction" key="SNMPv2-SMI::enterprises.11833.2.2.1.1.1.2.1.4 = STRING: "/>
+      <attrKeyMap attr="infoURL"      key="SNMPv2-SMI::enterprises.11833.2.2.1.1.1.2.1.3 = STRING: "/>
+      <attrKeyMap attr="hostName"   key="SNMPv2-SMI::enterprises.11833.2.2.1.1.1.2.2.2.3 = STRING: "/>
+      <attrKeyMap attr="hostIpAddr" key="SNMPv2-SMI::enterprises.11833.2.2.1.1.1.2.2.2.4 = STRING: "/>
+      <attrKeyMap attr="hostIpAddr" key="SNMPv2-SMI::enterprises.11833.2.2.1.1.1.2.2.3.1.1 = STRING: "/>     
+      <attrKeyMap attr="hostName"   key="SNMPv2-SMI::enterprises.11833.2.2.1.1.1.2.2.3.1.2 = STRING: "/>
+      <attrKeyMap attr="osType"     key="SNMPv2-SMI::enterprises.11833.2.2.1.1.1.2.2.3.1.3 = STRING: "/>
+      <attrKeyMap attr="srcIpAddr"  key="SNMPv2-SMI::enterprises.11833.2.2.1.1.1.2.2.3.2.4.5 = STRING: "/>
+      <attrKeyMap attr="srcIpPort"  key="SNMPv2-SMI::enterprises.11833.2.2.1.1.1.2.2.3.2.4.6 = STRING: "/>
+      <attrKeyMap attr="destIpPort" key="SNMPv2-SMI::enterprises.11833.2.2.1.1.1.2.2.3.2.4.7 = STRING: "/>
+      <attrKeyMap attr="_lastRespTime" key="SNMPv2-SMI::enterprises.11833.2.2.1.1.1.2.2.2.5 = STRING: "/>
+      <attrKeyMap attr="vulnScore"       key="SNMPv2-SMI::enterprises.11833.2.2.1.1.1.2.2.3.2.1.1 = Gauge32: "/>
+      <attrKeyMap attr="vulnScoreThresh" key="SNMPv2-SMI::enterprises.11833.2.2.1.1.1.2.2.3.2.1.2 = Gauge32: "/>
+      <attrKeyMap attr="reptDevIpAddr" key="SNMPv2-SMI::enterprises.11833.2.2.1.1.1.2.1.5 = STRING: "/>
+      <attrKeyMap attr="reptDevName"   key="SNMPv2-SMI::enterprises.11833.2.2.1.1.1.2.1.6 = STRING: "/>
+      <attrKeyMap attr="vulnId"    key="SNMPv2-SMI::enterprises.11833.2.2.1.1.1.2.2.3.2.2.3 = STRING: "/>
+      <attrKeyMap attr="vulnName"  key="SNMPv2-SMI::enterprises.11833.2.2.1.1.1.2.2.3.2.2.1 = STRING: "/>
+      <attrKeyMap attr="vulnType"  key="SNMPv2-SMI::enterprises.11833.2.2.1.1.1.2.2.3.2.2.2 = STRING: "/>
+      <attrKeyMap attr="vulnScore" key="SNMPv2-SMI::enterprises.11833.2.2.1.1.1.2.2.3.2.2.4 = STRING: "/>
+      <attrKeyMap attr="vulnCVEId" key="SNMPv2-SMI::enterprises.11833.2.2.1.1.1.2.2.3.2.2.5.1 = STRING: "/>
+      <attrKeyMap attr="scanId"      key="SNMPv2-SMI::enterprises.11833.2.2.1.1.1.2.3.1 = STRING: "/>
+      <attrKeyMap attr="scanProfile" key="SNMPv2-SMI::enterprises.11833.2.2.1.1.1.2.3.5 = STRING: "/>
+      <attrKeyMap attr="scanBegin"   key="SNMPv2-SMI::enterprises.11833.2.2.1.1.1.2.3.6 = STRING: "/>
+      <attrKeyMap attr="scanEnd"     key="SNMPv2-SMI::enterprises.11833.2.2.1.1.1.2.3.7 = STRING: "/>
+      <attrKeyMap attr="appName" key="SNMPv2-SMI::enterprises.11833.2.2.1.1.1.2.2.3.2.5.2 = STRING: "/>
+      <attrKeyMap attr="appTransportProto" key="SNMPv2-SMI::enterprises.11833.2.2.1.1.1.2.2.3.2.5.3 = STRING: "/>
+      <attrKeyMap attr="attackName"  key="SNMPv2-SMI::enterprises.11833.2.2.1.1.1.2.2.3.2.4.1 = STRING: "/>
+      <attrKeyMap attr="count"  key="SNMPv2-SMI::enterprises.11833.2.2.1.1.1.2.2.3.2.4.2 = STRING: "/>
+      <attrKeyMap attr="deviceTime"  key="SNMPv2-SMI::enterprises.11833.2.2.1.1.1.2.2.3.2.4.9 = STRING: "/>
+      <attrKeyMap attr="user" key="SNMPv2-SMI::enterprises.11833.2.2.1.1.1.2.2.4.1 = STRING: "/>
+    </collectAndSetAttrByKeyValuePair>
+
+    <choose>
+      <when test='exist _lastRespTime'>
+	<setEventAttribute attr="eventSeverity">9</setEventAttribute>
+	<setEventAttribute attr="eventType">nCircle_Appliance_Not_Responding</setEventAttribute>
+      </when>
+      
+      <when test='exist vulnScore'>
+	<setEventAttribute attr="eventSeverity">9</setEventAttribute>
+	<setEventAttribute attr="eventType">nCircle_Vuln_Score_Exceeded</setEventAttribute>
+      </when>
+      
+      <when test='exist vulnName'>
+	<setEventAttribute attr="eventSeverity">7</setEventAttribute>
+	<setEventAttribute attr="eventType">nCircle_Vuln_Detected</setEventAttribute>
+      </when>
+      
+      <when test='exist attackName'>
+	<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+	<setEventAttribute attr="eventType">nCircle_Attack_Detected</setEventAttribute>
+      </when>
+     
+      <when test='exist hostName'>
+	<when test='not_exist attackName'>
+	  <setEventAttribute attr="eventSeverity">3</setEventAttribute>
+	  <setEventAttribute attr="eventType">nCircle_New_Host_Detected</setEventAttribute>
+	</when>
+      </when>
+      
+      <when test='exist user'>
+	<setEventAttribute attr="eventSeverity">10</setEventAttribute>
+	<setEventAttribute attr="eventType">nCircle_Admin_LockedOut</setEventAttribute>
+      </when>
+    </choose>
+  </parsingInstructions>
+</eventParser>

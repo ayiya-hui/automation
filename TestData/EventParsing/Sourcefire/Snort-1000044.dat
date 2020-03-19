@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<188>Jul  4 14:49:15 Sourcefire3D Snort: [1:1000044:4] INDICATOR-COMPROMISE Suspicious .cn dns query - Chamado 49642 [Impact: Unknown] From DetectionEngine_IPS_DMZ2/SourcefireIPS at Thu Jul  4 14:49:14 2013 UTC [Classification: A Network Trojan was Detected] [Priority: 1] {udp} 200.174.153.46:3320->10.20.1.131:53
+[params]
+rawEventMsg=any
+eventType=Snort-1000044
+phCustId=$sender
+devEventTypeGrp=A Network Trojan was Detected
+destIpAddr=10.20.1.131
+ipProto=17 (UDP)
+srcIpAddr=200.174.153.46
+reptModel=Sourcefire3D IPS
+eventId=any
+eventParsedOk=1
+eventSeverity=9
+eventName=Snort-1000044
+phEventCategory=0 (External)
+srcIpPort=3320
+eventSeverityCat=HIGH
+collectorId=any
+destIpPort=53 (DOMAIN)
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Sourcefire

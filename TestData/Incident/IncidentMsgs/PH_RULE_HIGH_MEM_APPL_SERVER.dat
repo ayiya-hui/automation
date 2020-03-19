@@ -1,0 +1,4 @@
+[eventMsg]
+[PH_DEV_MON_PROC_RESOURCE_UTIL]:[eventSeverity]=PHL_INFO,[fileName]=phPerfJob.cpp,[lineNumber]=1301,[swProcName]=AAA ACCT Proc,[hostName]=automator8Dot12Dot0Dot1,[hostIpAddr]=8.12.0.1,[memUtil]=85.000000,[cpuUtil]=0.000000,[appName]=AAA ACCT Proc,[pollIntv]=176,[swParam]=,[phLogDetail]=
+
+[clearEventMsg]

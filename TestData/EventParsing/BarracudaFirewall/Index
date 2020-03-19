@@ -1,0 +1,8 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+Barracuda-WF-SQL_INJECTION_IN_PARAM,BarracudaFirewall_1,BarracudaFirewall,$localhost,,syslog
+Barracuda-WF-ALLOWED-CLEAN,BarracudaFirewall_2,BarracudaFirewall,$localhost,,syslog
+Barracuda-WF-BLOCKED-VIRUS,BarracudaFirewall_3,BarracudaFirewall,$localhost,,syslog
+Barracuda-WF-BLOCKED-SPYWARE,BarracudaFirewall_4,BarracudaFirewall,$localhost,,syslog
+Barracuda-WF-DETECTED-VIRUS,BarracudaFirewall_5,BarracudaFirewall,$localhost,,syslog
+Barracuda-WF-DETECTED-SPYWARE,BarracudaFirewall_6,BarracudaFirewall,$localhost,,syslog

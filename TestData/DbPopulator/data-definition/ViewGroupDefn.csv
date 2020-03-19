@@ -1,0 +1,5 @@
+PH_SYS_View_Network,,Network Admin View,1,,"Biz Services, Devices, Network Devices, My Devices, Hardware Summary, Incident Dashboard, Event Status..."
+PH_SYS_View_Server,,Server Admin View,2,,"Biz Services, Devices, servers, My Devices, Hardware Summary, VMWare, Storage, Application Summary, Incident Dashboard..."
+PH_SYS_View_Security,,Security Admin View,3,,"Biz Services, Devices, Incident Dashboard, Event Status..."
+PH_SYS_View_VMWare,,VMWare Admin View,4,,"Biz Services, My Devices, Incident Dashboard, VMWare Dashboard..."
+PH_SYS_View_Integrated,,Integrated Admin View,5,,"All services, All devices, All Dashboards..."

@@ -1,0 +1,69 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<190>Nov 16 12:56:15 mgd[22025]: %INTERACT-6-UI_JUNOSCRIPT_CMD: User 'phoenix_agent' used JUNOScript client to run command 'get-configuration database="committed" format="text"'
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+command=get-configuration database="committed" format="text"
+count=1
+phCustId=$sender
+deviceTime=any
+eventAction=0 (Permit)
+eventId=any
+eventName=User used JUNOScript client to run command
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=6
+eventSeverityCat=MEDIUM
+eventType=JUNOS_UI_JUNOSCRIPT_CMD
+reptDevIpAddr=$reporter
+reptModel=JunOS
+reptVendor=Juniper
+user=phoenix_agent
+[reptDevIpAddr(key)]
+56.56.56.2
+[eventMsg]
+<190>Nov 17 20:09:38 $reporter mgd[33276]: %INTERACT-6-UI_JUNOSCRIPT_CMD: User 'phoenix_agent' used JUNOScript client to run command 'request-web-management-login user=phoenix_agent session-id=d5b084726dfb44f5315dfc9509285f8746264cc6 from=192.168.26.48'
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+command=request-web-management-login user=phoenix_agent session-id=d5b084726dfb44f5315dfc9509285f8746264cc6 from=192.168.26.48
+count=1
+phCustId=$sender
+deviceTime=any
+eventAction=0 (Permit)
+eventId=any
+eventName=User used JUNOScript client to run command
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=6
+eventSeverityCat=MEDIUM
+eventType=JUNOS_UI_JUNOSCRIPT_CMD
+reptDevIpAddr=$reporter
+reptModel=JunOS
+reptVendor=Juniper
+user=phoenix_agent
+[reptDevIpAddr(key)]
+56.56.56.3
+[eventMsg]
+<190>Nov 17 20:09:38 $reporter mgd[33276]: %INTERACT-6-UI_JUNOSCRIPT_CMD: User 'phoenix_agent' used JUNOScript client to run command 'get-configuration database="committed" inherit="defaults"'
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+command=get-configuration database="committed" inherit="defaults"
+count=1
+phCustId=$sender
+deviceTime=any
+eventAction=0 (Permit)
+eventId=any
+eventName=User used JUNOScript client to run command
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=6
+eventSeverityCat=MEDIUM
+eventType=JUNOS_UI_JUNOSCRIPT_CMD
+reptDevIpAddr=$reporter
+reptModel=JunOS
+reptVendor=Juniper
+user=phoenix_agent

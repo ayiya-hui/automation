@@ -1,0 +1,265 @@
+<Reports> 
+
+<Report id="PH_Report_Template_VPNGW_1" group="PH_SYS_REPORT_VPNGateway">
+    <Name>VPN Logon: Top Users Ranked By Successful VPN Logon</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the VPN Gateways and their users by the number of successful VPN logons. This indicates how busy a VPN Gateway is.  </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,user,COUNT (*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT( * )</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_VPNGW_1" name="Filter_VPNGW_1">
+           <SingleEvtConstr>eventType IN (Group@PH_SYS_EVENT_VPNLogonSuccess)</SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr,user</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+</Report>	   
+
+<Report id="PH_Report_Template_VPNGW_2" group="PH_SYS_REPORT_VPNGateway">
+    <Name>VPN Logon: Top VPN Users Ranked By Failed VPN Logon</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the VPN Gateways and their users by the number of failed VPN logons. While some amount of failed login is normal, an unusually high number specifically at odd times of the day may be suspicious </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,user,COUNT (*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT( * )</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_VPNGW_2" name="Filter_VPNGW_2">
+           <SingleEvtConstr>eventType IN (Group@PH_SYS_EVENT_VPNLogonFailure)</SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr,user</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+</Report>	   
+
+<Report id="PH_Report_Template_VPNGW_3" group="PH_SYS_REPORT_VPNGateway">
+    <Name>Traffic: Top VPN Gateways, Users Ranked By Session Count, Average Bytes Exchanged, Average Session Duration</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the VPN Gateways and their users by the total amount ofexchanged bytes. This report provides further insight into the top VPN users from a bytes transferred perspective </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,user,COUNT(*),AVG(totBytes),AVG(durationMSec)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC, SUM(totBytes) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_VPNGW_3" name="Filter_VPNGW_3">
+           <SingleEvtConstr>eventType IN (Group@PH_SYS_EVENT_VPNLogoff)</SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr,user</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+</Report>
+
+<Report id="PH_Report_Template_VPNGW_4" group="PH_SYS_REPORT_VPNGateway">
+    <Name>Traffic: Top VPN Gateways, Users Ranked By Average Bytes Exchanged Per Connection</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the VPN Gateways and their users by the average exchanged bytes per VPN connection </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,user,COUNT(*),AVG(totBytes),AVG(durationMSec)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>SUM(totBytes) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_VPNGW_4" name="Filter_VPNGW_4">
+           <SingleEvtConstr>eventType IN (Group@PH_SYS_EVENT_VPNLogoff)</SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr,user</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+</Report>
+
+<Report id="PH_Report_Template_VPNGW_5" group="PH_SYS_REPORT_VPNGateway">
+    <Name>Traffic: Top VPN Gateways, Users Ranked By Duration, Session Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the VPN Gateways and users by average VPN session duration </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,user,COUNT(*),AVG(durationMSec)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(durationMSec) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_VPNGW_5" name="Filter_VPNGW_5">
+           <SingleEvtConstr>eventType IN (Group@PH_SYS_EVENT_VPNLogoff)</SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr,user</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+</Report>		   
+
+<Report id="PH_Report_Template_VPNGW_6" group="PH_SYS_REPORT_VPNGateway">
+    <Name>Admin Logon: Top VPN Gateways, Admins Ranked By Successful Logon</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the VPN Gateways and their admins by the number of successful device logons </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,user,COUNT (*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT ( * )</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_VPNGW_6" name="Filter_VPNGW_6">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_VPN_GATEWAY)  AND eventType IN ( Group@PH_SYS_EVENT_HostLogonSuccess)</SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr,user</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+</Report>	   
+
+<Report id="PH_Report_Template_VPNGW_7" group="PH_SYS_REPORT_VPNGateway">
+    <Name>Admin Logon: Top VPN Gateways, Admins Ranked By Failed Logon</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the VPN Gateways and their admins by the number of failed device logons </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,user,COUNT ( *)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT ( * )</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_VPNGW_7" name="Filter_VPNGW_7">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_VPN_GATEWAY)  AND  eventType IN (Group@PH_SYS_EVENT_HostLogonFailure)</SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr,user</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+</Report>	   
+
+<Report id="PH_Report_Template_VPNGW_8" group="PH_SYS_REPORT_VPNGateway">
+    <Name>Admin Logon: VPN Admin Logon Details</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Provides event details for all successful and failed VPN admin logons </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr, eventType,srcIpAddr,user,durationMSec,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_VPNGW_8" name="Filter_VPNGW_8">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_VPN_GATEWAY)  AND  eventType IN (Group@PH_SYS_EVENT_HostLogonSuccess,Group@PH_SYS_EVENT_HostLogonFailure,Group@PH_SYS_EVENT_HostLogoff)</SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+</Report>	   	
+
+  <Report id="PH_Report_Template_VPNGW_10" group="PH_SYS_REPORT_VPNGateway">
+    <Name>All Events: Top VPN Gateways Ranked By Event</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report ranks the VPN Gateways by the total number of events sent </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_VPNGW_10" name="Filter_VPNGW_10">
+           <SingleEvtConstr> reptDevIpAddr IN (Group@PH_SYS_DEVICE_VPN_GATEWAY) </SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr </GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_Template_VPNGW_11" group="PH_SYS_REPORT_VPNGateway">
+    <Name>VPN Logon: Top VPN Gateways Ranked By Distinct Users</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the VPN Gateways by the total number of distinct user logons </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,COUNT(DISTINCT user)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(DISTINCT user) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_VPNGW_11" name="Filter_VPNGW_11">
+           <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_VPNLogonSuccess) </SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr </GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_Template_VPNGW_12" group="PH_SYS_REPORT_VPNGateway">
+    <Name>VPN Logon: VPN Logon Details </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Captures detailed successful and failed VPN logons  </Description>
+    <SelectClause numEntries="All">
+      <AttrList>phRecvTime,reptDevIpAddr,eventType, srcIpAddr, user, rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_VPNGW_12" name="Filter_VPNGW_12">
+        <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_VPNLogonSuccess, Group@PH_SYS_EVENT_VPNLogonFailure) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>	
+
+  <Report id="PH_Report_Template_VPNGW_13"  group="PH_SYS_REPORT_VPNGateway">
+    <Name>Admin Logon: Successful VPN Admin Logon</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Provides event details for all successful VPN admin logons </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr, eventType,srcIpAddr,user,durationMSec,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_VPNGW_13" name="Filter_VPNGW_13">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_VPN_GATEWAY)  AND  eventType IN (Group@PH_SYS_EVENT_HostLogonSuccess,Group@PH_SYS_EVENT_HostLogoff)</SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+</Report>
+
+
+  <Report id="PH_Report_Template_VPNGW_14" group="PH_SYS_REPORT_VPNGateway">
+    <Name>Admin Logon: Failed VPN Admin Logon</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Provides event details for all failed VPN admin logons </Description>
+    <SelectClause numEntries="All">
+      <AttrList>phRecvTime,reptDevIpAddr, eventType,srcIpAddr,user,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_VPNGW_14" name="Filter_VPNGW_14">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_VPN_GATEWAY)  AND  eventType IN (Group@PH_SYS_EVENT_HostLogonFailure)</SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+  
+  <Report id="PH_Report_Template_VPNGW_15" group="PH_SYS_REPORT_VPNGateway">
+    <Name>Traffic: Top VPN Gateways Ranked By Average Session Duration </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the VPN Gateways by average user VPN session duration</Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,reptVendor,reptModel,AVG(durationMSec)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(durationMSec) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_VPNGW_15" name="Filter_VPNGW_15">
+           <SingleEvtConstr>eventType IN (Group@PH_SYS_EVENT_VPNLogoff)</SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr,reptVendor,reptModel</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+</Report>
+
+   <Report id="PH_Report_Template_VPNGW_16" group="PH_SYS_REPORT_VPNGateway">
+    <Name>VPN Logon: Top VPN Gateways Ranked By Total Logons</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the VPN Gateways by the total number of logons </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_VPNGW_11" name="Filter_VPNGW_11">
+           <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_VPNLogonSuccess,Group@PH_SYS_EVENT_VPNLogonFailure) </SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr </GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+</Reports>

@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+70.70.70.70
+[eventMsg]
+May 17 18:43:21 70.70.70.70 ikeyserver[3582]: {Info}, {Replication}, {I-002007}, {Initialization of a Replication destination server succeeded.}, {0xE0A64C139EBCF7E7640181E99910C3FA}, {Configuration Details:Host=10.9.8.7, Port=20014}
+[params]
+customer=Super
+eventId=any
+eventSeverityCat=LOW
+eventParsedOk=1
+phEventCategory=0 (External)
+parserName=VascoParser
+count=1
+eventSeverity=1
+eventType=Vasco-DigiPass-KeyServer-ReplDestServer-Init
+reptDevIpAddr=70.70.70.70
+collectorId=any
+eventName=Initialization of a Replication destination server succeeded
+reptVendor=Vasco
+relayDevIpAddr=70.70.70.70
+phRecvTime=any
+msg=Initialization of a Replication destination server succeeded.
+eventRuleTrigger=1
+appTransportProto=Syslog
+reptDevName=any
+reptModel=DigiPass

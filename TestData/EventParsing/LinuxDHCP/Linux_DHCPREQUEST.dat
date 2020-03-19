@@ -1,0 +1,51 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<13>Aug 26 19:28:11 DNS-Pri dhcpd: DHCPREQUEST for 172.16.10.200 (172.16.10.8) from 00:50:56:88:4e:17 (26L2233B1-02)
+[params]
+rawEventMsg=any
+eventSeverity=1
+eventSeverityCat=LOW
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+reptVendor=Generic
+srcMACAddr=00:50:56:88:4e:17
+phRecvTime=any
+phCustId=$sender
+hostName=26L2233B1-02
+srcIpAddr=172.16.10.200
+eventAction=0 (Permit)
+eventName=Client Accepts for Renews DHCP Lease
+computer=26L2233B1-02
+eventType=Linux_DHCPREQUEST
+phEventCategory=0 (External)
+srcName=26L2233B1-02
+reptDevIpAddr=$localhost
+reptModel=Linux DHCP
+[reptDevIpAddr(key)]
+172.16.10.8
+[eventMsg]
+<190>Mar 25 00:20:22 172.16.10.8 dhcpd: DHCPREQUEST for 172.16.10.199 from 00:0c:29:48:96:e3 (dev-v-win03-vc) via eth0
+[params]
+rawEventMsg=any
+eventSeverity=1
+eventSeverityCat=LOW
+srcName=26L2233B1-02
+computer=26L2233B1-02
+srcIpAddr=172.16.10.200
+srcMACAddr=00:50:56:88:4e:17
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=any
+phRecvTime=any
+phCustId=$sender
+reptDevIpAddr=172.16.10.8
+eventAction=0 (Permit)
+eventName=Client Accepts for Renews DHCP Lease
+reptVendor=Generic
+eventType=Linux_DHCPREQUEST
+phEventCategory=0 (External)
+reptModel=Linux DHCP

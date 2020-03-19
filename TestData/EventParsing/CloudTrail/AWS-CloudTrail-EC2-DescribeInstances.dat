@@ -1,0 +1,37 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+Sun May  4 10:29:06 2014 AccelOps-CloudTrail [eventTime]=2014-05-04T02:16:10Z [eventVersion]=1.01 [eventSource]=EC2 [eventName]=DescribeInstances [awsRegion]=us-east-1 [sourceIPAddress]=50.115.66.114 [userAgent]=aws-sdk-php2/2.4.7 Guzzle/3.7.1 curl/7.19.7 PHP/5.3.3 [userName]=accelops [userType]=Root [userPrincipalId]=623885071509 [userArn]=arn:aws:iam::623885071509:root [accountId]=623885071509 [accessKeyId]=AKIAI2MUUCROHFSLLT3A
+[params]
+deviceTime=any
+version=1.01
+parserName=CloudTrailParser
+principal=623885071509
+eventType=AWS-CloudTrail-EC2-DescribeInstances
+srcName=50-115-66-114.static-ip.telepacific.net
+userType=Root
+srcIpAddr=50.115.66.114
+userArn=arn:aws:iam::623885071509:root
+eventId=any
+eventTime=Sun May 04 02:16:10 CST 2014
+eventParsedOk=1
+eventSeverity=1
+eventName=Describes one or more of your instances.
+serviceName=EC2
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+reptModel=AWS CloudTrail
+accountId=623885071509
+appClientVersion=aws-sdk-php2/2.4.7 Guzzle/3.7.1 curl/7.19.7 PHP/5.3.3
+count=1
+eventSeverityCat=LOW
+collectorId=any
+accessKeyId=AKIAI2MUUCROHFSLLT3A
+relayDevIpAddr=$localhost
+user=accelops
+rawEventMsg=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+awsRegion=us-east-1
+reptVendor=Amazon

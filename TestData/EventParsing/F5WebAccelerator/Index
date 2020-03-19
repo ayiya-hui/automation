@@ -1,0 +1,6 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+F5-WebAcc-Request-Success,F5WebAccelerator_1,F5WebAccelerator,$localhost,,syslog
+F5-WebAcc-Server-Error,F5WebAccelerator_2,F5WebAccelerator,$localhost,,syslog
+F5-WebAcc-Request-Redirect,F5WebAccelerator_3,F5WebAccelerator,$localhost,,syslog
+F5-WebAcc-Forbidden-Access-Denied,F5WebAccelerator_4,F5WebAccelerator,$localhost,,syslog

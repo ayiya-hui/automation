@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+Tufin-Global-Policy-Assigned,Tufin_1,Tufin,$localhost,,syslog

@@ -1,0 +1,24 @@
+[reptDevIpAddr(key)]
+58.58.58.70
+[eventMsg]
+<14>Jun  4 01:49:17 58.58.58.70 STP: VLAN 3104 Port 4/22 STP State -> DISABLED (PortDown)
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+eventSeverityCat=MEDIUM
+eventParsedOk=1
+reptVendor=Foundry
+eventSeverity=7
+phRecvTime=any
+phCustId=$sender
+phEventCategory=0 (External)
+destIpAddr=$reporter
+eventAction=0 (Permit)
+eventName=Foundry STP port entered DISABLED state
+appTransportProto=STP
+eventType=Foundry-Ironware-StpPort-Disabled
+hostVLAN=3104
+devPort=4/22
+reptDevIpAddr=58.58.58.70
+reptModel=Ironware

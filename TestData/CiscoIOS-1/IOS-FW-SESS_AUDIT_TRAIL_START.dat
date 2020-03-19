@@ -1,0 +1,52 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+91790: Jan  9 02:38:30.575: %FW-6-SESS_AUDIT_TRAIL_START: Start udp session: initiator (192.168.20.40:1531) \-\- responder (192.168.0.10:53)
+[params]
+deviceTime=any
+eventType=IOS-FW-SESS_AUDIT_TRAIL_START
+phCustId=$sender
+reptModel=IOS
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+hostIpAddr=$localhost
+eventName=Firewalled session started
+phEventCategory=0
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=Success(0)
+reptVendor=Cisco
+[reptDevIpAddr(key)]
+$localhost(srcIpAddr:192.168.20.33)
+[eventMsg]
+109219: Jan  9 18:03:35.281: %FW-6-SESS_AUDIT_TRAIL_START: Start tcp session: initiator (192.168.20.33:1876) -- responder (192.168.0.10:445)
+[params]
+deviceTime=any
+destName=win2008-ads.accelops.net
+destIpAddr=192.168.0.10
+destIpPort=MICROSOFT-DS(445)
+eventType=IOS-FW-SESS_AUDIT_TRAIL_START
+phCustId=$sender
+reptModel=IOS
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+hostIpAddr=$localhost
+eventName=Firewalled session started
+phEventCategory=0
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=Success(0)
+reptVendor=Cisco
+ipProto=TCP(6)
+srcIpAddr=192.168.20.33
+srcIpPort=1876

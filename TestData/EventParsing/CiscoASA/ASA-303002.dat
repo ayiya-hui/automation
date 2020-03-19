@@ -1,0 +1,30 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<166>Jul 09 2010 14:40:27: %ASA-6-303002: FTP connection from inside:10.15.70.91/3328 to DMZ:10.1.1.14/21, user itms Stored file jpeg43.jpg
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+count=1
+phCustId=$sender
+destIntfName=DMZ
+destIpAddr=10.1.1.14
+destIpPort=21 (FTP)
+deviceTime=any
+eventAction=0 (Permit)
+eventId=any
+eventName=FTP connection accepted
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=1
+eventSeverityCat=LOW
+eventType=ASA-303002
+fileName=jpeg43.jpg
+ipProto=6 (TCP)
+reptDevIpAddr=$reporter
+reptModel=ASA
+reptVendor=Cisco
+srcIntfName=inside
+srcIpAddr=10.15.70.91
+srcIpPort=3328
+user=itms

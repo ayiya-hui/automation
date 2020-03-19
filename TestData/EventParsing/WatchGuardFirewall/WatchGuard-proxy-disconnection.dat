@@ -1,0 +1,34 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<155>Dec 16 16:57:33 HKHDCFIR01 (2010-12-16T08:57:33) kernel: SM: policy="TCP-proxy-00" src_ip="125.215.194.194" dst_ip="211.9.47.90" pr="tcp" src_port="3883" dst_port="110" src_intf="7" dst_intf="6" rc="590" msg="Connect timeout" proxy_act="TCP-Proxy.1"
+[params]
+rawEventMsg=any
+deviceTime=any
+eventType=WatchGuard-proxy-disconnection
+phCustId=$sender
+destIpAddr=211.9.47.90
+ipProto=6 (TCP)
+destGeoCountry=any
+srcIpAddr=125.215.194.194
+usrMsg=Connect timeout
+reptModel=Firebox
+eventId=any
+policyName=TCP-proxy-00
+eventParsedOk=1
+eventSeverity=5
+eventName=WatchGuard proxy disconnected
+phEventCategory=0 (External)
+destName=any
+srcIntfName=7
+srcIpPort=3883
+eventSeverityCat=MEDIUM
+collectorId=any
+destIntfName=6
+relayDevIpAddr=$localhost
+destIpPort=110 (POP3)
+reptDevName=any
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=WatchGuard

@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+20.20.20.20
+[eventMsg]
+<13>Jan 14 19:14:15 $reporter MSWinEventLog	1	Security	9365	Wed Jan 14 19:14:10 2009	593	Security	SYSTEM	User	Success Audit	ADS-PRI	Detailed Tracking		A process has exited:     Process ID: 700     Image File Name: C:\WINDOWS\system32\userinit.exe     User Name: ADS-PRI$     Domain: PROSPECTHILLS     Logon ID: (0x0,0x3E7)    	8794  Automation
+[params]
+rawEventMsg=any
+domain=PROSPECTHILLS
+deviceTime=any
+eventType=Win-Security-593
+phCustId=$sender
+destIpAddr=20.20.20.20
+procName=C:\WINDOWS\system32\userinit.exe
+reptModel=Windows
+eventId=any
+eventParsedOk=any
+eventSeverity=1
+eventName=Windows process exited
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+fileName=C:\WINDOWS\system32\userinit.exe
+user=ADS-PRI$
+count=1
+winLogonId=(0x0,0x3E7)
+phRecvTime=any
+reptDevIpAddr=20.20.20.20
+eventAction=0 (Permit)
+reptVendor=Microsoft

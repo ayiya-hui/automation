@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<52>Apr 11 13:08:22 SymantecServer $localhost: 5750-MXL7090GLV,Category: 2,IPS,"[Intrusion prevention submission] Information submitted to Symantec about file. File : '\Windows\System32\jscript9.dll',  Size (bytes): 1436."
+[params]
+customer=Super
+eventId=any
+parserName=SymantecAVParser
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=MEDIUM
+reptVendor=Symantec
+eventSeverity=5
+eventType=Symantec-AV-Info-Submitted
+reptDevIpAddr=$localhost
+collectorId=any
+eventName=Information submitted to Symantec
+count=1
+computer=5750-MXL7090GLV
+relayDevIpAddr=$localhost
+phRecvTime=any
+hostName=5750-MXL7090GLV
+reptDevName=any
+reptModel=Endpoint Protection Service

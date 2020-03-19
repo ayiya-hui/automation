@@ -1,0 +1,4 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+H3C-Comware-BGP-BGP_STATE_CHANGED,H3CComwareHP_1,H3CComwareHP,10.3.10.5,,syslog
+H3C-Comware-SC-SC_AAA_LAUNCH,H3CComwareHP_2,H3CComwareHP,10.30.20.252,,syslog

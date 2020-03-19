@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+192.168.5.43
+[eventMsg]
+<189> Apr 13 15:21:18 192.168.5.43-1 CLI_WEB[103917236]: cmd_logger_api.c(140) 5204 %% WEB:192.168.5.101:admin:User admin logged out
+[params]
+deviceTime=any
+parserName=DellPowerConnectParser
+eventType=Dell-PowerConnect-Logout
+reptModel=PowerConnect
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+hostIpAddr=192.168.5.101
+eventName=Dell-PowerConnect-Logout
+appTransportProto=WEB
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=192.168.5.43
+user=admin
+rawEventMsg=any
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=192.168.5.43
+reptVendor=Dell

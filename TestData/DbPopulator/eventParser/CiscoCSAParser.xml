@@ -1,0 +1,77 @@
+<eventParser name="CiscoCSAParser">
+  
+  <deviceType>
+    <Vendor>Generic</Vendor>
+    <Model>Generic</Model>
+    <Version>ANY</Version>
+  </deviceType>
+
+  <appType>
+    <Vendor>Cisco</Vendor>
+    <Model>CSA Management Center</Model>
+    <Version>ANY</Version>
+    <Name>Cisco CSA Management Center</Name>
+  </appType>
+
+  <eventFormatRecognizer><![CDATA[SNMPv2-SMI::enterprises.8590.3.1]]></eventFormatRecognizer>
+  
+  <testEvents>
+      <testEvent><![CDATA[2008-05-13 11:00:36 192.168.1.39 [192.168.1.39]:SNMPv2-MIB::sysUpTime.0 = Timeticks: (52695748) 6 days, 2:22:37.48	SNMPv2-MIB::snmpTrapOID.0 = OID: SNMPv2-SMI::enterprises.8590.3.1	SNMPv2-SMI::enterprises.8590.2.1 = INTEGER: 619	SNMPv2-SMI::enterprises.8590.2.2 = INTEGER: 261	SNMPv2-SMI::enterprises.8590.2.3 = STRING: "sjdevVwindb06.ProspectHills.net"	SNMPv2-SMI::enterprises.8590.2.4 = STRING: "2008-05-13 19:03:21.157"	SNMPv2-SMI::enterprises.8590.2.5 = INTEGER: 5	SNMPv2-SMI::enterprises.8590.2.6 = INTEGER: 452	SNMPv2-SMI::enterprises.8590.2.7 = STRING: "C:\\Program Files\\RealVNC\\VNC4\\winvnc4.exe"	SNMPv2-SMI::enterprises.8590.2.8 = NULL	SNMPv2-SMI::enterprises.8590.2.9 = STRING: "192.168.20.38"	SNMPv2-SMI::enterprises.8590.2.10 = STRING: "192.168.1.39"	SNMPv2-SMI::enterprises.8590.2.11 = STRING: "The process 'C:\\Program Files\\RealVNC\\VNC4\\winvnc4.exe' (as user NT AUTHORITY\\SYSTEM) attempted to accept a connection as a server on TCP port 5900 from 192.168.20.38 using interface Wired\\VMware Accelerated AMD PCNet Adapter. The operation was denied."	SNMPv2-SMI::enterprises.8590.2.12 = INTEGER: 109	SNMPv2-SMI::enterprises.8590.2.13 = STRING: "192.168.1.39"	SNMPv2-SMI::enterprises.8590.2.14 = STRING: "W"	SNMPv2-SMI::enterprises.8590.2.15 = INTEGER: 3959	SNMPv2-SMI::enterprises.8590.2.16 = INTEGER: 5900	SNMPv2-SMI::enterprises.8590.2.17 = STRING: "Network access control"	SNMPv2-SMI::enterprises.8590.2.18 = STRING: "Non CSA applications, server for TCP or UDP services"	SNMPv2-SMI::enterprises.8590.2.19 = INTEGER: 33	SNMPv2-SMI::enterprises.8590.2.20 = STRING: "CSA MC Security Module"	SNMPv2-SMI::enterprises.8590.2.21 = NULL	SNMPv2-SMI::enterprises.8590.2.22 = STRING: "NT AUTHORITY\\SYSTEM"	SNMPv2-SMI::enterprises.8590.2.23 = INTEGER: 2]]></testEvent>
+  </testEvents>
+
+  <!-- keep the white space at the end -->
+  <parsingInstructions>
+    <!-- parsing common fields -->
+    <!-- sample message 
+
+         2008-05-13 11:00:36 192.168.1.39 [192.168.1.39]:SNMPv2-MIB::sysUpTime.0 = Timeticks: (52695748) 6 days, 2:22:37.48	SNMPv2-MIB::snmpTrapOID.0 = OID: SNMPv2-SMI::enterprises.8590.3.1	SNMPv2-SMI::enterprises.8590.2.1 = INTEGER: 619	SNMPv2-SMI::enterprises.8590.2.2 = INTEGER: 261	SNMPv2-SMI::enterprises.8590.2.3 = STRING: "sjdevVwindb06.ProspectHills.net"	SNMPv2-SMI::enterprises.8590.2.4 = STRING: "2008-05-13 19:03:21.157"	SNMPv2-SMI::enterprises.8590.2.5 = INTEGER: 5	SNMPv2-SMI::enterprises.8590.2.6 = INTEGER: 452	SNMPv2-SMI::enterprises.8590.2.7 = STRING: "C:\\Program Files\\RealVNC\\VNC4\\winvnc4.exe"	SNMPv2-SMI::enterprises.8590.2.8 = NULL	SNMPv2-SMI::enterprises.8590.2.9 = STRING: "192.168.20.38"	SNMPv2-SMI::enterprises.8590.2.10 = STRING: "192.168.1.39"	SNMPv2-SMI::enterprises.8590.2.11 = STRING: "The process 'C:\\Program Files\\RealVNC\\VNC4\\winvnc4.exe' (as user NT AUTHORITY\\SYSTEM) attempted to accept a connection as a server on TCP port 5900 from 192.168.20.38 using interface Wired\\VMware Accelerated AMD PCNet Adapter. The operation was denied."	SNMPv2-SMI::enterprises.8590.2.12 = INTEGER: 109	SNMPv2-SMI::enterprises.8590.2.13 = STRING: "192.168.1.39"	SNMPv2-SMI::enterprises.8590.2.14 = STRING: "W"	SNMPv2-SMI::enterprises.8590.2.15 = INTEGER: 3959	SNMPv2-SMI::enterprises.8590.2.16 = INTEGER: 5900	SNMPv2-SMI::enterprises.8590.2.17 = STRING: "Network access control"	SNMPv2-SMI::enterprises.8590.2.18 = STRING: "Non CSA applications, server for TCP or UDP services"	SNMPv2-SMI::enterprises.8590.2.19 = INTEGER: 33	SNMPv2-SMI::enterprises.8590.2.20 = STRING: "CSA MC Security Module"	SNMPv2-SMI::enterprises.8590.2.21 = NULL	SNMPv2-SMI::enterprises.8590.2.22 = STRING: "NT AUTHORITY\\SYSTEM"	SNMPv2-SMI::enterprises.8590.2.23 = INTEGER: 2
+
+      -->
+    <switch>
+      <case>
+        <collectFieldsByRegex src="$_rawmsg">
+          <regex><![CDATA[<_year:gPatYear>-<_mon:gPatMonNum>-<_day:gPatDay>\s+<_time:gPatTime>\s+<:gPatIpV4Dot><_body:gPatMesgBody>]]>
+          </regex>
+        </collectFieldsByRegex>
+      </case>
+      <case>
+        <collectFieldsByRegex src="$_rawmsg">
+          <regex><![CDATA[<_year:gPatYear>-<_mon:gPatMonNum>-<_day:gPatDay>\s+<_time:gPatTime>\s+<hostName:gPatStr> <:gPatStr> <_body:gPatMesgBody>]]>
+          </regex>
+        </collectFieldsByRegex>
+      </case>
+    </switch>
+    
+    <setEventAttribute attr="deviceTime">toDateTime($_mon, $_day, $_year, $_time)</setEventAttribute>
+    <setEventAttribute attr="eventType">Cisco-CSA-Generic</setEventAttribute>
+    <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+
+    <collectAndSetAttrByKeyValuePair sep='\t' src="$_body">
+      <attrKeyMap attr="computer" key="SNMPv2-SMI::enterprises.8590.2.3 = STRING: "/>
+      <attrKeyMap attr="eventSeverity" key="SNMPv2-SMI::enterprises.8590.2.5 = INTEGER: "/>
+      <attrKeyMap attr="procName" key="SNMPv2-SMI::enterprises.8590.2.7 = STRING: "/>
+      <attrKeyMap attr="fileName" key="SNMPv2-SMI::enterprises.8590.2.8 = STRING: "/>    
+      <attrKeyMap attr="srcIpAddr" key="SNMPv2-SMI::enterprises.8590.2.9 = STRING: "/>
+      <attrKeyMap attr="destIpAddr" key="SNMPv2-SMI::enterprises.8590.2.10 = STRING: "/>
+      <attrKeyMap attr="srcIpPort" key="SNMPv2-SMI::enterprises.8590.2.15 = INTEGER: "/>
+      <attrKeyMap attr="destIpPort" key="SNMPv2-SMI::enterprises.8590.2.16 = INTEGER: "/>
+      <attrKeyMap attr="_eventType" key="SNMPv2-SMI::enterprises.8590.2.17 = STRING: "/>
+      <attrKeyMap attr="user" key="SNMPv2-SMI::enterprises.8590.2.22 = STRING: "/>
+      <attrKeyMap attr="_eventInfo" key="SNMPv2-SMI::enterprises.8590.2.11 = STRING: "/>
+    </collectAndSetAttrByKeyValuePair>
+    
+    <choose>
+      <when test="matches($_eventInfo, 'denied')">
+	<setEventAttribute attr="eventAction">1</setEventAttribute>
+      </when>
+      <otherwise>
+        <setEventAttribute attr="eventAction">0</setEventAttribute>
+      </otherwise>
+    </choose>
+
+    <setEventAttribute attr="eventType">combineMsgId("Cisco-CSA-",$_eventType)</setEventAttribute>
+
+  </parsingInstructions>
+  
+</eventParser>
+

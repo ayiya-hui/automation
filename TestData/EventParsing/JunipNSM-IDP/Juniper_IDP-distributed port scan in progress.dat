@@ -1,0 +1,38 @@
+[reptDevIpAddr(key)]
+10.146.68.73
+[eventMsg]
+<25>Oct 11 14:29:12 10.146.68.68 20101011, 58390368, 2010/10/11 18:29:08, 2010/10/11 18:32:55, global.IDP, 1631, par-real-idp200, 10.146.68.73, traffic, distributed port scan in progress, (NULL), (NULL), 0.0.0.0, 0, 0.0.0.0, 0, (NULL), (NULL), 10.248.8.110, 0, 0.0.0.0, 0, hopopt, global.IDP, 1631, Metro IDP IP / Port Scan Policy, traffic anomalies, 2, accepted, info, yes, 'interface=eth3', (NULL), (NULL), (NULL), 0, 0, 0, 0, 0, 0, 0, 0, no, 25, Not
+[params]
+phEventCategory=0 (External)
+count=1
+phCustId=$sender
+destFwZone=(NULL)
+destIpAddr=10.248.8.110
+destIpPort=0
+deviceTime=any
+durationMSec=0
+eventId=any
+eventName=Distributed Port Scan in Progress
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=2
+eventSeverityCat=LOW
+eventType=Juniper_IDP-distributed port scan in progress
+ipProto=255
+policyName=Metro IDP IP / Port Scan Policy
+postNATSrcIpPort=0
+preNATDestIpAddr=10.248.8.110
+preNATDestIpPort=0
+recvPkts=0
+recvBytes=0
+relayDevIpAddr=10.146.68.68
+reptDevName=par-real-idp200
+reptDevIpAddr=$reporter
+reptModel=IDP
+reptVendor=Juniper
+sentBytes=0
+sentPkts=0
+srcFwZone=(NULL)
+srcIpPort=0
+totBytes=0
+totPkts=0

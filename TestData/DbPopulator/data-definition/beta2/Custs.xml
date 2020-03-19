@@ -1,0 +1,74 @@
+
+<config>
+    <domains>
+        <domain>
+            <name>portsd</name>
+			<description>Port San Diego</description>
+            <domainId>1000</domainId>
+        </domain>
+        <domain>
+            <name>AmSys</name>
+			<description>American System</description>
+            <domainId>1001</domainId>
+        </domain>
+    </domains>
+	<roles>
+		<role>
+			<name>Administrators</name>
+			<description>Administrator role</description>
+		</role>
+		<role>
+			<name>Users</name>
+			<description>User role</description>
+		</role>
+	</roles>
+	<credentials>
+		<credential custId="1000" id="3">
+            <password>wwmal5000M$i3Y</password>
+		</credential>
+		<credential custId="1000" id="4">
+            <password>411Psd*Beta2</password>
+		</credential>
+		<credential custId="1001" id="5">
+            <password>wwmal5000M$i3Y</password>
+		</credential>
+		<credential custId="1001" id="6">
+            <password>411Ams*Beta2</password>
+		</credential>
+	</credentials>
+    <users>
+        <user custId="1000">
+            <name>portsd</name>
+            <credential>Credential#4</credential>
+            <privileged>true</privileged>
+            <roles>
+				<role>Role$Administrators</role>
+			</roles>
+            <active>true</active>
+            <description>Super administrator account</description>
+        </user>
+        <user custId="1001">
+            <name>AmSys</name>
+            <credential>Credential#6</credential>
+            <privileged>true</privileged>
+            <roles>
+				<role>Role$Administrators</role>
+			</roles>
+            <active>true</active>
+            <description>Super administrator account</description>
+        </user>
+    </users>
+    <eventCollectors>
+		<eventCollector custId="1000">
+			<name>PortSD Collector</name>
+			<agentId>1000</agentId>
+			<credential>Credential#3</credential>
+		</eventCollector>
+		<eventCollector custId="1001">
+			<name>AmSys Collector</name>
+			<agentId>1001</agentId>
+			<credential>Credential#5</credential>
+		</eventCollector>
+    </eventCollectors>
+	
+</config>

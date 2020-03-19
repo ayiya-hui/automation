@@ -1,0 +1,5 @@
+[eventMsg]
+<174>Apr  6 18:43:48 amonitor phPerfMonitor[2770]: [PH_DEV_MON_PING_STAT]:[eventSeverity]=PHL_INFO,[procName]=phPerfMonitor,[fileName]=phPerfJob.cpp,[lineNumber]=707,[hostName]=automator12Dot3Dot0Dot1,[hostIpAddr]=12.3.0.1,[avgDurationMSec]=98,[minDurationMSec]=10,[maxDurationMSec]=105,[pktLossPct]=100.000000,[phLogDetail]=
+
+[clearEventMsg]
+<174>Apr  6 19:03:48 amonitor phPerfMonitor[2770]: [PH_DEV_MON_PING_STAT]:[eventSeverity]=PHL_INFO,[procName]=phPerfMonitor,[fileName]=phPerfJob.cpp,[lineNumber]=707,[hostName]=automator12Dot3Dot0Dot1,[hostIpAddr]=12.3.0.1,[avgDurationMSec]=120,[minDurationMSec]=10,[maxDurationMSec]=105,[pktLossPct]=5.000000,[phLogDetail]=

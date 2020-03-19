@@ -1,0 +1,21 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>Jul 24 2008 03:29:15: %PIX-6-605004: Login denied from SJ-Dev-S-RH-VMW-01/44206 to inside:192.168.19.1/telnet for user "wenyong" --automator
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=any
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+eventAction=0 (Permit)
+eventName=Failed login to the appliance
+reptVendor=Cisco
+eventType=PIX-605004
+phEventCategory=0 (External)
+reptDevIpAddr=$localhost
+reptModel=PIX

@@ -1,0 +1,31 @@
+[reptDevIpAddr(key)]
+20.20.20.120
+[eventMsg]
+Fri Oct 30 18:19:58 2009 $reporter AccelOps-WinLog-WMI  [Category]="14080" [CategoryString]="Directory Service Access" [ComputerName]="sf1dc03.jha.local" [Data]="NULL" [EventCode]="4662" [EventIdentifier]="4662" [EventType]="4" [Logfile]="Security" [RecordNumber]="184035377" [SourceName]="Microsoft-Windows-Security-Auditing" [TimeGenerated]="20100505222915.665846-000" [TimeWritten]="20100505222915.665846-000" [Type]="Audit Success" [User]="(null)" [[Subject ]][Security ID]="S-1-5-21-2090294290-982477196-2044928816-6899" [Account Name]="SF1DC04$" [Account Domain]="JHA" [Logon ID]="0x54f6f4d" [[Object]][Object Server]="DS" [Object Type]="%{19195a5b-6da0-11d0-afd3-00c04fd930c9}" [Object Name]="%{c886762b-231a-4272-86b8-1060a9643a4e}" [Handle ID]="0x0" [[Operation]][Operation Type]="Object Access" [Accesses]="Control Access,			" [Access Mask]="0x100" [Properties]="Control Access,{1131f6ad-9c07-11d1-f79f-00c04fc2dcd2},{19195a5b-6da0-11d0-afd3-00c04fd930c9}" [[Additional Information]][Parameter 1]="-"
+[params]
+rawEventMsg=any
+type=Audit Success
+osObjType=%{19195a5b-6da0-11d0-afd3-00c04fd930c9}
+osObjName=%{c886762b-231a-4272-86b8-1060a9643a4e}
+osObjAccessType=Control Access,
+osObjHandleID=0x0
+eventAction=0 (Permit)
+count=1
+eventId=any
+domain=JHA
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=$reporter
+winLogonId=0x54f6f4d
+eventName=An operation was performed on an object
+reptVendor=Microsoft
+eventType=Win-Security-4662
+user=SF1DC04$
+phEventCategory=0 (External)
+reptDevIpAddr=$reporter
+reptModel=Windows
+eventSource=Microsoft-Windows-Security-Auditing

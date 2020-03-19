@@ -1,0 +1,24 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+217: May 12 13:57:23.720: %SYS-5-CONFIG_I: Configured from console by vty1 (192.168.29.8)
+[params]
+deviceTime=any
+eventType=IOS-SYS-CONFIG_I
+phCustId=$sender
+reptModel=IOS
+eventId=any
+eventParsedOk=1
+eventSeverity=4
+hostIpAddr=$localhost
+eventName=Configured from console
+phEventCategory=0
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=Success(0)
+reptVendor=Cisco
+srcIpAddr=192.168.29.8

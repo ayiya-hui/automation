@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+Oct 7 21:17:30.477: %AUTHMGR-5-SECURITY_VIOLATION: Security violation on the interface GigabitEthernet3/0/31, new MAC address (000d.9369.3d24) is seen.AuditSessionID AC101415000004200988F273
+[params]
+deviceTime=any
+isHostIntfCritical=No
+eventType=IOS-AUTHMGR-SECURITY_VIOLATION
+phCustId=$sender
+intfName=GigabitEthernet3/0/31
+reptModel=IOS
+eventId=any
+ipConnId=AC101415000004200988F273
+eventParsedOk=1
+eventSeverity=2
+hostIpAddr=$localhost
+eventName=Security violation on interface
+phEventCategory=0
+srcMACAddr=00:0d:93:69:3d:24
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=Success(0)
+reptVendor=Cisco

@@ -1,0 +1,47 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<12>May  6 15:59:03 1,2010/05/06 15:59:03,0006C101167,SYSTEM,general,0,2010/05/06 15:59:03,,unknown,,0,0,general,medium, Failed password for invalid user wenyong from 192.168.0.13 port 55719 ssh2.
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+srcIpAddr=192.168.0.13
+eventParsedOk=1
+eventSeverity=5
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=MEDIUM
+destIpAddr=$localhost
+eventName=Admin login failure
+reptVendor=Palo Alto
+eventType=PAN-OS-SYSTEM-login-failed
+user=wenyong
+phEventCategory=0 (External)
+reptDevIpAddr=$localhost
+reptModel=PAN-OS
+[reptDevIpAddr(key)]
+172.16.1.2
+[eventMsg]
+<12>May 26 14:59:49 172.16.1.2 14:59:49,0006C101167,SYSTEM,general,0,2010/05/26 14:59:49,,unknown,,0,0,general,medium,Authentication failed for user admin via telnet from 192.168.19.199
+[params]
+rawEventMsg=any
+ipProto=6 (TCP)
+destIpPort=23 (TELNET)
+count=1
+eventId=any
+reptDevIpAddr=$reporter
+eventParsedOk=1
+eventSeverity=5
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=MEDIUM
+destIpAddr=$reporter
+eventName=Admin login failure
+srcIpAddr=192.168.19.199
+reptVendor=Palo Alto
+eventType=PAN-OS-SYSTEM-login-failed
+user=admin
+phEventCategory=0 (External)
+appPort=telnet
+reptModel=PAN-OS

@@ -1,0 +1,75 @@
+[reptDevIpAddr(key)]
+172.22.30.52
+[eventMsg]
+2011-04-25 14:41:51 172.22.30.52(via UDP: [172.22.30.52]:2536) TRAP, SNMP v1, community public      SNMPv2-SMI::enterprises.2604.2.1.1.1.1 Enterprise Specific Trap (4) Uptime: 360 days, 3:22:07.34            SNMPv2-SMI::enterprises.2604.2.1.1.2.1.5 = STRING: "An \"allow file transfer\" action was taken.  Username: ROBROY\jibasan         Rule names: 'Bank routing numbers with qualifying terms'  User action: File open Application Name: Outlook            Data Control action: Allow     File type: Plain text (ASCII/UTF-8)      Source path: C:\Judy\rroy.14375700120110425"    SNMPv2-SMI::enterprises.2604.2.1.1.2.2.2 = STRING: "9.5.5"
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+appName=Outlook
+appVersion=9.5.5
+count=1
+phCustId=$sender
+deviceTime=any
+domain=ROBROY
+eventId=any
+eventName=DLP violation detected
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=11
+eventSeverityCat=HIGH
+eventType=Sophos-DLP-Violation
+fwRule=Bank routing numbers with qualifying terms
+reptDevIpAddr=172.22.30.52
+reptModel=Sophos Endpoint Control
+reptVendor=Sophos
+user=jibasan
+virusAction=Allow
+[reptDevIpAddr(key)]
+172.22.30.54
+[eventMsg]
+2011-01-28 11:54:40 172.22.30.54(via UDP: [172.22.30.54]:1870) TRAP, SNMP v1, community public      SNMPv2-SMI::enterprises.2604.2.1.1.1.1 Enterprise Specific Trap (4) Uptime: 3 days, 13:03:49.21  SNMPv2-SMI::enterprises.2604.2.1.1.2.1.5 = STRING: "An \"allow file transfer\" action was taken.  Username: ROBROY\Administrator          Rule names: 'US social security numbers with qualifying terms'      User action: File copy     Data Control action: Allow     File type: Document (Microsoft Word-OPC)  Source path: C:\Documents and Settings\administrator.ROBROY\Desktop\Test doc 1.docx   Destination path: E:\Test doc 1.docx  Destination type: Removable storage"   SNMPv2-SMI::enterprises.2604.2.1.1.2.2.2 = STRING: "9.5.4"
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+appVersion=9.5.4
+count=1
+phCustId=$sender
+deviceTime=any
+domain=ROBROY
+eventId=any
+eventName=DLP violation detected
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=11
+eventSeverityCat=HIGH
+eventType=Sophos-DLP-Violation
+fwRule=US social security numbers with qualifying terms
+reptDevIpAddr=172.22.30.54
+reptModel=Sophos Endpoint Control
+reptVendor=Sophos
+user=Administrator
+virusAction=Allow
+[reptDevIpAddr(key)]
+172.22.30.59
+[eventMsg]
+2011-01-28 11:54:40 172.22.30.59(via UDP: [172.22.30.59]:1870) TRAP, SNMP v1, community public      SNMPv2-SMI::enterprises.2604.2.1.1.1.1 Enterprise Specific Trap (4) Uptime: 3 days, 13:03:49.21  SNMPv2-SMI::enterprises.2604.2.1.1.2.1.5 = STRING: "An \"allow file transfer\" action was taken.  Username: sha         Rule names: 'US social security numbers with qualifying terms'      User action: File copy     Data Control action: Allow     File type: Document (Microsoft Word-OPC)  Source path: C:\Documents and Settings\administrator.ROBROY\Desktop\Test doc 1.docx   Destination path: E:\Test doc 1.docx  Destination type: Removable storage"   SNMPv2-SMI::enterprises.2604.2.1.1.2.2.2 = STRING: "9.5.4"
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+appVersion=9.5.4
+count=1
+phCustId=$sender
+deviceTime=any
+eventId=any
+eventName=DLP violation detected
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=11
+eventSeverityCat=HIGH
+eventType=Sophos-DLP-Violation
+fwRule=US social security numbers with qualifying terms
+reptDevIpAddr=172.22.30.59
+reptModel=Sophos Endpoint Control
+reptVendor=Sophos
+user=sha
+virusAction=Allow

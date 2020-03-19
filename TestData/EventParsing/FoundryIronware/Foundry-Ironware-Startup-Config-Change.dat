@@ -1,0 +1,24 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<14>SJ-Dev-A11-Fdy-FastIron, startup-config was changed from telnet client 192.168.20.18
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+reptDevIpAddr=$localhost
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=$localhost
+eventAction=0 (Permit)
+eventName=Foundry startup config change
+srcIpAddr=192.168.20.18
+reptVendor=Foundry
+eventType=Foundry-Ironware-Startup-Config-Change
+phEventCategory=0 (External)
+destIpPort=23
+destName=SJ-Dev-A11-Fdy-FastIron
+reptModel=Ironware

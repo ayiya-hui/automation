@@ -1,0 +1,2 @@
+[eventMsg]
+<46>Apr 14 12:05:28 2.9.1.1 IISWebLog	0	2010-04-14 19:05:07 W3SVC1 FILER 192.168.0.40 GET /aspnet_client/ - 80 - 192.168.22.4 HTTP/1.1 Mozilla/5.0+(Windows;+U;+Windows+NT+6.0;+en-US;+rv:1.9.0.19)+Gecko/2010031422+Firefox/3.0.19+(.NET+CLR+3.5.30729) - http://192.168.0.40/ 192.168.0.40 403 14 5 377 436 453

@@ -1,0 +1,2 @@
+[eventMsg]
+<14>May 19 12:33:34 $reporter 12:33:34,0006C101167,TRAFFIC,start,7,2010/05/19 12:33:33,172.16.2.41,$randomIP,::172.16.2.111,12.16.20.161,rule3,,,rpc,vsys1,trust,untrust,ethernet1/2,ethernet1/1,forward_syslog,2010/05/19 12:33:34,12571,1,1023,$randomNum,1023,$randomNum,0x40,udp,allow,142,142,142,1,2010/05/19 12:33:33,0,any,0

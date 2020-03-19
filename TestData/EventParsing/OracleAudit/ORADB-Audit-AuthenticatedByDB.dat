@@ -1,0 +1,62 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<172>Oracle Audit[28061]: LENGTH: 265 SESSIONID:[9] 118110747 ENTRYID:[5] 14188 STATEMENT:[5] 28375 USERID:[8] user ACTION:[3] 100 RETURNCODE:[1] 0 COMMENT$TEXT:[99] Authenticated by: DATABASE; Client address: (ADDRESS=(PROTOCOL=tcp)(HOST=10.90.217.247)(PORT=4566)) PRIV$USED:[1] 5
+[params]
+parserName=OracleAuditParser
+eventType=ORADB-Audit-AuthenticatedByDB
+srcIpAddr=10.90.217.247
+reptModel=Database Server
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=ORADB-Audit-AuthenticatedByDB
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+srcIpPort=4566
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+user=user
+rawEventMsg=any
+ipProto=6 (TCP)
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+sessionId=118110747
+reptVendor=Oracle
+oraAuditAction=100
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<172>Oracle Audit[29833]: LENGTH: 292 SESSIONID:[10] 1163576557 ENTRYID:[1] 1 STATEMENT:[1] 1 USERID:[7] SISTB2B USERHOST:[8] host ACTION:[3] 100 RETURNCODE:[4] 1017 COMMENT$TEXT:[101] Authenticated by: DATABASE; Client address: (ADDRESS=(PROTOCOL=tcp)(HOST=192.168.212.156)(PORT=3496)) DBID:[9] 200958341
+[params]
+parserName=OracleAuditParser
+eventType=ORADB-Audit-AuthenticatedByDB
+computer=host
+srcIpAddr=192.168.212.156
+reptModel=Database Server
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+dbId=200958341
+eventName=ORADB-Audit-AuthenticatedByDB
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+srcIpPort=3496
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+user=SISTB2B
+rawEventMsg=any
+ipProto=6 (TCP)
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+sessionId=1163576557
+reptVendor=Oracle
+oraAuditAction=100

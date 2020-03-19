@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+10.1.2.70
+[eventMsg]
+<134>Jan 12 15:04:57 10.1.2.70 java: [VMware_VmRenamedEvent],[phLogDetail]=, [eventTime]=2010-01-12 15:01:29:901, [rptIp]=10.1.2.70, [user]=root, [vmwEventId]=202, [vmwEventCat]=warning, [vmHost]=QA-SH-ESX70.accelops.net.cn, [cluster]=QA-SH-ESX70.accelops.net.cn, [vm]=test2, [datacenter]=ha-datacenter, [origVM]=test, [newVM]=test2, [vmwEventMsg]=Renamed test2 from test to test2 in ha-datacenter
+[params]
+rawEventMsg=any
+count=1
+datacenter=ha-datacenter
+deviceTime=any
+eventParsedOk=1
+vmwEventCat=warning
+eventSeverity=5
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=MEDIUM
+vmwEventMsg=Renamed test2 from test to test2 in ha-datacenter
+eventName=Virtual machine renamed
+cluster=QA-SH-ESX70.accelops.net.cn
+reptDevIpAddr=10.1.2.70
+reptVendor=VMware
+eventType=VMware_VmRenamedEvent
+user=root
+phEventCategory=0 (External)
+eventId=any
+reptDevName=QA-SH-ESX70.accelops.net.cn
+reptModel=Generic

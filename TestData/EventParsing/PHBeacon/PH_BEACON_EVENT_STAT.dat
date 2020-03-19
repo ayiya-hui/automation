@@ -1,0 +1,29 @@
+[reptDevIpAddr(key)]
+192.168.65.158
+[eventMsg]
+<134>Feb 25 18:05:00 192.168.65.158 devH [PH_BEACON_EVENT_STAT]: [phEventCategory]=7,[eventSeverity]=PHL_INFO,[custId]=3,[customer]=Super,[phCustId]=1,[AVG(incomingEventsPerSec)]=71.95,[AVG(fwdEventsPerSec)]=0,[AVG(dropPolicyEventsPerSec)]=0,[SUM(dropLicenseEvents)]=0,[AVG(dropLicenseEventRatio)]=0
+[params]
+deviceTime=any
+dropLicenseEvents=0
+parserName=PHBeaconParser
+eventType=PH_BEACON_EVENT_STAT
+fwdEventsPerSec=0.00
+dropLicenseEventRatio=0
+reptModel=FortiSIEM
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+dropPolicyEventsPerSec=0.00
+eventName=Beacon: System Event Processing Statistics
+phEventCategory=7
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=192.168.65.158
+rawEventMsg=any
+reptDevName=devH
+customer=Super
+phRecvTime=any
+reptDevIpAddr=192.168.65.158
+reptVendor=Fortinet
+incomingEventsPerSec=71.95

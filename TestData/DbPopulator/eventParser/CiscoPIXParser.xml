@@ -1,0 +1,730 @@
+<eventParser name="CiscoPIXParser">
+
+  <deviceType>
+    <Vendor>Cisco</Vendor>
+    <Model>PIX</Model>
+    <Version>ANY</Version>
+  </deviceType>
+  
+  <!-- pattern definitions -->
+  <patternDefinitions>
+    <pattern name="patMesgIdCommon"><![CDATA[PIX]]></pattern>
+    <pattern name="patMesgIdSev"><![CDATA[\d]]></pattern>
+    <pattern name="patIntfName"><![CDATA[[^:]+]]></pattern>
+    <pattern name="patIpV4DotORpatStr"><![CDATA[(\d{1,3}.\d{1,3}.\d{1.3}.\d{1,3})|([^ ]+)]]></pattern>
+    <pattern name="patStrDoubleQuoted"><![CDATA[[^"]*]]></pattern>
+    <pattern name="patStrSingleQuoted"><![CDATA[[^']*]]></pattern>
+    <pattern name="patStrEndColon"><![CDATA[[^:]*]]></pattern>
+    <pattern name="patStrEndSemiColon"><![CDATA[[^;]*]]></pattern>
+    <pattern name="patStrRightAngle"><![CDATA[[^>]*]]></pattern>
+    <pattern name="patStrRightParen"><![CDATA[[^\)]*]]></pattern>
+    <pattern name="patStrEndDot"><![CDATA[[^.]*]]></pattern>
+    <pattern name="patStrEndSlash"><![CDATA[[^/]*]]></pattern>
+    <pattern name="patStrEndComma"><![CDATA[[^,]*]]></pattern>
+  </patternDefinitions>
+  
+  <eventFormatRecognizer><![CDATA[%PIX-\d-\d+]]></eventFormatRecognizer>
+  
+  <testEvents>
+      <testEvent><![CDATA[<134>Dec 04 2008 20:00:45: %PIX-3-109010: Auth from 10.10.10.10/8080 to 20.20.20.20/9996 failed (too many pending auths) on interface inside]]></testEvent>
+  </testEvents>
+
+  <parsingInstructions>
+
+    <!-- parsing common fields -->
+    <!-- The notation "<field:patternName>" used inside regex means assigning to "field" the substring that matches the pattern specified by "patternName", later on the field can be referenced as 	"$field" in test condition or functions. The system provides a few built-in fields as described below: $_rawmsg: the whole event message $_reportIp: the reporting IP address -->
+    <switch>
+      <case>
+        <collectFieldsByRegex src="$_rawmsg">
+          <regex><![CDATA[<:gPatSyslogPRI>?<_mon:gPatMon> <_day:gPatDay> <_year:gPatYear> <_time:gPatTime>\s?: %<_idCommon:patMesgIdCommon>-<_severity:patMesgIdSev>-<_idNum:gPatInt>: <_body:gPatMesgBody>]]></regex>
+        </collectFieldsByRegex>
+        <setEventAttribute attr="deviceTime">toDateTime($_mon, $_day, $_year, $_time)</setEventAttribute>
+      </case>
+
+      <case>
+        <collectFieldsByRegex src="$_rawmsg">
+          <regex><![CDATA[<:gPatSyslogPRI>?<_NGHeader:gPatSyslogNGHeader> %<_idCommon:patMesgIdCommon>-<_severity:patMesgIdSev>-<_idNum:gPatInt>: <_body:gPatMesgBody>]]></regex>
+        </collectFieldsByRegex>
+        <collectFieldsByRegex src="$_NGHeader">
+          <regex><![CDATA[<_mon:gPatMon>\s+<_day:gPatDay>\s<_time:gPatTime>\s<:gPatIpV4Dot>]]></regex>
+        </collectFieldsByRegex>
+        <setEventAttribute attr="deviceTime">toDateTime($_mon, $_day, $_time)</setEventAttribute>
+      </case>
+      <case>
+        <collectFieldsByRegex src="$_rawmsg">
+          <regex><![CDATA[<:gPatSyslogPRI>?<_mon:gPatMon>\s+<_day:gPatDay>\s+<:gPatYear>\s+<_time:gPatTime>\s+<:gPatIpV4Dot>\s?: %<_idCommon:patMesgIdCommon>-<_severity:patMesgIdSev>-<_idNum:gPatInt>: <_body:gPatMesgBody>]]></regex>
+        </collectFieldsByRegex>
+        <setEventAttribute attr="deviceTime">toDateTime($_mon, $_day, $_time)</setEventAttribute>
+      </case>
+
+      <case>
+        <collectFieldsByRegex src="$_rawmsg">
+          <regex><![CDATA[<:gPatSyslogPRI>\s*%<_idCommon:patMesgIdCommon>-<_severity:patMesgIdSev>-<_idNum:gPatInt>: <_body:gPatMesgBody>]]></regex>
+        </collectFieldsByRegex>
+      </case>
+    </switch>
+
+    <setEventAttribute attr="eventType">combineMsgId($_idCommon, "-", $_idNum)</setEventAttribute>
+    <setEventAttribute attr="eventAction">0</setEventAttribute>
+    <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+
+    <!-- event severity -->
+    <choose>
+      <when test='$_severity IN "6, 7"'>
+        <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+      </when>
+
+      <when test='$_severity = "1"'>
+        <setEventAttribute attr="eventSeverity">10</setEventAttribute>
+      </when>
+
+      <when test='$_severity = "2"'>
+        <setEventAttribute attr="eventSeverity">8</setEventAttribute>
+      </when>
+
+      <when test='$_severity IN "3, 4"'>
+        <setEventAttribute attr="eventSeverity">5</setEventAttribute>
+      </when>
+
+      <when test='$_severity = "5"'>
+        <setEventAttribute attr="eventSeverity">2</setEventAttribute>
+      </when>
+    </choose>
+
+
+    <!-- message specific parsing -->
+    <choose>
+
+      <when test='$eventType = "PIX-302013"'>
+	<!--
+	    <134>Nov 28 2007 17:20:48: %PIX-6-302013: Built outbound TCP connection 76118 for outside:207.68.178.45/80 (207.68.178.45/80) to inside:192.168.20.31/3530 (99.129.50.157/5967)
+              -->
+    	<collectAndSetAttrByRegex src="$_body">
+    	  <regex><![CDATA[Built <_direction:gPatStr> <_proto:gPatProto> connection <ipConnId:gPatInt> for <destIntfName:patIntfName>:<destIpAddr:gPatIpV4Dot>/<destIpPort:gPatIpPort> \(<preNATDestIpAddr:gPatIpV4Dot>/<preNATDestIpPort:gPatIpPort>\) to <srcIntfName:patIntfName>:<srcIpAddr:gPatIpV4Dot>/<srcIpPort:gPatIpPort> \(<postNATSrcIpAddr:gPatIpV4Dot>/<postNATSrcIpPort:gPatIpPort>\)]]></regex>
+ 	</collectAndSetAttrByRegex>
+        <setEventAttribute attr="_result">compIntfSecVal($srcIntfName, $destIntfName)</setEventAttribute>
+        <!-- only need to check whether we need to swap the src and dest attributes -->
+        <choose>
+          <when test = '$_direction = "inbound"'>
+            <when test = '$_result = "GREATER"'>
+              <swap>$srcIntfName, $destIntfName</swap>
+              <swap>$srcIpAddr, $destIpAddr</swap>
+              <swap>$srcIpPort, $destIpPort</swap>
+              <swap>$postNATSrcIpAddr, $preNATDestIpAddr</swap>
+              <swap>$postNATSrcIpPort, $preNATDestIpPort</swap>
+            </when>
+          </when>
+          <otherwise>
+            <when test = '$_result = "LESS"'>
+              <swap>$srcIntfName, $destIntfName</swap>
+              <swap>$srcIpAddr, $destIpAddr</swap>
+              <swap>$srcIpPort, $destIpPort</swap>
+              <swap>$postNATSrcIpAddr, $preNATDestIpAddr</swap>
+              <swap>$postNATSrcIpPort, $preNATDestIpPort</swap>
+            </when>
+          </otherwise>
+        </choose>
+
+      </when>
+      
+      
+      <when test='$eventType = "PIX-302014"'>
+	<!--
+            <134>Nov 28 2007 17:22:08: %PIX-6-302014: Teardown TCP connection 76121 for outside:77.67.126.83/80 to inside:192.168.20.31/3531 duration 0:01:05 bytes 6410 TCP Reset-I
+	      -->
+	<collectAndSetAttrByRegex src="$_body">
+          <regex><![CDATA[Teardown <_proto:gPatProto> connection <ipConnId:gPatInt> for <destIntfName:patIntfName>:<destIpAddr:gPatIpV4Dot>/<destIpPort:gPatIpPort> to <srcIntfName:patIntfName>:<srcIpAddr:gPatIpV4Dot>/<srcIpPort:gPatIpPort> duration <_connDuration:gPatTime> bytes <totBytes:gPatInt> <:gPatMesgBody>]]></regex>
+        </collectAndSetAttrByRegex>
+
+         <collectAndSetAttrFromAnotherEvent AnotherEventType = "PIX-302013">
+           <when test = '$ipConnId = $AnotherEvent.ipConnId'>
+             <setEventAttribute attr="destIntfName">$AnotherEvent.destIntfName</setEventAttribute>
+             <setEventAttribute attr="destIpAddr">$AnotherEvent.destIpAddr</setEventAttribute>
+             <setEventAttribute attr="destIpPort">$AnotherEvent.destIpPort</setEventAttribute>
+             <setEventAttribute attr="srcIntfName">$AnotherEvent.srcIntfName</setEventAttribute>
+             <setEventAttribute attr="srcIpAddr">$AnotherEvent.srcIpAddr</setEventAttribute>
+             <setEventAttribute attr="srcIpPort">$AnotherEvent.srcIpPort</setEventAttribute>
+           </when>
+         </collectAndSetAttrFromAnotherEvent>	
+
+        <setEventAttribute attr="durationMSec">calculateMSec($_connDuration)</setEventAttribute>
+        <!--clasdkla =-->
+      </when>
+      
+      
+      <when test='$eventType = "PIX-302015"'>
+        <!--
+            <134>Nov 28 2007 17:20:48: %PIX-6-302015: Built outbound UDP connection 76116 for outside:99.129.50.158/53 (99.129.50.158/53) to inside:192.168.0.10/1041 (99.129.50.157/1411)
+              <134>Mar 11 2008 00:11:20: %PIX-6-302015: Built outbound UDP connection 691155 for outside:164.67.62.194/123 (164.67.62.194/123) to NP Identity Ifc:99.129.50.157/123 (99.129.50.157/123)
+              -->
+
+        <collectAndSetAttrByRegex src="$_body">
+          <regex><![CDATA[Built <_direction:gPatStr> <_proto:gPatProto> connection <ipConnId:gPatInt> for <destIntfName:patIntfName>:<destIpAddr:gPatIpV4Dot>/<destIpPort:gPatIpPort> \(<preNATDestIpAddr:gPatIpV4Dot>/<preNATDestIpPort:gPatIpPort>\) to <srcIntfName:patIntfName>:<srcIpAddr:gPatIpV4Dot>/<srcIpPort:gPatIpPort> \(<postNATSrcIpAddr:gPatIpV4Dot>/<postNATSrcIpPort:gPatIpPort>\)]]> </regex>
+        </collectAndSetAttrByRegex>
+
+        <setEventAttribute attr="_result">compIntfSecVal($srcIntfName, $destIntfName)</setEventAttribute>
+        <!-- only need to check whether we need to swap the src and dest attributes -->
+        <choose>
+          <when test = '$_direction = "inbound"'>
+            <when test = '$_result = "GREATER"'>
+              <swap>$srcIntfName, $destIntfName</swap>
+              <swap>$srcIpAddr, $destIpAddr</swap>
+              <swap>$srcIpPort, $destIpPort</swap>
+              <swap>$postNATSrcIpAddr, $preNATDestIpAddr</swap>
+              <swap>$postNATSrcIpPort, $preNATDestIpPort</swap>
+            </when>
+          </when>
+          <otherwise>
+            <when test = '$_result = "LESS"'>
+              <swap>$srcIntfName, $destIntfName</swap>
+              <swap>$srcIpAddr, $destIpAddr</swap>
+              <swap>$srcIpPort, $destIpPort</swap>
+              <swap>$postNATSrcIpAddr, $preNATDestIpAddr</swap>
+              <swap>$postNATSrcIpPort, $preNATDestIpPort</swap>
+            </when>
+          </otherwise>
+        </choose>
+
+      </when>
+      
+      
+      <when test='$eventType = "PIX-302016"'>
+        <!--
+            <134>Nov 28 2007 17:20:48: %PIX-6-302016: Teardown UDP connection 76116 for outside:99.129.50.158/53 to inside:192.168.0.10/1041 duration 0:00:00 bytes 268
+              <134>Mar 10 2008 23:56:17: %PIX-6-302016: Teardown UDP connection 689300 for outside:164.67.62.194/123 to NP Identity Ifc:99.129.50.157/123 duration 0:02:01 bytes 96
+              -->
+        <collectAndSetAttrByRegex src="$_body">
+          <regex><![CDATA[Teardown <_proto:gPatProto> connection <ipConnId:gPatInt> for <destIntfName:patIntfName>:<destIpAddr:gPatIpV4Dot>/<destIpPort:gPatIpPort> to <srcIntfName:patIntfName>:<srcIpAddr:gPatIpV4Dot>/<srcIpPort:gPatIpPort> duration <_connDuration:gPatTime> bytes <totBytes:gPatInt>]]> </regex>
+        </collectAndSetAttrByRegex>
+
+        <collectAndSetAttrFromAnotherEvent AnotherEventType = "PIX-302015">
+          <when test = '$ipConnId = $AnotherEvent.ipConnId'>
+            <setEventAttribute attr="destIntfName">$AnotherEvent.destIntfName</setEventAttribute>
+            <setEventAttribute attr="destIpAddr">$AnotherEvent.destIpAddr</setEventAttribute>
+            <setEventAttribute attr="destIpPort">$AnotherEvent.destIpPort</setEventAttribute>
+            <setEventAttribute attr="srcIntfName">$AnotherEvent.srcIntfName</setEventAttribute>
+            <setEventAttribute attr="srcIpAddr">$AnotherEvent.srcIpAddr</setEventAttribute>
+            <setEventAttribute attr="srcIpPort">$AnotherEvent.srcIpPort</setEventAttribute>
+          </when>
+        </collectAndSetAttrFromAnotherEvent>
+
+        <setEventAttribute attr="durationMSec">calculateMSec($_connDuration)</setEventAttribute>
+
+      </when>
+
+      
+      <when test='$eventType = "PIX-302020"'>
+        <!--
+            From syslog-ng: May 21 2007 14:00:34: %PIX-6-302020: Built ICMP connection for faddr 10.2.3.14/0 gaddr asa70/0 laddr asa70/0
+            <134>Nov 28 2007 17:20:48: %PIX-6-302020: Built ICMP connection for faddr 192.168.0.30/0 gaddr 192.168.0.1/0 laddr 192.168.0.1/0
+              -->
+        <switch>
+          <case>
+            <collectAndSetAttrByRegex src="$_body">
+              <regex><![CDATA[Built <_proto:gPatProto> connection for faddr <srcIpAddr:gPatIpV4Dot>/<:gPatIpPort> gaddr <preNATDestIpAddr:patIpV4DotORpatStr>/<:gPatIpPort> laddr <destIpAddr:patIpV4DotORpatStr>/<icmpType:gPatIpPort>]]></regex>
+            </collectAndSetAttrByRegex>
+          </case>
+          <case>
+            <collectAndSetAttrByRegex src="$_body">
+              <regex><![CDATA[Built <_direction:gPatStr> <_proto:gPatProto> connection for faddr <srcIpAddr:gPatIpV4Dot>/<_icmpType:gPatIpPort> gaddr <_ipAddr:patIpV4DotORpatStr>/<:gPatIpPort> laddr <destIpAddr:patIpV4DotORpatStr>/<icmpType:gPatIpPort>]]></regex>
+            </collectAndSetAttrByRegex>
+            <choose>
+              <when test='$_direction = "outbound"'>
+                <swap>$srcIpAddr, $destIpAddr</swap>
+                <setEventAttribute attr="postNATSrcIpAddr">$_ipAddr</setEventAttribute>
+                <setEventAttribute attr="icmpType">$_icmpType</setEventAttribute>
+              </when>
+              <otherwise>
+                <setEventAttribute attr="preNATDestIpAddr">$_ipAddr</setEventAttribute>
+            </otherwise>
+            </choose>
+          </case>
+        </switch>
+      </when>
+
+      
+      <when test='$eventType = "PIX-302021"'>
+        <!--
+            <134>Nov 28 2007 17:20:50: %PIX-6-302021: Teardown ICMP connection for faddr 192.168.0.30/0 gaddr 192.168.0.1/0 laddr 192.168.0.1/0
+              -->
+        <collectAndSetAttrByRegex src="$_body">
+          <regex><![CDATA[Teardown <_proto:gPatProto> connection for faddr <srcIpAddr:gPatIpV4Dot>/<icmpType:gPatIpPort> gaddr <:gPatIpV4Dot>/<:gPatIpPort> laddr <destIpAddr:gPatIpV4Dot>/<:gPatIpPort>]]> </regex>
+        </collectAndSetAttrByRegex>
+      </when>
+      
+      
+      <when test='$eventType IN "PIX-710005,PIX-710006"'>
+        <!--
+            <135>Nov 28 2007 17:21:17: %PIX-7-710005: UDP request discarded from 192.168.0.10/138 to inside:192.168.15.255/138
+	    <135>Nov 28 17:21:17 2.15.0.1 %PIX-2-710006: TCP request discarded from 192.168.0.10/138 to inside:192.168.15.255/138
+              -->
+        <collectAndSetAttrByRegex src="$_body">
+          <regex><![CDATA[<_proto:gPatProto> request discarded from <srcIpAddr:gPatIpV4Dot>/<srcIpPort:gPatIpPort> to <destIntfName:patIntfName>:<destIpAddr:gPatIpV4Dot>/<destIpPort:gPatIpPort>]]> </regex>
+        </collectAndSetAttrByRegex>
+        <setEventAttribute attr="eventAction">1</setEventAttribute>
+        <setEventAttribute attr="eventSeverity">4</setEventAttribute>
+        <when test='$eventType = "PIX-710006"'>
+		<setEventAttribute attr="eventSeverity">8</setEventAttribute>
+        </when>
+      </when>
+      
+      <when test='$eventType = "PIX-305011"'>
+        <!--
+            <134>Nov 28 2007 17:20:48: %PIX-6-305011: Built dynamic TCP translation from inside:192.168.20.31/3530 to outside:99.129.50.157/5967
+              <134>Nov 28 2007 17:20:48: %PIX-6-305011: Built dynamic UDP translation from inside:192.168.0.10/1041 to outside:99.129.50.157/1411
+                -->
+        <collectAndSetAttrByRegex src="$_body">
+          <regex><![CDATA[Built dynamic <_proto:gPatProto> translation from <srcIntfName:patIntfName>:<srcIpAddr:gPatIpV4Dot>/<srcIpPort:gPatIpPort> to <destIntfName:patIntfName>:<postNATSrcIpAddr:gPatIpV4Dot>/<postNATSrcIpPort:gPatIpPort>]]> </regex>
+       </collectAndSetAttrByRegex>
+      </when>
+
+
+      <when test='$eventType = "PIX-305012"'>
+        <!--
+            <134>Nov 28 2007 17:22:18: %PIX-6-305012: Teardown dynamic TCP translation from inside:192.168.20.31/3530 to outside:99.129.50.157/5967 duration 0:01:30
+              
+              <134>Nov 28 2007 17:21:33: %PIX-6-305012: Teardown dynamic UDP translation from inside:192.168.0.10/1041 to outside:99.129.50.157/1411 duration 0:00:45
+                -->
+        <collectAndSetAttrByRegex src="$_body">
+          <regex><![CDATA[Teardown dynamic <_proto:gPatProto> translation from <srcIntfName:patIntfName>:<srcIpAddr:gPatIpV4Dot>/<srcIpPort:gPatIpPort> to <destIntfName:patIntfName>:<postNATSrcIpAddr:gPatIpV4Dot>/<postNATSrcIpPort:gPatIpPort> duration <_connDuration:gPatTime>]]></regex>
+        </collectAndSetAttrByRegex>
+      </when>
+      <when test='$eventType = "PIX-305005"'>
+        <!--
+          <155>Apr 09 2010 14:32:18 10.3.90.10 : %PIX-3-305005: No translation group found for icmp src inside:10.3.60.6 dst outside:174.120.184.146 (type 8, code 0)
+                -->
+        <collectAndSetAttrByRegex src="$_body">
+          <regex><![CDATA[No translation group found for <_proto:gPatProto> src <srcIntfName:patIntfName>:<srcIpAddr:gPatIpV4Dot> dst <destIntfName:patIntfName>:<postNATSrcIpAddr:gPatIpV4Dot>.*]]></regex>
+        </collectAndSetAttrByRegex>
+      </when>
+      
+      <when test='$eventType = "PIX-106015"'>
+        <!-- <134>Dec 04 2008 20:00:45: %PIX-6-106015: Deny TCP (no connection) from 64.81.25.70/443 to 207.215.153.182/5898 flags FIN ACK on interface outside -->
+        <collectAndSetAttrByRegex src="$_body">
+          <regex><![CDATA[Deny <_proto:gPatProto> \(no connection\) from <srcIpAddr:gPatIpV4Dot>/<srcIpPort:gPatIpPort> to <destIpAddr:gPatIpV4Dot>/<destIpPort:gPatIpPort><:gPatMesgBody>]]></regex>
+        </collectAndSetAttrByRegex>
+	<setEventAttribute attr="eventAction">1</setEventAttribute>
+      </when>
+
+      <when test='$eventType = "PIX-106023"'>
+        <!--
+            Dec 05 2008 13:02:16: %PIX-4-106023: Deny icmp src outside:63.169.172.178 dst wdmz:66.203.99.120 (type 8, code 0) by access-group "outside-in"
+            <134>Nov 28 2007 17:22:18: %PIX-6-106023: Deny udp src inside:192.168.20.31/3530 dst outside:99.129.50.157/123 by access-group "inside_to_outside"[0x2a89d901,0x0]
+        -->
+        <collectAndSetAttrByRegex src="$_body">
+          <regex><![CDATA[Deny <_proto:gPatProto> <_body2:gPatMesgBody>]]></regex>
+        </collectAndSetAttrByRegex>
+
+        <choose>
+          <when test='$_proto = "icmp"'>
+            <collectAndSetAttrByRegex src="$_body2">
+              <regex><![CDATA[src <srcIntfName:patIntfName>:<srcIpAddr:gPatIpV4Dot> dst <destIntfName:patIntfName>:<destIpAddr:gPatIpV4Dot> \(type <icmpType:gPatInt>, code <icmpCode:gPatInt>\)<:gPatMesgBody>]]></regex>
+            </collectAndSetAttrByRegex>
+          </when>
+          <otherwise>
+            <collectAndSetAttrByRegex src="$_body2">
+              <regex><![CDATA[src <srcIntfName:patIntfName>:<srcIpAddr:gPatIpV4Dot>/<srcIpPort:gPatIpPort> dst <destIntfName:patIntfName>:<destIpAddr:gPatIpV4Dot>/<destIpPort:gPatIpPort> <:gPatMesgBody>]]></regex>
+            </collectAndSetAttrByRegex>
+          </otherwise>
+        </choose>
+	<setEventAttribute attr="eventAction">1</setEventAttribute>
+      </when>
+
+      <!-- start here -->
+
+       <when test='$eventType = "PIX-111001"'>
+        <!--
+	    <133>Jul 24 2008 03:14:34: %PIX-5-111001: Begin configuration: SJ-Dev-S-RH-VMW-01 writing to memory
+	    <133>Jul 24 2008 03:14:34: %PIX-5-111001: Begin configuration: 192.168.1.27 writing to memory 
+        -->
+        <collectAndSetAttrByRegex src="$_body">
+          <regex><![CDATA[Begin configuration: <srcIpAddr:gPatIpV4Dot> writing to memory<:gPatMesgBody>]]></regex>
+        </collectAndSetAttrByRegex>
+      </when>
+
+      <when test='$eventType = "PIX-111004"'>
+        <!--
+	   <133>Jul 24 2008 03:14:39: %PIX-5-111004: SJ-Dev-S-RH-VMW-01 end configuration: OK
+	   <133>Jul 24 2008 03:14:39: %PIX-5-111004: 192.168.1.27 end configuration: OK
+	   <133>Jul 24 2008 03:14:39: %PIX-5-111004: 192.168.1.27 end configuration: FAILED 
+	   <133>Jul 24 2008 03:14:39: %PIX-5-111004: console end configuration: FAILED  
+        -->
+	 <switch>       
+	   <case> 
+	     <collectAndSetAttrByRegex src="$_body">
+        	<regex><![CDATA[<srcIpAddr:gPatIpV4Dot> end configuration: <_status:gPatWord><:gPatMesgBody>]]></regex>
+            </collectAndSetAttrByRegex>
+	   </case>
+          <case>
+            <collectAndSetAttrByRegex src="$_body">  
+		<regex><![CDATA[[^ ]+ end configuration: <_status:gPatWord><:gPatMesgBody>]]></regex>
+	     </collectAndSetAttrByRegex>	
+          </case>
+   	 </switch>
+        <choose> 
+	    <when test='$_status = "FAILED"'>
+               <setEventAttribute attr="eventAction">1</setEventAttribute>
+	       <setEventAttribute attr="eventType">combineMsgId($_idCommon,"-",$_idNum ,"-","failure")</setEventAttribute>
+	    </when>
+	    <when test='$_status = "OK"'>
+               <setEventAttribute attr="eventAction">0</setEventAttribute>
+	       <setEventAttribute attr="eventType">combineMsgId($_idCommon,"-",$_idNum ,"-","success")</setEventAttribute>
+	    </when>
+	 </choose>
+      </when>
+ 
+       <when test='$eventType = "PIX-111005"'>
+        <!--
+	   <133>Jul 24 2008 03:14:32: %PIX-5-111005: SJ-Dev-S-RH-VMW-01 end configuration: OK
+	   <133>Jul 24 2008 03:14:32: %PIX-5-111005: 192.168.1.27 end configuration: OK 
+        -->
+        <collectAndSetAttrByRegex src="$_body">
+          <regex><![CDATA[<srcIpAddr:gPatIpV4Dot> end configuration: OK<:gPatMesgBody>]]></regex>
+        </collectAndSetAttrByRegex>
+      </when>
+
+      <when test='$eventType = "PIX-111007"'>
+        <!--
+	    <133>Jul 24 2008 03:14:07: %PIX-5-111007: Begin configuration: SJ-Dev-S-RH-VMW-01 reading from terminal
+	    <133>Jul 24 2008 03:14:07: %PIX-5-111007: Begin configuration: 192.168.1.27 reading from terminal 
+        -->
+        <collectAndSetAttrByRegex src="$_body">
+          <regex><![CDATA[Begin configuration: <srcIpAddr:gPatIpV4Dot> reading from terminal<:gPatMesgBody>]]></regex>
+        </collectAndSetAttrByRegex>
+      </when>
+
+      <when test='$eventType = "PIX-111008"'>
+        <!--
+	    <133>Jul 24 2008 03:14:07: %PIX-5-111008: User 'enable_15' executed the 'configure terminal' command.
+        -->
+        <collectAndSetAttrByRegex src="$_body">
+          <regex><![CDATA[User '<user:patStrSingleQuoted>' executed the '<command:patStrSingleQuoted>' command<:gPatMesgBody>]]></regex>
+        </collectAndSetAttrByRegex>
+      </when>
+
+      <when test='$eventType = "PIX-315011"'>
+        <!--
+	   <134>Jul 24 2008 03:19:07: %PIX-6-315011: SSH session from SJ-Dev-S-RH-VMW-01 on interface inside for user "pix" terminated normally
+	   <134>Jul 24 2008 03:19:07: %PIX-6-315011: SSH session from 192.168.1.1 on interface inside for user "pix" terminated normally
+        -->
+        <collectAndSetAttrByRegex src="$_body">
+          <regex><![CDATA[SSH session from <srcIpAddr:gPatIpV4Dot> on interface <srcIntfName:patIntfName> for user "<user:patStrDoubleQuoted>" terminated normally<:gPatMesgBody>]]></regex>
+        </collectAndSetAttrByRegex>
+	<setEventAttribute attr="destIpPort">22</setEventAttribute>
+	<setEventAttribute attr="ipProto">6</setEventAttribute>
+      </when>
+
+      <when test='$eventType = "PIX-113004"'>
+        <!--
+	   <134>Jul 24 2008 03:23:37: %PIX-6-113004: AAA user authentication Successful : server =  192.168.0.40 : user = automationUser
+        -->
+        <collectAndSetAttrByRegex src="$_body">
+          <regex><![CDATA[AAA user authentication Successful : server =  <:gPatIpV4Dot>: user = <user:gPatStr><:gPatMesgBody>]]></regex>
+        </collectAndSetAttrByRegex>
+      </when>
+
+      <when test='$eventType = "PIX-113005"'>
+        <!--
+	   <134>Jul 24 2008 03:29:15: %PIX-6-113005: AAA user authentication Rejected : reason = AAA failure : server = 192.168.0.40 : user = automationUser
+        -->
+        <collectAndSetAttrByRegex src="$_body">
+          <regex><![CDATA[AAA user authentication Rejected : reason = <:patStrEndColon>: server = <:gPatIpV4Dot> : user = <user:gPatStr><:gPatMesgBody>]]></regex>
+        </collectAndSetAttrByRegex>
+	<setEventAttribute attr="eventAction">1</setEventAttribute>
+      </when>
+
+      <when test='$eventType = "PIX-113008"'>
+        <!--
+	   <134>Jul 24 2008 03:23:37: %PIX-6-113008: AAA transaction status ACCEPT : user = automationUser
+        -->
+        <collectAndSetAttrByRegex src="$_body">
+          <regex><![CDATA[AAA transaction status ACCEPT : user = <user:gPatStr><:gPatMesgBody>]]></regex>
+        </collectAndSetAttrByRegex>
+      </when>
+
+      <when test='$eventType = "PIX-611101"'>
+        <!--
+	   <134>Jul 24 2008 03:23:37: %PIX-6-611101: User authentication succeeded: Uname: automationUser
+        -->
+        <collectAndSetAttrByRegex src="$_body">
+          <regex><![CDATA[User authentication succeeded: Uname: <user:gPatStr><:gPatMesgBody>]]></regex>
+        </collectAndSetAttrByRegex>
+      </when>
+
+       <when test='$eventType = "PIX-611102"'>
+        <!--
+	   <134>Jul 24 2008 03:29:15: %PIX-6-611102: User authentication failed: Uname: automationUser
+        -->
+        <collectAndSetAttrByRegex src="$_body">
+          <regex><![CDATA[User authentication failed: Uname: <user:gPatStr><:gPatMesgBody>]]></regex>
+        </collectAndSetAttrByRegex>
+	<setEventAttribute attr="eventAction">1</setEventAttribute>
+      </when>
+
+      <when test='$eventType = "PIX-605004"'>
+        <!--
+	   <134>Jul 24 2008 03:29:15: %PIX-6-605004: Login denied from SJ-Dev-S-RH-VMW-01/44206 to inside:192.168.19.1/telnet for user "automationUser"
+	   <134>Jul 24 2008 03:29:15: %PIX-6-605004: Login denied from 192.168.1.46/44206 to inside:192.168.19.1/telnet for user "automationUser" 
+	   <134>Jul 24 2008 03:29:15: %PIX-6-605004: Login denied from 192.168.1.46/44206 to inside:192.168.19.1/23 for user "automationUser"   
+        -->
+        <collectAndSetAttrByRegex src="$_body">
+          <regex><![CDATA[Login denied from <srcIpAddr:gPatIpV4Dot>/<srcIpPort:gPatIpPort> to <srcIntfName:patIntfName>:<destIpAddr:gPatIpV4Dot>/<_dport:gPatStr> for user "<user:patStrDoubleQuoted>"<:gPatMesgBody>]]></regex>
+        </collectAndSetAttrByRegex>
+	<setEventAttribute attr="eventAction">1</setEventAttribute>
+      </when>
+ 
+       <when test='$eventType = "PIX-605005"'>
+        <!--
+	   <134>Jul 24 2008 03:19:06: %PIX-6-605005: Login permitted from SJ-Dev-S-RH-VMW-01/44190 to inside:192.168.19.1/ssh for user "pix"
+	   <134>Jul 24 2008 03:19:06: %PIX-6-605005: Login permitted from 192.16.8.70/44190 to inside:192.168.19.1/ssh for user "pix"
+        -->
+        <collectAndSetAttrByRegex src="$_body">
+          <regex><![CDATA[Login permitted from <srcIpAddr:gPatIpV4Dot>/<srcIpPort:gPatIpPort> to <srcIntfName:patIntfName>:<destIpAddr:gPatIpV4Dot>/<destIpPort:gPatIpPort> for user "<user:patStrDoubleQuoted>"<:gPatMesgBody>]]></regex>
+        </collectAndSetAttrByRegex>
+
+      </when>
+
+
+      <when test='$eventType = "PIX-502103"'>
+        <!--
+	   <133>Jul 24 2008 03:23:37: %PIX-5-502103: User priv level changed: Uname: enable_15 From: 1 To: 15
+        -->
+        <collectAndSetAttrByRegex src="$_body">
+          <regex><![CDATA[User priv level changed: Uname: <user:gPatStr> From: <:gPatInt> To: <:gPatInt><:gPatMesgBody>]]></regex>
+        </collectAndSetAttrByRegex>
+      </when>
+
+      <when test='$eventType = "PIX-106001"'>
+        <!-- <134>Dec 04 2008 20:00:45: PIX|PIX-2-106001: Inbound TCP connection denied from IP_address/port to IP_address/port flags tcp_flags on interface interface_name-->
+        <collectAndSetAttrByRegex src="$_body">
+          <regex><![CDATA[Inbound <_proto:gPatProto> connection denied from <srcIpAddr:gPatIpV4Dot>/<_sport:gPatStr> to <destIpAddr:gPatIpV4Dot>/<_dport:gPatStr> <:gPatStr> <:gPatStr>\s+on interface <srcIntfName:gPatMesgBody>]]></regex>
+        </collectAndSetAttrByRegex>
+	<setEventAttribute attr="eventAction">1</setEventAttribute>
+      </when>
+
+      <when test='$eventType = "PIX-106002"'>
+        <!-- <134>Dec 04 2008 20:00:45: PIX|PIX-2-106002: protocol Connection denied by outbound list acl_ID src inside_address dest outside_address -->
+        <collectAndSetAttrByRegex src="$_body">
+          <regex><![CDATA[<_proto:gPatProto> Connection denied by <_direction:gPatStr> list <:gPatStr> src <srcIpAddr:gPatIpV4Dot> dest <destIpAddr:gPatIpV4Dot><:gPatMesgBody>]]></regex>
+        </collectAndSetAttrByRegex>
+	<setEventAttribute attr="eventAction">1</setEventAttribute>
+      </when>
+
+      <when test='$eventType = "PIX-106006"'>
+        <!-- <134>Dec 05 2008 13:02:16: %PIX-2-106006: Deny inbound UDP from 20.20.20.20/9996 to 10.10.10.10/8080 on interface outside. -->
+        <collectAndSetAttrByRegex src="$_body">
+          <regex><![CDATA[Deny <_direction:gPatStr> <_proto:gPatProto> from <srcIpAddr:gPatIpV4Dot>/<_sport:gPatStr> to <destIpAddr:gPatIpV4Dot>/<_dport:gPatStr> <:gPatMesgBody>]]></regex>
+        </collectAndSetAttrByRegex>
+	<setEventAttribute attr="eventAction">1</setEventAttribute>
+      </when>
+
+      <when test='$eventType = "PIX-106007"'>
+        <!-- <134>Dec 04 2008 20:00:45: PIX|PIX-2-106007: Deny inbound UDP from outside_address/outside_port to inside_address/inside_port due to DNS {Response|Query} -->
+        <collectAndSetAttrByRegex src="$_body">
+          <regex><![CDATA[Deny <_direction:gPatStr> <_proto:gPatProto> from <srcIpAddr:gPatIpV4Dot>/<_sport:gPatStr> to <destIpAddr:gPatIpV4Dot>/<_dport:gPatStr> due to DNS <:gPatMesgBody>]]></regex>
+        </collectAndSetAttrByRegex>
+	<setEventAttribute attr="eventAction">1</setEventAttribute>
+      </when>
+
+      <when test='$eventType = "PIX-106010"'>
+        <!-- <134>Dec 04 2008 20:00:45: PIX|PIX-3-106010: Deny inbound protocol src interface_name:dest_address/dest_port dst interface_name:source_address/source_port -->
+        <collectAndSetAttrByRegex src="$_body">
+          <regex><![CDATA[Deny <_direction:gPatStr> <_proto:gPatProto> <srcIntfName:patStrEndColon>:<srcIpAddr:gPatIpV4Dot>/<_sport:gPatStr> <destIntfName:patStrEndColon>:<destIpAddr:gPatIpV4Dot>/<_dport:gPatMesgBody>]]></regex>
+        </collectAndSetAttrByRegex>
+	<setEventAttribute attr="eventAction">1</setEventAttribute>
+      </when>
+
+      <when test='$eventType = "PIX-106012"'>
+        <!-- <134>Dec 04 2008 20:00:45: PIX|PIX-6-106012: Deny IP from IP_address to IP_address, IP options hex. -->
+        <collectAndSetAttrByRegex src="$_body">
+          <regex><![CDATA[Deny IP from <srcIpAddr:gPatIpV4Dot> to <destIpAddr:gPatIpV4Dot>,<:gPatMesgBody>]]></regex>
+        </collectAndSetAttrByRegex>
+	<setEventAttribute attr="eventAction">1</setEventAttribute>
+      </when>
+      
+      <when test='$eventType = "PIX-106013"'>
+        <!-- <134>Dec 04 2008 20:00:45: PIX|PIX-2-106013: Dropping echo request from IP_address to PAT address IP_address -->
+        <collectAndSetAttrByRegex src="$_body">
+          <regex><![CDATA[Dropping echo request from <srcIpAddr:gPatIpV4Dot> to PAT address <destIpAddr:gPatIpV4Dot><:gPatMesgBody>]]></regex>
+        </collectAndSetAttrByRegex>
+	<setEventAttribute attr="eventAction">1</setEventAttribute>
+	<setEventAttribute attr="ipProto">1</setEventAttribute>
+	<setEventAttribute attr="icmpType">8</setEventAttribute>
+      </when>
+
+      <when test='$eventType = "PIX-106014"'>
+        <!-- <134>Dec 04 2008 20:00:45: PIX|PIX-3-106014: Deny inbound icmp src interface_name: IP_address dst interface_name: IP_address (type dec, code dec) -->
+        <collectAndSetAttrByRegex src="$_body">
+          <regex><![CDATA[Deny inbound icmp src <srcIntfName:patStrEndColon>:\s*<srcIpAddr:gPatIpV4Dot> dst <destIntfName:patStrEndColon>:\s*<destIpAddr:gPatIpV4Dot> \(type <icmpType:gPatInt>, code <icmpCode:gPatInt>\)]]></regex>        </collectAndSetAttrByRegex>
+	<setEventAttribute attr="eventAction">1</setEventAttribute>
+	<setEventAttribute attr="ipProto">1</setEventAttribute>
+	<setEventAttribute attr="icmpType">8</setEventAttribute>
+      </when>
+
+      <when test='$eventType = "PIX-106016"'>
+        <!-- <134>Dec 04 2008 20:00:45: PIX|PIX-2-106016: Deny IP spoof from (IP_address) to IP_address on interface interface_name.-->
+        <collectAndSetAttrByRegex src="$_body">
+          <regex><![CDATA[Deny IP spoof from \(<srcIpAddr:gPatIpV4Dot>\) to <destIpAddr:gPatIpV4Dot> on interface <srcIntfName:patStrEndDot>\.]]></regex>
+        </collectAndSetAttrByRegex>
+	<setEventAttribute attr="eventAction">1</setEventAttribute>
+      </when>
+
+      <when test='$eventType = "PIX-106017"'>
+        <!-- <134>Dec 04 2008 20:00:45: PIX|PIX-2-106017: Deny IP due to Land Attack from IP_address to IP_address-->
+        <collectAndSetAttrByRegex src="$_body">
+          <regex><![CDATA[Deny IP due to Land Attack from <srcIpAddr:gPatIpV4Dot> to <destIpAddr:gPatIpV4Dot><:gPatMesgBody>]]></regex>
+        </collectAndSetAttrByRegex>
+	<setEventAttribute attr="eventAction">1</setEventAttribute>
+      </when>
+
+      <when test='$eventType = "PIX-106018"'>
+        <!-- <134>Dec 05 2008 13:02:16: %PIX-2-106018: ICMP packet type echo denied by outbound list myAcl src 10.10.10.10 dest 20.20.20.20 -->
+        <collectAndSetAttrByRegex src="$_body">
+          <regex><![CDATA[ICMP packet type echo denied by outbound list myAcl src <srcIpAddr:gPatIpV4Dot> dest <destIpAddr:gPatIpV4Dot>]]></regex>
+        </collectAndSetAttrByRegex>
+	<setEventAttribute attr="eventAction">1</setEventAttribute>
+      </when>
+
+      <when test='$eventType = "PIX-106020"'>
+        <!-- <134>Dec 04 2008 20:00:45: PIX|PIX-2-106020: Deny IP teardrop fragment (size = number, offset = number) from IP_address to IP_address-->
+        <collectAndSetAttrByRegex src="$_body">
+          <regex><![CDATA[Deny IP teardrop fragment <:gPatMesgBody> from <srcIpAddr:gPatIpV4Dot> to <destIpAddr:gPatIpV4Dot><:gPatMesgBody>]]></regex>
+        </collectAndSetAttrByRegex>
+	<setEventAttribute attr="eventAction">1</setEventAttribute>
+      </when>
+
+      <when test='$eventType = "PIX-106021"'>
+        <!-- <134>Dec 04 2008 20:00:45: PIX|PIX-2-106021: Deny protocol reverse path check from source_address to dest_address on interface interface_name -->
+        <collectAndSetAttrByRegex src="$_body">
+          <regex><![CDATA[Deny <_proto:gPatProto> reverse path check from <srcIpAddr:gPatIpV4Dot> to <destIpAddr:gPatIpV4Dot> on interface <srcIntfName:gPatMesgBody>]]></regex>
+        </collectAndSetAttrByRegex>
+	<setEventAttribute attr="eventAction">1</setEventAttribute>
+      </when>
+
+      <when test='$eventType = "PIX-106022"'>
+        <!-- <134>Dec 04 2008 20:00:45: PIX|PIX-2-106022: Deny protocol connection spoof from source_address to dest_address on interface interface_name -->
+        <collectAndSetAttrByRegex src="$_body">
+          <regex><![CDATA[Deny <_proto:gPatProto> connection spoof from <srcIpAddr:gPatIpV4Dot> to <destIpAddr:gPatIpV4Dot> on interface <srcIntfName:gPatMesgBody>]]></regex>
+        </collectAndSetAttrByRegex>
+	<setEventAttribute attr="eventAction">1</setEventAttribute>
+      </when>
+
+      <when test='$eventType = "PIX-106100"'>
+        <!-- <134>Dec 04 2008 20:00:45: access-list acl_ID {permitted | denied | est-allowed} protocol interface_name/source_address(source_port) -> interface_name/dest_address(dest_port) hit-cnt number ({first hit | number-second interval}) -->
+        <collectAndSetAttrByRegex src="$_body">
+          <regex><![CDATA[access-list <policyName:gPatStr> <_action:gPatStr> <_proto:gPatProto> <srcIntfName:patStrEndSlash>/<srcIpAddr:gPatIpV4Dot>\(<_sport:patStrRightParen>\) -> <destIntfName:patStrEndSlash>/<destIpAddr:gPatIpV4Dot>\(<_dport:patStrRightParen>\) <:gPatMesgBody>]]></regex>
+        </collectAndSetAttrByRegex>
+	<choose>
+	  <when test='$_action = "permitted"'>
+	    <setEventAttribute attr="eventAction">0</setEventAttribute>
+	    <setEventAttribute attr="eventType">combineMsgId($_idCommon,"-",$_idNum ,"-","permit")</setEventAttribute>
+	  </when>
+	  <when test='$_action = "denied"'>
+	    <setEventAttribute attr="eventAction">1</setEventAttribute>
+	    <setEventAttribute attr="eventType">combineMsgId($_idCommon,"-",$_idNum ,"-","deny")</setEventAttribute>
+	  </when>
+	  <when test='$_action = "est-allowed"'>
+	    <setEventAttribute attr="eventAction">0</setEventAttribute>
+	    <setEventAttribute attr="eventType">combineMsgId($_idCommon,"-",$_idNum ,"-","permit")</setEventAttribute>
+	  </when>
+	</choose>
+      </when>
+
+      <when test='$eventType = "PIX-107001"'>
+        <!-- %PIX|PIX-1-107001: RIP auth failed from IP_address: version=number, type=string, mode=string, sequence=number on interface interface_name  -->
+        <collectAndSetAttrByRegex src="$_body">
+          <regex><![CDATA[RIP auth failed from <srcIpAddr:gPatIpV4Dot>: <:gPatStr> <:gPatStr> <:gPatStr> <:gPatStr> on interface <srcIntfName:gPatMesgBody>]]></regex>
+        </collectAndSetAttrByRegex>
+	<setEventAttribute attr="eventAction">1</setEventAttribute>
+      </when>
+  
+       <when test='$eventType = "PIX-108003"'>
+        <!-- PIX|PIX-2-108003: Terminating ESMTP/SMTP connection; malicious pattern detected in the mail address from source_interface:source_address/source_port to dest_interface:dest_address/dset_port. Data:string   -->
+        <collectAndSetAttrByRegex src="$_body">
+          <regex><![CDATA[Terminating ESMTP/SMTP connection; malicious pattern detected in the mail address from <srcIntfName:patStrEndColon>:<srcIpAddr:gPatIpV4Dot>/<_sport:gPatStr> to <destIntfName:patStrEndColon>:<destIpAddr:gPatIpV4Dot>/<_dport:patStrEndColon>\.<:gPatMesgBody>]]></regex>
+        </collectAndSetAttrByRegex>
+	<setEventAttribute attr="eventAction">1</setEventAttribute>
+      </when>
+
+      <when test='$eventType = "PIX-108002"'>
+        <!-- %PIX|PIX-2-108002: SMTP replaced string: out source_address in inside_address data: string   -->
+        <collectAndSetAttrByRegex src="$_body">
+          <regex><![CDATA[SMTP replaced string: "<:patStrDoubleQuoted>" <srcIpAddr:gPatIpV4Dot> in <srcIpAddr:gPatIpV4Dot><:gPatMesgBody>]]></regex>
+        </collectAndSetAttrByRegex>
+      </when> 
+     	
+      <when test='$eventType = "PIX-108006"'>
+        <!-- %PIX|PIX-7-108006: Detected ESMTP size violation from src_ifc:sip|sport to dest_ifc:dip|dport;declared size is: decl_size, actual size is act_size.   -->
+        <collectAndSetAttrByRegex src="$_body">
+          <regex><![CDATA[Detected ESMTP size violation from <srcIntfName:patStrEndColon>:<srcIpAddr:gPatIpV4Dot>|<_sport:gPatStr> to <destIntfName:patStrEndColon>:<destIpAddr:gPatIpV4Dot>|<_dport:patStrEndSemiColon>;<:gPatMesgBody>]]></regex>
+        </collectAndSetAttrByRegex>
+	<setEventAttribute attr="eventAction">1</setEventAttribute>
+      </when>
+
+      <when test='$eventType = "PIX-109002"'>
+        <!-- %PIX|PIX-6-109002: Auth from inside_address/inside_port to outside_address/outside_port failed (server IP_address failed) on interface interface_name.   -->
+        <collectAndSetAttrByRegex src="$_body">
+          <regex><![CDATA[Auth from <srcIpAddr:gPatIpV4Dot>/<_sport:gPatStr> to <destIpAddr:gPatIpV4Dot>/<_dport:gPatStr> failed \(<:patStrRightParen>\) on interface <srcIntfName:patStrEndDot>\.]]></regex>
+        </collectAndSetAttrByRegex>
+	<setEventAttribute attr="eventAction">1</setEventAttribute>
+      </when>
+
+      <when test='$eventType = "PIX-109003"'>
+        <!-- %PIX|PIX-6-109003: Auth from inside_address to outside_address/outside_port failed (all servers failed) on interface interface_name.   -->
+        <collectAndSetAttrByRegex src="$_body">
+          <regex><![CDATA[Auth from <srcIpAddr:gPatIpV4Dot> to <destIpAddr:gPatIpV4Dot>/<_dport:gPatStr> failed .* on interface <srcIntfName:patStrEndDot>\.]]></regex>
+        </collectAndSetAttrByRegex>
+	<setEventAttribute attr="eventAction">1</setEventAttribute>
+      </when>
+
+      <when test='$eventType = "PIX-109005"'>
+        <!-- %PIX|PIX-6-109005: Authentication succeeded for user user from inside_address/inside_port to outside_address/outside_port on interface interface_name.  -->
+        <collectAndSetAttrByRegex src="$_body">
+          <regex><![CDATA[Authentication succeeded for user <user:gPatStr> from <srcIpAddr:gPatIpV4Dot>/<_sport:gPatStr> to <destIpAddr:gPatIpV4Dot>/<_dport:gPatStr> on interface <srcIntfName:patStrEndDot>\.]]></regex>
+        </collectAndSetAttrByRegex>
+      </when>
+
+      <when test='$eventType = "PIX-109006"'>
+        <!-- %PIX|PIX-6-109006: Authentication failed for user user from inside_address/inside_port to outside_address/outside_port on interface interface_name.  -->
+        <collectAndSetAttrByRegex src="$_body">
+          <regex><![CDATA[Authentication failed for user <user:gPatStr> from <srcIpAddr:gPatIpV4Dot>/<_sport:gPatStr> to <destIpAddr:gPatIpV4Dot>/<_dport:gPatStr> on interface <srcIntfName:patStrEndDot>\.]]></regex>
+        </collectAndSetAttrByRegex>
+	<setEventAttribute attr="eventAction">1</setEventAttribute>
+      </when>
+
+      <when test='$eventType = "PIX-109010"'>
+        <!-- %PIX|PIX-3-109010: Auth from inside_address/inside_port to outside_address/outside_port failed (too many pending auths) on interface interface_name.    -->
+        <collectAndSetAttrByRegex src="$_body">
+          <regex><![CDATA[Auth from <srcIpAddr:gPatIpV4Dot>/<_sport:gPatStr> to <destIpAddr:gPatIpV4Dot>/<_dport:gPatStr> failed \(too many pending auths\) on interface <srcIntfName:patStrEndColon>\.]]></regex>
+        </collectAndSetAttrByRegex>
+	<setEventAttribute attr="eventAction">1</setEventAttribute>
+      </when>
+
+    </choose>
+    
+    <when test='exist _proto'>
+      <setEventAttribute attr="ipProto">convertStrToIntIpProto($_proto)</setEventAttribute>
+    </when>
+
+    
+    <when test='exist _dport'>
+      <setEventAttribute attr="destIpPort">convertStrToIntIpPort($_dport)</setEventAttribute>
+    </when>
+
+    <when test='exist _sport'>
+      <setEventAttribute attr="srcIpPort">convertStrToIntIpPort($_sport)</setEventAttribute>
+    </when>
+
+    <!--
+    <when test='exist _saddr'>
+      <setEventAttribute attr="srcIpAddr">convertHostNameToIp($_saddr)</setEventAttribute>
+    </when>
+
+    <when test='exist _daddr'>
+      <setEventAttribute attr="destIpAddr">convertHostNameToIp($_daddr)</setEventAttribute>
+    </when>
+
+    -->
+  </parsingInstructions>
+  
+</eventParser>

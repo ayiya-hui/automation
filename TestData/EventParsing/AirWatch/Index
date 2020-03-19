@@ -1,0 +1,17 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+AirWatch-MDM-AdminRoleModified,AirWatch_1,AirWatch,$localhost,,syslog
+AirWatch-MDM-AdminUserLoggedIn,AirWatch_2,AirWatch,$localhost,,syslog
+AirWatch-MDM-ApplicationAdded,AirWatch_3,AirWatch,$localhost,,syslog
+AirWatch-MDM-ApplicationDownload,AirWatch_4,AirWatch,$localhost,,syslog
+AirWatch-MDM-ApplicationModified,AirWatch_5,AirWatch,$localhost,,syslog
+AirWatch-MDM-DeviceAttributeDeviceMCCModified,AirWatch_6,AirWatch,$localhost,,syslog
+AirWatch-MDM-DeviceQueryRequested,AirWatch_7,AirWatch,$localhost,,syslog
+AirWatch-MDM-DeviceRemoteControlSessionEnded,AirWatch_8,AirWatch,$localhost,,syslog
+AirWatch-MDM-DeviceRemoteControlSessionStarted,AirWatch_9,AirWatch,$localhost,,syslog
+AirWatch-MDM-EnrollmentComplete,AirWatch_10,AirWatch,$localhost,,syslog
+AirWatch-MDM-EnterpriseIntegrationAccConnectionFailed,AirWatch_11,AirWatch,$localhost,,syslog
+AirWatch-MDM-InstallProfileRequested,AirWatch_12,AirWatch,$localhost,,syslog
+AirWatch-MDM-ProfileModified,AirWatch_13,AirWatch,$localhost,,syslog
+AirWatch-MDM-UserModified,AirWatch_14,AirWatch,$localhost,,syslog
+AirWatch-MDM-Generic,AirWatch_15,AirWatch,$localhost,,syslog

@@ -1,0 +1,468 @@
+
+<Reports> 
+  <Report id="PH_Report_UNIX_1"  group="PH_SYS_REPORT_UnixServer">
+    <Name>Logon: Top Unix Servers, Users By Successful Logon Count</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report ranks the UNIX servers and their users by successful logon count </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,eventType,srcIpAddr,user,COUNT ( *)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT ( * )</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_UNIX_1" name="Filter_UNIX_1">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_DEVICE_UNIX_SERVER)  AND  eventType IN ( Group@PH_SYS_EVENT_HostLogonSuccess)</SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr,eventType,srcIpAddr,user</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+	   
+  <Report id="PH_Report_UNIX_2"  group="PH_SYS_REPORT_UnixServer">
+    <Name>Logon: Top Unix Servers, Users By Failed Logon Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report ranks the UNIX servers and their users by failed logon count </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,eventType,srcIpAddr,user,COUNT ( *)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT ( * )</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_UNIX_2" name="Filter_UNIX_2">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_DEVICE_UNIX_SERVER)  AND  eventType IN ( Group@PH_SYS_EVENT_HostLogonFailure)</SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr,eventType,srcIpAddr,user</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>	   
+
+  <Report id="PH_Report_UNIX_3"  group="PH_SYS_REPORT_UnixServer">
+    <Name>Logon: Successful Unix Server Logon Details </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report details successful unix server logons with all parsed fields and raw logs </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,srcIpAddr,user,phRecvTime,rawEventMsg</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_UNIX_3" name="Filter_UNIX_3">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_DEVICE_UNIX_SERVER)  AND  eventType IN ( Group@PH_SYS_EVENT_HostLogonSuccess)</SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>	   
+
+  <Report id="PH_Report_UNIX_4" group="PH_SYS_REPORT_UnixServer" >
+    <Name>Logon: Failed Unix Server Logon Details With Raw Logs </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report details failed unix server logons with all parsed fields and raw logs </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,srcIpAddr,user,phRecvTime,rawEventMsg</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_UNIX_4" name="Filter_UNIX_4">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_DEVICE_UNIX_SERVER)  AND  eventType IN ( Group@PH_SYS_EVENT_HostLogonFailure)</SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+	   
+  <Report id="PH_Report_UNIX_5" group="PH_SYS_REPORT_UnixServer">
+    <Name> Logon: Top Unix Servers, Users By Succesful Privilege Escalation Count</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report ranks the UNIX servers and their users by successful privilege escalations (su) count </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,eventType,user,targetUser,COUNT (*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT ( * )</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_UNIX_5" name="Filter_UNIX_5">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_DEVICE_UNIX_SERVER)  AND  eventType IN ( Group@PH_SYS_EVENT_HostPrivLogonSuccess)</SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr,eventType,user,targetUser</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+	   
+  <Report id="PH_Report_UNIX_6" group="PH_SYS_REPORT_UnixServer">
+    <Name>Logon: Top Unix Servers, Users By Failed Privilege Escalation Count  </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report ranks the UNIX servers and their users by failed privilege escalations (su) count </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,eventType,user,targetUser,COUNT ( *)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT ( * )</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_UNIX_6" name="Filter_UNIX_6">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_DEVICE_UNIX_SERVER)  AND  eventType IN ( Group@PH_SYS_EVENT_HostPrivLogonFailure)</SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr,eventType,user,targetUser </GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+	   
+  <Report id="PH_Report_UNIX_7" group="PH_SYS_REPORT_UnixServer">
+    <Name>Activity: Top Unix Servers, Users By Successful Privileged Command Execution Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report ranks the UNIX servers and their users by successful privilege command escalations (sudo) count </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,user,targetUser,command,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*)</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_UNIX_7" name="Filter_UNIX_7">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_DEVICE_UNIX_SERVER)  AND  eventType IN (Group@PH_SYS_EVENT_HostPrivExecSuccess)</SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr,user,targetUser,command</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+	   
+  <Report id="PH_Report_UNIX_8" group="PH_SYS_REPORT_UnixServer">
+    <Name> Activity: Top Unix Servers, Users By Failed Privileged Command Execution Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report ranks the UNIX servers and their users by failed privilege command escalations (sudo) count </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,user,targetUser,command,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*)</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_UNIX_8" name="Filter_UNIX_8">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_UNIX_SERVER)  AND  eventType IN (Group@PH_SYS_EVENT_HostPrivExecFailure)</SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr,user,targetUser,command</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_UNIX_9"  group="PH_SYS_REPORT_UnixServer">
+    <Name>Activity: Unix Server Privileged Command Execution</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report details privilege command execuations (sudo) at a Unix server  </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,eventType,reptDevIpAddr,srcIpAddr,user,targetUser,command,rawEventMsg</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_UNIX_9" name="Filter_UNIX_9">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_DEVICE_UNIX_SERVER)  AND  (eventType IN (Group@PH_SYS_EVENT_HostPrivExecSuccess) OR eventType IN (Group@PH_SYS_EVENT_HostPrivExecFailure)) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+   <Report id="PH_Report_UNIX_10" group="PH_SYS_REPORT_UnixServer">
+    <Name>Logon: Unix Server Privileged Logon</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report details UNIX server privileged logon (su) details with all parsed parameters and raw logs </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,eventType,reptDevIpAddr,srcIpAddr,user,targetUser,rawEventMsg</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_UNIX_10" name="Filter_UNIX_10">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_DEVICE_UNIX_SERVER)  AND  (eventType IN (Group@PH_SYS_EVENT_HostPrivLogonSuccess) OR eventType IN (Group@PH_SYS_EVENT_HostPrivLogonFailure)) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+	 
+  <Report id="PH_Report_UNIX_11" group="PH_SYS_REPORT_UnixServer">
+    <Name>Logon: Unix Server Logons </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report details both successful and failed unix server logons with all parsed fields and raw logs </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr,srcIpAddr,user,rawEventMsg</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_UNIX_11" name="Filter_UNIX_11">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_DEVICE_UNIX_SERVER)  AND  eventType IN ( Group@PH_SYS_EVENT_HostLogonFailure, Group@PH_SYS_EVENT_HostLogonSuccess)</SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_UNIX_12" group="PH_SYS_REPORT_UnixServer,PH_SYS_REPORT_Change">
+    <Name>Change: Unix Users Added To Group</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks user additions to groups </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr,srcIpAddr,user,targetUser,targetUserGrp,rawEventMsg</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_UNIX_12" name="Filter_UNIX_12">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_DEVICE_UNIX_SERVER)  AND  eventType = "Generic_Unix_User_Add")</SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_UNIX_13"  group="PH_SYS_REPORT_UnixServer,PH_SYS_REPORT_Change">
+    <Name>Change: Unix User Password Changed</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks password changes</Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr,srcIpAddr,user,targetUser,rawEventMsg</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_UNIX_13" name="Filter_UNIX_13">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_UNIX_SERVER)  AND  eventType IN (Group@PH_SYS_EVENT_PasswordChange)</SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <!--New  -->
+  <Report id="PH_Report_UNIX_14" group="PH_SYS_REPORT_UnixServer">
+     <Name>Performance: Top Unix Devices By CPU Util </Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description> Ranks the devices by average cpu utilization</Description> 
+     <SelectClause numEntries="All">
+         <AttrList> hostName,AVG(cpuUtil),AVG(sysCpuUtil),AVG(userCpuUtil) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(cpuUtil) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600" >
+       <SubPattern displayName="Filter_PERF_MON_2" name="Filter_PERF_MON_2">
+         <SingleEvtConstr> eventType = "PH_DEV_MON_SYS_CPU_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_UNIX_SERVER) </SingleEvtConstr>
+         <GroupByAttr> hostName</GroupByAttr> 
+       </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_UNIX_15" group="PH_SYS_REPORT_UnixServer">
+     <Name>Performance: Top Unix Devices By Memory Util and Swap Rate</Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description> Ranks the unix devices by average memory utilization over a window and provides details of memory utilization components such as buffered and cached memory</Description> 
+     <SelectClause numEntries="All">
+         <AttrList> hostName,memName, AVG(memUtil), AVG(freeMemKB), AVG(bufMemKB), AVG(cacheMemKB), AVG(swapInRate), AVG(swapOutRate),AVG(swapRate) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(memUtil) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_PERF_MON_3" name="Filter_PERF_MON_3">
+           <SingleEvtConstr> eventType = "PH_DEV_MON_SYS_MEM_UTIL" AND hostIpAddr IN ( Group@PH_SYS_DEVICE_UNIX_SERVER)</SingleEvtConstr>
+           <GroupByAttr> hostName,memName </GroupByAttr>  
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_UNIX_16" group="PH_SYS_REPORT_UnixServer">
+     <Name>Performance: Top Unix Devices By Disk Space Util </Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description>Ranks the devices by average system disk utilization over a window </Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName,diskName,AVG(diskUtil)</AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(diskUtil) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_PERF_MON_6" name="Filter_PERF_MON_6">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_SYS_DISK_UTIL" AND hostIpAddr IN ( Group@PH_SYS_DEVICE_UNIX_SERVER) </SingleEvtConstr> 
+           <GroupByAttr>hostName,diskName </GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_UNIX_17" group="PH_SYS_REPORT_UnixServer">
+    <Name>Performance: Top Unix Servers By Disk I/O Activity </Name> 
+    <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description>Ranks the unix servers by average disk I/O utilization over a window </Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName,hostIpAddr,diskName,AVG(diskIOUtil), AVG(devDiskRWLatency),AVG(appDiskRWLatency),AVG(diskReadReqPerSec), AVG(diskWriteReqPerSec), AVG(diskReadKBytesPerSec), AVG(diskWriteKBytesPerSec)</AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(diskIOUtil) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_PERF_MON_6" name="Filter_PERF_MON_6">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_DISK_IO_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_UNIX_SERVER) </SingleEvtConstr> 
+           <GroupByAttr>hostName,hostIpAddr,diskName</GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_UNIX_18" group="PH_SYS_REPORT_UnixServer">
+     <Name>Availability: Unix Server Ping Monitor Statistics</Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description>Tracks the PING response times and packet loss for the monitored devices </Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostIpAddr, AVG(avgDurationMSec),MIN(minDurationMSec),MAX(maxDurationMSec),AVG(pktLossPct) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(avgDurationMSec) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600" >
+       <SubPattern displayName="Filter_PERF_MON_17" name="Filter_PERF_MON_17">
+         <SingleEvtConstr> eventType = "PH_DEV_MON_PING_STAT" AND hostIpAddr IN (Group@PH_SYS_DEVICE_UNIX_SERVER)</SingleEvtConstr>
+	 <GroupByAttr>hostIpAddr </GroupByAttr> 
+       </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+  
+  <Report id="PH_Report_UNIX_19" group="PH_SYS_REPORT_UnixServer">
+    <Name>Availability: Unix Server Down/Restart </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks server down and restart events</Description>
+    <SelectClause numEntries="All">
+      <AttrList>phRecvTime,reptDevIpAddr,eventType,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_OVERALL_AVAIL_2" name="Filter_OVERALL_AVAIL_2">
+        <SingleEvtConstr>eventType IN (Group@PH_SYS_EVENT_SystemShutdown,Group@PH_SYS_EVENT_SystemRestart) AND (reptDevIpAddr IN (Group@PH_SYS_DEVICE_UNIX_SERVER) OR hostIpAddr IN (Group@PH_SYS_DEVICE_UNIX_SERVER)) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_UNIX_20" group="PH_SYS_REPORT_UnixServer">
+    <Name>Availability: Unix Application Down/Restart </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks application stop and start events</Description>
+    <SelectClause numEntries="All">
+      <AttrList>phRecvTime,reptDevIpAddr,hostName,hostIpAddr,eventType,appName,swProcName,swParam,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_OVERALL_AVAIL_3" name="Filter_OVERALL_AVAIL_3">
+        <SingleEvtConstr>eventType IN (Group@PH_SYS_EVENT_AppShutdown,Group@PH_SYS_EVENT_AppRestart) AND (reptDevIpAddr IN (Group@PH_SYS_DEVICE_UNIX_SERVER) OR hostIpAddr IN (Group@PH_SYS_DEVICE_UNIX_SERVER)) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_UNIX_21" group="PH_SYS_REPORT_UnixServer">
+    <Name>Availability: Unix Server Interface Down/Up</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks server network interface down and up events</Description>
+    <SelectClause numEntries="All">
+      <AttrList>phRecvTime,reptDevIpAddr,eventType,intfName,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_OVERALL_AVAIL_7" name="Filter_OVERALL_AVAIL_7">
+        <SingleEvtConstr>eventType IN (Group@PH_SYS_EVENT_NetIntfShutdown,Group@PH_SYS_EVENT_NetIntfRestart) AND (reptDevIpAddr IN (Group@PH_SYS_DEVICE_UNIX_SERVER) OR hostIpAddr IN (Group@PH_SYS_DEVICE_UNIX_SERVER)) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_UNIX_22" group="PH_SYS_REPORT_UnixServer">
+     <Name>Availability: Top Unix Servers by Uptime</Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description> Ranks the unix servers by system uptime </Description> 
+     <SelectClause numEntries="All">
+         <AttrList> hostName,LAST(sysUpTime) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> LAST(sysUpTime) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Minute" val="3"/></ReportInterval>
+     <PatternClause window="3600" >
+         <SubPattern displayName="Filter_PERF_MON_1" name="Filter_PERF_MON_1">
+           <SingleEvtConstr> eventType = "PH_DEV_MON_SYS_UPTIME" AND hostIpAddr IN (Group@PH_SYS_DEVICE_UNIX_SERVER)</SingleEvtConstr>
+           <GroupByAttr> hostName </GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+   <Report id="PH_Report_UNIX_23" group="PH_SYS_REPORT_UnixServer">
+     <Name>Availability: Top Unix Applications By synthetic transaction monitoring Response Time</Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description>Ranks the services by average synthetic transaction monitoring probe response times. </Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName,hostIpAddr,appPort,endUserMonitorName,AVG(appResponseTimeMSec),MAX(appResponseTimeMSec),MIN(appResponseTimeMSec) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(appResponseTimeMSec) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_AVAIL" name="Filter_AVAIL">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_EUM_SUCCESS" AND hostIpAddr IN (Group@PH_SYS_DEVICE_UNIX_SERVER) </SingleEvtConstr>
+           <GroupByAttr>hostName,hostIpAddr,appPort,endUserMonitorName </GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_UNIX_25" group="PH_SYS_REPORT_UnixServer">
+    <Name>Availability: Unix Server TCP/UDP Ports Up/Down</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks TCP/UDP ports that went up or down in a server</Description>
+    <SelectClause numEntries="All">
+      <AttrList>phRecvTime,hostIpAddr,hostName,eventType,ipProto,ipPort</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> hostName,eventType</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_PORT_UPDOWN" name="Filter_PORT_UPDOWN">
+        <SingleEvtConstr>eventType IN ("PH_DEV_MON_PORT_OPEN","PH_DEV_MON_PORT_CLOSE") AND (hostIpAddr IN (Group@PH_SYS_DEVICE_UNIX_SERVER))</SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr> 
+  </Report>
+
+   <Report id="PH_Report_UNIX_26" group="PH_SYS_REPORT_UnixServer">
+    <Name>Availability: Unix Server Processes Started/Stopped</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks started/stopped server processes </Description>
+    <SelectClause numEntries="All">
+      <AttrList>phRecvTime,hostIpAddr,hostName,eventType,appName,appGroupName</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> hostName,eventType</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_SRVC_UPDOWN" name="Filter_SRVC_UPDOWN">
+        <SingleEvtConstr>eventType IN ("PH_DEV_MON_PROC_START","PH_DEV_MON_PROC_STOP") AND (hostIpAddr IN (Group@PH_SYS_DEVICE_UNIX_SERVER))</SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr> 
+  </Report>
+
+   <Report id="PH_Report_UNIX_27" group="PH_SYS_REPORT_UnixServer,PH_SYS_REPORT_Change">
+    <Name>Change: Audited Linux file changes</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks user modifications to Linux files and directories. Both the content and attribute modifications are captured. For actions on directories, the affected files in the directories are also captured.</Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr,user,osObjType,osObjAction,osObjName,targetOsObjType,targetOsObjName</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_UNIX_12" name="Filter_UNIX_12">
+           <SingleEvtConstr>eventType = "LINUX_FILE_CHANGE")</SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+</Reports>

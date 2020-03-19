@@ -1,0 +1,11 @@
+eventType,name,module,reptDevIpAddr,key,method
+ZenithArca-E602,ZenithARCA_1,ZenithARCA,80.80.80.80,,syslog
+ZenithArca-I9,ZenithARCA_2,ZenithARCA,80.80.80.80,,syslog
+ZenithArca-E309,ZenithARCA_3,ZenithARCA,80.80.80.80,,syslog
+ZenithArca-W345,ZenithARCA_4,ZenithARCA,80.80.80.80,,syslog
+ZenithArca-E510,ZenithARCA_5,ZenithARCA,80.80.80.80,,syslog
+ZenithArca-E305,ZenithARCA_6,ZenithARCA,80.80.80.80,,syslog
+ZenithArca-I302,ZenithARCA_7,ZenithARCA,80.80.80.80,,syslog
+ZenithArca-E301,ZenithARCA_8,ZenithARCA,80.80.80.80,,syslog
+ZenithArca-E502,ZenithARCA_9,ZenithARCA,80.80.80.80,,syslog
+ZenithArca-E331,ZenithARCA_10,ZenithARCA,80.80.80.80,,syslog

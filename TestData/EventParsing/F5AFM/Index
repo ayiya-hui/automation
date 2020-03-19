@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+F5-AFM-Permit,F5AFM_1,F5AFM,$localhost,,syslog

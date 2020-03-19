@@ -1,0 +1,30 @@
+[reptDevIpAddr(key)]
+91.91.91.1
+[eventMsg]
+<38>Nov 12 08:21:56 ETC-AAA AAA: login failed due to Limit reached or exceeded: User-Name = rkelly limit 1 now 2: User-Name=rkelly, NAS=10.1.30.89, Port-ID=3/0/0/8.213, Port=0, MAC=00-23-6A-01-8F-35, Acct-Session-Id=${NOT-ENABLED}, Requested-IP-Address=${None}, IP-Address=
+[params]
+rawEventMsg=any
+rawEventMsg=any
+deviceTime=any
+parserName=AlcatelAAAParser
+eventType=Alcatel_AAA_Login_Failed
+phCustId=$sender
+reptModel=8950 AAA
+eventId=any
+nepDevPort=3/0/0/8.213
+eventParsedOk=1
+eventSeverity=1
+eventName=AAA authentication failed
+phEventCategory=0 (External)
+customer=Super
+srcMACAddr=00-23-6A-01-8F-35
+srcIpPort=0
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=91.91.91.1
+user=rkelly
+reptDevName=any
+count=1
+phRecvTime=any
+reptDevIpAddr=91.91.91.1
+reptVendor=Alcatel-Lucent

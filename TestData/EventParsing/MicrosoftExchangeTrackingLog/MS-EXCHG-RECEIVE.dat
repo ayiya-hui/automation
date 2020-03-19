@@ -1,0 +1,31 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<13>Oct  9 12:19:05 ExchServer.ABC.net ExchTrackLog              0              2012-02-14T00:00:00.549Z,192.168.83.39,fooyaoi.futerranihqru.local,192.168.99.85,gxrwjpjcaq.watfhmgbe.local,wuiatqrwsp,ojcopqkjvr,SMTP,RECEIVE,7879570,<rekhchmvlg@fooyaoi.futerranihqru.local>,rtuadjkvqd@cuixorbwvbomnei.local,,3577,1,,,"Redacted subject ycvghuemld",pziiykypyu@kkgggrsoshxacrt.local,pziiykypyu@kkgggrsoshxacrt.local,pkiryfjmjo,192.168.219.64,,,,lgtvbnqnxx
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=192.168.99.85
+eventAction=0 (Permit)
+eventName=Message received and committed to database
+reptVendor=Microsoft
+phEventCategory=0 (External)
+eventType=MS-EXCHG-RECEIVE
+reptDevIpAddr=any
+reptModel=Exchange Server
+destName=gxrwjpjcaq.watfhmgbe.local
+mailReturnPath=pziiykypyu@kkgggrsoshxacrt.local
+exchMsgId=<rekhchmvlg@fooyaoi.futerranihqru.local>
+receiverMailAddr=rtuadjkvqd@cuixorbwvbomnei.local
+senderMailAddr=pziiykypyu@kkgggrsoshxacrt.local
+mailSubject="Redacted subject ycvghuemld"
+srcName=fooyaoi.futerranihqru.local
+srcIpAddr=192.168.83.39
+exchMsgDirection=192.168.219.64

@@ -1,0 +1,36 @@
+[reptDevIpAddr(key)]
+192.168.51.65
+[eventMsg]
+<36>Dec 10 05:36:43 192.168.51.65 IPS5500-75EC: id=060001 pt=TLN-KA prot=TCP cip=50.58.90.98 cprt=6660 sip=69.7.164.214 sprt=80 atck=tln-102050 disp=monitor ckt=2 src=intern msg="PROTO: HTTP Message Contains Multiple Instances Of A Specified Header"
+[params]
+destGeoOrg=any
+parserName=CoreroIPSParser
+eventType=Corero-SmartWall-HTTP_Header-instanceUnallowed
+destGeoState=any
+destIpAddr=69.7.164.214
+srcName=any
+destIpPort=80 (HTTP)
+srcIpAddr=50.58.90.98
+destGeoCountry=any
+usrMsg=PROTO: HTTP Message Contains Multiple Instances Of A Specified Header
+reptModel=SmartWall
+eventId=any
+eventParsedOk=1
+eventSeverity=4
+eventName=any
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+destName=any
+count=1
+srcIpPort=6660
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=192.168.51.65
+rawEventMsg=any
+ipProto=6 (TCP)
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=192.168.51.65
+reptVendor=Corero
+destGeoCity=any

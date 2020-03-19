@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+33.33.33.35
+[eventMsg]
+<11>Feb  7 05:40:46 $reporter CisACS_13_AdminAudit  1pmorwph 1 0 AAA Server=ADS-PRI,admin-username=admin,browser-ip=192.168.20.35,text-message=Administration session started
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+srcIpAddr=192.168.20.35
+eventAction=0 (Permit)
+eventName=Admin authentication successful
+reptVendor=Cisco
+eventType=CisACS_13_AdminAudit_Success
+user=admin
+phEventCategory=0 (External)
+reptDevIpAddr=$reporter
+relayDevName=ADS-PRI
+reptDevName=ADS-PRI
+reptModel=Cisco Secure ACS

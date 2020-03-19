@@ -1,0 +1,14 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+MobXE-Policy-Client-Update,MobilitySystemAdmin_1,MobilitySystemAdmin,1.1.1.1,,syslog
+MobXE-Proxy-Sess-End,MobilitySystemAdmin_2,MobilitySystemAdmin,1.1.1.1,,syslog
+MobXE-Security-Client-Auth-Failure,MobilitySystemAdmin_3,MobilitySystemAdmin,1.1.1.1,,syslog
+MobXE-Security-Dev-Auth-Success,MobilitySystemAdmin_4,MobilitySystemAdmin,1.1.1.1,,syslog
+MobXE-IMP-Client-Addr-Change,MobilitySystemAdmin_5,MobilitySystemAdmin,1.1.1.1,,syslog
+MobXE-Policy-Client-Uptodate,MobilitySystemAdmin_6,MobilitySystemAdmin,1.1.1.1,,syslog
+MobXE-Proxy-Sess-Start,MobilitySystemAdmin_7,MobilitySystemAdmin,1.1.1.1,,syslog
+MobXE-Security-Client-Auth-Success,MobilitySystemAdmin_8,MobilitySystemAdmin,1.1.1.1,,syslog
+MobXE-Security-User-Auth-Success,MobilitySystemAdmin_9,MobilitySystemAdmin,1.1.1.1,,syslog
+MobXE-IMP-Client-Conn-Status,MobilitySystemAdmin_10,MobilitySystemAdmin,1.1.1.1,,syslog
+MobXE-Proxy-Proto-Mismatch,MobilitySystemAdmin_11,MobilitySystemAdmin,1.1.1.1,,syslog
+MobXE-Proxy-Version-Mismatch,MobilitySystemAdmin_12,MobilitySystemAdmin,1.1.1.1,,syslog

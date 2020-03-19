@@ -1,0 +1,87 @@
+<eventParser name="McAfeeIPSSyslogParser">
+
+  <deviceType>
+    <Vendor>McAfee</Vendor>
+    <Model>Intrushield</Model>
+    <Version>ANY</Version>
+  </deviceType>
+
+  <eventFormatRecognizer><![CDATA[<:gPatMon>\s+<:gPatDay>\s+<:gPatTime>\s+SyslogAlertForwarder:]]></eventFormatRecognizer>
+  
+  <testEvents>
+      <testEvent><![CDATA[Mar 24 16:23:18 SyslogAlertForwarder: AttackName:Invalid Packets detected,AttackTime:2009-03-24 16:23:17 EDT,AttackSeverity:Low,SourceIp:127.255.106.236,SourcePort:N/A,DestinationIp:127.255.106.252,DistinationPort:N/A,AlertId:5260607647261334188,AlertType:Signature,AttackId:0x00009300,AttackSignature:N/A,AttackConfidence:N/A,AdminDomain:ASC,SensorName:ASCDCIPS01,Interface:1A-1B,Category:Exploit,SubCategory:protocol-violation,Direction:Outbound,ResultStatus:May be successful,DetectionMechanism:signature,ApplicationProtocol:N/A,NetworkProtocol:N/A,Relevance:N/A,HostIsolationEndTime:N/A]]></testEvent>
+  </testEvents>
+  
+  
+  <parsingInstructions>
+    
+    <collectFieldsByRegex src="$_rawmsg">
+      <regex><![CDATA[<_mon:gPatMon>\s+<_day:gPatDay>\s+<_time:gPatTime>\s+SyslogAlertForwarder:<_body:gPatMesgBody>]]></regex>
+    </collectFieldsByRegex>
+    
+    <setEventAttribute attr="deviceTime">toDateTime($_mon, $_day, $_time)</setEventAttribute>
+    <setEventAttribute attr="eventAction">0</setEventAttribute>
+    
+    <!-- message specific parsing
+             Mar 24 16:23:18 SyslogAlertForwarder: AttackName:Invalid Packets detected,AttackTime:2009-03-24 16:23:17 EDT,AttackSeverity:Low,SourceIp:127.255.106.236,SourcePort:N/A,DestinationIp:127.255.106.252,DistinationPort:N/A,AlertId:5260607647261334188,AlertType:Signature,AttackId:0x00009300,AttackSignature:N/A,AttackConfidence:N/A,AdminDomain:ASC,SensorName:ASCDCIPS01,Interface:1A-1B,Category:Exploit,SubCategory:protocol-violation,Direction:Outbound,ResultStatus:May be successful,DetectionMechanism:signature,ApplicationProtocol:N/A,NetworkProtocol:N/A,Relevance:N/A,HostIsolationEndTime:N/A           
+               -->  
+    <collectAndSetAttrByKeyValuePair src="$_body" sep=",">
+      <attrKeyMap attr="_eventName" key="AttackName:"/>
+      <attrKeyMap attr="_devTime" key="AttackTime:"/>
+      <attrKeyMap attr="_eventSeverity" key="AttackSeverity:"/>
+      <attrKeyMap attr="srcIpAddr" key="SourceIp:"/>
+      <attrKeyMap attr="srcIpPort" key="SourcePort:"/>
+      <attrKeyMap attr="destIpAddr" key="DestinationIp:"/>
+      <attrKeyMap attr="destIpPort" key="DestinationPort:"/>
+      <attrKeyMap attr="eventType" key="AttackSignature:"/>
+      <attrKeyMap attr="_attackConfidence" key="AttackConfidence:"/>
+      <attrKeyMap attr="domain" key="AdminDomain:"/>
+      <attrKeyMap attr="reptDevName" key="SensorName:"/>
+      <attrKeyMap attr="srcIntfName" key="Interface:"/>
+      <attrKeyMap attr="_eventCat" key="Category:"/>
+      <attrKeyMap attr="_eventSubCat" key="SubCategory:"/>
+      <attrKeyMap attr="_direction" key="Direction:"/>
+      <attrKeyMap attr="_resultStat" key="ResultStatus:"/>
+      <attrKeyMap attr="_detectMechanism" key="DetectionMechanism:"/>
+      <attrKeyMap attr="_appProto" key="ApplicationProtocol:"/>
+      <attrKeyMap attr="_netProto" key="NetworkProtocol:"/>
+      <attrKeyMap attr="_relevance" key="Relevance:"/>
+      <attrKeyMap attr="_hostIsolEnd" key="HostIsolationEndTime:"/>
+    </collectAndSetAttrByKeyValuePair>	
+    
+    <collectFieldsByRegex src="$_devTime">
+      <regex><![CDATA[<_year:gPatYear>-<_mon:gPatMon>-<_day:gPatDay>\s+<_time:gPatTime>.*]]></regex>
+    </collectFieldsByRegex>
+    <setEventAttribute attr="deviceTime">toDateTime($_mon, $_day, $_time)</setEventAttribute>
+    <setEventAttribute attr="eventType">combineMsgId("McAfee-Intrushield-",$_eventName)</setEventAttribute>
+
+    <choose>
+      <when test="matches($_eventSeverity, '^Low')">
+	<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+      </when>
+      <when test="matches($_eventSeverity, '^Medium')">
+	<when test="matches($_attackConfidence, '^Low')">
+	  <setEventAttribute attr="eventSeverity">5</setEventAttribute>
+	</when>
+	<when test="matches($_attackConfidence, '^Medium')">
+	  <setEventAttribute attr="eventSeverity">6</setEventAttribute>
+	</when>
+        <when test="matches($_attackConfidence, '^High')">
+	  <setEventAttribute attr="eventSeverity">7</setEventAttribute>
+	</when>
+      </when>
+      <when test="matches($_eventSeverity, '^High')">
+        <when test="matches($_attackConfidence, '^Low')">
+	  <setEventAttribute attr="eventSeverity">7</setEventAttribute>
+	</when>
+	<when test="matches($_attackConfidence, '^Medium')">
+	  <setEventAttribute attr="eventSeverity">8</setEventAttribute>
+	</when>
+        <when test="matches($_attackConfidence, '^High')">
+	  <setEventAttribute attr="eventSeverity">9</setEventAttribute>
+	</when>
+      </when>
+    </choose>
+    
+  </parsingInstructions>
+</eventParser>

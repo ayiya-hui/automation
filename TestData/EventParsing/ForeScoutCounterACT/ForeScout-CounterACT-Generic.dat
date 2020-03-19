@@ -1,0 +1,94 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+Feb 20 12:44:56 abc Scout[1087]: Log: Login success by Admin@10.0.0.11. Details: User Admin logged in from 10.0.0.11
+[params]
+deviceTime=any
+parserName=ForeScoutCounterACTParser
+eventType=ForeScout-CounterACT-Generic
+hostName=abc
+reptGeoState=any
+reptModel=CounterACT
+eventId=any
+eventParsedOk=1
+eventSeverity=3
+eventName=Generic ForeScout event
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+reptDevName=any
+customer=Super
+reptGeoCity=any
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=ForeScout
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+Feb 20 16:13:30 abc CounterACT[9593]: Scan event. src: 2.2.2.2.
+[params]
+deviceTime=any
+parserName=ForeScoutCounterACTParser
+eventType=ForeScout-CounterACT-Generic
+hostName=abc
+srcIpAddr=255.255.255.255
+reptGeoState=any
+reptModel=CounterACT
+eventId=any
+eventParsedOk=1
+eventSeverity=3
+eventName=Generic ForeScout event
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+reptDevName=any
+customer=Super
+reptGeoCity=any
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=ForeScout
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+Feb 20 16:13:40 abc CounterACT[9593]: Port bite. src: 2.2.2.2. dst: 3.3.3.3. d_port: 24.
+[params]
+deviceTime=any
+destGeoOrg=any
+parserName=ForeScoutCounterACTParser
+eventType=ForeScout-CounterACT-Generic
+destGeoState=any
+hostName=abc
+destIpAddr=3.3.3.3
+srcName=HOST-2.2.2.2
+reptGeoState=any
+srcIpAddr=2.2.2.2
+reptModel=CounterACT
+eventId=any
+eventParsedOk=1
+eventSeverity=3
+eventName=Generic ForeScout event
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+destName=any
+count=1
+eventSeverityCat=LOW
+collectorId=any
+destGeoCountry=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+destIpPort=24
+reptDevName=any
+customer=Super
+reptGeoCity=any
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=ForeScout
+destGeoCity=any

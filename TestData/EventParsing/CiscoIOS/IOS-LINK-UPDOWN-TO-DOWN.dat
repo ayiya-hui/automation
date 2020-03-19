@@ -1,0 +1,53 @@
+[reptDevIpAddr(key)]
+192.168.19.11 (intfName:FastEthernet0/10)
+[eventMsg]
+<187>Mar 29 16:13:32 192.168.19.11 46: Mar 29 23:13:31.807: %LINK-3-UPDOWN: Interface FastEthernet0/10, changed state to down
+[params]
+rawEventMsg=any
+deviceTime=any
+isHostIntfCritical=No
+eventType=IOS-LINK-UPDOWN-TO-DOWN
+phCustId=$sender
+intfName=FastEthernet0/10
+reptModel=IOS
+eventId=any
+eventParsedOk=1
+eventSeverity=5
+hostIpAddr=192.168.19.11
+eventName=Interface went down
+phEventCategory=0 (External)
+eventSeverityCat=MEDIUM
+collectorId=any
+count=1
+phRecvTime=any
+reptDevIpAddr=192.168.19.11
+eventAction=0 (Permit)
+reptVendor=Cisco
+[reptDevIpAddr(key)]
+$localhost (intfName:FastEthernet0/13)
+[eventMsg]
+<179>Feb 3 13:02:27 railgun 12118: Feb 3 13:02:26 EST: %LINK-3-UPDOWN: Interface FastEthernet0/13, change state to down
+[params]
+deviceTime=any
+parserName=CiscoIOSParser
+totFlows=1
+eventType=IOS-LINK-UPDOWN-TO-DOWN
+hostName=railgun
+intfName=FastEthernet0/13
+reptModel=IOS
+eventId=any
+eventParsedOk=1
+eventSeverity=5
+eventName=Interface went down
+isHostIntfCritical=No
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=MEDIUM
+collectorId=any
+relayDevIpAddr=$localhost
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Cisco

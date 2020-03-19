@@ -1,0 +1,24 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<164>Jun 08 2010 14:14:14: %ASA-4-716007: Group <Tech_Policy> User <Chris.durkin> IP <82.132.139.15> WebVPN Unable to create session.
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=5
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=MEDIUM
+srcIpAddr=82.132.139.15
+eventAction=1 (Deny)
+eventName=WebVPN Unable to create session.
+reptVendor=Cisco
+eventType=ASA-716007
+user=Chris.durkin
+phEventCategory=0 (External)
+reptDevIpAddr=$reporter
+userGrp=Tech_Policy
+reptModel=ASA

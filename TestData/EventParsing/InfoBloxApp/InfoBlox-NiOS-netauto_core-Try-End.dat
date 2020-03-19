@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+10.210.252.42
+[eventMsg]
+<13>Apr 28 14:21:53 10.210.252.42 netauto_core[15189]: netautoctl: Attempting to terminate 'check-and-restart-discovery', pid 15208
+[params]
+deviceTime=any
+parserName=InfoBloxAppParser
+eventType=InfoBlox-NiOS-netauto_core-Try-End
+threadId=15208
+reptModel=NiOS
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Netauto message
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=10.210.252.42
+rawEventMsg=any
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=10.210.252.42
+threadName=check-and-restart-discovery
+reptVendor=InfoBlox

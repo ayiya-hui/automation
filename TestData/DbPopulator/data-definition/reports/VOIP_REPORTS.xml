@@ -1,0 +1,254 @@
+
+<Reports>
+  <Report id="PH_Report_VOIP_1" group="PH_SYS_REPORT_AppPerf,PH_SYS_REPORT_VOIP">
+     <Name>Top VoIP Call Paths By MOS and ICPIF</Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description>This is a call quality report that ranks VoIP call paths by mean opinion score (MOS) in an ascending order, that is, call paths with worst call qualities are presented first. </Description> 
+     <SelectClause numEntries="All">
+         <AttrList>srcName,destName,AVG(mosScore),AVG(icpifScore)</AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(mosScore) ASC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600" >
+         <SubPattern displayName="Filter" name="Filter">
+           <SingleEvtConstr> eventType = "PH_DEV_MON_IPSLA_VOIP_MET" </SingleEvtConstr>
+           <GroupByAttr>srcName,destName</GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+      <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_VOIP_5" group="PH_SYS_REPORT_AppPerf,PH_SYS_REPORT_VOIP">
+     <Name>Top VoIP Call Paths By MOS With Call Statistics</Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description>This is a call quality report that ranks VoIP call paths by mean opinion score (MOS) and presents other call statistics </Description> 
+     <SelectClause numEntries="All">
+         <AttrList>srcName,destName,AVG(mosScore),AVG(icpifScore),AVG(avgDurationMSec),AVG(pktLost),AVG(avgJitterSDMs) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(mosScore) ASC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600" >
+         <SubPattern displayName="Filter" name="Filter">
+           <SingleEvtConstr> eventType = "PH_DEV_MON_IPSLA_VOIP_MET" </SingleEvtConstr>
+           <GroupByAttr>srcName,destName</GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+      <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_VOIP_3" group="PH_SYS_REPORT_AppPerf,PH_SYS_REPORT_VOIP">
+    <Name>Top VoIP Call Paths By Packet Loss (Detailed)</Name> 
+    <CustomerScope groupByEachCustomer="true">
+      <Include all="true" /> 
+      <Exclude /> 
+    </CustomerScope>
+    <Description>This is a call quality report that ranks VoIP call paths by packet loss. Directional packet loss statistics are also presented. </Description> 
+    <SelectClause numEntries="All">
+      <AttrList>srcName,destName,AVG(pktLost),AVG(pktLostSD),AVG(pktLostDS), AVG(pktMIA), AVG(pktLate), AVG(pktOutSeq)</AttrList> 
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(pktLost) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600" >
+      <SubPattern displayName="Filter" name="Filter">
+        <SingleEvtConstr> eventType = "PH_DEV_MON_IPSLA_VOIP_MET" </SingleEvtConstr>
+        <GroupByAttr>srcName,destName</GroupByAttr> 
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_VOIP_4" group="PH_SYS_REPORT_AppPerf,PH_SYS_REPORT_VOIP">
+    <Name>Top VoIP Call Paths By Latency and Jitter</Name> 
+    <CustomerScope groupByEachCustomer="true">
+      <Include all="true" /> 
+      <Exclude /> 
+    </CustomerScope>
+    <Description>This is a call quality report that ranks VoIP call paths by latency and jitter</Description> 
+    <SelectClause numEntries="All">
+      <AttrList>srcName,destName,AVG(avgDurationMSec),MIN(minDurationMSec),MAX(maxDurationMSec),AVG(avgJitterMs), MIN(minJitterMs), MAX(maxJitterMs) </AttrList> 
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(avgDurationMSec) DESC, AVG(avgJitterMs) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600" >
+      <SubPattern displayName="Filter" name="Filter">
+        <SingleEvtConstr> eventType = "PH_DEV_MON_IPSLA_VOIP_MET" </SingleEvtConstr>
+        <GroupByAttr>srcName,destName</GroupByAttr> 
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_VOIP_6" group="PH_SYS_REPORT_AppPerf,PH_SYS_REPORT_VOIP">
+    <Name>Top VoIP Call Paths By Directional Jitter</Name> 
+    <CustomerScope groupByEachCustomer="true">
+      <Include all="true" /> 
+      <Exclude /> 
+    </CustomerScope>
+    <Description>This is a call quality report that ranks VoIP call paths by jitter and provides directional jitter statistics </Description> 
+    <SelectClause numEntries="All">
+      <AttrList>srcName,destName,AVG(avgJitterSDMs), MIN(minJitterSDMs), MAX(maxJitterSDMs),AVG(avgJitterDSMs), MIN(minJitterDSMs), MAX(maxJitterDSMs) </AttrList> 
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(avgJitterSDMs) DESC, AVG(avgJitterDSMs) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600" >
+      <SubPattern displayName="Filter" name="Filter">
+        <SingleEvtConstr> eventType = "PH_DEV_MON_IPSLA_VOIP_MET" </SingleEvtConstr>
+        <GroupByAttr>srcName,destName</GroupByAttr> 
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_VOIP_7" group="PH_SYS_REPORT_AppPerf,PH_SYS_REPORT_VOIP">
+    <Name>VoIP Call Report</Name> 
+    <CustomerScope groupByEachCustomer="true">
+      <Include all="true" /> 
+      <Exclude /> 
+    </CustomerScope>
+    <Description>This is a call detail report</Description> 
+    <SelectClause numEntries="All">
+      <AttrList>dateTimeConnect,dateTimeDisconnect,callDuration,srcIpAddr,srcName,callingPartyNumber,destIpAddr,destName,originalCalledPartyNumber,finalCalledPartyNumber</AttrList> 
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600" >
+      <SubPattern displayName="Filter" name="Filter">
+        <SingleEvtConstr> eventType = "Cisco-CM-CDR" </SingleEvtConstr> 
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+  
+  <Report id="PH_Report_VOIP_8" group="PH_SYS_REPORT_AppPerf,PH_SYS_REPORT_VOIP">
+    <Name>VoIP Call Volume Trend</Name> 
+    <CustomerScope groupByEachCustomer="true">
+      <Include all="true" /> 
+      <Exclude /> 
+    </CustomerScope>
+    <Description>Trends the call volume</Description> 
+    <SelectClause numEntries="All">
+      <AttrList>COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> COUNT(*) DESC </AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600" >
+      <SubPattern displayName="Filter" name="Filter">
+        <SingleEvtConstr> eventType = "Cisco-CM-CDR" </SingleEvtConstr> 
+	 <GroupByAttr>reptDevIpAddr</GroupByAttr> 
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_VOIP_9" group="PH_SYS_REPORT_AppPerf,PH_SYS_REPORT_VOIP">
+    <Name>Top VoIP Callers </Name> 
+    <CustomerScope groupByEachCustomer="true">
+      <Include all="true" /> 
+      <Exclude /> 
+    </CustomerScope>
+    <Description>Ranks the VoIP callers by call count and duration</Description> 
+    <SelectClause numEntries="All">
+      <AttrList>srcIpAddr,srcName,callingPartyNumber,COUNT(*), AVG(durationMSec) </AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> COUNT(*) DESC, AVG(durationMSec) DESC </AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600" >
+      <SubPattern displayName="Filter" name="Filter">
+        <SingleEvtConstr> eventType = "Cisco-CM-CDR" </SingleEvtConstr> 
+	 <GroupByAttr>srcIpAddr,srcName,callingPartyNumber </GroupByAttr> 
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_VOIP_10" group="PH_SYS_REPORT_AppPerf,PH_SYS_REPORT_VOIP">
+    <Name>Top VoIP Called Destinations </Name> 
+    <CustomerScope groupByEachCustomer="true">
+      <Include all="true" /> 
+      <Exclude /> 
+    </CustomerScope>
+    <Description>Ranks the VoIP destinations by call count and duration</Description> 
+    <SelectClause numEntries="All">
+      <AttrList>destIpAddr,destName,originalCalledPartyNumber,COUNT(*), AVG(durationMSec) </AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> COUNT(*) DESC, AVG(durationMSec) DESC </AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600" >
+      <SubPattern displayName="Filter" name="Filter">
+        <SingleEvtConstr> eventType = "Cisco-CM-CDR" </SingleEvtConstr> 
+	 <GroupByAttr>destIpAddr,destName,originalCalledPartyNumber</GroupByAttr> 
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_VOIP_11" group="PH_SYS_REPORT_AppPerf,PH_SYS_REPORT_VOIP">
+    <Name>Top VoIP Call Paths By Packet Loss </Name> 
+    <CustomerScope groupByEachCustomer="true">
+      <Include all="true" /> 
+      <Exclude /> 
+    </CustomerScope>
+    <Description>This is a call quality report that ranks VoIP call paths by packet loss.</Description> 
+    <SelectClause numEntries="All">
+      <AttrList>srcName,destName,AVG(pktLost)</AttrList> 
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(pktLost) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600" >
+      <SubPattern displayName="Filter" name="Filter">
+        <SingleEvtConstr> eventType = "PH_DEV_MON_IPSLA_VOIP_MET" </SingleEvtConstr>
+        <GroupByAttr>srcName,destName</GroupByAttr> 
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+   <Report id="PH_Report_VOIP_12" group="PH_SYS_REPORT_AppPerf,PH_SYS_REPORT_VOIP">
+    <Name>Top VoIP Call Paths By Average Latency </Name> 
+    <CustomerScope groupByEachCustomer="true">
+      <Include all="true" /> 
+      <Exclude /> 
+    </CustomerScope>
+    <Description>This is a call quality report that ranks VoIP call paths by latency </Description> 
+    <SelectClause numEntries="All">
+      <AttrList>srcName,destName,AVG(avgDurationMSec) </AttrList> 
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(avgDurationMSec) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600" >
+      <SubPattern displayName="Filter" name="Filter">
+        <SingleEvtConstr> eventType = "PH_DEV_MON_IPSLA_VOIP_MET" </SingleEvtConstr>
+        <GroupByAttr>srcName,destName</GroupByAttr> 
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+   <Report id="PH_Report_VOIP_13" group="PH_SYS_REPORT_AppPerf,PH_SYS_REPORT_VOIP">
+    <Name>Top VoIP Call Paths By Average Jitter</Name> 
+    <CustomerScope groupByEachCustomer="true">
+      <Include all="true" /> 
+      <Exclude /> 
+    </CustomerScope>
+    <Description>This is a call quality report that ranks VoIP call paths by average jitter</Description> 
+    <SelectClause numEntries="All">
+      <AttrList>srcName,destName,AVG(avgJitterMs) </AttrList> 
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(avgJitterMs) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600" >
+      <SubPattern displayName="Filter" name="Filter">
+        <SingleEvtConstr> eventType = "PH_DEV_MON_IPSLA_VOIP_MET" </SingleEvtConstr>
+        <GroupByAttr>srcName,destName</GroupByAttr> 
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+</Reports>
+

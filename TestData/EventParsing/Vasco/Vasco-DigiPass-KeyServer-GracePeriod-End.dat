@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+70.70.70.70
+[eventMsg]
+May 16 21:59:52 70.70.70.70 ikeyserver[3575]: {Info}, {Authentication}, {I-011001}, {A DIGIPASS Grace Period has been ended by the use of a One Time Password.}, {0xA4CEDBCA523E6946BD483F8D3455B0D6}, {Source Location:10.1.2.3}, {User ID:user001}, {Domain:company.com}, {Serial No:0000000000}
+[params]
+domain=company.com
+parserName=VascoParser
+eventType=Vasco-DigiPass-KeyServer-GracePeriod-End
+srcIpAddr=10.1.2.3
+reptModel=DigiPass
+eventId=any
+eventParsedOk=1
+eventSeverity=5
+eventName=A DIGIPASS Grace Period has been ended by the use of a One Time Password
+appTransportProto=Syslog
+phEventCategory=0 (External)
+msg=A DIGIPASS Grace Period has been ended by the use of a One Time Password.
+eventRuleTrigger=1
+count=1
+eventSeverityCat=MEDIUM
+collectorId=any
+relayDevIpAddr=70.70.70.70
+user=user001
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=70.70.70.70
+reptVendor=Vasco

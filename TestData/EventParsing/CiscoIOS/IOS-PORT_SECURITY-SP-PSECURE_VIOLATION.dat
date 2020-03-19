@@ -1,0 +1,20 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<186>1391: Aug 16 2010 12:00:01: %PORT_SECURITY-SP-2-PSECURE_VIOLATION: Security violation occurred, caused by MAC address 0012.3f4a.c031 on port FastEthernet1/16
+[params]
+rawEventMsg=any
+eventId=any
+count=1
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=MEDIUM
+eventSeverity=8
+eventType=IOS-PORT_SECURITY-SP-PSECURE_VIOLATION
+phCustId=$sender
+reptDevIpAddr=$localhost
+collectorId=any
+eventName=Security violation occurred on port
+reptVendor=Cisco
+phRecvTime=any
+reptModel=IOS

@@ -1,0 +1,23 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<190>43: Dec 14 23:35:01.463: %DHCPD-4-DECLINE_CONFLICT: DHCP address conflict: client AA.BB.CC.DD.EE.FF declined 12.12.12.12
+[params]
+rawEventMsg=any
+deviceTime=any
+eventType=IOS-DHCPD-DECLINE_CONFLICT
+phCustId=$sender
+reptModel=IOS
+eventId=any
+eventParsedOk=1
+eventSeverity=5
+hostIpAddr=$localhost
+eventName=DHCP address denied due to conflict
+phEventCategory=0 (External)
+eventSeverityCat=MEDIUM
+collectorId=any
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Cisco

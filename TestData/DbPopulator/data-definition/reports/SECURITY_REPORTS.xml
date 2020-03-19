@@ -1,0 +1,142 @@
+
+<Reports>
+  <Report id="PH_Report_Security_1" group="PH_SYS_REPORT_Security_Overall,PH_SYS_REPORT_Freq">
+    <Name>Top Security Events By Severity, Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the security related events by first their severity and then by their count</Description>
+    <SelectClause numEntries="All">
+      <AttrList>eventType,eventSeverity,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>eventSeverity DESC,COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_OVERALL_STATUS" name="Filter_OVERALL_STATUS">
+        <SingleEvtConstr>eventType IN (Group@PH_SYS_EVENT_Security) </SingleEvtConstr>
+        <GroupByAttr>eventType,eventSeverity </GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <inline>true</inline>
+    <active>true</active>
+    <RelevantFilterAttr>bizService</RelevantFilterAttr>
+  </Report>
+  
+  <Report id="PH_Report_Security_2" group="PH_SYS_REPORT_Security_Overall">
+    <Name>Top Security Event Severities By Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the security related event severties by count</Description>
+    <SelectClause numEntries="All">
+      <AttrList>eventSeverityCat,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>eventSeverityCat DESC,COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_OVERALL_STATUS" name="Filter_OVERALL_STATUS">
+        <SingleEvtConstr>eventType IN (Group@PH_SYS_EVENT_Security) </SingleEvtConstr>
+        <GroupByAttr>eventSeverityCat</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <inline>true</inline>
+    <active>true</active>
+    <RelevantFilterAttr>bizService</RelevantFilterAttr>
+  </Report>
+  
+  <Report id="PH_Report_Security_3" group="PH_SYS_REPORT_Security_Overall,PH_SYS_REPORT_Freq">
+    <Name>Top Security Event Categories By Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the security event categories by count</Description>
+    <SelectClause numEntries="All">
+      <AttrList>eventTypeGrp,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_OVERALL_STATUS" name="Filter_OVERALL_STATUS">
+        <SingleEvtConstr>eventType IN (Group@PH_SYS_EVENT_Security) </SingleEvtConstr>
+        <GroupByAttr>eventTypeGrp</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <inline>true</inline>
+    <active>true</active>
+    <RelevantFilterAttr>bizService</RelevantFilterAttr>
+  </Report>
+  
+  <Report id="PH_Report_Security_4" group="PH_SYS_REPORT_Security_Overall,PH_SYS_REPORT_Freq">
+    <Name>Top Audit Event Categories By Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the audit event categories by count. Audit events include logon, change and availability related events.</Description>
+    <SelectClause numEntries="All">
+      <AttrList>eventTypeGrp,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_OVERALL_STATUS" name="Filter_OVERALL_STATUS">
+        <SingleEvtConstr>eventType IN (Group@PH_SYS_EVENT_Change,Group@PH_SYS_EVENT_Logon,Group@PH_SYS_EVENT_LogonFailure,Group@PH_SYS_EVENT_SuspiciousLogon,Group@PH_SYS_EVENT_DeviceStatus) AND eventType NOT IN (Group@PH_SYS_EVENT_OtherDeviceStatus) </SingleEvtConstr>
+        <GroupByAttr>eventTypeGrp</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <inline>true</inline>
+    <active>true</active>
+    <RelevantFilterAttr>bizService</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_Security_5" group="PH_SYS_REPORT_Security_Overall">
+    <Name>Top Security Event Reporting IPs By Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the devices reporting security event by count</Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_OVERALL_STATUS" name="Filter_OVERALL_STATUS">
+        <SingleEvtConstr>eventType IN (Group@PH_SYS_EVENT_Security) </SingleEvtConstr>
+        <GroupByAttr>reptDevIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <inline>true</inline>
+    <active>true</active>
+    <RelevantFilterAttr>bizService</RelevantFilterAttr>
+  </Report>
+
+  <Report group="PH_SYS_REPORT_Security_Overall" id="PH_Report_Security_6">
+    <Name>Incidents: Top Business Services By Security Incidents</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks business services by the count of security related incidents </Description>
+    <SelectClause numEntries="All">
+        <AttrList>bizService,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter" name="Filter">
+           <SingleEvtConstr>phEventCategory = 1  AND bizService != "" AND eventType IN (Group@PH_SYS_EVENT_PH_RULE_SEC) </SingleEvtConstr>
+           <GroupByAttr>bizService</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <inline>true</inline>
+    <active>true</active>
+    <RelevantFilterAttr>bizService</RelevantFilterAttr>
+  </Report>
+
+  <Report group="PH_SYS_REPORT_Security_Overall" id="PH_Report_Security_7">
+    <Name>Incidents: Top Business Service Devices By Security Incidents</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks devices (that belong to business services) by the number of security related incidents </Description>
+    <SelectClause numEntries="All">
+        <AttrList>bizService,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter" name="Filter">
+           <SingleEvtConstr>phEventCategory = 1  AND bizService != "" AND eventType IN (Group@PH_SYS_EVENT_PH_RULE_SEC) </SingleEvtConstr>
+           <GroupByAttr>eventType,srcIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <inline>true</inline>
+    <active>true</active>
+    <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+</Reports>

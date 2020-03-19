@@ -1,0 +1,29 @@
+[eventMsg]
+Mon Nov  1 18:50:19 2010 30.30.50.1 AccelOps-WinLog-WMI [Category]="2" [CategoryString]="Logon/Logoff" [ComputerName]=automator30Dot30Dot50Dot1 [Data]="NULL" [EventCode]="629" [EventIdentifier]="629" [EventType]="5" [Logfile]="Security" [RecordNumber]="78524562" [SourceName]="Security" [TimeGenerated]="20101101183821.000000-420" [TimeWritten]="20101101183821.000000-420" [Type]="Audit Failure" [User]="NT AUTHORITY\SYSTEM" [[Logon Failure]] [Reason]="Account Disabled" [User Name]="PHOENIX_AGENT" [Domain]="PROSPECT-HILLS" [Logon Type]="3" [Logon Process]="Advapi" [Authentication Package]="Negotiate" [Workstation Name]="QA-V-WIN03-ADS" [Caller User Name]="Sha" [Caller Domain]="PROSPECT-HILLS" [Caller Logon ID]="(0x0,0x3E7)" [Caller Process ID]="1868" [Transited Services]="" [Source Network Address]="" [Source Port]=""
+Mon Nov  1 18:52:19 2010 30.30.50.1 AccelOps-WinLog-WMI  [Category]="14336" [CategoryString]="Credential Validation" [ComputerName]="sf1dc03.jha.local" [Data]="NULL" [EventCode]="4776" [EventIdentifier]="4776" [EventType]="4" [Logfile]="Security" [RecordNumber]="184035361" [SourceName]="Microsoft-Windows-Security-Auditing" [TimeGenerated]="20100505222913.353301-000" [TimeWritten]="20100505222913.353301-000" [Type]="Audit Success" [User]="(null)" [Authentication Package]="MICROSOFT_AUTHENTICATION_PACKAGE_V1_0" [Logon Account]="Sha" [Source Workstation]="SF01VMAC"
+
+
+Win-Security-4776-success
+Win-Security-4776-success
+
+Add Incident Reporting Device Status in GUI
+Add the ability to launch Incident dashboard from Incident page
+CEF forwarding
+Crowdstrike Falcon Data Replicator
+Crowdstrike Falcon Streaming API
+Data Obfuscation
+Multi-tenant Collector
+Optimize Rule Worker CPU
+PCAP File Parsed
+SNMP SysObj Id
+Upload Rate Limit
+Windows Agent 3.1
+Sophos Central device support
+Tenable.io Device support
+TruSTAR Device support
+Rapid7 InsightVM device support
+Box Support
+Watchguard Firebox Support
+Windows Defender ATP support
+CloudPassage-Halo Support
+Gitlab device support

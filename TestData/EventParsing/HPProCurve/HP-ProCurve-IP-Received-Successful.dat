@@ -1,0 +1,55 @@
+[reptDevIpAddr(key)]
+172.16.1.100
+[eventMsg]
+<15> Aug 28 22:43:27 172.16.1.100 IP : IP  mIpPktRecv:s=172.16.12.103(vl1) d=172.16.255.255 recv directed bcast
+[params]
+deviceTime=any
+parserName=HPProCurveParser
+eventType=HP-ProCurve-IP-Received-Successful
+destIpAddr=172.16.255.255
+srcIpAddr=172.16.12.103
+reptModel=ProCurve
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=HP-ProCurve-IP-Received-Successful
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=172.16.1.100
+rawEventMsg=any
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=172.16.1.100
+reptVendor=HP
+[reptDevIpAddr(key)]
+172.16.1.100
+[eventMsg]
+<15> Aug 28 22:35:32 172.16.1.100 IP : IP  mIpPktRecv:s=172.16.12.131(vl1) d=172.16.1.100 recv
+[params]
+deviceTime=any
+parserName=HPProCurveParser
+eventType=HP-ProCurve-IP-Received-Successful
+destIpAddr=172.16.1.100
+srcIpAddr=172.16.12.131
+reptModel=ProCurve
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=HP-ProCurve-IP-Received-Successful
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+destName=HOST-172.16.1.100
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=172.16.1.100
+rawEventMsg=any
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=172.16.1.100
+reptVendor=HP

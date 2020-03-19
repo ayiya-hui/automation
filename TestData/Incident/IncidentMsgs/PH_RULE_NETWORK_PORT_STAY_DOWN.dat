@@ -1,0 +1,2 @@
+[eventMsg]
+<174>Jan 23 14:46:11 cluster-wrk phPerfMonitor[22575]: [PH_DEV_MON_PORT_CLOSE]:[eventSeverity]=PHL_INFO,[procName]=phPerfMonitor,[fileName]=phPerfJob.cpp,[lineNumber]=1434,[hostName]=automator10Dot2Dot0Dot1,[hostIpAddr]=10.2.0.1,[serviceName]=kpasswd5,[ipProto]=17,[ipPort]=464,[pollIntv]=176,[phLogDetail]=

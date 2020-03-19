@@ -1,0 +1,43 @@
+[reptDevIpAddr(key)]
+$localhost (srcIpAddr:)
+[eventMsg]
+<133>Jul 24 2008 03:14:39: %PIX-5-111004: SJ-Dev-S-RH-VMW-01 end configuration: FAILED
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=2
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+eventAction=1 (Deny)
+eventName=End configuration: FAILED
+reptVendor=Cisco
+eventType=PIX-111004-failure
+phEventCategory=0 (External)
+reptDevIpAddr=$localhost
+reptModel=PIX
+[reptDevIpAddr(key)]
+$localhost (srcIpAddr:20.20.20.20)
+[eventMsg]
+<133>Jul 24 2008 03:14:39: %PIX-5-111004: 20.20.20.20 end configuration: FAILED
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=2
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+srcIpAddr=20.20.20.20
+eventAction=1 (Deny)
+eventName=End configuration: FAILED
+reptVendor=Cisco
+eventType=PIX-111004-failure
+phEventCategory=0 (External)
+reptDevIpAddr=$localhost
+reptModel=PIX

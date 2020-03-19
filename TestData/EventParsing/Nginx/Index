@@ -1,0 +1,10 @@
+eventType,name,reptDevIpAddr,key,method
+
+Nginx-Web-Request-Success,Nginx_1,$localhost,,syslog
+Nginx-Web-Request-Redirect,Nginx_2,$localhost,,syslog
+Nginx-Web-Client-Access-Denied,Nginx_3,$localhost,,syslog
+Nginx-Web-Forbidden-Access-Denied,Nginx_4,$localhost,,syslog
+Nginx-Web-Length-Reqd-Access-Denied,Nginx_5,$localhost,,syslog
+Nginx-Web-Bad-Request,Nginx_6,$localhost,,syslog
+Nginx-Web-Server-Error,Nginx_7,$localhost,,syslog
+Nginx-Web-Client-Error,Nginx_8,$localhost,,syslog

@@ -1,0 +1,22 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+enterprises.232.3 6 3023 sysName.0 s "Insight"
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=any
+eventSeverity=5
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=MEDIUM
+hostIpAddr=$localhost
+eventName=Tape Drive heads needs cleaning
+reptVendor=Generic
+eventType=HP-3023-TapeDriveCleaningRequired
+phEventCategory=0 (External)
+hostName=Insight
+reptDevIpAddr=$localhost
+reptModel=Generic

@@ -1,0 +1,78 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<22>Feb 15 16:00:31 IronPort-Mail: Info: MID 1750713 SPF: mailfrom identity v-chbiokb_ibogmjbkp_kjieicg_kjieicg_a@bounce.solarwindsmarketing.mkt4971.com Pass (v=spf1)
+[params]
+deviceTime=any
+parserName=IronportMailParser
+eventType=Cisco-IronPort-Mail-SPF-MailfromPass
+reptModel=IronPort AsyncOS Mail
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Cisco-IronPort-Mail-SPF-MailfromPass
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+customer=Super
+senderMailAddr=v-chbiokb_ibogmjbkp_kjieicg_kjieicg_a@bounce.solarwindsmarketing.mkt4971.com
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Cisco
+ironportMailMID=1750713
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<22>Feb 15 16:01:23 IronPort-Mail: Info: MID 1750716 SPF: mailfrom identity T2@totumviagens.com.br Pass (v=spf1)
+[params]
+deviceTime=any
+parserName=IronportMailParser
+eventType=Cisco-IronPort-Mail-SPF-MailfromPass
+reptModel=IronPort AsyncOS Mail
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Cisco-IronPort-Mail-SPF-MailfromPass
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+customer=Super
+senderMailAddr=T2@totumviagens.com.br
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Cisco
+ironportMailMID=1750716
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<22>Feb 15 16:11:46 IronPort-Mail: Info: MID 1750751 SPF: mailfrom identity atendimento@livrariasaraiva.com.br Pass (v=spf1)
+[params]
+deviceTime=any
+parserName=IronportMailParser
+eventType=Cisco-IronPort-Mail-SPF-MailfromPass
+reptModel=IronPort AsyncOS Mail
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Cisco-IronPort-Mail-SPF-MailfromPass
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+customer=Super
+senderMailAddr=atendimento@livrariasaraiva.com.br
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Cisco
+ironportMailMID=1750751

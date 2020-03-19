@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134> 09/23/2013:08:05:49 GMT hgvdccns01 0-PPE-0 : APPFW APPFW_FIELDCONSISTENCY 4709317 0 :  195.7.40.2 3360168-PPE0 4MCNwMSoic6Q8mfQ4YoHumUj5iEA000 WRMSAppFW
+[params]
+rawEventMsg=any
+eventId=any
+count=1
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+totFlows=1
+eventType=NETSCALER-APPFW-APPFW_FIELDCONSISTENCY
+phCustId=$sender
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+collectorId=any
+eventName=AppFw Field Consistency violation
+eventSeverity=3
+reptVendor=Citrix
+phRecvTime=any
+srcIpAddr=195.7.40.2
+srcName=any
+reptDevName=any
+reptModel=NetScaler

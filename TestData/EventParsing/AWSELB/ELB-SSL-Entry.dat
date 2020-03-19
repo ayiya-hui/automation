@@ -1,0 +1,36 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+2015-05-13T23:39:43.945958Z my-loadbalancer 192.168.131.39:2817 10.0.0.1:80 0.001065 0.000015 0.000023 - - 57 502 "- - - " "-" ECDHE-ECDSA-AES128-GCM-SHA256 TLSv1.2
+[params]
+deviceTime=any
+parserName=AWSELBParser
+eventType=ELB-SSL-Entry
+destIpAddr=10.0.0.1
+loadBalancerName=my-loadbalancer
+srcIpAddr=192.168.131.39
+reptModel=AWS ELB
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+respProcessTimeAvg=0
+eventName=AWS ELB SSL Entry
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+recvBytes=57
+srcIpPort=2817
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+destIpPort=80
+reqProcessTimeAvg=1
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Amazon
+encryptAlgo=ECDHE-ECDSA-AES128-GCM-SHA256
+httpUserAgent=-
+sentBytes=502

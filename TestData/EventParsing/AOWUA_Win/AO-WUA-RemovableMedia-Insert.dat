@@ -1,0 +1,31 @@
+[reptDevIpAddr(key)]
+192.168.1.10
+[eventMsg]
+2016-06-03T09:41:46Z SUDRIPTAN.sarangsoftindia.co.in 192.168.1.10 AccelOps-WUA-RemovableMedia-Insert [monitorStatus]="Success" [Locale]="en-GB" [MachineGuid]="bf13ce07-8df1-4f65-8ff1-587053943655" [timeZone]="+0530" [user]="" [domain]="" [eventTime]="Jun 03 2016 09:41:46" [fileName]="" [diskDrive]="F:" [osObjAction]="" [diskType]="Optical" [diskName]="" [diskVendor]="" [hwDiskModel]="CD-R" [msg]="Storage media inserted."
+[params]
+deviceTime=any
+parserName=AOWUA_WinParser
+eventType=AO-WUA-RemovableMedia-Insert
+reptModel=Windows
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=A removable media was inserted
+extEventRecvProto=Windows Agent
+phEventCategory=0 (External)
+msg=Storage media inserted.
+status=Success
+count=1
+hwDiskModel=CD-R
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=192.168.1.10
+rawEventMsg=any
+reptDevName=SUDRIPTAN.sarangsoftindia.co.in
+customer=Super
+phRecvTime=any
+reptDevIpAddr=192.168.1.10
+eventAction=0 (Permit)
+diskType=Optical
+reptVendor=Microsoft
+machineGUID=bf13ce07-8df1-4f65-8ff1-587053943655

@@ -1,0 +1,179 @@
+<eventParser name="MobilitySystemAdminParser">
+  <deviceType>
+    <Vendor>Microsoft</Vendor>
+    <Model>Windows</Model>
+    <Version>ANY</Version>
+  </deviceType>
+
+  <appType>
+    <Vendor>NetMotion</Vendor>
+    <Model>Mobility XE</Model>
+    <Version>ANY</Version>
+    <Name>NetMotion Mobility XE</Name>
+  </appType>
+  
+  <eventFormatRecognizer><![CDATA[\s+<:gPatStr>\[<:gPatInt>\]:\s+(?:IMP|Security|Proxy|Policy|Directory|NAL|Portmap|Proxy DHCP|Reporting|Server UI|Service|Utilities|Web Acceleration):\s+]]></eventFormatRecognizer>
+  
+  <testEvents>
+      <testEvent><![CDATA[<134>Sep 27 06:09:02 iitwinnm02 nmservic.exe[1016]: IMP: Roaming Event on session 0x1865694d user: SHARED\ChapMan. Peer's POP address changed from 156.74.250.7:9677 to 156.74.134.219:1040]]></testEvent>
+      <testEvent><![CDATA[<134>Sep 27 05:42:40 iitwinnm02 nmservic.exe[1016]: Security: RADIUS Authentication for SPU\griffibw was ACCEPTED  For device 01C9CB83D5DCBD5C0015C5EA691F027 w/reg. date 2009-05-03 0:12:24Z]]></testEvent>
+      <testEvent><![CDATA[<134>Sep 27 05:31:25 iitwinnm02 nmservic.exe[1016]: Policy: Policy (SPUDWWCREW), NAC (None) on Client is up-to-date, it will not be downloaded - user: (SPU\ELLISD) device: (01C8D87CB1F371880015C5EA691F00F).]]></testEvent>
+      <testEvent><![CDATA[<134>Sep 27 05:32:58 myHost2 nmservic.exe[1016]: Proxy: Client TDI RPC session termination indication, virtual address: 172.16.103.98, IMP handle: 0x1865654d, how: Abort, reason: Application inactivity timeout.]]></testEvent>
+  </testEvents>
+  
+  <!-- pattern definitions -->
+  <patternDefinitions>
+    <pattern name="patTime"><![CDATA[<:gPatYear>/<:gPatMonNum>/<:gPatDay>\s+<:gPatTime>]]></pattern>
+    <pattern name="patType"><![CDATA[(?:IMP|Security|Proxy|Policy)]]></pattern>
+    <pattern name="patStrEndRightBracket"><![CDATA[[^\)]*]]></pattern>
+  </patternDefinitions>
+  
+  <parsingInstructions>
+    
+    <!-- parsing common fields -->
+    <collectFieldsByRegex src="$_rawmsg">
+      <regex><![CDATA[<:gPatSyslogPRI><_mon:gPatMon>\s+<_day:gPatDay>\s+<_time:gPatTime>\s+<hostName:gPatStr>\s+<procName:gPatStr>\[<:gPatInt>\]:\s+<_type:patType>:\s+<_body:gPatMesgBody>]]></regex>
+    </collectFieldsByRegex>
+    <setEventAttribute attr="deviceTime">toDateTime($_mon, $_day, $_time)</setEventAttribute>
+    
+    <setEventAttribute attr="eventType">combineMsgId("MobXE-", $_type)</setEventAttribute>
+    <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+
+    <choose>
+      <when test='$_type = "IMP"'>
+        <switch>
+          <case>
+            <collectFieldsByRegex src="$_body">
+              <regex><![CDATA[Roaming Event on session <ipConnId:gPatStr> user: <_user:gPatStr>\. Peer's POP address changed from <prevSrcIpAddr:gPatIpV4Dot>:<prevSrcIpPort:gPatIpPort> to <srcIpAddr:gPatIpV4Dot>:<srcIpPort:gPatIpPort>]]></regex>
+            </collectFieldsByRegex>
+	    <setEventAttribute attr="eventType">MobXE-IMP-Client-Addr-Change</setEventAttribute>
+          </case>
+          <case>
+            <collectFieldsByRegex src="$_body">
+              <regex><![CDATA[Indicating session <ipConnId:gPatStr> for user <_user:gPatStr> \(Entity=<:gPatInt>\) on device <hostName:gPatStr> \(Entity=<:gPatInt>\) using authentication mode (?:Multi-factor|User authentication only) from POP address <srcIpAddr:gPatIpV4Dot>:<srcIpPort:gPatIpPort>]]></regex>
+            </collectFieldsByRegex>
+	    <setEventAttribute attr="eventType">MobXE-IMP-Client-Conn-Status</setEventAttribute>
+          </case>
+        </switch>
+      </when>
+
+      <when test='$_type = "Security"'>
+        <switch>
+          <case>
+            <collectFieldsByRegex src="$_body">
+              <regex><![CDATA[EAP authentication failed for User <_user:gPatStr>, session <ipConnId:gPatStr>, session handle <:gPatStr>, state FAILURE]]></regex>
+            </collectFieldsByRegex>
+	    <setEventAttribute attr="eventType">MobXE-Security-Client-Auth-Failure</setEventAttribute>
+	    <setEventAttribute attr="eventSeverity">5</setEventAttribute>
+          </case>
+          <case>
+            <collectFieldsByRegex src="$_body">
+              <regex><![CDATA[Successful EAP authentication for Device <hostName:gPatStr>\.]]></regex>
+            </collectFieldsByRegex>
+	    <setEventAttribute attr="eventType">MobXE-Security-Dev-Auth-Success</setEventAttribute>
+          </case>
+          <case>
+            <collectFieldsByRegex src="$_body">
+              <regex><![CDATA[Successful EAP authentication for User <_user:gPatStr>\.]]></regex>
+            </collectFieldsByRegex>
+	    <setEventAttribute attr="eventType">MobXE-Security-User-Auth-Success</setEventAttribute>
+          </case>
+          <case>
+            <collectFieldsByRegex src="$_body">
+              <regex><![CDATA[Binding BindId\(<:gPatStr>\) for device <hostName:gPatStr> with PID creation date <:gPatYear>-<:gPatMonNum>-<:gPatDay> <:gPatTime>.*]]></regex>
+            </collectFieldsByRegex>
+          </case>
+          <case>
+            <collectFieldsByRegex src="$_body">
+              <regex><![CDATA[RADIUS Authentication for <_user:gPatStr> was ACCEPTED\s+For device <hostName:gPatStr> w/reg\. date <:gPatYear>-<:gPatMonNum>-<:gPatDay> <:gPatTime>.*]]></regex>
+            </collectFieldsByRegex>
+	    <setEventAttribute attr="eventType">MobXE-Security-Client-Auth-Success</setEventAttribute>
+          </case>
+        </switch>
+      </when>
+
+      <when test='$_type = "Proxy"'>
+        <switch>
+          <case>
+            <collectFieldsByRegex src="$_body">
+              <regex><![CDATA[Client TDI RPC session termination indication, virtual address: <hostVirtIpAddr:gPatIpV4Dot>, IMP handle: <ipConnId:gPatStr>, how: <:gPatStr>, reason: [^\.]*\.]]></regex>
+            </collectFieldsByRegex>
+	    <setEventAttribute attr="eventType">MobXE-Proxy-Sess-End</setEventAttribute>
+          </case>
+          <case>
+            <collectFieldsByRegex src="$_body">
+              <regex><![CDATA[Client TDI RPC session indication, virtual address: <hostVirtIpAddr:gPatIpV4Dot>, IMP handle: <ipConnId:gPatStr>, client version: <appClientVersion:gPatStr>, build: <:gPatInt>]]></regex>
+            </collectFieldsByRegex>
+	    <setEventAttribute attr="eventType">MobXE-Proxy-Sess-Start</setEventAttribute>
+          </case>
+          <case>
+            <collectFieldsByRegex src="$_body">
+              <regex><![CDATA[Client RPC rpc protocol version mismatch, User name: <_user:gPatStr>, Device Identity <hostName:gPatStr>, server version: <appServerVersion:gPatStr>, client version <appClientVersion:gPatStr>]]></regex>
+            </collectFieldsByRegex>
+	    <setEventAttribute attr="eventType">MobXE-Proxy-Proto-Mismatch</setEventAttribute>
+	    <setEventAttribute attr="eventSeverity">7</setEventAttribute>
+          </case>
+          <case>
+            <collectFieldsByRegex src="$_body">
+              <regex><![CDATA[Client RPC system version mismatch, User name: <_user:gPatStr>, Device Identity <hostName:gPatStr>, server version: <appServerVersion:gPatStr> build: <:gPatInt>, client version: <appClientVersion:gPatStr> build: <:gPatStr>]]></regex>
+            </collectFieldsByRegex>
+	    <setEventAttribute attr="eventType">MobXE-Proxy-Version-Mismatch</setEventAttribute>
+	    <setEventAttribute attr="eventSeverity">7</setEventAttribute>
+          </case>
+        </switch>
+      </when>
+    
+      <when test='$_type = "Policy"'>
+        <switch>
+          <case>
+            <collectFieldsByRegex src="$_body">
+              <regex><![CDATA[Policy \(<policyName:patStrEndRightBracket>\), NAC \(<:gPatStr>\) on Client is up-to-date, it will not be downloaded - user: \(<_user:gPatStr>\) device: \(<hostName:gPatStr>\)\.]]></regex>
+            </collectFieldsByRegex>
+	    <setEventAttribute attr="eventType">MobXE-Policy-Client-Uptodate</setEventAttribute>
+          </case>
+          <case>
+            <collectFieldsByRegex src="$_body">
+              <regex><![CDATA[Policy \(<policyName:patStrEndRightBracket>\), NAC \(<:gPatStr>\) will be attempted to be sent to - user: \(<_user:gPatStr>\) device: \(<hostName:gPatStr>\)\.]]></regex>
+            </collectFieldsByRegex>
+	    <setEventAttribute attr="eventType">MobXE-Policy-Client-Update</setEventAttribute>
+          </case>
+        </switch>
+      </when>
+    </choose>
+    
+    <when test='exist _user'>
+      <switch>
+        <case>
+          <collectFieldsByRegex src="$_user">
+            <regex><![CDATA[<domain:gPatStr>(?:\\)<user:gPatStr>]]></regex>
+          </collectFieldsByRegex>
+        </case>
+	<case>
+          <collectFieldsByRegex src="$_user">
+            <regex><![CDATA[host/<reptDevName:gPatStr>]]></regex>
+          </collectFieldsByRegex>
+        </case>
+        <default>
+	   <setEventAttribute attr="user">$_user</setEventAttribute>
+        </default>
+      </switch>
+    </when>
+
+    <when test='exist hostName'>
+      <switch>
+        <case>
+          <collectFieldsByRegex src="$hostName">
+            <regex><![CDATA[<domain:gPatStr>(?:\\)<hostName:gPatStr>]]></regex>
+          </collectFieldsByRegex>
+        </case>
+	<case>
+          <collectFieldsByRegex src="$hostName">
+            <regex><![CDATA[host/<hostName:gPatStr>]]></regex>
+          </collectFieldsByRegex>
+        </case>
+	<default/>
+      </switch>
+    </when>
+    
+  </parsingInstructions>
+</eventParser>

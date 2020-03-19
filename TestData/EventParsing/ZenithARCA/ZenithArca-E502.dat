@@ -1,0 +1,24 @@
+[reptDevIpAddr(key)]
+80.80.80.80
+[eventMsg]
+<190>Dec 27 14:15:15 80.80.80.80 NT: <ZenithArcA;E502;> Daily Collapsed image not generated for server: inet backup folder: E9539AEA327C41EE-inet volume Name: C:\
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+count=1
+phCustId=$sender
+destName=any
+deviceTime=any
+eventAction=1 (Deny)
+eventId=any
+eventName=Daily Collapsed Image Not Generated For Server
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=5
+eventSeverityCat=MEDIUM
+eventType=ZenithArca-E502
+msg=backup folder: E9539AEA327C41EE-inet volume Name: C:\
+reptDevIpAddr=$reporter
+reptModel=Zenith ARCA
+reptVendor=Zenith Infotech
+serverName=inet

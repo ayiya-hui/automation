@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+CylancePROTECT: Event Type: AuditLog, Event Name: ThreatGlobalQuarantine, Message: SHA256: A1E92E2E84A1321F499A5EC500E8B9A9C0CA28701668BF13EA56D3995A96153F,1CCC95B7B2F781D55D538CA01D6049762FDF6A75B32A06DF3CC2EDC1F1573BFA; Reason: Manually blacklisting these 2 threats., User: (johnsmith@contoso.com)
+[params]
+customer=Super
+eventId=any
+eventSeverityCat=LOW
+eventParsedOk=1
+phEventCategory=0 (External)
+parserName=CylanceProtectParser
+count=1
+eventSeverity=1
+eventType=CylanceProtect-AuditLog-ThreatGlobalQuarantine
+reptDevIpAddr=$localhost
+collectorId=any
+hashCode=A1E92E2E84A1321F499A5EC500E8B9A9C0CA28701668BF13EA56D3995A96153F,1CCC95B7B2F781D55D538CA01D6049762FDF6A75B32A06DF3CC2EDC1F1573BFA; Reason: Manually blacklisting these 2 threats.
+eventName=CylanceProtect-AuditLog-ThreatGlobalQuarantine
+reptVendor=Cylance
+relayDevIpAddr=$localhost
+user=johnsmith@contoso.com
+extEventRecvProto=Syslog
+phRecvTime=any
+eventRuleTrigger=1
+reptDevName=any
+reptModel=Protect

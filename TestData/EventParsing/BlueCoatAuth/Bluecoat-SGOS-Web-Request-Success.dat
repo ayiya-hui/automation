@@ -1,0 +1,42 @@
+[reptDevIpAddr(key)]
+34.160.179.201
+[eventMsg]
+<2> Sep 14 19:24:39 ao BluecoatAuthWebLog   0       2010-09-14 14:31:13 36 34.159.60.56 hz13321 - - OBSERVED "Audio/Video Clips" - 200 TCP_NC_MISS POST application/x-fcs http 213.200.94.86 80 /idle/WdPmdz02xSLO2sHS/25136 - - "Shockwave Flash" 34.160.179.201 1087 217 -
+[params]
+rawEventMsg=any
+deviceTime=any
+eventType=Bluecoat-SGOS-Web-Request-Success
+phCustId=$sender
+httpReferrer=-
+reptGeoState=Texas
+srcIpAddr=34.159.60.56
+reptModel=SGOS Web Proxy
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+testEvent=Real Event(0)
+eventName=Web request successful
+phEventCategory=0 (External)
+destName=213.200.94.86
+webCategory=Audio/Video Clips
+recvBytes=217
+eventSeverityCat=LOW
+collectorId=any
+httpMethod=POST
+virusName=-
+user=hz13321
+destIpPort=80
+httpStatusCode=200 (The request has succeeded)
+count=1
+uriStem=/idle/WdPmdz02xSLO2sHS/25136
+reptGeoCity=any
+phRecvTime=any
+reptDevIpAddr=34.160.179.201
+eventAction=0 (Permit)
+httpUserAgent=Shockwave Flash
+uriQuery=-
+reptVendor=Blue Coat
+durationMSec=36
+httpContentType=application/x-fcs
+userGrp=-
+sentBytes=1087

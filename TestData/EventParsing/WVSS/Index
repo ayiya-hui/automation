@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+WVSS-VULN-INFO,WVSS_1,WVSS,$localhost,,syslog

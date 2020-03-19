@@ -1,0 +1,24 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<34>May 14 23:58:44 login: [ID 658745 auth.crit] REPEATED LOGIN FAILURES ON /dev/pts/3 FROM 192.168.1.2, root
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=4
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=$localhost
+eventAction=1 (Deny)
+eventName=Failed telnet logon
+srcIpAddr=192.168.1.2
+reptVendor=Sun
+eventType=Solaris_Failed_Telnet_Login
+user=root
+phEventCategory=0 (External)
+reptDevIpAddr=$localhost
+reptModel=Solaris

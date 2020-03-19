@@ -1,0 +1,29 @@
+[reptDevIpAddr(key)]
+86.86.86.86
+[eventMsg]
+<14>1 2014-01-30T06:55:01.162 TMG-FW-CO-SPRINGS RT_FLOW - FLOW_REASSEMBLE_FAIL [junos@2636.1.1.1.2.39 source-address=67.148.183.242 destination-address=67.135.72.211 assembly-id=5082]
+[params]
+deviceTime=any
+destGeoOrg=any
+parserName=JunOS2Parser
+eventType=JUNOS_FLOW_REASSEMBLE_FAIL
+destIpAddr=67.135.72.211
+srcName=67-148-183-242.dia.static.qwest.net
+srcIpAddr=67.148.183.242
+destGeoCountry=any
+reptModel=SRX JunOS
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=JUNOS_FLOW_REASSEMBLE_FAIL
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+eventRuleTrigger=1
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=86.86.86.86
+customer=Super
+phRecvTime=any
+reptDevIpAddr=86.86.86.86
+reptVendor=Juniper

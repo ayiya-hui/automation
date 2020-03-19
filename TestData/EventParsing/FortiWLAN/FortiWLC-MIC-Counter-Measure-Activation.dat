@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+172.18.65.202
+[eventMsg]
+Apr 28 13:57:36 172.18.65.202 ALARM: 1209371256l | system | info | ALR | MIC COUNTERMEASURE ACTIVATION CRITICAL MIC_CounterMeasure_Activation_for_AP1
+[params]
+customer=Super
+eventId=any
+parserName=FortiWLANParser
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+count=1
+eventSeverity=1
+eventType=FortiWLC-MIC-Counter-Measure-Activation
+reptDevIpAddr=172.18.65.202
+collectorId=any
+extEventRecvProto=Syslog
+eventName=Two subsequent MIC failures
+reptVendor=Fortinet
+relayDevIpAddr=172.18.65.202
+rawEventMsg=any
+phRecvTime=any
+reptDevName=any
+reptModel=FortiWLC

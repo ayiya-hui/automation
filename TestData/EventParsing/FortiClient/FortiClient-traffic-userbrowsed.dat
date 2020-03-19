@@ -1,0 +1,47 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<116> device=FCTEMS0036759495 severity=medium from=FAZVM64(FAZ-VM0000000001) trigger=EVT2SIEM log="itime=1490250462 date=2017-03-23 time=14:27:42 logver=2 type=traffic level=notice sessionid=31827416 hostname=Hui-PC pcdomain=uid=03866CA3DFBD45AD8009E0C59A6F513C devid=FCT8000424633208 fgtserial=N/A emsserial=FCTEMS0036759495 regip=N/A srcname=IEXPLORE.EXE srcproduct="Internet Explorer" srcip=N/A srcport=N/A direction=outbound dstip=N/A remotename=www.douban.com dstport=443 user=Hui proto=6 rcvdbyte=N/A sentbyte=N/A utmaction=userbrowsed utmevent=webfilter threat=N/A vd=root fctver=5.5.23.1022 os="Microsoft Windows 7 Professional Edition, 64-bit Service Pack 1 (build 7601)" usingpolicy="AOFCT" service=https url=/group/topic/81976245/ userinitiated=1 browsetime=263"
+[params]
+deviceTime=any
+parserName=FortiClientParser
+appName=Internet Explorer
+eventType=FortiClient-traffic-userbrowsed
+activityType=webfilter
+srcName=IEXPLORE.EXE
+customer=Super
+osType=Microsoft Windows 7 Professional Edition, 64-bit Service Pack 1 (build 7601)
+reptModel=FortiClient
+eventId=any
+policyName=AOFCT
+eventParsedOk=1
+eventSeverity=2
+eventName=FortiClient user web browsing activity
+serviceName=https
+reptDevName=any
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+threatLevel=N/A
+destName=www.douban.com
+count=1
+direction=outbound
+hostName=Hui-PC
+sentBytes64=0
+srcIpPort=0
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+user=Hui
+rawEventMsg=any
+ipProto=6 (TCP)
+runTime=263
+destIpPort=443 (HTTPS)
+vdom=root
+serialNumber=5.5.23.1022
+recvBytes64=0
+actionName=userbrowsed
+phRecvTime=any
+reptDevIpAddr=$localhost
+infoURL=/group/topic/81976245/
+sessionId=31827416
+reptVendor=Fortinet

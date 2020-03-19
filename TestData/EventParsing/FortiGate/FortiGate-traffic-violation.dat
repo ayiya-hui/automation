@@ -1,0 +1,80 @@
+[reptDevIpAddr(key)]
+$localhost (destIpAddr:192.168.20.116)
+[eventMsg]
+<188>date=2010-06-16 time=04:47:54 devname=FGT50B3G10615108 device_id=FGT50B3G10615108 log_id=0022000003 type=traffic subtype=violation pri=warning fwver=040002 status=deny vd="root" src=172.16.6.6 srcname=172.16.6.6 src_port=1652 dst=192.168.20.116 dstname=192.168.20.116 dst_port=443 service=443/tcp proto=6 app_type=N/A duration=0 rule=3 policyid=3 sent=0 rcvd=0 vpn="N/A" src_int="internal" dst_int="wan1" SN=5929 user="N/A" group="N/A" carrier_ep="N/A"
+[params]
+appName=N/A
+totBytes=0
+fwRule=3
+userGrp=N/A
+durationMSec=0
+deviceTime=any
+eventType=FortiGate-traffic-violation
+phCustId=$sender
+destIpAddr=192.168.20.116
+srcName=172.16.6.6
+destIpPort=443 (HTTPS)
+srcIpAddr=172.16.6.6
+reptModel=FortiOS
+eventId=any
+eventParsedOk=1
+eventSeverity=5
+eventName=Denied traffic
+phEventCategory=4 (Traffic)
+destName=192.168.20.116
+srcIntfName=internal
+recvBytes=0
+srcIpPort=1652
+eventSeverityCat=MEDIUM
+destIntfName=wan1
+relayDevIpAddr=$localhost
+ipProto=6 (TCP)
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=1 (Deny)
+reptVendor=Fortinet
+sentBytes=0
+[reptDevIpAddr(key)]
+$localhost (destIpAddr:2.3.0.1)
+[eventMsg]
+<188>date=2010-06-16 time=04:47:54 devname=fortiDev device_id=FGT50B3G10615108 log_id=0022000003 type=traffic subtype=violation pri=warning fwver=040002 status=deny vd="root" src=90.201.195.117 srcname=HOST-90.201.195.117 src_port=1652 dst=2.3.0.1 dstname=inDev dst_port=443 service=443/tcp proto=6 app_type=N/A duration=0 rule=3 policyid=3 sent=0 rcvd=0 vpn="N/A" src_int="internal" dst_int="wan1" SN=5929 user="N/A" group="N/A" carrier_ep="N/A"
+[params]
+deviceTime=any
+destGeoOrg=any
+appName=N/A
+eventType=FortiGate-traffic-violation
+phCustId=$sender
+destIpAddr=2.3.0.1
+totBytes=0
+srcName=HOST-90.201.195.117
+destIpPort=443 (HTTPS)
+destGeoCountry=any
+srcIpAddr=90.201.195.117
+reptModel=FortiOS
+eventId=any
+eventParsedOk=1
+eventSeverity=5
+eventName=Denied traffic
+serviceName=443/tcp
+phEventCategory=4 (Traffic)
+destName=inDev
+srcIntfName=internal
+recvBytes=0
+srcIpPort=1652
+eventSeverityCat=MEDIUM
+collectorId=any
+destIntfName=wan1
+relayDevIpAddr=$localhost
+ipProto=6 (TCP)
+reptDevName=any
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=1 (Deny)
+fwRule=3
+reptVendor=Fortinet
+durationMSec=0
+destGeoCity=any
+userGrp=N/A
+sentBytes=0

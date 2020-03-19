@@ -1,0 +1,34 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<181>date=2013-05-01 time=11:20:50 devname=FortiGate80C devid=FGT80C3912622808 logid=1100004100 type=utm subtype=netscan eventtype=discovery level=notice vd=root action=service-detection dstip=1.1.1.1 service=http proto=tcp dstport=80
+[params]
+deviceTime=any
+destGeoOrg=any
+eventType=FortiGate-discovery-netscan-service-detected
+phCustId=$sender
+destIpAddr=1.1.1.1
+ipProto=0 (IPv6 Hop-by-Hop Option)
+destGeoCountry=any
+reptModel=FortiOS
+eventId=any
+eventParsedOk=1
+eventSeverity=3
+hostIpAddr=1.1.1.1
+eventName=Network scan detected service
+serviceName=http
+phEventCategory=0 (External)
+hostGeoLongitude=133
+eventSeverityCat=LOW
+collectorId=any
+hostGeoLatitude=-27
+relayDevIpAddr=$localhost
+destIpPort=80
+reptDevName=any
+count=1
+hostGeoCountry=Australia
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Fortinet
+hostGeoOrg=APNIC Debogon Project

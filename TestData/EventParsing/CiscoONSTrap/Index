@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+Cisco-ONS-performanceMonitorThresholdCrossingAlert,CiscoONSTrap_1,CiscoONSTrap,$localhost,,syslog

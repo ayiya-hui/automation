@@ -1,0 +1,29 @@
+[reptDevIpAddr(key)]
+10.1.2.16
+[eventMsg]
+<45>Sep 21 01:58:03 10.1.2.16 JBossEventLog 0 2015-09-01 00:08:50,156 ERROR [org.apache.coyote.ajp.AjpMessage] (ajp-0.0.0.0-8009-1) Invalid message received with signature 18245
+[params]
+deviceTime=any
+parserName=JBossLogParser
+eventType=JBoss-AjpMessage-ERROR
+hostName=10.1.2.16
+threadName=ajp-0.0.0.0-8009-1
+reptModel=JBOSS App Server
+eventId=any
+eventTime=Tue Sep 01 00:08:50 CST 2015
+eventParsedOk=1
+eventSeverity=5
+eventName=JBoss AjpMessage error log
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=MEDIUM
+collectorId=any
+relayDevIpAddr=10.1.2.16
+rawEventMsg=any
+eventDesc=Invalid message received with signature 18245
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=10.1.2.16
+reptVendor=Redhat

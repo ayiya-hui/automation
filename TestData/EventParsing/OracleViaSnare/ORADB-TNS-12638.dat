@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+76.76.76.76
+[eventMsg]
+<46>Dec 13 06:07:08 76.76.76.76 OracleAlertLog    0       TNS-12638: Credential retrieval failed
+[params]
+rawEventMsg=any
+eventId=any
+count=1
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=MEDIUM
+eventSeverity=5
+eventType=ORADB-TNS-12638
+phCustId=$sender
+reptDevIpAddr=76.76.76.76
+collectorId=any
+fileName=Alert.log
+eventName=Credential retrieval failed
+reptVendor=Oracle
+testEvent=Real Event(0)
+phRecvTime=any
+hostName=any
+eventDesc=TNS-12638: Credential retrieval failed
+reptDevName=any
+reptModel=Database Server

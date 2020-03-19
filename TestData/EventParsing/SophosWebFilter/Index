@@ -1,0 +1,9 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+Sophos-Generic,SophosWebFilter_1,SophosWebFilter,$localhost,,syslog
+Sophos-Request-Allow,SophosWebFilter_2,SophosWebFilter,$localhost,,syslog
+Sophos-Request-Block,SophosWebFilter_3,SophosWebFilter,$localhost,,syslog
+Sophos-Request-Warn,SophosWebFilter_4,SophosWebFilter,$localhost,,syslog
+Sophos-Request-Warn-User-Proceeded,SophosWebFilter_5,SophosWebFilter,$localhost,,syslog
+Sophos-User-Proceeded,SophosWebFilter_6,SophosWebFilter,$localhost,,syslog
+Sophos-User-Proceeded-Request-Block,SophosWebFilter_7,SophosWebFilter,$localhost,,syslog

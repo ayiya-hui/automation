@@ -1,0 +1,22 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+enterprises.232.6 6 6013 sysName.0 s "Insight"
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=5
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=MEDIUM
+hostIpAddr=$localhost
+eventName=Server Power on Self test errors
+reptVendor=Generic
+eventType=HP-6013-POSTError
+phEventCategory=0 (External)
+hostName=Insight
+reptDevIpAddr=$localhost
+reptModel=Generic

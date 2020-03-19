@@ -1,0 +1,39 @@
+<!-- general pattern definitions -->
+<generalPatternDefinitions>
+
+  <!-- event log patterns -->
+  <pattern name="gPatSyslogPRI"><![CDATA[<\d+>]]></pattern>  
+  <pattern name="gPatMesgBody"><![CDATA[.*]]></pattern>
+  <pattern name="gPatSyslogNGHeader"><![CDATA[\w{3}\s+\d{1,2}\s\d{1,2}:\d{1,2}:\d{1,2}\s\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}]]></pattern>
+
+
+  <!-- time patters -->
+  <pattern name="gPatMon"><![CDATA[Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec|\d{1,2}]]></pattern>
+  <pattern name="gPatMonNum"><![CDATA[\d{1,2}]]></pattern>
+  <pattern name="gPatDay"><![CDATA[\d{1,2}]]></pattern>
+  <pattern name="gPatTime"><![CDATA[\d{1,2}:\d{1,2}:\d{1,2}]]></pattern>
+  <pattern name="gPatYear"><![CDATA[\d{2,4}]]></pattern>
+  <pattern name="gPatMSec"><![CDATA[\d{1,3}]]></pattern>
+  <pattern name="gPatTimeMSec"><![CDATA[\d{1,2}:\d{1,2}:\d{1,2}.\d{1,3}]]></pattern>
+
+
+  <!-- network patterns -->
+  <pattern name="gPatIpV4Dot"><![CDATA[\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}]]></pattern>
+  <pattern name="gPatIpPort"><![CDATA[\d+]]></pattern>   
+  <pattern name="gPatProto"><![CDATA[icmp|tcp|udp|http|ip|snmp|others|ICMP|UDP|TCP|HTTP|IP|SNMP|OTHERS]]></pattern>
+
+  <!-- fqdn -->
+  <pattern name="gPatFqdn"><![CDATA[\w+[.\w+]+]]></pattern>  
+
+  <!-- type patterns -->
+  <pattern name="gPatWord"><![CDATA[\w+]]></pattern>   
+  <pattern name="gPatStr"><![CDATA[[^ ]*]]></pattern>
+  <pattern name="gPatStrComma"><![CDATA[[^,]*]]></pattern>
+  <pattern name="gPatStrLeftParen"><![CDATA[[^\(]*]]></pattern>
+  <pattern name="gPatStrRightSB"><![CDATA[[^\]]*]]></pattern>
+  <pattern name="gPatInt"><![CDATA[\d+]]></pattern>
+  <pattern name="gPatSpace"><![CDATA[\s+]]></pattern>
+  <pattern name="gPatStrEndColon"><![CDATA[[^:]*]]></pattern>
+  
+  <pattern name="gPatSentence"><![CDATA[\w[\s+\w]*]]></pattern>
+</generalPatternDefinitions>

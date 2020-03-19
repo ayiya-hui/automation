@@ -1,0 +1,4 @@
+[eventMsg]
+[PH_DEV_MON_SYS_DISK_UTIL]:[eventSeverity]=PHL_INFO,[fileName]=phPerfJob.cpp,[lineNumber]=3178,[diskName]=C:\ Label:  Serial Number bc9b07c3,[hostName]=automator8Dot16Dot0Dot1,[hostIpAddr]=8.16.0.1,[diskUtil]=91.768052,[freeDiskMB]=150,[pollIntv]=180,[phLogDetail]=
+
+[clearEventMsg]

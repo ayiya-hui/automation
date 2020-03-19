@@ -1,0 +1,30 @@
+[reptDevIpAddr(key)]
+91.91.91.1
+[eventMsg]
+<38>Nov 12 08:21:53 ETC-AAA AAA: Acctounting session started: User-Name=1stop, NAS=192.168.32.225, Port-ID=4/0/1/308, Port=0, MAC=80-A1-D7-03-F2-17, Acct-Session-Id=00133AAA, IP-Address=190.197.45.188
+[params]
+rawEventMsg=any
+deviceTime=any
+parserName=AlcatelAAAParser
+eventType=Alcatel_AAA_Accounting_Session_Start
+phCustId=$sender
+srcIpAddr=190.197.45.188
+reptModel=8950 AAA
+eventId=any
+nepDevPort=4/0/1/308
+eventParsedOk=1
+eventSeverity=1
+eventName=AAA accounting session started
+phEventCategory=0 (External)
+customer=Super
+srcMACAddr=80-A1-D7-03-F2-17
+srcIpPort=0
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=91.91.91.1
+user=1stop
+reptDevName=any
+count=1
+phRecvTime=any
+reptDevIpAddr=91.91.91.1
+reptVendor=Alcatel-Lucent

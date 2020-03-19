@@ -1,0 +1,35 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<180>date=2013-05-01 time=11:20:53 devname=FortiGate80C devid=FGT80C3912622808 logid=0003000011 type=traffic subtype=invalid level=warning vd=root srcip=10.1.1.20 srcport=57291 srcintf=internal dstip=68.105.29.11 dstport=53 dstintf=wan1 sessionid=426962 action=dns policyid=2 crscore=10 craction=131072
+[params]
+deviceTime=any
+destGeoOrg=any
+parserName=FortiGateParser
+totFlows=1
+eventType=FortiGate-traffic-invalid
+destIpAddr=68.105.29.11
+destGeoCountry=any
+srcIpAddr=10.1.1.20
+reptModel=FortiOS
+eventId=any
+eventParsedOk=1
+eventSeverity=5
+eventName=FortiGate-traffic-invalid
+phEventCategory=4 (Traffic)
+count=1
+srcIntfName=internal
+srcIpPort=57291
+eventSeverityCat=MEDIUM
+collectorId=any
+destIntfName=wan1
+relayDevIpAddr=$localhost
+destIpPort=53
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Fortinet
+destGeoCity=any
+fwRule=2

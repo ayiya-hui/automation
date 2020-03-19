@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>Dec 04 2008 20:00:45: %ASA-6-106015: Deny TCP (no connection) from 64.81.25.70/443 to 207.215.153.182/5898 flags FIN ACK on interface outside
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=207.215.153.182
+eventAction=1 (Deny)
+eventName=Denied IP traffic - likely connection reset
+ipProto=6 (TCP)
+reptVendor=Cisco
+eventType=ASA-106015
+srcIpAddr=64.81.25.70
+phEventCategory=0 (External)
+destIpPort=5898
+reptDevIpAddr=$reporter
+srcIpPort=443
+reptModel=ASA

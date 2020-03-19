@@ -1,0 +1,70 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<46>Jan 28 15:50:55 Filer.ProspectHills.net FTPSvcLog	0	2009-01-28 23:50:54 172.16.20.120 - MSFTPSVC1 FILER 192.168.0.40 21 [119]QUIT - - 530 0 0 0 0 FTP - - - -
+[params]
+rawEventMsg=any
+deviceTime=any
+eventSeverityCat=LOW
+reptVendor=Microsoft
+ftpMethod=[119]QUIT
+eventType=IIS-FTP-Login-Failure
+phCustId=$sender
+destIpAddr=192.168.0.40
+srvInstName=MSFTPSVC1
+ftpStatusCode=530 (User not logged in)
+srcIpAddr=172.16.20.120
+reptModel=IIS
+eventId=any
+ipConnId=119
+eventParsedOk=1
+eventSeverity=3
+eventName=Failed FTP Authentication
+phEventCategory=0 (External)
+destName=FILER
+recvBytes=0
+user=root
+destIpPort=21
+count=1
+uriStem=-
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=1 (Deny)
+uriQuery=-
+durationMSec=0
+sentBytes=0
+[reptDevIpAddr(key)]
+192.168.0.40
+[eventMsg]
+<46>Mar 29 12:21:03 192.168.0.40 FTPSvcLog	0	2010-03-29 19:20:32 127.0.0.1 - MSFTPSVC1 FILER 127.0.0.1 21 [1]PASS IEUser@ - 530 1326 0 0 0 FTP - - - -
+[params]
+rawEventMsg=any
+deviceTime=any
+eventSeverityCat=LOW
+reptVendor=Microsoft
+ftpMethod=[1]PASS
+eventType=IIS-FTP-Login-Failure
+phCustId=$sender
+destIpAddr=192.168.0.40
+srvInstName=MSFTPSVC1
+ftpStatusCode=530 (User not logged in)
+srcIpAddr=192.168.0.40
+reptModel=IIS
+eventId=any
+ipConnId=1
+eventParsedOk=any
+eventSeverity=3
+eventName=Failed FTP Authentication
+phEventCategory=0 (External)
+destName=FILER
+recvBytes=0
+user=-
+destIpPort=21
+count=1
+uriStem=IEUser@
+phRecvTime=any
+reptDevIpAddr=192.168.0.40
+eventAction=1 (Deny)
+uriQuery=-
+durationMSec=0
+sentBytes=0

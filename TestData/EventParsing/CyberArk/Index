@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+CyberArk-Vault-295,CyberArk_1,CyberArk,$localhost,,syslog

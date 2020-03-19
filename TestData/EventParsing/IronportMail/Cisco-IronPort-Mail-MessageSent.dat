@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+187.0.198.8
+[eventMsg]
+[Sep 24 11:39:49 187.0.198.8 IronPort-Mail: Info: Internal SMTP system successfully sent a message to infraestrutura@corp.arcon.com.br with subject 'Critical <System> rjo-alg-iron.corp.arcon.com.br: Log Error: Subscription IronPort-Mail: Network error while send..'.
+[params]
+rawEventMsg=any
+deviceTime=any
+receiverMailAddr=infraestrutura@corp.arcon.com.br
+eventType=Cisco-IronPort-Mail-MessageSent
+phCustId=$sender
+reptModel=IronPort AsyncOS Mail
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=IronPort mail message sent
+phEventCategory=0 (External)
+reptGeoCountry=any
+eventSeverityCat=LOW
+collectorId=any
+mailSubject='Critical <System> rjo-alg-iron.corp.arcon.com.br: Log Error: Subscription IronPort-Mail: Network error while send..'
+reptDevName=mx2.arcon.com.br
+count=1
+phRecvTime=any
+reptGeoOrg=any
+reptDevIpAddr=187.0.198.8
+reptVendor=Cisco

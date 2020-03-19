@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<28>2016:03:11-05:15:32 ActiveUTM-2 confd[3811]: W main::cleanup_sessions:1020() => id="3100" severity="warn" sys="System" sub="confd" name="removing corrupted session" sid="uiUprwYWbwUIrJtzQyFx"
+[params]
+customer=Super
+eventId=any
+eventSeverityCat=MEDIUM
+eventParsedOk=1
+phEventCategory=0 (External)
+parserName=SophosUTMParser
+count=1
+eventSeverity=5
+eventType=Sophos-UTM-removing-corrupted-session
+reptDevIpAddr=$localhost
+collectorId=any
+eventName=Sophos UTM removing corrupted session
+procName=confd
+reptVendor=Sophos
+relayDevIpAddr=$localhost
+extEventRecvProto=Syslog
+phRecvTime=any
+eventRuleTrigger=1
+reptDevName=any
+reptModel=UTM

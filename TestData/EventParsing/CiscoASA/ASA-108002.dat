@@ -1,0 +1,22 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>Dec 05 2008 13:02:16: %ASA-2-108002: SMTP replaced "This is a real thing.": out 192.168.20.20 in 20.20.20.20 data: "This is a test."
+[params]
+rawEventMsg=any
+srcIpAddr=20.20.20.20
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=8
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=MEDIUM
+eventAction=0 (Permit)
+eventName=SMTP replaced invalid character in mail message
+reptVendor=Cisco
+eventType=ASA-108002
+phEventCategory=0 (External)
+reptDevIpAddr=$reporter
+reptModel=ASA

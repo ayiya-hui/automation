@@ -1,0 +1,24 @@
+[reptDevIpAddr(key)]
+83.83.83.83
+[eventMsg]
+Sep 4 10:38:04 83.83.83.83 CEF :0|PowerTech|Interact|2.0|TAD0019|Auditing was changed to *YES for bytestream file *N/*N using the CHGATR command or the Qp0lSetAttr API.|3| src =10.0.1.179 dst =0.0.0.0 msg=TYPE:JRN CLS :AUD JJOB :QPADEV000J JUSER :ADRIENNEH JNBR :061967 PGM :QCMD OBJECT : LIBRARY : MEMBER: DETAIL: S *N *N *STMF *YES                0000 00000 * * *NA /PowerTech/PowerLockComplianceMonitor/T2/dltlicpgm.qsh
+[params]
+rawEventMsg=any
+eventId=any
+count=1
+eventSeverityCat=LOW
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverity=3
+eventType=OS400-TAD0019
+phCustId=$sender
+reptDevIpAddr=83.83.83.83
+collectorId=any
+testEvent=Real Event(0)
+eventName=The scan attribute was changed using the CHGATR command
+reptVendor=IBM
+user=ADRIENNEH
+phRecvTime=any
+srcIpAddr=10.0.1.179
+reptDevName=any
+reptModel=OS400

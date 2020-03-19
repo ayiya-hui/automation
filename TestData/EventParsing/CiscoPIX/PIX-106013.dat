@@ -1,0 +1,21 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>Dec 04 2008 20:00:45: %PIX-2-106013: Dropping echo request from 10.10.10.10 to PAT 30.30.30.30
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=any
+eventSeverity=8
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=MEDIUM
+eventAction=0 (Permit)
+eventName=Denied IP traffic - bad packet
+reptVendor=Cisco
+eventType=PIX-106013
+phEventCategory=0 (External)
+reptDevIpAddr=$localhost
+reptModel=PIX

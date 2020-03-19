@@ -1,0 +1,21 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<133>Jul 24 2008 03:14:32: %PIX-5-111005: SJ-Dev-S-RH-VMW-01 end configuration: OK--automator
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=any
+eventSeverity=2
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+eventAction=0 (Permit)
+eventName=End configuration: OK
+reptVendor=Cisco
+eventType=PIX-111005
+phEventCategory=0 (External)
+reptDevIpAddr=$localhost
+reptModel=PIX

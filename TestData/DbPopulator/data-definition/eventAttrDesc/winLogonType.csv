@@ -1,0 +1,10 @@
+$winLogonType,Description
+2,Interactive - console logon
+3,Network - logon
+4,Batch logon run by batch servers
+5,Service started by service control managers
+7,Workstation unlocked
+8,Network clear text logon
+9,New credentials
+10,Remote interactive network logon using terminal services or remote desktop connection
+11,Cached Interactive logon (does not require domain controller)

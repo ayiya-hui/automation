@@ -1,0 +1,22 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<166>Nov 23 2010 06:58:37: %ASA-6-338304: Successfully downloaded dynamic filter data file from updater server https://update-manifests.ironport.com  N/A  False Positive Tuning
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+count=1
+phCustId=$sender
+destDomain=update-manifests.ironport.com
+deviceTime=any
+eventAction=0 (Permit)
+eventId=any
+eventName=Successfully downloaded dynamic filter data file from updater server
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=1
+eventSeverityCat=LOW
+eventType=ASA-338304
+reptDevIpAddr=$reporter
+reptModel=ASA
+reptVendor=Cisco

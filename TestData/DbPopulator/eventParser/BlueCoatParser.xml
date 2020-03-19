@@ -1,0 +1,131 @@
+<eventParser name="BlueCoatParser">
+  <deviceType>
+    <Vendor>Blue Coat</Vendor>
+    <Model>SGOS Web Proxy</Model>
+    <Version>ANY</Version>
+  </deviceType>
+  
+  <!-- examples
+Format main ELFF
+date time time-taken c-ip sc-status s-action sc-bytes cs-bytes cs-method cs-uri-scheme cs-host cs-uri-port cs-uri-path cs-uri-query cs-username cs-auth-group s-hierarchy s-supplier-name rs(Content-Type) cs(Referer) cs(User-Agent) sc-filter-result cs-categories x-virus-id s-ip
+<2> Jun 24 16:10:28 SJ-QA-W-FDR-Test-01.prospect-hills.net BluecoatWebLog	0	2010-06-24 23:09:52 2 192.168.22.21 304 TCP_HIT 345 1091 GET http img3.catalog.video.msn.com 80 /image.aspx ?uuid=b088c104-bba5-4ed9-8b51-5c11622e537e&w=136&h=102 - - DIRECT 65.54.87.101 image/jpeg - "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.1; Trident/4.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; InfoPath.2; Windows Live Messenger 14.0.8089.0726)" PROXIED "none" - 172.16.0.141
+	   -->
+  
+  <eventFormatRecognizer><![CDATA[BluecoatWebLog]]></eventFormatRecognizer>
+  
+  <testEvents>
+      <testEvent><![CDATA[<2> Jun 25 11:15:33 SJ-QA-W-FDR-Test-01.prospect-hills.net BluecoatWebLog	0	2010-06-25 18:13:34 2021 192.168.22.21 200 TCP_TUNNELED 820 1075 CONNECT tcp accelops.webex.com 443 / - - - NONE 172.16.0.141 - - "WebEx Outlook Integration Http Agent" PROXIED "none" - 25.24.23.22]]></testEvent>
+  </testEvents>
+  
+  <parsingInstructions>
+
+    <collectFieldsByRegex src="$_rawmsg">
+      <regex><![CDATA[<:gPatSyslogPRI>\s+<:gPatMon>\s+<:gPatDay>\s+<:gPatTime>\s+<:gPatStr>\s+BluecoatWebLog\s+\d\s+<_body:gPatMesgBody>]]></regex>
+    </collectFieldsByRegex>
+     
+    <!-- parsing common fields -->
+    <choose>
+	<when test="matches($_body, '^#')">
+		<setEventAttribute attr="eventType">Bluecoat-SGOS-Generic</setEventAttribute>
+		<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+	 </when>
+	<otherwise>
+		<collectAndSetAttrByPosWithNestedSep src="$_body" L1Sep=' ' L2Sep='""'>
+		      <attrPosMap attr="_date" pos='1'/>
+		      <attrPosMap attr="_time" pos='2'/>
+		      <attrPosMap attr="durationMSec" pos='3'/>
+		      <attrPosMap attr="srcIpAddr" pos='4'/>
+		      <attrPosMap attr="httpStatusCode" pos='5'/>
+		      <attrPosMap attr="bcProxyAction" pos='6'/>
+		      <attrPosMap attr="sentBytes" pos='7'/>
+		      <attrPosMap attr="recvBytes" pos='8'/>
+		      <attrPosMap attr="httpMethod" pos='9'/>
+		      <attrPosMap attr="_scheme" pos='10'/> 
+		      <attrPosMap attr="destName" pos='11'/>
+		      <attrPosMap attr="destIpPort" pos='12'/>
+		      <attrPosMap attr="uriStem" pos='13'/>
+		      <attrPosMap attr="uriQuery" pos='14'/>
+		      <attrPosMap attr="user" pos='15'/>
+		      <attrPosMap attr="userGrp" pos='16'/>
+		      <attrPosMap attr="_hierarchy" pos='17'/>
+		      <attrPosMap attr="destIpAddr" pos='18'/>
+		      <attrPosMap attr="httpContentType" pos='19'/>      
+		      <attrPosMap attr="httpReferrer" pos='20'/> 
+		      <attrPosMap attr="httpUserAgent" pos='21'/>
+		      <attrPosMap attr="bcFilterResult" pos='22'/>
+		      <attrPosMap attr="webCategory" pos='23'/>      
+		       <attrPosMap attr="virusName" pos='24'/> 
+		      <attrPosMap attr="reptDevIpAddr" pos='25'/>     
+		</collectAndSetAttrByPosWithNestedSep>
+	    
+		<collectFieldsByRegex src="$_date">
+			<regex><![CDATA[<_year:gPatYear>-<_mon:gPatMonNum>-<_day:gPatDay>]]></regex>
+		</collectFieldsByRegex>
+
+		<setEventAttribute attr="deviceTime">toDateTime($_mon, $_day, $_year, $_time)</setEventAttribute>
+		<setEventAttribute attr="eventType">Bluecoat-SGOS-Generic</setEventAttribute>
+		<setEventAttribute attr="eventAction">0</setEventAttribute>
+			
+		<choose>
+			<when test='$httpStatusCode = "0"'>
+				<when test='$bcProxyAction IN "DENIED,TCP_DENIED,UDP_DENIED,FAILED"'>
+					<setEventAttribute attr="eventType">Bluecoat-SGOS-Web-Request-Denied</setEventAttribute>
+					<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+				</when>
+				<when test='$bcFilterResult = "DENIED"'>
+					<setEventAttribute attr="eventType">Bluecoat-SGOS-Web-Request-Denied</setEventAttribute>
+					<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+				</when>
+				<otherwise>
+					<setEventAttribute attr="eventType">Bluecoat-SGOS-Web-Request-Success</setEventAttribute>
+					<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+				</otherwise>
+			</when>
+			<otherwise>
+				<when test="matches($httpStatusCode, '^2')">
+					<setEventAttribute attr="eventType">Bluecoat-SGOS-Web-Request-Success</setEventAttribute>
+					<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+				</when>
+			      
+				<when test="matches($httpStatusCode, '^3')">
+					<setEventAttribute attr="eventType">Bluecoat-SGOS-Web-Request-Redirect</setEventAttribute>
+					<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+				</when>
+
+				<when test='$httpStatusCode = "401"'>
+					<setEventAttribute attr="eventType">Bluecoat-SGOS-Web-Client-Access-Denied</setEventAttribute>
+					<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+				</when>
+			      
+				<when test='$httpStatusCode = "403"'>
+					<setEventAttribute attr="eventType">Bluecoat-SGOS-Web-Forbidden-Access-Denied</setEventAttribute>
+					<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+				</when>
+			      
+				<when test='$httpStatusCode = "400"'>
+					<setEventAttribute attr="eventType">Bluecoat-SGOS-Web-Bad-Request</setEventAttribute>
+					<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+				</when>
+			      
+				<when test='$httpStatusCode = "411"'>
+					<setEventAttribute attr="eventType">Bluecoat-SGOS-Web-Length-Reqd-Access-Denied</setEventAttribute>
+					<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+				</when>
+
+				<when test="matches($httpStatusCode, '^4')">
+					<setEventAttribute attr="eventType">Bluecoat-SGOS-Web-Client-Error</setEventAttribute>
+					<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+					<setEventAttribute attr="eventAction">1</setEventAttribute>
+				</when>
+			      
+				<when test="matches($httpStatusCode, '^5')">
+					<setEventAttribute attr="eventType">Bluecoat-SGOS-Web-Server-Error</setEventAttribute>
+					<setEventAttribute attr="eventSeverity">6</setEventAttribute>
+					<setEventAttribute attr="eventAction">1</setEventAttribute>
+				</when>
+			</otherwise>
+		</choose>
+	</otherwise>
+      </choose>
+  </parsingInstructions>
+</eventParser>

@@ -1,0 +1,39 @@
+[reptDevIpAddr(key)]
+86.86.86.86
+[eventMsg]
+<14>1 2014-01-30T06:54:29.966 TMG-FW-CO-SPRINGS RT_FLOW - RT_FLOW_SESSION_CREATE [junos@2636.1.1.1.2.39 source-address=192.168.20.61 source-port=2273 destination-address=192.168.2.101 destination-port=123 service-name=junos-ntp nat-source-address=192.168.20.61 nat-source-port=2273 nat-destination-address=192.168.2.101 nat-destination-port=123 src-nat-rule-name=None dst-nat-rule-name=None protocol-id=17 policy-name=shortel_to_servers-desktops_permit source-zone-name=shoretel destination-zone-name=lan session-id-32=10922 username=N/A roles=N/A packet-incoming-interface=reth0.20 application=UNKNOWN nested-application=UNKNOWN encrypted=UNKNOWN]
+[params]
+deviceTime=any
+parserName=JunOS2Parser
+appName=junos-ntp
+eventType=JUNOS_RT_FLOW_SESSION_CREATE
+destIpAddr=192.168.2.101
+ipProto=17 (UDP)
+srcIpAddr=192.168.20.61
+reptModel=SRX JunOS
+eventId=any
+policyName=shortel_to_servers-desktops_permit
+ipConnId=10922
+eventParsedOk=1
+eventSeverity=1
+preNATDestIpAddr=192.168.2.101
+eventName=A security session was created
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+eventRuleTrigger=1
+count=1
+srcFwZone=shoretel
+srcIpPort=2273
+preNATDestIpPort=123 (NTP)
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=86.86.86.86
+postNATSrcIpAddr=192.168.20.61
+destIpPort=123 (NTP)
+destFwZone=lan
+postNATSrcIpPort=2273
+customer=Super
+phRecvTime=any
+reptDevIpAddr=86.86.86.86
+reptVendor=Juniper
+user=N/A

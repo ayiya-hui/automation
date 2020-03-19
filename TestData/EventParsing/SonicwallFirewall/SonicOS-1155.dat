@@ -1,0 +1,40 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<129>id=firewall sn=C0EAE44DFBF0 time="2015-10-23 16:41:09 UTC" fw=24.30.249.50 pri=1 c=0 m=1155 msg="Application Control Prevention Alert: PROXY-ACCESS Encrypted Key Exchange -- TCP Random Encryption(Skype,UltraSurf,Emule)" sid=5 appcat="PROXY-ACCESS" appid=2900 catid=27 sess=None n=1415 src=10.216.1.52:50759:X0 dst=23.3.106.101:1935:X1:a23-3-106-101.deploy.static.akamaitechnologies.com
+[params]
+deviceTime=any
+destGeoOrg=any
+parserName=SonicwallFirewallParser
+eventType=SonicOS-1155
+destGeoState=Massachusetts
+destIpAddr=23.3.106.101
+destGeoCountry=any
+srcIpAddr=10.216.1.52
+reptModel=SonicOS
+eventId=any
+eventParsedOk=1
+eventSeverity=10
+eventName=Application Control Prevent Alert
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+msg=PROXY-ACCESS Encrypted Key Exchange -- TCP Random Encryption(Skype,UltraSurf,Emule)
+eventRuleTrigger=1
+type=Application_Control_Prevention_Alert
+destName=any
+appCategory=PROXY-ACCESS
+count=1
+srcIntfName=X0
+srcIpPort=50759
+eventSeverityCat=HIGH
+collectorId=any
+destIntfName=X1:a23-3-106-101.deploy.static.akamaitechnologies.com
+relayDevIpAddr=$localhost
+destIpPort=1935
+reptDevName=any
+customer=Super
+ipsSignatureId=5
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Sonicwall
+destGeoCity=any

@@ -1,0 +1,2 @@
+[eventMsg]
+<188>Jul  4 15:07:01 HOST-30.200.170.1 Snort: [119:15:1] http_inspect: OVERSIZE REQUEST-URI DIRECTORY [Impact: Unknown] From DetectionEngine_IPS_DMZ2/SourcefireIPS at Thu Jul  4 15:07:01 2013 UTC [Classification: Potentially Bad Traffic] [Priority: 2] {tcp} 10.20.1.12:57689->64.94.107.53:80

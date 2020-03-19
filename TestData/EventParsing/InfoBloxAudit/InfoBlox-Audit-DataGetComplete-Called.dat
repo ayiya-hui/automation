@@ -1,0 +1,29 @@
+[reptDevIpAddr(key)]
+10.10.10.11
+[eventMsg]
+<29>May 17 07:19:05 10.10.10.11 httpd: 2016-05-17 11:19:05.045Z [adminflast]: Called - DataGetComplete message=data\040get\040completed: Args message="data get completed"
+[params]
+deviceTime=any
+parserName=InfoBloxAuditParser
+eventType=InfoBlox-Audit-DataGetComplete-Called
+srcName=HOST-10.10.10.11
+srcIpAddr=10.10.10.11
+reptModel=NiOS
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=DataGetComplete Called
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+msg=data get completed
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=10.10.10.11
+user=adminflast
+rawEventMsg=any
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=10.10.10.11
+reptVendor=InfoBlox

@@ -1,0 +1,22 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<190>Nov 16 12:56:15 mgd[22025]: %INTERACT-6-UI_COMMIT_PROGRESS: Commit operation in progress: signaling 'Alarm control process', pid 812, signal 30, status 0 with notification errors enabled
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+count=1
+phCustId=$sender
+deviceTime=any
+eventAction=0 (Permit)
+eventId=any
+eventName=Commit operation in progress
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=6
+eventSeverityCat=MEDIUM
+eventType=JUNOS_UI_COMMIT_PROGRESS
+reptDevIpAddr=$localhost
+reptModel=JunOS
+reptVendor=Juniper
+usrMsg=signaling 'Alarm control process', pid 812, signal 30, status 0 with notification errors enabled

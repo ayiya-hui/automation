@@ -1,0 +1,50 @@
+[reptDevIpAddr(key)]
+10.6.53.215
+[eventMsg]
+2016-04-12 12:34:54 10.6.53.215TRAP, SNMP v1, community B3395668-RO	SNMPv2-SMI::enterprises.311.1.1.3.1.2 Authentication Failure Trap (0) Uptime: 1:05:58.93
+[params]
+customer=Super
+eventId=any
+parserName=MicrosoftDHCPTrapParser
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+count=1
+eventSeverity=1
+eventType=WIN-DHCP-Authentication-Failure
+reptDevIpAddr=10.6.53.215
+collectorId=any
+extEventRecvProto=Syslog
+eventName=DHCP Authentication failure
+reptVendor=Microsoft
+relayDevIpAddr=10.6.53.215
+rawEventMsg=any
+phRecvTime=any
+reptDevName=any
+reptModel=DHCP
+[reptDevIpAddr(key)]
+10.6.53.215
+[eventMsg]
+2016-04-13 12:34:09 10.6.53.215TRAP, SNMP v1, community B3395668-RO	SNMPv2-SMI::enterprises.311.1.1.3.1.2 Authentication Failure Trap (0) Uptime: 1 day, 1:05:13.53
+[params]
+customer=Super
+eventId=any
+parserName=MicrosoftDHCPTrapParser
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+count=1
+eventSeverity=1
+eventType=WIN-DHCP-Authentication-Failure
+reptDevIpAddr=10.6.53.215
+collectorId=any
+extEventRecvProto=Syslog
+eventName=DHCP Authentication failure
+reptVendor=Microsoft
+relayDevIpAddr=10.6.53.215
+rawEventMsg=any
+phRecvTime=any
+reptDevName=any
+reptModel=DHCP

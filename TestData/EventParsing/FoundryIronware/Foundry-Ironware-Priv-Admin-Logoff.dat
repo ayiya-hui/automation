@@ -1,0 +1,23 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<14>SJ-Dev-A-Fdy-FastIron, phoenix_agent logout from PRIVILEGED EXEC mode
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+reptDevIpAddr=$localhost
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=$localhost
+eventAction=0 (Permit)
+eventName=Foundry privileged mode admin logoff
+reptVendor=Foundry
+eventType=Foundry-Ironware-Priv-Admin-Logoff
+user=phoenix_agent
+phEventCategory=0 (External)
+destName=SJ-Dev-A-Fdy-FastIron
+reptModel=Ironware

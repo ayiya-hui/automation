@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<52>Apr 11 13:08:22 SymantecServer $localhost: 6400-BBRINKER,Category: 2,IPS,[Intrusion prevention submission] Submitting information to Symantec about file failed. File : '\windows\SysWOW64\jscript9.dll'.
+[params]
+customer=Super
+eventId=any
+parserName=SymantecAVParser
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=MEDIUM
+reptVendor=Symantec
+eventSeverity=5
+eventType=Symantec-AV-Submit-Failed
+reptDevIpAddr=$localhost
+collectorId=any
+eventName=Information failed to be submitted to Symantec
+count=1
+computer=6400-BBRINKER
+relayDevIpAddr=$localhost
+phRecvTime=any
+hostName=6400-BBRINKER
+reptDevName=any
+reptModel=Endpoint Protection Service

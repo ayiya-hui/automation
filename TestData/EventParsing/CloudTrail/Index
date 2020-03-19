@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+AWS-CloudTrail-EC2-DescribeInstances,CloudTrail_1,CloudTrail,$localhost,,syslog

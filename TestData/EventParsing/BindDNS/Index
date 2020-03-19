@@ -1,0 +1,13 @@
+eventType,name,module,reptDevIpAddr,key,method
+BIND_DNS_A_Query,BindDNS_1,BindDNS,100.1.1.1,,syslog
+BIND_DNS_PTR_Query,BindDNS_2,BindDNS,100.1.1.1,,syslog
+BIND_DNS_NS_Query,BindDNS_3,BindDNS,100.1.1.1,,syslog
+BIND_DNS_MX_Query,BindDNS_4,BindDNS,100.1.1.1,,syslog
+BIND_DNS_SOA_Query,BindDNS_5,BindDNS,100.1.1.1,,syslog
+BIND_DNS_CNAME_Query,BindDNS_6,BindDNS,100.1.1.1,,syslog
+BIND_DNS_HINFO_Query,BindDNS_7,BindDNS,100.1.1.1,,syslog
+BIND_DNS_AXFR_Query,BindDNS_8,BindDNS,100.1.1.1,,syslog
+BIND_DNS_A_Query,BindDNS_9,BindDNS,$localhost,,syslog
+BIND_DNS_PTR_Query,BindDNS_10,BindDNS,$localhost,,syslog
+BIND_DNS_RPZ_DISABLED,BindDNS_11,BindDNS,10.1.5.23,,syslog
+BIND_DNS_RPZ_FAILURE,BindDNS_12,BindDNS,10.1.5.23,,syslog

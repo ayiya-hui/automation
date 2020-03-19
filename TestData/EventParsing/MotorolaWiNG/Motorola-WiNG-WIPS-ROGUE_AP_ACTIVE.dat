@@ -1,0 +1,30 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+2015-11-11T10:55:25.660596-08:00 uscarf1rialrfs600001 %WIPS-4-ROGUE_AP_ACTIVE: Rogue AP 10-A5-D0-F8-E1-CC vendor 10-A5-D0 on channel 11 with vlan 100 and rssi -59 active from uscarf1rial-ap38
+[params]
+parserName=MotorolaWiNGParser
+eventType=Motorola-WiNG-WIPS-ROGUE_AP_ACTIVE
+srcName=uscarf1rial-ap38
+reptModel=WiNG WLAN AP
+eventId=any
+eventParsedOk=1
+eventSeverity=5
+wlanChannelId=11
+eventName=Motorola WLAN AP: Rogue AP Active
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+eventRuleTrigger=1
+hostMACAddr=10:a5:d0:f8:e1:cc
+count=1
+eventSeverityCat=MEDIUM
+collectorId=any
+hostVendor=10-A5-D0
+relayDevIpAddr=$localhost
+wlanRssi=-59
+reptDevName=uscarf1rialrfs600001
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Motorola
+hostVLAN=100

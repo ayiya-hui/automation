@@ -1,0 +1,42 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<180>date=2013-05-01 time=11:20:50 devname=FortiGate80C devid=FGT80C3912622808 logid=0212008448 type=utm subtype=virus eventtype=filename level=warning vd=root msg=File is blocked. status=passthrough service=mm1 srcip=1.1.1.1 dstip=2.2.2.2 srcport=2560 dstport=5120 srcintf=lo dstintf=eth0 policyid=12345 identidx=67890 sessionid=312 direction=rx filefilter=file pattern filetype=ignored file=file_name quarskip=No quarantine for HTTP GET file pattern block. user=user group=group
+[params]
+deviceTime=any
+destGeoOrg=any
+eventType=FortiGate-antivirus-infected-blocked
+phCustId=$sender
+destIpAddr=2.2.2.2
+destGeoCountry=any
+srcIpAddr=1.1.1.1
+hostGeoLongitude=133
+usrMsg=File is blocked.
+reptModel=FortiOS
+eventId=any
+eventParsedOk=1
+eventSeverity=5
+hostIpAddr=1.1.1.1
+eventName=Virus file was blocked
+serviceName=mm1
+phEventCategory=0 (External)
+destName=any
+srcIntfName=lo
+srcIpPort=2560
+eventSeverityCat=MEDIUM
+collectorId=any
+hostGeoLatitude=-27
+destIntfName=eth0
+relayDevIpAddr=$localhost
+user=user
+destIpPort=5120
+reptDevName=any
+count=1
+hostGeoCountry=Australia
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Fortinet
+destGeoCity=any
+userGrp=group
+hostGeoOrg=APNIC Debogon Project

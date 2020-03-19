@@ -1,0 +1,29 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<133>id=firewall sn=0017C5148478 time="2015-04-26 17:14:50" fw=74.203.128.131 pri=5 c=10240 gcat=4 m=175 msg="ICMP packet from LAN dropped" srcMac=00:0d:ad:02:05:70 src=0.163.141.53::X0 srcZone=LAN dstMac=02:17:c5:14:84:78 dst=224.239.119.186 type=3 icmpCode=3 rcvd=72 n=20136
+[params]
+deviceTime=any
+parserName=SonicwallFirewallParser
+eventType=SonicOS-175
+destIpAddr=224.239.119.186
+srcIpAddr=0.163.141.53
+reptModel=SonicOS
+eventId=any
+eventParsedOk=1
+eventSeverity=2
+icmpType=3 (Destination unreachable)
+eventName=ICMP packet from LAN dropped
+phEventCategory=0 (External)
+eventRuleTrigger=1
+count=1
+srcIntfName=X0
+recvBytes=72
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Sonicwall

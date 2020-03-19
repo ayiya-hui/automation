@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+1.1.1.1
+[eventMsg]
+<134>Sep 27 08:10:26 1.1.1.1 nmservic.exe[1016]: Policy: Policy (SPUDWWCREW), NAC (None) will be attempted to be sent to - user: (SPU\ambionh) device: (01CA909DE0D5A6260015C5EA70BB050).
+[params]
+rawEventMsg=any
+eventId=any
+count=1
+domain=SPU
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+policyName=SPUDWWCREW
+eventSeverity=1
+eventType=MobXE-Policy-Client-Update
+phCustId=$sender
+reptDevIpAddr=1.1.1.1
+collectorId=any
+eventName=Mobility XE Client NAC policy update sent to client
+procName=nmservic.exe
+reptVendor=NetMotion
+user=ambionh
+phRecvTime=any
+hostName=any
+reptModel=Mobility XE

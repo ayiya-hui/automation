@@ -1,0 +1,91 @@
+<Rules>
+
+  <Rule group="PH_SYS_RULE_Vuln" id="PH_Rule_Vuln_1" phIncidentCategory="Other">
+    <Name>Scanner found severe vulnerability</Name>
+    <active>true</active>
+    <Description>Detects a high severity vulnerability reported by a vulnerability scanner</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_HIGH_SEV_SCANNER" severity="9">
+      <ArgList>
+        hostName = ScannerHighSev.hostName, vulnName = ScannerHighSev.vulnName
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="300">
+      <SubPattern displayName="ScannerHighSev" name="ScannerHighSev">
+        <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_Vulnerability) AND reptVendor IN ("Qualys", "Nessus", "nCircle") AND eventSeverity &gt;= 8 </SingleEvtConstr>
+	<GroupByAttr>hostName,vulnName</GroupByAttr>
+	<GroupEvtConstr>COUNT(*) &gt;= 1</GroupEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> scanEnd,reptVendor,hostName,osType,vulnName,eventSeverity,vulnType,vulnCVEId,vulnBugTraqID,vulnScore,vulnConseq,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+  </Rule>
+
+  <Rule group="PH_SYS_RULE_Vuln" id="PH_Rule_Vuln_2" phIncidentCategory="Other">
+    <Name>Virus found but not remediated</Name>
+    <active>true</active>
+    <Description>Detects that host anti-virus or content inspection devices found a virus but could not rremediate it</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_VIRUS_NON_REMEDY" severity="9">
+      <ArgList>
+        hostIpAddr = VirusFound.hostIpAddr
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="300">
+      <SubPattern displayName="VirusFound" name="VirusFound">
+        <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_Worm_Remedy_Failed) AND reptDevIpAddr IN (Group@PH_SYS_APP_SEC_MGMT,Group@PH_SYS_DEVICE_SEC_GW)  </SingleEvtConstr>
+	<GroupByAttr>hostIpAddr</GroupByAttr>
+	<GroupEvtConstr>COUNT(*) &gt;= 1</GroupEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,reptDevIpAddr,eventType,hostIpAddr,computer,user,virusName,virusType,fileName,virusAction,virusQuarantStatus,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+  </Rule>
+
+  <Rule group="PH_SYS_RULE_Vuln" id="PH_Rule_Vuln_3" phIncidentCategory="Other">
+    <Name>Spam/Malicious Mail Attachment found but not remediated</Name>
+    <active>true</active>
+    <Description>Detects that host anti-virus or content inspection devices found a Spam/Malicious Mail Attachment but could not rremediate it. The sender is sending to 5 or more distinct receiver mail addresses </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_MAILATTACH_NON_REMEDY" severity="7">
+      <ArgList>
+        srcIpAddr = AttachFound.hostIpAddr, senderMailAddr = AttachFound.senderMailAddr
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="300">
+      <SubPattern displayName="AttachFound" name="AttachFound">
+        <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_MailMalware_Found) </SingleEvtConstr>
+	<GroupByAttr>hostIpAddr,senderMailAddr</GroupByAttr>
+	<GroupEvtConstr>COUNT(DISTINCT receiverMailAddr) &gt;= 5</GroupEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,reptDevIpAddr,eventType,srcIpAddr,senderMailAddr,receiverMailAddr,mailSubject,vendor,spamScore,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+  </Rule>
+
+  <Rule group="PH_SYS_RULE_Vuln" id="PH_Rule_Vuln_4" phIncidentCategory="Other">
+    <Name>Spyware found but not remediated</Name>
+    <active>true</active>
+    <Description>Detects that host anti-virus or content inspection devices found a spyware but could not remediate it</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_SPYWARE_NON_REMEDY" severity="8">
+      <ArgList>
+        hostIpAddr = SpywareFound.hostIpAddr
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="300">
+      <SubPattern displayName="SpywareFound" name="SpywareFound">
+        <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_Spyware_Remedy_Failed) AND reptDevIpAddr IN (Group@PH_SYS_APP_SEC_MGMT,Group@PH_SYS_DEVICE_SEC_GW) </SingleEvtConstr>
+	<GroupByAttr>hostIpAddr</GroupByAttr>
+	<GroupEvtConstr>COUNT(*) &gt;= 1</GroupEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,reptDevIpAddr,eventType,hostIpAddr,computer,user,fileName,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+  </Rule>
+
+</Rules>

@@ -1,0 +1,22 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>Jul 24 2008 03:23:37: %PIX-6-611101: User authentication succeeded: Uname: wenyong --automator
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=any
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+eventAction=0 (Permit)
+eventName=Appliance admin user authentication succeeded
+reptVendor=Cisco
+eventType=PIX-611101
+user=wenyong
+phEventCategory=0 (External)
+reptDevIpAddr=$localhost
+reptModel=PIX

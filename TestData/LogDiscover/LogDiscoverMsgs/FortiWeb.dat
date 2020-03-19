@@ -1,0 +1,2 @@
+[eventMsg]
+date=2016-02-18 time=10:00:05 log_id=00001002 msg_id=000067508821 device_id=FV400D3A15000010 vd="root" timezone="(GMT+3:00)Baghdad" type=event subtype="admin" pri=information trigger_policy="" user=admin ui=GUI action=edit status=success msg="User admin changed global from GUI(172.22.6.66)" 

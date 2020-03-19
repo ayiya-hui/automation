@@ -1,0 +1,73 @@
+<Reports>
+ 
+  <Report id="PH_Report_PH_Audit_1" group="PH_SYS_REPORT_PH_Audit">
+    <Name>Logon: Top System Admin Users Ranked By Successful Logon Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks System Admin Users By Successful Logon Count </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,srcIpAddr,user,phCustId,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*)</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter" name="Filter">
+           <SingleEvtConstr>phEventCategory = 2 AND eventType = "PH_AUDIT_USER_LOGIN_SUCCESS"</SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr,srcIpAddr,user,phCustId</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>srcIpAddr,reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_PH_Audit_2" group="PH_SYS_REPORT_PH_Audit">
+    <Name>Logon: Top System Admin Users Ranked By Failed Logon Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks System Admin Users By Failed Logon Count </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,srcIpAddr,user,phCustId,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*)</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW_1" name="Filter_FW_1">
+           <SingleEvtConstr>phEventCategory = 2 AND eventType = "PH_AUDIT_USER_LOGIN_FAILURE"</SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr,srcIpAddr,user,phCustId</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>srcIpAddr,reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_PH_Audit_3" group="PH_SYS_REPORT_PH_Audit">
+    <Name>Logon: All System Admin User Logon Attempts </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Details all System Admin User Logon Attempts </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,phRecvTime,eventType,srcIpAddr,user,phCustId</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*)</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW_1" name="Filter_FW_1">
+           <SingleEvtConstr>phEventCategory = 2 AND eventType IN ("PH_AUDIT_USER_LOGIN_SUCCESS","PH_AUDIT_USER_LOGIN_FAILURE","PH_AUDIT_USER_LOGOFF","PH_AUDIT_USER_SESSION_TIMEOUT")</SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>srcIpAddr,reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_PH_Audit_4" group="PH_SYS_REPORT_PH_Audit">
+    <Name>Logon: All System Admin User Object Modification Activity </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Details all System Admin user object modification activities </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,phRecvTime,eventType,srcIpAddr,user,phCustId,osObjType,osObjName</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*)</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter" name="Filter">
+           <SingleEvtConstr>phEventCategory = 2 AND eventType IN ("PH_AUDIT_OBJECT_CREATED","PH_AUDIT_OBJECT_DELETED","PH_AUDIT_OBJECT_UPDATED")</SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>srcIpAddr,reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+  
+</Reports>

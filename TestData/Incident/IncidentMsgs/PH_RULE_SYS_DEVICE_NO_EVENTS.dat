@@ -1,0 +1,2 @@
+[eventMsg]
+[PH_SYSTEM_DEVICE_NO_EVENTS]:[eventSeverity]=PHL_INFO,[fileName]=phDevNoEvtChecker.cpp,[lineNumber]=44,[reptDevIpAddr]=$localhost,[phLogDetail]=Device has not reported any event for last 60 minutes

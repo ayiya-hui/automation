@@ -1,0 +1,34 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<182>date=2013-05-01 time=11:20:50 devname=FortiGate80C devid=FGT80C3912622808 logid=0814044032 type=utm subtype=voip eventtype=voip level=information vd=root session_id=1 epoch=2 event_id=3 src=1.2.3.4 src_port=53764 dst=9999:7777:ffff:eeee:dddd:cccc:bbbb:aaaa dst_port=57616 proto=6 src_int=wan1 dst_int=modem policy_id=1 user=username group=groupname profile=profile voip_proto=sip kind=call action=permit status=end duration=123 dir=outbound from=Source User to=Destination User
+[params]
+deviceTime=any
+receiverMailAddr=Destination User
+eventType=FortiGate-VOIP-message
+phCustId=$sender
+ipProto=6 (TCP)
+srcIpAddr=1.2.3.4
+reptModel=FortiOS
+eventId=any
+eventParsedOk=1
+eventSeverity=3
+eventName=VoIP message
+phEventCategory=0 (External)
+srcIntfName=wan1
+srcIpPort=53764
+eventSeverityCat=LOW
+collectorId=any
+destIntfName=modem
+relayDevIpAddr=$localhost
+user=username
+destIpPort=57616
+reptDevName=any
+count=1
+senderMailAddr=Source User
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Fortinet
+durationMSec=123000
+userGrp=groupname

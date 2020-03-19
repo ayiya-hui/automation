@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<13> March 09 14:00:24 AirWatch  AirWatch Syslog Details are as follows Event Type: Device, Event: InstallProfileRequested, User: sysadmin, Event Source: Server, Event Module: Dashboard, Event Category: Command, Event Data: Profile=Android Default SettingsEvent Timestamp: March 9, 2016 14:00:24
+[params]
+customer=Super
+eventId=any
+parserName=AirWatchParser
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+count=1
+eventSeverity=1
+eventType=AirWatch-MDM-InstallProfileRequested
+reptDevIpAddr=$localhost
+collectorId=any
+eventName=AirWatch MDM install profile requested
+reptVendor=AirWatch
+relayDevIpAddr=$localhost
+user=sysadmin
+extEventRecvProto=Syslog
+phRecvTime=any
+eventRuleTrigger=1
+reptDevName=any
+reptModel=MDM

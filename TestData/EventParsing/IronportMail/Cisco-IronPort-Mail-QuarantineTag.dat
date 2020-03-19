@@ -1,0 +1,23 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<22>Oct 18 17:35:45 IronPort-Mail: Info: ISQ: Tagging MID 19597403 for quarantine
+[params]
+rawEventMsg=any
+eventId=any
+count=1
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+eventSeverity=1
+eventType=Cisco-IronPort-Mail-QuarantineTag
+phCustId=$sender
+reptDevIpAddr=$localhost
+collectorId=any
+eventName=IronPort mail found spam - tagged for quarantine
+reptVendor=Cisco
+phRecvTime=any
+ironportMailMID=19597403
+reptDevName=any
+reptModel=IronPort AsyncOS Mail

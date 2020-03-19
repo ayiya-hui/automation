@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+10.4.161.32
+[eventMsg]
+490416181 Sat Mar 01 20:00:38 EST 2014 (?<login>.*?) Module Changed lncmpnasp01.staples.com 10.4.161.32 ">HardwareRevision: blank => blank Serial Number: blank => blank   138711 10.80.2.2
+[params]
+customer=Super
+eventId=any
+eventSeverityCat=LOW
+eventParsedOk=1
+phEventCategory=0 (External)
+parserName=CiscoNCMParser
+count=1
+eventSeverity=1
+eventType=Cisco-NCM-Module-Changed
+reptDevIpAddr=10.4.161.32
+destIpAddr=10.80.2.2
+collectorId=any
+eventName=Cisco Network Compliance Manager Module Changed
+reptVendor=Cisco
+relayDevIpAddr=any
+user=(?<login>.*?)
+extEventRecvProto=Syslog
+phRecvTime=any
+eventRuleTrigger=1
+reptDevName=lncmpnasp01.staples.com
+reptModel=CiscoWorks NCM

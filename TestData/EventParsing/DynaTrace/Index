@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+Dynatrace-Host-Performance-Disk-Storage-Utilization,DynaTrace_1,DynaTrace,$localhost,,syslog

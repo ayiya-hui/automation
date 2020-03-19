@@ -1,0 +1,35 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<15>Mar 18 13:43:56 mso2 app-proc[7396]: CEF:0|mandiant|mso|1.4.0|Mandiant Containment Queued|Mandiant Containment Queued|0|rt=Mar 18 2014 13:43:56 UTC dvchost=71.71.71.71 categoryDeviceGroup=/IDS/Application/Service categoryDeviceType=Forensic Investigation categoryObject=/Host cs1Label=Host Agent Cert Hash cs1=rFPV28fZz61fBmN3qbZahm dst=192.168.69.103 dmac=00-50-56-9e-13-a1 dhost=VICTIM-5 dntdom=TESTDOMAIN cd1Label=Agent Last Audit cd1=Mar 18 2014 13:29:43 UTC cs2Label=Mandiant Agent Version cs2=10.6.14 cs5Label=Target GMT Offset cs5=-PT5H cs6Label=Target OS cs6=Microsoft Windows XP 2600 Service Pack 3 devAction=Containment Status msg=Host VICTIM-5 uncontain queued categoryOutcome=/Success categorySignificance=/Informational categoryBehavior=/Create externalId=ceq8kd6rVi4dTE7nosAR6G categoryTupleDescription=A Host Containment task was queued. cs3Label=Containment action cs3=uncontain request=https://mso2.testdomain.local:3000/find_host/search/rFPV28fZz61fBmN3qbZahm
+[params]
+domain=TESTDOMAIN
+parserName=HXParser
+eventType=FireEye-HX_UnContainment_Queued
+hxAgentCertHash=rFPV28fZz61fBmN3qbZahm
+hostName=VICTIM-5
+hxDirectURL=https://mso2.testdomain.local:3000/find_host/search/rFPV28fZz61fBmN3qbZahm
+computer=VICTIM-5
+osType=Microsoft Windows XP 2600 Service Pack 3
+reptModel=HX
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+hostIpAddr=192.168.69.103
+eventName=FireEye Mandiant queued host uncontainment request
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+msg=Host VICTIM-5 uncontain queued
+hostMACAddr=00-50-56-9e-13-a1
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+reptDevName=71.71.71.71
+customer=Super
+hxAgentLastAudit=Tue Mar 18 21:29:43 CST 2014
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=FireEye
+hxAgentVersion=10.6.14

@@ -1,0 +1,4 @@
+[eventMsg]
+<132>automator20Dot20Dot20Dot27: NetScreen device_id=automator20Dot20Dot20Dot27 [Root]system-warning-00519: Admin user "netscreen" logged in for Web(http) management (port 80) from 108.142.1.40:37939 (2001-10-20 21:00:20).
+<132>automator20Dot20Dot20Dot27: NetScreen device_id=automator20Dot20Dot20Dot27 [Root]system-warning-00519: Admin user "netscreen" logged in for Web(http) management (port 80) from 188.142.1.40:37939 (2001-10-20 21:00:20).
+

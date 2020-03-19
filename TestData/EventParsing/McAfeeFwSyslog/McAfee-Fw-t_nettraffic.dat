@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+192.168.2.10
+[eventMsg]
+Jun 18 10:34:08 192.168.2.10 wcrfw1 auditd: date="2011-06-18 14:34:08 +0000",fac=f_http_proxy,area=a_libproxycommon,type=t_nettraffic,pri=p_major,pid=2093,logid=0,cmd=httpp,hostname=wcrfw1.community.int,event="session end",app_risk=low,app_categories=infrastructure,netsessid=1adc04dfcb760,src_geo=US,srcip=74.70.205.191,srcport=3393,srczone=external,protocol=6,dstip=10.1.1.27,dstport=80,dstzone=dmz1,bytes_written_to_client=572,bytes_written_to_server=408,rule_name=BTC-inbound,cache_hit=1,start_time="2011-06-18 14:34:08 +0000",application=HTTP
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=6
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=MEDIUM
+destIpAddr=10.1.1.27
+eventName=Permitted IP traffic by policy
+reptVendor=McAfee
+phEventCategory=0 (External)
+eventType=McAfee-Fw-t_nettraffic
+reptDevIpAddr=any
+reptModel=Sidewinder Firewall
+destIpPort=80 (HTTP)
+fwRule=BTC-inbound
+msg=session end
+srcIpAddr=74.70.205.191

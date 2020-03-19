@@ -1,0 +1,32 @@
+[reptDevIpAddr(key)]
+60.60.60.60
+[eventMsg]
+<134>Apr 09 16:43:00 $reporter java: [Nessus-Vuln-Detected]:[eventSeverity]=PHL_INFO, [reptVendor]=Nessus, [reptModel]=Scan Report, [nessusUserName]=kai, [nessusDate]=Wed May 19 10:19:42 2010, [nessusScanName]=Network Scan -Test2, [nessusScanedIP]=10.1.2.26, [nessusScanedHostName]=QA-1.accelops.net.cn, [nessusOS]=Linux Kernel 2.6, [nessusVulnCategory]=Web Servers, [nessusScanedPort]=9443, [nessusVulnTittle]=The web server running on the remote host has an information disclosure vulnerability., [nessusVulnSeverity]=1, [nessusVulnCveId]=CVE-2009-0783, [nessusVulnBugTraqID]=35416, [nessusVulnCvssScore]=3.6, [nessusVulnConseq]=According to its self-reported version number, the remote host is running a vulnerable version of Apache Tomcat. Affected versions permit a web application to replace the XML parser used to process the XML and TLD files of other applications. This could allow a malicious web app to read or modify 'web.xml', 'context.xml', or TLD files of arbitrary web applications.
+[params]
+rawEventMsg=any
+hostIpAddr=10.1.2.26
+eventType=Nessus-Vuln-Detected
+phCustId=$sender
+hostName=QA-1.accelops.net.cn
+vulnCVEId=CVE-2009-0783
+vulnBugTraqID=35416
+scanProfile=Network Scan -Test2
+osType=Linux Kernel 2.6
+reptModel=Nessus Security Scanner
+eventId=any
+eventParsedOk=1
+eventSeverity=4
+eventName=Vulnerability detected by Nessus scanner
+phEventCategory=0 (External)
+ipPort=9443
+eventSeverityCat=LOW
+user=kai
+vulnConseq=According to its self-reported version number, the remote host is running a vulnerable version of Apache Tomcat. Affected versions permit a web application to replace the XML parser used to process the XML and TLD files of other applications. This could allow a malicious web app to read or modify 'web.xml', 'context.xml', or TLD files of arbitrary web applications.
+vulnScore=3
+vulnName=The web server running on the remote host has an information disclosure vulnerability.
+count=1
+vulnType=Web Servers
+phRecvTime=any
+reptDevIpAddr=$reporter
+reptVendor=Nessus
+serverName=60.60.60.60

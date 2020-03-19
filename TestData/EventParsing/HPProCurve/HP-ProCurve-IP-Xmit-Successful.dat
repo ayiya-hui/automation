@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+172.16.1.100
+[eventMsg]
+<15> Aug 28 22:35:30 172.16.1.100 IP : IP  InetServer:s=172.16.1.100 d=172.16.12.131(vl1) xmit
+[params]
+deviceTime=any
+parserName=HPProCurveParser
+eventType=HP-ProCurve-IP-Xmit-Successful
+destIpAddr=172.16.12.131
+srcName=HOST-172.16.1.100
+srcIpAddr=172.16.1.100
+reptModel=ProCurve
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=HP-ProCurve-IP-Xmit-Successful
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=172.16.1.100
+rawEventMsg=any
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=172.16.1.100
+reptVendor=HP

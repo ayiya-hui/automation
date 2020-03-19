@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>Mar 16 11:30:47 pf:     0.0.0.0 > 224.0.0.1: igmp query v2
+[params]
+customer=Super
+eventId=any
+parserName=PfSenseParser
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+count=1
+eventSeverity=1
+eventType=pfSense-IGMP
+reptDevIpAddr=$localhost
+destIpAddr=224.0.0.1
+collectorId=any
+eventName=IGMP traffic
+reptVendor=pfSense
+relayDevIpAddr=$localhost
+phRecvTime=any
+ipProto=2 (IGMP - Internet Group Management)
+eventRuleTrigger=1
+reptModel=BSD Firewall

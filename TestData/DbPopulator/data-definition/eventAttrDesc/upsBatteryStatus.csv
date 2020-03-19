@@ -1,0 +1,5 @@
+$upsBatteryStatus,Description
+1,Unknown
+2,Normal
+3,Low
+4,Depleted

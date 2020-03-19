@@ -1,0 +1,39 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>[2016-04-26 16:10:11] EFW: ALG: prio=1 id=00200206 rev=1 event=hybrid_data algmod=ftp algsesid=95238 rule=ftp4_membserv_com_Allow conn=open connipproto=TCP connrecvif=If1 connsrcip=52.1.157.217 connsrcport=59017 conndestif=If2 conndestip=208.68.133.205 conndestport=23576
+[params]
+deviceTime=any
+destGeoOrg=any
+parserName=ClavisterParser
+eventType=Clavister-hybrid-data
+destGeoState=any
+destIpAddr=208.68.133.205
+srcName=any
+ipProto=6 (TCP)
+destGeoCountry=any
+srcIpAddr=52.1.157.217
+reptModel=cOS Firewall
+eventId=any
+logID=200206
+eventParsedOk=1
+eventSeverity=1
+connMode=open
+eventName=Clavister-hybrid-data
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+srcIpPort=59017
+eventSeverityCat=LOW
+collectorId=any
+destIntfName=If2
+relayDevIpAddr=$localhost
+rawEventMsg=any
+destIpPort=23576
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Clavister
+destGeoCity=any
+fwRule=ftp4_membserv_com_Allow

@@ -1,0 +1,81 @@
+<eventParser name="NeXposeParser">
+
+  <deviceType>
+    <Vendor>Generic</Vendor>
+    <Model>Generic</Model>
+    <Version>ANY</Version>
+  </deviceType>
+
+  <appType>
+    <Vendor>Rapid7</Vendor>
+    <Model>Vulnerability Scanner</Model>
+    <Version>ANY</Version>
+    <Name>Rapid7 NeXpose Vulnerability Scanner</Name>
+  </appType>
+
+  <patternDefinitions>
+    <pattern name="patStrEndWithRightSquareBracket"><![CDATA[[^\]]*]]></pattern>
+    <pattern name="patStrEndBrack"><![CDATA[[^\]+]]></pattern>
+  </patternDefinitions>
+
+  <eventFormatRecognizer><![CDATA[\[NeXpose-]]></eventFormatRecognizer>
+  
+  <testEvents>
+      <testEvent><![CDATA[]]></testEvent>
+  </testEvents>
+
+  <parsingInstructions>
+
+    <!-- sample event
+	 <134>Apr 09 16:43:00 172.16.10.60 java: [Nessus_Report_Vuln]:[eventSeverity]=PHL_INFO, [reptVendor]=Nessus, [reptModel]=Scan Report, [nessusUserName]=kai, [nessusDate]=Wed May 19 10:19:42 2010, [nessusScanName]=Network Scan -Test2, [nessusScanedIP]=10.1.2.26, [nessusOS]=Linux Kernel 2.6, [nessusVulnCategory]=Web Servers, [nessusScanedPort]=9443, [nessusVulnTittle]=The web server running on the remote host has an information disclosure vulnerability., [nessusVulnSeverity]=1, [nessusVulnCveId]=CVE-2009-0783, [nessusVulnBugTraqID]=35416, [nessusVulnCvssScore]=3.6, [nessusVulnConseq]=According to its self-reported version number, the remote host is running a vulnerable version of Apache Tomcat. Affected versions permit a web application to replace the XML parser used to process the XML and TLD files of other applications. This could allow a malicious web app to read or modify 'web.xml', 'context.xml', or TLD files of arbitrary web applications.
+	 -->
+
+    <collectFieldsByRegex src="$_rawmsg">
+      <regex><![CDATA[<:gPatSyslogPRI><:gPatMon>\s+<:gPatDay>\s+<:gPatTime>\s+<serverName:gPatStr>\s+java:\s*\[<eventType:patStrEndWithRightSquareBracket>\]:<_body:gPatMesgBody>]]></regex>
+    </collectFieldsByRegex>
+
+    <when test='$eventType = "NeXpose-Get-Error"'>
+      <setEventAttribute attr="eventSeverity">8</setEventAttribute>
+    </when>
+
+    <collectAndSetAttrByKeyValuePair sep=', [' src="$_body">
+      <attrKeyMap attr="reptVendor" key="[reptVendor]="/>
+      <attrKeyMap attr="user" key="[nexposeUserName]="/>
+      <attrKeyMap attr="_reptTime" key="[nexposeDeviceTime]="/>
+      <attrKeyMap attr="scanProfile" key="[nexposeScanName]="/>
+      <attrKeyMap attr="hostIpAddr" key="[nexposeScanedIP]="/>
+      <attrKeyMap attr="hostVendor" key="[nexposeScanedDeviceVendor]="/>
+      <attrKeyMap attr="hostModel" key="[nexposeScanedDeviceProduct]="/>
+      <attrKeyMap attr="osVersion" key="[nexposeScanedDeviceVersion]="/>
+
+      <attrKeyMap attr="vulnName" key="[nexposeVulnTittle]="/>
+      <attrKeyMap attr="vulnCVEId" key="[nexposeVulnCVE]="/>
+      <attrKeyMap attr="vulnBugTraqID" key="[nexposeVulnBID]="/>
+      <attrKeyMap attr="vulnSecuniaId" key="[nexposeVulnSecunia]="/>
+      <attrKeyMap attr="vulnOSVDBId" key="[nexposeVulnOSVDB]="/>
+
+      <attrKeyMap attr="ipPort" key="[nexposeVulnServicePort]="/>
+      <attrKeyMap attr="serviceName" key="[nexposeVulnServiceName]="/>
+      <attrKeyMap attr="_proto" key="[nexposeVulnServiceProtocol]="/>
+      <attrKeyMap attr="appName" key="[nexposeVulnServiceProduct]="/>
+      
+      <attrKeyMap attr="errorString" key="[nexposeErrorContent]="/>
+    </collectAndSetAttrByKeyValuePair>
+
+    <when test='exist _proto'>
+      <setEventAttribute attr="ipProto">convertStrToIntIpProto($_proto)</setEventAttribute>
+    </when>
+
+    <when test='$eventType = "NeXpose-Vuln-Detected"'>
+      <when test='exist _reptTime'>
+	<collectFieldsByRegex src="$_reptTime">
+	  <regex><![CDATA[<:gPatStr>\s+<_mon:gPatMon>\s+<_day:gPatDay>\s+<_time:gPatTime>\s+<:gPatStr>\s+<_year:gPatYear>]]></regex>
+	</collectFieldsByRegex>
+	<setEventAttribute attr="scanEnd">toDateTime($_mon, $_day, $_year, $_time)</setEventAttribute>
+      </when>
+      <setEventAttribute attr="eventSeverity">7</setEventAttribute>
+    </when>
+
+	   
+  </parsingInstructions>
+</eventParser>

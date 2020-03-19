@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+WebLogic_Server-BEA-220103,WebLogic_1,WebLogic,$localhost,,syslog

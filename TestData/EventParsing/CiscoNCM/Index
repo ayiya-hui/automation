@@ -1,0 +1,12 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+Cisco-NCM-User-Login,CiscoNCM_1,CiscoNCM,10.1.2.3,,syslog
+Cisco-NCM-Task-Started,CiscoNCM_2,CiscoNCM,10.1.2.3,,syslog
+Cisco-NCM-Task-Completed,CiscoNCM_3,CiscoNCM,10.1.2.3,,syslog
+
+Cisco-NCM-Module-Added,CiscoNCM_4,CiscoNCM,10.3.35.32,,syslog
+Cisco-NCM-Software-Update-Succeeded,CiscoNCM_5,CiscoNCM,10.4.161.32,,syslog
+Cisco-NCM-Device-Access-Failure,CiscoNCM_6,CiscoNCM,10.3.35.32,,syslog
+Cisco-NCM-Device-Command-Script-Completed-Successfully,CiscoNCM_7,CiscoNCM,10.4.161.32,,syslog
+Cisco-NCM-Module-Removed,CiscoNCM_8,CiscoNCM,10.4.161.32,,syslog
+Cisco-NCM-Module-Changed,CiscoNCM_9,CiscoNCM,10.4.161.32,,syslog

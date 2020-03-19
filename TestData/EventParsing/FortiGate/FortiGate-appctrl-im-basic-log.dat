@@ -1,0 +1,43 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<182>date=2013-05-01 time=11:20:50 devname=FortiGate80C devid=FGT80C3912622808 logid=1059028672 type=utm subtype=app-ctrl eventtype=app-ctrl-all level=information vd=root user=user group=group kind=login direction=incoming srcip=1.1.1.1 srcport=2560 srcintf=test_srcint dstip=2.2.2.2 dstport=5120 dstintf=test_dstint srcuser=local dstuser=remote proto=12345 service=im policyid=54321 identidx=98765 sessionid=123456789 applist=app list apptype=im app=app name action=pass
+[params]
+deviceTime=any
+destGeoOrg=any
+appName=im
+eventType=FortiGate-appctrl-im-basic-log
+phCustId=$sender
+destIpAddr=2.2.2.2
+ipProto=12345
+destGeoCountry=any
+srcIpAddr=1.1.1.1
+hostGeoLongitude=133
+reptModel=FortiOS
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+hostIpAddr=1.1.1.1
+eventName=An application control IM-basic log
+serviceName=im
+phEventCategory=0 (External)
+destName=any
+srcIntfName=test_srcint
+srcIpPort=2560
+eventSeverityCat=LOW
+collectorId=any
+hostGeoLatitude=-27
+destIntfName=test_dstint
+relayDevIpAddr=$localhost
+user=user
+destIpPort=5120
+reptDevName=any
+count=1
+hostGeoCountry=Australia
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Fortinet
+destGeoCity=any
+userGrp=group
+hostGeoOrg=APNIC Debogon Project

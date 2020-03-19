@@ -1,0 +1,23 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+"<134>Sep 10 11:32:18 pf: 	  Client-IP 10.100.57.69"
+[params]
+customer=Super
+eventId=any
+parserName=PfSenseParser
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+count=1
+eventSeverity=1
+eventType=pfSense-Generic
+reptDevIpAddr=$localhost
+collectorId=any
+eventName=generic pfSense traffic
+reptVendor=pfSense
+relayDevIpAddr=$localhost
+phRecvTime=any
+eventRuleTrigger=1
+reptModel=BSD Firewall

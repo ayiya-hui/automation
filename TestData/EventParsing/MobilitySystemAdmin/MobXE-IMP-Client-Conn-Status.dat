@@ -1,0 +1,30 @@
+[reptDevIpAddr(key)]
+1.1.1.1
+[eventMsg]
+<134>Sep 27 05:40:43 1.1.1.1 nmservic.exe[1016]: IMP: Indicating session 0x1865064d for user SPU\zadnipv (Entity=0) on device host/spult00725.spu.cos.local (Entity=12345) using authentication mode Multi-factor from POP address 184.214.193.76:1040
+[params]
+rawEventMsg=any
+domain=SPU
+deviceTime=any
+eventType=MobXE-IMP-Client-Conn-Status
+phCustId=$sender
+hostName=any
+srcName=any
+procName=nmservic.exe
+srcIpAddr=184.214.193.76
+reptModel=Mobility XE
+eventId=any
+ipConnId=0x1865064d
+eventParsedOk=1
+eventSeverity=1
+eventName=NetMotion MobilityXE IMP client connection status
+phEventCategory=0 (External)
+srcIpPort=1040
+eventSeverityCat=LOW
+collectorId=any
+user=zadnipv
+reptDevName=any
+count=1
+phRecvTime=any
+reptDevIpAddr=1.1.1.1
+reptVendor=NetMotion

@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<190>Aug  9 22:43:36 SyslogAlertForwarder: AttackName:ARP: MAC Address Flip-Flop,AttackTime:2011-08-09 22:43:35 PDT,AttackSeverity:Low,SourceIp:192.168.20.116,SourcePort:N/A,DestinationIp:192.168.20.111,DistinationPort:N/A,AlertId:5620781725332537689,AlertType:Signature,AttackId:0x42400200,AttackSignature:N/A,AttackConfidence:N/A,AdminDomain:My Company,SensorName:accelopsips,Interface:1A-1B,Category:PolicyViolation,SubCategory:restricted-access,Direction:Outbound,ResultStatus:Suspicious,DetectionMechanism:protocol-anomaly,ApplicationProtocol:N/A,NetworkProtocol:N/A,Relevance:N/A,Quarantine_End_Time:N/A
+[params]
+domain=My Company
+deviceTime=any
+eventType=McAfee-Intrushield-ARP: MAC Address Flip-Flop
+phCustId=$sender
+destIpAddr=192.168.20.111
+ipsFPCheckStatus=0 (Couldnot determine)
+srcIpAddr=192.168.20.116
+reptModel=Intrushield
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=McAfee-Intrushield-ARP: MAC Address Flip-Flop
+phEventCategory=0 (External)
+srcIntfName=1A-1B
+srcIpPort=0
+eventSeverityCat=LOW
+relayDevIpAddr=$localhost
+reptDevName=accelopsips
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=McAfee

@@ -1,0 +1,30 @@
+[reptDevIpAddr(key)]
+192.168.0.250
+[eventMsg]
+Mon Jan 26 11:59:15 2015 192.168.0.250 AccelOps-WinLog-WMI [Category]="0" [CategoryString]="(null)" [ComputerName]="WV-DC1.acllc.acwc.com" [Data]="(,62)" [EventCode]="10028" [EventIdentifier]="10028" [EventType]="1" [Logfile]="System" [RecordNumber]="1422098" [SourceName]="Microsoft-Windows-DistributedCOM" [TimeGenerated]="20150126195621.601603-000" [TimeWritten]="20150126195621.601603-000" [Type]="Error" [User]="ACLLC\Administrator" [DCOM was unable to communicate with the computer 192.168.20.124 using any of the configured protocols; requested by PID      d14 (C]="\Program Files (x86)\Palo Alto Networks\User-ID Agent\UaService.exe). "
+[params]
+deviceTime=any
+parserName=WinOSWmiParser
+eventType=Win-System-Microsoft-Windows-DistributedCOM-10028
+hostName=WV-DC1.acllc.acwc.com
+destIpAddr=192.168.0.250
+eventSource=Microsoft-Windows-DistributedCOM
+srcIpAddr=192.168.20.124
+reptModel=Windows
+eventId=any
+latency=0.00
+eventParsedOk=1
+eventSeverity=3
+eventName=DCOM unable to communicate
+phEventCategory=0 (External)
+eventRuleTrigger=1
+type=Audit Failure
+count=1
+seqNum=1422098
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=192.168.0.250
+reptVendor=Microsoft

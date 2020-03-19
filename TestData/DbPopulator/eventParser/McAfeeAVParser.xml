@@ -1,0 +1,174 @@
+<eventParser name="McAfeeAVParser">
+ 
+  <deviceType>
+    <Vendor>Generic</Vendor>
+    <Model>Generic</Model>
+    <Version>ANY</Version>
+  </deviceType>
+
+  <appType>
+    <Vendor>McAfee</Vendor>
+    <Model>ePolicy Orchestrator</Model>
+    <Version>ANY</Version>
+    <Name>McAfee ePolicy Orchestrator Server</Name>
+  </appType>
+
+  <eventFormatRecognizer><![CDATA[SNMPv2-SMI::enterprises\.3401]]></eventFormatRecognizer>
+  
+  <testEvents>
+      <testEvent><![CDATA[2011-04-14 01:28:46 192.168.20.214(via UDP: [192.168.20.214]:45440) TRAP, SNMP v1, community public	SNMPv2-SMI::enterprises.3401 Enterprise Specific Trap (5) Uptime: 0:00:00.30	SNMPv2-SMI::enterprises.3401.12.2.1.1.4.1.1.9.245 = STRING: "To SJ-Dev-S-RH-DNS-01"	SNMPv2-SMI::enterprises.3401.12.2.1.1.4.1.1.11.245 = STRING: "My Organization"	SNMPv2-SMI::enterprises.3401.12.2.1.1.4.1.1.12.245 = STRING: "Directory"	SNMPv2-SMI::enterprises.3401.12.2.1.1.4.1.1.18.245 = STRING: "Any"	SNMPv2-SMI::enterprises.3401.12.2.1.1.4.1.1.19.245 = STRING: "Any"	SNMPv2-SMI::enterprises.3401.12.2.1.1.4.1.1.33.245 = STRING: "(Any)"	SNMPv2-SMI::enterprises.3401.12.2.1.1.4.1.1.15.245 = STRING: "4/16/08 3:07:04 AM"	SNMPv2-SMI::enterprises.3401.12.2.1.1.4.1.1.31.245 = STRING: "1278"	SNMPv2-SMI::enterprises.3401.12.2.1.1.4.1.1.32.245 = STRING: "file infected.  No cleaner  available, file deleted successfully"	SNMPv2-SMI::enterprises.3401.12.2.1.1.4.1.1.16.245 = STRING: "1"	SNMPv2-SMI::enterprises.3401.12.2.1.1.4.1.1.17.245 = STRING: "1"	SNMPv2-SMI::enterprises.3401.12.2.1.1.4.1.1.13.245 = STRING: "VirusScan"	SNMPv2-SMI::enterprises.3401.12.2.1.1.4.1.1.14.245 = STRING: "Virus detected and removed"	SNMPv2-SMI::enterprises.3401.12.2.1.1.4.1.1.22.245 = STRING: "EICAR test file"	SNMPv2-SMI::enterprises.3401.12.2.1.1.4.1.1.23.245 = STRING: "Not Available"	SNMPv2-SMI::enterprises.3401.12.2.1.1.4.1.1.24.245 = STRING: "192.168.1.6"	SNMPv2-SMI::enterprises.3401.12.2.1.1.4.1.1.25.245 = STRING: "SJDEVSWINIIS01"	SNMPv2-SMI::enterprises.3401.12.2.1.1.4.1.1.26.245 = STRING: "C:\Documents and Settings\administrator.PROSPECTHILLS\Desktop\eicar.com"	SNMPv2-SMI::enterprises.3401.12.2.1.1.4.1.1.27.245 = STRING: "3"	SNMPv2-SMI::enterprises.3401.12.2.1.1.4.1.1.6.245 = STRING: "4/16/08 3:07:04 AM"]]></testEvent>
+  </testEvents>
+
+  <!-- pattern definitions -->
+  <patternDefinitions>
+    <pattern name="patStrRightParenthesis"><![CDATA[[^\)]*]]></pattern>
+    <pattern name="patStrColon"><![CDATA[[^:]*]]></pattern>
+    <pattern name="patStrQuote"><![CDATA[[^"]*]]></pattern>
+  </patternDefinitions>
+ 
+  <parsingInstructions>
+
+    <switch>
+      <case>
+        <collectFieldsByRegex src="$_rawmsg">
+          <regex><![CDATA[<_year:gPatYear>-<_mon:gPatMonNum>-<_day:gPatDay>\s+<_time:gPatTime>\s+<:gPatIpV4Dot>\(via <_reptIp:patStrRightParenthesis>\)<_body:gPatMesgBody>]]>
+          </regex>
+        </collectFieldsByRegex>
+      </case>
+      <case>
+        <collectFieldsByRegex src="$_rawmsg">
+          <regex><![CDATA[<_year:gPatYear>-<_mon:gPatMonNum>-<_day:gPatDay>\s+<_time:gPatTime>\s+<hostName:gPatStr> <:gPatStr> \(via <_reptIp:patStrRightParenthesis>\)<_body:gPatMesgBody>]]>
+          </regex>
+        </collectFieldsByRegex>
+      </case>
+    </switch>
+
+    <setEventAttribute attr="deviceTime">toDateTime($_mon, $_day, $_year, $_time)</setEventAttribute>
+    <setEventAttribute attr="eventType">combineMsgId("McAfee-EPO-", "Generic")</setEventAttribute>
+    <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+
+    <!-- parse reporting ip -->
+    <when test='matches($_reptIp, "^\w+:")'>
+      <collectFieldsByRegex src="$_reptIp">
+        <regex><![CDATA[<:patStrColon>:\s+\[<_reptIp:gPatIpV4Dot>\]<:gPatMesgBody>]]></regex>
+      </collectFieldsByRegex>
+    </when>
+    <when test='$_reptIp != "127.0.0.1"'>
+      <when test='$_reptIp != "0.0.0.0"'>
+        <setEventAttribute attr="reptDevIpAddr">$_reptIp</setEventAttribute>
+      </when>
+    </when>
+
+    <choose>
+      <when test='matches($_body,"SNMPv2-SMI::enterprises.3401.12.2.1.1.4")'>		
+		<collectAndSetAttrByKeyValuePair sep='SNMP' src="$_body">
+		<!--collectAndSetAttrByKeyValuePair sep='"\t\\|" \\|"SNMP' src="$_body"-->
+		  <!-- the new uglier way -->
+		  <attrKeyMap attr="_ruleName" key="SNMPv2-SMI::enterprises.3401.12.2.1.1.4.1.1.9."/>
+		  <attrKeyMap attr="_eventType" key="SNMPv2-SMI::enterprises.3401.12.2.1.1.4.1.1.31."/>
+		  <attrKeyMap attr="_eventDesc" key="SNMPv2-SMI::enterprises.3401.12.2.1.1.4.1.1.32."/>
+		  <attrKeyMap attr="_virusName" key="SNMPv2-SMI::enterprises.3401.12.2.1.1.4.1.1.22."/>
+		  <attrKeyMap attr="_srcIp" key="SNMPv2-SMI::enterprises.3401.12.2.1.1.4.1.1.23."/>
+		  <attrKeyMap attr="_targetIp" key="SNMPv2-SMI::enterprises.3401.12.2.1.1.4.1.1.24."/>
+		  <attrKeyMap attr="_targetHost" key="SNMPv2-SMI::enterprises.3401.12.2.1.1.4.1.1.25."/>
+		  <attrKeyMap attr="_affectedObj" key="SNMPv2-SMI::enterprises.3401.12.2.1.1.4.1.1.26."/>
+		</collectAndSetAttrByKeyValuePair>
+		
+        <when test='exist _eventType'>
+          <when test='not_matches($_eventType, "\d+, \d+")'>
+	    <collectFieldsByRegex src="$_eventType">
+	      <regex><![CDATA[\d+\s+=\s+STRING:\s+"<_eventType:patStrQuote>"<:gPatMesgBody>]]></regex>
+    	    </collectFieldsByRegex>
+
+            <setEventAttribute attr="eventType">combineMsgId("McAfee-EPO-", $_eventType)</setEventAttribute>
+
+            <when test='exist _virusName'>
+	      <collectFieldsByRegex src="$_virusName">
+	        <regex><![CDATA[\d+\s+=\s+STRING:\s+"<virusName:patStrQuote>"<:gPatMesgBody>]]></regex>
+              </collectFieldsByRegex>
+            </when>
+          </when>
+        </when>
+
+        <when test='exist _srcIp'>
+	  <collectFieldsByRegex src="$_srcIp">
+	    <regex><![CDATA[\d+\s+=\s+STRING:\s+"<srcIpAddr:patStrQuote>"<:gPatMesgBody>]]></regex>
+	  </collectFieldsByRegex>
+        </when>
+
+        <when test='exist _targetIp'>
+	  <collectFieldsByRegex src="$_targetIp">
+	    <regex><![CDATA[\d+\s+=\s+STRING:\s+"<destIpAddr:patStrQuote>"<:gPatMesgBody>]]></regex>
+	  </collectFieldsByRegex>
+          <setEventAttribute attr="hostIpAddr">$destIpAddr</setEventAttribute>
+        </when>
+
+        <when test='exist _targetHost'>
+	  <collectFieldsByRegex src="$_targetHost">
+	    <regex><![CDATA[\d+\s+=\s+STRING:\s+"<computer:patStrQuote>"<:gPatMesgBody>]]></regex>
+	  </collectFieldsByRegex>
+          <setEventAttribute attr="destName">$computer</setEventAttribute>
+	  <setEventAttribute attr="hostName">$computer</setEventAttribute>
+        </when>
+
+        <when test='exist _affectedObj'>
+	  <collectFieldsByRegex src="$_affectedObj">
+	    <regex><![CDATA[\d+\s+=\s+STRING:\s+"<fileName:patStrQuote>"<:gPatMesgBody>]]></regex>
+	  </collectFieldsByRegex>
+        </when>
+      </when>
+      <when test='matches($_body,"SNMPv2-SMI::enterprises.3401.12.2.1.1.5")'>
+		
+	<collectAndSetAttrByKeyValuePair sep='SNMP' src="$_body">
+	  <attrKeyMap attr="_eventType" key="SNMPv2-SMI::enterprises.3401.12.2.1.1.5.2.300 = STRING: "/>
+	   <attrKeyMap attr="appName" key="SNMPv2-SMI::enterprises.3401.12.2.1.1.5.2.50 = STRING: "/>
+	    <attrKeyMap attr="appVersion" key="SNMPv2-SMI::enterprises.3401.12.2.1.1.5.2.60 = STRING: "/>
+	   <attrKeyMap attr="hostName" key="SNMPv2-SMI::enterprises.3401.12.2.1.1.5.2.70 = STRING: "/>
+	    <attrKeyMap attr="hostIpAddr" key="SNMPv2-SMI::enterprises.3401.12.2.1.1.5.2.80 = STRING: "/>
+	     <attrKeyMap attr="hostMACAddr" key="SNMPv2-SMI::enterprises.3401.12.2.1.1.5.2.100 = STRING: "/>
+	      <attrKeyMap attr="virdbVer" key="SNMPv2-SMI::enterprises.3401.12.2.1.1.5.2.110 = STRING: "/>
+	  <attrKeyMap attr="srcName" key="SNMPv2-SMI::enterprises.3401.12.2.1.1.5.2.130 = STRING: "/>
+	  <attrKeyMap attr="srctIpAddr" key="SNMPv2-SMI::enterprises.3401.12.2.1.1.5.2.140 = STRING: "/>
+	   <attrKeyMap attr="srctMACAddr" key="SNMPv2-SMI::enterprises.3401.12.2.1.1.5.2.150 = STRING: "/>
+	    <attrKeyMap attr="user" key="SNMPv2-SMI::enterprises.3401.12.2.1.1.5.2.170 = STRING: "/>
+	     <attrKeyMap attr="infoURL" key="SNMPv2-SMI::enterprises.3401.12.2.1.1.5.2.190 = STRING: "/>
+	  <attrKeyMap attr="destName" key="SNMPv2-SMI::enterprises.3401.12.2.1.1.5.2.200 = STRING: "/>
+	  <attrKeyMap attr="destIpAddr" key="SNMPv2-SMI::enterprises.3401.12.2.1.1.5.2.210 = STRING: "/>
+	   <attrKeyMap attr="destMACAddr" key="SNMPv2-SMI::enterprises.3401.12.2.1.1.5.2.230 = STRING: "/>
+	   <attrKeyMap attr="targetUser" key="SNMPv2-SMI::enterprises.3401.12.2.1.1.5.2.240 = STRING: "/>
+	  <attrKeyMap attr="destIpPort" key="SNMPv2-SMI::enterprises.3401.12.2.1.1.5.2.250 = STRING: "/>
+	  <attrKeyMap attr="appTransportProto" key="SNMPv2-SMI::enterprises.3401.12.2.1.1.5.2.260 = STRING: "/>
+	  <attrKeyMap attr="procName" key="SNMPv2-SMI::enterprises.3401.12.2.1.1.5.2.270 = STRING: "/>
+	  <attrKeyMap attr="fileName" key="SNMPv2-SMI::enterprises.3401.12.2.1.1.5.2.280 = STRING: "/>
+	   <attrKeyMap attr="threatCategory" key="SNMPv2-SMI::enterprises.3401.12.2.1.1.5.2.290 = STRING: "/>
+	    <attrKeyMap attr="threatLevel" key="SNMPv2-SMI::enterprises.3401.12.2.1.1.5.2.310 = STRING: "/>
+	     <attrKeyMap attr="virusName" key="SNMPv2-SMI::enterprises.3401.12.2.1.1.5.2.320 = STRING: "/>
+	      <attrKeyMap attr="virusType" key="SNMPv2-SMI::enterprises.3401.12.2.1.1.5.2.330 = STRING: "/>
+	       <attrKeyMap attr="virusAction" key="SNMPv2-SMI::enterprises.3401.12.2.1.1.5.2.340 = STRING: "/>
+		<attrKeyMap attr="osType" key="SNMPv2-SMI::enterprises.3401.12.2.1.1.5.2.380 = STRING: "/>
+		 <attrKeyMap attr="osVersion" key="SNMPv2-SMI::enterprises.3401.12.2.1.1.5.2.390 = STRING: "/>
+		<attrKeyMap attr="hostLocation" key="SNMPv2-SMI::enterprises.3401.12.2.1.1.5.2.400 = STRING: "/>
+	</collectAndSetAttrByKeyValuePair>
+	<setEventAttribute attr="eventType">combineMsgId("McAfee-EPO-", $_eventType)</setEventAttribute>
+      </when>
+      <otherwise>
+	<collectAndSetAttrByKeyValuePair sep='\t' src="$_body">
+	  <!-- the old way -->
+	  <attrKeyMap attr="virusName" key="SNMPv2-SMI::enterprises.3401.12.1.5.0 = STRING: "/>
+	  <attrKeyMap attr="virusType" key="SNMPv2-SMI::enterprises.3401.12.1.6.0 = STRING: "/>
+	  <attrKeyMap attr="fileName" key="SNMPv2-SMI::enterprises.3401.12.1.7.0 = STRING: "/>
+	  <attrKeyMap attr="user" key="SNMPv2-SMI::enterprises.3401.12.1.8.0 = STRING: "/>
+	  <attrKeyMap attr="osType" key="SNMPv2-SMI::enterprises.3401.12.1.9.0 = STRING: "/>
+	  <attrKeyMap attr="senderMailAddr" key="SNMPv2-SMI::enterprises.3401.12.1.30.0 = STRING: "/>
+	  <attrKeyMap attr="receiverMailAddr" key="SNMPv2-SMI::enterprises.3401.12.1.31.0 = STRING: "/>
+	  <attrKeyMap attr="mailSubject" key="SNMPv2-SMI::enterprises.3401.12.1.33.0 = STRING: "/>
+	  <attrKeyMap attr="srcIpAddr" key="SNMPv2-SMI::enterprises.3401.12.1.47.0 = STRING: "/>
+	  <attrKeyMap attr="domain" key="SNMPv2-SMI::enterprises.3401.12.1.38.0 = STRING: "/>
+	  <attrKeyMap attr="computer" key="SNMPv2-SMI::enterprises.3401.12.1.41.0 = STRING: "/>
+	</collectAndSetAttrByKeyValuePair>
+      </otherwise>
+    </choose>
+
+  </parsingInstructions>
+  
+</eventParser>

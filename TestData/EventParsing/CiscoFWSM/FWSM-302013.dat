@@ -1,0 +1,33 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<166>Apr 09 2010 12:40:18 Core-FWSM : %FWSM-6-302013: Built outbound TCP connection 144548322861788919 for inside:10.3.60.65/2021 (10.3.60.65/2021) to Manage:10.0.1.10/443 (10.0.1.10/443)
+[params]
+rawEventMsg=any
+deviceTime=any
+eventType=FWSM-302013
+phCustId=$sender
+destIpAddr=10.0.1.10
+destIpPort=443 (HTTPS)
+srcIpAddr=10.3.60.65
+reptModel=FWSM
+eventId=any
+ipConnId=144548322861788919
+eventParsedOk=1
+eventSeverity=1
+preNATDestIpAddr=10.0.1.10
+eventName=Built TCP connection
+phEventCategory=0 (External)
+srcIntfName=inside
+srcIpPort=2021
+preNATDestIpPort=443 (HTTPS)
+eventSeverityCat=LOW
+destIntfName=Manage
+postNATSrcIpAddr=10.3.60.65
+ipProto=6 (TCP)
+postNATSrcIpPort=2021
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Cisco

@@ -1,0 +1,29 @@
+[reptDevIpAddr(key)]
+58.58.58.74
+[eventMsg]
+<14>Jul 24 15:35:56 SW-ABC-123 STP: VLAN 20 BPDU-guard port 1/1/21 detect (Received BPDU), putting into err-disable state
+[params]
+parserName=FoundryIronwareParserPlus
+totFlows=1
+eventType=Foundry-Ironware-StpPort-ErrDisabled
+destIpAddr=58.58.58.74
+reptModel=Ironware
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=STP Port Error - disabled
+appTransportProto=Syslog
+phEventCategory=0 (External)
+eventRuleTrigger=1
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=58.58.58.74
+devPort=1/1/21
+reptDevName=SW-ABC-123
+customer=Super
+phRecvTime=any
+reptDevIpAddr=58.58.58.74
+eventAction=0 (Permit)
+reptVendor=Foundry
+hostVLAN=20

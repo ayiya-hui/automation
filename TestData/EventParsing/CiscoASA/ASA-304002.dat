@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<165>Jul 15 2010 16:26:24: %ASA-5-304002: Access denied URL http://bighugelabs.com/profilewidget/group/random/000000/ffffff/71917374@N00.jpg SRC 10.10.12.115 DEST 72.233.5.162 on interface inside
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+appTransportProto=http
+count=1
+phCustId=$sender
+destIpAddr=72.233.5.162
+destIpPort=80 (HTTP)
+deviceTime=any
+eventAction=0 (Permit)
+eventId=any
+eventName=Denied HTTP Traffic
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=2
+eventSeverityCat=LOW
+eventType=ASA-304002
+ipProto=6 (TCP)
+reptDevIpAddr=$reporter
+reptModel=ASA
+reptVendor=Cisco
+srcIpAddr=10.10.12.115
+srcIntfName=inside
+uriStem=/profilewidget/group/random/000000/ffffff/71917374@N00.jpg

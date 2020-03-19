@@ -1,0 +1,24 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<190>43: Dec 14 23:35:01.463: %SPANTREE-3-PORT_SELF_LOOPED: Ethernet4/5 disabled.- received BPDU src mac (AA:BB:CC:DD:EE:FF)
+[params]
+rawEventMsg=any
+deviceTime=any
+eventType=IOS-SPANTREE-PORT_SELF_LOOPED
+phCustId=$sender
+intfName=Ethernet4/5
+reptModel=IOS
+eventId=any
+eventParsedOk=0
+eventSeverity=5
+hostIpAddr=$localhost
+eventName=Interface disabled because of span tree loop
+phEventCategory=0 (External)
+eventSeverityCat=MEDIUM
+collectorId=any
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Cisco

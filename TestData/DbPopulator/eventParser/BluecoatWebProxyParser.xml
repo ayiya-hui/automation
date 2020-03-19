@@ -1,0 +1,116 @@
+<eventParser name="BluecoatWebProxyParser">
+  
+  <deviceType>
+    <Vendor>Blue Coat</Vendor>
+    <Model>SGOS Web Proxy</Model>
+    <Version>ANY</Version>
+  </deviceType>
+
+  <eventFormatRecognizer><![CDATA[ProxySG:]]></eventFormatRecognizer>
+  
+  <testEvents>
+      <testEvent><![CDATA[<29>May 27 17:27:28 ProxySG: E0000 Access Log FTP (main): Connecting to primary 10.1.20.21 server 10.1.20.21:21.(0) NORMAL_EVENT ../alog_ftp_client.cpp 110]]></testEvent>
+  </testEvents>
+
+  <patternDefinitions>
+    <pattern name="patStrSingleQuote"><![CDATA[[^']*]]></pattern>
+    <pattern name="patStrComma"><![CDATA[[^,]*]]></pattern>
+  </patternDefinitions>
+
+  <parsingInstructions>
+
+  <!-- sample events
+  #Login Failed
+  <29>Jan 29 05:13:36 ProxySG: 260017 Console user password authentication from 192.168.20.35 failed for user 'admin'(0) NORMAL_EVENT ../../AuthConsole.cpp 177
+
+  #Login Succeeded
+  <29>Jan 29 05:13:53 ProxySG: 26001E Administrator login from 192.168.20.35, user 'admin'(0) NORMAL_EVENT ../../AuthConsole.cpp 275
+  -->
+
+  <!-- parsing common fields --> 
+  <switch>
+	<case>
+		  <collectFieldsByRegex src="$_rawmsg">
+		    <regex><![CDATA[<:gPatSyslogPRI>?<_mon:gPatMon>\s+<_day:gPatDay>\s+<_time:gPatTime>\s+ProxySG:\s+<:gPatStr>\s+<_body:gPatMesgBody>]]></regex>
+		  </collectFieldsByRegex>
+	</case>
+	<case>
+		   <collectFieldsByRegex src="$_rawmsg">
+		    <regex><![CDATA[<:gPatSyslogPRI>?<_mon:gPatMon>\s+<_day:gPatDay>\s+<_time:gPatTime>\s+<reptDevIpAddr:gPatIpV4Dot>\s+ProxySG:\s+<:gPatStr>\s+<_body:gPatMesgBody>]]></regex>
+		  </collectFieldsByRegex>
+	</case>
+ </switch>
+  
+  <setEventAttribute attr="deviceTime">toDateTime($_mon, $_day, $_time)</setEventAttribute>
+  <setEventAttribute attr="eventType">Bluecoat-SGOS-Generic</setEventAttribute>     
+  <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+  <setEventAttribute attr="eventAction">0</setEventAttribute>
+
+  <choose>
+    <when test="matches($_body, '^Console')">
+      <collectAndSetAttrByRegex src="$_body">
+        <regex><![CDATA[Console user password authentication from <srcIpAddr:gPatIpV4Dot> failed for user '<user:patStrSingleQuote>'<:gPatMesgBody>]]></regex>
+      </collectAndSetAttrByRegex>
+      <setEventAttribute attr="eventAction">1</setEventAttribute>
+      <setEventAttribute attr="eventType">Bluecoat-SGOS-Login-Failure</setEventAttribute>
+    </when>
+
+    <when test="matches($_body, '^Administrator')">
+      <collectAndSetAttrByRegex src="$_body">
+        <regex><![CDATA[Administrator login from <srcIpAddr:gPatIpV4Dot>, user '<user:patStrSingleQuote>'<:gPatMesgBody>]]></regex>
+      </collectAndSetAttrByRegex>
+      <setEventAttribute attr="eventType">Bluecoat-SGOS-Login-Success</setEventAttribute>      
+    </when>
+
+    <when test="matches($_body, 'Access Log FTP')">
+      <collectAndSetAttrByRegex src="$_body">
+        <regex><![CDATA[Access Log FTP\s.+ <destIpAddr:gPatIpV4Dot>:<destIpPort:gPatIpPort>.+]]></regex>
+      </collectAndSetAttrByRegex>
+      <setEventAttribute attr="eventType">Bluecoat-SGOS-AccessLog-FTP</setEventAttribute> 
+      <setEventAttribute attr="srcIpAddr">$reptDevIpAddr</setEventAttribute>
+    </when>
+    
+    <when test="matches($_body, '^Health check')">
+      <switch>
+	<case>
+	      <collectAndSetAttrByRegex src="$_body">
+		<regex><![CDATA[Health check '<hostName:patStrSingleQuote>' \(IP <hostIpAddr:gPatIpV4Dot>\) changed from: <:patStrComma>, to: <_status:patStrComma>, and has become <:gPatStr>\. Status: <_msg:gPatMesgBody>\.\(0\).*]]></regex>
+	      </collectAndSetAttrByRegex>	  
+          </case>	      
+	<case>
+	      <collectAndSetAttrByRegex src="$_body">
+		<regex><![CDATA[Health check '<hostName:patStrSingleQuote>'\s+changed from: <:patStrComma>, to: <_status:patStrComma>, and has become <:gPatStr>\. Status: <_msg:gPatMesgBody>\.\s+\(IP <hostIpAddr:gPatIpV4Dot>\)\(0\).*]]></regex>
+	      </collectAndSetAttrByRegex>
+	</case>	
+       </switch>
+       <setEventAttribute attr="reptDevIpAddr">$hostIpAddr</setEventAttribute>
+      <when test='$_status = "OK"'>
+	<setEventAttribute attr="eventType">Bluecoat-SGOS-HealthCheck-Success</setEventAttribute>
+      </when>
+      <when test='$_status = "Check failed"'>
+	<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+	<setEventAttribute attr="eventAction">1</setEventAttribute>
+	<setEventAttribute attr="eventType">Bluecoat-SGOS-HealthCheck-Failed</setEventAttribute> 
+	<switch>
+		<case>
+			<collectAndSetAttrByRegex src="$_msg">
+				<regex><![CDATA[Socket could not be connected successfully]]></regex>
+			</collectAndSetAttrByRegex>
+			<setEventAttribute attr="eventType">Bluecoat-SGOS-HealthCheck-Failed-Socket-Error</setEventAttribute> 
+		</case>
+		<case>
+			<collectAndSetAttrByRegex src="$_msg">
+				<regex><![CDATA[Socket could not negotiate an SSL connection]]></regex>
+			</collectAndSetAttrByRegex>
+			<setEventAttribute attr="eventType">Bluecoat-SGOS-HealthCheck-Failed-SSL-Error</setEventAttribute>
+		</case>
+	</switch>
+      </when>
+    </when>
+    
+    
+  </choose>
+
+  </parsingInstructions>
+
+</eventParser>

@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<109>Aug 20 14:06:47 audit: [ID 702911 audit.notice] logout ok session 584538286 by root as root:root from yes.this.is.tech.support
+[params]
+deviceTime=any
+parserName=SolarisLogParser
+eventType=Solaris_Audit_Logoff
+srcName=yes.this.is.tech.support
+reptModel=Solaris
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Solaris_Audit_Logoff
+phEventCategory=0 (External)
+eventRuleTrigger=1
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+user=root
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+sessionId=584538286
+reptVendor=Sun

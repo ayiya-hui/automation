@@ -1,0 +1,42 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<44>Apr  2 15:52:15 ABC SFIMS: [Primary Detection Engine (851f464c-5b8c-11e4-879b-975d667e1ccb)][IPS_com][119:2:1] Snort Alert [Classification: Not Suspicious Traffic] User: Unknown, Application: Unknown, Client: Unknown, App Protocol: Unknown, Interface Ingress: s2p3, Interface Egress: s2p4, Security Zone Ingress: External-Corp1, Security Zone Egress: Internal-Corp1, [Priority: 3] {TCP} 1.1.1.1:10540 -> 2.2.2.2:80
+[params]
+deviceTime=any
+destGeoOrg=any
+parserName=Sourcefire2Parser
+appName=Unknown
+eventType=Snort-119
+destGeoState=any
+hostName=ABC
+destIpAddr=2.2.2.2
+ipProto=6 (TCP)
+destGeoCountry=any
+srcIpAddr=1.1.1.1
+reptModel=FirePOWER
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=BACKDOOR Doly 2.0 access
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+srcApp=Unknown
+destName=HOST-2.2.2.2
+count=1
+srcIntfName=s2p3
+srcFwZone=External-Corp1
+srcIpPort=10540
+eventSeverityCat=LOW
+collectorId=any
+destIntfName=s2p4
+relayDevIpAddr=$localhost
+rawEventMsg=any
+destIpPort=80 (HTTP)
+destFwZone=Internal-Corp1,
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Cisco
+destGeoCity=any

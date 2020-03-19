@@ -1,0 +1,30 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+2015-09-01 06:54:33.526734+00 cyphortcore-lkf-soc CEF:0|Cyphort|Cortex|3.3.1.46|3|link-health|5|desc=Link eth1 on panasonic collector (10.2.119.17) is down json={"interface": "eth1", "ip": "10.2.119.17", "appliance": "panasonic collector", "app_id": "4c4c4544-0046-4610-8042-c4c04f423432", "up": false}
+[params]
+deviceTime=any
+parserName=CyphortParser
+isHostIntfCritical=No
+eventType=Cyphort-Cortex-link-health
+intfName=eth1
+reptModel=Cortex
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+hostIpAddr=10.2.119.17
+eventName=Cyphort Cortex link health
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+msg=Link eth1 on panasonic collector (10.2.119.17) is down
+eventRuleTrigger=1
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+user=10.2.119.17
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Cyphort

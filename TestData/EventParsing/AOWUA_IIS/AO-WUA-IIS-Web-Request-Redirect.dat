@@ -1,0 +1,36 @@
+[reptDevIpAddr(key)]
+192.168.1.30
+[eventMsg]
+2015-02-11T02:29:12Z WIN-2008-LAW-agent 192.168.1.30 AccelOps-WUA-IIS [monitorStatus]="Success" [date]="2015-02-11" [time]="02:25:36" [s-ip]="10.1.2.242" [cs-method]="GET" [cs-uri-stem]="/" [cs-uri-query]="-" [s-port]="80" [cs-username]="-" [c-ip]="10.1.20.102" [cs(User-Agent)]="Mozilla/5.0+(Windows+NT+6.1;+WOW64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/40.0.2214.111+Safari/537.36" [sc-status]="304" [sc-substatus]="0" [sc-win32-status]="0" [time-taken]="62" [site]="Default Web Site" [format]="W3C"
+[params]
+deviceTime=any
+parserName=AOWUA_IISParser
+eventType=AO-WUA-IIS-Web-Request-Redirect
+destIpAddr=10.1.2.242
+srvInstName=Default Web Site
+srcIpAddr=10.1.20.102
+reptModel=IIS
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=AO-WUA-IIS-Web-Request-Redirect
+httpSubStatusCode=0
+extEventRecvProto=Windows Agent
+phEventCategory=0 (External)
+httpWin32Status=0
+status=Success
+count=1
+eventSeverityCat=LOW
+collectorId=any
+httpMethod=GET
+relayDevIpAddr=192.168.1.30
+rawEventMsg=any
+destIpPort=80
+httpStatusCode=304 (Not Modified - The client has performed a conditional GET request and access is allowed, but the document has not been modified)
+reptDevName=WIN-2008-LAW-agent
+customer=Super
+uriStem=/
+phRecvTime=any
+reptDevIpAddr=192.168.1.30
+reptVendor=Microsoft
+httpUserAgent=Mozilla/5.0+(Windows+NT+6.1;+WOW64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/40.0.2214.111+Safari/537.36

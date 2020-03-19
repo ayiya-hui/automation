@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<109>Aug 20 14:06:53 audit: [ID 702911 audit.notice] login - ssh ok session 3585965386 by root as root:root from yes.this.is.tech.support
+[params]
+deviceTime=any
+parserName=SolarisLogParser
+eventType=Solaris_Audit_Logon
+srcName=yes.this.is.tech.support
+reptModel=Solaris
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Solaris_Audit_Logon
+phEventCategory=0 (External)
+eventRuleTrigger=1
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+user=root
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+sessionId=3585965386
+reptVendor=Sun

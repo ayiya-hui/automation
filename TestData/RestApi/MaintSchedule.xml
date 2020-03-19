@@ -1,0 +1,27 @@
+<MaintSchedules>
+	<MaintSchedule>
+		<name>name1</name>
+		<description>des1</description>
+		<devices>
+			<device>asd</device>
+			<device>10.1.2.3</device>
+		</devices>
+		<groups>
+			<group>Unix</group>
+			<group>g1</group>
+		</groups>
+		<fireIncident>true</fireIncident>
+		<schedule>
+			<startHour>12</startHour>
+			<startMin>2</startMin>
+			<duration>3</duration>
+			<timeZone>9</timeZone>
+			<startDate>2011-3-5</startDate>
+			<endDate>2011-8-8</endDate>
+			<endDateOpen>true</endDateOpen>
+			<daysOfWeek></daysOfWeek>
+			<daysOfMonth>3</daysOfMonth>
+			<monthsOfYear></monthsOfYear>
+		</schedule>
+	</MaintSchedule>
+</MaintSchedules>

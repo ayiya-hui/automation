@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+May 11 08:45:59.431: %STACKMGR-4-STACK_LINK_CHANGE: Stack Port 2 Switch 2 has changed to state DOWN
+[params]
+deviceTime=any
+isHostIntfCritical=No
+eventType=IOS-STACK-LINK-CHANGED-TO-DOWN
+phCustId=$sender
+intfName=Switch2/Port2
+reptModel=IOS
+eventId=any
+eventParsedOk=1
+eventSeverity=7
+hostIpAddr=$localhost
+eventName=Stack switch interface went down
+phEventCategory=0
+eventSeverityCat=MEDIUM
+collectorId=any
+relayDevIpAddr=$localhost
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=Success(0)
+reptVendor=Cisco

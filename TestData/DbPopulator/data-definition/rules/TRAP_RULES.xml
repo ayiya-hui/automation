@@ -1,0 +1,92 @@
+
+<Rules>
+   <Rule group="PH_SYS_RULE_Avail_Storage" id="PH_Rule_Trap_1" phIncidentCategory="Storage">
+    <Name>Critical NetApp Trap </Name>
+    <active>true</active>
+    <Description> Detects a high severity trap from NetApp Filers  </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_NETAPP_TRAP_CRIT" severity="9">
+      <ArgList>
+        destIpAddr = HighSevTrap.reptDevIpAddr, compEventType = HighSevTrap.eventType
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+       <SubPattern displayName="HighSevTrap" name="HighSevTrap">
+         <SingleEvtConstr> reptVendor = "NetApp" AND reptModel = "DataONTAP" AND eventSeverityCat = "High" </SingleEvtConstr>
+	 <GroupEvtConstr>COUNT (*) &gt;= 1</GroupEvtConstr>
+	 <GroupByAttr>reptDevIpAddr, eventType </GroupByAttr>
+       </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,reptDevIpAddr,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+   </Rule>
+
+   <Rule group="PH_SYS_RULE_Avail_Storage" id="PH_Rule_Trap_2" phIncidentCategory="Storage">
+       <Name>Warning NetApp Trap </Name>
+       <active>true</active>
+    <Description> Detects a medium severity trap from NetApp Filers  </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_NETAPP_TRAP_WARN" severity="7">
+      <ArgList>
+        destIpAddr = HighSevTrap.reptDevIpAddr, compEventType = HighSevTrap.eventType
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+       <SubPattern displayName="HighSevTrap" name="HighSevTrap">
+         <SingleEvtConstr> reptVendor = "NetApp" AND reptModel = "DataONTAP" AND eventSeverityCat = "Medium" </SingleEvtConstr>
+	 <GroupEvtConstr>COUNT (*) &gt;= 1</GroupEvtConstr>
+	 <GroupByAttr>reptDevIpAddr, eventType </GroupByAttr>
+       </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,reptDevIpAddr,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+   </Rule>
+
+   <Rule group="PH_SYS_RULE_Environ" id="PH_Rule_Trap_3" phIncidentCategory="Environmental"">
+    <Name>Critical APC Trap </Name>
+    <active>true</active>
+    <Description> Detects a high severity trap from APC devices (UPS, PDUs etc) </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_APC_TRAP_CRIT" severity="9">
+      <ArgList>
+        destIpAddr = HighSevTrap.reptDevIpAddr, compEventType = HighSevTrap.eventType
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+       <SubPattern displayName="HighSevTrap" name="HighSevTrap">
+         <SingleEvtConstr> reptVendor = "APC" AND eventSeverityCat = "High" </SingleEvtConstr>
+	 <GroupEvtConstr>COUNT (*) &gt;= 1</GroupEvtConstr>
+	 <GroupByAttr>reptDevIpAddr, eventType </GroupByAttr>
+       </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,reptDevIpAddr,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+   </Rule>
+
+   <Rule group="PH_SYS_RULE_Environ" id="PH_Rule_Trap_2" phIncidentCategory="Environmental"">
+       <Name>Warning APC Trap </Name>
+       <active>true</active>
+    <Description> Detects a medium severity trap from APC devices (UPS, PDUs etc) </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_APC_TRAP_WARN" severity="7">
+      <ArgList>
+        destIpAddr = HighSevTrap.reptDevIpAddr, compEventType = HighSevTrap.eventType
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+       <SubPattern displayName="HighSevTrap" name="HighSevTrap">
+         <SingleEvtConstr> reptVendor = "APC" AND eventSeverityCat = "Medium" </SingleEvtConstr>
+	 <GroupEvtConstr>COUNT (*) &gt;= 1</GroupEvtConstr>
+	 <GroupByAttr>reptDevIpAddr, eventType </GroupByAttr>
+       </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,reptDevIpAddr,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+   </Rule>
+
+
+</Rules>

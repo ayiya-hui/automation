@@ -1,0 +1,22 @@
+[reptDevIpAddr(key)]
+20.20.20.20
+[eventMsg]
+<13>Jan 14 18:58:58 20.20.20.20 MSWinEventLog	1	Security	9201	Wed Jan 14 18:58:57 2009	600	Security	SYSTEM	User	Success Audit	ADS-PRI	Detailed Tracking		A process was assigned a primary token.    Assigning Process Information:     Process ID: 1340     Image File Name: C:\WINDOWS\system32\msiexec.exe     Primary User Name: ADS-PRI$     Primary Domain: PROSPECTHILLS     Primary Logon ID: (0x0,0x3E7)    New Process Information:     Process ID: 228     Image File Name: C:\WINDOWS\system32\msiexec.exe     Target User Name: Administrator     Target Domain: PROSPECTHILLS     Target Logon ID: (0x0,0x33B710)    	8636  Automation
+[params]
+rawEventMsg=any
+eventSeverity=1
+eventSeverityCat=LOW
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+phRecvTime=any
+phCustId=$sender
+reptDevIpAddr=20.20.20.20
+destIpAddr=20.20.20.20
+eventAction=0 (Permit)
+eventName=Win-Security-600
+reptVendor=Microsoft
+eventType=Win-Security-600
+phEventCategory=0 (External)
+reptModel=Windows

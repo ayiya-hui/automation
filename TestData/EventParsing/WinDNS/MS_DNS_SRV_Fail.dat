@@ -1,0 +1,30 @@
+[reptDevIpAddr(key)]
+20.2.2.17
+[eventMsg]
+<13>Aug 10 19:08:44 $reporter MSDNSLog 0 20090810 19:08:34 15F0 PACKET 02935460 UDP Snd 192.168.20.44 9a01 R Q [8385 A DR NXDOMAIN] SRV (13)_autodiscover(4)_tcp(13)prospecthills(3)net(0)
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+appTransportProto=UDP
+ipConnId=Snd
+count=1
+phCustId=$sender
+destName=_autodiscover._tcp.prospecthills.net
+destIpAddr=192.168.20.44
+destIpPort=53 (DOMAIN)
+deviceTime=any
+errorNo=8385
+errorString=NXDOMAIN
+eventAction=1 (Deny)
+eventId=any
+eventName=Failed DNS Available Services query
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=1
+eventSeverityCat=LOW
+eventType=MS_DNS_SRV_Fail
+ipProto=17 (UDP)
+reptDevIpAddr=$reporter
+reptModel=DNS
+reptVendor=Microsoft
+srcIpAddr=$reporter

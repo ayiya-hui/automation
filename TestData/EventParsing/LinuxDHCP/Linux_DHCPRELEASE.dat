@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<13>Aug 26 19:33:30 DNS-Pri dhcpd: DHCPRELEASE of 172.28.41.179 from 00:11:43:42:b7:b2 (AMOOREXP) via 172.28.41.12: not found
+[params]
+rawEventMsg=any
+eventSeverity=1
+eventSeverityCat=LOW
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+reptVendor=Generic
+srcMACAddr=00:11:43:42:b7:b2
+phRecvTime=any
+phCustId=$sender
+hostName=AMOOREXP
+srcIpAddr=172.28.41.179
+eventAction=0 (Permit)
+eventName=Client Release IP Address
+computer=AMOOREXP
+eventType=Linux_DHCPRELEASE
+phEventCategory=0 (External)
+srcName=AMOOREXP
+reptDevIpAddr=$localhost
+reptModel=Linux DHCP

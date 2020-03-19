@@ -1,0 +1,29 @@
+[reptDevIpAddr(key)]
+70.70.70.70
+[eventMsg]
+May 15 18:58:54 70.70.70.70 ikeyserver[3575]: {Success}, {Authentication}, {S-002001}, {User authentication was successful.}, {0x913B00FF4ACBD133D7193A14DE02D452}, {Source Location:10.1.2.3}, {Client Location:10.3.2.1}, {User ID:flast}, {Domain:company.com}, {Input Details: {User ID : flast} {Password : ********} {Raw User ID : 0x726F636B776F6F6D} {Password Format : 0} {Component Type : SBR Plug-In} {User Attribute Group : Radius}}, {Output Details: {User ID : flast} {Domain Name : company.com} {Static Password : ********} {User Attributes : {}}}, {Policy ID:Identikey Local Authentication}, {Local Authentication:yes}, {Back-End Authentication:None}, {Client Type:SBR Plug-In}
+[params]
+domain=company.com
+parserName=VascoParser
+eventType=Vasco-DigiPass-KeyServer-UserAuth-Success
+srcIpAddr=10.1.2.3
+reptModel=DigiPass
+eventId=any
+policyName=Identikey Local Authentication
+eventParsedOk=1
+eventSeverity=3
+eventName=DigiPass User authentication was successful
+appTransportProto=Syslog
+phEventCategory=0 (External)
+msg=User authentication was successful.
+eventRuleTrigger=1
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=70.70.70.70
+user=flast
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=70.70.70.70
+reptVendor=Vasco

@@ -1,0 +1,23 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<188>36: *May 20 04:42:41: %C4K_IOSMODPORTMAN-4-POWERSUPPLYBAD: Power supply 2 has failed or been turned off
+[params]
+deviceTime=any
+eventType=IOS-C4K_IOSMODPORTMAN-POWERSUPPLYBAD
+phCustId=$sender
+reptModel=IOS
+eventId=any
+eventParsedOk=1
+eventSeverity=5
+hostIpAddr=$localhost
+eventName=Catalyst 4000 Power supply is bad
+phEventCategory=0
+eventSeverityCat=MEDIUM
+collectorId=any
+relayDevIpAddr=$localhost
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=Success(0)
+reptVendor=Cisco

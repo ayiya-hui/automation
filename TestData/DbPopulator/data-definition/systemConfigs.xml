@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<config>
+    <systemConfigs>
+        <systemConfig>
+            <category>Appserver</category>
+            <name>System_Name</name>
+            <value>SYSTEM_NAME_VALUE</value>
+        </systemConfig>
+        <!-- PhServer -->
+        <systemConfig>
+            <category>PhServer</category>
+            <name>svn_url</name>
+            <value>SVN_URL_VALUE</value>
+        </systemConfig>
+        <systemConfig>
+            <category>PhServer</category>
+            <name>svn_username</name>
+            <value>SVN_USERNAME_VALUE</value>
+        </systemConfig>
+        <systemConfig>
+            <category>PhServer</category>
+            <name>svn_password</name>
+            <value>SVN_PASSWORD_VALUE</value>
+            <sensitive>true</sensitive>
+        </systemConfig>
+
+        <!-- Message -->
+        <systemConfig>
+            <category>Message</category>
+            <name>Mail_Server</name>
+            <value></value>
+        </systemConfig>
+        <systemConfig>
+            <category>Message</category>
+            <name>Mail_Account_User</name>
+            <value></value>
+        </systemConfig>
+        <systemConfig>
+            <category>Message</category>
+            <name>Mail_Account_Password</name>
+            <value></value>
+            <sensitive>true</sensitive>
+        </systemConfig>
+        <systemConfig>
+            <category>Message</category>
+            <name>Mail_Transport_Protocol</name>
+            <value>TLS</value>
+        </systemConfig>
+        <systemConfig>
+            <category>Message</category>
+            <name>Mail_Transport_Secured</name>
+            <value>true</value>
+        </systemConfig>
+        <systemConfig>
+            <category>Message</category>
+            <name>Mail_Server_Port</name>
+            <value>25</value>
+        </systemConfig>
+        <systemConfig>
+            <category>Message</category>
+            <name>Mail_Recipient</name>
+            <value></value>
+        </systemConfig>
+    </systemConfigs>
+</config>

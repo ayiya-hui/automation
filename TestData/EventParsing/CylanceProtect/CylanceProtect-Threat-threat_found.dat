@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+CylancePROTECT: Event Type: Threat, Event Name: threat_found, Device Name: SH-Win81-1, IP Address: (10.3.0.132), File Name: virusshare_00fbc4cc4b42774b50a9f71074b79bd9, Path: c:\ruby\host_automation\test\data\test_files\, SHA256: 1EBF3B8A61A7E0023AAB3B0CB24938536A1D87BCE1FCC6442E137FB2A7DD510B, Status: Unsafe, Cylance Score: 100, Found Date: 6/1/2015 10:57:42 PM, File Type: Executable, Is Running: False, Auto Run: False, Detected By: FileWatcher
+[params]
+parserName=CylanceProtectParser
+eventType=CylanceProtect-Threat-threat_found
+hostName=SH-Win81-1
+reptModel=Protect
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+fileType=Executable
+hashCode=1EBF3B8A61A7E0023AAB3B0CB24938536A1D87BCE1FCC6442E137FB2A7DD510B
+eventName=CylanceProtect-Threat-threat_found
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+eventRuleTrigger=1
+count=1
+eventSeverityCat=LOW
+collectorId=any
+fileName=virusshare_00fbc4cc4b42774b50a9f71074b79bd9
+relayDevIpAddr=$localhost
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Cylance

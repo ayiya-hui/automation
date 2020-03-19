@@ -1,0 +1,30 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<45>Nov 12 13:51:00 Cleared or Expired Alarm: ClearOrExpiredTime=2015-11-12T13:51:00,Category=Performance,CriticalityLevel=Minor,Desc=Wireless Client Excessive Roaming or Reassociations,device=6c:88:14:fd:35:0c(6C-88-14-FD-35-0C),sensor=fc:0a:81:41:b0:ae(canscc1hali-sensor01[a,b,g,n])
+[params]
+deviceTime=any
+clearOrExpiredTime=Thu Nov 12 13:51:00 CST 2015
+eventType=Motorola-AirDefense-Performance
+srcName=6C-88-14-FD-35-0C
+reptModel=AirDefense
+eventId=any
+eventParsedOk=1
+parserName=MotorolaAirDefenseParser
+eventSeverity=3
+eventName=Motorola-AirDefense-Performance
+appTransportProto=Syslog
+phEventCategory=0 (External)
+eventRuleTrigger=1
+destName=canscc1hali-sensor01[a,b,g,n]
+count=1
+srcMACAddr=6c:88:14:fd:35:0c
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+reptDevIpAddr=$localhost
+eventDesc=Wireless Client Excessive Roaming or Reassociations
+customer=Super
+phRecvTime=any
+destMACAddr=fc:0a:81:41:b0:ae
+reptVendor=Motorola

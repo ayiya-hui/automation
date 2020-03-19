@@ -1,0 +1,32 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<189>date=2011-01-14 time=09:34:36 devname=FG200B3910600343 device_id=FG200B3910600343 log_id=0317013312 type=webfilter subtype=ftgd_allow pri=notice vd="root" policyid=30 identidx=0 serial=213180673 user="N/A" group="N/A" src=172.17.30.96 sport=3634 src_port=3634 src_int="port13" dst=69.147.125.65 dport=80 dst_port=80 dst_int="port9" service="http" hostname="www.yahoo.com" profiletype="Webfilter_Profile" profilegroup="N/A" profile="Malware and Unrated" status="passthrough" req_type="referral" url="/p.gif;_ylc=X3oDMTU4cWoyaTBnBF9TAzIwMjM1MzgwNzUEYQMxMTAxMTMgbW92aWVzIGJhdG1hbiBhY3RyZXNzZXMgdARjcG9zAzExBGcDaWQtNj" msg="URL belongs to an allowed category in policy" method=domain class=0 class_desc="N/A" cat=41 cat_desc="Search Engines and Portals"
+[params]
+destName=www.yahoo.com
+destIpAddr=69.147.125.65
+destIntfName=port9
+destIpPort=80
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=3
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+eventAction=0 (Permit)
+eventName=The URL belongs to an allowed category in the firewall policy
+reptVendor=Fortinet
+eventType=FortiGate-webfilter-url-firewall-allow
+userGrp=N/A
+phEventCategory=0 (External)
+relayDevIpAddr=$localhost
+reptDevIpAddr=$reporter
+usrMsg=URL belongs to an allowed category in policy
+reptModel=FortiOS
+webCategory=Search Engines and Portals
+uriStem=/p.gif;_ylc=X3oDMTU4cWoyaTBnBF9TAzIwMjM1MzgwNzUEYQMxMTAxMTMgbW92aWVzIGJhdG1hbiBhY3RyZXNzZXMgdARjcG9zAzExBGcDaWQtNj
+srcIpPort=3634
+srcIntfName=port13
+srcIpAddr=172.17.30.96

@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+172.18.65.202
+[eventMsg]
+Mar 21 15:19:05 172.18.65.202 ALARM: 1206092945l | system | info | ALR | AP SOFTWARE VERSION MISMATCH CRITICAL AP Pat-AP300 (2) - Software Version Mismatch : AP version is 3.4.SR3m-10 and Controller version is 3.6-40
+[params]
+customer=Super
+eventId=any
+parserName=FortiWLANParser
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+count=1
+eventSeverity=1
+eventType=FortiWLC-AP-Software-Version-Mismatch
+reptDevIpAddr=172.18.65.202
+collectorId=any
+extEventRecvProto=Syslog
+eventName=FortiAP software version mismatch
+reptVendor=Fortinet
+relayDevIpAddr=172.18.65.202
+rawEventMsg=any
+phRecvTime=any
+hostName=AP Pat-AP300 (2)
+reptDevName=any
+reptModel=FortiWLC

@@ -1,0 +1,35 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<6>CEF:0|McAfee|IPS|5.5.7|75475|ProtoId_MSSQL-Server|1|spt=51458 deviceExternalId=PANASONIC-PCI-V2 node 1 dmac=BF:37:BE:56:20:6C dst=192.168.15.19 cat=Content Identification app=MSSQL (TCP) rt=Apr 08 2016 00:26:00 deviceFacility=Inspection act=Permit deviceOutboundInterface=Interface #2 deviceInboundInterface=Interface #2 proto=6 dpt=1433 src=192.168.94.59 dvc=192.168.94.51 dvchost=192.168.94.51 smac=50:D7:08:CB:2B:78 cs1Label=RuleId cs1=147.0
+[params]
+domain=PANASONIC-PCI-V2 node 1
+destMACAddr=BF:37:BE:56:20:6C
+parserName=McAfeeStonesoftParser
+eventType=McAfee-Stonesoft-ProtoId_MSSQL-Server
+devEventTypeGrp=Content Identification
+destIpAddr=192.168.15.19
+destIpPort=1433 (MS-SQL-S)
+srcIpAddr=192.168.94.59
+reptModel=Stonesoft IPS
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+fwAction=Permit
+eventName=MSSQL protocol context
+appTransportProto=MSSQL (TCP)
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+eventRuleTrigger=1
+count=1
+srcMACAddr=50:D7:08:CB:2B:78
+srcIpPort=51458
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+ipProto=6 (TCP)
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=McAfee

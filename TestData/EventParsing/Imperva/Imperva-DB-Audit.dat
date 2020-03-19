@@ -1,0 +1,40 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<14>CEF:0|Imperva Inc.|SecureSphere|11.5.0.20_0|Audit|Audit|Informative|dst=10.2.6.194 dpt=3306 duser=wf_settlement src=10.2.6.48 spt=59876 proto=TCP rt=11 April 2016 14:07:09 cat=Audit Default Rule - All cs2Label=a cs3=ProcessMakerDBFX cs3Label=a cs4=Default MySql Application cs4Label=a cs5=642697783064 cs5Label=a cs6=Query cs6Label=a cs7=Default MySql group cs7Label=a cs8=True cs8Label=a cs9= cs9Label=a cs10= cs10Label=a cs11= cs11Label=a cs12= cs12Label=a cs13=wf_settlement cs13Label=a cs14= cs14Label=a cs15=a cs15Label=a cs16=select count(app_cache_view.app_uid) from app_cache_view left join users cu on (app_cache_view.usr_uid=cu.usr_uid) left join users pu on (app_cache_view.previous_usr_uid=pu.usr_uid) left join app_cache_view appcvcr on (app_cache_view.app_uid=appcvcr.app_uid and appcvcr.del_last_index=?) left join users usrcr on (appcvcr.usr_uid=usrcr.usr_uid) where app_cache_view.app_status=? and app_cache_view.usr_uid=? and app_cache_view.del_finish_date is ? and app_cache_view.app_thread_status=? and app_cache_view.del_thread_status=? cs16Label=a cs17= cs17Label=a cs18= cs18Label=a cs19=1 cs19Label=a cs20=0 cs20Label=a cs21=0 cs21Label=a
+[params]
+parserName=ImpervaParser
+appName=Default MySql Application
+tableRowCount=0
+eventType=Imperva-DB-Audit
+fwRule=Audit Default Rule - All
+destIpAddr=10.2.6.194
+ipProto=6 (TCP)
+srcIpAddr=10.2.6.48
+reptModel=Securesphere DB Security Gateway
+eventId=any
+eventParsedOk=1
+dbQuery=a
+eventSeverity=1
+eventName=Imperva database audit
+serviceName=ProcessMakerDBFX
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+msg=select count(app_cache_view.app_uid) from app_cache_view left join users cu on (app_cache_view.usr_uid=cu.usr_uid) left join users pu on (app_cache_view.previous_usr_uid=pu.usr_uid) left join app_cache_view appcvcr on (app_cache_view.app_uid=appcvcr.app_uid and appcvcr.del_last_index=?) left join users usrcr on (appcvcr.usr_uid=usrcr.usr_uid) where app_cache_view.app_status=? and app_cache_view.usr_uid=? and app_cache_view.del_finish_date is ? and app_cache_view.app_thread_status=? and app_cache_view.del_thread_status=?
+count=1
+srcIpPort=59876
+eventSeverityCat=LOW
+collectorId=any
+totalResponses=1
+relayDevIpAddr=$localhost
+rawEventMsg=any
+destIpPort=3306 (MYSQL)
+customer=Super
+dbQueryResponseTimeSec=0
+phRecvTime=any
+reptDevIpAddr=$localhost
+userGrp=Default MySql group
+compEventType=Query
+reptVendor=Imperva
+authResult=True
+dbName=wf_settlement

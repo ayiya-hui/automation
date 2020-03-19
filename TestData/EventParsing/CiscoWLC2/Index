@@ -1,0 +1,4 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+Cisco-WLC-1-clientKeyDecryptError,CiscoWLC2_1,CiscoWLC2,$localhost,,syslog
+Cisco-WLC-4-HOST_LOCATION,CiscoWLC2_2,CiscoWLC2,$localhost,,syslog

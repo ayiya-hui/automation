@@ -1,0 +1,22 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>Juniper: 2008-10-28 04:00:11 - ive - [127.0.0.1] System()[] - Number of concurrent users logged in to the device: 0
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+eventAction=0 (Permit)
+eventName=Number of concurrent users logged in
+reptVendor=Juniper
+eventType=Juniper-SecureAccess-Concurrent-Users-Login
+user=System
+phEventCategory=0 (External)
+reptDevIpAddr=$localhost
+reptModel=Secure Access

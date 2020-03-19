@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+58.58.58.71
+[eventMsg]
+<14>Jun  4 01:49:19 58.58.58.71 STP: VLAN 3104 Port 4/22 STP State -> LISTENING (MakeFwding)
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+eventSeverityCat=LOW
+eventParsedOk=1
+reptVendor=Foundry
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+phEventCategory=0 (External)
+destIpAddr=$reporter
+eventAction=0 (Permit)
+eventName=Foundry STP port entered LISTENING state
+appTransportProto=STP
+eventType=Foundry-Ironware-StpPort-Listening
+hostVLAN=3104
+devPort=4/22
+reptDevIpAddr=58.58.58.71
+reptModel=Ironware
+
+

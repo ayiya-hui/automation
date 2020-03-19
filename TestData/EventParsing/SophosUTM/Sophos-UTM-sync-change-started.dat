@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<29>2016:03:11-10:00:29 ActiveUTM-2 confd-sync[8588]: id="3850" severity="info" sys="System" sub="ha" name="Starting change sync to slave 198.19.250.1"
+[params]
+customer=Super
+eventId=any
+eventSeverityCat=LOW
+eventParsedOk=1
+phEventCategory=0 (External)
+parserName=SophosUTMParser
+count=1
+eventSeverity=1
+eventType=Sophos-UTM-sync-change-started
+reptDevIpAddr=$localhost
+collectorId=any
+eventName=Sophos UTM sync change started
+procName=confd-sync
+reptVendor=Sophos
+relayDevIpAddr=$localhost
+extEventRecvProto=Syslog
+phRecvTime=any
+eventRuleTrigger=1
+reptDevName=any
+reptModel=UTM

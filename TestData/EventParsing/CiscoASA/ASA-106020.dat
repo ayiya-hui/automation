@@ -1,0 +1,23 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>Dec 04 2008 20:00:45: %ASA-2-106020: Deny IP teardrop fragment (size =5675 offset = 56) from 20.20.20.20 to 192.168.20.20
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=8
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=MEDIUM
+destIpAddr=192.168.20.20
+eventAction=1 (Deny)
+eventName=Denied IP traffic - teardrop fragment attack
+srcIpAddr=20.20.20.20
+reptVendor=Cisco
+eventType=ASA-106020
+phEventCategory=0 (External)
+reptDevIpAddr=$reporter
+reptModel=ASA

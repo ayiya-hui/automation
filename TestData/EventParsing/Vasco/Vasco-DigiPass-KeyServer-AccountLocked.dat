@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+70.70.70.70
+[eventMsg]
+May 16 20:12:41 70.70.70.70 ikeyserver[3575]: {Warning}, {Authentication}, {W-011003}, {A DIGIPASS User Account has become locked.}, {0x79BAA1294E25A99DFA37640B302C9BD8}, {Source Location:10.1.2.3}, {Client Location:10.3.2.1}, {User ID:user001}, {Domain:company.com}, {Client Type:SBR Plug-In}
+[params]
+domain=company.com
+parserName=VascoParser
+eventType=Vasco-DigiPass-KeyServer-AccountLocked
+srcIpAddr=10.1.2.3
+reptModel=DigiPass
+eventId=any
+eventParsedOk=1
+eventSeverity=7
+eventName=A DIGIPASS User Account has become locked
+appTransportProto=Syslog
+phEventCategory=0 (External)
+msg=A DIGIPASS User Account has become locked.
+eventRuleTrigger=1
+count=1
+eventSeverityCat=MEDIUM
+collectorId=any
+relayDevIpAddr=70.70.70.70
+user=user001
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=70.70.70.70
+reptVendor=Vasco

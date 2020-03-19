@@ -1,0 +1,23 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>Juniper: 2008-10-28 03:11:40 - ive - [172.16.3.150] admin(Admin Users)[.Administrators] - Extra Action in Policy 'JuniperOfficeVPNIPs' is modified to [Xport Config=ESPProxy Server Config=No proxy server,Custom DNS settings=OFF,Custom AutoAllow settings=OFF,Primary DNS=,Secondary DNS=,DNS Domain(s)=,WINS=,DNS Search Order=Client First]
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+eventAction=0 (Permit)
+eventName=Extra Action in Policy is modified
+reptVendor=Juniper
+eventType=Juniper-SecureAccess-Extra-Action-In-Policy-Modified
+user=admin
+phEventCategory=0 (External)
+reptDevIpAddr=$localhost
+userGrp=.Administrators
+reptModel=Secure Access

@@ -1,0 +1,21 @@
+[reptDevIpAddr(key)]
+55.55.55.55
+[eventMsg]
+<134>Jun  1 11:22:28 $reporter uvm[0]: System stat event # info:  #
+[params]
+rawEventMsg=any
+count=1
+hostIpAddr=$reporter
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+eventName=Untangle-Generic
+reptVendor=Untangle
+eventType=Untangle-Generic
+phEventCategory=0 (External)
+reptDevIpAddr=$reporter
+reptModel=Untangle Security Gateway

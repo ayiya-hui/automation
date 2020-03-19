@@ -1,0 +1,191 @@
+<eventParser name="ExtremeSwitchParser">
+
+<deviceType>
+	<Vendor>Extreme</Vendor>
+	<Model>Extremeware</Model>
+	<Version>ANY</Version>
+</deviceType>
+
+<patternDefinitions>
+  <pattern name="patStrEndColon"><![CDATA[[^:]*]]></pattern>
+</patternDefinitions>
+
+<testEvents>
+      <testEvent><![CDATA[<134>Mar 29 15:59:01 172.16.20.22 USER: admin logged in through telnet (192.168.20.34)]]></testEvent>
+  </testEvents>
+
+<parsingInstructions> 
+  <!-- 
+      <134>USER: admin logged in through telnet (192.168.20.34)
+      <134>SYST: User admin logged out from telnet (192.168.20.34)
+      <134>USER: phoenix_agent logged in through telnet (192.168.0.30)
+	     <134>SYST: User phoenix_agent logged out from telnet (192.168.0.30)
+	       <132>USER: Login failed for user admin through telnet (192.168.20.34)
+	         <132>USER: Login failed for user phoenix_dev through telnet (192.168.20.34)
+	           <134>SYST: 192.168.0.30 admin: create vlan test
+	             <134>SYST: 192.168.0.30 admin: delete vlan test
+	               <134>SYST: 192.168.0.30 admin: save
+	                 <134>SYST: Save to the PRIMARY configuration completed
+	                   -->
+  
+  <setEventAttribute attr="eventAction">0</setEventAttribute>
+  <setEventAttribute attr="destIpAddr">$reptDevIpAddr</setEventAttribute>
+  <setEventAttribute attr="eventSeverity">3</setEventAttribute>
+  
+
+  <!-- header -->
+  <switch>
+    <case>
+      <collectFieldsByRegex src="$_rawmsg">
+        <regex><![CDATA[<:gPatSyslogPRI><_NGHeader:gPatSyslogNGHeader> <_keyWord:patStrEndColon>: <_body:gPatMesgBody>]]></regex>
+      </collectFieldsByRegex>
+      <!--collectFieldsByRegex src="$_NGHeader">
+        <regex><![CDATA[<:gPatMon>\s+<:gPatDay>\s<:gPatTime>\s<reptDevIpAddr:gPatIpV4Dot>]]></regex>
+      </collectFieldsByRegex-->
+    </case>
+    
+    <case>
+      <collectFieldsByRegex src="$_rawmsg">
+        <regex><![CDATA[<:gPatSyslogPRI><_keyWord:patStrEndColon>: <_body:gPatMesgBody>]]></regex>
+      </collectFieldsByRegex>
+    </case>
+  </switch>
+
+  <!-- body -->
+  <choose>
+    <when test='$_keyWord = "SYST"'>
+      <switch>
+        <case>
+          <!--- 
+              Logon Successful
+	      <134>SYST: User admin logged out from telnet (192.168.20.34)
+	        <134>SYST: User phoenix_agent logged out from telnet (192.168.0.30)
+                  -->
+          <collectFieldsByRegex src="$_body">
+            <regex><![CDATA[User <user:gPatStr>\s+logged\s+<_mode:gPatStr>\s+<:gPatStr>\s+<:gPatStr>\s+\(<srcIpAddr:gPatIpV4Dot>\)]]></regex>
+          </collectFieldsByRegex>
+          
+          <when test='$_mode = "in"'>
+            <setEventAttribute attr="eventType">Extremeware-Successful-Login</setEventAttribute>
+          </when>
+          
+          <when test='$_mode = "out"'>
+            <setEventAttribute attr="eventType">Extremeware-Successful-Logout</setEventAttribute>
+          </when>
+        </case>
+
+        <case>
+          <!--
+              config change:
+              <134>SYST: 192.168.0.30 admin: create vlan test
+	        <134>SYST: 192.168.0.30 admin: delete vlan test
+	          <134>SYST: 192.168.0.30 admin: save
+                    -->
+          <collectFieldsByRegex src="$_body">
+            <regex><![CDATA[<srcIpAddr:gPatIpV4Dot>\s+<user:patStrEndColon>:\s+<_cmd:gPatMesgBody>]]></regex>
+          </collectFieldsByRegex>
+
+	  <switch>
+	    <case>
+	      <collectFieldsByRegex src="$_cmd">
+		<regex><![CDATA[create\s+.*]]></regex>
+              </collectFieldsByRegex>
+	      <setEventAttribute attr="command">$_cmd</setEventAttribute>
+              <setEventAttribute attr="eventType">Extremeware-Config-Change</setEventAttribute> 
+            </case>
+	    <case>
+	      <collectFieldsByRegex src="$_cmd">
+		<regex><![CDATA[delete\s+.*]]></regex>
+              </collectFieldsByRegex>
+	      <setEventAttribute attr="command">$_cmd</setEventAttribute>
+              <setEventAttribute attr="eventType">Extremeware-Config-Change</setEventAttribute> 
+            </case>
+
+	    <case>
+	      <collectFieldsByRegex src="$_cmd">
+		<regex><![CDATA[save\s+.*]]></regex>
+              </collectFieldsByRegex>
+	      <setEventAttribute attr="command">$_cmd</setEventAttribute>
+              <setEventAttribute attr="eventType">Extremeware-Config-Change</setEventAttribute> 
+            </case>
+	  </switch>
+	</case>
+
+        <case>
+          <!--
+              config change:
+              <134>SYST: Save to the PRIMARY configuration completed
+                -->
+          <collectFieldsByRegex src="$_body">
+            <regex><![CDATA[Save\s+to\s+the\s+<:gPatStr>\s+configuration\s+completed]]></regex>
+          </collectFieldsByRegex>
+          <setEventAttribute attr="eventType">Extremeware-Config-Change</setEventAttribute> 
+        </case>
+
+        <case>
+          <!--
+              <12>SYST: Port 6 link down
+            -->
+          <collectFieldsByRegex src="$_body">
+            <regex><![CDATA[Port\s+<devPort:gPatStr>\s+link\s+down]]></regex>
+          </collectFieldsByRegex>
+          <setEventAttribute attr="eventType">Extremeware-Link-Down</setEventAttribute>           
+        </case>
+
+        <case>
+          <!--
+              <12>SYST: Port 24 link active 100Mbs FULL duplex 
+                -->
+          <collectFieldsByRegex src="$_body">
+            <regex><![CDATA[Port\s+<devPort:gPatStr>\s+link\s+active<:gPatMesgBody>]]></regex>
+          </collectFieldsByRegex>
+          <setEventAttribute attr="eventType">Extremeware-Link-Up</setEventAttribute>
+        </case>
+      </switch>
+    </when>
+
+    <when test='$_keyWord = "USER"'>
+      <switch>
+        <case>
+          <!--- 
+              Logon Successful
+              <134>USER: admin logged in through telnet (192.168.20.34)
+	        <134>USER: phoenix_agent logged in through telnet (192.168.0.30)
+                  -->
+          <collectFieldsByRegex src="$_body">
+            <regex><![CDATA[<user:gPatStr>\s+logged\s+<_mode:gPatStr>\s+<:gPatStr>\s+<:gPatStr>\s+\(<srcIpAddr:gPatIpV4Dot>\)]]></regex>
+          </collectFieldsByRegex>
+          
+          <when test='$_mode = "in"'>
+            <setEventAttribute attr="eventType">Extremeware-Successful-Login</setEventAttribute>
+          </when>
+          
+          <when test='$_mode = "out"'>
+            <setEventAttribute attr="eventType">Extremeware-Successful-Logout</setEventAttribute>
+          </when>
+        </case>
+
+        <case>
+          <!--- 
+              Logon Failed
+              <132>USER: Login failed for user admin through telnet (192.168.20.34)
+	        <132>USER: Login failed for user phoenix_dev through telnet (192.168.20.34)
+                  -->
+          <collectFieldsByRegex src="$_body">
+            <regex><![CDATA[Login\s+failed\s+for\s+user\s+<user:gPatStr>\s+through\s+<:gPatStr>\s+\(<srcIpAddr:gPatIpV4Dot>\)]]></regex>
+          </collectFieldsByRegex>
+          <setEventAttribute attr="eventAction">1</setEventAttribute>
+          <setEventAttribute attr="eventType">Extremeware-Failed-Login</setEventAttribute>
+        </case>
+      </switch>
+    </when>
+
+    <otherwise>
+       <setEventAttribute attr="eventParsedOk">0</setEventAttribute>
+    </otherwise>
+
+  </choose>
+
+</parsingInstructions>
+
+</eventParser>

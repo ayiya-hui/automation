@@ -1,0 +1,36 @@
+[reptDevIpAddr(key)]
+192.168.51.65
+[eventMsg]
+<36>Dec 10 05:40:09 192.168.51.65 IPS5500-75EC: id=060001 pt=TLN-KA prot=TCP cip=98.169.205.230 cprt=43007 sip=50.58.90.99 sprt=443 atck=tln-001018 disp=mitigate ckt=1 src=extern msg="DDOSA: SynFlood - Connection From Client That Fails Proxy Handshake"
+[params]
+destGeoOrg=any
+parserName=CoreroIPSParser
+eventType=Corero-SmartWall-Proxy_Handshake-client-failure
+destGeoState=any
+destIpAddr=50.58.90.99
+srcName=any
+destIpPort=443 (HTTPS)
+srcIpAddr=98.169.205.230
+destGeoCountry=any
+usrMsg=DDOSA: SynFlood - Connection From Client That Fails Proxy Handshake
+reptModel=SmartWall
+eventId=any
+eventParsedOk=1
+eventSeverity=4
+eventName=any
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+destName=any
+count=1
+srcIpPort=43007
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=192.168.51.65
+rawEventMsg=any
+ipProto=6 (TCP)
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=192.168.51.65
+reptVendor=Corero
+destGeoCity=any

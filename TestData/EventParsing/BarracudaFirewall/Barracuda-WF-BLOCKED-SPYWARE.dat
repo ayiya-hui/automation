@@ -1,0 +1,39 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<164>barracuda_pqman[27088]: 1459965663 1 10.8.233.15 74.200.96.4 - 10.8.233.15 https://www.dealertrack.com/ 0 BYF BLOCKED SPYWARE  2 1 1 0 1 (ldap0:barracuda - executive) 1 motor-vehicles 0 - 0 dealertrack.com motor-vehicles [ldap0:etsadmin]   https://www.dealertrack.com/
+[params]
+destGeoOrg=any
+parserName=BarracudaWebFilterParser
+eventType=Barracuda-WF-BLOCKED-SPYWARE
+destGeoState=any
+activityType=denied
+destIpAddr=74.200.96.4
+totBytes=0
+srcName=HOST-10.8.233.15
+destGeoCountry=any
+srcIpAddr=10.8.233.15
+reptModel=Web Filter
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+serverName=0
+eventName=Permitted web traffic - spyware
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+destName=www.dealertrack.com
+webCategory=-
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+user=0
+rawEventMsg=any
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+count=1
+infoURL=https://www.dealertrack.com/
+reptVendor=Barracuda
+destGeoCity=any
+fileType=-

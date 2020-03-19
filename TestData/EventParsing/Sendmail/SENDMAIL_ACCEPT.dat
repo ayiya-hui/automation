@@ -1,0 +1,45 @@
+[reptDevIpAddr(key)]
+137.146.28.72
+[eventMsg]
+<22>Mar 10 19:04:34 137.146.28.72 sendmail[21478]: [ID 801593 mail.info] o2B046Ha021349: to=<teyoung@colby.edu>, delay=00:00:19, xdelay=00:00:00, mailer=relay, pri=139292, relay=mirapoint.colby.edu. [137.146.28.76], dsn=2.0.0, stat=Sent (AUV36627 Message accepted for delivery)
+[params]
+rawEventMsg=any
+eventAction=0 (Permit)
+count=1
+eventId=any
+reptDevIpAddr=$reporter
+eventParsedOk=1
+receiverMailAddr=teyoung
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+srcIpAddr=137.146.28.76
+eventName=Message Accepted by Sendmail Server
+reptVendor=Sendmail.org
+eventType=SENDMAIL_ACCEPT
+phEventCategory=0 (External)
+reptModel=Sendmail Mail Server
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<22>sendmail[31905]: o2UIStEp031905: to=hongbo.zhu@accelops.net, ctladdr=bugzilla-daemon@prospecthills.net (48/48), delay=00:00:00, xdelay=00:00:00, mailer=relay, pri=31300, relay=mailhost.prospecthills.net. [172.16.10.8], dsn=2.0.0, stat=Sent (o2UIStU2023690 Message accepted for delivery)
+[params]
+rawEventMsg=any
+eventAction=0 (Permit)
+count=1
+eventId=any
+reptDevIpAddr=$localhost
+eventParsedOk=1
+senderMailAddr=bugzilla-daemon@prospecthills.net
+receiverMailAddr=hongbo.zhu@accelops.net
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+srcIpAddr=172.16.10.8
+eventName=Message Accepted by Sendmail Server
+reptVendor=Sendmail.org
+eventType=SENDMAIL_ACCEPT
+phEventCategory=0 (External)
+reptModel=Sendmail Mail Server

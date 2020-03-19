@@ -1,0 +1,357 @@
+Application Group Name,package signature,process,parameters ,proces Desc,priority,service (in nmap),
+
+Generic Web Server,,,,Generic Web Server,1,http;https,PH_SYS_APP_WEB_SERVER
+Apache Webserver,http,"httpd,apache2",,Apache Webserver,10,http;https,PH_SYS_APP_WEB_SERVER 
+Java VM,,java,,Java VM,10,,
+Web Server for Ruby-on-rails,,mongrel_rails,,Web Server for Ruby-on-rails,10,,PH_SYS_APP_WEB_SERVER
+Unix Terminal Manager,,"getty,ttymon,agetty,mgetty,mingetty",,Unix Terminal Manager,10,,PH_SYS_APP_HOST_CONN
+Microsoft IIS,,svchost.exe,"""-k iissvc""",Microsoft IIS,10,http;https;,PH_SYS_APP_WEB_SERVER
+Microsoft IIS,,w3wp.exe,,Microsoft IIS Application Pool Process,10,,
+Tomcat Appserver,tomcat,"tomcat.exe,tomcat5.exe,tomcat6.exe",,Tomcat Appserver,10,http-alt;https-alt,PH_SYS_APP_APP_SERVER
+PostgreSQL Database Server,postgresql,postmaster,,PostgreSQL Database Server,10,postgres,PH_SYS_APP_DATABASE_SERVER
+MySQL Database Server,mysql-server,mysqld,,MySQL Database Server,10,mysql,PH_SYS_APP_DATABASE_SERVER
+Sybase Adaptive Server,,"dbsrv7.exe,dbsrv8.exe,dbsrv9.exe",,Sybase Adaptive Server,10,sybase,PH_SYS_APP_DATABASE_SERVER
+Microsoft SQL Server,SQL Server,sqlservr.exe,,Microsoft SQL Server,10,ms-sql-s,PH_SYS_APP_DATABASE_SERVER
+Microsoft SQL Server,,,,Microsoft SQL Monitor,10,ms-sql-m,PH_SYS_APP_DATABASE_SERVER
+Microsoft SQL Server,,logread.exe,,Microsoft SQL Server Replication Logreader Agent,10,,PH_SYS_APP_DATABASE_SERVER
+Microsoft SQL Server,,sqlwriter.exe,,Microsoft SQL Server Volume Shadow Copy Service Process,10,,
+Microsoft SQL Server,,MsDTSSrvr.exe,,Microsoft SQL Server Integrated Services Package Mgmt Process,10,,
+Oracle Database Server,,oracle,,Oracle Database Server,10,oracle;sql*net,PH_SYS_APP_DATABASE_SERVER
+Oracle Command Line SQL PL/SQL,,sqlplus,,Oracle Command Line SQL PL/SQL,10,,
+IBM DB2 Server,,,,IBM DB2 Server,1,ibm-db2,PH_SYS_APP_DATABASE_SERVER
+OpenSSH Server,openssh-server,sshd,,OpenSSH Server,10,ssh,PH_SYS_APP_HOST_CONN
+FTP Server,,,,FTP Server,1,ftp,PH_SYS_APP_HOST_CONN
+Very Secure FTP Server,,vsftpd,,Very Secure FTP Server,10,ftp,PH_SYS_APP_HOST_CONN
+Microsoft DNS,,dns.exe,,Microsoft DNS,10,domain,PH_SYS_APP_DNS_SERVER
+Unix NTP daemon,,ntpd,,Unix NTP daemon,10,ntp,
+Generic DHCP Server,,,,DHCP Server,1,dhcps;dhcpv6-server,
+Bind DNS,bind,named,,Bind DNS,10,domain,PH_SYS_APP_DNS_SERVER
+Microsoft IAS,,,,Microsoft IAS,1,,PH_SYS_APP_AUTH_SERVER
+Sendmail Mail Server,sendmail,sendmail,,Sendmail Server,10,smtp,PH_SYS_APP_MAIL_SERVER
+Postfix Mail Server,,master,,Postfix Mail Server,10,smtp,PH_SYS_APP_MAIL_SERVER
+Generic Mail Server,,imapd,,Generic Mail Server,10,imap;imap3;imaps;pop3;kpop;pop2;pop3s,PH_SYS_APP_MAIL_SERVER
+Samba Server,,smbd,,Samba Server,10,microsoft-ds,PH_SYS_APP_FILE_SERVER
+Microsoft SMB,,,,Microsoft SMB,1,microsoft-ds,PH_SYS_APP_FILE_SERVER
+Windows VNC Remote Access,vnc,winvnc4.exe,,Windows VNC Remote Access,10,vnc;vnc-1;vnc-2;vnc-3;vnc-http;vnc-http-1;vnc-http-2;vnc-http-3;,PH_SYS_APP_TERMINAL_SERVER
+VNC Remote Access,vnc,,,VNC Remote Access,1,vnc;vnc-1;vnc-2;vnc-3;vnc-http;vnc-http-1;vnc-http-2;vnc-http-3;,PH_SYS_APP_TERMINAL_SERVER
+Squid Web Proxy,,,,Squid Web Proxy,1,squid-htcp;squid-ipc,PH_SYS_APP_SEC_GW
+Bluecoat SGOS Web Proxy,,,,Bluecoat SGOS Web Proxy,1,,PH_SYS_APP_SEC_GW
+Untangle Security Gateway,,,,Untangle Security Gateway,1,,PH_SYS_APP_SEC_GW
+Unix Telnet Server,telnet,,,Telnet Server,1,telnet,PH_SYS_APP_HOST_CONN
+Unix NFS Server,,nfsd,,NFS Server,10,nfs,PH_SYS_APP_FILE_SERVER
+Unix Net-SNMP Service,net-snmp,snmpd,,Unix Net-SNMP Service,10,snmp,
+Windows SNMP Service,,snmp.exe,,Windows SNMP Service,10,snmp,
+Windows SNMP Trap Service,,snmptrap.exe,,Windows SNMP Trap Service,10,snmptrap,
+Kerberos Authentication service,,,,Kerberos Authentication service,1,kerberos,
+Microsoft Terminal Server,,svchost.exe,"""-k termsvcs""",Microsoft Terminal Server,10,ms-term-serv,PH_SYS_APP_TERMINAL_SERVER
+Generic TACACS Service,,,,TACACS Service,1,tacacs,
+Generic RADIUS Service,,,,RADIUS Service,1,radius,
+NETBIOS Name Service,,,,NETBIOS Name Service,1,netbios-ssn,
+Generic SOCKS service,,,,SOCKS service,1,socks,
+Microsoft RPC service,,svchost.exe,"""-k rpcss""",Microsoft RPC service,10,msrpc,
+RPC Portmapper service,,,,RPC Portmapper service,1,rpcbind,
+Generic SSH Server,,,,Generic SSH Server,1,ssh,PH_SYS_APP_HOST_CONN
+Generic Telnet Server,,,,Generic Telnet Server,1,telnet,PH_SYS_APP_HOST_CONN
+Generic DNS Server,,,,Generic DNS Server,1,domain,
+Windows Security Update,Security Update,,,Windows Security Update,1,,
+Windows Server Update,Update for Windows Server,,,Windows Server Update,1,,
+Checkpoint Mgmt Server,,,,Checkpoint Mgmt Server,1,opsec-lea;opsec-cvp;opsec-ela;opsec-sam;opsec-omi,PH_SYS_APP_SEC_MGMT
+Microsoft TCP/IP Services Application,,tcpsvcs.exe,,Microsoft TCP/IP Services Application,10,,PH_SYS_APP_DHCP_SERVER
+Windows DHCP Client,,svchost.exe,"""-k NetworkService""",Windows DHCP Client,10,,
+Windows Distributed File System Service,,Dfssvc.exe,,Windows Distributed File System Service,10,,
+Microsoft Distributed Transaction Coordinator Service,,msdtc.exe,,Microsoft Distributed Transaction Coordinator Service,10,,
+Windows Intersite Messaging Service,,ismserv.exe,,Windows Intersite Messaging Service,10,,
+Windows Application Layer Gateway Service,,alg.exe,,Windows Application Layer Gateway Service,10,,
+Microsoft Network Services,,svchost.exe,"""-k netsvcs""",Microsoft Network Services,10,,
+Cisco Secure ACS Auth Server,,CSAdmin.exe,,Cisco Secure ACS Administration Server,10,http-alt;https-alt,PH_SYS_APP_AUTH_SERVER
+Cisco Secure ACS Auth Server,,CSAuth.exe,,Cisco Secure ACS Authentication Server,10,,
+Cisco Secure ACS Auth Server,,CSDbSync.exe,,Cisco Secure ACS Database Synch Server,10,,
+Cisco Secure ACS Auth Server,,CSLog.exe,,Cisco Secure ACS Logging Server,10,,
+Cisco Secure ACS Auth Server,,CSMon.exe,,Cisco Secure ACS Monitoring Service,10,,
+Cisco Secure ACS Auth Server,,CSRadius.exe,,Cisco Secure ACS RADIUS Server,10,radius,
+Cisco Secure ACS Auth Server,,CSTacacs.exe,,Cisco Secure ACS TACACS Server,10,tacacs,
+DCOM Process Launcher,,svchost.exe,"""-k DcomLaunch""",DCOM Process Launcher,10,,
+Local Security Authentication Service,,lsass.exe,,Local Security Authentication Service,10,,
+LDAP Directory Service,,,,LDAP Directory Service,1,ldap;ldapssl;globalcatldap;globalcatldapssl,PH_SYS_APP_DIRECTORY_SERVER
+Unix LDAP Directory Service,,slapd,,Unix LDAP Directory Service,10,ldap;ldapssl,PH_SYS_APP_DIRECTORY_SERVER
+Spam Assasin (UNIX),,spamd,,Spam Assasin (UNIX),10,,
+DNS Forwarder,,dnsmasq,,DNS Forwarder,10,,PH_SYS_APP_DNS_SERVER
+Snare Windows Event Logging Service,Snare,SnareCore.exe,,Snare Windows Event Logging Service,10,http-alt;https-alt,PH_SYS_APP_LOG_MGMT_SERVER
+Snare IIS Event Logging Service ,Epilog,Epilog.exe,,Snare IIS Event Logging Service ,10,http-alt;https-alt,PH_SYS_APP_LOG_MGMT_SERVER
+Windows Telnet Service,,tlntsvr.exe,,Windows Telnet Service,10,telnet
+Windows File Replication Service,,ntfrs.exe,,Windows File Replication Service,10,msrpc
+NetMeeting Desktop Sharing Service,,mnmsrvc.exe,,NetMeeting Desktop Sharing Service,10,ms-term-serv
+Microsoft Internet Naming Service,,wins.exe,,Microsoft Internet Naming Service,10,
+Windows Internet Explorer Browser,Internet Explorer,explorer.exe,,Windows Internet Explorer Browser,10,
+Mozilla Firefox Browser,Mozilla Firefox,,,Mozilla Firefox Browser,1,
+CiscoSecure ACS Server,CiscoSecure ACS,,,CiscoSecure ACS Server,1,
+Microsoft Visual Studio,Visual Studio,,,Microsoft Visual Studio,1,
+VMware,VMware,,,VMware ,1,
+VMware Service,,VMwareService.exe,,VMware Service,10,
+VMware Tools,,VMwareUser.exe,,VMware Tools,10,
+Windows Management Interface (WMI) Service,,wmiprvse.exe,,Windows Management Interface (WMI) Service,10,
+Windows Session Manager Subsystem,,smss.exe,,Windows Session Manager Subsystem,10,
+Windows Client Server Runtime Subsystem,,csrss.exe,,Windows Client Server Runtime Subsystem,10,
+Windows Service Start-Stop Management Service,,services.exe,,Windows Service Start-Stop Management Service,10,
+Adobe Acrobat Distiller Helper,,acrotray.exe,,Adobe Acrobat Distiller Helper,10,
+Autodesk Network License Management,,adskflex.exe,,Autodesk Network License Management,10,,
+Microsoft Service Extension for Java,,aims_appserver.exe,,Microsoft Service Extension for Java,10,,
+Microsoft Agent Server,,agentsvr.exe,,Microsoft Agent Server,10,,
+Brother Printer Driver1,,brss01a.exe,,Brother Printer Driver1,10,,
+Brother Printer Driver2,,brsvc01a.exe,,Brother Printer Driver2,10,,
+Novell Border Manager Client Trust Service,,clntrust.exe,,Novell Border Manager Client Trust Service,10,,
+Cybermedia agent,,cmagent.exe,,Cybermedia agent,10,,
+HP Insight Manager,,cpqnimgt.exe,,Compaq NIC Agents Service,10,,
+HP ProLiant Remote Monitor Service,,cpqrcmc.exe,,HP ProLiant Remote Monitor Service,10,,
+Compaq Network Teaming and Configuration,,cpqteam.exe,,Compaq Network Teaming and Configuration,10,,
+HP Insight Manager,,cpqwmgmt.exe,,Compaq Server Web Management Agent,10,,
+Compaq windows management Interface (WMI) service,,cpqwmi.exe,,Compaq windows management Interface (WMI) service,10,,
+HP windows management Interface (WMI) service,,hpqwmi.exe,,HP windows management Interface (WMI) service,10,,
+HP Insight Manager,,cqmghost.exe,,HP Insight Foundation Agent Serviice,10,,PH_SYS_APP_MGMT_SERVER
+HP Insight Manager,,cqmgserv.exe,,HP Insight Management Server Agent Service,10,,PH_SYS_APP_MGMT_SERVER
+HP Insight Manager,,cqmgstor.exe,,HP Insight Storage Agents,10,,PH_SYS_APP_MGMT_SERVER
+HP Insight Manager,,hpsmhd.exe,,HP System Management Monitor service,10,,PH_SYS_APP_MGMT_SERVER
+HP Insight Manager,,smhstart.exe,,HP System Management Homepage Service,10,,
+HP Insight Manager,,vcagent.exe,,HP Insight Management Version Control Agent Service,10,,PH_SYS_APP_MGMT_SERVER
+Microsoft Windows World Wide Web Publishing Service,,inetinfo.exe,,Microsoft Windows World Wide Web Publishing Service,10,,
+Microsoft Windows logon screen saver service,,logon.scr,,Microsoft Windows logon screen saver service,10,,
+Sun Java's automatic update scheduler,, jusched.exe,,Sun Java's automatic update scheduler,10,,
+McAfee Anti-virus service,,mcshield.exe,,McAfee Anti-virus service,10,,PH_SYS_APP_HOST_AV
+McAfee Security Taskbar Extension Service,,mctray.exe,,McAfee Security Taskbar Extension Service,10,,PH_SYS_APP_HOST_AV
+McAfee Anti-virus McTaskManager service ,,vstskmgr.exe,,McAfee Anti-virus McTaskManager service ,10,,
+McAfee Host Intrusion Protection for Servers,,,,McAfee Host Intrusion Protection for Servers,1,,PH_SYS_APP_HOST_AV
+McAfee Host Intrusion Protection for Desktops,,,,McAfee Host Intrusion Protection for Desktops,1,,PH_SYS_APP_HOST_AV
+McAfee Security Common User Interface,,udaterui.exe,,McAfee Security Common User Interface,10,,
+McAfee Virus-scan Process,,mfeann.exe,,McAfee Virus-scan Process,10,,PH_SYS_APP_HOST_AV
+McAfee Virus Scanner Statististics Task,,shstat.exe,,McAfee Virus Scanner Statististics Task,10,,
+McAfee Anti-virus Validation Protection Service,,mfevtps.exe,,McAfee Anti-virus Validation Protection Service,10,,PH_SYS_APP_HOST_AV
+McAfee ePolicy Orchestrator Process,,naprdmgr.exe,,McAfee ePolicy Orchestrator Process,10,,PH_SYS_APP_HOST_AV
+McAfee ePolicy Orchestrator Server,,tomcat5.exe,//RS//MCAFEETOMCATSRV,McAfee ePolicy Orchestrator Server,10,http-alt;https-alt,PH_SYS_APP_SEC_MGMT
+McAfee Common Management Agent,,,,McAfee Common Management Agent,10,,PH_SYS_APP_SEC_MGMT
+Symantec Endpoint Protection ,,Rtvscan.exe,,Symantec Endpoint Protection Scanner,10,,PH_SYS_APP_HOST_AV
+Symantec Endpoint Protection ,,semsvc.exe,,Symantec Endpoint Protection Service,10,,PH_SYS_APP_SEC_MGMT
+Symantec Endpoint Protection ,,smc.exe,,Symantec Endpoint Protection Client,10,,PH_SYS_APP_HOST_AV
+Symantec Ghost imaging service,,dbserv.exe,,Symantec Ghost imaging service,10,,
+Symantec Ghost imaging server process,, ngctw32.exe,,Symantec Ghost imaging server process,10,,
+Symantec Ghost configuration server process,, ngserver.exe,,Symantec Ghost configuration server process,10,,
+Symantec Ghost Tray icon task service,, ngtray.exe,,Symantec Ghost Tray icon task service,10,,
+TrendMicro Antivirus Manager,,Apache.exe,Trend Micro,TrendMicro Antivirus Manager,10,,PH_SYS_APP_SEC_MGMT
+TrendMicro OfficeScan ,,DbServer.exe,,TrendMicro OfficeScan Management DB Server,10,,PH_SYS_APP_SEC_MGMT
+TrendMicro OfficeScan,,NTRtScan.exe,,TrendMicro OfficeScan Real Time Scan,10,,PH_SYS_APP_HOST_AV
+Microsoft Windows remote registry system service,,regsvc.exe,,Microsoft Windows remote registry system service,10,,
+SAP customer connection service (SAP proxy),,saprouter,,SAP customer connection service (SAP proxy),10,,
+Windows print and fax handler,, spoolsv.exe,,Windows print and fax handler,10,,
+Microsoft Windows Server shutdown service,, sysdown.exe,,Microsoft Windows Server shutdown service,10,,
+WinZip System Tray icon task service,,wzqkpick.exe,,WinZip System Tray icon task service,10,,
+Microsoft Windows  Automatic Update Service,, wuauclt.exe,,Microsoft Windows  Automatic Update Service,10,,
+Hummingbird DOCSFusion,,docsfusion.exe,,Hummingbird DOCSFusion Server1,10,,
+Hummingbird DOCSFusion,,ftservce.exe,,Hummingbird DOCSFusion Connector Service,10,,
+Hummingbird DOCSFusion,,ftserver.exe,,Hummingbird DOCSFusion Connector Server,10,,
+Hummingbird DOCSFusion,,pcdauthenpipe.exe,,Hummingbird DOCSFusion Server2,10,,
+Hummingbird DOCSFusion,,pcdoiserver.exe,,Hummingbird DOCSFusion Server3,10,,
+BlackBerry Mail,,blackberryagent.exe,,BlackBerry Messaging Agent ,10,,PH_SYS_APP_MAIL_SERVER
+BlackBerry Mail,,bbattachserver.exe,,BlackBerry Attachment Server,10,,PH_SYS_APP_MAIL_SERVER
+BlackBerry Mail,,bcol.exe,,BlackBerry Collaboration Service,10,,PH_SYS_APP_MAIL_SERVER
+BlackBerry Mail,,gwservice.exe,,BlackBerry Novell GroupWise connector1,10,,PH_SYS_APP_MAIL_SERVER
+BlackBerry Mail,,bmds.exe,,BlackBerry Mobile Data Service,10,,PH_SYS_APP_MAIL_SERVER
+BlackBerry Mail,,besalert.exe,,BlackBerry Enterprise Server ,10,,PH_SYS_APP_MAIL_SERVER
+BlackBerry Mail,,gwchecknew.exe,,BlackBerry Novell GroupWise connector2,10,,PH_SYS_APP_MAIL_SERVER
+BlackBerry Mail,,gwcheckpa.exe,,BlackBerry Novell GroupWise connector3,10,,PH_SYS_APP_MAIL_SERVER
+BlackBerry Mail,,gwconnector.exe,,BlackBerry Novell GroupWise connector4,10,,PH_SYS_APP_MAIL_SERVER
+BlackBerry Mail,,blackberrycontroller.exe,,BlackBerry Controller,10,,PH_SYS_APP_MAIL_SERVER
+BlackBerry Mail,,blackberrydispatcher.exe,,BlackBerry Dispatcher,10,,PH_SYS_APP_MAIL_SERVER
+BlackBerry Mail,,itadminserver.exe,,BlackBerry Policy Service,10,,PH_SYS_APP_MAIL_SERVER
+BlackBerry Mail,,blackberryrouter.exe,,BlackBerry Router ,10,,PH_SYS_APP_MAIL_SERVER
+BlackBerry Mail,,blackberrysyncserver.exe,,BlackBerry Synchronization Service,10,,PH_SYS_APP_MAIL_SERVER
+BlackBerry Mail,,rimdevicemanager.exe,,BlackBerry Communications Manager,10,,PH_SYS_APP_MAIL_SERVER
+BlackBerry Mail,,bbdevmgr.exe,,BlackBerry Handheld Driver Software ,10,,
+BlackBerry Mail,,bbmgrw32.exe,,BlackBerry Application Server,10,,PH_SYS_APP_MAIL_SERVER
+Blackberry Mail,,bbconvert.exe,,Blackberry BES server,10,,PH_SYS_APP_MAIL_SERVER
+ArcIMS Application Server,,aims_appserver.exe,,ArcIMS Application Server,10,,
+ArcIMS Monitor,,aims_monitor.exe,,ArcIMS Monitor,10,,
+ArcIMS Tasker,,aims_tasker.exe,,ArcIMS Tasker,10,,
+ArcIMS Spatial Server containers,,aimsserver.exe,,ArcIMS Spatial Server containers,10,,
+ArcGIS Logging and Directory Mgmt Server,,arcsoc.exe,,ArcGIS Logging and Directory Mgmt Server,10,,
+ArcGIS Server,,arcsom.exe,,ArcGIS Server,10,,
+Microsoft Windows File Indexing Service,,cidaemon.exe,,Microsoft Windows File Indexing Service,10,,
+Microsoft Office Alternate Text Input Service,,ctfmon.exe,,Microsoft Office Alternate Text Input Service,10,,
+Microsoft Windows Logon Manager,,winlogon.exe,,Microsoft Windows Logon Manager,10,,
+Microsoft Windows File Indexing Service Monitor,,cisvc.exe,,Microsoft Windows File Indexing Service Monitor,10,,
+Nero Scout CD/DVD Burner Monitor,,nmbgmonitor.exe,,Nero Scout CD/DVD Burner Monitor,10,,
+Nero Scout CD/DVD Burner File Index Store,,nmindexstoresvr..exe,,Nero Scout CD/DVD Burner File Index Store,10,,
+Nero Scout CD/DVD Burner File Indexer,,nmindexingservice..exe,,Nero Scout CD/DVD Burner File Indexer,10,,
+Microsoft Telephone API (TAPI) Service,,svchost.exe,"""-k tapisrv""",Microsoft Telephone API (TAPI) Service,10,,
+Microsoft Error reporting Service,,svchost.exe,"""-k WinErr""",Microsoft Error reporting Service,10,,
+ProspectHills Phoenix,,,,ProspectHills Phoenix,1,,PH_SYS_APP_SEC_MGMT
+Juniper Security Central Manager,,,,Juniper Security Central Manager,1,,PH_SYS_APP_SEC_MGMT
+Checkpoint SmartCenter,,,,Checkpoint SmartCenter,1,,PH_SYS_APP_SEC_MGMT
+Sonicwall Global Security Manager,,,,Sonicwall Global Security Manager,1,,PH_SYS_APP_SEC_MGMT
+Fortinet FortiManager,,,,Fortinet FortiManager,1,,PH_SYS_APP_SEC_MGMT
+WatchGuard System Manager,,,,WatchGuard System Manager,1,,PH_SYS_APP_SEC_MGMT
+IBM ISS SiteProtector Mgmt Server,,,,IBM ISS SiteProtector Mgmt Server,1,,PH_SYS_APP_SEC_MGMT
+3Com TippingPoint Security Management System,,,,3Com TippingPoint Security Management System,1,,PH_SYS_APP_SEC_MGMT
+Cisco CSA Management Center,,,,Cisco CSA Management Center,1,,PH_SYS_APP_SEC_MGMT
+Generic Java App Server,,,,Generic Java App Server,1,,PH_SYS_APP_APP_SERVER
+SUN Glassfish App Server,,,,SUN Glassfish App Server,1,,PH_SYS_APP_APP_SERVER
+Redhat JBOSS App Server,,,,Redhat JBOSS App Server,1,,PH_SYS_APP_APP_SERVER
+IBM WebSphere App Server,,,,IBM WebSphere App Server,1,,PH_SYS_APP_APP_SERVER
+BEA WebLogic App Server,,,,BEA WebLogic App Server,1,,PH_SYS_APP_APP_SERVER
+EMC RSA Authentication Manager,,,,EMC RSA Authentication Manager,1,,PH_SYS_APP_SEC_MGMT
+Juniper Steel-Belted RADIUS Server,,radius.exe,sbr.xml,Juniper Steel-Belted RADIUS Server,10,,PH_SYS_APP_AUTH_SERVER
+InfoBlox DNS,,,,InfoBlox DNS,1,,PH_SYS_APP_DNS_SERVER
+Unix Syslog Server,,"Klogd,Rklogd,Syslogd,syslog-ng,rsyslogd",,Syslog Server,10,syslog,PH_SYS_APP_LOG_MGMT_SERVER
+Nagios Server,,nagios,,Nagios Server,10,,PH_SYS_APP_MGMT_SERVER
+Microsoft Domain Controller,,,,Microsoft Domain Controller,1,,PH_SYS_APP_DOMAIN_CONTROLLER
+Imperva Securesphere MX Management Server,,,,Imperva Securesphere MX Management Server,1,,PH_SYS_APP_SEC_MGMT
+Snort IPS,,snort,,Snort IPS,1,,PH_SYS_APP_NETWORK_IPS
+QualysGuard Vulnerability Scanner,,,,QualysGuard Vulnerability Scanner,1,,PH_SYS_APP_SEC_MGMT
+nCircle Suite360 Vulnerability Scanner,,,,nCircle Suite360 Vulnerability Scanner,1,,PH_SYS_APP_SEC_MGMT
+Nessus Vulnerability Scanner,,nessusd,,Nessus Vulnerability Scanner,1,,PH_SYS_APP_SEC_MGMT
+ProspectHills AccelOps,,phMonitor,,ProspectHills AccelOps Monitor Service,10,PHMONITOR,PH_SYS_APP_ACCELOPS
+ProspectHills AccelOps,,phParser,,ProspectHills AccelOps Event Parsing Service,10,PHPARSER,PH_SYS_APP_ACCELOPS
+ProspectHills AccelOps,,phQueryMaster,,ProspectHills AccelOps Query Master Service,10,PHQUERYMASTER,PH_SYS_APP_ACCELOPS
+ProspectHills AccelOps,,phQueryWorker,,ProspectHills AccelOps Query Worker Service,10,PHQUERYWORKER,PH_SYS_APP_ACCELOPS
+ProspectHills AccelOps,,phRuleMaster,,ProspectHills AccelOps Rule Master Service,10,,PH_SYS_APP_ACCELOPS
+ProspectHills AccelOps,,phRuleWorker,,ProspectHills AccelOps Rule Worker Service,10,,PH_SYS_APP_ACCELOPS
+ProspectHills AccelOps,,phReportMaster,,ProspectHills AccelOps Report Master Service,10,PHREPORTMASTER,PH_SYS_APP_ACCELOPS
+ProspectHills AccelOps,,phReportWorker,,ProspectHills AccelOps Report Worker Service,10,PHREPORTWORKER,PH_SYS_APP_ACCELOPS
+ProspectHills AccelOps,,phIdentityMaster,,ProspectHills AccelOps  Identity Master Service,10,PHIDENTITYMASTER,PH_SYS_APP_ACCELOPS
+ProspectHills AccelOps,,phIdentityWorker,,ProspectHills AccelOps Identity Worker Service,10,PHIDENTITYWORKER,PH_SYS_APP_ACCELOPS
+ProspectHills AccelOps,,phDiscover,,ProspectHills AccelOps Discover Module,10,PHDISCOVER,PH_SYS_APP_ACCELOPS
+ProspectHills AccelOps,,phDataManager,,ProspectHills AccelOps Data Management Service,10,PHDATAMANAGER,PH_SYS_APP_ACCELOPS
+ProspectHills AccelOps,,phAgentManager,,ProspectHills AccelOps Agent Manager Service,10,PHAGENTMANAGER,PH_SYS_APP_ACCELOPS
+ProspectHills AccelOps,,phEventPackager,,ProspectHills AccelOps Event packager Service,10,PHEVENTPACKAGER,PH_SYS_APP_ACCELOPS
+ProspectHills AccelOps,,phCheckpoint,,ProspectHills AccelOps Checkpoint Firewall Service,10,PHCHECKPOINTAGENT,PH_SYS_APP_ACCELOPS
+Websense Web Security,,PolicyServer,,Websense Web Security,10,,PH_SYS_APP_SEC_GW
+Websense Web Security ,,UserService,,Websense Web Security User Service,10,,PH_SYS_APP_SEC_GW
+Websense Web Security ,,NetworkAgent,,Websense Web Security Network Agent,10,,PH_SYS_APP_SEC_GW
+Websense Web Security ,,RadiusAgent,,Websense Web Security Radius Agent,10,,PH_SYS_APP_SEC_GW
+Websense Web Security ,,postgres,"""-D /opt/Websense/bin""",Websense Web Security Database,10,,PH_SYS_APP_SEC_GW
+Websense Mail Security,,STEMRules.exe,,Websense Mail Security,10,,PH_SYS_APP_SEC_GW
+Websense Mail Security ,,STEMRCV.exe,,Websense Mail Security (SurfControl Filter Rcv),10,,PH_SYS_APP_SEC_GW
+Websense Mail Security ,,STEMSND.exe,,Websense Mail Security (SurfControl Filter Send),10,,PH_SYS_APP_SEC_GW
+Websense Mail Security ,,STEMWADM.exe,,Websense Mail Security (SurfControl Web Admin),10,,PH_SYS_APP_SEC_GW
+Websense Mail Security ,,STEMSCHED.exe,,Websense Mail Security (SurfControl Scheduler),10,,PH_SYS_APP_SEC_GW
+Websense Log Server,,,,Websense Log Server,1,,PH_SYS_APP_LOG_MGMT_SERVER
+Microsoft PPTP/L2TP VPN,,,,Microsoft PPTP/L2TP VPN,1,,PH_SYS_APP_VPN_GATEWAY
+Astaro Security Gateway,,,,Astaro Security Gateway,1,,PH_SYS_APP_SEC_GW
+Microsoft Full Text Search Core Indexer,,msftesql.exe,,Microsoft Full Text Search Core Indexer,10,,
+Microsoft Text Search Filter Daemon,,Msftefd.exe,,Microsoft Text Search Filter Daemon,10,,
+Microsoft Text Search ,,Microsoft.Exchange.Search.ExSearch.exe,,Microsoft Text Search ,10,,
+Microsoft Exchange,,MSExchangeADTopologyService.exe,,MS Exchange Active Directory Topology Service,10,,PH_SYS_APP_MAIL_SERVER
+Microsoft Exchange,,store.exe,,MS Exchange Information store,10,,PH_SYS_APP_MAIL_SERVER
+Microsoft Exchange,,mad.exe,,MS Exchange System Attendant,10,,PH_SYS_APP_MAIL_SERVER
+Microsoft Exchange,,Microsoft.Exchange.AntispamUpdateSvc.exe,,MS Exchange Antispam Update,10,,PH_SYS_APP_MAIL_SERVER
+Microsoft Exchange,,Microsoft.Exchange.EdgeSyncSvc.exe,,MS Exchange Edge Synch Service,10,,PH_SYS_APP_MAIL_SERVER
+Microsoft Exchange,,MsExchangeFDS.exe,,MS Exchange File Distribution Service,10,,PH_SYS_APP_MAIL_SERVER
+Microsoft Exchange,,MSExchangeMailboxAssistants.exe,,MS Exchange Mailbox Assistant Service,10,,PH_SYS_APP_MAIL_SERVER
+Microsoft Exchange,,MSExchangeMailSubmission.exe ,,MS Exchange Mail Submission Service,10,,PH_SYS_APP_MAIL_SERVER
+Microsoft Exchange,,Microsoft.Exchange.Cluster.ReplayService.exe,,MS Exchange Cluster Replay Service,10,,PH_SYS_APP_MAIL_SERVER
+Microsoft Exchange,,Microsoft.Exchange.ServiceHost.exe,,MS Exchange Service Host,10,,PH_SYS_APP_MAIL_SERVER
+Microsoft Exchange,,MSExchangeTransport.exe,,MS Exchange Transport Service,10,,PH_SYS_APP_MAIL_SERVER
+Microsoft Exchange,,MSExchangeTransportLogSearch.exe,,MS Exchange Transport Log Search Service,10,,PH_SYS_APP_MAIL_SERVER
+Microsoft Exchange,,EdgeTransport.exe,,MS Exchange Edge Transport Service,10,,PH_SYS_APP_MAIL_SERVER
+Microsoft Exchange,,Microsoft.Exchange.Pop3Service.exe ,,MS Exchange POP3 Service,10,pop3;kpop;pop2;pop3s,PH_SYS_APP_MAIL_SERVER
+Microsoft Exchange,,Microsoft.Exchange.Pop3.exe ,,MS Exchange POP3 Process,10,pop3;kpop;pop2;pop3s,PH_SYS_APP_MAIL_SERVER
+Microsoft Exchange,,Microsoft.Exchange.Imap4Service.exe,,MS Exchange IMAP4 Service,10,imap;imap3;imaps,PH_SYS_APP_MAIL_SERVER
+Microsoft Exchange,,Microsoft.Exchange.Imap4.exe,,MS Exchange IMAP4 Process,10,imap;imap3;imaps,PH_SYS_APP_MAIL_SERVER
+Microsoft Exchange,,MSExchangeFDS.exe,,MS Exchange File Distribution Service,10,,PH_SYS_APP_MAIL_SERVER
+Microsoft Exchange,,Exsetup.exe,,MS Exchange Setup,10,,PH_SYS_APP_MAIL_SERVER
+Microsoft Exchange,,Clussvc.exe ,,MS Exchange Cluster Service,10,,PH_SYS_APP_MAIL_SERVER
+Microsoft Exchange,,CluAdmin.exe,,MS Exchange Cluster Administrator,10,,PH_SYS_APP_MAIL_SERVER
+Microsoft Exchange,,Resrcmon.exe,,MS Exchange Cluster Resource Monitor,10,,PH_SYS_APP_MAIL_SERVER
+Microsoft Exchange,,Microsoft.Exchange.Monitoring.exe,,MS Exchange Mailbox Assistant Service,10,,PH_SYS_APP_MAIL_SERVER
+Windows Active Directory Tools,,Dsamain.exe,,Windows Active Directory Database Mounting Tool,10,,
+Microsoft Exchange,,EdgeCredentialSvc.exe,,MS Exchange Edge Credential Service,10,,PH_SYS_APP_MAIL_SERVER
+Microsoft Exchange,,umservice.exe,,MS Exchange Unified Messaging Service,10,,PH_SYS_APP_MAIL_SERVER
+Microsoft Exchange,,UMWorkerProcess.exe,,MS Exchange Unified Messaging Worker Process,10,,PH_SYS_APP_MAIL_SERVER
+Microsoft WMI,,wmiapsrv.exe,,Microsoft WMI Performance Adapter,10,,
+Microsoft WMI,,wbemtest.exe,,Microsoft WMI Tester Program,10,,
+Microsft Remote Command Execution Service,,winexesvc.exe,,Microsft Remote Command Execution Service,10,,
+Windows Java Update Checker,,jucheck.exe,,Windows Java Update Checker,10,,
+Windows NTP Time Synchronization Process,,SymmTime.exe,,NTP Time Synchronization Process,10,,
+Windows Vista Task Scheduler Engine,,taskeng.exe,,Windows Vista Task Scheduler Engine,10,,
+CommVault Backup,,clbackup.exe,,CommVault Backup Process,10,,
+CommVault Backup,,EvMgrC.exe,,CommVault Event Manager Service,10,,
+CommVault Backup,,cvd.exe,,CommVault QiNetix Backup,10,,
+McAfee EPO Process,,frameworkservice.exe,,McAfee EPO Process,10,,PH_SYS_APP_HOST_AV
+StarWind iSCSI Target,,StarWindServiceAE.exe,,StarWind iSCSI Target,10,,
+Windows NFS Client,,nfsclnt.exe,,Windows NFS Client,10,,
+Windows NFS Server,,nfssvc.exe,,Windows NFS Server,10,nfs,
+VMware Physical Desk Helper Service,,vmacthlp.exe,,VMware Physical Desk Helper Service,10,,
+Windows Deployment Server,,svchost.exe,"""-k wdsserver""",Windows Deployment Server,10,,
+Windows File System Resource Manager,,svchost.exe,"""-k srmsvcs""",Windows File System Resource Manager,10,,
+Microsoft Remote Desktop Clip Manager,,rdpclip.exe,,Microsoft Remote Desktop Clip Manager,10,,
+VMware VirtualCenter Server,,vpxd.exe,,VMware VirtualCenter Server,10,,PH_SYS_APP_VMW_VIRTUAL_CENTER
+Dell OpenManage Server Administration Tools,,dsm_om_connsvc32.exe,,Dell OpenManage SA Connection Service,10,,
+Dell OpenManage Server Administration Tools,,dsm_om_shrsvc32.exe,,Dell OpenManage SA Shared Services,10,,
+Dell OpenManage Server Administration Tools,,dsm_sa_datamgr32.exe,,Dell OpenManage SA Data Manager,10,,
+Dell OpenManage Server Administration Tools,,dsm_sa_eventmgr32.exe,,Dell OpenManage SA Event Manager,10,,
+Dell OpenManage Server Administration Tools,,mr2kserv.exe,,Dell OpenManage Storage Array Management Utility,10,,
+Cisco Call Manager,,aupair.exe,,Cisco Call Manager Database layer Monitor,10,,PH_SYS_APP_VOIP_SERVER
+Cisco Call manager,,ctimanager,,Cisco Call manager call telephony integration Service,10,,PH_SYS_APP_VOIP_SERVER
+Cisco Call Manager RIS Data Collector,,RiSDC,,Cisco Call Manager RIS Data Collector,10,,PH_SYS_APP_VOIP_SERVER
+Cisco Call Manager Telephony Call Dispatcher,, tcdsrv.exe,,Cisco Call Manager Telephony Call Dispatcher,10,,PH_SYS_APP_VOIP_SERVER
+Cisco Call Manager,,ccm,,CCM Call Processor,10,,PH_SYS_APP_VOIP_SERVER
+Cisco Call Manager,,ccmAgt,,CCM Call Processor Agent,10,,PH_SYS_APP_VOIP_SERVER
+Cisco Call Manager,,acserver,,CCM Attendant Console Server,10,,PH_SYS_APP_VOIP_SERVER
+Cisco Call Manager,,amc,,CCM Alert manager Collector,10,,PH_SYS_APP_VOIP_SERVER
+Cisco Call Manager,,ipvmsd,,CCM IP Voice Media Streaming Server,10,,PH_SYS_APP_VOIP_SERVER
+Cisco Call Manager,,CTLProvider,,CCM Cisco Trust List Provider Service,10,,PH_SYS_APP_VOIP_SERVER
+Cisco Call Manager,,CTLAgent,,CCM Cisco Trust List Client,10,,PH_SYS_APP_VOIP_SERVER
+Cisco Call Manager,,carschlr,,CCM CAR Scheduler Service,10,,PH_SYS_APP_VOIP_SERVER
+Cisco Call Manager,,cef,,CCM Cisco Extension Function,10,,PH_SYS_APP_VOIP_SERVER
+Cisco Call Manager,,cdrrep,,CCM CDR Repository Manager,10,,PH_SYS_APP_VOIP_SERVER
+Cisco Call Manager,,cdragent,,CCM CDR Agent,10,,PH_SYS_APP_VOIP_SERVER      
+Cisco Call Manager,,rtmtreporter,,CCM Real Time Monitoring Service,10,,PH_SYS_APP_VOIP_SERVER
+Cisco Unified Meeting PlaceDirectory Services,,dcx500.exe,,Cisco Unified Meeting place Directory Services,10,,
+Cisco IP Voice Media Streaming App,,ipvmsapp.exe,,Cisco IP Voice Media Streaming App,10,,
+Cisco Unity Connection,,CuCsMgr,,Cisco Unity Conversation Manager,10,,PH_SYS_APP_VOIP_SERVER
+Cisco Unity Connection,,CuMixer,,Cisco Unity Mixer,10,,PH_SYS_APP_VOIP_SERVER
+Cisco Unity Connection,,CuMta,,Cisco Unity MTA,10,,PH_SYS_APP_VOIP_SERVER
+Cisco Unity Connection,,CuImapSvr,,Cisco Unity IMAP Server,10,,PH_SYS_APP_VOIP_SERVER
+Cisco Unity Connection,,CuSmtpSvr,,Cisco Unity SMTP Server,10,,PH_SYS_APP_VOIP_SERVER
+Cisco Unity Connection,,CuNotifier,,Cisco Unity ,10,,PH_SYS_APP_VOIP_SERVER
+Cisco Unity Connection,,Cuvrt,,Cisco Unity Voice Recognition Transport,10,,PH_SYS_APP_VOIP_SERVER
+Cisco Unity Connection,,CuSysAgent,,Cisco Unity Connection System Agent,10,,PH_SYS_APP_VOIP_SERVER
+Cisco Unity Connection,,CuGalSvc,,Cisco Unity Groupware Caching Service,10,,PH_SYS_APP_VOIP_SERVER
+Cisco Unity Connection,,CuScavenger,,Cisco Unity Report Data Harvester,10,,PH_SYS_APP_VOIP_SERVER
+Cisco Unity Connection,,CuCmDbEventListener,,Cisco Unity Database Event Listener,10,,PH_SYS_APP_VOIP_SERVER
+Cisco Unity Connection,,CuFileSync,,Cisco Unity File Sync,10,,PH_SYS_APP_VOIP_SERVER
+Cisco Unity Connection,,CuReplicator,,Cisco Unity Replicator ,10,,PH_SYS_APP_VOIP_SERVER
+Cisco Unity Connection,,CuDbProxy,,Cisco Unity Connection DB Proxy,10,,PH_SYS_APP_VOIP_SERVER
+Cisco Unity Connection,,CuSrm,,Cisco Unity Server Role Manager,10,,PH_SYS_APP_VOIP_SERVER
+Cisco Unity Connection,,CuLicSvr,,Cisco Unity License Server,10,,PH_SYS_APP_VOIP_SERVER
+Cisco Unity Connection,,CuSnmpAgt,,Cisco Unity SNMP Agent,10,,PH_SYS_APP_VOIP_SERVER
+Cisco Unity Connection,,unityoninit,,Cisco Unity Connection DB,10,,PH_SYS_APP_VOIP_SERVER
+BigFix,,BESClient.exe,,BigFix BES Client,10,,PH_SYS_APP_MGMT_SERVER
+BigFix,,BESClientHelper.exe,,BigFix BES Client Helper,10,,PH_SYS_APP_MGMT_SERVER
+Citrix Presentation Server,,HCAService.exe,, Citrix Health Monitoring and Recovery,10,,PH_SYS_APP_TERMINAL_SERVER
+Citrix Presentation Server,,CpSvc.exe,,Citrix Print Manager Service,10,,PH_SYS_APP_TERMINAL_SERVER
+Citrix Presentation Server,,IMAAdvanceSrv.exe,,Citrix Presentation Server Services Manager,10,,PH_SYS_APP_TERMINAL_SERVER
+Citrix Presentation Server,,RadeSvc.exe,, Citrix Streaming Service,10,,PH_SYS_APP_TERMINAL_SERVER
+Citrix Presentation Server,,cdmsvc.exe,, Citrix Drive Mapping Service,10,,PH_SYS_APP_TERMINAL_SERVER
+Citrix Presentation Server,,ctxactivesync.exe,,Citrix Active Synch Server,10,,PH_SYS_APP_TERMINAL_SERVER
+Citrix Presentation Server,,mfcom.exe,, Citrix MFCOM Service,10,,PH_SYS_APP_TERMINAL_SERVER
+Citrix Presentation Server,,ctxsfosvc64.exe,,Citrix Presentation Server 64-bit Virtual Memory Optimization,10,,PH_SYS_APP_TERMINAL_SERVER
+Citrix Presentation Server,,XTE.exe,, Citrix XTE Server,10,,PH_SYS_APP_TERMINAL_SERVER
+Citrix Presentation Server,,ctxwmisvc.exe,,Citrix WMI Service,10,,PH_SYS_APP_TERMINAL_SERVER
+Citrix Presentation Server,,wfshell.exe,, Citrix WinFrame Shell,10,,PH_SYS_APP_TERMINAL_SERVER
+Citrix Presentation Server,,concentr.exe,, Citrix Connection center service,10,,PH_SYS_APP_TERMINAL_SERVER
+Citrix Presentation Server,,wfcrun32.exe,, Citrix Program Neighborhood Connection Center,10,,PH_SYS_APP_TERMINAL_SERVER
+Citrix Presentation Server,,cdfsvc.exe,,Citrix Metaframe diagnostic facility COM Server ,10,,PH_SYS_APP_TERMINAL_SERVER
+Citrix Presentation Server,,citrix.msam.deployment.service.exe,,Citrix Deployment Server,10,,PH_SYS_APP_TERMINAL_SERVER
+Citrix Presentation Server,,resaggsvc.exe,,Citrix Resource Aggregation Server,10,,PH_SYS_APP_TERMINAL_SERVER
+Citrix Presentation Server,,enginemgrservice.exe,,Citrix File Activation Engine Service,10,,PH_SYS_APP_TERMINAL_SERVER
+Citrix Presentation Server,,activationservicehost.exe,,Citrix File Activation Host Service,10,,PH_SYS_APP_TERMINAL_SERVER
+Citrix Presentation Server,,AgentServer.exe,,Citrix Agent Service,10,,PH_SYS_APP_TERMINAL_SERVER
+Citrix Presentation Server,,pnagent.exe,,Citrix Program Neighborhood Agent Client,10,,PH_SYS_APP_TERMINAL_SERVER
+Citrix Presentation Server,,ssonsvr.exe,,Citrix MetaFrame Client remote administration tool,10,,PH_SYS_APP_TERMINAL_SERVER
+Citrix Presentation Server,,xte.exe,,Citrix MetaFrame XTE Server ,10,,PH_SYS_APP_TERMINAL_SERVER
+Citrix Presentation Server,,icabar.exe,,Citrix MetaFrame Administration Toolbar,10,,PH_SYS_APP_TERMINAL_SERVER
+Citrix Presentation Server,,imasrv.exe,,Citrix Independent Management Architecture (IMA) Server,10,,PH_SYS_APP_TERMINAL_SERVER
+Citrix Presentation Server,,encsvc.exe,,Citrix MetaFrame XP Encryption Service,10,,PH_SYS_APP_TERMINAL_SERVER
+Citrix Presentation Server,,ctxxmlss.exe,,Citrix  MetaFrame XP XML Service,10,,PH_SYS_APP_TERMINAL_SERVER
+Citrix Presentation Server,,ctxsgsvc.exe,,Citrix MetaFrame Secure Gateway Service,10,,PH_SYS_APP_TERMINAL_SERVER
+Cisco AnyConnect VPN Client,,vpnagent.exe,,Cisco AnyConnect VPN Client,10,,
+Windows DHCP Server,,svchost.exe,"""-k DHCPServer""",Windows DHCP Server,10,,PH_SYS_APP_DHCP_SERVER

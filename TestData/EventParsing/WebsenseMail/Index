@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+Websense_Mail_Deny_policy,WebsenseMail_1,WebsenseMail,192.168.64.6,,syslog

@@ -1,0 +1,29 @@
+<accessConfigs>
+	<accessMethods>
+		<accessMethod id="1">
+			<accessProtocol>MS_WMI</accessProtocol>
+			<baseDN/>
+			<description/>
+			<name>MS-WMI-Domain_Prospect-Hills</name>
+			<port/>
+			<pullInterval>5</pullInterval>
+			<credential>
+				<password>abc</password>
+				<principal>prospect-hills/phoenix_agent</principal>
+				<suPassword/>
+			</credential>
+			<deviceType>
+				<accessProtocols>MS_RPC,MS_WMI,LDAP</accessProtocols>
+				<model>Windows</model>
+				<vendor>Microsoft</vendor>
+				<version>ANY</version>
+			</deviceType>
+		</accessMethod>
+	</accessMethods>
+	<ipAccessMappings>
+		<ipAccessMapping>
+			<accessMethodId>1</accessMethodId>
+			<ipRange>1.1.1.1</ipRange>
+		</ipAccessMapping>
+	</ipAccessMappings>
+</accessConfigs>

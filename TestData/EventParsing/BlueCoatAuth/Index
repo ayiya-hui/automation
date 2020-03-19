@@ -1,0 +1,7 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+Bluecoat-SGOS-Web-Request-Success,BlueCoatAuth_1,BlueCoatAuth,34.160.179.201,,syslog
+Bluecoat-SGOS-Web-Request-Redirect,BlueCoatAuth_2,BlueCoatAuth,34.160.179.201,,syslog
+Bluecoat-SGOS-Web-Server-Error,BlueCoatAuth_4,BlueCoatAuth,34.160.179.201,,syslog
+Bluecoat-SGOS-Web-Request-Denied,BlueCoatAuth_5,BlueCoatAuth,34.160.179.201,,syslog
+Bluecoat-SGOS-Web-Client-Error,BlueCoatAuth_3,BlueCoatAuth,34.160.179.201,,syslog

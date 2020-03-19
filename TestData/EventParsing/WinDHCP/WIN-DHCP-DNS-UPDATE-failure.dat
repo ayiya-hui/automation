@@ -1,0 +1,24 @@
+[reptDevIpAddr(key)]
+37.37.37.37
+[eventMsg]
+<13>Jun  1 14:24:08 $reporter WinDHCPLog	0	31,06/01/10,14:24:08,DNS Update Failed,192.168.26.31,HONGBO-LAPTOP.ProspectHills.net,-1,
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+reptVendor=Microsoft
+eventSeverity=3
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+eventAction=1 (Deny)
+hostIpAddr=192.168.26.31
+eventName=DHCP DNS Update Request Fail
+computer=HONGBO-LAPTOP
+eventType=WIN-DHCP-DNS-UPDATE-failure
+phEventCategory=0 (External)
+hostName=HONGBO-LAPTOP
+reptDevIpAddr=$reporter
+reptModel=DHCP

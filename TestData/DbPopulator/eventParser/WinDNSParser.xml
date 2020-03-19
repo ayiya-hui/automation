@@ -1,0 +1,144 @@
+<eventParser name="WinDNSParser">
+  <deviceType>
+    <Vendor>Generic</Vendor>
+    <Model>Generic</Model>
+    <Version>ANY</Version>
+  </deviceType>
+
+  <appType>
+    <Vendor>Microsoft</Vendor>
+    <Model>DNS</Model>
+    <Version>ANY</Version>
+    <Name>Microsoft DNS</Name>
+  </appType>
+
+  <!-- pattern definitions -->
+  <patternDefinitions>
+    <pattern name="patErrorCode"><![CDATA[\[.*\]]]></pattern>
+    <pattern name="patStrWord"><![CDATA[[\w]*]]></pattern>
+  </patternDefinitions>
+  
+  <eventFormatRecognizer><![CDATA[MSDNSLog]]></eventFormatRecognizer>
+
+  <testEvents>
+      <testEvent><![CDATA[<13>Aug 10 19:14:36 192.168.20.99 MSDNSLog 0 20090810 19:13:43 15EC PACKET 025AED90 UDP Rcv 192.168.20.35 b66e Q [0001 D NOERROR] A (12)autodiscover(8)accelops(3)net(0)]]></testEvent>
+  </testEvents>
+
+  <parsingInstructions>
+  
+  <!-- header -->
+  <switch>
+      <case>
+          <collectFieldsByRegex src="$_rawmsg">
+  	      <regex><![CDATA[<:gPatSyslogPRI><_mon:gPatMon>\s+<_day:gPatDay>\s+<_time:gPatTime>\s+<:gPatIpV4Dot>\s+MSDNSLog\s+<:gPatInt>\s+<_year:gPatYear><:gPatInt>\s+<:gPatTime>\s+<:gPatStr>\s+<_body:gPatMesgBody>\s+<_errCode:patErrorCode>\s+<_type:patStrWord>\s*<destName:gPatMesgBody>]]></regex>
+          </collectFieldsByRegex>
+      </case>
+      <case>
+          <collectFieldsByRegex src="$_rawmsg">
+  	      <regex><![CDATA[<:gPatSyslogPRI><_mon:gPatMon>\s+<_day:gPatDay>\s+<_time:gPatTime>\s+<:gPatIpV4Dot>\s+MSDNSLog\s+<:gPatInt>\s+<:gPatInt>/<:gPatInt>/<_year:gPatYear>\s+<:gPatTime>\s+<:gPatStr>\s+<_body:gPatMesgBody>\s+<_errCode:patErrorCode>\s+<_type:patStrWord>\s*<destName:gPatMesgBody>]]></regex>
+          </collectFieldsByRegex>
+      </case>
+      <case>
+          <collectFieldsByRegex src="$_rawmsg">
+  	      <regex><![CDATA[<:gPatSyslogPRI><_mon:gPatMon>\s+<_day:gPatDay>\s+<_time:gPatTime>\s+<reptDevName:gPatStr>\s+MSDNSLog\s+<:gPatInt>\s+<_year:gPatYear><:gPatInt>\s+<:gPatTime>\s+<:gPatStr>\s+<_body:gPatMesgBody>\s+<_errCode:patErrorCode>\s+<_type:patStrWord>\s*<destName:gPatMesgBody>]]></regex>
+          </collectFieldsByRegex>
+      </case>
+      <case>
+          <collectFieldsByRegex src="$_rawmsg">
+  	      <regex><![CDATA[<:gPatSyslogPRI><_mon:gPatMon>\s+<_day:gPatDay>\s+<_time:gPatTime>\s+<reptDevName:gPatStr>\s+MSDNSLog\s+<:gPatInt>\s+<:gPatInt>/<:gPatInt>/<_year:gPatYear>\s+<:gPatTime>\s+<:gPatStr>\s+<_body:gPatMesgBody>\s+<_errCode:patErrorCode>\s+<_type:patStrWord>\s*<destName:gPatMesgBody>]]></regex>
+          </collectFieldsByRegex>
+      </case>
+  </switch>
+
+  <setEventAttribute attr="eventType">combineMsgId("MS", "_", "DNS", "_", $_type, "_", "Query")</setEventAttribute> 
+  <setEventAttribute attr="deviceTime">toDateTime($_mon, $_day, $_year, $_time)</setEventAttribute>
+  <setEventAttribute attr="eventAction">0</setEventAttribute>
+  <setEventAttribute attr="destName">replaceStringByRegex($destName, "\(\d+\)", ".")</setEventAttribute>
+  <setEventAttribute attr="destName">trimAttribute($destName, ".")</setEventAttribute>
+
+  <switch>
+      <case>
+      <collectAndSetAttrByRegex src="$_errCode">
+  	<regex><![CDATA[\[<_errorNo:gPatInt>\s+<:gPatSentence>\s+<_errorString:gPatWord>\]]]></regex>
+      </collectAndSetAttrByRegex>
+      </case>
+            <case>
+      <collectAndSetAttrByRegex src="$_errCode">
+  	<regex><![CDATA[\[<_errorNo:gPatInt>\s+<_errorString:gPatWord>\]]]></regex>
+      </collectAndSetAttrByRegex>
+      </case>
+  </switch>
+  
+  <collectAndSetAttrByRegex src="$_body">
+	<regex><![CDATA[PACKET\s+<:gPatStr>\s+<appTransportProto:gPatProto>\s+<ipConnId:gPatWord>\s+<_IpAddr:gPatIpV4Dot>\s+<:gPatStr>\s+<_rq:gPatSentence>]]></regex>
+   </collectAndSetAttrByRegex>
+   
+   <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+   <setEventAttribute attr="ipProto">17</setEventAttribute>
+   <setEventAttribute attr="destIpPort">53</setEventAttribute>
+   
+   <when test='matches($destName, gPatIpV4Dot)'>
+	<collectFieldsByRegex src="$destName">
+		<regex><![CDATA[<_bit4:gPatInt>\.<_bit3:gPatInt>\.<_bit2:gPatInt>\.<_bit1:gPatInt><:gPatMesgBody>]]></regex>
+	</collectFieldsByRegex>
+	<setEventAttribute attr="destName">combineMsgId($_bit1, ".", $_bit2, ".", $_bit3, ".", $_bit4)</setEventAttribute>
+    </when>
+    
+  
+   <!-- Pair of PTR (Domain Not Exist)
+  <13>Aug 10 19:13:06 192.168.0.10 MSDNSLog 0 20090810 19:12:39 15EC PACKET 02A90CF0 UDP Rcv 192.168.21.16 0410 Q [0001 D NOERROR] PTR (1)7(2)20(3)168(3)192(7)in-_addr(4)arpa(0)
+  <13>Aug 10 19:13:06 192.168.0.10 MSDNSLog 0 20090810 19:12:41 15E0 PACKET 02A90CF0 UDP Snd 192.168.21.16 0410 R Q [8385 A DR NXDOMAIN] PTR (1)7(2)20(3)168(3)192(7)in-_addr(4)arpa(0)
+  -->  
+
+   <!-- Pair of SRV (Domain Not Exist)
+  <13>Aug 10 19:08:44 192.168.0.10 MSDNSLog 0 20090810 19:08:34 15F0 PACKET 02935460 UDP Rcv 192.168.20.44 9a01 Q [0001 D NOERROR] SRV (13)_autodiscover(4)_tcp(13)prospecthills(3)net(0)
+  <13>Aug 10 19:08:44 192.168.0.10 MSDNSLog 0 20090810 19:08:34 15F0 PACKET 02935460 UDP Snd 192.168.20.44 9a01 R Q [8385 A DR NXDOMAIN] SRV (13)_autodiscover(4)_tcp(13)prospecthills(3)net(0)
+  -->
+  
+  <!-- Pair of AAAA (Domain Not Exist)
+  <13>Aug 10 19:08:32 192.168.0.10 MSDNSLog 0 20090810 19:08:29 15F0 PACKET 02572BB0 UDP Rcv 172.16.10.40 1806 Q [0001 D NOERROR] AAAA (13)QA-V-CtOS-ora(14)prospecthills(3)net(13)prospecthills(3)net(0)
+  <13>Aug 10 19:08:32 192.168.0.10 MSDNSLog 0 20090810 19:08:29 15F0 PACKET 02572BB0 UDP Snd 172.16.10.40 1806 R Q [8385 A DR NXDOMAIN] AAAA (13)QA-V-CtOS-ora(14)prospecthills(3)net(13)prospecthills(3)net(0)
+  -->
+  
+  <!--  Standard Pair of A Request to MSDNS
+  <13>Aug 10 19:14:36 192.168.0.10 MSDNSLog 0 20090810 19:14:30 15F0 PACKET 024723B0 UDP Rcv 192.168.20.36 be45 Q [0001 D NOERROR] A (6)server(3)iad(10)liveperson(3)net(0)
+  <13>Aug 10 19:14:36 192.168.0.10 MSDNSLog 0 20090810 19:14:30 15F0 PACKET 01D81180 UDP Snd 68.94.156.1 2a15 Q [0001 D NOERROR] A (6)server(3)iad(10)liveperson(3)net(0)
+  <13>Aug 10 19:14:36 192.168.0.10 MSDNSLog 0 20090810 19:14:30 15F0 PACKET 0266DE30 UDP Rcv 68.94.156.1 2a15 R Q [8081 DR NOERROR] A (6)server(3)iad(10)liveperson(3)net(0)
+  <13>Aug 10 19:14:36 192.168.0.10 MSDNSLog 0 20090810 19:14:30 15F0 PACKET 0266DE30 UDP Snd 192.168.20.36 be45 R Q [8081 DR NOERROR] A (6)server(3)iad(10)liveperson(3)net(0)
+  -->
+  <!-- Pair of Generic (Domain Not Exist)
+172.16.20.210:<13>Aug 24 20:11:51 iedc02.ie.local MSDNSLog  0              20100824 20:10:48 E54 PACKET  UDP Rcv 172.22.2.32     c4ce   Q [0001   D   NOERROR] (2)52(1)2(2)22(3)172(7)in-addr(4)arpa(0)
+172.16.20.210:<13>Aug 24 20:11:51 iedc02.ie.local MSDNSLog  0              20100824 20:10:48 E54 PACKET  UDP Snd 172.22.2.32     c4ce R Q [8085 A DR  NOERROR] (2)52(1)2(2)22(3)172(7)in-addr(4)arpa(0)
+-->
+      <choose>
+	      <when test='$ipConnId = "Rcv"'>  
+		   <when test='$_rq IN "Q,U"'>
+		     <setEventAttribute attr="srcIpAddr">$_IpAddr</setEventAttribute>
+		     <setEventAttribute attr="destIpAddr">$reptDevIpAddr</setEventAttribute>	     
+		  </when>
+	      </when>
+	      
+	      <when test='$ipConnId = "Snd"'>
+		  <when test='$_rq = "R Q"'>
+		     <setEventAttribute attr="srcIpAddr">$reptDevIpAddr</setEventAttribute>
+		     <setEventAttribute attr="destIpAddr">$_IpAddr</setEventAttribute>
+		  </when>
+	       </when>
+       </choose>
+       
+       <choose>
+	     <when test = '$_errorString = "NOERROR"'>
+		 <setEventAttribute attr="eventType">combineMsgId("MS", "_", "DNS", "_", $_type, "_", "Success")</setEventAttribute>
+	     </when>
+	     <otherwise>
+	           <setEventAttribute attr="eventType">combineMsgId("MS", "_", "DNS", "_", $_type, "_", "Fail")</setEventAttribute>
+		 <setEventAttribute attr="eventAction">1</setEventAttribute> 
+		 <setEventAttribute attr="errorString">$_errorString</setEventAttribute>
+		<setEventAttribute attr="errorNo">$_errorNo</setEventAttribute>
+	     </otherwise>
+       </choose>
+  
+  </parsingInstructions>
+
+</eventParser>
+

@@ -1,0 +1,108 @@
+
+<Reports>
+ 
+  <Report id="PH_Report_Auth_Server_1" group="PH_SYS_REPORT_AAAServer">
+    <Name>Logon: Successful Authentication Server Logons </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Successful Authentication Server Logon Details </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,eventType,srcIpAddr,user,userGrp,nepDevIpAddr,nepDevPort,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_Auth_Server_1" name="Filter_Auth_Server_1">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_APP_AUTH_SERVER)  AND  eventType IN (Group@PH_SYS_EVENT_AAALogonSuccess)</SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>srcIpAddr,destIpAddr,hostIpAddr,nepDevIpAddr,reptDevIpAddr,relayDevIpAddr</RelevantFilterAttr>
+  </Report>
+  
+  <Report id="PH_Report_Auth_Server_2" group="PH_SYS_REPORT_AAAServer">
+    <Name>Logon: Failed Authentication Server Logons </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Failed Authentication Server Logon Details </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,eventType,srcIpAddr,user,userGrp,nepDevIpAddr,nepDevPort,ciscoACSFailCode, rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_Auth_Server_2" name="Filter_Auth_Server_2">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_APP_AUTH_SERVER)  AND  eventType IN ( Group@PH_SYS_EVENT_AAALogonFailure)</SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>srcIpAddr,destIpAddr,hostIpAddr,nepDevIpAddr,reptDevIpAddr,relayDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_Auth_Server_3" group="PH_SYS_REPORT_AAAServer">
+    <Name>Logon: Top Auth Servers By Successful Logon Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks Auth Servers and Users By Successful Logon Count </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,user, COUNT( *)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> COUNT (*) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_Auth_Server_3" name="Filter_Auth_Server_3">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_APP_AUTH_SERVER)  AND  eventType IN ( Group@PH_SYS_EVENT_AAALogonSuccess)</SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr, user</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+     <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_Auth_Server_4" group="PH_SYS_REPORT_AAAServer">
+    <Name>Logon: Top Auth Servers,Users By Failed Logon Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks Auth Servers, Users By Failed Logon Count </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,user,COUNT( *)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> COUNT ( * ) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_Auth_Server_4" name="Filter_Auth_Server_4">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_APP_AUTH_SERVER)  AND  eventType IN ( Group@PH_SYS_EVENT_AAALogonFailure)</SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr, user</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>  
+
+  <Report id="PH_Report_Auth_Server_5" group="PH_SYS_REPORT_AAAServer">
+    <Name>All Events: Top Auth Servers and events by count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the AAA servers and their events by count </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,reptVendor,reptModel,eventType,COUNT( *)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> COUNT ( * ) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_Auth_Server_5" name="Filter_Auth_Server_5">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_APP_AUTH_SERVER) AND (eventType CONTAIN "Win-IAS-" OR eventType CONTAIN "Juniper-Steelbelt-" OR eventType CONTAIN "CisACS_") </SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr, reptVendor,reptModel,eventType </GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>  
+
+
+  <Report id="PH_Report_Auth_Server_6" group="PH_SYS_REPORT_AAAServer">
+    <Name>All Events: Top Auth Servers Ranked By Users </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the Auth servers by the distinct number of authenticated users</Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,reptVendor,reptModel,COUNT(DISTINCT user)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> COUNT(DISTINCT user) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_Auth_Server_6" name="Filter_Auth_Server_6">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_APP_AUTH_SERVER) AND (eventType CONTAIN "Win-IAS-" OR eventType CONTAIN "Juniper-Steelbelt-" OR eventType CONTAIN "CisACS_") </SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr, eventType </GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr,reptVendor,reptModel</RelevantFilterAttr>
+  </Report> 
+</Reports>

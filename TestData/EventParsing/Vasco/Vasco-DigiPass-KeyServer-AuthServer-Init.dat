@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+70.70.70.70
+[eventMsg]
+May 17 18:43:22 70.70.70.70 ikeyserver[3582]: {Info}, {Initialization}, {I-002010}, {The SOAP protocol handler has been initialized successfully.}, {0x0E736D24D54E717E6F5DA6C09E89F8EE}, {Version:3.4.7.115}, {Configuration Details:IP-Address: 10.1.2.3, IP-Port: 8888, Supported-Cipher-Suite: HIGH, Server-Certificate: /var/identikey/conf/certs/soap-custom.pem, Private-Key-Password: ********, CA-Certificate-Store: /var/identikey/conf/certs/soap-ca-certificate-store.pem, Client-Authentication-Method: none, Reverify-Client-On-Reconnect: False, DPX-Upload-Location: /var/dpx/}
+[params]
+customer=Super
+eventId=any
+eventSeverityCat=LOW
+eventParsedOk=1
+phEventCategory=0 (External)
+parserName=VascoParser
+count=1
+eventSeverity=1
+eventType=Vasco-DigiPass-KeyServer-AuthServer-Init
+reptDevIpAddr=70.70.70.70
+collectorId=any
+eventName=The Authentication Server protocol handler has been initialized successfully
+reptVendor=Vasco
+relayDevIpAddr=70.70.70.70
+phRecvTime=any
+msg=The SOAP protocol handler has been initialized successfully.
+eventRuleTrigger=1
+appTransportProto=Syslog
+reptDevName=any
+reptModel=DigiPass

@@ -1,0 +1,22 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+%Sep 22 20:38:32:947 2009 H3C DEVD/2/BRD TOO HOT:Temperature of the board is too high!
+[params]
+rawEventMsg=any
+eventId=any
+count=1
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=MEDIUM
+eventSeverity=5
+eventType=H3C-Comware-DEVD-BRD_TOO_HOT
+phCustId=$sender
+reptDevIpAddr=$localhost
+collectorId=any
+eventName=Temperature of the card is out of the required temperature range
+reptVendor=H3C
+phRecvTime=any
+reptDevName=any
+reptModel=Comware

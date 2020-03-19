@@ -1,0 +1,2 @@
+[eventMsg]
+[PH_DEV_MON_PERF_MSSQL_SYS]:[eventSeverity]=PHL_INFO, [hostIpAddr]=48.48.48.52, [hostName]=automator48Dot48Dot48Dot52, [rptIp]=48.48.48.52,[relayIp]=$localhost,[instanceName]=Oracle,[dbLogFileUsedKB]= 2382,[dbLogGrowthCount]= 0,[dbLogShrinkCount]= 0,[dbTransPerSec]= 0.48,[dbLogFlushPerSec]= 0,[dbDeadLocksPerSec]= 2

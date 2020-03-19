@@ -1,0 +1,7 @@
+eventType,name,module,reptDevIpAddr,key,method
+Cisco_IPS-2100/0,CiscoIPS_1,CiscoIPS,$localhost,srcIpAddr:2.1.2.1,syslog
+Cisco_IPS-3030/0,CiscoIPS_2,CiscoIPS,$localhost,srcIpAddr:2.1.2.2,syslog
+Cisco_IPS-2100/0,CiscoIPS_3,CiscoIPS,$localhost,srcIpAddr:2.1.2.3,syslog
+Cisco_IPS-3030/0,CiscoIPS_4,CiscoIPS,$localhost,srcIpAddr:2.1.2.4,syslog
+Cisco_IPS-3030/0,CiscoIPS_5,CiscoIPS,$localhost,srcIpAddr:2.1.2.5,syslog
+Cisco_IPS-2100/0,CiscoIPS_6,CiscoIPS,$localhost,srcIpAddr:2.1.2.6,syslog

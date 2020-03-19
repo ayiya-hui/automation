@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<166>CounterACT[9859]: NAC Policy Log: Source: 172.20.16.118, Rule: Policy 2.1 Windows OS Clarification , Match: ENFNet:Pending, Category: N/A, Details: Host evaluation changed from 2.1 Windows OS Clarification:Unmatched to ENFNet:Pending due to condition . Reason: Host added to group Windows because it matches rule 1.1 Asset Classification->Windows.
+[params]
+parserName=ForeScoutCounterACTParser
+eventType=ForeScout-CounterACT-NACPolicyLog
+srcIpAddr=172.20.16.118
+reptModel=CounterACT
+eventId=any
+eventParsedOk=1
+eventSeverity=3
+eventName=ForeScout-CounterACT-NACPolicyLog
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+errReason=Host added to group Windows because it matches rule 1
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=ForeScout
+fwRule=Policy 2.1 Windows OS Clarification

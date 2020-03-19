@@ -1,0 +1,24 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<22>Feb 15 15:57:57 IronPort-Mail: Info: SLBL: Database watcher updated from snapshot 20130215T175757-slbl.db.
+[params]
+customer=Super
+eventId=any
+parserName=IronportMailParser
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+count=1
+eventSeverity=1
+eventType=Cisco-IronPort-Mail-DBWatcher-Updated
+reptDevIpAddr=$localhost
+collectorId=any
+extEventRecvProto=Syslog
+eventName=Cisco-IronPort-Mail-DBWatcher-Updated
+reptVendor=Cisco
+relayDevIpAddr=$localhost
+rawEventMsg=any
+phRecvTime=any
+reptModel=IronPort AsyncOS Mail

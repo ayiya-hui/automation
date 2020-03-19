@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+10.210.252.42
+[eventMsg]
+<13>Apr 28 14:11:33 10.210.252.42 netauto_discovery[4558]: dataProc.pl: 04558 (manager ) Started - Process Size: 65824
+[params]
+deviceTime=any
+parserName=InfoBloxAppParser
+eventType=InfoBlox-NiOS-netauto_discovery-Successful-Started
+reptModel=NiOS
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Netauto discovery started
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=10.210.252.42
+rawEventMsg=any
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=10.210.252.42
+targetUser=manager
+reptVendor=InfoBlox

@@ -1,0 +1,31 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+Feb 10 03:00:13.680 CST: %BGP_SESSION-5-ADJCHANGE: neighbor 65.125.9.61 IPv4 Unicast topology base removed from session  BGP Notification received
+[params]
+deviceTime=any
+destGeoOrg=any
+parserName=CiscoIOSParser
+totFlows=1
+eventType=IOS-BGP_SESSION-ADJCHANGE
+destGeoState=Nebraska
+destIpAddr=65.125.9.61
+destGeoCountry=any
+reptModel=IOS
+eventId=any
+eventParsedOk=1
+eventSeverity=2
+eventName=BGP session adjacency change
+phEventCategory=0 (External)
+msg=BGP Notification received
+eventRuleTrigger=1
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Cisco
+destGeoCity=any

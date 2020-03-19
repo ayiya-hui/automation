@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+192.168.24.11
+[eventMsg]
+<134>Jan 15 10:45:27 192.168.24.11 java: [VMware_HostConnectionLostEvent],[phLogDetail]=, [eventTime]=2010-01-15 10:42:44:830, [rptIp]=192.168.24.11, [user]=, [vmwEventId]=210943, [vmwEventCat]=error, [vmHost]=192.168.64.102, [cluster]=192.168.64.102, [datacenter]=add-DC-test, [vmwEventMsg]=Host 192.168.64.102 in add-DC-test is not responding
+[params]
+rawEventMsg=any
+count=1
+datacenter=add-DC-test
+deviceTime=any
+eventParsedOk=1
+vmwEventCat=error
+eventSeverity=8
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=MEDIUM
+vmwEventMsg=Host 192.168.64.102 in add-DC-test is not responding
+eventName=Host connection lost
+cluster=192.168.64.102
+reptDevIpAddr=192.168.24.11
+reptVendor=VMware
+eventType=VMware_HostConnectionLostEvent
+phEventCategory=0 (External)
+eventId=any
+reptDevName=192.168.64.102
+reptModel=Generic

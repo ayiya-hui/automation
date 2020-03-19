@@ -1,0 +1,36 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<116> device=FCTEMS0036759495 severity=medium from=FAZVM64(FAZ-VM0000000001) trigger=EVT2SIEM1 log="itime=1490237155 date=2017-03-22 time=19:45:55 logver=2 level=info uid=C4C4E56CE7B04762B053E8F88B8ECF47 vd=root fctver=5.4.2.0862 os="Microsoft Windows Server 2012 R2 Standard Edition, 64-bit (build 9600)" usingpolicy=AOFCT fgtserial=N/A emsserial=FCTEMS0036759495 devid=FCT8003883203338 hostname=sjcitvwfct01 pcdomain=accelops.net clientfeature=endpoint deviceip=devicemac=N/A type=event user=N/A id=96953 msg="Endpoint Control Status changed - Offline""
+[params]
+domain=accelops.net
+deviceTime=any
+parserName=FortiClientParser
+eventType=FortiClient-endpoint
+hostName=sjcitvwfct01
+srcName=EVT2SIEM1
+osType=Microsoft Windows Server 2012 R2 Standard Edition, 64-bit (build 9600)
+reptModel=FortiClient
+eventId=any
+policyName=AOFCT
+eventParsedOk=1
+eventSeverity=2
+feature=endpoint
+eventName=FortiClient generic endpoint event
+reptDevName=any
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+msg=Endpoint Control Status changed - Offline
+count=1
+srcMACAddr=N/A
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+user=N/A
+rawEventMsg=any
+vdom=root
+serialNumber=5.4.2.0862
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Fortinet

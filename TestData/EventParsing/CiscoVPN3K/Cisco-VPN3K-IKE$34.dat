@@ -1,0 +1,21 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<189>393052 06/29/2009 21:26:10.760 SEV=5 IKE/34 RPT=1388 99.129.50.155  Group [HQ-Dev] User [wenyong] Received local IP Proxy Subnet data in ID Payload:  Address 0.0.0.0, Mask 0.0.0.0, Protocol 0, Port 0--automator
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+eventAction=0 (Permit)
+eventName=Cisco-VPN3K-IKE/34
+reptVendor=Cisco
+eventType=Cisco-VPN3K-IKE/34
+phEventCategory=0 (External)
+reptDevIpAddr=$localhost
+reptModel=VPN 3K

@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+1.2.3.4
+[eventMsg]
+<141>Nov 4 19:54:40 1.2.3.4 postgres[4297]: [26099-1] WARNING: Audit DB rotation: Maybe an open audit viewer?
+[params]
+deviceTime=any
+parserName=UnixParser
+eventType=Generic_Unix_DB_Rotation
+reptModel=Unix
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Generic_Unix_DB_Rotation
+appTransportProto=Syslog
+phEventCategory=0 (External)
+eventRuleTrigger=1
+destName=HOST-1.2.3.4
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=1.2.3.4
+customer=Super
+phRecvTime=any
+reptDevIpAddr=1.2.3.4
+eventAction=0 (Permit)
+reptVendor=Generic

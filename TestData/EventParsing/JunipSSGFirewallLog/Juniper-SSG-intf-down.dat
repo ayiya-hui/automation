@@ -1,0 +1,30 @@
+[reptDevIpAddr(key)]
+81.81.81.81
+[eventMsg]
+<133>SH-QA-A-Jnp-FW-01: NetScreen device_id=SH-QA-A-Jnp-FW-01  [Root]system-notification-00513: The physical state of interface ethernet0/6 has changed to Down. (2001-10-20 21:51:48).
+[params]
+rawEventMsg=any
+deviceTime=any
+destGeoOrg=any
+eventType=Juniper-SSG-intf-down
+phCustId=$sender
+destIpAddr=any
+destGeoCountry=any
+reptModel=SSG ScreenOS
+eventId=any
+eventParsedOk=1
+eventSeverity=7
+testEvent=Real Event(0)
+eventName=Network interface went down
+phEventCategory=0 (External)
+destName=any
+intfName=ethernet0/6
+eventSeverityCat=MEDIUM
+collectorId=any
+reptDevName=any
+count=1
+phRecvTime=any
+reptDevIpAddr=81.81.81.81
+hostIpAddr=81.81.81.81
+eventAction=0 (Permit)
+reptVendor=Juniper

@@ -1,0 +1,22 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<133>Jul 24 2008 03:23:37: %PIX-5-502103: User priv level changed: Uname: enable_15 From: 1 To: 15--automator
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=any
+eventSeverity=2
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+eventAction=0 (Permit)
+eventName=User privilege level changed
+reptVendor=Cisco
+eventType=PIX-502103
+user=enable_15
+phEventCategory=0 (External)
+reptDevIpAddr=$localhost
+reptModel=PIX

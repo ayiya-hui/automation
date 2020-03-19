@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+FireEye-Alert,FireEyeTrap_1,FireEyeTrap,$localhost,,syslog

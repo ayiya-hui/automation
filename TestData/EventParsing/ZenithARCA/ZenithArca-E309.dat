@@ -1,0 +1,23 @@
+[reptDevIpAddr(key)]
+80.80.80.80
+[eventMsg]
+<190>Dec 27 14:15:15 80.80.80.80 NT: <ZenithArcA;E309;> New incremental backup image is not created for last 768 minutes for server inet Server name:inet Backup Folder:E9539AEA327C41EE-inet Volume Name: D
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+count=1
+phCustId=$sender
+destName=any
+deviceTime=any
+eventAction=1 (Deny)
+eventId=any
+eventName=New Incremental Backup Image Not Created
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=5
+eventSeverityCat=MEDIUM
+eventType=ZenithArca-E309
+msg=New incremental backup image is not created for last 768 minutes for server inet Server name:inet Backup Folder:E9539AEA327C41EE-inet Volume Name: D
+reptDevIpAddr=$reporter
+reptModel=Zenith ARCA
+reptVendor=Zenith Infotech

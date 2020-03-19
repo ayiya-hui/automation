@@ -1,0 +1,9 @@
+eventType,name,module,reptDevIpAddr,key,method
+Cisco-WLC-1-bsnDot11StationDisassociate,CiscoWLC_1,CiscoWLC,$localhost,,snmptrap@2c@20.152
+Cisco-WLC-2-bsnDot11StationDeauthenticate,CiscoWLC_2,CiscoWLC,$localhost,,snmptrap@2c@20.152
+Cisco-WLC-3-bsnDot11StationAuthenticateFail,CiscoWLC_3,CiscoWLC,$localhost,,snmptrap@2c@20.152
+Cisco-WLC-27-bsnAuthenticationFailure,CiscoWLC_4,CiscoWLC,$localhost,,snmptrap@2c@20.152
+Cisco-WLC-36-bsnRogueAPDetected,CiscoWLC_5,CiscoWLC,$localhost,,snmptrap@2c@20.152
+Cisco-WLC-41-bsnRogueAPRemoved,CiscoWLC_6,CiscoWLC,$localhost,,snmptrap@2c@20.152
+Cisco-WLC-66-bsnRogueApAutoContained,CiscoWLC_7,CiscoWLC,$localhost,,snmptrap@2c@20.152
+Cisco-WLC-52-bsnDot11StationBlacklisted,CiscoWLC_8,CiscoWLC,$localhost,,snmptrap@2c@20.152

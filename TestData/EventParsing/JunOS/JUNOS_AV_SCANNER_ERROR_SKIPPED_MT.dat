@@ -1,0 +1,30 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<12>Nov 14 14:37:25 RT_UTM: AV_SCANNER_ERROR_SKIPPED_MT: AntiVirus: Content from 98.136.145.154:80 to 172.16.54.2:1796 tv.yahoo.com/video/challenger-why-did-launch-050000052.html?m_id=&m_mode=&instance_id=&mode=multipart&__phase=pre&type=content was not scanned because scan-engine error or constraint with code 5 for exceeding max decompress layer limit.
+[params]
+rawEventMsg=any
+deviceTime=any
+eventType=JUNOS_AV_SCANNER_ERROR_SKIPPED_MT
+phCustId=$sender
+destIpAddr=172.16.54.2
+srcName=any
+srcIpAddr=98.136.145.154
+reptModel=JunOS
+eventId=any
+eventParsedOk=1
+eventSeverity=4
+eventName=AV scanner skipped the received traffic because of an internal error
+phEventCategory=0 (External)
+errReason=exceeding max decompress layer limit.
+srcIpPort=80
+eventSeverityCat=LOW
+collectorId=any
+fileName=tv.yahoo.com/video/challenger-why-did-launch-050000052.html?m_id=&m_mode=&instance_id=&mode=multipart&__phase=pre&type=content
+destIpPort=1796
+reptDevName=any
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Juniper

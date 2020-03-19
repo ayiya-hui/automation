@@ -1,0 +1,2 @@
+[eventMsg]
+<187> Sep 24 13:17:56 Ashley N3048P Switch Stack  1-1 IPV6[dtlTask]: ip6map.c(3787) 89904 %% Received invalid ip6 packet on Vl1:  TC 0xf3, flow 663552, length 65152, next head 0, hop lim 0, src 8100:c8::f21f:afff:fedf:2080, dst ff02::1:ffdf:2080.

@@ -1,0 +1,142 @@
+<eventParser name="MicrosoftIASODBCParser">
+  <deviceType>
+    <Vendor>Microsoft</Vendor>
+    <Model>Windows</Model>
+    <Version>ANY</Version>
+  </deviceType>
+
+  <appType>
+    <Vendor>Microsoft</Vendor>
+    <Model>IAS</Model>
+    <Version>ANY</Version>
+    <Name>Microsoft IAS</Name>
+  </appType>
+
+  <patternDefinitions>
+    <pattern name="patStrComma"><![CDATA[[^,]*]]></pattern>
+    <pattern name="pagSig"><![CDATA[MSIASLog]]></pattern>
+  </patternDefinitions>
+
+  <eventFormatRecognizer><![CDATA[<:gPatSyslogPRI>?<:gPatMon>\s+<:gPatDay>\s+<:gPatTime> <:gPatStr>\s+MSIASLog(?:\t|\s+)<:gPatInt>(?:\t|\s+)<:patStrComma>,<:patStrComma>,<:patStrComma>,<:patStrComma>,<:patStrComma>]]></eventFormatRecognizer>
+  
+  <testEvents>
+      <testEvent><![CDATA[<13>Feb  2 14:40:36 CORP-ADC02.renewdata-austin.com MSIASLog 0 "CORP-ADC02","IAS",02/02/2011,14:40:19,1,"scott.mace","renewdata-austin.com/Users/Scott Mace","71.42.190.3","71.42.190.250",,,,"10.10.2.3",167231488,0,"10.10.2.3","10.10.2.3",,,5,,,,1,"Austin VPN RAFOP",0,"311 1 10.10.3.22 02/02/2011 20:23:28 35|OU=RAFOP",,,,,,,,,,,,,,,,,,,,"71.42.190.250",,,,,,,,,,,,,,"Use Windows authetnication for all users",1,,,,]]></testEvent>
+  </testEvents>
+
+  <parsingInstructions>
+
+    <!-- parsing common fields -->
+    <!-- sample message 
+
+	  <13>Feb  2 14:40:36 CORP-ADC02.renewdata-austin.com MSIASLog 0 "CORP-ADC02","IAS",02/02/2011,14:40:19,1,"scott.mace","renewdata-austin.com/Users/Scott Mace","71.42.190.3","71.42.190.250",,,,"10.10.2.3",167231488,0,"10.10.2.3","10.10.2.3",,,5,,,,1,"Austin VPN RAFOP",0,"311 1 10.10.3.22 02/02/2011 20:23:28 35|OU=RAFOP",,,,,,,,,,,,,,,,,,,,"71.42.190.250",,,,,,,,,,,,,,"Use Windows authetnication for all users",1,,,,-->
+
+    <collectFieldsByRegex src="$_rawmsg">
+      <regex><![CDATA[<:gPatSyslogPRI>?<:gPatMon>\s+<:gPatDay>\s+<:gPatTime> <:gPatStr> <:pagSig>(?:\t|\s+)<:gPatInt>(?:\t|\s+)<_body:gPatMesgBody>]]></regex>
+    </collectFieldsByRegex>
+
+    <collectAndSetAttrByPos src="$_body" sep=','>
+	<attrPosMap attr="reptDevName" pos='1'/>
+	<attrPosMap attr="relayDevName" pos='2'/> 
+	<attrPosMap attr="_date" pos='3'/>
+	<attrPosMap attr="_time" pos='4'/>	 
+	<attrPosMap attr="_pktType" pos='5'/>	  
+	<attrPosMap attr="_user" pos='6'/>
+	<attrPosMap attr="_altuser" pos='7'/>
+	<attrPosMap attr="_srcIp" pos='9'/>
+	<attrPosMap attr="_reasonCode" pos='26'/>
+    </collectAndSetAttrByPos>
+    
+    <!-- time -->
+    <collectFieldsByRegex src="$_date">
+      <regex><![CDATA[<_mon:gPatMonNum>/<_day:gPatDay>/<_year:gPatYear>]]></regex>
+    </collectFieldsByRegex>
+
+    <setEventAttribute attr="deviceTime">toDateTime($_mon, $_day, $_year, $_time)</setEventAttribute>
+    <setEventAttribute attr="eventAction">0</setEventAttribute>
+    <setEventAttribute attr="eventType">Win-IAS-Generic</setEventAttribute>
+    <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+    
+    <when test='$_srcIp != ""'>
+      <switch>
+	<case>
+		<collectFieldsByRegex src="$_srcIp">
+			<regex><![CDATA[<srcIpAddr:gPatIpV4Dot>]]></regex>
+		</collectFieldsByRegex>
+	</case>
+	<default />
+      </switch>
+    </when>
+    
+    <when test='$reptDevName != ""'>
+      <switch>
+	<case>
+		<collectFieldsByRegex src="$reptDevName">
+			<regex><![CDATA["<reptDevName:gPatStr>"]]></regex>
+		</collectFieldsByRegex>
+	</case>
+	<default />
+      </switch>
+    </when>
+		
+    <when test='$relayDevName != ""'>
+      <switch>
+	<case>
+		<collectFieldsByRegex src="$relayDevName">
+			<regex><![CDATA["<relayDevName:gPatStr>"]]></regex>
+		</collectFieldsByRegex>
+	</case>
+	<default />
+      </switch>
+    </when>
+        
+    <choose>
+	    <when test='$_user != " "'>	
+		 <collectFieldsByRegex src="$_user">
+			<regex><![CDATA["<user:gPatStr>"]]></regex>
+		     </collectFieldsByRegex>
+	   </when>
+	   <otherwise>
+		<when test='$_altuser != " "'>	
+		     <collectFieldsByRegex src="$_altuser">
+			<regex><![CDATA["<user:gPatStr>"]]></regex>
+		     </collectFieldsByRegex>
+		</when>
+	   </otherwise>
+    </choose>
+
+    <!-- set event type and reason code -->
+
+    <choose>
+
+      <when test='$_pktType = "1"'> 
+	<setEventAttribute attr="eventAction">0</setEventAttribute>
+	<setEventAttribute attr="eventType">Win-IAS-AcptReq</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+      </when>
+
+      <when test='$_pktType = "2"'> 
+	<setEventAttribute attr="eventAction">0</setEventAttribute>
+	<setEventAttribute attr="eventType">Win-IAS-PassedAuth</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+        <collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-IAS-AcptReq">
+          <when test = '$user = $AnotherEvent.user'>
+            <setEventAttribute attr="srcIpAddr">$AnotherEvent.srcIpAddr</setEventAttribute>
+          </when>
+        </collectAndSetAttrFromAnotherEvent>	
+      </when>
+
+      <when test='$_pktType = "3"'> 
+	<setEventAttribute attr="eventAction">1</setEventAttribute>
+	<setEventAttribute attr="eventType">Win-IAS-FailedAuth</setEventAttribute>
+	<setEventAttribute attr="winIASFailCode">$_reasonCode</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+        <collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-IAS-AcptReq">
+          <when test = '$user = $AnotherEvent.user'>
+            <setEventAttribute attr="srcIpAddr">$AnotherEvent.srcIpAddr</setEventAttribute>
+          </when>
+        </collectAndSetAttrFromAnotherEvent>	
+      </when>
+    </choose>
+
+  </parsingInstructions>
+</eventParser>

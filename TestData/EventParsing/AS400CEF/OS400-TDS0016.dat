@@ -1,0 +1,24 @@
+[reptDevIpAddr(key)]
+83.83.83.83
+[eventMsg]
+Sep 24 14:27:42 83.83.83.83 CEF :0|PowerTech|Interact|2.0|TDS0016|A service tools user ID password has been changed.|3| src =10.0.1.179 dst =0.0.0.0 msg=TYPE:JRN CLS :AUD JJOB :QPADEV000L JUSER :QSECOFR JNBR :066754 PGM :QCMD OBJECT : LIBRARY : MEMBER: DETAIL: P  QSECOFR  Y
+[params]
+rawEventMsg=any
+eventId=any
+count=1
+eventSeverityCat=LOW
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverity=3
+eventType=OS400-TDS0016
+phCustId=$sender
+reptDevIpAddr=83.83.83.83
+collectorId=any
+testEvent=Real Event(0)
+eventName=Service tools user ID password was changed
+reptVendor=IBM
+user=QSECOFR
+phRecvTime=any
+srcIpAddr=10.0.1.179
+reptDevName=any
+reptModel=OS400

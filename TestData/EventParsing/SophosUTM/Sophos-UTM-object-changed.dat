@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<30>2016:03:11-10:06:42 ActiveUTM-2 confd[3811]: I main::top-level:677() => id="310a" severity="info" sys="System" sub="confd" name="object changed" class="network" type="dns_host" ref="REF_NetDnsWeboutlook" objname="Web-outlook.office365.com" user="system" srcip="127.0.0.1" sid="WTmxhFgrpkHaMihGFdTQ" facility="system" client="dns-resolver.plx" pid="23058" attr_address="132.245.68.98" oldattr_address="132.245.16.242"
+[params]
+parserName=SophosUTMParser
+eventType=Sophos-UTM-object-changed
+procName=confd
+srcIpAddr=$localhost
+reptModel=UTM
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Sophos UTM object changed
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+eventRuleTrigger=1
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+user=system
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Sophos

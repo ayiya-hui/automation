@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<135>Nov 28 2007 17:21:17: %ASA-7-710005: UDP request discarded from 192.168.0.10/138 to inside:192.168.15.255/138
+[params]
+rawEventMsg=any
+srcIpPort=138
+destIpPort=138 (NETBIOS-DGM)
+destIpAddr=192.168.15.255
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=4
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+srcIpAddr=192.168.0.10
+eventAction=1 (Deny)
+eventName={TCP|UDP} request to appliance discarded by session check
+destIntfName=inside
+reptVendor=Cisco
+eventType=ASA-710005
+phEventCategory=0 (External)
+ipProto=17 (UDP)
+reptDevIpAddr=$reporter
+reptModel=ASA

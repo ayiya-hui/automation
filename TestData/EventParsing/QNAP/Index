@@ -1,0 +1,4 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+QNAP-TurboNAS-File-Access,QNAP_1,QNAP,$localhost,,syslog
+QNAP-TurboNAS-Login-Success,QNAP_2,QNAP,$localhost,,syslog

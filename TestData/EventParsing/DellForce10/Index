@@ -1,0 +1,4 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+Dell-Force10-IFMGR-OSTATE_DN,DellForce10_1,DellForce10,$localhost,,syslog
+Dell-Force10-IFMGR-OSTATE_UP,DellForce10_2,DellForce10,$localhost,,syslog

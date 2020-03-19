@@ -1,0 +1,2 @@
+[eventMsg]
+<188>Feb 2 16:32:26 12.8.0.1 1048484: Feb  3 00:32:25.712: %CDP-4-DUPLEX_MISMATCH: duplex mismatch discovered on FastEthernet5/46 (not full duplex), with SJ-Dev-A-Cat-Adm-01.prospecthills.net FastEthernet0/1 (full duplex).

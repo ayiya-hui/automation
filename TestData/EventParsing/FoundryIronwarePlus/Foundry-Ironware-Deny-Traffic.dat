@@ -1,0 +1,112 @@
+[reptDevIpAddr(key)]
+58.58.58.60
+[eventMsg]
+<14>Jun  4 03:12:53 58.58.58.60 ACL: ACL: List GWI-in denied tcp 61.158.162.230(6000)(Ethernet 1/4 0023.3368.f500) -> 137.146.0.0(8082), 1 event(s)
+[params]
+rawEventMsg=any
+eventType=Foundry-Ironware-Deny-Traffic
+phCustId=$sender
+destIpAddr=137.146.0.0
+destIpPort=8082 (BLACKICE-ALERTS)
+srcIpAddr=61.158.162.230
+reptModel=Ironware
+eventId=any
+eventParsedOk=1
+eventSeverity=3
+eventName=Foundry network traffic denied
+phEventCategory=0 (External)
+srcIntfName=Ethernet1/4
+srcMACAddr=00:23:33:68:f5:00
+srcIpPort=6000
+eventSeverityCat=LOW
+ipProto=6 (TCP)
+count=1
+phRecvTime=any
+reptDevIpAddr=58.58.58.60
+eventAction=0 (Permit)
+reptVendor=Foundry
+fwRule=GWI-in
+[reptDevIpAddr(key)]
+58.58.58.62
+[eventMsg]
+<14>Jun  4 02:54:31 58.58.58.62 ACL: ACL: List XCORE denied udp 137.146.28.75(55603)(Ethernet 1/1 000c.dbde.6000) -> 137.146.3.35(snmp), 1 event(s)
+[params]
+rawEventMsg=any
+eventType=Foundry-Ironware-Deny-Traffic
+phCustId=$sender
+destIpAddr=137.146.3.35
+destIpPort=161 (SNMP)
+srcIpAddr=137.146.28.75
+reptModel=Ironware
+eventId=any
+eventParsedOk=1
+eventSeverity=3
+eventName=Foundry network traffic denied
+phEventCategory=0 (External)
+srcIntfName=Ethernet1/1
+srcMACAddr=00:0c:db:de:60:00
+srcIpPort=55603
+eventSeverityCat=LOW
+ipProto=17 (UDP)
+count=1
+phRecvTime=any
+reptDevIpAddr=58.58.58.62
+eventAction=0 (Permit)
+reptVendor=Foundry
+fwRule=XCORE
+[reptDevIpAddr(key)]
+58.58.58.63
+[eventMsg]
+<14>Jun  4 01:14:33 58.58.58.63 NX08-03,: list DMD-OF-in denied udp 192.168.56.1(123)(Ethernet 1/4 0018.8b2b.7fc0) -> 137.146.28.85(123), 8 event(s)
+[params]
+rawEventMsg=any
+eventType=Foundry-Ironware-Deny-Traffic
+phCustId=$sender
+destIpAddr=137.146.28.85
+destIpPort=123 (NTP)
+srcIpAddr=192.168.56.1
+reptModel=Ironware
+eventId=any
+eventParsedOk=1
+eventSeverity=3
+eventName=Foundry network traffic denied
+phEventCategory=0 (External)
+srcIntfName=Ethernet1/4
+srcMACAddr=00:18:8b:2b:7f:c0
+srcIpPort=123
+eventSeverityCat=LOW
+ipProto=17 (UDP)
+count=8
+phRecvTime=any
+reptDevIpAddr=58.58.58.63
+eventAction=0 (Permit)
+reptVendor=Foundry
+fwRule=DMD-OF-in
+[reptDevIpAddr(key)]
+58.58.58.64
+[eventMsg]
+<14>Jun  4 01:14:53 58.58.58.64 NX08-02,: list KYS-LB-in denied udp 10.0.1.1(123)(Ethernet 8/4 0019.b93d.8134) -> 137.146.28.85(123), 8 event(s)
+[params]
+rawEventMsg=any
+srcIntfName=Ethernet8/4
+fwRule=KYS-LB-in
+count=8
+eventId=any
+reptDevIpAddr=58.58.58.64
+eventParsedOk=1
+eventSeverity=3
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=137.146.28.85
+eventAction=0 (Permit)
+eventName=Foundry network traffic denied
+ipProto=17 (UDP)
+reptVendor=Foundry
+eventType=Foundry-Ironware-Deny-Traffic
+srcIpAddr=10.0.1.1
+phEventCategory=0 (External)
+destIpPort=123 (NTP)
+srcMACAddr=00:19:b9:3d:81:34
+srcIpPort=123
+reptModel=Ironware

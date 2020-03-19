@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+172.18.65.202
+[eventMsg]
+Mar 22 16:41:51 172.18.65.202 ALARM: 1206061230l | system | info | ALR | ACCOUNT RADIUS SERVER SWITCHOVER FAILED MAJOR Primary Accounting RADIUS Server <1.1.1.1> failed. No valid Secondary Accounting RADIUS Server present. Switchover FAILED for Profile <WPA2>
+[params]
+customer=Super
+eventId=any
+parserName=FortiWLANParser
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+count=1
+eventSeverity=1
+eventType=FortiWLC-Accounting-Radius-Switchover-Failure
+reptDevIpAddr=172.18.65.202
+collectorId=any
+extEventRecvProto=Syslog
+eventName=Primary Accounting RADIUS server not accessible and Secondary Accounting RADIUS Server not configured
+reptVendor=Fortinet
+relayDevIpAddr=172.18.65.202
+rawEventMsg=any
+phRecvTime=any
+reptDevName=any
+reptModel=FortiWLC

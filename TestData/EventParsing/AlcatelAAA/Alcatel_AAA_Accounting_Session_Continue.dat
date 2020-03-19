@@ -1,0 +1,30 @@
+[reptDevIpAddr(key)]
+91.91.91.1
+[eventMsg]
+<38>Nov 12 08:21:15 ETC-AAA AAA: Acctounting session continued: User-Name=1stflrconfrm, NAS=192.168.32.137, Port-ID=0/0/1/410, Port=0, MAC=00-23-6A-01-95-06, Acct-Session-Id=000447F8, IP-Address=190.197.124.253
+[params]
+rawEventMsg=any
+deviceTime=any
+parserName=AlcatelAAAParser
+eventType=Alcatel_AAA_Accounting_Session_Continue
+phCustId=$sender
+srcIpAddr=190.197.124.253
+reptModel=8950 AAA
+eventId=any
+nepDevPort=0/0/1/410
+eventParsedOk=1
+eventSeverity=1
+eventName=AAA accounting session continued
+phEventCategory=0 (External)
+customer=Super
+srcMACAddr=00-23-6A-01-95-06
+srcIpPort=0
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=91.91.91.1
+user=1stflrconfrm
+reptDevName=any
+count=1
+phRecvTime=any
+reptDevIpAddr=91.91.91.1
+reptVendor=Alcatel-Lucent

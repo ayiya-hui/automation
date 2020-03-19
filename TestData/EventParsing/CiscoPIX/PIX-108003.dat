@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>Dec 04 2008 20:00:45: %PIX-2-108003: Terminating ESMTP/SMTP connection; malicious pattern detected in the mail address from inside:20.20.20.20/25 to outside:10.10.10.10/9996. Data:"Wrong info" --automator
+[params]
+rawEventMsg=any
+destIpAddr=10.10.10.10
+deviceTime=any
+eventType=PIX-108003
+phCustId=$sender
+destIpAddr=10.10.10.10
+srcIpAddr=20.20.20.20
+reptModel=PIX
+eventId=any
+eventParsedOk=any
+eventSeverity=8
+eventName=Terminating ESMTP/SMTP connection - malicious pattern mail address
+phEventCategory=0 (External)
+srcIntfName=inside
+srcIpPort=25
+eventSeverityCat=MEDIUM
+destIntfName=outside
+destIpPort=9996
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=1 (Deny)
+reptVendor=Cisco

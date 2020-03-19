@@ -1,0 +1,34 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+2016-02-26 15:19:10 AccelOps-Azure,[action]=Microsoft.ClassicCompute/virtualmachines/shutdown/action,[caller]=Cuiping.Wang@shashiaccelops.onmicrosoft.com,[level]=Error,[resourceId]=/subscriptions/3ed4ee1c-1a83-4e02-a928-7ff5e0008e8a/resourcegroups/china/providers/Microsoft.ClassicCompute/virtualmachines/china,[resourceGroupName]=china,[eventTimestamp]=2016-02-14T06:12:18.5539709Z,[status]=Failed,[subStatus]=Conflict,[resourceType]=Microsoft.ClassicCompute/virtualmachines,[category]=Administrative
+[params]
+deviceTime=any
+parserName=MicrosoftAzureAuditParser
+eventType=Microsoft-Azure-ClassicCompute-virtualmachines-shutdown
+resourceName=/subscriptions/3ed4ee1c-1a83-4e02-a928-7ff5e0008e8a/resourcegroups/china/providers/Microsoft.ClassicCompute/virtualmachines/china
+reptModel=Windows
+eventId=any
+eventTime=Sun Feb 14 06:12:18 CST 2016
+eventParsedOk=1
+eventSeverity=5
+eventName=Shutdown virtual machines
+groupName=china
+details=Microsoft.ClassicCompute/virtualmachines/shutdown/action
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+status=Failed
+count=1
+azureEventCategory=Administrative
+eventSeverityCat=MEDIUM
+collectorId=any
+azureSubstatus=Conflict
+relayDevIpAddr=$localhost
+rawEventMsg=any
+reptDevIpAddr=$localhost
+reptDevName=any
+customer=Super
+resourceType=Microsoft.ClassicCompute/virtualmachines
+phRecvTime=any
+caller=Cuiping.Wang@shashiaccelops.onmicrosoft.com
+reptVendor=Microsoft

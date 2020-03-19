@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+Wed Jul  9 15:10:24 2014 AccelOps-RSAS [eventType]=RSAS-GENERIC [name]=name [risk]=10.0 [solution]=none [description]=none
+[params]
+deviceTime=any
+parserName=RSASParser
+eventType=RSAS-GENERIC
+reptModel=RSAS
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=RSAS-GENERIC
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+description=none
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+vulnScore=10
+vulnName=name
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Green League

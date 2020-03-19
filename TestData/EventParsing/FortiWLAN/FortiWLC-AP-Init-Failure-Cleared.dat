@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+172.18.65.202
+[eventMsg]
+Apr 28 12:55:45 172.18.65.202 ALARM: 1209367545l | system | info | ALR | AP INIT FAILURE CLEAR Init_Failure_ for_AP1
+[params]
+customer=Super
+eventId=any
+parserName=FortiWLANParser
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+count=1
+eventSeverity=1
+eventType=FortiWLC-AP-Init-Failure-Cleared
+reptDevIpAddr=172.18.65.202
+collectorId=any
+extEventRecvProto=Syslog
+eventName=FortiAP initialization failure cleared
+reptVendor=Fortinet
+relayDevIpAddr=172.18.65.202
+rawEventMsg=any
+phRecvTime=any
+reptDevName=any
+reptModel=FortiWLC

@@ -1,0 +1,170 @@
+[reptDevIpAddr(key)]
+4.4.4.5
+[eventMsg]
+<190>Apr 10 13:07:10 partha-desktop java: [JEE_AppServer_Perf]:[eventSeverity]=PHL_ALERT, [rptIp]=4.4.4.5, [upTime]=153097644, [cpuUtil]=100, [heapUsedKB]=251503, [heapMaxKB]=516224, [heapCommitKB]=516224, [heapUtil]=48, [nonHeapUsedKB]=157904, [nonHeapMaxKB]=245760, [nonHeapCommitKB]=217841664, [nonHeapUtil]=64, [liveThreads]=979, [liveThreadsMax]=979, [loadedClasses]=30864169,
+[params]
+rawEventMsg=any
+deviceTime=any
+sysUpTime=153097644
+eventType=JEE_AppServer_Perf
+phCustId=1
+nonHeapUsedKB=157904
+liveThreads=979
+reptModel=JEE App Server
+eventId=any
+heapUsedKB=251503
+eventSeverity=10
+hostIpAddr=4.4.4.5
+eventName=JEE App server Performace Stat
+heapMaxKB=516224
+phEventCategory=0 (External)
+nonHeapMaxKB=245760
+eventSeverityCat=HIGH
+liveThreadsMax=979
+nonHeapCommitKB=217841664
+heapCommitKB=516224
+eventParsedOk=1
+heapUtil=48.00
+count=1
+nonHeapUtil=64.00
+phRecvTime=any
+reptDevIpAddr=4.4.4.5
+cpuUtil=100.00
+loadedClasses=30864169
+reptVendor=Generic
+[reptDevIpAddr(key)]
+4.4.4.4
+[eventMsg]
+<190>Apr 10 13:07:10 partha-desktop java: [JEE_AppServer_Perf]:[eventSeverity]=PHL_CRITICAL, [rptIp]=4.4.4.4, [upTime]=153097644, [cpuUtil]=90, [heapUsedKB]=251503, [heapMaxKB]=516224, [heapCommitKB]=516224, [heapUtil]=48, [nonHeapUsedKB]=157904, [nonHeapMaxKB]=245760, [nonHeapCommitKB]=217841664, [nonHeapUtil]=64, [liveThreads]=979, [liveThreadsMax]=979, [loadedClasses]=30864169,
+[params]
+rawEventMsg=any
+deviceTime=any
+sysUpTime=153097644
+eventType=JEE_AppServer_Perf
+phCustId=1
+nonHeapUsedKB=157904
+liveThreads=979
+reptModel=JEE App Server
+eventId=any
+heapUsedKB=251503
+eventSeverity=8
+hostIpAddr=4.4.4.4
+eventName=JEE App server Performace Stat
+heapMaxKB=516224
+phEventCategory=0 (External)
+nonHeapMaxKB=245760
+eventSeverityCat=MEDIUM
+liveThreadsMax=979
+nonHeapCommitKB=217841664
+heapCommitKB=516224
+eventParsedOk=1
+heapUtil=48.00
+count=1
+nonHeapUtil=64.00
+phRecvTime=any
+reptDevIpAddr=4.4.4.4
+cpuUtil=90.00
+loadedClasses=30864169
+reptVendor=Generic
+[reptDevIpAddr(key)]
+4.4.4.1
+[eventMsg]
+<190>Apr 10 13:07:10 partha-desktop java: [JEE_AppServer_Perf]:[eventSeverity]=PHL_INFO, [rptIp]=4.4.4.1, [upTime]=153097644, [cpuUtil]=58, [heapUsedKB]=251503, [heapMaxKB]=516224, [heapCommitKB]=516224, [heapUtil]=48, [nonHeapUsedKB]=157904, [nonHeapMaxKB]=245760, [nonHeapCommitKB]=217841664, [nonHeapUtil]=64, [liveThreads]=979, [liveThreadsMax]=979, [loadedClasses]=30864169,
+[params]
+rawEventMsg=any
+deviceTime=any
+sysUpTime=153097644
+eventType=JEE_AppServer_Perf
+phCustId=1
+nonHeapUsedKB=157904
+liveThreads=979
+reptModel=JEE App Server
+eventId=any
+heapUsedKB=251503
+eventSeverity=1
+hostIpAddr=4.4.4.1
+eventName=JEE App server Performace Stat
+heapMaxKB=516224
+phEventCategory=0 (External)
+nonHeapMaxKB=245760
+eventSeverityCat=LOW
+liveThreadsMax=979
+nonHeapCommitKB=217841664
+heapCommitKB=516224
+eventParsedOk=1
+heapUtil=48.00
+count=1
+nonHeapUtil=64.00
+phRecvTime=any
+reptDevIpAddr=4.4.4.1
+cpuUtil=58.00
+loadedClasses=30864169
+reptVendor=Generic
+[reptDevIpAddr(key)]
+4.4.4.3
+[eventMsg]
+<190>Apr 10 13:07:10 partha-desktop java: [JEE_AppServer_Perf]:[eventSeverity]=PHL_ERROR, [rptIp]=4.4.4.3, [upTime]=153097644, [cpuUtil]=80, [heapUsedKB]=251503, [heapMaxKB]=516224, [heapCommitKB]=516224, [heapUtil]=48, [nonHeapUsedKB]=157904, [nonHeapMaxKB]=245760, [nonHeapCommitKB]=217841664, [nonHeapUtil]=64, [liveThreads]=979, [liveThreadsMax]=979, [loadedClasses]=30864169,
+[params]
+rawEventMsg=any
+deviceTime=any
+sysUpTime=153097644
+eventType=JEE_AppServer_Perf
+phCustId=1
+nonHeapUsedKB=157904
+liveThreads=979
+reptModel=JEE App Server
+eventId=any
+heapUsedKB=251503
+eventSeverity=5
+hostIpAddr=4.4.4.3
+eventName=JEE App server Performace Stat
+heapMaxKB=516224
+phEventCategory=0 (External)
+nonHeapMaxKB=245760
+eventSeverityCat=MEDIUM
+liveThreadsMax=979
+nonHeapCommitKB=217841664
+heapCommitKB=516224
+eventParsedOk=1
+heapUtil=48.00
+count=1
+nonHeapUtil=64.00
+phRecvTime=any
+reptDevIpAddr=4.4.4.3
+cpuUtil=80.00
+loadedClasses=30864169
+reptVendor=Generic
+[reptDevIpAddr(key)]
+4.4.4.2
+[eventMsg]
+<190>Apr 10 13:07:10 partha-desktop java: [JEE_AppServer_Perf]:[eventSeverity]=PHL_ERROR, [rptIp]=4.4.4.2, [upTime]=153097644, [cpuUtil]=75, [heapUsedKB]=251503, [heapMaxKB]=516224, [heapCommitKB]=516224, [heapUtil]=48, [nonHeapUsedKB]=157904, [nonHeapMaxKB]=245760, [nonHeapCommitKB]=217841664, [nonHeapUtil]=64, [liveThreads]=979, [liveThreadsMax]=979, [loadedClasses]=30864169,
+[params]
+rawEventMsg=any
+deviceTime=any
+sysUpTime=153097644
+eventType=JEE_AppServer_Perf
+phCustId=1
+nonHeapUsedKB=157904
+liveThreads=979
+reptModel=JEE App Server
+eventId=any
+heapUsedKB=251503
+eventSeverity=5
+hostIpAddr=4.4.4.2
+eventName=JEE App server Performace Stat
+heapMaxKB=516224
+phEventCategory=0 (External)
+nonHeapMaxKB=245760
+eventSeverityCat=MEDIUM
+liveThreadsMax=979
+nonHeapCommitKB=217841664
+heapCommitKB=516224
+eventParsedOk=1
+heapUtil=48.00
+count=1
+nonHeapUtil=64.00
+phRecvTime=any
+reptDevIpAddr=4.4.4.2
+cpuUtil=75.00
+loadedClasses=30864169
+reptVendor=Generic

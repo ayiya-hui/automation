@@ -1,0 +1,62 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<30>2009:08:17-13:27:47 ulogd[3004]: id="2001" severity="info" sys="SecureNet" sub="packetfilter" name="Packet dropped" action="drop" fwrule="60001" seq="0" initf="br0" outitf="br0" dstmac="00:90:0b:07:8f:ce" srcmac="00:00:00:00:00:00" srcip="172.18.22.126" dstip="172.18.22.255" proto="17" length="78" tos="0x00" prec="0x00" ttl="128" srcport="137" dstport="137" --automator
+[params]
+rawEventMsg=any
+deviceTime=any
+eventType=Astaro-Packet-Drop
+phCustId=$sender
+destIpAddr=172.18.22.255
+totBytes=78
+destIpPort=137 (NETBIOS-NS)
+srcIpAddr=172.18.22.126
+reptModel=Security Gateway
+eventId=any
+eventParsedOk=1
+eventSeverity=7
+eventName=Packet denied by Firewall
+phEventCategory=0 (External)
+srcIntfName=br0
+srcMACAddr=00:00:00:00:00:00
+srcIpPort=137
+eventSeverityCat=MEDIUM
+destIntfName=br0
+ipProto=17 (UDP)
+reptDevIpAddr=$localhost
+count=1
+phRecvTime=any
+destMACAddr=00:90:0b:07:8f:ce
+eventAction=1 (Deny)
+reptVendor=Astaro
+[reptDevIpAddr(key)]
+172.16.255.68
+[eventMsg]
+<30>Mar 30 16:30:53 172.16.255.68 2009:08:17-13:27:47 ulogd[3004]: id="2001" severity="info" sys="SecureNet" sub="packetfilter" name="Packet dropped" action="drop" fwrule="60001" seq="0" initf="br0" outitf="br0" dstmac="00:90:0b:07:8f:ce" srcmac="00:00:00:00:00:00" srcip="172.18.22.126" dstip="172.18.22.255" proto="17" length="78" tos="0x00" prec="0x00" ttl="128" srcport="137" dstport="137"
+[params]
+rawEventMsg=any
+deviceTime=any
+eventType=Astaro-Packet-Drop
+phCustId=$sender
+destIpAddr=172.18.22.255
+totBytes=78
+destIpPort=137 (NETBIOS-NS)
+srcIpAddr=172.18.22.126
+reptModel=Security Gateway
+eventId=any
+eventParsedOk=1
+eventSeverity=7
+eventName=Packet denied by Firewall
+phEventCategory=0 (External)
+srcIntfName=br0
+srcMACAddr=00:00:00:00:00:00
+srcIpPort=137
+eventSeverityCat=MEDIUM
+destIntfName=br0
+ipProto=17 (UDP)
+reptDevIpAddr=172.16.255.68
+count=1
+phRecvTime=any
+destMACAddr=00:90:0b:07:8f:ce
+eventAction=1 (Deny)
+reptVendor=Astaro

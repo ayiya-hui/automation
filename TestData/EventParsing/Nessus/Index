@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+Nessus-Vuln-Detected,Nessus_1,Nessus,60.60.60.60,,syslog
+Nessus-Error,Nessus_2,Nessus,60.60.60.61,,syslog

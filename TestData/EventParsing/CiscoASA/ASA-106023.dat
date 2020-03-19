@@ -1,0 +1,56 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>Nov 28 2007 17:22:18: %ASA-6-106023: Deny udp src inside:192.168.20.31/3530 dst outside:99.129.50.157/123 by access-group "inside_to_outside"[0x2a89d901,0x0]
+[params]
+rawEventMsg=any
+deviceTime=any
+eventType=ASA-106023
+phCustId=$sender
+destIpAddr=99.129.50.157
+destIpPort=123 (NTP)
+srcIpAddr=192.168.20.31
+reptModel=ASA
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Denied IP traffic by policy
+phEventCategory=4 (Traffic)
+srcIntfName=inside
+srcIpPort=3530
+eventSeverityCat=LOW
+destIntfName=outside
+ipProto=17 (UDP)
+count=1
+phRecvTime=any
+reptDevIpAddr=$reporter
+eventAction=1 (Deny)
+reptVendor=Cisco
+[reptDevIpAddr(key)]
+10.200.3.1
+[eventMsg]
+<164>Original Address=$reporter Nov 17 2010 11:48:09: %ASA-4-106023: Deny tcp src outside:88.200.232.120/2611 dst inside:72.44.221.101/445 by access-group "acl_out" [0x0, 0x0]
+[params]
+rawEventMsg=any
+phEventCategory=4 (Traffic)
+count=1
+phCustId=$sender
+destIpAddr=72.44.221.101
+destIntfName=inside
+destIpPort=445 (MICROSOFT-DS)
+deviceTime=any
+eventAction=1 (Deny)
+eventId=any
+eventName=Denied IP traffic by policy
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=5
+eventSeverityCat=MEDIUM
+eventType=ASA-106023
+ipProto=6 (TCP)
+reptDevIpAddr=$reporter
+reptModel=ASA
+reptVendor=Cisco
+srcIpAddr=88.200.232.120
+srcIntfName=outside
+srcIpPort=2611

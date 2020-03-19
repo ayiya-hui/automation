@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<104>Mar 24 16:23:18 SyslogAlertForwarder: AttackName:Invalid Packets detected,AttackTime:2009-03-24 16:23:17 EDT,AttackSeverity:Low,SourceIp:127.255.106.236,SourcePort:N/A,DestinationIp:127.255.106.252,DistinationPort:N/A,AlertId:5260607647261334188,AlertType:Signature,AttackId:0x00009300,AttackSignature:N/A,AttackConfidence:N/A,AdminDomain:ASC,SensorName:ASCDCIPS01,Interface:1A-1B,Category:Exploit,SubCategory:protocol-violation,Direction:Outbound,ResultStatus:May be successful,DetectionMechanism:signature,ApplicationProtocol:N/A,NetworkProtocol:N/A,Relevance:N/A,HostIsolationEndTime:N/A
+[params]
+domain=ASC
+deviceTime=any
+eventType=McAfee-Intrushield-Invalid Packets detected
+phCustId=$sender
+destIpAddr=127.255.106.252
+ipsFPCheckStatus=0 (Couldnot determine)
+srcIpAddr=127.255.106.236
+reptModel=Intrushield
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=McAfee-Intrushield-Invalid Packets detected
+phEventCategory=0 (External)
+srcIntfName=1A-1B
+srcIpPort=0
+eventSeverityCat=LOW
+relayDevIpAddr=$localhost
+reptDevName=ASCDCIPS01
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=McAfee

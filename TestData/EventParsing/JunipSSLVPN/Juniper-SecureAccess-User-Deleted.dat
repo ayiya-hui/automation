@@ -1,0 +1,23 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>Juniper: 2008-10-28 03:05:47 - ive - [172.16.3.150] admin(Admin Users)[.Administrators] - Deleted User realm 'Remote Access Realm'
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+eventAction=0 (Permit)
+eventName=User is being deleted
+reptVendor=Juniper
+eventType=Juniper-SecureAccess-User-Deleted
+user=admin
+phEventCategory=0 (External)
+reptDevIpAddr=$localhost
+userGrp=.Administrators
+reptModel=Secure Access

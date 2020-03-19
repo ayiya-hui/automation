@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+70.70.70.70
+[eventMsg]
+May 15 20:27:35 70.70.70.70 ikeyserver[3575]: {Success}, {Administration}, {S-004001}, {An administrative logon was successful.}, {0x25AB20F3222F554A96CFFD2886AE4C71}, {Source Location:10.1.2.3}, {Client Location:10.1.2.3}, {User ID:admin}, {Domain:company.com}, {Client Type:Administration Program}
+[params]
+domain=company.com
+parserName=VascoParser
+eventType=Vasco-DigiPass-KeyServer-AdminLogon-Success
+srcIpAddr=10.1.2.3
+reptModel=DigiPass
+eventId=any
+eventParsedOk=1
+eventSeverity=3
+eventName=An administrative logon was successful
+appTransportProto=Syslog
+phEventCategory=0 (External)
+msg=An administrative logon was successful.
+eventRuleTrigger=1
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=70.70.70.70
+user=admin
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=70.70.70.70
+reptVendor=Vasco

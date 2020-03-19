@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134> 11/25/2013:11:15:39  clxns 0-PPE-0 : AAATM LOGIN 12309885 0 : Context anonymous@166.137.108.216 - SessionId: 17085- User anonymous - Client_ip 166.137.108.216 - Nat_ip Mapped Ip - Vserver 172.22.36.80:443 - Browser_type Apple-iPhone4C1/1102.55400001 - Group(s) N/A
+[params]
+rawEventMsg=any
+deviceTime=any
+totFlows=1
+eventType=NETSCALER-AAATM-LOGIN
+phCustId=$sender
+reptModel=NetScaler
+ipPort=443
+eventParsedOk=1
+eventSeverity=3
+hostIpAddr=172.22.36.80
+eventName=NetScaler AAA TM login success
+phEventCategory=0 (External)
+eventId=any
+eventSeverityCat=LOW
+collectorId=any
+user=anonymous
+reptDevName=any
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Citrix
+userGrp=N/A

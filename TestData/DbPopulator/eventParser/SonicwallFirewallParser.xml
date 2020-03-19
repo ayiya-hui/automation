@@ -1,0 +1,129 @@
+<eventParser name="SonicwallFirewallParser">
+  <deviceType>
+    <Vendor>Sonicwall</Vendor>
+    <Model>SonicOS</Model>
+    <Version>ANY</Version>
+  </deviceType>
+  
+  <!-- examples  
+
+  Jan  3 13:45:36 192.168.5.1 id=firewall sn=000SERIAL time="2007-01-03 14:48:06" fw=1.1.1.1 pri=6 c=262144 m=98 msg="Connection Opened" n=23419 src=2.2.2.2:36701:WAN dst=1.1.1.1:50000:WAN proto=tcp/50000
+
+  -->
+
+  <eventFormatRecognizer><![CDATA[id=firewall]]></eventFormatRecognizer>
+  
+  <testEvents>
+      <testEvent><![CDATA[Jan  3 13:45:36 192.168.5.1 id=firewall sn=000SERIAL time="2007-01-03 14:48:06" fw=1.1.1.1 pri=6 c=262144 m=98 msg="Connection Opened" n=23419 src=2.2.2.2:36701:WAN dst=1.1.1.1:50000:WAN proto=tcp/50000]]></testEvent>
+  </testEvents>
+
+  <!-- pattern definitions --> 
+  <patternDefinitions>
+    <pattern name="patStrEndColon"><![CDATA[[^:]*]]></pattern>
+  </patternDefinitions>
+
+  <parsingInstructions>
+
+    <!-- parsing common fields --> 
+    <switch>
+      <case>
+	<collectFieldsByRegex src="$_rawmsg">
+	  <regex><![CDATA[<:gPatMon>\s+<:gPatDay>\s+<:gPatTime> <reptDevIpAddr:gPatIpV4Dot>\s+id=firewall\s+<_body:gPatMesgBody>]]></regex>
+	</collectFieldsByRegex>
+      </case>
+      <case>
+	<collectFieldsByRegex src="$_rawmsg">
+	  <regex><![CDATA[id=firewall\s+<_body:gPatMesgBody>]]></regex>
+	</collectFieldsByRegex>
+      </case>
+    </switch>
+
+    <setEventAttribute attr="eventType">SonicOS</setEventAttribute>
+
+    <collectAndSetAttrByKeyValuePair src="$_body" sep=' '>
+      <attrKeyMap attr="_eventType" key="m="/>
+      <attrKeyMap attr="_time" key="time="/>
+      <attrKeyMap attr="_severity" key="pri="/>
+      <attrKeyMap attr="_wanIP" key="fw="/>
+      <attrKeyMap attr="_eventTypeId" key="m="/>
+      <attrKeyMap attr="_eventName" key="msg="/>
+      <attrKeyMap attr="_src" key="src="/>
+      <attrKeyMap attr="_dest" key="dst="/>
+      <attrKeyMap attr="destName" key="dstname="/>
+      <attrKeyMap attr="_protoSvc" key="proto="/>
+      <attrKeyMap attr="sentBytes" key="sent="/>
+      <attrKeyMap attr="recvBytes" key="rcvd="/>
+      <attrKeyMap attr="icmpType" key="type="/>
+      <attrKeyMap attr="icmpCode" key="code="/>
+      <attrKeyMap attr="httpMethod" key="op="/>
+      <attrKeyMap attr="user" key="user="/>
+      <attrKeyMap attr="user" key="usr="/>
+      <attrKeyMap attr="_cpuUtil" key="cpuUtil="/>
+      <attrKeyMap attr="_memUtil" key="ramUtil="/>
+      <attrKeyMap attr="intfName" key="if="/>
+    </collectAndSetAttrByKeyValuePair>	
+
+    <!-- reformat device time -->
+    <collectFieldsByRegex src="$_time">
+      <regex><![CDATA[<_year:gPatYear>-<_mon:gPatMonNum>-<_day:gPatDay>\s+<_time:gPatTime>]]></regex>
+    </collectFieldsByRegex>
+    <setEventAttribute attr="deviceTime">toDateTime($_mon, $_day, $_year, $_time)</setEventAttribute>
+
+    <!-- reformat event priority -->
+    <choose>
+      <when test='$_severity IN "6, 7"'>
+        <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+      </when>
+
+      <when test='$_severity = "1"'>
+        <setEventAttribute attr="eventSeverity">10</setEventAttribute>
+      </when>
+
+      <when test='$_severity = "2"'>
+        <setEventAttribute attr="eventSeverity">8</setEventAttribute>
+      </when>
+
+      <when test='$_severity IN "3, 4"'>
+        <setEventAttribute attr="eventSeverity">5</setEventAttribute>
+      </when>
+
+      <when test='$_severity = "5"'>
+        <setEventAttribute attr="eventSeverity">2</setEventAttribute>
+      </when>
+    </choose>
+
+    <!-- event type -->
+    <setEventAttribute attr="eventType">combineMsgId("SonicOS", "-", $_eventType)</setEventAttribute>
+
+    <!-- reformat protocol, src/dest ip, port -->
+    <when test='exist _src'>
+      <collectFieldsByRegex src="$_src">
+	<regex><![CDATA[<srcIpAddr:gPatIpV4Dot>:<srcIpPort:gPatIpPort>:<srcIntfName:gPatMesgBody>]]></regex>
+      </collectFieldsByRegex>
+    </when>
+
+    <!-- take care of missing values -->
+    <when test='exist _dest'>
+      <collectFieldsByRegex src="$_dest">
+	<regex><![CDATA[<destIpAddr:gPatIpV4Dot>:<_destIpPort:patStrEndColon>:<_destIntf:gPatMesgBody>]]></regex>
+      </collectFieldsByRegex>
+
+      <when test='$_destIpPort != ""'>
+	<setEventAttribute attr="destIpPort">$_destIpPort</setEventAttribute>
+      </when>
+
+      <when test='$_destIntf != ""'>
+	<setEventAttribute attr="destIntfName">$_destIntf</setEventAttribute>
+      </when>
+    </when>
+
+    <!-- convert proto from string to number -->
+    <when test='exist _protoSvc'>
+      <collectFieldsByRegex src="$_protoSvc">
+        <regex><![CDATA[<_proto:gPatProto>/?<:gPatMesgBody>]]></regex>
+      </collectFieldsByRegex>
+      <setEventAttribute attr="ipProto">convertStrToIntIpProto($_proto)</setEventAttribute>
+    </when>
+
+  </parsingInstructions>
+</eventParser>

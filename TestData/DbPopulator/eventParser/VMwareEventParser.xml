@@ -1,0 +1,113 @@
+<eventParser name="VMwareEventParser">
+  <deviceType>
+    <Vendor>Generic</Vendor>
+    <Model>Generic</Model>
+    <Version>ANY</Version>
+  </deviceType>
+
+  <appType>
+    <Vendor>VMware</Vendor>
+    <Model>Generic</Model>
+    <Version>ANY</Version>
+    <Name>Generic</Name>
+  </appType>
+
+  <patternDefinitions>
+    <pattern name="patStrEndWithRightSquareBracket"><![CDATA[[^\]]*]]></pattern>
+    <pattern name="patStrEndBrack"><![CDATA[[^\]+]]></pattern>
+  </patternDefinitions>
+  <eventFormatRecognizer><![CDATA[\[VMware_]]></eventFormatRecognizer>
+  
+  <testEvents>
+      <testEvent><![CDATA[<134>Nov 18 16:42:54 192.168.24.11 java: [VMware_UserLoginSessionEvent], [eventTime]=2009-11-18 16:37:53:013, [rptIp]=192.168.24.11, [user]=Administrator, [vmwEventId]=67350, [vmwEventCat]=info, [srcIpAddr]=127.0.0.1, [vmwEventMsg]=User Administrator@127.0.0.1 logged in]]></testEvent>
+  </testEvents>
+
+  <parsingInstructions>
+
+	<!--
+	<134>Oct 29 15:01:24 192.168.24.11 java: [VMware_UserLogoutSessionEvent]: [eventTime]=, [user]=, [vmwEventCat]=info, [vmwEventMsg]=
+	-->
+
+    <collectFieldsByRegex src="$_rawmsg">
+      <regex><![CDATA[<:gPatSyslogPRI><:gPatMon>\s+<:gPatDay>\s+<:gPatTime>\s+<:gPatStr>\s+java:\s+\[<eventType:patStrEndWithRightSquareBracket>\]<_body:gPatMesgBody>]]></regex>
+    </collectFieldsByRegex>
+    
+    <collectAndSetAttrByKeyValuePair sep=',' src="$_body">
+      <attrKeyMap attr="_eventTime" key="[eventTime]="/>
+      <attrKeyMap attr="vmwEventCat" key="[vmwEventCat]="/>
+      <attrKeyMap attr="user" key="[user]="/>
+      <attrKeyMap attr="userGrp" key="[userGrp]="/>
+      <attrKeyMap attr="targetUser" key="[targetUser]="/>
+      <attrKeyMap attr="targetUserGrp" key="[targetUserGrp]="/>
+      <attrKeyMap attr="vmName" key="[vmName]="/>
+      <attrKeyMap attr="srcVmName" key="[srcVmName]="/>
+      <attrKeyMap attr="destVmName" key="[destVmName]="/>
+      <attrKeyMap attr="origVmName" key="[origVmName]="/>
+      <attrKeyMap attr="newVmName" key="[newVmName]="/>
+      <attrKeyMap attr="phyMachName" key="[phyMachName]="/>
+      <attrKeyMap attr="srcPhyMachName" key="[srcPhyMachName]="/>
+      <attrKeyMap attr="destPhyMachName" key="[destPhyMachName]="/>
+      <attrKeyMap attr="origPhyMachName" key="[origPhyMachName]="/>
+      <attrKeyMap attr="vmTemplate" key="[vmTemplate]="/>
+      <attrKeyMap attr="vmGuestId" key="[vmGuestId]="/>
+      <attrKeyMap attr="drsBehavior" key="[drsBehavior]="/>
+      <attrKeyMap attr="resourcePool" key="[resourcePool]="/>
+      <attrKeyMap attr="origResourcePool" key="[origResourcePool]="/>
+      <attrKeyMap attr="newResourcePool" key="[newResourcePool]="/>
+      <attrKeyMap attr="destResourcePool" key="[destResourcePool]="/>
+      <attrKeyMap attr="datastore" key="[datastore]="/>
+      <attrKeyMap attr="cluster" key="[cluster]="/>
+      <attrKeyMap attr="datacenter" key="[datacenter]="/>
+      <attrKeyMap attr="uuid" key="[uuid]="/>
+      <attrKeyMap attr="alarm" key="[alarm]="/>
+      <attrKeyMap attr="task" key="[task]="/>
+      <attrKeyMap attr="folder" key="[folder]="/>
+      <attrKeyMap attr="role" key="[role]="/>
+      <attrKeyMap attr="principal" key="[principal]="/>
+      <attrKeyMap attr="origStatus" key="[origStatus]="/>
+      <attrKeyMap attr="newStatus" key="[newStatus]="/>
+      <attrKeyMap attr="script" key="[script]="/>
+      <attrKeyMap attr="licenseServer" key="[licenseServer]="/>
+      <attrKeyMap attr="feature" key="[feature]="/>
+      <attrKeyMap attr="managedEntity" key="[managedEntity]="/>
+      <attrKeyMap attr="srcIpAddr" key="[srcIpAddr]="/>
+      <attrKeyMap attr="hostIpAddr" key="[hostIpAddr]="/>
+      <attrKeyMap attr="hostMACAddr" key="[hostMACAddr]="/>
+      <attrKeyMap attr="intfName" key="[intfName]="/>
+      <attrKeyMap attr="reptDevName" key="[vmHost]="/>
+      <attrKeyMap attr="vmwEventMsg" key="[vmwEventMsg]="/>
+    </collectAndSetAttrByKeyValuePair>
+    
+    <!-- parse this 2009-03-26 19:27:52:752505 -->
+   
+    <collectFieldsByRegex src="$_eventTime">
+      <regex><![CDATA[<_year:gPatYear>-<_mon:gPatMonNum>-<_day:gPatDay>\s+<_time:gPatTime>:.*]]></regex>
+    </collectFieldsByRegex>
+
+    <setEventAttribute attr="deviceTime">toDateTime($_mon, $_day, $_year, $_time)</setEventAttribute>
+    
+    
+    <!-- event severity -->
+    <choose>
+      <when test='$vmwEventCat = "error"'>
+	<setEventAttribute attr="eventSeverity">8</setEventAttribute>
+      </when>
+      <when test='$vmwEventCat = "warning"'>
+	<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+      </when>
+      <when test='$vmwEventCat = "user"'>
+	<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+      </when>
+      <when test='$vmwEventCat = "info"'>
+	<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+      </when>
+    </choose>
+
+    <!-- VMware event message -->
+    <choose>
+      <when test='$eventType IN "VMware_UserLoginSessionEvent,VMware_BadUsernameSessionEvent,VMware_UserLogoutSessionEvent"'>
+         <setEventAttribute attr="destIpAddr">$reptDevIpAddr</setEventAttribute>
+      </when>
+    </choose>
+  </parsingInstructions>
+</eventParser>

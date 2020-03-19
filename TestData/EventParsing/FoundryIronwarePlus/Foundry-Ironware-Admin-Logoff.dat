@@ -1,0 +1,50 @@
+[reptDevIpAddr(key)]
+58.58.58.58
+[eventMsg]
+<14>Jun  4 15:51:18 58.58.58.58 Security: telnet logout by admin from src IP 137.146.28.75, src MAC 000c.dbff.6d00
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+reptDevIpAddr=58.58.58.58
+eventParsedOk=1
+reptVendor=Foundry
+eventSeverity=4
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=$reporter
+eventAction=0 (Permit)
+eventName=Foundry admin logoff
+srcIpAddr=137.146.28.75
+appTransportProto=telnet
+eventType=Foundry-Ironware-Admin-Logoff
+user=admin
+phEventCategory=0 (External)
+srcMACAddr=00:0c:db:ff:6d:00
+reptModel=Ironware
+
+[reptDevIpAddr(key)]
+58.58.58.73
+[eventMsg]
+<14>Aug 16 14:25:26 58.58.58.73 Security: telnet logout by line password from src IP 192.169.95.221, src MAC 002b.ed28.ce01
+[params]
+parserName=FoundryIronwareParserPlus
+eventType=Foundry-Ironware-Admin-Logoff
+destIpAddr=58.58.58.73
+srcIpAddr=192.169.95.221
+reptModel=Ironware
+eventParsedOk=1
+eventSeverity=4
+eventName=Foundry admin logoff
+appTransportProto=telnet
+phEventCategory=0 (External)
+srcMACAddr=00:2b:ed:28:ce:01
+eventSeverityCat=LOW
+relayDevIpAddr=58.58.58.73
+user=line
+reptDevName=any
+customer=Super
+reptDevIpAddr=58.58.58.73
+eventAction=0 (Permit)
+reptVendor=Foundry

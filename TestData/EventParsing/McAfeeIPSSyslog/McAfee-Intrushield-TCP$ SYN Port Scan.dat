@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<104>Nov 12 11:51:51 SyslogAlertForwarder: AttackName:TCP: SYN Port Scan,AttackTime:2009-11-12 11:51:49 PST,AttackSeverity:Medium,SourceIp:192.168.21.206,SourcePort:0,DestinationIp:192.168.0.40,DistinationPort:N/A,AlertId:5332552212419904203,AlertType:Port Scan,AttackId:0x40009500,AttackSignature:N/A,AttackConfidence:N/A,AdminDomain:My Company,SensorName:accelopsips,Interface:1A,Category:Reconnaissance,SubCategory:port-scan,Direction:Unknown,ResultStatus:Suspicious,DetectionMechanism:threshold,ApplicationProtocol:N/A,NetworkProtocol:N/A,Relevance:N/A,Quarantine_End_Time:N/A
+[params]
+domain=My Company
+deviceTime=any
+eventType=McAfee-Intrushield-TCP: SYN Port Scan
+phCustId=$sender
+destIpAddr=192.168.0.40
+ipsFPCheckStatus=0 (Couldnot determine)
+srcIpAddr=192.168.21.206
+reptModel=Intrushield
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=McAfee-Intrushield-TCP: SYN Port Scan
+phEventCategory=0 (External)
+srcIntfName=1A
+srcIpPort=0
+eventSeverityCat=LOW
+relayDevIpAddr=$localhost
+reptDevName=accelopsips
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=McAfee

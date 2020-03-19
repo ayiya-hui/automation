@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+FortiGate-fnTrapTest,FortiGateTrap_1,FortiGateTrap,$localhost,,syslog

@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>Dec 04 2008 20:00:45: ASA-3-106014: Deny inbound icmp src ether03: 20.20.20.20 dst ether05: 192.168.20.20 (type 12, code 05)
+[params]
+rawEventMsg=any
+deviceTime=any
+eventType=ASA-106014
+phCustId=$sender
+destIpAddr=192.168.20.20
+srcIpAddr=20.20.20.20
+icmpCode=5 (Echo Request)
+reptModel=ASA
+eventId=any
+eventParsedOk=1
+eventSeverity=5
+icmpType=8 (Echo Request)
+eventName=Denied IP traffic
+phEventCategory=0 (External)
+srcIntfName=ether03
+eventSeverityCat=MEDIUM
+destIntfName=ether05
+ipProto=1 (ICMP)
+count=1
+phRecvTime=any
+reptDevIpAddr=$reporter
+eventAction=1 (Deny)
+reptVendor=Cisco

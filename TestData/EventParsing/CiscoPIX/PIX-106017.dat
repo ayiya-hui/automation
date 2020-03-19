@@ -1,0 +1,24 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>Dec 04 2008 20:00:45: %PIX-2-106017: Deny IP due to Land Attack from 192.168.20.20 to 10.10.10.10--automator
+[params]
+rawEventMsg=any
+destIpAddr=10.10.10.10
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=any
+eventSeverity=8
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=MEDIUM
+destIpAddr=10.10.10.10
+eventAction=1 (Deny)
+eventName=Denied IP traffic - land attack
+srcIpAddr=192.168.20.20
+reptVendor=Cisco
+eventType=PIX-106017
+phEventCategory=0 (External)
+reptDevIpAddr=$localhost
+reptModel=PIX

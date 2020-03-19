@@ -1,0 +1,23 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<22>Oct 17 18:07:32 IronPort-Mail: Info: ICID 175169666 TLS success protocol TLSv1 cipher RC4-SHA
+[params]
+rawEventMsg=any
+eventId=any
+count=1
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+eventSeverity=1
+eventType=Cisco-IronPort-Mail-TLS-Success
+phCustId=$sender
+reptDevIpAddr=$localhost
+collectorId=any
+eventName=IronPort mail TLS Success
+ironportMailICID=175169666
+reptVendor=Cisco
+phRecvTime=any
+reptDevName=any
+reptModel=IronPort AsyncOS Mail

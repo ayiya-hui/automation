@@ -1,0 +1,29 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<182>Oct 16 05:26:57 syslog-ng@COS-Node-1 logserver: [16/Oct/2010:05:26:57.580086 -0700] COS-Node-1 020444 ps 401148ca Info    CSACL   User '(wooa)@(COS Non-Standard VPN)' connecting from '172.18.6.55:-' matched rule #4 'COS Non-Standard VPN Permit Rule', access to '156.74.139.51:6054' is permitted.
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+ipConnId=401148ca
+count=1
+phCustId=$sender
+destIpAddr=156.74.139.51
+destIpPort=6054
+deviceTime=any
+domain=COS Non-Standard VPN
+eventId=any
+eventName=Aventail client server access success by policy
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=3
+eventSeverityCat=LOW
+eventType=Aventail-System-CSACL-Success
+fwRule=COS Non-Standard VPN Permit Rule
+hostName=COS-Node-1
+procName=policy service
+reptDevIpAddr=$reporter
+reptModel=Aventail VPN
+reptVendor=Sonicwall
+srcIpAddr=172.18.6.55
+user=wooa

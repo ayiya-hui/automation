@@ -1,0 +1,6 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+FortiWeb-01002,FortiWeb_1,FortiWeb,$localhost,,syslog
+FortiWeb-19999498,FortiWeb_2,FortiWeb,$localhost,,syslog
+FortiWeb-20000010,FortiWeb_3,FortiWeb,$localhost,,syslog
+FortiWeb-30000000,FortiWeb_4,FortiWeb,$localhost,,syslog

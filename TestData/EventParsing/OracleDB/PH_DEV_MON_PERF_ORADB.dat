@@ -1,0 +1,41 @@
+[reptDevIpAddr(key)]
+70.70.70.3
+[eventMsg]
+<134>Jun 03 22:19:33 $reporter java: [PH_DEV_MON_PERF_ORADB]:[eventSeverity]=PHL_INFO,[hostIpAddr]=$reporter,[hostName]=Host-$reporter,[rptIp]=$reporter,[relayIp]=$localhost,[dbBufferCacheHitRatio]= 100,[dbMemorySortsRatio]= 100,[dbUserTransactionPerSec]= 0.33,[dbPhysicalReadsPerSec]= 0,[dbPhysicalWritesPerSec]= 0.07,[dbHostCpuUtilRatio]= 0,[dbNetworkTrafficVolumePerSec]= 594.47,[dbEnqueueDeadlocksPerSec]= 0,[dbCurrentLogonsCount]= 34,[dbWaitTimeRatio]= 38.30,[dbCpuTimeRatio]= 61.70,[dbRowCacheHitRatio]= 100,[dbLibraryCacheHitRatio]= 99.79,[dbSharedPoolFreeRatio]= 19.86,[dbSessionCount]= 42,[dbIOMegaBytesPerSec]= 0.05,[dbRequestsPerSec]= 3.50,[dbSystemTablespaceUsage]= 2.24,[dbTempTablespaceUsage]= 0,[dbUsersTablespaceUsage]= 0.01,[dbUserCount]= 3,[dbInvalidObjectCount]= 0
+[params]
+rawEventMsg=any
+eventType=PH_DEV_MON_PERF_ORADB
+dbCpuTimeRatio=61.70
+dbRowCacheHitRatio=100.00
+dbRequestsPerSec=3.50
+deviceTime=any
+reptModel=FortiSIEM
+eventId=any
+dbHostCpuUtilRatio=0.00
+eventParsedOk=1
+eventSeverity=1
+hostIpAddr=$reporter
+dbPhysicalWritesPerSec=0.07
+eventName=Oracle database performance metrics
+dbUsersTablespaceUsage=0.01
+dbPhysicalReadsPerSec=0.00
+phEventCategory=6 (Performance Event)
+dbWaitTimeRatio=38.30
+dbSharedPoolFreeRatio=19.86
+phCustId=$sender
+dbSystemTablespaceUsage=2.24
+dbEnqueueDeadlocksPerSec=0.00
+eventSeverityCat=LOW
+dbInvalidObjectCount=0
+dbMemorySortsRatio=100.00
+dbUserCount=3
+dbLibraryCacheHitRatio=99.79
+count=1
+phRecvTime=any
+reptDevIpAddr=70.70.70.3
+dbUserTransactionPerSec=0.33
+dbSessionCount=42
+dbTempTablespaceUsage=0.00
+reptVendor=Fortinet
+dbCurrentLogonsCount=34
+dbBufferCacheHitRatio=100.00

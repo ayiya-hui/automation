@@ -1,0 +1,34 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<41>Jan 27 12:37:41 NdcSrcFireMgr SFIMS: <*- Network Based Retrospective From "ndcsfips1" at Tue Jan 26 14:27:43 2016 UTC -*>  Sha256: 7841eb6f45fca916ee70a931eacce69431ab4693d1c99f726ddf987dd4966f11 Disposition: Malware Threat name: N/AIP Addresses: 10.28.165.194<-85.93.0.32
+[params]
+deviceTime=any
+parserName=Sourcefire2Parser
+eventType=Sourcefire-Network-Based-Retrospective
+hostName=NdcSrcFireMgr
+destIpAddr=10.28.165.194
+srcName=ndcsfips1
+srcIpAddr=85.93.0.32
+reptGeoState=Shanghai
+reptModel=FirePOWER
+eventId=any
+eventTime=Tue Jan 26 14:27:43 CST 2016
+eventParsedOk=1
+eventSeverity=1
+hashCode=7841eb6f45fca916ee70a931eacce69431ab4693d1c99f726ddf987dd4966f11
+eventName=Sourcefire-Network-Based-Retrospective
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+eventRuleTrigger=1
+count=1
+eventSeverityCat=LOW
+collectorId=any
+virusName=N/A
+relayDevIpAddr=$localhost
+reptDevName=any
+customer=Super
+reptGeoCity=any
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Cisco

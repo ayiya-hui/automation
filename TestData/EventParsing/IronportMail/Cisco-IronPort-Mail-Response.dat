@@ -1,0 +1,200 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<22>Feb 15 15:57:07 IronPort-Mail: Info: MID 1750701 RID [0, 1, 2, 3] Response 'OK: <6f7e963800101e20@im-vv-sg-022>'
+[params]
+deviceTime=any
+parserName=IronportMailParser
+eventType=Cisco-IronPort-Mail-Response
+reptModel=IronPort AsyncOS Mail
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Cisco-IronPort-Mail-Response
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Cisco
+ironportMailMID=1750701
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<22>Feb 15 15:58:43 IronPort-Mail: Info: MID 1750707 RID [0, 1] Response 'OK: <6f7a283f00104bc1@im-vv-sg-021>'
+[params]
+deviceTime=any
+parserName=IronportMailParser
+eventType=Cisco-IronPort-Mail-Response
+reptModel=IronPort AsyncOS Mail
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Cisco-IronPort-Mail-Response
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Cisco
+ironportMailMID=1750707
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<22>Feb 15 16:00:01 IronPort-Mail: Info: MID 1750439 RID [0, 1] Response '2.6.0 <20130215160914.9066520F649@smtp.tjsp.jus.br> [InternalId=503410] Queued mail for delivery'
+[params]
+deviceTime=any
+parserName=IronportMailParser
+eventType=Cisco-IronPort-Mail-Response
+reptModel=IronPort AsyncOS Mail
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Cisco-IronPort-Mail-Response
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Cisco
+ironportMailMID=1750439
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<22>Feb 15 16:05:53 IronPort-Mail: Info: MID 1750729 RID [0, 1] Response '2.6.0 <FB342B268E268C4185859204B70807A5A3491B@USDC1SRP00202.prosegur.local> [InternalId=503452] Queued mail for delivery'
+[params]
+deviceTime=any
+parserName=IronportMailParser
+eventType=Cisco-IronPort-Mail-Response
+reptModel=IronPort AsyncOS Mail
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Cisco-IronPort-Mail-Response
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Cisco
+ironportMailMID=1750729
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<22>Feb 15 16:09:53 IronPort-Mail: Info: MID 1750743 RID [2] Response 'Thanks'
+[params]
+deviceTime=any
+parserName=IronportMailParser
+eventType=Cisco-IronPort-Mail-Response
+reptModel=IronPort AsyncOS Mail
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Cisco-IronPort-Mail-Response
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Cisco
+ironportMailMID=1750743
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<22>Feb 15 16:10:29 IronPort-Mail: Info: MID 1750744 RID [0, 1] Response '2.0.0 Ok: queued as 0153B6A62B6'
+[params]
+deviceTime=any
+parserName=IronportMailParser
+eventType=Cisco-IronPort-Mail-Response
+reptModel=IronPort AsyncOS Mail
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Cisco-IronPort-Mail-Response
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Cisco
+ironportMailMID=1750744
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<22>Feb 15 16:23:20 IronPort-Mail: Info: MID 1750774 RID [2] Response 'OK id=1U6PwB-0003dM-5N'
+[params]
+deviceTime=any
+parserName=IronportMailParser
+eventType=Cisco-IronPort-Mail-Response
+reptModel=IronPort AsyncOS Mail
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Cisco-IronPort-Mail-Response
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Cisco
+ironportMailMID=1750774
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<22>Feb 15 16:26:29 IronPort-Mail: Info: MID 1750787 RID [0, 1] Response 'ok:  Message 7308511 accepted'
+[params]
+deviceTime=any
+parserName=IronportMailParser
+eventType=Cisco-IronPort-Mail-Response
+reptModel=IronPort AsyncOS Mail
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Cisco-IronPort-Mail-Response
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Cisco
+ironportMailMID=1750787

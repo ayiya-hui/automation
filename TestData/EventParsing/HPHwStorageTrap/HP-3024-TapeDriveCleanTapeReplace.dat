@@ -1,0 +1,22 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+enterprises.232.3 6 3024 sysName.0 s "Insight"
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=any
+eventSeverity=10
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=HIGH
+hostIpAddr=$localhost
+eventName=Tape Drive cleaning tape needs replacement
+reptVendor=Generic
+eventType=HP-3024-TapeDriveCleanTapeReplace
+phEventCategory=0 (External)
+hostName=Insight
+reptDevIpAddr=$localhost
+reptModel=Generic

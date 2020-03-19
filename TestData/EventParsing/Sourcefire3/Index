@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+Sourcefire-Audit-Synchronization,Sourcefire3_1,Sourcefire3,$localhost,,syslog

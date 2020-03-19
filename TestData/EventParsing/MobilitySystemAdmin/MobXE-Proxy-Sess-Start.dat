@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+1.1.1.1
+[eventMsg]
+<134>Sep 27 05:40:43 1.1.1.1 nmservic.exe[1016]: Proxy: Client TDI RPC session indication, virtual address: 172.16.103.63, IMP handle: 0x1865064d, client version: 9.10, build: 19168.
+[params]
+rawEventMsg=any
+deviceTime=any
+eventType=MobXE-Proxy-Sess-Start
+phCustId=$sender
+hostName=any
+procName=nmservic.exe
+reptModel=Mobility XE
+eventId=any
+ipConnId=0x1865064d
+eventParsedOk=1
+eventSeverity=1
+hostVirtIpAddr=172.16.103.63
+eventName=NetMotion MobilityXE client-to-mobility server proxy session started
+phEventCategory=0 (External)
+appClientVersion=9.10
+eventSeverityCat=LOW
+collectorId=any
+reptDevName=any
+count=1
+phRecvTime=any
+reptDevIpAddr=1.1.1.1
+reptVendor=NetMotion

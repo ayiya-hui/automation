@@ -1,0 +1,21 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<189>393068 06/29/2009 21:28:41.370 SEV=5 IKE/50 RPT=716 99.129.50.155  Group [HQ-Dev] User [wenyong] Connection terminated for peer wenyong. Reason: Peer Terminate Remote Proxy 192.168.16.10, Local Proxy 0.0.0.0--automator
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+eventAction=0 (Permit)
+eventName=Cisco-VPN3K-IKE/50
+reptVendor=Cisco
+eventType=Cisco-VPN3K-IKE/50
+phEventCategory=0 (External)
+reptDevIpAddr=$localhost
+reptModel=VPN 3K

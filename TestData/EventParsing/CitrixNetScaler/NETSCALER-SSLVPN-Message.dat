@@ -1,0 +1,24 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<135> 11/25/2013:11:15:39  clxns 0-PPE-0 : SSLVPN Message 12309886 0 :  SSID 42bd remove session PE : 0, owner : 1, ref : 0, exp : 0
+[params]
+rawEventMsg=any
+eventId=any
+count=1
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+totFlows=1
+eventType=NETSCALER-SSLVPN-Message
+phCustId=$sender
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+collectorId=any
+eventName=NETSCALER-SSLVPN-Message
+eventSeverity=1
+reptVendor=Citrix
+phRecvTime=any
+reptDevName=any
+reptModel=NetScaler

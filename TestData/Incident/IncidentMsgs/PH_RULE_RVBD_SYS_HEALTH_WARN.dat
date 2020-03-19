@@ -1,0 +1,2 @@
+[eventMsg]
+[PH_DEV_MON_SYS_STAT]:[eventSeverity]=PHL_INFO,[hostName]=automator178Dot56Dot57Dot175,[hostIpAddr]=178.56.57.175,[numUser]=2,[numJob]=34,[pollIntv]=20,[systemStatus]=Degraded,[svcStatus]=Degraded,[hwStatusCode]=1

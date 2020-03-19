@@ -1,0 +1,7 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+InfoBlox-NiOS-ibPrimaryDiskFailure,InfoBloxTrap_1,InfoBloxTrap,192.168.20.245,,syslog
+InfoBlox-NiOS-Generic,InfoBloxTrap_2,InfoBloxTrap,192.168.20.245,,syslog
+InfoBlox-NiOS-ibFanFailure,InfoBloxTrap_3,InfoBloxTrap,192.168.20.245,,syslog
+InfoBlox-NiOS-ibPowerSupplyFailure,InfoBloxTrap_4,InfoBloxTrap,192.168.20.245,,syslog
+InfoBlox-NiOS-ibDBFailure,InfoBloxTrap_5,InfoBloxTrap,192.168.20.245,,syslog

@@ -1,0 +1,2 @@
+[eventMsg]
+[PH_DEV_MON_SYS_STAT]:[eventSeverity]=PHL_INFO,[hostName]=automator178Dot57Dot57Dot175,[hostIpAddr]=178.57.57.175,[numUser]=2,[numJob]=34,[pollIntv]=20,[systemStatus]=Stopped,[svcStatus]=Stopped,[hwStatusCode]=2

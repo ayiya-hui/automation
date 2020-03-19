@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<38>Jun 25 14:42:17 Galaxy qlogd[8029]: conn log: Users: admin, Source IP: 192.168.1.111, Computer name: ---, Connection type: HTTP, Accessed resources: Administration, Action: Login OK
+[params]
+customer=Super
+eventId=any
+eventSeverityCat=LOW
+eventParsedOk=1
+phEventCategory=0 (External)
+parserName=QNAPParser
+count=1
+eventSeverity=1
+eventType=QNAP-TurboNAS-Login-Success
+reptDevIpAddr=$localhost
+collectorId=any
+fileName=Administration
+eventName=QNAP TurboNAS Logon Success
+reptVendor=QNAP
+relayDevIpAddr=$localhost
+user=admin
+phRecvTime=any
+srcIpAddr=192.168.1.111
+eventRuleTrigger=1
+appTransportProto=HTTP
+reptModel=Turbo NAS

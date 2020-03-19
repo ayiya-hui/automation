@@ -1,0 +1,43 @@
+$smtpFailCode,Description
+101,Cannot open connection
+211,System status message
+214,Help reply message
+220,Service running
+221,Server ending mail session
+250,Server successfully delivered message
+251,Mail account not local but server will forward
+252,Mail account cannot be verified but server will deliver message
+354,Server has received FROM and TO and now asking for MESSAGE BODY
+421,Mail Server unavailable, retry later
+422,Recipient's mailbox over storage limit
+431,Recipient's mail server has Disk Full or Out fo memopry error condition
+432,Recipient's mail queue stopped or frozen
+441,Recipients mail server not responding
+442,Mail connection broken during mail delivery
+446,Max Hop count exceeded for message
+447,Outgoing message timed out
+449,Microsoft Exchange Server Message Routing Error
+450,Server could not access recipients mail server to deliver the message
+451,Requested action aborted by ISP's server (likely overloaded)
+452,Requested action not taken, insufficient storage
+465,Code page not available on recipeint's server
+471,Local error with your own mail server
+500,Syntax error - command not recognized
+501,Syntax error in parameters
+502,Command not interpreted
+503,Bad sequence of commands
+504,Command parameter not implemented
+510,Bad email address
+511,Bad email address
+512,Unable to resolve recipients domain name
+513,Address type incorrect
+523,Message size exceeds message size
+550,Requested action not taken as mailbox unavailable
+551,User not local or invalid address - relay denied
+552,Requested mail action aborted - exceeded storage allocation
+553,Requested action not taken - mailbox name invalid
+554,Transaction failed - email is believed to be spam or sender is blacklisted
+
+
+
+ 

@@ -1,0 +1,46 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<14>SJ-Dev-A-Fdy-FastIron, phoenix_agent login to USER EXEC mode
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+reptDevIpAddr=$localhost
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=$localhost
+eventAction=0 (Permit)
+eventName=Foundry successful admin logon
+reptVendor=Foundry
+eventType=Foundry-Ironware-Admin-Login
+user=phoenix_agent
+phEventCategory=0 (External)
+destName=SJ-Dev-A-Fdy-FastIron
+reptModel=Ironware
+[reptDevIpAddr(key)]
+20.20.20.39
+[eventMsg]
+<14>Mar 29 08:53:28 20.20.20.39 SJ-Dev-A-Fdy-FastIron2, test1 login to USER EXEC mode
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+reptDevIpAddr=20.20.20.39
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=20.20.20.39
+eventAction=0 (Permit)
+eventName=Foundry successful admin logon
+reptVendor=Foundry
+eventType=Foundry-Ironware-Admin-Login
+user=test1
+phEventCategory=0 (External)
+destName=SJ-Dev-A-Fdy-FastIron2
+reptModel=Ironware

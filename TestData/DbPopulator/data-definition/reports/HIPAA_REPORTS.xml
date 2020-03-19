@@ -1,0 +1,1038 @@
+<Reports>
+
+  <Report id="PH_Report_HIPAA_1" group="PH_SYS_REPORT_HIPAA">
+    <Name>HIPAA 164.308(a)(3): Server Password Changes </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks password changes </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,phRecvTime,srcIpAddr,user,domain,targetUser,targetDomain,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WINDOWS_42" name="Filter_WINDOWS_42">
+        <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_PasswordChange) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_HIPAA) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_HIPAA_2" group="PH_SYS_REPORT_HIPAA">
+    <Name>HIPAA 164.308(a)(3),164.312(a)(2): Local Windows User Accounts Created </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report captures user accounts added on a server </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,phRecvTime,srcIpAddr,user,computer,targetUser,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WINDOWS_26" name="Filter_WINDOWS_26">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER)  AND  eventType = "Win-Security-624" AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_HIPAA) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_HIPAA_3" group="PH_SYS_REPORT_HIPAA">
+    <Name>HIPAA 164.308(a)(3): Local Windows User Accounts Deleted</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report captures user accounts removed from a server </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,phRecvTime,srcIpAddr,user,computer,targetUser,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WINDOWS_27" name="Filter_WINDOWS_27">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER)  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_HIPAA) AND eventType = "Win-Security-630" </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_HIPAA_4" group="PH_SYS_REPORT_HIPAA">
+    <Name>HIPAA 164.308(a)(3): Local Windows User Accounts Modified </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report captures local user account modifications. </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,phRecvTime,eventType, srcIpAddr,user,computer,targetUser,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WINDOWS_28" name="Filter_WINDOWS_28">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER)  AND  eventType IN ("Win-Security-625", "Win-Security-626","Win-Security-642", "Win-Security-627", "Win-Security-628", "Win-Security-629","Win-Security-636","Win-Security-650","Win-Security-637","Win-Security-651","Win-Security-632","Win-Security-633","Win-Security-655","Win-Security-656","Win-Security-660","Win-Security-661","Win-Security-665","Win-Security-666")  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_HIPAA) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_HIPAA_5" group="PH_SYS_REPORT_HIPAA">
+    <Name>HIPAA 164.308(a)(3): Users Added To Local Groups </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report captures users added to local groups. </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,phRecvTime,srcIpAddr,user,computer,targetUser,targetUserGrp,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WINDOWS_32" name="Filter_WINDOWS_32">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER)  AND  eventType IN ("Win-Security-636", "Win-Security-650")  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_HIPAA) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_HIPAA_6" group="PH_SYS_REPORT_HIPAA">
+    <Name>HIPAA 164.308(a)(3): Users Added To Global Groups </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report captures users added to global or univeral groups. </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,phRecvTime,srcIpAddr,user,computer,targetUser,targetUserGrp,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WINDOWS_33" name="Filter_WINDOWS_33">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER)  AND  eventType IN ("Win-Security-632", "Win-Security-655","Win-Security-660", "Win-Security-665") </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_HIPAA_7" group="PH_SYS_REPORT_HIPAA">
+    <Name>HIPAA 164.308(a)(3): Users Deleted From Local Groups </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report captures users deleted from local groups. </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,phRecvTime,srcIpAddr,user,computer,targetUser,targetUserGrp,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WINDOWS_34" name="Filter_WINDOWS_34">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER)  AND  eventType IN ("Win-Security-637", "Win-Security-651")  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_HIPAA) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_HIPAA_8" group="PH_SYS_REPORT_HIPAA">
+    <Name>HIPAA 164.308(a)(3): Users Deleted From Global Groups </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report captures users deleted from global or univeral groups. </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,phRecvTime,srcIpAddr,user,computer,targetUser,targetUserGrp,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WINDOWS_35" name="Filter_WINDOWS_35">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER)  AND  eventType IN ("Win-Security-633", "Win-Security-656","Win-Security-661", "Win-Security-666")  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_HIPAA) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_HIPAA_9" group="PH_SYS_REPORT_HIPAA">
+    <Name>HIPAA 164.308(a)(3): Local Windows Groups Deleted </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report captures local group deletions </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,phRecvTime,srcIpAddr,user,computer,targetUserGrp,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WINDOWS_36" name="Filter_WINDOWS_36">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER)  AND  eventType IN ("Win-Security-638", "Win-Security-652")  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_HIPAA) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_HIPAA_10" group="PH_SYS_REPORT_HIPAA">
+    <Name>HIPAA 164.308(a)(3): Local Windows Groups Modified </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report captures local group modifications </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,phRecvTime,srcIpAddr,user,computer,targetUserGrp,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WINDOWS_37" name="Filter_WINDOWS_37">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER) AND eventType IN ("Win-Security-639", "Win-Security-649")  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_HIPAA) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_HIPAA_11" group="PH_SYS_REPORT_HIPAA">
+    <Name>HIPAA 164.308(a)(3): Local Windows Groups Created </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report captures local group creations </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,phRecvTime,srcIpAddr,user,computer,targetUserGrp,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WINDOWS_41" name="Filter_WINDOWS_41">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER) AND eventType IN ("Win-Security-635", "Win-Security-648")  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_HIPAA) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_HIPAA_12" group="PH_SYS_REPORT_HIPAA">
+    <Name>HIPAA 164.308(a)(3): Global Windows Groups Created </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report captures global group creations </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,phRecvTime,srcIpAddr,user,computer,targetUserGrp,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WINDOWS_38" name="Filter_WINDOWS_38">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER) AND eventType IN ("Win-Security-631", "Win-Security-653","Win-Security-658", "Win-Security-663")  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_HIPAA) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_HIPAA_13" group="PH_SYS_REPORT_HIPAA">
+    <Name>HIPAA 164.308(a)(3): Global Windows Groups Deleted</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report captures global group deletions </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,phRecvTime,srcIpAddr,user,computer,targetUserGrp,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WINDOWS_39" name="Filter_WINDOWS_39">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER) AND eventType IN ("Win-Security-634", "Win-Security-657","Win-Security-662", "Win-Security-667")  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_HIPAA) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_HIPAA_14" group="PH_SYS_REPORT_HIPAA">
+    <Name>HIPAA 164.308(a)(3): Global Windows Groups Modified</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report captures global group modifications </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,phRecvTime,srcIpAddr,user,computer,targetUserGrp,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WINDOWS_40" name="Filter_WINDOWS_40">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER) AND eventType IN ("Win-Security-641", "Win-Security-654","Win-Security-659", "Win-Security-664")  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_HIPAA) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_HIPAA_15" group="PH_SYS_REPORT_HIPAA">
+    <Name>HIPAA 164.308(a)(4): Firewall Config Changes Detected Via Login </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report captures detected startup or running config changes - the changes are detected by logging into the device and hence is accurate. </Description>
+    <SelectClause numEntries="All">
+      <AttrList>phRecvTime,hostName,hostIpAddr,eventType,oldSVNVersion,newSVNVersion,addedItem,deletedItem </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_FW_36" name="Filter_FW_36">
+        <SingleEvtConstr> hostIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN ("PH_DEV_MON_CHANGE_RUN_CONFIG","PH_DEV_MON_CHANGE_STARTUP_CONFIG") AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_HIPAA) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+   <Report id="PH_Report_HIPAA_16" group="PH_SYS_REPORT_HIPAA">
+    <Name>HIPAA 164.308(a)(4): Router Config Changes Detected Via Login </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report captures detected startup or running config changes - the changes are detected by logging into the device and hence is accurate. </Description>
+    <SelectClause numEntries="All">
+      <AttrList>phRecvTime,hostName,hostIpAddr,eventType,oldSVNVersion,newSVNVersion,addedItem,deletedItem </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_FW_36" name="Filter_FW_36">
+        <SingleEvtConstr> hostIpAddr IN (Group@PH_SYS_DEVICE_ROUTER_SWITCH) AND eventType IN ("PH_DEV_MON_CHANGE_RUN_CONFIG","PH_DEV_MON_CHANGE_STARTUP_CONFIG") AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_HIPAA) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_HIPAA_17" group="PH_SYS_REPORT_HIPAA">
+    <Name>HIPAA 164.308(a)(4): Router Run vs Startup Config Difference Via Login </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report captures detected differences between a routers running and startup config </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,hostName,hostIpAddr,eventType,startUpConfVer,runningConfVer,addedItem,deletedItem </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW_35" name="Filter_FW_35">
+           <SingleEvtConstr> hostIpAddr IN (Group@PH_SYS_DEVICE_ROUTER_SWITCH) AND eventType = "PH_DEV_MON_DELTA_CONFIG" AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_HIPAA) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+   <Report id="PH_Report_HIPAA_18" group="PH_SYS_REPORT_HIPAA">
+    <Name>HIPAA 164.308(a)(4): Top Firewalls and Outbound Permitted Services By Connections, Bytes </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks firewalls and permitted outbound services by first the total number of connections and then by bytes for that service</Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,ipProto, destIpPort, srcIntfName,destIntfName,COUNT(*),SUM(sentBytes), SUM(recvBytes), SUM (totBytes)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> COUNT(*)  DESC, SUM(totBytes) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW_20" name="Filter_FW_20">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic) AND srcIpAddr IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) AND destIpAddr NOT IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_HIPAA) </SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr,ipProto, destIpPort,srcIntfName,destIntfName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_HIPAA_19" group="PH_SYS_REPORT_HIPAA">
+    <Name>HIPAA 164.308(a)(4): Top Firewalls and Inbound Permitted Services By Connections, Bytes  </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks firewalls and permitted inbound services by first the total number of connections and then by bytes for that service</Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,ipProto, destIpPort,srcIntfName,destIntfName, COUNT(*),SUM(sentBytes), SUM(recvBytes), SUM (totBytes)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> COUNT(*)  DESC, SUM(totBytes) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW_21" name="Filter_FW_21">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic) AND srcIpAddr NOT IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) AND destIpAddr IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_HIPAA) </SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr,ipProto, destIpPort,srcIntfName,destIntfName </GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_HIPAA_111" group="PH_SYS_REPORT_HIPAA">
+    <Name>HIPAA 164.308(a)(4): Top Firewalls and Permitted High Port Services By Connections, Bytes</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks the high port services permitted by firewalls - these services may pose security risk </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,srcIpAddr,destIpAddr,ipProto,destIpPort,srcIntfName,destIntfName,COUNT(*), SUM(sentBytes), SUM(recvBytes), SUM (totBytes) </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_FW_38" name="Filter_FW_38">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_HIPAA) </SingleEvtConstr>
+        <GroupByAttr>reptDevIpAddr,srcIpAddr,destIpAddr,ipProto,destIpPort,srcIntfName,destIntfName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_HIPAA_20" group="PH_SYS_REPORT_HIPAA">
+    <Name>HIPAA 1.x: Top Firewalls and Permitted Uncommon Services By Connections, Bytes</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks uncommon services permitted by firewalls - common services include DNS, SMTP, Web </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,srcIpAddr,destIpAddr,ipProto,destIpPort,srcIntfName,destIntfName,COUNT(*), SUM(sentBytes), SUM(recvBytes), SUM (totBytes) </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_FW_39" name="Filter_FW_39">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic) AND destIpPort NOT IN (25,53,80,443,123) </SingleEvtConstr>
+        <GroupByAttr>reptDevIpAddr,srcIpAddr,destIpAddr,ipProto,destIpPort,srcIntfName,destIntfName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_HIPAA_21" group="PH_SYS_REPORT_HIPAA">
+    <Name>HIPAA 164.308(a)(4): Top Firewalls and Permitted Vulnerable Low Port Services By Connections, Bytes</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks uncommon services permitted by firewalls - vulnerable services include Microsoft services such as MS-RPC (135), NETBIOS-SSN (139), MICROSOFT-DS (445), MS-SQL (1433,1434), FTP (23), TELNET (21)</Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,srcIpAddr,destIpAddr,ipProto,destIpPort,srcIntfName,destIntfName,COUNT(*), SUM(sentBytes), SUM(recvBytes), SUM (totBytes) </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_FW_40" name="Filter_FW_40">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic) AND destIpPort IN (135,139,445,1433,1434,23,21) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_HIPAA) </SingleEvtConstr>
+        <GroupByAttr>reptDevIpAddr,srcIpAddr,destIpAddr,ipProto,destIpPort,srcIntfName,destIntfName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_HIPAA_22" group="PH_SYS_REPORT_HIPAA">
+    <Name>HIPAA 164.308(a)(4): Top Firewall Originated Or Destined Permitted Connections By Count</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the firewall originated or destined connections - these connections would be typically be for administrative and monitoring purposes</Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,srcIpAddr,destIpAddr,ipProto,destIpPort,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList></AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW_8" name="Filter_FW_8">
+           <SingleEvtConstr> reptDevIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic) AND (srcIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) OR destIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL)) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_HIPAA) </SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr,srcIpAddr,destIpAddr,ipProto,destIpPort</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_HIPAA_23" group="PH_SYS_REPORT_HIPAA">
+    <Name>HIPAA 164.308(a)(4),164.308(a)(5)(ii)(c),164.312(a)(2): Detailed Successful Login At HIPAA Device </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Captures detailed successful logins at any device or application including servers, network devices, domain controllers, VPN gateways, WLAN controllers and applications </Description>
+    <SelectClause numEntries="All">
+      <AttrList>phRecvTime,reptDevIpAddr,eventType,srcIpAddr,srcMACAddr,user,domain,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_Auth_2" name="Filter_Auth_2">
+	<SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_DomainLogonSuccess, Group@PH_SYS_EVENT_HostLogonSuccess, Group@PH_SYS_EVENT_HostPrivLogonSuccess,Group@PH_SYS_EVENT_DomainLogonSuccess, Group@PH_SYS_EVENT_VPNLogonSuccess, Group@PH_SYS_EVENT_WirelessLogonSuccess,Group@PH_SYS_EVENT_AppLogonSuccess) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_HIPAA) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+   <Report id="PH_Report_HIPAA_24" group="PH_SYS_REPORT_HIPAA">
+    <Name>HIPAA 164.308(a)(4),164.308(a)(5)(ii)(c),164.312(a)(2): Detailed Failed Login At HIPAA System</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Captures detailed failed logins at any device or application - servers, network devices, domain controllers, VPN gateways, WLAN controllers and applications </Description>
+    <SelectClause numEntries="All">
+      <AttrList>phRecvTime,reptDevIpAddr,eventType,srcIpAddr,srcMACAddr,user,domain,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_Auth_1" name="Filter_Auth_1">
+        <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_DomainLogonFailure, Group@PH_SYS_EVENT_HostLogonFailure, Group@PH_SYS_EVENT_HostPrivLogonFailure,Group@PH_SYS_EVENT_DomainLogonFailure,Group@PH_SYS_EVENT_VPNLogonFailure, Group@PH_SYS_EVENT_WirelessLogonFailure,Group@PH_SYS_EVENT_AppLogonFailure)  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_HIPAA) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_HIPAA_25" group="PH_SYS_REPORT_HIPAA">
+    <Name>HIPAA 164.308(a)(4),164.308(a)(5)(ii)(c): Successful Firewall Admin Logon Details </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Details about successful firewall logons </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr,eventType,srcIpAddr,user,srcIntfName,destIpPort,rawEventMsg</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW_3" name="Filter_FW_3">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_HostLogonSuccess))  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_HIPAA) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_HIPAA_26" group="PH_SYS_REPORT_HIPAA">
+    <Name>HIPAA 164.308(a)(4),164.308(a)(5)(ii)(c): Failed Firewall Admin Logon Details </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Details about failed firewall logons</Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr,eventType,srcIpAddr,user,srcIntfName,destIpPort,rawEventMsg</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW_4" name="Filter_FW_4">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_HostLogonFailure))  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_HIPAA) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+ <Report id="PH_Report_HIPAA_27" group="PH_SYS_REPORT_HIPAA">
+    <Name>HIPAA 164.308(a)(4),164.308(a)(5)(ii)(c): Successful Router Admin Logon Details</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Details about successful router logons</Description>
+    <SelectClause numEntries="All">
+      <AttrList>phRecvTime,reptDevIpAddr,eventType,srcIpAddr,user,srcIntfName,destIpPort,rawEventMsg</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_Router_24" name="Filter_Router_24">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_ROUTER_SWITCH) AND eventType IN (Group@PH_SYS_EVENT_HostLogonSuccess))  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_HIPAA) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+ <Report id="PH_Report_HIPAA_28" group="PH_SYS_REPORT_HIPAA">
+    <Name>HIPAA 164.308(a)(4),164.308(a)(5)(ii)(c): Failed Router Admin Logon Details </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Details about failed router logons</Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr,eventType,srcIpAddr,user,srcIntfName,destIpPort,rawEventMsg</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_Router_3" name="Filter_Router_3">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_ROUTER_SWITCH) AND eventType IN (Group@PH_SYS_EVENT_HostLogonFailure))  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_HIPAA) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_HIPAA_29"  group="PH_SYS_REPORT_HIPAA">
+    <Name>HIPAA 164.308(a)(4),164.308(a)(5)(ii)(c): Successful VPN Admin Logon</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Provides event details for all successful VPN admin logons </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr, eventType,srcIpAddr,user,durationMSec,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_VPNGW_13" name="Filter_VPNGW_13">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_VPN_GATEWAY)  AND  eventType IN (Group@PH_SYS_EVENT_HostLogonSuccess,Group@PH_SYS_EVENT_HostLogoff)  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_HIPAA) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_HIPAA_30" group="PH_SYS_REPORT_HIPAA">
+    <Name>HIPAA 164.308(a)(4),164.308(a)(5)(ii)(c): Failed VPN Admin Logon</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Provides event details for all failed VPN admin logons </Description>
+    <SelectClause numEntries="All">
+      <AttrList>phRecvTime,reptDevIpAddr, eventType,srcIpAddr,user,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_VPNGW_14" name="Filter_VPNGW_14">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_VPN_GATEWAY)  AND  eventType IN (Group@PH_SYS_EVENT_HostLogonFailure)  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_HIPAA) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_HIPAA_31" group="PH_SYS_REPORT_HIPAA">
+    <Name>HIPAA 10.x: Successful WLAN Admin Logon</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks successful admin logons to the WLAN Controller</Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr,eventType,srcIpAddr,user,rawEventMsg </AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT (*)</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WLAN_11" name="Filter_WLAN_11">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WLAN_CONTROLLER) AND eventType IN (Group@PH_SYS_EVENT_HostLogonSuccess)  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_HIPAA) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_HIPAA_32" group="PH_SYS_REPORT_HIPAA">
+    <Name>HIPAA 164.308(a)(4),164.308(a)(5)(ii)(c): Failed WLAN Admin Logon</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks failed admin logons to the WLAN Controller</Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr,eventType,srcIpAddr,user,rawEventMsg </AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT (*)</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WLAN_11" name="Filter_WLAN_11">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WLAN_CONTROLLER) AND eventType IN (Group@PH_SYS_EVENT_HostLogonFailure)  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_HIPAA) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_HIPAA_33"  group="PH_SYS_REPORT_HIPAA">
+    <Name>HIPAA 164.308(a)(4),164.308(a)(5)(ii)(c): Privileged Windows Server Logon Attempts using the Administrator Account </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report details prvileged logon attempts to a windows server using the Administrator account </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,eventType, eventAction,srcIpAddr,user,domain,winLogonType,winLogonFailCode,rawEventMsg</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WINDOWS_29" name="Filter_WINDOWS_29">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER)  AND  user = "Administrator" AND eventType IN (Group@PH_SYS_EVENT_HostLogonFailure,Group@PH_SYS_EVENT_HostLogonSuccess)  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_HIPAA) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report> 
+
+  <Report id="PH_Report_HIPAA_34"  group="PH_SYS_REPORT_HIPAA">
+    <Name>HIPAA 164.308(a)(4),164.308(a)(5)(ii)(c): Remote Desktop Connections to Windows Servers </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report details successful and failed remote desktop connections </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,eventType, eventAction,srcIpAddr,user,domain,winLogonType,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WINDOWS_30" name="Filter_WINDOWS_30">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER)  AND winLogonType = 10 AND eventType IN (Group@PH_SYS_EVENT_HostLogonFailure,Group@PH_SYS_EVENT_HostLogonSuccess)  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_HIPAA) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_HIPAA_35" group="PH_SYS_REPORT_HIPAA">
+    <Name>HIPAA 164.308(a)(4),164.308(a)(5)(ii)(c),164.312(a)(2): Successful Windows Server Logons</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report records successful windows server logons </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,eventType,srcIpAddr,user,domain,winLogonType,COUNT( *)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT ( * )</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WINDOWS_1" name="Filter_WINDOWS_1">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER)  AND  eventType IN ( Group@PH_SYS_EVENT_HostLogonSuccess) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_HIPAA) </SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr,srcIpAddr,user,domain,eventType,winLogonType </GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_HIPAA_36"  group="PH_SYS_REPORT_HIPAA">
+    <Name>HIPAA 164.308(a)(4),164.308(a)(5)(ii)(c),164.312(a)(2): Failed Windows Server Logons</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report reports failed windows servers logons </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,eventType,srcIpAddr,user,domain,winLogonType,COUNT( *)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*)</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WINDOWS_2" name="Filter_WINDOWS_2">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER)  AND  eventType IN (Group@PH_SYS_EVENT_HostLogonFailure) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_HIPAA)</SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr,eventType,srcIpAddr,user,domain,winLogonType</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report> 
+  
+
+  <Report id="PH_Report_HIPAA_37"  group="PH_SYS_REPORT_HIPAA">
+    <Name>HIPAA 164.308(a)(4),164.308(a)(5)(ii)(c),164.312(a)(2): Successful Unix Server Logons</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report details successful unix server logons with all parsed fields and raw logs </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,srcIpAddr,user, COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*)</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_UNIX_3" name="Filter_UNIX_3">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_DEVICE_UNIX_SERVER)  AND  eventType IN ( Group@PH_SYS_EVENT_HostLogonSuccess) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_HIPAA)</SingleEvtConstr>
+	   <GroupByAttr>reptDevIpAddr,srcIpAddr,user</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>	   
+
+  <Report id="PH_Report_HIPAA_38" group="PH_SYS_REPORT_HIPAA" >
+    <Name>HIPAA 164.308(a)(4),164.308(a)(5)(ii)(c),164.312(a)(2): Failed Unix Server Logons</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report details failed unix server logons with all parsed fields and raw logs </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,srcIpAddr,user,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*)</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_UNIX_4" name="Filter_UNIX_4">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_DEVICE_UNIX_SERVER)  AND  eventType IN ( Group@PH_SYS_EVENT_HostLogonFailure) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_HIPAA) </SingleEvtConstr>
+	   <GroupByAttr>reptDevIpAddr,srcIpAddr,user</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_HIPAA_39" group="PH_SYS_REPORT_HIPAA">
+    <Name>HIPAA 164.308(a)(4),164.308(a)(5)(ii)(c): Unix Server Privileged Logon</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report details UNIX server privileged logon (su) details with all parsed parameters and raw logs </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,eventType,reptDevIpAddr,srcIpAddr,user,targetUser,rawEventMsg</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_UNIX_10" name="Filter_UNIX_10">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_DEVICE_UNIX_SERVER)  AND  (eventType IN (Group@PH_SYS_EVENT_HostPrivLogonSuccess) OR eventType IN (Group@PH_SYS_EVENT_HostPrivLogonFailure))  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_HIPAA) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_HIPAA_40"  group="PH_SYS_REPORT_HIPAA">
+    <Name>HIPAA 164.308(a)(4),164.308(a)(5)(ii)(c): Unix Server Privileged Command Execution</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report details privilege command execuations (sudo) at a Unix server  </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,eventType,reptDevIpAddr,srcIpAddr,user,targetUser,command,rawEventMsg</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_UNIX_9" name="Filter_UNIX_9">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_DEVICE_UNIX_SERVER)  AND  (eventType IN (Group@PH_SYS_EVENT_HostPrivExecSuccess) OR eventType IN (Group@PH_SYS_EVENT_HostPrivExecFailure))  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_HIPAA) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+ <Report id="PH_Report_HIPAA_41" group="PH_SYS_REPORT_HIPAA" >
+    <Name>HIPAA 164.308(a)(5)(ii)(c): Windows Server Account Lockouts </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report captures account lockouts on windows servers. Account lockouts happen on repeated login failures and may be suspicious if they are repeated or happen at odd hours of operation </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,srcIpAddr,user,domain,eventType,rawEventMsg</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>phRecvTime DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WINDOWS_3" name="Filter_WINDOWS_3">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER)  AND  eventType IN (Group@PH_SYS_EVENT_HostAccountLocked) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_HIPAA) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>	   
+
+  <Report id="PH_Report_HIPAA_42" group="PH_SYS_REPORT_HIPAA">
+    <Name>HIPAA 164.308(a)(5)(ii)(c): Windows Server Account Unlocks</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Captures account unlocks on windows servers. Account unlocks happen after lockouts that may happen on repeated login failures</Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,eventType,srcIpAddr,user,domain,targetUser,targetDomain,rawEventMsg</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>phRecvTime DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WINDOWS_44" name="Filter_WINDOWS_44">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER)  AND eventType IN (Group@PH_SYS_EVENT_HostAccountUnlocked) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_HIPAA)</SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_HIPAA_43" group="PH_SYS_REPORT_HIPAA">
+    <Name>HIPAA 164.308(a)(5): Server Password Changes </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks password changes </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,phRecvTime,srcIpAddr,user,domain,targetUser,targetDomain,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WINDOWS_42" name="Filter_WINDOWS_42">
+        <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_PasswordChange) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_HIPAA) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+   <Report id="PH_Report_HIPAA_44" group="PH_SYS_REPORT_HIPAA">
+   <Name>HIPAA 164.308(a)(6): Virus found but not remediated by Host Antivirus </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Captures events that indicate the viruses that Host Antivirus found but failed to remedy </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr,eventType,hostIpAddr,computer,user,virusName,virusType,fileName,virusAction,virusQuarantStatus</AttrList>    
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_AV_2" name="Filter_AV_2">
+           <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_Worm_Remedy_Failed) AND reptDevIpAddr IN (Group@PH_SYS_APP_SEC_MGMT) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_HIPAA) </SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_HIPAA_45" group="PH_SYS_REPORT_HIPAA">
+   <Name>HIPAA 164.308(a)(6): Spyware found but not remediated by Host Antivirus </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr,eventType,hostIpAddr,computer,user,fileName</AttrList>    
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_AV_4" name="Filter_AV_4">
+           <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_Spyware_Remedy_Failed) AND reptDevIpAddr IN (Group@PH_SYS_APP_SEC_MGMT) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_HIPAA_46" group="PH_SYS_REPORT_HIPAA">
+   <Name>HIPAA 164.308(a)(6): Top hosts with Malware found by Host Antivirus</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> </Description>
+    <SelectClause numEntries="All">
+        <AttrList>computer,COUNT(*)</AttrList>    
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_AV_5" name="Filter_AV_5">
+           <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_Malware) AND reptDevIpAddr IN (Group@PH_SYS_APP_SEC_MGMT) </SingleEvtConstr>
+	   <GroupByAttr>computer</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_HIPAA_47" group="PH_SYS_REPORT_HIPAA">
+    <Name>HIPAA 164.308(a)(6): Top IPs with Malware Found By IPS and Firewalls</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> Tracks IP addresses with Malware as found by IPS </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,eventType,srcIpAddr,COUNT(*)</AttrList>    
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_Vuln_10" name="Filter_Vuln_10">
+        <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_Malware) AND reptDevIpAddr IN (Group@PH_SYS_DEVICE_NETWORK_IPS,Group@PH_SYS_APP_NETWORK_IPS,Group@PH_SYS_DEVICE_FIREWALL)  </SingleEvtConstr>
+	<GroupByAttr>reptDevIpAddr,eventType,srcIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_HIPAA_48" group="PH_SYS_REPORT_HIPAA">
+   <Name>HIPAA 164.308(a)(6): Top IPs with Malware Found By Antivirus and Security Gateways</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks IP addresses with Malware as found by Host Anti-virus and Security Gateways</Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,eventType,srcIpAddr,COUNT(*)</AttrList>    
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_Vuln_8" name="Filter_Vuln_8">
+           <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_Malware) AND reptDevIpAddr IN (Group@PH_SYS_APP_SEC_MGMT,Group@PH_SYS_DEVICE_SEC_GW)  </SingleEvtConstr>
+	   <GroupByAttr>reptDevIpAddr,eventType,srcIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_HIPAA_49" group="PH_SYS_REPORT_HIPAA">
+    <Name>HIPAA 164.308(a)(6): Non-compliant Hosts and Security Software License Expirations</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks non-compliant hosts and license expiry events from Security Management Gateways and Firewalls. Non-compliant hosts may not have proper security software running and therefore may pose a security threat. License expiration of security software may expose exploitable security vulnerabilities.</Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,eventType,hostIpAddr,rawEventMsg</AttrList>    
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT (*) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_Vuln_12" name="Filter_Vuln_12">
+        <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_LicenseExpired,Group@PH_SYS_EVENT_NoncompliantHost) AND reptDevIpAddr IN (Group@PH_SYS_DEVICE_NETWORK_IPS,Group@PH_SYS_APP_NETWORK_IPS,Group@PH_SYS_APP_SEC_MGMT,Group@PH_SYS_DEVICE_FIREWALL,Group@PH_SYS_DEVICE_SEC_GW) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_HIPAA_50" group="PH_SYS_REPORT_HIPAA">
+    <Name>HIPAA 164.308(a)(6): Top Network Scanners By Event Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the source IP addresses by detected network scan or reconnaissance events </Description>
+    <SelectClause numEntries="All">
+        <AttrList>srcIpAddr,eventType,eventSeverity,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_NIPS_3" name="Filter_NIPS_3">
+           <SingleEvtConstr> reptDevIpAddr IN (Group@PH_SYS_DEVICE_NETWORK_IPS,Group@PH_SYS_APP_NETWORK_IPS) AND eventType IN (Group@PH_SYS_EVENT_Reconn) </SingleEvtConstr>
+	   <GroupByAttr>srcIpAddr,eventType,eventSeverity </GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>srcIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_HIPAA_51" group="PH_SYS_REPORT_HIPAA">
+    <Name>HIPAA 164.308(a)(6): Top Blocked Network Attacks By Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the network attacks attacks blocked by network IPS </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,srcIpAddr,eventType,eventSeverity,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_NIPS_4" name="Filter_NIPS_4">
+           <SingleEvtConstr> reptDevIpAddr IN (Group@PH_SYS_DEVICE_NETWORK_IPS,Group@PH_SYS_APP_NETWORK_IPS) AND eventAction = 1 </SingleEvtConstr>
+	   <GroupByAttr>reptDevIpAddr,srcIpAddr,eventType,eventSeverity</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>srcIpAddr,reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_HIPAA_52" group="PH_SYS_REPORT_HIPAA">
+    <Name>HIPAA 164.308(a)(6): Top Network IPS events (affecting HIPAA devices) Ranked By Severity, Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the network IPS events affecting HIPAA devices</Description>
+    <SelectClause numEntries="All">
+        <AttrList>srcIpAddr,destIpAddr,eventType,eventSeverity,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>eventSeverity DESC,COUNT(*) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_NIPS_1" name="Filter_NIPS_2">
+           <SingleEvtConstr> reptDevIpAddr IN (Group@PH_SYS_DEVICE_NETWORK_IPS,Group@PH_SYS_APP_NETWORK_IPS) </SingleEvtConstr>
+	   <GroupByAttr>srcIpAddr,destIpAddr,eventType,eventSeverity </GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>srcIpAddr,destIpAddr,hostIpAddr</RelevantFilterAttr>
+  </Report>
+ 
+  <Report id="PH_SYS_REPORT_HIPAA_53" group="PH_SYS_REPORT_HIPAA">
+    <Name>HIPAA 164.308(a)(6): Top System detected Security Incidents (affecting HIPAA devices) Ranked By Severity, Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the security related incidents by first their severity and then by their count - restricted to HIPAA devices</Description>
+    <SelectClause numEntries="All">
+        <AttrList>eventType,eventSeverity,incidentSrc,incidentTarget,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>eventSeverity DESC,COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_OVERALL_STATUS" name="Filter_OVERALL_STATUS">
+           <SingleEvtConstr>phEventCategory = 1 AND eventType IN (Group@PH_SYS_EVENT_PH_RULE_SEC) AND (srcIpAddr IN (BizService@PH_SYS_BizSrvc_HIPAA) OR destIpAddr IN (BizService@PH_SYS_BizSrvc_HIPAA) )</SingleEvtConstr>
+           <GroupByAttr>eventType,eventSeverity,incidentSrc,incidentTarget </GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <inline>false</inline>
+    <active>false</active>
+    <RelevantFilterAttr>bizService</RelevantFilterAttr>
+  </Report>
+
+  <!-- start here -->
+  <Report id="PH_SYS_REPORT_HIPAA_54" group="PH_SYS_REPORT_HIPAA">
+    <Name>HIPAA 164.312(a)(2): Successful VPN Logons</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Captures successful VPN logons</Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr,srcIpAddr,user</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_VPNGW_1" name="Filter_VPNGW_1">
+           <SingleEvtConstr>eventType IN (Group@PH_SYS_EVENT_VPNLogonSuccess)</SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_SYS_REPORT_HIPAA_55" group="PH_SYS_REPORT_HIPAA">
+    <Name>HIPAA 164.312(a)(2): Failed VPN Logons</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Captures failed VPN logons</Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr,srcIpAddr,user</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_VPNGW_1" name="Filter_VPNGW_1">
+           <SingleEvtConstr>eventType IN (Group@PH_SYS_EVENT_VPNLogonFailure)</SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_SYS_REPORT_HIPAA_56" group="PH_SYS_REPORT_HIPAA">
+    <Name>HIPAA 164.312(a)(2): Successful Wireless Logons</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Captures successful wireless logons</Description>
+    <SelectClause numEntries="All">
+      <AttrList>phRecvTime,reptDevIpAddr,srcMACAddr,srcIpAddr</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WLAN_4" name="Filter_WLAN_4">
+        <SingleEvtConstr> reptDevIpAddr IN (Group@PH_SYS_DEVICE_WLAN_CONTROLLER) AND eventType IN (Group@PH_SYS_EVENT_WirelessLogonSuccess) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_SYS_REPORT_HIPAA_57" group="PH_SYS_REPORT_HIPAA">
+    <Name>HIPAA 164.312(a)(2): Failed Wireless Logons</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Captures failed wireless logons</Description>
+    <SelectClause numEntries="All">
+      <AttrList>phRecvTime,reptDevIpAddr,srcMACAddr,srcIpAddr</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WLAN_4" name="Filter_WLAN_4">
+        <SingleEvtConstr> reptDevIpAddr IN (Group@PH_SYS_DEVICE_WLAN_CONTROLLER) AND eventType IN (Group@PH_SYS_EVENT_WirelessLogonFailure) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_SYS_REPORT_HIPAA_58" group="PH_SYS_REPORT_HIPAA">
+    <Name>HIPAA 164.312(a)(2): Successful Windows Domain Authentications</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Captures successful domain authentications</Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr,srcIpAddr,user,computer,domain</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_DC_5" name="Filter_DC_5">
+           <SingleEvtConstr> reptDevIpAddr IN (Group@PH_SYS_APP_DOMAIN_CONTROLLER) AND eventType IN (Group@PH_SYS_EVENT_DomainLogonSuccess)</SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr,srcIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_SYS_REPORT_HIPAA_59" group="PH_SYS_REPORT_HIPAA">
+    <Name>HIPAA 164.312(a)(2): Failed Windows Domain Authentications</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Captures failed domain authentications</Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr,srcIpAddr,user,computer,domain</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_DC_5" name="Filter_DC_5">
+           <SingleEvtConstr> reptDevIpAddr IN (Group@PH_SYS_APP_DOMAIN_CONTROLLER) AND eventType IN (Group@PH_SYS_EVENT_DomainLogonFailure)</SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr,srcIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_SYS_REPORT_HIPAA_60" group="PH_SYS_REPORT_HIPAA">
+    <Name>HIPAA 164.312(a)(2): Successful Database Server Logons</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Captures successful database server logons</Description>
+    <SelectClause numEntries="All">
+      <AttrList>phRecvTime,reptDevIpAddr,logonTime,logoffTime,srcIpAddr,user,srcApp,srcTerminal</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_DBServer_1" name="Filter_DBServer_1">
+        <SingleEvtConstr>eventType IN (Group@PH_SYS_EVENT_DBLogonSuccess) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_HIPAA)</SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+     <RelevantFilterAttr>srcIpAddr,reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+  <Report id="PH_SYS_REPORT_HIPAA_61" group="PH_SYS_REPORT_HIPAA">
+    <Name>HIPAA 164.312(a)(2): Failed Database Server Logons</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Captures failed database server logons </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,deviceTime,srcIpAddr,user,srcApp,srcTerminal,dbRetCode</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_DBServer_3" name="Filter_DBServer_3">
+        <SingleEvtConstr>eventType IN (Group@PH_SYS_EVENT_DBLogonFailure) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_HIPAA)</SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>srcIpAddr,reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_SYS_REPORT_HIPAA_62" group="PH_SYS_REPORT_HIPAA">
+    <Name>HIPAA 164.312(b): Windows Audit Policy Changed</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report captures audit policy changes </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,phRecvTime,srcIpAddr,user,computer,targetUser,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WINDOWS_26" name="Filter_WINDOWS_26">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER)  AND  eventType IN ("Win-Security-807","Win-Security-4902","Win-Security-517","Win-Security-612","Win-Security-4912","Win-Security-4715","Win-Security-4907") AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_HIPAA) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_SYS_REPORT_HIPAA_63" group="PH_SYS_REPORT_HIPAA">
+    <Name>HIPAA 164.312(b): All System Admin User Logon Attempts </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Details all System Admin User Logon Attempts </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,phRecvTime,eventType,srcIpAddr,user,phCustId</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*)</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW_1" name="Filter_FW_1">
+           <SingleEvtConstr>phEventCategory = 2 AND eventType IN ("PH_AUDIT_USER_LOGIN_SUCCESS","PH_AUDIT_USER_LOGIN_FAILURE","PH_AUDIT_USER_LOGOFF","PH_AUDIT_USER_SESSION_TIMEOUT")</SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>srcIpAddr,reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_SYS_REPORT_HIPAA_64" group="PH_SYS_REPORT_HIPAA">
+    <Name>HIPAA 164.312(b): System Operational Warnings</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Detects System operational errors including license limits, down collector</Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,phRecvTime,eventType,rawEventMsg</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW_1" name="Filter_FW_1">
+           <SingleEvtConstr>eventType IN ("PH_SYSTEM_STORAGE_LOW","PH_SYSTEM_EVENT_RATE_EXCEED_LICENSE", "PH_AUDIT_CI_QUOTE_EXCEEDED", "PH_RULE_ACCELOPS_COLLECTOR_DOWN")</SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+</Reports>

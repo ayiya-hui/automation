@@ -1,0 +1,48 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<113>Nov 23 16:51:08 ABC NetelligentTest: Protocol: TCP, SrcIP: 10.3.21.65, DstIP: 1.1.1.1, SrcPort: 37225, DstPort: 443, TCPFlags: 0x0, IngressInterface: eth1, EgressInterface: eth2, IngressZone: Internal, EgressZone: External, DE: Primary Detection Engine (e89a018e-8d55-11e5-b7f1-99e2ec806534), Policy: Test-Policy, ConnectType: Start, AccessControlRuleName: Block Apps, AccessControlRuleAction: Block, UserName: No Authentication Required, Client: SSL client, ApplicationProtocol: HTTPS, WebApplication: Facebook, InitiatorPackets: 3, ResponderPackets: 1, InitiatorBytes: 589, ResponderBytes: 74, NAPPolicy: Balanced Security and Connectivity, DNSResponseType: No Error, Sinkhole: Unknown, URLCategory: Social Network, URLReputation: Well known, URL: https://www.foo.com
+[params]
+deviceTime=any
+destGeoOrg=any
+parserName=Sourcefire2Parser
+webCategory=Social Network
+eventType=Sourcefire-AccessControl-Block
+hostName=ABC
+destIpAddr=1.1.1.1
+destGeoCountry=any
+srcIpAddr=10.3.21.65
+reptModel=FirePOWER
+eventId=any
+policyName=Test-Policy
+eventParsedOk=1
+eventSeverity=1
+sentPkts=3
+fwAction=Block
+eventName=Sourcefire blocked connection
+tcpFlags=none
+appTransportProto=HTTPS
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+destName=www.foo.com
+count=1
+srcIntfName=eth1
+srcFwZone=Internal
+recvBytes=74
+srcIpPort=37225
+eventSeverityCat=LOW
+collectorId=any
+destIntfName=eth2
+relayDevIpAddr=$localhost
+rawEventMsg=any
+destIpPort=443
+destFwZone=External
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+recvPkts=1
+infoURL=https://www.foo.com
+reptVendor=Cisco
+fwRule=Block Apps
+sentBytes=589

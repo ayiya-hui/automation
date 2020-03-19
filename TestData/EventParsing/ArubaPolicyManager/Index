@@ -1,0 +1,3 @@
+eventType,name,reptDevIpAddr,key,method
+Aruba-ClearPass-REJECT,ArubaPolicyManager_1,$localhost,,syslog
+Aruba-ClearPass-User,ArubaPolicyManager_2,$localhost,,syslog

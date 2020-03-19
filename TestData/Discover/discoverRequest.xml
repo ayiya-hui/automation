@@ -1,0 +1,8 @@
+<discoverRequest>
+	<type>SmartScan</type>
+	<rootIPs>172.16.3.2</rootIPs>
+	<includeRange>172.16.3.2-172.16.3.10</includeRange>
+	<excludeRange>none</excludeRange>
+	<noPing>true</noPing>
+	<onlyPing>false</onlyPing>
+</discoverRequest>

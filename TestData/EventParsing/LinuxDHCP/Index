@@ -1,0 +1,10 @@
+eventType,name,module,reptDevIpAddr,key,method
+Linux_DHCPREQUEST,LinuxDHCP_1,LinuxDHCP,$localhost,,syslog
+Linux_DHCPACK,LinuxDHCP_2,LinuxDHCP,$localhost,,syslog
+Linux_DHCPDISCOVER,LinuxDHCP_3,LinuxDHCP,$localhost,,syslog
+Linux_DHCPOFFER,LinuxDHCP_4,LinuxDHCP,$localhost,,syslog
+Linux_DHCPINFORM,LinuxDHCP_5,LinuxDHCP,$localhost,,syslog
+Linux_DHCPDECLINE,LinuxDHCP_6,LinuxDHCP,$localhost,,syslog
+Linux_DHCPRELEASE,LinuxDHCP_7,LinuxDHCP,$localhost,,syslog
+Linux_DHCPREQUEST,LinuxDHCP_8,LinuxDHCP,$localhost,,syslog
+Linux_DHCPACK,LinuxDHCP_9,LinuxDHCP,172.16.10.8,,syslog

@@ -1,0 +1,31 @@
+[reptDevIpAddr(key)]
+10.1.2.65
+[eventMsg]
+Fri Mar 18 05:06:07 2016 $reporter AccelOps-WinLog-WMI [Category]="2" [CategoryString]="Logon/Logoff" [ComputerName]="ACCELOPS-E9F061" [Data]="NULL" [EventCode]="4801" [EventIdentifier]="4801" [EventType]="4" [Logfile]="Security" [RecordNumber]="387260574" [SourceName]="Security" [TimeGenerated]="20160318050428.000000+480" [TimeWritten]="20160318050428.000000+480" [Type]="Audit Success" [User]="ACCELOPS-E9F061\Administrator"[[Successful Network Logon]]  [User Name]="Administrator"  [Domain]="ACCELOPS-E9F061"  [Logon ID]="(0xE,0xAF6B2868)"  [Logon Type]="3"  [Logon Process]="NtLmSsp"  [Authentication Package]="NTLM"  [Workstation Name]="SP167"  [Logon GUID]=""  [Caller User Name]=""  [Caller Domain]=""  [Caller Logon ID]=""  [Caller Process ID]=" -"  [Transited Services]=" -"  [Source Network Address]="10.1.2.167"  [Source Port]="57650 "
+[params]
+deviceTime=any
+parserName=WinOSWmiParser
+eventType=Win-Security-4801
+hostName=ACCELOPS-E9F061
+destIpAddr=$reporter
+eventSource=Security
+reptModel=Windows
+eventId=any
+latency=99000.00
+eventTime=Fri Mar 18 05:04:28 CST 2016
+eventParsedOk=0
+eventSeverity=1
+eventName=The workstation was unlocked
+extEventRecvProto=WMI
+phEventCategory=0 (External)
+type=Audit Success
+count=1
+seqNum=387260574
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$reporter
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$reporter
+eventAction=0 (Permit)
+reptVendor=Microsoft

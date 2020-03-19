@@ -1,0 +1,24 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+Oct 27 20:18:43.254 UTC: %SNMP-3-AUTHFAIL: Authentication failure for SNMP request from host 192.168.2.98
+[params]
+rawEventMsg=any
+deviceTime=any
+eventType=IOS-SNMP-AUTHFAIL
+phCustId=$sender
+intfName=Ethernet0/0
+reptModel=IOS
+eventId=any
+eventParsedOk=1
+eventSeverity=5
+hostIpAddr=$localhost
+eventName=SNMP Auth failed
+phEventCategory=0 (External)
+eventSeverityCat=MEDIUM
+collectorId=any
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Cisco

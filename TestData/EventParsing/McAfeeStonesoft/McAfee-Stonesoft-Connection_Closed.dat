@@ -1,0 +1,31 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<6>CEF:0|McAfee|IPS|5.5.7|70021|Connection_Closed|0|deviceExternalId=PANASONIC-PCI-V2 node 1 dst=192.168.15.30 app=Echo Request (No Code) rt=Apr 08 2016 00:25:59 deviceFacility=Packet filter deviceInboundInterface=Interface #2 proto=1 in=80 out=80 src=192.168.94.70 dvc=192.168.94.51 dvchost=192.168.94.51
+[params]
+domain=PANASONIC-PCI-V2 node 1
+parserName=McAfeeStonesoftParser
+eventType=McAfee-Stonesoft-Connection_Closed
+destIpAddr=192.168.15.30
+srcIpAddr=192.168.94.70
+reptModel=Stonesoft IPS
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Connection Closed
+appTransportProto=Echo Request (No Code)
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+eventRuleTrigger=1
+count=1
+recvBytes=80
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+ipProto=1 (ICMP)
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=McAfee
+sentBytes=80

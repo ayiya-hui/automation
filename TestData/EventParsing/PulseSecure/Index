@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+PulseSecure-Authenticate-hostCheckerPassedEx,PulseSecure_1,PulseSecure,$localhost,,syslog

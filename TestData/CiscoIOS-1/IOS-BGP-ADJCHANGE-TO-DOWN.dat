@@ -1,0 +1,24 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<187>201: May 12 01:10:52: %BGP-5-ADJCHANGE: neighbor 172.17.1.2 Down - Peer closed the session
+[params]
+deviceTime=any
+isHostIntfCritical=No
+eventType=IOS-BGP-ADJCHANGE-TO-DOWN
+phCustId=$sender
+reptModel=IOS
+eventId=any
+eventParsedOk=1
+eventSeverity=2
+hostIpAddr=$localhost
+eventName=BGP neighbor went down
+phEventCategory=0
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=Success(0)
+reptVendor=Cisco

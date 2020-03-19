@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<37>May 14 23:56:16 login: [ID 254462 auth.notice] ROOT LOGIN /dev/pts/3 FROM 192.168.1.2
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=3
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=$localhost
+eventAction=0 (Permit)
+eventName=Successful Telnet logon
+srcIpAddr=192.168.1.2
+reptVendor=Sun
+eventType=Solaris_Successful_Telnet_Login
+user=root
+phEventCategory=0 (External)
+destIpPort=23
+reptDevIpAddr=$localhost
+reptModel=Solaris

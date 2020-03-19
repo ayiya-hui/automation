@@ -1,0 +1,2 @@
+[eventMsg]
+<29>Jun 15 07:59:03 HOST-30.200.152.1 nginx: "2.2.2.2","-","Mozilla/5.0 (Windows NT 5.1 WOW64; rv:9.0.1) Gecko/20100178 Firefox/9.0.1","/images/design/header-2-logo.jpg","GET","http://abc.com/images/design/header-2-logo.jpg","200","0","/ypf-cookie_auth/index.html","0.000","877","-","10.4.200.203","80","abc.com","no-cache, no-store, must-revalidate","-","1.64","_","-","-"

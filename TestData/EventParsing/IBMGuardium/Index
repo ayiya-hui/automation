@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+Guardium-Alert,IBMGuardium_1,IBMGuardium,$localhost,,syslog

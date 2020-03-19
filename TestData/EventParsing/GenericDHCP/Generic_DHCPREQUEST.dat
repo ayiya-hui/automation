@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<13>Aug 26 19:28:11 DNS-Pri dhcpd[0]: DHCPREQUEST for 172.16.10.200 (172.16.10.8) from 00:50:56:88:4e:17 (26L2233B1-02)
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+eventAction=0 (Permit)
+eventName=Client Accepts for Renews DHCP Lease
+reptVendor=Generic
+phEventCategory=0 (External)
+eventType=Generic_DHCPREQUEST
+reptDevIpAddr=any
+reptModel=Generic
+srcName=26L2233B1-02
+srcIpAddr=172.16.10.200
+srcMACAddr=00:50:56:88:4e:17
+

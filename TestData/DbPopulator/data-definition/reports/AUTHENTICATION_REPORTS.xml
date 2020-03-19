@@ -1,0 +1,177 @@
+
+<Reports>
+
+  <Report id="PH_Report_Auth_1" group="PH_SYS_REPORT_Authentication,PH_SYS_REPORT_Freq">
+    <Name>Detailed Failed Login At Any Device </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Captures detailed failed logins at any device or application - servers, network devices, domain controllers, VPN gateways, WLAN controllers and applications </Description>
+    <SelectClause numEntries="All">
+      <AttrList>phRecvTime,reptDevIpAddr,eventType,srcIpAddr,srcMACAddr,user,domain,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_Auth_1" name="Filter_Auth_1">
+        <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_DomainLogonFailure, Group@PH_SYS_EVENT_HostLogonFailure, Group@PH_SYS_EVENT_HostPrivLogonFailure,Group@PH_SYS_EVENT_DomainLogonFailure,Group@PH_SYS_EVENT_VPNLogonFailure, Group@PH_SYS_EVENT_WirelessLogonFailure,Group@PH_SYS_EVENT_AppLogonFailure)</SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>srcIpAddr,destIpAddr,hostIpAddr,reptDevIpAddr,relayDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_Auth_2" group="PH_SYS_REPORT_Authentication">
+    <Name>Detailed Successful Login At Any Device </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Captures detailed successful logins at any device or application including servers, network devices, domain controllers, VPN gateways, WLAN controllers and applications </Description>
+    <SelectClause numEntries="All">
+      <AttrList>phRecvTime,reptDevIpAddr,eventType,srcIpAddr,srcMACAddr,user,domain,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_Auth_2" name="Filter_Auth_2">
+	<SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_DomainLogonSuccess, Group@PH_SYS_EVENT_HostLogonSuccess, Group@PH_SYS_EVENT_HostPrivLogonSuccess,Group@PH_SYS_EVENT_DomainLogonSuccess, Group@PH_SYS_EVENT_VPNLogonSuccess, Group@PH_SYS_EVENT_WirelessLogonSuccess,Group@PH_SYS_EVENT_AppLogonSuccess)</SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>srcIpAddr,destIpAddr,hostIpAddr,reptDevIpAddr,relayDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+ <Report id="PH_Report_Auth_3" group="PH_SYS_REPORT_Authentication">
+    <Name>Detailed Domain or Server Account Lockouts </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Provides detailed windows domain or server account lockouts </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr,srcIpAddr,user,domain,eventType,winLogonType,rawEventMsg</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_Auth_3" name="Filter_Auth_3">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER,Group@PH_SYS_APP_DOMAIN_CONTROLLER)  AND  eventType IN (Group@PH_SYS_EVENT_DomainAccountLocked, Group@PH_SYS_EVENT_HostAccountLocked)</SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>srcIpAddr,destIpAddr,hostIpAddr,reptDevIpAddr,relayDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+ <Report id="PH_Report_Auth_4" group="PH_SYS_REPORT_Authentication">
+    <Name>Detailed Domain or Server Account Unlocks </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Provides detailed windows domain or server account unlocks </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr,srcIpAddr,user,domain,eventType,winLogonType,rawEventMsg</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_Auth_4" name="Filter_Auth_4">
+         <SingleEvtConstr> reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER,Group@PH_SYS_APP_DOMAIN_CONTROLLER) AND eventType IN (Group@PH_SYS_EVENT_DomainAccountUnlocked, Group@PH_SYS_EVENT_HostAccountUnlocked) </SingleEvtConstr>
+       </SubPattern>
+    </PatternClause>
+     <RelevantFilterAttr>srcIpAddr,destIpAddr,hostIpAddr,reptDevIpAddr,relayDevIpAddr</RelevantFilterAttr>
+ </Report>
+
+ <Report id="PH_Report_Auth_5" group="PH_SYS_REPORT_Authentication">
+    <Name>Top Devices, Users By Failed Login Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the devices and users by failed login count. Devices includes servers, network devices, domain controllers, VPN gateways, WLAN controllers and applications </Description>
+    <SelectClause numEntries="All">
+      <AttrList> reptDevIpAddr,user,COUNT(*) </AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_Auth_5" name="Filter_Auth_5">
+        <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_LogonFailure)</SingleEvtConstr>
+        <GroupByAttr> reptDevIpAddr,user </GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+     <RelevantFilterAttr>srcIpAddr,destIpAddr,hostIpAddr,reptDevIpAddr,relayDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+ <Report id="PH_Report_Auth_6" group="PH_SYS_REPORT_Authentication">
+    <Name>Top Devices, Users By Successful Logins</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the devices and users by successful login count. Devices includes servers, network devices, domain controllers, VPN gateways, WLAN controllers and applications </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,user, COUNT(*) </AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT (*) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_Auth_6" name="Filter_Auth_6">
+	<SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_Logon)</SingleEvtConstr>
+	<GroupByAttr> reptDevIpAddr,user </GroupByAttr>	
+      </SubPattern>
+    </PatternClause>
+     <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+ <Report id="PH_Report_Auth_7" group="PH_SYS_REPORT_Authentication">
+    <Name>Top Servers By Successful and Failed Login </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the servers by login activity</Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,COUNT(*) </AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT (*) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_Auth_6" name="Filter_Auth_6">
+	<SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_Logon,Group@PH_SYS_EVENT_LogonFailure) AND reptDevIpAddr IN (Group@PH_SYS_DEVICE_Server) </SingleEvtConstr>
+	<GroupByAttr> reptDevIpAddr</GroupByAttr>	
+      </SubPattern>
+    </PatternClause>
+     <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+ 
+  <Report id="PH_Report_Auth_8" group="PH_SYS_REPORT_Authentication">
+    <Name>Top Devices By Failed Login</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the devices by failed login activity</Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,COUNT(*) </AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT (*) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_Auth_6" name="Filter_Auth_6">
+	<SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_LogonFailure)</SingleEvtConstr>
+	<GroupByAttr> reptDevIpAddr</GroupByAttr>	
+      </SubPattern>
+    </PatternClause>
+     <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_Auth_9" group="PH_SYS_REPORT_Authentication">
+    <Name>Top Servers By Failed Login </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the servers by failed login</Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,COUNT(*) </AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT (*) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_Auth_6" name="Filter_Auth_6">
+	<SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_LogonFailure) AND reptDevIpAddr IN (Group@PH_SYS_DEVICE_Server) </SingleEvtConstr>
+	<GroupByAttr> reptDevIpAddr</GroupByAttr>	
+      </SubPattern>
+    </PatternClause>
+     <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_Auth_10" group="PH_SYS_REPORT_Authentication">
+    <Name>Top Network Devices By Failed Login </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the network devices by failed login</Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,COUNT(*) </AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT (*) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_Auth_6" name="Filter_Auth_6">
+	<SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_LogonFailure) AND reptDevIpAddr IN (Group@PH_SYS_DEVICE_Network) </SingleEvtConstr>
+	<GroupByAttr> reptDevIpAddr</GroupByAttr>	
+      </SubPattern>
+    </PatternClause>
+     <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+</Reports>
+

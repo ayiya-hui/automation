@@ -1,0 +1,34 @@
+[reptDevIpAddr(key)]
+192.168.1.22
+[eventMsg]
+PH_WIN_LOG_PULL,[EncodingFormat]=485000,[DeviceTime]=1238469097,[SourceName]=Security,[EventType]=540,[EventAction]=8,[ReptDevName]=QA-V-WIN03-APP1,[ReptDevIp]=192.168.1.22,[EventString]=joeUser::SEP::ABC::SEP::(0x0,0xA89CDDBF)::SEP::3::SEP::NtLmSsp ::SEP::NTLM::SEP::\\LAKERS::SEP::-::SEP::-::SEP::-::SEP::-::SEP::-::SEP::-::SEP::192.168.20.66::SEP::0::SEP::
+[params]
+domain=ABC
+deviceTime=any
+parserName=WinOSPullParser
+eventType=Win-Security-540
+destIpAddr=192.168.1.22
+srcIpAddr=192.168.20.66
+winLogonType=3 (Network - logon)
+reptModel=Windows
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Windows network logon success
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+destName=QA-V-WIN03-APP1
+count=1
+srcIpPort=0
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=192.168.1.22
+user=joeUser
+rawEventMsg=any
+reptDevName=QA-V-WIN03-APP1
+customer=Super
+winLogonId=(0x0,0xA89CDDBF)
+phRecvTime=any
+reptDevIpAddr=192.168.1.22
+eventAction=8
+reptVendor=Microsoft

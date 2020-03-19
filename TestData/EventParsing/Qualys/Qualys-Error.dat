@@ -1,0 +1,22 @@
+[reptDevIpAddr(key)]
+50.50.50.52
+[eventMsg]
+<134>Apr 09 16:43:00 50.50.50.52 java: [Qualys-Error]:[eventSeverity]=PHL_INFO, [reptVendor]=Qualys, [reptModel]=Scan Report, [qualysUserName]=prspe_wy, [qualysErrorContent]=FAILED: Account Expired
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+eventParsedOk=1
+errorString=FAILED: Account Expired
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+eventName=Qualys-Error
+reptVendor=Qualys
+eventType=Qualys-Error
+user=prspe_wy
+phEventCategory=0 (External)
+reptDevIpAddr=50.50.50.52
+reptModel=QualysGuard Scanner
+serverName=50.50.50.52

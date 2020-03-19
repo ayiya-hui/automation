@@ -1,0 +1,36 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<182>Oct 16 05:26:46 syslog-ng@COS-Node-1 logserver: [16/Oct/2010:05:26:46.650286 -0700] COS-Node-1 000000 kt 00000000 Info    Session Src='172.18.6.30:3033' Auth='-' User='(NguyenL)@(COS Non-Standard VPN)' SocksVersion='0x101' Command='Flow:UDP' Dest='156.74.139.51:6054' Error='0' SrcBytes='0' DstBytes='53' Duration='300' VirtualHost='-' EquipmentId='-'
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+appName=policy service
+command=Flow:UDP
+ipConnId=00000000
+count=1
+phCustId=$sender
+destIpAddr=156.74.139.51
+destIpPort=6054
+deviceTime=any
+domain=COS Non-Standard VPN
+durationMSec=300
+eventId=any
+eventName=Aventail generic system session log
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=3
+eventSeverityCat=LOW
+eventType=Aventail-System-Session-Generic
+fqdnName=-
+hostName=COS-Node-1
+procName=kernel tunnel component
+errReason=0
+recvBytes=53
+reptDevIpAddr=$reporter
+reptModel=Aventail VPN
+reptVendor=Sonicwall
+sentBytes=0
+srcIpAddr=172.18.6.30
+srcIpPort=3033
+user=NguyenL

@@ -1,0 +1,14 @@
+eventType,name,module,reptDevIpAddr,key,method
+Tipp_Audit_Generic,TipPointSysAudit_1,TipPointSysAudit,$localhost,,syslog
+Tipp_Sys_Generic,TipPointSysAudit_2,TipPointSysAudit,$localhost,,syslog
+Tipp_Login_Success,TipPointSysAudit_3,TipPointSysAudit,$localhost,srcIpAddr:192.168.1.19,syslog
+Tipp_Login_Success,TipPointSysAudit_4,TipPointSysAudit,$localhost,srcIpAddr:192.168.1.29,syslog
+Tipp_Logout,TipPointSysAudit_5,TipPointSysAudit,$localhost,srcIpAddr:192.168.1.20,syslog
+Tipp_Login_Failure,TipPointSysAudit_6,TipPointSysAudit,$localhost,srcIpAddr:192.168.64.7,syslog
+Tipp_Login_Failure,TipPointSysAudit_7,TipPointSysAudit,$localhost,srcIpAddr:192.168.64.8,syslog
+Tipp_Login_Failure,TipPointSysAudit_8,TipPointSysAudit,$localhost,srcIpAddr:192.168.64.9,syslog
+Tipp_Login_Failure,TipPointSysAudit_9,TipPointSysAudit,$localhost,srcIpAddr:192.168.64.10,syslog
+Tipp_Login_Failure,TipPointSysAudit_10,TipPointSysAudit,$localhost,srcIpAddr:192.168.64.11,syslog
+Tipp_Login_Failure,TipPointSysAudit_11,TipPointSysAudit,$localhost,srcIpAddr:192.168.64.12,syslog
+Tipp_Link_Up,TipPointSysAudit_12,TipPointSysAudit,$localhost,,syslog
+Tipp_Link_Down,TipPointSysAudit_13,TipPointSysAudit,$localhost,,syslog

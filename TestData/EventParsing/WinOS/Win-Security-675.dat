@@ -1,0 +1,24 @@
+[reptDevIpAddr(key)]
+20.20.20.20
+[eventMsg]
+<13>Jan 14 19:04:57 20.20.20.20 MSWinEventLog	1	Security	9293	Wed Jan 14 19:04:51 2009	675	Security	SYSTEM	User	Failure Audit	ADS-PRI	Account Logon		Pre-authentication failed:     User Name: partha     User ID: %{S-1-5-21-3383442562-1768178646-255068551-1110}     Service Name: krbtgt/PROSPECTHILLS.NET     Pre-Authentication Type: 0x2     Failure Code: 0x18     Client Address: 192.168.20.33    	8723  Automation
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=3
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=20.20.20.20
+eventAction=1 (Deny)
+eventName=Windows kerberos domain controller authentication failed
+srcIpAddr=192.168.20.33
+reptVendor=Microsoft
+eventType=Win-Security-675
+user=partha
+phEventCategory=0 (External)
+reptDevIpAddr=20.20.20.20
+reptModel=Windows

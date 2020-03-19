@@ -1,0 +1,41 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<52>Apr 11 13:08:22 SymantecServer $localhost: host,[SID: 55000] IRC Identification Signature attack detected but not blocked. Application path: \DEVICE\HARDDISKVOLUME2\PROGRAM FILES (X86)\PIDGIN\PIDGIN.EXE,Local: 172.16.205.166,Local: 000000000000,Remote: ,Remote: 1.2.3.4,Remote: 000000000000,Outbound,TCP,Intrusion ID: 0,Begin: 2013-12-18 14:01:58,End: 2013-12-18 14:01:58,Occurrences: 1,Application: /DEVICE/HARDDISKVOLUME2/PROGRAM FILES (X86)/PIDGIN/PIDGIN.EXE,Location: Default,User: abc,Domain: domain,Local Port 58055,Remote Port 6667,CIDS Signature ID: 55000,CIDS Signature string: IRC Identification Signature,CIDS Signature SubID: 65606,Intrusion URL: ,Intrusion Payload URL:
+[params]
+domain=domain
+deviceTime=any
+destGeoOrg=any
+parserName=SymantecAVParser
+eventType=Symantec-CIDS-55000-IRCIdentificationSignature
+hostName=host
+destIpAddr=1.2.3.4
+ipProto=6 (TCP)
+computer=host
+destGeoCountry=any
+srcIpAddr=172.16.205.166
+reptModel=Endpoint Protection Service
+eventId=any
+eventParsedOk=1
+eventSeverity=5
+swProcName=/DEVICE/HARDDISKVOLUME2/PROGRAM FILES (X86)/PIDGIN/PIDGIN.EXE
+eventName=This signature detects IRC traffic over any port.
+phEventCategory=0 (External)
+eventDesc=[SID: 55000] IRC Identification Signature attack detected but not blocked. Application path: \DEVICE\HARDDISKVOLUME2\PROGRAM FILES (X86)\PIDGIN\PIDGIN.EXE
+destName=HOST-1.2.3.4
+count=1
+direction=Outbound
+srcIpPort=58055
+eventSeverityCat=MEDIUM
+collectorId=any
+relayDevIpAddr=$localhost
+user=abc
+destIpPort=6667 (IRC)
+reptDevName=any
+customer=Super
+ipsSignatureId=55000
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+ipsEventName=IRC Identification Signature
+reptVendor=Symantec

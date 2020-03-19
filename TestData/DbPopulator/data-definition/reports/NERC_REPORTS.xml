@@ -1,0 +1,1173 @@
+
+<Reports>
+
+  <Report id="PH_Report_NERC_1" group="PH_SYS_REPORT_NERC">
+    <Name>NERC CIP_005_R2.2, NERC CIP_005_R4.2, NERC CIP_007_R2: Top Firewalls and Outbound Permitted Services (Ports) By Connections, Bytes </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks firewalls and permitted outbound services by first the total number of connections and then by bytes for that service</Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,ipProto, destIpPort, srcIntfName,destIntfName,COUNT(*),SUM(sentBytes), SUM(recvBytes), SUM (totBytes)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> COUNT(*)  DESC, SUM(totBytes) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW_20" name="Filter_FW_20">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic) AND srcIpAddr IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) AND destIpAddr NOT IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_NERC) </SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr,ipProto, destIpPort,srcIntfName,destIntfName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_NERC_2" group="PH_SYS_REPORT_NERC">
+    <Name>NERC CIP_005_R2.2, NERC CIP_005_R4.2, NERC CIP_007_R2: Top Firewalls and Inbound Permitted Services (Ports) By Connections, Bytes  </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks firewalls and permitted inbound services by first the total number of connections and then by bytes for that service</Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,ipProto, destIpPort,srcIntfName,destIntfName, COUNT(*),SUM(sentBytes), SUM(recvBytes), SUM (totBytes)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> COUNT(*)  DESC, SUM(totBytes) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW_21" name="Filter_FW_21">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic) AND srcIpAddr NOT IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) AND destIpAddr IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_NERC) </SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr,ipProto, destIpPort,srcIntfName,destIntfName </GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_NERC_3" group="PH_SYS_REPORT_NERC">
+    <Name>NERC CIP_005_R2.2, NERC CIP_005_R4.2, NERC CIP_007_R2: Top Firewalls and Permitted High Port Services By Connections, Bytes</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks the high port services permitted by firewalls - these services may pose security risk </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,srcIpAddr,destIpAddr,ipProto,destIpPort,srcIntfName,destIntfName,COUNT(*), SUM(sentBytes), SUM(recvBytes), SUM (totBytes) </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_FW_38" name="Filter_FW_38">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_NERC) </SingleEvtConstr>
+        <GroupByAttr>reptDevIpAddr,srcIpAddr,destIpAddr,ipProto,destIpPort,srcIntfName,destIntfName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_NERC_4" group="PH_SYS_REPORT_NERC">
+    <Name>NERC CIP_005_R2.2, NERC CIP_005_R4.2, NERC CIP_007_R2: Top Firewalls and Permitted Uncommon Services By Connections, Bytes</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks uncommon services permitted by firewalls - common services include DNS, SMTP, Web </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,srcIpAddr,destIpAddr,ipProto,destIpPort,srcIntfName,destIntfName,COUNT(*), SUM(sentBytes), SUM(recvBytes), SUM (totBytes) </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_FW_39" name="Filter_FW_39">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic) AND destIpPort NOT IN (25,53,80,443,123) </SingleEvtConstr>
+        <GroupByAttr>reptDevIpAddr,srcIpAddr,destIpAddr,ipProto,destIpPort,srcIntfName,destIntfName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_NERC_5" group="PH_SYS_REPORT_NERC">
+    <Name>NERC CIP_005_R2.2, NERC CIP_005_R4.2, NERC CIP_007_R2: Top Firewalls and Permitted Vulnerable Low Port Services By Connections, Bytes</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks uncommon services permitted by firewalls - vulnerable services include Microsoft services such as MS-RPC (135), NETBIOS-SSN (139), MICROSOFT-DS (445), MS-SQL (1433,1434), FTP (23), TELNET (21)</Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,srcIpAddr,destIpAddr,ipProto,destIpPort,srcIntfName,destIntfName,COUNT(*), SUM(sentBytes), SUM(recvBytes), SUM (totBytes) </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_FW_40" name="Filter_FW_40">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic) AND destIpPort IN (135,139,445,1433,1434,23,21) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_NERC) </SingleEvtConstr>
+        <GroupByAttr>reptDevIpAddr,srcIpAddr,destIpAddr,ipProto,destIpPort,srcIntfName,destIntfName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+   <Report id="PH_Report_NERC_6" group="PH_SYS_REPORT_NERC">
+    <Name>NERC CIP_005_R2.2: Top Firewall Originated Or Destined Permitted Connections By Count</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the firewall originated or destined connections - these connections would be typically be for administrative and monitoring purposes</Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,srcIpAddr,destIpAddr,ipProto,destIpPort,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList></AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW_8" name="Filter_FW_8">
+           <SingleEvtConstr> reptDevIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic) AND (srcIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) OR destIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL)) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_NERC) </SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr,srcIpAddr,destIpAddr,ipProto,destIpPort</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_NERC_7" group="PH_SYS_REPORT_NERC">
+    <Name>NERC CIP_005_R2.3: Top Users Ranked By Successful VPN Logon</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the VPN Gateways and their users by the number of successful VPN logons. This indicates how busy a VPN Gateway is.  </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,user,COUNT (*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT( * )</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_VPNGW_1" name="Filter_VPNGW_1">
+           <SingleEvtConstr>eventType IN (Group@PH_SYS_EVENT_VPNLogonSuccess) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_NERC) </SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr,user</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>	   
+
+  <Report id="PH_Report_NERC_8" group="PH_SYS_REPORT_NERC">
+    <Name>NERC CIP_005_R2.3: Top VPN Users Ranked By Failed VPN Logon</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the VPN Gateways and their users by the number of failed VPN logons. While some amount of failed login is normal, an unusually high number specifically at odd times of the day may be suspicious </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,user,COUNT (*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT( * )</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_VPNGW_2" name="Filter_VPNGW_2">
+           <SingleEvtConstr>eventType IN (Group@PH_SYS_EVENT_VPNLogonFailure) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_NERC) </SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr,user</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_NERC_9" group="PH_SYS_REPORT_NERC">
+    <Name>NERC CIP_005_R2.4, NERC CIP_005_R3, NERC CIP_005_R3.1: Top Wireless Controllers, Users By Failed Logon Count</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Provides details of wireless logon authentication failures</Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,srcMACAddr,user,COUNT(*)</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WLAN_5" name="Filter_WLAN_5">
+        <SingleEvtConstr> reptDevIpAddr IN (Group@PH_SYS_DEVICE_WLAN_CONTROLLER) AND eventType IN (Group@PH_SYS_EVENT_WirelessLogonFailure) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_NERC) </SingleEvtConstr>
+	<GroupByAttr>reptDevIpAddr,srcMACAddr,user</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_NERC_10" group="PH_SYS_REPORT_NERC">
+    <Name>NERC CIP_005_R2.4, NERC CIP_005_R3, NERC CIP_005_R3.1: Top Wireless Controllers, Users By Successful Logon Count</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks wireless controllers by successful logons</Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,srcMACAddr,user,COUNT(*)</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WLAN_6" name="Filter_WLAN_6">
+        <SingleEvtConstr> reptDevIpAddr IN (Group@PH_SYS_DEVICE_WLAN_CONTROLLER) AND eventType IN (Group@PH_SYS_EVENT_WirelessLogonSuccess) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_NERC) </SingleEvtConstr>
+	<GroupByAttr>reptDevIpAddr,srcMACAddr,user</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_NERC_11" group="PH_SYS_REPORT_NERC">
+    <Name>NERC_CIP_005_R3.2, NERC_CIP_007_R5: Failed login At any NERC System</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Captures detailed failed logins at any device or application - servers, network devices, domain controllers, VPN gateways, WLAN controllers and applications </Description>
+    <SelectClause numEntries="All">
+      <AttrList>phRecvTime,reptDevIpAddr,eventType,srcIpAddr,srcMACAddr,user,domain,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_Auth_1" name="Filter_Auth_1">
+        <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_LogonFailure)  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_NERC) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>  
+
+   <Report id="PH_Report_NERC_12" group="PH_SYS_REPORT_NERC">
+    <Name>NERC_CIP_005_R3.2, NERC_CIP_007_R5: Successful login At any NERC System</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Captures detailed failed logins at any device or application - servers, network devices, domain controllers, VPN gateways, WLAN controllers and applications </Description>
+    <SelectClause numEntries="All">
+      <AttrList>phRecvTime,reptDevIpAddr,eventType,srcIpAddr,srcMACAddr,user,domain,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_Auth_1" name="Filter_Auth_1">
+        <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_HostLogonSuccess,Group@PH_SYS_EVENT_HostPrivLogonSuccess,Group@PH_SYS_EVENT_HostPrivExecSuccess,Group@PH_SYS_EVENT_VMware_LogonSuccess,Group@PH_SYS_EVENT_DomainLogonSuccess,Group@PH_SYS_EVENT_DomainSrvcLogonSuccess,Group@PH_SYS_EVENT_VPNLogonSuccess,Group@PH_SYS_EVENT_AAALogonSuccess,Group@PH_SYS_EVENT_WirelessLogonSuccess,Group@PH_SYS_EVENT_DBLogonSuccess,Group@PH_SYS_EVENT_WebLogonSuccess,Group@PH_SYS_EVENT_AppLogonSuccess)  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_NERC) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report> 
+
+  <Report id="PH_Report_NERC_13" group="PH_SYS_REPORT_NERC">
+    <Name>NERC_CIP_005_R3.2, NERC_CIP_007_R5: Firewall Admin Activity Details</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Provides details about firewall admin activity - logons, command executions and logoff </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr,eventType,srcIpAddr,user,rawEventMsg</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW_34" name="Filter_FW_34">
+           <SingleEvtConstr> reptDevIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_HostLogonSuccess,Group@PH_SYS_EVENT_ConfigChange,Group@PH_SYS_EVENT_HostLogoff) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_NERC) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_NERC_14" group="PH_SYS_REPORT_NERC">
+    <Name>NERC_CIP_005_R3.2, NERC_CIP_007_R5: Router Admin Activity Details</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Provides details about router admin activity - logons, command executions and logoff </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr,eventType,srcIpAddr,user,rawEventMsg</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_Router_23" name="Filter_Router_23">
+           <SingleEvtConstr> reptDevIpAddr IN (Group@PH_SYS_DEVICE_ROUTER_SWITCH) AND eventType IN (Group@PH_SYS_EVENT_HostLogonSuccess,Group@PH_SYS_EVENT_ConfigChange,Group@PH_SYS_EVENT_HostLogoff) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_NERC) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_NERC_15"  group="PH_SYS_REPORT_NERC">
+    <Name>NERC_CIP_005_R3.2, NERC_CIP_007_R5: Successful VPN Admin Logon</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Provides event details for all successful VPN admin logons </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr, eventType,srcIpAddr,user,durationMSec,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_VPNGW_13" name="Filter_VPNGW_13">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_VPN_GATEWAY)  AND  eventType IN (Group@PH_SYS_EVENT_HostLogonSuccess,Group@PH_SYS_EVENT_HostLogoff)  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_NERC) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_NERC_16" group="PH_SYS_REPORT_NERC">
+    <Name>NERC_CIP_005_R3.2, NERC_CIP_007_R5: Failed VPN Admin Logon</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Provides event details for all failed VPN admin logons </Description>
+    <SelectClause numEntries="All">
+      <AttrList>phRecvTime,reptDevIpAddr, eventType,srcIpAddr,user,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_VPNGW_14" name="Filter_VPNGW_14">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_VPN_GATEWAY)  AND  eventType IN (Group@PH_SYS_EVENT_HostLogonFailure)  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_NERC) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_NERC_17" group="PH_SYS_REPORT_NERC">
+    <Name>NERC_CIP_005_R3.2, NERC_CIP_007_R5: Successful WLAN Admin Logon</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks successful admin logons to the WLAN Controller</Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr,eventType,srcIpAddr,user,rawEventMsg </AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT (*)</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WLAN_11" name="Filter_WLAN_11">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WLAN_CONTROLLER) AND eventType IN (Group@PH_SYS_EVENT_HostLogonSuccess)  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_NERC) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_NERC_18" group="PH_SYS_REPORT_NERC">
+    <Name>NERC_CIP_005_R3.2, NERC_CIP_007_R5: Failed WLAN Admin Logon</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks failed admin logons to the WLAN Controller</Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr,eventType,srcIpAddr,user,rawEventMsg </AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT (*)</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WLAN_11" name="Filter_WLAN_11">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WLAN_CONTROLLER) AND eventType IN (Group@PH_SYS_EVENT_HostLogonFailure)  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_NERC) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_NERC_19" group="PH_SYS_REPORT_NERC" >
+    <Name>NERC_CIP_005_R3.2, NERC_CIP_007_R5: Windows Server Account Lockouts </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report captures account lockouts on windows servers. Account lockouts happen on repeated login failures and may be suspicious if they are repeated or happen at odd hours of operation </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,srcIpAddr,user,domain,eventType,rawEventMsg</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>phRecvTime DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WINDOWS_3" name="Filter_WINDOWS_3">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER)  AND  eventType IN (Group@PH_SYS_EVENT_HostAccountLocked) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_NERC) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_NERC_20" group="PH_SYS_REPORT_NERC">
+    <Name>NERC_CIP_005_R3.2, NERC_CIP_007_R5: Windows Domain Account Lockouts </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report details windows domain account lockouts </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,srcIpAddr,user,domain,eventType,winLogonType,phRecvTime,rawEventMsg</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_DC_9" name="Filter_DC_9">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_APP_DOMAIN_CONTROLLER)  AND  eventType IN ( Group@PH_SYS_EVENT_DomainAccountLocked) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_NERC) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+ <Report id="PH_Report_NERC_21" group="PH_SYS_REPORT_NERC">
+    <Name>NERC_CIP_005_R4: Non-compliant Hosts and Security Software License Expirations</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks non-compliant hosts and license expiry events from Security Management Gateways and Firewalls. Non-compliant hosts may not have proper security software running and therefore may pose a security threat. License expiration of security software may expose exploitable security vulnerabilities.</Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,eventType,hostIpAddr,rawEventMsg</AttrList>    
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT (*) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_Vuln_12" name="Filter_Vuln_12">
+        <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_LicenseExpired,Group@PH_SYS_EVENT_NoncompliantHost) AND reptDevIpAddr IN (Group@PH_SYS_DEVICE_NETWORK_IPS,Group@PH_SYS_APP_NETWORK_IPS,Group@PH_SYS_APP_SEC_MGMT,Group@PH_SYS_DEVICE_FIREWALL,Group@PH_SYS_DEVICE_SEC_GW) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_NERC) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_NERC_22" group="PH_SYS_REPORT_NERC">
+    <Name>NERC_CIP_005_R4: Host vulnerability found by scanners with details </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Details the vulnerabilities discovered on hosts </Description>
+    <SelectClause numEntries="All">
+      <AttrList>scanEnd,hostName,hostIpAddr, osType,vulnName,eventSeverity,vulnType,vulnCVEId,vulnBugTraqID,vulnScore,vulnConseq</AttrList>    
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT (*) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_Vuln_13" name="Filter_Vuln_13">
+        <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_Vulnerability) AND hostIpAddr IN (BizService@PH_SYS_BizSrvc_NERC)</SingleEvtConstr>
+	<GroupByAttr></GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>hostName</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_NERC_23" group="PH_SYS_REPORT_NERC">
+    <Name>NERC_CIP_005_R4: Top OS types with vulnerabilities</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks OS types by vulnerabilities found</Description>
+    <SelectClause numEntries="All">
+      <AttrList>osType,eventSeverity,COUNT(*)</AttrList>    
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT (*) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_Vuln_13" name="Filter_Vuln_13">
+        <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_Vulnerability) AND hostIpAddr IN (BizService@PH_SYS_BizSrvc_NERC) </SingleEvtConstr>
+	<GroupByAttr>osType,eventSeverity</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>hostName</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_NERC_24" group="PH_SYS_REPORT_NERC">
+    <Name>NERC_CIP_005_R4: Top Hosts with Vulnerabilities found by scanners</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the hosts by vulnerabilities found by scanners</Description>
+    <SelectClause numEntries="All">
+      <AttrList>hostName,eventSeverity,COUNT(*)</AttrList>    
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT (*) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_Vuln_13" name="Filter_Vuln_13">
+        <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_Vulnerability) AND hostIpAddr IN (BizService@PH_SYS_BizSrvc_NERC) </SingleEvtConstr>
+	<GroupByAttr>hostName,eventSeverity</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>hostName</RelevantFilterAttr>
+  </Report>
+
+   <Report id="PH_Report_NERC_25" group="PH_SYS_REPORT_NERC">
+   <Name>NERC_CIP_007_R4: Virus found but not remediated by Host Antivirus </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Captures events that indicate the viruses that Host Antivirus found but failed to remedy </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr,eventType,hostIpAddr,computer,user,virusName,virusType,fileName,virusAction,virusQuarantStatus</AttrList>    
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_AV_2" name="Filter_AV_2">
+           <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_Worm_Remedy_Failed) AND reptDevIpAddr IN (Group@PH_SYS_APP_SEC_MGMT) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_NERC) </SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  
+   <Report id="PH_Report_NERC_26" group="PH_SYS_REPORT_NERC">
+   <Name>NERC_CIP_007_R4: Virus found and remediated by Host Antivirus </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Captures events that indicate the viruses that Host Antivirus found but failed to remedy </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr,eventType,hostIpAddr,computer,user,virusName,virusType,fileName,virusAction,virusQuarantStatus</AttrList>    
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_AV_2" name="Filter_AV_2">
+           <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_Worm_Remedy_Success) AND reptDevIpAddr IN (Group@PH_SYS_APP_SEC_MGMT) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_NERC) </SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_NERC_26B" group="PH_SYS_REPORT_NERC">
+   <Name>NERC_CIP_007_R4: Spyware found but not remediated by Host Antivirus </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr,eventType,hostIpAddr,computer,user,fileName</AttrList>    
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_AV_4" name="Filter_AV_4">
+           <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_Spyware_Remedy_Failed) AND reptDevIpAddr IN (Group@PH_SYS_APP_SEC_MGMT) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_NERC) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_NERC_27" group="PH_SYS_REPORT_NERC">
+   <Name>NERC_CIP_007_R4: Spyware found and remediated by Host Antivirus </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr,eventType,hostIpAddr,computer,user,fileName</AttrList>    
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_AV_4" name="Filter_AV_4">
+           <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_Spyware_Remedy_Success) AND reptDevIpAddr IN (Group@PH_SYS_APP_SEC_MGMT) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_NERC) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_NERC_28" group="PH_SYS_REPORT_NERC">
+   <Name>NERC_CIP_007_R4: Phishing attempt found but not remediated by Host Antivirus </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr,eventType,hostIpAddr,computer,user,fileName</AttrList>    
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_AV_4" name="Filter_AV_4">
+           <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_Phish_Remedy_Failed) AND reptDevIpAddr IN (Group@PH_SYS_APP_SEC_MGMT) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_NERC) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_NERC_29" group="PH_SYS_REPORT_NERC">
+   <Name>NERC_CIP_007_R4: Phishing attempt found and remediated by Host Antivirus </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr,eventType,hostIpAddr,computer,user,fileName</AttrList>    
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_AV_4" name="Filter_AV_4">
+           <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_Phish_Remedy_Success) AND reptDevIpAddr IN (Group@PH_SYS_APP_SEC_MGMT) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_NERC) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_NERC_30" group="PH_SYS_REPORT_NERC">
+   <Name>NERC_CIP_007_R4: Top hosts with Malware found by Host Antivirus</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> </Description>
+    <SelectClause numEntries="All">
+        <AttrList>computer,COUNT(*)</AttrList>    
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_AV_5" name="Filter_AV_5">
+           <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_Malware) AND reptDevIpAddr IN (Group@PH_SYS_APP_SEC_MGMT) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_NERC) </SingleEvtConstr>
+	   <GroupByAttr>computer</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_NERC_31" group="PH_SYS_REPORT_NERC">
+    <Name>NERC_CIP_007_R4: Top IPs with Malware Found By IPS and Firewalls</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> Tracks IP addresses with Malware as found by IPS </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,eventType,srcIpAddr,COUNT(*)</AttrList>    
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_Vuln_10" name="Filter_Vuln_10">
+        <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_Malware) AND reptDevIpAddr IN (Group@PH_SYS_DEVICE_NETWORK_IPS,Group@PH_SYS_APP_NETWORK_IPS,Group@PH_SYS_DEVICE_FIREWALL) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_NERC) </SingleEvtConstr>
+	<GroupByAttr>reptDevIpAddr,eventType,srcIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_NERC_32" group="PH_SYS_REPORT_NERC">
+   <Name>NERC_CIP_007_R4: Top IPs with Malware Found By Antivirus and Security Gateways</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks IP addresses with Malware as found by Host Anti-virus and Security Gateways</Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,eventType,srcIpAddr,COUNT(*)</AttrList>    
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT (*) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_Vuln_8" name="Filter_Vuln_8">
+           <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_Malware) AND reptDevIpAddr IN (Group@PH_SYS_APP_SEC_MGMT,Group@PH_SYS_DEVICE_SEC_GW) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_NERC) </SingleEvtConstr>
+	   <GroupByAttr>reptDevIpAddr,eventType,srcIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+
+  <Report id="PH_Report_NERC_33"  group="PH_SYS_REPORT_NERC">
+    <Name>NERC_CIP_007_R5: Windows File Access Failures </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report captures the details of windows server file access failures. Details include the administrative user, file/directory, the operation performed and the raw log </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,phRecvTime,eventType,eventAction,user,domain,procName,osObjName,osObjType,rawEventMsg</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>phRecvTime DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WINDOWS_8" name="Filter_WINDOWS_8">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER)  AND  eventType IN (Group@PH_SYS_EVENT_FileChange) AND eventAction = 1 AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_NERC) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_NERC_34"  group="PH_SYS_REPORT_NERC">
+    <Name>NERC_CIP_007_R5: Windows File Access Successes </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report captures the details of windows server file access successes. Details include the administrative user, file/directory, the operation performed and the raw log </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,phRecvTime,eventType,eventAction,user,domain,procName,osObjName,osObjType,rawEventMsg</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>phRecvTime DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WINDOWS_8" name="Filter_WINDOWS_8">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER)  AND  eventType IN (Group@PH_SYS_EVENT_FileChange) AND eventAction = 0 AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_NERC) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_NERC_35" group="PH_SYS_REPORT_NERC">
+    <Name>NERC_CIP_007_R5: Audited Linux file changes</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks user modifications to Linux files and directories. Both the content and attribute modifications are captured. For actions on directories, the affected files in the directories are also captured.</Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr,user,osObjType,osObjAction,osObjName,targetOsObjType,targetOsObjName</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_UNIX_12" name="Filter_UNIX_12">
+           <SingleEvtConstr>eventType = "LINUX_FILE_CHANGE") AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_NERC) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_NERC_36" group="PH_SYS_REPORT_NERC">
+    <Name>NERC_CIP_007_R5: Successful Database Server Logon Details </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Captures successful database server logons </Description>
+    <SelectClause numEntries="All">
+      <AttrList>phRecvTime,reptDevIpAddr,logonTime,logoffTime,srcIpAddr,user,srcApp,srcTerminal</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_DBServer_1" name="Filter_DBServer_1">
+        <SingleEvtConstr>eventType IN (Group@PH_SYS_EVENT_DBLogonSuccess) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_NERC) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+     <RelevantFilterAttr>srcIpAddr,reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+    <Report id="PH_Report_NERC_37" group="PH_SYS_REPORT_NERC">
+    <Name>NERC_CIP_007_R5: Failed Database Server Logon Details </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Captures failed database server logons </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,deviceTime,srcIpAddr,user,srcApp,srcTerminal,dbRetCode</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_DBServer_3" name="Filter_DBServer_3">
+        <SingleEvtConstr>eventType IN (Group@PH_SYS_EVENT_DBLogonFailure) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_NERC) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>srcIpAddr,reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_NERC_38" group="PH_SYS_REPORT_NERC">
+    <Name>NERC_CIP_007_R5: Top Web Visitors By Unauthorized Access Error Count</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks web servers and visitors by the total number of unauthorized access error count</Description>
+    <SelectClause numEntries="All">
+      <AttrList>destIpAddr,uriStem,httpStatusCode,COUNT(*),srcIpAddr,user</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WEB_SERVER_17" name="Filter_WEB_SERVER_17">
+        <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_APP_WEB_SERVER) AND eventType IN ("IIS-Web-Client-Error", "Apache-Web-Client-Error") AND httpStatusCode IN ("401", "403") AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_NERC) </SingleEvtConstr>
+        <GroupByAttr>destIpAddr,uriStem,httpStatusCode,srcIpAddr,user</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr,destIpAddr</RelevantFilterAttr>
+ </Report>
+
+ <Report id="PH_Report_NERC_39" group="PH_SYS_REPORT_NERC">
+    <Name>NERC_CIP_007_R5: Top FTP Clients By Server side Error Count</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks web servers and their FTP clients by the total number of FTP errors</Description>
+    <SelectClause numEntries="All">
+      <AttrList>destIpAddr,uriStem,eventType,ftpStatusCode,srcIpAddr,user,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WEB_SERVER_18" name="Filter_WEB_SERVER_18">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_APP_WEB_SERVER)  AND  ftpStatusCode IN ("500", "501","503","504","550","552","553") AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_NERC) </SingleEvtConstr>
+           <GroupByAttr>destIpAddr,uriStem,eventType,ftpStatusCode,srcIpAddr,user</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr,destIpAddr</RelevantFilterAttr>
+ </Report>	 
+  
+ <Report id="PH_Report_NERC_40" group="PH_SYS_REPORT_NERC">
+    <Name>NERC_CIP_007_R5: Top FTP Clients By Unauthorized Access Error Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks servers and their FTP clients by the total number of unauthorized Access Errors</Description>
+    <SelectClause numEntries="All">
+        <AttrList>destIpAddr,ftpStatusCode, eventType,srcIpAddr,user,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WEB_SERVER_19" name="Filter_WEB_SERVER_19">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_APP_WEB_SERVER)  AND  ftpStatusCode IN ("503","550") AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_NERC) </SingleEvtConstr>
+           <GroupByAttr>destIpAddr,ftpStatusCode,eventType,srcIpAddr,user</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr,destIpAddr</RelevantFilterAttr>
+ </Report>	  
+ 
+ <Report id="PH_Report_NERC_41" group="PH_SYS_REPORT_NERC">
+    <Name>NERC_CIP_007_R5: Top Web Visitors By Uncommon HTTP Method Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks Web servers and visitors by the total number of uncommon HTTP Methods</Description>
+    <SelectClause numEntries="All">
+        <AttrList>destIpAddr,srcIpAddr,httpMethod,uriStem,httpStatusCode,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WEB_SERVER_20" name="Filter_WEB_SERVER_20">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_APP_WEB_SERVER) AND httpMethod NOT IN ("GET","POST") AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_NERC) </SingleEvtConstr>
+        <GroupByAttr>destIpAddr,srcIpAddr,httpMethod,uriStem,httpStatusCode</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr,destIpAddr</RelevantFilterAttr>
+ </Report>
+
+ <Report id="PH_Report_NERC_42" group="PH_SYS_REPORT_NERC">
+    <Name>NERC_CIP_007_R5: Top Web Visitor Browser Types By Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks web servers and their client browser types by the total number of hits </Description>
+    <SelectClause numEntries="All">
+      <AttrList>httpUserAgent,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WEB_SERVER_21" name="Filter_WEB_SERVER_21">
+        <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_APP_WEB_SERVER)  AND  httpStatusCode IN ("200") AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_NERC) </SingleEvtConstr>
+        <GroupByAttr>httpUserAgent</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr,destIpAddr</RelevantFilterAttr>
+ </Report>NERC
+
+  <Report id="PH_Report_NERC_43" group="PH_SYS_REPORT_NERC">
+    <Name>NERC_CIP_007_R5.1.1, NERC_CIP_007_R5.2.1: Server Password Changes </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks password changes </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,phRecvTime,srcIpAddr,user,domain,targetUser,targetDomain,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WINDOWS_42" name="Filter_WINDOWS_42">
+        <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_PasswordChange) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_NERC) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_NERC_44" group="PH_SYS_REPORT_NERC">
+    <Name>NERC_CIP_007_R5.1.1, NERC_CIP_007_R5.2.1: Local Windows User Accounts Created </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report captures user accounts added on a server </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,phRecvTime,srcIpAddr,user,computer,targetUser,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WINDOWS_26" name="Filter_WINDOWS_26">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER)  AND  eventType = "Win-Security-624" AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_NERC) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_NERC_45" group="PH_SYS_REPORT_NERC">
+    <Name>NERC_CIP_007_R5.1.1, NERC_CIP_007_R5.2.1: Local Windows User Accounts Deleted</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report captures user accounts removed from a server </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,phRecvTime,srcIpAddr,user,computer,targetUser,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WINDOWS_27" name="Filter_WINDOWS_27">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER)  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_NERC) AND eventType = "Win-Security-630" </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_NERC_46" group="PH_SYS_REPORT_NERC">
+    <Name>NERC_CIP_007_R5.1.1, NERC_CIP_007_R5.2.1: Local Windows User Accounts Modified </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report captures local user account modifications. </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,phRecvTime,eventType, srcIpAddr,user,computer,targetUser,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WINDOWS_28" name="Filter_WINDOWS_28">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER)  AND  eventType IN ("Win-Security-625", "Win-Security-626","Win-Security-642", "Win-Security-627", "Win-Security-628", "Win-Security-629","Win-Security-636","Win-Security-650","Win-Security-637","Win-Security-651","Win-Security-632","Win-Security-633","Win-Security-655","Win-Security-656","Win-Security-660","Win-Security-661","Win-Security-665","Win-Security-666")  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_NERC) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_NERC_47" group="PH_SYS_REPORT_NERC">
+    <Name>NERC_CIP_007_R5.1.1, NERC_CIP_007_R5.2.1: Users Added To Local Groups </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report captures users added to local groups. </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,phRecvTime,srcIpAddr,user,computer,targetUser,targetUserGrp,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WINDOWS_32" name="Filter_WINDOWS_32">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER)  AND  eventType IN ("Win-Security-636", "Win-Security-650")  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_NERC) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_NERC_48" group="PH_SYS_REPORT_NERC">
+    <Name>NERC_CIP_007_R5.1.1, NERC_CIP_007_R5.2.1: Users Added To Global Groups </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report captures users added to global or univeral groups. </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,phRecvTime,srcIpAddr,user,computer,targetUser,targetUserGrp,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WINDOWS_33" name="Filter_WINDOWS_33">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER)  AND  eventType IN ("Win-Security-632", "Win-Security-655","Win-Security-660", "Win-Security-665") </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_NERC_49" group="PH_SYS_REPORT_NERC">
+    <Name>NERC_CIP_007_R5.1.1, NERC_CIP_007_R5.2.1: Users Deleted From Local Groups </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report captures users deleted from local groups. </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,phRecvTime,srcIpAddr,user,computer,targetUser,targetUserGrp,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WINDOWS_34" name="Filter_WINDOWS_34">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER)  AND  eventType IN ("Win-Security-637", "Win-Security-651")  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_NERC) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_NERC_50" group="PH_SYS_REPORT_NERC">
+    <Name>NERC_CIP_007_R5.1.1, NERC_CIP_007_R5.2.1: Users Deleted From Global Groups </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report captures users deleted from global or univeral groups. </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,phRecvTime,srcIpAddr,user,computer,targetUser,targetUserGrp,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WINDOWS_35" name="Filter_WINDOWS_35">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER)  AND  eventType IN ("Win-Security-633", "Win-Security-656","Win-Security-661", "Win-Security-666")  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_NERC) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_NERC_51" group="PH_SYS_REPORT_NERC">
+    <Name>NERC_CIP_007_R5.1.1, NERC_CIP_007_R5.2.1: Local Windows Groups Deleted </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report captures local group deletions </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,phRecvTime,srcIpAddr,user,computer,targetUserGrp,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WINDOWS_36" name="Filter_WINDOWS_36">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER)  AND  eventType IN ("Win-Security-638", "Win-Security-652")  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_NERC) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_NERC_52" group="PH_SYS_REPORT_NERC">
+    <Name>NERC_CIP_007_R5.1.1, NERC_CIP_007_R5.2.1: Local Windows Groups Modified </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report captures local group modifications </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,phRecvTime,srcIpAddr,user,computer,targetUserGrp,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WINDOWS_37" name="Filter_WINDOWS_37">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER) AND eventType IN ("Win-Security-639", "Win-Security-649")  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_NERC) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_NERC_53" group="PH_SYS_REPORT_NERC">
+    <Name>NERC_CIP_007_R5.1.1, NERC_CIP_007_R5.2.1: Local Windows Groups Created </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report captures local group creations </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,phRecvTime,srcIpAddr,user,computer,targetUserGrp,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WINDOWS_41" name="Filter_WINDOWS_41">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER) AND eventType IN ("Win-Security-635", "Win-Security-648")  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_NERC) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_NERC_54" group="PH_SYS_REPORT_NERC">
+    <Name>NERC_CIP_007_R5.1.1, NERC_CIP_007_R5.2.1: Global Windows Groups Created </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report captures global group creations </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,phRecvTime,srcIpAddr,user,computer,targetUserGrp,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WINDOWS_38" name="Filter_WINDOWS_38">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER) AND eventType IN ("Win-Security-631", "Win-Security-653","Win-Security-658", "Win-Security-663")  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_NERC) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_NERC_55" group="PH_SYS_REPORT_NERC">
+    <Name>NERC_CIP_007_R5.1.1, NERC_CIP_007_R5.2.1: Global Windows Groups Deleted</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report captures global group deletions </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,phRecvTime,srcIpAddr,user,computer,targetUserGrp,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WINDOWS_39" name="Filter_WINDOWS_39">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER) AND eventType IN ("Win-Security-634", "Win-Security-657","Win-Security-662", "Win-Security-667")  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_NERC) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_NERC_56" group="PH_SYS_REPORT_NERC">
+    <Name>NERC_CIP_007_R5.1.1, NERC_CIP_007_R5.2.1: Global Windows Groups Modified</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report captures global group modifications </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,phRecvTime,srcIpAddr,user,computer,targetUserGrp,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WINDOWS_40" name="Filter_WINDOWS_40">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER) AND eventType IN ("Win-Security-641", "Win-Security-654","Win-Security-659", "Win-Security-664")  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_NERC) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+   <Report id="PH_Report_NERC_57" group="PH_SYS_REPORT_NERC">
+    <Name> NERC_CIP_007_R5.1.1, NERC_CIP_007_R5.2.1: Computers added to domain</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Captures computers added to a domain </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,phRecvTime,srcIpAddr,user,computer,domain,targetUser,targetDomain,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_DC_24" name="Filter_DC_24">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_APP_DOMAIN_CONTROLLER)  AND  eventType IN ("Win-Security-645","Win-Security-4741") AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_NERC) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr,srcIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_NERC_58" group="PH_SYS_REPORT_NERC">
+    <Name>NERC_CIP_007_R5.1.1, NERC_CIP_007_R5.2.1: Computers deleted from domain</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Captures computers removed from a domain </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,phRecvTime,srcIpAddr,user,computer,domain,targetUser,targetDomain,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_DC_25" name="Filter_DC_25">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_APP_DOMAIN_CONTROLLER)  AND  eventType IN ("Win-Security-647","Win-Security-4743") AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_NERC)  </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr,srcIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_NERC_59"  group="PH_SYS_REPORT_NERC">
+    <Name>NERC_CIP_005_R3.2, NERC_CIP_007_R5, NERC_CIP_007_R5.2.2: Privileged Windows Server Logon Attempts using the Administrator Account </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report details prvileged logon attempts to a windows server using the Administrator account </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,eventType, eventAction,srcIpAddr,user,domain,winLogonType,winLogonFailCode,rawEventMsg</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WINDOWS_29" name="Filter_WINDOWS_29">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER)  AND  user = "Administrator" AND eventType IN (Group@PH_SYS_EVENT_HostLogonFailure,Group@PH_SYS_EVENT_HostLogonSuccess)  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_NERC) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_NERC_60"  group="PH_SYS_REPORT_NERC">
+    <Name>NERC_CIP_005_R3.2, NERC_CIP_007_R5, NERC_CIP_007_R5.2.2: Remote Desktop Connections to Windows Servers </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report details successful and failed remote desktop connections </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,eventType, eventAction,srcIpAddr,user,domain,winLogonType,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WINDOWS_30" name="Filter_WINDOWS_30">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER)  AND winLogonType = 10 AND eventType IN (Group@PH_SYS_EVENT_HostLogonFailure,Group@PH_SYS_EVENT_HostLogonSuccess)  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_NERC) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_NERC_61" group="PH_SYS_REPORT_NERC">
+    <Name>NERC_CIP_005_R3.2, NERC_CIP_007_R5, NERC_CIP_007_R5.2.2: Unix Server Privileged Logon</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report details UNIX server privileged logon (su) details with all parsed parameters and raw logs </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,eventType,reptDevIpAddr,srcIpAddr,user,targetUser,rawEventMsg</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_UNIX_10" name="Filter_UNIX_10">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_DEVICE_UNIX_SERVER)  AND  (eventType IN (Group@PH_SYS_EVENT_HostPrivLogonSuccess) OR eventType IN (Group@PH_SYS_EVENT_HostPrivLogonFailure))  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_NERC) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_NERC_62"  group="PH_SYS_REPORT_NERC">
+    <Name>NERC_CIP_005_R3.2, NERC_CIP_007_R5, NERC_CIP_007_R5.2.2: Unix Server Privileged Command Execution</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report details privilege command execuations (sudo) at a Unix server  </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,eventType,reptDevIpAddr,srcIpAddr,user,targetUser,command,rawEventMsg</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_UNIX_9" name="Filter_UNIX_9">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_DEVICE_UNIX_SERVER)  AND  (eventType IN (Group@PH_SYS_EVENT_HostPrivExecSuccess) OR eventType IN (Group@PH_SYS_EVENT_HostPrivExecFailure))  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_NERC) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_NERC_63" group="PH_SYS_REPORT_NERC">
+    <Name>NERC_CIP_008: Top Security Incidents By Severity, Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the security related incidents by first their severity and then by their count</Description>
+    <SelectClause numEntries="All">
+        <AttrList>eventType,eventSeverity,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>eventSeverity DESC,COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_OVERALL_STATUS" name="Filter_OVERALL_STATUS">
+           <SingleEvtConstr>phEventCategory = 1 AND eventType IN (Group@PH_SYS_EVENT_PH_RULE_SEC) </SingleEvtConstr>
+           <GroupByAttr>eventType,eventSeverity </GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <inline>false</inline>
+    <active>false</active>
+    <RelevantFilterAttr>bizService</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_NERC_64" group="PH_SYS_REPORT_NERC">
+    <Name>NERC_CIP_008: Weekly Security Incident Trend </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Shows incident trend on a week-by-week basis </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvWeek,eventSeverityCat, COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter" name="Filter">
+           <SingleEvtConstr>phEventCategory = 1 AND eventType IN (Group@PH_SYS_EVENT_PH_RULE_SEC) </SingleEvtConstr>
+           <GroupByAttr>phRecvWeek</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <inline>false</inline>
+    <active>false</active>
+    <RelevantFilterAttr>bizService</RelevantFilterAttr>
+   </Report> 
+
+<Report id="PH_Report_NERC_65" group="PH_SYS_REPORT_NERC">
+    <Name>NERC_CIP_008: Monthly Security Incident Trend </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Shows incident trend on a month-by-month basis </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvMonth,eventSeverityCat, COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter" name="Filter">
+           <SingleEvtConstr>phEventCategory = 1 AND eventType IN (Group@PH_SYS_EVENT_PH_RULE_SEC) </SingleEvtConstr>
+           <GroupByAttr>phRecvMonth</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <inline>false</inline>
+    <active>false</active>
+    <RelevantFilterAttr>bizService</RelevantFilterAttr>
+   </Report> 
+
+ <Report id="PH_Report_NERC_66" group="PH_SYS_REPORT_NERC">
+    <Name>NERC_CIP_008: Security Incidents, Assigned Users By Resolution Time</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Incidents By Assigned Users and resolution time </Description>
+    <SelectClause numEntries="All">
+        <AttrList>eventType,incidentSrc,incidentTarget,eventSeverityCat,incidentTicketStatus,incidentTicketUser,AVG(incidentResoTime)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(incidentResoTime) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter" name="Filter">
+           <SingleEvtConstr>phEventCategory = 1 AND eventType IN (Group@PH_SYS_EVENT_PH_RULE_SEC) </SingleEvtConstr>
+           <GroupByAttr>eventType,incidentSrc,incidentTarget,eventSeverityCat,incidentTicketStatus,incidentTicketUser</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <inline>false</inline>
+    <active>false</active>
+    <RelevantFilterAttr>bizService</RelevantFilterAttr>
+  </Report> 
+
+  <Report id="PH_Report_NERC_67" group="PH_SYS_REPORT_NERC">
+    <Name>NERC_CIP_008: Security Incident Severity By Resolution Time</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Incidents severities by resolution time </Description>
+    <SelectClause numEntries="All">
+        <AttrList>eventSeverityCat,AVG(incidentResoTime)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(incidentResoTime) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter" name="Filter">
+           <SingleEvtConstr>phEventCategory = 1 AND eventType IN (Group@PH_SYS_EVENT_PH_RULE_SEC) </SingleEvtConstr>
+           <GroupByAttr>eventSeverityCat</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <inline>false</inline>
+    <active>false</active>
+    <RelevantFilterAttr>bizService</RelevantFilterAttr>
+  </Report> 
+
+  <Report id="PH_Report_NERC_68" group="PH_SYS_REPORT_NERC">
+    <Name>NERC_CIP_008: Monthly Security Incident Resolution Time Trend</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Incidents severities by resolution time </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvMonth,eventSeverityCat,AVG(incidentResoTime)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> phRecvMonth DESC, eventSeverityCat DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter" name="Filter">
+           <SingleEvtConstr>phEventCategory = 1 AND eventType IN (Group@PH_SYS_EVENT_PH_RULE_SEC) </SingleEvtConstr>
+           <GroupByAttr>phRecvMonth,eventSeverityCat</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <inline>false</inline>
+    <active>false</active>
+    <RelevantFilterAttr>bizService</RelevantFilterAttr>
+  </Report> 
+
+  <Report id="PH_Report_NERC_69" group="PH_SYS_REPORT_NERC">
+    <Name>NERC_CIP_008: Monthly Assigned Security Incident User Trend</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Monthly Incidents By Assigned Users </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvMonth,incidentTicketUser,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter" name="Filter">
+           <SingleEvtConstr>phEventCategory = 1 AND eventType IN (Group@PH_SYS_EVENT_PH_RULE_SEC) </SingleEvtConstr>
+           <GroupByAttr>phRecvMonth,incidentTicketUser</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <inline>false</inline>
+    <active>false</active>
+    <RelevantFilterAttr>bizService</RelevantFilterAttr>
+  </Report> 
+
+  <Report id="PH_Report_NERC_70" group="PH_SYS_REPORT_NERC">
+    <Name>NERC_CIP_008: Security Incidents By Location and Category</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Incidents By Location and Category </Description>
+    <SelectClause numEntries="All">
+        <AttrList>eventType,phIncidentCategory,eventSeverityCat,DeviceToCMDBAttr(incidentTarget:country) "Country",COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter" name="Filter">
+           <SingleEvtConstr>phEventCategory = 1 AND eventType IN (Group@PH_SYS_EVENT_PH_RULE_SEC)  </SingleEvtConstr>
+           <GroupByAttr>eventType,phIncidentCategory,eventSeverityCat,DeviceToCMDBAttr(incidentTarget:country)</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <inline>false</inline>
+    <active>false</active>
+    <RelevantFilterAttr>bizService</RelevantFilterAttr>
+   </Report> 
+
+</Reports>

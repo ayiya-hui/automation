@@ -1,0 +1,5 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+Snort-119,Sourcefire2_1,Sourcefire2,$localhost,,syslog
+Sourcefire-Default-Access-Control,Sourcefire2_2,Sourcefire2,$localhost,,syslog
+Sourcefire-AccessControl-Block,Sourcefire2_3,Sourcefire2,$localhost,,syslog

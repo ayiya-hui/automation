@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+192.168.24.11
+[eventMsg]
+<134>Jan 15 10:40:11 192.168.24.11 java: [VMware_DatastoreDiscoveredEvent], [eventTime]=2010-01-15 10:38:56:713, [rptIp]=192.168.24.11, [user]=Administrator, [vmwEventId]=210901, [vmwEventCat]=info, [vmHost]=192.168.64.102, [cluster]=192.168.64.102, [datacenter]=add-DC-test, [datastore]=Data_Storage, [vmwEventMsg]=Discovered datastore Data_Storage on 192.168.64.102 in add-DC-test
+[params]
+rawEventMsg=any
+deviceTime=any
+eventType=VMware_DatastoreDiscoveredEvent
+phCustId=$sender
+vmwEventMsg=Discovered datastore Data_Storage on 192.168.64.102 in add-DC-test
+cluster=192.168.64.102
+datastore=Data_Storage
+reptModel=Generic
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Datastore discovered
+phEventCategory=0 (External)
+vmwEventCat=info
+eventSeverityCat=LOW
+user=Administrator
+reptDevName=192.168.64.102
+count=1
+datacenter=add-DC-test
+phRecvTime=any
+reptDevIpAddr=192.168.24.11
+reptVendor=VMware

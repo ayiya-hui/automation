@@ -1,0 +1,33 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<132>[2016-04-26 16:10:34] EFW: RULE: prio=3 id=06000051 rev=1 event=ruleset_drop_packet action=drop rule=Default_Rule recvif=If1 srcip=216.243.31.2 destip=208.68.133.197 ipproto=TCP ipdatalen=20 srcport=56267 destport=443 syn=1
+[params]
+deviceTime=any
+parserName=ClavisterParser
+eventType=Clavister-ruleset-drop-packet
+ipProto=6 (TCP)
+srcIpAddr=216.243.31.2
+reptModel=cOS Firewall
+eventId=any
+logID=6000051
+eventParsedOk=1
+eventSeverity=4
+fwAction=drop
+eventName=Clavister-ruleset-drop-packet
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+ipTotalLength=20
+count=1
+srcIpPort=56267
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+destIpPort=443 (HTTPS)
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Clavister
+fwRule=Default_Rule

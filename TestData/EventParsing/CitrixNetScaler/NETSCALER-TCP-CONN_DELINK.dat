@@ -1,0 +1,33 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134> 11/25/2013:11:06:40  clxns 0-PPE-0 : TCP CONN_DELINK 12304726 0 :  Source 70.209.74.7:16098 - Vserver 172.22.36.67:443 - NatIP 172.22.36.76:44063 - Destination 172.20.20.30:443 - Delink Time 11/25/2013:11:06:40  - Total_bytes_send 0 - Total_bytes_recv 245
+[params]
+rawEventMsg=any
+deviceTime=any
+totFlows=1
+eventType=NETSCALER-TCP-CONN_DELINK
+phCustId=$sender
+destIpAddr=172.20.20.30
+srcName=any
+srcIpAddr=70.209.74.7
+reptModel=NetScaler
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+hostIpAddr=172.22.36.67
+eventName=NetScaler TCP connection delinked
+phEventCategory=0 (External)
+ipPort=443
+recvBytes=245
+srcIpPort=16098
+eventSeverityCat=LOW
+collectorId=any
+destIpPort=443
+reptDevName=any
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Citrix
+sentBytes=0

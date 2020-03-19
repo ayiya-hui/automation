@@ -1,0 +1,232 @@
+
+<Reports>
+  <Report group="PH_SYS_REPORT_SuperGlobal" id="PH_Report_SG_1">
+    <Name>Top Organizations By Event Rate</Name>
+    <CustomerScope groupByEachCustomer="false"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks organizations by event rate</Description>
+    <SelectClause numEntries="All">
+      <AttrList>phCustId, reptDevIpAddr, AVG(eventsPerSec), MAX(peakEventsPerSec) </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_SG" name="Filter_SG">
+	<SingleEvtConstr> phEventCategory = 3 AND eventType = "PH_SYSTEM_EVENTS_PER_SEC" </SingleEvtConstr>
+	<GroupByAttr>phCustId, reptDevIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <inline>true</inline>
+    <active>true</active>
+  </Report>
+
+  <Report group="PH_SYS_REPORT_SuperGlobal" id="PH_Report_SG_2">
+    <Name>Top Organizations By Total Incident Count </Name>
+    <CustomerScope groupByEachCustomer="false"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the organizations by total incident count  </Description>
+    <SelectClause numEntries="All">
+      <AttrList>phCustId,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_SG" name="Filter_SG">
+        <SingleEvtConstr>phEventCategory = 1</SingleEvtConstr>
+        <GroupByAttr>phCustId</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <inline>false</inline>
+    <active>false</active>
+  </Report>
+  
+ <Report group="PH_SYS_REPORT_SuperGlobal" id="PH_Report_SG_3">
+    <Name>Top Organizations By Availability Incident Count </Name>
+    <CustomerScope groupByEachCustomer="false"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the organizations by the number of availability related incidents </Description>
+    <SelectClause numEntries="All">
+      <AttrList>phCustId,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_SG" name="Filter_SG">
+        <SingleEvtConstr>phEventCategory = 1 AND eventType IN (Group@PH_SYS_EVENT_PH_RULE_AVAIL) </SingleEvtConstr>
+        <GroupByAttr>phCustId</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <inline>false</inline>
+    <active>false</active>
+ </Report>
+
+ <Report group="PH_SYS_REPORT_SuperGlobal" id="PH_Report_SG_4">
+    <Name>Top Organizations By Security Incident Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the organizations by the number of security related incidents </Description>
+    <SelectClause numEntries="All">
+      <AttrList>phCustId,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_SG" name="Filter_SG">
+        <SingleEvtConstr>phEventCategory = 1 AND eventType IN (Group@PH_SYS_EVENT_PH_RULE_SEC) </SingleEvtConstr>
+        <GroupByAttr>phCustId</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <inline>false</inline>
+    <active>false</active>
+ </Report>
+
+ <Report group="PH_SYS_REPORT_SuperGlobal" id="PH_Report_SG_5">
+    <Name>Top Organizations By Performance Incident Count </Name>
+    <CustomerScope groupByEachCustomer="false"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the organizations by the number of performance related incidents</Description>
+    <SelectClause numEntries="All">
+      <AttrList>phCustId,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_SG" name="Filter_SG">
+        <SingleEvtConstr>phEventCategory = 1 AND eventType IN (Group@PH_SYS_EVENT_PH_RULE_PERF) </SingleEvtConstr>
+        <GroupByAttr>phCustId</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <inline>false</inline>
+    <active>false</active>
+ </Report>
+
+ <Report group="PH_SYS_REPORT_SuperGlobal" id="PH_Report_SG_6">
+   <Name>Top Business Services and Organizations By Total Incident Count </Name>
+   <CustomerScope groupByEachCustomer="false"> <Include all="true"/> <Exclude/> </CustomerScope>
+   <Description>Ranks the affected business services and organizations by total incident count</Description>
+   <SelectClause numEntries="All">
+     <AttrList>bizService,phCustId,COUNT(*)</AttrList>
+   </SelectClause>
+   <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+   <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+   <PatternClause window="3600">
+     <SubPattern displayName="Filter_SG" name="Filter_SG">
+       <SingleEvtConstr>phEventCategory = 1 AND bizService != "" </SingleEvtConstr>
+       <GroupByAttr>bizService,phCustId</GroupByAttr>
+     </SubPattern>
+   </PatternClause>
+   <inline>false</inline>
+   <active>false</active>
+ </Report>
+ 
+ <Report group="PH_SYS_REPORT_SuperGlobal" id="PH_Report_7">
+   <Name>Top Business Services and Organizations By Availability Incident Count </Name>
+   <CustomerScope groupByEachCustomer="false"> <Include all="true"/> <Exclude/> </CustomerScope>
+   <Description>Ranks the affected business services and organizations by the number of availability related incidents</Description>
+   <SelectClause numEntries="All">
+     <AttrList>bizService,phCustId,COUNT(*)</AttrList>
+   </SelectClause>
+   <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+   <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+   <PatternClause window="3600">
+     <SubPattern displayName="Filter_SG" name="Filter_SG">
+       <SingleEvtConstr>phEventCategory = 1 AND bizService != "" AND eventType IN (Group@PH_SYS_EVENT_PH_RULE_AVAIL)</SingleEvtConstr>
+       <GroupByAttr>bizService,phCustId</GroupByAttr>
+     </SubPattern>
+   </PatternClause>
+   <inline>false</inline>
+   <active>false</active>
+ </Report>
+
+
+ <Report group="PH_SYS_REPORT_SuperGlobal" id="PH_Report_8">
+   <Name>Top Business Services and Organizations By Performance Incident Count </Name>
+   <CustomerScope groupByEachCustomer="false"> <Include all="true"/> <Exclude/> </CustomerScope>
+   <Description>Ranks the affected business services and organizations by the number of performance related incidents</Description>
+   <SelectClause numEntries="All">
+     <AttrList>bizService,phCustId,COUNT(*)</AttrList>
+   </SelectClause>
+   <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+   <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+   <PatternClause window="3600">
+     <SubPattern displayName="Filter_SG" name="Filter_SG">
+       <SingleEvtConstr>phEventCategory = 1 AND bizService != "" AND eventType IN (Group@PH_SYS_EVENT_PH_RULE_PERF)</SingleEvtConstr>
+       <GroupByAttr>bizService,phCustId</GroupByAttr>
+     </SubPattern>
+   </PatternClause>
+   <inline>false</inline>
+   <active>false</active>
+ </Report>
+
+ <Report group="PH_SYS_REPORT_SuperGlobal" id="PH_Report_9">
+   <Name>Top Business Services and Organizations By Security Incident Count </Name>
+   <CustomerScope groupByEachCustomer="false"> <Include all="true"/> <Exclude/> </CustomerScope>
+   <Description>Ranks the affected business services and organizations by the number of security incidents</Description>
+   <SelectClause numEntries="All">
+     <AttrList>bizService,phCustId,COUNT(*)</AttrList>
+   </SelectClause>
+   <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+   <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+   <PatternClause window="3600">
+     <SubPattern displayName="Filter_SG" name="Filter_SG">
+       <SingleEvtConstr>phEventCategory = 1 AND bizService != "" AND eventType IN (Group@PH_SYS_EVENT_PH_RULE_SEC)</SingleEvtConstr>
+       <GroupByAttr>bizService,phCustId</GroupByAttr>
+     </SubPattern>
+   </PatternClause>
+   <inline>false</inline>
+   <active>false</active>
+ </Report>
+
+
+ <Report group="PH_SYS_REPORT_SuperGlobal" id="PH_Report_SG_13">
+    <Name>Top Organizations and Availability Incidents By Count </Name>
+    <CustomerScope groupByEachCustomer="false"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the organizations and availability incidents by count  </Description>
+    <SelectClause numEntries="All">
+      <AttrList>phCustId,eventType,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_SG" name="Filter_SG">
+        <SingleEvtConstr>phEventCategory = 1 AND eventType IN (Group@PH_SYS_EVENT_PH_RULE_AVAIL) </SingleEvtConstr>
+        <GroupByAttr>phCustId,eventType</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <inline>false</inline>
+    <active>false</active>
+ </Report>
+
+ <Report group="PH_SYS_REPORT_SuperGlobal" id="PH_Report_SG_14">
+    <Name>Top Organizations and Security Incidents By Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the organizations and security incidents by count  </Description>
+    <SelectClause numEntries="All">
+      <AttrList>phCustId,eventType,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_SG" name="Filter_SG">
+        <SingleEvtConstr>phEventCategory = 1 AND eventType IN (Group@PH_SYS_EVENT_PH_RULE_SEC) </SingleEvtConstr>
+        <GroupByAttr>phCustId,eventType</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <inline>false</inline>
+    <active>false</active>
+ </Report>
+
+ <Report group="PH_SYS_REPORT_SuperGlobal" id="PH_Report_SG_15">
+    <Name>Top Organizations and Performance Incidents By Count </Name>
+    <CustomerScope groupByEachCustomer="false"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the organizations and performance incidents by count</Description>
+    <SelectClause numEntries="All">
+      <AttrList>phCustId,eventType,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_SG" name="Filter_SG">
+        <SingleEvtConstr>phEventCategory = 1 AND eventType IN (Group@PH_SYS_EVENT_PH_RULE_PERF) </SingleEvtConstr>
+        <GroupByAttr>phCustId,eventType</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <inline>false</inline>
+    <active>false</active>
+ </Report>
+
+</Reports>

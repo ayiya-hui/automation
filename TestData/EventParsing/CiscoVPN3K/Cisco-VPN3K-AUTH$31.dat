@@ -1,0 +1,23 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<189>18174 01/07/1999 20:25:27.210 SEV=5 AUTH/31 RPT=14  User [ admin ] Protocol [ Telnet ] attempted ADMIN logon. Status: <REFUSED> authentication failure--automator
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=6
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=MEDIUM
+destIpAddr=$localhost
+eventAction=1 (Deny)
+eventName=Failed admin logon
+reptVendor=Cisco
+eventType=Cisco-VPN3K-AUTH/31
+user=admin
+phEventCategory=0 (External)
+reptDevIpAddr=$localhost
+reptModel=VPN 3K

@@ -1,0 +1,56 @@
+[reptDevIpAddr(key)]
+20.20.20.21
+[eventMsg]
+<134>Mar 29 18:21:57 $reporter %ASA-6-305011: Built dynamic TCP translation from inside:192.168.20.37/64033 to outside:216.156.83.134/16887
+[params]
+rawEventMsg=any
+deviceTime=any
+eventType=ASA-305011
+phCustId=$sender
+srcIpAddr=192.168.20.37
+reptModel=ASA
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Built address translation
+phEventCategory=0 (External)
+srcIntfName=inside
+srcIpPort=64033
+eventSeverityCat=LOW
+destIntfName=outside
+postNATSrcIpAddr=216.156.83.134
+ipProto=6 (TCP)
+postNATSrcIpPort=16887
+count=1
+phRecvTime=any
+reptDevIpAddr=$reporter
+eventAction=0 (Permit)
+reptVendor=Cisco
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>Nov 28 2007 17:20:48: %ASA-6-305011: Built dynamic TCP translation from inside:192.168.20.31/3530 to outside:99.129.50.157/5967
+[params]
+rawEventMsg=any
+deviceTime=any
+eventType=ASA-305011
+phCustId=$sender
+srcIpAddr=192.168.20.31
+reptModel=ASA
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Built address translation
+phEventCategory=0 (External)
+srcIntfName=inside
+srcIpPort=3530
+eventSeverityCat=LOW
+destIntfName=outside
+postNATSrcIpAddr=99.129.50.157
+ipProto=6 (TCP)
+postNATSrcIpPort=5967
+count=1
+phRecvTime=any
+reptDevIpAddr=$reporter
+eventAction=0 (Permit)
+reptVendor=Cisco

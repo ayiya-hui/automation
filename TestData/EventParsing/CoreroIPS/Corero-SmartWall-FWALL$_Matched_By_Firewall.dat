@@ -1,0 +1,36 @@
+[reptDevIpAddr(key)]
+192.168.51.65
+[eventMsg]
+<38>Dec 10 05:36:40 192.168.51.65 IPS5500-75EC: id=060002 pt=TLN-KA prot=UDP cip=50.58.90.98 cprt=39967 sip=208.67.220.220 sprt=53 atck=tln-001021 disp=monitor ckt=2 src=intern msg="FWALL: Matched By Firewall"
+[params]
+destGeoOrg=any
+parserName=CoreroIPSParser
+eventType=Corero-SmartWall-FWALL:_Matched_By_Firewall
+destGeoState=any
+destIpAddr=208.67.220.220
+srcName=any
+destIpPort=53 (DOMAIN)
+srcIpAddr=50.58.90.98
+destGeoCountry=any
+usrMsg=FWALL: Matched By Firewall
+reptModel=SmartWall
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=any
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+destName=any
+count=1
+srcIpPort=39967
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=192.168.51.65
+rawEventMsg=any
+ipProto=17 (UDP)
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=192.168.51.65
+reptVendor=Corero
+destGeoCity=any

@@ -1,0 +1,29 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<135> 11/25/2013:11:06:41  clxns 0-PPE-0 : SSLLOG SSL_HANDSHAKE_SUCCESS 12304730 0 :  SPCBId 2961104 - ClientIP 70.209.65.236 - ClientPort 9814 - VserverServiceIP 172.22.36.67 - VserverServicePort 443 - ClientVersion TLSv1.0 - CipherSuite RC4-MD5 TLSv1 Non-Export 128-bit - Session New
+[params]
+rawEventMsg=any
+deviceTime=any
+totFlows=1
+eventType=NETSCALER-SSLLOG-SSL_HANDSHAKE_SUCCESS
+phCustId=$sender
+destIpAddr=172.22.36.67
+srcName=any
+srcIpAddr=70.209.65.236
+reptModel=NetScaler
+eventId=any
+eventParsedOk=1
+eventSeverity=3
+eventName=NetScaler SSL handshake succeeded
+phEventCategory=0 (External)
+srcIpPort=9814
+eventSeverityCat=LOW
+collectorId=any
+destIpPort=443
+reptDevName=any
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Citrix

@@ -1,0 +1,30 @@
+[reptDevIpAddr(key)]
+20.20.20.120
+[eventMsg]
+Mon Dec 27 13:32:36 2010 20.20.20.120 AccelOps-WinLog-WMI [Category]="0" [CategoryString]="(null)" [ComputerName]="DBSQL" [Data]="NULL" [EventCode]="1121" [EventIdentifier]="3758097505" [EventType]="1" [Logfile]="Application" [RecordNumber]="527942" [SourceName]="ShadowProtectSvc" [TimeGenerated]="20101227133028.000000-480" [TimeWritten]="20101227133028.000000-480" [Type]="Error" [User]="NT AUTHORITY\SYSTEM" [Backup status]="failed" [Image file]="\\\\ARCA-REMOTE\D$\Backup\34A623003F6947E1-DBSQL\E_VOL-b001-i42458.spi" [Log file]="C:\Program Files\Zenith\Zenith Infotech\Logs\{D4CDB6F1-AC7C-4624-8839-ADC9492B9FC0}.txt" [Start time]="12/27/2010 1:29:59 PM" [Module]="sbfile" [Code]="503" [Message]="Fatal I/O error on \\ARAC-REMOTE\D$\Backup\34A623003F6947E1-DBSQL\E_VOL-b001-i42458,spi offset 0 on write (-112 There is not enough space on the disk.)"
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+backupStatus=failed
+code=503
+count=1
+phCustId=$sender
+destIpAddr=$reporter
+deviceTime=any
+eventAction=1 (Deny)
+eventId=any
+eventName=Zenith ARCA ShadowProtectSvc backup failed
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=3
+eventSeverityCat=LOW
+eventType=Win-App-ShadowProtectSvc-1121
+hostName=DBSQL
+imageFile=\\ARCA-REMOTE\D$\Backup\34A623003F6947E1-DBSQL\E_VOL-b001-i42458.spi
+msg=Fatal I/O error on \\ARAC-REMOTE\D$\Backup\34A623003F6947E1-DBSQL\E_VOL-b001-i42458,spi offset 0 on write (-112 There is not enough space on the disk.)
+reptDevIpAddr=20.20.20.120
+reptModel=Windows
+reptVendor=Microsoft
+startTime=any
+type=Audit Failure
+eventSource=ShadowProtectSvc

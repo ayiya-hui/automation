@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+3.2.3.1
+[eventMsg]
+<185>Jul 25 10:34:56 3.2.3.1 date=2010-04-11 time=20:31:25 devname=automator3Dot2Dot3Dot1 device_id=APS3012404200944 log_id=0104038003 type=event subtype=auth pri=notice vd=root user="root" ui=ssh(10.1.20.21) action=authenticate status=lockout msg="Usre at 10.1.20.21 failed authentication too many times."
+[params]
+deviceTime=any
+eventType=FortiGate-event-authenticate-lockout
+phCustId=$sender
+reptGeoState=Connecticut
+srcIpAddr=10.1.20.21
+usrMsg=Usre at 10.1.20.21 failed authentication too many times.
+reptModel=FortiOS
+eventId=any
+eventParsedOk=1
+eventSeverity=3
+eventName=Administrator locked out - excessive authentication failures
+appTransportProto=ssh
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=3.2.3.1
+user=root
+count=1
+reptGeoCity=any
+phRecvTime=any
+reptDevIpAddr=3.2.3.1
+eventAction=0 (Permit)
+reptVendor=Fortinet

@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+192.168.24.11
+[eventMsg]
+<134>Jan 15 10:31:44 192.168.24.11 java: [VMware_TaskEvent], [eventTime]=2010-01-15 10:27:55:243, [rptIp]=192.168.24.11, [user]=Administrator, [vmwEventId]=210795, [vmwEventCat]=info, [vmHost]=192.168.1.3, [cluster]=192.168.1.3, [vm]=add-remove-test, [datacenter]=PH.Net, [vmwEventMsg]=Task: Destroy Virtual Machine
+[params]
+rawEventMsg=any
+count=1
+datacenter=PH.Net
+deviceTime=any
+eventParsedOk=1
+vmwEventCat=info
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+vmwEventMsg=Task: Destroy Virtual Machine
+eventName=Task event
+cluster=192.168.1.3
+reptDevIpAddr=192.168.24.11
+reptVendor=VMware
+eventType=VMware_TaskEvent
+user=Administrator
+phEventCategory=0 (External)
+eventId=any
+reptDevName=192.168.1.3
+reptModel=Generic

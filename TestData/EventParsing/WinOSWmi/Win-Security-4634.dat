@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+20.20.20.120
+[eventMsg]
+Fri Oct 30 18:19:58 2009 $reporter AccelOps-WinLog-WMI  [Category]="12545" [CategoryString]="Logoff" [ComputerName]="sf1dc03.jha.local" [Data]="NULL" [EventCode]="4634" [EventIdentifier]="4634" [EventType]="4" [Logfile]="Security" [RecordNumber]="184035406" [SourceName]="Microsoft-Windows-Security-Auditing" [TimeGenerated]="20100505222919.103412-000" [TimeWritten]="20100505222919.103412-000" [Type]="Audit Success" [User]="(null)" [[Subject]][Security ID]="S-1-5-21-2090294290-982477196-2044928816-8601" [Account Name]="websenseadmin" [Account Domain]="JHA" [Logon ID]="0x5509fff" [Logon Type]="3"
+[params]
+rawEventMsg=any
+type=Audit Success
+eventAction=0 (Permit)
+count=1
+eventId=any
+domain=JHA
+deviceTime=any
+eventParsedOk=1
+winLogonType=3(Network - logon)
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=$reporter
+winLogonId=0x5509fff
+eventName=Windows logoff
+reptVendor=Microsoft
+eventType=Win-Security-4634
+user=websenseadmin
+phEventCategory=0 (External)
+reptDevIpAddr=$reporter
+reptModel=Windows
+eventSource=Microsoft-Windows-Security-Auditing

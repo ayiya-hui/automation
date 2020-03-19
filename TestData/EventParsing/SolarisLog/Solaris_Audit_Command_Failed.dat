@@ -1,0 +1,29 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<109>Aug 20 14:06:53 audit: [ID 702911 audit.notice] open(2) - read failed session 3585965386 by root as root:root from yes.this.is.tech.support obj /root/.bash_login
+[params]
+deviceTime=any
+parserName=SolarisLogParser
+eventType=Solaris_Audit_Command_Failed
+srcName=yes.this.is.tech.support
+osObjName=/root/.bash_login
+reptModel=Solaris
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Solaris_Audit_Command_Failed
+phEventCategory=0 (External)
+eventRuleTrigger=1
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+user=root
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+sessionId=3585965386
+reptVendor=Sun
+command=open/read

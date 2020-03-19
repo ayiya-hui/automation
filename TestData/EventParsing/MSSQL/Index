@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+PH_DEV_MON_PERF_MSSQL_SYS,MSSQL_1,MSSQL,70.70.70.1,,syslog
+PH_DEV_MON_PERF_MSSQL_PERDB,MSSQL_2,MSSQL,70.70.70.2,,syslog

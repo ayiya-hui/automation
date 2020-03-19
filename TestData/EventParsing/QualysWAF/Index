@@ -1,0 +1,10 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+Qualys-WAF-Web-Bad-Request,QualysWAF_1,QualysWAF,$localhost,,syslog
+Qualys-WAF-Web-Client-Access-Denied,QualysWAF_2,QualysWAF,$localhost,,syslog
+Qualys-WAF-Web-Client-Error,QualysWAF_3,QualysWAF,$localhost,,syslog
+Qualys-WAF-Web-Forbidden-Access-Denied,QualysWAF_4,QualysWAF,$localhost,,syslog
+Qualys-WAF-Web-Length-Reqd-Access-Denied,QualysWAF_5,QualysWAF,$localhost,,syslog
+Qualys-WAF-Web-Request,QualysWAF_6,QualysWAF,$localhost,,syslog
+Qualys-WAF-Web-Request-Redirect,QualysWAF_7,QualysWAF,$localhost,,syslog
+Qualys-WAF-Web-Server-Error,QualysWAF_9,QualysWAF,$localhost,,syslog

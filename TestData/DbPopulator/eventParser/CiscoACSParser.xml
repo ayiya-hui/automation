@@ -1,0 +1,106 @@
+<eventParser name="CiscoACSParser">
+
+  <deviceType>
+    <Vendor>Microsoft</Vendor>
+    <Model>Windows</Model>
+    <Version>ANY</Version>
+  </deviceType>
+
+  <appType>
+    <Vendor>Cisco</Vendor>
+    <Model>Cisco Secure ACS</Model>
+    <Version>ANY</Version>
+    <Name>Cisco Secure ACS Auth Server</Name>
+  </appType>
+  
+  <eventFormatRecognizer><![CDATA[(CisACS_|Cisco_ACS_)\d+]]></eventFormatRecognizer>
+  
+  <testEvents>
+      <testEvent><![CDATA[<38>Apr 20 06:36:11 11.22.22.11 CisACS_01_PassedAuth phvdc8d 1 0 Message-Type=Authen OK,User-Name=WenYong,NAS-IP-Address=192.168.19.18,Caller-ID=192.168.29.8,NAS-Port=6,Group-Name=Default Group,Filter Information=No Filters activated.,Access Device=SJ-Dev-A-IOS-Lab-01]]></testEvent>
+      <testEvent><![CDATA[<38>Apr 20 06:36:11 11.22.22.12 Cisco_ACS_01_PassedAuth phvdc8d 1 0 Message-Type=Authen OK,User-Name=WenYong,NAS-IP-Address=192.168.19.18,Caller-ID=192.168.29.8,NAS-Port=6,Group-Name=Default Group,Filter Information=No Filters activated.,Access Device=SJ-Dev-A-IOS-Lab-01]]></testEvent>
+  </testEvents>
+  
+  <!-- pattern definitions --> 
+  <patternDefinitions>
+    <pattern name="patStrQuote"><![CDATA[[^']+]]></pattern>
+  </patternDefinitions>
+  
+  <parsingInstructions>
+    <!-- parsing common fields -->
+ 
+	<switch>
+		<case>
+			<collectFieldsByRegex src="$_rawmsg">
+				<regex><![CDATA[<:gPatSyslogPRI><_mon:gPatMon>\s+<_day:gPatDay>\s+<_time:gPatTime> <reptDevIpAddr:gPatIpV4Dot> <eventType:gPatStr>\s+<:gPatStr>\s+<:gPatStr>\s+<:gPatStr>\s+<_body:gPatMesgBody>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="deviceTime">toDateTime($_mon, $_day, $_time)</setEventAttribute>
+		</case>
+		<case>
+			<collectFieldsByRegex src="$_rawmsg">
+				<regex><![CDATA[<:gPatStr>\s+<:gPatStr>\s+<:gPatStr>\s+<:gPatStr>\s+<_body:gPatMesgBody>]]></regex>
+			</collectFieldsByRegex>
+		</case>
+	</switch>
+   
+    <setEventAttribute attr="eventAction">0</setEventAttribute>
+    <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+    
+    <!-- message specific parsing
+		<38>Dec 14 20:38:13 192.168.0.10 CisACS_01_PassedAuth 1eh2c073 1 0 Message-Type=Authen OK,User-Name=partha,NAS-IP-Address=192.168.0.2,Caller-ID=192.168.20.47,NAS-Port=6,Group-Name=Default Group,Filter Information=No Filters activated.,AAA Server=ADS-Pri,Network Access Profile Name=(Default)
+		<38>Dec 14 20:40:54 192.168.0.10 CisACS_02_FailedAuth o46b7r4 1 0 Message-Type=Authen failed,User-Name=partha,NAS-IP-Address=192.168.0.2,Authen-Failure-Code=External DB user invalid or bad password,Caller-ID=192.168.20.47,NAS-Port=6,Group-Name=Default Group,Network Access Profile Name=(Default),AAA Server=ADS-Pri,
+		<38>Dec 14 20:41:08 192.168.0.10 CisACS_02_FailedAuth s00mkn5 1 0 Message-Type=Authen failed,User-Name=zoe,NAS-IP-Address=192.168.0.2,Authen-Failure-Code=External DB user invalid or bad password,Caller-ID=192.168.20.47,NAS-Port=6,Group-Name=Default Group,Network Access Profile Name=(Default),AAA Server=ADS-Pri,
+
+		<11>Feb  7 05:40:46 192.168.0.10 CisACS_13_AdminAudit  1pmorwph 1 0 AAA Server=ADS-PRI,admin-username=admin,browser-ip=192.168.20.35,text-message=Administration session started,
+		<11>Feb  7 05:40:37 192.168.0.10 CisACS_13_AdminAudit  1n4sfgpg 1 0 AAA Server=ADS-PRI,admin-username=-SECURITY-,browser-ip=192.168.20.35,text-message=Administrator 'admin' login failed.,
+		<11>Feb  7 05:50:37 192.168.0.10 CisACS_13_AdminAudit  cisuvdj 1 0 AAA Server=ADS-PRI,admin-username=-SECURITY-,browser-ip=192.168.20.35,text-message=Unknown Administrator 'adminTest' login failed.,               
+               	       
+	       Cisco_ACS_3_x_02    1    1 1431946295 NAS-IP-Address=10.10.10.1,AAA Server=iedc02,User-Name=mlocke,NAS-Port=6973,Message-Type=Authen failed,Authen-Failure-Code=External DB user invalid
+	       Cisco_ACS_3_x_01    1    1     289500 Caller-ID=ip:source-ip=172.22.2.32,NAS-IP-Address=10.10.10.1,AAA Server=iedc02,System-Posture-Token=,User-Name=mlocke,NAS-Port=6978,EAP Type Name=,Date=08/25/2010,Time=08:45:16,Message-Type=Authen OK,Group-Name=Default Group,Network Access Profile Name=(Default),Downloadable ACL=,Application-Posture-Token=,Reason=,EAP Type=,PEAP/EAP-FAST-Clear-Name=,Access Device=ie-asa-01,Network Device Group=Firewalls
+	       -->
+  
+    <collectAndSetAttrByKeyValuePair src="$_body" sep=",">
+      <attrKeyMap attr="user" key="User-Name="/>
+      <attrKeyMap attr="user" key="admin-username="/>
+      <attrKeyMap attr="srcIpAddr" key="Caller-ID="/>
+      <attrKeyMap attr="srcIpAddr" key="browser-ip="/>
+      <attrKeyMap attr="srcIpAddr" key="Caller-ID=ip:source-ip="/>
+      <attrKeyMap attr="srcIpAddr" key="source-ip="/>
+      <attrKeyMap attr="userGrp" key="Group-Name="/>
+      <attrKeyMap attr="relayDevName" key="AAA Server="/>
+      <attrKeyMap attr="reptDevName" key="AAA Server="/>
+      <attrKeyMap attr="destIpAddr" key="NAS-IP-Address="/>
+      <attrKeyMap attr="nepDevIpAddr" key="NAS-IP-Address="/>
+      <attrKeyMap attr="nepDevPort" key="NAS-Port="/>
+      <attrKeyMap attr="ciscoACSFailCode" key="Authen-Failure-Code="/>
+      <attrKeyMap attr="_mesg" key="text-message="/>
+      <attrKeyMap attr="_mesgType" key="Message-Type="/>
+    </collectAndSetAttrByKeyValuePair>	
+    
+        	<when test='exist _mesgType'>
+		<when test='matches($_mesgType, "Authen OK")'>
+		  <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		    <setEventAttribute attr="eventType">CisACS_01_PassedAuth</setEventAttribute>
+		</when>
+		<when test='matches($_mesgType, "Authen failed")'>
+		  <setEventAttribute attr="eventAction">1</setEventAttribute>
+		    <setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		    <setEventAttribute attr="eventType">CisACS_02_FailedAuth</setEventAttribute>
+		</when>
+	</when>
+	 <when test='exist _mesg'>		   
+		  <when test='matches($_mesg, "session started")'>
+		    <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		    <setEventAttribute attr="eventType">CisACS_13_AdminAudit_Success</setEventAttribute>
+		  </when>
+		  <when test='matches($_mesg, "login failed")'>
+		    <setEventAttribute attr="eventAction">1</setEventAttribute>
+		    <setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		    <setEventAttribute attr="eventType">CisACS_13_AdminAudit_Fail</setEventAttribute>
+		    <collectFieldsByRegex src="$_mesg">
+		      <regex><![CDATA[<:patStrQuote>'<user:patStrQuote>' login failed<:gPatMesgBody>]]></regex>
+		    </collectFieldsByRegex>
+		  </when>
+	 </when>
+ 
+  </parsingInstructions>
+</eventParser>

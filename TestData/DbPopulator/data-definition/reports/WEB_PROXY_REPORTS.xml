@@ -1,0 +1,469 @@
+<Reports>
+ 
+<Report id="PH_Report_WEB_PROXY_1"  group="PH_SYS_REPORT_WebProxy">
+    <Name>Top Visited Web Sites By Connections</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks Visited Web Sites By Connections</Description>
+    <SelectClause numEntries="All">
+        <AttrList>destName,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WEB_PROXY_1" name="Filter_WEB_PROXY_1">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_SEC_GW,Group@PH_SYS_APP_SEC_GW) AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic) </SingleEvtConstr>
+           <GroupByAttr>destName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+</Report>
+
+<Report id="PH_Report_WEB_PROXY_2" group="PH_SYS_REPORT_WebProxy">
+    <Name>Top Visited Web Sites By Bytes</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks Visited Web Sites By Bytes</Description>
+    <SelectClause numEntries="All">
+        <AttrList>destName,COUNT(*),SUM(sentBytes),SUM(recvBytes),SUM(totBytes)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>SUM(totBytes) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WEB_PROXY_2" name="Filter_WEB_PROXY_2">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_SEC_GW,Group@PH_SYS_APP_SEC_GW)  AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic) </SingleEvtConstr>
+           <GroupByAttr>destName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+</Report>	   
+	   
+<Report id="PH_Report_WEB_PROXY_3" group="PH_SYS_REPORT_WebProxy">
+    <Name>Top Web Users By Connections </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks Web Users By Connections </Description>
+    <SelectClause numEntries="All">
+        <AttrList>srcIpAddr, COUNT(*), SUM(sentBytes),SUM(recvBytes)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WEB_PROXY_3" name="Filter_WEB_PROXY_3">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_SEC_GW,Group@PH_SYS_APP_SEC_GW) AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic) </SingleEvtConstr>
+           <GroupByAttr>srcIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+</Report>	   
+
+<Report id="PH_Report_WEB_PROXY_4" group="PH_SYS_REPORT_WebProxy">
+    <Name>Top Web Users By Bytes</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks Web Users By Bytes</Description>
+    <SelectClause numEntries="All">
+        <AttrList>srcIpAddr, COUNT(*), SUM(sentBytes),SUM(recvBytes), SUM(totBytes)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>SUM(totBytes) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WEB_PROXY_4" name="Filter_WEB_PROXY_4">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_SEC_GW,Group@PH_SYS_APP_SEC_GW)  AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic) </SingleEvtConstr>
+           <GroupByAttr>srcIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+</Report>	   
+
+<Report id="PH_Report_WEB_PROXY_5" group="PH_SYS_REPORT_WebProxy">
+    <Name>Top Web Sessions By Connections </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks Web Sessions By Connections </Description>
+    <SelectClause numEntries="All">
+        <AttrList>srcIpAddr, destName,COUNT(*), SUM(sentBytes),SUM(recvBytes)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WEB_PROXY_5" name="Filter_WEB_PROXY_5">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_SEC_GW,Group@PH_SYS_APP_SEC_GW) AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic) </SingleEvtConstr>
+           <GroupByAttr>srcIpAddr, destName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+</Report>	   
+
+<Report id="PH_Report_WEB_PROXY_6" group="PH_SYS_REPORT_WebProxy">
+    <Name>Top Web Sessions By Bytes </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks Web Sessions By Bytes</Description>
+    <SelectClause numEntries="All">
+        <AttrList>srcIpAddr, destIpAddr, COUNT(*), SUM(sentBytes),SUM(recvBytes), SUM(totBytes)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>SUM(totBytes) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WEB_PROXY_6" name="Filter_WEB_PROXY_6">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_SEC_GW,Group@PH_SYS_APP_SEC_GW) AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic) </SingleEvtConstr>
+           <GroupByAttr>srcIpAddr,destIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+</Report>	   
+
+<Report id="PH_Report_WEB_PROXY_7" group="PH_SYS_REPORT_WebProxy">
+    <Name>Top Client Web Browser types By Connections </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks Client Web Browser types</Description>
+    <SelectClause numEntries="All">
+        <AttrList>httpUserAgent,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WEB_PROXY_7" name="Filter_WEB_PROXY_7">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_DEVICE_SEC_GW,Group@PH_SYS_APP_SEC_GW)  AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic) </SingleEvtConstr>
+           <GroupByAttr>httpUserAgent</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+</Report>	   
+
+<Report id="PH_Report_WEB_PROXY_8" group="PH_SYS_REPORT_WebProxy">
+    <Name>Top Web Users By Uncommon HTTP Method Connections</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks web users by uncommon HTTP methods used </Description>
+    <SelectClause numEntries="All">
+        <AttrList>srcIpAddr,httpMethod,uriStem,httpStatusCode,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> COUNT(*) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WEB_PROXY_8" name="Filter_WEB_PROXY_8">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_SEC_GW,Group@PH_SYS_APP_SEC_GW) AND httpMethod NOT IN ("GET", "POST") </SingleEvtConstr>
+           <GroupByAttr>srcIpAddr,httpMethod,uriStem,httpStatusCode</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+</Report>
+
+<Report id="PH_Report_WEB_PROXY_9" group="PH_SYS_REPORT_WebProxy">
+    <Name>Top Web Users By HTTP POST Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks web users by HTTP POST count - can catch malware sending confidential information out</Description>
+    <SelectClause numEntries="All">
+        <AttrList>srcIpAddr,destIpAddr,uriStem,httpUserAgent,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WEB_PROXY_9" name="Filter_WEB_PROXY_9">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_DEVICE_SEC_GW,Group@PH_SYS_APP_SEC_GW)  AND  httpStatusCode IN ("200") AND httpMethod = "POST"</SingleEvtConstr>
+           <GroupByAttr>srcIpAddr,destIpAddr,uriStem,httpUserAgent</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+</Report>
+	   
+<Report id="PH_Report_WEB_PROXY_10" group="PH_SYS_REPORT_WebProxy">
+    <Name>Top Web Users By HTTP POST Exchanged Bytes </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks web clients by HTTP POST byte count - can catch malware sending confidential information out</Description>
+    <SelectClause numEntries="All">
+        <AttrList>srcIpAddr,destIpAddr,uriStem,httpUserAgent,SUM(sentBytes),COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>SUM(sentBytes) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WEB_PROXY_10" name="Filter_WEB_PROXY_10">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_DEVICE_SEC_GW,Group@PH_SYS_APP_SEC_GW)  AND  httpStatusCode IN ("200") AND httpMethod = "POST" </SingleEvtConstr>
+           <GroupByAttr>srcIpAddr,destIpAddr,uriStem,httpUserAgent</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+</Report>	   
+
+<Report id="PH_Report_WEB_PROXY_11"  group="PH_SYS_REPORT_WebProxy">
+    <Name>Top Visited Web Sites And Categories By Connections</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks (successfully) visited web sites and categories by the number of connections</Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,destName,webCategory,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WEB_PROXY_11" name="Filter_WEB_PROXY_11">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_SEC_GW,Group@PH_SYS_APP_SEC_GW) AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic) </SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr,destName,webCategory</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+</Report>
+
+
+<Report id="PH_Report_WEB_PROXY_12"  group="PH_SYS_REPORT_WebProxy">
+    <Name>Top Denied Web Sites And Categories By Connections</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks web sites and categories that were denied by policy, by the number of connections</Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,destName,webCategory,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WEB_PROXY_12" name="Filter_WEB_PROXY_12">
+           <SingleEvtConstr>eventType IN (Group@PH_SYS_EVENT_WebsiteCategoryViolation) </SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr,destName,webCategory</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+</Report>
+
+<Report id="PH_Report_WEB_PROXY_13"  group="PH_SYS_REPORT_WebProxy">
+    <Name>Top Web Users, Denied Sites And Categories By Connections</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks users, web sites and categories that were denied by policy, by the number of connections</Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,srcIpAddr,destName,webCategory,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WEB_PROXY_13" name="Filter_WEB_PROXY_13">
+           <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_WebsiteCategoryViolation)</SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr,srcIpAddr,destName,webCategory</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+</Report>
+
+<Report id="PH_Report_WEB_PROXY_14"  group="PH_SYS_REPORT_WebProxy">
+    <Name>Top Inbound Blacklisted Mail Gateways By Connections</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks denied mail gateways by the number of attempted SMTP connections. The most common reason of denial is often the gateway being included in blacklists.</Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,srcIpAddr,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WEB_PROXY_14" name="Filter_WEB_PROXY_14">
+           <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_MailMalware_GwBlocked) AND srcIpAddr NOT IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) </SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr,srcIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+</Report>
+
+<Report id="PH_Report_WEB_PROXY_15"  group="PH_SYS_REPORT_WebProxy">
+    <Name>Top Inbound Blacklisted Mail Gateways and SMTP Error Types By Connections</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks denied mail gateways and the SMTP errors by the number of attempted connections. The most common SMTP error is often the gateway being included in mail blacklists.</Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,srcIpAddr,smtpFailCode,errReason,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WEB_PROXY_15" name="Filter_WEB_PROXY_15">
+           <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_MailMalware_GwBlocked) AND srcIpAddr NOT IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) </SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr,srcIpAddr,smtpFailCode,errReason</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+</Report>
+
+<Report id="PH_Report_WEB_PROXY_16"  group="PH_SYS_REPORT_WebProxy">
+    <Name>Filtered Inbound Spam Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Counts total inbound spam denied by spam filtering policy</Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,eventType,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WEB_PROXY_16" name="Filter_WEB_PROXY_16">
+           <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_MailMalware_GwBlocked) AND srcIpAddr NOT IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) </SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr,eventType</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+</Report>
+
+
+<Report id="PH_Report_WEB_PROXY_17"  group="PH_SYS_REPORT_WebProxy">
+    <Name>Top Outbound Blacklisted Mail Gateways By Connections</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks denied mail gateways by the number of attempted SMTP connections. The most common reason of denial is often the gateway being included in blacklists.</Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,destIpAddr,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WEB_PROXY_17" name="Filter_WEB_PROXY_17">
+           <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_MailMalware_GwBlocked) AND destIpAddr NOT IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) </SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr,destIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+</Report>
+
+<Report id="PH_Report_WEB_PROXY_18"  group="PH_SYS_REPORT_WebProxy">
+    <Name>Top Outbound Blacklisted Mail Gateways and SMTP Error Types By Connections</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks denied mail gateways and the SMTP errors by the number of attempted connections. The most common SMTP error is often the gateway being included in mail blacklists.</Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,destIpAddr,smtpFailCode,errReason,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WEB_PROXY_18" name="Filter_WEB_PROXY_18">
+           <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_MailMalware_GwBlocked) AND destIpAddr NOT IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET)</SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr,destIpAddr,smtpFailCode,errReason</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+</Report>
+
+<Report id="PH_Report_WEB_PROXY_19"  group="PH_SYS_REPORT_WebProxy">
+    <Name>Filtered Outbound Spam Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Counts total outbound spam denied by policy</Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,eventType,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WEB_PROXY_16" name="Filter_WEB_PROXY_16">
+           <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_MailMalware_Remedy_Success) AND destIpAddr NOT IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET)</SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr,eventType</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+</Report>
+
+<Report id="PH_Report_WEB_PROXY_20"  group="PH_SYS_REPORT_WebProxy">
+    <Name>Total Denied Web Connections By Policy</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Counts denied web site connections because of policy violations</Description>
+    <SelectClause numEntries="All">
+        <AttrList>COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WEB_PROXY_20" name="Filter_WEB_PROXY_20">
+           <SingleEvtConstr>eventType IN (Group@PH_SYS_EVENT_WebsiteCategoryViolation) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+</Report>
+
+<Report id="PH_Report_WEB_PROXY_21"  group="PH_SYS_REPORT_WebProxy">
+    <Name>Top Mail Security Gateway Actions By Count</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the actions taken by the mail security gateway - actions include blocking an inbound/outbound mail gateway because of RBL or other SMTP violations, blocking a mail because of spam or other policy violations and delivering a mail </Description>
+    <SelectClause numEntries="All">
+        <AttrList>eventType,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WEB_PROXY_21" name="Filter_WEB_PROXY_21">
+           <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_MailMalware_GwBlocked,Group@PH_SYS_EVENT_MailMalware_Remedy_Success,Group@PH_SYS_EVENT_PermitTraffic) AND reptDevIpAddr IN (Group@PH_SYS_DEVICE_SEC_GW,Group@PH_SYS_APP_SEC_GW) </SingleEvtConstr>
+           <GroupByAttr>eventType</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+</Report>
+
+<Report id="PH_Report_WEB_PROXY_22"  group="PH_SYS_REPORT_WebProxy">
+    <Name>Top Reporting Security Gateways By Event Count</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the security gateways by the number of events  </Description>
+    <SelectClause numEntries="All">
+        <AttrList>COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WEB_PROXY_21" name="Filter_WEB_PROXY_21">
+           <SingleEvtConstr> reptDevIpAddr IN (Group@PH_SYS_DEVICE_SEC_GW,Group@PH_SYS_APP_SEC_GW) </SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+</Report>
+
+<Report id="PH_Report_WEB_PROXY_23"  group="PH_SYS_REPORT_WebProxy">
+  <Name>Top User Web Activity By Connections</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the users, successfully visited web sites and categories by the number of connections. This report is applicable for security gateways, proxies and firewalls that do web traffic content inspection e.g. Palo Alto Firewall, Bluecoat, Squid etc. </Description>
+    <SelectClause numEntries="All">
+      <AttrList>srcIpAddr,destName,webCategory,eventAction,SUM(count),SUM(totBytes)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>SUM(count) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WEB_PROXY_11" name="Filter_WEB_PROXY_11">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_SEC_GW,Group@PH_SYS_APP_SEC_GW) AND eventType IN (Group@PH_SYS_EVENT_WebTraffic) </SingleEvtConstr>
+        <GroupByAttr>srcIpAddr,destName,webCategory,eventAction</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+</Report>
+
+<Report id="PH_Report_WEB_PROXY_24"  group="PH_SYS_REPORT_WebProxy">
+  <Name>Detailed User Web Activity </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> Details user web activity. This report is applicable for security gateways, proxies and firewalls that do web traffic content inspection e.g. Palo Alto Firewall, Bluecoat, Squid etc. </Description>
+    <SelectClause numEntries="All">
+      <AttrList>deviceTime,srcIpAddr,destName,webCategory,eventAction,count</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WEB_PROXY_11" name="Filter_WEB_PROXY_11">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_SEC_GW,Group@PH_SYS_APP_SEC_GW) AND eventType IN (Group@PH_SYS_EVENT_WebTraffic) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+</Report>
+
+<Report id="PH_Report_WEB_PROXY_25"  group="PH_SYS_REPORT_WebProxy">
+  <Name>Bluecoat client to proxy metrics</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Details Bluecoat client to  proxy requests, transferred bytes/sec, cache hits, errors </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr, AVG(client2ProxyHttpReq), AVG(client2ProxyHttpKBps), AVG(proxy2ClientHttpKBps), AVG(client2ProxyHttpCacheHit), AVG(client2ProxyHttpError)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList></AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WEB_PROXY_11" name="Filter_WEB_PROXY_11">
+        <SingleEvtConstr>eventType = "PH_DEV_MON_BC_PROXY_METRIC" </SingleEvtConstr>
+        <GroupByAttr>reptDevIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+</Report>
+
+<Report id="PH_Report_WEB_PROXY_26"  group="PH_SYS_REPORT_WebProxy">
+  <Name>Bluecoat proxy to server metrics</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Details Bluecoat proxy to server requests, errors, transferred bytes/sec</Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr, AVG(proxy2ServerHttpReq), AVG(proxy2ServerHttpKBps), AVG(server2ProxyHttpKBps), AVG(proxy2ServerHttpErr), AVG(proxyCacheObjCount) </AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList></AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WEB_PROXY_11" name="Filter_WEB_PROXY_11">
+        <SingleEvtConstr>eventType = "PH_DEV_MON_BC_PROXY_METRIC" </SingleEvtConstr>
+        <GroupByAttr>reptDevIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+</Report>
+
+</Reports>

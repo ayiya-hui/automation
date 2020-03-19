@@ -1,0 +1,7 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+WatchGuard-traffic-permit,WatchGuardFirewall_1,WatchGuardFirewall,$localhost,,syslog
+WatchGuard-traffic-deny,WatchGuardFirewall_2,WatchGuardFirewall,$localhost,,syslog
+WatchGuard-proxy-disconnection,WatchGuardFirewall_3,WatchGuardFirewall,$localhost,,syslog
+WatchGuard-admin-logon-failure,WatchGuardFirewall_4,WatchGuardFirewall,$localhost,,syslog
+WatchGuard-SSLVPN-Logon-Success,WatchGuardFirewall_5,WatchGuardFirewall,$localhost,,syslog

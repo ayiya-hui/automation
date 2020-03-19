@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<27>Mar 22 20:10:50 VA461_1022 CyberArk AIM[2453]: APPAP289E Connection to the Vault has failed. Further attempts to connect to the Vault will be avoided for [1] minutes.
+[params]
+customer=Super
+eventId=any
+parserName=CyberArk2Parser
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+count=1
+eventSeverity=1
+eventType=CyberArk-Vault-Connection-failed
+reptDevIpAddr=$localhost
+collectorId=any
+extEventRecvProto=Syslog
+eventName=CyberArk-Vault-Connection-failed
+reptVendor=CyberArk
+relayDevIpAddr=$localhost
+rawEventMsg=any
+phRecvTime=any
+reptDevName=any
+reptModel=Enterprise Password Vault

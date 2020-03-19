@@ -1,0 +1,23 @@
+[reptDevIpAddr(key)]
+20.20.20.20
+[eventMsg]
+<13>Jan 14 18:57:59 20.20.20.20 MSWinEventLog	1	System	9178	Wed Jan 14 18:57:53 2009	7035	Service Control Manager	Administrator	User	Information	ADS-PRI	None		The SNMP Service service was successfully sent a stop control.  	59  Automation
+[params]
+rawEventMsg=any
+eventSeverity=1
+eventSeverityCat=LOW
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+phRecvTime=any
+phCustId=$sender
+reptDevIpAddr=20.20.20.20
+destIpAddr=20.20.20.20
+swProcName=SNMP Service
+eventName=Win-System-Service-Control-Manager-7035
+procName=SNMP Service
+reptVendor=Microsoft
+eventType=Win-System-Service-Control-Manager-7035
+phEventCategory=0 (External)
+reptModel=Windows

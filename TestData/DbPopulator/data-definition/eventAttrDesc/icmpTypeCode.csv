@@ -1,0 +1,85 @@
+$icmpType,Description
+0,Echo Reply
+1,Unassigned
+2,Unassigned
+3,Destination unreachable
+4,Source Quench
+5,Redirect
+6,Alternate Host Address
+7,Unassigned
+8,Echo Request
+9,Router Advertisement
+10,Router Selection
+11,Time Exceeded
+12,Parameter Problem
+13,Timestamp
+14,Timestamp Reply
+15,Information Request
+16,Information Reply
+17,Address Mask Request
+18,Address Mask Reply
+19,Reserved (for Security)
+20,Reserved (for Robustness Experiment)
+21,Reserved (for Robustness Experiment)
+22,Reserved (for Robustness Experiment)
+23,Reserved (for Robustness Experiment)
+24,Reserved (for Robustness Experiment)
+25,Reserved (for Robustness Experiment)
+26,Reserved (for Robustness Experiment)
+27,Reserved (for Robustness Experiment)
+28,Reserved (for Robustness Experiment)
+29,Reserved (for Robustness Experiment)
+30,Traceroute
+31,Datagram Conversion Error
+32,Mobile Host Redirect
+33,IPv6 Where-Are-You
+34,IPv6 I-Am-Here
+35,Mobile Registration Request
+36,Mobile Registration Reply
+39,SKIP protocol
+40,Photuris
+,
+,
+$icmpCode,Description
+0.0,Echo Reply
+3.0,Destination net unreachable
+3.1,Destination  host unreachable
+3.2,Destination  protocol unreachable
+3.3,Destination  port unreachable
+3.4,Fragmentation needed and don't fragment was set 
+3.5,Source route failed
+3.6,Destination network unknown
+3.7,Destination host unknown
+3.8,Source host isolated
+3.9,Communication with destination network is administratively prohibited
+3.10,Communication with destination host is administratively prohibited
+3.11,Destination network unreachable for type of service
+3.12,Destination host unreachable for type of service
+3.13,Communication administratively prohibited
+3.14,Host precedence violation
+3.15,Precedence cutoff in effect
+4.0,Source Quench
+5.0,Redirect datagram for the network (or subnet)
+5.1,Redirect datagram for the host
+5.2,Redirect datagram for the type of service and network
+5.3,Redirect datagram for the type of service and host
+9.0,Normal router advertisement
+9.16,Does not route common traffic
+10.0,Router Selection
+11.0,Time to Live exceeded in Transit
+11.1,Fragment Reassembly Time Exceeded
+12.0,Pointer indicates the error
+12.1,Missing a Required Option
+12.2,Bad Length
+13.0,Timestamp
+14.0,Timestamp Reply
+15.0,Information Request
+16.0,Information Reply
+17.0,Address Mask Request
+18.0,Address Mask Reply
+40.0,Photuris - Bad SPI
+40.1,Photuris - Authentication Failed
+40.2,Photuris - Decompression Failed
+40.3,Photuris - Decryption Failed
+40.4,Photuris - Need Authentication
+40.5,Photuris - Need Authorization

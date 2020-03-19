@@ -1,0 +1,23 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>Juniper: 2008-10-28 04:35:30 - ive - [192.168.20.82] wenyong(Users)[] - Primary authentication failed for wenyong/SteelBelted from 192.168.20.82
+[params]
+rawEventMsg=any
+eventSeverity=6
+eventSeverityCat=MEDIUM
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+phRecvTime=any
+phCustId=$sender
+reptDevIpAddr=$localhost
+srcIpAddr=192.168.20.82
+eventAction=1 (Deny)
+eventName=Failed VPN logon
+reptVendor=Juniper
+eventType=Juniper-SecureAccess-VPN-Logon-Failure
+user=wenyong
+phEventCategory=0 (External)
+reptModel=Secure Access

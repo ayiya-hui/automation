@@ -1,0 +1,24 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<190>43: Dec 14 23:35:01.463: %FW-4-HOST_TCP_ALERT_ON: Max tcp half-open connections (2330) exceeded for host 13.13.13.13
+[params]
+deviceTime=any
+eventType=IOS-FW-HOST_TCP_ALERT_ON
+phCustId=$sender
+destIpAddr=13.13.13.13
+reptModel=IOS
+eventId=any
+eventParsedOk=1
+eventSeverity=5
+hostIpAddr=$localhost
+eventName=Half-open TCP conns for host above threshold
+phEventCategory=0
+eventSeverityCat=MEDIUM
+collectorId=any
+relayDevIpAddr=$localhost
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=Success(0)
+reptVendor=Cisco

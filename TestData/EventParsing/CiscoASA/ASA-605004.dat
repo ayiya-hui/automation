@@ -1,0 +1,52 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>Jul 24 2008 03:29:15: %ASA-6-605004: Login denied from SJ-Dev-S-RH-VMW-01/44206 to inside:192.168.19.1/telnet for user "wenyong"
+[params]
+rawEventMsg=any
+destIpAddr=192.168.19.1
+srcIntfName=inside
+srcIpPort=44206
+user=wenyong
+destIpPort=23
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+eventAction=1 (Deny)
+eventName=Failed login to the ASA appliance
+reptVendor=Cisco
+eventType=ASA-605004
+phEventCategory=0 (External)
+reptDevIpAddr=$reporter
+reptModel=ASA
+[reptDevIpAddr(key)]
+10.200.3.8
+[eventMsg]
+<134>Jul 24 03:29:15 $reporter %ASA-6-605004: Login denied from 192.168.19.1/telnet to inside:SJ-Dev-S-RH-VMW-01/44206 for user "wenyong"
+[params]
+rawEventMsg=any
+srcIpAddr=192.168.19.1
+srcIntfName=inside
+srcIpPort=23
+user=wenyong
+destIpPort=44206
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+eventAction=1 (Deny)
+eventName=Failed login to the ASA appliance
+reptVendor=Cisco
+eventType=ASA-605004
+phEventCategory=0 (External)
+reptDevIpAddr=$reporter
+reptModel=ASA

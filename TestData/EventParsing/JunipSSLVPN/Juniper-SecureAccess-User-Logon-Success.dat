@@ -1,0 +1,24 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>Juniper: 2008-10-28 03:12:03 - ive - [192.168.20.82] wenyong(Users)[] - Primary authentication successful for wenyong/SteelBelted from 192.168.20.82
+[params]
+rawEventMsg=any
+eventSeverity=4
+eventSeverityCat=LOW
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+phRecvTime=any
+phCustId=$sender
+reptDevIpAddr=$localhost
+srcIpAddr=192.168.20.82
+eventAction=0 (Permit)
+eventName=Successful user logon
+reptVendor=Juniper
+eventType=Juniper-SecureAccess-VPN-Logon-Success
+user=wenyong
+phEventCategory=0 (External)
+userGrp=Users
+reptModel=Secure Access

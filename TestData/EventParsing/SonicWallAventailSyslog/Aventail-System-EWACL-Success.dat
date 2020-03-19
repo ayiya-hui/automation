@@ -1,0 +1,31 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<182>Oct 16 05:26:40 syslog-ng@COS-Node-1 logserver: [16/Oct/2010:05:26:40.630013 -0700] COS-Node-1 020444 ps 10000017 Info    EWACL   User '(pair)@(COS Standard VPN)' connecting from '122.98.30.4:26288' matched rule #1 'Default Workplace permit all rule.', access to '127.0.0.1:8085' is permitted.
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+appName=Web proxy service
+ipConnId=10000017
+count=1
+phCustId=$sender
+destIpAddr=$reporter
+destIpPort=8085
+deviceTime=any
+domain=COS Standard VPN
+eventId=any
+eventName=Aventail web access success by policy
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=3
+eventSeverityCat=LOW
+eventType=Aventail-System-EWACL-Success
+fwRule=Default Workplace permit all rule.
+hostName=COS-Node-1
+procName=policy service
+reptDevIpAddr=$reporter
+reptModel=Aventail VPN
+reptVendor=Sonicwall
+srcIpAddr=122.98.30.4
+srcIpPort=26288
+user=pair

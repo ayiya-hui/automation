@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<13> March 09 11:51:28 AirWatch  AirWatch Syslog Details are as follows Event Type: Device, Event: ApplicationDownload, User: sysadmin, Event Source: Server, Event Module: AppCatalog, Event Category: Applications, Event Data: MessageText=Application: AirWatchRemoteManagement-base-release;BytesReceived=Event Timestamp: March 9, 2016 11:51:27
+[params]
+customer=Super
+eventId=any
+parserName=AirWatchParser
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+count=1
+eventSeverity=1
+eventType=AirWatch-MDM-ApplicationDownload
+reptDevIpAddr=$localhost
+collectorId=any
+eventName=AirWatch MDM Application download
+reptVendor=AirWatch
+relayDevIpAddr=$localhost
+user=sysadmin
+extEventRecvProto=Syslog
+phRecvTime=any
+eventRuleTrigger=1
+reptDevName=any
+reptModel=MDM

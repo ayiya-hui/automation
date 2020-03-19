@@ -1,0 +1,141 @@
+<Reports>
+
+  <Report id="PH_Report_ENV_1" group="PH_SYS_REPORT_Environ">
+   <Name>UPS Basic Status</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> Basic UPS status report</Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime, hostName, upsBatteryStatus, upsTimeOnBattery, upsRemainBatteryChargePct, upsEstSecRemain </AttrList>    
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_Env" name="Filter_Env">
+           <SingleEvtConstr> eventType = "PH_DEV_MON_UPS_METRIC" </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>hostIpAddr,reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_ENV_2" group="PH_SYS_REPORT_Environ">
+   <Name>UPS Detailed Status</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> Detailed UPS status report </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime, hostName, upsBatteryStatus, upsTimeOnBattery, upsRemainBatteryChargePct, upsEstSecRemain,upsBatteryVoltage,upsBatteryCurrent,upsBatteryTempF </AttrList>    
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_Env" name="Filter_Env">
+           <SingleEvtConstr> eventType = "PH_DEV_MON_UPS_METRIC" </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>hostIpAddr,reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_ENV_3" group="PH_SYS_REPORT_Environ">
+   <Name>APC UPS Detailed Status</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> Detailed APC UPS status report </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime, hostName, upsBatteryStatus, upsTimeOnBattery, upsRemainBatteryChargePct, upsEstSecRemain, upsReplaceBatteryIndicator, upsBasicOutputStatus,upsAdvOutputLoad,upsAdvOutputVoltage,upsAdvOutputFreq </AttrList>    
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_Env" name="Filter_Env">
+           <SingleEvtConstr> eventType = "PH_DEV_MON_UPS_METRIC" </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>hostIpAddr,reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_ENV_4" group="PH_SYS_REPORT_Environ">
+   <Name>UPS With Least Remaining Battery Charge</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> Ranks UPS by remaining battery charge (lowest first)</Description>
+    <SelectClause numEntries="All">
+        <AttrList>hostName, AVG(upsRemainBatteryChargePct), AVG(upsEstSecRemain) </AttrList>    
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(upsRemainBatteryChargePct) ASC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_Env" name="Filter_Env">
+           <SingleEvtConstr> eventType = "PH_DEV_MON_UPS_METRIC" </SingleEvtConstr>
+	   <GroupByAttr>hostName </GroupByAttr> 
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>hostIpAddr,reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_ENV_5" group="PH_SYS_REPORT_Environ">
+   <Name>Top Reporting UPS </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> Reporting UPS devices by number of events</Description>
+    <SelectClause numEntries="All">
+        <AttrList>hostName,hostIpAddr,COUNT(*) </AttrList>    
+    </SelectClause>
+    <OrderByClause><AttrList> COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_Env" name="Filter_Env">
+           <SingleEvtConstr> eventType = "PH_DEV_MON_UPS_METRIC" </SingleEvtConstr>
+	   <GroupByAttr>hostName,hostIpAddr </GroupByAttr> 
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>hostIpAddr,reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_ENV_6" group="PH_SYS_REPORT_Environ">
+   <Name>UPS With Degraded Batteries</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> UPS with low or depleted battery condition</Description>
+    <SelectClause numEntries="All">
+        <AttrList>hostName,hostIpAddr,upsBatteryStatus,COUNT(*) </AttrList>    
+    </SelectClause>
+    <OrderByClause><AttrList> upsBatteryStatus DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_Env" name="Filter_Env">
+           <SingleEvtConstr> eventType = "PH_DEV_MON_UPS_METRIC" AND upsBatteryStatus IN (3,4) </SingleEvtConstr>
+	   <GroupByAttr>hostName,hostIpAddr,upsBatteryStatus </GroupByAttr> 
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>hostIpAddr,reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_ENV_7" group="PH_SYS_REPORT_Environ">
+   <Name>Top Liebert HVAC By Temperature and Relative Humidity </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description></Description>
+    <SelectClause numEntries="All">
+        <AttrList>hostName,hostIpAddr,AVG(envTempDegF), AVG(envTempHighThreshDegF),AVG(envTempLowThreshDegF), AVG(envHumidityRel), AVG(envHumidityOffHigh), AVG(envHumidityOffLow) </AttrList>    
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(envTempDegF) DESC, AVG(envHumidityRel) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_Env" name="Filter_Env">
+           <SingleEvtConstr> eventType = "PH_DEV_MON_HVAC_LIEBERT_METRIC" </SingleEvtConstr>
+	   <GroupByAttr>hostName,hostIpAddr</GroupByAttr> 
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>hostIpAddr,reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+   <Report id="PH_Report_ENV_8" group="PH_SYS_REPORT_Environ">
+   <Name>Top Liebert FPC By Harmonic Distortion </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description></Description>
+    <SelectClause numEntries="All">
+        <AttrList>hostName,hostIpAddr,AVG(outputVxTHD),AVG(outputVyTHD),AVG(outputVzTHD),AVG(outputLxTHD),AVG(outputLyTHD),AVG(outputLzTHD)</AttrList>    
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(outputVxTHD) DESC, AVG(outputLxTHD) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_Env" name="Filter_Env">
+           <SingleEvtConstr> eventType = "PH_DEV_MON_FPC_LIEBERT_METRIC" </SingleEvtConstr>
+	   <GroupByAttr>hostName,hostIpAddr</GroupByAttr> 
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>hostIpAddr,reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+</Reports>

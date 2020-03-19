@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+2015-11-11T13:59:54.497156-05:00 usganf1lithrfs600001 %SMRT-5-POWER_ADJUSTMENT: Radio usganf1lith-ap12:R2 power changed from 17 to 14 on AP B4-C7-99-A1-0C-48
+[params]
+customer=Super
+eventId=any
+eventSeverityCat=LOW
+eventParsedOk=1
+phEventCategory=0 (External)
+parserName=MotorolaWiNGParser
+count=1
+eventSeverity=2
+eventType=Motorola-WiNG-SMRT-POWER_ADJUSTMENT
+reptDevIpAddr=$localhost
+collectorId=any
+eventName=Motorola WLAN AP: Power Adjustment
+reptVendor=Motorola
+relayDevIpAddr=$localhost
+extEventRecvProto=Syslog
+phRecvTime=any
+msg=Radio usganf1lith-ap12:R2 power changed from 17 to 14 on AP B4-C7-99-A1-0C-48
+eventRuleTrigger=1
+reptDevName=usganf1lithrfs600001
+reptModel=WiNG WLAN AP

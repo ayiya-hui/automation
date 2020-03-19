@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<142>2016-02-17 02:45:06,874 [DbcnHandlerThread-0x7f5b741de700] INFO  Dbcn.TipsDbcnHandler - notifyDbEntity: Ignore Exception=BaseException: DbcnException: No DbEntityTable for TAG_DEFINITION
+[params]
+deviceTime=any
+parserName=ArubaPolicyManager2Parser
+eventType=Aruba-ClearPass-Generic-INFO
+reptModel=ClearPass PolicyManager
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Aruba ClearPass informational messages
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+funName=DbcnHandlerThread-0x7f5b741de700
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Aruba

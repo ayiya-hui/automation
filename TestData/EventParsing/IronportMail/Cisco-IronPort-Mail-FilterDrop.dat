@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<22>Feb 15 16:11:26 IronPort-Mail: Info: Message aborted MID 1750749 Dropped by content filter 'mmoraes_personal_filter' in the inbound table
+[params]
+deviceTime=any
+parserName=IronportMailParser
+eventType=Cisco-IronPort-Mail-FilterDrop
+reptModel=IronPort AsyncOS Mail
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Cisco-IronPort-Mail-FilterDrop
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=LOW
+collectorId=any
+fileName=mmoraes_personal_filter
+relayDevIpAddr=$localhost
+rawEventMsg=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Cisco
+ironportMailMID=1750749

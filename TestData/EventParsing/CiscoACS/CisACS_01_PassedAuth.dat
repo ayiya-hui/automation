@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+33.33.33.33
+[eventMsg]
+<38>Apr 20 06:36:11 $reporter CisACS_01_PassedAuth phvdc8d 1 0 Message-Type=Authen OK,User-Name=WenYong,NAS-IP-Address=192.168.19.18,Caller-ID=192.168.29.8,NAS-Port=6,Group-Name=Default Group,Filter Information=No Filters activated.,Access Device=SJ-Dev-A-IOS-Lab-01
+[params]
+rawEventMsg=any
+eventType=CisACS_01_PassedAuth
+deviceTime=any
+phCustId=$sender
+destIpAddr=192.168.19.18
+srcIpAddr=192.168.29.8
+reptModel=Cisco Secure ACS
+eventId=any
+nepDevPort=6
+eventParsedOk=1
+eventSeverity=1
+eventName=AAA authentication successful
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+user=WenYong
+count=1
+phRecvTime=any
+reptDevIpAddr=$reporter
+eventAction=0 (Permit)
+reptVendor=Cisco
+nepDevIpAddr=192.168.19.18
+userGrp=Default Group

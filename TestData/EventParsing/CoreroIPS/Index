@@ -1,0 +1,10 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+Corero-SmartWall-FWALL:_Matched_By_Firewall,CoreroIPS_1,CoreroIPS,192.168.51.65,,syslog
+Corero-SmartWall-PROTO:_HTTP_Header_Section_Too_Long,CoreroIPS_2,CoreroIPS,192.168.51.65,,syslog
+Corero-SmartWall-PROTO:_GZIP_Bad_BType,CoreroIPS_3,CoreroIPS,192.168.51.65,,syslog
+Corero-SmartWall-HTTP_Header-instanceUnallowed,CoreroIPS_4,CoreroIPS,192.168.51.65,,syslog
+Corero-SmartWall-Proxy_Handshake-target-failure,CoreroIPS_5,CoreroIPS,192.168.51.65,,syslog
+Corero-SmartWall-PROTO:_GZIP_Bad_Table_Lengths,CoreroIPS_6,CoreroIPS,192.168.51.65,,syslog
+Corero-SmartWall-PROTO:_GZIP_Bad_NLEN_Field,CoreroIPS_7,CoreroIPS,192.168.51.65,,syslog
+Corero-SmartWall-Proxy_Handshake-client-failure,CoreroIPS_8,CoreroIPS,192.168.51.65,,syslog

@@ -1,0 +1,22 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+enterprises.232.6 6 6032 sysName.0 s "Insight"
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=10
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=HIGH
+hostIpAddr=$localhost
+eventName=Server power supply redundancy lost
+reptVendor=Generic
+eventType=HP-6032-PowerSupplyRedundancyLost
+phEventCategory=0 (External)
+hostName=Insight
+reptDevIpAddr=$localhost
+reptModel=Generic

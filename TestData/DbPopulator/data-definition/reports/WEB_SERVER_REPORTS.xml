@@ -1,0 +1,475 @@
+<Reports>
+
+<Report id="PH_Report_WEB_SERVER_1" group="PH_SYS_REPORT_WebServer">
+    <Name>Top Web Servers By hits, distinct visitors and bandwidth </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> Ranks Web servers by first the number of hits, then by the number of distinct visitors and used bandwidth</Description>
+    <SelectClause numEntries="All">
+        <AttrList>destIpAddr,COUNT(*),COUNT(DISTINCT srcIpAddr),SUM(totBytes)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WEB_SERVER_1" name="Filter_WEB_SERVER_1">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_APP_WEB_SERVER)  AND httpStatusCode IN ("200") </SingleEvtConstr>
+           <GroupByAttr>destIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr,destIpAddr</RelevantFilterAttr>
+</Report>
+	   
+<Report id="PH_Report_WEB_SERVER_2" group="PH_SYS_REPORT_WebServer">
+    <Name>Top Web Servers and URLs By hits</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks Web Servers, URLs by the number of hits</Description>
+    <SelectClause numEntries="All">
+        <AttrList>destIpAddr,uriStem,COUNT(*),AVG(totBytes)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WEB_SERVER_2" name="Filter_WEB_SERVER_2">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_APP_WEB_SERVER)  AND httpStatusCode IN ("200") </SingleEvtConstr>
+           <GroupByAttr>destIpAddr,uriStem</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr,destIpAddr</RelevantFilterAttr>
+</Report>
+	   
+<Report id="PH_Report_WEB_SERVER_3" group="PH_SYS_REPORT_WebServer">
+    <Name>Top Web Servers and URLs By Response Time</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks Web Servers, URLs by response time, that is, by the maximum time taken to serve the request)</Description>
+    <SelectClause numEntries="All">
+        <AttrList>destIpAddr,uriStem,COUNT(*),MAX(durationMSec),AVG(durationMSec),AVG(totBytes)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>MAX(durationMSec) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WEB_SERVER_3" name="Filter_WEB_SERVER_3">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_APP_WEB_SERVER)  AND   httpStatusCode IN ("200") </SingleEvtConstr>
+           <GroupByAttr>destIpAddr,uriStem</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr,destIpAddr</RelevantFilterAttr>
+</Report>	
+   
+<Report id="PH_Report_WEB_SERVER_4" group="PH_SYS_REPORT_WebServer">
+    <Name>Top FTP Servers and Downloaded URLs By Hits and Bytes</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks FTP downloaded files by the number of hits and then by the number of sent bytes</Description>
+    <SelectClause numEntries="All">
+        <AttrList>destIpAddr,uriStem,COUNT(*),SUM(recvBytes),AVG(recvBytes),AVG(durationMSec)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC,SUM(recvBytes) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WEB_SERVER_4" name="Filter_WEB_SERVER_4">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_APP_WEB_SERVER)  AND ftpMethod CONTAIN "sent"</SingleEvtConstr>
+           <GroupByAttr>destIpAddr,uriStem</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr,destIpAddr</RelevantFilterAttr>
+</Report>
+	   
+<Report id="PH_Report_WEB_SERVER_5" group="PH_SYS_REPORT_WebServer">
+    <Name>Top FTP Servers and Downloaded URLs By Bytes</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks FTP downloaded files by the number of sent bytes</Description>
+    <SelectClause numEntries="All">
+        <AttrList>destIpAddr,uriStem,SUM(recvBytes),AVG(durationMSec),COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>SUM(recvBytes) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WEB_SERVER_5" name="Filter_WEB_SERVER_5">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_APP_WEB_SERVER)  AND ftpMethod CONTAIN "sent"</SingleEvtConstr>
+           <GroupByAttr>destIpAddr,uriStem</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr,destIpAddr</RelevantFilterAttr>
+</Report>
+
+<Report id="PH_Report_WEB_SERVER_6" group="PH_SYS_REPORT_WebServer">
+  <Name>Top FTP Servers and Downloaded URLs By Response Time</Name>
+  <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+  <Description>Ranks FTP downloaded files by the response time, that is, by the time taken to serve the request</Description>
+  <SelectClause numEntries="All">
+    <AttrList>destIpAddr,uriStem,MAX(durationMSec),COUNT(*),AVG(recvBytes),AVG(durationMSec)</AttrList>
+  </SelectClause>
+  <OrderByClause><AttrList>MAX(durationMSec) DESC</AttrList></OrderByClause>
+  <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+  <PatternClause window="3600">
+    <SubPattern displayName="Filter_WEB_SERVER_6" name="Filter_WEB_SERVER_6">
+      <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_APP_WEB_SERVER) AND ftpMethod CONTAIN "sent" </SingleEvtConstr>
+      <GroupByAttr>destIpAddr,uriStem</GroupByAttr>
+    </SubPattern>
+  </PatternClause>
+  <RelevantFilterAttr>reptDevIpAddr,destIpAddr</RelevantFilterAttr>
+</Report>
+
+<Report id="PH_Report_WEB_SERVER_7" group="PH_SYS_REPORT_WebServer">
+  <Name>Top FTP Servers and Uploaded URLs By Hits and Bytes</Name>
+  <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+  <Description>Ranks servers and FTP uploaded files by the number of hits, then by bytes</Description>
+    <SelectClause numEntries="All">
+        <AttrList>destIpAddr,uriStem,COUNT(*),SUM(recvBytes),AVG(recvBytes),AVG(durationMSec)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC,SUM(recvBytes) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WEB_SERVER_7" name="Filter_WEB_SERVER_7">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_APP_WEB_SERVER)  AND ftpMethod CONTAIN "created"</SingleEvtConstr>
+           <GroupByAttr>destIpAddr,uriStem</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr,destIpAddr</RelevantFilterAttr>
+</Report>
+
+<Report id="PH_Report_WEB_SERVER_8" group="PH_SYS_REPORT_WebServer">
+    <Name>Top FTP Servers and Uploaded URLs By Bytes</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks servers and FTP uploaded files by the number of bytes uploaded</Description>
+    <SelectClause numEntries="All">
+        <AttrList>destIpAddr,uriStem,SUM(sentBytes),AVG(durationMSec),COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>SUM(sentBytes) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WEB_SERVER_8" name="Filter_WEB_SERVER_8">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_APP_WEB_SERVER)  AND ftpMethod CONTAIN "created"</SingleEvtConstr>
+           <GroupByAttr>destIpAddr,uriStem</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr,destIpAddr</RelevantFilterAttr>
+</Report>	
+   
+<Report id="PH_Report_WEB_SERVER_9" group="PH_SYS_REPORT_WebServer">
+    <Name>Top FTP Servers and Uploaded URLs By Response Time</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks servers and FTP uploads by the response time, i.e. time taken to serve the request</Description>
+    <SelectClause numEntries="All">
+        <AttrList>destIpAddr,uriStem,MAX(durationMSec),COUNT(*),AVG(recvBytes),AVG(durationMSec)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>MAX(durationMSec) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WEB_SERVER_9" name="Filter_WEB_SERVER_9">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_APP_WEB_SERVER)  AND  ftpMethod CONTAIN "created" </SingleEvtConstr>
+           <GroupByAttr>destIpAddr,uriStem</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr,destIpAddr</RelevantFilterAttr>
+</Report>	
+   	   
+<Report id="PH_Report_WEB_SERVER_10" group="PH_SYS_REPORT_WebServer">
+    <Name>Top Web Servers and their Entry Points By Hits</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks Web Server Entry points by the number of hits</Description>
+    <SelectClause numEntries="All">
+        <AttrList>destIpAddr,uriStem,COUNT(*),AVG(durationMSec)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WEB_SERVER_10" name="Filter_WEB_SERVER_10">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_APP_WEB_SERVER)  AND  eventType IN ( Group@PH_SYS_EVENT_PermitTraffic) AND httpReferrer IS NULL </SingleEvtConstr>
+           <GroupByAttr>destIpAddr,uriStem</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr,destIpAddr</RelevantFilterAttr>
+</Report>	
+   
+<Report id="PH_Report_WEB_SERVER_11" group="PH_SYS_REPORT_WebServer">
+    <Name>Top Web Servers, URLs and Referrers By Hits</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks Web Servers and their Referrers by the number of hits</Description>
+    <SelectClause numEntries="All">
+        <AttrList>destIpAddr,uriStem,httpReferrer,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WEB_SERVER_11" name="Filter_WEB_SERVER_11">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_APP_WEB_SERVER)  AND  eventType IN ( Group@PH_SYS_EVENT_PermitTraffic) AND httpReferrer IS NOT NULL </SingleEvtConstr>
+           <GroupByAttr>destIpAddr,uriStem,httpReferrer</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr,destIpAddr</RelevantFilterAttr>
+</Report>
+	   
+<Report id="PH_Report_WEB_SERVER_12" group="PH_SYS_REPORT_WebServer">
+    <Name>Top Web Server Bandwidth Usage By Service</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks web Servers and destination ports by the total bandwidth used</Description>
+    <SelectClause numEntries="All">
+        <AttrList>destIpAddr,destIpPort,SUM(sentBytes),SUM(recvBytes)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList></AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WEB_SERVER_12" name="Filter_WEB_SERVER_12">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_APP_WEB_SERVER)  AND  httpStatusCode IN ("200") </SingleEvtConstr>
+           <GroupByAttr>destIpAddr,destIpPort</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr,destIpAddr</RelevantFilterAttr>
+</Report>	 
+  
+<Report id="PH_Report_WEB_SERVER_13" group="PH_SYS_REPORT_WebServer">
+    <Name>Top Web Visitors By Server Side Error Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the web visitors by the number of HTTP server side error count</Description>
+    <SelectClause numEntries="All">
+        <AttrList>destIpAddr,uriStem,httpStatusCode,httpSubStatusCode,srcIpAddr,user,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WEB_SERVER_13" name="Filter_WEB_SERVER_13">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_APP_WEB_SERVER)  AND  eventType IN ("IIS-Web-Server-Error", "Apache-Web-Server-Error")</SingleEvtConstr>
+           <GroupByAttr>destIpAddr,uriStem,httpStatusCode,srcIpAddr,user</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr,destIpAddr</RelevantFilterAttr>
+</Report>	  
+ 
+<Report id="PH_Report_WEB_SERVER_14" group="PH_SYS_REPORT_WebServer">
+    <Name>Top Web Visitors By Client Side Error Count</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the web visitors by the number of HTTP client side error count</Description>
+    <SelectClause numEntries="All">
+        <AttrList>destIpAddr,uriStem,httpStatusCode,srcIpAddr,user,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WEB_SERVER_14" name="Filter_WEB_SERVER_14">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_APP_WEB_SERVER)  AND  eventType IN ("IIS-Web-Client-Error", "Apache-Web-Client-Error")</SingleEvtConstr>
+           <GroupByAttr>destIpAddr,uriStem,httpStatusCode,srcIpAddr,user</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr,destIpAddr</RelevantFilterAttr>
+</Report>	 
+  
+<Report id="PH_Report_WEB_SERVER_15" group="PH_SYS_REPORT_WebServer">
+    <Name>Top Web Pages By Pages-Not-Found Error Count</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the web servers and URLs by the page-not-found error count</Description>
+    <SelectClause numEntries="All">
+        <AttrList>destIpAddr,uriStem,httpStatusCode,COUNT(*),srcIpAddr,user</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WEB_SERVER_15" name="Filter_WEB_SERVER_15">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_APP_WEB_SERVER) AND httpStatusCode = "404"</SingleEvtConstr>
+           <GroupByAttr>destIpAddr,uriStem,httpStatusCode,srcIpAddr,user</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr,destIpAddr</RelevantFilterAttr>
+</Report>	  
+ 
+<Report id="PH_Report_WEB_SERVER_16" group="PH_SYS_REPORT_WebServer">
+    <Name>Top Web Visitors By HTTP-Pages-Not-Found Error Count</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks web servers and visitors by HTTP page-not-found error count</Description>
+    <SelectClause numEntries="All">
+        <AttrList>srcIpAddr,httpStatusCode,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WEB_SERVER_16" name="Filter_WEB_SERVER_16">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_APP_WEB_SERVER)  AND httpStatusCode CONTAIN "404"</SingleEvtConstr>
+           <GroupByAttr>srcIpAddr,httpStatusCode</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr,destIpAddr</RelevantFilterAttr>
+</Report>	
+   
+<Report id="PH_Report_WEB_SERVER_17" group="PH_SYS_REPORT_WebServer">
+    <Name>Top Web Visitors By Unauthorized Access Error Count</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks web servers and visitors by the total number of unauthorized access error count</Description>
+    <SelectClause numEntries="All">
+      <AttrList>destIpAddr,uriStem,httpStatusCode,COUNT(*),srcIpAddr,user</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WEB_SERVER_17" name="Filter_WEB_SERVER_17">
+        <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_APP_WEB_SERVER) AND eventType IN ("IIS-Web-Client-Error", "Apache-Web-Client-Error") AND httpStatusCode IN ("401", "403") </SingleEvtConstr>
+        <GroupByAttr>destIpAddr,uriStem,httpStatusCode,srcIpAddr,user</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr,destIpAddr</RelevantFilterAttr>
+</Report>	
+   
+<Report id="PH_Report_WEB_SERVER_18" group="PH_SYS_REPORT_WebServer">
+    <Name>Top FTP Clients By Server side Error Count</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks web servers and their FTP clients by the total number of FTP errors</Description>
+    <SelectClause numEntries="All">
+      <AttrList>destIpAddr,uriStem,eventType,ftpStatusCode,srcIpAddr,user,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WEB_SERVER_18" name="Filter_WEB_SERVER_18">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_APP_WEB_SERVER)  AND  ftpStatusCode IN ("500", "501","503","504","550","552","553") </SingleEvtConstr>
+           <GroupByAttr>destIpAddr,uriStem,eventType,ftpStatusCode,srcIpAddr,user</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr,destIpAddr</RelevantFilterAttr>
+</Report>	 
+  
+<Report id="PH_Report_WEB_SERVER_19" group="PH_SYS_REPORT_WebServer">
+    <Name>Top FTP Clients By Unauthorized Access Error Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks servers and their FTP clients by the total number of unauthorized Access Errors</Description>
+    <SelectClause numEntries="All">
+        <AttrList>destIpAddr,ftpStatusCode, eventType,srcIpAddr,user,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WEB_SERVER_19" name="Filter_WEB_SERVER_19">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_APP_WEB_SERVER)  AND  ftpStatusCode IN ("503","550") </SingleEvtConstr>
+           <GroupByAttr>destIpAddr,ftpStatusCode,eventType,srcIpAddr,user</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr,destIpAddr</RelevantFilterAttr>
+</Report>	  
+ 
+<Report id="PH_Report_WEB_SERVER_20" group="PH_SYS_REPORT_WebServer">
+    <Name>Top Web Visitors By Uncommon HTTP Method Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks Web servers and visitors by the total number of uncommon HTTP Methods</Description>
+    <SelectClause numEntries="All">
+        <AttrList>destIpAddr,srcIpAddr,httpMethod,uriStem,httpStatusCode,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WEB_SERVER_20" name="Filter_WEB_SERVER_20">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_APP_WEB_SERVER) AND httpMethod NOT IN ("GET","POST") </SingleEvtConstr>
+        <GroupByAttr>destIpAddr,srcIpAddr,httpMethod,uriStem,httpStatusCode</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr,destIpAddr</RelevantFilterAttr>
+</Report>
+
+<Report id="PH_Report_WEB_SERVER_21" group="PH_SYS_REPORT_WebServer">
+    <Name>Top Web Visitor Browser Types By Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks web servers and their client browser types by the total number of hits </Description>
+    <SelectClause numEntries="All">
+      <AttrList>httpUserAgent,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WEB_SERVER_21" name="Filter_WEB_SERVER_21">
+        <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_APP_WEB_SERVER)  AND  httpStatusCode IN ("200") </SingleEvtConstr>
+        <GroupByAttr>httpUserAgent</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr,destIpAddr</RelevantFilterAttr>
+</Report>
+
+<Report id="PH_Report_WEB_SERVER_22" group="PH_SYS_REPORT_WebServer">
+    <Name>Top Web Servers and URLs By Average Response Time</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks Web Servers, URLs by average response time </Description>
+    <SelectClause numEntries="All">
+        <AttrList>destIpAddr,uriStem,AVG(durationMSec)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>AVG(durationMSec) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WEB_SERVER_22" name="Filter_WEB_SERVER_22">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_APP_WEB_SERVER)  AND   httpStatusCode IN ("200") </SingleEvtConstr>
+           <GroupByAttr>destIpAddr,uriStem</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr,destIpAddr</RelevantFilterAttr>
+</Report>
+
+<Report id="PH_Report_WEB_SERVER_23" group="PH_SYS_REPORT_WebServer">
+    <Name>Top Web Servers By hits </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> Ranks Web servers by first the number of hits</Description>
+    <SelectClause numEntries="All">
+        <AttrList>destIpAddr,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WEB_SERVER_23" name="Filter_WEB_SERVER_23">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_APP_WEB_SERVER)  AND httpStatusCode IN ("200") </SingleEvtConstr>
+           <GroupByAttr>destIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr,destIpAddr</RelevantFilterAttr>
+</Report>
+	   	 
+<Report id="PH_Report_WEB_SERVER_24" group="PH_SYS_REPORT_WebServer">
+    <Name>Top Web Servers By distinct visitors </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> Ranks Web servers by the number of distinct visitors</Description>
+    <SelectClause numEntries="All">
+        <AttrList>destIpAddr,COUNT(DISTINCT srcIpAddr)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(DISTINCT srcIpAddr) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WEB_SERVER_24" name="Filter_WEB_SERVER_24">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_APP_WEB_SERVER)  AND httpStatusCode IN ("200") </SingleEvtConstr>
+           <GroupByAttr>destIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr,destIpAddr</RelevantFilterAttr>
+</Report>
+
+
+<Report id="PH_Report_WEB_SERVER_25" group="PH_SYS_REPORT_WebServer">
+    <Name>Top Web Servers By bandwidth </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> Ranks Web servers by used bandwidth</Description>
+    <SelectClause numEntries="All">
+        <AttrList>destIpAddr,SUM(totBytes)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>SUM(totBytes) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WEB_SERVER_25" name="Filter_WEB_SERVER_25">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_APP_WEB_SERVER)  AND httpStatusCode IN ("200") </SingleEvtConstr>
+           <GroupByAttr>destIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr,destIpAddr</RelevantFilterAttr>
+</Report>
+
+<Report id="PH_Report_WEB_SERVER_26" group="PH_SYS_REPORT_WebServer">
+     <Name>Top Web Servers By synthetic transaction monitoring Response Time </Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description>Ranks the services by average synthetic transaction monitoring probe response times. </Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName,hostIpAddr,appPort,endUserMonitorName,AVG(appResponseTimeMSec),MAX(appResponseTimeMSec),MIN(appResponseTimeMSec) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(appResponseTimeMSec) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_AVAIL" name="Filter_AVAIL">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_EUM_SUCCESS" AND (appPort = "80" OR appPort = "443(ssl)") </SingleEvtConstr>
+           <GroupByAttr>hostName,hostIpAddr,appPort,endUserMonitorName </GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+</Reports>

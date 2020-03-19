@@ -1,0 +1,35 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<6>CEF:0|McAfee|IPS|5.5.7|75501|ProtoId_TFTP_Client-Stop|1|spt=10458 deviceExternalId=PANASONIC-PCI-V2 node 1 dmac=BF:37:BE:56:20:6C dst=192.168.92.50 cat=Content Identification app=DNS (UDP) rt=Apr 08 2016 00:26:02 deviceFacility=Inspection act=Permit deviceOutboundInterface=Interface #2 deviceInboundInterface=Interface #2 proto=17 dpt=53 src=192.168.94.52 dvc=192.168.94.51 dvchost=192.168.94.51 smac=74:C2:A5:67:1E:00 cs1Label=RuleId cs1=147.0
+[params]
+domain=PANASONIC-PCI-V2 node 1
+destMACAddr=BF:37:BE:56:20:6C
+parserName=McAfeeStonesoftParser
+eventType=McAfee-Stonesoft-ProtoId_TFTP_Client-Stop
+devEventTypeGrp=Content Identification
+destIpAddr=192.168.92.50
+destIpPort=53 (DOMAIN)
+srcIpAddr=192.168.94.52
+reptModel=Stonesoft IPS
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+fwAction=Permit
+eventName=Protocol identification completed for TFTP client
+appTransportProto=DNS (UDP)
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+eventRuleTrigger=1
+count=1
+srcMACAddr=74:C2:A5:67:1E:00
+srcIpPort=10458
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+ipProto=17 (UDP)
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=McAfee

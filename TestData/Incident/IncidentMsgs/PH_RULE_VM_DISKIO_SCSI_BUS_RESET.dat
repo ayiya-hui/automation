@@ -1,0 +1,2 @@
+[eventMsg]
+[PH_DEV_MON_VM_DISK_IO]:[eventSeverity]=PHL_INFO,[hostName]=automator18Dot3Dot0Dot1,[hostIpAddr]=18.3.0.1,[pollIntv]=180,[diskAdapter]=naa.5000cca200c92c8b,[diskBusResets]=3,[phyMachIpAddr]=18.0.0.1,[origPhyMachName]=hostVM

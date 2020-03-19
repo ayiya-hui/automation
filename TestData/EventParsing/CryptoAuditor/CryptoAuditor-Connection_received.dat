@@ -1,0 +1,31 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<189>Jun 24 15:43:01 auditor ssh-auditor[4067]: CEF:0|SSH|CryptoAuditor|1.6.0|4201|Connection_received|1|rt=Jun 26 2015 07:48:24 SshAuditorSrc=10.1.78.8 spt=34453 SshAuditorDst=10.1.78.8 dpt=10022 SshAuditorSessionId=21 SshAuditorUsername=testuser SshAuditorRemoteusername=testuser SshAuditorProtocolsessionId=C089C55D9ADE0A4F901917D69B46B01223A02B70 SshAuditorVirtualLAN=0 cs1=source connection cs1Label=Text
+[params]
+parserName=CryptoAuditorParser
+eventType=CryptoAuditor-Connection_received
+destIpAddr=10.1.78.8
+reptModel=CryptoAuditor
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=CryptoAuditor-Connection_received
+destUser=testuser
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+srcIpPort=34453
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+destIpPort=10022
+srcUser=testuser
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+sessionId=C089C55D9ADE0A4F901917D69B46B01223A02B70
+reptVendor=SSH Comm Security
+hostVLAN=0

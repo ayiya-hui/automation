@@ -1,0 +1,186 @@
+<eventParser name="JuniperSteelBeltAAAParser">
+
+  <deviceType>
+    <Vendor>Generic</Vendor>
+    <Model>Generic</Model>
+    <Version>ANY</Version>
+  </deviceType>
+
+  <appType>
+    <Vendor>Juniper</Vendor>
+    <Model>Steel-Belted RADIUS</Model>
+    <Version>ANY</Version>
+    <Name>Juniper Steel-Belted RADIUS Server</Name>
+  </appType>
+
+ <patternDefinitions>
+    <pattern name="patStrTab"><![CDATA[[^\t]*]]></pattern>
+    <pattern name="patStrSlash"><![CDATA[[^\\]*]]></pattern>
+ </patternDefinitions>
+ 
+ <eventFormatRecognizer><![CDATA[<:gPatSyslogPRI><:gPatMon>\s+<:gPatDay>\s+<:gPatTime>\s+<:gPatStr>\s+SteelBeltedLog(?:\t|\s)+\d+(?:\t|\s)+(<:gPatMon>|")]]></eventFormatRecognizer> 
+ 
+ <testEvents>
+      <testEvent><![CDATA[<45>Jul  9 03:26:26 sjqavwinads.Prospect-Hills.net SteelBeltedLog	0	Jul 09 03:26:18 2008: In admin session: User administrator is authenticated--automator]]></testEvent>
+  </testEvents>
+ 
+ <parsingInstructions>
+   
+   <!-- Step 1. parse common fields -->
+   <!-- sample message (others follow)
+        
+	 # Admin Logs
+	 <45>Jul  9 03:26:26 sjqavwinads.Prospect-Hills.net SteelBeltedLog	0	Jul 09 03:26:18 2008: In admin session: User administrator is authenticated
+           -->
+   
+   <collectFieldsByRegex src="$_rawmsg">
+     <regex><![CDATA[<:gPatSyslogPRI><:gPatMon>\s+<:gPatDay> <:gPatTime> <_senderHostName:gPatStr>\s+SteelBeltedLog(?:\t|\s+)+<:gPatInt>(?:\t|\s+)<_body:gPatMesgBody>]]></regex>
+   </collectFieldsByRegex>
+   
+   <choose>
+     <when test="matches($_senderHostName, '\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}')">
+       <setEventAttribute attr="reptDevIpAddr">$_senderHostName</setEventAttribute>       
+     </when>
+     <otherwise>
+       <setEventAttribute attr="reptDevName">$_senderHostName</setEventAttribute>
+     </otherwise>
+   </choose>
+   
+   <setEventAttribute attr="eventAction">0</setEventAttribute>
+   <setEventAttribute attr="eventType">Juniper-Steelbelt-Generic</setEventAttribute>
+   <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+   
+   <!-- Step 2: parse message body  
+        two cases which we solve using switch statement
+        (a) special message for Admin logs
+        (b) comma separated for others (need to be parsed by position)
+     -->
+   
+   <switch>
+     
+     <case>
+       
+       <!-- sample message 
+            
+	    # Admin Logs - login success
+            
+	    <45>Jul  9 03:26:26 sjqavwinads.Prospect-Hills.net SteelBeltedLog	0	Jul 09 03:26:18 2008: In admin session: User administrator is authenticated
+	      -->
+       
+       <collectFieldsByRegex src="$_body">
+         <regex><![CDATA[<_mon:gPatMon>(?:\t|\s+)<_day:gPatDay>(?:\t|\s)+<_time:gPatTime>(?:\t|\s)+<_year:gPatYear>:\s+In\s+admin\s+session:\s+User\s+<user:gPatStr>\s+is\s+authenticated.*]]></regex>
+       </collectFieldsByRegex>
+       
+       <setEventAttribute attr="deviceTime">toDateTime($_mon, $_day, $_year, $_time)</setEventAttribute>
+       <setEventAttribute attr="eventSeverity">3</setEventAttribute>
+       <setEventAttribute attr="destIpAddr">$reptDevIpAddr</setEventAttribute>
+       <setEventAttribute attr="eventType">Juniper-Steelbelt-Admin-Login-Success</setEventAttribute>
+     </case>
+     
+     <case>
+       
+       <!-- sample message 
+            
+	    # Admin Logs - login failure
+            
+	    <45>Jul  9 03:07:23 sjqavwinads.Prospect-Hills.net SteelBeltedLog  0       Jul 05 00:29:47 2008: Admin interface (GET): URI [/reports/lockedAccounts/ping] not found
+	      -->
+       <collectFieldsByRegex src="$_body">
+	 <regex><![CDATA[<_mon:gPatMon>(?:\t|\s)+<_day:gPatDay>(?:\t|\s)+<_time:gPatTime>(?:\t|\s)+<_year:gPatYear>:\s+<user:gPatStr>\s+interface\s+<:gPatStr>\s+URI\s+<:gPatStr>\s+not\s+found.*]]></regex>
+       </collectFieldsByRegex>
+       
+       <setEventAttribute attr="eventSeverity">3</setEventAttribute>
+       <setEventAttribute attr="eventType">Juniper-Steelbelt-Admin-Login-Failure</setEventAttribute>
+     </case>
+     
+     <case>
+       
+       <!-- sample message 
+            
+	    # Unknown User, Failed  CASE 1
+	    # format: "Date","Time","RADIUS-Client","User-Name","Reject-Method","Reject-Reason","Reject-Log","NAS-IP-Address"
+            
+            <45>Jul  9 03:20:30 sjqavwinads.Prospect-Hills.net SteelBeltedLog	0	"2008-07-09","03:20:26","SJ-QA-A-CAT-COR","ParthaHacker","NT Domain User","User name or credential incorrect","","172.16.10.1"
+              
+	      <45>Jul  9 03:07:23 sjqavwinads.Prospect-Hills.net SteelBeltedLog	0	"2008-07-05","00:34:41","SJ-QA-A-CAT-COR","typr","NT Domain User","User name or credential incorrect","","172.16.10.1"
+                
+                # Known User, Bad Password, Failed  CASE 2
+                <45>Jul  9 03:07:23 sjqavwinads.Prospect-Hills.net SteelBeltedLog	0	"2008-07-05","00:35:09","SJ-QA-A-CAT-COR","automationUser","NT Domain User","User name or credential incorrect","","172.16.10.1"
+                  <45>Jul  9 03:07:23 sjqavwinads.Prospect-Hills.net SteelBeltedLog	0	"2008-07-05","00:35:20","SJ-QA-A-CAT-COR","automationUser","NT Domain User","User name or credential incorrect","","172.16.10.1"
+                    
+	            # Known domain User, Good Password, Passed  CASE 3
+                    # format: "Date","Time","RADIUS-Client","Full-Name","User-Name","Nas-IP-Address","Calling-Station-Id","NAS-Port-Type"
+                    <45>Jul  9 03:07:23 sjqavwinads.Prospect-Hills.net SteelBeltedLog	0	"2008-07-09","03:07:20","SJ-QA-A-CAT-COR","\\PROSPECT-HILLS\WENYONG","automationUser","172.16.10.1","172.16.1.11","5"
+                      
+	              # Known Local user, Good Password, Passed CASE 4
+	              <45>Jul  9 03:07:23 sjqavwinads.Prospect-Hills.net SteelBeltedLog	0	"2008-07-05","00:46:40","SJ-QA-A-CAT-COR","TEST1234","test1234","172.16.10.1","172.16.10.10","5"
+                        
+	                # Unknown Client   CASE 5
+	                # format: "Date","Time","Source-IP-Address","Source-UDP-Port","Target-IP-Address","Target-UDP-Port","User-Name"
+	                <45>Jul  9 03:07:23 sjqavwinads.Prospect-Hills.net SteelBeltedLog	0	"2008-07-05","02:30:48","172.16.10.1","1645","172.16.10.15","1645","test"   
+                          -->
+       
+       <collectAndSetAttrByPosWithQuotes src="$_body" sep=',' quo='"'>
+	 <attrPosMap attr="_nasNameOrIp" pos='3'/>
+         <attrPosMap attr="_user1OrPort" pos='4'/>
+	 <attrPosMap attr="_user2" pos='5'/>
+         <attrPosMap attr="_reasonOrNasIp" pos='6'/>
+	 <attrPosMap attr="_reasonOrOwnIp" pos='7'/>
+	 <attrPosMap attr="_someIp" pos='8'/>
+       </collectAndSetAttrByPosWithQuotes>
+       
+       <!-- this is messy logic but nevertheless, is as follows
+            
+	    3rd pos = Ip and 4th pos = port => unknown client (case 5)
+            3rd pos = string => passed/failed auth (cases 1,2,3,4)
+            6th pos = IP => auth success (case 3,4)
+            6th pos = reason => auth failure (case 1,2)
+         -->
+       <choose>
+         
+	 <when test="matches($_nasNameOrIp, gPatIpV4Dot)">
+	   <when test="matches($_user1OrPort, gPatIpPort)">
+	     <!-- CASE 5  -->
+	     <setEventAttribute attr="eventSeverity">3</setEventAttribute>
+	     <setEventAttribute attr="eventType">Juniper-Steelbelt-FailedAuth</setEventAttribute>
+	     <setEventAttribute attr="eventAction">1</setEventAttribute>
+	     <setEventAttribute attr="nepDevIpAddr">$_nasNameOrIp</setEventAttribute>
+	     <setEventAttribute attr="user">$_reasonOrOwnIp</setEventAttribute>
+	   </when>
+	 </when>
+         
+	 <when test="matches($_reasonOrNasIp, gPatIpV4Dot)">
+	   <!--- regular auth success  (CASES 3,4) -->
+	   <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+	   <setEventAttribute attr="eventType">Juniper-Steelbelt-PassedAuth</setEventAttribute>
+           <setEventAttribute attr="user">$_user2</setEventAttribute>
+	   <setEventAttribute attr="nepDevIpAddr">$_reasonOrNasIp</setEventAttribute>
+	   <setEventAttribute attr="destIpAddr">$_reasonOrNasIp</setEventAttribute>
+           <switch>
+             <case>
+	       <!-- pick up domain  -->
+	       <collectFieldsByRegex src="$_user1OrPort">
+	         <regex><![CDATA[\\\\<domain:patStrSlash>\\<:gPatMesgBody>]]></regex>
+	       </collectFieldsByRegex> 
+             </case>
+             <case>
+               <!-- something else -->
+             </case>
+           </switch>
+         </when>
+         
+	 <otherwise>
+	   <!--- regular auth failure (CASES 1,2) -->
+	   <setEventAttribute attr="eventSeverity">3</setEventAttribute>
+	   <setEventAttribute attr="eventType">Juniper-Steelbelt-FailedAuth</setEventAttribute>
+	   <setEventAttribute attr="eventAction">1</setEventAttribute>
+	   <setEventAttribute attr="ciscoACSFailCode">$_reasonOrNasIp</setEventAttribute>
+	   <setEventAttribute attr="user">$_user1OrPort</setEventAttribute>
+	   <setEventAttribute attr="nepDevIpAddr">$_someIp</setEventAttribute>
+	   <setEventAttribute attr="destIpAddr">$_someIp</setEventAttribute>
+	 </otherwise>
+       </choose>
+     </case>
+   </switch>
+ </parsingInstructions>
+</eventParser>

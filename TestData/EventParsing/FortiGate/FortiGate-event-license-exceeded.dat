@@ -1,0 +1,24 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<181>date=2013-05-01 time=11:20:50 devname=FortiGate80C devid=FGT80C3912622808 logid=0100045056 type=event subtype=system level=notice vd=root action=add status=error license_limit=10 reason=License Number Exceeded repeat=1 msg=FortiClient license maximum has been reached.
+[params]
+eventId=any
+count=1
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+eventSeverity=3
+eventType=FortiGate-event-license-exceeded
+phCustId=$sender
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+collectorId=any
+eventName=FortiGate License exceeded
+reptVendor=Fortinet
+relayDevIpAddr=$localhost
+phRecvTime=any
+usrMsg=FortiClient license maximum has been reached.
+reptDevName=any
+reptModel=FortiOS

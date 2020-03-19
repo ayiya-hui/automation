@@ -1,0 +1,5 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+Microsoft-UAG-Session_Started,MicrosoftUAG_1,MicrosoftUAG,172.20.9.102,,syslog
+Microsoft-UAG-Session_Stopped,MicrosoftUAG_2,MicrosoftUAG,172.20.9.102,,syslog
+Microsoft-UAG-Request_Failed,MicrosoftUAG_3,MicrosoftUAG,172.20.9.102,,syslog

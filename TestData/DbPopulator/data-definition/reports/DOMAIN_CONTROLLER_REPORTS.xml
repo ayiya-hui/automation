@@ -1,0 +1,593 @@
+
+<Reports>
+
+  <Report id="PH_Report_DC_1" group="PH_SYS_REPORT_DomainController">
+    <Name>Logon: Top Windows Domain Controllers By Logon Event Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the Windows Domain Controllers by the total number of logon activity </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,COUNT( *)</AttrList>    
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT ( * )</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_DC_1" name="Filter_DC_1">
+           <SingleEvtConstr> eventType IN ( Group@PH_SYS_EVENT_DomainLogonSuccess, Group@PH_SYS_EVENT_DomainLogonFailure, Group@PH_SYS_EVENT_DomainSrvcLogonSuccess, Group@PH_SYS_EVENT_DomainSrvcLogonFailure, Group@PH_SYS_EVENT_HostLogonSuccess, Group@PH_SYS_EVENT_HostLogonFailure) AND reptDevIpAddr IN (Group@PH_SYS_APP_DOMAIN_CONTROLLER) </SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_DC_2" group="PH_SYS_REPORT_DomainController">
+    <Name>Logon: Top Windows Domain Controllers, Events By Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the domain controllers and their reported events by count </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,eventType,COUNT( *)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT ( * )</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_DC_2" name="Filter_DC_2">
+           <SingleEvtConstr> reptDevIpAddr IN (Group@PH_SYS_APP_DOMAIN_CONTROLLER) </SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr,eventType</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_DC_3" group="PH_SYS_REPORT_DomainController">
+    <Name> Logon: Top Windows Domain Controllers, Users By Successful Domain Authentication Count </Name>
+   <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> Ranks the Windows Domain Controllers and their users by the number of successful domain authentications </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,srcIpAddr,user,domain,COUNT( *)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT ( * )</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_DC_3" name="Filter_DC_3">
+           <SingleEvtConstr> eventType IN ( Group@PH_SYS_EVENT_DomainLogonSuccess)</SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr,srcIpAddr,user,domain</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr,srcIpAddr</RelevantFilterAttr>
+  </Report>
+	   
+  <Report id="PH_Report_DC_4" group="PH_SYS_REPORT_DomainController,PH_SYS_REPORT_Freq">
+    <Name> Logon: Top Windows Domain Controllers, Users By Failed Domain Authentication Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> Ranks the Windows Domain Controllers and the users by the number of failed authentications </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,srcIpAddr,user,domain,winKerbFailCode,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT ( * )</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_DC_4" name="FIlter_DC_4">
+           <SingleEvtConstr> eventType IN ( Group@PH_SYS_EVENT_DomainLogonFailure)</SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr,srcIpAddr,user,domain,winKerbFailCode</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr,srcIpAddr</RelevantFilterAttr>
+  </Report>	   
+
+  <Report id="PH_Report_DC_5" group="PH_SYS_REPORT_DomainController">
+    <Name> Logon: Successful Windows Domain Authentication Details </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Provides details about a successful domain authentication </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,srcIpAddr,user,computer,domain,phRecvTime,rawEventMsg</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_DC_5" name="Filter_DC_5">
+           <SingleEvtConstr> reptDevIpAddr IN (Group@PH_SYS_APP_DOMAIN_CONTROLLER) AND eventType IN (Group@PH_SYS_EVENT_DomainLogonSuccess)</SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr,srcIpAddr</RelevantFilterAttr>
+  </Report>	   
+
+  <Report id="PH_Report_DC_6" group="PH_SYS_REPORT_DomainController">
+    <Name> Logon: Failed Windows Domain Authentication Details </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Provides details about a failed domain authentication</Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,srcIpAddr,user,domain,winKerbFailCode,phRecvTime,rawEventMsg</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_DC_6" name="Filter_DC_6">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_APP_DOMAIN_CONTROLLER) AND eventType IN (Group@PH_SYS_EVENT_DomainLogonFailure)</SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr,srcIpAddr</RelevantFilterAttr>
+  </Report>	 
+ 
+  <Report id="PH_Report_DC_7" group="PH_SYS_REPORT_DomainController">
+    <Name> Logon: Top Windows Domain Controllers, Users By Successful Domain Logon Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> Ranks the Domain Controllers and the users By successful domain logon count </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,srcIpAddr,user,domain,eventType,winLogonType,COUNT( *)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT ( * )</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_DC_7" name="Filter_DC_7">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_APP_DOMAIN_CONTROLLER)  AND  eventType IN ( Group@PH_SYS_EVENT_HostLogonSuccess)</SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr,srcIpAddr,user,domain,eventType,winLogonType </GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr,srcIpAddr</RelevantFilterAttr>
+  </Report>	 
+ 
+  <Report id="PH_Report_DC_8" group="PH_SYS_REPORT_DomainController">
+    <Name>Logon: Top Windows Domain Controllers By Failed Domain Logon Count</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the windows domain controllers and the users by the number of failed domain logons </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,srcIpAddr,user,domain,eventType,winLogonType, COUNT( *)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT ( * )</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_DC_8" name="Filter_DC_8">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_APP_DOMAIN_CONTROLLER)  AND  eventType IN (Group@PH_SYS_EVENT_HostLogonFailure)</SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr,srcIpAddr,user,domain,eventType,winLogonType</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr,srcIpAddr</RelevantFilterAttr>
+  </Report>   
+	   	   
+  <Report id="PH_Report_DC_9" group="PH_SYS_REPORT_DomainController,PH_SYS_REPORT_Freq">
+    <Name> Logon: Windows Domain Account Lockouts </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report details windows domain account lockouts </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,srcIpAddr,user,domain,eventType,winLogonType,phRecvTime,rawEventMsg</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_DC_9" name="Filter_DC_9">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_APP_DOMAIN_CONTROLLER)  AND  eventType IN ( Group@PH_SYS_EVENT_DomainAccountLocked)</SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr,srcIpAddr</RelevantFilterAttr>
+  </Report>	   
+
+  <Report id="PH_Report_DC_10" group="PH_SYS_REPORT_DomainController,PH_SYS_REPORT_Change">
+    <Name> Change: Top Windows Domain Controllers, Users By Account Modification Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks Domain Controllers and their administrators by the number of account modifications performed </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,user, eventType, COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_DC_10" name="Filter_DC_10">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_APP_DOMAIN_CONTROLLER)  AND  eventType IN ( Group@PH_SYS_EVENT_AccountGrpChange) </SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr,user,eventType </GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+	   
+  <Report id="PH_Report_DC_11" group="PH_SYS_REPORT_DomainController,PH_SYS_REPORT_Change">
+    <Name> Change: Windows Domain Account Modification Details </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> Details windows domain account modifications </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,phRecvTime,eventType,eventAction,srcIpAddr,user,computer,domain,targetUser,targetDomain,rawEventMsg</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>phRecvTime DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_DC_11" name="Filter_DC_11">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_APP_DOMAIN_CONTROLLER)  AND  eventType IN (Group@PH_SYS_EVENT_AccountGrpChange) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr,srcIpAddr</RelevantFilterAttr>
+  </Report>	   	   
+
+  <Report id="PH_Report_DC_13" group="PH_SYS_REPORT_DomainController,PH_SYS_REPORT_Change">
+    <Name> Change: Top Windows Domain Controllers, Users By File Modification Count</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the Domain Controllers abd their administrators by the number of file modifications performed </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,user,eventType,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> COUNT(*) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_DC_13" name="Filter_DC_13">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_APP_DOMAIN_CONTROLLER)  AND  eventType IN (Group@PH_SYS_EVENT_FileChange) </SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr,user,eventType </GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+	
+  <Report id="PH_Report_DC_14" group="PH_SYS_REPORT_DomainController,PH_SYS_REPORT_Change">
+    <Name>Change: Windows Domain Controller File Modification Details </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Provides details about domain controller file modifications </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,phRecvTime,eventType,eventAction,srcIpAddr,user,computer,domain,procName,osObjName,osObjType,rawEventMsg</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>phRecvTime DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_DC_14" name="Filter_DC_14">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_APP_DOMAIN_CONTROLLER) AND eventType IN (Group@PH_SYS_EVENT_FileChange) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr,srcIpAddr</RelevantFilterAttr>
+  </Report>	   
+
+  <Report id="PH_Report_DC_16" group="PH_SYS_REPORT_DomainController,PH_SYS_REPORT_Change">
+    <Name>Change: Top Windows Domain Controllers, Users By Config Modification Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks Domain Controllers and their administrators by the number of config modifications performed </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,user,eventType,eventAction, COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_DC_16" name="Filter_DC_16">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_APP_DOMAIN_CONTROLLER) AND eventType IN (Group@PH_SYS_EVENT_ConfigChange) </SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr,user,eventType,eventAction </GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>	  
+
+  <Report id="PH_Report_DC_20" group="PH_SYS_REPORT_DomainController,PH_SYS_REPORT_Change">
+    <Name>Change: Windows Domain Controller Config Changes </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Provides detailed windows domain controller config changes</Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,eventType,eventAction,phRecvTime,srcIpAddr,user,computer,domain,rawEventMsg</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>phRecvTime DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_DC_20" name="Filter_DC_20">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_APP_DOMAIN_CONTROLLER) AND eventType IN (Group@PH_SYS_EVENT_ConfigChange)</SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr,srcIpAddr</RelevantFilterAttr>
+  </Report>	   
+
+  <Report id="PH_Report_DC_22" group="PH_SYS_REPORT_DomainController">
+    <Name>All Events: Windows Domain Controller Per User Activity Details</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Provides details about per user activity on the domain controller</Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr,eventType,srcIpAddr,user,computer,domain,winLogonId,rawEventMsg</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>phRecvTime DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_DC_22" name="Filter_DC_22">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_APP_DOMAIN_CONTROLLER)  AND  user IS NOT NULL </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr,srcIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_DC_23" group="PH_SYS_REPORT_DomainController">
+    <Name>All Events: Top Windows Domain Controllers By Event Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the domain controllers by the total number of events </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,COUNT( *)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT ( * )</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_DC_23" name="Filter_DC_23">
+           <SingleEvtConstr> reptDevIpAddr IN ( Group@PH_SYS_APP_DOMAIN_CONTROLLER) </SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_DC_24" group="PH_SYS_REPORT_DomainController,PH_SYS_REPORT_Change,PH_SYS_REPORT_Freq">
+    <Name> Change: Computers added to domain</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Captures computers added to a domain </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,phRecvTime,srcIpAddr,user,computer,domain,targetUser,targetDomain,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_DC_24" name="Filter_DC_24">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_APP_DOMAIN_CONTROLLER)  AND  eventType IN ("Win-Security-645","Win-Security-4741") </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr,srcIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_DC_25" group="PH_SYS_REPORT_DomainController,PH_SYS_REPORT_Change">
+    <Name> Change: Computers deleted from domain</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Captures computers removed from a domain </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,phRecvTime,srcIpAddr,user,computer,domain,targetUser,targetDomain,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_DC_25" name="Filter_DC_25">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_APP_DOMAIN_CONTROLLER)  AND  eventType IN ("Win-Security-647","Win-Security-4743") </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr,srcIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_DC_26" group="PH_SYS_REPORT_DomainController,PH_SYS_REPORT_Change,PH_SYS_REPORT_Freq">
+    <Name> Change: Domain user accounts created </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Captures user accounts added to a domain </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,phRecvTime,srcIpAddr,user,computer,domain,targetUser,targetDomain,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_DC_26" name="Filter_DC_26">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_APP_DOMAIN_CONTROLLER)  AND  eventType IN ("Win-Security-624","Win-Security-4720") </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr,srcIpAddr</RelevantFilterAttr>
+  </Report>
+
+   <Report id="PH_Report_DC_27" group="PH_SYS_REPORT_DomainController,PH_SYS_REPORT_Change">
+    <Name> Change: Domain user accounts deleted </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Captures user accounts removed from a domain </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,phRecvTime,srcIpAddr,user,computer,domain,targetUser,targetDomain,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_DC_27" name="Filter_DC_27">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_APP_DOMAIN_CONTROLLER)  AND  eventType IN ("Win-Security-630","Win-Security-4726") </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr,srcIpAddr</RelevantFilterAttr>
+  </Report>
+   
+  <Report id="PH_Report_DC_28" group="PH_SYS_REPORT_DomainController,PH_SYS_REPORT_Change,PH_SYS_REPORT_Freq">
+    <Name> Change: Domain user accounts modified </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Captures domain user account modifications. </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,phRecvTime,eventType, srcIpAddr,user,computer,domain,targetUser,targetDomain,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_DC_28" name="Filter_DC_28">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_APP_DOMAIN_CONTROLLER)  AND  eventType IN (Group@PH_SYS_EVENT_GroupChanged,Group@PH_SYS_EVENT_AccountChanged) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr,srcIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_DC_29" group="PH_SYS_REPORT_DomainController,PH_SYS_REPORT_Change">
+    <Name> Change: Domain groups created </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Captures domain group creations </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,phRecvTime,eventType,srcIpAddr,user,computer,domain,targetUserGrp,targetDomain,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_DC_29" name="Filter_DC_29">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_APP_DOMAIN_CONTROLLER)  AND  eventType IN ("Win-Security-631","Win-Security-658", "Win-Security-653", "Win-Security-663","Win-Security-4727","Win-Security-4749", "Win-Security-4754", "Win-Security-4759" ) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr,srcIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_DC_30" group="PH_SYS_REPORT_DomainController,PH_SYS_REPORT_Change">
+    <Name> Change: Domain groups deleted </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Captures domain group deletions </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,phRecvTime,eventType,srcIpAddr,user,computer,domain,targetUserGrp,targetDomain,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_DC_30" name="Filter_DC_30">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_APP_DOMAIN_CONTROLLER)  AND  eventType IN ("Win-Security-634","Win-Security-662", "Win-Security-657", "Win-Security-667","Win-Security-4730","Win-Security-4753", "Win-Security-4758", "Win-Security-4763" ) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr,srcIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_DC_31" group="PH_SYS_REPORT_DomainController,PH_SYS_REPORT_Change">
+    <Name> Change: Domain groups modified </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Captures domain group modifications </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,phRecvTime,eventType,srcIpAddr,user,computer,domain,targetUserGrp,targetDomain,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_DC_31" name="Filter_DC_31">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_APP_DOMAIN_CONTROLLER)  AND  eventType IN ("Win-Security-641","Win-Security-659", "Win-Security-654", "Win-Security-664","Win-Security-4737","Win-Security-4750", "Win-Security-4755", "Win-Security-4760" ) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr,srcIpAddr</RelevantFilterAttr>
+  </Report>
+
+   <Report id="PH_Report_DC_32" group="PH_SYS_REPORT_DomainController">
+    <Name>Logon: Privileged Domain Controller Logon Attempts using the Administrator Account </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the windows servers and their users by the number of failed logons using the administrator account</Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,eventType, eventAction,srcIpAddr,user,domain,winLogonType,winLogonFailCode,rawEventMsg</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_DC_32" name="Filter_DC_32">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_APP_DOMAIN_CONTROLLER)  AND  user = "Administrator" AND eventType IN (Group@PH_SYS_EVENT_HostLogonFailure,Group@PH_SYS_EVENT_HostLogonSuccess) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr,srcIpAddr</RelevantFilterAttr>
+  </Report> 
+  
+  <Report id="PH_Report_DC_33" group="PH_SYS_REPORT_DomainController" >
+    <Name>Logon: Remote Desktop Connections to Domain Controller </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Details successful remote desktop connections </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,eventType, eventAction,srcIpAddr,user,domain,winLogonType,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_DC_33" name="Filter_DC_33">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_APP_DOMAIN_CONTROLLER)  AND winLogonType = 10 AND eventType IN (Group@PH_SYS_EVENT_HostLogonFailure,Group@PH_SYS_EVENT_HostLogonSuccess) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr,srcIpAddr</RelevantFilterAttr>
+  </Report> 
+
+  <Report id="PH_Report_DC_34" group="PH_SYS_REPORT_DomainController,PH_SYS_REPORT_Change">
+    <Name> Logon: Windows Domain Authentication details </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Provides detailed windows domain authentication attempts - both success and failures </Description>
+    <SelectClause numEntries="All">
+      <AttrList> phRecvTime, reptDevIpAddr,srcIpAddr,user,computer,domain,winKerbFailCode,rawEventMsg</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_DC_34" name="Filter_DC_34">
+        <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_DomainLogonSuccess,Group@PH_SYS_EVENT_DomainLogonFailure)</SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr,srcIpAddr</RelevantFilterAttr>
+  </Report>	   
+
+   <Report id="PH_Report_DC_35" group="PH_SYS_REPORT_DomainController,PH_SYS_REPORT_Change">
+    <Name> Change: Users Added To Domain Groups </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks users added to domain groups </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,phRecvTime,srcIpAddr,user,computer,domain,targetUser,targetUserGrp,targetDomain,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_DC_35" name="Filter_DC_35">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_APP_DOMAIN_CONTROLLER)  AND  eventType IN ("Win-Security-632","Win-Security-655", "Win-Security-660", "Win-Security-665","Win-Security-4728","Win-Security-4751", "Win-Security-4756", "Win-Security-4761" ) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr,srcIpAddr</RelevantFilterAttr>
+  </Report>
+
+   <Report id="PH_Report_DC_36" group="PH_SYS_REPORT_DomainController,PH_SYS_REPORT_Change">
+    <Name> Change: Users Deleted From Domain Groups </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> Tracks users deleted from domain groups. The information contains who did it (User, Computer, Domain, Source IP) along with the deleted account (Target User) and group (Target User Group). </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,phRecvTime,srcIpAddr,user,computer,domain,targetUser,targetUserGrp,targetDomain,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_DC_36" name="Filter_DC_36">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_APP_DOMAIN_CONTROLLER)  AND  eventType IN ("Win-Security-633","Win-Security-656", "Win-Security-661", "Win-Security-666","Win-Security-4729","Win-Security-4752", "Win-Security-4757", "Win-Security-4762" ) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr,srcIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_DC_37" group="PH_SYS_REPORT_DomainController,PH_SYS_REPORT_Change">
+    <Name> Change: Domain User Password Changes </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks password changes </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,phRecvTime,srcIpAddr,user,domain,targetUser,targetDomain,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_DC_37" name="Filter_DC_37">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_APP_DOMAIN_CONTROLLER) AND eventType IN (Group@PH_SYS_EVENT_PasswordChange) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr,srcIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_DC_38" group="PH_SYS_REPORT_DomainController,PH_SYS_REPORT_Change">
+    <Name>Change: Domain Account Lock/Unlock history </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Captures account lockouts and unlocks on domain accounts. Account lockouts happen on repeated login failures and may be suspicious if they are repeated or happen at odd hours of operation. </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,eventType,srcIpAddr,user,domain,targetUser,targetDomain,rawEventMsg</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>phRecvTime DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_DC_38" name="Filter_DC_38">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_APP_DOMAIN_CONTROLLER)  AND eventType IN (Group@PH_SYS_EVENT_DomainAccountLocked,Group@PH_SYS_EVENT_DomainAccountUnlocked)</SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr,srcIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_DC_39" group="PH_SYS_REPORT_DomainController,PH_SYS_REPORT_Change">
+    <Name>Change: Domain Account Unlocks</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Captures account unlocks on domain accounts. Account unlocks happen after lockouts that may happen on repeated login failures</Description>
+    <SelectClause numEntries="All">
+      <AttrList>phRecvTime,eventType,srcIpAddr,user,domain,targetUser,targetDomain,rawEventMsg</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>phRecvTime DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_DC_39" name="Filter_DC_39">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_APP_DOMAIN_CONTROLLER)  AND eventType IN (Group@PH_SYS_EVENT_DomainAccountUnlocked)</SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr,srcIpAddr</RelevantFilterAttr>
+  </Report>  
+
+  <Report id="PH_Report_DC_40" group="PH_SYS_REPORT_DomainController">
+    <Name>Logon: Top Windows Domain Controllers By Users</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the Windows Domain Controllers by the distinct number of users receiving domain services</Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,COUNT(DISTINCT user)</AttrList>    
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(DISTINCT user)</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_DC_1" name="Filter_DC_1">
+           <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_DomainLogonSuccess, Group@PH_SYS_EVENT_DomainSrvcLogonSuccess, Group@PH_SYS_EVENT_HostLogonSuccess) AND reptDevIpAddr IN (Group@PH_SYS_APP_DOMAIN_CONTROLLER) </SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr,srcIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_DC_41" group="PH_SYS_REPORT_DomainController,PH_SYS_REPORT_Change">
+    <Name>Change: Windows Domain Controller Audit Policy Changed</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report captures audit policy changes </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,phRecvTime,srcIpAddr,user,computer,targetUser,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WINDOWS_26" name="Filter_WINDOWS_26">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_APP_DOMAIN_CONTROLLER)  AND  eventType IN ("Win-Security-807","Win-Security-4902","Win-Security-517","Win-Security-612","Win-Security-4912","Win-Security-4715","Win-Security-4907") </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+</Reports>
+

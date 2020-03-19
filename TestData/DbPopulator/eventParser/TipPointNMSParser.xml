@@ -1,0 +1,54 @@
+<eventParser name="TipPointNMSParser">
+
+	<deviceType>
+		<Vendor>3Com</Vendor>
+		<Model>TippingPoint UnityOne IPS</Model>
+		<Version>ANY</Version>
+	</deviceType>
+
+	<patternDefinitions>
+		<pattern name="patTipUuidHex"><![CDATA[\w{8}-\w{4}-\w{4}-\w{4}-\w{12}]]></pattern>
+		<pattern name="patSep"><![CDATA[\t]]></pattern>
+	</patternDefinitions>
+
+	<eventFormatRecognizer><![CDATA[\d<:patSep><:patTipUuidHex>]]></eventFormatRecognizer>
+	
+	<testEvents>
+      <testEvent><![CDATA[<36> 7 2	00000002-0002-0002-0002-000000001919 00000001-0001-0001-0001-000000001919 1919: Backdoor: Psychward 1919 tcp 10.1.1.100 13013 10.1.1.101 1240 3 3 2 207-2400-Jack 33761793 1109876221622]]></testEvent>
+  </testEvents>
+
+	<!-- This parser is specially made for Port of Long Beach -->
+	<!-- <36> 7 2 00000002-0002-0002-0002-000000001919 00000001-0001-0001-0001-000000001919 1919: Backdoor: Psychward 1919 tcp 10.1.1.100 13013 10.1.1.101 1240 3 3 2 207-2400-Jack 33761793 1109876221622 -->
+	<parsingInstructions>
+		<setEventAttribute attr="eventType">Tipp-Generic</setEventAttribute>
+
+		<switch>
+		    <!-- Message with no header NMS format -->
+			<case>
+				<collectFieldsByRegex src="$_rawmsg">
+					<regex><![CDATA[<:gPatSyslogPRI><:patSep>\d<:patSep>\d<:patSep><:patTipUuidHex><:patSep><:patTipUuidHex><:patSep><:gPatMesgBody><:patSep><_tiptype:gPatInt><:patSep><appTransportProto:gPatProto><:patSep><srcIpAddr:gPatIpV4Dot><:patSep><srcIpPort:gPatInt><:patSep><destIpAddr:gPatIpV4Dot><:patSep><destIpPort:gPatInt><:patSep><count:gPatInt><:gPatMesgBody>]]></regex>
+				</collectFieldsByRegex>
+
+				<setEventAttribute attr="eventType">combineMsgId("Tipp", "_", "IPS", "-", $_tiptype)</setEventAttribute>
+			</case>
+			<!-- Message with no header and a single digit separator right after syslog PRI symbol NMS format -->
+			<case>
+				<collectFieldsByRegex src="$_rawmsg">
+					<regex><![CDATA[<:gPatSyslogPRI>\d<:patSep>\d<:patSep><:patTipUuidHex><:patSep><:patTipUuidHex><:patSep><:gPatMesgBody><:patSep><_tiptype:gPatInt><:patSep><appTransportProto:gPatProto><:patSep><srcIpAddr:gPatIpV4Dot><:patSep><srcIpPort:gPatInt><:patSep><destIpAddr:gPatIpV4Dot><:patSep><destIpPort:gPatInt><:patSep><count:gPatInt><:gPatMesgBody>]]></regex>
+				</collectFieldsByRegex>
+
+				<setEventAttribute attr="eventType">combineMsgId("Tipp", "_", "IPS", "-", $_tiptype)</setEventAttribute>
+			</case>
+			<!-- Message with syslog event header NMS format -->
+			<case>
+				<collectFieldsByRegex src="$_rawmsg">
+					<regex><![CDATA[<:gPatSyslogPRI><_mon:gPatMon>\s+<_day:gPatDay>\s+<_time:gPatTime>\s+\d<:patSep>\d<:patSep><:patTipUuidHex><:patSep><:patTipUuidHex><:patSep><:gPatMesgBody><:patSep><_tiptype:gPatInt><:patSep><appTransportProto:gPatProto><:patSep><srcIpAddr:gPatIpV4Dot><:patSep><srcIpPort:gPatInt><:patSep><destIpAddr:gPatIpV4Dot><:patSep><destIpPort:gPatInt><:patSep><count:gPatInt><:gPatMesgBody>]]></regex>
+				</collectFieldsByRegex>
+
+				<setEventAttribute attr="eventType">combineMsgId("Tipp", "_", "IPS", "-", $_tiptype)</setEventAttribute>
+			</case>
+		</switch>
+
+	</parsingInstructions>
+
+</eventParser>

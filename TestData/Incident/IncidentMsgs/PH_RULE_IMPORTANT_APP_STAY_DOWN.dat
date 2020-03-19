@@ -1,0 +1,2 @@
+[eventMsg]
+[PH_DEV_MON_PROC_STOP]:[eventSeverity]=PHL_INFO,[swProcName]=myBigApp,[hostName]=utomator12Dot12Dot12Dot12,[hostIpAddr]=12.12.12.12,[appName]=bigApp,[appGroupName]=bigGroup,[pollIntv]=20,[swParam]=

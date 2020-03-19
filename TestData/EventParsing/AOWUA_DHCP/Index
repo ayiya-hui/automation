@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+AO-WUA-DHCP-Generic,AOWUA_DHCP_1,AOWUA_DHCP,192.168.1.30,,syslog

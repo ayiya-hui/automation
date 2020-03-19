@@ -1,0 +1,81 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<189>date=2010-06-12 time=17:09:57 devname=FortiGate-Shan device_id=APS3012404201140 log_id=0021010001 type=traffic subtype=allowed pri=notice vd=root SN=37534 duration=65 user=N/A group=N/A rule=1 policyid=1 proto=1 service=8/icmp app_type=N/A status=accept src=10.1.20.132 srcname=10.1.20.132 dst=20.1.1.13 dstname=20.1.1.13 src_int="internal" dst_int="external" sent=504 rcvd=504 sent_pkt=6 rcvd_pkt=6 src_port=0 dst_port=0 vpn=N/A tran_ip=20.1.1.75 tran_port=0 dir_disp=org tran_disp=snat
+[params]
+appName=N/A
+totBytes=1008
+totPkts=12
+userGrp=N/A
+deviceTime=any
+eventType=FortiGate-traffic-allowed
+phCustId=$sender
+destIpAddr=20.1.1.13
+srcName=10.1.20.132
+destIpPort=0
+srcIpAddr=10.1.20.132
+reptModel=FortiOS
+eventId=any
+eventParsedOk=1
+eventSeverity=3
+sentPkts=6
+icmpType=8 (Echo Request)
+eventName=Permitted traffic
+phEventCategory=4 (Traffic)
+destName=20.1.1.13
+srcIntfName=internal
+recvBytes=504
+srcIpPort=0
+eventSeverityCat=LOW
+destIntfName=external
+relayDevIpAddr=$reporter
+ipProto=1 (ICMP)
+count=1
+phRecvTime=any
+reptDevIpAddr=$reporter
+recvPkts=6
+eventAction=0 (Permit)
+reptVendor=Fortinet
+durationMSec=65000
+fwRule=1
+sentBytes=504
+[reptDevIpAddr(key)]
+30.30.30.35
+[eventMsg]
+<189>Apr  7 11:04:44 $reporter date=2010-04-07 time=13:01:54 devname=APS3012404210944 device_id=APS3012404200944 log_id=0021010001 type=traffic subtype=allowed pri=Trueice vd=root SN=7131 duration=198 user=N/A group=N/A rule=1 policyid=1 proto=17 service=161/udp app_type=N/A status=accept src=172.16.8.2 srcname=172.16.8.2 dst=192.168.20.2 dstname=192.168.20.2 src_int="internal" dst_int="external" sent=424 rcvd=0 sent_pkt=4 rcvd_pkt=0 src_port=1030 dst_port=161 vpn=N/A tran_ip=172.16.255.74 tran_port=52742 dir_disp=org tran_disp=snat
+[params]
+phEventCategory=4 (Traffic)
+appName=N/A
+count=1
+phCustId=$sender
+destName=192.168.20.2
+destIpAddr=192.168.20.2
+destIntfName=external
+destIpPort=161 (SNMP)
+deviceTime=any
+durationMSec=198000
+eventAction=0 (Permit)
+eventId=any
+eventName=Permitted traffic
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=3
+eventSeverityCat=LOW
+eventType=FortiGate-traffic-allowed
+fwRule=1
+ipProto=17 (UDP)
+recvBytes=0
+recvPkts=0
+relayDevIpAddr=$reporter
+reptDevIpAddr=$reporter
+reptModel=FortiOS
+reptVendor=Fortinet
+sentBytes=424
+sentPkts=4
+srcName=172.16.8.2
+srcIpAddr=172.16.8.2
+srcIntfName=internal
+srcIpPort=1030
+totBytes=424
+totPkts=4
+userGrp=N/A

@@ -1,0 +1,34 @@
+[reptDevIpAddr(key)]
+10.162.24.101
+[eventMsg]
+Tue Dec 16 15:01:26 2014 10.162.24.101 AccelOps-WinLog-WMI [Category]="2" [CategoryString]="Logon/Logoff" [ComputerName]="SECUREACCESS1" [Data]="NULL" [EventCode]="531" [EventIdentifier]="531" [EventType]="5" [Logfile]="Security" [RecordNumber]="8765589" [SourceName]="Security" [TimeGenerated]="20141216100101.000000-300" [TimeWritten]="20141216100101.000000-300" [Type]="Audit Failure" [User]="NT AUTHORITY\SYSTEM"[[Logon Failure]] [Reason]="Account currently disabled" [[User Name]] [[Domain]] [Logon Type]="3" [Logon Process]="Authz" [Authentication Package]="Kerberos" [Workstation Name]="SECUREACCESS1" [Caller User Name]="SECUREACCESS1$" [Caller Domain]="CSB01" [Caller Logon ID]="(0x0,0x3E7)" [Caller Process ID]="816" [Transited Services]="" [Source Network Address]="" [Source Port]=" "
+[params]
+domain=CSB01
+deviceTime=any
+parserName=WinOSWmiParser
+eventType=Win-Security-531
+hostName=SECUREACCESS1
+destIpAddr=10.162.24.101
+computer=SECUREACCESS1
+eventSource=Security
+winLogonType=3 (Network - logon)
+reptModel=Windows
+eventId=any
+latency=0.00
+eventParsedOk=1
+eventSeverity=3
+eventName=Windows logon failure - account currently disabled
+phEventCategory=0 (External)
+eventRuleTrigger=1
+type=Audit Failure
+count=1
+seqNum=8765589
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=any
+user=SECUREACCESS1$
+customer=Super
+phRecvTime=any
+reptDevIpAddr=10.162.24.101
+eventAction=1 (Deny)
+reptVendor=Microsoft

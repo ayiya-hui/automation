@@ -1,0 +1,23 @@
+[reptDevIpAddr(key)]
+81.81.81.81
+[eventMsg]
+<132>SH-QA-A-Jnp-FW-01: NetScreen device_id=SH-QA-A-Jnp-FW-01  [Root]system-warning-00518: ADM: Local admin authentication failed for login name 'netscreen': invalid password (2001-10-20 21:14:31).--automator
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=6
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=MEDIUM
+destIpAddr=81.81.81.81
+eventAction=0 (Permit)
+eventName=Failed admin local logon
+reptVendor=Juniper
+eventType=Juniper-SSG-local-login-fail
+user='netscreen'
+phEventCategory=0 (External)
+reptDevIpAddr=81.81.81.81
+reptModel=SSG ScreenOS

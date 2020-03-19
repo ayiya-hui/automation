@@ -1,0 +1,33 @@
+[reptDevIpAddr(key)]
+81.81.81.81
+[eventMsg]
+<133>SH-QA-A-Jnp-FW-01: NetScreen device_id=SH-QA-A-Jnp-FW-01  [Root]system-notification-00257(traffic): start_time="2001-10-21 18:32:43" duration=0 policy_id=6 service=icmp proto=1 src zone=Untrust dst zone=Global action=Deny sent=0 rcvd=0 src=172.16.2.5 dst=172.16.3.27 icmp type=8 session_id=0.
+[params]
+rawEventMsg=any
+deviceTime=any
+eventType=Juniper-SSG-traffic-deny
+phCustId=$sender
+destIpAddr=172.16.3.27
+totBytes=0
+srcIpAddr=172.16.2.5
+reptModel=SSG ScreenOS
+eventId=any
+policyName=6
+eventParsedOk=1
+eventSeverity=5
+testEvent=Real Event(0)
+preNATDestIpAddr=172.16.3.27
+eventName=Denied network traffic
+phEventCategory=4 (Traffic)
+recvBytes=0
+eventSeverityCat=MEDIUM
+collectorId=any
+ipProto=1 (ICMP)
+reptDevName=any
+count=1
+phRecvTime=any
+reptDevIpAddr=81.81.81.81
+eventAction=1 (Deny)
+reptVendor=Juniper
+durationMSec=0
+sentBytes=0

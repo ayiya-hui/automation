@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<52>Apr 11 13:08:22 SymantecServer $localhost: 6400-cgavin,Category: 0,SYLINK,Downloaded new content update from the management server failed.     Remote file path: http://CMSEPM.megapath.biz:8014/content/{55DE35DC-862A-44c9-8A2B-3EF451665D0A}/140410012/xdelta140409011.dax
+[params]
+customer=Super
+eventId=any
+parserName=SymantecAVParser
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=MEDIUM
+reptVendor=Symantec
+eventSeverity=5
+eventType=Symantec-AV-Download-Failed
+reptDevIpAddr=$localhost
+collectorId=any
+eventName=Symantec AV Client failed to download new content update from the management server
+count=1
+computer=6400-cgavin
+relayDevIpAddr=$localhost
+phRecvTime=any
+hostName=6400-cgavin
+reptDevName=any
+reptModel=Endpoint Protection Service

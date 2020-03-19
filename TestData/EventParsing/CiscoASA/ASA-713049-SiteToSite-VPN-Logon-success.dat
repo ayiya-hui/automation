@@ -1,0 +1,46 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<165>Dec 16 2010 16:22:47: %ASA-5-713049: Group = 172.244.221.184, IP = 172.244.221.184, Security negotiation complete for LAN-to-LAN Group (172.244.221.184)  Responder, Inbound SPI = 0x26405bd9, Outbound SPI = 0xab272990
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+count=1
+phCustId=$sender
+deviceTime=any
+eventAction=0 (Permit)
+eventId=any
+eventName=Security negotiation complete for IPSec tunnel - Site to Site VPN logon success
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=2
+eventSeverityCat=LOW
+eventType=ASA-713049-SiteToSite-VPN-Logon-success
+reptDevIpAddr=$reporter
+reptModel=ASA
+reptVendor=Cisco
+srcIpAddr=172.244.221.184
+userGrp=172.244.221.184
+[reptDevIpAddr(key)]
+54.54.54.54
+[eventMsg]
+<165>Original Address=$reporter Dec 16 2010 16:56:28: %ASA-5-713049: Group = 99.131.254.1, IP = 99.131.254.1, Security negotiation complete for LAN-to-LAN Group (199.231.154.4)  Initiator, Inbound SPI = 0xab272990, Outbound SPI = 0x26405bd9
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+count=1
+phCustId=$sender
+deviceTime=any
+eventAction=0 (Permit)
+eventId=any
+eventName=Security negotiation complete for IPSec tunnel - Site to Site VPN logon success
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=2
+eventSeverityCat=LOW
+eventType=ASA-713049-SiteToSite-VPN-Logon-success
+reptDevIpAddr=$reporter
+reptModel=ASA
+reptVendor=Cisco
+srcIpAddr=99.131.254.1
+userGrp=99.131.254.1

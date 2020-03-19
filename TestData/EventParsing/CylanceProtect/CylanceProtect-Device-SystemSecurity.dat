@@ -1,0 +1,29 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+CylancePROTECT: Event Type: Device, Event Name: SystemSecurity, Device Name: WIN-55NATVQHBUU, Agent Version: 1.1.1270.58, IP Address: (10.3.0.154), MAC Address: (005056881877), Logged On Users: (WIN-55NATVQHBUU\Administrator), OS: Microsoft Windows Server 2008 R2 Standard Service Pack 1 x64 6.1.7601
+[params]
+domain=WIN-55NATVQHBUU
+parserName=CylanceProtectParser
+eventType=CylanceProtect-Device-SystemSecurity
+hostName=WIN-55NATVQHBUU
+osType=Microsoft Windows Server 2008 R2 Standard Service Pack 1 x64 6.1.7601
+reptModel=Protect
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=CylanceProtect-Device-SystemSecurity
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+eventRuleTrigger=1
+hostMACAddr=00:00:00:00:00:00
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+user=Administrator
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Cylance

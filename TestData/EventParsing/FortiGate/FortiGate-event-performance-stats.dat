@@ -1,0 +1,22 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<190>date=2010-06-17 time=03:32:48 devname=FGT50B3G10615108 device_id=FGT50B3G10615108 log_id=0143040704 type=event subtype=his-performance pri=information fwver=040002 vd="root" action=perf-stats cpu=18 mem=47 total_session=19 msg="Performance statistics"
+[params]
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=3
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+eventAction=0 (Permit)
+eventName=FortiGate unit performance statistics
+reptVendor=Fortinet
+eventType=FortiGate-event-performance-stats
+phEventCategory=0 (External)
+relayDevIpAddr=$reporter
+reptDevIpAddr=$reporter
+usrMsg=Performance statistics
+reptModel=FortiOS

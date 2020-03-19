@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+enterprises.3401 6 5 enterprises.3401.12.2.1.1.4.1.1.9.271 s "To SJ-Dev-S-RH-DNS-01"     enterprises.3401.12.2.1.1.4.1.1.11.271 s "My Organization"   enterprises.3401.12.2.1.1.4.1.1.12.271 s "Directory"        enterprises.3401.12.2.1.1.4.1.1.18.271 s "Any"       enterprises.3401.12.2.1.1.4.1.1.19.271 s "Any"      enterprises.3401.12.2.1.1.4.1.1.33.271 s "(Any)"     enterprises.3401.12.2.1.1.4.1.1.15.271 s "4/16/08 3:27:14 AM"        enterprises.3401.12.2.1.1.4.1.1.31.271 s "1038"     enterprises.3401.12.2.1.1.4.1.1.32.271 s "Scan found infected files."        enterprises.3401.12.2.1.1.4.1.1.16.271 s "1"        enterprises.3401.12.2.1.1.4.1.1.17.271 s "1" enterprises.3401.12.2.1.1.4.1.1.13.271 s "VirusScan"        enterprises.3401.12.2.1.1.4.1.1.14.271 s "Virus detected and NOT removed"    enterprises.3401.12.2.1.1.4.1.1.22.271 s "On-Demand Scan"    enterprises.3401.12.2.1.1.4.1.1.23.271 s "Not Available"    enterprises.3401.12.2.1.1.4.1.1.24.271 s "192.168.1.6"       enterprises.3401.12.2.1.1.4.1.1.25.271 s "SJDEVSWINIIS01"   enterprises.3401.12.2.1.1.4.1.1.26.271 s "Not Available"     enterprises.3401.12.2.1.1.4.1.1.27.271 s "4" enterprises.3401.12.2.1.1.4.1.1.6.271 s "4/16/08 3:27:14 AM"
+[params]
+rawEventMsg=any
+eventSeverity=1
+eventSeverityCat=LOW
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+virusName=On-Demand Scan
+reptVendor=McAfee
+phRecvTime=any
+phCustId=$sender
+hostName=SJDEVSWINIIS01
+destIpAddr=192.168.1.6
+hostIpAddr=192.168.1.6
+fileName=Not Available
+eventName=Scan found infected files
+computer=SJDEVSWINIIS01
+eventType=McAfee-EPO-1038
+phEventCategory=0 (External)
+reptDevIpAddr=$localhost
+destName=SJDEVSWINIIS01
+reptModel=ePolicy Orchestrator

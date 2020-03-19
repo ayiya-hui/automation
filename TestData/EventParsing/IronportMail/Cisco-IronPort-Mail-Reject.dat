@@ -1,0 +1,24 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<22>Oct 18 17:47:49 IronPort-Mail: Info: ICID 175199551 REJECT SG BLACKLIST match sbrs[-10.0:-3.0] SBRS -8.2
+[params]
+rawEventMsg=any
+eventId=any
+count=1
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+eventSeverity=1
+eventType=Cisco-IronPort-Mail-Reject
+phCustId=$sender
+reptDevIpAddr=$localhost
+collectorId=any
+sbrsScore=-8.20
+eventName=IronPort mail rejected with known SBRS score
+ironportMailICID=175199551
+reptVendor=Cisco
+phRecvTime=any
+reptDevName=any
+reptModel=IronPort AsyncOS Mail

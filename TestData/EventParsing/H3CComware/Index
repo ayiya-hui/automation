@@ -1,0 +1,8 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+H3C-Comware-DEVD-BOARD_REBOOT,H3CComware_1,H3CComware,$localhost,,syslog
+H3C-Comware-DEVD-BRD_MISPLUG_MODEL,H3CComware_2,H3CComware,$localhost,,syslog
+H3C-Comware-DEVD-BRD_TOO_HOT,H3CComware_3,H3CComware,$localhost,,syslog
+H3C-Comware-DEVD-LACK_OF_PWR,H3CComware_4,H3CComware,$localhost,,syslog
+H3C-Comware-DEVD-FAN_CHANGE_CLEAR,H3CComware_5,H3CComware,$localhost,,syslog
+H3C-Comware-DEVD-PSU_CHANGED,H3CComware_6,H3CComware,$localhost,,syslog

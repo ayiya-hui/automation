@@ -1,0 +1,2 @@
+[eventMsg]
+<13>Dec 12 10:09:00 automator40Dot0Dot0Dot10 MSWinEventLog	1	Security	1756	Wed Dec 12 10:08:53 2007	633	Security	SYSTEM	User	Success Audit	ADS-PRI	Security enabled global group member removed		Caller User Name: partha   Caller Domain: PROSPECTHILLS		Caller Logon ID: (0x0, 0x158E87) 	Target Account Name: DnsAdmins  Target Domain: PROSPECTHILLS	Target Account ID: PROSPECTHILLS\johnDoe 

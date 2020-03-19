@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<189>3755503: Mar 16 21:23:20: %AUTHMGR-5-SUCCESS: Authorization succeeded for client (001e.c96d.65fb) on Interface Gi1/0/25 AuditSessionID AC1032150000360DD25F3B9F
+[params]
+deviceTime=any
+eventType=IOS-AUTHMGR-SUCCESS
+phCustId=$sender
+reptModel=IOS
+eventId=any
+ipConnId=AC1032150000360DD25F3B9F
+eventParsedOk=1
+eventSeverity=2
+hostIpAddr=$localhost
+eventName=Authorization succeeded for client on interface
+phEventCategory=0
+srcIntfName=Gi1/0/25
+srcMACAddr=00:1e:c9:6d:65:fb
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=Success(0)
+reptVendor=Cisco

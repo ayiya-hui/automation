@@ -1,0 +1,52 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<13>Aug 26 15:58:01 DNS-Pri dhcpd: DHCPACK on 172.16.10.223 to 00:1e:c9:fe:06:86 (WIN-09PEADE5UAN) via eth0
+[params]
+rawEventMsg=any
+eventSeverity=1
+eventSeverityCat=LOW
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+reptVendor=Generic
+srcMACAddr=00:1e:c9:fe:06:86
+phRecvTime=any
+phCustId=$sender
+hostName=WIN-09PEADE5UAN
+srcIpAddr=172.16.10.223
+eventAction=0 (Permit)
+eventName=Server Acknowledges IP Request
+computer=WIN-09PEADE5UAN
+eventType=Linux_DHCPACK
+phEventCategory=0 (External)
+srcName=WIN-09PEADE5UAN
+reptDevIpAddr=$localhost
+reptModel=Linux DHCP
+[reptDevIpAddr(key)]
+172.16.10.8
+[eventMsg]
+<190>Mar 25 00:20:22 172.16.10.8 dhcpd: DHCPACK on 172.16.10.197 to 00:0c:29:48:96:e3 (dev-v-win03-vc) via eth0
+[params]
+rawEventMsg=any
+eventSeverity=1
+eventSeverityCat=LOW
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+reptVendor=Generic
+srcMACAddr=00:0c:29:48:96:e3
+phRecvTime=any
+phCustId=$sender
+hostName=dev-v-win03-vc
+srcIpAddr=172.16.10.197
+eventAction=0 (Permit)
+eventName=Server Acknowledges IP Request
+computer=dev-v-win03-vc
+eventType=Linux_DHCPACK
+phEventCategory=0 (External)
+srcName=dev-v-win03-vc
+reptDevIpAddr=172.16.10.8
+reptModel=Linux DHCP

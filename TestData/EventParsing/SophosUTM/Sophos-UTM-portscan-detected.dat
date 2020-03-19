@@ -1,0 +1,36 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<30>2016:03:11-09:42:07 ActiveUTM-2 ulogd[7643]: id="2102" severity="info" sys="SecureNet" sub="ips" name="portscan detected" action="portscan" fwrule="60017" initf="eth7" outitf="eth0" srcmac="00:1e:14:62:f8:00" dstmac="00:1a:8c:f0:60:87" srcip="10.4.47.201" dstip="10.250.0.51" proto="6" length="52" tos="0x00" prec="0x00" ttl="126" srcport="49648" dstport="49155" tcpflags="SYN"
+[params]
+destMACAddr=00:1a:8c:f0:60:87
+parserName=SophosUTMParser
+eventType=Sophos-UTM-portscan-detected
+destIpAddr=10.250.0.51
+procName=ulogd
+srcIpAddr=10.4.47.201
+reptModel=UTM
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+fwAction=portscan
+eventName=Sophos UTM port scan detected
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+eventRuleTrigger=1
+count=1
+srcIntfName=eth7
+srcIpPort=49648
+eventSeverityCat=LOW
+collectorId=any
+destIntfName=eth0
+relayDevIpAddr=$localhost
+ipProto=6 (TCP)
+destIpPort=49155
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+ipTtl=126
+reptVendor=Sophos
+fwRule=60017

@@ -1,0 +1,30 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+Nov 3 17:07:28 FOO CEF:0|PATownsend|IBM-QAUDJRN|1.28|1056|SV-System value changed|10|msg=SV-System value changed act=D-Adjust UTC actual_type=SV-D system_value=ADJUTC new_value=2751703461974520 old_value=2751703461991213 jrn_seq=158268434 timestamp=20151103170728328000 dproc=QTOTNTP suser=QNTP job_number=758502 eff_user=QNTP
+[params]
+deviceTime=any
+parserName=IBMTownsendParser
+eventType=OS400-SV
+jobId=758502
+reptModel=OS400
+eventId=any
+eventTime=Tue Nov 03 17:07:28 CST 2015
+eventParsedOk=1
+eventSeverity=1
+eventName=OS400 System Value Changed
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+msg=SV-System value changed
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+user=QNTP
+rawEventMsg=any
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+targetUser=QNTP
+reptVendor=IBM

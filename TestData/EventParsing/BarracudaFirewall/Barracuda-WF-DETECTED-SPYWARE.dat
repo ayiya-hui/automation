@@ -1,0 +1,38 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<164>http_scan[6318]: 1483983626 1 10.128.200.93 72.246.196.48 application/x-javascript 10.128.200.93 http://hk.adx.nextmedia.com/uvp/js/flowplayer.con-3.1.0.js? 50105 BYF DETECTED SPYWARE 2 0 0 0 0 (-) 0 - 0 - 0 nextmedia.com news [ANON] http://hk.apple.nextmedia.com/ hk.apple.nextmedia.com news 0
+[params]
+destGeoOrg=any
+parserName=BarracudaWebFilterParser
+eventType=Barracuda-WF-DETECTED-SPYWARE
+destGeoState=any
+activityType=allowed
+destIpAddr=72.246.196.48
+totBytes=50105
+srcName=any
+destGeoCountry=any
+srcIpAddr=10.128.200.93
+reptModel=Web Filter
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+serverName=nextmedia.com
+eventName=Detected but permitted web traffic - spyware
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+destName=hk.adx.nextmedia.com
+webCategory=news
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+count=1
+infoURL=http://hk.adx.nextmedia.com/uvp/js/flowplayer.con-3.1.0.js?
+reptVendor=Barracuda
+destGeoCity=any
+fileType=application/x-javascript

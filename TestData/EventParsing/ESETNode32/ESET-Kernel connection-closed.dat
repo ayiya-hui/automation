@@ -1,0 +1,29 @@
+[reptDevIpAddr(key)]
+74.74.74.74
+[eventMsg]
+<35313864>Jul 26 18:06:13 74.74.74.74 ERA Server: [2011-07-26 13:06:13.221] V5 [4e2f02148110] [00000e9c] <SESSION_INFO> Kernel connection from 10.0.52.25:48071 closed (code 0,took 438ms, name 'Lmhathnsmt01', mac '00-1E-4F-E8-49-03', product 'ESET NOD32 Antivirus BUSINESS EDITION', product version '04.00002.00071', virus signature db version '63(20110726)')
+[params]
+virdbVer=63(20110726)
+deviceTime=any
+appName=ESET NOD32 Antivirus BUSINESS EDITION
+eventType=ESET-Kernel connection-closed
+phCustId=$sender
+hostName=Lmhathnsmt01
+srcIpAddr=10.0.52.25
+reptModel=Nod32
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+appVersion=04.00002.00071
+eventName=Permitted IP traffic by policy
+phEventCategory=0 (External)
+hostMACAddr=00:1E:4F:E8:49:03
+srcIpPort=48071
+eventSeverityCat=LOW
+relayDevIpAddr=74.74.74.74
+reptDevName=any
+count=1
+phRecvTime=any
+reptDevIpAddr=74.74.74.74
+reptVendor=ESET
+durationMSec=438

@@ -1,0 +1,43 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<13>Sep 14 14:02:14 BG-Bit9.BurgessGroup.com Bit9 event:  text="Computer BURGESSGROUP\MARYA-E7440 discovered new file '\\fileserver1\users shared folders\deployment center\messagestore\bgmessenger.exe' [2f92fb917c4f3faf481d63302ee1a17640a7e98d6786d3acddca1a733e762663]. DiscoveredBy[Kernel:Execute] FileCreated[9/1/2015 4:12:10 PM] Discovered[9/14/2015 2:02:24 PM (Hash: 9/14/2015 2:02:24 PM)]" type="Discovery" subtype="New unapproved file to computer" hostname="BURGESSGROUP\MARYA-E7440" username="BURGESSGROUP\Mary.Altieri" date="9/14/2015 2:02:25 PM" ip_address="192.168.52.51" process="c:\windows\explorer.exe" file_path="\\fileserver1\users shared folders\deployment center\messagestore\bgmessenger.exe" file_name="bgmessenger.exe" file_hash="2f92fb917c4f3faf481d63302ee1a17640a7e98d6786d3acddca1a733e762663" installer_name="explorer.exe" policy="Low Enforcement" process_key="00000007-0000-12a0-01d0-df75ec6bc5cc" server_version="7.2.1.710" file_trust="-1" file_threat="-1" process_trust="10" process_threat="0"
+[params]
+domain=BURGESSGROUP
+deviceTime=any
+parserName=Bit9Parser
+eventType=Bit9-Discovery-New-unapproved-file-to-computer
+hostName=MARYA-E7440
+procName=c:\windows\explorer.exe
+hashCode=2f92fb917c4f3faf481d63302ee1a17640a7e98d6786d3acddca1a733e762663
+reptModel=Security Platform
+eventId=any
+policyName=Low Enforcement
+eventParsedOk=1
+procThreatLevel=0
+eventSeverity=1
+fileType=exe
+appVersion=7.2.1.710
+hostIpAddr=192.168.52.51
+fileThreatLevel=-1
+eventName=Computer discovered new unapproved file
+appTransportProto=Syslog
+phEventCategory=0 (External)
+msg=Computer BURGESSGROUP\MARYA-E7440 discovered new file '\fileserver1\users shared folders\deployment center\messagestore\bgmessenger.exe' [2f92fb917c4f3faf481d63302ee1a17640a7e98d6786d3acddca1a733e762663]. DiscoveredBy[Kernel:Execute] FileCreated[9/1/2015 4:12:10 PM] Discovered[9/14/2015 2:02:24 PM (Hash: 9/14/2015 2:02:24 PM)]
+eventRuleTrigger=1
+type=Discovery
+count=1
+filePath=\fileserver1\users shared folders\deployment center\messagestore\bgmessenger.exe
+eventSeverityCat=LOW
+collectorId=any
+procTrustLevel=10
+fileName=bgmessenger.exe
+relayDevIpAddr=$localhost
+user=Mary.Altieri
+fileTrustLevel=-1
+reptDevName=BG-Bit9.BurgessGroup.com
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+subtype=New unapproved file to computer
+reptVendor=Bit9

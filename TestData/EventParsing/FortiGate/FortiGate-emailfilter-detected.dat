@@ -1,0 +1,47 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<181>date=2013-05-01 time=11:20:50 devname=FortiGate80C devid=FGT80C3912622808 logid=0508020480 type=utm subtype=emailfilter eventtype=smtp level=notice vd=root policyid=12345 identidx=67890 sessionid=312 user=user group=group srcip=1.1.1.1 srcport=2560 srcintf=lo dstip=2.2.2.2 dstport=5120 dstintf=eth0 service=mm1 status=detected from=from@xxx.com to=to@xxx.com tracker=Tracker sentbyte=1 rcvdbyte=2 msg=SpamEmail
+[params]
+deviceTime=any
+destGeoOrg=any
+receiverMailAddr=to@xxx.com
+eventType=FortiGate-emailfilter-detected
+phCustId=$sender
+destIpAddr=2.2.2.2
+totBytes=3
+destGeoCountry=any
+srcIpAddr=1.1.1.1
+hostGeoLongitude=133
+usrMsg=SpamEmail
+reptModel=FortiOS
+eventId=any
+eventParsedOk=1
+eventSeverity=3
+hostIpAddr=1.1.1.1
+eventName=Email detected but permitted
+serviceName=mm1
+phEventCategory=0 (External)
+destName=any
+srcIntfName=lo
+recvBytes=2
+srcIpPort=2560
+eventSeverityCat=LOW
+collectorId=any
+hostGeoLatitude=-27
+destIntfName=eth0
+relayDevIpAddr=$localhost
+user=user
+destIpPort=5120
+reptDevName=any
+count=1
+senderMailAddr=from@xxx.com
+hostGeoCountry=Australia
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Fortinet
+destGeoCity=any
+userGrp=group
+sentBytes=1
+hostGeoOrg=APNIC Debogon Project

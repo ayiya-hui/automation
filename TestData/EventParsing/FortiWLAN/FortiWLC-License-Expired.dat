@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+172.18.65.202
+[eventMsg]
+Mar 22 15:42:17 172.18.65.202 ALARM: 1206057655l | system | info | ALR | SOFTWARE LICENSE EXPIRED MAJOR controller license has already expired.
+[params]
+customer=Super
+eventId=any
+parserName=FortiWLANParser
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+count=1
+eventSeverity=1
+eventType=FortiWLC-License-Expired
+reptDevIpAddr=172.18.65.202
+collectorId=any
+extEventRecvProto=Syslog
+eventName=FortiWLC License expired
+reptVendor=Fortinet
+relayDevIpAddr=172.18.65.202
+rawEventMsg=any
+phRecvTime=any
+reptDevName=any
+reptModel=FortiWLC

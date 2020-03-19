@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<30>2016:03:11-10:00:29 ActiveUTM-1 confd[3738]: I main::cleanup_changelog:990() => id="3100" severity="info" sys="System" sub="confd" name="trimmed version 10084 from changelog"
+[params]
+customer=Super
+eventId=any
+eventSeverityCat=LOW
+eventParsedOk=1
+phEventCategory=0 (External)
+parserName=SophosUTMParser
+count=1
+eventSeverity=1
+eventType=Sophos-UTM-version-change
+reptDevIpAddr=$localhost
+collectorId=any
+eventName=Sophos UTM version change
+procName=confd
+reptVendor=Sophos
+relayDevIpAddr=$localhost
+extEventRecvProto=Syslog
+phRecvTime=any
+eventRuleTrigger=1
+reptDevName=any
+reptModel=UTM

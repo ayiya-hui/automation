@@ -1,0 +1,946 @@
+
+<Reports>
+
+  <!-- PCI 1.x Firewall config and log  -->
+  <Report id="PH_Report_PCI_100" group="PH_SYS_REPORT_PCI">
+    <Name> PCI 1.x: Top Reporting Firewalls By Event Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the firewalls by the number of events sent </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList></AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_FW_31" name="Filter_FW_31">
+        <SingleEvtConstr> reptDevIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_PCI)</SingleEvtConstr>
+        <GroupByAttr>reptDevIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_PCI_101" group="PH_SYS_REPORT_PCI">
+    <Name>PCI 1.x: Firewall Config Changes Detected Via Login </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report captures detected startup or running config changes - the changes are detected by logging into the device and hence is accurate. </Description>
+    <SelectClause numEntries="All">
+      <AttrList>phRecvTime,hostName,hostIpAddr,eventType,oldSVNVersion,newSVNVersion,addedItem,deletedItem </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_FW_36" name="Filter_FW_36">
+        <SingleEvtConstr> hostIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN ("PH_DEV_MON_CHANGE_RUN_CONFIG","PH_DEV_MON_CHANGE_STARTUP_CONFIG") AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_PCI) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_PCI_102" group="PH_SYS_REPORT_PCI">
+    <Name>PCI 1.x: Router Config Changes Detected From Log</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report provides details about router config changes </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr,eventType,srcIpAddr,user,rawEventMsg</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_Router_7" name="Filter_Router_7">
+           <SingleEvtConstr> reptDevIpAddr IN (Group@PH_SYS_DEVICE_ROUTER_SWITCH) AND eventType IN (Group@PH_SYS_EVENT_ConfigChange) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_PCI) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_PCI_103" group="PH_SYS_REPORT_PCI">
+    <Name>PCI 1.x: Router Run vs Startup Config Difference Via Login </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report captures detected differences between a routers running and startup config </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,hostName,hostIpAddr,eventType,startUpConfVer,runningConfVer,addedItem,deletedItem </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW_35" name="Filter_FW_35">
+           <SingleEvtConstr> hostIpAddr IN (Group@PH_SYS_DEVICE_ROUTER_SWITCH) AND eventType = "PH_DEV_MON_DELTA_CONFIG" AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_PCI) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_PCI_103B" group="PH_SYS_REPORT_PCI">
+    <Name>PCI 1.x: Firewall Run vs Startup Config Difference Via Login </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report captures detected differences between a firewall's running and startup config </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,hostName,hostIpAddr,eventType,startUpConfVer,runningConfVer,addedItem,deletedItem </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW_35" name="Filter_FW_35">
+           <SingleEvtConstr> hostIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) AND eventType = "PH_DEV_MON_DELTA_CONFIG" AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_PCI) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_PCI_104" group="PH_SYS_REPORT_PCI">
+    <Name>PCI 1.x: Router/Switch Config Changes Detected Via Login </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report captures detected startup or running config changes - the changes are detected by logging into the device and hence is accurate. </Description>
+    <SelectClause numEntries="All">
+      <AttrList>phRecvTime,hostName,hostIpAddr,eventType,oldSVNVersion,newSVNVersion,addedItem,deletedItem </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_FW_36" name="Filter_FW_36">
+        <SingleEvtConstr> hostIpAddr IN (Group@PH_SYS_DEVICE_ROUTER_SWITCH) AND eventType IN ("PH_DEV_MON_CHANGE_RUN_CONFIG","PH_DEV_MON_CHANGE_STARTUP_CONFIG") AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_PCI) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+   <Report id="PH_Report_PCI_1014B" group="PH_SYS_REPORT_PCI">
+    <Name>PCI 1.x: Router Config Changes Detected Via Login </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report captures detected startup or running config changes - the changes are detected by logging into the device and hence is accurate. </Description>
+    <SelectClause numEntries="All">
+      <AttrList>phRecvTime,hostName,hostIpAddr,eventType,oldSVNVersion,newSVNVersion,addedItem,deletedItem </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_FW_36" name="Filter_FW_36">
+        <SingleEvtConstr> hostIpAddr IN (Group@PH_SYS_DEVICE_ROUTER_SWITCH) AND eventType IN ("PH_DEV_MON_CHANGE_RUN_CONFIG","PH_DEV_MON_CHANGE_STARTUP_CONFIG") AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_PCI) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_PCI_105" group="PH_SYS_REPORT_PCI">
+    <Name>PCI 1.x: Firewall Admin Activity Details</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Provides details about firewall admin activity - logons, command executions and logoff </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr,eventType,srcIpAddr,user,rawEventMsg</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW_34" name="Filter_FW_34">
+           <SingleEvtConstr> reptDevIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_HostLogonSuccess,Group@PH_SYS_EVENT_ConfigChange,Group@PH_SYS_EVENT_HostLogoff) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_PCI) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_PCI_106" group="PH_SYS_REPORT_PCI">
+    <Name>PCI 1.x: Router Admin Activity Details</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Provides details about router admin activity - logons, command executions and logoff </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr,eventType,srcIpAddr,user,rawEventMsg</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_Router_23" name="Filter_Router_23">
+           <SingleEvtConstr> reptDevIpAddr IN (Group@PH_SYS_DEVICE_ROUTER_SWITCH) AND eventType IN (Group@PH_SYS_EVENT_HostLogonSuccess,Group@PH_SYS_EVENT_ConfigChange,Group@PH_SYS_EVENT_HostLogoff) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_PCI) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <!--
+  <report group="PH_SYS_REPORT_PCI" id="PH_Report_PCI_107">
+    <name>PCI 1.x: Wireless and VPN Authorized Admin Activity</name>
+    <active>false </active>
+    <filterTemplate id="PH_Report_Template_XXX"/>
+    <schedule>
+      <type>Simple</type>
+      <repeatInterval>Hourly</repeatInterval>
+    </schedule>
+    <inline> false </inline>
+    <active> false </active>
+    <notification>
+      <delivery type="Alert"/>
+    </notification>
+  </report>
+-->
+
+  <!-- config analysis via logs -->
+  <Report id="PH_Report_PCI_108" group="PH_SYS_REPORT_PCI">
+    <Name>PCI 1.x: Firewall NAT Translations</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report captures the NAT translations over a time window </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr,srcIpAddr,srcIpPort,ipProto,preNATDestIpAddr,preNATDestIpPort, postNATSrcIpAddr, postNATSrcIpPort,destIpAddr,destIpPort </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW_32" name="Filter_FW_32">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_PCI) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_PCI_109" group="PH_SYS_REPORT_PCI">
+    <Name>PCI 1.x: Top Firewalls and Outbound Permitted Services By Connections, Bytes </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks firewalls and permitted outbound services by first the total number of connections and then by bytes for that service</Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,ipProto, destIpPort, srcIntfName,destIntfName,COUNT(*),SUM(sentBytes), SUM(recvBytes), SUM (totBytes)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> COUNT(*)  DESC, SUM(totBytes) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW_20" name="Filter_FW_20">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic) AND srcIpAddr IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) AND destIpAddr NOT IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_PCI) </SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr,ipProto, destIpPort,srcIntfName,destIntfName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_PCI_110" group="PH_SYS_REPORT_PCI">
+    <Name>PCI 1.x: Top Firewalls and Inbound Permitted Services By Connections, Bytes  </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks firewalls and permitted inbound services by first the total number of connections and then by bytes for that service</Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,ipProto, destIpPort,srcIntfName,destIntfName, COUNT(*),SUM(sentBytes), SUM(recvBytes), SUM (totBytes)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> COUNT(*)  DESC, SUM(totBytes) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW_21" name="Filter_FW_21">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic) AND srcIpAddr NOT IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) AND destIpAddr IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_PCI) </SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr,ipProto, destIpPort,srcIntfName,destIntfName </GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_PCI_111" group="PH_SYS_REPORT_PCI">
+    <Name>PCI 1.x: Top Firewalls and Permitted High Port Services By Connections, Bytes</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks the high port services permitted by firewalls - these services may pose security risk </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,srcIpAddr,destIpAddr,ipProto,destIpPort,srcIntfName,destIntfName,COUNT(*), SUM(sentBytes), SUM(recvBytes), SUM (totBytes) </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_FW_38" name="Filter_FW_38">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_PCI) </SingleEvtConstr>
+        <GroupByAttr>reptDevIpAddr,srcIpAddr,destIpAddr,ipProto,destIpPort,srcIntfName,destIntfName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_PCI_112" group="PH_SYS_REPORT_PCI">
+    <Name>PCI 1.x: Top Firewalls and Permitted Uncommon Services By Connections, Bytes</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks uncommon services permitted by firewalls - common services include DNS, SMTP, Web </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,srcIpAddr,destIpAddr,ipProto,destIpPort,srcIntfName,destIntfName,COUNT(*), SUM(sentBytes), SUM(recvBytes), SUM (totBytes) </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_FW_39" name="Filter_FW_39">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic) AND destIpPort NOT IN (25,53,80,443,123) </SingleEvtConstr>
+        <GroupByAttr>reptDevIpAddr,srcIpAddr,destIpAddr,ipProto,destIpPort,srcIntfName,destIntfName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_PCI_113" group="PH_SYS_REPORT_PCI">
+    <Name>PCI 1.x: Top Firewalls and Permitted Vulnerable Low Port Services By Connections, Bytes</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks uncommon services permitted by firewalls - vulnerable services include Microsoft services such as MS-RPC (135), NETBIOS-SSN (139), MICROSOFT-DS (445), MS-SQL (1433,1434), FTP (23), TELNET (21)</Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,srcIpAddr,destIpAddr,ipProto,destIpPort,srcIntfName,destIntfName,COUNT(*), SUM(sentBytes), SUM(recvBytes), SUM (totBytes) </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_FW_40" name="Filter_FW_40">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic) AND destIpPort IN (135,139,445,1433,1434,23,21) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_PCI) </SingleEvtConstr>
+        <GroupByAttr>reptDevIpAddr,srcIpAddr,destIpAddr,ipProto,destIpPort,srcIntfName,destIntfName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_PCI_114" group="PH_SYS_REPORT_PCI">
+    <Name>PCI 1.x: Top Firewall Originated Or Destined Permitted Connections By Count</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the firewall originated or destined connections - these connections would be typically be for administrative and monitoring purposes</Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,srcIpAddr,destIpAddr,ipProto,destIpPort,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList></AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW_8" name="Filter_FW_8">
+           <SingleEvtConstr> reptDevIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic) AND (srcIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) OR destIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL)) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_PCI) </SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr,srcIpAddr,destIpAddr,ipProto,destIpPort</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_PCI_500" group="PH_SYS_REPORT_PCI">
+   <Name>PCI 5.x: Top Reporting Security Management Servers</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,COUNT(*)</AttrList>    
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_AV_6" name="Filter_AV_6">
+           <SingleEvtConstr> reptDevIpAddr IN (Group@PH_SYS_APP_SEC_MGMT) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_PCI) </SingleEvtConstr>
+	   <GroupByAttr>reptDevIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+ 
+  <Report id="PH_Report_PCI_501" group="PH_SYS_REPORT_PCI">
+   <Name>PCI 1.x: Virus found but not remediated by Host Antivirus </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Captures events that indicate the viruses that Host Antivirus found but failed to remedy </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr,eventType,hostIpAddr,computer,user,virusName,virusType,fileName,virusAction,virusQuarantStatus</AttrList>    
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_AV_2" name="Filter_AV_2">
+           <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_Worm_Remedy_Failed) AND reptDevIpAddr IN (Group@PH_SYS_APP_SEC_MGMT) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_PCI) </SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_PCI_502" group="PH_SYS_REPORT_PCI">
+   <Name>PCI 5.x: Spyware found but not remediated by Host Antivirus </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr,eventType,hostIpAddr,computer,user,fileName</AttrList>    
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_AV_4" name="Filter_AV_4">
+           <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_Spyware_Remedy_Failed) AND reptDevIpAddr IN (Group@PH_SYS_APP_SEC_MGMT) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_PCI) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_PCI_503" group="PH_SYS_REPORT_PCI">
+   <Name>PCI 5.x: Top hosts with Malware found by Host Antivirus</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> </Description>
+    <SelectClause numEntries="All">
+        <AttrList>computer,COUNT(*)</AttrList>    
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_AV_5" name="Filter_AV_5">
+           <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_Malware) AND reptDevIpAddr IN (Group@PH_SYS_APP_SEC_MGMT) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_PCI) </SingleEvtConstr>
+	   <GroupByAttr>computer</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_PCI_504" group="PH_SYS_REPORT_PCI">
+    <Name>PCI 5.x: Top IPs with Malware Found By IPS and Firewalls</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> Tracks IP addresses with Malware as found by IPS </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,eventType,srcIpAddr,COUNT(*)</AttrList>    
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_Vuln_10" name="Filter_Vuln_10">
+        <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_Malware) AND reptDevIpAddr IN (Group@PH_SYS_DEVICE_NETWORK_IPS,Group@PH_SYS_APP_NETWORK_IPS,Group@PH_SYS_DEVICE_FIREWALL) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_PCI) </SingleEvtConstr>
+	<GroupByAttr>reptDevIpAddr,eventType,srcIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_PCI_505" group="PH_SYS_REPORT_PCI">
+   <Name>PCI 5.x: Top IPs with Malware Found By Antivirus and Security Gateways</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks IP addresses with Malware as found by Host Anti-virus and Security Gateways</Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,eventType,srcIpAddr,COUNT(*)</AttrList>    
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT (*) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_Vuln_8" name="Filter_Vuln_8">
+           <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_Malware) AND reptDevIpAddr IN (Group@PH_SYS_APP_SEC_MGMT,Group@PH_SYS_DEVICE_SEC_GW) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_PCI) </SingleEvtConstr>
+	   <GroupByAttr>reptDevIpAddr,eventType,srcIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_PCI_506" group="PH_SYS_REPORT_PCI">
+    <Name>PCI 5.x: Non-compliant Hosts and Security Software License Expirations</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks non-compliant hosts and license expiry events from Security Management Gateways and Firewalls. Non-compliant hosts may not have proper security software running and therefore may pose a security threat. License expiration of security software may expose exploitable security vulnerabilities.</Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,eventType,hostIpAddr,rawEventMsg</AttrList>    
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT (*) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_Vuln_12" name="Filter_Vuln_12">
+        <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_LicenseExpired,Group@PH_SYS_EVENT_NoncompliantHost) AND reptDevIpAddr IN (Group@PH_SYS_DEVICE_NETWORK_IPS,Group@PH_SYS_APP_NETWORK_IPS,Group@PH_SYS_APP_SEC_MGMT,Group@PH_SYS_DEVICE_FIREWALL,Group@PH_SYS_DEVICE_SEC_GW) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_PCI) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_PCI_800" group="PH_SYS_REPORT_PCI">
+    <Name>PCI 8.x,10.x: Detailed Successful Login At PCI Device </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Captures detailed successful logins at any device or application including servers, network devices, domain controllers, VPN gateways, WLAN controllers and applications </Description>
+    <SelectClause numEntries="All">
+      <AttrList>phRecvTime,reptDevIpAddr,eventType,srcIpAddr,srcMACAddr,user,domain,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_Auth_2" name="Filter_Auth_2">
+	<SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_DomainLogonSuccess, Group@PH_SYS_EVENT_HostLogonSuccess, Group@PH_SYS_EVENT_HostPrivLogonSuccess,Group@PH_SYS_EVENT_DomainLogonSuccess, Group@PH_SYS_EVENT_VPNLogonSuccess, Group@PH_SYS_EVENT_WirelessLogonSuccess,Group@PH_SYS_EVENT_AppLogonSuccess) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_PCI) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_PCI_801" group="PH_SYS_REPORT_PCI" >
+    <Name>PCI 8.x: Windows Server Account Lockouts </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report captures account lockouts on windows servers. Account lockouts happen on repeated login failures and may be suspicious if they are repeated or happen at odd hours of operation </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,srcIpAddr,user,domain,eventType,rawEventMsg</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>phRecvTime DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WINDOWS_3" name="Filter_WINDOWS_3">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER)  AND  eventType IN (Group@PH_SYS_EVENT_HostAccountLocked) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_PCI) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_PCI_802" group="PH_SYS_REPORT_PCI">
+    <Name>PCI 8.x: Windows Domain Account Lockouts </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report details windows domain account lockouts </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,srcIpAddr,user,domain,eventType,winLogonType,phRecvTime,rawEventMsg</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_DC_9" name="Filter_DC_9">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_APP_DOMAIN_CONTROLLER)  AND  eventType IN ( Group@PH_SYS_EVENT_DomainAccountLocked) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_PCI) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_PCI_803"  group="PH_SYS_REPORT_PCI">
+    <Name>PCI 8.x: Windows Server Account Lock/Unlock history </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Captures account lockouts and unlocks on windows servers. Account lockouts happen on repeated login failures and may be suspicious if they are repeated or happen at odd hours of operation. </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,eventType,srcIpAddr,user,domain,targetUser,targetDomain,rawEventMsg</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>phRecvTime DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WINDOWS_43" name="Filter_WINDOWS_43">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER)  AND eventType IN (Group@PH_SYS_EVENT_HostAccountLocked,Group@PH_SYS_EVENT_HostAccountUnlocked) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_PCI) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_PCI_804" group="PH_SYS_REPORT_PCI">
+    <Name>PCI 8.x: Domain Account Lock/Unlock history </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Captures account lockouts and unlocks on domain accounts. Account lockouts happen on repeated login failures and may be suspicious if they are repeated or happen at odd hours of operation. </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,eventType,srcIpAddr,user,domain,targetUser,targetDomain,rawEventMsg</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>phRecvTime DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_DC_38" name="Filter_DC_38">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_APP_DOMAIN_CONTROLLER)  AND eventType IN (Group@PH_SYS_EVENT_DomainAccountLocked,Group@PH_SYS_EVENT_DomainAccountUnlocked)  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_PCI) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report> 
+
+  <Report id="PH_Report_PCI_805" group="PH_SYS_REPORT_PCI">
+    <Name>PCI 8.x: Server Password Changes </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks password changes </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,phRecvTime,srcIpAddr,user,domain,targetUser,targetDomain,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WINDOWS_42" name="Filter_WINDOWS_42">
+        <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_PasswordChange) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_PCI) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_PCI_807" group="PH_SYS_REPORT_PCI">
+    <Name>PCI 8.x: Local Windows User Accounts Created </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report captures user accounts added on a server </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,phRecvTime,srcIpAddr,user,computer,targetUser,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WINDOWS_26" name="Filter_WINDOWS_26">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER)  AND  eventType = "Win-Security-624" AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_PCI) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_PCI_808" group="PH_SYS_REPORT_PCI">
+    <Name>PCI 8.x: Local Windows User Accounts Deleted</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report captures user accounts removed from a server </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,phRecvTime,srcIpAddr,user,computer,targetUser,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WINDOWS_27" name="Filter_WINDOWS_27">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER)  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_PCI) AND eventType = "Win-Security-630" </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_PCI_810" group="PH_SYS_REPORT_PCI">
+    <Name>PCI 8.x: Local Windows User Accounts Modified </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report captures local user account modifications. </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,phRecvTime,eventType, srcIpAddr,user,computer,targetUser,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WINDOWS_28" name="Filter_WINDOWS_28">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER)  AND  eventType IN ("Win-Security-625", "Win-Security-626","Win-Security-642", "Win-Security-627", "Win-Security-628", "Win-Security-629","Win-Security-636","Win-Security-650","Win-Security-637","Win-Security-651","Win-Security-632","Win-Security-633","Win-Security-655","Win-Security-656","Win-Security-660","Win-Security-661","Win-Security-665","Win-Security-666")  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_PCI) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_PCI_811" group="PH_SYS_REPORT_PCI">
+    <Name>PCI 8.x: Users Added To Local Groups </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report captures users added to local groups. </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,phRecvTime,srcIpAddr,user,computer,targetUser,targetUserGrp,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WINDOWS_32" name="Filter_WINDOWS_32">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER)  AND  eventType IN ("Win-Security-636", "Win-Security-650")  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_PCI) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_PCI_812" group="PH_SYS_REPORT_PCI">
+    <Name>PCI 8.x: Users Added To Global Groups </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report captures users added to global or univeral groups. </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,phRecvTime,srcIpAddr,user,computer,targetUser,targetUserGrp,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WINDOWS_33" name="Filter_WINDOWS_33">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER)  AND  eventType IN ("Win-Security-632", "Win-Security-655","Win-Security-660", "Win-Security-665") </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_PCI_813" group="PH_SYS_REPORT_PCI">
+    <Name>PCI 8.x: Users Deleted From Local Groups </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report captures users deleted from local groups. </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,phRecvTime,srcIpAddr,user,computer,targetUser,targetUserGrp,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WINDOWS_34" name="Filter_WINDOWS_34">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER)  AND  eventType IN ("Win-Security-637", "Win-Security-651")  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_PCI) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_PCI_814" group="PH_SYS_REPORT_PCI">
+    <Name>PCI 8.x: Users Deleted From Global Groups </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report captures users deleted from global or univeral groups. </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,phRecvTime,srcIpAddr,user,computer,targetUser,targetUserGrp,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WINDOWS_35" name="Filter_WINDOWS_35">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER)  AND  eventType IN ("Win-Security-633", "Win-Security-656","Win-Security-661", "Win-Security-666")  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_PCI) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_PCI_815" group="PH_SYS_REPORT_PCI">
+    <Name>PCI 8.x: Local Windows Groups Deleted </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report captures local group deletions </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,phRecvTime,srcIpAddr,user,computer,targetUserGrp,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WINDOWS_36" name="Filter_WINDOWS_36">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER)  AND  eventType IN ("Win-Security-638", "Win-Security-652")  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_PCI) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_PCI_816" group="PH_SYS_REPORT_PCI">
+    <Name>PCI 8.x: Local Windows Groups Modified </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report captures local group modifications </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,phRecvTime,srcIpAddr,user,computer,targetUserGrp,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WINDOWS_37" name="Filter_WINDOWS_37">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER) AND eventType IN ("Win-Security-639", "Win-Security-649")  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_PCI) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_PCI_817" group="PH_SYS_REPORT_PCI">
+    <Name>PCI 8.x: Local Windows Groups Created </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report captures local group creations </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,phRecvTime,srcIpAddr,user,computer,targetUserGrp,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WINDOWS_41" name="Filter_WINDOWS_41">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER) AND eventType IN ("Win-Security-635", "Win-Security-648")  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_PCI) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_PCI_818" group="PH_SYS_REPORT_PCI">
+    <Name>PCI 8.x: Global Windows Groups Created </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report captures global group creations </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,phRecvTime,srcIpAddr,user,computer,targetUserGrp,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WINDOWS_38" name="Filter_WINDOWS_38">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER) AND eventType IN ("Win-Security-631", "Win-Security-653","Win-Security-658", "Win-Security-663")  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_PCI) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_PCI_819" group="PH_SYS_REPORT_PCI">
+    <Name>PCI 8.x: Global Windows Groups Deleted</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report captures global group deletions </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,phRecvTime,srcIpAddr,user,computer,targetUserGrp,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WINDOWS_39" name="Filter_WINDOWS_39">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER) AND eventType IN ("Win-Security-634", "Win-Security-657","Win-Security-662", "Win-Security-667")  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_PCI) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_PCI_820" group="PH_SYS_REPORT_PCI">
+    <Name>PCI 8.x: Global Windows Groups Modified</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report captures global group modifications </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,phRecvTime,srcIpAddr,user,computer,targetUserGrp,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WINDOWS_40" name="Filter_WINDOWS_40">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER) AND eventType IN ("Win-Security-641", "Win-Security-654","Win-Security-659", "Win-Security-664")  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_PCI) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_PCI_1001" group="PH_SYS_REPORT_PCI">
+    <Name>PCI 10.x: Detailed Failed Login At PCI System</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Captures detailed failed logins at any device or application - servers, network devices, domain controllers, VPN gateways, WLAN controllers and applications </Description>
+    <SelectClause numEntries="All">
+      <AttrList>phRecvTime,reptDevIpAddr,eventType,srcIpAddr,srcMACAddr,user,domain,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_Auth_1" name="Filter_Auth_1">
+        <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_DomainLogonFailure, Group@PH_SYS_EVENT_HostLogonFailure, Group@PH_SYS_EVENT_HostPrivLogonFailure,Group@PH_SYS_EVENT_DomainLogonFailure,Group@PH_SYS_EVENT_VPNLogonFailure, Group@PH_SYS_EVENT_WirelessLogonFailure,Group@PH_SYS_EVENT_AppLogonFailure)  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_PCI) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_PCI_1002"  group="PH_SYS_REPORT_PCI">
+    <Name>PCI 10.x: Privileged Windows Server Logon Attempts using the Administrator Account </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report details prvileged logon attempts to a windows server using the Administrator account </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,eventType, eventAction,srcIpAddr,user,domain,winLogonType,winLogonFailCode,rawEventMsg</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WINDOWS_29" name="Filter_WINDOWS_29">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER)  AND  user = "Administrator" AND eventType IN (Group@PH_SYS_EVENT_HostLogonFailure,Group@PH_SYS_EVENT_HostLogonSuccess)  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_PCI) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report> 
+
+  <Report id="PH_Report_PCI_1003"  group="PH_SYS_REPORT_PCI">
+    <Name>PCI 10.x: Remote Desktop Connections to Windows Servers </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report details successful and failed remote desktop connections </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,eventType, eventAction,srcIpAddr,user,domain,winLogonType,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WINDOWS_30" name="Filter_WINDOWS_30">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER)  AND winLogonType = 10 AND eventType IN (Group@PH_SYS_EVENT_HostLogonFailure,Group@PH_SYS_EVENT_HostLogonSuccess)  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_PCI) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_PCI_1004" group="PH_SYS_REPORT_PCI">
+    <Name>PCI 10.x: Unix Server Privileged Logon</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report details UNIX server privileged logon (su) details with all parsed parameters and raw logs </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,eventType,reptDevIpAddr,srcIpAddr,user,targetUser,rawEventMsg</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_UNIX_10" name="Filter_UNIX_10">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_DEVICE_UNIX_SERVER)  AND  (eventType IN (Group@PH_SYS_EVENT_HostPrivLogonSuccess) OR eventType IN (Group@PH_SYS_EVENT_HostPrivLogonFailure))  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_PCI) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_PCI_1005"  group="PH_SYS_REPORT_PCI">
+    <Name>PCI 10.x: Unix Server Privileged Command Execution</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report details privilege command execuations (sudo) at a Unix server  </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,eventType,reptDevIpAddr,srcIpAddr,user,targetUser,command,rawEventMsg</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_UNIX_9" name="Filter_UNIX_9">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_DEVICE_UNIX_SERVER)  AND  (eventType IN (Group@PH_SYS_EVENT_HostPrivExecSuccess) OR eventType IN (Group@PH_SYS_EVENT_HostPrivExecFailure))  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_PCI) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_PCI_1006" group="PH_SYS_REPORT_PCI">
+    <Name>PCI 10.x: Successful Firewall Admin Logon Details </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Details about successful firewall logons </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr,eventType,srcIpAddr,user,srcIntfName,destIpPort,rawEventMsg</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW_3" name="Filter_FW_3">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_HostLogonSuccess))  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_PCI) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_PCI_1007" group="PH_SYS_REPORT_PCI">
+    <Name>PCI 10.x: Failed Firewall Admin Logon Details </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Details about failed firewall logons</Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr,eventType,srcIpAddr,user,srcIntfName,destIpPort,rawEventMsg</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW_4" name="Filter_FW_4">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_HostLogonFailure))  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_PCI) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+ <Report id="PH_Report_PCI_1008" group="PH_SYS_REPORT_PCI">
+    <Name>PCI 10.x: Successful Router Admin Logon Details</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Details about successful router logons</Description>
+    <SelectClause numEntries="All">
+      <AttrList>phRecvTime,reptDevIpAddr,eventType,srcIpAddr,user,srcIntfName,destIpPort,rawEventMsg</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_Router_24" name="Filter_Router_24">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_ROUTER_SWITCH) AND eventType IN (Group@PH_SYS_EVENT_HostLogonSuccess))  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_PCI) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+ <Report id="PH_Report_PCI_1009" group="PH_SYS_REPORT_PCI">
+    <Name>PCI 10.x: Failed Router Admin Logon Details </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Details about failed router logons</Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr,eventType,srcIpAddr,user,srcIntfName,destIpPort,rawEventMsg</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_Router_3" name="Filter_Router_3">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_ROUTER_SWITCH) AND eventType IN (Group@PH_SYS_EVENT_HostLogonFailure))  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_PCI) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_PCI_1010"  group="PH_SYS_REPORT_PCI">
+    <Name>PCI 10.x: Successful VPN Admin Logon</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Provides event details for all successful VPN admin logons </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr, eventType,srcIpAddr,user,durationMSec,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_VPNGW_13" name="Filter_VPNGW_13">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_VPN_GATEWAY)  AND  eventType IN (Group@PH_SYS_EVENT_HostLogonSuccess,Group@PH_SYS_EVENT_HostLogoff)  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_PCI) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_PCI_1011" group="PH_SYS_REPORT_PCI">
+    <Name>PCI 10.x: Failed VPN Admin Logon</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Provides event details for all failed VPN admin logons </Description>
+    <SelectClause numEntries="All">
+      <AttrList>phRecvTime,reptDevIpAddr, eventType,srcIpAddr,user,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_VPNGW_14" name="Filter_VPNGW_14">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_VPN_GATEWAY)  AND  eventType IN (Group@PH_SYS_EVENT_HostLogonFailure)  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_PCI) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_PCI_1012" group="PH_SYS_REPORT_PCI">
+    <Name>PCI 10.x: Successful WLAN Admin Logon</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks successful admin logons to the WLAN Controller</Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr,eventType,srcIpAddr,user,rawEventMsg </AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT (*)</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WLAN_11" name="Filter_WLAN_11">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WLAN_CONTROLLER) AND eventType IN (Group@PH_SYS_EVENT_HostLogonSuccess)  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_PCI) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_PCI_1013" group="PH_SYS_REPORT_PCI">
+    <Name>PCI 10.x: Failed WLAN Admin Logon</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks failed admin logons to the WLAN Controller</Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr,eventType,srcIpAddr,user,rawEventMsg </AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT (*)</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WLAN_11" name="Filter_WLAN_11">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WLAN_CONTROLLER) AND eventType IN (Group@PH_SYS_EVENT_HostLogonFailure)  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_PCI) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_PCI_1014" group="PH_SYS_REPORT_PCI">
+    <Name>PCI 10.x: Network Device Down/Restart</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks network device down and restart events</Description>
+    <SelectClause numEntries="All">
+      <AttrList>phRecvTime,reptDevIpAddr,eventType,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_OVERALL_AVAIL_1" name="Filter_OVERALL_AVAIL_1">
+        <SingleEvtConstr>eventType IN (Group@PH_SYS_EVENT_SystemShutdown,Group@PH_SYS_EVENT_SystemRestart) AND (reptDevIpAddr IN (Group@PH_SYS_DEVICE_Network) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_PCI)) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_PCI_1015" group="PH_SYS_REPORT_PCI">
+    <Name>PCI 10.x: Server Down/Restart</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks server down and restart events</Description>
+    <SelectClause numEntries="All">
+      <AttrList>phRecvTime,reptDevIpAddr,eventType,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_OVERALL_AVAIL_2" name="Filter_OVERALL_AVAIL_2">
+        <SingleEvtConstr>eventType IN (Group@PH_SYS_EVENT_SystemShutdown,Group@PH_SYS_EVENT_SystemRestart) AND (reptDevIpAddr IN (Group@PH_SYS_DEVICE_Network) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_PCI)) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_PCI_1016" group="PH_SYS_REPORT_PCI">
+    <Name>PCI 10.x: Application Down/Restart</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks application stop and start events</Description>
+    <SelectClause numEntries="All">
+      <AttrList>phRecvTime,reptDevIpAddr,eventType,appName,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_OVERALL_AVAIL_3" name="Filter_OVERALL_AVAIL_3">
+        <SingleEvtConstr>eventType IN (Group@PH_SYS_EVENT_AppShutdown) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_PCI) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_PCI_1017" group="PH_SYS_REPORT_PCI">
+    <Name>PCI 10.x: Network Device Link Module Down/Up</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks network device miscellaneous module (e.g. fan, power etc.) down/up events</Description>
+    <SelectClause numEntries="All">
+      <AttrList>phRecvTime,reptDevIpAddr,eventType,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_OVERALL_AVAIL_11" name="Filter_OVERALL_AVAIL_11">
+        <SingleEvtConstr>eventType IN (Group@PH_SYS_EVENT_OtherModuleDown) AND reptDevIpAddr IN (Group@PH_SYS_DEVICE_Network) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_PCI) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_PCI_1018" group="PH_SYS_REPORT_PCI">
+    <Name>PCI 10.x: Network Device Errors</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks errors reported by network device</Description>
+    <SelectClause numEntries="All">
+      <AttrList>phRecvTime,reptDevIpAddr,eventType,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_OVERALL_AVAIL_11" name="Filter_OVERALL_AVAIL_11">
+        <SingleEvtConstr>eventType IN (Group@PH_SYS_EVENT_Error) AND reptDevIpAddr IN (Group@PH_SYS_DEVICE_Network) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_PCI) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+</Reports>

@@ -1,0 +1,2 @@
+eventType,name,module,reptDevIpAddr,key,method
+Untangle-Generic,UntangleWebProxy_1,UntangleWebProxy,55.55.55.55,,syslog

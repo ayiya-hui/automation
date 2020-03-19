@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+83.83.83.83
+[eventMsg]
+Jan  4 11:48:27 83.83.83.83 CEF :0|PowerTech|Interact|2.0|UNA0902|A System i FTP Server transaction was allowed for user JERRYB.|3| src =10.0.1.34 dst =10.0.1.34 msg=TYPE:JRN CLS :AUD JJOB :QTFTP00112 JUSER :JERRYB JNBR :003119 PGM :PLKR108JEL OBJECT : LIBRARY : MEMBER: DETAIL: ST JERRYB *FTPSERVER CREATELIB QTFTP00112 LNS0811 000112 00031 /home/pt_test/pt_test2/pt_test3
+[params]
+rawEventMsg=any
+eventType=OS400-UNA0902-CREATELIB
+phCustId=$sender
+destIpAddr=10.0.1.34
+srcIpAddr=10.0.1.34
+reptModel=OS400
+eventId=any
+eventParsedOk=1
+eventSeverity=3
+testEvent=Real Event(0)
+eventName=OS400-UNA0902-CREATELIB
+phEventCategory=0 (External)
+opName=CREATELIB
+dirName=/home/pt_test/pt_test2/pt_test3
+eventSeverityCat=LOW
+collectorId=any
+user=JERRYB
+reptDevName=any
+count=1
+phRecvTime=any
+reptDevIpAddr=83.83.83.83
+reptVendor=IBM

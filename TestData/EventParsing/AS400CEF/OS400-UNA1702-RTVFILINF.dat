@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+83.83.83.83
+[eventMsg]
+Mar 18 17:43:10 83.83.83.83 CEF :0|PowerTech|Interact|2.0|UNA1702|A SQL Retrieve Object Information transaction was allowed for user BRENDANP.|1| src =10.0.1.60 dst =10.0.1.180 msg=TYPE:JRN CLS :AUD JJOB :QZDASOINIT JUSER :BRENDANP JNBR :029486 PGM :PLKR108JEL OBJECT : LIBRARY : MEMBER: DETAIL: OB BRENDANP *RTVOBJINF RTVFILINF QZDASOINIT LNS0811 000112 00017 PAYROLL//NEWYORK.
+[params]
+rawEventMsg=any
+eventType=OS400-UNA1702-RTVFILINF
+phCustId=$sender
+destIpAddr=10.0.1.180
+osObjName=PAYROLL//NEWYORK.
+srcIpAddr=10.0.1.60
+reptModel=OS400
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+testEvent=Real Event(0)
+eventName=OS400-UNA1702-RTVFILINF
+phEventCategory=0 (External)
+opName=RTVFILINF
+eventSeverityCat=LOW
+collectorId=any
+user=BRENDANP
+reptDevName=any
+count=1
+phRecvTime=any
+reptDevIpAddr=83.83.83.83
+reptVendor=IBM

@@ -1,0 +1,7 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+Motorola-AirDefense-Performance,MotorolaAirDefense_1,MotorolaAirDefense,$localhost,,syslog
+Motorola-AirDefense-Exploits,MotorolaAirDefense_2,MotorolaAirDefense,$localhost,,syslog
+Motorola-AirDefense-Rogue-Activity,MotorolaAirDefense_3,MotorolaAirDefense,$localhost,,syslog
+Motorola-AirDefense-Platform-Health,MotorolaAirDefense_4,MotorolaAirDefense,$localhost,,syslog
+Motorola-AirDefense-Vulnerabilities,MotorolaAirDefense_5,MotorolaAirDefense,$localhost,,syslog

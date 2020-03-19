@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+2015-11-11T12:28:40.165326-06:00 usmnnf1arde-ap02 %KERN-3-ERR: 0| bridge.c:1611 Warning: Filtering MAC address 00-00-00-00-00-00 on vlan 100, port ge1 from FDB.
+[params]
+parserName=MotorolaWiNGParser
+isHostIntfCritical=No
+eventType=Motorola-WiNG-KERN-ERR
+intfName=100
+reptModel=WiNG WLAN AP
+eventId=any
+eventParsedOk=1
+eventSeverity=5
+eventName=Motorola WLAN AP: Kernel error
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+msg=0| bridge.c:1611 Warning: Filtering MAC address 00-00-00-00-00-00 on vlan 100, port ge1 from FDB.
+eventRuleTrigger=1
+count=1
+eventSeverityCat=MEDIUM
+collectorId=any
+relayDevIpAddr=$localhost
+reptDevName=usmnnf1arde-ap02
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Motorola

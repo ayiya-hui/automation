@@ -1,0 +1,23 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+enterprises.674.10892.1.5000 6 1603 enterprises.674.10892.1.5000.10.1.0 s "Openmanage"
+[params]
+rawEventMsg=any
+hostIpAddr=$localhost
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=any
+eventSeverity=5
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=MEDIUM
+hostIpAddr=any
+eventName=Processor status warning
+reptVendor=Generic
+eventType=Dell-1603-ProcessorWarning
+phEventCategory=0 (External)
+hostName=Openmanage
+reptDevIpAddr=$localhost
+reptModel=Generic

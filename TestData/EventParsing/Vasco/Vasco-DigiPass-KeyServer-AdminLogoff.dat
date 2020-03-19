@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+70.70.70.70
+[eventMsg]
+May 16 19:16:13 70.70.70.70 ikeyserver[3575]: {Success}, {Authentication}, {S-004003}, {An administrative session was closed.}, {0x64D20AF313AA47C0A2D37E84AC652ED4}, {Source Location:10.1.2.3}, {Client Location:10.1.2.3}, {User ID:flast}, {Domain:company.com}, {Client Type:Administration Program}
+[params]
+domain=company.com
+parserName=VascoParser
+eventType=Vasco-DigiPass-KeyServer-AdminLogoff
+srcIpAddr=10.1.2.3
+reptModel=DigiPass
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=An administrative logoff
+appTransportProto=Syslog
+phEventCategory=0 (External)
+msg=An administrative session was closed.
+eventRuleTrigger=1
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=70.70.70.70
+user=flast
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=70.70.70.70
+reptVendor=Vasco

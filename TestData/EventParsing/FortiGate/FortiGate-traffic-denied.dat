@@ -1,0 +1,87 @@
+[reptDevIpAddr(key)]
+$localhost (appName:143/0/icmp6)
+[eventMsg]
+<181>date=2013-05-01 time=11:20:54 devname=FortiGate80C devid=FGT80C3912622808 logid=0001000014 type=traffic subtype=local level=notice vd=root srcip=fe80::8a53:95ff:fec1:4612 srcintf=Wireless dstip=ff02::16 dstintf=unknown-0 sessionid=28205 status=deny policyid=0 trandisp=noop service=143/0/icmp6 proto=58 app=143/0/icmp6 duration=61 sentbyte=0 rcvdbyte=0 sentpkt=0 rcvdpkt=0
+[params]
+deviceTime=any
+parserName=FortiGateParser
+appName=143/0/icmp6
+totFlows=1
+eventType=FortiGate-traffic-denied
+totBytes=0
+reptModel=FortiOS
+eventId=any
+eventParsedOk=1
+eventSeverity=3
+sentPkts=0
+eventName=Denied traffic
+serviceName=143/0/icmp6
+phEventCategory=4 (Traffic)
+count=1
+srcIntfName=Wireless
+recvBytes=0
+eventSeverityCat=LOW
+collectorId=any
+totPkts=0
+destIntfName=unknown-0
+relayDevIpAddr=$localhost
+ipProto=58 (ICMP for IPv6)
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+recvPkts=0
+eventAction=1 (Deny)
+reptVendor=Fortinet
+durationMSec=61000
+trandisp=noop
+fwRule=0
+sentBytes=0
+[reptDevIpAddr(key)]
+$localhost (appName:Facebook)
+[eventMsg]
+<181>date=2014-04-10 time=08:44:03 devname=Fortigate90D devid=FGT90D3Z13006177 logid=0000000013 type=traffic subtype=forward level=notice vd=root srcip=10.1.1.110 srcname=Benjamins-MBP srcport=50275 srcintf="internal" dstip=31.13.77.81 dstport=443 dstintf="wan1" sessionid=367693 status=deny policyid=1 dstcountry="Ireland" srccountry="Reserved" trandisp=snat transip=174.66.146.51 transport=50275 service=HTTPS proto=6 appid=15832 app="Facebook" appcat="Social.Media" applist="default" appact=detected duration=13 sentbyte=1582 rcvdbyte=6083 sentpkt=13 rcvdpkt=15 devtype="Mac" osname="Mac OS X" osversion="10.9.2" unauthuser="benjaminpowell" unauthusersource="forticlient" mastersrcmac=a8:20:66:33:a0:62 srcmac=20:c9:d0:df:b0:dd
+[params]
+deviceTime=any
+destGeoOrg=any
+parserName=FortiGateParser
+appName=Facebook
+totFlows=1
+eventType=FortiGate-traffic-denied
+phCustId=$sender
+destIpAddr=31.13.77.81
+appGroupName=Social.Media
+srcName=Benjamins-MBP
+destIpPort=443 (HTTPS)
+destGeoCountry=any
+osType=Mac OS X
+srcIpAddr=10.1.1.110
+reptModel=FortiOS
+eventId=any
+eventParsedOk=1
+eventSeverity=3
+sentPkts=13
+eventName=Denied traffic
+srcMACAddr=20:c9:d0:df:b0:dd
+serviceName=HTTPS
+phEventCategory=4 (Traffic)
+type=Mac
+destName=any
+customer=Super
+srcIntfName=internal
+recvBytes=6083
+srcIpPort=50275
+eventSeverityCat=LOW
+collectorId=any
+destIntfName=wan1
+relayDevIpAddr=$localhost
+ipProto=6 (TCP)
+osVersion=10.9.2
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+recvPkts=15
+eventAction=1 (Deny)
+reptVendor=Fortinet
+fwRule=1
+sentBytes=1582

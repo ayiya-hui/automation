@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+172.16.20.41
+[eventMsg]
+<37>Oct 28 13:10:46 172.16.20.41 ALT,v4,20091028T131046+0480,"PH-QA-TIP1"/$reporter,835198,1,Permit,Low,00000002-0002-0002-0002-000000000633,"0633: FTP: Bad Login","0633: FTP: Bad Login",tcp," ",172.16.20.151:55162,172.16.10.40:21,20091028T130751+0480,1," ",0,1A-1B
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+reptDevIpAddr=172.16.20.41
+eventParsedOk=1
+reptVendor=3Com
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=172.16.10.40
+eventName=Detects a failed login attempt to an FTP server.
+ipProto=6 (TCP)
+appTransportProto=tcp
+eventType=Tipp_IPS-0633
+srcIpAddr=172.16.20.151
+remedyAction=Permit
+phEventCategory=0 (External)
+destIpPort=21 (FTP)
+srcIpPort=55162
+reptModel=TippingPoint UnityOne IPS

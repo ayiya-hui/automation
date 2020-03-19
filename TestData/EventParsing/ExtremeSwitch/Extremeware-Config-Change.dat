@@ -1,0 +1,24 @@
+[reptDevIpAddr(key)]
+90.90.90.94
+[eventMsg]
+<134>Mar 29 15:59:01 $reporter SYST: 192.168.0.30 admin: create vlan test
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+reptDevIpAddr=$reporter
+eventParsedOk=1
+eventSeverity=3
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=$reporter
+eventAction=0 (Permit)
+eventName=Config change
+srcIpAddr=192.168.0.30
+reptVendor=Extreme
+command=create vlan test
+user=admin
+phEventCategory=0 (External)
+eventType=Extremeware-Config-Change
+reptModel=Extremeware

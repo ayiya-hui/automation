@@ -1,0 +1,4 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+VMware-vShield_Accepted_Connection,VMwarevShield_1,VMwarevShield,$localhost,,syslog
+VMware-vShield_Connection_Failed,VMwarevShield_2,VMwarevShield,$localhost,,syslog

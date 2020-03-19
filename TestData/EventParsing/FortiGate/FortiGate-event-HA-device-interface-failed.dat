@@ -1,0 +1,24 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<180>date=2013-05-01 time=11:20:50 devname=FortiGate80C devid=FGT80C3912622808 logid=0100037898 type=event subtype=system level=warning vd=root msg=HA device(interface) fail ha_role=master devintfname=intf_name
+[params]
+eventId=any
+count=1
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=MEDIUM
+eventSeverity=5
+eventType=FortiGate-event-HA-device-interface-failed
+phCustId=$sender
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+collectorId=any
+eventName=HA device interface down
+reptVendor=Fortinet
+relayDevIpAddr=$localhost
+phRecvTime=any
+usrMsg=HA device(interface) fail
+reptDevName=any
+reptModel=FortiOS

@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+20.20.20.120
+[eventMsg]
+Fri Oct 30 18:19:58 2009 $reporter AccelOps-WinLog-WMI  [Category]="12810" [CategoryString]="Filtering Platform Connection" [ComputerName]="sf1dc03.jha.local" [Data]="NULL" [EventCode]="5159" [EventIdentifier]="5159" [EventType]="5" [Logfile]="Security" [RecordNumber]="184032952" [SourceName]="Microsoft-Windows-Security-Auditing" [TimeGenerated]="20100505222601.605079-000" [TimeWritten]="20100505222601.605079-000" [Type]="Audit Failure" [User]="(null)" [[Application Information]][Process ID]="1068" [Application Name]="\device\harddiskvolume1\windows\system32\svchost.exe" [[Network Information]][Source Address]="0.0.0.0" [Source Port]="51405" [Protocol]="17" [[Filter Information]][Filter Run-Time ID]="0" [Layer Name]="Resource Assignment"
+[params]
+rawEventMsg=any
+type=Audit Failure
+destIpAddr=20.20.20.120
+eventAction=1 (Deny)
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+appName=\device\harddiskvolume1\windows\system32\svchost.exe
+eventSeverity=3
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+eventName=Windows Filtering blocked a bind to a local port
+reptVendor=Microsoft
+eventType=Win-Security-5159
+phEventCategory=0 (External)
+ipProto=17 (UDP)
+reptDevIpAddr=$reporter
+srcIpPort=51405
+reptModel=Windows
+eventSource=Microsoft-Windows-Security-Auditing

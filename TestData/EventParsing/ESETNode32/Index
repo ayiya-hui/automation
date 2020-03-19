@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+ESET-Kernel connection-closed,ESETNode32_1,ESETNode32,74.74.74.74,,syslog

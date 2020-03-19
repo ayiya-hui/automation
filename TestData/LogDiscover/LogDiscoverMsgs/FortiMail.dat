@@ -1,0 +1,2 @@
+[eventMsg]
+date=2012-07-16 time=12:22:56 device_id=FE100C3909600504 log_id=0300001075 type=spam pri=information session_id="q6GJMuPu003642-q6GJMuPv003642" client_name="[172.20.140.94]" dst_ip="172.20.140.92" endpoint="" from="user@external.lab" to="user5@external.lab" subject="" msg="<user5@external.lab>... User unknown"

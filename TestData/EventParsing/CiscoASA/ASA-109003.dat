@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>Dec 05 2008 13:02:16: %ASA-6-109003: Auth from 192.168.20.15 to 20.20.20.11/56 failed (all servers failed) on interface eth04.
+[params]
+rawEventMsg=any
+srcIntfName=eth04
+destIpAddr=20.20.20.11
+destIpPort=56
+srcIpAddr=192.168.20.15
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+eventAction=1 (Deny)
+eventName=AAA Authen failed - no response from any AAA server
+reptVendor=Cisco
+eventType=ASA-109003
+phEventCategory=0 (External)
+reptDevIpAddr=$reporter
+reptModel=ASA

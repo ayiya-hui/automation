@@ -1,0 +1,29 @@
+[reptDevIpAddr(key)]
+172.16.10.40
+[eventMsg]
+<134>Apr 10 12:51:42 abc-desktop java: [ORADB_PH_Logoff]:[eventSeverity]=PHL_INFO, [retCode]=0, [eventTime]=2009-04-10 14:29:22:111420, [rptIp]=172.16.10.40, [srcIp]=QA-V-CtOS-ora.abc.net, [user]=DBSNMP, [logonTime]=2009-04-10 14:29:22:111420, [logoffTime]=2009-04-10 14:29:22, [privUsed]=CREATE_SESSION,
+[params]
+deviceTime=any
+parserName=OracleDBParser
+eventType=ORADB_PH_Logoff
+dbPrivUsed=CREATE_SESSION
+srcName=QA-V-CtOS-ora.abc.net
+reptModel=Database Server
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=ORADB_PH_Logoff
+extEventRecvProto=JDBC
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=172.16.10.40
+user=DBSNMP
+rawEventMsg=any
+dbRetCode=0
+reptDevName=abc-desktop
+customer=Super
+phRecvTime=any
+reptDevIpAddr=172.16.10.40
+reptVendor=Oracle

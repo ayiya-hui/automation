@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+192.168.1.30
+[eventMsg]
+2015-02-11T05:54:45Z WIN-I6.com 192.168.1.30 AccelOps-WUA-Powershell [monitorStatus]="Success" [msg]=""
+[params]
+deviceTime=any
+parserName=AOWUA_WinParser
+eventType=AO-WUA-Powershell
+reptModel=Windows
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=AO-WUA-Powershell
+extEventRecvProto=Windows Agent
+phEventCategory=0 (External)
+status=Success
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=192.168.1.30
+rawEventMsg=any
+reptDevName=WIN-I6.com
+customer=Super
+phRecvTime=any
+reptDevIpAddr=192.168.1.30
+eventAction=0 (Permit)
+reptVendor=Microsoft

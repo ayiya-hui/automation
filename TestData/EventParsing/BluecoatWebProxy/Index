@@ -1,0 +1,6 @@
+eventType,name,module,reptDevIpAddr,key,method
+Bluecoat-SGOS-AccessLog-FTP,BluecoatWebProxy_1,BluecoatWebProxy,28.28.28.29,,syslog
+Bluecoat-SGOS-AccessLog-FTP,BluecoatWebProxy_2,BluecoatWebProxy,$localhost,,syslog
+Bluecoat-SGOS-Login-Success,BluecoatWebProxy_3,BluecoatWebProxy,$localhost,,syslog
+Bluecoat-SGOS-Login-Failure,BluecoatWebProxy_4,BluecoatWebProxy,$localhost,,syslog
+Bluecoat-SGOS-AccessLog-FTP-Error,BluecoatWebProxy_5,BluecoatWebProxy,$localhost,,syslog

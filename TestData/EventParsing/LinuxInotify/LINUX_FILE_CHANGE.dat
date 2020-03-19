@@ -1,0 +1,457 @@
+[reptDevIpAddr(key)]
+$localhost (hostName:myTesterAttr)
+[eventMsg]
+Tue Oct 19 18:18:49 2010 myTesterAttr: [LINUX_FILE_CHANGE]: [objectType]=Dir,[objectName]=/MyAutomation/All,[objectAction]=ATTRIB,[targetObjType]=File,[targetObjName]="newFile2.txt",[user]=newUser
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+count=1
+phCustId=$sender
+deviceTime=any
+eventId=any
+eventName=A file or directory changed - content or attributes
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=5
+eventSeverityCat=MEDIUM
+eventType=LINUX_FILE_CHANGE
+hostName=myTesterAttr
+osObjAction=ATTRIB
+osObjName=/MyAutomation/All
+osObjType=Dir
+reptDevIpAddr=$reporter
+reptModel=Linux
+reptVendor=Generic
+targetOsObjName=newFile2.txt
+targetOsObjType=File
+user=newUser
+[reptDevIpAddr(key)]
+$localhost (hostName:myTesterOpen)
+[eventMsg]
+Tue Oct 19 18:18:49 2010 myTesterOpen: [LINUX_FILE_CHANGE]: [objectType]=Dir,[objectName]=/MyFileMonitor/All,[objectAction]=OPEN,[targetObjType]=File,[targetObjName]="newFile2.txt",[user]=root
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+count=1
+phCustId=$sender
+deviceTime=any
+eventId=any
+eventName=A file or directory changed - content or attributes
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=5
+eventSeverityCat=MEDIUM
+eventType=LINUX_FILE_CHANGE
+hostName=myTesterOpen
+osObjAction=OPEN
+osObjName=/MyFileMonitor/All
+osObjType=Dir
+reptDevIpAddr=$reporter
+reptModel=Linux
+reptVendor=Generic
+targetOsObjName=newFile2.txt
+targetOsObjType=File
+user=root
+[reptDevIpAddr(key)]
+$localhost (hostName:myTesterAccess)
+[eventMsg]
+Wed Oct 20 14:15:33 2010 myTesterAccess: [LINUX_FILE_CHANGE]: [objectType]=Dir,[objectName]=/MyFileMonitor/All,[objectAction]=ACCESS,[targetObjType]=File,[targetObjName]="All-1.txt",[user]=sha
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+count=1
+phCustId=$sender
+deviceTime=any
+eventId=any
+eventName=A file or directory changed - content or attributes
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=5
+eventSeverityCat=MEDIUM
+eventType=LINUX_FILE_CHANGE
+hostName=myTesterAccess
+osObjAction=ACCESS
+osObjName=/MyFileMonitor/All
+osObjType=Dir
+reptDevIpAddr=$reporter
+reptModel=Linux
+reptVendor=Generic
+targetOsObjName=All-1.txt
+targetOsObjType=File
+user=sha
+[reptDevIpAddr(key)]
+$localhost (hostName:myTesterCloseNoWrite)
+[eventMsg]
+Tue Oct 19 23:18:28 2010 myTesterCloseNoWrite: [LINUX_FILE_CHANGE]: [objectType]=Dir,[objectName]=/MyFileMonitor/All,[objectAction]=CLOSE_NOWRITE,[targetObjType]=File,[targetObjName]="All-4.txt",[user]=root
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+count=1
+phCustId=$sender
+deviceTime=any
+eventId=any
+eventName=A file or directory changed - content or attributes
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=5
+eventSeverityCat=MEDIUM
+eventType=LINUX_FILE_CHANGE
+hostName=myTesterCloseNoWrite
+osObjAction=CLOSE_NOWRITE
+osObjName=/MyFileMonitor/All
+osObjType=Dir
+reptDevIpAddr=$reporter
+reptModel=Linux
+reptVendor=Generic
+targetOsObjName=All-4.txt
+targetOsObjType=File
+user=root
+[reptDevIpAddr(key)]
+$localhost (hostName:myTesterCloseWrite)
+[eventMsg]
+Tue Oct 19 18:18:49 2010 myTesterCloseWrite: [LINUX_FILE_CHANGE]: [objectType]=Dir,[objectName]=/MyFileMonitor/All,[objectAction]=CLOSE_WRITE,[targetObjType]=File,[targetObjName]="newFile2.txt",[user]=root
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+count=1
+phCustId=$sender
+deviceTime=any
+eventId=any
+eventName=A file or directory changed - content or attributes
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=5
+eventSeverityCat=MEDIUM
+eventType=LINUX_FILE_CHANGE
+hostName=myTesterCloseWrite
+osObjAction=CLOSE_WRITE
+osObjName=/MyFileMonitor/All
+osObjType=Dir
+reptDevIpAddr=$reporter
+reptModel=Linux
+reptVendor=Generic
+targetOsObjName=newFile2.txt
+targetOsObjType=File
+user=root
+[reptDevIpAddr(key)]
+$localhost (hostName:myTesterModify)
+[eventMsg]
+Tue Oct 19 18:18:49 2010 myTesterModify: [LINUX_FILE_CHANGE]: [objectType]=Dir,[objectName]=/MyFileMonitor/All,[objectAction]=MODIFY,[targetObjType]=File,[targetObjName]="newFile2.txt",[user]=root
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+count=1
+phCustId=$sender
+deviceTime=any
+eventId=any
+eventName=A file or directory changed - content or attributes
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=5
+eventSeverityCat=MEDIUM
+eventType=LINUX_FILE_CHANGE
+hostName=myTesterModify
+osObjAction=MODIFY
+osObjName=/MyFileMonitor/All
+osObjType=Dir
+reptDevIpAddr=$reporter
+reptModel=Linux
+reptVendor=Generic
+targetOsObjName=newFile2.txt
+targetOsObjType=File
+user=root
+[reptDevIpAddr(key)]
+$localhost (hostName:myTesterCreate)
+[eventMsg]
+Tue Oct 19 18:18:49 2010 myTesterCreate: [LINUX_FILE_CHANGE]: [objectType]=Dir,[objectName]=/MyFileMonitor/All,[objectAction]=CREATE,[targetObjType]=File,[targetObjName]="newFile2.txt",[user]=root
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+count=1
+phCustId=$sender
+deviceTime=any
+eventId=any
+eventName=A file or directory changed - content or attributes
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=5
+eventSeverityCat=MEDIUM
+eventType=LINUX_FILE_CHANGE
+hostName=myTesterCreate
+osObjAction=CREATE
+osObjName=/MyFileMonitor/All
+osObjType=Dir
+reptDevIpAddr=$reporter
+reptModel=Linux
+reptVendor=Generic
+targetOsObjName=newFile2.txt
+targetOsObjType=File
+user=root
+[reptDevIpAddr(key)]
+$localhost (hostName:myTesterDelete)
+[eventMsg]
+Tue Oct 19 19:09:07 2010 myTesterDelete: [LINUX_FILE_CHANGE]: [objectType]=Dir,[objectName]=/MyFileMonitor/All,[objectAction]=DELETE,[targetObjType]=File,[targetObjName]="newFile.txt",[user]=root
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+count=1
+phCustId=$sender
+deviceTime=any
+eventId=any
+eventName=A file or directory changed - content or attributes
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=5
+eventSeverityCat=MEDIUM
+eventType=LINUX_FILE_CHANGE
+hostName=myTesterDelete
+osObjAction=DELETE
+osObjName=/MyFileMonitor/All
+osObjType=Dir
+reptDevIpAddr=$reporter
+reptModel=Linux
+reptVendor=Generic
+targetOsObjName=newFile.txt
+targetOsObjType=File
+user=root
+[reptDevIpAddr(key)]
+$localhost (hostName:myTesterMoveFrom)
+[eventMsg]
+Wed Oct 20 00:00:17 2010 myTesterMoveFrom: [LINUX_FILE_CHANGE]: [objectType]=Dir,[objectName]=/MyFileMonitor/All,[objectAction]=MOVED_FROM,[targetObjType]=File,[targetObjName]="newFile.txt",[user]=root
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+count=1
+phCustId=$sender
+deviceTime=any
+eventId=any
+eventName=A file or directory changed - content or attributes
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=5
+eventSeverityCat=MEDIUM
+eventType=LINUX_FILE_CHANGE
+hostName=myTesterMoveFrom
+osObjAction=MOVED_FROM
+osObjName=/MyFileMonitor/All
+osObjType=Dir
+reptDevIpAddr=$reporter
+reptModel=Linux
+reptVendor=Generic
+targetOsObjName=newFile.txt
+targetOsObjType=File
+user=root
+[reptDevIpAddr(key)]
+$localhost (hostName:myTesterMoveTo)
+[eventMsg]
+Wed Oct 20 00:00:17 2010 myTesterMoveTo: [LINUX_FILE_CHANGE]: [objectType]=Dir,[objectName]=/MyFileMonitor/All,[objectAction]=MOVED_TO,[targetObjType]=File,[targetObjName]="All-7.txt",[user]=root
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+count=1
+phCustId=$sender
+deviceTime=any
+eventId=any
+eventName=A file or directory changed - content or attributes
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=5
+eventSeverityCat=MEDIUM
+eventType=LINUX_FILE_CHANGE
+hostName=myTesterMoveTo
+osObjAction=MOVED_TO
+osObjName=/MyFileMonitor/All
+osObjType=Dir
+reptDevIpAddr=$reporter
+reptModel=Linux
+reptVendor=Generic
+targetOsObjName=All-7.txt
+targetOsObjType=File
+user=root
+[reptDevIpAddr(key)]
+$localhost (hostName:myTesterDirOpen)
+[eventMsg]
+Tue Oct 19 18:18:49 2010 myTesterDirOpen: [LINUX_FILE_CHANGE]: [objectType]=Dir,[objectName]=/MyFileMonitor/All,[objectAction]=OPEN,[targetObjType]=Dir,[targetObjName]="",[user]=root
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+count=1
+phCustId=$sender
+deviceTime=any
+eventId=any
+eventName=A file or directory changed - content or attributes
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=5
+eventSeverityCat=MEDIUM
+eventType=LINUX_FILE_CHANGE
+hostName=myTesterDirOpen
+osObjAction=OPEN
+osObjName=/MyFileMonitor/All
+osObjType=Dir
+reptDevIpAddr=$reporter
+reptModel=Linux
+reptVendor=Generic
+targetOsObjType=Dir
+user=root
+[reptDevIpAddr(key)]
+$localhost (hostName:myTesterDirCloseNoWrite)
+[eventMsg]
+Tue Oct 19 18:18:49 2010 myTesterDirCloseNoWrite: [LINUX_FILE_CHANGE]: [objectType]=Dir,[objectName]=/MyFileMonitor/All,[objectAction]=CLOSE_NOWRITE,[targetObjType]=Dir,[targetObjName]="",[user]=root
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+count=1
+phCustId=$sender
+deviceTime=any
+eventId=any
+eventName=A file or directory changed - content or attributes
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=5
+eventSeverityCat=MEDIUM
+eventType=LINUX_FILE_CHANGE
+hostName=myTesterDirCloseNoWrite
+osObjAction=CLOSE_NOWRITE
+osObjName=/MyFileMonitor/All
+osObjType=Dir
+reptDevIpAddr=$reporter
+reptModel=Linux
+reptVendor=Generic
+targetOsObjType=Dir
+user=root
+[reptDevIpAddr(key)]
+$localhost (hostName:myTesterDirCreate)
+[eventMsg]
+Tue Oct 19 23:30:56 2010 myTesterDirCreate: [LINUX_FILE_CHANGE]: [objectType]=Dir,[objectName]=/MyFileMonitor/All,[objectAction]=CREATE,[targetObjType]=Dir,[targetObjName]="NewDir",[user]=root
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+count=1
+phCustId=$sender
+deviceTime=any
+eventId=any
+eventName=A file or directory changed - content or attributes
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=5
+eventSeverityCat=MEDIUM
+eventType=LINUX_FILE_CHANGE
+hostName=myTesterDirCreate
+osObjAction=CREATE
+osObjName=/MyFileMonitor/All
+osObjType=Dir
+reptDevIpAddr=$reporter
+reptModel=Linux
+reptVendor=Generic
+targetOsObjName=NewDir
+targetOsObjType=Dir
+user=root
+[reptDevIpAddr(key)]
+$localhost (hostName:myTesterDirAttr)
+[eventMsg]
+Tue Oct 19 23:40:11 2010 myTesterDirAttr: [LINUX_FILE_CHANGE]: [objectType]=Dir,[objectName]=/MyFileMonitor/All,[objectAction]=ATTRIB,[targetObjType]=Dir,[targetObjName]="NewDir",[user]=root
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+count=1
+phCustId=$sender
+deviceTime=any
+eventId=any
+eventName=A file or directory changed - content or attributes
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=5
+eventSeverityCat=MEDIUM
+eventType=LINUX_FILE_CHANGE
+hostName=myTesterDirAttr
+osObjAction=ATTRIB
+osObjName=/MyFileMonitor/All
+osObjType=Dir
+reptDevIpAddr=$reporter
+reptModel=Linux
+reptVendor=Generic
+targetOsObjName=NewDir
+targetOsObjType=Dir
+user=root
+[reptDevIpAddr(key)]
+$localhost (hostName:myTesterDirMoveFrom)
+[eventMsg]
+Tue Oct 19 23:52:34 2010 myTesterDirMoveFrom: [LINUX_FILE_CHANGE]: [objectType]=Dir,[objectName]=/MyFileMonitor/All,[objectAction]=MOVED_FROM,[targetObjType]=Dir,[targetObjName]="NewDir",[user]=root
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+count=1
+phCustId=$sender
+deviceTime=any
+eventId=any
+eventName=A file or directory changed - content or attributes
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=5
+eventSeverityCat=MEDIUM
+eventType=LINUX_FILE_CHANGE
+hostName=myTesterDirMoveFrom
+osObjAction=MOVED_FROM
+osObjName=/MyFileMonitor/All
+osObjType=Dir
+reptDevIpAddr=$reporter
+reptModel=Linux
+reptVendor=Generic
+targetOsObjName=NewDir
+targetOsObjType=Dir
+user=root
+[reptDevIpAddr(key)]
+$localhost (hostName:myTesterDirMoveTo)
+[eventMsg]
+Tue Oct 19 23:52:34 2010 myTesterDirMoveTo: [LINUX_FILE_CHANGE]: [objectType]=Dir,[objectName]=/MyFileMonitor/All,[objectAction]=MOVED_TO,[targetObjType]=Dir,[targetObjName]="OldDir",[user]=root
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+count=1
+phCustId=$sender
+deviceTime=any
+eventId=any
+eventName=A file or directory changed - content or attributes
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=5
+eventSeverityCat=MEDIUM
+eventType=LINUX_FILE_CHANGE
+hostName=myTesterDirMoveTo
+osObjAction=MOVED_TO
+osObjName=/MyFileMonitor/All
+osObjType=Dir
+reptDevIpAddr=$reporter
+reptModel=Linux
+reptVendor=Generic
+targetOsObjName=OldDir
+targetOsObjType=Dir
+user=root
+[reptDevIpAddr(key)]
+$localhost (hostName:myTesterDirDelete)
+[eventMsg]
+Wed Oct 20 00:14:11 2010 myTesterDirDelete: [LINUX_FILE_CHANGE]: [objectType]=Dir,[objectName]=/MyFileMonitor/All,[objectAction]=DELETE,[targetObjType]=Dir,[targetObjName]="OldDir",[user]=root
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+count=1
+phCustId=$sender
+deviceTime=any
+eventId=any
+eventName=A file or directory changed - content or attributes
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=5
+eventSeverityCat=MEDIUM
+eventType=LINUX_FILE_CHANGE
+hostName=myTesterDirDelete
+osObjAction=DELETE
+osObjName=/MyFileMonitor/All
+osObjType=Dir
+reptDevIpAddr=$reporter
+reptModel=Linux
+reptVendor=Generic
+targetOsObjName=OldDir
+targetOsObjType=Dir
+user=root

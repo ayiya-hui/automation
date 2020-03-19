@@ -1,0 +1,32 @@
+[reptDevIpAddr(key)]
+10.30.2.249
+[eventMsg]
+2019-01-15T05:53:54Z WIN-2008-249.ersijiu.com 10.30.2.249 AccelOps-WUA-DNS [phCustId]="1" [customer]="Super" [monitorStatus]="Success" [Locale]="en-US" [MachineGuid]="0d41370c-5fe3-41ba-999a-781676ef02f5" [timeZone]="+0800" [srcIpAddr]="::1" [srcIpPort]="64620" [destName]="" [destIpAddr]="1.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0" [destIpPort]="53" [destCName]="" [recvBytes]="90" [msg]="1/15/2019 1:53:27 PM 1448 PACKET 0000000005BD9210 UDP Snd 10.30.2.249 0001 R Q [8381 DR NXDOMAIN] PTR (3)249(1)2(2)30(2)10(7)in-addr(4)arpa(0) "
+[params]
+deviceTime=any
+parserName=AOWUA_DNSParser
+eventType=AO-WUA-DNS-PTR-Query-Failed
+reptModel=DNS
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Failed IP to domain name query
+extEventRecvProto=Windows Agent
+phEventCategory=0 (External)
+msg=1/15/2019 1:53:27 PM 1448 PACKET 0000000005BD9210 UDP Snd 10.30.2.249 0001 R Q [8381 DR NXDOMAIN] PTR (3)249(1)2(2)30(2)10(7)in-addr(4)arpa(0) 
+destName=any
+status=Success
+count=1
+recvBytes=90
+srcIpPort=64620
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=10.30.2.249
+rawEventMsg=any
+destIpPort=53
+reptDevName=WIN-2008-249.ersijiu.com
+customer=Super
+phRecvTime=any
+reptDevIpAddr=10.30.2.249
+reptVendor=Microsoft
+machineGUID=0d41370c-5fe3-41ba-999a-781676ef02f5

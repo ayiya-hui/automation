@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+20.20.20.20
+[eventMsg]
+<13>Jan 14 18:56:48 $reporter MSWinEventLog	1	Security	9162	Wed Jan 14 18:56:48 2009	673	Security	SYSTEM	User	Success Audit	SJQAVWINADS	Account Logon		Service Ticket Request:     User Name: PARTHA_LAPTOP$@PROSPECT-HILLS.NET     User Domain: PROSPECT-HILLS.NET     Service Name: krbtgt     Service ID: %{S-1-5-21-3383442562-1768178646-255068551-502}     Ticket Options: 0x60810010     Ticket Encryption Type: 0x17     Client Address: 192.168.20.33     Failure Code: -     Logon GUID: {7bf641ec-0dcb-7718-cefa-3ba07f269654}     Transited Services: -    	8604  Automation
+[params]
+rawEventMsg=any
+eventAction=0 (Permit)
+count=1
+eventId=any
+domain=PROSPECT-HILLS.NET
+deviceTime=any
+eventParsedOk=1
+eventSeverity=2
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=$reporter
+eventName=Windows kerberos service ticket grant successful
+srcIpAddr=192.168.20.33
+winSrvcName=krbtgt
+reptVendor=Microsoft
+eventType=Win-Security-673-success
+user=PARTHA_LAPTOP$@PROSPECT-HILLS.NET
+phEventCategory=0 (External)
+reptDevIpAddr=$reporter
+reptModel=Windows

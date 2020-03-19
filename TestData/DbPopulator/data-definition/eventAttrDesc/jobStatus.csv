@@ -1,0 +1,5 @@
+$jobStatus,Description
+0,Success
+1,Failure
+2,Skip
+3,Success and fall behind

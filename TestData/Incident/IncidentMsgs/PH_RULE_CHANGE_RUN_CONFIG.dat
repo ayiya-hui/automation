@@ -1,0 +1,2 @@
+[eventMsg]
+<174>Apr  7 17:06:37 amonitor phPerfMonitor[2770]: [PH_DEV_MON_CHANGE_RUN_CONFIG]:[eventSeverity]=PHL_INFO,[procName]=phPerfMonitor,[fileName]=phSvnUpdate.cpp,[lineNumber]=145,[phCustId]=1,[hostName]=automator5Dot2Dot0Dot1,[hostIpAddr]=5.2.0.1,[oldSVNVersion]=243,[newSVNVersion]=326,[deletedItem]=ip flow-export destination 192.168.20.116 2055;ip flow-export destination 172.16.10.12 2055;,[addedItem]=flowcontrol receive on;ip flow-export destination 192.168.29.12 2055;ip flow-export destination 192.168.20.117 2055;,[phLogDetail]=

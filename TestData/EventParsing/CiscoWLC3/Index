@@ -1,0 +1,6 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+Cisco-WLC-1-clientCoverageHolePreAlarm,CiscoWLC3_1,CiscoWLC3,$localhost,,syslog
+Cisco-WLC-2-rrmRfGroupLeaderChanged,CiscoWLC3_2,CiscoWLC3,$localhost,,syslog
+Cisco-WLC-3-rrmRfGroupMemberAdded,CiscoWLC3_3,CiscoWLC3,$localhost,,syslog
+Cisco-WLC-4-rrnRfGroupMemberRemoved,CiscoWLC3_4,CiscoWLC3,$localhost,,syslog

@@ -1,0 +1,37 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<164>barracuda_pqman[27088]: 1459965662 1 10.224.57.84 63.236.88.200 - 10.224.57.84 https://www.eleadcrm.com/ 0 BYF BLOCKED VIRUS  2 0 0 0 0 (-) 0 - 0 - 0 eleadcrm.com business [ANON]   https://www.eleadcrm.com/
+[params]
+destGeoOrg=any
+parserName=BarracudaWebFilterParser
+eventType=Barracuda-WF-BLOCKED-VIRUS
+activityType=allowed
+destIpAddr=63.236.88.200
+totBytes=0
+srcName=HOST-10.224.57.84
+destGeoCountry=any
+srcIpAddr=10.224.57.84
+reptModel=Web Filter
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+serverName=0
+eventName=Blocked web traffic - virus
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+destName=www.eleadcrm.com
+webCategory=eleadcrm.com
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+user=business
+rawEventMsg=any
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+count=1
+infoURL=https://www.eleadcrm.com/
+reptVendor=Barracuda
+fileType=-

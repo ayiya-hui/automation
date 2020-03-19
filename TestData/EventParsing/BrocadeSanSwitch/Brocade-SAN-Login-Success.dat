@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+1.5.6.7
+[eventMsg]
+2014 Dec 18 16:51:50 1.5.6.7 Security: SSH login by svadmin from src IP 10.28.1.21, src MAC 0010.dbff.1008 to USER EXEC mode, using DSA as server hostkey
+[params]
+deviceTime=any
+parserName=BrocadeSanSwitchParser
+eventType=Brocade-SAN-Login-Success
+srcIpAddr=10.28.1.21
+reptModel=San Switch
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Successful admin login
+appTransportProto=SSH
+phEventCategory=0 (External)
+eventRuleTrigger=1
+count=1
+srcMACAddr=00:10:db:ff:10:08
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=1.5.6.7
+user=svadmin
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=1.5.6.7
+reptVendor=Brocade

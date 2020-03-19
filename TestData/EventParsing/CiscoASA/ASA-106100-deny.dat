@@ -1,0 +1,29 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>Dec 04 2008 20:00:45: %ASA-2-106100: access-list 56456 denied tcp ether05/192.168.20.20(8080) -> ether06/20.20.20.20(80) hit-cnt 1000 (first hit)
+[params]
+rawEventMsg=any
+deviceTime=any
+eventType=ASA-106100-deny
+phCustId=$sender
+destIpAddr=20.20.20.20
+destIpPort=80 (HTTP)
+srcIpAddr=192.168.20.20
+reptModel=ASA
+eventId=any
+policyName=56456
+eventParsedOk=1
+eventSeverity=8
+eventName=Denied IP traffic by policy
+phEventCategory=0 (External)
+srcIntfName=ether05
+srcIpPort=8080
+eventSeverityCat=MEDIUM
+destIntfName=ether06
+ipProto=6 (TCP)
+count=1
+phRecvTime=any
+reptDevIpAddr=$reporter
+eventAction=1 (Deny)
+reptVendor=Cisco

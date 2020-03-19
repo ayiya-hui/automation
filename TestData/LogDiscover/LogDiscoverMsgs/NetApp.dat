@@ -1,0 +1,2 @@
+[eventMsg]
+2013-09-30 12:51:45 10.100.1.86(via UDP: [10.100.1.8]:38778) TRAP, SNMP v1, community publicSNMPv2-SMI::enterprises.789 Enterprise Specific Trap (176) Uptime: 183 days, 22:13:40.35SNMPv2-SMI::enterprises.789.1.1.12.0 = STRING: Quota Event: status=exceeded, type=hard, volume=pandata, limit_item=disk, limit_value=36700160, treeid=112SNMPv2-SMI::enterprises.789.1.1.9.0 = STRING: 200000208115

@@ -1,0 +1,6 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+Win-VPN-SuccessfulLogon,MicrosoftPPTP_1,MicrosoftPPTP,192.168.24.11,,syslog
+Win-VPN-Logoff,MicrosoftPPTP_2,MicrosoftPPTP,192.168.24.11,,syslog
+Win-VPN-Accounting,MicrosoftPPTP_3,MicrosoftPPTP,192.168.24.11,,syslog
+Win-VPN-FailedLogon,MicrosoftPPTP_4,MicrosoftPPTP,192.168.24.11,,syslog

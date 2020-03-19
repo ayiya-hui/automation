@@ -1,0 +1,723 @@
+<Reports>
+ 
+  <Report id="PH_Report_AppServer_1" group="PH_SYS_REPORT_AppServer,PH_SYS_REPORT_AppPerf">
+    <Name>Top Java App Servers By CPU</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks App servers by the amount of CPU usage </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,AVG(cpuUtil),MAX(cpuUtil)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(cpuUtil) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_AppServer_1" name="Filter_AppServer_1">
+        <SingleEvtConstr>eventType = "JEE_APPSERVER_PERF"</SingleEvtConstr>
+        <GroupByAttr>reptDevIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_AppServer_2" group="PH_SYS_REPORT_AppServer,PH_SYS_REPORT_AppPerf">
+    <Name>Top Java App Servers By Memory</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks App servers by the amount of memory usage </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,AVG(heapUtil),MAX(heapUtil),AVG(nonHeapUtil),MAX(nonHeapUtil)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(heapUtil) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_AppServer_2" name="Filter_AppServer_2">
+        <SingleEvtConstr>eventType = "JEE_APPSERVER_PERF"</SingleEvtConstr>
+        <GroupByAttr>reptDevIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_AppServer_3" group="PH_SYS_REPORT_AppServer,PH_SYS_REPORT_AppPerf">
+    <Name>Top Java App Servers By Memory Usage (With Other Memory Usage Stats)</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks App servers by the amount of memory usage - this report provides deatils on used, max and committed values of heap and non-heap memory. </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,AVG(heapUsedKB), AVG(heapMaxKB), AVG(heapCommitKB),AVG(heapUtil),MAX(heapUtil),AVG(nonHeapUsedKB), AVG(nonHeapMaxKB), AVG(nonHeapCommitKB),AVG(nonHeapUtil),MAX(nonHeapUtil)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(heapUtil) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_AppServer_3" name="Filter_AppServer_3">
+        <SingleEvtConstr>eventType = "JEE_APPSERVER_PERF"</SingleEvtConstr>
+        <GroupByAttr>reptDevIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_AppServer_4" group="PH_SYS_REPORT_AppServer,PH_SYS_REPORT_AppPerf">
+    <Name>Top Java App Servers By CPU Usage (With Other Performance Metrics)</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks App servers by the amount of CPU usage - this report provides details on other performance aspects such as memory, threads and classes</Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,AVG(cpuUtil),MAX(cpuUtil), AVG(heapUtil),MAX(heapUtil), AVG(nonHeapUtil),MAX(nonHeapUtil), AVG(liveThreads), MAX(liveThreadsMax), AVG(loadedClasses)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(cpuUtil) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_AppServer_4" name="Filter_AppServer_4">
+        <SingleEvtConstr>eventType = "JEE_APPSERVER_PERF"</SingleEvtConstr>
+        <GroupByAttr>reptDevIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_AppServer_5" group="PH_SYS_REPORT_AppServer,PH_SYS_REPORT_AppPerf">
+    <Name>Top Java App Servers By Current Uptime</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks App servers by current uptime (i.e. time since last reboot) </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,LAST(sysUpTime)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> LAST(sysUpTime) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Minute" val="4"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_AppServer_5" name="Filter_AppServer_5">
+        <SingleEvtConstr>eventType = "JEE_APPSERVER_PERF"</SingleEvtConstr>
+        <GroupByAttr>reptDevIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_AppServer_6" group="PH_SYS_REPORT_AppPerf">
+     <Name>Top Server Applications By CPU, Memory</Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description>Ranks the server processes by first average cpu utilization and then by memory utilization </Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName,appName,swProcName,AVG(cpuUtil),AVG(memUtil) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(cpuUtil) DESC, AVG(memUtil) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_PERF_MON_4" name="Filter_PERF_MON_4">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_PROC_RESOURCE_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Server) </SingleEvtConstr> 
+           <GroupByAttr>hostName,appName,swProcName </GroupByAttr>  
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_AppServer_7" group="PH_SYS_REPORT_AppPerf">
+     <Name>Top Server Applications By CPU</Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description>Ranks the host processes by average CPU utilization over a window</Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName,appName,swProcName,AVG(cpuUtil) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(cpuUtil) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_PERF_MON_5" name="Filter_PERF_MON_5">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_PROC_RESOURCE_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Server) </SingleEvtConstr>
+           <GroupByAttr>hostName,appName,swProcName </GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_AppServer_7B" group="PH_SYS_REPORT_AppPerf">
+     <Name>Top Server Applications By Memory</Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description>Ranks the host processes by average memory utilization </Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName,appName,swProcName,AVG(memUtil) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(memUtil) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_PERF_MON_5" name="Filter_PERF_MON_5">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_PROC_RESOURCE_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Server)</SingleEvtConstr>
+           <GroupByAttr>hostName,appName,swProcName </GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_AppServer_8" group="PH_SYS_REPORT_AppPerf">
+     <Name>Top Windows Apps By CPU, Memory, I/O</Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description>Ranks the host processes by average memory utilization over a window</Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName,appName,swProcName,AVG(cpuUtil),AVG(memUtil),AVG(ioReadKBytesPerSec),AVG(ioWriteKBytesPerSec)</AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(cpuUtil) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_PERF_MON_5" name="Filter_PERF_MON_5">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_PROC_RESOURCE_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER) </SingleEvtConstr>
+           <GroupByAttr>hostName,appName,swProcName </GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+   <Report id="PH_Report_AppServer_8B" group="PH_SYS_REPORT_AppPerf">
+     <Name>Top Windows Apps By I/O</Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description>Ranks the host processes by average memory utilization over a window</Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName,appName,swProcName,AVG(ioReadKBytesPerSec),AVG(ioWriteKBytesPerSec)</AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(ioReadKBytesPerSec) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_PERF_MON_5" name="Filter_PERF_MON_5">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_PROC_RESOURCE_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER) </SingleEvtConstr>
+           <GroupByAttr>hostName,appName,swProcName </GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+  
+  <Report id="PH_Report_AppServer_9" group="PH_SYS_REPORT_AppPerf,PH_SYS_REPORT_DHCPServer">
+     <Name>Top DHCP Servers By Requests Served </Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description>Ranks the host processes by average memory utilization over a window</Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName,AVG(dhcpReqPerSec),MAX(dhcpReqPerSec),AVG(dhcpActiveQueueLen),MAX(dhcpActiveQueueLen),AVG(dhcpPktsPerSec),AVG(dhcpAvgRespTime),AVG(dhcpDeclinesPerSec),AVG(dhcpConflictQueueLen) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(dhcpReqPerSec) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_PERF_MON_5" name="Filter_PERF_MON_5">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_APP_DHCP_MET" </SingleEvtConstr>
+           <GroupByAttr>hostName</GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_AppServer_10" group="PH_SYS_REPORT_AppPerf,PH_SYS_REPORT_DNS">
+     <Name>Top DNS Servers By Requests Served (With Other Metrics) </Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description>Ranks the host processes by average memory utilization over a window</Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName,AVG(dnsReqRecv),AVG(dnsRespSent),AVG(dnsRecQueryRecv),AVG(dnsRecQueryRecv), AVG(winsReqRecv), AVG(winsRespSent), AVG(dnsSecUpdateRecv) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(dnsReqRecv) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_PERF_MON_5" name="Filter_PERF_MON_5">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_APP_DNS_MET" </SingleEvtConstr>
+           <GroupByAttr>hostName</GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+   <Report id="PH_Report_AppServer_11" group="PH_SYS_REPORT_AppPerf,PH_SYS_REPORT_DNS">
+     <Name>Top DNS Servers By Zone Transfer Activity </Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description>Ranks the DNS Servers by zone transfer requests over a window</Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName,SUM(fullDnsXferSent),SUM(fullDnsXferRecv),SUM(fullDnsXferSucc),SUM(incrDnsXferSent),SUM(incrDnsXferRecv),SUM(incrDnsXferSucc) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> SUM(fullDnsXferSucc) DESC, SUM(incrDnsXferSucc) DESC </AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_PERF_MON_5" name="Filter_PERF_MON_5">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_APP_DNS_MET" </SingleEvtConstr>
+           <GroupByAttr>hostName</GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_AppServer_12" group="PH_SYS_REPORT_AppPerf,PH_SYS_REPORT_DNS">
+     <Name>Top DNS Servers By Errors </Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description>Ranks the DNS Servers by the number of errors.</Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName,AVG(dynDnsUpdRej),AVG(dynDnsUpdTimeout),AVG(recurDnsQueryFail),AVG(recurDnsQueryTimeout) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(dnsReqRecv) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_PERF_MON_5" name="Filter_PERF_MON_5">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_APP_DNS_MET" </SingleEvtConstr>
+           <GroupByAttr>hostName</GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_AppServer_13" group="PH_SYS_REPORT_AppPerf,PH_SYS_REPORT_WebServer">
+     <Name>Top IIS Servers By Connection Count</Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description>Ranks the IIS Servers by connection count - requires IIS metrics collected via WMI</Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName,srvInstName,AVG(httpCurrConnCount),AVG(sentBytes),AVG(recvBytes),AVG(httpSentFiles),AVG(httpRecvFiles),AVG(httpIsapiReq), AVG(httpLogons), AVG(httpAnonymLogons) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(httpCurrConnCount) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_PERF_MON_5" name="Filter_PERF_MON_5">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_APP_IIS_MET" </SingleEvtConstr>
+           <GroupByAttr>hostName,srvInstName</GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_AppServer_14" group="PH_SYS_REPORT_AppPerf,PH_SYS_REPORT_WebServer">
+     <Name>Top IIS Servers By Errors</Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description>Ranks the HTTP Servers by not found errors </Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName,srvInstName,AVG(httpNotFoundErr),AVG(httpCurrConnCount),AVG(httpIsapiReq) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(httpCurrConnCount) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_PERF_MON_5" name="Filter_PERF_MON_5">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_APP_IIS_MET" </SingleEvtConstr>
+           <GroupByAttr>hostName,srvInstName</GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_AppServer_16" group="PH_SYS_REPORT_AppPerf,PH_SYS_REPORT_DBServer">
+     <Name>Top Database Server Processes By CPU</Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description>Ranks the database processes by average cpu utilization over a window</Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName,appName,swProcName,AVG(cpuUtil) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(cpuUtil) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_PERF_MON_5" name="Filter_PERF_MON_5">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_PROC_RESOURCE_UTIL" AND ((appName CONTAIN "Oracle Database") OR (appName CONTAIN "IBM DB2") OR (appName CONTAIN "Microsoft SQL") OR (appName CONTAIN "MySQL Database") OR (appName CONTAIN "Postgress Database") OR (appName CONTAIN "Sybase Adaptive")) </SingleEvtConstr>
+           <GroupByAttr>hostName,appName,swProcName </GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_AppServer_16B" group="PH_SYS_REPORT_AppPerf,PH_SYS_REPORT_DBServer">
+     <Name>Top Database Server Processes By Memory </Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description>Ranks the database processes by average memory utilization over a window</Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName,appName,swProcName,AVG(memUtil) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(memUtil) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_PERF_MON_5" name="Filter_PERF_MON_5">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_PROC_RESOURCE_UTIL" AND ((appName CONTAIN "Oracle Database") OR (appName CONTAIN "IBM DB2") OR (appName CONTAIN "Microsoft SQL") OR (appName CONTAIN "MySQL Database") OR (appName CONTAIN "Postgress Database") OR (appName CONTAIN "Sybase Adaptive")) </SingleEvtConstr>
+           <GroupByAttr>hostName,appName,swProcName </GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_AppServer_16C" group="PH_SYS_REPORT_AppPerf,PH_SYS_REPORT_DBServer">
+     <Name>Top Windows Database Server Processes By I/O Activity</Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description>Ranks the database processes by average I/O activity</Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName,appName,swProcName,AVG(ioReadKBytesPerSec),AVG(ioWriteKBytesPerSec)</AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(ioReadKBytesPerSec) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_PERF_MON_5" name="Filter_PERF_MON_5">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_PROC_RESOURCE_UTIL" AND ((appName CONTAIN "Oracle Database") OR (appName CONTAIN "IBM DB2") OR (appName CONTAIN "Microsoft SQL") OR (appName CONTAIN "MySQL Database") OR (appName CONTAIN "Postgress Database") OR (appName CONTAIN "Sybase Adaptive")) AND hostIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER) </SingleEvtConstr>
+           <GroupByAttr>hostName,appName,swProcName </GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_AppServer_16D" group="PH_SYS_REPORT_AppPerf,PH_SYS_REPORT_DBServer">
+    <Name>Top Database Servers By Disk I/O Utilization </Name> 
+    <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description>Ranks the database servers by average disk I/O utilization over a window. This requires WMI (Windows) and SSH (Unix) </Description> 
+     <SelectClause numEntries="All">
+       <AttrList> hostName,diskName,AVG(diskIOUtil) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(diskIOUtil) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+       <SubPattern displayName="Filter_PERF_MON_6" name="Filter_PERF_MON_6">
+         <SingleEvtConstr>eventType = "PH_DEV_MON_DISK_IO_UTIL" AND hostIpAddr IN (Group@PH_SYS_APP_DATABASE_SERVER) </SingleEvtConstr> 
+         <GroupByAttr>hostName,diskName</GroupByAttr> 
+       </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+   <Report id="PH_Report_AppServer_16E" group="PH_SYS_REPORT_AppPerf,PH_SYS_REPORT_DBServer">
+    <Name>Top Database Servers By Disk I/O Latency </Name> 
+    <CustomerScope groupByEachCustomer="true">
+      <Include all="true" /> 
+      <Exclude /> 
+    </CustomerScope>
+    <Description>Ranks the database servers by average disk I/O read/write latency. This requires (Windows) and SSH (Unix) </Description> 
+     <SelectClause numEntries="All">
+         <AttrList> hostName,diskName,AVG(devDiskRdLatency),AVG(devDiskWrLatency) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(devDiskRdLatency) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_PERF_MON_6" name="Filter_PERF_MON_6">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_DISK_IO_UTIL" AND hostIpAddr IN (Group@PH_SYS_APP_DATABASE_SERVER) </SingleEvtConstr> 
+           <GroupByAttr>hostName,diskName</GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_AppServer_16F" group="PH_SYS_REPORT_AppPerf,PH_SYS_REPORT_DBServer">
+    <Name>Top Windows Database Servers By Disk Queue length </Name> 
+    <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description>Ranks the windows based database servers by average disk I/O queue length. This requires WMI. </Description> 
+     <SelectClause numEntries="All">
+         <AttrList> hostName,diskName,AVG(diskQLen) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(diskQLen) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_PERF_MON_6" name="Filter_PERF_MON_6">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_DISK_IO_UTIL" AND hostIpAddr IN (Group@PH_SYS_APP_DATABASE_SERVER,Group@PH_SYS_DEVICE_WINDOWS_SERVER) </SingleEvtConstr> 
+           <GroupByAttr>hostName,diskName</GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_AppServer_16G" group="PH_SYS_REPORT_AppPerf,PH_SYS_REPORT_DBServer">
+     <Name>Top Database Servers By Page Swapping Rate</Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description> Ranks the database servers by average swapping rate </Description> 
+     <SelectClause numEntries="All">
+         <AttrList> hostName,AVG(swapRate) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(swapRate) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_PERF_MON_3" name="Filter_PERF_MON_3">
+           <SingleEvtConstr> eventType = "PH_DEV_MON_SYS_MEM_UTIL" AND hostIpAddr IN (Group@PH_SYS_APP_DATABASE_SERVER) AND (memName = "Physical Memory") </SingleEvtConstr>
+           <GroupByAttr> hostName</GroupByAttr>  
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+   <Report id="PH_Report_AppServer_17" group="PH_SYS_REPORT_AppPerf,PH_SYS_REPORT_WebServer">
+     <Name>Top Web/App Server Processes By CPU, Memory, I/O </Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description>Ranks the web server processes by average cpu, memory utilization over a window</Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName,appName,swProcName,AVG(memUtil),AVG(cpuUtil),AVG(ioReadKBytesPerSec),AVG(ioWriteKBytesPerSec)</AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(cpuUtil) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_PERF_MON_5" name="Filter_PERF_MON_5">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_PROC_RESOURCE_UTIL" AND ((appName CONTAIN "Microsoft IIS") OR (appName CONTAIN "Tomcat Appserver") OR (appName CONTAIN "Apache Webserver")) </SingleEvtConstr>
+           <GroupByAttr>hostName,appName,swProcName </GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_AppServer_17B" group="PH_SYS_REPORT_AppPerf,PH_SYS_REPORT_WebServer">
+     <Name>Top Web/App Server Processes By CPU </Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description>Ranks the web server processes by average cpu utilization over a window</Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName,appName,swProcName,AVG(cpuUtil)</AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(cpuUtil) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_PERF_MON_5" name="Filter_PERF_MON_5">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_PROC_RESOURCE_UTIL" AND ((appName CONTAIN "Microsoft IIS") OR (appName CONTAIN "Tomcat Appserver") OR (appName CONTAIN "Apache Webserver")) </SingleEvtConstr>
+           <GroupByAttr>hostName,appName,swProcName </GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_AppServer_17C" group="PH_SYS_REPORT_AppPerf,PH_SYS_REPORT_WebServer">
+     <Name>Top Web/App Server Processes By Memory </Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description>Ranks the web server processes by average memory utilization over a window</Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName,appName,swProcName,AVG(memUtil) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(memUtil) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_PERF_MON_5" name="Filter_PERF_MON_5">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_PROC_RESOURCE_UTIL" AND ((appName CONTAIN "Microsoft IIS") OR (appName CONTAIN "Tomcat Appserver") OR (appName CONTAIN "Apache Webserver")) </SingleEvtConstr>
+           <GroupByAttr>hostName,appName,swProcName </GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_AppServer_17D" group="PH_SYS_REPORT_AppPerf,PH_SYS_REPORT_WebServer">
+     <Name>Top Web/App Server Processes By I/O Activity </Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description>Ranks the web server processes by average I/O over a window</Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName,appName,swProcName,AVG(ioReadKBytesPerSec),AVG(ioWriteKBytesPerSec)</AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(ioReadKBytesPerSec) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_PERF_MON_5" name="Filter_PERF_MON_5">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_PROC_RESOURCE_UTIL" AND ((appName CONTAIN "Microsoft IIS") OR (appName CONTAIN "Tomcat Appserver") OR (appName CONTAIN "Apache Webserver")) </SingleEvtConstr>
+           <GroupByAttr>hostName,appName,swProcName </GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_AppServer_19" group="PH_SYS_REPORT_AppPerf,PH_SYS_REPORT_WebServer">
+     <Name>Top Apache Servers By Connection Rate</Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description>Ranks the Apache Servers by connection rate (requests per sec) - requires Apache metrics collected from mod_status module. Also provides auxiliary data such as apache CPU, uptime, bytes/sec, bytes/req </Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName,hostIpAddr,AVG(apacheCPULoad),LAST(apacheUptime),AVG(apacheReqPerSec),AVG(apacheBytesPerSec),AVG(apacheBytesPerReq),AVG(apacheBusyWorkers),AVG(apacheIdleWorkers)</AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList>AVG(apacheReqPerSec) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_PERF_MON_5" name="Filter_PERF_MON_5">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_APP_APACHE_MET" </SingleEvtConstr>
+           <GroupByAttr>hostName</GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_AppServer_20" group="PH_SYS_REPORT_AppPerf">
+     <Name>NetApp NFS Statistics </Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description> NetApp NFS statistics</Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName,hostIpAddr,AVG(cifsOpsPerSec),AVG(nfsOpsPerSec),MIN(cacheAgeMin),AVG(diskReadKBytesPerSec),AVG(diskWriteKBytesPerSec),AVG(netSentKBytesPerSec),AVG(netRecvdKBytesPerSec)</AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList>AVG(nfsOpsPerSec) DESC, AVG(cifsOpsPerSec) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_PERF_MON" name="Filter_PERF_MON">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_NETAPP_NFS_MET" </SingleEvtConstr>
+           <GroupByAttr>hostIpAddr</GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_AppServer_21" group="PH_SYS_REPORT_AppPerf">
+     <Name>NetApp NFS Disk Volume Usage </Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description> NetApp NFS Disk Volume Usage </Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName,hostIpAddr,AVG(diskUtil),AVG(freeDiskMB)</AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList>AVG(diskUtil) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_PERF_MON" name="Filter_PERF_MON">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_SYS_DISK_UTIL" </SingleEvtConstr>
+           <GroupByAttr>hostIpAddr</GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_AppServer_22" group="PH_SYS_REPORT_AppPerf,PH_SYS_REPORT_DNS">
+    <Name>Top DNS Processes By CPU, Memory, I/O</Name> 
+    <CustomerScope groupByEachCustomer="true">
+      <Include all="true" /> 
+      <Exclude /> 
+    </CustomerScope>
+    <Description>Ranks the DNS processes by average cpu, memory utilization over a window</Description> 
+    <SelectClause numEntries="All">
+      <AttrList>hostName,appName,swProcName,AVG(memUtil),AVG(cpuUtil),AVG(ioReadKBytesPerSec),AVG(ioWriteKBytesPerSec)</AttrList> 
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(cpuUtil) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_PERF_MON_5" name="Filter_PERF_MON_5">
+        <SingleEvtConstr>eventType = "PH_DEV_MON_PROC_RESOURCE_UTIL" AND ((appName CONTAIN "Microsoft DNS") OR (appName CONTAIN "Bind DNS")) </SingleEvtConstr>
+        <GroupByAttr>hostName,appName,swProcName </GroupByAttr> 
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_AppServer_23" group="PH_SYS_REPORT_AppPerf,PH_SYS_REPORT_WebServer">
+    <Name>Top ASP.NET Processes By CPU, Memory, I/O</Name> 
+    <CustomerScope groupByEachCustomer="true">
+      <Include all="true" /> 
+      <Exclude /> 
+    </CustomerScope>
+    <Description>Ranks the ASP.NET processes by average cpu, memory utilization over a window</Description> 
+    <SelectClause numEntries="All">
+      <AttrList>hostName,swProcName,AVG(memUtil),AVG(cpuUtil),AVG(ioReadKBytesPerSec),AVG(ioWriteKBytesPerSec)</AttrList> 
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(cpuUtil) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_PERF_MON_5" name="Filter_PERF_MON_5">
+        <SingleEvtConstr>eventType = "PH_DEV_MON_PROC_RESOURCE_UTIL" AND ((swProcName CONTAIN "w3wp") OR (swProcName CONTAIN "Inetinfo")) </SingleEvtConstr>
+        <GroupByAttr>hostName,swProcName </GroupByAttr> 
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_AppServer_24" group="PH_SYS_REPORT_AppPerf,PH_SYS_REPORT_WebServer">
+    <Name>Top ASP.NET Servers By Average Request Execution Time</Name> 
+    <CustomerScope groupByEachCustomer="true">
+      <Include all="true" /> 
+      <Exclude /> 
+    </CustomerScope>
+    <Description>Ranks the ASP.NET servers by average request execution time</Description> 
+    <SelectClause numEntries="All">
+      <AttrList>hostName,AVG(aspReqExecTimeMs) </AttrList> 
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(aspReqExecTimeMs) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_PERF_MON_5" name="Filter_PERF_MON_5">
+        <SingleEvtConstr>eventType = "PH_DEV_MON_APP_ASPNET_MET"  </SingleEvtConstr>
+        <GroupByAttr>hostName</GroupByAttr> 
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+  
+  <Report id="PH_Report_AppServer_25" group="PH_SYS_REPORT_AppPerf,PH_SYS_REPORT_WebServer">
+    <Name>Top ASP.NET Servers By Average Request Wait Time</Name> 
+    <CustomerScope groupByEachCustomer="true">
+      <Include all="true" /> 
+      <Exclude /> 
+    </CustomerScope>
+    <Description>Ranks the ASP.NET servers by average request wait time</Description> 
+    <SelectClause numEntries="All">
+      <AttrList>hostName,AVG(aspReqWaitTimeMs) </AttrList> 
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(aspReqWaitTimeMs) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_PERF_MON_5" name="Filter_PERF_MON_5">
+        <SingleEvtConstr>eventType = "PH_DEV_MON_APP_ASPNET_MET"  </SingleEvtConstr>
+        <GroupByAttr>hostName</GroupByAttr> 
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_AppServer_26" group="PH_SYS_REPORT_AppPerf,PH_SYS_REPORT_WebServer">
+    <Name>Top ASP.NET Servers By Average Request Execution Time (Detailed)</Name> 
+    <CustomerScope groupByEachCustomer="true">
+      <Include all="true" /> 
+      <Exclude /> 
+    </CustomerScope>
+    <Description>Ranks the ASP.NET servers by average request execution time with other details</Description> 
+    <SelectClause numEntries="All">
+      <AttrList>hostName,AVG(aspReqExecTimeMs),AVG(aspReqWaitTimeMs),AVG(aspReqCurrent),AVG(aspReqQueued),AVG(aspReqDisconnected),AVG(aspReqDisconnected) </AttrList> 
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(aspReqExecTimeMs) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_PERF_MON_5" name="Filter_PERF_MON_5">
+        <SingleEvtConstr>eventType = "PH_DEV_MON_APP_ASPNET_MET" </SingleEvtConstr>
+        <GroupByAttr>hostName</GroupByAttr> 
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+</Reports>

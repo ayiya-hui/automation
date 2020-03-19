@@ -1,0 +1,35 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<15>Feb 18 14:12:34 mso app-proc[5194]: CEF:0|mandiant|mso|1.4.1|Mandiant Containment Started|Mandiant Containment Started|0|rt=Feb 18 2014 14:12:34 UTC dvchost=71.71.71.71 categoryDeviceGroup=/IDS/Application/Service categoryDeviceType=Forensic Investigation categoryObject=/Host cs1Label=Host Agent Cert Hash cs1=YEWZT76tA45fgcegWMFMQY dst=192.168.69.105 dmac=00-50-56-9e-13-a1 dhost=VICTIM-5 dntdom=TESTDOMAIN cd1Label=Agent Last Audit cd1=Feb 18 2014 13:48:11 UTC cs2Label=Mandiant Agent Version cs2=10.6.16 cs5Label=Target GMT Offset cs5=-PT5H cs6Label=Target OS cs6=Microsoft Windows XP 2600 Service Pack 3 devAction=Containment Status msg=Host VICTIM-5 contain started categoryOutcome=/Success categorySignificance=/Informational categoryBehavior=/Create externalId=undefined categoryTupleDescription=A Host Containment task was started. cs3Label=Containment action cs3=contain request=https://mso.testdomain:3000/find_host/search/YEWZT76tA45fgcegWMFMQY
+[params]
+domain=TESTDOMAIN
+parserName=HXParser
+eventType=FireEye-HX_Containment_Started
+hxAgentCertHash=YEWZT76tA45fgcegWMFMQY
+hostName=VICTIM-5
+hxDirectURL=https://mso.testdomain:3000/find_host/search/YEWZT76tA45fgcegWMFMQY
+computer=VICTIM-5
+osType=Microsoft Windows XP 2600 Service Pack 3
+reptModel=HX
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+hostIpAddr=192.168.69.105
+eventName=FireEye Mandiant started host containment
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+msg=Host VICTIM-5 contain started
+hostMACAddr=00-50-56-9e-13-a1
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+reptDevName=71.71.71.71
+customer=Super
+hxAgentLastAudit=Tue Feb 18 21:48:11 CST 2014
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=FireEye
+hxAgentVersion=10.6.16

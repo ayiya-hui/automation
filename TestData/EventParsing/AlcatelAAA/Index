@@ -1,0 +1,7 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+Alcatel_AAA_Login_Success,AlcatelAAA_1,AlcatelAAA,91.91.91.1,,syslog
+Alcatel_AAA_Accounting_Session_Stop,AlcatelAAA_2,AlcatelAAA,91.91.91.1,,syslog
+Alcatel_AAA_Accounting_Session_Continue,AlcatelAAA_3,AlcatelAAA,91.91.91.1,,syslog
+Alcatel_AAA_Accounting_Session_Start,AlcatelAAA_4,AlcatelAAA,91.91.91.1,,syslog
+Alcatel_AAA_Login_Failed,AlcatelAAA_5,AlcatelAAA,91.91.91.1,,syslog

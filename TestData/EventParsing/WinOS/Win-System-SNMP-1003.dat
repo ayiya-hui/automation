@@ -1,0 +1,24 @@
+[reptDevIpAddr(key)]
+20.20.20.20
+[eventMsg]
+<13>Jan 14 18:57:59 20.20.20.20 MSWinEventLog	1	System	9179	Wed Jan 14 18:57:56 2009	1003	SNMP	Unknown User	N/A	Information	ADS-PRI	None		The SNMP Service has stopped successfully.  	60  Automation
+[params]
+rawEventMsg=any
+eventSeverity=1
+eventSeverityCat=LOW
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+phRecvTime=any
+phCustId=$sender
+reptDevIpAddr=20.20.20.20
+destIpAddr=20.20.20.20
+swProcName=SNMP Service
+hostIpAddr=20.20.20.20
+eventName=Win-System-SNMP-1003
+procName=SNMP Service
+reptVendor=Microsoft
+eventType=Win-System-SNMP-1003
+phEventCategory=0 (External)
+reptModel=Windows

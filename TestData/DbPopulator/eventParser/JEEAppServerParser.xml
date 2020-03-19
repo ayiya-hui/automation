@@ -1,0 +1,85 @@
+<eventParser name="JEEAppServerParser">
+  <deviceType>
+    <Vendor>Generic</Vendor>
+    <Model>Generic</Model>
+    <Version>ANY</Version>
+  </deviceType>
+
+  <appType>
+    <Vendor>Generic</Vendor>
+    <Model>JEE App Server</Model>
+    <Version>ANY</Version>
+    <Name>JEE App Server</Name>
+  </appType>
+
+  <patternDefinitions>
+    <pattern name="patStrEndWithRightSquareBracket"><![CDATA[[^\]]*]]></pattern>
+  </patternDefinitions>
+
+  <eventFormatRecognizer><![CDATA[\[JEE_AppServer_Perf]]></eventFormatRecognizer>
+  
+  <testEvents>
+      <testEvent><![CDATA[<190>Apr 10 13:07:10 partha-desktop java: [JEE_AppServer_Perf]:[eventSeverity]=PHL_INFO, [rptIp]=$reporter, [upTime]=153097644, [cpuUtil]=58, [heapUsedKB]=251503, [heapMaxKB]=516224, [heapCommitKB]=516224, [heapUtil]=48, [nonHeapUsedKB]=157904, [nonHeapMaxKB]=245760, [nonHeapCommitKB]=217841664, [nonHeapUtil]=64, [liveThreads]=979, [liveThreadsMax]=979, [loadedClasses]=30864169,]]></testEvent>
+  </testEvents>
+
+  <parsingInstructions>
+    <!--
+Apr 10 13:07:10 partha-desktop java: [JEE_AppServer_Perf]:[eventSeverity]=PHL_INFO, [rptIp]=192.168.20.111, [upTime]=153097644, [cpuUtil]=58, [heapUsedKB]=251503, [heapMaxKB]=516224, [heapCommitKB]=516224, [heapUtil]=48, [nonHeapUsedKB]=157904, [nonHeapMaxKB]=245760, [nonHeapCommitKB]=217841664, [nonHeapUtil]=64, [liveThreads]=979, [liveThreadsMax]=979, [loadedClasses]=30864169,
+    -->
+
+    <collectFieldsByRegex src="$_rawmsg">
+      <regex><![CDATA[<:gPatSyslogPRI><_mon:gPatMon>\s+<_day:gPatDay>\s+<_time:gPatTime>\s+<:gPatStr>\s+java:\s+\[<eventType:patStrEndWithRightSquareBracket>\]<_body:gPatMesgBody>]]></regex>
+    </collectFieldsByRegex>
+
+    <setEventAttribute attr="deviceTime">toDateTime($_mon, $_day, $_time)</setEventAttribute>
+
+    <collectAndSetAttrByKeyValuePair sep=',' src="$_body">
+      <attrKeyMap attr="_severity" key="[eventSeverity]="/>
+      <attrKeyMap attr="sysUpTime" key="[upTime]="/>
+      <attrKeyMap attr="reptDevIpAddr" key="[rptIp]="/>
+      <attrKeyMap attr="relayDevIpAddr" key="[relayIp]="/>
+      <attrKeyMap attr="hostIpAddr" key="[rptIp]="/>
+      <attrKeyMap attr="cpuUtil" key="[cpuUtil]="/>
+      <attrKeyMap attr="heapUsedKB" key="[heapUsedKB]="/>
+      <attrKeyMap attr="heapMaxKB" key="[heapMaxKB]="/>
+      <attrKeyMap attr="heapCommitKB" key="[heapCommitKB]="/>
+      <attrKeyMap attr="heapUtil" key="[heapUtil]="/>
+      <attrKeyMap attr="nonHeapUsedKB" key="[nonHeapUsedKB]="/>
+      <attrKeyMap attr="nonHeapMaxKB" key="[nonHeapMaxKB]="/>
+      <attrKeyMap attr="nonHeapCommitKB" key="[nonHeapCommitKB]="/>
+      <attrKeyMap attr="nonHeapUtil" key="[nonHeapUtil]="/>
+      <attrKeyMap attr="liveThreads" key="[liveThreads]="/>
+      <attrKeyMap attr="liveThreadsMax" key="[liveThreadsMax]="/>
+      <attrKeyMap attr="loadedClasses" key="[loadedClasses]="/>
+    </collectAndSetAttrByKeyValuePair>
+
+    <choose>
+      <when test="exist _relayDevIpAddr">
+        <setEventAttribute attr="relayDevIpAddr">$_relayDevIpAddr</setEventAttribute>
+      </when>
+      <otherwise>
+        <setEventAttribute attr="relayDevIpAddr">$reptDevIpAddr</setEventAttribute>
+      </otherwise>
+    </choose>
+
+    <!-- event severity -->
+    <choose>
+      <when test='$_severity = "PHL_ALERT"'>
+	<setEventAttribute attr="eventSeverity">10</setEventAttribute>
+      </when>
+      
+      <when test='$_severity = "PHL_CRITICAL"'>
+	<setEventAttribute attr="eventSeverity">8</setEventAttribute>
+      </when>
+      
+      <when test='$_severity IN "PHL_ERROR, PHL_WARNING"'>
+	<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+      </when>
+      
+      <when test='$_severity = "PHL_INFO"'>
+	<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+      </when>
+    </choose>   
+
+  </parsingInstructions>
+</eventParser>

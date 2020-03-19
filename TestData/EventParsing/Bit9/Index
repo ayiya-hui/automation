@@ -1,0 +1,4 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+Bit9-Discovery-New-file-on-network,Bit9_1,Bit9,$localhost,,syslog
+Bit9-Discovery-New-unapproved-file-to-computer,Bit9_2,Bit9,$localhost,,syslog

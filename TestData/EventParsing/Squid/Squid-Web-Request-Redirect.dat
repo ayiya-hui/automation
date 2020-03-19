@@ -1,0 +1,68 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<166>May  6 17:55:48 squid[1773]: [ID 702911 local4.info] 192.168.20.39 1715 72.14.223.18 172.16.10.6 3128 674 - - - - - [06/May/2008:17:55:48 -0700] GET "http://mail.google.com/mail/?" HTTP/1.1 302 1061 568 "http://www.google.com/" "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.14) Gecko/20080404 Firefox/2.0.0.14" TCP_MISS:DIRECT
+[params]
+rawEventMsg=any
+deviceTime=any
+eventType=Squid-Web-Request-Redirect
+phCustId=$sender
+destIpAddr=72.14.223.18
+httpReferrer=http://www.google.com/
+srcIpAddr=192.168.20.39
+reptModel=Squid Web Proxy
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Web request redirected
+phEventCategory=0 (External)
+recvBytes=1061
+srcIpPort=1715
+eventSeverityCat=LOW
+httpMethod=GET
+user=-
+httpStatusCode=302 (Found - The requested resource resides temporarily under a different URI.)
+httpVersion=HTTP/1.1
+count=1
+uriStem=http://mail.google.com/mail/?
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Squid-cache-org
+durationMSec=674
+httpUserAgent=	Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.14) Gecko/20080404 Firefox/2.0.0.14
+sentBytes=568
+[reptDevIpAddr(key)]
+172.16.10.34
+[eventMsg]
+<166>Mar 25 18:15:30 172.16.10.34 squid[4535]: 192.168.22.4 52019 220.181.6.175 172.16.10.34 3128 515 - - - - - [25/Mar/2010:15:53:10 -0700] GET "http://www.baidu.com/img/baidu_logo.gif" HTTP/1.1 304 418 561 "http://www.baidu.com/" "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0; Trident/4.0; GTB6.4; SLCC1; .NET CLR 2.0.50727; Media Center PC 5.0; InfoPath.2; .NET CLR 3.5.30729; .NET CLR 3.0.30618; msn OptimizedIE8;ENUS; AskTB5.6)" TCP_CLIENT_REFRESH_MISS:DIRECT
+[params]
+rawEventMsg=any
+deviceTime=any
+eventType=Squid-Web-Request-Redirect
+phCustId=$sender
+destIpAddr=220.181.6.175
+httpReferrer=http://www.baidu.com/
+srcIpAddr=192.168.22.4
+reptModel=Squid Web Proxy
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Web request redirected
+phEventCategory=0 (External)
+recvBytes=418
+srcIpPort=52019
+eventSeverityCat=LOW
+httpMethod=GET
+user=-
+httpStatusCode=304 (Not Modified - The client has performed a conditional GET request and access is allowed, but the document has not been modified)
+httpVersion=HTTP/1.1
+count=1
+uriStem=http://www.baidu.com/img/baidu_logo.gif
+phRecvTime=any
+reptDevIpAddr=172.16.10.34
+eventAction=0 (Permit)
+reptVendor=Squid-cache-org
+durationMSec=515
+httpUserAgent=Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0; Trident/4.0; GTB6.4; SLCC1; .NET CLR 2.0.50727; Media Center PC 5.0; InfoPath.2; .NET CLR 3.5.30729; .NET CLR 3.0.30618; msn OptimizedIE8;ENUS; AskTB5.6)
+sentBytes=561

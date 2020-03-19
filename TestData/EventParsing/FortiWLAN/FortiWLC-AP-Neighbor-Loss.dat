@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+172.18.65.202
+[eventMsg]
+Apr 28 14:01:12 172.18.65.202 ALARM: 1209371472l | system | info | ALR | AP NEIGHBOR LOSS CRITICAL Neighbor_Loss_for_AP1
+[params]
+customer=Super
+eventId=any
+parserName=FortiWLANParser
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+count=1
+eventSeverity=1
+eventType=FortiWLC-AP-Neighbor-Loss
+reptDevIpAddr=172.18.65.202
+collectorId=any
+extEventRecvProto=Syslog
+eventName=FortiAP lost its neighbor AP
+reptVendor=Fortinet
+relayDevIpAddr=172.18.65.202
+rawEventMsg=any
+phRecvTime=any
+reptDevName=any
+reptModel=FortiWLC

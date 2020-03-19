@@ -1,0 +1,2 @@
+[eventMsg]
+<6>CEF:0|McAfee|IPS|5.4.3|70018|Connection_Allowed|0|spt=123 deviceExternalId=PAC-NY-GCS01 node 1 dmac=84:B2:61:DC:E1:31 dst=169.132.200.3 cat=System Situations app=NTP (UDP) rt=Apr 08 2016 00:26:13 deviceFacility=Inspection act=Allow deviceOutboundInterface=Interface #5 deviceInboundInterface=Interface #4 proto=17 dpt=123 src=10.64.9.3 dvc=172.17.2.17 dvchost=172.17.2.17 smac=78:DA:6E:0D:FF:C0 cs1Label=RuleId cs1=2097152.6

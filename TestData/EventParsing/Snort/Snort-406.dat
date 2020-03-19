@@ -1,0 +1,24 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<161>snort[2242]: [1:406:9] ICMP Destination Unreachable Source Route Failed [Classification: Misc activity] [Priority: 3]: {ICMP} 192.168.19.1:0 -> 172.16.2.5:0
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+reptDevIpAddr=$localhost
+eventParsedOk=1
+eventSeverity=8
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=MEDIUM
+destIpAddr=172.16.2.5
+eventAction=0 (Permit)
+eventName=ICMP Destination Unreachable Source Route Failed
+srcIpAddr=192.168.19.1
+reptVendor=Snort-org
+eventType=Snort-406
+phEventCategory=0 (External)
+ipProto=1 (ICMP)
+reptModel=Snort IPS
+devEventTypeGrp=Misc activity

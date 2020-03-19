@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<187>: 2011 Oct 19 18:29:19 UTC: %AUTHPRIV-3-SYSTEM_MSG: pam_aaa:Authentication failed for user ciscoworks from 10.24.23.60 - sshd[6585]
+[params]
+rawEventMsg=any
+deviceTime=any
+eventType=Cisco-NxOS-AUTHPRIV-SYSTEM_MSG
+phCustId=$sender
+srcIpAddr=10.24.23.60
+reptModel=NX-OS
+eventId=any
+eventParsedOk=1
+eventSeverity=5
+testEvent=Real Event(0)
+hostIpAddr=$localhost
+eventName=Telnet/SSH session abruptly terminates
+phEventCategory=0 (External)
+eventSeverityCat=MEDIUM
+collectorId=any
+user=ciscoworks
+reptDevName=any
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Cisco

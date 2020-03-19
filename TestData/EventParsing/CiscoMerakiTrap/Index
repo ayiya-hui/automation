@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+Cisco-Meraki-vpnConnectivityChange-up,CiscoMerakiTrap_1,CiscoMerakiTrap,$localhost,,syslog

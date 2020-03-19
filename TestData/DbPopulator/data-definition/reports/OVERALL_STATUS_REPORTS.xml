@@ -1,0 +1,483 @@
+<Reports>
+
+<!-- Event rate and disk usage -->
+<Report group="PH_SYS_REPORT_OverallStatus,PH_SYS_REPORT_Freq" id="PH_Report_OVERALL_STATUS_1">
+  <Name>Events: Total Event Rate (Per Sec)</Name>
+  <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+  <Description>Provides the statistics of the  total number of received events  over a window </Description>
+  <SelectClause numEntries="All">
+    <AttrList>MAX(eventsPerSec),AVG(eventsPerSec),MIN(eventsPerSec),MAX(peakEventsPerSec) </AttrList>
+  </SelectClause>
+  <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+  <PatternClause window="3600">
+    <SubPattern displayName="Filter_OVERALL_STATUS" name="Filter_OVERALL_STATUS">
+      <SingleEvtConstr> phEventCategory = 3 AND eventType = "PH_SYSTEM_EVENTS_PER_SEC" </SingleEvtConstr>
+    </SubPattern>
+  </PatternClause>
+  <inline>true</inline>
+  <active>true</active>
+  <RelevantFilterAttr>reptDevIpAddr,relayDevIpAddr</RelevantFilterAttr>
+</Report>
+
+<Report group="PH_SYS_REPORT_OverallStatus" id="PH_Report_OVERALL_STATUS_2">
+  <Name>System Disk Usage</Name>
+  <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+  <Description>Provides the total disk space used by events and event management. Includes the storage of raw events, indices, queries, reports and incidents. CMDB is not included.</Description>
+  <SelectClause numEntries="All">
+    <AttrList> phCustId, MAX(diskUsage) </AttrList>
+  </SelectClause>
+  <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+  <PatternClause window="3600">
+    <SubPattern displayName="Filter_OVERALL_STATUS" name="Filter_OVERALL_STATUS">
+      <SingleEvtConstr> phEventCategory = 3 AND eventType = "PH_SYSTEM_DISK_USAGE" </SingleEvtConstr>
+      <GroupByAttr>phCustId</GroupByAttr>
+    </SubPattern>
+  </PatternClause>
+   <inline>true</inline>
+   <active>false</active>
+</Report>
+
+<!-- Event related -->
+<Report group="PH_SYS_REPORT_OverallStatus" id="PH_Report_OVERALL_STATUS_5">
+    <Name>Top Events By Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> Ranks the events by the number of times they have occurred in a given time period. </Description>
+    <SelectClause numEntries="All">
+        <AttrList>eventType,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_OVERALL_STATUS" name="Filter_OVERALL_STATUS">
+           <SingleEvtConstr/> 
+           <GroupByAttr>eventType</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <inline>true</inline>
+    <active>true</active>
+    <RelevantFilterAttr>srcIpAddr,destIpAddr,hostIpAddr,reptDevIpAddr,relayDevIpAddr</RelevantFilterAttr>
+</Report>
+
+<Report group="PH_SYS_REPORT_OverallStatus" id="PH_Report_OVERALL_STATUS_5A">
+    <Name>Top Event Categories By Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> Ranks the event categories by the number of times they have occurred in a given time period. </Description>
+    <SelectClause numEntries="All">
+        <AttrList>eventTypeGrp,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_OVERALL_STATUS" name="Filter_OVERALL_STATUS">
+           <SingleEvtConstr/> 
+           <GroupByAttr>eventTypeGrp</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <inline>true</inline>
+    <active>true</active>
+    <RelevantFilterAttr>srcIpAddr,destIpAddr,hostIpAddr,reptDevIpAddr,relayDevIpAddr</RelevantFilterAttr>
+</Report>
+
+<Report group="PH_SYS_REPORT_OverallStatus,PH_SYS_REPORT_Freq" id="PH_Report_OVERALL_STATUS_EVT_BY_SEV_COUNT">
+    <Name>Top Events By Severity, Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> Ranks the events by first their severity and then by their count. The severity information can be used to prioritize the events. </Description>
+    <SelectClause numEntries="All">
+        <AttrList>eventType,eventSeverity,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>eventSeverity DESC,COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_OVERALL_STATUS" name="Filter_OVERALL_STATUS">
+	 <SingleEvtConstr/> 
+         <GroupByAttr>eventType,eventSeverity</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <inline>true</inline>
+    <active>true</active>
+    <RelevantFilterAttr>srcIpAddr,destIpAddr,hostIpAddr,reptDevIpAddr,relayDevIpAddr</RelevantFilterAttr>
+</Report>
+
+<Report group="PH_SYS_REPORT_OverallStatus" id="PH_Report_OVERALL_STATUS_7">
+  <Name>All Received Events</Name>
+  <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+  <Description>Tracks all events received from monitored devices </Description>
+  <SelectClause numEntries="All">
+    <AttrList>phRecvTime,reptDevIpAddr,eventType,rawEventMsg </AttrList>
+  </SelectClause>
+  <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+  <PatternClause window="3600">
+    <SubPattern displayName="Filter_OVERALL_STATUS" name="Filter_OVERALL_STATUS">
+      <SingleEvtConstr/>
+    </SubPattern>
+  </PatternClause>
+    <inline>false</inline>
+    <active>false</active>
+    <RelevantFilterAttr>srcIpAddr,destIpAddr,hostIpAddr,reptDevIpAddr,relayDevIpAddr</RelevantFilterAttr>
+</Report>
+
+<Report group="PH_SYS_REPORT_OverallStatus" id="PH_Report_OVERALL_STATUS_8">
+    <Name>Top Internal Events By Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the internal events by the number of times they have occurred in a given time period. </Description>
+    <SelectClause numEntries="All">
+        <AttrList>eventType,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_OVERALL_STATUS" name="Filter_OVERALL_STATUS">
+           <SingleEvtConstr>phEventCategory = 1 OR phEventCategory =2 OR phEventCategory =3 </SingleEvtConstr> 
+           <GroupByAttr>eventType</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <inline>true</inline>
+    <active>false</active>
+    <RelevantFilterAttr>srcIpAddr,destIpAddr,hostIpAddr,reptDevIpAddr,relayDevIpAddr</RelevantFilterAttr>
+</Report>
+
+<Report group="PH_SYS_REPORT_OverallStatus" id="PH_Report_OVERALL_STATUS_9">
+    <Name>Top Internal Events By Severity, Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> Ranks the internal events by first their severity and then by their count. The severity information can be used to prioritize the events. </Description>
+    <SelectClause numEntries="All">
+        <AttrList>eventType,eventSeverity,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>eventSeverity DESC,COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_OVERALL_STATUS" name="Filter_OVERALL_STATUS">
+	 <SingleEvtConstr>phEventCategory = 1 OR phEventCategory =2 OR phEventCategory =3 </SingleEvtConstr> 
+         <GroupByAttr>eventType,eventSeverity</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <inline>true</inline>
+    <active>false</active>
+    <RelevantFilterAttr>srcIpAddr,destIpAddr,hostIpAddr,reptDevIpAddr,relayDevIpAddr</RelevantFilterAttr>
+</Report>
+
+
+<!-- Reporting IP related -->
+<Report group="PH_SYS_REPORT_OverallStatus,PH_SYS_REPORT_Freq" id="PH_Report_OVERALL_STATUS_10"  >
+  <Name>Top Reporting Modules By Event Rate (Per Sec)</Name>
+  <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+  <Description>Ranks the reporting device modules  by sent events per second </Description>
+  <SelectClause numEntries="All">
+    <AttrList> reptDevIpAddr,reptVendor,reptModel, AVG(eventsPerSec),MAX(eventsPerSec),MIN(eventsPerSec)  </AttrList>
+  </SelectClause>
+  <OrderByClause> <AttrList>  AVG(eventsPerSec) DESC </AttrList></OrderByClause>
+  <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+  <PatternClause window="3600">
+    <SubPattern displayName="Filter_OVERALL_STATUS" name="Filter_OVERALL_STATUS">
+      <SingleEvtConstr> phEventCategory = 3 AND eventType = "PH_SYSTEM_DEVAPP_EVENTS_PER_SEC" </SingleEvtConstr>
+      <GroupByAttr> reptDevIpAddr, reptVendor, reptModel </GroupByAttr>
+    </SubPattern>
+  </PatternClause>
+  <inline>true</inline>
+  <active>true</active>
+  <RelevantFilterAttr> reptDevIpAddr</RelevantFilterAttr>
+</Report>
+
+<Report group="PH_SYS_REPORT_OverallStatus" id="PH_Report_OVERALL_STATUS_DEV_EPS"  >
+  <Name>Top Reporting Devices By Event Rate</Name>
+  <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+  <Description>Ranks the reporting devices by sent events per second </Description>
+  <SelectClause numEntries="All">
+    <AttrList>reptDevIpAddr, AVG(eventsPerSec),MAX(eventsPerSec),MIN(eventsPerSec)  </AttrList>
+  </SelectClause>
+  <OrderByClause> <AttrList>  AVG(eventsPerSec) DESC </AttrList></OrderByClause>
+  <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+  <PatternClause window="3600">
+    <SubPattern displayName="Filter_OVERALL_STATUS" name="Filter_OVERALL_STATUS">
+      <SingleEvtConstr> phEventCategory = 3 AND eventType = "PH_SYSTEM_IP_EVENTS_PER_SEC" </SingleEvtConstr>
+      <GroupByAttr>reptDevIpAddr</GroupByAttr>
+    </SubPattern>
+  </PatternClause>
+    <inline>true</inline>
+    <active>true</active>
+    <RelevantFilterAttr> reptDevIpAddr</RelevantFilterAttr>
+</Report>
+
+<Report group="PH_SYS_REPORT_OverallStatus" id="PH_Report_OVERALL_STATUS_RPTDEV_BY_COUNT"  >
+  <Name>Top Reporting Devices By Event Count</Name>
+  <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+  <Description>Ranks the reporting devices and applications by total number of sent events</Description>
+  <SelectClause numEntries="All">
+    <AttrList>reptDevIpAddr,COUNT(*)</AttrList>
+  </SelectClause>
+  <OrderByClause> <AttrList> COUNT(*) DESC </AttrList></OrderByClause>
+  <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+  <PatternClause window="3600">
+    <SubPattern displayName="Filter_OVERALL_STATUS" name="Filter_OVERALL_STATUS">
+      <SingleEvtConstr/> 
+      <GroupByAttr>reptDevIpAddr</GroupByAttr>
+    </SubPattern>
+  </PatternClause>
+    <inline>true</inline>
+    <active>true</active>
+    <RelevantFilterAttr> reptDevIpAddr</RelevantFilterAttr>
+</Report>
+
+<Report group="PH_SYS_REPORT_OverallStatus" id="PH_Report_OVERALL_STATUS_13">
+  <Name>Top Reporting Modules, Events By Count</Name>
+  <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+  <Description>Ranks the reporting devices and events first by count</Description>
+  <SelectClause numEntries="All">
+    <AttrList>reptDevIpAddr,reptVendor,reptModel,eventType,COUNT(*)</AttrList>
+  </SelectClause>
+  <OrderByClause><AttrList>eventSeverity DESC,COUNT(*) DESC</AttrList></OrderByClause>
+  <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+  <PatternClause window="3600">
+    <SubPattern displayName="Filter_OVERALL_STATUS" name="Filter_OVERALL_STATUS">
+      <SingleEvtConstr/>
+      <GroupByAttr>reptDevIpAddr,reptVendor,reptModel,eventType</GroupByAttr>
+    </SubPattern>
+  </PatternClause>
+    <inline>true</inline>
+    <active>false</active>
+    <RelevantFilterAttr> reptDevIpAddr</RelevantFilterAttr>
+</Report>
+
+<Report group="PH_SYS_REPORT_OverallStatus" id="PH_Report_OVERALL_STATUS_14">
+  <Name>Top Reporting Modules, Events By Severity, Count</Name>
+  <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+  <Description>Ranks the reporting devices and events first by their severity and then by their received event count. This report can be used to identify devices that are sending higher severity events. </Description>
+  <SelectClause numEntries="All">
+    <AttrList>reptDevIpAddr,reptVendor, reptModel,eventType,eventSeverity,COUNT(*)</AttrList>
+  </SelectClause>
+  <OrderByClause><AttrList>eventSeverity DESC,COUNT(*) DESC</AttrList></OrderByClause>
+  <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+  <PatternClause window="3600">
+    <SubPattern displayName="Filter_OVERALL_STATUS" name="Filter_OVERALL_STATUS">
+      <SingleEvtConstr/>
+      <GroupByAttr>reptDevIpAddr,reptVendor,reptModel,eventType,eventSeverity</GroupByAttr>
+    </SubPattern>
+  </PatternClause>
+  <inline>true</inline>
+  <active>false</active>
+  <RelevantFilterAttr> reptDevIpAddr</RelevantFilterAttr>
+</Report>
+
+<Report group="PH_SYS_REPORT_OverallStatus" id="PH_Report_OVERALL_STATUS_15"  >
+  <Name>All Non-reporting Modules</Name>
+  <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+  <Description>Tracks the device modules that are not reporting in the given time window</Description>
+  <SelectClause numEntries="All">
+    <AttrList>reptDevIpAddr,reptVendor,reptModel</AttrList>
+  </SelectClause>
+  <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+  <PatternClause window="3600">
+    <SubPattern displayName="Filter_OVERALL_STATUS" name="Filter_OVERALL_STATUS">
+      <SingleEvtConstr> phEventCategory = 3 AND eventType = "PH_SYSTEM_DEVAPP_NO_EVENTS" </SingleEvtConstr>
+      <GroupByAttr>reptDevIpAddr,reptVendor,reptModel</GroupByAttr>
+    </SubPattern>
+  </PatternClause>
+    <inline>true</inline>
+    <active>false</active>
+    <RelevantFilterAttr> reptDevIpAddr</RelevantFilterAttr>
+</Report>
+
+
+<!--  -->
+<Report group="PH_SYS_REPORT_OverallStatus" id="PH_Report_OVERALL_STATUS_30">
+  <Name>Top Src IP By Count</Name>
+  <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+  <Description>Ranks the Source IP Addresses found in events by count </Description>
+  <SelectClause numEntries="All">
+    <AttrList>srcIpAddr, COUNT(*)</AttrList>
+  </SelectClause>
+  <OrderByClause><AttrList>COUNT(*) DESC </AttrList></OrderByClause>
+  <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+  <PatternClause window="3600">
+    <SubPattern displayName="Filter_OVERALL_STATUS" name="Filter_OVERALL_STATUS">
+      <SingleEvtConstr></SingleEvtConstr>
+      <GroupByAttr>srcIpAddr</GroupByAttr>
+    </SubPattern>
+  </PatternClause>
+    <inline>true</inline>
+    <active>true</active>
+    <RelevantFilterAttr>srcIpAddr</RelevantFilterAttr>
+</Report>
+
+<Report group="PH_SYS_REPORT_OverallStatus" id="PH_Report_OVERALL_STATUS_31">
+  <Name>Top Src IP, Events By Severity, Count </Name>
+  <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+  <Description>Ranks the source IP addresses and event types first by severity and then by count. This report can be used to isolate sources that are sending higher severity events </Description>
+  <SelectClause numEntries="All">
+    <AttrList>srcIpAddr,eventType,eventSeverity,COUNT(*)</AttrList>
+  </SelectClause>
+  <OrderByClause><AttrList>eventSeverity DESC,COUNT(*) DESC</AttrList></OrderByClause>
+  <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+  <PatternClause window="3600">
+    <SubPattern displayName="Filter_OVERALL_STATUS" name="Filter_OVERALL_STATUS">
+      <SingleEvtConstr></SingleEvtConstr>
+      <GroupByAttr>srcIpAddr,eventType,eventSeverity</GroupByAttr>
+    </SubPattern>
+  </PatternClause>
+  <inline>true</inline>
+  <active>false</active>
+  <RelevantFilterAttr>srcIpAddr</RelevantFilterAttr>
+</Report>
+
+<Report group="PH_SYS_REPORT_OverallStatus" id="PH_Report_OVERALL_STATUS_32">
+  <Name>Top Dest IP By Count</Name>
+  <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+  <Description>Ranks the destination IP addresses by event count </Description>
+  <SelectClause numEntries="All">
+    <AttrList>destIpAddr, COUNT(*)</AttrList>
+  </SelectClause>
+  <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+  <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+  <PatternClause window="3600">
+    <SubPattern displayName="Filter_OVERALL_STATUS" name="Filter_OVERALL_STATUS">
+      <SingleEvtConstr></SingleEvtConstr>
+      <GroupByAttr>destIpAddr</GroupByAttr>
+    </SubPattern>
+  </PatternClause>
+  <inline>true</inline>
+  <active>true</active>
+  <RelevantFilterAttr>destIpAddr</RelevantFilterAttr>
+</Report>
+
+<Report group="PH_SYS_REPORT_OverallStatus" id="PH_Report_OVERALL_STATUS_33">
+    <Name>Top Dest IP, Events By Severity, Count</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the destination IP addresses and their events first by event severity and then by count. This report can be used to isolate destination addresses that are receiving higher severity events. </Description>
+    <SelectClause numEntries="All">
+        <AttrList>destIpAddr,eventType,eventSeverity,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>eventSeverity DESC,COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_OVERALL_STATUS" name="Filter_OVERALL_STATUS">
+           <SingleEvtConstr></SingleEvtConstr>
+           <GroupByAttr>destIpAddr,eventType,eventSeverity</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <inline>true</inline>
+    <active>false</active>
+    <RelevantFilterAttr>destIpAddr</RelevantFilterAttr>
+</Report>
+
+<Report group="PH_SYS_REPORT_OverallStatus" id="PH_Report_OVERALL_STATUS_34"  >
+  <Name>Top TCP/UDP Ports By Count</Name>
+  <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+  <Description>Ranks the TCP/UDP ports by the number of received events on that port </Description>
+  <SelectClause numEntries="All">
+    <AttrList>ipProto,destIpPort, COUNT(*)</AttrList>
+  </SelectClause>
+  <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+  <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+  <PatternClause window="3600">
+    <SubPattern displayName="Filter_OVERALL_STATUS" name="Filter_OVERALL_STATUS">
+      <SingleEvtConstr>ipProto = 17 OR ipProto = 6</SingleEvtConstr>
+      <GroupByAttr>ipProto,destIpPort</GroupByAttr>
+    </SubPattern>
+  </PatternClause>
+    <inline>true</inline>
+    <active>true</active>
+    <RelevantFilterAttr>srcIpAddr,destIpAddr,hostIpAddr,reptDevIpAddr,relayDevIpAddr</RelevantFilterAttr>
+</Report>
+
+<Report group="PH_SYS_REPORT_OverallStatus" id="PH_Report_OVERALL_STATUS_35"  >
+  <Name>Top TCP/UDP Ports, Events By Severity, Count</Name>
+  <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+  <Description> Ranks the TCP/UDP services first by their severity and then by their count. This report can be used to identify services that are sending higher severity events. </Description>
+  <SelectClause numEntries="All">
+    <AttrList>ipProto,destIpPort,eventType,eventSeverity,COUNT(*)</AttrList>
+  </SelectClause>
+  <OrderByClause><AttrList>eventSeverity DESC,COUNT(*) DESC</AttrList></OrderByClause>
+  <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+  <PatternClause window="3600">
+    <SubPattern displayName="Filter_OVERALL_STATUS" name="Filter_OVERALL_STATUS">
+      <SingleEvtConstr>ipProto = 17 OR ipProto = 6</SingleEvtConstr>
+      <GroupByAttr>ipProto,destIpPort,eventType,eventSeverity</GroupByAttr>
+    </SubPattern>
+  </PatternClause>
+    <inline>true</inline>
+    <active>false</active>
+    <RelevantFilterAttr>srcIpAddr,destIpAddr,hostIpAddr,reptDevIpAddr,relayDevIpAddr</RelevantFilterAttr>
+</Report>
+
+
+<Report group="PH_SYS_REPORT_OverallStatus" id="PH_Report_OVERALL_STATUS_36">
+  <Name>Top Network Connections, Events By Severity, Count</Name>
+  <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+  <Description> Ranks source IP, destination IP, TCP/UDP ports, reporting devices and event types first by event severity and then by event count. </Description>
+  <SelectClause numEntries="All">
+    <AttrList>srcIpAddr, destIpAddr, ipProto, destIpPort, reptDevIpAddr,eventType,eventSeverity,COUNT(*)</AttrList>
+  </SelectClause>
+  <OrderByClause><AttrList>eventSeverity DESC,COUNT(*) DESC</AttrList></OrderByClause>
+  <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+  <PatternClause window="3600">
+    <SubPattern displayName="Filter_OVERALL_STATUS" name="Filter_OVERALL_STATUS">
+      <SingleEvtConstr>ipProto = 17 OR ipProto = 6</SingleEvtConstr>
+      <GroupByAttr>srcIpAddr, destIpAddr, ipProto, destIpPort, reptDevIpAddr, eventType,eventSeverity</GroupByAttr>
+    </SubPattern>
+  </PatternClause>
+    <inline>true</inline>
+    <active>true</active>
+    <RelevantFilterAttr>srcIpAddr,destIpAddr,hostIpAddr,reptDevIpAddr,relayDevIpAddr</RelevantFilterAttr>
+</Report>
+
+<Report group="PH_SYS_REPORT_OverallStatus" id="PH_Report_OVERALL_STATUS_37"  >
+  <Name>Top non-(TCP,UDP) Protocols By Count</Name>
+  <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+  <Description>Ranks the non-TCP/UDP protocols by the number of received events on that port </Description>
+  <SelectClause numEntries="All">
+    <AttrList>ipProto,COUNT(*)</AttrList>
+  </SelectClause>
+  <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+  <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+  <PatternClause window="3600">
+    <SubPattern displayName="Filter_OVERALL_STATUS" name="Filter_OVERALL_STATUS">
+      <SingleEvtConstr>ipProto != 17 AND ipProto != 6</SingleEvtConstr>
+      <GroupByAttr>ipProto</GroupByAttr>
+    </SubPattern>
+  </PatternClause>
+    <inline>true</inline>
+    <active>true</active>
+    <RelevantFilterAttr>srcIpAddr,destIpAddr,reptDevIpAddr,relayDevIpAddr</RelevantFilterAttr>
+</Report>
+
+<Report group="PH_SYS_REPORT_OverallStatus" id="PH_Report_OVERALL_STATUS_38">
+  <Name>Top non-TCP/UDP Network Conns, Events, Reporting IP, By Severity, Count</Name>
+  <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+  <Description>Ranks source IP, destination IP, non-TCP/UDP ports, reporting devices and event types first by event severity and then by event count</Description>
+  <SelectClause numEntries="All">
+    <AttrList>srcIpAddr, destIpAddr, ipProto, reptDevIpAddr,eventType,eventSeverity,COUNT(*)</AttrList>
+  </SelectClause>
+  <OrderByClause><AttrList>eventSeverity DESC,COUNT(*) DESC</AttrList></OrderByClause>
+  <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+  <PatternClause window="3600">
+    <SubPattern displayName="Filter_OVERALL_STATUS" name="Filter_OVERALL_STATUS">
+      <SingleEvtConstr>ipProto != 17 AND ipProto != 6</SingleEvtConstr>
+      <GroupByAttr>srcIpAddr, destIpAddr, ipProto, reptDevIpAddr, eventType,eventSeverity</GroupByAttr>
+    </SubPattern>
+  </PatternClause>
+  <inline>true</inline>
+  <active>true</active>
+  <RelevantFilterAttr>srcIpAddr,destIpAddr,reptDevIpAddr,relayDevIpAddr</RelevantFilterAttr>
+</Report>
+
+<Report group="PH_SYS_REPORT_OverallStatus" id="PH_Report_OVERALL_STATUS_39">
+  <Name>Top ICMP Connections By Severity, Count</Name>
+  <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+  <Description> Ranks source IP, destination IP, reporting devices and event types for ICMP connections, first by event severity and then by event count. </Description>
+  <SelectClause numEntries="All">
+    <AttrList>srcIpAddr, destIpAddr, ipProto, icmpType, icmpCode, reptDevIpAddr,eventType,eventSeverity,COUNT(*)</AttrList>
+  </SelectClause>
+  <OrderByClause><AttrList>eventSeverity DESC,COUNT(*) DESC</AttrList></OrderByClause>
+  <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+  <PatternClause window="3600">
+    <SubPattern displayName="Filter_OVERALL_STATUS" name="Filter_OVERALL_STATUS">
+      <SingleEvtConstr>ipProto =1</SingleEvtConstr>
+      <GroupByAttr>srcIpAddr, destIpAddr, ipProto, icmpType, icmpCode, reptDevIpAddr, eventType,eventSeverity</GroupByAttr>
+    </SubPattern>
+  </PatternClause>
+    <inline>true</inline>
+    <active>true</active>
+    <RelevantFilterAttr>srcIpAddr,destIpAddr,reptDevIpAddr,relayDevIpAddr</RelevantFilterAttr>
+</Report>
+
+</Reports>

@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+2015-11-11T14:00:23.646882-05:00 usmasd1ston-ap04 %DOT11-5-WPA_WPA2_FAILED: Client '00-15-70-F6-DC-F5' failed group key handshake on wlan 'SDO-PSK-WLAN' radio 'usmasd1ston-ap04:R1'
+[params]
+radioBand=R1
+parserName=MotorolaWiNGParser
+eventType=Motorola-WiNG-DOT11-WPA_WPA2_FAILED
+reptModel=WiNG WLAN AP
+eventId=any
+eventParsedOk=1
+eventSeverity=2
+eventName=Motorola WLAN AP: WPA client auth failed
+extEventRecvProto=Syslog
+wlanSsid=SDO-PSK-WLAN
+eventRuleTrigger=1
+count=1
+srcMACAddr=00:15:70:f6:dc:f5
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+reptDevName=usmasd1ston-ap04
+customer=Super
+phEventCategory=0 (External)
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Motorola

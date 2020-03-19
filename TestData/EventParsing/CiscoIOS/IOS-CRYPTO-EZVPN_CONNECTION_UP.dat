@@ -1,0 +1,30 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<190>2108: Sep  3 16:33:59: %CRYPTO-6-EZVPN_CONNECTION_UP: (Server)  Mode=CLIENT_OR_NEM_PLUS  Client_type=CISCO_SW_VPN_CLIENT 5.0.07.0440:WinNTp  User=epedersen  Group=VPN_CLIENTS  Client_public_addr=190.104.162.90  Server_public_addr=190.128.219.210  Assigned_client_addr=192.168.16.2
+[params]
+rawEventMsg=any
+deviceTime=any
+totFlows=1
+eventType=IOS-CRYPTO-EZVPN_CONNECTION_UP
+phCustId=$sender
+destIpAddr=190.128.219.210
+srcIpAddr=190.104.162.90
+reptModel=IOS
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+hostIpAddr=$localhost
+eventName=IOS-CRYPTO-EZVPN_CONNECTION_UP
+phEventCategory=0 (External)
+destName=any
+eventSeverityCat=LOW
+collectorId=any
+postNATSrcIpAddr=192.168.16.2
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Cisco
+userGrp=VPN_CLIENTS
+user=epedersen

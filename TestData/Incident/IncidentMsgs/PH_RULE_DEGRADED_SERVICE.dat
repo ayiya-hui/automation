@@ -1,0 +1,6 @@
+[eventMsg]
+<174>Apr  8 08:53:01 10.3.0.1 phPerfMonitor[1508]: [PH_DEV_MON_EUM_SUCCESS]:[eventSeverity]=PHL_INFO,[procName]=phPerfMonitor,[fileName]=SrvcMonJobExec.cpp,[lineNumber]=663,[hostName]=automator10Dot3Dot0Dot1,[hostIpAddr]=10.3.0.1,[appGroupName]=Sendmail Server,[appPort]=25,[appTransportProto]=SMTP,[endUserMonitorName]=mySMTP,[endUserMonitorStep]=2,[appResponseTimeMSec]=5018,[phLogDetail]=
+
+[clearEventMsg]
+<174>Apr  8 09:53:01 10.3.0.1 phPerfMonitor[1508]: [PH_DEV_MON_EUM_SUCCESS]:[eventSeverity]=PHL_INFO,[procName]=phPerfMonitor,[fileName]=SrvcMonJobExec.cpp,[lineNumber]=663,[hostName]=automator10Dot3Dot0Dot1,[hostIpAddr]=10.3.0.1,[appGroupName]=Sendmail Server,[appPort]=25,[appTransportProto]=SMTP,[endUserMonitorName]=mySMTP,[endUserMonitorStep]=2,[appResponseTimeMSec]=118,[phLogDetail]=
+<174>Apr  8 09:53:01 10.3.0.1 phPerfMonitor[1508]: [PH_DEV_MON_EUM_SUCCESS]:[eventSeverity]=PHL_INFO,[procName]=phPerfMonitor,[fileName]=SrvcMonJobExec.cpp,[lineNumber]=663,[hostName]=automator10Dot3Dot0Dot1,[hostIpAddr]=10.3.0.1,[appGroupName]=Sendmail Server,[appPort]=25,[appTransportProto]=SMTP,[endUserMonitorName]=mySMTP,[endUserMonitorStep]=2,[appResponseTimeMSec]=118,[phLogDetail]=

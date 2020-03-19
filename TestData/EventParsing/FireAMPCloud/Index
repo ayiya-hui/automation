@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+FireAMP_Cloud_Threat_Detected,FireAMPCloud_1,FireAMPCloud,$localhost,,syslog

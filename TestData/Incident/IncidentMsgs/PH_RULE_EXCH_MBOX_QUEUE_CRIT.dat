@@ -1,0 +1,4 @@
+[eventMsg]
+<174>Jan 19 13:45:03 PH-QA-AUTOTEST phPerfMonitor[16325]: [PH_DEV_MON_APP_MSEXCH_MBOX_MET]:[eventSeverity]=PHL_INFO,[procName]=phPerfMonitor,[fileName]=phPerfJob.cpp,[lineNumber]=3500,[hostName]=automator7Dot3Dot0Dot1,[hostIpAddr]=7.3.0.1,[appGroupName]=Microsoft Exchange,[exchMboxName]=Second Storage Group-Public Folder Database,[exchMboxSendQueue]=700,[exchMboxRecvQueue]=560,[exchMboxSentMsg]=0,[exchMboxSubmitMsg]=0,[exchMboxDelivMsg]=0,[exchMboxActiveUserCount]=0,[exchMboxPeakUserCount]=7,[phLogDetail]=
+
+[clearEventMsg]

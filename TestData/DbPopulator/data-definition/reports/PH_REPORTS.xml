@@ -1,0 +1,218 @@
+<Reports>
+  <Report id="PH_Report_PH_1" group="PH_SYS_REPORT_PH">
+    <Name> PH System Operational Errors </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Errors reported by PH system </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime ,procName ,phCustId ,rawEventMsg</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_PH_1" name="Filter_PH_1">
+           <SingleEvtConstr>phEventCategory = 3 AND rawEventMsg CONTAIN  "PHL_ERROR" AND rawEventMsg NOT CONTAIN "PH_DISCOV*"</SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>srcIpAddr,destIpAddr,hostIpAddr,reptDevIpAddr,relayDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_PH_2" group="PH_SYS_REPORT_PH">
+    <Name> Successful PH Discoveries </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This reports successful discoveries by the PH system </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,eventType,destIpAddr,destName,rawEventMsg</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_PH_2" name="Filter_PH_2">
+           <SingleEvtConstr>phEventCategory = 3 AND eventType IN ("PH_DISCOV_BASIC_SNMP_SUCCESS","PH_DISCOV_L2_SUCCESS") </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>destIpAddr,reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_PH_3" group="PH_SYS_REPORT_PH">
+    <Name> PH Discovery Errors </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report tracks the errors during PH Discovery operation. The errors could be caused by bad credentials or unsupported device types or merely internal errors in the PH system. </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,eventType,phDiscovFailCode,destIpAddr,destName,rawEventMsg</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_PH_3" name="Filter_PH_3">
+           <SingleEvtConstr> phEventCategory = 3 AND (rawEventMsg CONTAIN  "PHL_ERROR") AND (rawEventMsg CONTAIN "PH_DISCOV*") </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>destIpAddr,reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_PH_4" group="PH_SYS_REPORT_PH">
+    <Name> Skipped or Significant Failed PH Discoveries </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report tracks PH discoveries which either completely failed or a significant sub-discovery completely failed. Examples are basic SNMP discovery failure, Host Resources discovery failure, Layer 2 discovery failure, Active Directory discovery failure etc. A discovery can be skipped by user defined policy by including a host in exclude discovery list or by not including in include discovery list </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,eventType,phDiscovFailCode,destIpAddr,destName,rawEventMsg</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_PH_4" name="Filter_PH_4">
+           <SingleEvtConstr> phEventCategory = 3 AND eventType IN ("PH_DISCOV_BASIC_FAILED","PH_DISCOV_L2_FAILED","PH_DISCOV_HOST_ERROR", "PH_DISCOV_LDAP_ERROR", "PH_DISCOV_SKIPPED") </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>srcIpAddr,destIpAddr,hostIpAddr,reptDevIpAddr,relayDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_PH_5" group="PH_SYS_REPORT_PH">
+    <Name>PH Event Parsing Errors </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report lists the events that were not parsed correctly </Description>
+    <SelectClause numEntries="All">
+        <AttrList> reptDevIpAddr,phRecvTime,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_PH_5" name="Filter_PH_5">
+           <SingleEvtConstr> phEventCategory = 3 AND eventParsedOk = 0</SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+</Report>
+
+<Report id="PH_Report_PH_6" group="PH_SYS_REPORT_PH">
+    <Name> Top reporting devices by event parsing errors </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This summary report ranks the reporting devices by the number of events with parsing errors </Description>
+    <SelectClause numEntries="All">
+        <AttrList> reptDevIpAddr, COUNT(*) </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_PH_6" name="Filter_PH_6">
+           <SingleEvtConstr> phEventCategory = 3 AND eventParsedOk = 0</SingleEvtConstr>
+	   <GroupByAttr> reptDevIpAddr</GroupByAttr>
+       </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+    <inline> true </inline>
+    <active> true </active>
+</Report>
+
+<Report id="PH_Report_PH_7" group="PH_SYS_REPORT_PH">
+    <Name> Successful Layer 2 Discovery Details </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report displays the hosts and their discovered current switch port location </Description>
+    <SelectClause numEntries="All">
+        <AttrList> hostIpAddr, hostMACAddr, nepDevName, nepDevIpAddr, nepDevPort,COUNT(*) </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_PH_7" name="Filter_PH_7">
+           <SingleEvtConstr> phEventCategory = 3 AND eventType = "PH_DISCOV_HOST_LOCATION" </SingleEvtConstr>
+	   <GroupByAttr>hostIpAddr, hostMACAddr, nepDevName, nepDevIpAddr, nepDevPort</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>hostIpAddr,nepDevIpAddr</RelevantFilterAttr>
+</Report>
+
+<Report id="PH_Report_PH_8" group="PH_SYS_REPORT_PH">
+    <Name> Successful Layer 2 Discoveries </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report displays the successfully L2 discovered switches and the number of hosts directly attached to the switches</Description>
+    <SelectClause numEntries="All">
+        <AttrList> nepDevIpAddr, COUNT(DISTINCT hostIpAddr)</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_PH_8" name="Filter_PH_8">
+           <SingleEvtConstr> phEventCategory = 3 AND eventType = "PH_DISCOV_HOST_LOCATION" </SingleEvtConstr>
+	   <GroupByAttr>nepDevIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>nepDevIpAddr</RelevantFilterAttr>
+</Report>
+
+<Report id="PH_Report_PH_9" group="PH_SYS_REPORT_PH">
+    <Name>Failed Layer 2 Discoveries </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report displays the switches where Layer2 discovery failed along with the reason for failure</Description>
+    <SelectClause numEntries="All">
+        <AttrList>destIpAddr,phDiscovFailCode</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_PH_9" name="Filter_PH_9">
+           <SingleEvtConstr> phEventCategory = 3 AND eventType = "PH_DISCOV_L2_FAILED" </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>destIpAddr</RelevantFilterAttr>
+</Report>
+
+<Report id="PH_Report_PH_10" group="PH_SYS_REPORT_PH">
+    <Name> Failed CMDB Device Discoveries </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This reports identifies failed discoveries of existing CMDB devices </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,eventType,destIpAddr,destName,rawEventMsg</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_PH_2" name="Filter_PH_2">
+           <SingleEvtConstr>phEventCategory = 3 AND eventType = "PH_DISCOV_FAIL_CMDB_DEV" </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>destIpAddr,reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_PH_11" group="PH_SYS_REPORT_PH">
+    <Name> Successful Monitoring Jobs </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This reports successful monitoring jobs </Description>
+    <SelectClause numEntries="All">
+        <AttrList>hostName,hostIpAddr,jobName,jobDesc,COUNT(*)</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_PH_2" name="Filter_PH_2">
+           <SingleEvtConstr>eventType = "PH_JOB_STAT" AND jobStatus = 1 </SingleEvtConstr>
+	   <GroupByAttr> hostName,hostIpAddr,jobName,jobDesc </GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>destIpAddr,reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_PH_12" group="PH_SYS_REPORT_PH">
+    <Name> Failed Monitoring Jobs </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This reports failed monitoring jobs </Description>
+    <SelectClause numEntries="All">
+        <AttrList>hostName,hostIpAddr,jobName,jobDesc,jobDetail,COUNT(*)</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_PH_2" name="Filter_PH_2">
+           <SingleEvtConstr>eventType = "PH_JOB_STAT" AND jobStatus = 1 </SingleEvtConstr>
+	   <GroupByAttr> hostName,hostIpAddr,jobName,jobDesc,jobDetail</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>destIpAddr,reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_PH_13" group="PH_SYS_REPORT_PH">
+    <Name> Successful Monitoring Jobs Falling Behind </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This reports successful monitoring jobs that are behinf schedule </Description>
+    <SelectClause numEntries="All">
+        <AttrList>hostName,hostIpAddr,jobName,jobDesc,COUNT(*)</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_PH_2" name="Filter_PH_2">
+           <SingleEvtConstr>eventType = "PH_JOB_STAT" AND jobStatus = 3 </SingleEvtConstr>
+	   <GroupByAttr> hostName,hostIpAddr,jobName,jobDesc </GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>destIpAddr,reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+</Reports>

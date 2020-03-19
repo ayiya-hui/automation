@@ -1,0 +1,42 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<38>May 14 23:26:38 sshd[3613]: [ID 800047 auth.info] Keyboard-interactive (PAM) userauth failed[9] while authenticating: Authentication failed
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=2
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+eventAction=0 (Permit)
+eventName=Solaris Generic Syslog
+reptVendor=Sun
+eventType=Solaris_Generic_Syslog
+phEventCategory=0 (External)
+reptDevIpAddr=$localhost
+reptModel=Solaris
+[reptDevIpAddr(key)]
+172.16.10.6
+[eventMsg]
+<29>Mar 30 15:09:17 172.16.10.6 inetd[342]: [ID 317013 daemon.notice] telnet[5109] from 192.168.22.4 57587
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=2
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+eventAction=0 (Permit)
+eventName=Solaris Generic Syslog
+reptVendor=Sun
+eventType=Solaris_Generic_Syslog
+phEventCategory=0 (External)
+reptDevIpAddr=172.16.10.6
+reptModel=Solaris

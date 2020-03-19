@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+Cradlepoint-dhcp-updated,Cradlepoint_1,Cradlepoint,$localhost,,syslog

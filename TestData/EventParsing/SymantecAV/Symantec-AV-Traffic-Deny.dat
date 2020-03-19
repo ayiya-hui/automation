@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<54>Feb 24 11:51:19 SymantecServer $localhost: QA-V-Win03-App2,Traffic from IP address 192.168.1.4 is blocked from 2/24/2009 11:50:01 AM to 2/24/2009 12:00:01 PM.,Local: 0.0.0.0,Local: 000000000000,Remote: ,Remote: 192.168.1.4,Remote: 000000000000,Inbound,OTHERS,,Begin: 2009-02-24 11:50:01,End: 2009-02-24 11:50:01,Occurrences: 1,Application: ,Location: Default,User: Administrator,Domain: PROSPECTHILLS
+[params]
+rawEventMsg=any
+eventSeverity=1
+eventSeverityCat=LOW
+reptDevName=$localhost
+count=1
+eventId=any
+domain=PROSPECTHILLS
+deviceTime=any
+eventParsedOk=1
+reptVendor=Symantec
+phRecvTime=any
+phCustId=$sender
+reptDevIpAddr=$localhost
+srcIpAddr=192.168.1.4
+eventName=Symantec traffic event
+computer=any
+eventType=Symantec-AV-Traffic-Deny
+user=Administrator
+phEventCategory=0 (External)
+reptModel=Endpoint Protection Service

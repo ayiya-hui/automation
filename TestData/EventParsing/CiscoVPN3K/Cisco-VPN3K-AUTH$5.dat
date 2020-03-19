@@ -1,0 +1,24 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<188>393029 06/29/2009 21:22:24.680 SEV=3 AUTH/5 RPT=519 99.129.50.155  Authentication rejected: Reason = Unspecified handle = 967, server = 192.168.0.10, user = wenyong2, domain = <not specified>--automator
+[params]
+rawEventMsg=any
+count=1
+authServerIpAddr=192.168.0.10
+deviceTime=any
+eventParsedOk=1
+eventSeverity=3
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+srcIpAddr=99.129.50.155
+eventAction=1 (Deny)
+eventName=Failed VPN logon
+reptDevIpAddr=$localhost
+reptVendor=Cisco
+eventType=Cisco-VPN3K-AUTH/5
+user=wenyong2
+phEventCategory=0 (External)
+eventId=any
+reptModel=VPN 3K

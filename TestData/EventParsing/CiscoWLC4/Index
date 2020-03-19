@@ -1,0 +1,4 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+Cisco-WLC-Generic,CiscoWLC4_1,CiscoWLC4,$localhost,,syslog
+Cisco-WLC-5-ServerWlanDeactivated,CiscoWLC4_2,CiscoWLC4,$localhost,,syslog

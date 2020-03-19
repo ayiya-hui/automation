@@ -1,0 +1,5 @@
+[eventMsg]
+<187>May 12 01:10:52 12.9.0.2 201: May 12 01:10:52.807: %EIGRP-5-NBRCHANGE_DUAL: Neighbor 12.9.0.2 (eth03) is down - link is down
+
+[clearEventMsg]
+<187>May 12 01:16:52 12.9.0.2 201: May 12 01:16:52.807: %EIGRP-5-NBRCHANGE_DUAL: Neighbor 12.9.0.2 (eth03) is up - link is up

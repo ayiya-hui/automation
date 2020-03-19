@@ -1,0 +1,29 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+CylancePROTECT: Event Type: AppControl, Event Name: pechange, Device Name: WIN-7entSh64, IP Address: (192.168.119.128), Action: PEFileChange, Action Type: Deny, File Path: C:\Users\admin\AppData\Local\Temp\MyInstaller.exe, SHA256: 04D4DC02D96673ECA9050FE7201044FDB380E3CFE0D727E93DB35A709B45EDAA
+[params]
+parserName=CylanceProtectParser
+eventType=CylanceProtect-AppControl-pechange
+hostName=WIN-7entSh64
+fwAction=PEFileChange
+reptModel=Protect
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+hashCode=04D4DC02D96673ECA9050FE7201044FDB380E3CFE0D727E93DB35A709B45EDAA
+eventName=CylanceProtect-AppControl-pechange
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+eventRuleTrigger=1
+count=1
+filePath=C:\Users\admin\AppData\Local\Temp\MyInstaller.exe
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=1 (Deny)
+reptVendor=Cylance

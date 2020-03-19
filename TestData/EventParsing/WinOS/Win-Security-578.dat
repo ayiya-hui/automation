@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+52.52.52.52
+[eventMsg]
+<13>Mar 10 15:36:26 $reporter MSWinEventLog	1	Security	816	Mon Mar 10 15:36:24 2008	578	Security	Administrator	User	Failure Audit	ADS-PRI	Privilege Use		Privileged object operation:     Object Server: Security     Object Handle: 0     Process ID: 2080     Primary User Name: Administrator     Primary Domain: PROSPECTHILLS     Primary Logon ID: (0x0,0x3F98A7)     Client User Name: -     Client Domain: -     Client Logon ID: -     Privileges: SeTcbPrivilege  	805
+[params]
+rawEventMsg=any
+eventAction=1 (Deny)
+count=1
+eventId=any
+domain=PROSPECTHILLS
+deviceTime=any
+eventParsedOk=1
+eventSeverity=3
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=$reporter
+winLogonId=(0x0,0x3F98A7)
+eventName=Windows user right exercised
+reptVendor=Microsoft
+eventType=Win-Security-578
+user=Administrator
+phEventCategory=0 (External)
+reptDevIpAddr=$reporter
+reptModel=Windows

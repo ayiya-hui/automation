@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+Win_User_Login,CorreLog_1,CorreLog,$localhost,,syslog

@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+2015-11-11T16:00:21.042263-03:00 canscc1hali-ap08 %DATAPLANE-5-IGMPSNOOP: IP Multicast group <239.255.255.250> Vlan 580 created.
+[params]
+customer=Super
+eventId=any
+eventSeverityCat=LOW
+eventParsedOk=1
+phEventCategory=0 (External)
+parserName=MotorolaWiNGParser
+count=1
+eventSeverity=2
+eventType=Motorola-WiNG-DATAPLANE-IGMPSNOOP
+reptDevIpAddr=$localhost
+collectorId=any
+extEventRecvProto=Syslog
+eventName=Motorola WLAN AP: IGMP Snoop
+reptVendor=Motorola
+relayDevIpAddr=$localhost
+srcVLAN=580
+phRecvTime=any
+srcIpAddr=239.255.255.250
+eventRuleTrigger=1
+reptDevName=canscc1hali-ap08
+reptModel=WiNG WLAN AP

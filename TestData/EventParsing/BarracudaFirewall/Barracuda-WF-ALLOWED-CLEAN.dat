@@ -1,0 +1,39 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<164>barracuda_pqman[27088]: 1459965663 1 10.224.63.93 54.239.17.7 - 10.224.63.93 https://www.amazon.com/ 0 BYF ALLOWED CLEAN  2 1 0 1 3 (-) 1 shopping 0 - 0 amazon.com shopping,CUSTOM-140657649511160 [ANON] https://www.amazon.com/
+[params]
+destGeoOrg=any
+parserName=BarracudaWebFilterParser
+eventType=Barracuda-WF-ALLOWED-CLEAN
+destGeoState=any
+activityType=allowed
+destIpAddr=54.239.17.7
+totBytes=0
+srcName=HOST-10.224.63.93
+destGeoCountry=any
+srcIpAddr=10.224.63.93
+reptModel=Web Filter
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+serverName=0
+eventName=Permitted web traffic - no malware
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+destName=www.amazon.com
+webCategory=amazon.com
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+user=shopping,CUSTOM-140657649511160
+rawEventMsg=any
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+count=1
+infoURL=https://www.amazon.com/
+reptVendor=Barracuda
+destGeoCity=any
+fileType=-

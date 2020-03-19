@@ -1,0 +1,2 @@
+[eventMsg]
+<161>Mar 20 20:34:45 3.4.2.1 snort[2242]: [1:1251:9] INFO TELNET Bad Login [Classification: Misc activity] [Priority: 3]: {UDP} 192.168.19.1:6555 -> 172.16.2.5:514

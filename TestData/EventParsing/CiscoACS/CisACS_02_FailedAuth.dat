@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+33.33.33.34
+[eventMsg]
+<38>Apr 20 06:36:42 $reporter CisACS_02_FailedAuth y3is7ce 1 0 Message-Type=Authen failed,User-Name=hacker,NAS-IP-Address=192.168.19.18,Authen-Failure-Code=External DB user invalid or bad password,Caller-ID=192.168.29.8,NAS-Port=6,Group-Name=Default Group,Access Device=SJ-Dev-A-IOS-Lab-01
+[params]
+rawEventMsg=any
+eventType=CisACS_02_FailedAuth
+deviceTime=any
+phCustId=$sender
+destIpAddr=192.168.19.18
+srcIpAddr=192.168.29.8
+reptModel=Cisco Secure ACS
+eventId=any
+nepDevPort=6
+eventParsedOk=1
+eventSeverity=3
+eventName=AAA authentication failed
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+ciscoACSFailCode=External DB user invalid or bad password
+user=hacker
+count=1
+phRecvTime=any
+reptDevIpAddr=$reporter
+eventAction=1 (Deny)
+reptVendor=Cisco
+nepDevIpAddr=192.168.19.18
+userGrp=Default Group

@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+172.16.1.101
+[eventMsg]
+<15> Aug 28 21:35:30 172.16.1.101 LLDP: LLDP mlldpCtrl:delay timer for port : 100 expired
+[params]
+deviceTime=any
+parserName=HPProCurveParser
+isHostIntfCritical=No
+eventType=HP-ProCurve-LLDP-Timer-Expired
+intfName=100
+reptModel=ProCurve
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=HP-ProCurve-LLDP-Timer-Expired
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=172.16.1.101
+rawEventMsg=any
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=172.16.1.101
+reptVendor=HP

@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<189>date=2010-06-17 time=05:33:42 devname=FGT50B3G10615108 device_id=FGT50B3G10615108 log_id=0104041989 type=event subtype=admin pri=notice fwver=040002 vd=root user="admin" ui=GUI(172.16.6.6) name="testUserGroup" msg="User admin added a user group testUserGroup from GUI(172.16.6.6)"
+[params]
+srcIpAddr=172.16.6.6
+appTransportProto=GUI
+user=admin
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+eventAction=0 (Permit)
+eventName=The specified user added a user group
+reptVendor=Fortinet
+eventType=FortiGate-event-user-group-change
+phEventCategory=0 (External)
+relayDevIpAddr=$reporter
+reptDevIpAddr=$reporter
+usrMsg=User admin added a user group testUserGroup from GUI(172.16.6.6)
+reptModel=FortiOS

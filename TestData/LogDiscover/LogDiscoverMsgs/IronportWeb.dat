@@ -1,0 +1,2 @@
+[eventMsg]
+<38>Jan 22 13:40:06 IronPort-Web: Info: 1421952006.580 0 1.2.3.4 TCP_DENIED/403 0 GET http://a.com/files/1.pdf "DOT\a@B" NONE/- - CMF:4 DCF:0 ERR:10 BLOCK_CUSTOMCAT_11-DefaultGroup-DefaultGroup-NONE-NONE-NONE-NONE <C_Bloc,-,-,"-",-,-,-,-,"-",-,-,-,"-",-,-,"-","-",-,-,-,-,"-","-","-","-","-","-",0.00,0,-,"-","-"> - "22/Jan/2015:13:40:06 -0500" 155 "Mazilla/4.0"

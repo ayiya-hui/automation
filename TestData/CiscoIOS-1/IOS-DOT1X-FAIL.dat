@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<189>3755579: Mar 16 21:26:46: %DOT1X-5-FAIL: Authentication failed for client (0018.8b5a.1e6b) on Interface Gi1/0/8 AuditSessionID AC103215000035FAD0A44695
+[params]
+deviceTime=any
+eventType=IOS-DOT1X-FAIL
+phCustId=$sender
+reptModel=IOS
+eventId=any
+ipConnId=AC103215000035FAD0A44695
+eventParsedOk=1
+eventSeverity=2
+hostIpAddr=$localhost
+eventName=Authentiation failed for client on interface
+phEventCategory=0
+srcIntfName=Gi1/0/8
+srcMACAddr=00:18:8b:5a:1e:6b
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=Success(0)
+reptVendor=Cisco

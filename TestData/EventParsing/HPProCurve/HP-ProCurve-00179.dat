@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+172.16.22.2
+[eventMsg]
+<134> Jan 10 14:03:26 172.16.22.2 00179 mgr: SME TELNET from 10.1.2.91 - MANAGER Mode
+[params]
+customer=Super
+eventId=any
+parserName=HPProCurveParser
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+count=1
+eventSeverity=1
+eventType=HP-ProCurve-00179
+reptDevIpAddr=172.16.22.2
+collectorId=any
+extEventRecvProto=Syslog
+eventName=HP-ProCurve-00179
+reptVendor=HP
+relayDevIpAddr=172.16.22.2
+rawEventMsg=any
+phRecvTime=any
+srcIpAddr=10.1.2.91
+reptDevName=any
+reptModel=ProCurve

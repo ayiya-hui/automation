@@ -1,0 +1,138 @@
+<eventParser name="BarracudaFirewallParser">
+  <deviceType>
+    <Vendor>Barracuda</Vendor>
+    <Model>Spam Firewall</Model>
+    <Version>ANY</Version>
+  </deviceType>
+  <!--examples
+      <23>outbound/smtp[945]: 127.0.0.1 1300386119-473aa6a90001-sB89EM 0 0 SEND - 1 4D760309475 250 2.6.0  <E6BB7C56C6761D42AEAFBF7FC6E17E920156A38D@USNSSEXC174.us.kworld.kpmg.com> Queued mail for delivery
+      <23>scan[9390]: mail.netcontentinc.net[207.65.119.227] 1300386126-4739a8be0001-R6OEVB 1300386126 1300386128 SCAN - release@calcium.netcontentinc.net kmcgilvrey@qinprop.com - 7 61 - SZ:34602 SUBJ:How FMLA Leave, ADA and Workers' Compensation Work Together April 28, 2011
+  -->
+  <patternDefinitions>
+    <pattern name="patBaPass1"><![CDATA[inbound/pass1\[\d+\]:]]></pattern>
+    <pattern name="patBaPass2"><![CDATA[inbound/pass2\[\d+\]:]]></pattern>
+    <pattern name="patBaScan"><![CDATA[scan\[\d+\]:]]></pattern>
+    <pattern name="patBaSMTP"><![CDATA[outbound/smtp\[\d+\]:]]></pattern>
+  </patternDefinitions>
+
+  <eventFormatRecognizer><![CDATA[<:patBaPass1>|<:patBaPass2>|<:patBaScan>|<:patBaSMTP>]]></eventFormatRecognizer>
+  
+  <testEvents>
+      <testEvent><![CDATA[<23>inbound/pass1[923]: 127.0.0.1 1300386119-473aa6a90001-sB89EM 0 0 RECV - 1 4D760309475 250 2.6.0  <E6BB7C56C6761D42AEAFBF7FC6E17E920156A38D@USNSSEXC174.us.kworld.kpmg.com> Queued mail for delivery]]></testEvent>
+      <testEvent><![CDATA[<23>inbound/pass2[925]: 127.0.0.1 1300386119-473aa6a90001-sB89EM 0 0 RECV - 1 4D760309475 250 2.6.0  <E6BB7C56C6761D42AEAFBF7FC6E17E920156A38D@USNSSEXC174.us.kworld.kpmg.com> Queued mail for delivery]]></testEvent>
+      <testEvent><![CDATA[<23>outbound/smtp[945]: 127.0.0.1 1300386119-473aa6a90001-sB89EM 0 0 SEND - 1 4D760309475 250 2.6.0  <E6BB7C56C6761D42AEAFBF7FC6E17E920156A38D@USNSSEXC174.us.kworld.kpmg.com> Queued mail for delivery]]></testEvent>
+      <testEvent><![CDATA[<23>scan[9390]: mail.netcontentinc.net[207.65.119.227] 1300386126-4739a8be0001-R6OEVB 1300386126 1300386128 SCAN - release@calcium.netcontentinc.net kmcgilvrey@qinprop.com - 7 61 - SZ:34602 SUBJ:How FMLA Leave, ADA and Workers' Compensation Work Together April 28, 2011]]></testEvent>
+ </testEvents>
+
+  <parsingInstructions>
+    <collectFieldsByRegex src="$_rawmsg">
+      <regex><![CDATA[<:gPatSyslogPRI><_Process:gPatStr>\[\d+\]:\s+<_client:gPatStr>\s+<_MesgCode:gPatStr>\s+<_startTime:gPatInt>\s+<_endTime:gPatInt>\s+<_Mode:gPatStr>\s+<_body:gPatMesgBody>]]></regex>
+    </collectFieldsByRegex>
+
+    <setEventAttribute attr="eventType">Barracuda_Generic</setEventAttribute>
+
+    <!--Handle message body-->
+    <choose>
+      <when test='$_Mode = "SCAN"'>
+	<setEventAttribute attr="_modelow">scan</setEventAttribute>
+	<collectFieldsByRegex src="$_body">
+	  <regex><![CDATA[<:gPatStr>\s+<_sender:gPatStr>\s+<_receiver:gPatStr>\s+<_score:gPatStr>\s+<_action:gPatInt>\s+<barracudaReason:gPatInt>\s+<msg:gPatMesgBody>\s+SUBJ:<mailSubject:gPatMesgBody>]]></regex>
+	</collectFieldsByRegex>
+	<when test='$_score != "-"'>
+	  <setEventAttribute attr="spamScore">$_score</setEventAttribute>
+	</when>
+      </when>
+      <when test='$_Mode = "RECV"'>
+	<setEventAttribute attr="_modelow">recv</setEventAttribute>
+	<collectFieldsByRegex src="$_body">
+	  <regex><![CDATA[<_sender:gPatStr>\s+<_receiver:gPatStr>\s+<_action:gPatInt>\s+<barracudaReason:gPatInt>\s+<msg:gPatMesgBody>]]></regex>
+	</collectFieldsByRegex>
+      </when>
+      <when test='$_Mode = "SEND"'>
+	<setEventAttribute attr="_modelow">send</setEventAttribute>
+	<collectFieldsByRegex src="$_body">
+	  <regex><![CDATA[<:gPatStr>\s+<_action:gPatInt>\s+<_queueID:gPatStr>\s+<msg:gPatMesgBody>]]></regex>
+	</collectFieldsByRegex>
+      </when>
+    </choose>
+    
+    <choose>
+      <when test='$_Mode IN "SCAN, RECV"'>
+	<when test='$_sender != "-"'>
+	  <setEventAttribute attr="senderMailAddr">$_sender</setEventAttribute>
+	</when>
+	<when test='$_receiver != "-"'>
+	  <setEventAttribute attr="receiverMailAddr">$_receiver</setEventAttribute>
+	</when>
+	<when test='$_action != "-"'>
+	  <choose>
+	    <when test='$_action = "0"'>
+	      <setEventAttribute attr="_actionMode">allow</setEventAttribute>
+	    </when>
+	    <when test='$_action = "1"'>
+	      <setEventAttribute attr="_actionMode">abort</setEventAttribute>
+	    </when>
+	    <when test='$_action = "2"'>
+	      <setEventAttribute attr="_actionMode">block</setEventAttribute>
+	    </when>
+	    <when test='$_action = "3"'>
+	      <setEventAttribute attr="_actionMode">quarantine</setEventAttribute>
+	    </when>
+	    <when test='$_action = "4"'>
+	      <setEventAttribute attr="_actionMode">tag</setEventAttribute>
+	    </when>
+	    <when test='$_action = "5"'>
+	      <setEventAttribute attr="_actionMode">defer</setEventAttribute>
+	    </when>
+	    <when test='$_action = "6"'>
+	      <setEventAttribute attr="_actionMode">per-user-quarantine</setEventAttribute>
+	    </when>
+	    <when test='$_action = "7"'>
+	      <setEventAttribute attr="_actionMode">whitelist</setEventAttribute>
+	    </when>
+	  </choose>
+	</when>
+      </when>
+      <when test='$_Mode = "SEND"'>
+	<when test='$_action != "-"'>
+	  <choose>
+	    <when test='$_action = "1"'>
+	      <setEventAttribute attr="_actionMode">deliver</setEventAttribute>
+	    </when>
+	    <when test='$_action = "2"'>
+	      <setEventAttribute attr="_actionMode">reject</setEventAttribute>
+	    </when>
+	    <when test='$_action = "3"'>
+	      <setEventAttribute attr="_actionMode">defer</setEventAttribute>
+	    </when>
+	    <when test='$_action = "4"'>
+	      <setEventAttribute attr="_actionMode">expired</setEventAttribute>
+	    </when>
+	  </choose>
+	</when>
+      </when>
+    </choose>
+
+    <!--Handle client ip and host name-->
+    <choose>
+      <when test='matches($_client, "[^ ]*\[[^ ]*\]")'>
+	<collectFieldsByRegex src="$_client">
+	  <regex><![CDATA[<reptDevName:gPatStr>\[<srcIpAddr:gPatIpV4Dot>\]]]></regex>
+	</collectFieldsByRegex>
+      </when>
+      <otherwise>
+	<setEventAttribute attr="srcIpAddr">$_client</setEventAttribute>
+      </otherwise>
+    </choose>
+
+    <!--Handle message code-->
+    <!--Handle start time-->
+    <when test='$_startTime != "0"'>
+      <setEventAttribute attr="deviceTime">$_startTime</setEventAttribute>
+    </when>
+
+    <!--Set Event type-->
+    <setEventAttribute attr="eventType">combineMsgId("Barracuda-", $_modelow, "-", $_actionMode)</setEventAttribute>
+  </parsingInstructions>
+
+</eventParser>

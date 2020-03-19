@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<30>2016:03:11-10:00:42 ActiveUTM-1 confd[14715]: I Session::terminate:290() => id="3100" severity="info" sys="System" sub="confd" name="closing session" user="ha_sync" srcip="198.19.250.2" sid="QuMOddGdYeZxHwFLxSBn" facility="system" client="confd-sync" call="logout" function="logout"
+[params]
+parserName=SophosUTMParser
+eventType=Sophos-UTM-closing-session
+procName=confd
+srcIpAddr=198.19.250.2
+reptModel=UTM
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Sophos UTM closing session
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+eventRuleTrigger=1
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+user=ha_sync
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Sophos

@@ -1,0 +1,74 @@
+<eventParser name="UCMCDR">
+   <deviceType>
+     <Vendor>Cisco</Vendor>
+     <Model>Call Manager</Model>
+     <Version>ANY</Version>
+   </deviceType>
+     
+   <!-- 
+origIpv4v6Addr -> srcIpAddr
+destIpv4v6Addr -> destIpAddr
+OrigDeviceName ->srcName
+DestDeviceName ->destName
+CallingPartyNumber
+OriginalCalledPartyNumber
+FinalCalledPartyNumber
+DateTimeConnect
+DateTimeDisconnect
+Duration ->durationMsec
+GlobalCallID_callId ->ipConnId
+
+[cdrRecordType]="1" [globalCallID_callManagerId]="2" [globalCallID_callId]="109358" [origLegCallIdentifier]="39101096" [dateTimeOrigination]="1267900802" [origNodeId]="2" [origSpan]="0" [origIpAddr]="1083779082" [callingPartyNumber]="3600" [callingPartyUnicodeLoginUserID]="emaitia" [origCause_location]="0" [origCause_value]="0" [origPrecedenceLevel]="4" [origMediaTransportAddress_IP]="1083779082" [origMediaTransportAddress_Port]="26932" [origMediaCap_payloadCapability]="4" [origMediaCap_maxFramesPerPacket]="20" [origMediaCap_g723BitRate]="0" [origVideoCap_Codec]="0" [origVideoCap_Bandwidth]="0" [origVideoCap_Resolution]="0" [origVideoTransportAddress_IP]="0" [origVideoTransportAddress_Port]="0" [origRSVPAudioStat]="0" [origRSVPVideoStat]="0" [destLegIdentifier]="39101097" [destNodeId]="1" [destSpan]="0" [destIpAddr]="77146122" [originalCalledPartyNumber]="7137" [finalCalledPartyNumber]="7137" [finalCalledPartyUnicodeLoginUserID]="" [destCause_location]="0" [destCause_value]="16" [destPrecedenceLevel]="4" [destMediaTransportAddress_IP]="77146122" [destMediaTransportAddress_Port]="29394" [destMediaCap_payloadCapability]="4" [destMediaCap_maxFramesPerPacket]="20" [destMediaCap_g723BitRate]="0" [destVideoCap_Codec]="0" [destVideoCap_Bandwidth]="0" [destVideoCap_Resolution]="0" [destVideoTransportAddress_IP]="0" [destVideoTransportAddress_Port]="0" [destRSVPAudioStat]="0" [destRSVPVideoStat]="0" [dateTimeConnect]="1267900815" [dateTimeDisconnect]="1267900828" [lastRedirectDn]="7137" [pkid]="c8450eb1-ea81-4b7d-90d9-de708a465142" [originalCalledPartyNumberPartition]="899_PT_Phones" [callingPartyNumberPartition]="899_PT_Phones" [finalCalledPartyNumberPartition]="899_PT_Phones" [lastRedirectDnPartition]="899_PT_Phones" [duration]="13" [origDeviceName]="SEP0021A086E5B8" [destDeviceName]="SEP0024142F7B5E" [origCallTerminationOnBehalfOf]="0" [destCallTerminationOnBehalfOf]="12" [origCalledPartyRedirectOnBehalfOf]="0" [lastRedirectRedirectOnBehalfOf]="0" [origCalledPartyRedirectReason]="0" [lastRedirectRedirectReason]="0" [destConversationId]="0" [globalCallId_ClusterID]="StandAloneCluster" [joinOnBehalfOf]="0" [comment]="" [authCodeDescription]="" [authorizationLevel]="0" [clientMatterCode]="" [origDTMFMethod]="3" [destDTMFMethod]="3" [callSecuredStatus]="0" [origConversationId]="0" [origMediaCap_Bandwidth]="64" [destMediaCap_Bandwidth]="64" [authorizationCodeValue]="" [outpulsedCallingPartyNumber]="" [outpulsedCalledPartyNumber]="" [origIpv4v6Addr]="10.40.153.64" [destIpv4v6Addr]="10.40.153.4"
+
+   -->
+   <eventFormatRecognizer><![CDATA[AccelOps-FileLog-UCMCDR]]></eventFormatRecognizer>
+   
+   <testEvents>
+      <testEvent><![CDATA[]]></testEvent>
+  </testEvents>
+
+   <!-- pattern definitions -->
+   <patternDefinitions>
+     <pattern name="patMonabbrDay"><![CDATA[(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)(?:\s*)\d{1,2}]]></pattern>
+   </patternDefinitions>
+
+   <parsingInstructions>     
+     <collectFieldsByRegex src="$_rawmsg">
+       <regex><![CDATA[<:gPatStr>\s+<_mon:gPatMon>\s+<_day:gPatDay>\s+<_time:gPatTime>\s+<_year:gPatYear>\s+<:gPatIpV4Dot>\s+AccelOps\-FileLog\-UCMCDR\s+<_body:gPatMesgBody>]]></regex>
+     </collectFieldsByRegex>
+     <setEventAttribute attr="deviceTime">toDateTime($_mon, $_day, $_year, $_time)</setEventAttribute>
+     
+     <collectAndSetAttrByKeyValuePair sep=' [' src="$_body">
+       <attrKeyMap attr="_srcIpAddr" key="[origIpv4v6Addr]="/>
+       <attrKeyMap attr="_destIpAddr" key="[destIpv4v6Addr]="/>
+       <attrKeyMap attr="_srcIpAddr2" key="[origIpAddr]="/>
+       <attrKeyMap attr="_destIpAddr2" key="[destIpAddr]="/>
+       <attrKeyMap attr="srcName" key="[origDeviceName]="/>
+       <attrKeyMap attr="destName" key="[destDeviceName]="/>
+       <attrKeyMap attr="callingPartyNumber" key="[callingPartyNumber]="/>
+       <attrKeyMap attr="originalCalledPartyNumber" key="[originalCalledPartyNumber]="/>
+       <attrKeyMap attr="finalCalledPartyNumber" key="[finalCalledPartyNumber]="/>
+       <attrKeyMap attr="dateTimeConnect" key="[dateTimeConnect]="/>
+       <attrKeyMap attr="dateTimeDisconnect" key="[dateTimeDisconnect]="/>
+       <attrKeyMap attr="callDuration" key="[duration]="/>
+       <attrKeyMap attr="ipConnId" key="[globalCallID_callId]="/>
+     </collectAndSetAttrByKeyValuePair>
+     <setEventAttribute attr="eventType">combineMsgId("Cisco-CM-", "CDR")</setEventAttribute>
+	 <choose>
+		 <when test="exist _srcIpAddr">
+		   <setEventAttribute attr="srcIpAddr">convertIpDecimalToStr($_srcIpAddr, $_srcIpAddr2)</setEventAttribute>
+		 </when> 
+		 <when test="not_exist _srcIpAddr">
+		   <setEventAttribute attr="srcIpAddr">convertIpDecimalToStr($_srcIpAddr2)</setEventAttribute>
+		 </when>
+	 </choose>
+	 <choose>
+		 <when test="exist _destIpAddr">
+		   <setEventAttribute attr="destIpAddr">convertIpDecimalToStr($_destIpAddr, $_destIpAddr2)</setEventAttribute>
+		 </when> 
+		 <when test="not_exist _destIpAddr">
+		   <setEventAttribute attr="destIpAddr">convertIpDecimalToStr($_destIpAddr2)</setEventAttribute>
+		 </when>
+	 </choose>
+   </parsingInstructions>
+</eventParser>

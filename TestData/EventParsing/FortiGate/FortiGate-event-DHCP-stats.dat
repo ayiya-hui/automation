@@ -1,0 +1,29 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<182>date=2014-04-12 time=19:59:00 devname=Fortigate90D devid=FGT90D3Z13006177 logid=0103026003 type=event subtype=router level=information vd="root" interface="internal" total=51 used=21 msg="DHCP statistics"
+[params]
+deviceTime=any
+parserName=FortiGateParser
+totFlows=1
+eventType=FortiGate-event-DHCP-stats
+intfName=internal
+usrMsg=DHCP statistics
+reptModel=FortiOS
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Fortgate DHCP statistics
+isHostIntfCritical=No
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+DHCPAvail=51
+customer=Super
+DHCPUsed=21
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Fortinet

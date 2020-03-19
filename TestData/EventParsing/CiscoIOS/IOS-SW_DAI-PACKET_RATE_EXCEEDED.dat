@@ -1,0 +1,31 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<188>87: Nov 20 14:45:48.526 EST: %SW_DAI-4-PACKET_RATE_EXCEEDED: 118 packets received in 532 milliseconds on abc/3.
+[params]
+rawEventMsg=any
+deviceTime=any
+parserName=CiscoIOSParser
+totFlows=1
+eventType=IOS-SW_DAI-PACKET_RATE_EXCEEDED
+phCustId=$sender
+intfName=abc/3
+reptModel=IOS
+eventId=any
+eventParsedOk=1
+eventSeverity=5
+hostIpAddr=$localhost
+eventName=Packets received on an interface exceeded configured rate
+isHostIntfCritical=No
+phEventCategory=0 (External)
+customer=Super
+eventSeverityCat=MEDIUM
+collectorId=any
+relayDevIpAddr=$localhost
+reptDevName=any
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+recvPkts=118
+eventAction=0 (Permit)
+reptVendor=Cisco

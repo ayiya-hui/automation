@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>Juniper: End : 78.143.172.52 : IRL: IP Address Temp Black-Listed (Valid IP) Exceeds SYN + RST + F2D Count (Peak 114/s, Dropped 83.5K pkts)
+[params]
+customer=Super
+eventId=any
+eventSeverityCat=LOW
+eventParsedOk=1
+phEventCategory=0 (External)
+parserName=JuniperDDoSParser
+count=1
+eventSeverity=1
+eventType=Juniper-DDoS-Secure-Blacklisted
+reptDevIpAddr=$localhost
+collectorId=any
+extEventRecvProto=Syslog
+eventName=Juniper-DDoS-Secure-Blacklisted
+reptVendor=Juniper
+relayDevIpAddr=$localhost
+rawEventMsg=any
+phRecvTime=any
+srcIpAddr=78.143.172.52
+reptDevName=any
+reptModel=DDoS Secure

@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+FireEye-malware-callback,FireEye_1,FireEye,10.10.11.11,,syslog

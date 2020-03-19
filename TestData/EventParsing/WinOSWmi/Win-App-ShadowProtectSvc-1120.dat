@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+20.20.20.120
+[eventMsg]
+Mon Dec 27 16:33:07 2010 $reporter AccelOps-WinLog-WMI [Category]="0" [CategoryString]="(null)" [ComputerName]="CSB-CITRIX01" [Data]="NULL" [EventCode]="1120" [EventIdentifier]="3758097504" [EventType]="0" [Logfile]="Application" [RecordNumber]="119777" [SourceName]="ShadowProtectSvc" [TimeGenerated]="20101227163009.000000-300" [TimeWritten]="20101227163009.000000-300" [Type]="Success" [User]="NT AUTHORITY\SYSTEM" [Backup status]="completed" [Image file]="\\\\CSB-CSR01\D$\Backup\8CD07EE9BDC8445D-csb-citrix01\C_VOL-b001-i15622.spi" [Log file]="C:\Program Files\Zenith\Zenith Infotech\Logs\{615C254F-2BC8-4E8C-A953-7A876EE8EBE6}.txt" [Start time]="12/27/2010 4:30:00 PM"
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+backupStatus=completed
+count=1
+phCustId=$sender
+destIpAddr=$reporter
+deviceTime=any
+eventAction=0 (Permit)
+eventId=any
+eventName=Zenith ARCA ShadowProtectSvc backup success
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=1
+eventSeverityCat=LOW
+eventType=Win-App-ShadowProtectSvc-1120
+hostName=CSB-CITRIX01
+imageFile=\\CSB-CSR01\D$\Backup\8CD07EE9BDC8445D-csb-citrix01\C_VOL-b001-i15622.spi
+reptDevIpAddr=$reporter
+reptModel=Windows
+reptVendor=Microsoft
+startTime=any
+type=Success
+eventSource=ShadowProtectSvc

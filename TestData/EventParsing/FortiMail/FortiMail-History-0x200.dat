@@ -1,0 +1,32 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+date=2013-02-25 time=07:01:34 device_id=FE100C3909600504 log_id=0200025843 type=statistics pri=information session_id="r1PF1YTh025836-r1PF1YTh025836" client_name="172.20.140.108" dst_ip="172.20.140.13" endpoint="" from="aaa@bbb.com" to="user1@example.com" polid="0:1:0" domain="" subject="" mailer="proxy" resolved="" direction="unknown" virus="" disposition="0x200" classifier="0x17" message_length="199986"
+[params]
+deviceTime=any
+parserName=FortiMailParser
+eventType=FortiMail-History-0x200
+destIpAddr=172.20.140.13
+reptModel=FortiMail
+eventId=any
+srcUser=aaa@bbb.com
+eventSeverity=1
+eventName=FortiMail-History-0x200
+destUser=user1@example.com
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+type=History
+destName=172.20.140.108
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+eventParsedOk=1
+msgLen=199986
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+sessionId=r1PF1YTh025836-r1PF1YTh025836
+reptVendor=Fortinet
+classifier=0x17

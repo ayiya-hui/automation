@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<187>: 2014 Dec 16 21:57:00 CST: %UCSM-3-LINK_DOWN: [F0207][cleared][link-down][sys/chassis-4/blade-1/adaptor-1/host-eth-1] Adapter  host interface 4/1/1/1 link state: down
+[params]
+errorNo=207
+customer=Super
+eventSeverityCat=LOW
+eventParsedOk=1
+phEventCategory=0 (External)
+parserName=CiscoUCSParser
+count=1
+eventSeverity=1
+eventType=Cisco-UCS-F0207
+reptDevIpAddr=$localhost
+collectorId=any
+extEventRecvProto=Syslog
+eventName=Cisco-UCS-F0207
+reptVendor=Cisco
+relayDevIpAddr=$localhost
+rawEventMsg=any
+phRecvTime=any
+eventId=any
+reptDevName=any
+reptModel=UCS

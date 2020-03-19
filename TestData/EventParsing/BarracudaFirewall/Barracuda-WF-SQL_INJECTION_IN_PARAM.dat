@@ -1,0 +1,39 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<129>2015-03-16 10:18:40.915 -0700 Zenithbarracuda WF ALER SQL_INJECTION_IN_PARAM 64.39.105.149 48963 10.110.187.71 443 security-policy GLOBAL LOG NONE [type\="sql-injection-medium" pattern\="sql-comments" token\=";WAITFOR DELAY '00\\::00\\::28'--" Parameter\="format" value\="feed);WAITFOR DELAY '00\\::00\\::28'-- "] GET www.aseahealth.org/component/finder/search HTTPS "-" "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_8; en-us) AppleWebKit/534.57.2 (KHTML, like Gecko) Version/5.1.6 Safari/534.57.2" 64.39.105.149 48963 "-" http://www.aseahealth.org/
+[params]
+deviceTime=any
+parserName=BarracudaWebFilterParser
+eventType=Barracuda-WF-SQL_INJECTION_IN_PARAM
+destIpAddr=10.110.187.71
+module=sql-comments
+srcName=any
+srcIpAddr=64.39.105.149
+reptModel=Web Filter
+eventId=any
+policyName=GLOBAL LOG NONE
+eventParsedOk=1
+eventSeverity=1
+eventName=Barracuda-WF-SQL_INJECTION_IN_PARAM
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+type=sql-injection-medium
+destName=any
+paraName=format
+count=1
+srcIpPort=48963
+eventSeverityCat=LOW
+collectorId=any
+httpMethod=GET
+relayDevIpAddr=$localhost
+rawEventMsg=any
+destIpPort=443
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+infoURL=www.aseahealth.org/component/finder/search
+reptVendor=Barracuda
+command=SQL_INJECTION_IN_PARAM
+httpUserAgent=Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_8; en-us) AppleWebKit/534.57.2 (KHTML, like Gecko) Version/5.1.6 Safari/534.57.2

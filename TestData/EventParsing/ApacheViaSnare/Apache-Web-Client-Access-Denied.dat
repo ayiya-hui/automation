@@ -1,0 +1,31 @@
+[reptDevIpAddr(key)]
+125.15.125.15
+[eventMsg]
+<142>Sep 17 13:27:37 SJ-Dev-S-RH-VMW-01.prospecthills.net ApacheLog  216.67.1.91 - leon [01/Jul/2002:12:11:52 +0000] "GET /index.html HTTP/1.1" 401 431"http://www.loganalyzer.net/" "Mozilla/4.05 [en] (WinNT; I)" "USERID=CustomerA;IMPID=01234"--automator
+[params]
+rawEventMsg=any
+deviceTime=any
+eventType=Apache-Web-Client-Access-Denied
+phCustId=$sender
+destIpAddr=125.15.125.15
+httpReferrer=Mozilla/4.05 [en] (WinNT; I)
+srcIpAddr=216.67.1.91
+reptModel=Apache Tomcat
+eventId=any
+eventParsedOk=1
+eventSeverity=5
+eventName=Web request access denied
+phEventCategory=0 (External)
+recvBytes=431
+eventSeverityCat=MEDIUM
+httpMethod=GET
+user=leon
+httpStatusCode=401 (Access Denied - The request requires user authentication)
+httpVersion=HTTP/1.1
+count=1
+uriStem=/index.html
+phRecvTime=any
+reptDevIpAddr=125.15.125.15
+eventAction=0 (Permit)
+reptVendor=Apache
+httpUserAgent=USERID=CustomerA;IMPID=01234

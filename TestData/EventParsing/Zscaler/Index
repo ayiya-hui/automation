@@ -1,0 +1,4 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+Zscaler-CloudFirewall-Blocked,Zscaler_1,Zscaler,$localhost,,syslog
+Zscaler-CloudFirewall-Allowed,Zscaler_2,Zscaler,$localhost,,syslog

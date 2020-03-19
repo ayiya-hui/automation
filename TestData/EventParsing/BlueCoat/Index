@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+Bluecoat-SGOS-Web-Request-Success,BlueCoat_1,BlueCoat,50.50.50.1,,syslog
+Bluecoat-SGOS-Web-Request-Success,BlueCoat_2,BlueCoat,50.50.50.2,,syslog

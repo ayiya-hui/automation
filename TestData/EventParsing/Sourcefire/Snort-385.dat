@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+$localhost (srcIpAddr:195.66.241.163)
+[eventMsg]
+<188>Jul  4 15:20:30 Sourcefire3D Snort: [1:385:8] PROTOCOL-ICMP traceroute [Impact: Unknown] From DetectionEngine_IPS_DMZ1/SourcefireIPS at Thu Jul  4 15:20:30 2013 UTC [Classification: Attempted Information Leak] [Priority: 2] {icmp} 195.66.241.163->10.20.1.155
+[params]
+rawEventMsg=any
+eventId=any
+count=1
+eventSeverityCat=MEDIUM
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverity=5
+eventType=Snort-385
+phCustId=$sender
+reptDevIpAddr=$reporter
+destIpAddr=10.20.1.155
+eventAction=0 (Permit)
+collectorId=any
+eventName=ICMP traceroute
+reptVendor=Sourcefire
+phRecvTime=any
+ipProto=1 (ICMP)
+srcIpAddr=195.66.241.163
+devEventTypeGrp=Attempted Information Leak
+reptModel=Sourcefire3D IPS

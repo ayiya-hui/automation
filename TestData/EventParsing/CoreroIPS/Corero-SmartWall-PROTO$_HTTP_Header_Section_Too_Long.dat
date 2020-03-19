@@ -1,0 +1,36 @@
+[reptDevIpAddr(key)]
+192.168.51.65
+[eventMsg]
+<36>Dec 10 05:37:29 192.168.51.65 IPS5500-75EC: id=060001 pt=TLN-KA prot=TCP cip=50.58.90.98 cprt=54583 sip=165.254.27.72 sprt=80 atck=tln-102055 disp=monitor ckt=2 src=intern msg="PROTO: HTTP Header Section Too Long"
+[params]
+destGeoOrg=any
+parserName=CoreroIPSParser
+eventType=Corero-SmartWall-PROTO:_HTTP_Header_Section_Too_Long
+destGeoState=any
+destIpAddr=165.254.27.72
+srcName=any
+destIpPort=80 (HTTP)
+srcIpAddr=50.58.90.98
+destGeoCountry=any
+usrMsg=PROTO: HTTP Header Section Too Long
+reptModel=SmartWall
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=any
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+destName=any
+count=1
+srcIpPort=54583
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=192.168.51.65
+rawEventMsg=any
+ipProto=6 (TCP)
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=192.168.51.65
+reptVendor=Corero
+destGeoCity=any

@@ -1,0 +1,24 @@
+[reptDevIpAddr(key)]
+20.20.20.20
+[eventMsg]
+<13>Jan 14 18:57:56 20.20.20.20 MSWinEventLog	1	Application	9177	Wed Jan 14 18:57:56 2009	2020	EvntAgnt	Unknown User	N/A	Information	ADS-PRI	None		SNMP Event Log Extension Agent has terminated.  	485  Automation
+[params]
+rawEventMsg=any
+eventSeverity=1
+eventSeverityCat=LOW
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+phRecvTime=any
+phCustId=$sender
+reptDevIpAddr=20.20.20.20
+destIpAddr=20.20.20.20
+swProcName=SNMP Event Log Extension Agent
+hostIpAddr=20.20.20.20
+eventName=Win-App-EvntAgnt-2020
+procName=SNMP Event Log Extension Agent
+reptVendor=Microsoft
+eventType=Win-App-EvntAgnt-2020
+phEventCategory=0 (External)
+reptModel=Windows

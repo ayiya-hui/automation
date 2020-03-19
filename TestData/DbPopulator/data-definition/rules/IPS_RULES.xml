@@ -1,0 +1,111 @@
+<Rules>
+  <Rule group="PH_SYS_RULE_Exploits" id="PH_Rule_IPS_1" pnIncidentCategory="Network">
+    <Name>Multiple Distinct IPS Events From Same Src</Name>
+    <active>true</active>
+    <Description>Detects multiple IPS events from the same source IP in a short period of time - the source IP may have been infected</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_MULTIPLE_IPS_SAME_SRC" severity="9">
+      <ArgList>
+        srcIpAddr = DistinctIPSEvents.srcIpAddr, incidentCount = DistinctIPSEvents.COUNT (DISTINCT eventType)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="300">
+      <SubPattern displayName="DistinctIPSEvents" name="DistinctIPSEvents">
+        <SingleEvtConstr> (reptDevIpAddr IN (Group@PH_SYS_DEVICE_NETWORK_IPS) OR (reptDevIpAddr IN (Group@PH_SYS_APP_NETWORK_IPS) AND eventType CONTAIN "Snort-")) AND eventSeverity &gt;= 7 </SingleEvtConstr>
+	<GroupByAttr> srcIpAddr </GroupByAttr>
+	<GroupEvtConstr>COUNT (DISTINCT eventType) &gt;= 3</GroupEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,srcIpAddr,destIpAddr,ipProto,srcIpPort,destIpPort,reptDevIpAddr,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+  </Rule>
+
+  <Rule group="PH_SYS_RULE_Exploits" id="PH_Rule_IPS_2" pnIncidentCategory="Network">
+    <Name>Multiple IPS Scans From Same Src</Name>
+    <active>true</active>
+    <Description>Detects multiple IPS scans from the same source IP in a short period of time. </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_SCAN_IPS_SAME_SRC" severity="7">
+      <ArgList>
+        srcIpAddr = IPSScan.srcIpAddr, incidentCount = IPSScan.COUNT(*)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="300">
+      <SubPattern displayName="IPSScan" name="IPSScan">
+        <SingleEvtConstr> (reptDevIpAddr IN (Group@PH_SYS_DEVICE_NETWORK_IPS) OR (reptDevIpAddr IN (Group@PH_SYS_APP_NETWORK_IPS) AND eventType CONTAIN "Snort-")) AND eventType IN (Group@PH_SYS_EVENT_Reconn) </SingleEvtConstr>
+	<GroupByAttr> srcIpAddr </GroupByAttr>
+	<GroupEvtConstr>COUNT(*) &gt;= 2</GroupEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,srcIpAddr,destIpAddr,ipProto,srcIpPort,destIpPort,reptDevIpAddr,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+  </Rule>
+  
+  <Rule group="PH_SYS_RULE_Exploits" id="PH_Rule_IPS_3" pnIncidentCategory="Network">
+    <Name>High Risk Rating Cisco IPS Exploit</Name>
+    <active>true</active>
+    <Description>Detects a high risk rating IPS exploit event. This is applicable for Cisco IPS.</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_HIGH_RR_IPS" severity="9">
+      <ArgList>
+        srcIpAddr = IPSHighRR.srcIpAddr, compEventType = IPSHighRR.eventType, compEventName = IPSHighRR.eventName, incidentCount = IPSHighRR.COUNT(*)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="300">
+      <SubPattern displayName="IPSHighRR" name="IPSHighRR">
+        <SingleEvtConstr> reptDevIpAddr IN (Group@PH_SYS_DEVICE_NETWORK_IPS) AND eventType NOT IN (Group@PH_SYS_EVENT_Logon,Group@PH_SYS_EVENT_Reconn) AND ipsEvRR &gt;= 85</SingleEvtConstr>
+	<GroupByAttr>srcIpAddr,eventType,eventName</GroupByAttr>
+	<GroupEvtConstr>COUNT(*) &gt;= 1</GroupEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,srcIpAddr,destIpAddr,ipProto,srcIpPort,destIpPort,reptDevIpAddr,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+  </Rule>
+
+  <Rule group="PH_SYS_RULE_Exploits" id="PH_Rule_IPS_4" pnIncidentCategory="Network">
+    <Name>High Severity IPS Exploit</Name>
+    <active>true</active>
+    <Description>Detects a high severity IPS exploit detected by non-Cisco IPS</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_HIGH_SEV_IPS" severity="9">
+      <ArgList>
+        srcIpAddr = NonCiscoIPSHighSev.srcIpAddr, compEventType = NonCiscoIPSHighSev.eventType, incidentCount = NonCiscoIPSHighSev.COUNT(*)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="300">
+      <SubPattern displayName="NonCiscoIPSHighSev" name="NonCiscoIPSHighSev">
+        <SingleEvtConstr> (reptDevIpAddr IN (Group@PH_SYS_DEVICE_NETWORK_IPS) OR (reptDevIpAddr IN (Group@PH_SYS_APP_NETWORK_IPS) AND eventType CONTAIN "Snort-")) AND reptVendor != "Cisco" AND eventType NOT IN (Group@PH_SYS_EVENT_Logon,Group@PH_SYS_EVENT_Reconn) AND eventSeverity &gt;= 8 </SingleEvtConstr>
+	<GroupByAttr> srcIpAddr,eventType</GroupByAttr>
+	<GroupEvtConstr>COUNT(*) &gt;= 1</GroupEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,srcIpAddr,destIpAddr,ipProto,srcIpPort,destIpPort,reptDevIpAddr,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+  </Rule>
+
+  <Rule group="PH_SYS_RULE_Exploits" id="PH_Rule_IPS_5" pnIncidentCategory="Application">
+    <Name>High Severity Security Exploit</Name>
+    <active>true</active>
+    <Description>Detects a high severity security exploit detected by non IPS devices</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_HIGH_SEV_SEC_NONIPS" severity="9">
+      <ArgList>
+        srcIpAddr = NonIPSHighSev.srcIpAddr, incidentCount = NonIPSHighSev.COUNT(*)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="300">
+      <SubPattern displayName="NonIPSHighSev" name="NonIPSHighSev">
+        <SingleEvtConstr> reptDevIpAddr NOT IN (Group@PH_SYS_DEVICE_NETWORK_IPS,Group@PH_SYS_APP_NETWORK_IPS) AND eventType IN (Group@PH_SYS_EVENT_Exploit,Group@PH_SYS_EVENT_Malware,Group@PH_SYS_EVENT_UnusualTraffic) AND eventSeverity &gt;= 8 </SingleEvtConstr>
+	<GroupByAttr>srcIpAddr,eventType</GroupByAttr>
+	<GroupEvtConstr>COUNT(*) &gt;= 1</GroupEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,srcIpAddr,destIpAddr,ipProto,srcIpPort,destIpPort,reptDevIpAddr,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+  </Rule>
+</Rules>

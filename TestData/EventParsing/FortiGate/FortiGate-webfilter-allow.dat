@@ -1,0 +1,38 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+date=2014-04-16 time=10:24:18 device_id=FG-5KB3E12701005 log_id=12546 subtype=urlfilter type=webfilter pri=information itime=1397673371 urlfilter_idx=97 urlfilter_list=XXXXXXXXXX vd=VDOMNAME policyid=6 identidx=0 serial=1763408824 src=1.1.1.1 sport=42683 src_port=42683 src_int=XXXXXXXX dst=2.2.2.2 dport=80 dst_port=80 dst_int=XXXXX
+[params]
+deviceTime=any
+destGeoOrg=any
+parserName=FortiGateParser
+totFlows=1
+eventType=FortiGate-webfilter-allow
+destIpAddr=2.2.2.2
+destGeoCountry=any
+srcIpAddr=1.1.1.1
+reptModel=FortiOS
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Category matched web traffic permitted
+appTransportProto=Syslog
+vdom=VDOMNAME
+phEventCategory=0 (External)
+eventRuleTrigger=1
+destName=any
+count=1
+srcIntfName=XXXXXXXX
+srcIpPort=42683
+eventSeverityCat=LOW
+collectorId=any
+destIntfName=XXXXX
+relayDevIpAddr=$localhost
+destIpPort=80
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Fortinet
+destGeoCity=any
+fwRule=6

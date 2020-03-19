@@ -1,0 +1,6 @@
+eventType,name,module,reptDevIpAddr,key,method
+HP-3034-LogicalDriveStatusChange,HPHwStorageTrap_1,HPHwStorageTrap,$localhost,,snmptrap@1@public
+HP-3021-TapeLibraryDoorStatusChange,HPHwStorageTrap_2,HPHwStorageTrap,$localhost,,snmptrap@1@public
+HP-3032-TapeDriveStatusChange,HPHwStorageTrap_3,HPHwStorageTrap,$localhost,,snmptrap@1@public
+HP-3023-TapeDriveCleaningRequired,HPHwStorageTrap_4,HPHwStorageTrap,$localhost,,snmptrap@1@public
+HP-3024-TapeDriveCleanTapeReplace,HPHwStorageTrap_5,HPHwStorageTrap,$localhost,,snmptrap@1@public

@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<13>Mar 10 18:19:45 $reporter MSWinEventLog	1	Directory Service	13162	Mon Mar 10 18:19:45 2008	700	NTDS ISAM	Unknown User	N/A	Information	ADS-PRI None	NTDS (404) NTDSA: Online defragmentation is beginning a full pass on database 'C:\WINDOWS\NTDS\ntds.dit'.	0
+[params]
+deviceTime=any
+parserName=WinOSParser
+eventType=Win-Directory-Service-NTDS-ISAM-700
+destIpAddr=$localhost
+eventSource=NTDS ISAM
+reptModel=Windows
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Win-Directory-Service-NTDS-ISAM-700
+phEventCategory=0 (External)
+eventRuleTrigger=1
+count=1
+seqNum=13162
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Microsoft

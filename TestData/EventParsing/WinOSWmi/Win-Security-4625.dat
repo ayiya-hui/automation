@@ -1,0 +1,129 @@
+﻿[reptDevIpAddr(key)]
+20.20.20.120
+[eventMsg]
+Fri Oct 30 18:19:58 2009 $reporter AccelOps-WinLog-WMI  [Category]="12544" [CategoryString]="Logon" [ComputerName]="sf1dc03.jha.local" [Data]="NULL" [EventCode]="4625" [EventIdentifier]="4625" [EventType]="5" [Logfile]="Security" [RecordNumber]="184019857" [SourceName]="Microsoft-Windows-Security-Auditing" [TimeGenerated]="20100505221013.589517-000" [TimeWritten]="20100505221013.589517-000" [Type]="Audit Failure" [User]="(null)" [[Subject]][Security ID]="S-1-0-0" [Account Name]="-" [Account Domain]="-" [Logon ID]="0x0" [Logon Type]="3" [[Account For Which Logon Failed]][Security ID]="S-1-0-0" [Account Name]="JHSriverbedadmin" [Account Domain]="WORKGROUP" [[Failure Information]][Failure Reason]="Unknown user name or bad Trueword." [Status]="0xc000006d" [Sub Status]="0xc0000064" [[Process Information]][Caller Process ID]="0x0" [Caller Process Name]="-" [[Network Information]][Workstation Name]="SF01VMAC" [Source Network Address]="10.0.0.176" [Source Port]="43346" [[Detailed Authentication Information]][Logon Process]="NtLmSsp " [Authentication Package]="NTLM" [Transited Services]="-" [Package Name (NTLM only)]="-" [Key Length]="0"
+[params]
+rawEventMsg=any
+type=Audit Failure
+procName=-
+eventAction=1 (Deny)
+domain=WORKGROUP
+deviceTime=any
+eventType=Win-Security-4625
+phCustId=$sender
+destIpAddr=$reporter
+computer=SF01VMAC
+srcIpAddr=10.0.0.176
+winLogonType=3(Network - logon)
+reptModel=Windows
+eventId=any
+eventParsedOk=1
+eventSeverity=3
+eventName=Windows logon failure
+phEventCategory=0 (External)
+srcIpPort=43346
+winLogonFailCode=0
+eventSeverityCat=LOW
+user=JHSriverbedadmin
+count=1
+winLogonId=0x0
+phRecvTime=any
+reptDevIpAddr=$reporter
+reptVendor=Microsoft
+[reptDevIpAddr(key)]
+10.1.8.115
+[eventMsg]
+Fri Aug 31 18:27:47 2012 10.1.8.115 AccelOps-WinLog-WMI [Category]="12544" [CategoryString]="登录" [ComputerName]="CSJW-DbServer" [Data]="NULL" [EventCode]="4625" [EventIdentifier]="4625" [EventType]="5" [Logfile]="Security" [RecordNumber]="14141488" [SourceName]="Microsoft-Windows-Security-Auditing" [TimeGenerated]="20120831103329.843797-000" [TimeWritten]="20120831103329.843797-000" [Type]="审核失败" [User]="(null)" [Message]="帐户登录失败。" [[主题]] [安全 ID]="S-1-0-0" [帐户名]="" [帐户域]="" [登录 ID]="0x0" [登录类型]="3" [[登录失败的帐户]] [安全 ID]="S-1-0-0" [帐户名]="Administrator" [帐户域]="HNCSSW2" [[失败信息]] [失败原因]="未知用户名或密码错误。" [状态]="0xc000006d" [子状态]="0xc000006a" [[进程信息]] [调用方进程 ID]="0x0" [调用方进程名]="" [[网络信息]] [工作站名]="HNCSSW2" [源网络地址]="10.1.8.41" [源端口]="30217" [[详细身份验证信息]] [登录进程]="NtLmSsp" [身份验证数据包]="NTLM" [传递服务]="" [数据包名(仅限 NTLM)]="" [密钥长度]="0"
+[params]
+rawEventMsg=any
+type=Audit Failure
+eventAction=1 (Deny)
+deviceTime=any
+eventType=Win-Security-4625
+phCustId=$sender
+destIpAddr=$reporter
+computer=HNCSSW2
+srcIpAddr=10.1.8.41
+winLogonType=3(Network - logon)
+reptModel=Windows
+eventId=any
+eventParsedOk=1
+eventSeverity=3
+eventName=Windows logon failure
+phEventCategory=0 (External)
+srcIpPort=30217
+winLogonFailCode=0
+eventSeverityCat=LOW
+user=Administrator
+count=1
+winLogonId=0x0
+phRecvTime=any
+reptDevIpAddr=$reporter
+reptVendor=Microsoft
+hostName=CSJW-DbServer
+msg=帐户登录失败。
+[reptDevIpAddr(key)]
+10.1.8.116
+[eventMsg]
+Wed May  8 16:52:58 2013 10.1.8.116 AccelOps-WinLog-WMI [Category]="12544" [CategoryString]="Inicio de sesi¾n" [ComputerName]="Win2008Spanish.Win2008AD.net" [Data]="NULL" [EventCode]="4625" [EventIdentifier]="4625" [EventType]="5" [Logfile]="Security" [RecordNumber]="206341" [SourceName]="Microsoft-Windows-Security-Auditing" [TimeGenerated]="20130509073221.932817-000" [TimeWritten]="20130509073221.932817-000" [Type]="Error de auditorÝa" [User]="(null)" [Message]="Error de una cuenta al iniciar sesi¾n." [[Sujeto]] [Id. de seguridad]="S-1-0-0" [Nombre de cuenta]="" [Dominio de cuenta]="" [Id. de inicio de sesi¾n]="0x0" [Tipo de inicio de sesi¾n]="3" [Cuenta con error de inicio de sesi¾n]="" [Id. de seguridad]="S-1-0-0" [Nombre de cuenta]="Administrator" [Dominio de cuenta]="ACCELOPS" [[Informaci¾n de error]] [Motivo del error]="Nombre de usuario desconocido o contrase±a incorrecta" [Estado]="0xc000006d" [Subestado]="0xc0000064" [[Informaci¾n de proceso]] [Id. de proceso del autor de la llamada]="0x0" [Nombre de proceso del autor de la llamada]="" [[Informaci¾n de red]] [Nombre de estaci¾n de trabajo]="ZHENSONG-LAPTOP" [Direcci¾n de red de origen]="" [Puerto de origen]="" [[Informaci¾n de autenticaci¾n detallada]] [Proceso de inicio de sesi¾n]="NtLmSsp" [Paquete de autenticaci¾n]="NTLM" [Servicios transitados]="" [Nombre de paquete (s¾lo NTLM)]="" [Longitud de clave]="0"[p
+[params]
+rawEventMsg=any
+type=Audit Failure
+eventAction=1 (Deny)
+domain=WORKGROUP
+deviceTime=any
+eventType=Win-Security-4625
+phCustId=$sender
+destIpAddr=$reporter
+computer=ZHENSONG-LAPTOP
+srcIpAddr=10.0.0.176
+winLogonType=3(Network - logon)
+reptModel=Windows
+eventId=any
+eventParsedOk=1
+eventSeverity=3
+eventName=Windows logon failure
+phEventCategory=0 (External)
+srcIpPort=43346
+winLogonFailCode=0
+eventSeverityCat=LOW
+user=JHSriverbedadmin
+count=1
+winLogonId=0x0
+phRecvTime=any
+reptDevIpAddr=$reporter
+reptVendor=Microsoft
+destName=Win2008Spanish.Win2008AD.net
+hostName=Win2008Spanish.Win2008AD.net
+[reptDevIpAddr(key)]
+10.1.8.117
+[eventMsg]
+Fri Aug 31 18:27:47 2012 10.1.8.117 AccelOps-WinLog-WMI [Category]="12544" [CategoryString]="登入" [ComputerName]="CSJW-DbServer" [Data]="NULL" [EventCode]="4625" [EventIdentifier]="4625" [EventType]="5" [Logfile]="Security" [RecordNumber]="14141488" [SourceName]="Microsoft-Windows-Security-Auditing" [TimeGenerated]="20120831103329.843797-000" [TimeWritten]="20120831103329.843797-000" [Type]="稽核失敗" [User]="(null)" [Message]="帳戶無法登入。" [[主旨]] [安全性識别碼]="S-1-0-0" [帳戶名稱]="" [帳戶網域]="" [登入識别碼]="0x0" [登入類型]="3" [[登入失敗的帳戶]] [安全性識别碼]="S-1-0-0" [帳戶名稱]="Administrator" [帳戶網域]="HNCSSW2" [[失敗資訊]] [失敗原因]="不明的使用者名稱或錯誤密碼。" [失敗程度]="嚴重" [狀態]="0xc000006d" [子狀態]="0xc000006a" [[處理程序資訊]] [呼叫者處理程序識别碼]="0x0" [呼叫者處理程序名稱]="" [[網路資訊]] [工作站名稱]="HNCSSW2" [來源網路位址]="10.1.8.41" [來源連接埠]="30217" [[詳細驗證資訊]] [登入處理程序]="NtLmSsp" [驗證封装]="NTLM" [轉送的服務]="" [封装名稱(僅限 NTLM)]="" [金錀長度]="0"
+[params]
+rawEventMsg=any
+type=Audit Failure
+evntAction=1 (Deny)
+deviceTime=any
+eventType=Win-Security-4625
+phCustId=$sender
+destIpAddr=$reporter
+computer=HNCSSW2
+srcIpAddr=10.1.8.41
+winLogonType=3(Network - logon)
+reptModel=Windows
+eventId=any
+eventParsedOk=1
+eventSeverity=3
+eventName=Windows logon failure
+phEventCategory=0 (External)
+srcIpPort=30217
+winLogonFailCode=0
+eventSeverityCat=LOW
+user=Administrator
+count=1
+winLogonId=0x0
+phRecvTime=any
+reptDevIpAddr=10.1.8.117
+reptVendor=Microsoft
+hostName=CSJW-DbServer
+msg=帳戶無法登入。

@@ -1,0 +1,179 @@
+
+<Reports>
+
+  <!-- ********************************************************************* -->
+  <Report id="PH_Report_AV_1" group="PH_SYS_REPORT_SecMgmt">
+   <Name>Virus found and remediated by Host Antivirus </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> Captures events that indicate the viruses that Host Antivirus found and remediated </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr,eventType,hostIpAddr,computer,user,virusName,virusType,fileName,virusAction,virusQuarantStatus</AttrList>    
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_AV_1" name="Filter_AV_1">
+           <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_Worm_Remedy_Success) AND reptDevIpAddr IN (Group@PH_SYS_APP_SEC_MGMT) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>hostIpAddr,reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+ 
+  <!-- ********************************************************************* -->
+  <Report id="PH_Report_AV_2" group="PH_SYS_REPORT_SecMgmt">
+   <Name>Virus found but not remediated by Host Antivirus </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Captures events that indicate the viruses that Host Antivirus found but failed to remedy </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr,eventType,hostIpAddr,computer,user,virusName,virusType,fileName,virusAction,virusQuarantStatus</AttrList>    
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_AV_2" name="Filter_AV_2">
+           <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_Worm_Remedy_Failed) AND reptDevIpAddr IN (Group@PH_SYS_APP_SEC_MGMT) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>hostIpAddr,reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <!-- ********************************************************************* -->
+  <Report id="PH_Report_AV_3" group="PH_SYS_REPORT_SecMgmt">
+   <Name>Spyware found and remediated by Host Antivirus </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> Captures events that indicate spyware that Host Antivirus found and remediated </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr,eventType,hostIpAddr,computer,user,fileName</AttrList>    
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_AV_3" name="Filter_AV_3">
+           <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_Spyware_Remedy_Success) AND reptDevIpAddr IN (Group@PH_SYS_APP_SEC_MGMT) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>hostIpAddr,reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <!-- ********************************************************************* -->
+  <Report id="PH_Report_AV_4" group="PH_SYS_REPORT_SecMgmt">
+   <Name>Spyware found but not remediated by Host Antivirus </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Captures events that indicate spyware that Host Antivirus found but failed to remedy</Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr,eventType,hostIpAddr,computer,user,fileName</AttrList>    
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_AV_4" name="Filter_AV_4">
+           <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_Spyware_Remedy_Failed) AND reptDevIpAddr IN (Group@PH_SYS_APP_SEC_MGMT) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>hostIpAddr,reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <!-- ********************************************************************* -->
+  <Report id="PH_Report_AV_5" group="PH_SYS_REPORT_SecMgmt">
+   <Name>Top hosts with Malware found by Host Antivirus</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> Ranks computers by the number of malware (virus, spyware, botnet etc) found by host anti-virus</Description>
+    <SelectClause numEntries="All">
+        <AttrList>computer,COUNT(*)</AttrList>    
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_AV_5" name="Filter_AV_5">
+           <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_Malware) AND reptDevIpAddr IN (Group@PH_SYS_APP_SEC_MGMT) </SingleEvtConstr>
+	   <GroupByAttr>computer</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <!-- ********************************************************************* -->
+  <Report id="PH_Report_AV_6" group="PH_SYS_REPORT_SecMgmt">
+   <Name>Top Reporting Security Management Servers</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,reptVendor,reptModel,COUNT(*)</AttrList>    
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_AV_6" name="Filter_AV_6">
+           <SingleEvtConstr> reptDevIpAddr IN (Group@PH_SYS_APP_SEC_MGMT) </SingleEvtConstr>
+	   <GroupByAttr>reptDevIpAddr,reptVendor,reptModel</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+
+  <!-- ********************************************************************* -->
+  <Report id="PH_Report_AV_7" group="PH_SYS_REPORT_SecMgmt">
+   <Name>Total Viruses found and remediated by Host Antivirus </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Counts the total number of viruses that Host Antivirus found and remediated </Description>
+    <SelectClause numEntries="All">
+        <AttrList>COUNT(*)</AttrList>    
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT (*)</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_AV_7" name="Filter_AV_7">
+           <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_Worm_Remedy_Success) AND reptDevIpAddr IN (Group@PH_SYS_APP_SEC_MGMT) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+ 
+  <!-- ********************************************************************* -->
+
+  <Report id="PH_Report_AV_8" group="PH_SYS_REPORT_SecMgmt">
+   <Name>Total Viruses found but not remediated by Host Antivirus </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Counts the total number of viruses that Host Antivirus found but failed to remedy </Description>
+    <SelectClause numEntries="All">
+        <AttrList>COUNT(*)</AttrList>    
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT (*)</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_AV_8" name="Filter_AV_8">
+           <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_Worm_Remedy_Failed) AND reptDevIpAddr IN (Group@PH_SYS_APP_SEC_MGMT) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <!-- ********************************************************************* -->
+  <Report id="PH_Report_AV_9" group="PH_SYS_REPORT_SecMgmt">
+   <Name>Total Spyware found and remediated by Host Antivirus </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> Counts the total number of viruses that Host Antivirus found and remediated </Description>
+    <SelectClause numEntries="All">
+        <AttrList>COUNT(*)</AttrList>    
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_AV_9" name="Filter_AV_9">
+           <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_Spyware_Remedy_Success) AND reptDevIpAddr IN (Group@PH_SYS_APP_SEC_MGMT) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <!-- ********************************************************************* -->
+  <Report id="PH_Report_AV_10" group="PH_SYS_REPORT_SecMgmt">
+   <Name>Total Spyware found but not remediated by Host Antivirus </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> Counts the total number of spyware that Host Antivirus found but failed to remedy </Description>
+    <SelectClause numEntries="All">
+        <AttrList>COUNT(*)</AttrList>    
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_AV_10" name="Filter_AV_10">
+           <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_Spyware_Remedy_Failed) AND reptDevIpAddr IN (Group@PH_SYS_APP_SEC_MGMT) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+</Reports>

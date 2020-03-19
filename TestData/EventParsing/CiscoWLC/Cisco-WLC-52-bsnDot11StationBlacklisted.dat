@@ -1,0 +1,22 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+enterprises.14179.2.6.3.52	enterprises.14179.2.1.7.1.1.0 x "00 23 51 32 FF B9"	enterprises.14179.2.6.2.34.0  x "00 23 51 32 FF B9"	enterprises.14179.2.6.2.35.0 x "00 23 51 32 FF B9"	enterprises.14179.2.6.2.38.0 i 0
+[params]
+rawEventMsg=any
+eventSeverity=1
+eventSeverityCat=LOW
+srcMACAddr=00:23:51:32:ff:b9
+hostMACAddr=00:23:51:32:ff:b9
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+phRecvTime=any
+phCustId=$sender
+reptDevIpAddr=$localhost
+eventName=A client is blacklisted - repeated auth or association failures or IP Address theft
+reptVendor=Cisco
+eventType=Cisco-WLC-52-bsnDot11StationBlacklisted
+phEventCategory=0 (External)
+reptModel=WLAN Controller

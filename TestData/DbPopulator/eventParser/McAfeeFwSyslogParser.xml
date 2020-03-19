@@ -1,0 +1,85 @@
+<eventParser name="McAfeeFwSyslogParser">
+  <deviceType>
+    <Vendor>McAfee</Vendor>
+    <Model>Firewall</Model>
+    <Version>ANY</Version>
+  </deviceType>
+
+  <eventFormatRecognizer><![CDATA[<:gPatMon>\s+<:gPatDay>\s+<:gPatTime>\s+<:gPatIpV4Dot>\s+<:gPatStr>\s+auditd:\s+date="<:gPatYear>-<:gPatMonNum>-<:gPatDay>\s+<:gPatTime>\s+.*"]]></eventFormatRecognizer>
+  
+  <testEvents>
+      <testEvent><![CDATA[Jun 18 10:34:08 192.168.2.10 wcrfw1 auditd: date="2011-06-18 14:34:08 +0000",fac=f_http_proxy,area=a_libproxycommon,type=t_nettraffic,pri=p_major,pid=2093,logid=0,cmd=httpp,hostname=wcrfw1.community.int,event="session end",app_risk=low,app_categories=infrastructure,netsessid=1adc04dfcb760,src_geo=US,srcip=74.70.205.191,srcport=3393,srczone=external,protocol=6,dstip=10.1.1.27,dstport=80,dstzone=dmz1,bytes_written_to_client=572,bytes_written_to_server=408,rule_name=BTC-inbound,cache_hit=1,start_time="2011-06-18 14:34:08 +0000",application=HTTP]]></testEvent>
+  </testEvents>
+
+  <parsingInstructions>
+
+    <!--
+      Jun 18 10:34:08 192.168.2.10 wcrfw1 auditd: date="2011-06-18 14:34:08 +0000",fac=f_http_proxy,area=a_libproxycommon,type=t_nettraffic,pri=p_major,pid=2093,logid=0,cmd=httpp,hostname=wcrfw1.community.int,event="session end",app_risk=low,app_categories=infrastructure,netsessid=1adc04dfcb760,src_geo=US,srcip=74.70.205.191,srcport=3393,srczone=external,protocol=6,dstip=10.1.1.27,dstport=80,dstzone=dmz1,bytes_written_to_client=572,bytes_written_to_server=408,rule_name=BTC-inbound,cache_hit=1,start_time="2011-06-18 14:34:08 +0000",application=HTTP
+    -->
+
+    <collectFieldsByRegex src="$_rawmsg">
+      <regex><![CDATA[<_mon:gPatMon>\s+<_day:gPatDay>\s+<_time:gPatTime>\s+<reptDevIpAddr:gPatIpV4Dot>\s+<hostName:gPatStr>\s+auditd:\s+<_body:gPatMesgBody>]]></regex>
+    </collectFieldsByRegex>
+
+    <setEventAttribute attr="deviceTime">toDateTime($_mon, $_day, $_time)</setEventAttribute>
+    <setEventAttribute attr="eventType">McAfee-Firewall-Syslog-Generic</setEventAttribute>
+
+    <collectAndSetAttrByKeyValuePair sep=',' src="$_body">
+      <attrKeyMap attr="_date" key="date="/>
+      <attrKeyMap attr="_fac" key="fac="/>
+      <attrKeyMap attr="_area" key="area="/>
+      <attrKeyMap attr="_type" key="type="/>
+      <attrKeyMap attr="_priority" key="pri="/>
+      <attrKeyMap attr="_processId" key="pid="/>
+      <attrKeyMap attr="_logId" key="logid="/>
+      <attrKeyMap attr="ipConnId" key="cmd="/>
+      <attrKeyMap attr="hostName" key="hostname="/>
+      <attrKeyMap attr="msg" key="event="/>
+      <attrKeyMap attr="threatLevel" key="app_risk="/>
+      <attrKeyMap attr="threatCategory" key="app_categories="/>
+      <attrKeyMap attr="wlanSsid" key="netsessid="/>
+      <attrKeyMap attr="hostLocation" key="src_geo="/>
+      <attrKeyMap attr="srcIpAddr" key="srcip="/>
+      <attrKeyMap attr="srcIpPort" key="srcport="/>
+      <attrKeyMap attr="srcFwZone" key="srczone="/>
+      <attrKeyMap attr="ipProto" key="protocol="/>
+      <attrKeyMap attr="destIpAddr" key="dstip="/>
+      <attrKeyMap attr="destIpPort" key="dstport="/>
+      <attrKeyMap attr="destFwZone" key="destzone="/>
+      <attrKeyMap attr="_bytesWrittenToClient" key="bytes_written_to_client="/>
+      <attrKeyMap attr="_bytesWrittenToServer" key="bytes_written_to_server="/>
+      <attrKeyMap attr="fwRule" key="rule_name="/>
+      <attrKeyMap attr="_logCacheHitRatio" key="cache_hit="/>
+      <attrKeyMap attr="_startTime" key="start_time="/>
+      <attrKeyMap attr="appName" key="application="/>
+    </collectAndSetAttrByKeyValuePair>
+
+    <when test = 'exist _type'>
+      <setEventAttribute attr="eventType">combineMsgId("McAfee-Firewall-Syslog-", $_type)</setEventAttribute>
+    </when>
+
+    <choose>
+      <when test = '$_priority = "p_major"'>
+        <setEventAttribute attr="eventSeverity">6</setEventAttribute>
+      </when>
+      <when test = '$_priority = "p_minor"'>
+        <setEventAttribute attr="eventSeverity">3</setEventAttribute>
+      </when>
+    </choose>
+
+    <when test = 'exist _date'>
+      <collectFieldsByRegex src="$_date">
+        <regex><![CDATA[<_year:gPatYear>-<_mon:gPatMonNum>-<_day:gPatDay>\s+<_time:gPatTime>\s+.*]]></regex>
+      </collectFieldsByRegex>
+      <setEventAttribute attr="eventTime">toDateTime($_mon, $_day, $_year, $_time)</setEventAttribute>
+    </when>
+
+    <when test = 'exist _startTime'>
+      <collectFieldsByRegex src="$_startTime">
+        <regex><![CDATA[<_year:gPatYear>-<_mon:gPatMonNum>-<_day:gPatDay>\s+<_time:gPatTime>\s+.*]]></regex>
+      </collectFieldsByRegex>
+      <setEventAttribute attr="startTime">toDateTime($_mon, $_day, $_year, $_time)</setEventAttribute>
+    </when>
+
+  </parsingInstructions>
+</eventParser>

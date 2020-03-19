@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+20.2.2.16
+[eventMsg]
+<13>Aug 10 19:08:44 $reporter MSDNSLog 0 20090810 19:08:34 15F0 PACKET 02935460 UDP Rcv 192.168.20.44 9a01 Q [0001 D NOERROR] SRV (13)_autodiscover(4)_tcp(13)prospecthills(3)net(0)
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+appTransportProto=UDP
+ipConnId=Rcv
+count=1
+phCustId=$sender
+destName=_autodiscover._tcp.prospecthills.net
+destIpAddr=$reporter
+destIpPort=53 (DOMAIN)
+deviceTime=any
+eventAction=0 (Permit)
+eventId=any
+eventName=Successful DNS Available Services Query
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=1
+eventSeverityCat=LOW
+eventType=MS_DNS_SRV_Success
+ipProto=17 (UDP)
+reptDevIpAddr=$reporter
+reptModel=DNS
+reptVendor=Microsoft
+srcIpAddr=192.168.20.44

@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+172.18.98.221
+[eventMsg]
+Mar 29 13:14:06 172.18.98.221 RADIUSInfo: RADIUS Access-Request Message sent for Client (00:1e:37:0e:98:3e).
+[params]
+customer=Super
+eventId=any
+parserName=FortiWLANParser
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+count=1
+eventSeverity=1
+eventType=FortiWLC-Radius
+reptDevIpAddr=172.18.98.221
+collectorId=any
+extEventRecvProto=Syslog
+eventName=FortiWLC Radius message
+reptVendor=Fortinet
+relayDevIpAddr=172.18.98.221
+rawEventMsg=any
+phRecvTime=any
+reptDevName=any
+reptModel=FortiWLC

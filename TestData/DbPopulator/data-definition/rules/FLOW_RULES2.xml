@@ -1,0 +1,226 @@
+<Rules>
+  <Rule group="PH_SYS_RULE_Exploits" id="PH_Rule_Flow_200" phIncidentCategory="Network">
+    <Name>Heavy TCP Port Scan: Single Host</Name>
+    <active>true</active>
+    <Description> Detects a host performing a port scan - this involves excessive half open TCP connections from the same source to many distinct ports on a host in a short period of time. The thresholds are at least 20 distinct ports in a 2 minute window</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_HEAVY_TCP_PORT_SCAN" severity="7">
+      <ArgList>
+        srcIpAddr = Filter1.srcIpAddr, destIpAddr = Filter1.destIpAddr, incidentCount = Filter1.COUNT (DISTINCT destIpPort)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="120">
+      <SubPattern displayName="Filter1" name="Filter1">
+        <SingleEvtConstr> eventType = "IOS-NETFLOW-BI" AND srcDestTCPFlags = 2 AND ipProto = 6 AND srcIpPort &gt;= 1024 AND srcIpAddr NOT IN (Group@PH_SYS_APP_ACCELOPS) </SingleEvtConstr>
+	<GroupByAttr>srcIpAddr,destIpAddr</GroupByAttr>
+	<GroupEvtConstr>COUNT (DISTINCT destIpPort) &gt;= 20</GroupEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,srcIpAddr,destIpAddr,ipProto,srcIpPort,destIpPort,srcDestTCPFlags,reptDevIpAddr,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+  </Rule>
+
+  <!-- ***************************************** -->
+  <Rule group="PH_SYS_RULE_Exploits" id="PH_Rule_Flow_201" phIncidentCategory="Network">
+    <Name>Heavy TCP Port Scan: Multiple Hosts</Name>
+    <active>true</active>
+    <Description> Detects that a source is doing port scans on multiple hosts. The thresholds are port scans on at least 5 hosts in 15 minute window </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_REPEAT_HEAVY_TCP_PORT_SCAN" severity="8">
+      <ArgList>
+        srcIpAddr = Filter1.srcIpAddr, incidentCount = Filter1.COUNT (DISTINCT destIpAddr)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="900">
+      <SubPattern displayName="Filter1" name="Filter1">
+        <SingleEvtConstr> eventType IN ("PH_RULE_HEAVY_TCP_PORT_SCAN") </SingleEvtConstr>
+	<GroupByAttr> srcIpAddr </GroupByAttr>
+	<GroupEvtConstr>COUNT(DISTINCT destIpAddr) &gt; 30</GroupEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,srcIpAddr,destIpAddr</AttrList>
+    </TriggerEventDisplay>
+  </Rule>
+
+  <!-- ***************************************** -->
+  <Rule group="PH_SYS_RULE_Exploits" id="PH_Rule_Flow_202" phIncidentCategory="Network">
+    <Name>Heavy UDP Port Scan: Single Host</Name>
+    <active>true</active>
+    <Description> Detects excessive UDP connections from the same source to many distinct ports on the same destination in a short period of time </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_HEAVY_UDP_PORT_SCAN" severity="7">
+      <ArgList>
+        srcIpAddr = Filter1.srcIpAddr, destIpAddr = Filter1.destIpAddr, incidentCount = Filter1.COUNT (DISTINCT destIpPort)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="120">
+      <SubPattern displayName="Filter1" name="Filter1">
+        <SingleEvtConstr> eventType = "IOS-NETFLOW-BI" AND ipProto = 17 AND srcIpPort &gt;= 1024 AND srcIpAddr NOT IN (Group@PH_SYS_APP_ACCELOPS) </SingleEvtConstr>
+	<GroupByAttr> srcIpAddr,destIpAddr </GroupByAttr>
+	<GroupEvtConstr>COUNT (DISTINCT destIpPort) &gt;= 20</GroupEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,srcIpAddr,destIpAddr,ipProto,srcIpPort,destIpPort,srcDestTCPFlags,reptDevIpAddr,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+  </Rule>
+
+  <!-- ***************************************** -->
+  <Rule group="PH_SYS_RULE_Exploits" id="PH_Rule_Flow_203" phIncidentCategory="Network">
+    <Name>Heavy UDP Port Scan: Multiple Hosts</Name>
+    <active>true</active>
+    <Description> Detects that a source is doing UDP port scans on multiple hosts. The thresholds are port scans on at least 5 hosts in 15 minute window </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_REPEAT_HEAVY_UDP_PORT_SCAN" severity="9">
+      <ArgList>
+        srcIpAddr = Filter1.srcIpAddr, incidentCount = Filter1.COUNT (DISTINCT destIpAddr)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="900">
+      <SubPattern displayName="Filter1" name="Filter1">
+        <SingleEvtConstr> eventType IN ("PH_RULE_HEAVY_UDP_PORT_SCAN") </SingleEvtConstr>
+	<GroupByAttr> srcIpAddr </GroupByAttr>
+	<GroupEvtConstr>COUNT(DISTINCT destIpAddr) &gt; 30</GroupEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,srcIpAddr,destIpAddr</AttrList>
+    </TriggerEventDisplay>
+  </Rule>
+
+  <Rule group="PH_SYS_RULE_Exploits" id="PH_Rule_Flow_204" phIncidentCategory="Network">
+    <Name> Unusual ICMP Traffic </Name>
+    <active>true</active>
+    <Description> Detects unusual ( more than 10 in 3 minutes) ICMP types, namely other than echo request/reply and destination unreachables </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_UNUSUAL_ICMP" severity="9">
+      <ArgList>
+        srcIpAddr = UnusualIcmp.srcIpAddr, icmpType = UnusualIcmp.icmpType, incidentCount = UnusualIcmp.COUNT(*)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="180">
+      <SubPattern displayName="UnusualIcmp" name="UnusualIcmp">
+        <SingleEvtConstr> eventType = "IOS-NETFLOW-BI" AND ipProto = 1 AND icmpType NOT IN (0,3,8)  </SingleEvtConstr>
+	<GroupByAttr> srcIpAddr,icmpType </GroupByAttr>
+	<GroupEvtConstr> COUNT(*) &gt; 10 </GroupEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,srcIpAddr,destIpAddr,ipProto,icmpType,icmpCode</AttrList>
+    </TriggerEventDisplay>
+  </Rule>
+  
+  <Rule group="PH_SYS_RULE_Exploits" id="PH_Rule_Flow_205" phIncidentCategory="Network">
+    <Name> Invalid TCP/UDP Port Traffic </Name>
+    <active>true</active>
+    <Description> Detects invalid TCP/UDP traffic with 0 port (more than 10 in 3 minutes) </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_INVALID_TCP_UDP_PORT" severity="9">
+      <ArgList>
+        srcIpAddr = UnusualIcmp.srcIpAddr, icmpType = UnusualIcmp.icmpType, incidentCount = UnusualIcmp.COUNT(*)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="180">
+      <SubPattern displayName="UnusualIcmp" name="UnusualIcmp">
+        <SingleEvtConstr> eventType = "IOS-NETFLOW-BI" AND ipProto = 17 AND destIpPort = 0  </SingleEvtConstr>
+	<GroupByAttr> srcIpAddr,icmpType </GroupByAttr>
+	<GroupEvtConstr> COUNT(*) &gt; 10 </GroupEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,srcIpAddr,destIpAddr,ipProto,icmpType,icmpCode</AttrList>
+    </TriggerEventDisplay>
+  </Rule>
+
+   <Rule group="PH_SYS_RULE_Exploits" id="PH_Rule_Flow_206" phIncidentCategory="Network">
+    <Name>Invalid TCP Flags - Medium Intensity </Name>
+    <active>true</active>
+    <Description> Detects 100 or more flows in 5 minutes, with invalid TCP flag combinations (NULL,FIN, SYN-FIN, SYN-FIN-PUSH, SYN-FIN-RESET, SYN-FIN-RESET-PUSH,SYN-FIN-RESET-PUSH-ACK-URG) - may indcate scanning and probing activity from the sender </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_INVALID_TCP_FLAG_MEDIUM" severity="7">
+      <ArgList>
+        srcIpAddr = InvalidTCPFlag.srcIpAddr,incidentCount = InvalidTCPFlag.COUNT(*)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="300">
+      <SubPattern displayName="InvalidTCPFlag" name="InvalidTCPFlag">
+        <SingleEvtConstr> eventType = "IOS-NETFLOW-BI" AND ipProto = 6 AND srcDestTCPFlags IN (1,3,7,11,15,31,63) </SingleEvtConstr>
+	<GroupByAttr> srcIpAddr </GroupByAttr>
+	<GroupEvtConstr> COUNT(*) &gt;= 100 </GroupEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,srcIpAddr,destIpAddr,srcIpPort,ipProto,destIpPort,srcDestTCPFlags</AttrList>
+    </TriggerEventDisplay>
+  </Rule>
+
+   <Rule group="PH_SYS_RULE_Exploits" id="PH_Rule_Flow_207" phIncidentCategory="Network">
+    <Name>Invalid TCP Flags - High Intensity </Name>
+    <active>true</active>
+    <Description> Detects 500 or more flows in 5 minutes, with invalid TCP flag combinations (FIN, SYN-FIN, SYN-FIN-PUSH, SYN-FIN-RESET, SYN-FIN-RESET-PUSH,SYN-FIN-RESET-PUSH-ACK-URG) - may indcate scanning and probing activity from the sender </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_INVALID_TCP_FLAG_HIGH" severity="9">
+      <ArgList>
+        srcIpAddr = InvalidTCPFlag.srcIpAddr,incidentCount = InvalidTCPFlag.COUNT(*)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="300">
+      <SubPattern displayName="InvalidTCPFlag" name="InvalidTCPFlag">
+        <SingleEvtConstr> eventType = "IOS-NETFLOW-BI" AND ipProto = 6 AND srcDestTCPFlags IN (1,3,7,11,15,31,63) </SingleEvtConstr>
+	<GroupByAttr> srcIpAddr </GroupByAttr>
+	<GroupEvtConstr> COUNT(*) &gt;= 500 </GroupEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,srcIpAddr,destIpAddr,srcIpPort,ipProto,destIpPort,srcDestTCPFlags</AttrList>
+    </TriggerEventDisplay>
+  </Rule>
+
+  <Rule group="PH_SYS_RULE_Exploits" id="PH_Rule_Flow_208" phIncidentCategory="Network">
+    <Name> Excessive ICMP Traffic From Same Source </Name>
+    <active>true</active>
+    <Description> Detects excessive (> 5000 in 5 minutes) ICMP traffic from the same source </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_EXCESSIVE_ICMP" severity="9">
+      <ArgList>
+        srcIpAddr = ExcessIcmp.srcIpAddr, incidentCount = ExcessIcmp.COUNT(*)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="300">
+      <SubPattern displayName="ExcessIcmp" name="ExcessIcmp">
+        <SingleEvtConstr> eventType = "IOS-NETFLOW-BI" AND ipProto = 1 AND srcIpAddr NOT IN (Group@PH_SYS_APP_ACCELOPS) </SingleEvtConstr>
+	<GroupByAttr> srcIpAddr </GroupByAttr>
+	<GroupEvtConstr> COUNT(*) &gt; 5000 </GroupEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,srcIpAddr,destIpAddr,ipProto,icmpType,icmpCode</AttrList>
+    </TriggerEventDisplay>
+  </Rule>
+
+  <Rule group="PH_SYS_RULE_Exploits" id="PH_Rule_Flow_209" phIncidentCategory="Network">
+    <Name> Large Outbound Transfer </Name>
+    <active>true</active>
+    <Description> Detects a large outbound transfer (larger than 5MB in 10 minutes) from an internal host to an external destination </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_LARGE_OUTBOUND_XFER" severity="8">
+      <ArgList>
+        srcIpAddr = LargeXfer.srcIpAddr, sentBytes = LargeXfer.SUM (sentBytes)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+      <SubPattern displayName="LargeXfer" name="LargeXfer">
+        <SingleEvtConstr> srcIpAddr IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) AND destIpAddr NOT IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) </SingleEvtConstr>
+	<GroupByAttr> srcIpAddr</GroupByAttr>
+	<GroupEvtConstr> SUM (sentBytes) &gt;= 5242880 </GroupEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,srcIpAddr,destIpAddr,ipProto,srcIpPort,destIpPort,sentBytes,recvBytes,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+  </Rule>
+
+ 
+</Rules>

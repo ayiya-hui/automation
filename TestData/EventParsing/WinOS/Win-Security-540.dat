@@ -1,0 +1,58 @@
+[reptDevIpAddr(key)]
+20.20.20.20
+[eventMsg]
+<13>Jan 14 18:55:36 20.20.20.20 MSWinEventLog	1	Security	9155	Wed Jan 14 18:55:29 2009	540	Security	hongbo	User	Success Audit	ADS-PRI	Logon/Logoff		Successful Network Logon:     User Name: hongbo     Domain: PROSPECTHILLS     Logon ID: (0x0,0x36227D)     Logon Type: 3     Logon Process: Kerberos     Authentication Package: Kerberos     Workstation Name:      Logon GUID: {5de55a3c-1ddd-f002-8b1d-e5c88379fae5}     Caller User Name: -     Caller Domain: -     Caller Logon ID: -     Caller Process ID: -     Transited Services: -     Source Network Address: 192.168.20.36     Source Port: 2557    	8597  Automation
+[params]
+rawEventMsg=any
+eventAction=0 (Permit)
+srcIpAddr=192.168.20.36
+srcIpPort=2557
+winLogonCallerUser=-
+count=1
+eventId=any
+domain=PROSPECTHILLS
+deviceTime=any
+eventParsedOk=any
+winLogonType=3(Network - logon)
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=20.20.20.20
+winLogonId=(0x0,0x36227D)
+eventName=Windows network logon success
+reptVendor=Microsoft
+eventType=Win-Security-540
+user=hongbo
+phEventCategory=0 (External)
+reptDevIpAddr=20.20.20.20
+reptModel=Windows
+[reptDevIpAddr(key)]
+52.52.52.52
+[eventMsg]
+<13>Mar 29 14:17:11 52.52.52.52 MSWinEventLog	1	Security	787710	Mon Mar 29 14:17:10 2010	540	Security	phoenix_agent	User	Success Audit	QA-V-WIN03-ADS  Logon/Logoff           Successful Network Logon:     User Name: phoenix_agent     Domain: PROSPECT-HILLS     Logon ID: (0x0,0x6E07BD2)     Logon Type: 3     Logon Process: Advapi       Authentication Package: Negotiate     Workstation Name: QA-V-WIN03-ADS     Logon GUID: -     Caller User Name: QA-V-WIN03-ADS$     Caller Domain: PROSPECT-HILLS     Caller Logon ID: (0x0,0x3E7)     Caller Process ID: 1776     Transited Services: -     Source Network Address: -     Source Port: -       787407  Automation
+[params]
+rawEventMsg=any
+computer=QA-V-WIN03-ADS
+srcIpPort=0
+winLogonCallerUser=QA-V-WIN03-ADS$
+count=1
+eventId=any
+domain=PROSPECT-HILLS
+deviceTime=any
+eventParsedOk=1
+winLogonType=3(Network - logon)
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=any
+eventAction=0 (Permit)
+eventName=Windows network logon success
+reptVendor=Microsoft
+eventType=Win-Security-540
+user=phoenix_agent
+phEventCategory=0 (External)
+reptDevIpAddr=52.52.52.52
+winLogonId=(0x0,0x6E07BD2)
+reptModel=Windows

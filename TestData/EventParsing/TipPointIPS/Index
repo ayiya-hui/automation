@@ -1,0 +1,8 @@
+eventType,name,module,reptDevIpAddr,key,method
+Tipp_IPS-0089,TipPointIPS_1,TipPointIPS,172.16.20.41,,syslog
+Tipp_IPS-0633,TipPointIPS_2,TipPointIPS,172.16.20.41,,syslog
+Tipp_IPS-1221,TipPointIPS_3,TipPointIPS,172.16.20.41,,syslog
+Tipp_IPS-0079,TipPointIPS_4,TipPointIPS,172.16.20.41,,syslog
+Tipp_IPS-6924,TipPointIPS_5,TipPointIPS,172.16.20.41,,syslog
+Tipp_IPS-4316,TipPointIPS_6,TipPointIPS,172.16.20.41,,syslog
+Tipp_IPS-5601,TipPointIPS_7,TipPointIPS,172.16.20.41,,syslog

@@ -1,0 +1,30 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<14>Jun  4 17:00:08 abc [SystemEvent] Time:'Wed Jun 04 17:00:08.023 GMT 2014', Severity:'Informational', Event Source:'Take Backup', Code:'9009', Event Message:'Backup of vShield Manager successfully completed.', Module:'vShield DB Backup'
+[params]
+deviceTime=any
+parserName=VMwareVCNSParser
+eventType=VMware-VCNS-BACKUP-SUCCESS
+reptGeoState=any
+reptModel=vCNS Manager
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Backup successful
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+msg=Backup of vShield Manager successfully completed.
+destName=abc
+count=1
+componentName=vShield DB Backup
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+reptDevName=any
+customer=Super
+reptGeoCity=any
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=VMware

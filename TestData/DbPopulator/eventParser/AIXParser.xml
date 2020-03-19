@@ -1,0 +1,94 @@
+<eventParser name="AIXParser">
+
+<deviceType>
+	<Vendor>IBM</Vendor>
+	<Model>AIX</Model>
+	<Version>ANY</Version>
+</deviceType>
+
+<eventFormatRecognizer><![CDATA[ Message\sforwarded\sfrom\s<:gPatStrEndColon>: ]]></eventFormatRecognizer>
+
+<testEvents>
+      <testEvent><![CDATA[<38>Dec  2 15:47:31 Message forwarded from fiona: syslog: pts/2: failed login attempt for root from 10.136.104.105 ]]></testEvent>
+  </testEvents>
+
+<parsingInstructions>
+	<!--
+		<38>Dec  2 15:47:31 Message forwarded from fiona: syslog: pts/2: failed login attempt for root from 10.136.104.105
+        Attriubtes to be extracted: user, srcIpAddr
+        Derived Attributes to be set: eventType="AIX_Failed_SSH_Login"
+
+		<46>Dec  2 15:46:55 Message forwarded from fiona: syslogd: restart
+        Derived Attribute to be set: eventType="AIX_Process_Restart"
+
+		<2>Dec  2 15:50:47 Message forwarded from fiona: unix: bpf: lo0 attached
+		<38>Dec  2 15:52:09 Message forwarded from fiona: last message repeated 3 times
+
+		<35>Dec  2 15:55:25 Message forwarded from fiona: tsm: /dev/pts/2: 3004-038 Login timed out after 60 seconds.
+        Attributes to be extracted: durationMSec=60000, check combineMsgId
+        For example,<setEventAttribute attr="durationMSec">combineMsgId($durationMSec,"000")</setEventAttribute>
+
+	-->
+
+	<setEventAttribute attr="eventAction">0</setEventAttribute>
+	<setEventAttribute attr="destIpAddr">$reptDevIpAddr</setEventAttribute>
+	<setEventAttribute attr="eventType">AIX-Generic</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+	
+	<!-- header -->
+	<collectAndSetAttrByRegex src = "$_rawmsg">
+		<regex><![CDATA[<:gPatSyslogPRI><_mon:gPatMon>\s+<_day:gPatDay>\s<_time:gPatTime>\s<:gPatStrEndColon>: <_body:gPatMesgBody>]]></regex>
+	</collectAndSetAttrByRegex>
+	<setEventAttribute attr="deviceTime">toDateTime($_mon, $_day, $_time)</setEventAttribute>
+
+	<!-- body -->
+	<switch>
+		<!-- AIX_Login_Failure -->
+		<case>
+			<collectAndSetAttrByRegex src = "$_body">
+				<regex><![CDATA[<swProcName:gPatStrEndColon>:\s[^:]*:\sfailed login attempt for\s<user:gPatWord>\sfrom\s<srcIpAddr:gPatIpV4Dot>]]></regex>
+			</collectAndSetAttrByRegex>
+			<setEventAttribute attr="eventAction">1</setEventAttribute>
+			<setEventAttribute attr="eventType">AIX_Failed_SSH_Login</setEventAttribute>
+			<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		</case>
+		
+		<!-- AIX_Msg_Repeated -->
+		<!--case>
+			<collectAndSetAttrByRegex src = "$_body">
+				<regex><![CDATA[last message repeated\s<times:gPatInt>\stimes]]></regex>
+			</collectAndSetAttrByRegex>
+			<setEventAttribute attr="eventAction">2</setEventAttribute>
+			<setEventAttribute attr="eventType">AIX_Msg_Repeated</setEventAttribute>
+			<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		</case-->
+		
+		<!-- AIX_Login_Timeout -->
+		<case>
+			<collectAndSetAttrByRegex src = "$_body">
+				<regex><![CDATA[<swProcName:gPatStrEndColon>:\s[^:]*:\s<_first:gPatInt>-<_second:gPatInt>\sLogin timed out after\s<_time:gPatInt>\sseconds]]></regex>
+			</collectAndSetAttrByRegex>
+			<setEventAttribute attr="durationMSec">combineMsgId($_time, "000")</setEventAttribute>
+			<setEventAttribute attr="eventAction">3</setEventAttribute>
+			<setEventAttribute attr="eventType">AIX_SSH_Login_Timeout</setEventAttribute>
+			<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		</case>
+		
+		<!-- AIX_Unix_Attached -->
+		<!--case>
+			<collectAndSetAttrByRegex src = "$_body">
+				<regex><![CDATA[unix:\s[^:]*:\s<:gPatWord>\sattached]]></regex>
+			</collectAndSetAttrByRegex>
+			<setEventAttribute attr="eventType">AIX_Unix_Attached</setEventAttribute>
+		</case-->
+		
+		<!-- AIX_Process_Restart -->
+		<case>
+			<collectAndSetAttrByRegex src = "$_body">
+				<regex><![CDATA[<swProcName:gPatStrEndColon>:\srestart]]></regex>
+			</collectAndSetAttrByRegex>
+			<setEventAttribute attr="eventType">AIX_Process_Restart</setEventAttribute>
+		</case>
+	</switch>
+</parsingInstructions>
+</eventParser>

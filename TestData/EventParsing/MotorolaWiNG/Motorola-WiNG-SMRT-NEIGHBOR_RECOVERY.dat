@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+2015-11-11T09:49:41.881947-06:00 ustxnf1housrfs600001 %SMRT-5-NEIGHBOR_RECOVERY: Radio ustxnf1hous-ap07:R1 power changed from 8 to 12 on AP 84-24-8D-18-4E-7C
+[params]
+radioBand=R1
+parserName=MotorolaWiNGParser
+eventType=Motorola-WiNG-SMRT-NEIGHBOR_RECOVERY
+hostName=ustxnf1hous-ap07
+reptModel=WiNG WLAN AP
+eventId=any
+eventParsedOk=1
+eventSeverity=2
+eventName=Motorola WLAN AP: Neighbor recovery
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+eventRuleTrigger=1
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+eventDesc=Radio ustxnf1hous-ap07:R1 power changed from 8 to 12 on AP 84-24-8D-18-4E-7C
+reptDevName=ustxnf1housrfs600001
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Motorola

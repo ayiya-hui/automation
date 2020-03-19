@@ -1,0 +1,4 @@
+[eventMsg]
+<174>Jan 20 05:11:58 CO135 phPerfMonitor[2861]: [PH_DEV_MON_HVAC_LIEBERT_METRIC]:[eventSeverity]=PHL_INFO,[procName]=phPerfMonitor,[fileName]=phPerfJob.cpp,[lineNumber]=4941,[hostName]=Automator15Dot0Dot4Dot1,[hostIpAddr]=15.0.4.1,[envTempDegC]=21,[envTempHighThreshDegC]=28,[envTempLowThreshDegC]=16,[envTempOffHighDegC]=7,[envTempOffLowDegC]=5,[envTempDegF]=69,[envTempHighThreshDegF]=82,[envTempLowThreshDegF]=60,[envTempOffHighDegF]=44,[envTempOffLowDegF]=41,[envHumidityRel]=33,[envHumidityRelHighThresh]=70,[envHumidityRelLowThresh]=20,[envHumidityOffHigh]=4,[envHumidityOffLow]=13,[lgpSystemState]=2,[lgpCoolingState]=2,[lgpHeatingState]=0,[lgpHumidState]=2,[lgpDehumidState]=2,[lgpEconCycle]=0,[lgpFanState]=2,[envCoolCap]=0,[envHeatCap]=0,[phLogDetail]=
+
+[clearEventMsg]

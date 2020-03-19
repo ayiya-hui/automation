@@ -1,0 +1,17 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+FireEye-HX_Acquisition_Completed,HX_1,HX,$localhost,,syslog
+FireEye-HX_Acquisition_Created,HX_2,HX,$localhost,,syslog
+FireEye-HX_Acquisition_Deleted,HX_3,HX,$localhost,,syslog
+FireEye-HX_Acquisition_Queued,HX_4,HX,$localhost,,syslog
+FireEye-HX_Acquisition_Started,HX_5,HX,$localhost,,syslog
+FireEye-HX_Containment_Approved,HX_6,HX,$localhost,,syslog
+FireEye-HX_Containment_Cancelled,HX_7,HX,$localhost,,syslog
+FireEye-HX_Containment_Completed,HX_8,HX,$localhost,,syslog
+FireEye-HX_Containment_Queued,HX_9,HX,$localhost,,syslog
+FireEye-HX_Containment_Requested,HX_10,HX,$localhost,,syslog
+FireEye-HX_Containment_Started,HX_11,HX,$localhost,,syslog
+FireEye-HX_IOC_Hit_Found,HX_12,HX,$localhost,,syslog
+FireEye-HX_UnContainment_Completed,HX_13,HX,$localhost,,syslog
+FireEye-HX_UnContainment_Queued,HX_14,HX,$localhost,,syslog
+FireEye-HX_UnContainment_Started,HX_15,HX,$localhost,,syslog

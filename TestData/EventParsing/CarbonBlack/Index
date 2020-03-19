@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+CarbonBlack-Watchlist-Hit,CarbonBlack_1,CarbonBlack,$localhost,,syslog

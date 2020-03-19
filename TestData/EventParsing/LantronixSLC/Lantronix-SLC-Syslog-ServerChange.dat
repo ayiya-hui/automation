@@ -1,0 +1,24 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<174>xmsd: gen/info-Syslog server changed to 10.4.3.37
+[params]
+customer=Super
+eventId=any
+eventSeverityCat=MEDIUM
+eventParsedOk=1
+phEventCategory=0 (External)
+parserName=LantronixSLCParser
+count=1
+eventSeverity=7
+eventType=Lantronix-SLC-Syslog-ServerChange
+reptDevIpAddr=$localhost
+collectorId=any
+hostIpAddr=10.4.3.37
+eventName=Lantronix syslog server change
+reptVendor=Lantronix
+relayDevIpAddr=$localhost
+phRecvTime=any
+eventRuleTrigger=1
+appTransportProto=Syslog
+reptModel=SLC Console Manager

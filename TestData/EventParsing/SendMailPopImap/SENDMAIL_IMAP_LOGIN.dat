@@ -1,0 +1,30 @@
+[reptDevIpAddr(key)]
+2.2.2.2
+[eventMsg]
+<21>Mar 10 19:33:17 2.2.2.2 1938176090  IMAP.USER.LOGIN ssl[67.223.64.86]:             neblanch             plaintext
+[params]
+deviceTime=any
+parserName=SendMailPopImapParser
+eventType=SENDMAIL_IMAP_LOGIN
+srcName=any
+srcIpAddr=67.223.64.86
+reptGeoState=any
+reptModel=Sendmail Mail Server
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=User Logged Into Mailbox via IMAP
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=2.2.2.2
+user=neblanch
+rawEventMsg=any
+reptDevName=any
+customer=Super
+reptGeoCity=any
+phRecvTime=any
+reptDevIpAddr=2.2.2.2
+reptVendor=Sendmail.org

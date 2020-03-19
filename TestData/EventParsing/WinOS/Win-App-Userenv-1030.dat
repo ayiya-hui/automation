@@ -1,0 +1,21 @@
+[reptDevIpAddr(key)]
+20.20.20.20
+[eventMsg]
+<13>Jan 14 18:59:22 20.20.20.20 MSWinEventLog	1	Application	9226	Wed Jan 14 18:59:17 2009	1030	Userenv	SYSTEM	User	Error	ADS-PRI	None		Windows cannot query for the list of Group Policy objects. Check the event log for possible messages previously logged by the policy engine that describes the reason for this.  	488  Automation
+[params]
+rawEventMsg=any
+eventSeverity=1
+eventSeverityCat=LOW
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+phRecvTime=any
+phCustId=$sender
+reptDevIpAddr=20.20.20.20
+destIpAddr=20.20.20.20
+eventName=Win-App-Userenv-1030
+reptVendor=Microsoft
+eventType=Win-App-Userenv-1030
+phEventCategory=0 (External)
+reptModel=Windows

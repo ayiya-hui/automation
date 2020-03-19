@@ -1,0 +1,34 @@
+[reptDevIpAddr(key)]
+10.1.2.148
+[eventMsg]
+<134>Jan 10 09:13:15 10.1.2.148 java: [NeXpose-Vuln-Detected]:[eventSeverity]=PHL_INFO[reptVendor]=Rapid7, [reptModel]=Scan Report, [nexposeUserName]=admin, [nexposeDeviceTime]=Thu Jan 10 09:10:44 CST 2013, [nexposeScanName]=/reports/00000002/0000005D/report.xml, [nexposeScanedIP]=10.1.2.25, [nexposeScanedDeviceVendor]=CentOS, [nexposeScanedDeviceProduct]=Linux, [nexposeVulnTittle]=apache-httpd-cve-2010-1623, [nexposeVulnCVE]=CVE-2010-1623, [nexposeVulnBID]=43673, [nexposeVulnSecunia]=41701, 42015, 42361, 42367, 42403, 42537, 43211, 43285, [nexposeVulnServiceName]=HTTPS, [nexposeVulnServicePort]=443, [nexposeVulnServiceProtocol]=tcp, [nexposeVulnServiceProduct]=Apache
+[params]
+rawEventMsg=any
+vulnSecuniaId=41701, 42015, 42361, 42367, 42403, 42537, 43211, 43285
+appName=Apache
+eventType=NeXpose-Vuln-Detected
+phCustId=$sender
+vulnCVEId=CVE-2010-1623
+vulnBugTraqID=43673
+scanProfile=/reports/00000002/0000005D/report.xml
+reptModel=NeXpose Security Scanner
+eventId=any
+eventParsedOk=1
+eventSeverity=7
+serverName=10.1.2.148
+hostModel=Linux
+hostIpAddr=10.1.2.25
+eventName=Vulnerability detected by NeXpose scanner
+serviceName=HTTPS
+phEventCategory=0 (External)
+ipPort=443
+eventSeverityCat=MEDIUM
+collectorId=any
+hostVendor=CentOS
+user=admin
+ipProto=6 (TCP)
+vulnName=apache-httpd-cve-2010-1623
+count=1
+phRecvTime=any
+reptDevIpAddr=10.1.2.148
+reptVendor=Rapid7

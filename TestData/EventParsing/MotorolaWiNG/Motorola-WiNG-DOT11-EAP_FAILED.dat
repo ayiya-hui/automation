@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+2015-11-10T14:26:34.330612-05:00 usscfs1colu-ap03 %DOT11-5-EAP_FAILED: Client 'C0-BD-D1-21-E9-E5' failed 802.1x/EAP authentication on wlan 'OFFICE-WAREHOUSE-RADIUS-WLAN' radio 'usscfs1colu-ap03:R2'
+[params]
+radioBand=R2
+parserName=MotorolaWiNGParser
+eventType=Motorola-WiNG-DOT11-EAP_FAILED
+reptModel=WiNG WLAN AP
+eventId=any
+eventParsedOk=1
+eventSeverity=2
+eventName=Motorola WLAN AP: EAP client auth failed
+extEventRecvProto=Syslog
+wlanSsid=OFFICE-WAREHOUSE-RADIUS-WLAN
+eventRuleTrigger=1
+count=1
+srcMACAddr=c0:bd:d1:21:e9:e5
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+reptDevName=usscfs1colu-ap03
+customer=Super
+phEventCategory=0 (External)
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Motorola
+authenMethod=802.1x/EAP

@@ -1,0 +1,76 @@
+<eventParser name="WebsenseWebParser">
+  <deviceType>
+    <Vendor>Generic</Vendor>
+    <Model>Generic</Model>
+    <Version>ANY</Version>
+  </deviceType>
+
+  <appType>
+    <Vendor>Websense</Vendor>
+    <Model>Web Security</Model>
+    <Version>ANY</Version>
+    <Name>Websense Web Security</Name>
+  </appType>
+
+  <patternDefinitions>
+    <pattern name="patStrEndWithRightSquareBracket"><![CDATA[[^\]]*]]></pattern>
+    <pattern name="patStrEndBrack"><![CDATA[[^\]+]]></pattern>
+  </patternDefinitions>
+  <eventFormatRecognizer><![CDATA[\[Websense_Web_]]></eventFormatRecognizer>
+  
+  <testEvents>
+      <testEvent><![CDATA[Apr 10 13:01:26 partha-desktop java: [Websense_Web_Deny]:[eventSeverity]=PHL_INFO, [retCode]=1, [eventTime]=2009-04-01 21:27:35.0, [rptIp]=192.168.0.43, [relayIp]=192.168.0.43, [srcIp]=192.168.20.35, [destPort]=80, [destIp]=205.178.145.65, [destName]=www.prospecthills.net, [destCategory]=Productivity,]]></testEvent>
+  </testEvents>
+
+  <parsingInstructions>
+
+    <!--
+      Apr 10 13:01:26 partha-desktop java: [Websense_Web_Deny]:[eventSeverity]=PHL_INFO, [retCode]=1, [eventTime]=2009-04-01 21:27:35.0, [rptIp]=192.168.0.43, [relayIp]=192.168.0.43, [srcIp]=192.168.20.35, [destPort]=80, [destIp]=205.178.145.65, [destName]=www.prospecthills.net, [destCategory]=Productivity,
+
+Apr 10 13:01:26 partha-desktop java: [Websense_Web_Permit]:[eventSeverity]=PHL_INFO, [retCode]=0, [eventTime]=2009-04-01 21:44:18.0, [rptIp]=192.168.0.43, [relayIp]=192.168.0.43, [srcIp]=192.168.20.35, [destPort]=80, [destIp]=74.125.164.229, [destName]=static.cache.l.google.com, [destCategory]=Information Technology,
+    -->
+
+    <collectFieldsByRegex src="$_rawmsg">
+      <regex><![CDATA[<:gPatSyslogPRI><:gPatMon>\s+<:gPatDay>\s+<:gPatTime>\s+<:gPatStr>\s+java:\s+\[<eventType:patStrEndWithRightSquareBracket>\]<_body:gPatMesgBody>]]></regex>
+    </collectFieldsByRegex>
+    
+    <collectAndSetAttrByKeyValuePair sep=',' src="$_body">
+      <attrKeyMap attr="_severity" key="[eventSeverity]="/>
+      <attrKeyMap attr="_eventTime" key="[eventTime]="/>
+      <attrKeyMap attr="reptDevIpAddr" key="[rptIp]="/>
+      <attrKeyMap attr="relayDevIpAddr" key="[relayIp]="/>
+      <attrKeyMap attr="srcIpAddr" key="[srcIp]="/>
+      <attrKeyMap attr="destIpAddr" key="[destIp]="/>
+      <attrKeyMap attr="destIpPort" key="[destPort]="/>
+      <attrKeyMap attr="destName" key="[destName]="/>
+      <attrKeyMap attr="webCategory" key="[destCategory]="/>
+    </collectAndSetAttrByKeyValuePair>
+    
+    <!-- parse this 2009-03-26 19:27:52:752505 -->
+    <collectFieldsByRegex src="$_eventTime">
+      <regex><![CDATA[<_year:gPatYear>-<_mon:gPatMonNum>-<_day:gPatDay>\s+<_time:gPatTime>.*]]></regex>
+    </collectFieldsByRegex>
+
+    <setEventAttribute attr="deviceTime">toDateTime($_mon, $_day, $_year, $_time)</setEventAttribute>
+   
+    <!-- event severity -->
+    <choose>
+      <when test='$_severity = "PHL_ALERT"'>
+	<setEventAttribute attr="eventSeverity">10</setEventAttribute>
+      </when>
+      
+      <when test='$_severity = "PHL_CRITICAL"'>
+	<setEventAttribute attr="eventSeverity">8</setEventAttribute>
+      </when>
+      
+      <when test='$_severity IN "PHL_ERROR, PHL_WARNING"'>
+	<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+      </when>
+      
+      <when test='$_severity = "PHL_INFO"'>
+	<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+      </when>
+    </choose>
+
+  </parsingInstructions>
+</eventParser>

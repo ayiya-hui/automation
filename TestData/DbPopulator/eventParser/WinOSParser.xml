@@ -1,0 +1,2290 @@
+<eventParser name="WinOSParser">
+   <deviceType>
+     <Vendor>Microsoft</Vendor>
+     <Model>Windows</Model>
+     <Version>ANY</Version>
+   </deviceType>
+   
+   <eventFormatRecognizer><![CDATA[MSWinEventLog]]></eventFormatRecognizer>
+   
+   <testEvents>
+      <testEvent><![CDATA[<13>Jul 23 17:38:35 20.20.20.20 MSWinEventLog	1	Security	34035	Thu Jul 23 17:38:31 2009	644	Security	SYSTEM	User	Success Audit	ADS-PRI	Account Management		User Account Locked Out:     Target Account Name: connie.hsu     Target Account ID: %{S-1-5-21-3383442562-1768178646-255068551-1250}     Caller Machine Name: ADS-Pri     Caller User Name: ADS-PRI$     Caller Domain: PROSPECTHILLS     Caller Logon ID: (0x0,0x3E7)    	33720]]></testEvent>
+  </testEvents>
+
+   <!-- pattern definitions -->
+   <patternDefinitions>
+     <pattern name="patMonabbrDay"><![CDATA[(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)(?:\s*)\d{1,2}]]></pattern>
+     <pattern name="patWordThree"><![CDATA[\w{3}]]></pattern> 
+     <pattern name="patWordTab"><![CDATA[[^\t]+]]></pattern> 
+     <pattern name="patOptLeftAngleBracket"><![CDATA[<]]></pattern> 
+     <pattern name="patOptRightAngleBracket"><![CDATA[>]]></pattern> 
+     <pattern name="patStrQuote"><![CDATA[[^']+]]></pattern>
+     <pattern name="patStrRightSquareBracket"><![CDATA[[^\]]+]]></pattern>
+     <pattern name="patStrRightAngleBracket"><![CDATA[[^>]+]]></pattern>
+   </patternDefinitions>
+
+   <parsingInstructions>
+      
+     <switch>
+       <case>
+	 <collectFieldsByRegex src="$_rawmsg">
+	   <regex><![CDATA[<:gPatSyslogPRI><:gPatMon>\s+<:gPatDay> <:gPatTime> <:gPatStr> <_agentSig:gPatWord>\s+<_mesgType:gPatInt>\s+<_OSModule:patWordTab>\s+<_mesgId:gPatInt>\s+<_dayName:gPatWord>:? <_mon:gPatMon><:gPatSpace><_day:gPatDay> <_time:gPatTime> <_year:gPatYear>\s+<_id:gPatInt>\s+<_applModule:patWordTab>\s+<:patWordTab>\s+<:patWordTab>\s+<_action:patWordTab>\s+<_body:gPatMesgBody>]]></regex>
+	 </collectFieldsByRegex>
+	 
+	 <setEventAttribute attr="eventType">combineMsgId("Win", "-", $_OSModule, "-", $_id)</setEventAttribute>
+	 <setEventAttribute attr="deviceTime">toDateTime($_mon, $_day, $_year, $_time)</setEventAttribute>
+	  <setEventAttribute attr="destIpAddr">$reptDevIpAddr</setEventAttribute> 
+	 <choose>
+	   <when test="matches($_action, '^Success')">
+	     <setEventAttribute attr="eventAction">0</setEventAttribute>
+	   </when>
+	   <when test="matches($_action, '^Failure')">       
+	     <setEventAttribute attr="eventAction">1</setEventAttribute>
+	   </when>
+	 </choose>
+       </case>
+
+       <case>
+	 <collectFieldsByRegex src="$_rawmsg">
+	   <regex><![CDATA[<:gPatMon>\s+<:gPatDay> <:gPatTime> <:gPatStr> <_agentSig:gPatWord>\s+<_mesgType:gPatInt>\s+<_OSModule:patWordTab>\s+<_mesgId:gPatInt>\s+<_dayName:gPatWord> <_mon:gPatMon><:gPatSpace><_day:gPatDay> <_time:gPatTime> <_year:gPatYear>\s+<_id:gPatInt>\s+<_applModule:patWordTab>\s+<:patWordTab>\s+<:patWordTab>\s+<:patWordTab>\s+<_body:gPatMesgBody>]]></regex>
+	 </collectFieldsByRegex>
+	 
+	 <setEventAttribute attr="eventType">combineMsgId("Win", "-", $_OSModule, "-", $_id)</setEventAttribute>
+	 <setEventAttribute attr="deviceTime">toDateTime($_mon, $_day, $_year, $_time)</setEventAttribute>
+	 <setEventAttribute attr="destIpAddr">$reptDevIpAddr</setEventAttribute>
+       </case>
+     </switch>
+
+     <!--when test="matches($_senderHostName, '\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}')">
+       <setEventAttribute attr="reptDevIpAddr">$_senderHostName</setEventAttribute>       
+     </when-->
+
+     <!-- default (overridden later) -->
+     <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+
+     <choose>
+
+       <!-- Logon related  -->
+
+       <when test='$_id IN "528, 538"'>
+
+         <collectAndSetAttrByKeyValuePair sep=' ' src="$_body">
+           <attrKeyMap attr="user" key="User Name: "/>
+           <attrKeyMap attr="domain" key="Domain: "/>
+           <attrKeyMap attr="winLogonId" key="Logon ID: "/>
+           <attrKeyMap attr="winLogonType" key="Logon Type: "/>
+	   <attrKeyMap attr="srcIpAddr" key="Source Network Address: "/>
+           <attrKeyMap attr="srcIpPort" key="Source Port: "/>
+	 </collectAndSetAttrByKeyValuePair>
+         <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+
+       </when>
+
+       <when test='$_id = "540"'>
+         <!-- 
+                 <13>Jan 21 09:45:48 ADS-Pri.ProspectHills.net MSWinEventLog	1	Security	59874	Mon Jan 21 09:45:48 2008	540	Security	schen	User	Success Audit	ADS-PRI	Logon/Logoff		Successful Network Logon:     User Name: schen     Domain: PROSPECTHILLS     Logon ID: (0x0,0x14066CF)     Logon Type: 3     Logon Process: Kerberos     Authentication Package: Kerberos     Workstation Name:      Logon GUID: {fd3d2e01-3980-1c07-d916-c03ddb25378f}     Caller User Name: -     Caller Domain: -     Caller Logon ID: -     Caller Process ID: -     Transited Services: -     Source Network Address: 192.168.20.13     Source Port: 1159    	59676
+                   -->
+         <collectAndSetAttrByKeyValuePair sep=' ' src="$_body">
+           <attrKeyMap attr="user" key="User Name: "/>
+           <attrKeyMap attr="domain" key="Domain: "/>
+           <attrKeyMap attr="winLogonId" key="Logon ID: "/>
+           <attrKeyMap attr="winLogonType" key="Logon Type: "/>
+	   <attrKeyMap attr="srcIpAddr" key="Source Network Address: "/>
+           <attrKeyMap attr="srcIpPort" key="Source Port: "/>
+           <attrKeyMap attr="_computer" key="Workstation Name: "/>
+           <attrKeyMap attr="winLogonCallerUser" key="Caller User Name: "/>
+         </collectAndSetAttrByKeyValuePair>
+         <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+         <when test = 'exist _computer'>
+	   <setEventAttribute attr="computer">replaceStrInStr($_computer, "\\", "")</setEventAttribute>
+         </when>
+       </when>
+
+       <when test='$_id = "4624"'>
+
+         <collectFieldsByRegex src="$_body">
+	   <regex><![CDATA[.*Subject:<_subject:gPatMesgBody>New Logon:<_newLogon:gPatMesgBody>Process Information:<_processInfo:gPatMesgBody>Network Information:<_netInfo:gPatMesgBody>Detailed Authentication Information:<_detailedAuth:gPatMesgBody>]]></regex>
+	 </collectFieldsByRegex>
+
+	 <collectAndSetAttrByKeyValuePair sep=' ' src="$_subject">
+           <attrKeyMap attr="winLogonType" key="Logon Type:   "/>
+           <attrKeyMap attr="winLogonCallerUser" key="Account Name: "/>
+         </collectAndSetAttrByKeyValuePair>
+
+	 <collectAndSetAttrByKeyValuePair sep=' ' src="$_newLogon">
+           <attrKeyMap attr="user" key="Account Name:  "/>
+           <attrKeyMap attr="domain" key="Account Domain:  "/>
+           <attrKeyMap attr="winLogonId" key="Logon ID:  "/>
+         </collectAndSetAttrByKeyValuePair>
+	 
+	 <collectAndSetAttrByKeyValuePair sep=' ' src="$_processInfo">
+           <attrKeyMap attr="procName" key="Process Name:  "/>
+         </collectAndSetAttrByKeyValuePair>
+	 
+	 <collectAndSetAttrByKeyValuePair sep=' ' src="$_netInfo">
+           <attrKeyMap attr="_computer" key="Workstation Name: "/>
+	   <attrKeyMap attr="srcIpAddr" key="Source Network Address: "/>
+           <attrKeyMap attr="srcIpPort" key="Source Port:  "/>
+         </collectAndSetAttrByKeyValuePair>
+         <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+	 <setEventAttribute attr="computer">replaceStrInStr($_computer, "\\", "")</setEventAttribute>
+	    <when test="not_matches($srcIpAddr, '\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}')">
+          <setEventAttribute attr="srcIpAddr">$reptDevIpAddr</setEventAttribute>
+        </when>
+	 
+       </when>
+
+       <when test='$_id = "4625"'>
+
+         <collectFieldsByRegex src="$_body">
+	   <regex><![CDATA[.*Subject:<_subject:gPatMesgBody>Account For Which Logon Failed:<_failedLogon:gPatMesgBody>Failure Information:<_failInfo:gPatMesgBody>Process Information:<_processInfo:gPatMesgBody>Network Information:<_netInfo:gPatMesgBody>Detailed Authentication Information:<_detailedAuth:gPatMesgBody>]]></regex>
+ 
+	 </collectFieldsByRegex>
+	 
+	 <collectAndSetAttrByKeyValuePair sep=' ' src="$_subject">          
+           <attrKeyMap attr="winLogonType" key="Logon Type:   "/>
+	   <attrKeyMap attr="winLogonId" key="Logon ID:  "/>
+         </collectAndSetAttrByKeyValuePair>
+
+	 <collectAndSetAttrByKeyValuePair sep=' ' src="$_failedLogon">
+           <attrKeyMap attr="user" key="Account Name:  "/>
+           <attrKeyMap attr="domain" key="Account Domain:  "/>
+         </collectAndSetAttrByKeyValuePair>
+
+	 <collectAndSetAttrByKeyValuePair sep=' ' src="$_failInfo">
+           <attrKeyMap attr="winLogonFailCode" key="Failure Reason:  "/>
+         </collectAndSetAttrByKeyValuePair>
+
+	 <collectAndSetAttrByKeyValuePair sep=' ' src="$_processInfo">
+           <attrKeyMap attr="procName" key="Caller Process Name: "/>
+         </collectAndSetAttrByKeyValuePair>
+	 
+	 <collectAndSetAttrByKeyValuePair sep=' ' src="$_netInfo">
+           <attrKeyMap attr="_computer" key="Workstation Name: "/>
+	   <attrKeyMap attr="srcIpAddr" key="Source Network Address: "/>
+           <attrKeyMap attr="srcIpPort" key="Source Port:  "/>
+         </collectAndSetAttrByKeyValuePair>
+         <setEventAttribute attr="eventSeverity">3</setEventAttribute>
+	 <setEventAttribute attr="computer">replaceStrInStr($_computer, "\\", "")</setEventAttribute>
+
+	 <collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-4624">
+	   <when test = 'exist winLogonId'>
+		 <when test = '$winLogonId = $AnotherEvent.winLogonId'>
+		   <setEventAttribute attr="srcIpAddr">$AnotherEvent.srcIpAddr</setEventAttribute>
+		 </when>
+	   </when>
+	 </collectAndSetAttrFromAnotherEvent>
+	 
+       </when>
+
+       <when test='$_id IN "4634"'>
+
+         <collectAndSetAttrByKeyValuePair sep=' ' src="$_body">
+           <attrKeyMap attr="user" key="Account Name:  "/>
+           <attrKeyMap attr="domain" key="Account Domain:  "/>
+           <attrKeyMap attr="winLogonId" key="Logon ID:  "/>
+           <attrKeyMap attr="winLogonType" key="Logon Type:   "/>
+	 </collectAndSetAttrByKeyValuePair>
+         <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+
+       </when>
+
+       <when test='$_id = "539"'>
+
+         <collectAndSetAttrByKeyValuePair sep=' ' src="$_body">
+           <attrKeyMap attr="user" key="User Name: "/>
+           <attrKeyMap attr="domain" key="Domain: "/>
+           <attrKeyMap attr="winLogonId" key="Logon ID: "/>
+           <attrKeyMap attr="winLogonType" key="Logon Type: "/>
+	 </collectAndSetAttrByKeyValuePair>
+         <setEventAttribute attr="eventSeverity">10</setEventAttribute>
+
+       </when>
+ 
+       <when test='$_id IN "529, 530, 531, 532, 533, 534, 535, 536, 537"'>
+
+         <collectAndSetAttrByKeyValuePair sep=' ' src="$_body">
+           <attrKeyMap attr="user" key="User Name: "/>
+           <attrKeyMap attr="domain" key="Domain: "/>
+           <attrKeyMap attr="winLogonId" key="Logon ID: "/>
+           <attrKeyMap attr="winLogonType" key="Logon Type: "/>
+	   <attrKeyMap attr="srcIpAddr" key="Source Network Address: "/>
+	 </collectAndSetAttrByKeyValuePair>
+         <setEventAttribute attr="eventSeverity">3</setEventAttribute>
+
+       </when>
+
+       <when test='$_id = "552"'>
+         <collectAndSetAttrByKeyValuePair sep=' ' src="$_body">
+           <attrKeyMap attr="user" key="User Name: "/>
+           <attrKeyMap attr="domain" key="Domain: "/>
+           <attrKeyMap attr="winLogonId" key="Logon ID: "/>
+           <attrKeyMap attr="targetUser" key="Target User Name: "/>
+	   <attrKeyMap attr="targetDomain" key="Target Domain: "/>
+           <attrKeyMap attr="srcIpAddr" key="Source Network Address: "/>
+           <attrKeyMap attr="srcIpPort" key="Source Port: "/>
+         </collectAndSetAttrByKeyValuePair>	
+         <setEventAttribute attr="eventSeverity">3</setEventAttribute>
+       </when>
+       
+       <!-- A logon was attempted using explicit credentials -->
+       <when test='$_id = "4648"'>
+         <collectFieldsByRegex src="$_body">
+	   <regex><![CDATA[.*Subject:<_subject:gPatMesgBody>Account Whose Credentials Were Used:<_target:gPatMesgBody>Target Server:<_server:gPatMesgBody>Process Information:<_processInfo:gPatMesgBody>Network Information:<_netInfo:gPatMesgBody>]]></regex>
+	 </collectFieldsByRegex>
+
+	 <collectAndSetAttrByKeyValuePair sep=' ' src="$_subject">          
+           <attrKeyMap attr="winLogonId" key="Logon ID:  "/>
+	   <attrKeyMap attr="user" key="Account Name:  "/>
+           <attrKeyMap attr="domain" key="Account Domain:  "/>
+         </collectAndSetAttrByKeyValuePair>
+
+	 <collectAndSetAttrByKeyValuePair sep=' ' src="$_target">
+           <attrKeyMap attr="targetUser" key="Account Name:  "/>
+           <attrKeyMap attr="targetDomain" key="Account Domain:  "/>
+         </collectAndSetAttrByKeyValuePair>
+	 
+	 <collectAndSetAttrByKeyValuePair sep=' ' src="$_processInfo">
+           <attrKeyMap attr="procName" key="Process Name:  "/>
+         </collectAndSetAttrByKeyValuePair>
+	 
+	 <collectAndSetAttrByKeyValuePair sep=' ' src="$_netInfo">
+	   <attrKeyMap attr="srcIpAddr" key="Network Address: "/>
+           <attrKeyMap attr="srcIpPort" key="Port:   "/>
+         </collectAndSetAttrByKeyValuePair>
+         <setEventAttribute attr="eventSeverity">3</setEventAttribute>
+       </when>
+
+       <when test='$_id = "560"'>
+         <!-- various
+              <13>Dec 12 10:09:00 ADS-Pri.ProspectHills.net MSWinEventLog	1	Security	1756	Wed Dec 12 10:08:53 2007	560	Security	SYSTEM	User	Success Audit	ADS-PRI	Object Open		Client User Name: partha   Client Domain: PROSPECTHILLS		Client Logon ID: (0x0,0x158E87)  Object Type: File  Handle ID: 144 	Image File Name: C:\WINDOWS\system32\notepad.exe Object Name: C:\ConfidentialFiles\ProjectPlan.doc.txt  Accesses: WriteData (or AddFile) AppendData (or AddSubdirectory or CreatePipeInstance)
+                -->
+         
+         <collectAndSetAttrByKeyValuePair sep=' ' src="$_body">
+           <attrKeyMap attr="_user" key="Client User Name: "/>
+         </collectAndSetAttrByKeyValuePair>
+         <setEventAttribute attr="eventSeverity">2</setEventAttribute>
+	 <choose>
+           <when test='$_user != "-"'>
+             <collectAndSetAttrByKeyValuePair sep=' ' src="$_body">
+               <attrKeyMap attr="user" key="Client User Name: "/>
+               <attrKeyMap attr="domain" key="Client Domain: "/>
+               <attrKeyMap attr="winLogonId" key="Client Logon ID: "/>
+               <attrKeyMap attr="procName" key="Image File Name: "/>
+ 	         <attrKeyMap attr="osObjType" key="Object Type: "/>
+ 	         <attrKeyMap attr="osObjName" key="Object Name: "/>
+               <attrKeyMap attr="osObjHandleID" key="Handle ID: "/>
+	         <attrKeyMap attr="osObjAccessType" key="Accesses: "/>
+             </collectAndSetAttrByKeyValuePair>	
+           </when>
+           <otherwise>
+             <collectAndSetAttrByKeyValuePair sep=' ' src="$_body">
+               <attrKeyMap attr="user" key="Primary User Name: "/>
+               <attrKeyMap attr="domain" key="Primary Domain: "/>
+               <attrKeyMap attr="winLogonId" key="Primary Logon ID: "/>
+               <attrKeyMap attr="procName" key="Image File Name: "/>
+	       <attrKeyMap attr="osObjType" key="Object Type: "/>
+ 	       <attrKeyMap attr="osObjName" key=" Object Name: "/>
+               <attrKeyMap attr="osObjHandleID" key="Handle ID: "/>
+               <attrKeyMap attr="osObjAccessType" key="Accesses: "/>
+             </collectAndSetAttrByKeyValuePair>	
+           </otherwise>
+         </choose>
+         
+         <collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-540 OR Win-Security-528">
+           <when test = '$winLogonId = $AnotherEvent.winLogonId'>
+             <setEventAttribute attr="srcIpAddr">$AnotherEvent.srcIpAddr</setEventAttribute>
+           </when>
+         </collectAndSetAttrFromAnotherEvent>	
+         
+         <choose>
+             <when test="matches($_action, '^Success')">
+	          <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+              </when>
+
+              <when test="matches($_action, '^Failure)">       
+	          <setEventAttribute attr="eventSeverity">3</setEventAttribute>
+              </when>
+         </choose>
+
+       </when>
+       
+       <when test='$_id = "567"'>
+         <!-- various
+              <13>Dec 12 10:09:00 ADS-Pri.ProspectHills.net MSWinEventLog	1	Security	1756	Wed Dec 12 10:08:53 2007	567	Security	SYSTEM	User	Success Audit	ADS-PRI	Object Access Attempt	 Object Type: File  Handle ID: 144 	Image File Name: C:\WINDOWS\system32\notepad.exe Accesses: WriteData (or AddFile) AppendData (or AddSubdirectory or CreatePipeInstance)
+                -->
+         
+         <collectAndSetAttrByKeyValuePair sep=' ' src="$_body">
+           <attrKeyMap attr="procName" key="Image File Name: "/>
+ 	     <attrKeyMap attr="osObjType" key="Object Type: "/>
+           <attrKeyMap attr="osObjHandleID" key="Handle ID: "/>
+           <attrKeyMap attr="osObjAccessType" key="Accesses: "/>
+         </collectAndSetAttrByKeyValuePair>
+
+         <collectAndSetAttrFromAnotherEvent AnotherEventType="Win-Security-560">
+           <when test = '$osObjHandleID = $AnotherEvent.osObjHandleID'>
+             <setEventAttribute attr="srcIpAddr">$AnotherEvent.srcIpAddr</setEventAttribute>
+	       <setEventAttribute attr="user">$AnotherEvent.user</setEventAttribute>
+             <setEventAttribute attr="domain">$AnotherEvent.domain</setEventAttribute>
+             <setEventAttribute attr="winLogonId">$AnotherEvent.winLogonId</setEventAttribute>
+	     <setEventAttribute attr="osObjName">$AnotherEvent.osObjName</setEventAttribute>
+           </when>
+         </collectAndSetAttrFromAnotherEvent>
+
+         <choose>
+             <when test="matches($_action, '^Success')">
+	          <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+              </when>
+
+              <when test="matches($_action, '^Failure)">       
+	          <setEventAttribute attr="eventSeverity">3</setEventAttribute>
+              </when>
+         </choose>
+		
+       </when>
+       
+       <!-- Special privileges assigned to new logon -->
+       <when test='$_id = "576"'>
+	 <collectAndSetAttrByKeyValuePair sep=' ' src="$_body">                                         
+           <attrKeyMap attr="winLogonId" key="Logon ID: "/>
+	   <attrKeyMap attr="user" key="User Name: "/>
+           <attrKeyMap attr="domain" key="Domain: "/>
+         </collectAndSetAttrByKeyValuePair>
+	 <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+	 <collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-540 OR Win-Security-528">
+           <when test = '$winLogonId = $AnotherEvent.winLogonId'>
+             <setEventAttribute attr="srcIpAddr">$AnotherEvent.srcIpAddr</setEventAttribute>
+           </when>
+         </collectAndSetAttrFromAnotherEvent>
+         
+       </when>
+
+       <!-- Special privileges assigned to new logon -->
+       <when test='$_id = "4672"'>
+         <collectFieldsByRegex src="$_body">
+	   <regex><![CDATA[.*Subject:<_subject:gPatMesgBody>Privileges:<_priv:gPatMesgBody>]]></regex>
+	 </collectFieldsByRegex>
+
+	 <collectAndSetAttrByKeyValuePair sep=' ' src="$_subject">                                            
+           <attrKeyMap attr="winLogonId" key="Logon ID:  "/>
+	   <attrKeyMap attr="user" key="Account Name:  "/>
+           <attrKeyMap attr="domain" key="Account Domain:  "/>
+         </collectAndSetAttrByKeyValuePair>
+
+	 <collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-4624">
+           <when test = '$winLogonId = $AnotherEvent.winLogonId'>
+             <setEventAttribute attr="srcIpAddr">$AnotherEvent.srcIpAddr</setEventAttribute>
+           </when>
+         </collectAndSetAttrFromAnotherEvent>
+         <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+       </when>
+
+       <when test='$_id = "578"'>
+         <!--  PRIVILEDGED OBJECT OPERATION
+               <13>Mar 10 15:40:44 ADS-Pri.ProspectHills.net MSWinEventLog     1       Security        1250    Mon Mar 10 15:40:24 2008        578     Security        Administrator  User    Failure Audit   ADS-PRI Privilege Use           Privileged object operation:     Object Server: Security     Object Handle: 0     Process ID: 2080     Primary User Name: Administrator     Primary Domain: PROSPECTHILLS     Primary Logon ID: (0x0,0x3F98A7)     Client User Name: -     Client Domain: -     Client Logon ID: -     Privileges: SeTcbPrivilege         1237
+          -->
+
+         <collectAndSetAttrByKeyValuePair sep=' ' src="$_body">
+           <attrKeyMap attr="_user" key="Client User Name: "/>
+         </collectAndSetAttrByKeyValuePair>
+         <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+	   <choose>
+           <when test='$_user != "-"'>
+             <collectAndSetAttrByKeyValuePair sep=' ' src="$_body">
+               <attrKeyMap attr="user" key="Client User Name: "/>
+               <attrKeyMap attr="domain" key="Client Domain: "/>
+               <attrKeyMap attr="winLogonId" key="Client Logon ID: "/>
+             </collectAndSetAttrByKeyValuePair>	
+           </when>
+           <otherwise>
+             <collectAndSetAttrByKeyValuePair sep=' ' src="$_body">
+               <attrKeyMap attr="user" key="Primary User Name: "/>
+               <attrKeyMap attr="domain" key="Primary Domain: "/>
+               <attrKeyMap attr="winLogonId" key="Primary Logon ID: "/>
+             </collectAndSetAttrByKeyValuePair>	
+           </otherwise>
+         </choose>
+
+         <collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-540 OR Win-Security-528 ">
+           <when test = '$winLogonId = $AnotherEvent.winLogonId'>
+             <setEventAttribute attr="srcIpAddr">$AnotherEvent.srcIpAddr</setEventAttribute>
+           </when>
+         </collectAndSetAttrFromAnotherEvent>	
+
+         <choose>
+            <when test="matches($_action, '^Success')">
+	         <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+             </when>
+             <when test="matches($_action, '^Failure)">       
+	         <setEventAttribute attr="eventSeverity">3</setEventAttribute>
+             </when>
+         </choose>
+       </when>
+       
+
+       <when test='$_id IN "592, 593"'>
+         <!--  A new process has been created
+               <13>Mar 10 17:06:43 ADS-Pri.ProspectHills.net MSWinEventLog	1	Security	8485	Mon Mar 10 17:06:36 2008	592	Security	SYSTEM	User	Success Audit	ADS-PRI	Detailed Tracking		A new process has been created:     New Process ID: 5788     Image File Name: C:\Program Files\Splunk\bin\splunk-optimize.exe     Creator Process ID: 4416     User Name: ADS-PRI$     Domain: PROSPECTHILLS     Logon ID: (0x0,0x3E7)    	8470
+                 <13>Mar 10 16:56:13 ADS-Pri.ProspectHills.net MSWinEventLog	1	Security	7827	Mon Mar 10 16:56:05 2008	593	Security	SYSTEM	User	Success Audit	ADS-PRI	Detailed Tracking		A process has exited:     Process ID: 5160     Image File Name: C:\Program Files\Splunk\bin\splunk-optimize.exe     User Name: ADS-PRI$     Domain: PROSPECTHILLS     Logon ID: (0x0,0x3E7)    	7813
+                   -->
+         <collectAndSetAttrByKeyValuePair sep=' ' src="$_body">
+           <attrKeyMap attr="user" key="User Name: "/>
+           <attrKeyMap attr="domain" key="Domain: "/>
+           <attrKeyMap attr="fileName" key="Image File Name: "/>
+           <attrKeyMap attr="winLogonId" key="Logon ID: "/>
+           <attrKeyMap attr="procName" key="Image File Name: "/>
+         </collectAndSetAttrByKeyValuePair>
+
+         <collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-540 OR Win-Security-528">
+           <when test = '$winLogonId = $AnotherEvent.winLogonId'>
+             <setEventAttribute attr="srcIpAddr">$AnotherEvent.srcIpAddr</setEventAttribute>
+           </when>
+         </collectAndSetAttrFromAnotherEvent>	
+
+         <choose>
+            <when test="matches($_action, '^Success')">
+	         <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+             </when>
+             <when test="matches($_action, '^Failure)">       
+	         <setEventAttribute attr="eventSeverity">3</setEventAttribute>
+             </when>
+         </choose>
+
+       </when>
+
+       <!-- domain auth success/failure -->
+       <when test='$_id = "672"'>
+         <collectAndSetAttrByKeyValuePair sep=' ' src="$_body">
+           <attrKeyMap attr="winKerbFailCode" key="Result Code: "/>
+         </collectAndSetAttrByKeyValuePair>
+         
+         <choose>
+           <when test='$winKerbFailCode IN "-,0x0"'>
+             <setEventAttribute attr="eventType">combineMsgId("Win", "-", $_OSModule, "-", $_id, "-", "success")</setEventAttribute>
+             <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+           </when>
+           <otherwise>
+             <setEventAttribute attr="eventType">combineMsgId("Win", "-", $_OSModule, "-", $_id, "-", "failure")</setEventAttribute>
+             <setEventAttribute attr="eventSeverity">3</setEventAttribute>
+           </otherwise>
+         </choose>
+         
+         <collectAndSetAttrByKeyValuePair sep=' ' src="$_body">
+           <attrKeyMap attr="user" key="User Name: "/>
+           <attrKeyMap attr="domain" key="Supplied Realm Name: "/>
+           <attrKeyMap attr="winSrvcName" key="Service Name: "/>
+           <attrKeyMap attr="srcIpAddr" key="Client Address: "/>
+	   <attrKeyMap attr="srcIpAddr" key="Source Network Address: "/>
+         </collectAndSetAttrByKeyValuePair>
+       </when>
+       
+       <!-- domain auth success/failure -->
+       <when test='$_id = "4768"'>
+         <collectFieldsByRegex src="$_body">
+	   <regex><![CDATA[.*Account Information:<_account:gPatMesgBody>Service Information:<_service:gPatMesgBody>Network Information:<_network:gPatMesgBody>Additional Information:<_addl:gPatMesgBody>Certificate Information:<_cert:gPatMesgBody>]]></regex>
+	 </collectFieldsByRegex>
+
+	 <collectAndSetAttrByKeyValuePair sep=' ' src="$_account">
+           <attrKeyMap attr="user" key="Account Name:  "/>
+           <attrKeyMap attr="domain" key="Supplied Realm Name: "/>
+         </collectAndSetAttrByKeyValuePair>
+
+	 <collectAndSetAttrByKeyValuePair sep=' ' src="$_service">
+         </collectAndSetAttrByKeyValuePair>
+	 
+	 <collectAndSetAttrByKeyValuePair sep=' ' src="$_addl">
+           <attrKeyMap attr="_result" key="Result Code:  "/>
+         </collectAndSetAttrByKeyValuePair>
+	 
+	 <collectAndSetAttrByKeyValuePair sep=' ' src="$_network">
+	   <attrKeyMap attr="srcIpAddr" key="Client Address:  "/>
+           <attrKeyMap attr="srcIpPort" key="Client Port:  "/>
+         </collectAndSetAttrByKeyValuePair>
+
+         <choose> 
+           <when test='$result IN "-,0x0"'>
+             <setEventAttribute attr="eventType">combineMsgId("Win", "-", $_OSModule, "-", $_id, "-", "success")</setEventAttribute>
+             <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+           </when>
+           <otherwise>
+             <setEventAttribute attr="eventType">combineMsgId("Win", "-", $_OSModule, "-", $_id, "-", "failure")</setEventAttribute>
+             <setEventAttribute attr="eventSeverity">3</setEventAttribute>
+           </otherwise>
+         </choose>
+       </when>
+
+       <!-- ticket grant success/failure -->
+       <when test='$_id = "4769"'>
+         <collectFieldsByRegex src="$_body">
+	   <regex><![CDATA[.*Account Information:<_account:gPatMesgBody>Service Information:<_service:gPatMesgBody>Network Information:<_network:gPatMesgBody>Additional Information:<_addl:gPatMesgBody>]]></regex>
+	 </collectFieldsByRegex>
+
+	 <collectAndSetAttrByKeyValuePair sep=' ' src="$_account">
+           <attrKeyMap attr="user" key="Account Name:  "/>
+           <attrKeyMap attr="domain" key="Account Domain:  "/>
+         </collectAndSetAttrByKeyValuePair>
+
+	 <collectAndSetAttrByKeyValuePair sep=' ' src="$_service">
+           <attrKeyMap attr="winSrvcName" key="Service Name:  "/>
+         </collectAndSetAttrByKeyValuePair>
+	 
+	 <collectAndSetAttrByKeyValuePair sep=' ' src="$_addl">
+           <attrKeyMap attr="_result" key="Failure Code:  "/>
+         </collectAndSetAttrByKeyValuePair>
+	 
+	 <collectAndSetAttrByKeyValuePair sep=' ' src="$_network">
+	   <attrKeyMap attr="srcIpAddr" key="Client Address:  "/>
+           <attrKeyMap attr="srcIpPort" key="Client Port:  "/>
+         </collectAndSetAttrByKeyValuePair>
+         <choose> 
+           <when test='$result IN "-, 0x0"'>
+             <setEventAttribute attr="eventType">combineMsgId("Win", "-", $_OSModule, "-", $_id, "-", "success")</setEventAttribute>
+             <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+           </when>
+           <otherwise>
+             <setEventAttribute attr="eventType">combineMsgId("Win", "-", $_OSModule, "-", $_id, "-", "failure")</setEventAttribute>
+             <setEventAttribute attr="eventSeverity">3</setEventAttribute>
+           </otherwise>
+         </choose>
+       </when>
+
+       <when test='$_id = "4771"'>
+         <collectFieldsByRegex src="$_body">
+	   <regex><![CDATA[.*Account Information:<_account:gPatMesgBody>Service Information:<_service:gPatMesgBody>Network Information:<_network:gPatMesgBody>Additional Information:<_addl:gPatMesgBody>Certificate Information:<_cert:gPatMesgBody>]]></regex>
+	 </collectFieldsByRegex>
+
+	 <collectAndSetAttrByKeyValuePair sep=' ' src="$_account">
+           <attrKeyMap attr="user" key="Account Name:  "/>
+         </collectAndSetAttrByKeyValuePair>
+
+	 <collectAndSetAttrByKeyValuePair sep=' ' src="$_service">
+           <attrKeyMap attr="winSrvcName" key="Service Name:  "/>
+         </collectAndSetAttrByKeyValuePair>
+	 
+	 <collectAndSetAttrByKeyValuePair sep=' ' src="$_addl">
+           <attrKeyMap attr="winKerbFailCode" key="Failure Code:  "/>
+         </collectAndSetAttrByKeyValuePair>
+	 
+	 <collectAndSetAttrByKeyValuePair sep=' ' src="$_network">
+	   <attrKeyMap attr="srcIpAddr" key="Client Address:  "/>
+           <attrKeyMap attr="srcIpPort" key="Client Port:  "/>
+         </collectAndSetAttrByKeyValuePair>
+         <setEventAttribute attr="eventSeverity">3</setEventAttribute>
+       </when>
+
+       <when test='$_id = "675"'>
+         <!-- FAILED DOMAIN AUTH VIA KERBEROS
+              <13>Nov 29 00:01:12 ADS-Pri.ProspectHills.net MSWinEventLog	1	Security	16714	Thu Nov 29 00:01:04 2007	675	Security	SYSTEM	User	Failure Audit	ADS-PRI	Pre-authentication failed:  User Name: partha     User ID: PROSPECTHILLS\Partha Service Name: krbtgt/Prospecthills Pre-Authentication Type: 0x02 Failure Code: 24 Client Address: 192.168.20.33     
+                -->
+         
+         <collectAndSetAttrByKeyValuePair sep=' ' src="$_body">
+           <attrKeyMap attr="_user" key="User Name: "/>
+           <attrKeyMap attr="_combUsrId" key="User ID: "/>
+           <attrKeyMap attr="srcIpAddr" key="Client Address: "/>
+	   <attrKeyMap attr="srcIpAddr" key="Source Network Address: "/>
+           <attrKeyMap attr="_winKerbFailCode" key="Failure Code: "/>
+         </collectAndSetAttrByKeyValuePair>
+         
+         <setEventAttribute attr="user">$_user</setEventAttribute>
+         <setEventAttribute attr="eventSeverity">3</setEventAttribute>
+
+         <when test='matches($_combUsrId, "\\")'>
+           <collectFieldsByRegex src="$_combUsrId">
+             <regex><![CDATA[<_domain:gPatStr>\\<:gPatMesgBody>]]></regex>
+           </collectFieldsByRegex>
+           <setEventAttribute attr="domain">$_domain</setEventAttribute>
+         </when>	 
+       </when>
+
+       <when test='$_id = "676"'>
+         <collectAndSetAttrByKeyValuePair sep=' ' src="$_body">
+           <attrKeyMap attr="user" key="User Name: "/>
+           <attrKeyMap attr="domain" key="Supplied Realm Name: "/>
+           <attrKeyMap attr="srcIpAddr" key="Client Address: "/>
+	   <attrKeyMap attr="srcIpAddr" key="Source Network Address: "/>
+           <attrKeyMap attr="winSrvcName" key="Service Name: "/>
+         </collectAndSetAttrByKeyValuePair>
+         <setEventAttribute attr="eventSeverity">3</setEventAttribute>	
+       </when>
+       
+       <when test='$_id = "673"'>
+         <collectAndSetAttrByKeyValuePair sep=' ' src="$_body">
+           <attrKeyMap attr="user" key="User Name: "/>
+           <attrKeyMap attr="domain" key="User Domain: "/>
+           <attrKeyMap attr="srcIpAddr" key="Client Address: "/>
+	   <attrKeyMap attr="srcIpAddr" key="Source Network Address: "/>
+           <attrKeyMap attr="winSrvcName" key="Service Name: "/>
+         </collectAndSetAttrByKeyValuePair>
+
+         <choose>
+           <when test="matches($_action, '^Success')">
+             <setEventAttribute attr="eventType">combineMsgId("Win", "-", $_OSModule, "-", $_id, "-", "success")</setEventAttribute>
+             <setEventAttribute attr="eventSeverity">2</setEventAttribute>
+           </when>
+           <when test="matches($_action, '^Failure)">       
+             <setEventAttribute attr="eventType">combineMsgId("Win", "-", $_OSModule, "-", $_id, "-", "failure")</setEventAttribute>
+             <setEventAttribute attr="eventSeverity">5</setEventAttribute>
+           </when>
+         </choose>		
+       </when>
+
+       <when test='$_id IN "682, 683"'>
+         <collectAndSetAttrByKeyValuePair sep=' ' src="$_body">
+           <attrKeyMap attr="user" key="User Name: "/>
+           <attrKeyMap attr="domain" key="Domain: "/>
+           <attrKeyMap attr="winLogonId" key="Logon ID: "/>
+           <attrKeyMap attr="computer" key="Client Name: "/>
+	   <attrKeyMap attr="srcIpAddr" key="Client Address: "/>
+	   <attrKeyMap attr="srcIpAddr" key="Source Network Address: "/>
+         </collectAndSetAttrByKeyValuePair>
+         <setEventAttribute attr="eventSeverity">1</setEventAttribute>		
+       </when>
+
+       <when test='$_id IN "624, 645"'>
+         <!-- USER / COMPUTER ACCOUNT CREATED
+              <13>Dec 12 10:09:00 ADS-Pri.ProspectHills.net MSWinEventLog	1	Security	1756	Wed Dec 12 10:08:53 2007	624	Security	SYSTEM	User	Success Audit	ADS-PRI	User Account Created		Caller User Name: Administrator	Caller Domain: PROSPECTHILLS		Caller Logon ID: (0x0,0x158E87) 	New Account Name: johnDoe 	New Domain: PROSPECTHILLS	New Account ID: PROSPECTHILLS\johnDoe
+                -->
+
+         <collectAndSetAttrByKeyValuePair sep=' ' src="$_body">
+           <attrKeyMap attr="user" key="Caller User Name: "/>
+           <attrKeyMap attr="domain" key="Caller Domain: "/>
+           <attrKeyMap attr="winLogonId" key="Caller Logon ID: "/>
+           <attrKeyMap attr="targetUser" key="New Account Name: "/>
+	   <attrKeyMap attr="targetDomain" key="New Domain: "/>
+         </collectAndSetAttrByKeyValuePair>
+     
+         <collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-540 OR Win-Security-528">
+           <when test = '$winLogonId = $AnotherEvent.winLogonId'>
+             <setEventAttribute attr="srcIpAddr">$AnotherEvent.srcIpAddr</setEventAttribute>
+           </when>
+         </collectAndSetAttrFromAnotherEvent>
+
+         <choose>
+             <when test="matches($_action, '^Success')">
+	          <setEventAttribute attr="eventSeverity">4</setEventAttribute>
+              </when>
+
+              <when test="matches($_action, '^Failure)">       
+	          <setEventAttribute attr="eventSeverity">7</setEventAttribute>
+              </when>
+         </choose>
+       </when>
+       
+       <!-- new computer account created -->
+       <when test='$_id = "4741"'>
+         <collectFieldsByRegex src="$_body">
+	   <regex><![CDATA[.*Subject:<_subject:gPatMesgBody>New Computer Account:<_acct:gPatMesgBody>Attributes:<_attrib:gPatMesgBody>Additional Information:<_addl:gPatMesgBody>]]></regex>
+	 </collectFieldsByRegex>
+	 
+	 <collectAndSetAttrByKeyValuePair sep=' ' src="$_subject">
+           <attrKeyMap attr="user" key="Account Name:  "/>
+           <attrKeyMap attr="domain" key="Account Domain:  "/>
+	   <attrKeyMap attr="winLogonId" key="Logon ID:  "/>
+         </collectAndSetAttrByKeyValuePair>
+	 <collectAndSetAttrByKeyValuePair sep=' ' src="$_acct">
+	   <attrKeyMap attr="targetUser" key="Account Name:  "/>
+           <attrKeyMap attr="targetDomain" key="Account Domain:  "/>
+         </collectAndSetAttrByKeyValuePair>
+	 
+         <collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-4624">
+           <when test = '$winLogonId = $AnotherEvent.winLogonId'>
+             <setEventAttribute attr="srcIpAddr">$AnotherEvent.srcIpAddr</setEventAttribute>
+           </when>
+         </collectAndSetAttrFromAnotherEvent>
+	 
+         <choose>
+           <when test="matches($_action, '^Success')">
+	     <setEventAttribute attr="eventSeverity">4</setEventAttribute>
+           </when>
+	   
+           <when test="matches($_action, '^Failure)">       
+	     <setEventAttribute attr="eventSeverity">7</setEventAttribute>
+           </when>
+         </choose>
+       </when>
+
+     <!-- computer account changed -->
+     <when test='$_id = "4742"'>
+       <collectFieldsByRegex src="$_body">
+	 <regex><![CDATA[.*Subject:<_subject:gPatMesgBody>Computer Account That Was Changed:<_acct:gPatMesgBody>Attributes:<_attrib:gPatMesgBody>Additional Information:<_addl:gPatMesgBody>]]></regex>
+       </collectFieldsByRegex>
+       
+       <collectAndSetAttrByKeyValuePair sep=' ' src="$_subject">
+         <attrKeyMap attr="user" key="Account Name:  "/>
+         <attrKeyMap attr="domain" key="Account Domain:  "/>
+	 <attrKeyMap attr="winLogonId" key="Logon ID:  "/>
+       </collectAndSetAttrByKeyValuePair>
+       <collectAndSetAttrByKeyValuePair sep=' ' src="$_acct">
+	 <attrKeyMap attr="targetUser" key="Account Name:  "/>
+         <attrKeyMap attr="targetDomain" key="Account Domain:  "/>
+       </collectAndSetAttrByKeyValuePair>
+
+       <collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-4624">
+         <when test = '$winLogonId = $AnotherEvent.winLogonId'>
+           <setEventAttribute attr="srcIpAddr">$AnotherEvent.srcIpAddr</setEventAttribute>
+         </when>
+       </collectAndSetAttrFromAnotherEvent>
+       
+       <choose>
+         <when test="matches($_action, '^Success')">
+	   <setEventAttribute attr="eventSeverity">4</setEventAttribute>
+         </when>
+	 
+         <when test="matches($_action, '^Failure)">       
+	   <setEventAttribute attr="eventSeverity">7</setEventAttribute>
+         </when>
+       </choose>
+     </when>
+     
+     <!-- computer account deleted -->
+     <when test='$_id = "4743"'>
+       <collectFieldsByRegex src="$_body">
+	 <regex><![CDATA[.*Subject:<_subject:gPatMesgBody>Target Computer:<_acct:gPatMesgBody>Additional Information:<_addl:gPatMesgBody>]]></regex>
+       </collectFieldsByRegex>
+       
+       <collectAndSetAttrByKeyValuePair sep=' ' src="$_subject">
+         <attrKeyMap attr="user" key="Account Name:  "/>
+         <attrKeyMap attr="domain" key="Account Domain:  "/>
+	 <attrKeyMap attr="winLogonId" key="Logon ID:  "/>
+       </collectAndSetAttrByKeyValuePair>
+       
+       <collectAndSetAttrByKeyValuePair sep=' ' src="$_acct">
+	 <attrKeyMap attr="targetUser" key="Account Name:  "/>
+         <attrKeyMap attr="targetDomain" key="Account Domain:  "/>
+       </collectAndSetAttrByKeyValuePair>
+
+       <collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-4624">
+         <when test = '$winLogonId = $AnotherEvent.winLogonId'>
+           <setEventAttribute attr="srcIpAddr">$AnotherEvent.srcIpAddr</setEventAttribute>
+         </when>
+       </collectAndSetAttrFromAnotherEvent>
+       
+       <choose>
+         <when test="matches($_action, '^Success')">
+	   <setEventAttribute attr="eventSeverity">4</setEventAttribute>
+         </when>
+	 
+         <when test="matches($_action, '^Failure)">       
+	   <setEventAttribute attr="eventSeverity">7</setEventAttribute>
+         </when>
+       </choose>
+     </when> 
+     
+     <!-- user account created -->
+     <when test='$_id = "4720"'>
+       <collectFieldsByRegex src="$_body">
+	 <regex><![CDATA[.*Subject:<_subject:gPatMesgBody>New Account:<_acct:gPatMesgBody>Attributes:<_attrib:gPatMesgBody>Additional Information:<_addl:gPatMesgBody>]]></regex>
+       </collectFieldsByRegex>
+       
+       <collectAndSetAttrByKeyValuePair sep=' ' src="$_subject">
+         <attrKeyMap attr="user" key="Account Name:  "/>
+         <attrKeyMap attr="domain" key="Account Domain:  "/>
+	 <attrKeyMap attr="winLogonId" key="Logon ID:  "/>
+       </collectAndSetAttrByKeyValuePair>
+       
+       <collectAndSetAttrByKeyValuePair sep=' ' src="$_acct">
+	 <attrKeyMap attr="targetUser" key="Account Name:  "/>
+         <attrKeyMap attr="targetDomain" key="Account Domain:  "/>
+       </collectAndSetAttrByKeyValuePair>
+       
+       <collectFieldsByRegex src="$_attrib">
+	 <regex><![CDATA[.*User Account Control:<_acctCtl:gPatMesgBody>User Parameters:<:gPatMesgBody>]]></regex>
+       </collectFieldsByRegex>
+       
+       <collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-4624">
+         <when test = '$winLogonId = $AnotherEvent.winLogonId'>
+           <setEventAttribute attr="srcIpAddr">$AnotherEvent.srcIpAddr</setEventAttribute>
+         </when>
+       </collectAndSetAttrFromAnotherEvent>
+       
+       <choose>
+         <when test="matches($_action, '^Success')">
+	   <setEventAttribute attr="eventSeverity">4</setEventAttribute>
+         </when>
+	 
+         <when test="matches($_action, '^Failure)">       
+	   <setEventAttribute attr="eventSeverity">7</setEventAttribute>
+         </when>
+       </choose>
+     </when>
+     
+     <!-- user account deleted -->
+     <when test='$_id = "4726"'>
+       <collectFieldsByRegex src="$_body">
+	 <regex><![CDATA[.*Subject:<_subject:gPatMesgBody>Target Account:<_acct:gPatMesgBody>Additional Information:<_addl:gPatMesgBody>]]></regex>
+       </collectFieldsByRegex>
+       
+       <collectAndSetAttrByKeyValuePair sep=' ' src="$_subject">
+         <attrKeyMap attr="user" key="Account Name:  "/>
+         <attrKeyMap attr="domain" key="Account Domain:  "/>
+	 <attrKeyMap attr="winLogonId" key="Logon ID:  "/>
+       </collectAndSetAttrByKeyValuePair>
+       
+       <collectAndSetAttrByKeyValuePair sep=' ' src="$_acct">
+	 <attrKeyMap attr="targetUser" key="Account Name:  "/>
+         <attrKeyMap attr="targetDomain" key="Account Domain:  "/>
+       </collectAndSetAttrByKeyValuePair>
+       
+       <collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-4624">
+         <when test = '$winLogonId = $AnotherEvent.winLogonId'>
+           <setEventAttribute attr="srcIpAddr">$AnotherEvent.srcIpAddr</setEventAttribute>
+         </when>
+       </collectAndSetAttrFromAnotherEvent>
+       <setEventAttribute attr="eventSeverity">4</setEventAttribute>
+     </when>
+
+     <!-- basic application group created -->
+     <when test='$_id = "4783"'>
+       <collectFieldsByRegex src="$_body">
+	 <regex><![CDATA[.*Subject:<_subject:gPatMesgBody>Group:<_acct:gPatMesgBody>Attributes:<_attrib:gPatMesgBody>Additional Information:<_addl:gPatMesgBody>]]></regex>
+       </collectFieldsByRegex>
+       
+       <collectAndSetAttrByKeyValuePair sep=' ' src="$_subject">
+         <attrKeyMap attr="user" key="Account Name:  "/>
+         <attrKeyMap attr="domain" key="Account Domain:  "/>
+	 <attrKeyMap attr="winLogonId" key="Logon ID:  "/>
+       </collectAndSetAttrByKeyValuePair>
+       
+       <collectAndSetAttrByKeyValuePair sep=' ' src="$_acct">
+	 <attrKeyMap attr="targetUser" key="Account Name:  "/>
+         <attrKeyMap attr="targetDomain" key="Account Domain:  "/>
+       </collectAndSetAttrByKeyValuePair>
+       
+       <collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-4624">
+         <when test = '$winLogonId = $AnotherEvent.winLogonId'>
+           <setEventAttribute attr="srcIpAddr">$AnotherEvent.srcIpAddr</setEventAttribute>
+         </when>
+       </collectAndSetAttrFromAnotherEvent>
+       
+       <choose>
+         <when test="matches($_action, '^Success')">
+	   <setEventAttribute attr="eventSeverity">4</setEventAttribute>
+         </when>
+	 
+         <when test="matches($_action, '^Failure)">       
+	   <setEventAttribute attr="eventSeverity">7</setEventAttribute>
+         </when>
+       </choose>
+     </when>
+     
+     <!-- basic application group changed -->
+     <when test='$_id = "4784"'>
+       <collectFieldsByRegex src="$_body">
+	 <regex><![CDATA[.*Subject:<_subject:gPatMesgBody>Group:<_acct:gPatMesgBody>Attributes:<_attrib:gPatMesgBody>Additional Information:<_addl:gPatMesgBody>]]></regex>
+       </collectFieldsByRegex>
+       
+       <collectAndSetAttrByKeyValuePair sep=' ' src="$_subject">
+         <attrKeyMap attr="user" key="Account Name:  "/>
+         <attrKeyMap attr="domain" key="Account Domain:  "/>
+	 <attrKeyMap attr="winLogonId" key="Logon ID:  "/>
+       </collectAndSetAttrByKeyValuePair>
+       
+       <collectAndSetAttrByKeyValuePair sep=' ' src="$_acct">
+	 <attrKeyMap attr="targetUser" key="Account Name:  "/>
+         <attrKeyMap attr="targetDomain" key="Account Domain:  "/>
+       </collectAndSetAttrByKeyValuePair>
+
+       <collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-4624">
+         <when test = '$winLogonId = $AnotherEvent.winLogonId'>
+           <setEventAttribute attr="srcIpAddr">$AnotherEvent.srcIpAddr</setEventAttribute>
+         </when>
+       </collectAndSetAttrFromAnotherEvent>
+       
+       <choose>
+         <when test="matches($_action, '^Success')">
+	   <setEventAttribute attr="eventSeverity">4</setEventAttribute>
+         </when>
+	 
+         <when test="matches($_action, '^Failure)">       
+	   <setEventAttribute attr="eventSeverity">7</setEventAttribute>
+         </when>
+       </choose>
+     </when>
+  
+     <when test='$_id IN "625, 626, 642, 627, 629, 630, 643, 646, 647"'>
+       
+       <!-- USER ACCOUNT TYPE CHANGED
+	    <13>Dec 12 10:09:00 ADS-Pri.ProspectHills.net MSWinEventLog	1	Security	1756	Wed Dec 12 10:08:53 2007	625	Security	SYSTEM	User	Success Audit	ADS-PRI	User Account Type Change		Caller User Name: Administrator	Caller Domain: PROSPECTHILLS		Caller Logon ID: (0x0, 0x158E87) 	Target Account Name: johnDoe  Target Domain: PROSPECTHILLS	Target Account ID: PROSPECTHILLS\johnDoe  New Type: Writer
+	      -->
+       
+       <!-- USER ACCOUNT ENABLED
+       <13>Dec 12 10:09:00 ADS-Pri.ProspectHills.net MSWinEventLog	1	Security	1756	Wed Dec 12 10:08:53 2007	626	Security	SYSTEM	User	Success Audit	ADS-PRI	User Account Ennabled		Caller User Name: Administrator	Caller Domain: PROSPECTHILLS		Caller Logon ID: (0x0, 0x158E87) 	Target Account Name: johnDoe 	Target Domain: PROSPECTHILLS	Target Account ID: PROSPECTHILLS\johnDoe 
+          -->
+
+          <!-- USER ACCOUNT DISABLED
+       <13>Dec 12 10:09:00 ADS-Pri.ProspectHills.net MSWinEventLog	1	Security	1756	Wed Dec 12 10:08:53 2007	629	Security	SYSTEM	User	Success Audit	ADS-PRI	User Account Disabled		Caller User Name: Administrator	Caller Domain: PROSPECTHILLS		Caller Logon ID: (0x0, 0x158E87) 	Target Account Name: johnDoe  Target Domain: PROSPECTHILLS	Target Account ID: PROSPECTHILLS\johnDoe  New Type: Writer
+      -->
+
+           <!-- USER ACCOUNT CHANGED
+       <13>Dec 12 10:09:00 ADS-Pri.ProspectHills.net MSWinEventLog	1	Security	1756	Wed Dec 12 10:08:53 2007	642	Security	SYSTEM	User	Success Audit	ADS-PRI	User Account Changed		Caller User Name: Administrator	Caller Domain: PROSPECTHILLS		Caller Logon ID: (0x0, 0x158E87) 	Target Account Name: johnDoe  Target Domain: PROSPECTHILLS	Target Account ID: PROSPECTHILLS\johnDoe  New Type: Writer
+      -->
+
+           <!-- CHANGE PASSWORD ATTEMPT
+       <13>Dec 12 10:09:00 ADS-Pri.ProspectHills.net MSWinEventLog	1	Security	1756	Wed Dec 12 10:08:53 2007	627	Security	SYSTEM	User	Success Audit	ADS-PRI	Change Password Attempt		Caller User Name: Administrator	Caller Domain: PROSPECTHILLS		Caller Logon ID: (0x0, 0x158E87) 	Target Account Name: johnDoe  Target Domain: PROSPECTHILLS	Target Account ID: PROSPECTHILLS\johnDoe  New Type: Writer
+      -->
+
+           <!-- USER ACCOUNT PASSWORD RESET
+       <13>Dec 12 10:09:00 ADS-Pri.ProspectHills.net MSWinEventLog	1	Security	1756	Wed Dec 12 10:08:53 2007	628	Security	SYSTEM	User	Success Audit	ADS-PRI	User Account Password Set		Caller User Name: Administrator	Caller Domain: PROSPECTHILLS		Caller Logon ID: (0x0, 0x158E87) 	Target Account Name: johnDoe  Target Domain: PROSPECTHILLS	Target Account ID: PROSPECTHILLS\johnDoe  New Type: Writer
+      -->
+
+          <!-- USER ACCOUNT Deleted
+       <13>Dec 12 10:09:00 ADS-Pri.ProspectHills.net MSWinEventLog	1	Security	1756	Wed Dec 12 10:08:53 2007	630	Security	SYSTEM	User	Success Audit	ADS-PRI	User Account Deleted		Caller User Name: Administrator	Caller Domain: PROSPECTHILLS		Caller Logon ID: (0x0, 0x158E87) 	Target Account Name: johnDoe  Target Domain: PROSPECTHILLS	Target Account ID: PROSPECTHILLS\johnDoe  New Type: Writer
+      -->
+          
+          <!-- DOMAIN POLICY CHANGED
+       <13>Dec 12 10:09:00 ADS-Pri.ProspectHills.net MSWinEventLog	1	Security	1756	Wed Dec 12 10:08:53 2007	643	Security	SYSTEM	User	Success Audit	ADS-PRI	Domain Policy Changed		Caller User Name: Administrator	Caller Domain: PROSPECTHILLS		Caller Logon ID: (0x0, 0x158E87) 	Target Account Name: johnDoe  Target Domain: PROSPECTHILLS	Target Account ID: PROSPECTHILLS\johnDoe  New Type: Writer
+      -->
+
+         <collectAndSetAttrByKeyValuePair sep=' ' src="$_body">
+            <attrKeyMap attr="user" key="Caller User Name: "/>
+            <attrKeyMap attr="domain" key="Caller Domain: "/>
+            <attrKeyMap attr="winLogonId" key="Caller Logon ID: "/>
+            <attrKeyMap attr="targetUser" key="Target Account Name: "/>
+	      <attrKeyMap attr="targetDomain" key="Target Domain: "/>
+         </collectAndSetAttrByKeyValuePair>
+
+         <collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-540 OR Win-Security-528">
+            <when test = '$winLogonId = $AnotherEventType.winLogonId'>
+               <setEventAttribute attr="srcIpAddr">$AnotherEventType.srcIpAddr</setEventAttribute>
+            </when>
+         </collectAndSetAttrFromAnotherEvent>
+		
+         <choose>
+             <when test="matches($_action, '^Success')">
+	          <setEventAttribute attr="eventSeverity">4</setEventAttribute>
+              </when>
+
+              <when test="matches($_action, '^Failure)">       
+	          <setEventAttribute attr="eventSeverity">7</setEventAttribute>
+              </when>
+         </choose>
+       </when>
+
+       <!-- 4725: A user account was disabled 
+            4738: A user account was changed 
+	    4722: A user account was enabled 
+            4723: Password changed     
+            4724: Password reset  -->
+       <when test='$_id IN "4725,4738,4722,4723,4724"'>
+	 <collectFieldsByRegex src="$_body">
+	   <regex><![CDATA[.*Subject:<_subject:gPatMesgBody>Target Account:<_target:gPatMesgBody>]]></regex>
+	 </collectFieldsByRegex>
+	 
+	 <collectAndSetAttrByKeyValuePair sep=' ' src="$_subject">
+           <attrKeyMap attr="user" key="Account Name:  "/>
+           <attrKeyMap attr="domain" key="Account Domain:  "/>
+	   <attrKeyMap attr="winLogonId" key="Logon ID:  "/>
+	 </collectAndSetAttrByKeyValuePair>
+	 
+	 <collectAndSetAttrByKeyValuePair sep=' \\|\t' src="$_target">
+           <attrKeyMap attr="targetUser" key="Account Name:  "/>
+	   <attrKeyMap attr="targetDomain" key="Account Domain:  "/>
+	 </collectAndSetAttrByKeyValuePair>
+         
+	 <collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-4624">
+         <when test = '$winLogonId = $AnotherEvent.winLogonId'>
+           <setEventAttribute attr="srcIpAddr">$AnotherEvent.srcIpAddr</setEventAttribute>
+         </when>
+	 </collectAndSetAttrFromAnotherEvent>
+	 
+	 <choose>
+           <when test="matches($_action, '^Success')">
+	     <setEventAttribute attr="eventSeverity">4</setEventAttribute>
+           </when>
+	   
+           <when test="matches($_action, '^Failure)">       
+	     <setEventAttribute attr="eventSeverity">7</setEventAttribute>
+           </when>
+	 </choose>
+       </when> 
+       
+       <when test='$_id = "644"'>
+       <!-- USER ACCOUNT LOCKED OUT
+       <13>Dec 12 10:09:00 ADS-Pri.ProspectHills.net MSWinEventLog	1	Security	1756	Wed Dec 12 10:08:53 2007	644	Security	SYSTEM	User	Success Audit	ADS-PRI	Domain Policy Changed		Caller User Name: partha-laptop$	 Caller Machine Name: partha-laptop  Caller Domain: PROSPECTHILLS		Caller Logon ID: (0x0, 0x158E87) 	Target Account Name: partha  Target Domain: PROSPECTHILLS	Target Account ID: PROSPECTHILLS\johnDoe 
+      -->
+
+         <collectAndSetAttrByKeyValuePair sep=' ' src="$_body">
+	   <attrKeyMap attr="computer" key="Caller Machine Name: "/>
+	   <attrKeyMap attr="user" key="Target Account Name: "/>
+	   <attrKeyMap attr="domain" key="Caller Domain: "/>
+	   <attrKeyMap attr="winLogonId" key="Caller Logon ID: "/>
+	   <attrKeyMap attr="targetDomain" key="Target Domain: "/>
+         </collectAndSetAttrByKeyValuePair>
+
+        <collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-540 OR Win-Security-528">
+           <when test = '$winLogonId = $AnotherEventType.winLogonId'>
+             <setEventAttribute attr="srcIpAddr">$AnotherEventType.srcIpAddr</setEventAttribute>
+           </when>
+        </collectAndSetAttrFromAnotherEvent>
+        <setEventAttribute attr="eventSeverity">10</setEventAttribute>		
+       </when>
+
+       <!-- A user account was locked out -->
+       <when test='$_id = "4740"'>
+	 <collectFieldsByRegex src="$_body">
+	   <regex><![CDATA[.*Subject:<_subject:gPatMesgBody>Account That Was Locked Out:<_target:gPatMesgBody>Additional Information:<_addl:gPatMesgBody>]]></regex>
+	 </collectFieldsByRegex>
+	 
+	 <collectAndSetAttrByKeyValuePair sep=' ' src="$_subject">
+           <attrKeyMap attr="domain" key="Account Domain:  "/>
+	   <attrKeyMap attr="winLogonId" key="Logon ID:  "/>
+	 </collectAndSetAttrByKeyValuePair>
+	 
+	 <collectAndSetAttrByKeyValuePair sep=' \\|\t' src="$_target">
+           <attrKeyMap attr="user" key="Account Name:  "/>
+	 </collectAndSetAttrByKeyValuePair>
+         
+	 <collectAndSetAttrByKeyValuePair sep=' \\|\t' src="$_addl">
+           <attrKeyMap attr="srcIpAddr" key="Caller Computer Name: "/>
+	 </collectAndSetAttrByKeyValuePair>
+	 <collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-4624">
+         <when test = '$winLogonId = $AnotherEvent.winLogonId'>
+           <setEventAttribute attr="srcIpAddr">$AnotherEvent.srcIpAddr</setEventAttribute>
+         </when>
+	 </collectAndSetAttrFromAnotherEvent>
+	 <setEventAttribute attr="eventSeverity">10</setEventAttribute>
+       </when>
+
+       <!-- Security enabled/disabled local/global/universal group created -->
+       <when test='$_id IN "631, 635, 648, 653, 658, 663"'>   
+     
+       <!-- <13>Dec 12 10:09:00 ADS-Pri.ProspectHills.net MSWinEventLog	1	Security	1756	Wed Dec 12 10:08:53 2007	631	Security	SYSTEM	User	Success Audit	ADS-PRI	Security enabled global group created		Caller User Name: partha  Caller Domain: PROSPECTHILLS		Caller Logon ID: (0x0, 0x158E87) 	New Account Name: johnDoe  New Domain: PROSPECTHILLS	Target Account ID: PROSPECTHILLS\johnDoe 
+      -->
+          <collectAndSetAttrByKeyValuePair sep=' ' src="$_body">
+             <attrKeyMap attr="user" key="Caller User Name: "/>
+             <attrKeyMap attr="domain" key="Caller Domain: "/>
+             <attrKeyMap attr="winLogonId" key="Caller Logon ID: "/>
+             <attrKeyMap attr="targetUserGrp" key="New Account Name: "/>
+	     <attrKeyMap attr="targetDomain" key="New Domain: "/>
+          </collectAndSetAttrByKeyValuePair>
+
+          <collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-540 OR Win-Security-528">
+             <when test = '$winLogonId = $AnotherEventType.winLogonId'>
+                <setEventAttribute attr="srcIpAddr">$AnotherEventType.srcIpAddr</setEventAttribute>
+             </when>
+          </collectAndSetAttrFromAnotherEvent>
+
+          <choose>
+             <when test="matches($_action, '^Success')">
+	          <setEventAttribute attr="eventSeverity">5</setEventAttribute>
+              </when>
+
+              <when test="matches($_action, '^Failure)">       
+	          <setEventAttribute attr="eventSeverity">7</setEventAttribute>
+              </when>
+          </choose>		
+       </when>
+
+       <!-- A security-enabled/disabled local/global/universal group was created -->
+       <when test='$_id IN "4731, 4744, 4727, 4754, 4759, 4749"'>
+         <collectFieldsByRegex src="$_body">
+	   <regex><![CDATA[.*Subject:<_subject:gPatMesgBody>New?\s*Group:<_grp:gPatMesgBody>Attributes:<_attrib:gPatMesgBody>]]></regex>
+	 </collectFieldsByRegex>
+
+	 <collectAndSetAttrByKeyValuePair sep=' ' src="$_subject">
+           <attrKeyMap attr="user" key="Account Name:  "/>
+           <attrKeyMap attr="domain" key="Account Domain:  "/>
+	   <attrKeyMap attr="winLogonId" key="Logon ID:  "/>
+         </collectAndSetAttrByKeyValuePair>
+
+	 <collectFieldsByRegex src="$_grp">
+	   <regex><![CDATA[.*Group Name:  <targetUserGrp:gPatMesgBody>Group Domain:  <targetDomain:gPatMesgBody>]]></regex>
+	 </collectFieldsByRegex>
+
+         <collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-4624">
+           <when test = '$winLogonId = $AnotherEvent.winLogonId'>
+             <setEventAttribute attr="srcIpAddr">$AnotherEvent.srcIpAddr</setEventAttribute>
+           </when>
+	 </collectAndSetAttrFromAnotherEvent>
+	 
+	 <choose>
+           <when test="matches($_action, '^Success')">
+	     <setEventAttribute attr="eventSeverity">5</setEventAttribute>
+           </when>
+	   
+           <when test="matches($_action, '^Failure)">       
+	     <setEventAttribute attr="eventSeverity">7</setEventAttribute>
+           </when>
+	 </choose>
+       </when>
+
+       <!-- A member added to a security-enabled/disabled local/global/universal group -->
+       <when test='$_id IN "632, 636, 650, 655, 660, 665"'>
+
+         <!-- SECURITY ENABLED/DISABLED LOCAL/GLOBAL/UNIVERSAL GROUP MEMBER ADDED
+       <13>Dec 12 10:09:00 ADS-Pri.ProspectHills.net MSWinEventLog	1	Security	1756	Wed Dec 12 10:08:53 2007	632	Security	SYSTEM	User	Success Audit	ADS-PRI	Security enabled global group member added		Caller User Name: partha    Caller Domain: PROSPECTHILLS		Caller Logon ID: (0x0, 0x158E87) 	Target Account Name: johnDoe  Target Domain: PROSPECTHILLS	Target Account ID: PROSPECTHILLS\johnDoe 
+      -->
+
+         <collectAndSetAttrByKeyValuePair sep=' ' src="$_body">
+           <attrKeyMap attr="user" key="Caller User Name: "/>
+           <attrKeyMap attr="domain" key="Caller Domain: "/>
+           <attrKeyMap attr="winLogonId" key="Caller Logon ID: "/>
+	   <attrKeyMap attr="targetUser" key="Member Name: "/>
+           <attrKeyMap attr="targetUserGrp" key="Target Account Name: "/>
+    	   <attrKeyMap attr="targetDomain" key="Target Domain: "/>
+         </collectAndSetAttrByKeyValuePair>
+	 
+         <collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-540 OR Win-Security-528">
+           <when test = '$winLogonId = $AnotherEventType.winLogonId'>
+             <setEventAttribute attr="srcIpAddr">$AnotherEventType.srcIpAddr</setEventAttribute>
+           </when>
+         </collectAndSetAttrFromAnotherEvent>
+	 
+         <choose>
+           <when test="matches($_action, '^Success')">
+	     <setEventAttribute attr="eventSeverity">5</setEventAttribute>
+           </when>
+	   
+           <when test="matches($_action, '^Failure)">       
+	     <setEventAttribute attr="eventSeverity">7</setEventAttribute>
+           </when>
+         </choose>		
+       </when>
+       
+       <!-- A member was added to a security-enabled global group -->
+       <when test='$_id IN "4746, 4751, 4761, 4728, 4732, 4756, 4785, 4787"'>
+	 <collectFieldsByRegex src="$_body">
+	   <regex><![CDATA[.*Subject:<_subject:gPatMesgBody>Member:<_member:gPatMesgBody>Group:<_grp:gPatMesgBody>]]></regex>
+	 </collectFieldsByRegex>
+	 <setEventAttribute attr="fileName">$_subject</setEventAttribute>
+	 <collectAndSetAttrByKeyValuePair sep=' \\|\t' src="$_subject">
+           <attrKeyMap attr="user" key="Account Name:  "/>
+           <attrKeyMap attr="domain" key="Account Domain:  "/>
+	   <attrKeyMap attr="winLogonId" key="Logon ID:  "/>
+	 </collectAndSetAttrByKeyValuePair>
+	 
+	 <collectAndSetAttrByKeyValuePair sep=' ' src="$_member">
+           <attrKeyMap attr="targetUser" key="Account Name:  "/>
+	 </collectAndSetAttrByKeyValuePair>
+	 
+	 <collectFieldsByRegex src="$_grp">
+	   <regex><![CDATA[.*Group Name:  <targetUserGrp:gPatMesgBody>Group Domain:  <targetDomain:gPatStr>]]></regex>
+	 </collectFieldsByRegex>
+	 
+	 <collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-4624">
+           <when test = '$winLogonId = $AnotherEvent.winLogonId'>
+             <setEventAttribute attr="srcIpAddr">$AnotherEvent.srcIpAddr</setEventAttribute>
+         </when>
+	 </collectAndSetAttrFromAnotherEvent>
+	 
+	 <choose>
+           <when test="matches($_action, '^Success')">
+	     <setEventAttribute attr="eventSeverity">5</setEventAttribute>
+           </when>
+	   
+           <when test="matches($_action, '^Failure)">       
+	     <setEventAttribute attr="eventSeverity">7</setEventAttribute>
+           </when>
+	 </choose>
+       </when> 
+
+      <!-- A member was removed from a security-enabled global group -->
+      <when test='$_id IN "633, 637, 651, 656, 661, 666"'>
+
+       <!-- SECURITY ENABLED/DISABLED LOCAL/GLOBAL/UNIVERSAL GROUP MEMBER REMOVED
+         <13>Dec 12 10:09:00 ADS-Pri.ProspectHills.net MSWinEventLog	1	Security	1756	Wed Dec 12 10:08:53 2007	633	Security	SYSTEM	User	Success Audit	ADS-PRI	Security enabled global group member removed		Caller User Name: partha   Caller Domain: PROSPECTHILLS		Caller Logon ID: (0x0, 0x158E87) 	Target Account Name: johnDoe  Target Domain: PROSPECTHILLS	Target Account ID: PROSPECTHILLS\johnDoe 
+      -->
+
+       <collectAndSetAttrByKeyValuePair sep=' ' src="$_body">
+          <attrKeyMap attr="user" key="Caller User Name: "/>
+          <attrKeyMap attr="domain" key="Caller Domain: "/>
+          <attrKeyMap attr="winLogonId" key="Caller Logon ID: "/>
+	  <attrKeyMap attr="targetUser" key="Member Name:: "/>
+          <attrKeyMap attr="targetUserGrp" key="Target Account Name: "/>
+	  <attrKeyMap attr="targetDomain" key="Target Domain: "/>
+       </collectAndSetAttrByKeyValuePair>
+
+       <collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-540 OR Win-Security-528">
+         <when test = '$winLogonId = $AnotherEventType.winLogonId'>
+           <setEventAttribute attr="srcIpAddr">$AnotherEventType.srcIpAddr</setEventAttribute>
+         </when>
+       </collectAndSetAttrFromAnotherEvent>
+       
+       <choose>
+          <when test="matches($_action, '^Success')">
+	       <setEventAttribute attr="eventSeverity">5</setEventAttribute>
+           </when>
+
+           <when test="matches($_action, '^Failure)">       
+	       <setEventAttribute attr="eventSeverity">7</setEventAttribute>
+           </when>
+       </choose>		
+     </when>
+
+     <!-- A member was removed from a security-enabled global group -->
+     <when test='$_id = "4747, 4752, 4762, 4729, 4733, 4757, 4786, 4788"'>
+       <collectFieldsByRegex src="$_body">
+	 <regex><![CDATA[.*Subject:<_subject:gPatMesgBody>Member:<_member:gPatMesgBody>Group:<_grp:gPatMesgBody>]]></regex>
+       </collectFieldsByRegex>
+       
+       <collectAndSetAttrByKeyValuePair sep=' \\|\t' src="$_subject">
+         <attrKeyMap attr="user" key="Account Name:  "/>
+         <attrKeyMap attr="domain" key="Account Domain:  "/>
+	 <attrKeyMap attr="winLogonId" key="Logon ID:  "/>
+       </collectAndSetAttrByKeyValuePair>
+  
+       <collectAndSetAttrByKeyValuePair sep=' ' src="$_member">
+         <attrKeyMap attr="targetUser" key="Account Name:  "/>
+       </collectAndSetAttrByKeyValuePair>
+
+       <collectFieldsByRegex src="$_grp">
+	 <regex><![CDATA[.*Group Name:  <targetUserGrp:gPatMesgBody>Group Domain:  <targetDomain:gPatStr>]]></regex>
+       </collectFieldsByRegex>
+       
+       <collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-4624">
+         <when test = '$winLogonId = $AnotherEvent.winLogonId'>
+           <setEventAttribute attr="srcIpAddr">$AnotherEvent.srcIpAddr</setEventAttribute>
+         </when>
+	 </collectAndSetAttrFromAnotherEvent>
+	 
+	 <choose>
+           <when test="matches($_action, '^Success')">
+	     <setEventAttribute attr="eventSeverity">5</setEventAttribute>
+           </when>
+	   
+           <when test="matches($_action, '^Failure)">       
+	     <setEventAttribute attr="eventSeverity">7</setEventAttribute>
+           </when>
+	 </choose>
+     </when> 
+
+     <!-- Group deleted or modified -->
+     <when test='$_id IN "634, 638, 652, 657, 662, 667, 639, 641, 649, 654, 659, 664"'>
+
+        <!-- SECURITY ENABLED/DISABLED LOCAL/GLOBAL/UNIVERSAL GROUP DELETED
+       <13>Dec 12 10:09:00 ADS-Pri.ProspectHills.net MSWinEventLog	1	Security	1756	Wed Dec 12 10:08:53 2007	634	Security	SYSTEM	User	Success Audit	ADS-PRI	Security enabled global group deleted		Caller User Name: partha  Caller Domain: PROSPECTHILLS		Caller Logon ID: (0x0, 0x158E87) 	Target Account Name: johnDoe  Target Domain: PROSPECTHILLS	Target Account ID: PROSPECTHILLS\johnDoe 
+      -->
+
+        <!-- SECURITY ENABLED/DISABLED LOCAL/GLOBAL/UNIVERSAL GROUP CHANGED
+       <13>Dec 12 10:09:00 ADS-Pri.ProspectHills.net MSWinEventLog	1	Security	1756	Wed Dec 12 10:08:53 2007	641	Security	SYSTEM	User	Success Audit	ADS-PRI	Security enabled global group changed		Caller User Name: partha   Caller Domain: PROSPECTHILLS		Caller Logon ID: (0x0, 0x158E87) 	Target Account Name: johnDoe  Target Domain: PROSPECTHILLS	Target Account ID: PROSPECTHILLS\johnDoe 
+      -->
+
+        <collectAndSetAttrByKeyValuePair sep=' ' src="$_body">
+          <attrKeyMap attr="user" key="Caller User Name: "/>
+          <attrKeyMap attr="domain" key="Caller Domain: "/>
+          <attrKeyMap attr="winLogonId" key="Caller Logon ID: "/>
+          <attrKeyMap attr="targetUserGrp" key="Target Account Name: "/>
+	    <attrKeyMap attr="targetDomain" key="Target Domain: "/>
+        </collectAndSetAttrByKeyValuePair>
+
+        <collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-540 OR Win-Security-528">
+          <when test = '$winLogonId = $AnotherEventType.winLogonId'>
+             <setEventAttribute attr="srcIpAddr">$AnotherEventType.srcIpAddr</setEventAttribute>
+          </when>
+        </collectAndSetAttrFromAnotherEvent>
+
+        <choose>
+          <when test="matches($_action, '^Success')">
+	       <setEventAttribute attr="eventSeverity">5</setEventAttribute>
+           </when>
+
+           <when test="matches($_action, '^Failure)">       
+	       <setEventAttribute attr="eventSeverity">7</setEventAttribute>
+           </when>
+        </choose>			
+     </when>
+
+     <!-- Domain Policy was changed --> 
+     <when test='$_id = "4739"'>
+       <collectFieldsByRegex src="$_body">
+	 <regex><![CDATA[.*Subject:<_subject:gPatMesgBody>Domain:<_dom:gPatMesgBody>Changed Attributes:<_attrib:gPatMesgBody>]]></regex>
+       </collectFieldsByRegex>
+       
+       <collectAndSetAttrByKeyValuePair sep=' ' src="$_subject">
+         <attrKeyMap attr="user" key="Account Name:  "/>
+         <attrKeyMap attr="domain" key="Account Domain:  "/>
+	 <attrKeyMap attr="winLogonId" key="Logon ID:  "/>
+       </collectAndSetAttrByKeyValuePair>
+      
+       <collectAndSetAttrByKeyValuePair sep=' ' src="$_dom">
+         <attrKeyMap attr="targetDomain" key="Domain Name:  "/>
+       </collectAndSetAttrByKeyValuePair>
+       <collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-4624">
+         <when test = '$winLogonId = $AnotherEventType.winLogonId'>
+           <setEventAttribute attr="srcIpAddr">$AnotherEventType.srcIpAddr</setEventAttribute>
+         </when>
+       </collectAndSetAttrFromAnotherEvent>
+       <choose>
+          <when test="matches($_action, '^Success')">
+	       <setEventAttribute attr="eventSeverity">5</setEventAttribute>
+           </when>
+
+           <when test="matches($_action, '^Failure)">       
+	       <setEventAttribute attr="eventSeverity">7</setEventAttribute>
+           </when>
+       </choose>
+     </when>
+     
+     <!-- A security-enabled/disabled local/global/unversal group was modified -->
+     <when test='$_id IN "4735, 4737, 4755, 4745, 4750, 4760"'>
+       <collectFieldsByRegex src="$_body">
+	 <regex><![CDATA[.*Subject:<_subject:gPatMesgBody>Group:<_grp:gPatMesgBody>Changed Attributes:<_attrib:gPatMesgBody>]]></regex>
+       </collectFieldsByRegex>
+       
+       <collectAndSetAttrByKeyValuePair sep=' ' src="$_subject">
+         <attrKeyMap attr="user" key="Account Name:  "/>
+         <attrKeyMap attr="domain" key="Account Domain:  "/>
+	 <attrKeyMap attr="winLogonId" key="Logon ID:  "/>
+       </collectAndSetAttrByKeyValuePair>
+      
+       <collectFieldsByRegex src="$_grp">
+	 <regex><![CDATA[.*Group Name:  <targetUserGrp:gPatMesgBody>Group Domain:  <targetDomain:gPatMesgBody>]]></regex>
+       </collectFieldsByRegex>
+       <collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-4624">
+         <when test = '$winLogonId = $AnotherEventType.winLogonId'>
+           <setEventAttribute attr="srcIpAddr">$AnotherEventType.srcIpAddr</setEventAttribute>
+         </when>
+       </collectAndSetAttrFromAnotherEvent>
+       <choose>
+          <when test="matches($_action, '^Success')">
+	       <setEventAttribute attr="eventSeverity">5</setEventAttribute>
+           </when>
+
+           <when test="matches($_action, '^Failure)">       
+	       <setEventAttribute attr="eventSeverity">7</setEventAttribute>
+           </when>
+       </choose>
+     </when>
+     
+     <!-- A security-enabled/disabled local/global/universal group was deleted -->
+     <when test='$_id IN "4789, 4763, 4748, 4753, 4734, 4758, 4730"'>
+       <collectFieldsByRegex src="$_body">
+	 <regex><![CDATA[.*Subject:<_subject:gPatMesgBody>Deleted?\s*Group:<_grp:gPatMesgBody>Additional Information:<_addl:gPatMesgBody>]]></regex>
+       </collectFieldsByRegex>
+       
+       <collectAndSetAttrByKeyValuePair sep=' ' src="$_subject">
+         <attrKeyMap attr="user" key="Account Name:  "/>
+         <attrKeyMap attr="domain" key="Account Domain:  "/>
+	 <attrKeyMap attr="winLogonId" key="Logon ID:  "/>
+       </collectAndSetAttrByKeyValuePair>
+  
+       <collectFieldsByRegex src="$_grp">
+	 <regex><![CDATA[.*Group Name:  <targetUserGrp:gPatMesgBody>Group Domain:  <targetDomain:gPatMesgBody>]]></regex>
+       </collectFieldsByRegex>
+
+       <collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-4624">
+         <when test = '$winLogonId = $AnotherEventType.winLogonId'>
+           <setEventAttribute attr="srcIpAddr">$AnotherEventType.srcIpAddr</setEventAttribute>
+         </when>
+       </collectAndSetAttrFromAnotherEvent>
+       <choose>
+          <when test="matches($_action, '^Success')">
+	       <setEventAttribute attr="eventSeverity">5</setEventAttribute>
+           </when>
+
+           <when test="matches($_action, '^Failure)">       
+	       <setEventAttribute attr="eventSeverity">7</setEventAttribute>
+           </when>
+       </choose>
+     </when>
+
+     <when test='$_id IN "670, 671"'>
+         <!-- 670: add SID hostory failure, 671: account unlocked
+       <13>Dec 12 10:09:00 ADS-Pri.ProspectHills.net MSWinEventLog	1	Security	1756	Wed Dec 12 10:08:53 2007	668	Security	SYSTEM	User	Success Audit	ADS-PRI	Group Type changed		Caller User Name: partha   Caller Domain: PROSPECTHILLS		Caller Logon ID: (0x0, 0x158E87) 	Target Account Name: johnDoe  Target Domain: PROSPECTHILLS	Target Account ID: PROSPECTHILLS\johnDoe 
+      -->
+
+       <collectAndSetAttrByKeyValuePair sep=' ' src="$_body">
+          <attrKeyMap attr="user" key="Caller User Name: "/>
+          <attrKeyMap attr="domain" key="Caller Domain: "/>
+          <attrKeyMap attr="winLogonId" key="Caller Logon ID: "/>
+          <attrKeyMap attr="targetUser" key="Target Account Name: "/>
+	    <attrKeyMap attr="targetDomain" key="Target Domain: "/>
+       </collectAndSetAttrByKeyValuePair>
+
+       <collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-540 OR Win-Security-528">
+          <when test = '$winLogonId = $AnotherEventType.winLogonId'>
+             <setEventAttribute attr="srcIpAddr">$AnotherEventType.srcIpAddr</setEventAttribute>
+          </when>
+       </collectAndSetAttrFromAnotherEvent>
+
+       <setEventAttribute attr="eventSeverity">5</setEventAttribute>	
+   </when>
+
+   <when test='$_id = "669"'>
+         <!-- 670: add SID hostory success
+       <13>Dec 12 10:09:00 ADS-Pri.ProspectHills.net MSWinEventLog	1	Security	1756	Wed Dec 12 10:08:53 2007	668	Security	SYSTEM	User	Success Audit	ADS-PRI	Group Type changed		Caller User Name: partha   Caller Domain: PROSPECTHILLS		Caller Logon ID: (0x0, 0x158E87) 	Target Account Name: johnDoe  Target Domain: PROSPECTHILLS	Target Account ID: PROSPECTHILLS\johnDoe 
+      -->
+
+       <collectAndSetAttrByKeyValuePair sep=' ' src="$_body">
+          <attrKeyMap attr="user" key="Caller User Name: "/>
+          <attrKeyMap attr="domain" key="Caller Domain: "/>
+          <attrKeyMap attr="winLogonId" key="Caller Logon ID: "/>
+          <attrKeyMap attr="targetUser" key="Target Account Name: "/>
+	    <attrKeyMap attr="targetDomain" key="Target Domain: "/>
+       </collectAndSetAttrByKeyValuePair>
+
+       <collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-540 OR Win-Security-528">
+          <when test = '$winLogonId = $AnotherEventType.winLogonId'>
+             <setEventAttribute attr="srcIpAddr">$AnotherEventType.srcIpAddr</setEventAttribute>
+          </when>
+       </collectAndSetAttrFromAnotherEvent>
+
+       <setEventAttribute attr="eventSeverity">4</setEventAttribute>	
+   </when>
+
+   <when test='$_id IN "640, 668"'>
+         <!-- 640: account database change, 668: group type change
+       <13>Dec 12 10:09:00 ADS-Pri.ProspectHills.net MSWinEventLog	1	Security	1756	Wed Dec 12 10:08:53 2007	668	Security	SYSTEM	User	Success Audit	ADS-PRI	Group Type changed		Caller User Name: partha   Caller Domain: PROSPECTHILLS		Caller Logon ID: (0x0, 0x158E87) 	Target Account Name: johnDoe  Target Domain: PROSPECTHILLS	Target Account ID: PROSPECTHILLS\johnDoe 
+      -->
+
+       <collectAndSetAttrByKeyValuePair sep=' ' src="$_body">
+          <attrKeyMap attr="user" key="Caller User Name: "/>
+          <attrKeyMap attr="domain" key="Caller Domain: "/>
+          <attrKeyMap attr="winLogonId" key="Caller Logon ID: "/>
+          <attrKeyMap attr="targetUser" key="Target Account Name: "/>
+	    <attrKeyMap attr="targetDomain" key="Target Domain: "/>
+       </collectAndSetAttrByKeyValuePair>
+
+       <collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-540 OR Win-Security-528">
+          <when test = '$winLogonId = $AnotherEventType.winLogonId'>
+             <setEventAttribute attr="srcIpAddr">$AnotherEventType.srcIpAddr</setEventAttribute>
+          </when>
+       </collectAndSetAttrFromAnotherEvent>
+
+       <choose>
+          <when test="matches($_action, '^Success')">
+	       <setEventAttribute attr="eventSeverity">5</setEventAttribute>
+           </when>
+
+           <when test="matches($_action, '^Failure)">       
+	       <setEventAttribute attr="eventSeverity">7</setEventAttribute>
+           </when>
+        </choose>	
+   </when>
+
+   <when test='$_id = "680"'>
+
+     <!-- SUCCESSFUL / FAILED DOMAIN RESOURCE ACCESS VIA NTLM 
+       <13>Nov 29 00:01:12 ADS-Pri.ProspectHills.net MSWinEventLog	1	Security	16714	Thu Nov 29 00:01:04 2007	680	Security	SYSTEM	User	Failure Audit	ADS-PRI  Account Used For Logon By  Logon Account: partha  Source Workstation: PARTHA_LAPTOP Error Code: 0xC0000064     
+      -->
+
+       <collectAndSetAttrByKeyValuePair sep=' ' src="$_body">
+          <attrKeyMap attr="winLogonFailCode" key="Error Code: "/>
+       </collectAndSetAttrByKeyValuePair>
+
+       <choose>
+         <when test='$winLogonFailCode IN "-, 0x0"'>
+            <setEventAttribute attr="eventType">combineMsgId("Win", "-", $_OSModule, "-", $_id, "-", "success")</setEventAttribute>
+            <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+         </when>
+         <otherwise>
+           <setEventAttribute attr="eventType">combineMsgId("Win", "-", $_OSModule, "-", $_id, "-", "failure")</setEventAttribute>
+           <setEventAttribute attr="eventSeverity">3</setEventAttribute>            
+         </otherwise>
+       </choose>
+
+       <collectAndSetAttrByKeyValuePair sep=' ' src="$_body">
+         <attrKeyMap attr="user" key="Logon Account: "/>
+         <attrKeyMap attr="computer" key="Source Workstation: "/>
+	 <attrKeyMap attr="winLogonFailCode" key="Error Code: "/>
+       </collectAndSetAttrByKeyValuePair>
+   </when>
+
+     <!-- The domain controller attempted to validate the credentials for an account -->
+     <when test='$_id = "4776"'>
+       <collectAndSetAttrByKeyValuePair sep='  \\|\t' src="$_body">
+	 <attrKeyMap attr="user" key="Logon Account: "/>
+         <attrKeyMap attr="srcIpAddr" key="Source Workstation: "/>
+	 <attrKeyMap attr="winLogonFailCode" key="Error Code: "/>
+       </collectAndSetAttrByKeyValuePair> 
+       <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+ 
+       <choose>
+         <when test='$winLogonFailCode IN "-,0x0"'>
+            <setEventAttribute attr="eventType">combineMsgId("Win", "-", $_OSModule, "-", $_id, "-", "success")</setEventAttribute>
+            <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+         </when>
+         <otherwise>
+           <setEventAttribute attr="eventType">combineMsgId("Win", "-", $_OSModule, "-", $_id, "-", "failure")</setEventAttribute>
+           <setEventAttribute attr="eventSeverity">3</setEventAttribute>            
+         </otherwise>
+       </choose>
+         <when test="not_matches($srcIpAddr, '\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}')">
+          <setEventAttribute attr="srcIpAddr">$reptDevIpAddr</setEventAttribute>
+        </when>
+     </when>  
+
+   <when test='$_id = "684"'>
+     <!-- various
+       <13>Dec 12 10:09:00 ADS-Pri.ProspectHills.net MSWinEventLog	1	Security	1756	Wed Dec 12 10:08:53 2007	684	Security	SYSTEM	User	Success Audit	ADS-PRI	Set ACLs of members in administrators groups:		Caller User Name: partha   Caller Domain: PROSPECTHILLS		Caller Logon ID: (0x0, 0x158E87) 	Target Account Name: johnDoe  Target Domain: DC=PROSPECTHILLS, DC=local	Target Account ID: PROSPECTHILLS\johnDoe 
+      -->
+
+       <collectAndSetAttrByKeyValuePair sep=' ' src="$_body">
+           <attrKeyMap attr="_targetAcct" key="Target Account ID: "/>
+       </collectAndSetAttrByKeyValuePair>
+
+       <collectFieldsByRegex src="$_targetAcct">
+           <regex> <![CDATA[<_targetDomain:gPatWord>\<:gPatWord>]]> </regex>
+       </collectFieldsByRegex>
+ 
+       <setEventAttribute attr="targetDomain">$_targetDomain</setEventAttribute> 
+
+       <collectAndSetAttrByKeyValuePair sep=' ' src="$_body">
+          <attrKeyMap attr="user" key="Caller User Name: "/>
+          <attrKeyMap attr="domain" key="Caller Domain: "/>
+          <attrKeyMap attr="winLogonId" key="Caller Logon ID: "/>
+          <attrKeyMap attr="targetUser" key="Target Account Name: "/>
+	    <attrKeyMap attr="targetDomain" key="Target Domain: "/>
+       </collectAndSetAttrByKeyValuePair>
+
+       <collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-540 OR Win-Security-528">
+          <when test = '$winLogonId = $AnotherEventType.winLogonId'>
+             <setEventAttribute attr="srcIpAddr">$AnotherEventType.srcIpAddr</setEventAttribute>
+          </when>
+       </collectAndSetAttrFromAnotherEvent>
+
+       <setEventAttribute attr="eventSeverity">1</setEventAttribute>	
+     </when>
+
+
+     <when test='$_id = "685"'>
+     <!-- ACCOUNT NAME CHANGED
+       <13>Dec 12 10:09:00 ADS-Pri.ProspectHills.net MSWinEventLog	1	Security	1756	Wed Dec 12 10:08:53 2007	668	Security	SYSTEM	User	Success Audit	ADS-PRI	Windows account name changed		Caller User Name: partha   Caller Domain: PROSPECTHILLS		Caller Logon ID: (0x0, 0x158E87) 	Old Account Name: johnDoe  New Account Name: newJohnDoe  Target Domain: PROSPECTHILLS	Target Account ID: PROSPECTHILLS\johnDoe 
+      -->
+
+       <collectAndSetAttrByKeyValuePair sep=' ' src="$_body">
+          <attrKeyMap attr="user" key="Caller User Name: "/>
+          <attrKeyMap attr="domain" key="Caller Domain: "/>
+          <attrKeyMap attr="winLogonId" key="Caller Logon ID: "/>
+          <attrKeyMap attr="targetUser" key="Old Account Name: "/>
+	    <attrKeyMap attr="targetDomain" key="Target Domain: "/>
+       </collectAndSetAttrByKeyValuePair>
+
+       <collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-540 OR Win-Security-528">
+          <when test = '$winLogonId = $AnotherEventType.winLogonId'>
+             <setEventAttribute attr="srcIpAddr">$AnotherEventType.srcIpAddr</setEventAttribute>
+          </when>
+       </collectAndSetAttrFromAnotherEvent>
+
+       <setEventAttribute attr="eventSeverity">2</setEventAttribute>			
+     </when>
+
+     <when test='$_id = "686"'>
+     <!-- password of user accessed
+       <13>Dec 12 10:09:00 ADS-Pri.ProspectHills.net MSWinEventLog	1	Security	1756	Wed Dec 12 10:08:53 2007	686	Security	SYSTEM	User	Success Audit	ADS-PRI	Windows user password accessed		Caller User Name: partha   Caller Domain: PROSPECTHILLS	Caller Logon ID: (0x0, 0x158E87) 	Target User Name: johnDoe  Target Domain: PROSPECTHILLS 
+      -->
+
+       <collectAndSetAttrByKeyValuePair sep=' ' src="$_body">
+          <attrKeyMap attr="user" key="Caller User Name: "/>
+          <attrKeyMap attr="domain" key="Caller Domain: "/>
+          <attrKeyMap attr="winLogonId" key="Caller Logon ID: "/>
+          <attrKeyMap attr="targetUser" key="Target User Name: "/>
+	    <attrKeyMap attr="targetDomain" key="Target Domain: "/>
+       </collectAndSetAttrByKeyValuePair>
+
+       <collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-540 OR Win-Security-528">
+          <when test = '$winLogonId = $AnotherEventType.winLogonId'>
+             <setEventAttribute attr="srcIpAddr">$AnotherEventType.srcIpAddr</setEventAttribute>
+          </when>
+       </collectAndSetAttrFromAnotherEvent>	
+
+       <setEventAttribute attr="eventSeverity">1</setEventAttribute>	
+     </when>      
+
+     <when test='$_id IN "687, 688"'>
+     <!-- various
+       <13>Dec 12 10:09:00 ADS-Pri.ProspectHills.net MSWinEventLog	1	Security	1756	Wed Dec 12 10:08:53 2007	688	Security	SYSTEM	User	Success Audit	ADS-PRI	Basic Application Group Changed		Caller User Name: partha   Caller Domain: PROSPECTHILLS		Caller Logon ID: (0x0, 0x158E87) 	Target Account Name: johnDoe  Target Domain: PROSPECTHILLS	Target Account ID: PROSPECTHILLS\johnDoe 
+      -->
+
+       <collectAndSetAttrByKeyValuePair sep=' ' src="$_body">
+          <attrKeyMap attr="user" key="Caller User Name: "/>
+          <attrKeyMap attr="domain" key="Caller Domain: "/>
+          <attrKeyMap attr="winLogonId" key="Caller Logon ID: "/>
+          <attrKeyMap attr="targetUser" key="New Account Name: "/>
+	    <attrKeyMap attr="targetDomain" key="New Domain: "/>
+       </collectAndSetAttrByKeyValuePair>
+
+       <collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-540 OR Win-Security-528">
+          <when test = '$winLogonId = $AnotherEventType.winLogonId'>
+             <setEventAttribute attr="srcIpAddr">$AnotherEventType.srcIpAddr</setEventAttribute>
+          </when>
+       </collectAndSetAttrFromAnotherEvent>
+
+       <setEventAttribute attr="eventSeverity">1</setEventAttribute>			
+   </when>
+
+   <when test='$_id IN "689, 690, 691, 692, 693, 694, 695, 696"'>
+     <!-- various
+       <13>Dec 12 10:09:00 ADS-Pri.ProspectHills.net MSWinEventLog	1	Security	1756	Wed Dec 12 10:08:53 2007	689	Security	SYSTEM	User	Success Audit	ADS-PRI	Basic Application Group Changed		Caller User Name: partha   Caller Domain: PROSPECTHILLS		Caller Logon ID: (0x0, 0x158E87) 	Target Account Name: johnDoe  Target Domain: PROSPECTHILLS	Target Account ID: PROSPECTHILLS\johnDoe 
+      -->
+
+       <collectAndSetAttrByKeyValuePair sep=' ' src="$_body">
+          <attrKeyMap attr="user" key="Caller User Name: "/>
+          <attrKeyMap attr="domain" key="Caller Domain: "/>
+          <attrKeyMap attr="winLogonId" key="Caller Logon ID: "/>
+          <attrKeyMap attr="targetUser" key="Target Account Name: "/>
+	    <attrKeyMap attr="targetDomain" key="Target Domain: "/>
+       </collectAndSetAttrByKeyValuePair>
+
+       <collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-540 OR Win-Security-528">
+          <when test = '$winLogonId = $AnotherEventType.winLogonId'>
+             <setEventAttribute attr="srcIpAddr">$AnotherEventType.srcIpAddr</setEventAttribute>
+          </when>
+       </collectAndSetAttrFromAnotherEvent>
+
+       <choose>
+          <when test="matches($_action, '^Success')">
+	       <setEventAttribute attr="eventSeverity">3</setEventAttribute>
+           </when>
+
+           <when test="matches($_action, '^Failure)">       
+	       <setEventAttribute attr="eventSeverity">5</setEventAttribute>
+           </when>
+       </choose>	
+		
+   </when>
+
+   <when test='$_id = "608"'>
+     <!-- user right assigned
+       <13>Dec 12 10:09:00 ADS-Pri.ProspectHills.net MSWinEventLog	1	Security	1756	Wed Dec 12 10:08:53 2007	608	Security	SYSTEM	User	Success Audit	ADS-PRI	User Right Assigned		User Name: PROSPECTHILLS$   Domain: PROSPECTHILLS	Logon ID: (0x0, 0x158E87) 	Assigned To: PROSPECTHILLS\johnDoe  Assigned By:  User Right: Assigned User Right: SetUndockPrivilege 
+      -->
+
+       <collectAndSetAttrByKeyValuePair sep=' ' src="$_body">
+           <attrKeyMap attr="_targetDomUser" key="Assigned To: "/>
+       </collectAndSetAttrByKeyValuePair>
+
+       <collectFieldsByRegex src="$_targetDomUser">
+           <regex> <![CDATA[ <_targetDomain:gPatWord>\<_targetUser:gPatWord>  ]]> </regex>
+       </collectFieldsByRegex>
+ 
+       <setEventAttribute attr="targetDomain">$_targetDomain</setEventAttribute> 
+       <setEventAttribute attr="targetUser">$_targetUser</setEventAttribute> 
+
+       <collectAndSetAttrByKeyValuePair sep=' ' src="$_body">
+          <attrKeyMap attr="user" key="User Name: "/>
+          <attrKeyMap attr="domain" key="Domain: "/>
+          <attrKeyMap attr="winLogonId" key="Logon ID: "/>
+       </collectAndSetAttrByKeyValuePair>
+
+       <collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-540 OR Win-Security-528">
+          <when test = '$winLogonId = $AnotherEventType.winLogonId'>
+             <setEventAttribute attr="srcIpAddr">$AnotherEventType.srcIpAddr</setEventAttribute>
+          </when>
+       </collectAndSetAttrFromAnotherEvent>
+
+       <choose>
+          <when test="matches($_action, '^Success')">
+	       <setEventAttribute attr="eventSeverity">4</setEventAttribute>
+           </when>
+
+           <when test="matches($_action, '^Failure)">       
+	       <setEventAttribute attr="eventSeverity">7</setEventAttribute>
+           </when>
+       </choose>	
+   </when>
+
+   <when test='$_id = "609"'>
+     <!-- user right removed
+       <13>Dec 12 10:09:00 ADS-Pri.ProspectHills.net MSWinEventLog	1	Security	1756	Wed Dec 12 10:08:53 2007	609	Security	SYSTEM	User	Success Audit	ADS-PRI	User Right Removed		User Name: partha   Domain: PROSPECTHILLS	Logon ID: (0x0, 0x158E87) 	User Right: Removed   User Right: johnDoe Removed From AdminGrp 
+      -->
+
+       <collectAndSetAttrByKeyValuePair sep=' ' src="$_body">
+           <attrKeyMap attr="_userRight" key="User Right: "/>
+       </collectAndSetAttrByKeyValuePair>
+
+       <collectFieldsByRegex src="$_userRight">
+           <regex> <![CDATA[ <_targetUser:gPatWord> Removed From <_targetUserGrp:gPatWord>]]> </regex>
+       </collectFieldsByRegex>
+ 
+       <setEventAttribute attr="targetUserGrp">$_targetUserGrp</setEventAttribute> 
+       <setEventAttribute attr="targetUser">$_targetUser</setEventAttribute> 
+
+       <collectAndSetAttrByKeyValuePair sep=' ' src="$_body">
+          <attrKeyMap attr="user" key="User Name: "/>
+          <attrKeyMap attr="domain" key="Domain: "/>
+          <attrKeyMap attr="winLogonId" key="Logon ID: "/>
+       </collectAndSetAttrByKeyValuePair>
+
+       <collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-540 OR Win-Security-528">
+          <when test = '$winLogonId = $AnotherEventType.winLogonId'>
+             <setEventAttribute attr="srcIpAddr">$AnotherEventType.srcIpAddr</setEventAttribute>
+          </when>
+       </collectAndSetAttrFromAnotherEvent>
+
+       <choose>
+          <when test="matches($_action, '^Success')">
+	       <setEventAttribute attr="eventSeverity">4</setEventAttribute>
+           </when>
+
+           <when test="matches($_action, '^Failure)">       
+	       <setEventAttribute attr="eventSeverity">7</setEventAttribute>
+           </when>
+       </choose>		
+   </when>
+
+   <when test='$_id IN "610, 611, 620"'>
+     <!-- windows trust domain added/modified/removed
+       <13>Dec 12 10:09:00 ADS-Pri.ProspectHills.net MSWinEventLog	1	Security	1756	Wed Dec 12 10:08:53 2007	610	Security	SYSTEM	User	Success Audit	ADS-PRI	New Trusted Domain		User Name: partha   Domain: PROSPECTHILLS		Logon ID: (0x0, 0x158E87) 	Domain Name: johnDoe  Domain ID: PROSPECTHILLS 
+      -->
+
+       <collectAndSetAttrByKeyValuePair sep=' ' src="$_body">
+          <attrKeyMap attr="user" key="User Name: "/>
+          <attrKeyMap attr="domain" key="Domain: "/>
+          <attrKeyMap attr="winLogonId" key="Logon ID: "/>
+	    <attrKeyMap attr="targetDomain" key="Domain Name: "/>
+       </collectAndSetAttrByKeyValuePair>
+
+       <collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-540 OR Win-Security-528">
+          <when test = '$winLogonId = $AnotherEventType.winLogonId'>
+             <setEventAttribute attr="srcIpAddr">$AnotherEventType.srcIpAddr</setEventAttribute>
+          </when>
+       </collectAndSetAttrFromAnotherEvent>
+
+       <choose>
+          <when test="matches($_action, '^Success')">
+	       <setEventAttribute attr="eventSeverity">5</setEventAttribute>
+           </when>
+
+           <when test="matches($_action, '^Failure)">       
+	       <setEventAttribute attr="eventSeverity">8</setEventAttribute>
+           </when>
+       </choose>
+   </when>   
+
+    <when test='$_id IN "621, 622"'>
+             <!-- various
+       <13>Dec 12 10:09:00 ADS-Pri.ProspectHills.net MSWinEventLog	1	Security	1756	Wed Dec 12 10:08:53 2007	621	Security	SYSTEM	User	Success Audit	ADS-PRI	System Security Access Granted		User Name: partha   Domain: PROSPECTHILLS	Logon ID: (0x0, 0x158E87) 	Account Modified: PROSPECTHILLS\johnDoe
+      -->
+
+       <collectAndSetAttrByKeyValuePair sep=' ' src="$_body">
+           <attrKeyMap attr="_targetUser2" key="Account Modified: "/>
+       </collectAndSetAttrByKeyValuePair>
+
+       <collectAndSetAttrByRegex src="$_targetUser2">
+           <regex> <![CDATA[ <targetUserDomain:gPatWord>\<targetUser:gPatWord>  ]]> </regex>
+       </collectAndSetAttrByRegex>
+
+       <collectAndSetAttrByKeyValuePair sep=' ' src="$_body">
+          <attrKeyMap attr="user" key="User Name: "/>
+          <attrKeyMap attr="domain" key="Domain: "/>
+          <attrKeyMap attr="winLogonId" key="Logon ID: "/>
+       </collectAndSetAttrByKeyValuePair>
+
+       <collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-540 OR Win-Security-528">
+          <when test = '$winLogonId = $AnotherEventType.winLogonId'>
+             <setEventAttribute attr="srcIpAddr">$AnotherEventType.srcIpAddr</setEventAttribute>
+          </when>
+       </collectAndSetAttrFromAnotherEvent>
+		
+       <choose>
+          <when test="matches($_action, '^Success')">
+	       <setEventAttribute attr="eventSeverity">5</setEventAttribute>
+           </when>
+
+           <when test="matches($_action, '^Failure)">       
+	       <setEventAttribute attr="eventSeverity">8</setEventAttribute>
+           </when>
+       </choose>		
+   </when>
+
+   <when test='$_id IN "612, 617, 618, 619"'>
+
+     <!-- kerberos policy, QoS policy, audit policy
+       <13>Dec 12 10:09:00 ADS-Pri.ProspectHills.net MSWinEventLog	1	Security	1756	Wed Dec 12 10:08:53 2007	612	Security	SYSTEM	User	Success Audit	ADS-PRI	Windows Audit Policy Changed		User Name: partha   Domain: PROSPECTHILLS		Logon ID: (0x0, 0x158E87)  
+      -->
+
+       <collectAndSetAttrByKeyValuePair sep=' ' src="$_body">
+          <attrKeyMap attr="user" key="User Name: "/>
+          <attrKeyMap attr="domain" key="Domain: "/>
+          <attrKeyMap attr="winLogonId" key="Logon ID: "/>           	
+       </collectAndSetAttrByKeyValuePair>
+
+       <collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-540 OR Win-Security-528">
+          <when test = '$winLogonId = $AnotherEventType.winLogonId'>
+             <setEventAttribute attr="srcIpAddr">$AnotherEventType.srcIpAddr</setEventAttribute>
+          </when>
+       </collectAndSetAttrFromAnotherEvent>
+		
+       <choose>
+          <when test="matches($_action, '^Success')">
+	       <setEventAttribute attr="eventSeverity">5</setEventAttribute>
+           </when>
+
+           <when test="matches($_action, '^Failure)">       
+	       <setEventAttribute attr="eventSeverity">7</setEventAttribute>
+           </when>
+       </choose>
+    </when>
+   
+    <when test='$_id = "517"'>
+     <!-- audit log cleared
+       <13>Dec 12 10:09:00 ADS-Pri.ProspectHills.net MSWinEventLog	1	Security	1756	Wed Dec 12 10:08:53 2007	517	Security	SYSTEM	User	Success Audit	ADS-PRI	The audit log was cleared		Client User Name: partha   Client Domain: PROSPECTHILLS		Client Logon ID: (0x0, 0x158E87)  
+      -->
+
+       <collectAndSetAttrByKeyValuePair sep=' ' src="$_body">
+          <attrKeyMap attr="user" key="Client User Name: "/>
+          <attrKeyMap attr="domain" key="Client Domain: "/>
+          <attrKeyMap attr="winLogonId" key="Client Logon ID: "/>           	
+       </collectAndSetAttrByKeyValuePair>
+
+       <collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-540 OR Win-Security-528">
+          <when test = '$winLogonId = $AnotherEventType.winLogonId'>
+             <setEventAttribute attr="srcIpAddr">$AnotherEventType.srcIpAddr</setEventAttribute>
+          </when>
+       </collectAndSetAttrFromAnotherEvent>		
+
+       <choose>
+          <when test="matches($_action, '^Success')">
+	       <setEventAttribute attr="eventSeverity">5</setEventAttribute>
+           </when>
+
+           <when test="matches($_action, '^Failure)">       
+	       <setEventAttribute attr="eventSeverity">7</setEventAttribute>
+           </when>
+       </choose>
+   </when>
+
+   <when test='$_id = "514"'>
+     <!-- auth package loaded
+       <13>Dec 12 10:09:00 ADS-Pri.ProspectHills.net MSWinEventLog	1	Security	1756	Wed Dec 12 10:08:53 2007	514	Security	SYSTEM	User	Success Audit	ADS-PRI	An authentication package has been loaded by the Local Security Authority		Authentication Package Name: NTLM  
+      -->
+
+       <collectAndSetAttrByKeyValuePair sep=' ' src="$_body">
+          <attrKeyMap attr="procName" key="Authentication Package Name: "/>
+       </collectAndSetAttrByKeyValuePair>	
+
+       <choose>
+          <when test="matches($_action, '^Success')">
+	       <setEventAttribute attr="eventSeverity">3</setEventAttribute>
+           </when>
+
+           <when test="matches($_action, '^Failure)">       
+	       <setEventAttribute attr="eventSeverity">6</setEventAttribute>
+           </when>
+       </choose>
+
+   </when>
+
+   <when test='$_id = "515"'>
+     <!-- trusted logon process registered
+       <13>Dec 12 10:09:00 ADS-Pri.ProspectHills.net MSWinEventLog	1	Security	1756	Wed Dec 12 10:08:53 2007	515	Security	SYSTEM	User	Success Audit	ADS-PRI	A trusted logon process has registered with the Local Security Authority		Logon Process Name: KSecDD  
+      -->
+
+       <collectAndSetAttrByKeyValuePair sep=' ' src="$_body">
+          <attrKeyMap attr="procName" key="Logon Process Name: "/>
+       </collectAndSetAttrByKeyValuePair>	
+
+       <choose>
+          <when test="matches($_action, '^Success')">
+	       <setEventAttribute attr="eventSeverity">3</setEventAttribute>
+           </when>
+
+           <when test="matches($_action, '^Failure)">       
+	       <setEventAttribute attr="eventSeverity">6</setEventAttribute>
+           </when>
+       </choose>
+
+   </when>
+
+   <when test='$_id = "518"'>
+     <!-- notofication package loaded 
+       <13>Dec 12 10:09:00 ADS-Pri.ProspectHills.net MSWinEventLog	1	Security	1756	Wed Dec 12 10:08:53 2007	515	Security	SYSTEM	User	Success Audit	ADS-PRI	A notification package has been loaded by the Security Account Manager		Notification Package Name: scecli  
+      -->
+
+       <collectAndSetAttrByKeyValuePair sep=' ' src="$_body">
+          <attrKeyMap attr="procName" key="Notification Package Name: "/>
+       </collectAndSetAttrByKeyValuePair>	
+
+       <choose>
+          <when test="matches($_action, '^Success')">
+	       <setEventAttribute attr="eventSeverity">3</setEventAttribute>
+           </when>
+
+           <when test="matches($_action, '^Failure)">       
+	       <setEventAttribute attr="eventSeverity">6</setEventAttribute>
+           </when>
+       </choose>
+
+   </when> 
+
+   <when test='$_id = "520"'>
+     <!-- system time changed
+       <13>Dec 12 10:09:00 ADS-Pri.ProspectHills.net MSWinEventLog	1	Security	1756	Wed Dec 12 10:08:53 2007	520	Security	SYSTEM	User	Success Audit	ADS-PRI	The system time was changed		Client User Name: partha   Client Domain: PROSPECTHILLS		Client Logon ID: (0x0, 0x158E87)  Process name: C:\WINDOWS\system32\rundll32.exe
+      -->
+
+       <collectAndSetAttrByKeyValuePair sep=' ' src="$_body">
+          <attrKeyMap attr="user" key="Client User Name: "/>
+          <attrKeyMap attr="domain" key="Client Domain: "/>
+          <attrKeyMap attr="winLogonId" key="Client Logon ID: "/>
+          <attrKeyMap attr="procName" key="Process  Name: "/>           	
+       </collectAndSetAttrByKeyValuePair>
+
+       <collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-540 OR Win-Security-528">
+          <when test = '$winLogonId = $AnotherEventType.winLogonId'>
+             <setEventAttribute attr="srcIpAddr">$AnotherEventType.srcIpAddr</setEventAttribute>
+          </when>
+       </collectAndSetAttrFromAnotherEvent>
+
+       <choose>
+          <when test="matches($_action, '^Success')">
+	       <setEventAttribute attr="eventSeverity">3</setEventAttribute>
+           </when>
+
+           <when test="matches($_action, '^Failure)">       
+	       <setEventAttribute attr="eventSeverity">6</setEventAttribute>
+           </when>
+       </choose>		
+   </when>
+
+   <when test='$_id = "512"'>
+      <!-- windows staring up -->
+      <setEventAttribute attr="eventSeverity">2</setEventAttribute>
+   </when>
+
+   <when test='$_id = "513"'>
+      <!-- windows shutting down -->
+      <setEventAttribute attr="eventSeverity">2</setEventAttribute>
+   </when>
+
+   <when test='$_id = "613"'>
+      <!-- ipsec policy agent started -->
+      <setEventAttribute attr="eventSeverity">2</setEventAttribute>
+   </when>
+
+   <when test='$_id = "614"'>
+      <!-- windows policy agent disabled -->
+      <setEventAttribute attr="eventSeverity">5</setEventAttribute>
+   </when>
+
+   <when test='$_id = "616"'>
+      <!-- windows policy agent serious failure
+        -->
+      <setEventAttribute attr="eventSeverity">5</setEventAttribute>
+   </when>
+
+   <when test='$_id = "516"'>
+      <!-- internal resources for queueing audit messages exhausted
+        -->
+      <setEventAttribute attr="eventSeverity">7</setEventAttribute>
+   </when>
+
+   <when test='$_id = "519"'>
+      <!-- process using invalid LPC port
+        -->
+      <setEventAttribute attr="eventSeverity">5</setEventAttribute>
+   </when>
+
+   <when test='$_id = "562"'>
+     <!-- windows object closed 
+       <13>Dec 12 10:09:00 ADS-Pri.ProspectHills.net MSWinEventLog	1	Security	1756	Wed Dec 12 10:08:53 2007	562	Security	SYSTEM	User	Success Audit	ADS-PRI	Handle Closed	 Handle ID: 144 	Image File Name: C:\WINDOWS\system32\notepad.exe 
+      -->
+       <collectAndSetAttrByKeyValuePair sep=' ' src="$_body">
+          	<attrKeyMap attr="procName" key="Image File Name: "/>
+            <attrKeyMap attr="osObjHandleID" key="Handle ID: "/>
+       </collectAndSetAttrByKeyValuePair>
+
+       <collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-560">
+          <when test = '$osObjHandleID = $AnotherEventType.osObjHandleID'>
+             <setEventAttribute attr="srcIpAddr">$AnotherEventType.srcIpAddr</setEventAttribute>
+		 <setEventAttribute attr="user">$AnotherEventType.user</setEventAttribute>
+             <setEventAttribute attr="domain">$AnotherEventType.domain</setEventAttribute>
+             <setEventAttribute attr="winLogonId">$AnotherEventType.winLogonId</setEventAttribute>
+	       <setEventAttribute attr="osObjName">$AnotherEventType.osObjName</setEventAttribute>
+          </when>
+       </collectAndSetAttrFromAnotherEvent>
+
+       <choose>
+          <when test="matches($_action, '^Success')">
+	       <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+           </when>
+
+           <when test="matches($_action, '^Failure)">       
+	       <setEventAttribute attr="eventSeverity">4</setEventAttribute>
+           </when>
+       </choose>			
+  </when>
+
+  <when test='$_id = "563"'>
+     <!-- windows object open for delete
+       <13>Dec 12 10:09:00 ADS-Pri.ProspectHills.net MSWinEventLog	1	Security	1756	Wed Dec 12 10:08:53 2007	563	Security	SYSTEM	User	Success Audit	ADS-PRI	Object Open for Delete		Client User Name: partha   Client Domain: PROSPECTHILLS		Client Logon ID: (0x0, 0x158E87)  Object Type: File  New Handle ID: 144 	Image File Name: C:\WINDOWS\system32\notepad.exe Object Name:C:\ConfidentialFiles\ ProjectPlan.doc.txt  Accesses: WriteData (or AddFile) AppendData (or AddSubdirectory or CreatePipeInstance)
+      -->
+
+       <collectAndSetAttrByKeyValuePair sep=' ' src="$_body">
+          <attrKeyMap attr="user2" key="Client User Name: "/>
+       </collectAndSetAttrByKeyValuePair>
+
+	 <choose>
+         <when test='$user2 != "-")'>
+              <collectAndSetAttrByKeyValuePair sep=' ' src="$_body">
+          		<attrKeyMap attr="user" key="Client User Name: "/>
+          		<attrKeyMap attr="domain" key="Client Domain: "/>
+          		<attrKeyMap attr="winLogonId" key="Client Logon ID: "/>
+          		<attrKeyMap attr="procName" key="Image File Name: "/>
+ 			<attrKeyMap attr="osObjType" key="Object Type: "/>
+ 			<attrKeyMap attr="osObjName" key="Object Name: "/>
+                  <attrKeyMap attr="osObjHandleID" key="New Handle ID: "/>
+			<attrKeyMap attr="osObjAccessType" key="Accesses: "/>
+              </collectAndSetAttrByKeyValuePair>	
+          </when>
+          <otherwise>
+              <collectAndSetAttrByKeyValuePair sep=' ' src="$_body">
+          		<attrKeyMap attr="user" key="Primary User Name: "/>
+          		<attrKeyMap attr="domain" key="Primary Domain: "/>
+          		<attrKeyMap attr="winLogonId" key="Primary Logon ID: "/>
+          		<attrKeyMap attr="procName" key="Image File Name: "/>
+			<attrKeyMap attr="osObjType" key="Object Type: "/>
+ 			<attrKeyMap attr="osObjName" key=" Object Name: "/>
+                  <attrKeyMap attr="osObjHandleID" key="New Handle ID: "/>
+                  <attrKeyMap attr="osObjAccessType" key="Accesses: "/>
+              </collectAndSetAttrByKeyValuePair>	
+          </otherwise>
+
+          <collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-540 OR Win-Security-528">
+             <when test = '$winLogonId = $AnotherEventType.winLogonId'>
+                <setEventAttribute attr="srcIpAddr">$AnotherEventType.srcIpAddr</setEventAttribute>
+             </when>
+          </collectAndSetAttrFromAnotherEvent>
+        </choose>
+
+        <choose>
+          <when test="matches($_action, '^Success')">
+	       <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+           </when>
+
+           <when test="matches($_action, '^Failure)">       
+	       <setEventAttribute attr="eventSeverity">4</setEventAttribute>
+           </when>
+       </choose>		
+   </when>
+
+   <when test='$_id = "564"'>
+     <!-- windows object deleted
+       <13>Dec 12 10:09:00 ADS-Pri.ProspectHills.net MSWinEventLog	1	Security	1756	Wed Dec 12 10:08:53 2007	564	Security	SYSTEM	User	Success Audit	ADS-PRI	Object Deleted	 Handle ID: 144 	Image File Name: C:\WINDOWS\system32\notepad.exe 
+      -->
+       <collectAndSetAttrByKeyValuePair sep=' ' src="$_body">
+          	<attrKeyMap attr="procName" key="Image File Name: "/>
+            <attrKeyMap attr="osObjHandleID" key="Handle ID: "/>
+       </collectAndSetAttrByKeyValuePair>
+
+       <collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-Security-560">
+          <when test = '$osObjHandleID = $AnotherEventType.osObjHandleID'>
+             <setEventAttribute attr="srcIpAddr">$AnotherEventType.srcIpAddr</setEventAttribute>
+		 <setEventAttribute attr="user">$AnotherEventType.user</setEventAttribute>
+             <setEventAttribute attr="domain">$AnotherEventType.domain</setEventAttribute>
+             <setEventAttribute attr="winLogonId">$AnotherEventType.winLogonId</setEventAttribute>
+	       <setEventAttribute attr="osObjName">$AnotherEventType.osObjName</setEventAttribute>
+          </when>
+       </collectAndSetAttrFromAnotherEvent>	
+
+       <choose>
+          <when test="matches($_action, '^Success')">
+	       <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+           </when>
+
+           <when test="matches($_action, '^Failure)">       
+	       <setEventAttribute attr="eventSeverity">4</setEventAttribute>
+           </when>
+       </choose>		
+  </when>
+
+   <when test='$_id = "806"'>
+      <!-- per user audit policy refreshed
+        -->
+      <choose>
+           <when test="matches($_action, '^Success')">
+	       <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+           </when>
+
+           <when test="matches($_action, '^Failure)">       
+	       <setEventAttribute attr="eventSeverity">3</setEventAttribute>
+           </when>
+      </choose>
+   </when>
+
+   <when test='$_id = "807"'>
+      <!-- per user audit policy set
+        -->
+      <choose>
+        <when test="matches($_action, '^Success')">
+	    <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+        </when>
+
+        <when test="matches($_action, '^Failure)">       
+	    <setEventAttribute attr="eventSeverity">3</setEventAttribute>
+        </when>
+     </choose>
+   </when>
+
+   <when test='$_id = "615"'>
+      <!-- windows ipsec policy changed
+        -->
+      <choose>
+        <when test="matches($_action, '^Success')">
+	    <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+        </when>
+
+        <when test="matches($_action, '^Failure)">       
+	     <setEventAttribute attr="eventSeverity">3</setEventAttribute>
+        </when>
+      </choose>
+   </when>
+
+   <when test='$_id = "674"'>
+      <collectAndSetAttrByKeyValuePair sep=' ' src="$_body">
+         <attrKeyMap attr="user" key="User Name: "/>
+          <attrKeyMap attr="domain" key="User Domain: "/>
+          <attrKeyMap attr="srcIpAddr" key="Client Address: "/>
+	  <attrKeyMap attr="srcIpAddr" key="Source Network Address: "/>
+          <attrKeyMap attr="winSrvcName" key="Service Name: "/>
+      </collectAndSetAttrByKeyValuePair>
+      <setEventAttribute attr="eventSeverity">1</setEventAttribute>		
+   </when>
+
+   <when test='$_id = "677"'>
+      <collectAndSetAttrByKeyValuePair sep=' ' src="$_body">
+         <attrKeyMap attr="user" key="User Name: "/>
+          <attrKeyMap attr="domain" key="Supplied Realm Name: "/>
+          <attrKeyMap attr="srcIpAddr" key="Client Address: "/>
+	  <attrKeyMap attr="srcIpAddr" key="Source Network Address: "/>
+          <attrKeyMap attr="winSrvcName" key="Service Name: "/>
+      </collectAndSetAttrByKeyValuePair>
+      <setEventAttribute attr="eventSeverity">3</setEventAttribute>		
+   </when>
+
+   <when test='$_id = "7035"'>
+     <collectAndSetAttrByRegex src="$_body">
+       <regex><![CDATA[<:patWordTab>\s+<:patWordTab>\s+The <procName:gPatMesgBody> service<:gPatMesgBody>]]></regex>
+     </collectAndSetAttrByRegex>
+   </when>
+
+   <when test='$_id = "7036"'>
+     <collectAndSetAttrByRegex src="$_body">
+       <regex><![CDATA[<:patWordTab>\s+<:patWordTab>\s+The <procName:gPatMesgBody> service entered the <_state:gPatStr> state<:gPatMesgBody>]]></regex>
+     </collectAndSetAttrByRegex>
+      <setEventAttribute attr="appName">$procName</setEventAttribute>		
+     <choose>
+       <when test='$_state = "running"'>
+         <setEventAttribute attr="eventType">combineMsgId("Win", "-", $_OSModule, "-", $_id, "-", "Start")</setEventAttribute>
+       </when>
+       <otherwise>
+         <setEventAttribute attr="eventType">combineMsgId("Win", "-", $_OSModule, "-", $_id, "-", "Stop")</setEventAttribute>
+       </otherwise>
+     </choose>
+   </when>
+
+   <!--The Windows Filtering Platform has allowed a connection  -->
+   <when test='$_id = "5156"'>
+     <collectFieldsByRegex src="$_body">
+       <regex><![CDATA[.*Application Information:<_appl:gPatMesgBody>Network Information:<_net:gPatMesgBody>Filter Information:<_filter:gPatMesgBody>]]></regex>
+     </collectFieldsByRegex>
+     
+     <collectAndSetAttrByKeyValuePair sep=' ' src="$_appl">          
+       <attrKeyMap attr="appName" key="Application Name: "/>
+     </collectAndSetAttrByKeyValuePair>
+     
+     <collectFieldsByRegex src="$_net">
+       <regex><![CDATA[.*Direction:\s+<:gPatStr>\s+Source Address:\s+<srcIpAddr:gPatIpV4Dot>\s+Source Port:\s+<srcIpPort:gPatIpPort>\s+Destination Address:\s+<destIpAddr:gPatIpV4Dot>\s+Destination Port:\s+<destIpPort:gPatIpPort>\s+Protocol:\s+<ipProto:gPatInt>.*]]></regex>
+     </collectFieldsByRegex>
+     
+     <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+   </when>
+
+   <!--The Windows Filtering Platform has blocked a connection  -->
+   <when test='$_id = "5157"'>
+     <collectFieldsByRegex src="$_body">
+       <regex><![CDATA[.*Application Information:<_appl:gPatMesgBody>Network Information:<_net:gPatMesgBody>Filter Information:<_filter:gPatMesgBody>]]></regex>
+     </collectFieldsByRegex>
+     
+     <collectAndSetAttrByKeyValuePair sep=' ' src="$_appl">          
+       <attrKeyMap attr="appName" key="Application Name: "/>
+     </collectAndSetAttrByKeyValuePair>
+     
+     <collectFieldsByRegex src="$_net">
+       <regex><![CDATA[.*Direction:\s+<:gPatStr>\s+Source Address:\s+<srcIpAddr:gPatIpV4Dot>\s+Source Port:\s+<srcIpPort:gPatIpPort>\s+Destination Address:\s+<destIpAddr:gPatIpV4Dot>\s+Destination Port:\s+<destIpPort:gPatIpPort>\s+Protocol:\s+<ipProto:gPatInt>.*]]></regex>
+     </collectFieldsByRegex>
+     
+     <setEventAttribute attr="eventSeverity">5</setEventAttribute>
+   </when>
+
+   <!--The workstation was locked/unlocked-->
+   <when test='$_id IN "4800,4801"'>
+     <collectFieldsByRegex src="$_body">
+       <regex><![CDATA[.*Subject:<_subj:gPatMesgBody>]]></regex>
+     </collectFieldsByRegex>
+     <collectAndSetAttrByKeyValuePair sep=' ' src="$_subj">
+       <attrKeyMap attr="user" key="Account Name:  "/>
+       <attrKeyMap attr="domain" key="Account Domain:  "/>
+       <attrKeyMap attr="winLogonId" key="Logon ID:  "/>
+     </collectAndSetAttrByKeyValuePair>
+     <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+   </when>
+	       
+   <!--Process started or stopped  -->	       
+   <when test='$_id IN "1001, 1003"'>
+     <collectAndSetAttrByRegex src="$_body">
+       <regex><![CDATA[<:patWordTab>\s+<:patWordTab>\s+The <procName:gPatMesgBody> has<:gPatMesgBody>]]></regex>
+     </collectAndSetAttrByRegex>
+     <setEventAttribute attr="hostIpAddr">$reptDevIpAddr</setEventAttribute>
+   </when>
+
+   <when test='$_id = "2020"'>
+     <collectAndSetAttrByRegex src="$_body">
+       <regex><![CDATA[<:patWordTab>\s+<:patWordTab>\s+<procName:gPatMesgBody> has terminated<:gPatMesgBody>]]></regex>
+     </collectAndSetAttrByRegex>
+     <setEventAttribute attr="hostIpAddr">$reptDevIpAddr</setEventAttribute>
+   </when>
+
+   <!-- MS-SQL successful login (non-trusted and trusted) -->
+   <when test='$_id IN "18453,18454"'>
+
+     <when test='$_applModule = "MSSQLSERVER"'>
+       <collectAndSetAttrByRegex src="$_body">
+	 <regex><![CDATA[.*Login\s+succeeded\s+for\s+user\s+'<user:patStrQuote>'\.\s+Connection:\s*<_connType:gPatStr>\.\s+\[CLIENT:\s*<_srcId:patStrRightSquareBracket>\]<:gPatMesgBody>]]></regex>
+       </collectAndSetAttrByRegex>
+     </when>
+
+     <!-- set src ip or name -->
+     <choose> 
+       <when test="matches($_srcId, '\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}')"> 
+	 <setEventAttribute attr="srcIpAddr">$_srcId</setEventAttribute>
+       </when>
+       <when test='matches($_srcId, "local machine")'>
+         <setEventAttribute attr="srcIpAddr">$reptDevIpAddr</setEventAttribute>
+       </when>
+     </choose>
+   </when>
+   
+   <!-- MS-SQL failed login -->
+   <when test='$_id = "18456"'>
+     <when test='$_applModule = "MSSQLSERVER"'>
+       <collectAndSetAttrByRegex src="$_body">
+	 <regex><![CDATA[.*Login\s+failed\s+for\s+user\s+'<user:patStrQuote>'.\s+\[CLIENT:\s*<_srcId:patStrRightSquareBracket>\]<:gPatMesgBody>]]></regex>
+       </collectAndSetAttrByRegex>
+
+       <choose> 
+	 <when test="matches($_srcId, '\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}')"> 
+	   <setEventAttribute attr="srcIpAddr">$_srcId</setEventAttribute>
+	 </when>
+         <when test='matches($_srcId, "local machine")'>
+           <setEventAttribute attr="srcIpAddr">$reptDevIpAddr</setEventAttribute>
+         </when>
+       </choose>
+     </when>
+   </when>
+
+   <!-- Starting up database 'mssql' -->
+   <when test='$_id = "17137"'>
+     <collectAndSetAttrByRegex src="$_body">
+       <regex><![CDATA[.*Starting up database '<dbName:gPatStr>']]></regex>
+     </collectAndSetAttrByRegex>
+   </when>
+   
+   <!-- SQL Server (database) terminating because of a system shutdown -->
+   <when test='$_id = "17138"'>
+     <collectAndSetAttrByRegex src="$_body">
+       <regex><![CDATA[.*SQL Server terminating because of a system shutdown.*]]></regex>
+     </collectAndSetAttrByRegex>
+   </when>
+     
+  </choose>
+
+  <when test='exist procName'>     
+    <setEventAttribute attr="swProcName">$procName</setEventAttribute>
+    <when test='not exist appName'>     
+      <setEventAttribute attr="appName">$procName</setEventAttribute>
+    </when>
+  </when>
+  
+ </parsingInstructions>
+
+</eventParser>

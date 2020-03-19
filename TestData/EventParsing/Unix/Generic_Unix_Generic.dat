@@ -1,0 +1,22 @@
+[reptDevIpAddr(key)]
+1.2.3.4
+[eventMsg]
+<86>May 27 11:29:32 1.2.3.4 sshd[19112]: subsystem request for sftp
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=1.2.3.4
+eventAction=0 (Permit)
+eventName=Generic syslog
+reptVendor=Generic
+eventType=Generic_Unix_Generic
+phEventCategory=0 (External)
+reptDevIpAddr=1.2.3.4
+reptModel=Unix

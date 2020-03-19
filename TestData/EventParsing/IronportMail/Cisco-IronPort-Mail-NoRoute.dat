@@ -1,0 +1,62 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<22>Feb 15 15:57:29 IronPort-Mail: Info: Connection Error: DCID: 426107 domain: lee.com IP: 167.64.243.71 port: 25 details: timeout interface: 187.0.198.8 reason: connection timed out
+[params]
+domain=lee.com
+deviceTime=any
+destGeoOrg=any
+parserName=IronportMailParser
+eventType=Cisco-IronPort-Mail-NoRoute
+destIpAddr=187.0.198.8
+destGeoCountry=any
+reptModel=IronPort AsyncOS Mail
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Cisco-IronPort-Mail-NoRoute
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+destName=mx2.arcon.com.br
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+destIpPort=25
+customer=Super
+ironportMailDCID=426107
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Cisco
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<22>Feb 15 16:21:31 IronPort-Mail: Info: Connection Error: DCID: 426180 domain: servidorvermelho.com IP: 186.251.131.3 port: 25 details: [Errno 61] Connection refused interface: 187.0.198.8 reason: network error
+[params]
+domain=servidorvermelho.com
+deviceTime=any
+destGeoOrg=any
+parserName=IronportMailParser
+eventType=Cisco-IronPort-Mail-NoRoute
+destIpAddr=187.0.198.8
+destGeoCountry=any
+reptModel=IronPort AsyncOS Mail
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Cisco-IronPort-Mail-NoRoute
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+destName=mx2.arcon.com.br
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+destIpPort=25
+customer=Super
+ironportMailDCID=426180
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Cisco

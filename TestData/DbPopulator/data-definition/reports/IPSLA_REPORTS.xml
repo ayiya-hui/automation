@@ -1,0 +1,233 @@
+<Reports>
+  <Report id="PH_Report_IPSLA_1" group="PH_SYS_REPORT_AppPerf,PH_SYS_REPORT_IPSLA">
+    <Name>Top IPSLA Connections By Directional Jitter (Detailed)</Name> 
+    <CustomerScope groupByEachCustomer="true">
+      <Include all="true" /> 
+      <Exclude /> 
+    </CustomerScope>
+    <Description>This is a report that ranks IPSLA connections by directional jitter statistics </Description> 
+    <SelectClause numEntries="All">
+      <AttrList>srcName,destName,ipSLAProto,AVG(avgJitterSDMs), MIN(minJitterSDMs), MAX(maxJitterSDMs),AVG(avgJitterDSMs), MIN(minJitterDSMs), MAX(maxJitterDSMs) </AttrList> 
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(avgJitterSDMs) DESC, AVG(avgJitterDSMs) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600" >
+      <SubPattern displayName="Filter" name="Filter">
+        <SingleEvtConstr> eventType = "PH_DEV_MON_IPSLA_MET" </SingleEvtConstr>
+        <GroupByAttr>srcName,destName,ipSLAProto</GroupByAttr> 
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_IPSLA_2" group="PH_SYS_REPORT_AppPerf,PH_SYS_REPORT_IPSLA">
+    <Name>Top IPSLA Connections By Packet Loss </Name> 
+    <CustomerScope groupByEachCustomer="true">
+      <Include all="true" /> 
+      <Exclude /> 
+    </CustomerScope>
+    <Description>This report ranks IPSLA connections by packet loss </Description> 
+    <SelectClause numEntries="All">
+      <AttrList>srcName,destName,ipSLAProto,AVG(pktLost) </AttrList> 
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(pktLost) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600" >
+      <SubPattern displayName="Filter" name="Filter">
+        <SingleEvtConstr> eventType = "PH_DEV_MON_IPSLA_MET" </SingleEvtConstr>
+        <GroupByAttr>srcName,destName,ipSLAProto</GroupByAttr> 
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_IPSLA_3" group="PH_SYS_REPORT_AppPerf,PH_SYS_REPORT_IPSLA">
+    <Name>Top IPSLA Connections By Packet Loss (Detailed)</Name> 
+    <CustomerScope groupByEachCustomer="true">
+      <Include all="true" /> 
+      <Exclude /> 
+    </CustomerScope>
+    <Description> This report ranks IPSLA connections by packet loss and also presents other related statistics </Description> 
+    <SelectClause numEntries="All">
+      <AttrList>srcName,destName,ipSLAProto,AVG(pktLost),AVG(pktLostSD),AVG(pktLostDS), AVG(pktMIA), AVG(pktLate), AVG(pktOutSeq)</AttrList> 
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(pktLost) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600" >
+      <SubPattern displayName="Filter" name="Filter">
+        <SingleEvtConstr> eventType = "PH_DEV_MON_IPSLA_MET" </SingleEvtConstr>
+        <GroupByAttr>srcName,destName,ipSLAProto</GroupByAttr> 
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_IPSLA_4" group="PH_SYS_REPORT_AppPerf,PH_SYS_REPORT_IPSLA">
+    <Name>Top IPSLA Connections By Average Latency </Name> 
+    <CustomerScope groupByEachCustomer="true">
+      <Include all="true" /> 
+      <Exclude /> 
+    </CustomerScope>
+    <Description>This report ranks IPSLA connections by average latency  </Description> 
+    <SelectClause numEntries="All">
+      <AttrList>srcName,destName,ipSLAProto,AVG(avgDurationMSec) </AttrList> 
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(avgDurationMSec) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600" >
+      <SubPattern displayName="Filter" name="Filter">
+        <SingleEvtConstr> eventType = "PH_DEV_MON_IPSLA_MET" </SingleEvtConstr>
+        <GroupByAttr>srcName,destName,ipSLAProto</GroupByAttr> 
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_IPSLA_5" group="PH_SYS_REPORT_AppPerf,PH_SYS_REPORT_IPSLA">
+    <Name>Top IPSLA Connections By Average Jitter </Name> 
+    <CustomerScope groupByEachCustomer="true">
+      <Include all="true" /> 
+      <Exclude /> 
+    </CustomerScope>
+    <Description>This report ranks IPSLA connections by latency and jitter and presents detailed related statistics </Description> 
+    <SelectClause numEntries="All">
+      <AttrList>srcName,destName,ipSLAProto,AVG(avgJitterMs) </AttrList> 
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(avgJitterMs) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600" >
+      <SubPattern displayName="Filter" name="Filter">
+        <SingleEvtConstr> eventType = "PH_DEV_MON_IPSLA_MET" </SingleEvtConstr>
+        <GroupByAttr>srcName,destName,ipSLAProto</GroupByAttr> 
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_IPSLA_6" group="PH_SYS_REPORT_AppPerf,PH_SYS_REPORT_IPSLA">
+    <Name>Top IPSLA Connections By Latency and Jitter (Detailed)</Name> 
+    <CustomerScope groupByEachCustomer="true">
+      <Include all="true" /> 
+      <Exclude /> 
+    </CustomerScope>
+    <Description>This report ranks IPSLA connections by latency and jitter and presents detailed related statistics </Description> 
+    <SelectClause numEntries="All">
+      <AttrList>srcName,destName,ipSLAProto,AVG(avgDurationMSec),MIN(minDurationMSec),MAX(maxDurationMSec),AVG(avgJitterMs), MIN(minJitterMs), MAX(maxJitterMs) </AttrList> 
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(avgDurationMSec) DESC, AVG(avgJitterMs) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600" >
+      <SubPattern displayName="Filter" name="Filter">
+        <SingleEvtConstr> eventType = "PH_DEV_MON_IPSLA_MET" </SingleEvtConstr>
+        <GroupByAttr>srcName,destName,ipSLAProto</GroupByAttr> 
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_IPSLA_7" group="PH_SYS_REPORT_AppPerf,PH_SYS_REPORT_IPSLA">
+    <Name>Top IPSLA Connections By Source-to-destination Average Jitter</Name> 
+    <CustomerScope groupByEachCustomer="true">
+      <Include all="true" /> 
+      <Exclude /> 
+    </CustomerScope>
+    <Description>This report ranks IPSLA connections by sourec-to-destination average jitter </Description> 
+    <SelectClause numEntries="All">
+      <AttrList>srcName,destName,ipSLAProto,AVG(avgJitterSDMs)</AttrList> 
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(avgJitterSDMs) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600" >
+      <SubPattern displayName="Filter" name="Filter">
+        <SingleEvtConstr> eventType = "PH_DEV_MON_IPSLA_MET" </SingleEvtConstr>
+        <GroupByAttr>srcName,destName,ipSLAProto</GroupByAttr> 
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_IPSLA_8" group="PH_SYS_REPORT_AppPerf,PH_SYS_REPORT_IPSLA">
+    <Name>Top IPSLA Connections By Destination-to-source Average Jitter</Name> 
+    <CustomerScope groupByEachCustomer="true">
+      <Include all="true" /> 
+      <Exclude /> 
+    </CustomerScope>
+    <Description>This report ranks IPSLA connections by destination-to-source average jitter </Description> 
+    <SelectClause numEntries="All">
+      <AttrList>srcName,destName,ipSLAProto,AVG(avgJitterDSMs) </AttrList> 
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(avgJitterDSMs) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600" >
+      <SubPattern displayName="Filter" name="Filter">
+        <SingleEvtConstr> eventType = "PH_DEV_MON_IPSLA_MET" </SingleEvtConstr>
+        <GroupByAttr>srcName,destName,ipSLAProto</GroupByAttr> 
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_IPSLA_9" group="PH_SYS_REPORT_AppPerf,PH_SYS_REPORT_IPSLA">
+    <Name>Top IPSLA Successful HTTP Connections By Response Time (Detailed)</Name> 
+    <CustomerScope groupByEachCustomer="true">
+      <Include all="true" /> 
+      <Exclude /> 
+    </CustomerScope>
+    <Description>This is a report that ranks IPSLA HTTP connections by (decreasing) end-to-end response time and provides component response times  </Description> 
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,destName,AVG(httpResponseTimeMs),AVG(dnsResponseTimeMs),AVG(tcpConnectResponseTimeMs),AVG(httpTransactResponseTimeMs) </AttrList> 
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(httpResponseTimeMs) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600" >
+      <SubPattern displayName="Filter" name="Filter">
+        <SingleEvtConstr> eventType = "PH_DEV_MON_IPSLA_HTTP_MET" AND ipslaHttpStatus = 1 </SingleEvtConstr>
+        <GroupByAttr>reptDevIpAddr,destName</GroupByAttr> 
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_IPSLA_10" group="PH_SYS_REPORT_AppPerf,PH_SYS_REPORT_IPSLA">
+    <Name>Top IPSLA Successful HTTP Connections By Response Time </Name> 
+    <CustomerScope groupByEachCustomer="true">
+      <Include all="true" /> 
+      <Exclude /> 
+    </CustomerScope>
+    <Description>This is a report that ranks IPSLA HTTP connections by (decreasing) end-to-end response time  </Description> 
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,destName,AVG(httpResponseTimeMs) </AttrList> 
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(httpResponseTimeMs) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600" >
+      <SubPattern displayName="Filter" name="Filter">
+        <SingleEvtConstr> eventType = "PH_DEV_MON_IPSLA_HTTP_MET" AND ipslaHttpStatus = 1 </SingleEvtConstr>
+        <GroupByAttr>reptDevIpAddr,destName</GroupByAttr> 
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+   <Report id="PH_Report_IPSLA_11" group="PH_SYS_REPORT_AppPerf,PH_SYS_REPORT_IPSLA">
+    <Name>Failed IPSLA HTTP Connections </Name> 
+    <CustomerScope groupByEachCustomer="true">
+      <Include all="true" /> 
+      <Exclude /> 
+    </CustomerScope>
+    <Description>This report collects failed IPSLA HTTP connections </Description> 
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,destName,ipslaHttpStatus,ipslaHttpStatusDesc,httpStatusCode </AttrList> 
+    </SelectClause>
+    <OrderByClause><AttrList>  </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600" >
+      <SubPattern displayName="Filter" name="Filter">
+        <SingleEvtConstr> eventType = "PH_DEV_MON_IPSLA_HTTP_MET" AND ipslaHttpStatus != 1 </SingleEvtConstr>
+        <GroupByAttr>reptDevIpAddr,destName,ipslaHttpStatus,ipslaHttpStatusDesc,httpStatusCode</GroupByAttr> 
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+</Reports>

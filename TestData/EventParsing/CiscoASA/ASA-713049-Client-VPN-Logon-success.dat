@@ -1,0 +1,24 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<165>Dec 16 2010 16:05:36: %ASA-5-713049: Group = ciscoclient, Username = lwang, IP = 68.25.35.125, Security negotiation complete for User (lwang)  Responder, Inbound SPI = 0x437c6049, Outbound SPI = 0xc7d721b1
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+count=1
+phCustId=$sender
+deviceTime=any
+eventAction=0 (Permit)
+eventId=any
+eventName=Security negotiation complete for IPSec tunnel - Client VPN logon success
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=2
+eventSeverityCat=LOW
+eventType=ASA-713049-Client-VPN-Logon-success
+reptDevIpAddr=$reporter
+reptModel=ASA
+reptVendor=Cisco
+srcIpAddr=68.25.35.125
+user=lwang
+userGrp=ciscoclient

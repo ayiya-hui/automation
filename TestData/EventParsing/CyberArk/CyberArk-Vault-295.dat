@@ -1,0 +1,32 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<5>1 2016-02-02T17:24:42Z SJCDVVWCARK01 CYBERARK: Product="Vault";Version="9.20.0000";MessageID="295";Message="Retrieve password";Issuer="Administrator";Station="10.10.110.11";File="Root\snmpCommunity";Safe="TestPasswords";Reason="Test";Severity="Info"
+[params]
+deviceTime=any
+parserName=CyberArkParser
+eventType=CyberArk-Vault-295
+cyberArkSafe=TestPasswords
+srcIpAddr=10.10.110.11
+reptModel=Vault
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Retrieve password
+version=9.20.0000
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+msg=Retrieve password
+errReason=Test
+count=1
+eventSeverityCat=LOW
+collectorId=any
+fileName=Root\snmpCommunity
+relayDevIpAddr=$localhost
+user=Administrator
+rawEventMsg=any
+reptDevName=SJCDVVWCARK01
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=CyberArk

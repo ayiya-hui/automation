@@ -1,0 +1,48 @@
+[reptDevIpAddr(key)]
+100.1.1.1
+[eventMsg]
+<158>Jan 29 14:53:37 100.1.1.1 named[24146]: Jan 29 14:53:37.057 client 192.168.20.117#33616: query: 4.1.168.192.in-addr.arpa IN PTR --antomator
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+srcIpAddr=192.168.20.117
+eventAction=0 (Permit)
+eventName=DNS IP to host name query
+reptVendor=ISC
+eventType=BIND_DNS_PTR_Query
+phEventCategory=0 (External)
+destIpPort=53
+reptDevIpAddr=100.1.1.1
+destName=4.1.168.192.in-addr.arpa
+reptModel=BIND DNS
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<158>named[21625]: 25-Mar-2010 18:49:08.426 client 172.16.10.10#58323: query: 110.20.16.172.in-addr.arpa IN PTR +
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+srcIpAddr=172.16.10.10
+eventAction=0 (Permit)
+eventName=DNS IP to host name query
+reptVendor=ISC
+eventType=BIND_DNS_PTR_Query
+phEventCategory=0 (External)
+destIpPort=53
+reptDevIpAddr=$localhost
+destName=110.20.16.172.in-addr.arpa
+reptModel=BIND DNS

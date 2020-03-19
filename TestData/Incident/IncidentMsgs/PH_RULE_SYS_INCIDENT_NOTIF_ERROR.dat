@@ -1,0 +1,2 @@
+[eventMsg]
+[PH_INCIDENT_ACTION_STATUS]:[eventSeverity]=PHL_INFO,[phCustId]=2010,[customer]=Cisco,[ruleId]=234567,[ruleName]=Fake Rule,[policyId]=3456,[actionId]=33,[actionName]=Wait,[actionTime]=12:33:12,[actionResult]=Failed,[incidentId]=71,[incidentSrc]=132.23.23.21,[incidentTarget]=121.2.2.2.,[incidentDatail]=Record incident notification action result

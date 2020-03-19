@@ -1,0 +1,37 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<116> device=FCTEMS0036759495 severity=medium from=FAZVM64(FAZ-VM0000000001) trigger=EVT2SIEM1 log="itime=1490191224 date=2017-03-22 time=07:00:24 logver=2 level=info uid=C4C4E56CE7B04762B053E8F88B8ECF47 vd=root fctver=5.4.2.0862 os="Microsoft Windows Server 2012 R2 Standard Edition, 64-bit (build 9600)" usingpolicy=AOFCT fgtserial=N/A emsserial=FCTEMS0036759495 devid=FCT8003883203338 hostname=sjcitvwfct01 pcdomain=accelops.net clientfeature=update deviceip=devicemac=N/A type=event user=N/A id=96650 avsig=45.00542 avsigheu=45.00542 avsiglastupdate="2017-03-22 07:00:23-07""
+[params]
+domain=accelops.net
+deviceTime=any
+parserName=FortiClientParser
+eventType=FortiClient-update
+hostName=sjcitvwfct01
+srcName=EVT2SIEM1
+osType=Microsoft Windows Server 2012 R2 Standard Edition, 64-bit (build 9600)
+reptModel=FortiClient
+eventId=any
+policyName=AOFCT
+eventParsedOk=1
+eventSeverity=2
+feature=update
+avSigVer=45.00542
+eventName=FortiClient signature update
+reptDevName=any
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+srcMACAddr=N/A
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+user=N/A
+rawEventMsg=any
+vdom=root
+serialNumber=5.4.2.0862
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+avSigHeuristicVer=45.00542
+reptVendor=Fortinet

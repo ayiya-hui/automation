@@ -1,0 +1,12 @@
+$arubaWLANBlacklistReasonCode,
+,
+1,userDefined
+2,mitmAttack
+3,authFailure
+4,pingFlood
+5,sessionFlood
+6,synFlood
+7,sessionBlacklist
+8,ipSpoofing
+9,esiBlacklist
+100,other

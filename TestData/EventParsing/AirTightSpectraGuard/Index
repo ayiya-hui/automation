@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+AirTight-SGE-Authorized_AP_non-allowed_channel,AirTightSpectraGuard_1,AirTightSpectraGuard,10.255.1.36,,syslog

@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<22>Feb 15 16:00:06 IronPort-Mail: Info: MID 1750712 ICID 1574439 To: <mrodrigues@arcon.com.br> Rejected by LDAPACCEPT
+[params]
+deviceTime=any
+parserName=IronportMailParser
+receiverMailAddr=mrodrigues@arcon.com.br
+eventType=Cisco-IronPort-Mail-Receiver-Rejected
+reptModel=IronPort AsyncOS Mail
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Cisco-IronPort-Mail-Receiver-Rejected
+ironportMailICID=1574439
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Cisco
+ironportMailMID=1750712

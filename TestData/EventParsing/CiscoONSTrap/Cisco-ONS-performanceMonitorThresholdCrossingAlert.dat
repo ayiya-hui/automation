@@ -1,0 +1,32 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+2016-03-05 11:24:29 0.0.0.0TRAP2, SNMP v2c, community DOESNMP	. Cold Start Trap (0) Uptime: 0:00:00.00	DISMAN-EVENT-MIB::sysUpTimeInstance = Timeticks: (182901537) 21 days, 4:03:35.37	SNMPv2-MIB::snmpTrapOID.0 = OID: SNMPv2-SMI::enterprises.3607.6.10.30.0.2120	SNMPv2-SMI::enterprises.3607.6.10.100.10.20.0 = STRING: "a"	SNMPv2-SMI::enterprises.3607.6.10.20.30.20.1.80.16785411.2120 = INTEGER: 1	SNMPv2-SMI::enterprises.3607.6.10.20.30.20.1.20.16785411.2120 = INTEGER: 1	SNMPv2-SMI::enterprises.3607.6.10.20.30.20.1.60.16785411.2120 = INTEGER: 1	SNMPv2-SMI::enterprises.3607.6.10.20.30.20.1.30.16785411.2120 = INTEGER: 1	SNMPv2-SMI::enterprises.3607.6.10.20.30.20.1.40.16785411.2120 = INTEGER: 1	SNMPv2-SMI::enterprises.3607.6.10.20.30.20.1.50.16785411.2120 = INTEGER: 1	SNMPv2-SMI::enterprises.3607.6.10.20.30.20.1.100.16785411.2120 = STRING: "a"	SNMPv2-SMI::enterprises.3607.6.10.20.40.10.1.20.16785411 = INTEGER: 1	SNMPv2-SMI::enterprises.3607.6.10.20.40.10.1.30.16785411 = INTEGER: 1	SNMPv2-SMI::enterprises.3607.6.10.20.40.10.1.40.16785411 = INTEGER: 1	SNMPv2-SMI::enterprises.3607.6.10.20.40.10.1.60.16785411 = INTEGER: 1	SNMPv2-SMI::enterprises.3607.6.10.20.30.20.1.120.16785411.2120 = INTEGER: 1	SNMPv2-SMI::enterprises.3607.6.10.20.30.20.1.130.16785411.2120 = INTEGER: 30	SNMPv2-SMI::enterprises.3607.6.10.20.30.20.1.140.16785411.2120 = INTEGER: 20	SNMP-COMMUNITY-MIB::snmpTrapAddress.0 = IpAddress: 1.1.1.1
+[params]
+deviceTime=any
+parserName=CiscoONSTrapParser
+eventType=Cisco-ONS-performanceMonitorThresholdCrossingAlert
+hwPort=1
+reptModel=ONS
+eventId=any
+alarmState=transient
+eventParsedOk=1
+eventSeverity=1
+svcAffecting=no
+eventName=performance Monitor Threshold Crossing Alert
+monitorValue=1
+hwLine=1
+hwSlot=1
+extEventRecvProto=Snmp Trap
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=LOW
+collectorId=any
+hwObject=a
+relayDevIpAddr=$localhost
+rawEventMsg=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Cisco
+monitorObj=1 (unknown)

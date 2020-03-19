@@ -1,0 +1,5 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+Brocade-SAN-Login-Success,BrocadeSanSwitch_1,BrocadeSanSwitch,1.5.6.7,,syslog
+Brocade-SAN-Login-Failed,BrocadeSanSwitch_2,BrocadeSanSwitch,1.5.6.7,,syslog
+Brocade-SAN-Logout,BrocadeSanSwitch_3,BrocadeSanSwitch,1.5.6.7,,syslog

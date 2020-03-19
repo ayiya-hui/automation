@@ -1,0 +1,35 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<13>Mar 24 14:07:45 panjb7ppb02 JBOSSLog: [24/Mar/2016:14:07:40 +0100] 10.30.202.145 - - GET /main-web/timeout.zul HTTP/1.1 200 1190 https://panjb7ppb02:8443/main-web/timeout.zul "Mozilla/5.0 (Windows NT 6.1 WOW64 rv:47.0) Gecko/20100101 Firefox/47.0"" LIMmQVGSYkh4DBA3QToeP4uR.undefined 0.015"
+[params]
+deviceTime=any
+parserName=JBossAccessLogParser
+eventType=JBOSS-Web-Request-Success
+hostName=panjb7ppb02
+httpReferrer=https://panjb7ppb02:8443/main-web/timeout.zul
+srcIpAddr=10.30.202.145
+reptModel=JBOSS App Server
+eventId=any
+eventTime=Thu Mar 24 14:07:40 CST 2016
+eventParsedOk=1
+eventSeverity=1
+eventName=Web request successful
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+recvBytes=1190
+eventSeverityCat=LOW
+collectorId=any
+httpMethod=GET
+relayDevIpAddr=$localhost
+rawEventMsg=any
+httpStatusCode=200 (The request has succeeded)
+reptDevName=any
+httpVersion=HTTP/1.1
+customer=Super
+uriStem=/main-web/timeout.zul
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Redhat
+httpUserAgent=Mozilla/5.0 (Windows NT 6.1 WOW64 rv:47.0) Gecko/20100101 Firefox/47.0"" LIMmQVGSYkh4DBA3QToeP4uR.undefined 0.015

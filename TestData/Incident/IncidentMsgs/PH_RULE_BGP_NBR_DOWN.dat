@@ -1,0 +1,5 @@
+[eventMsg]
+<187>May 12 01:10:52 12.9.0.1 201: May 12 01:10:52.807: %BGP-5-ADJCHANGE: neighbor 12.9.0.2 Down - Peer closed the session
+
+[clearEventMsg]
+<187>May 12 01:16:52 12.9.0.1 201: May 12 01:16:52.807: %BGP-5-ADJCHANGE: neighbor 12.9.0.2 Up

@@ -1,0 +1,6 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+Juniper-DDoS-Secure-WorstOffender,JuniperDDoS_1,JuniperDDoS,$localhost,,syslog
+Juniper-DDoS-Secure-WorstOffender,JuniperDDoS_2,JuniperDDoS,$localhost,,syslog
+Juniper-DDoS-Secure-WorstOffender,JuniperDDoS_3,JuniperDDoS,$localhost,,syslog
+Juniper-DDoS-Secure-Blacklisted,JuniperDDoS_4,JuniperDDoS,$localhost,,syslog

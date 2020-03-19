@@ -1,0 +1,5 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+ORADB-ORA-00312,OracleViaSnare_1,OracleViaSnare,76.76.76.76,,syslog
+ORADB-Log-Generic,OracleViaSnare_2,OracleViaSnare,76.76.76.76,,syslog
+ORADB-TNS-12638,OracleViaSnare_3,OracleViaSnare,76.76.76.76,,syslog

@@ -1,0 +1,1041 @@
+
+<Reports> 
+  <Report id="PH_Report_VMware_1"  group="PH_SYS_REPORT_VMware">
+    <Name>Error: All Error Events</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report lists all error events </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime, eventType, vmwEventMsg</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>phRecvTime DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_VMware_1" name="Filter_VMware_1">
+           <SingleEvtConstr>vmwEventCat = "error"</SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_VMware_2"  group="PH_SYS_REPORT_VMware">
+    <Name>Error: All Warning Events</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report lists all warning events </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime, eventType, vmwEventMsg</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>phRecvTime DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_VMware_2" name="Filter_VMware_2">
+           <SingleEvtConstr>vmwEventCat = "warning"</SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_VMware_3"  group="PH_SYS_REPORT_VMware">
+    <Name>Change: All Account/Group Change Events</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report lists all account/group change events </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime, eventType, vmwEventMsg</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>phRecvTime DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_VMware_3" name="Filter_VMware_3">
+           <SingleEvtConstr>eventType IN (Group@PH_SYS_EVENT_ConfigChange) AND vmwEventCat IS NOT NULL</SingleEvtConstr>
+       </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_VMware_6"  group="PH_SYS_REPORT_VMware">
+    <Name>Error: All License Errors</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report lists all license errors </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime, eventType, vmwEventMsg</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>phRecvTime DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_VMware_6" name="Filter_VMware_6">
+           <SingleEvtConstr>eventType IN ( Group@PH_SYS_EVENT_LicenseExpired) AND vmwEventCat IS NOT NULL</SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_VMware_7"  group="PH_SYS_REPORT_VMware">
+    <Name>Logon: All Successful Logons</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report lists all successful logons </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime, eventType, user, vmwEventMsg</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>phRecvTime DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_VMware_7" name="Filter_VMware_7">
+           <SingleEvtConstr>eventType IN (Group@PH_SYS_EVENT_VMware_LogonSuccess)</SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_VMware_8"  group="PH_SYS_REPORT_VMware">
+    <Name>Logon: All Failed Logons</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report lists all failed logons </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime, eventType, user, vmwEventMsg</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>phRecvTime DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_VMware_8" name="Filter_VMware_8">
+           <SingleEvtConstr>eventType IN ( Group@PH_SYS_EVENT_VMware_LogonFailure)</SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_VMware_20"  group="PH_SYS_REPORT_VMware">
+    <Name>Events: Top Reporting ESX Servers and Event Types By Count</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report ranks virtual machine hosts (ESX servers) by number of reported events </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phyMachName, eventType, COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_VMware_20" name="Filter_VMware_20">
+           <SingleEvtConstr>eventType CONTAIN "VMware_*" AND phyMachName IS NOT NULL</SingleEvtConstr>
+           <GroupByAttr>phyMachName, eventType</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_VMware_21"  group="PH_SYS_REPORT_VMware">
+    <Name>Events: Top Reporting VMs and Event Types By Count</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report ranks virtual machines by number of reported events </Description>
+    <SelectClause numEntries="All">
+        <AttrList>vmName, eventType, COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_VMware_21" name="Filter_VMware_21">
+           <SingleEvtConstr>eventType CONTAIN "VMware_*" AND vmName IS NOT NULL</SingleEvtConstr>
+           <GroupByAttr>vmName,eventType</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_VMware_22"  group="PH_SYS_REPORT_VMware,PH_SYS_REPORT_Freq">
+    <Name>Events: Top VM Event Types By Count</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report ranks vmware event types by number of events </Description>
+    <SelectClause numEntries="All">
+        <AttrList>eventType, COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_VMware_22" name="Filter_VMware_22">
+           <SingleEvtConstr>eventType CONTAIN "VMware_*"</SingleEvtConstr>
+           <GroupByAttr>eventType</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+ <Report id="PH_Report_VMware_23"  group="PH_SYS_REPORT_VMware,PH_SYS_REPORT_SysPerf,PH_SYS_REPORT_Freq">
+    <Name>Performance: Top VMs By CPU Utilization</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report ranks virtual machines by cpu utilization</Description>
+    <SelectClause numEntries="All">
+        <AttrList>vmName,hostName,hostIpAddr,AVG(cpuUtil)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(cpuUtil) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_VMware_23" name="Filter_VMware_23">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_VM_CPU_UTIL" </SingleEvtConstr>
+           <GroupByAttr>vmName,hostName,hostIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_VMware_23B"  group="PH_SYS_REPORT_VMware,PH_SYS_REPORT_SysPerf,PH_SYS_REPORT_Freq">
+    <Name>Performance: Top VMs By CPU Utilization With Details</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report ranks virtual machines by cpu utilization. Other CPU usage metrics are included. </Description>
+    <SelectClause numEntries="All">
+        <AttrList>vmName,hostName,hostIpAddr,AVG(cpuUtil),AVG(cpuSysPct),AVG(cpuRunPct),AVG(cpuReadyPct),AVG(phyCpuUtil),MAX(vCpus)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(cpuUtil) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_VMware_23" name="Filter_VMware_23">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_VM_CPU_UTIL" </SingleEvtConstr>
+           <GroupByAttr>vmName,hostName,hostIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_VMware_23C"  group="PH_SYS_REPORT_VMware,PH_SYS_REPORT_SysPerf,PH_SYS_REPORT_Freq">
+    <Name>Performance: Top VMs By CPU Ready Pct</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report ranks virtual machines by cpu ready percent. A high number indicates the VM is starved of CPU</Description>
+    <SelectClause numEntries="All">
+        <AttrList>vmName,hostName,hostIpAddr,AVG(cpuReadyPct)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(cpuReadyPct) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_VMware_23" name="Filter_VMware_23">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_VM_CPU_UTIL" </SingleEvtConstr>
+           <GroupByAttr>vmName,hostName,hostIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_VMware_23D"  group="PH_SYS_REPORT_VMware,PH_SYS_REPORT_SysPerf,PH_SYS_REPORT_Freq">
+    <Name>Performance: Least utilized VMs By CPU </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report ranks virtual machines in the descending order of cpu utilization</Description>
+    <SelectClause numEntries="All">
+        <AttrList>vmName,hostName,hostIpAddr,AVG(cpuUtil)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(cpuUtil) ASC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_VMware_23" name="Filter_VMware_23">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_VM_CPU_UTIL" </SingleEvtConstr>
+           <GroupByAttr>vmName,hostName,hostIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_VMware_24"  group="PH_SYS_REPORT_VMware,PH_SYS_REPORT_SysPerf,PH_SYS_REPORT_Freq">
+    <Name>Performance: Top VMs By Memory Utilization With Details</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report ranks virtual machines by memory utilization. Other memory usage metrics are included. </Description>
+    <SelectClause numEntries="All">
+        <AttrList>vmName,phyMachName,AVG(phyMemUtil),AVG(swapReadKBytesPerSec),AVG(swapWriteKBytesPerSec)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(phyMemUtil) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_VMware_24" name="Filter_VMware_24">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_VM_MEM_UTIL" </SingleEvtConstr>
+           <GroupByAttr>vmName,phyMachName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_VMware_24B"  group="PH_SYS_REPORT_VMware,PH_SYS_REPORT_SysPerf,PH_SYS_REPORT_Freq">
+    <Name>Performance: Top VMs By Swap Activity</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report ranks virtual machines by swapping activity </Description>
+    <SelectClause numEntries="All">
+        <AttrList>vmName,phyMachName,AVG(swapReadKBytesPerSec)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(swapReadKBytesPerSec) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_VMware_24" name="Filter_VMware_24">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_VM_MEM_UTIL" </SingleEvtConstr>
+           <GroupByAttr>vmName,phyMachName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_VMware_24C"  group="PH_SYS_REPORT_VMware,PH_SYS_REPORT_SysPerf,PH_SYS_REPORT_Freq">
+    <Name>Performance: Top VMs By Memory Utilization </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report ranks virtual machines by memory utilization</Description>
+    <SelectClause numEntries="All">
+        <AttrList>vmName,phyMachName,AVG(phyMemUtil)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(phyMemUtil) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_VMware_24" name="Filter_VMware_24">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_VM_MEM_UTIL" </SingleEvtConstr>
+           <GroupByAttr>vmName,phyMachName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_VMware_25"  group="PH_SYS_REPORT_VMware,PH_SYS_REPORT_SysPerf,PH_SYS_REPORT_Freq">
+    <Name>Performance: Top VMs By Disk I/O Activity With Details</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report ranks virtual machines by disk I/O activity. Other disk I/O usage metrics are included. </Description>
+    <SelectClause numEntries="All">
+        <AttrList>vmName,hostName,hostIpAddr,datastore,diskName,AVG(diskReadReqPerSec),AVG(diskWriteReqPerSec),AVG(diskReadKBytesPerSec),AVG(diskWriteKBytesPerSec)</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_VMware_25" name="Filter_VMware_25">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_VM_DISK_IO" </SingleEvtConstr>
+           <GroupByAttr>vmName,hostName,hostIpAddr,datastore,diskName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+
+  <Report id="PH_Report_VMware_25D"  group="PH_SYS_REPORT_VMware,PH_SYS_REPORT_SysPerf,PH_SYS_REPORT_Freq">
+    <Name>Performance: Top VMs By Disk I/O Read KBps </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report ranks virtual machines by disk I/O read (KBps)</Description>
+    <SelectClause numEntries="All">
+        <AttrList>vmName,hostName,hostIpAddr,diskName,AVG(diskReadKBytesPerSec)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(diskReadKBytesPerSec) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_VMware_25" name="Filter_VMware_25">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_VM_DISK_IO" </SingleEvtConstr>
+           <GroupByAttr>vmName,hostName,hostIpAddr,datastore,diskName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_VMware_25E"  group="PH_SYS_REPORT_VMware,PH_SYS_REPORT_SysPerf,PH_SYS_REPORT_Freq">
+    <Name>Performance: Top VMs By Disk I/O Write KBps </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report ranks virtual machines by disk I/O writes (KBps)</Description>
+    <SelectClause numEntries="All">
+        <AttrList>vmName,hostName,hostIpAddr,datastore,diskName,AVG(diskWriteKBytesPerSec)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(diskWriteKBytesPerSec) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_VMware_25" name="Filter_VMware_25">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_VM_DISK_IO" </SingleEvtConstr>
+           <GroupByAttr>vmName,hostName,hostIpAddr,datastore,diskName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_VMware_26"  group="PH_SYS_REPORT_VMware,PH_SYS_REPORT_SysPerf">
+    <Name>Availability: Top VMs By Uptime</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report ranks virtual machines by uptime </Description>
+    <SelectClause numEntries="All">
+        <AttrList>vmName,hostName,hostIpAddr,LAST(sysUpTime)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> LAST(sysUpTime) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Minute" val="10"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_VMware_26" name="Filter_VMware_26">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_VM_UPTIME" </SingleEvtConstr>
+           <GroupByAttr>vmName,hostName,hostIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+
+  <Report id="PH_Report_VMware_26B"  group="PH_SYS_REPORT_VMware,PH_SYS_REPORT_SysPerf">
+    <Name>Availability: Top ESX By Uptime</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report ranks ESX hosts by uptime </Description>
+    <SelectClause numEntries="All">
+        <AttrList>hostName,LAST(sysUpTime)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> LAST(sysUpTime) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Minute" val="10"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_VMware_26" name="Filter_VMware_26">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_SYS_UPTIME" AND hostIpAddr IN (Group@PH_SYS_DEVICE_VM_SERVER)</SingleEvtConstr>
+           <GroupByAttr>hostName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_VMware_26C"  group="PH_SYS_REPORT_VMware,PH_SYS_REPORT_SysPerf">
+    <Name>Availability: ESX  By Lowest Uptime</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report ranks ESX hosts with least uptime </Description>
+    <SelectClause numEntries="All">
+        <AttrList>hostName,LAST(sysUpTime)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> LAST(sysUpTime) ASC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Minute" val="10"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_VMware_26" name="Filter_VMware_26">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_SYS_UPTIME" AND hostIpAddr IN (Group@PH_SYS_DEVICE_VM_SERVER)</SingleEvtConstr>
+           <GroupByAttr>hostName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_VMware_27"  group="PH_SYS_REPORT_VMware,PH_SYS_REPORT_SysPerf,PH_SYS_REPORT_Freq">
+    <Name>Performance: Top ESX By CPU Utilization</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report ranks ESX hosts by aggregate cpu utilization. Other CPU usage metrics are included. </Description>
+    <SelectClause numEntries="All">
+        <AttrList>hostName,AVG(cpuUtil)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(cpuUtil) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_VMware_23" name="Filter_VMware_23">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_SYS_CPU_UTIL"  AND hostIpAddr IN (Group@PH_SYS_DEVICE_VM_SERVER) </SingleEvtConstr>
+           <GroupByAttr>hostName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_VMware_28"  group="PH_SYS_REPORT_VMware,PH_SYS_REPORT_SysPerf,PH_SYS_REPORT_Freq">
+    <Name>Performance: Top ESX By Memory Utilization With Details</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report ranks ESX hosts by memory utilization. Other memory usage metrics are included. </Description>
+    <SelectClause numEntries="All">
+        <AttrList>hostName,MAX(freeMemState),AVG(memUtil),AVG(swapReadKBytesPerSec),AVG(swapWriteKBytesPerSec)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(memUtil) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_VMware_24" name="Filter_VMware_24">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_SYS_MEM_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_VM_SERVER) </SingleEvtConstr>
+           <GroupByAttr>hostName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_VMware_28B"  group="PH_SYS_REPORT_VMware,PH_SYS_REPORT_SysPerf,PH_SYS_REPORT_Freq">
+    <Name>Performance: Top ESX By Memory Utilization</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report ranks ESX hosts by memory utilization. </Description>
+    <SelectClause numEntries="All">
+        <AttrList>hostName,AVG(memUtil)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(memUtil) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_VMware_24" name="Filter_VMware_24">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_SYS_MEM_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_VM_SERVER) </SingleEvtConstr>
+           <GroupByAttr>hostName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_VMware_28C"  group="PH_SYS_REPORT_VMware,PH_SYS_REPORT_SysPerf,PH_SYS_REPORT_Freq">
+    <Name>Performance: Top ESX By Swap Activity</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report ranks ESX hosts by swap activity </Description>
+    <SelectClause numEntries="All">
+        <AttrList>hostName,AVG(swapReadKBytesPerSec)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(swapReadKBytesPerSec) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_VMware_24" name="Filter_VMware_24">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_SYS_MEM_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_VM_SERVER) </SingleEvtConstr>
+           <GroupByAttr>hostName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_VMware_28D"  group="PH_SYS_REPORT_VMware,PH_SYS_REPORT_SysPerf,PH_SYS_REPORT_Freq">
+    <Name>Performance: ESX With Balooning Memory</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report identifies ESX hosts with low enough memory where memory balooning technique is used for memory management </Description>
+    <SelectClause numEntries="All">
+        <AttrList>hostName, COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList></AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_VMware_24" name="Filter_VMware_24">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_SYS_MEM_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_VM_SERVER) AND (freeMemState IN (2,3)) </SingleEvtConstr>
+           <GroupByAttr>hostName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+   <Report id="PH_Report_VMware_28E"  group="PH_SYS_REPORT_VMware,PH_SYS_REPORT_SysPerf,PH_SYS_REPORT_Freq">
+    <Name>Performance: ESX With Swapping Memory</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report identifies ESX hosts with low memory where swapping memory technique is used for memory management </Description>
+    <SelectClause numEntries="All">
+        <AttrList>hostName, COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList></AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_VMware_24" name="Filter_VMware_24">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_SYS_MEM_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_VM_SERVER) AND (freeMemState IN (1,2)) </SingleEvtConstr>
+           <GroupByAttr>hostName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_VMware_29"  group="PH_SYS_REPORT_VMware,PH_SYS_REPORT_SysPerf,PH_SYS_REPORT_Freq">
+    <Name>Performance: Top ESX By Disk I/O Activity With Details </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report ranks ESX hosts by disk I/O operations. Other disk I/O usage metrics are included. </Description>
+    <SelectClause numEntries="All">
+        <AttrList>hostName,datastore,diskName,AVG(diskReadKBytesPerSec),AVG(diskWriteKBytesPerSec), AVG(diskReadReqPerSec),AVG(diskWriteReqPerSec),AVG(diskReadKBytesPerSec),AVG(diskWriteKBytesPerSec)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(diskReadKBytesPerSec) DESC, AVG(diskWriteKBytesPerSec) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_VMware_25" name="Filter_VMware_25">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_ESX_DISK_IO" </SingleEvtConstr>
+           <GroupByAttr>hostName,datastore,diskName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+   <Report id="PH_Report_VMware_29B"  group="PH_SYS_REPORT_VMware,PH_SYS_REPORT_SysPerf,PH_SYS_REPORT_Freq">
+    <Name>Performance: Top ESX By Disk Read KBps </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report ranks ESX hosts by read disk I/O (KBps) </Description>
+    <SelectClause numEntries="All">
+        <AttrList>hostName,datastore,diskName,AVG(diskReadKBytesPerSec)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(diskReadKBytesPerSec) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_VMware_25" name="Filter_VMware_25">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_ESX_DISK_IO" </SingleEvtConstr>
+           <GroupByAttr>hostName,datastore,diskName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_VMware_29C"  group="PH_SYS_REPORT_VMware,PH_SYS_REPORT_SysPerf,PH_SYS_REPORT_Freq">
+    <Name>Performance: Top ESX By Disk Write KBps </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report ranks ESX hosts by write disk I/O (KBps) </Description>
+    <SelectClause numEntries="All">
+        <AttrList>hostName,datastore,diskName,AVG(diskWriteKBytesPerSec)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(diskWriteKBytesPerSec) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_VMware_25" name="Filter_VMware_25">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_ESX_DISK_IO" </SingleEvtConstr>
+           <GroupByAttr>hostName,datastore,diskName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_VMware_29D"  group="PH_SYS_REPORT_VMware,PH_SYS_REPORT_SysPerf,PH_SYS_REPORT_Freq">
+    <Name>Performance: Top ESX By Disk Latency With Details </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report ranks ESX hosts by disk I/O latency. Other disk I/O usage metrics are included. </Description>
+    <SelectClause numEntries="All">
+        <AttrList>hostName,datastore,diskName,AVG(kernDiskRdLatency),AVG(kernDiskWrLatency),AVG(devDiskRdLatency),AVG(devDiskWrLatency) </AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(kernDiskRdLatency) DESC, AVG(kernDiskWrLatency) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_VMware_25" name="Filter_VMware_25">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_ESX_DISK_IO" </SingleEvtConstr>
+           <GroupByAttr>hostName,datastore,diskName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_VMware_29E"  group="PH_SYS_REPORT_VMware,PH_SYS_REPORT_SysPerf,PH_SYS_REPORT_Freq">
+    <Name>Performance: Top ESX By Kernel Disk Read Latency </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report ranks ESX hosts by kernel disk I/O read latency. </Description>
+    <SelectClause numEntries="All">
+        <AttrList>hostName,datastore,diskName,AVG(kernDiskRdLatency) </AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(kernDiskRdLatency) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_VMware_25" name="Filter_VMware_25">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_ESX_DISK_IO" </SingleEvtConstr>
+           <GroupByAttr>hostName,datastore,diskName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_VMware_29F"  group="PH_SYS_REPORT_VMware,PH_SYS_REPORT_SysPerf,PH_SYS_REPORT_Freq">
+    <Name>Performance: Top ESX By Kernel Disk Write Latency </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report ranks ESX hosts by kernel disk I/O write latency. </Description>
+    <SelectClause numEntries="All">
+        <AttrList>hostName,datastore,diskName,AVG(kernDiskWrLatency) </AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(kernDiskWrLatency) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_VMware_25" name="Filter_VMware_25">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_ESX_DISK_IO" </SingleEvtConstr>
+           <GroupByAttr>hostName,datastore,diskName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_VMware_29G"  group="PH_SYS_REPORT_VMware,PH_SYS_REPORT_SysPerf,PH_SYS_REPORT_Freq">
+    <Name>Performance: Top ESX By Device Disk Read Latency </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report ranks ESX hosts by device disk I/O read latency </Description>
+    <SelectClause numEntries="All">
+        <AttrList>hostName,datastore,diskName,AVG(devDiskRdLatency)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(devDiskRdLatency) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_VMware_25" name="Filter_VMware_25">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_ESX_DISK_IO" </SingleEvtConstr>
+           <GroupByAttr>hostName,datastore,diskName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_VMware_29H"  group="PH_SYS_REPORT_VMware,PH_SYS_REPORT_SysPerf,PH_SYS_REPORT_Freq">
+    <Name>Performance: Top ESX By Device Disk Write Latency </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report ranks ESX hosts by device disk I/O write latency. </Description>
+    <SelectClause numEntries="All">
+        <AttrList>hostName,datastore,diskName,AVG(devDiskWrLatency) </AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(devDiskWrLatency) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_VMware_25" name="Filter_VMware_25">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_ESX_DISK_IO" </SingleEvtConstr>
+           <GroupByAttr>hostName,datastore,diskName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_VMware_30"  group="PH_SYS_REPORT_VMware,PH_SYS_REPORT_SysPerf">
+    <Name>Performance: Top ESX By Network Activity With Details</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report ranks ESX hosts by network activity. </Description>
+    <SelectClause numEntries="All">
+        <AttrList>hostName,vSwitch,intfName,AVG(inIntfUtil),AVG(outIntfUtil),AVG(sentBytes),AVG(recvBytes),AVG(sentPkts),AVG(recvPkts)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(inIntfUtil) DESC, AVG(outIntfUtil) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_VMware_25" name="Filter_VMware_25">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_NET_INTF_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_VM_SERVER) </SingleEvtConstr>
+           <GroupByAttr>hostName,vSwitch,intfName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_VMware_30B"  group="PH_SYS_REPORT_VMware,PH_SYS_REPORT_SysPerf">
+    <Name>Performance: Top ESX By Inbound Net Utilization</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report ranks ESX hosts by inbound network utilization </Description>
+    <SelectClause numEntries="All">
+        <AttrList>hostName,intfName,AVG(inIntfUtil)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(inIntfUtil) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_VMware_25" name="Filter_VMware_25">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_NET_INTF_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_VM_SERVER) </SingleEvtConstr>
+           <GroupByAttr>hostName,intfName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_VMware_30C"  group="PH_SYS_REPORT_VMware,PH_SYS_REPORT_SysPerf">
+    <Name>Performance: Top ESX By Outbound Net Utilization</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report ranks ESX hosts by outbound network utilization </Description>
+    <SelectClause numEntries="All">
+        <AttrList>hostName,intfName,AVG(outIntfUtil)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(outIntfUtil) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_VMware_25" name="Filter_VMware_25">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_NET_INTF_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_VM_SERVER) </SingleEvtConstr>
+           <GroupByAttr>hostName,intfName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+  
+  <Report id="PH_Report_VMware_30D"  group="PH_SYS_REPORT_VMware,PH_SYS_REPORT_SysPerf,PH_SYS_REPORT_Freq">
+    <Name>Performance: Top Datastores By Utilization </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report ranks datastores by utlization</Description>
+    <SelectClause numEntries="All">
+      <AttrList>datacenter,datastore,datastoreType,AVG(diskUtil)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(diskUtil) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_VMware_25" name="Filter_VMware_25">
+         <SingleEvtConstr>eventType = "PH_DEV_MON_DATASTORE_UTIL" </SingleEvtConstr>
+           <GroupByAttr>datacenter,datastore,datastoreType</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_VMware_30E"  group="PH_SYS_REPORT_VMware,PH_SYS_REPORT_SysPerf,PH_SYS_REPORT_Freq">
+    <Name>Performance: Datastores with Lowest Free Space</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report ranks ESX datastore with lowest free space</Description>
+    <SelectClause numEntries="All">
+      <AttrList>datacenter,datastore,datastoreType,AVG(freeDiskMB)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(freeDiskMB) ASC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_VMware_25" name="Filter_VMware_25">
+         <SingleEvtConstr>eventType = "PH_DEV_MON_DATASTORE_UTIL" </SingleEvtConstr>
+           <GroupByAttr>datacenter,datastore,datastoreType</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_VMware_31"  group="PH_SYS_REPORT_VMware">
+    <Name>Events: Physical to Virtual Machine Membership </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report enumerates Physical machine (ESX server) to Virtual machine  meberships from event collection. </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phyMachName,phyMachIpAddr,vmName</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>phyMachName,phyMachIpAddr,vmName </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_VMware_25" name="Filter_VMware_25">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_VM_CPU_UTIL" AND phyMachIpAddr IN (Group@PH_SYS_DEVICE_VM_SERVER) </SingleEvtConstr>
+           <GroupByAttr>phyMachName,phyMachIpAddr,vmName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_VMware_32" group="PH_SYS_REPORT_VMware">
+    <Name>Availability: VMware Hardware Errors</Name> 
+    <CustomerScope groupByEachCustomer="true">
+      <Include all="true" /> 
+      <Exclude /> 
+    </CustomerScope>
+    <Description>Captures VMware hardware warning and critical errors.</Description> 
+    <SelectClause numEntries="All">
+      <AttrList>phRecvTime,hostName,hostIpAddr,hwStatusCode,hwComponentName,hwComponentStatus </AttrList> 
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_PERF_MON_6" name="Filter_PERF_MON_6">
+         <SingleEvtConstr>hostIpAddr IN (Group@PH_SYS_DEVICE_VM_SERVER) AND eventType IN (Group@PH_SYS_EVENT_HwProblem)</SingleEvtConstr>  
+       </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+  
+  <Report id="PH_Report_VMware_33" group="PH_SYS_REPORT_VMware">
+    <Name>Availability: VMware Hardware Status</Name> 
+    <CustomerScope groupByEachCustomer="true">
+      <Include all="true" /> 
+      <Exclude /> 
+    </CustomerScope>
+    <Description>Captures VMware hardware status</Description> 
+    <SelectClause numEntries="All">
+      <AttrList>phRecvTime,hostName,hostIpAddr,hwStatusCode,hwBatteryStatus,hwDiskStatus,hwMemoryStatus,hwPowerSupplyStatus,hwTempSensorStatus,hwFanStatus,hwVoltageStatus </AttrList> 
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_PERF_MON_6" name="Filter_PERF_MON_6">
+        <SingleEvtConstr>hostIpAddr IN (Group@PH_SYS_DEVICE_VM_SERVER) AND eventType = "PH_DEV_MON_HW_STATUS" </SingleEvtConstr>  
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_VMware_34"  group="PH_SYS_REPORT_VMware,PH_SYS_REPORT_SysPerf,PH_SYS_REPORT_Freq">
+    <Name>Performance: Top VMs By Datastore I/O Activity With Details</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report ranks virtual machines by datastore I/O activity. Other datastore I/O usage metrics are included. </Description>
+    <SelectClause numEntries="All">
+        <AttrList>vmName,hostName,datastore,AVG(diskReadReqPerSec),AVG(diskWriteReqPerSec),AVG(diskReadKBytesPerSec),AVG(diskWriteKBytesPerSec)</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_VMware_25" name="Filter_VMware_25">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_VM_DATASTORE_IO" </SingleEvtConstr>
+           <GroupByAttr>vmName,hostName,datastore</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_VMware_37"  group="PH_SYS_REPORT_VMware,PH_SYS_REPORT_SysPerf,PH_SYS_REPORT_Freq">
+    <Name>Performance: Top VMs By Datastore Read KBps</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report ranks virtual machines by datastore I/O read (KBps)</Description>
+    <SelectClause numEntries="All">
+        <AttrList>vmName,hostName,datastore,AVG(diskReadKBytesPerSec)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(diskReadKBytesPerSec) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_VMware_25" name="Filter_VMware_25">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_VM_DATASTORE_IO" </SingleEvtConstr>
+           <GroupByAttr>vmName,hostName,datastore</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_VMware_38"  group="PH_SYS_REPORT_VMware,PH_SYS_REPORT_SysPerf,PH_SYS_REPORT_Freq">
+    <Name>Performance: Top VMs By Datastore Write KBps </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report ranks virtual machines by datastore I/O writes (KBps)</Description>
+    <SelectClause numEntries="All">
+        <AttrList>vmName,hostName,datastore,AVG(diskWriteKBytesPerSec)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(diskWriteKBytesPerSec) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_VMware_25" name="Filter_VMware_25">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_VM_DATASTORE_IO" </SingleEvtConstr>
+           <GroupByAttr>vmName,hostName,datastore</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_VMware_39"  group="PH_SYS_REPORT_VMware,PH_SYS_REPORT_SysPerf,PH_SYS_REPORT_Freq">
+    <Name>Performance: Top ESX By Datastore I/O Activity With Details </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report ranks ESX hosts by datsatore I/O operations. Other datastore I/O usage metrics are included. </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phyMachName,datastore,AVG(diskReadKBytesPerSec),AVG(diskWriteKBytesPerSec), AVG(diskReadReqPerSec),AVG(diskWriteReqPerSec),AVG(diskReadKBytesPerSec),AVG(diskWriteKBytesPerSec)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(diskReadKBytesPerSec) DESC, AVG(diskWriteKBytesPerSec) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_VMware_25" name="Filter_VMware_25">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_ESX_DATASTORE_IO" </SingleEvtConstr>
+           <GroupByAttr>phyMachName,datastore</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+   <Report id="PH_Report_VMware_40"  group="PH_SYS_REPORT_VMware,PH_SYS_REPORT_SysPerf,PH_SYS_REPORT_Freq">
+    <Name>Performance: Top ESX By Datastore Read KBps </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report ranks ESX hosts by read datastore I/O (KBps) </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phyMachName,datastore,AVG(diskReadKBytesPerSec)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(diskReadKBytesPerSec) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_VMware_25" name="Filter_VMware_25">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_ESX_DATASTORE_IO"  </SingleEvtConstr>
+           <GroupByAttr>phyMachName,datastore</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_VMware_41"  group="PH_SYS_REPORT_VMware,PH_SYS_REPORT_SysPerf,PH_SYS_REPORT_Freq">
+    <Name>Performance: Top ESX By Datastore Write KBps </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report ranks ESX hosts by write datastore I/O (KBps) </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phyMachName,datastore,AVG(diskWriteKBytesPerSec)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(diskWriteKBytesPerSec) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_VMware_25" name="Filter_VMware_25">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_ESX_DATASTORE_IO" </SingleEvtConstr>
+           <GroupByAttr>phyMachName,datastore</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+
+  <Report id="PH_Report_VMware_47"  group="PH_SYS_REPORT_VMware,PH_SYS_REPORT_SysPerf,PH_SYS_REPORT_Freq">
+    <Name>Performance: Top VMWare Clusters By CPU Utilization </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report ranks VMWare clusters by CPU utilization </Description>
+    <SelectClause numEntries="All">
+        <AttrList>clusterPath,AVG(cpuUtil) </AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(cpuUtil) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_VMware_25" name="Filter_VMware_25">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_VMCLUSTER_CPU_UTIL" </SingleEvtConstr>
+           <GroupByAttr>clusterPath</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_VMware_48"  group="PH_SYS_REPORT_VMware,PH_SYS_REPORT_SysPerf,PH_SYS_REPORT_Freq">
+    <Name>Performance: Top VMWare Clusters By Memory Utilization </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report ranks VMWare clusters by memory utilization </Description>
+    <SelectClause numEntries="All">
+        <AttrList>clusterPath,AVG(memUtil) </AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(memUtil) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_VMware_25" name="Filter_VMware_25">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_VMCLUSTER_MEM_UTIL" </SingleEvtConstr>
+           <GroupByAttr>clusterPath</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+   <Report id="PH_Report_VMware_51"  group="PH_SYS_REPORT_VMware,PH_SYS_REPORT_SysPerf,PH_SYS_REPORT_Freq">
+    <Name>Performance: Top VMWare Clusters By Datastore I/O Activity With Details </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report ranks VMWare Clusters by datsatore I/O operations. Other datastore I/O usage metrics are included. </Description>
+    <SelectClause numEntries="All">
+        <AttrList>clusterPath,datastore,AVG(diskReadKBytesPerSec),AVG(diskWriteKBytesPerSec), AVG(diskReadReqPerSec),AVG(diskWriteReqPerSec),AVG(diskReadKBytesPerSec),AVG(diskWriteKBytesPerSec)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(diskReadKBytesPerSec) DESC, AVG(diskWriteKBytesPerSec) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_VMware_25" name="Filter_VMware_25">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_VMCLUSTER_DATASTORE_IO" </SingleEvtConstr>
+           <GroupByAttr>clusterPath,datastore</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+   <Report id="PH_Report_VMware_52"  group="PH_SYS_REPORT_VMware,PH_SYS_REPORT_SysPerf,PH_SYS_REPORT_Freq">
+    <Name>Performance: Top VMWare Clusters By Datastore Read KBps </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report ranks ESX hosts by read datastore I/O (KBps) </Description>
+    <SelectClause numEntries="All">
+        <AttrList>clusterPath,datastore,AVG(diskReadKBytesPerSec)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(diskReadKBytesPerSec) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_VMware_25" name="Filter_VMware_25">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_VMCLUSTER_DATASTORE_IO" </SingleEvtConstr>
+           <GroupByAttr>clusterPath,datastore</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_VMware_53"  group="PH_SYS_REPORT_VMware,PH_SYS_REPORT_SysPerf,PH_SYS_REPORT_Freq">
+    <Name>Performance: Top VMWare Clusters By Datastore Write KBps </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report ranks ESX hosts by write datastore I/O (KBps) </Description>
+    <SelectClause numEntries="All">
+        <AttrList>clusterPath,datastore,AVG(diskWriteKBytesPerSec)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(diskWriteKBytesPerSec) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_VMware_25" name="Filter_VMware_25">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_VMCLUSTER_DATASTORE_IO" </SingleEvtConstr>
+           <GroupByAttr>clusterPath,datastore</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_VMware_57"  group="PH_SYS_REPORT_VMware,PH_SYS_REPORT_SysPerf">
+    <Name>Performance: Top VMWare Resource Pools By CPU Utilization </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report ranks VMWare resource pools by CPU utilization </Description>
+    <SelectClause numEntries="All">
+        <AttrList>resPoolPath,AVG(cpuUtil) </AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(cpuUtil) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_VMware_25" name="Filter_VMware_25">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_VMRESPOOL_CPU_UTIL" </SingleEvtConstr>
+           <GroupByAttr>resPoolPath</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_VMware_58"  group="PH_SYS_REPORT_VMware,PH_SYS_REPORT_SysPerf">
+    <Name>Performance: Top VMWare Resource Pools By Memory Utilization </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report ranks least utilized VMWare resource pools by memory utilization </Description>
+    <SelectClause numEntries="All">
+        <AttrList>resPoolPath,AVG(memUtil) </AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(memUtil) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_VMware_25" name="Filter_VMware_25">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_VMRESPOOL_MEM_UTIL" </SingleEvtConstr>
+           <GroupByAttr>resPoolPath</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_VMware_59"  group="PH_SYS_REPORT_VMware,PH_SYS_REPORT_SysPerf,PH_SYS_REPORT_Freq">
+    <Name>Performance: Least Utilized VMWare Clusters By CPU </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report ranks least utilized VMWare clusters by CPU utilization </Description>
+    <SelectClause numEntries="All">
+        <AttrList>clusterPath,AVG(cpuUtil) </AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(cpuUtil) ASC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_VMware_25" name="Filter_VMware_25">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_VMCLUSTER_CPU_UTIL" </SingleEvtConstr>
+           <GroupByAttr>clusterPath</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_VMware_60"  group="PH_SYS_REPORT_VMware,PH_SYS_REPORT_SysPerf,PH_SYS_REPORT_Freq">
+    <Name>Performance: Least Utilized VMWare Clusters By Memory </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report ranks least utilized VMWare clusters by memory utilization </Description>
+    <SelectClause numEntries="All">
+        <AttrList>clusterPath,AVG(memUtil) </AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(memUtil) ASC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_VMware_25" name="Filter_VMware_25">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_VMCLUSTER_MEM_UTIL" </SingleEvtConstr>
+           <GroupByAttr>clusterPath</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+ 
+   <Report id="PH_Report_VMware_63"  group="PH_SYS_REPORT_VMware,PH_SYS_REPORT_SysPerf,PH_SYS_REPORT_Freq">
+    <Name>Performance: Least Utilized VMWare Clusters By Disk Read KBps </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report ranks least utlized VMware clusters by disk I/O read (KBps)</Description>
+    <SelectClause numEntries="All">
+        <AttrList>clusterPath,SUM(diskReadKBytesPerSec)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> SUM(diskReadKBytesPerSec) ASC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_VMware_25" name="Filter_VMware_25">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_VMCLUSTER_DATASTORE_IO" </SingleEvtConstr>
+           <GroupByAttr>clusterPath</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_VMware_64"  group="PH_SYS_REPORT_VMware,PH_SYS_REPORT_SysPerf,PH_SYS_REPORT_Freq">
+    <Name>Performance: Least Utilized VMWare Clusters By Disk Write KBps </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report ranks least utilized VMWare clusters by disk I/O write volume (KBps)</Description>
+    <SelectClause numEntries="All">
+        <AttrList>clusterPath,SUM(diskWriteKBytesPerSec)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> SUM(diskWriteKBytesPerSec) ASC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_VMware_25" name="Filter_VMware_25">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_VMCLUSTER_DATASTORE_IO" </SingleEvtConstr>
+           <GroupByAttr>clusterPath</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+
+</Reports>

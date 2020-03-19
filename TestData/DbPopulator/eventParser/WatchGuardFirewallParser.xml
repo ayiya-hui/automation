@@ -1,0 +1,389 @@
+<eventParser name="WatchGuardFirewallParser">
+  <deviceType>
+    <Vendor>WatchGuard</Vendor>
+    <Model>Firebox</Model>
+    <Version>ANY</Version>
+  </deviceType>
+  
+  <!-- examples  
+
+ <143>2010-09-30 10:34:11 HKHDCFIR01 disp="Allow"   pri="1" policy="HTTP-incoming-00" src_ip="202.64.210.178" dst_ip="125.215.194.243" pr="http/tcp" src_port="27822" dst_port="80" src_intf="0-External" dst_intf="1-Trusted"   tcpinfo="offset 7 S 3758778056 win 65535"   rc="100" msg="allowed, mss not exceeding 1460, idle timeout=43205 sec" pckt_len="48" ttl="119" 
+
+<143>2010-09-30 10:34:09 HKHDCFIR01 disp="Allow"   pri="1" policy="ML3128-00" src_ip="10.60.60.83" dst_ip="117.120.20.131" pr="3128/tcp" src_port="2284" dst_port="3128" src_intf="1-Trusted" 
+<143>2010-09-30 10:36:27 HKHDCFIR01 disp="Deny"   pri="1" policy="Unhandled External Packet-00" src_ip="174.37.188.122" dst_ip="125.215.194.221" pr="27200/tcp" src_port="80" dst_port="27200" src_intf="0-External" dst_intf="1-Trusted"   tcpinfo="offset 5 SA 3119459433 win 65535"   rc="101" msg="denied" pckt_len="40" ttl="100"  
+ 
+ <140>Oct  7 17:35:06 ColorFX-DSM 908555973C384 (2010-10-07T22:35:06) firewall: Deny 1-Trusted 0-External 78 udp 20 125 10.10.1.251 150.xx.xxx.xx 137 137  (Clean-Up-00)
+
+<140>Oct  7 17:35:06 ColorFX-DSM 908555973C384 (2010-10-07T22:35:06) firewall: Deny 0-External Firebox 135 udp 20 55 199.212.0.102 67.xxx.xx.xx 53 1559  (Unhandled External Packet-00)
+
+<140>Oct  7 17:35:04 ColorFX-DSM 908555973C384 (2010-10-07T22:35:04) firewall: Deny 1-Trusted 0-External 48 tcp 20 126 10.30.1.25 74.62.xxx.xxx 3444 445 offset 7 S 3271556786 win 65535  (Internal Policy)
+
+<140>Oct  7 17:35:05 ColorFX-DSM 908555973C384 (2010-10-07T22:35:05) firewall: Allow 1-Trusted 0-External 71 udp 20 126 10.10.1.5 199.xxx.x.xx 60455 53  (Out-DNS-00)
+
+<140>Oct  6 05:59:59 Name-of-co 908555973C384 (2010-10-06T10:59:59) firewall: Deny 1-Trusted Firebox 48 tcp 20 126 10.20.1.71 7.8.1.78 139 6836 offset 7 AS 2340231712 win 64  (Internal Policy)
+
+<140>Oct  6 05:59:54 Name-of-co 908555973C384 (2010-10-06T10:59:54) firewall: Allow 1-Trusted 0-External 60 tcp 20 62 10.10.1.132 63.224.xx.xxx 40997 443 offset 10 S 87963493 win 53270  (Out-HTTPS-00)
+
+Samples from crown
+<155>Dec 16 16:57:33 HKHDCFIR01 (2010-12-16T08:57:33) kernel: SM: policy="TCP-proxy-00" src_ip="125.215.194.194" dst_ip="211.9.47.90" pr="tcp" src_port="3883" dst_port="110" src_intf="7" dst_intf="6" rc="590" msg="Connect timeout" proxy_act="TCP-Proxy.1"
+<140>Dec 21 12:00:01 HKHDCFIR01 (2010-12-21T04:00:01) firewall: Allow 3-MPLS 1-Trusted 48 tcp 20 122 10.160.60.115 10.60.60.40 2139 1352 offset 7 S 2693466524 win 252  (LotusNotes-incoming-00)
+
+  -->
+ <!-- pattern definitions --> 
+  <patternDefinitions>
+    <!--pattern name="patWg1"><![CDATA[disp=\"A|D[^ ]*\"]]></pattern-->
+    <pattern name="patWg1"><![CDATA[disp=\"Allow|Deny\"]]></pattern>
+    <pattern name="patWg2"><![CDATA[firewall:\s+[Allow|Deny]]]></pattern>
+    <pattern name="patWg3"><![CDATA[[^ ]*-proxy\[\d+\]:]]></pattern>
+    <pattern name="patWg4"><![CDATA[kernel: SM:]]></pattern>
+    <pattern name="patWgIke"><![CDATA[iked\[\d+\]:]]></pattern>
+    <pattern name="patWgSession"><![CDATA[sessiond\[\d+\]:]]></pattern>
+    <pattern name="patWgConfig"><![CDATA[configd\[\d+\]:]]></pattern>
+    <pattern name="patWgFWMsg1"><![CDATA[firewall:\s+msg_id=]]></pattern>
+    <pattern name="patWgFWMsg2"><![CDATA[firewall\[\d+\]:]]></pattern>
+    <pattern name="patWgAllowDeny"><![CDATA[Allow|Deny]]></pattern>
+    <pattern name="patWgSig"><![CDATA[sigd[.upd]*\[\d+\]:]]></pattern>
+    <pattern name="patWgAgent"><![CDATA[wgagent\[\d+\]:]]></pattern>
+  </patternDefinitions>
+  
+  <eventFormatRecognizer><![CDATA[<:patWg1>|<:patWg2>|<:patWg3>|<:patWg4>|<:patWgIke>|<:patWgSession>|<:patWgConfig>|<:patWgFWMsg1>|<:patWgFWMsg2>|<:patWgSig>|<:patWgAgent>]]></eventFormatRecognizer><!--|<:patWgConfig>-->
+  
+  <testEvents>
+      <testEvent><![CDATA[<142>Oct 14 13:20:53 ColorFX-DSM 908555973C384 (2010-10-14T18:20:53) smtp-proxy[1952]: Allow Trusted External tcp 10.10.1.27 68.142.24.25 15911 25 msg="SMTP Request" proxy_act="Out - SMTP-Outgoing" rcvd_bytes="2904" sent_bytes="2784" sender="user@email.net" recipients="karla@email.com"  (Out-SMTP-proxy-00)]]></testEvent>
+      <testEvent><![CDATA[<140>Oct  6 05:59:59 Name-of-co 908555973C384 (2010-10-06T10:59:59) firewall: Deny 1-Trusted Firebox 48 tcp 20 126 10.20.1.71 7.8.1.78 139 6836 offset 7 AS 2340231712 win 64  (Internal Policy)]]></testEvent>
+      <testEvent><![CDATA[<140>Oct  5 12:46:15 Client-ABC 908553273C384 (2010-10-05T17:46:15) firewall: Allow 1-Trusted 0-External 48 tcp 20 125 10.10.14.2 75.36.30.30 3815 80 offset 7 S 4184374101 win 65535  (Out - HTTP-00)]]></testEvent>
+      <testEvent><![CDATA[<143>2010-09-30 10:34:09 HKHDCFIR01 disp="Allow"   pri="1" policy="ML3128-00" src_ip="10.60.60.83" dst_ip="117.120.20.131" pr="3128/tcp" src_port="2284" dst_port="3128" src_intf="1-Trusted" ]]></testEvent>
+      <testEvent><![CDATA[<143>2010-09-30 10:36:27 HKHDCFIR01 disp="Deny"   pri="1" policy="Unhandled External Packet-00" src_ip="174.37.188.122" dst_ip="125.215.194.221" pr="27200/tcp" src_port="80" dst_port="27200" src_intf="0-External" dst_intf="1-Trusted"   tcpinfo="offset 5 SA 3119459433 win 65535"   rc="101" msg="denied" pckt_len="40" ttl="100"  ]]></testEvent>
+  </testEvents>
+
+  <parsingInstructions>
+    
+    <!-- parsing common fields --> 
+    <switch>
+      <case>
+	<collectFieldsByRegex src="$_rawmsg">
+	  <regex><![CDATA[<:gPatSyslogPRI><_year:gPatYear>-<_mon:gPatMon>-<_day:gPatDay>\s+<_time:gPatTime>\s+<:gPatStr>\s+<_body:gPatMesgBody>]]></regex>
+	</collectFieldsByRegex>
+      </case>
+      <case>
+	<collectFieldsByRegex src="$_rawmsg">
+	  <regex><![CDATA[<:gPatSyslogPRI><_mon:gPatMon>\s+<_day:gPatDay>\s+<_time:gPatTime>\s+.*\(<_year:gPatYear>.*\)\s+<_keyword:gPatStrEndColon>:\s+<_body:gPatMesgBody>]]></regex>
+	</collectFieldsByRegex>
+      </case>
+    </switch>
+    
+    <setEventAttribute attr="eventType">WatchGuard_Generic</setEventAttribute>
+    <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+    
+    <choose>
+      <when test='exist _keyword'>
+	<when test='matches($_keyword, "firewall$")'>
+	  <switch>
+	    <case>
+	      <collectFieldsByRegex src="$_body">
+		<regex><![CDATA[<_disp:patWgAllowDeny>\s+<_body1:gPatMesgBody>\(<policyName:gPatMesgBody>\)]]></regex>
+	      </collectFieldsByRegex>
+	      <collectAndSetAttrByPos src="$_body1" sep=' '>
+		<attrPosMap attr="srcFwZone" pos='1'/>
+		<attrPosMap attr="destFwZone" pos='2'/>
+		<attrPosMap attr="_bytes" pos='3'/>
+		<attrPosMap attr="_ipProto" pos='4'/>
+		<attrPosMap attr="srcIpAddr" pos='7'/>
+		<attrPosMap attr="destIpAddr" pos='8'/>
+		<attrPosMap attr="srcIpPort" pos='9'/>
+		<attrPosMap attr="destIpPort" pos='10'/>
+	      </collectAndSetAttrByPos>
+	    </case>
+	    <case>
+	      <collectFieldsByRegex src="$_body">
+		<regex><![CDATA[msg_id=\"<_msgId:gPatStr>\"\s+<_body1:gPatMesgBody>]]></regex>
+	      </collectFieldsByRegex>
+	      <when test='$_msgId = "3001-1001"'>
+		<collectFieldsByRegex src="$_body1">
+		  <regex><![CDATA[<:gPatMesgBody>\s+<hostIpAddr:gPatIpV4Dot>]]></regex>
+		</collectFieldsByRegex>
+		<setEventAttribute attr="eventType">WatchGuard-temp-blocking</setEventAttribute>
+	      </when>
+	      <when test='$_msgId = "0000-0000"'>
+		<collectFieldsByRegex src="$_body1">
+		  <regex><![CDATA[ARP\s+spoofing attack!ip=<hostIpAddr:gPatIpV4Dot>\s+mac=<hostMACAddr:gPatStr>\s+port=<srcIpPort:gPatInt>]]></regex>
+		</collectFieldsByRegex>
+		<setEventAttribute attr="eventType">WatchGuard-alarm-arpspoofing-attack</setEventAttribute>
+	      </when>
+	    </case>
+	  </switch>
+	</when>
+	<when test='matches($_keyword, "firewall\[\d+\]")'>
+	  <switch>
+	    <case>
+	      <collectFieldsByRegex src="$_body">
+		<regex><![CDATA[<_fwKey:gPatStr>:\s+<_body1:gPatMesgBody>]]></regex>
+	      </collectFieldsByRegex>
+	      <when test='$_fwKey = "manager_main"'>
+		<!--In logs collected, this tag always be followed with restart info-->
+		<setEventAttribute attr="eventType">WatchGuard-admin-restart</setEventAttribute>
+	      </when>
+	    </case>
+	    <case>
+	      <collectFieldsByRegex src="$_body">
+		<regex><![CDATA[Idle\s+time-out\s+has\s+occurred\s+for\s+hostle\s+site\s+<hostIpAddr:gPatIpV4Dot>]]></regex>
+	      </collectFieldsByRegex>
+	      <setEventAttribute attr="eventType">WatchGuard-idle-timeout</setEventAttribute>
+	    </case>
+	  </switch>
+	</when>
+	<when test='matches($_keyword, "[^ ]*-proxy\[\d+\]")'>
+	  <collectFieldsByRegex src="$_keyword">
+	    <regex><![CDATA[<_proxyName:gPatStr>-proxy\[\d+\]]]></regex>
+	  </collectFieldsByRegex>
+	  <collectFieldsByRegex src="$_body">
+	    <regex><![CDATA[<_body1:gPatMesgBody>\s+msg<_body2:gPatMesgBody>\(<policyName:gPatMesgBody>\)]]></regex>
+	  </collectFieldsByRegex>
+	  <collectAndSetAttrByPos src="$_body1" sep=' '>
+	    <attrPosMap attr="_disp" pos='1'/>
+	    <attrPosMap attr="srcFwZone" pos='2'/>
+	    <attrPosMap attr="destFwZone" pos='3'/>
+	    <attrPosMap attr="_ipProto" pos='4'/>
+	    <attrPosMap attr="srcIpAddr" pos='5'/>
+	    <attrPosMap attr="destIpAddr" pos='6'/>
+	    <attrPosMap attr="srcIpPort" pos='7'/>
+	    <attrPosMap attr="destIpPort" pos='8'/>
+	  </collectAndSetAttrByPos>
+	  <collectAndSetAttrByKeyValuePair src="$_body2" sep=' '>
+	    <attrKeyMap attr="usrMsg" key="="/>
+	    <attrKeyMap attr="recvBytes" key="rcvd_bytes="/>
+	    <attrKeyMap attr="sentBytes" key="sent_bytes="/>
+	    <attrKeyMap attr="senderMailAddr" key="sender="/>
+	    <attrKeyMap attr="receiverMailAddr" key="recipients="/>
+	    <!--attrKeyMap attr="" key="ctl_dst="/-->
+	    <!--attrKeyMap attr="" key="ctl_src="/-->
+	    <attrKeyMap attr="fileName" key="file="/>
+	    <attrKeyMap attr="fileName" key="file_name="/>
+	    <!--attrKeyMap attr="_fwRuleSet" key="proxy_act="/-->
+	    <!--attrKeyMap attr="_queryClass" key="query_class="/-->
+	    <!--attrKeyMap attr="_queryType" key="query_type="/-->
+	    <attrKeyMap attr="fwRule" key="rule_name="/>
+	    <attrKeyMap attr="ftpMethod" key="type="/>
+	    <attrKeyMap attr="user" key="user="/>
+          </collectAndSetAttrByKeyValuePair>
+	</when>
+	<when test='matches($_keyword, "kernel")'>
+	  <collectFieldsByRegex src="$_body">
+	    <regex><![CDATA[<_kernelFlag:gPatStr>:\s+<_body1:gPatMesgBody>]]></regex>
+	  </collectFieldsByRegex>
+	  <when test='matches($_kernelFlag, "SM")'>
+	    <collectAndSetAttrByKeyValuePair src="$_body1" sep=' '>
+	      <attrKeyMap attr="policyName" key="policy="/>
+	      <attrKeyMap attr="srcIpAddr" key="src_ip="/>
+	      <attrKeyMap attr="destIpAddr" key="dst_ip="/>
+	      <attrKeyMap attr="_ipProto" key="pr="/>
+	      <attrKeyMap attr="srcIpPort" key="src_port="/>
+	      <attrKeyMap attr="destIpPort" key="dst_port="/>
+	      <attrKeyMap attr="srcIntfName" key="src_intf="/>
+	      <attrKeyMap attr="destIntfName" key="dst_intf="/>
+	      <!--attrKeyMap attr="" key="rc="/-->
+	      <attrKeyMap attr="usrMsg" key="msg="/>
+	      <!--attrKeyMap attr="_fwRuleSet" key="proxy_act="/-->
+	    </collectAndSetAttrByKeyValuePair>
+	    <setEventAttribute attr="eventType">WatchGuard-proxy-disconnection</setEventAttribute>
+	    <setEventAttribute attr="eventSeverity">5</setEventAttribute>
+	  </when>
+	</when>
+	<when test='matches($_keyword, "iked\[\d+\]")'>
+	  <collectFieldsByRegex src="$_body">
+	    <regex><![CDATA[<_ikeFlag:gPatStrEndColon>:\s+<_body1:gPatMesgBody>]]></regex>
+	  </collectFieldsByRegex>
+	  <when test='matches($_ikeFlag, "IPSEC\s+SA\s+ADD")'>
+	    <switch>
+	      <case>
+		<collectFieldsByRegex src="$_body1">
+		  <regex><![CDATA[REKEY\s+BOVPN:\s+<role:gPatStr>\s+src:<srcIPRange:gPatStr>\s+dst:<destIPRange:gPatStr>\s+dir:<_dir:gPatStr>\s+SPI:<SPI:gPatStr>\s+\(OldSPI:<oldSPI:gPatStr>\)]]></regex>
+		</collectFieldsByRegex>
+		<setEventAttribute attr="eventType">combineMsgId("WatchGuard-ipsec-add-rekey-BOVPN-", $_dir)</setEventAttribute>
+	      </case>
+	      <case>
+		<collectFieldsByRegex src="$_body1">
+		  <regex><![CDATA[BOVPN:\s+<role:gPatStr>\s+src:<srcIPRange:gPatStr>\s+dst:<destIPRange:gPatStr>\s+dir:<_dir:gPatStr>\s+SPI:<SPI:gPatStr>]]></regex>
+		</collectFieldsByRegex>
+		<setEventAttribute attr="eventType">combineMsgId("WatchGuard-ipsec-add-BOVPN-", $_dir)</setEventAttribute>
+	      </case>
+	    </switch>
+	  </when>
+	  <when test='matches($_ikeFlag, "IPSEC\s+SA\s+DEL")'>
+	    <switch>
+	      <case>
+		<collectFieldsByRegex src="$_body1">
+		  <regex><![CDATA[src:<_srcIPRange:gPatStr>\s+dst:<_destIPRange:gPatStr>\s+dir:<_dir:gPatStr>\s+SPI:<SPI:gPatStr>]]></regex>
+		</collectFieldsByRegex>
+	      </case>
+	      <case>
+		<collectFieldsByRegex src="$_body1">
+		  <regex><![CDATA[dst:<destIpAddr:gPatStr>\s+proto:<:gPatInt>\s+SPI:<SPI:gPatStr>\s+dir:<_dir:gPatStr>]]></regex>
+		</collectFieldsByRegex>
+	      </case>
+	      <case>
+		<collectFieldsByRegex src="$_body1">
+		  <regex><![CDATA[lifebyte limit<:gPatMesgBody>]]></regex>
+		</collectFieldsByRegex>
+		<setEventAttribute attr="usrMsg">$_body1</setEventAttribute>
+		<setEventAttribute attr="_isStatus">1</setEventAttribute>
+	      </case>
+	    </switch>
+	    <choose>
+	      <when test='matches($_ikeFlag, "IPSEC\s+SA\s+DEL\s+\(HardExpire")'>
+		<setEventAttribute attr="eventType">WatchGuard-ipsec-del-hardexpire</setEventAttribute>
+		<when test='exist _isStatus'>
+		  <setEventAttribute attr="eventType">WatchGuard-ipsec-del-hardexpire-status</setEventAttribute>
+		</when>
+	      </when>
+	      <otherwise>
+		<setEventAttribute attr="eventType">WatchGuard-ipsec-del</setEventAttribute>
+	      </otherwise>
+	    </choose>
+	  </when>
+	  <when test='matches($_ikeFlag, "[decrease|increase]\s+BOVPN\s+Tunnel")'>
+	    <setEventAttribute attr="eventDesc">$_ikeFlag</setEventAttribute>
+	    <collectFieldsByRegex src="$_ikeFlag">
+	      <regex><![CDATA[<_DecOrInc:gPatStr>\s+BOVPN\s+Tunnel\s+Count\s+by\s+<_step:gPatInt>]]></regex>
+	    </collectFieldsByRegex>
+	    <setEventAttribute attr="eventDesc">$_body1</setEventAttribute>
+	    <collectFieldsByRegex src="$_body1">
+	      <regex><![CDATA[<numUser:gPatInt>/<_totalUser:gPatInt>]]></regex>
+	    </collectFieldsByRegex>
+	    <setEventAttribute attr="eventType">combineMsgId("WatchGuard-ike-bovpn-", $_DecOrInc, "-user")</setEventAttribute>
+	  </when>
+	</when>
+	<when test='matches($_keyword, "sessiond\[\d+\]")'>
+	  <collectFieldsByRegex src="$_body">
+	    <regex><![CDATA[msg_id=\"<_msgId:gPatStr>\"\s+<_body1:gPatMesgBody>]]></regex>
+	  </collectFieldsByRegex>
+	  <when test='$_msgId IN "3E00-0002,3E00-0004"'>
+	    <collectFieldsByRegex src="$_body1">    
+	      <regex><![CDATA[Management\s+user\s+<user:gPatStr>\s+from\s+<hostIpAddr:gPatIpV4Dot>\s+logged\s+<:gPatStr>]]></regex>
+	    </collectFieldsByRegex>
+	    <when test='$_msgId = "3E00-0002"'>
+	      <setEventAttribute attr="eventType">WatchGaurd-admin-logon-success</setEventAttribute>
+	    </when>
+	    <when test='$_msgId = "3E00-0004"'>
+	      <setEventAttribute attr="eventType">WatchGuard-admin-logoff</setEventAttribute>
+	    </when>
+	  </when>
+	</when>
+	<when test='matches($_keyword, "configd\[\d+\]")'>
+	  <collectFieldsByRegex src="$_body">
+	    <regex><![CDATA[msg_id=\"<_msgId:gPatStr>\"\s+<_body1:gPatMesgBody>]]></regex>
+	  </collectFieldsByRegex>
+	  <when test='$_msgId = "0101-0001"'>
+	    <collectFieldsByRegex src="$_body1">
+	      <regex><![CDATA[<user:gPatStr>@<hostIpAddr:gPatIpV4Dot>\s+<opName:gPatStr>\s+<policyName:gPatMesgBody>]]></regex>
+	    </collectFieldsByRegex>
+	    <setEventAttribute attr="eventType">WatchGuard-admin-config-change</setEventAttribute>
+	  </when>
+	</when>
+	<when test='matches($_keyword, "sigd[.upd]*\[\d+\]")'>
+	  <choose>
+	    <when test='matches($_body,"msg_id.*")'>
+	      <collectFieldsByRegex src="$_body">
+		<regex><![CDATA[msg_id=\"<_msgId:gPatStr>\"\s+<_body1:gPatMesgBody>]]></regex>
+	      </collectFieldsByRegex>
+	      <when test='$_msgId = "2E02-0065"'>
+		<collectFieldsByRegex src="$_body1">
+		  <regex><![CDATA[Scheduled\s+<appName:gPatStr>\s+Update\s+started]]></regex>
+		</collectFieldsByRegex>
+		<setEventAttribute attr="eventType">WatchGuard-update-start</setEventAttribute>
+	      </when>
+	      <when test='$_msgId = "2E02-0067"'>
+		<collectFieldsByRegex src="$_body1">
+		  <regex><![CDATA[Scheduled\s+<appName:gPatStr>\s+Update\s+for\s+the\s+version\(<appVersion:gPatStr>\)\s+failed\s+with\s+return\s+code=\[<_retCode:gPatStr>\]]]></regex>
+		  <!--regex><![CDATA[Scheduled\s+<appName:gPatStr>\s+Update\s+for\s+the\s+version<appVersion:gPatStr>\s+failed\s+with\s+return\s+code<eventDesc:gPatMesgBody>]]></regex-->
+		</collectFieldsByRegex>
+		<setEventAttribute attr="eventType">WatchGuard-update-failed</setEventAttribute>
+	      </when>
+	    </when>
+	    <otherwise>
+	      <switch>
+		<case>
+		  <collectFieldsByRegex src="$_body">
+		    <regex><![CDATA[No\s+license\s+available\s+for\s+<appName:gPatStr>\s+update]]></regex>
+		  </collectFieldsByRegex>
+		  <setEventAttribute attr="eventType">WatchGuard-update-nolicense</setEventAttribute>
+		</case>
+		<case>
+		  <collectFieldsByRegex src="$_body">
+		    <regex><![CDATA[update\s+process\s+exited\s+abnormally]]></regex>
+		  </collectFieldsByRegex>
+		  <setEventAttribute attr="eventType">WatchGuard-update-failure</setEventAttribute>
+		</case>
+	      </switch>
+	    </otherwise>
+	  </choose>
+	</when>
+	<when test='matches($_keyword, "wgagent\[\d+\]")'>
+	  <collectFieldsByRegex src="$_body">
+	    <regex><![CDATA[msg_id=\"<_msgId:gPatStr>\"\s+<_body1:gPatMesgBody>]]></regex>
+	  </collectFieldsByRegex>
+	  <when test='$_msgId = "3E00-0003"'>
+	    <collectFieldsByRegex src="$_body1">
+	      <regex><![CDATA[Management\s+user\s+<user:gPatStr>\s+from\s+<hostIpAddr:gPatIpV4Dot>\s+rejected<:gPatMesgBody>]]></regex>
+	    </collectFieldsByRegex>
+	    <setEventAttribute attr="eventType">WatchGuard-admin-logon-failure</setEventAttribute>
+	  </when>
+	</when>
+      </when>
+      <otherwise>
+	<collectAndSetAttrByKeyValuePair src="$_body" sep=' '>
+	  <attrKeyMap attr="_disp" key="disp="/>
+	  <attrKeyMap attr="_pri" key="pri="/>
+	  <attrKeyMap attr="policyName" key="policy="/>
+	  <attrKeyMap attr="srcIpAddr" key="src_ip="/>
+	  <attrKeyMap attr="destIpAddr" key="dst_ip="/>
+	  <attrKeyMap attr="_proto" key="pr="/>
+	  <attrKeyMap attr="srcIpPort" key="src_port="/>
+	  <attrKeyMap attr="destIpPort" key="dst_port="/>
+	  <attrKeyMap attr="srcIntfName" key="src_intf="/>
+	  <attrKeyMap attr="destIntfName" key="dst_intf="/>
+	  <attrKeyMap attr="usrMsg" key="msg="/>
+	  <attrKeyMap attr="postNATSrcIpAddr" key="src_ip_nat="/>
+	  <attrKeyMap attr="postNATSrcIpPort" key="src_port_nat="/>
+	  <attrKeyMap attr="preNATDestIpAddr" key="dst_ip_nat="/>
+	  <attrKeyMap attr="preNATDestIpPort" key="dst_port_nat="/>
+	</collectAndSetAttrByKeyValuePair>	
+      </otherwise>
+    </choose>
+    <setEventAttribute attr="deviceTime">toDateTime($_mon, $_day, $_year, $_time)</setEventAttribute>
+    
+    <when test='exist _proto'>
+      <collectAndSetAttrByPos src="$_proto" sep='/'>
+        <attrPosMap attr="_proStr" pos='2'/>
+      </collectAndSetAttrByPos>
+      <setEventAttribute attr="ipProto">convertStrToIntIpProto($_proStr)</setEventAttribute>
+    </when>
+    
+    <when test='exist _ipProto'>
+      <setEventAttribute attr="ipProto">convertStrToIntIpProto($_ipProto)</setEventAttribute>
+    </when>
+    
+    <when test='exist _bytes'>
+      <setEventAttribute attr="totBytes">$_bytes</setEventAttribute>
+    </when>
+    
+    <when test='exist sentBytes'>
+      <when test='exist recvBytes'>
+	<setEventAttribute attr="totBytes">add($sentBytes, $recvBytes)</setEventAttribute>
+      </when>
+    </when>
+    
+    <when test='exist _disp'>
+      <choose>
+	<when test="matches($_disp, 'Allow')">
+	  <setEventAttribute attr="eventType">WatchGuard-traffic-permit</setEventAttribute>
+	</when>
+	<when test="matches($_disp, 'Deny')">
+	  <setEventAttribute attr="eventType">WatchGuard-traffic-deny</setEventAttribute>
+	  <setEventAttribute attr="eventSeverity">5</setEventAttribute>
+	</when>
+      </choose>
+    </when>
+    
+  </parsingInstructions>
+</eventParser>

@@ -1,0 +1,312 @@
+<eventParser name="SolarisLogParser">
+  <deviceType>
+    <Vendor>Sun</Vendor>
+    <Model>Solaris</Model>
+    <Version>ANY</Version>
+  </deviceType>
+  
+  <!-- pattern definitions -->
+  <patternDefinitions>
+    <pattern name="patSolarisMod" list="begin"><![CDATA[sshd|login|]]></pattern>
+    <pattern name="patSolarisMod" list="continue"><![CDATA[inetd|lpstat|]]></pattern>
+    <pattern name="patSolarisMod" list="end"><![CDATA[su|sudo]]></pattern>
+    <pattern name="patQueryNum"><![CDATA[#\d+:]]></pattern>   
+    <pattern name="patSolarisProcId"><![CDATA[\[ID [^\]]+\]]]></pattern>
+  </patternDefinitions>
+  
+  <eventFormatRecognizer><![CDATA[<:patSolarisMod>(?:\[\d+\])?: <:patSolarisProcId>]]></eventFormatRecognizer>
+  
+  <testEvents>
+      <testEvent><![CDATA[<37>May 14 23:19:45 su: [ID 366847 auth.notice] 'su partha' succeeded for automationUser on /dev/pts/2]]></testEvent>
+      <testEvent><![CDATA[<149>May 14 23:17:11 sudo: [ID 702911 local2.notice]  automationUser : TTY=pts/2 ; PWD=/Desktop ; USER=root ; COMMAND=/usr/local/sbin/tcpdump]]></testEvent>
+      <testEvent><![CDATA[<38>Jun  1 13:09:28 sshd[15903]: [ID 800047 auth.info] Illegal user hacker from 192.168.0.30]]></testEvent>
+      <testEvent><![CDATA[<34>May 14 23:58:44 login: [ID 658745 auth.crit] REPEATED LOGIN FAILURES ON /dev/pts/3 FROM 192.168.1.2, root]]></testEvent>
+      <testEvent><![CDATA[<15>Jun  1 13:09:28 lpstat[15906]: [ID 462742 user.debug] database: printers, default: user files nis nisplus]]></testEvent>
+      <testEvent><![CDATA[<29>Mar 30 15:09:17 172.16.10.6 inetd[342]: [ID 317013 daemon.notice] telnet[5109] from 192.168.22.4 57587]]></testEvent>
+  </testEvents>
+  
+  <parsingInstructions>
+    <!-- header -->
+    <switch>
+      <case>
+        <collectFieldsByRegex src="$_rawmsg">
+          <regex><![CDATA[<:gPatSyslogPRI><_mon:gPatMon>\s+<_day:gPatDay> <_time:gPatTime> <:gPatIpV4Dot> <_body:gPatMesgBody>$]]></regex>
+        </collectFieldsByRegex>
+      </case>
+      <case>
+        <collectFieldsByRegex src="$_rawmsg">
+          <regex><![CDATA[<:gPatSyslogPRI><_mon:gPatMon>\s+<_day:gPatDay> <_time:gPatTime> <_body:gPatMesgBody>$]]></regex>
+        </collectFieldsByRegex>
+      </case>
+    </switch>
+    
+    <setEventAttribute attr="deviceTime">toDateTime($_mon, $_day, $_time)</setEventAttribute>
+    <setEventAttribute attr="eventAction">0</setEventAttribute>
+
+    <!-- body -->
+    <switch>
+
+      <case>
+        <!-- message specific parsing
+             
+             SUCCESSFUL SSH LOGIN
+             <38>Dec  9 13:30:13 172.16.10.6 sshd[26638]: [ID 800047 auth.info] Keyboard-interactive (PAM) userauth failed[9] while authenticating: Authentication failed          
+          <38>May 14 23:38:14 sshd[3650]: [ID 800047 auth.info] Accepted keyboard-interactive for root from 192.168.1.2 port 43421 ssh2
+	  <38>May 14 23:23:18 sshd[3602]: [ID 800047 auth.info] Accepted keyboard-interactive for partha from 192.168.1.2 port 53454 ssh2
+               -->
+        <collectAndSetAttrByRegex src="$_body">
+          <regex><![CDATA[sshd\[\d+\]: <:patSolarisProcId> Accepted keyboard-interactive for <user:gPatStr> from <srcIpAddr:gPatIpV4Dot> port <srcIpPort:gPatIpPort> ssh2]]></regex>
+        </collectAndSetAttrByRegex>
+        <setEventAttribute attr="eventType">"Solaris_Successful_SSH_Login"</setEventAttribute>
+	<setEventAttribute attr="destIpPort">22</setEventAttribute>
+	<setEventAttribute attr="destIpAddr">$reptDevIpAddr</setEventAttribute>
+	
+	<choose>
+	  <when test="matches($user, '^root')">
+	    <setEventAttribute attr="eventSeverity">3</setEventAttribute>
+	  </when>
+	  <otherwise> 
+	    <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+	  </otherwise>
+	</choose>
+      </case>
+      <case>
+      <!-- message specific parsing
+             
+             User debug
+	     <15>Jun  1 13:09:28 lpstat[15906]: [ID 462742 user.debug] database: printers, default: user files nis nisplus
+             
+               -->
+      <collectAndSetAttrByRegex src="$_body">
+          <regex><![CDATA[lpstat\[\d+\]: <:patSolarisProcId>.*]]></regex>
+        </collectAndSetAttrByRegex>
+        <setEventAttribute attr="eventType">"Solaris_Generic_Debug"</setEventAttribute>
+        <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+      </case>
+
+      <case>
+        <!-- message specific parsing
+             
+             Failed SSH LOGIN
+
+             <37>May 14 23:27:56 sshd[3616]: [ID 800047 auth.notice] Failed keyboard-interactive for root from 192.168.1.2 port 47232 ssh2   
+        -->
+
+        <collectAndSetAttrByRegex src="$_body">
+          <regex><![CDATA[sshd\[\d+\]: <:patSolarisProcId> Failed keyboard-interactive for <user:gPatStr> from <srcIpAddr:gPatIpV4Dot> port <srcIpPort:gPatIpPort> ssh2]]></regex>
+        </collectAndSetAttrByRegex>
+        <setEventAttribute attr="eventType">"Solaris_Failed_SSH_Login"</setEventAttribute>
+        <setEventAttribute attr="eventAction">1</setEventAttribute>
+        <setEventAttribute attr="eventSeverity">4</setEventAttribute>
+	<setEventAttribute attr="destIpPort">22</setEventAttribute>
+	<setEventAttribute attr="destIpAddr">$reptDevIpAddr</setEventAttribute>
+	
+	<choose>
+	  <when test="matches($user, '^root')">
+	    <setEventAttribute attr="eventSeverity">4</setEventAttribute>
+	  </when>
+	  <otherwise> 
+	    <setEventAttribute attr="eventSeverity">2</setEventAttribute>
+	  </otherwise>
+	</choose>
+
+      </case>
+      
+      <case>
+
+        <!-- message specific parsing
+             
+             FAILED SSH LOGIN (TYPE 2)
+             
+	     <38>May 14 23:27:56 sshd[3616]: [ID 800047 auth.info] ROOT LOGIN REFUSED FROM 192.168.1.2
+        -->
+        
+        <collectAndSetAttrByRegex src="$_body">
+          <regex><![CDATA[sshd\[\d+\]: <:patSolarisProcId>\s+ROOT\s+LOGIN\s+REFUSED\s+FROM <srcIpAddr:gPatIpV4Dot>]]></regex>
+        </collectAndSetAttrByRegex>
+        <setEventAttribute attr="eventType">"Solaris_Failed_SSH_Login"</setEventAttribute>
+        <setEventAttribute attr="eventAction">1</setEventAttribute>
+        <setEventAttribute attr="eventSeverity">4</setEventAttribute>
+	<setEventAttribute attr="user">root</setEventAttribute>
+	<setEventAttribute attr="destIpAddr">$reptDevIpAddr</setEventAttribute>
+	<setEventAttribute attr="destIpPort">22</setEventAttribute>
+      </case>
+      
+      <case>
+        <!-- message specific parsing
+             
+             Failed SSH LOGIN (TYPE 3)
+             <38>Jun  1 13:09:28 sshd[15903]: [ID 800047 auth.info] Illegal user hacker from 192.168.0.30
+        -->
+
+        <collectAndSetAttrByRegex src="$_body">
+          <regex><![CDATA[sshd\[\d+\]: <:patSolarisProcId> Illegal user <user:gPatStr> from <srcIpAddr:gPatIpV4Dot>]]></regex>
+        </collectAndSetAttrByRegex>
+        <setEventAttribute attr="eventType">"Solaris_Failed_SSH_Login"</setEventAttribute>
+        <setEventAttribute attr="eventAction">1</setEventAttribute>
+        <setEventAttribute attr="eventSeverity">4</setEventAttribute>
+	<setEventAttribute attr="destIpPort">22</setEventAttribute>
+	<setEventAttribute attr="destIpAddr">$reptDevIpAddr</setEventAttribute>
+      </case>
+								      
+     <case>
+
+       <!-- message specific parsing
+             
+             SUCCESSFUL TELNET LOGIN
+
+      <37>May 14 23:56:16 login: [ID 254462 auth.notice] ROOT LOGIN /dev/pts/3 FROM 192.168.1.2      
+       -->
+
+        <collectAndSetAttrByRegex src="$_body">
+          <regex><![CDATA[login: <:patSolarisProcId>\s+ROOT\s+LOGIN\s+<:gPatStr>\s+FROM\s+<srcIpAddr:gPatIpV4Dot>]]></regex>
+        </collectAndSetAttrByRegex>
+
+        <setEventAttribute attr="eventType">"Solaris_Successful_Telnet_Login"</setEventAttribute>
+	<setEventAttribute attr="destIpPort">23</setEventAttribute>
+	<setEventAttribute attr="user">root</setEventAttribute>
+	<setEventAttribute attr="destIpAddr">$reptDevIpAddr</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+      </case>
+
+     <case>
+
+        <!-- message specific parsing
+             
+             FAILED TELNET LOGIN
+
+        <34>May 14 23:58:44 login: [ID 658745 auth.crit] REPEATED LOGIN FAILURES ON /dev/pts/3 FROM 192.168.1.2, root
+
+        <34>May 15 00:00:07 login: [ID 658745 auth.crit] REPEATED LOGIN FAILURES ON /dev/pts/3 FROM 192.168.1.2, automationUser
+           
+          -->
+        
+        <collectAndSetAttrByRegex src="$_body">
+          <regex><![CDATA[login: <:patSolarisProcId>\s+REPEATED\s+LOGIN\s+FAILURES\s+ON\s+<:gPatStr>\s+FROM\s+<srcIpAddr:gPatIpV4Dot>,\s+<user:gPatMesgBody>]]></regex>
+        </collectAndSetAttrByRegex>
+
+        <setEventAttribute attr="eventType">"Solaris_Failed_Telnet_Login"</setEventAttribute>
+        <setEventAttribute attr="eventAction">1</setEventAttribute>
+        <setEventAttribute attr="eventSeverity">3</setEventAttribute>
+	<setEventAttribute attr="destIpAddr">$reptDevIpAddr</setEventAttribute>
+
+	<choose>
+	  <when test="matches($user, '^root')">
+	    <setEventAttribute attr="eventSeverity">4</setEventAttribute>
+	  </when>
+	  <otherwise> 
+	    <setEventAttribute attr="eventSeverity">2</setEventAttribute>
+	  </otherwise>
+	</choose>
+
+      </case>
+								     
+      <case>
+        <!-- message specific parsing
+           
+             SUCCESSFUL SU
+
+             <38>May 14 22:41:09 su: [ID 366847 auth.info] 'su root' succeeded for automationUser on /dev/pts/2
+	     <37>May 14 23:19:45 su: [ID 366847 auth.notice] 'su partha' succeeded for automationUser on /dev/pts/2  
+        -->
+        
+        <collectAndSetAttrByRegex src="$_body">
+          <regex><![CDATA[su: <:patSolarisProcId>\s+'su\s+<targetUser:gPatStr>'\s+succeeded\s+for\s+<user:gPatStr>\s+on.*]]></regex>
+        </collectAndSetAttrByRegex>
+        <setEventAttribute attr="eventType">"Solaris_Successful_Switch_User"</setEventAttribute>
+	<setEventAttribute attr="destIpAddr">$reptDevIpAddr</setEventAttribute>
+
+	<choose>
+	  <when test="matches($targetUser, '^root')">
+	    <setEventAttribute attr="eventSeverity">5</setEventAttribute>
+	  </when>
+	  <otherwise> 
+	    <setEventAttribute attr="eventSeverity">4</setEventAttribute>
+	  </otherwise>
+	</choose>
+      </case>
+
+      <case>
+        <!-- message specific parsing
+             
+             FAILED SU
+
+            <34>May 14 22:41:25 su: [ID 810491 auth.crit] 'su root' failed for automationUser on /dev/pts/2 
+	    <34>May 14 23:25:23 su: [ID 810491 auth.crit] 'su automationUser' failed for partha on /dev/pts/2
+        -->
+        
+        <collectAndSetAttrByRegex src="$_body">
+          <regex><![CDATA[su: <:patSolarisProcId>\s+'su\s+<targetUser:gPatStr>'\s+failed\s+for\s+<user:gPatStr>\s+on.*]]></regex>
+        </collectAndSetAttrByRegex>
+        <setEventAttribute attr="eventType">"Solaris_Failed_Switch_User"</setEventAttribute>
+        <setEventAttribute attr="eventSeverity">6</setEventAttribute>
+	<setEventAttribute attr="destIpAddr">$reptDevIpAddr</setEventAttribute> 
+	<setEventAttribute attr="eventAction">1</setEventAttribute>
+
+	<choose>
+	  <when test="matches($targetUser, '^root')">
+	    <setEventAttribute attr="eventSeverity">7</setEventAttribute>
+	  </when>
+	  <otherwise> 
+	    <setEventAttribute attr="eventSeverity">6</setEventAttribute>
+	  </otherwise>
+	</choose>
+      </case>
+
+      <case>
+        <!-- message specific parsing
+             
+             SUCCESSFUL SUDO EXEC 
+             
+	     <149>May 14 23:17:11 sudo: [ID 702911 local2.notice]  automationUser : TTY=pts/2 ; PWD=/Desktop ; USER=root ; COMMAND=/usr/local/sbin/tcpdump
+        -->
+        
+        <collectAndSetAttrByRegex src="$_body">
+          <regex><![CDATA[sudo: <:patSolarisProcId>\s+<user:gPatStr>\s+:\s+TTY=<:gPatStr>\s+;\s+PWD=<:gPatStr>\s+;\s+USER=<targetUser:gPatStr>\s+;\s+COMMAND=<command:gPatMesgBody>]]></regex>
+        </collectAndSetAttrByRegex>
+        <setEventAttribute attr="eventType">"Linux_Successful_SUDO_Exec"</setEventAttribute>
+        <setEventAttribute attr="eventSeverity">4</setEventAttribute>
+	<setEventAttribute attr="destIpAddr">$reptDevIpAddr</setEventAttribute> 
+      </case>
+
+      <case>
+        <!-- message specific parsing
+             
+             FAILED SUDO EXEC 
+             
+             <145>May 14 22:47:35 sudo: [ID 702911 local2.alert]  automationUser : user NOT in sudoers ; TTY=pts/2 ; PWD=/Desktop ; USER=root ; COMMAND=/usr/local/sbin/tcpdump
+        -->
+        <collectAndSetAttrByRegex src="$_body">
+          <regex><![CDATA[sudo: <:patSolarisProcId>\s+<user:gPatStr>\s+:\s+user\s+NOT\s+in\s+sudoers\s+;\s+TTY=<:gPatStr>\s+;\s+PWD=<:gPatStr>\s+;\s+USER=<targetUser:gPatStr>\s+;\s+COMMAND=<command:gPatMesgBody>]]></regex>
+        </collectAndSetAttrByRegex>
+        <setEventAttribute attr="eventType">"Linux_Failed_SUDO_Exec"</setEventAttribute>
+        <setEventAttribute attr="eventSeverity">6</setEventAttribute>
+	<setEventAttribute attr="destIpAddr">$reptDevIpAddr</setEventAttribute> 
+	<setEventAttribute attr="eventAction">1</setEventAttribute>
+      </case>
+
+      <case>
+        <!-- message specific parsing
+             
+             FAILED SUDO EXEC (TYPE 2) 
+             
+              <145>May 14 23:24:13 sudo: [ID 702911 local2.alert]   partha : 3 incorrect password attempts ; TTY=pts/2 ; PWD=/ ; USER=root ; COMMAND=/usr/bin/vi /etc/passwd
+        -->
+        
+        <collectAndSetAttrByRegex src="$_body">
+          <regex><![CDATA[sudo: <:patSolarisProcId>\s+<user:gPatStr>\s+:\s+\d+\s+incorrect\s+password\s+attempts\s+;\s+TTY=<:gPatStr>\s+;\s+PWD=<:gPatStr>\s+;\s+USER=<targetUser:gPatStr>\s+;\s+COMMAND=<command:gPatMesgBody>]]></regex>
+        </collectAndSetAttrByRegex>
+        <setEventAttribute attr="eventType">"Linux_Failed_SUDO_Exec"</setEventAttribute>
+        <setEventAttribute attr="eventSeverity">8</setEventAttribute>
+	<setEventAttribute attr="destIpAddr">$reptDevIpAddr</setEventAttribute> 
+	<setEventAttribute attr="eventAction">1</setEventAttribute>
+      </case>
+
+       <default>
+        <setEventAttribute attr="eventType">"Solaris_Generic_Syslog"</setEventAttribute>
+        <setEventAttribute attr="eventSeverity">2</setEventAttribute>          
+      </default>
+
+    </switch>
+  </parsingInstructions>
+</eventParser>

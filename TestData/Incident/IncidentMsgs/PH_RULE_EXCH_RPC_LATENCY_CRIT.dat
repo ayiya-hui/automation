@@ -1,0 +1,4 @@
+[eventMsg]
+[PH_DEV_MON_APP_MSEXCH_MET]:[eventSeverity]=PHL_INFO,[fileName]=phPerfJob.cpp,[lineNumber]=3525,[hostName]=automator7Dot4Dot0Dot1,[hostIpAddr]=7.4.0.1,[appGroupName]=Microsoft Exchange,[exchVMLargestBlockSize]=3407966208,[exchVMTotalLargeFreeBlockBytes]=3267088384,[exchVMTotalFreeBlocks]=196,[exchRPCReq]=0,[exchRPCAvgLatency]=65,[exchRPCOpsPerSec]=90,[exchRPCReqPeak]=7,[exchUserCount]=0,[exchActiveUserCount]=0,[exchPeakUserCount]=0,[exchActiveConnCount]=3,[exchMaxConn]=23,[phLogDetail]=
+
+[clearEventMsg]

@@ -1,0 +1,40 @@
+[reptDevIpAddr(key)]
+192.168.1.151
+[eventMsg]
+<131>Jun 26 14:18:59 f5virtual.tdic.ae ASM:CEF:0|F5|ASM|10.2.1|200100043|bad HTTP/1.1 request, Potentially worm attack|5|dvchost=f5virtual.tdic.ae dvc=192.168.1.151 cs1=master-key_default cs1Label=policy_name cs2=master-key cs2Label=web_application_name deviceCustomDate1=Jul 13 2011 16:24:25 deviceCustomDate1Label=policy_apply_date externalId=3601068286554428909 act=alerted cn1=400 cn1Label=response_code src=10.10.77.54 spt=49782 dst=10.10.175.82 dpt=443 requestMethod=GET app=HTTPS request=/ cs5=N/A cs5Label=x_forwarded_for_header_value rt=Jun 26 2012 14:18:58 deviceExternalId=0 cs4=Other Application Attacks cs4Label=attack_type cs6=N/A cs6Label=geo_location cs3Label=full_request cs3=GET / HTTP/1.1\r\n\r\n
+[params]
+rawEventMsg=any
+deviceTime=any
+appName=HTTPS
+eventType=F5-ASM-200100043
+phCustId=$sender
+destIpAddr=10.10.175.82
+srcIpAddr=10.10.77.54
+reptModel=Big-IPOS
+eventId=any
+policyName=master-key_default
+eventParsedOk=1
+eventSeverity=5
+testEvent=Real Event(0)
+fwAction=alerted
+eventName=Bad HTTP/1.1 request - potentially worm attack
+f5XForHeader=N/A
+phEventCategory=0 (External)
+webAppName=master-key
+eventDesc=bad HTTP/1.1 request, Potentially worm attack
+srcIpPort=49782
+infoURL=/
+f5DevExtId=0
+httpFullRequest=GET / HTTP/1.1\r\n\r\n
+eventSeverityCat=MEDIUM
+collectorId=any
+httpMethod=GET
+destIpPort=443
+httpStatusCode=400 (Bad Request - The request could not be understood by the server due to malformed syntax)
+reptDevName=f5virtual.tdic.ae
+count=1
+eventTypeGrp=Other Application Attacks
+phRecvTime=any
+reptDevIpAddr=192.168.1.151
+reptVendor=F5
+f5ExtId=3601068286554428909

@@ -1,0 +1,5 @@
+[eventMsg]
+<174>Apr  8 08:53:01 PH-QA-AUTOTEST phPerfMonitor[1508]: [PH_DEV_MON_EUM_FAIL]:[eventSeverity]=PHL_INFO,[procName]=phPerfMonitor,[fileName]=SrvcMonJobExec.cpp,[lineNumber]=663,[hostName]=automator10Dot4Dot0Dot1,[hostIpAddr]=10.4.0.1,[appGroupName]=Sendmail Server,[appPort]=25,[appTransportProto]=SMTP,[endUserMonitorName]=mySMTP,[endUserMonitorStep]=,[appResponseTimeMSec]=0,[phLogDetail]=
+
+[clearEventMsg]
+<174>Apr  8 09:13:01 PH-QA-AUTOTEST phPerfMonitor[1508]: [PH_DEV_MON_EUM_SUCCESS]:[eventSeverity]=PHL_INFO,[procName]=phPerfMonitor,[fileName]=SrvcMonJobExec.cpp,[lineNumber]=663,[hostName]=automator10Dot4Dot0Dot1,[hostIpAddr]=10.4.0.1,[appGroupName]=Sendmail Server,[appPort]=25,[appTransportProto]=SMTP,[endUserMonitorName]=mySMTP,[endUserMonitorStep]=,[appResponseTimeMSec]=0,[phLogDetail]=

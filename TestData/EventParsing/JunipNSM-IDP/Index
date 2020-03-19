@@ -1,0 +1,10 @@
+eventType,name,module,reptDevIpAddr,key,method
+Juniper_IDP-distributed port scan in progress,JunipNSM-IDP_1,JunipNSM-IDP,10.146.68.73,,syslog
+Juniper_IDP-backdoor detected,JunipNSM-IDP_2,JunipNSM-IDP,10.146.68.73,,syslog
+Juniper_IDP-udp port scan in progress,JunipNSM-IDP_3,JunipNSM-IDP,10.146.68.73,,syslog
+Juniper_IDP-icmp sweep in progress,JunipNSM-IDP_4,JunipNSM-IDP,10.146.68.73,,syslog
+Juniper_IDP-network scan in progress,JunipNSM-IDP_5,JunipNSM-IDP,9.9.9.9,,syslog
+Juniper_IDP-arp hw changed for ip,JunipNSM-IDP_6,JunipNSM-IDP,10.146.68.73,,syslog
+Juniper_IDP-icmp sweep,JunipNSM-IDP_7,JunipNSM-IDP,10.146.68.73,,syslog
+Juniper_IDP-network scan,JunipNSM-IDP_8,JunipNSM-IDP,10.146.251.78,,syslog
+Juniper_IDP-arp sender hw mismatch,JunipNSM-IDP_9,JunipNSM-IDP,10.146.68.73,,syslog

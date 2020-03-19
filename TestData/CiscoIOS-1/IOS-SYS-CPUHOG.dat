@@ -1,0 +1,24 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<190>43: Dec 14 23:35:01.463: %SYS-3-CPUHOG: Task ran for [dec] msec ([dec]/[dec]), process = [chars], PC =[hex].
+[params]
+deviceTime=any
+eventType=IOS-SYS-CPUHOG
+phCustId=$sender
+destIpAddr=$localhost
+reptModel=IOS
+eventId=any
+eventParsedOk=1
+eventSeverity=7
+hostIpAddr=$localhost
+eventName=CPU usage high
+phEventCategory=0
+eventSeverityCat=MEDIUM
+collectorId=any
+relayDevIpAddr=$localhost
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=Success(0)
+reptVendor=Cisco

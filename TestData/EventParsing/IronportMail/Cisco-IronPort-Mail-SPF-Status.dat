@@ -1,0 +1,24 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<22>Feb 15 15:57:26 IronPort-Mail: Info: SPF Verdict Cache cache status: hits = 393752, misses = 286301, expires = 187316, adds = 283462, seconds saved = 193363.79, total seconds = 331785.82
+[params]
+customer=Super
+eventId=any
+parserName=IronportMailParser
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+count=1
+eventSeverity=1
+eventType=Cisco-IronPort-Mail-SPF-Status
+reptDevIpAddr=$localhost
+collectorId=any
+extEventRecvProto=Syslog
+eventName=Cisco-IronPort-Mail-SPF-Status
+reptVendor=Cisco
+relayDevIpAddr=$localhost
+rawEventMsg=any
+phRecvTime=any
+reptModel=IronPort AsyncOS Mail

@@ -1,0 +1,85 @@
+<eventParser name="ZenithARCAParser">
+  <deviceType>
+    <Vendor>Microsoft</Vendor>
+    <Model>Windows</Model>
+    <Version>ANY</Version>
+  </deviceType>
+  
+  <appType>
+    <Vendor>Zenith Infotech</Vendor>
+    <Model>Zenith ARCA</Model>
+    <Version>ANY</Version>
+    <Name>Zenith ARCA</Name>
+  </appType>
+  
+  <!-- examples  
+
+ <190>Dec 27 14:15:15 ARCA-REMOTE NT: <ZenithArcA;E602;> Error in communicating with Replica device gateway service from Backup device for server:inet5
+
+
+  -->
+ <!-- pattern definitions --> 
+  <patternDefinitions>
+    <pattern name="patZenith"><![CDATA[\<ZenithArcA;[A-Z]\d+;\>]]></pattern>
+    <pattern name="patStrEndSemiColon"><![CDATA[[^;]*]]></pattern>
+  </patternDefinitions>
+  
+  <eventFormatRecognizer><![CDATA[<:patZenith>]]></eventFormatRecognizer>  
+  
+  <testEvents>
+      <testEvent><![CDATA[<190>Dec 27 14:15:15 ARCA-REMOTE NT: <ZenithArcA;E602;> Error in communicating with Replica device gateway service from Backup device for server:inet]]></testEvent>
+  </testEvents>
+
+  <parsingInstructions>
+
+    <!-- parsing common fields --> 
+    <collectFieldsByRegex src="$_rawmsg">
+	  <regex><![CDATA[<:gPatSyslogPRI><_mon:gPatMon>\s+<_day:gPatDay>\s+<_time:gPatTime>\s+<_host:gPatStr>\s+<:gPatStr>:\s+<_module:patZenith>\s+<_body:gPatMesgBody>]]></regex>
+    </collectFieldsByRegex>
+    <setEventAttribute attr="deviceTime">toDateTime($_mon, $_day, $_time)</setEventAttribute>
+     
+    <collectFieldsByRegex src="$_module">
+	  <regex><![CDATA[\<ZenithArcA;<_num:patStrEndSemiColon>;\>]]></regex>
+    </collectFieldsByRegex>
+    <setEventAttribute attr="eventType">combineMsgId("ZenithArca-", $_num)</setEventAttribute>
+     <setEventAttribute attr="eventAction">0</setEventAttribute>    
+    <setEventAttribute attr="eventSeverity">3</setEventAttribute>
+    
+    <choose>
+	<when test='matches($_num, "^E")'>
+	    <setEventAttribute attr="eventAction">1</setEventAttribute>
+	    <setEventAttribute attr="eventSeverity">5</setEventAttribute>
+	</when>
+    </choose>
+    
+    <choose>
+      <when test='$_num IN  "E301, I302"'>
+	<collectFieldsByRegex src="$_body">
+	     <regex><![CDATA[Backup chain continuity (?:successful|failed) Server name:\s+<serverName:gPatStr>\s+<msg:gPatMesgBody>]]></regex>
+	</collectFieldsByRegex>
+      </when>
+      <when test='$_num =  "E502"'>
+	<collectFieldsByRegex src="$_body">
+	     <regex><![CDATA[Daily Collapsed image not generated for server:\s+<serverName:gPatStr>\s+<msg:gPatMesgBody>]]></regex>
+	</collectFieldsByRegex>
+      </when>
+      <otherwise>
+	<setEventAttribute attr="msg">$_body</setEventAttribute>
+      </otherwise>
+    </choose>
+    
+   <when test='exist _host'>
+      <switch>
+	<case>
+	      <collectAndSetAttrByRegex src="$_host">
+		  <regex><![CDATA[<destIpAddr:gPatIpV4Dot>]]></regex>
+	      </collectAndSetAttrByRegex>
+	</case>
+	<default>
+		<setEventAttribute attr="destName">$_host</setEventAttribute>
+	</default>
+     </switch>
+    </when>
+
+  </parsingInstructions>
+</eventParser>

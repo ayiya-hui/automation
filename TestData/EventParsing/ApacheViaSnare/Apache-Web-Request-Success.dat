@@ -1,0 +1,93 @@
+[reptDevIpAddr(key)]
+125.15.125.15
+[eventMsg]
+<142>Sep 17 13:27:37 SJ-Dev-S-RH-VMW-01.prospecthills.net ApacheLog   192.168.22.33 - - [17/Sep/2009:13:27:37 -0700] "GET /icons/apache_pb2.gif HTTP/1.1" 200 2414 "http://192.168.0.30/" "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 2.0.50727)".
+[params]
+rawEventMsg=any
+user=-
+deviceTime=any
+eventType=Apache-Web-Request-Success
+phCustId=$sender
+destIpAddr=125.15.125.15
+httpReferrer=http://192.168.0.30/
+srcIpAddr=192.168.22.33
+reptModel=Apache Tomcat
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Web request successful
+phEventCategory=0 (External)
+recvBytes=2414
+eventSeverityCat=LOW
+httpMethod=GET
+httpStatusCode=200 (The request has succeeded)
+httpVersion=HTTP/1.1
+count=1
+uriStem=/icons/apache_pb2.gif
+phRecvTime=any
+reptDevIpAddr=125.15.125.15
+eventAction=0 (Permit)
+reptVendor=Apache
+httpUserAgent=Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 2.0.50727)
+[reptDevIpAddr(key)]
+137.146.28.68
+[eventMsg]
+<134>Mar  4 17:08:04 137.146.28.68 httpd: [ID 702911 local0.info] 192.168.20.38 - - [04/Mar/2010:16:35:21 -0800] "GET /bugzilla-3.0.4/ HTTP/1.1" 200 10791 "-" "Mozilla/5.0 (Windows; U; Windows NT 6.0; en-US; rv:1.9.1.8) Gecko/20100202 Firefox/3.5.8 GTB6"
+[params]
+rawEventMsg=any
+deviceTime=any
+eventType=Apache-Web-Request-Success
+phCustId=$sender
+destIpAddr=$reporter
+httpReferrer=-
+srcIpAddr=192.168.20.38
+reptModel=Apache Tomcat
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Web request successful
+phEventCategory=0 (External)
+recvBytes=10791
+eventSeverityCat=LOW
+httpMethod=GET
+user=-
+httpStatusCode=200 (The request has succeeded)
+httpVersion=HTTP/1.1
+count=1
+uriStem=/bugzilla-3.0.4/
+phRecvTime=any
+reptDevIpAddr=$reporter
+eventAction=0 (Permit)
+reptVendor=Apache
+httpUserAgent=Mozilla/5.0 (Windows; U; Windows NT 6.0; en-US; rv:1.9.1.8) Gecko/20100202 Firefox/3.5.8 GTB6
+[reptDevIpAddr(key)]
+51.51.51.51
+[eventMsg]
+<134>Mar  4 17:08:04 $reporter httpd: [ID 702911 local0.info] 71.167.48.78 137.146.28.68 - - [04/Mar/2010:17:08:04 -0500] "GET /images/button_fontsize_plus.gif HTTP/1.1" 200 80 138
+[params]
+rawEventMsg=any
+eventType=Apache-Web-Request-Success
+phCustId=$sender
+destIpAddr=$reporter
+httpReferrer=80
+srcIpAddr=137.146.28.68
+reptModel=Apache Tomcat
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventAction=0 (Permit)
+eventName=Web request successful
+phEventCategory=0 (External)
+recvBytes=80
+eventSeverityCat=LOW
+user=-
+httpMethod=GET
+httpStatusCode=200 (The request has succeeded)
+httpVersion=HTTP/1.1
+count=1
+phRecvTime=any
+reptDevIpAddr=$reporter
+eventAction=0 (Permit)
+reptVendor=Apache
+httpUserAgent=138
+uriStem=/images/button_fontsize_plus.gif

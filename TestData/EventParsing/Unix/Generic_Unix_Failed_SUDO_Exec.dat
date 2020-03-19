@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+1.2.3.4
+[eventMsg]
+<33>Oct 21 17:22:11 1.2.3.4 sudo:  wenyong : 1 incorrect password attempt ; TTY=pts/4 ; PWD=/ ; USER=root ; COMMAND=tcpdump
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=4
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=1.2.3.4
+eventAction=1 (Deny)
+eventName=Failed Privileged command execution
+targetUser=root
+reptVendor=Generic
+command=tcpdump
+user=wenyong
+phEventCategory=0 (External)
+eventType=Generic_Unix_Failed_SUDO_Exec
+reptDevIpAddr=1.2.3.4
+reptModel=Unix

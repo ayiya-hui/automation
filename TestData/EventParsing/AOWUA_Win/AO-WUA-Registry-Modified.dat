@@ -1,0 +1,32 @@
+[reptDevIpAddr(key)]
+192.168.1.30
+[eventMsg]
+2015-02-10T08:05:07Z WIN-2008-LAW-agent 192.168.1.30 AccelOps-WUA-Registry [monitorStatus]="Success" [regKeyPath]="HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Component Based Servicing" [regValueName]="SessionIdLow" [regValueType]="4" [osObjAction]="Modified" [oldRegValue]="tzQTxA==" [newRegValue]="9p21Cw=="
+[params]
+deviceTime=any
+parserName=AOWUA_WinParser
+osObjAction=Modified
+eventType=AO-WUA-Registry-Modified
+regKeyPath=HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing
+newRegValue=9p21Cw==
+reptModel=Windows
+eventId=any
+regValueName=SessionIdLow
+eventSeverity=1
+eventName=A registry entry was modified
+extEventRecvProto=Windows Agent
+phEventCategory=0 (External)
+status=Success
+count=1
+oldRegValue=tzQTxA==
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=192.168.1.30
+rawEventMsg=any
+eventParsedOk=1
+reptDevName=WIN-2008-LAW-agent
+customer=Super
+phRecvTime=any
+reptDevIpAddr=192.168.1.30
+eventAction=0 (Permit)
+reptVendor=Microsoft

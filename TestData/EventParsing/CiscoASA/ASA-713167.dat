@@ -1,0 +1,24 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<163>Dec 13 2010 09:24:42: %ASA-3-713167: Group = ciscoclient, Username = knorr, IP = 71.105.24.61, Remote peer has failed user authentication -  check configured username and password
+[params]
+rawEventMsg=any
+user=knorr
+userGrp=ciscoclient
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=5
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=MEDIUM
+srcIpAddr=71.105.24.61
+eventAction=0 (Permit)
+eventName=Remote Peer IPSec Xauth authentication failed
+reptVendor=Cisco
+eventType=ASA-713167
+phEventCategory=0 (External)
+reptDevIpAddr=$reporter
+reptModel=ASA

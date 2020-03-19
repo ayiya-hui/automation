@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+70.70.70.70
+[eventMsg]
+May 14 22:06:44 70.70.70.70 ikeyserver[3575]: {Info}, {Replication}, {I-004004}, {A connection attempt to a Replication destination server was successful.}, {0x3A0D01B4478CF74C81CE7806671F62DA}, {Source Location:10.1.2.3}, {Server Location:10.9.8.7:20014}, {Characteristics:}
+[params]
+parserName=VascoParser
+eventType=Vasco-DigiPass-KeyServer-ReplConnect-Success
+destIpAddr=10.9.8.7
+srcIpAddr=10.1.2.3
+reptModel=DigiPass
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=A connection attempt to a Replication destination server was successful
+appTransportProto=Syslog
+phEventCategory=0 (External)
+msg=A connection attempt to a Replication destination server was successful.
+eventRuleTrigger=1
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=70.70.70.70
+destIpPort=20014
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=70.70.70.70
+reptVendor=Vasco

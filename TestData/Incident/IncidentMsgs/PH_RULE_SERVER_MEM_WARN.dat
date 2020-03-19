@@ -1,0 +1,4 @@
+[eventMsg]
+[PH_DEV_MON_SYS_MEM_UTIL]:[eventSeverity]=PHL_INFO,[fileName]=phPerfJob.cpp,[lineNumber]=4153,[memName]=Physical Memory,[hostName]=automator8Dot22Dot0Dot1,[hostIpAddr]=8.22.0.1,[memUtil]=78.988740,[pollIntv]=180,[phLogDetail]=
+
+[clearEventMsg]

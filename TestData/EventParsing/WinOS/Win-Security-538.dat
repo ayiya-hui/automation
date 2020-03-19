@@ -1,0 +1,52 @@
+[reptDevIpAddr(key)]
+20.20.20.20
+[eventMsg]
+<13>Jan 14 19:14:15 20.20.20.20 MSWinEventLog	1	Security	9363	Wed Jan 14 19:14:10 2009	538	Security	SYSTEM	User	Success Audit	ADS-PRI	Logon/Logoff		User Logoff:     User Name: ADS-PRI$     Domain: PROSPECTHILLS     Logon ID: (0x0,0x38CAB9)     Logon Type: 3    	8792  Automation
+[params]
+rawEventMsg=any
+eventAction=0 (Permit)
+count=1
+eventId=any
+domain=PROSPECTHILLS
+deviceTime=any
+eventParsedOk=1
+winLogonType=3(Network - logon)
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=20.20.20.20
+winLogonId=(0x0,0x38CAB9)
+eventName=Windows logoff
+reptVendor=Microsoft
+eventType=Win-Security-538
+user=ADS-PRI$
+phEventCategory=0 (External)
+reptDevIpAddr=20.20.20.20
+reptModel=Windows
+[reptDevIpAddr(key)]
+52.52.52.52
+[eventMsg]
+<13>Mar 29 14:17:11 52.52.52.52 MSWinEventLog	1	Security	787711	Mon Mar 29 14:17:10 2010	538	Security	phoenix_agent	User	Success Audit	QA-V-WIN03-ADS  Logon/Logoff           User Logoff:     User Name: phoenix_agent     Domain: PROSPECT-HILLS     Logon ID: (0x0,0x6E07BD2)     Logon Type: 3     787408  Automation
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+domain=PROSPECT-HILLS
+deviceTime=any
+eventParsedOk=1
+winLogonType=3(Network - logon)
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=any
+eventAction=0 (Permit)
+eventName=Windows logoff
+reptVendor=Microsoft
+eventType=Win-Security-538
+user=phoenix_agent
+phEventCategory=0 (External)
+reptDevIpAddr=52.52.52.52
+winLogonId=(0x0,0x6E07BD2)
+reptModel=Windows

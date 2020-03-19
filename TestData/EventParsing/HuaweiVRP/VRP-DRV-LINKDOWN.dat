@@ -1,0 +1,24 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<190>Apr 13 2008 19:27:43 SH-Quidway-SW1 %%01DRV/6/LINKDOWN(l): Port Ethernet0/0/3 is down because the link layer is down.
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+count=1
+phCustId=$sender
+deviceTime=any
+eventAction=1 (Deny)
+eventId=any
+eventName=Driver link down
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=3
+eventSeverityCat=LOW
+eventType=VRP-DRV-LINKDOWN
+hostName=SH-Quidway-SW1
+reptDevName=SH-Quidway-SW1
+reptDevIpAddr=$reporter
+reptModel=VRP
+reptVendor=Huawei
+srcIntfName=Ethernet0/0/3

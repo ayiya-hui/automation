@@ -1,0 +1,30 @@
+[reptDevIpAddr(key)]
+192.168.19.18
+[eventMsg]
+<188>Feb  2 16:32:26 192.168.19.18 1048484: Feb  3 00:32:25.712: %SEC_LOGIN-5-LOGIN_SUCCESS: Login Success [user: phoenix_agent] [Source: 192.168.29.18] [localport: 23] at 00:32:25 UTC Wed Feb 3 2010
+[params]
+deviceTime=any
+eventType=IOS-SEC_LOGIN-LOGIN_SUCCESS
+phCustId=$sender
+hostName=HOST-192.168.19.18
+destIpAddr=192.168.19.18
+srcIpAddr=192.168.29.18
+reptModel=IOS
+eventId=any
+eventParsedOk=1
+eventSeverity=2
+hostIpAddr=192.168.19.18
+eventName=Successful admin login
+phEventCategory=0
+destName=HOST-192.168.19.18
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+user=phoenix_agent
+destIpPort=23
+reptDevName=HOST-192.168.19.18
+count=1
+phRecvTime=any
+reptDevIpAddr=192.168.19.18
+eventAction=Success(0)
+reptVendor=Cisco

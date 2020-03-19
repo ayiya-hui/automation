@@ -1,0 +1,33 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<13>Mar  6 20:56:03 ISA.test.local ISAFWSLog	0	ISA	2011-03-09	00:07:42	UDP	192.168.69.9:53551	8.8.8.8:53	192.168.69.9	Local Host	External	Terminate	0x80074e20	[System] Allow DNS from ISA Server to selected servers	DNS	119	119	194	194	61000	61000	-	-	607	10126
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+appTransportProto=DNS
+count=1
+phCustId=$sender
+destIpAddr=8.8.8.8
+destIntfName=External
+destIpPort=53 (DOMAIN)
+deviceTime=any
+eventId=any
+eventName=The Firewall service terminated a session.
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=1
+eventSeverityCat=LOW
+eventType=ISA-FW-Terminate-Session
+fwRule=[System] Allow DNS from ISA Server to selected servers
+ipProto=17 (UDP)
+paFwAction=Terminate
+recvBytes=194
+reptDevName=ISA
+reptDevIpAddr=$reporter
+reptModel=ISA Server
+reptVendor=Microsoft
+sentBytes=119
+srcIpAddr=192.168.69.9
+srcIntfName=Local Host
+srcIpPort=53551

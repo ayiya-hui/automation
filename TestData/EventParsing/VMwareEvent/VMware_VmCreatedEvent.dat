@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+10.1.2.70
+[eventMsg]
+<134>Jan 12 14:54:57 10.1.2.70 java: [VMware_VmCreatedEvent], [eventTime]=2010-01-12 14:51:51:912, [rptIp]=10.1.2.70, [user]=root, [vmwEventId]=197, [vmwEventCat]=info, [vmHost]=QA-SH-ESX70.accelops.net.cn, [cluster]=QA-SH-ESX70.accelops.net.cn, [datacenter]=ha-datacenter, [vmwEventMsg]=Created virtual machine  on QA-SH-ESX70.accelops.net.cn in ha-datacenter
+[params]
+rawEventMsg=any
+count=1
+datacenter=ha-datacenter
+deviceTime=any
+eventParsedOk=1
+vmwEventCat=info
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+vmwEventMsg=Created virtual machine on QA-SH-ESX70.accelops.net.cn in ha-datacenter
+eventName=Virtual machine was successfully created
+cluster=QA-SH-ESX70.accelops.net.cn
+reptDevIpAddr=10.1.2.70
+reptVendor=VMware
+eventType=VMware_VmCreatedEvent
+user=root
+phEventCategory=0 (External)
+eventId=any
+reptDevName=QA-SH-ESX70.accelops.net.cn
+reptModel=Generic

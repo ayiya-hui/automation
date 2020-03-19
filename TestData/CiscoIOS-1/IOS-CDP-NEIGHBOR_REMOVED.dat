@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<190>: 2012 May 20 02:47:32 GMT: %CDP-6-NEIGHBOR_REMOVED: CDP Neighbor cdc-3750e-esx1-tor on port Ethernet7/2 has been removed
+[params]
+deviceTime=any
+isHostIntfCritical=No
+eventType=IOS-CDP-NEIGHBOR_REMOVED
+phCustId=$sender
+hostName=cdc-3750e-esx1-tor
+intfName=Ethernet7/2
+reptModel=IOS
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+hostIpAddr=$localhost
+eventName=CDP Neighbor has been removed
+phEventCategory=0
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=Success(0)
+reptVendor=Cisco

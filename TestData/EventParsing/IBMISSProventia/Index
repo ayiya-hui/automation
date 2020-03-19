@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+IBM-ISS-ICMP_Unreachable_Storm,IBMISSProventia_1,IBMISSProventia,172.16.64.60,,syslog

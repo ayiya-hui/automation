@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<30>2016:03:11-08:51:58 ActiveUTM-1 confd[3738]: I main::top-level:677() => id="310a" severity="info" sys="System" sub="confd" name="object created" class="packetfilter" type="packetfilter" ref="REF_PacPacAnyFromLansu" objname="Any from LAN-Summit to Internal (Network)" user="ha_sync" srcip="198.19.250.2" sid="ZtdLHNJJZsSKddHViONX" facility="system" client="confd-sync" pid="11997"
+[params]
+parserName=SophosUTMParser
+eventType=Sophos-UTM-object-created
+procName=confd
+srcIpAddr=198.19.250.2
+reptModel=UTM
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Sophos UTM object created
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+eventRuleTrigger=1
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+user=ha_sync
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Sophos

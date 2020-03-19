@@ -1,0 +1,21 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<189>18173 01/07/1999 20:25:24.020 SEV=4 TELNET/43 RPT=7  Telnet session established for peer 192.168.1.4, process TN01--automator
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+eventAction=0 (Permit)
+eventName=Cisco-VPN3K-TELNET/43
+reptVendor=Cisco
+eventType=Cisco-VPN3K-TELNET/43
+phEventCategory=0 (External)
+reptDevIpAddr=$localhost
+reptModel=VPN 3K

@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>Dec 05 2008 13:02:16: %PIX-2-106006: Deny inbound UDP from 20.20.20.20/9996 to 10.10.10.10/8080 on interface outside. --automator
+[params]
+rawEventMsg=any
+destIpAddr=10.10.10.10
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=any
+eventSeverity=8
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=MEDIUM
+destIpAddr=10.10.10.10
+eventAction=1 (Deny)
+eventName=Denied IP traffic by policy
+ipProto=17 (UDP)
+reptVendor=Cisco
+eventType=PIX-106006
+srcIpAddr=20.20.20.20
+phEventCategory=0 (External)
+destIpPort=8080
+reptDevIpAddr=$localhost
+srcIpPort=9996
+reptModel=PIX

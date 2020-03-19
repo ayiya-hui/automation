@@ -1,0 +1,2 @@
+[eventMsg]
+[PH_DEV_MON_EQL_CONN_MET]:[eventSeverity]=PHL_INFO,[hostName]=automator14Dot0Dot1Dot1,[hostIpAddr]=14.0.1.1,[sanConnCount]=180,[diskReadReqPersec]=15.67,[diskWriteReqPerSec]=24.33,[devDiskRdLatency]=53,[devDiskWrLatency]=57,[diskReadKBytesPerSec]=3344,[diskWriteKBytesPerSec]=2345

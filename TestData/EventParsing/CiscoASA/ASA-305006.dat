@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<163>Aug 09 2010 01:40:15: %ASA-3-305006: portmap translation creation failed for udp src inside:172.22.2.35/3866 dst inside:172.22.13.147/8612
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+count=1
+phCustId=$sender
+destIpAddr=172.22.13.147
+destIntfName=inside
+destIpPort=8612
+deviceTime=any
+eventAction=1 (Deny)
+eventId=any
+eventName=Failed translation creation
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=5
+eventSeverityCat=MEDIUM
+eventType=ASA-305006
+ipProto=17 (UDP)
+reptDevIpAddr=$reporter
+reptModel=ASA
+reptVendor=Cisco
+srcIpAddr=172.22.2.35
+srcIntfName=inside
+srcIpPort=3866

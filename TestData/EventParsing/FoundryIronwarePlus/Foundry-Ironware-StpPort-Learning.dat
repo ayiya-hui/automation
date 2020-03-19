@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+58.58.58.67
+[eventMsg]
+<14>Jun  4 01:49:09 58.58.58.67 STP: VLAN 3104 Port 4/22 STP State -> LEARNING (FwdDlyExpiry)
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+eventSeverityCat=LOW
+eventParsedOk=1
+reptVendor=Foundry
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+phEventCategory=0 (External)
+destIpAddr=$reporter
+eventAction=0 (Permit)
+eventName=Foundry STP port entered LEARNING state
+appTransportProto=STP
+eventType=Foundry-Ironware-StpPort-Learning
+hostVLAN=3104
+devPort=4/22
+reptDevIpAddr=58.58.58.67
+reptModel=Ironware
+

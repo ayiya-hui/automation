@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+10.1.2.3
+[eventMsg]
+455182801 Fri Nov 06 06:47:28 EST 2015 LastF Task Started servername 10.1.2.3 The following task was started:    230699941: Task Name: Take Snapshot Device: UK44157296001 (10.3.2.1) Added by: LastF (First Last) Start Date: 2015-11-06 06:47:27.0 Repeat type: Non-recurring Status: Running Comments: System Task to regularly poll for device configuration changes.  126851 10.1.2.3 $OrignatorEmail$ LastF NCM - Take Snapshot - Europe (NCMSat1GW1EU) 2011-12-21 01:30:00.0 UK44157296001 (10.3.2.1) Running System Task to regularly poll for device configuration changes
+[params]
+customer=Super
+eventId=any
+eventSeverityCat=LOW
+eventParsedOk=1
+phEventCategory=0 (External)
+parserName=CiscoNCMParser
+count=1
+eventSeverity=1
+eventType=Cisco-NCM-Task-Started
+reptDevIpAddr=10.1.2.3
+collectorId=any
+eventName=Cisco Network Compliance Manager Task Started
+reptVendor=Cisco
+relayDevIpAddr=10.1.2.3
+user=LastF
+phRecvTime=any
+eventRuleTrigger=1
+appTransportProto=Syslog
+reptDevName=servername
+reptModel=CiscoWorks NCM

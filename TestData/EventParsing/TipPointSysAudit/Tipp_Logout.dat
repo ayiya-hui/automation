@@ -1,0 +1,21 @@
+[reptDevIpAddr(key)]
+$localhost (srcIpAddr:192.168.1.20)
+[eventMsg]
+<6>OCT 28 13:10:46 2009  PH-QA-TIP1 [audit] user=[phoenix_agent] src=192.168.1.20 iface=1 access=8 Logged out of system
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+reptDevIpAddr=$localhost
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+srcIpAddr=192.168.1.20
+eventName=Tipping Point IPS Administrative user logged out
+reptVendor=3Com
+eventType=Tipp_Logout
+user=phoenix_agent
+phEventCategory=0 (External)
+reptModel=TippingPoint UnityOne IPS

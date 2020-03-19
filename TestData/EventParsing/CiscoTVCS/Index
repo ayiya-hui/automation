@@ -1,0 +1,5 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+Cisco-TVCS-Generic,CiscoTVCS_1,CiscoTVCS,$localhost,,syslog
+Cisco-TVCS-Message-Received,CiscoTVCS_2,CiscoTVCS,$localhost,,syslog
+Cisco-TVCS-Generic,CiscoTVCS_3,CiscoTVCS,$localhost,,syslog

@@ -1,0 +1,11 @@
+eventType,name,module,reptDevIpAddr,key,method
+Aruba-1106-wlsxInterferingApDetected,ArubaWLAN_1,ArubaWLAN,$localhost,,snmptrap@1@public
+Aruba-1003-wlsxNodeRateAnomaly,ArubaWLAN_2,ArubaWLAN,$localhost,,snmptrap@1@public
+Aruba-1014-wlsxNUserEntryCreated,ArubaWLAN_3,ArubaWLAN,$localhost,,snmptrap@1@public
+Aruba-1121-wlsxUserEntryChanged,ArubaWLAN_4,ArubaWLAN,$localhost,,snmptrap@1@public
+Aruba-1004-wlsxNormalTemperature,ArubaWLAN_5,ArubaWLAN,$localhost,,snmptrap@1@public
+Aruba-1015-wlsxNUserEntryDeleted,ArubaWLAN_6,ArubaWLAN,$localhost,,snmptrap@1@public
+Aruba-1053-wlsxUnsecureAPDetected,ArubaWLAN_7,ArubaWLAN,$localhost,,snmptrap@1@public
+Aruba-1054-wlsxUnsecureAPResolved,ArubaWLAN_8,ArubaWLAN,$localhost,,snmptrap@1@public
+Aruba-1103-wlsxStaAssociatedToUnsecureAP,ArubaWLAN_9,ArubaWLAN,$localhost,,snmptrap@1@public
+Aruba-1104-wlsxStaUnAssociatedFromUnsecureAP,ArubaWLAN_10,ArubaWLAN,$localhost,,snmptrap@1@public

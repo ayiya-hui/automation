@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+enterprises.3401 6 5 enterprises.3401.12.2.1.1.4.1.1.9.312 s "To SJ-Dev-S-RH-DNS-01"     enterprises.3401.12.2.1.1.4.1.1.11.312 s "My Organization" enterprises.3401.12.2.1.1.4.1.1.12.312 s "Directory"        enterprises.3401.12.2.1.1.4.1.1.18.312 s "Any"     enterprises.3401.12.2.1.1.4.1.1.19.312 s "Any"      enterprises.3401.12.2.1.1.4.1.1.33.312 s "(Any)"   enterprises.3401.12.2.1.1.4.1.1.15.312 s "4/16/08 5:35:56 PM"       enterprises.3401.12.2.1.1.4.1.1.31.312 s "2401"    enterprises.3401.12.2.1.1.4.1.1.32.312 s "Update Successful"        enterprises.3401.12.2.1.1.4.1.1.16.312 s "1"       enterprises.3401.12.2.1.1.4.1.1.17.312 s "1"        enterprises.3401.12.2.1.1.4.1.1.13.312 s "McAfee Agent"    enterprises.3401.12.2.1.1.4.1.1.14.312 s "Update/upgrade succeeded" enterprises.3401.12.2.1.1.4.1.1.22.312 s "Not Available"   enterprises.3401.12.2.1.1.4.1.1.23.312 s "Not Available"    enterprises.3401.12.2.1.1.4.1.1.24.312 s "192.168.1.6"     enterprises.3401.12.2.1.1.4.1.1.25.312 s "SJDEVSWINIIS01"   enterprises.3401.12.2.1.1.4.1.1.26.312 s "DAT"     enterprises.3401.12.2.1.1.4.1.1.27.312 s "0"        enterprises.3401.12.2.1.1.4.1.1.6.312 s "4/16/08 5:35:56 PM"
+[params]
+rawEventMsg=any
+eventSeverity=1
+eventSeverityCat=LOW
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+virusName=Not Available
+reptVendor=McAfee
+phRecvTime=any
+phCustId=$sender
+hostName=SJDEVSWINIIS01
+destIpAddr=192.168.1.6
+hostIpAddr=192.168.1.6
+fileName=DAT
+eventName=Epo agent update successful
+computer=SJDEVSWINIIS01
+eventType=McAfee-EPO-2401
+phEventCategory=0 (External)
+reptDevIpAddr=$localhost
+destName=SJDEVSWINIIS01
+reptModel=ePolicy Orchestrator

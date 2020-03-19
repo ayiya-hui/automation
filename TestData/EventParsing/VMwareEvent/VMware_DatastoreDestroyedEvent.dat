@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+192.168.24.11
+[eventMsg]
+<134>Jan 15 10:45:27 192.168.24.11 java: [VMware_DatastoreDestroyedEvent], [eventTime]=2010-01-15 10:43:56:850, [rptIp]=192.168.24.11, [user]=Administrator, [vmwEventId]=210967, [vmwEventCat]=info, [datacenter]=add-DC-test, [datastore]=LocalHD192.168.64.102, [vmwEventMsg]=Removed unconfigured datastore LocalHD192.168.64.102
+[params]
+rawEventMsg=any
+count=1
+datacenter=add-DC-test
+deviceTime=any
+eventParsedOk=1
+vmwEventCat=info
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+vmwEventMsg=Removed unconfigured datastore LocalHD192.168.64.102
+eventName=Datastore removed
+reptDevIpAddr=192.168.24.11
+reptVendor=VMware
+eventType=VMware_DatastoreDestroyedEvent
+user=Administrator
+phEventCategory=0 (External)
+datastore=LocalHD192.168.64.102
+eventId=any
+reptModel=Generic

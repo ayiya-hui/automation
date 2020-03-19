@@ -1,0 +1,4 @@
+[eventMsg]
+[PH_DEV_MON_NET_INTF_UTIL]:[eventSeverity]=PHL_INFO,[fileName]=phIntfFilter.cpp,[lineNumber]=229,[intfName]=MyNet,[hostName]=automator9Dot5Dot0Dot1,[hostIpAddr]=9.5.0.1,[pollIntv]=176,[recvBytes]=0,[recvBytesPerSec]=0.000000,[inIntfUtil]=0.000000,[sentBytes]=0,[sentBytesPerSec]=0.000000,[outIntfUtil]=0.000000,[recvPkts]=0,[sentPkts]=0,[inIntfPktErr]=0,[inIntfPktErrPct]=10.000000,[outIntfPktErr]=0,[outIntfPktErrPct]=9.000000,[inIntfPktDiscarded]=0,[inIntfPktDiscardedPct]=0.000000,[outIntfPktDiscarded]=0,[outIntfPktDiscardedPct]=0.000000,[outQLen]=0,[phLogDetail]=
+
+[clearEventMsg]

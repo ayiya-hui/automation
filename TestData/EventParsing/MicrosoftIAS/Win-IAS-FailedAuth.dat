@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+$localhost (user:Partha_Hacker)
+[eventMsg]
+<13>May 13 16:02:04 Filer.ProspectHills.net MSIASLog      0       192.168.19.1,Partha_Hacker,05/13/2008,12:01:56,IAS,FILER,25,311 1 192.168.0.40 05/07/2008 10:07:07 7,4127,1,4130,PROSPECTHILLS\Partha_Hacker,4129,PROSPECTHILLS\Partha_Hacker,4154,Use Windows authentication for all users,4155,1,4108,192.168.19.1,4116,0,4128,Cisco ASA,4136,3,4142,16
+[params]
+deviceTime=any
+eventType=Win-IAS-FailedAuth
+phCustId=$sender
+reptModel=IAS
+eventId=any
+eventSeverity=3
+eventName=AAA authentication failed
+phEventCategory=0 (External)
+winIASFailCode=16 (IAS_AUTH_FAILURE)
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+user=Partha_Hacker
+reptDevName=FILER
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=1 (Deny)
+reptVendor=Microsoft
+nepDevIpAddr=192.168.19.1
+relayDevName=IAS

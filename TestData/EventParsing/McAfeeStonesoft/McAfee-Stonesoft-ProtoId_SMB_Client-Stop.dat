@@ -1,0 +1,35 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<6>CEF:0|McAfee|IPS|5.5.7|75510|ProtoId_SMB_Client-Stop|1|spt=33131 deviceExternalId=PANASONIC-PCI-V2 node 1 dmac=27:D5:86:56:50:00 dst=192.168.92.61 cat=Content Identification app=TCP/62002 rt=Apr 08 2016 00:26:07 deviceFacility=Inspection act=Permit deviceOutboundInterface=Interface #2 deviceInboundInterface=Interface #2 proto=6 dpt=62002 src=192.168.92.67 dvc=192.168.94.51 dvchost=192.168.94.51 smac=D2:DF:86:56:50:00 cs1Label=RuleId cs1=147.0
+[params]
+domain=PANASONIC-PCI-V2 node 1
+destMACAddr=27:D5:86:56:50:00
+parserName=McAfeeStonesoftParser
+eventType=McAfee-Stonesoft-ProtoId_SMB_Client-Stop
+devEventTypeGrp=Content Identification
+destIpAddr=192.168.92.61
+destIpPort=62002
+srcIpAddr=192.168.92.67
+reptModel=Stonesoft IPS
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+fwAction=Permit
+eventName=Protocol identification completed for SMB client
+appTransportProto=TCP/62002
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+eventRuleTrigger=1
+count=1
+srcMACAddr=D2:DF:86:56:50:00
+srcIpPort=33131
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+ipProto=6 (TCP)
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=McAfee

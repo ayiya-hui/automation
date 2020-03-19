@@ -1,0 +1,30 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+2013-09-29 13:52:07 10.100.1.86(via UDP: [10.100.1.8]:38778) TRAP, SNMP v1, community public   SNMPv2-SMI::enterprises.789 Enterprise Specific Trap (176) Uptime: 182 days, 23:13:48.36        SNMPv2-SMI::enterprises.789.1.1.12.0 = STRING: Quota Event: status=exceeded, type=hard, volume=pandata, limit_item=disk, limit_value=36700160, treeid=112       SNMPv2-SMI::enterprises.789.1.1.9.0 = STRING: 200000208115
+[params]
+deviceTime=any
+quotaHardThresholdBytes=36700160
+eventType=NetApp-quotaExceeded
+phCustId=$sender
+customer=Super
+volName=pandata
+reptModel=DataONTAP
+errorNo=176
+eventParsedOk=1
+parserName=NetAppParser
+eventSeverity=9
+hostIpAddr=10.100.1.86
+eventName=One of the quota limits has been exceeded.
+phEventCategory=0 (External)
+msg=Uptime: 182 days, 23:13:48.36        SNMPv2-SMI::enterprises.789.1.1.12.0 = STRING: Quota Event: status=exceeded, type=hard, volume=pandata, limit_item=disk, limit_value=36700160, treeid=112       SNMPv2-SMI::enterprises.789.1.1.9.0 = STRING: 200000208115
+eventId=any
+eventSeverityCat=HIGH
+collectorId=any
+relayDevIpAddr=$localhost
+quotaType=hard
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+item=disk
+reptVendor=NetApp

@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<14> March 09 11:54:29 AirWatch  AirWatch Syslog Details are as follows Event Type: Console, Event: DeviceQueryRequested, User: staplesams\UserFLast, Event Source: Server, Event Module: Dashboard, Event Category: Device, Event Data: Device=10.170.130.46 0.0.0.0 US0349;LoginSessionID=33frewmhttrqgbf5cleo0ymxEvent Timestamp: March 9, 2016 11:54:29
+[params]
+domain=staplesams
+deviceTime=any
+parserName=AirWatchParser
+eventType=AirWatch-MDM-DeviceQueryRequested
+reptModel=MDM
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=AirWatch MDM Query Requested
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+eventRuleTrigger=1
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+user=UserFLast
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=AirWatch

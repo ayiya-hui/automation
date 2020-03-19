@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+172.18.65.202
+[eventMsg]
+Mar 22 16:38:19 172.18.65.202 ALARM: 1206061018l | system | info | ALR | ACCOUNT RADIUS SERVER SWITCHOVER MAJOR Accounting RADIUS Server switches over from Primary <1.1.1.1> to Secondary <2.2.2.2> for Profile <WPA2>
+[params]
+customer=Super
+eventId=any
+parserName=FortiWLANParser
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+count=1
+eventSeverity=1
+eventType=FortiWLC-Accounting-Radius-Switchover
+reptDevIpAddr=172.18.65.202
+collectorId=any
+extEventRecvProto=Syslog
+eventName=Switched over to Secondary Accounting RADIUS Server since Primary RADIUS server is not accessible
+reptVendor=Fortinet
+relayDevIpAddr=172.18.65.202
+rawEventMsg=any
+phRecvTime=any
+reptDevName=any
+reptModel=FortiWLC

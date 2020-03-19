@@ -1,0 +1,29 @@
+[reptDevIpAddr(key)]
+20.20.20.120
+[eventMsg]
+Fri Oct 30 18:19:58 2009 $reporter AccelOps-WinLog-WMI  [Category]="14339" [CategoryString]="Kerberos Authentication Service" [ComputerName]="sf1dc03.jha.local" [Data]="NULL" [EventCode]="4771" [EventIdentifier]="4771" [EventType]="5" [Logfile]="Security" [RecordNumber]="184026665" [SourceName]="Microsoft-Windows-Security-Auditing" [TimeGenerated]="20100505221759.986457-000" [TimeWritten]="20100505221759.986457-000" [Type]="Audit Failure" [User]="(null)" [[Account Information]][Security ID]="S-1-5-21-2090294290-982477196-2044928816-6879" [Account Name]="ptsui" [[Service Information]][Service Name]="krbtgt/JHA" [[Network Information]][Client Address]="::ffff:10.0.0.55" [Client Port]="51363" [[Additional Information]][Ticket Options]="0x40810010" [Failure Code]="0x18" [Pre-Authentication Type]="2" [[Certificate Information]][Certificate Issuer Name]="		" [Certificate Serial Number]=" " [Certificate Thumbprint]="
+[params]
+rawEventMsg=any
+type=Audit Failure
+eventAction=1 (Deny)
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=3
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=$reporter
+eventName=Windows kerberos domain authentication failed
+srcIpAddr=10.0.0.55
+winSrvcName=krbtgt/JHA
+reptVendor=Microsoft
+eventType=Win-Security-4771
+user=ptsui
+phEventCategory=0 (External)
+winKerbFailCode=0x18 (Pre-authentication info invalid)
+reptDevIpAddr=$reporter
+srcIpPort=51363
+reptModel=Windows
+eventSource=Microsoft-Windows-Security-Auditing

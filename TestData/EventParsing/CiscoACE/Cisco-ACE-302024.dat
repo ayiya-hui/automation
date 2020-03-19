@@ -1,0 +1,68 @@
+[reptDevIpAddr(key)]
+$localhost (srcIpPort:57417)
+[eventMsg]
+<166>Jun  4 2010 10:06:38 FLOODCERT_DMZ: %ACE-6-302024: Built UDP connection 0xac6bc for vlan747:10.7.46.157/57417 (10.7.46.157/57417) to vlan746:10.7.44.20/53 (10.7.44.20/53)
+[params]
+rawEventMsg=any
+virtContext=FLOODCERT_DMZ
+postNATSrcIpPort=57417
+deviceTime=any
+eventType=Cisco-ACE-302024
+phCustId=$sender
+destIpAddr=10.7.44.20
+destIpPort=53 (DOMAIN)
+srcIpAddr=10.7.46.157
+reptModel=ACE
+eventId=any
+ipConnId=706236
+eventParsedOk=1
+eventSeverity=1
+preNATDestIpAddr=10.7.44.20
+eventName=Built UDP connection
+phEventCategory=0 (External)
+srcIntfName=vlan747
+srcIpPort=57417
+preNATDestIpPort=53 (DOMAIN)
+eventSeverityCat=LOW
+destIntfName=vlan746
+postNATSrcIpAddr=10.7.46.157
+ipProto=17 (UDP)
+count=1
+phRecvTime=any
+reptDevIpAddr=$reporter
+eventAction=0 (Permit)
+reptVendor=Cisco
+[reptDevIpAddr(key)]
+$localhost (srcIpPort:1027)
+[eventMsg]
+<166>Jun  4 2010 10:27:29 Admin: %ACE-6-302024: Built UDP connection 0xace8b for vlan762:10.7.62.18/1027 (10.7.62.18/1027) to vlan762:10.0.1.10/514 (10.0.1.10/514)
+[params]
+rawEventMsg=any
+virtContext=Admin
+postNATSrcIpPort=1027
+deviceTime=any
+eventType=Cisco-ACE-302024
+phCustId=$sender
+destIpAddr=10.0.1.10
+destIpPort=514 (SYSLOG)
+srcIpAddr=10.7.62.18
+reptModel=ACE
+eventId=any
+ipConnId=708235
+eventParsedOk=1
+eventSeverity=1
+preNATDestIpAddr=10.0.1.10
+eventName=Built UDP connection
+phEventCategory=0 (External)
+srcIntfName=vlan762
+srcIpPort=1027
+preNATDestIpPort=514 (SYSLOG)
+eventSeverityCat=LOW
+destIntfName=vlan762
+postNATSrcIpAddr=10.7.62.18
+ipProto=17 (UDP)
+count=1
+phRecvTime=any
+reptDevIpAddr=$reporter
+eventAction=0 (Permit)
+reptVendor=Cisco

@@ -1,0 +1,24 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<29>Nov 17 14:47:17 $localhost CL-GW-ISP-01: utmd[90892]: AV_PATTERN_UPDATED: AntiVirus: Pattern file updated. Version: 11/17/2013 22:42 GMT, virus records: 565556; size: 18676539 bytes
+[params]
+rawEventMsg=any
+virdbVer=11/17/2013 22:42 GMT
+eventId=any
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+count=1
+eventSeverity=3
+eventType=JUNOS_AV_PATTERN_UPDATED
+phCustId=$sender
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+collectorId=any
+eventName=Internal antivirus scanner successfully updated pattern file
+reptVendor=Juniper
+phRecvTime=any
+reptDevName=any
+reptModel=JunOS

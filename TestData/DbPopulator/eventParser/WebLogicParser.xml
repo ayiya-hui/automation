@@ -1,0 +1,87 @@
+<eventParser name="WebLogicParser">
+  <deviceType>
+    <Vendor>Oracle</Vendor>
+    <Model>WebLogic Server</Model>
+    <Version>ANY</Version>
+  </deviceType>
+  
+  <!-- examples
+
+####<Jul 6, 2010 2:41:45 PM CST> <Info> <WebService> <dev-back02.accelops.net.cn> <AdminServer> <[STANDBY] ExecuteThread: '3' for queue: 'weblogic.kernel.Default (self-tuning)'> <<anonymous>> <> <> <1278398505717> <BEA-220103> <Async web service support is not fully configured. The async response web service /AsyncResponseServiceJms for this server was not fully deployed because the JMS reliability queue was not defined/deployed: weblogic.wsee.DefaultQueue. The server will periodically retry completing the deploy for the service. This message can usually be ignored unless there are async web service applications. To completely disable async web service support, thus avoiding this message, set -Dweblogic.wsee.skip.async.response=true.> 
+
+	   -->
+  
+  <eventFormatRecognizer><![CDATA[\<BEA-\d+\>]]></eventFormatRecognizer>
+  
+  <testEvents>
+      <testEvent><![CDATA[####<Jul 6, 2010 2:41:45 PM CST> <Info> <WebService> <dev-back02.accelops.net.cn> <AdminServer> <[STANDBY] ExecuteThread: '3' for queue: 'weblogic.kernel.Default (self-tuning)'> <<anonymous>> <> <> <1278398505717> <BEA-220103> <Async web service support is not fully configured. The async response web service /AsyncResponseServiceJms for this server was not fully deployed because the JMS reliability queue was not defined/deployed: weblogic.wsee.DefaultQueue. The server will periodically retry completing the deploy for the service. This message can usually be ignored unless there are async web service applications. To completely disable async web service support, thus avoiding this message, set -Dweblogic.wsee.skip.async.response=true.> ]]></testEvent>
+  </testEvents>
+  
+  <!-- pattern definitions -->
+  <patternDefinitions>
+  </patternDefinitions>
+  
+  <parsingInstructions>
+    
+    <!-- parsing common fields -->
+    <collectFieldsByRegex src="$_rawmsg">
+      <regex><![CDATA[####\<<_body:gPatMesgBody>\>]]></regex>
+    </collectFieldsByRegex>
+    
+    <setEventAttribute attr="eventType">WebLogic_Server-</setEventAttribute>
+    
+    <collectAndSetAttrByPos src="$_body" sep='&gt; &lt;'>
+      <attrPosMap attr="_time" pos='1'/>
+      <attrPosMap attr="_eventSeverityStr" pos='2'/>
+      <attrPosMap attr="_subsystem" pos='3'/>
+      <attrPosMap attr="hostName" pos='4'/>
+      <attrPosMap attr="authServerName" pos='5'/>
+      <attrPosMap attr="_threadID" pos='6'/>
+      <attrPosMap attr="_userID" pos='7'/>
+      <attrPosMap attr="_transActionID" pos='8'/>
+      <attrPosMap attr="_contextID" pos='9'/>
+      <attrPosMap attr="_timeValue" pos='10'/>
+      <attrPosMap attr="_msgID" pos='11'/>
+      <attrPosMap attr="eventDesc" pos='12'/>
+    </collectAndSetAttrByPos>
+
+    <collectFieldsByRegex src="$_time">
+      <regex><![CDATA[<_mon:gPatMon>\s+<_day:gPatDay>,\s+<_year:gPatYear>\s+<_time:gPatTime>\s+<_apm:gPatStr>\s+.*]]></regex>
+    </collectFieldsByRegex>
+ 
+    <setEventAttribute attr="deviceTime">toDateTime($_mon, $_day, $_year, $_time, $_apm)</setEventAttribute>
+
+    <choose>
+      <when test='$_eventSeverityStr = "trace"'>
+        <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+      </when>
+      <when test='$_eventSeverityStr = "debug"'>
+        <setEventAttribute attr="eventSeverity">2</setEventAttribute>
+      </when>
+      <when test='$_eventSeverityStr = "info"'>
+        <setEventAttribute attr="eventSeverity">3</setEventAttribute>
+      </when>
+      <when test='$_eventSeverityStr = "notice"'>
+        <setEventAttribute attr="eventSeverity">4</setEventAttribute>
+      </when>
+      <when test='$_eventSeverityStr = "warning"'>
+        <setEventAttribute attr="eventSeverity">5</setEventAttribute>
+      </when>
+      <when test='$_eventSeverityStr = "error"'>
+        <setEventAttribute attr="eventSeverity">6</setEventAttribute>
+      </when>
+      <when test='$_eventSeverityStr = "critica"'>
+        <setEventAttribute attr="eventSeverity">7</setEventAttribute>
+      </when>
+      <when test='$_eventSeverityStr = "alert"'>
+        <setEventAttribute attr="eventSeverity">8</setEventAttribute>
+      </when>
+      <when test='$_eventSeverityStr = "emergency"'>
+        <setEventAttribute attr="eventSeverity">9</setEventAttribute>
+      </when>
+    </choose>
+
+    <setEventAttribute attr="eventType">combineMsgId($eventType, "-", $_msgID)</setEventAttribute>
+	
+  </parsingInstructions>
+</eventParser>

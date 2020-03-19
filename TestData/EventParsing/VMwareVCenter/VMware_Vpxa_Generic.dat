@@ -1,0 +1,33 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<166>2016-03-22T10:40:45.403Z vcenter01-mgmc Vpxa: [59544B70 verbose 'VpxaHalCnxHostagent' opID=WFU-e82ed594] [WaitForUpdatesDone] Received callback-
+[params]
+deviceTime=any
+destGeoOrg=any
+parserName=VMwareVCenterParser
+eventType=VMware_Vpxa_Generic
+destIpAddr=any
+procName=VpxaHalCnxHostagent
+destGeoCountry=any
+reptModel=vCenter
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=VMware Vpxa generic message
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+type=verbose
+destName=vcenter01-mgmc
+status=WaitForUpdatesDone
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+reptDevName=vcenter01-mgmc
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+sessionId=WFU-e82ed594
+reptVendor=VMware

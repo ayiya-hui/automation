@@ -1,0 +1,40 @@
+[reptDevIpAddr(key)]
+128.118.73.199
+[eventMsg]
+<4>Feb 10 09:44:32 128.118.73.199 kernel: IPTables-Outgoing: IN=testInt OUT=em1 SRC=128.118.73.199 DST=128.118.73.27 LEN=60 TOS=0x00 PREC=0x00 TTL=64 ID=20744 DF PROTO=TCP SPT=46872 DPT=22 WINDOW=14600 RES=0x00 SYN URGP=0 UID=75619 GID=1000
+[params]
+deviceTime=any
+destGeoOrg=any
+parserName=UnixParser
+eventType=Generic_Unix_Outbound_Permit
+destGeoState=Pennsylvania
+destIpAddr=128.118.73.27
+srcName=any
+ipProto=6 (TCP)
+reptGeoState=Pennsylvania
+srcIpAddr=128.118.73.199
+reptModel=Unix
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Generic_Unix_Outbound_Permit
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+eventRuleTrigger=1
+count=1
+srcIntfName=testInt
+srcIpPort=46872
+eventSeverityCat=LOW
+collectorId=any
+destGeoCountry=any
+destIntfName=em1
+relayDevIpAddr=128.118.73.199
+destIpPort=22 (SSH)
+reptDevName=any
+customer=Super
+reptGeoCity=any
+phRecvTime=any
+reptDevIpAddr=128.118.73.199
+eventAction=0 (Permit)
+reptVendor=Generic
+destGeoCity=any

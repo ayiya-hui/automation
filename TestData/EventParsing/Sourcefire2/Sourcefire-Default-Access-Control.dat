@@ -1,0 +1,54 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<44>Feb 13 17:36:23 ABC SFIMS: [Primary Detection Engine (1ff2ec50-5ae3-11e4-a27e-8889fa1f6084)][Default Access Control] Connection Type: Start, User: Unknown, Client: Web browser, Application Protocol: HTTP, Web App: Unknown, Access Control Rule Name: IPS & Malware File Inspection, Access Control Rule Action: Allow, Access Control Rule Reasons: Unknown, URL Category: Unknown, URL Reputation: Risk unknown, URL: Unknown, Interface Ingress: inside, Interface Egress: outside, Security Zone Ingress: N/A, Security Zone Egress: N/A, Security Intelligence Matching IP: None, Security Intelligence Category: None, Client Version: (null), Number of File Events: 0, Number of IPS Events: 0, TCP Flags: 0x0, NetBIOS Domain: (null), Initiator Packets: 4, Responder Packets: 2, Initiator Bytes: 240, Responder Bytes: 299, Context: unknown {TCP} 1.1.1.1:63583 -> 2.2.2.2:80
+[params]
+deviceTime=any
+destGeoOrg=any
+parserName=Sourcefire2Parser
+webCategory=Unknown
+eventType=Sourcefire-Default-Access-Control
+destGeoState=any
+hostName=ABC
+destIpAddr=2.2.2.2
+destIpPort=80 (HTTP)
+destGeoCountry=any
+srcIpAddr=1.1.1.1
+count=1
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+appTransportProto=HTTP
+sentPkts=4
+eventName=Sourcefire-Default-Access-Control
+tcpFlags=none
+reputation=Risk unknown
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+webAppName=Unknown
+reptModel=FirePOWER
+destName=HOST-2.2.2.2
+infoURL=Unknown
+srcIntfName=inside
+srcFwZone=N/A
+recvBytes=299
+srcIpPort=63583
+eventSeverityCat=LOW
+collectorId=any
+destIntfName=outside
+relayDevIpAddr=$localhost
+rawEventMsg=any
+srcApp=Web browser
+ipProto=6 (TCP)
+destFwZone=N/A
+reptDevName=any
+customer=Super
+srcAppVersion=(null)
+phRecvTime=any
+reptDevIpAddr=$localhost
+recvPkts=2
+eventAction=0 (Permit)
+reptVendor=Cisco
+destGeoCity=any
+fwRule=IPS & Malware File Inspection
+sentBytes=240

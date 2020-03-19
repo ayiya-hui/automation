@@ -1,0 +1,21 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<189>392996 06/29/2009 21:16:15.590 SEV=5 IKEDBG/64 RPT=1297 99.129.50.155  IKE Peer included IKE fragmentation capability flags: Main Mode:        True Aggressive Mode:  False--automator
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+eventAction=0 (Permit)
+eventName=Cisco-VPN3K-IKEDBG/64
+reptVendor=Cisco
+eventType=Cisco-VPN3K-IKEDBG/64
+phEventCategory=0 (External)
+reptDevIpAddr=$localhost
+reptModel=VPN 3K

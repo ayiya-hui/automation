@@ -1,0 +1,149 @@
+<eventParser name="GenericDHCPParser">
+
+  <deviceType>
+    <Vendor> Generic </Vendor>
+    <Model> Generic </Model>
+    <Version> ANY</Version>
+  </deviceType>
+
+  <eventFormatRecognizer><![CDATA[dhcpd\[\d+\]:]]></eventFormatRecognizer>
+  
+  <testEvents>
+      <testEvent><![CDATA[<13>Aug 26 19:28:11 DNS-Pri dhcpd[0]: DHCPREQUEST for 172.16.10.200 (172.16.10.8) from 00:50:56:88:4e:17 (26L2233B1-02)]]></testEvent>
+  </testEvents>
+  
+  <parsingInstructions>
+  
+  
+   <switch>
+      <case>
+        <collectFieldsByRegex src="$_rawmsg">
+            <regex><![CDATA[<:gPatSyslogPRI><_mon:gPatMon>\s+<_day:gPatDay>\s+<_time:gPatTime>\s+<reptDevIpAddr:gPatIpV4Dot>\s+dhcpd\[\d+\]:\s+<_type:gPatStr>\s+<_body:gPatMesgBody>]]></regex>
+        </collectFieldsByRegex>
+        <setEventAttribute attr="deviceTime">toDateTime($_mon, $_day, $_time)</setEventAttribute>
+      </case>
+      <case> 
+        <collectFieldsByRegex src="$_rawmsg">
+            <regex><![CDATA[<:gPatSyslogPRI><_mon:gPatMon>\s+<_day:gPatDay>\s+<_time:gPatTime>\s+<hostName:gPatStr>\s+dhcpd\[\d+\]:\s+<_type:gPatStr>\s+<_body:gPatMesgBody>]]></regex>
+        </collectFieldsByRegex>
+        <setEventAttribute attr="deviceTime">toDateTime($_mon, $_day, $_time)</setEventAttribute>
+      </case>
+   </switch>
+  
+   <setEventAttribute attr="eventType">combineMsgId("Generic", "_", $_type)</setEventAttribute>
+   <setEventAttribute attr="deviceTime">toDateTime($_mon, $_day, $_time)</setEventAttribute>
+   <setEventAttribute attr="eventAction">0</setEventAttribute>
+  
+   <choose>
+     <when test='$_type = "DHCPDISCOVER"'>
+       <!-- <13>Aug 26 19:28:10 DNS-Pri dhcpd: DHCPDISCOVER from 00:50:56:88:4e:17 via eth0 -->
+       <!-- <30>Sep 2 09:50:09 34.36.132.51 dhcpd[10821]: DHCPDISCOVER from 00:0b:86:ca:cb:f8 via 34.38.67.254 -->
+       
+       <collectAndSetAttrByRegex src="$_body">
+  	<regex><![CDATA[from\s+<srcMACAddr:gPatStr>\s+via\s+<:gPatStr>]]></regex>
+       </collectAndSetAttrByRegex>
+     </when>
+     
+     <when test='$_type = "DHCPOFFER"'>
+       <!-- <13>Aug 26 19:28:11 DNS-Pri dhcpd: DHCPOFFER on 172.16.10.200 to 00:50:56:88:4e:17 (26L2233B1-02) via eth0 -->
+       <!-- <30>Sep 2 09:50:09 34.36.132.51 dhcpd[10821]: DHCPOFFER on 34.38.65.58 to 00:0b:86:ca:cb:f8 via eth2 relay 34.38.67.254 lease-duration 47387-->
+       <switch>
+       <case>
+	       <collectAndSetAttrByRegex src="$_body">
+		<regex><![CDATA[on\s+<:gPatIpV4Dot>\s+to\s+<srcMACAddr:gPatStr> \(<srcName:gPatStr>\)<:gPatMesgBody>]]></regex>
+	       </collectAndSetAttrByRegex>
+       </case>
+       <case>
+	       <collectAndSetAttrByRegex src="$_body">
+		<regex><![CDATA[on\s+<:gPatIpV4Dot>\s+to\s+<srcMACAddr:gPatStr><:gPatMesgBody>]]></regex>
+	       </collectAndSetAttrByRegex>
+       </case>
+       </switch>
+     </when>
+     
+     <when test='$_type = "DHCPREQUEST"'>
+       <!-- <13>Aug 26 19:28:11 DNS-Pri dhcpd: DHCPREQUEST for 172.16.10.200 (172.16.10.8) from 00:50:56:88:4e:17 (26L2233B1-02) -->
+       <!-- <30>Sep 2 09:50:08 34.34.132.52 dhcpd[20125]: DHCPREQUEST for 34.2.3.115 from 00:16:d4:c5:61:a7 -->
+       <switch>
+       <case>
+	       <collectAndSetAttrByRegex src="$_body">
+		<regex><![CDATA[for\s+<srcIpAddr:gPatIpV4Dot>\s+\(<:gPatIpV4Dot>\)\s+from\s+<srcMACAddr:gPatStr>\s+\(<srcName:gPatStr>\)<:gPatMesgBody>]]></regex>
+	       </collectAndSetAttrByRegex>
+       </case>
+        <case>
+	       <collectAndSetAttrByRegex src="$_body">
+		<regex><![CDATA[for\s+<srcIpAddr:gPatIpV4Dot>\s+from\s+<srcMACAddr:gPatStr><:gPatMesgBody>]]></regex>
+	       </collectAndSetAttrByRegex>
+       </case>
+       </switch>
+     </when>
+     
+     <when test='$_type = "DHCPACK"'>
+       <!-- <13>Aug 26 15:58:01 DNS-Pri dhcpd: DHCPACK on 172.16.10.223 to 00:1e:c9:fe:06:86 (WIN-09PEADE5UAN) via eth0 -->
+       <!-- <30>Sep 2 09:50:08 34.34.132.52 dhcpd[20125]: DHCPACK on 34.2.3.115 to 00:16:d4:c5:61:a7 -->
+       <switch>
+       <case>
+	       <collectAndSetAttrByRegex src="$_body">
+		<regex><![CDATA[on <srcIpAddr:gPatIpV4Dot> to <srcMACAddr:gPatStr> \(<srcName:gPatStr>\)<:gPatMesgBody>]]></regex>
+	       </collectAndSetAttrByRegex>
+       </case>
+       <case>
+	       <collectAndSetAttrByRegex src="$_body">
+		<regex><![CDATA[on <srcIpAddr:gPatIpV4Dot> to <srcMACAddr:gPatStr><:gPatMesgBody>]]></regex>
+	       </collectAndSetAttrByRegex>
+       </case>
+       </switch>
+     </when>
+     
+     <when test='$_type = "DHCPINFORM"'>
+       <!-- <13>Aug 26 19:33:30 DNS-Pri dhcpd: DHCPINFORM from 172.16.10.200 via eth0: not authoritative for subnet 172.16.10.0 -->
+       <!-- <30>Sep 2 09:50:09 34.36.132.51 dhcpd[10821]: DHCPINFORM from 34.1.69.8 via 34.1.71.253-->
+       
+       <collectAndSetAttrByRegex src="$_body">
+  	<regex><![CDATA[from <srcIpAddr:gPatIpV4Dot><:gPatMesgBody>]]></regex>
+       </collectAndSetAttrByRegex>
+     </when>
+
+     <when test='$_type = "DHCPDECLINE"'>
+       <!-- <13>Aug 26 19:33:30 DNS-Pri dhcpd: DHCPDECLINE of 172.28.41.179 from 00:11:43:42:b7:b2 (AMOOREXP) via 172.28.41.12: not found -->
+	<switch>
+	<case>
+	       <collectAndSetAttrByRegex src="$_body">
+		 <regex><![CDATA[of <srcIpAddr:gPatIpV4Dot> from <srcMACAddr:gPatStr> \(<srcName:gPatStr>\)<:gPatMesgBody>]]></regex>
+	       </collectAndSetAttrByRegex>
+       </case>
+       <case>
+	       <collectAndSetAttrByRegex src="$_body">
+		 <regex><![CDATA[of <srcIpAddr:gPatIpV4Dot> from <srcMACAddr:gPatStr><:gPatMesgBody>]]></regex>
+	       </collectAndSetAttrByRegex>
+       </case>
+       </switch>
+     </when>
+
+     <when test='$_type = "DHCPRELEASE"'>
+       <!-- <13>Aug 26 19:33:30 DNS-Pri dhcpd: DHCPRELEASE of 172.28.41.179 from 00:11:43:42:b7:b2 (AMOOREXP) via 172.28.41.12: not found -->
+       <switch>
+       <case>
+	       <collectAndSetAttrByRegex src="$_body">
+		 <regex><![CDATA[of <srcIpAddr:gPatIpV4Dot> from <srcMACAddr:gPatStr> \(<srcName:gPatStr>\)<:gPatMesgBody>]]></regex>
+	       </collectAndSetAttrByRegex>
+       </case>
+       <case>
+	       <collectAndSetAttrByRegex src="$_body">
+		 <regex><![CDATA[of <srcIpAddr:gPatIpV4Dot> from <srcMACAddr:gPatStr><:gPatMesgBody>]]></regex>
+	       </collectAndSetAttrByRegex>
+       </case>
+       </switch>
+     </when>
+ 
+   </choose>
+
+   <when test="exist srcName">
+     <setEventAttribute attr="hostName">$srcName</setEventAttribute>
+     <setEventAttribute attr="computer">$srcName</setEventAttribute>
+   </when>  
+  
+  </parsingInstructions>
+
+</eventParser>
+

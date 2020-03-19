@@ -1,0 +1,39 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<132>[2016-04-26 16:10:13] EFW: TCP_OPT: prio=3 id=03400019 rev=1 event=mismatching_tcp_window_scale action=adjust old=8 new=not_used effective=not_used connipproto=TCP connrecvif=If2 connsrcip=192.168.12.120 connsrcport=56593 conndestif=If1 conndestip=98.129.223.119 conndestport=48002 origsent=152 termsent=0 recvif=If2 srcip=208.68.133.195 destip=98.129.223.119 ipproto=TCP ipdatalen=28 srcport=63801 destport=48002 tcphdrlen=28 syn=1
+[params]
+deviceTime=any
+tcpLen=28
+destGeoOrg=any
+parserName=ClavisterParser
+eventType=Clavister-mismatching-tcp-window-scale
+destGeoState=any
+destIpAddr=98.129.223.119
+ipProto=6 (TCP)
+destGeoCountry=any
+srcIpAddr=208.68.133.195
+reptModel=cOS Firewall
+eventId=any
+logID=3400019
+eventParsedOk=1
+eventSeverity=4
+fwAction=adjust
+eventName=Clavister-mismatching-tcp-window-scale
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+ipTotalLength=28
+count=1
+srcIpPort=63801
+eventSeverityCat=LOW
+collectorId=any
+destIntfName=If1
+relayDevIpAddr=$localhost
+rawEventMsg=any
+destIpPort=48002
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Clavister
+destGeoCity=any

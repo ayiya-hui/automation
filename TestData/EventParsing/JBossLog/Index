@@ -1,0 +1,5 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+JBoss-AjpMessage-ERROR,JBossLog_1,JBossLog,10.1.2.16,,syslog
+JBoss-Domain-DEBUG,JBossLog_2,JBossLog,10.1.2.16,,syslog
+JBoss-CopyMechanism-INFO,JBossLog_3,JBossLog,10.1.2.16,,syslog

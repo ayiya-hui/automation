@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>Dec 04 2008 20:00:45: %PIX-3-109010: Auth from 10.10.10.10/8080 to 20.20.20.20/9996 failed (too many pending auths) on interface inside.
+[params]
+rawEventMsg=any
+destIpAddr=20.20.20.20
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=any
+eventSeverity=5
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=MEDIUM
+destIpAddr=20.20.20.20
+eventAction=1 (Deny)
+eventName=AAA Authorization failed - too many pending auth
+srcIpAddr=10.10.10.10
+reptVendor=Cisco
+eventType=PIX-109010
+phEventCategory=0 (External)
+destIpPort=9996
+srcIntfName=inside
+reptDevIpAddr=$localhost
+srcIpPort=8080
+reptModel=PIX

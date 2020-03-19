@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<188>Jul  4 15:07:01 Sourcefire3D Snort: [119:15:1] http_inspect: OVERSIZE REQUEST-URI DIRECTORY [Impact: Unknown] From DetectionEngine_IPS_DMZ2/SourcefireIPS at Thu Jul  4 15:07:01 2013 UTC [Classification: Potentially Bad Traffic] [Priority: 2] {tcp} 10.20.1.12:57689->64.94.107.53:80
+[params]
+rawEventMsg=any
+eventType=Snort-15
+phCustId=$sender
+devEventTypeGrp=Potentially Bad Traffic
+destIpAddr=64.94.107.53
+ipProto=6 (TCP)
+srcIpAddr=10.20.1.12
+reptModel=Sourcefire3D IPS
+eventId=any
+eventParsedOk=1
+eventSeverity=5
+eventName=Snort-15
+phEventCategory=0 (External)
+destName=any
+srcIpPort=57689
+eventSeverityCat=MEDIUM
+collectorId=any
+destIpPort=80 (HTTP)
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Sourcefire

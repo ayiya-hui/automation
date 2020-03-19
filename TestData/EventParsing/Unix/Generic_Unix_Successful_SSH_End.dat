@@ -1,0 +1,46 @@
+[reptDevIpAddr(key)]
+1.2.3.4
+[eventMsg]
+<86>Dec 14 16:54:22 1.2.3.4 sshd[14666]: pam_unix(sshd:session): session closed for user partha
+[params]
+rawEventMsg=any
+destIpAddr=$reporter
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+eventAction=0 (Permit)
+eventName=SSH session ended
+reptVendor=Generic
+eventType=Generic_Unix_Successful_SSH_End
+user=partha
+phEventCategory=0 (External)
+reptDevIpAddr=1.2.3.4
+reptModel=Unix
+[reptDevIpAddr(key)]
+1.2.3.5
+[eventMsg]
+<86>Mar 25 16:10:37 $reporter sshd[9447]: pam_unix(sshd:session): session closed for user root --automator
+[params]
+rawEventMsg=any
+destIpAddr=$reporter
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+eventAction=0 (Permit)
+eventName=SSH session ended
+reptVendor=Generic
+eventType=Generic_Unix_Successful_SSH_End
+user=root
+phEventCategory=0 (External)
+reptDevIpAddr=$reporter
+reptModel=Unix

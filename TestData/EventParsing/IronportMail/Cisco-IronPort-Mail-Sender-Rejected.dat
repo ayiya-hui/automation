@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<22>Feb 15 16:01:09 IronPort-Mail: Info: ICID 1574449 Address: <alert@ironport-c160.cesp.com.br> sender rejected, envelope sender domain does not exist
+[params]
+deviceTime=any
+parserName=IronportMailParser
+eventType=Cisco-IronPort-Mail-Sender-Rejected
+reptModel=IronPort AsyncOS Mail
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Cisco-IronPort-Mail-Sender-Rejected
+ironportMailICID=1574449
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+customer=Super
+senderMailAddr=alert@ironport-c160.cesp.com.br
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Cisco

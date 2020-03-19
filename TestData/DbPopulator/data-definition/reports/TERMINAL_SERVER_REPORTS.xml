@@ -1,0 +1,38 @@
+<Reports>
+  <Report id="PH_Report_Term_1" group="PH_SYS_REPORT_TermServer">
+    <Name>Top Reporting Citrix ICA Servers</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks reporting ICA servers by event count</Description>
+    <SelectClause numEntries="All">
+      <AttrList>hostName,hostIpAddr,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter" name="Filter_Storage">
+        <SingleEvtConstr>eventType = "PH_DEV_MON_APP_ICA_SESS_MET"  </SingleEvtConstr>
+        <GroupByAttr>hostName, hostIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_Term_2" group="PH_SYS_REPORT_TermServer">
+    <Name>Top Citrix ICA Users by Session Latency </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks reporting ICA users by latency</Description>
+    <SelectClause numEntries="All">
+      <AttrList>user,hostName,AVG(icaLatencySessAvg), LAST(icaLatencyLast) </AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter" name="Filter_Storage">
+        <SingleEvtConstr>eventType = "PH_DEV_MON_APP_ICA_SESS_MET"  </SingleEvtConstr>
+        <GroupByAttr>user,hostName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+</Reports>

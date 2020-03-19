@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+[FireAMP_Cloud_Threat_Detected]:[eventSeverity]=PHL_CRITICAL,[connectorGUID]=d2f5d61f-feb0-4b67-80fd-073655b86425,[date]=2015-11-25T19:17:39+00:00,[detection]=W32.DFC.MalParent,[detectionId]=6159251516445163587,[eventId]=6159251516445163587,[eventType]=Threat Detected,[eventTypeId]=1090519054,[fileDispostion]=Malicious,[fileName]=rjtsbks.exe,[fileSHA256]=3372c1edab46837f1e973164fa2d726c5c5e17bcb888828ccd7c4dfcc234a370,[hostName]=Demo_TeslaCrypt
+[params]
+parserName=FireAMPCloudParser
+eventType=FireAMP_Cloud_Threat_Detected
+hostName=Demo_TeslaCrypt
+reptModel=FireAMP Cloud
+eventId=any
+eventParsedOk=1
+connectorGUID=d2f5d61f-feb0-4b67-80fd-073655b86425
+eventSeverity=9
+eventName=FireAMP_Cloud_Threat_Detected
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=HIGH
+collectorId=any
+fileName=rjtsbks.exe
+relayDevIpAddr=$localhost
+rawEventMsg=any
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Cisco

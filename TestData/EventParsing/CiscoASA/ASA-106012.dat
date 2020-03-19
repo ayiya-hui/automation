@@ -1,0 +1,23 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>Dec 04 2008 20:00:45: ASA-6-106012: Deny IP from 192.168.20.20 to 10.20.20.20, IP options 6F.
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=10.20.20.20
+eventAction=1 (Deny)
+eventName=Denied IP traffic - IP options
+srcIpAddr=192.168.20.20
+reptVendor=Cisco
+eventType=ASA-106012
+phEventCategory=0 (External)
+reptDevIpAddr=$reporter
+reptModel=ASA

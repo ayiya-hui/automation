@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+20.20.20.20
+[eventMsg]
+<13>Jul 23 17:38:35 20.20.20.20 MSWinEventLog	1	Security	34034	Thu Jul 23 17:38:31 2009	529	Security	SYSTEM	User	Failure Audit	ADS-PRI	Logon/Logoff		Logon Failure:     Reason: Unknown user name or bad password     User Name: connie.hsu     Domain:      Logon Type: 3     Logon Process: CISCO       Authentication Package: MICROSOFT_AUTHENTICATION_PACKAGE_V1_0     Workstation Name: ADS-Pri     Caller User Name: ADS-PRI$     Caller Domain: PROSPECTHILLS     Caller Logon ID: (0x0,0x3E7)     Caller Process ID: 1420     Transited Services: -     Source Network Address: -     Source Port: -    	33719  Automation
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+winLogonId=(0x0,0x3E7)
+deviceTime=any
+eventParsedOk=1
+winLogonType=3(Network - logon)
+eventSeverity=3
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=20.20.20.20
+eventAction=1 (Deny)
+eventName=Windows logon failure - unknown user name or bad password
+reptVendor=Microsoft
+eventType=Win-Security-529
+user=connie.hsu
+phEventCategory=0 (External)
+reptDevIpAddr=20.20.20.20
+reptModel=Windows

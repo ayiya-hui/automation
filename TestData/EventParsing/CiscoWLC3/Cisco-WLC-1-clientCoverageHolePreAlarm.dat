@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+2011-04-05 10:37:42 0.0.0.0(via UDP: [10.10.81.240]:32768) TRAP2, SNMP v2c, community AccelOps        . Cold Start Trap (0) Uptime: 0:00:00.00 DISMAN-EVENT-MIB::sysUpTimeInstance = Timeticks: (1672429600) 193 days, 13:38:16.00    SNMPv2-MIB::snmpTrapOID.0 = OID: SNMPv2-SMI::enterprises.9.9.615.0.1	 SNMPv2-SMI::enterprises.9.9.599.1.3.1.1.1.0 = Hex-STRING: 00 25 BC 80 E8 77	    SNMPv2-SMI::enterprises.9.9.599.1.3.1.1.8.0 = Hex-STRING: 6C 50 4D 7D AC 50	  SNMPv2-SMI::enterprises.9.9.599.1.3.1.1.9.0 = INTEGER: 1	SNMPv2-SMI::enterprises.9.9.513.1.1.1.1.5.0 = STRING: "AP03-3.rdu2"	SNMPv2-SMI::enterprises.9.9.615.1.2.1.0 = INTEGER: 1	SNMPv2-SMI::enterprises.9.9.615.1.2.2.0 = INTEGER: 5000	 SNMPv2-SMI::enterprises.9.9.615.1.2.3.0 = INTEGER: 1	SNMPv2-SMI::enterprises.9.9.615.1.2.4.0 = INTEGER: 31	 SNMPv2-SMI::enterprises.9.9.615.1.2.5.0 = INTEGER: -60	SNMPv2-SMI::enterprises.9.9.615.1.2.6.0 = INTEGER: -90	SNMPv2-SMI::enterprises.9.9.615.1.2.7.0 = STRING: "0,0,0,0,1,20,24,28,3,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"	SNMPv2-SMI::enterprises.9.9.615.1.2.8.0 = INTEGER: 2	SNMPv2-SMI::enterprises.9.9.615.1.2.9.0 = STRING: "6c:50:4d:7d:ac:50,e8:04:62:0b:b5:f0"	 SNMPv2-SMI::enterprises.9.9.615.1.2.10.0 = STRING: "-83,-85"	SNMPv2-SMI::enterprises.9.9.615.1.2.11.0 = STRING: "1,1"	SNMPv2-SMI::enterprises.9.9.512.1.1.1.1.11.5 = INTEGER: 1
+[params]
+rawEventMsg=any
+eventId=any
+count=1
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=MEDIUM
+eventSeverity=5
+eventType=Cisco-WLC-1-clientCoverageHolePreAlarm
+phCustId=$sender
+reptDevIpAddr=$localhost
+collectorId=any
+nepDevName=AP03-3.rdu2
+eventName=AP receives packets from client below RSSI thredholds
+reptVendor=Cisco
+testEvent=Real Event(0)
+phRecvTime=any
+nepMACAddr=6c:50:4d:7d:ac:50
+hostMACAddr=00:25:bc:80:e8:77
+reptDevName=any
+reptModel=WLAN Controller

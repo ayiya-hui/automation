@@ -1,0 +1,48 @@
+[reptDevIpAddr(key)]
+28.28.28.29
+[eventMsg]
+<29>May 27 17:27:28 $reporter ProxySG: E0000 Access Log FTP (main): Connecting to primary 10.1.20.21 server 10.1.20.21:21.(0) NORMAL_EVENT ../alog_ftp_client.cpp 110
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=10.1.20.21
+eventAction=0 (Permit)
+eventName=Bluecoat FTP message
+srcIpAddr=$reporter
+reptVendor=Blue Coat
+eventType=Bluecoat-SGOS-AccessLog-FTP
+phEventCategory=0 (External)
+destIpPort=21
+reptDevIpAddr=$reporter
+reptModel=SGOS Web Proxy
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<29>May 27 17:27:28 ProxySG: E0000 Access Log FTP (main): Connecting to primary 10.1.20.21 server 10.1.20.21:21.(0) NORMAL_EVENT ../alog_ftp_client.cpp 110
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=10.1.20.21
+eventAction=0 (Permit)
+eventName=Bluecoat FTP message
+srcIpAddr=$reporter
+reptVendor=Blue Coat
+eventType=Bluecoat-SGOS-AccessLog-FTP
+phEventCategory=0 (External)
+destIpPort=21
+reptDevIpAddr=$localhost
+reptModel=SGOS Web Proxy

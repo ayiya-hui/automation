@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+MYSQL_Logon_Successs,MySQLDB_1,MySQLDB,172.16.22.227,,syslog

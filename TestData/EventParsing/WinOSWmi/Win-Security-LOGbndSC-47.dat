@@ -1,0 +1,37 @@
+[reptDevIpAddr(key)]
+20.20.20.20
+[eventMsg]
+Wed Aug 26 14:18:41 2015 20.20.20.20 AccelOps-WinLog-WMI [Category]="3" [CategoryString]="(null)" [ComputerName]="C4ASINTRANET.c4as.local" [Data]="NULL" [EventCode]="47" [EventIdentifier]="47" [EventType]="4" [Logfile]="Security" [RecordNumber]="7383801" [SourceName]="LOGbndSC" [TimeGenerated]="20150826101318.654900-000" [TimeWritten]="20150826101318.654900-000" [Type]="Audit Success" [User]="C4AS\logadmin" [InsertionStrings]="(8/26/2015 2:10:13 PM,http://c4asintranet:21039,C4AS\pramendra.garg,_catalogs/masterpage/C4_Main_Layout.aspx,C4 Main Page Layout,10.0,,,,,,,,,,2015-08-26T14:10:13.0000000)" [Message]="Document viewed"  [Occurred]=" 8/26/2015 2:10:13 PM"  [Site]="http://c4asintranet:21039"  [User]=" C4AS\pramendra.garg"  [URL]="_catalogs/masterpage/C4_Main_Layout.aspx"  [Title]=" C4 Main Page Layout" [Version]=" 10.0"  [For more information, see http]="//www.ultimatewindowssecurity.com/securitylog/encyclopedia/event.aspx?eventid=47"
+[params]
+deviceTime=any
+version=10.0
+parserName=WinOSWmiParser
+eventType=Win-Security-LOGbndSC-47
+hostName=C4ASINTRANET.c4as.local
+destIpAddr=20.20.20.20
+site=http://c4asintranet:21039
+eventSource=LOGbndSC
+reptModel=Windows
+eventId=any
+eventTime=Wed Aug 26 14:10:13 CST 2015
+eventParsedOk=1
+title=C4 Main Page Layout
+eventSeverity=1
+eventName=SharePoint Document viewed
+appTransportProto=WMI
+phEventCategory=0 (External)
+msg=Document viewed
+eventRuleTrigger=1
+type=Audit Success
+count=1
+seqNum=7383801
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=20.20.20.20
+user=pramendra.garg
+customer=Super
+phRecvTime=any
+reptDevIpAddr=20.20.20.20
+eventAction=0 (Permit)
+infoURL=_catalogs/masterpage/C4_Main_Layout.aspx
+reptVendor=Microsoft

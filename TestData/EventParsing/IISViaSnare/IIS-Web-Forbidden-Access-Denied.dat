@@ -1,0 +1,39 @@
+[reptDevIpAddr(key)]
+192.168.0.40
+[eventMsg]
+<46>Apr 14 12:05:28 192.168.0.40 IISWebLog	0	2010-04-14 19:05:07 W3SVC1 FILER 192.168.0.40 GET /aspnet_client/ - 80 - 192.168.22.4 HTTP/1.1 Mozilla/5.0+(Windows;+U;+Windows+NT+6.0;+en-US;+rv:1.9.0.19)+Gecko/2010031422+Firefox/3.0.19+(.NET+CLR+3.5.30729) - http://192.168.0.40/ 192.168.0.40 403 14 5 377 436 453
+[params]
+rawEventMsg=any
+count=1
+reptVendor=Microsoft
+deviceTime=any
+eventType=IIS-Web-Forbidden-Access-Denied
+phCustId=$sender
+destIpAddr=192.168.0.40
+httpReferrer=http://192.168.0.40/
+srcIpAddr=192.168.22.4
+reptModel=IIS
+eventId=any
+eventParsedOk=1
+eventSeverity=5
+eventName=Web request denied - forbidden access
+httpSubStatusCode=14
+phEventCategory=0 (External)
+httpWin32Status=5
+destName=FILER
+recvBytes=377
+eventSeverityCat=MEDIUM
+srvInstName=W3SVC1
+httpMethod=GET
+user=-
+destIpPort=80
+httpStatusCode=403 (Forbidden - The server understood the request, but is refusing to fulfill it. Authorization will not help)
+httpVersion=HTTP/1.1
+uriStem=/aspnet_client/
+phRecvTime=any
+reptDevIpAddr=192.168.0.40
+eventAction=0 (Permit)
+uriQuery=-
+durationMSec=453
+httpUserAgent=Mozilla/5.0+(Windows;+U;+Windows+NT+6.0;+en-US;+rv:1.9.0.19)+Gecko/2010031422+Firefox/3.0.19+(.NET+CLR+3.5.30729)
+sentBytes=436

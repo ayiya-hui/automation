@@ -1,0 +1,46 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<116> device=FCTEMS0036759495 severity=medium from=FAZVM64(FAZ-VM0000000001) trigger=EVT2SIEM log="itime=1490577883 date=2017-03-27 time=09:24:43 logver=2 type=traffic level=notice sessionid=31434268 hostname=xiaobo-PC pcdomain=uid=52D9E30355CA48B38A15381C0BB29A24 devid=FCT8002625078547 fgtserial=N/A emsserial=FCTEMS0036759495 regip=N/A srcname=sslvpn srcproduct=N/A srcip=N/A srcport=N/A direction=outbound dstip=us-vpn3.myfortinet.com remotename=N/A dstport=10443 user=N/A proto=6 rcvdbyte=30660604 sentbyte=1919249382 utmaction=passthrough utmevent=vpn threat=connect vd=root fctver=5.4.3.0870 os="Microsoft Windows 7 Ultimate Edition, 64-bit Service Pack 1 (build 7601)" usingpolicy="AOFCT" service=url=N/A userinitiated=0 browsetime=N/A"
+[params]
+deviceTime=any
+parserName=FortiClientParser
+appName=N/A
+eventType=FortiClient-traffic-passthrough
+activityType=vpn
+srcName=sslvpn
+customer=Super
+osType=Microsoft Windows 7 Ultimate Edition, 64-bit Service Pack 1 (build 7601)
+reptModel=FortiClient
+eventId=any
+policyName=AOFCT
+eventParsedOk=1
+eventSeverity=2
+eventName=FortiClient permitted traffic
+reptDevName=any
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+threatLevel=connect
+destName=N/A
+count=1
+direction=outbound
+hostName=xiaobo-PC
+sentBytes64=1919249382
+srcIpPort=0
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+user=N/A
+rawEventMsg=any
+ipProto=6 (TCP)
+runTime=0
+destIpPort=10443
+vdom=root
+serialNumber=5.4.3.0870
+recvBytes64=30660604
+actionName=passthrough
+phRecvTime=any
+reptDevIpAddr=$localhost
+infoURL=N/A
+sessionId=31434268
+reptVendor=Fortinet

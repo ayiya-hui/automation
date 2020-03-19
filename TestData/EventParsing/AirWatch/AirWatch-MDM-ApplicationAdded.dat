@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<13> March 09 13:46:01 AirWatch  AirWatch Syslog Details are as follows Event Type: Console, Event: ApplicationAdded, User: ATLANTAWIFI\UserFLast, Event Source: Server, Event Module: Apps, Event Category: Applications, Event Data: Application=Agent;ApplicationVersion=6.0.0;ApplicationType=Internal;LoginSessionID=z21ltg3ib0ozs3q4qzfxgqyqEvent Timestamp: March 9, 2016 13:46:00
+[params]
+domain=ATLANTAWIFI
+deviceTime=any
+parserName=AirWatchParser
+eventType=AirWatch-MDM-ApplicationAdded
+reptModel=MDM
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=AirWatch MDM Application added
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+eventRuleTrigger=1
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+user=UserFLast
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=AirWatch

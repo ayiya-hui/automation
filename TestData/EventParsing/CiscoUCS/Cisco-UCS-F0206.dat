@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<190>: 2014 Dec 16 21:24:52 CST: %UCSM-6-CONNECTIVITY_PROBLEM: [F0206][cleared][connectivity-problem][sys/chassis-6/blade-3/adaptor-1] Adapter 6/3/1 is unreachable
+[params]
+errorNo=206
+customer=Super
+eventSeverityCat=LOW
+eventParsedOk=1
+phEventCategory=0 (External)
+parserName=CiscoUCSParser
+count=1
+eventSeverity=1
+eventType=Cisco-UCS-F0206
+reptDevIpAddr=$localhost
+collectorId=any
+extEventRecvProto=Syslog
+eventName=Cisco-UCS-F0206
+reptVendor=Cisco
+relayDevIpAddr=$localhost
+rawEventMsg=any
+phRecvTime=any
+eventId=any
+reptDevName=any
+reptModel=UCS

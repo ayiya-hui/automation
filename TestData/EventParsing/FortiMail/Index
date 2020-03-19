@@ -1,0 +1,9 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+FortiMail-History-Reject-OK,FortiMail_1,FortiMail,$localhost,,syslog
+FortiMail-Antispam-spam-found-generic,FortiMail_2,FortiMail,$localhost,,syslog
+FortiMail-History-0x200,FortiMail_3,FortiMail,$localhost,,syslog
+FortiMail-Event-Generic,FortiMail_4,FortiMail,$localhost,,syslog
+FortiMail-Event-Hearbeat-Check,FortiMail_5,FortiMail,$localhost,,syslog
+FortiMail-Antivirus-virus-infected,FortiMail_6,FortiMail,$localhost,,syslog
+FortiMail-Encryption-Generic,FortiMail_8,FortiMail,$localhost,,syslog

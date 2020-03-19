@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<135>Nov 28 2007 17:21:17: %PIX-7-710005: UDP request discarded from 192.168.0.10/138 to inside:192.168.15.255/138--automator
+[params]
+rawEventMsg=any
+destIpAddr=192.168.15.255
+deviceTime=any
+eventType=PIX-710005
+phCustId=$sender
+destIpAddr=192.168.15.255
+destIpPort=138 (NETBIOS-DGM)
+srcIpAddr=192.168.0.10
+reptModel=PIX
+eventId=any
+eventParsedOk=any
+eventSeverity=4
+eventName={TCP|UDP} request to appliance discarded by session check
+phEventCategory=0 (External)
+srcIpPort=138
+eventSeverityCat=LOW
+destIntfName=inside
+ipProto=17 (UDP)
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=1 (Deny)
+reptVendor=Cisco

@@ -1,0 +1,32 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+2015-03-27 15:32:55 0.0.0.0TRAP2, SNMP v2c, community public	. Cold Start Trap (0) Uptime: 0:00:00.00	DISMAN-EVENT-MIB::sysUpTimeInstance = Timeticks: (68894422) 7 days, 23:22:24.22	SNMPv2-MIB::snmpTrapOID.0 = OID: SNMPv2-SMI::enterprises.31094.0.1	SNMPv2-MIB::sysDescr.0 = STRING: dynaTrace Trap	SNMPv2-SMI::enterprises.31094.1.1 = STRING: "AccelOps - Test 2"	SNMPv2-SMI::enterprises.31094.1.2 = STRING: "Host Performance/Disk Storage Utilization : Disk Storage Utilization [disk->C:\] <all-applications> (Host-Agent@bik-con-bck3) upper bound exceeded"	SNMPv2-SMI::enterprises.31094.1.3 = Hex-STRING: 5A 75 BF 79 63 69 65 20 64 79 73 6B 75 20 3E 20 31 30 25 	SNMPv2-SMI::enterprises.31094.1.4 = STRING: "Warning"	SNMPv2-SMI::enterprises.31094.1.5 = STRING: "9d6bc7fc-96ca-4812-91d1-edbd8dccc1a9"	SNMPv2-SMI::enterprises.31094.1.6 = STRING: "dtctst01"	SNMPv2-SMI::enterprises.31094.1.7 = STRING: "Monitoring"	SNMPv2-SMI::enterprises.31094.1.8 = STRING: "20150327163220"	SNMPv2-SMI::enterprises.31094.1.11 = STRING: "-"	SNMPv2-SMI::enterprises.31094.1.12 = STRING: "-"	SNMPv2-SMI::enterprises.31094.1.13.1 = STRING: "Immediate"	SNMPv2-SMI::enterprises.31094.1.13.2 = Timeticks: (0) 0:00:00.00	SNMPv2-SMI::enterprises.31094.1.13.3 = Timeticks: (0) 0:00:00.00	SNMPv2-SMI::enterprises.31094.1.13.4 = Timeticks: (60000) 0:10:00.00	SNMPv2-SMI::enterprises.31094.1.15.1.3.2.1 = STRING: "a"	SNMPv2-SMI::enterprises.31094.1.15.1.4.1.1 = STRING: "<all-applications>"
+[params]
+deviceTime=any
+rawEventMsg=any
+parserName=DynaTraceParser
+eventType=Dynatrace-Host-Performance-Disk-Storage-Utilization
+hostName=dtctst01
+appGroupName=<all-applications>
+reptModel=Dynatrace App Monitoring
+eventId=any
+eventParsedOk=1
+eventSeverity=5
+eventName=Disk Storage upper bound exceeded
+serviceName=AccelOps - Test 2
+extEventRecvProto=Snmp Trap
+phEventCategory=0 (External)
+msg=Disk Storage Utilization [disk->C:\] <all-applications> (Host-Agent@bik-con-bck3) upper bound exceeded
+jobDesc=a
+count=1
+eventSeverityCat=MEDIUM
+collectorId=any
+relayDevIpAddr=$localhost
+startTime=Fri Mar 27 16:32:20 CST 2015
+profileDetails=Monitoring
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Compuware
+alertName=AccelOps - Test 2

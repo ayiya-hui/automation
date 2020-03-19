@@ -1,0 +1,4 @@
+[eventMsg]
+[PH_DEV_MON_VM_MEM_UTIL]:[eventSeverity]=PHL_INFO,[phyMachName]=testVM,[phyMachIpAddr]=8.0.0.1,[pollIntv]=180,[vmName]=vm3,[hostName]=automator8Dot30Dot0Dot1,[hostIpAddr]=8.30.0.1,[actvMemPct]=27.39,[phyMemUtil]=15.27,[swapWriteKBytesPerSec]=0.0,[swapReadKBytesPerSec]=1650.0
+
+[clearEventMsg]

@@ -1,0 +1,52 @@
+[reptDevIpAddr(key)]
+56.56.56.1
+[eventMsg]
+<190>May 11 13:54:10 $reporter mgd[5518]: UI_LOGIN_EVENT: User 'phoenix_agent' login, class 'j-super-user' [5518], ssh-connection '192.168.28.21 39109 172.16.5.64 22', client-mode 'cli'
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+appTransportProto=cli
+count=1
+phCustId=$sender
+destIpAddr=172.16.5.64
+destIpPort=22
+deviceTime=any
+eventAction=0 (Permit)
+eventId=any
+eventName=User started a JUNOS CLI session
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=1
+eventSeverityCat=LOW
+eventType=JUNOS_UI_LOGIN_EVENT
+osObjName=j-super-user
+reptDevIpAddr=$reporter
+reptModel=JunOS
+reptVendor=Juniper
+srcIpAddr=192.168.28.21
+srcIpPort=39109
+user=phoenix_agent
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<190>Nov 17 20:09:38 mgd[33276]: %INTERACT-6-UI_LOGIN_EVENT: User 'phoenix_agent' login, class 'j-super-user' [33276], ssh-connection '', client-mode 'junoscript'
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+appTransportProto=junoscript
+count=1
+phCustId=$sender
+deviceTime=any
+eventAction=0 (Permit)
+eventId=any
+eventName=User started a JUNOS CLI session
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=6
+eventSeverityCat=MEDIUM
+eventType=JUNOS_UI_LOGIN_EVENT
+osObjName=j-super-user
+reptDevIpAddr=$reporter
+reptModel=JunOS
+reptVendor=Juniper
+user=phoenix_agent

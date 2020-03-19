@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+Dell-NSeries-Invalid-Packet,DellNSeries_1,DellNSeries,$localhost,,syslog

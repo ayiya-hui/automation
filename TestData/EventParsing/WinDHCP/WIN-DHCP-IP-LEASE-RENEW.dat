@@ -1,0 +1,48 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<15>May 27 17:22:45 ADS-Pri.ProspectHills.net WinDHCPLog	0	11,05/27/08,17:22:45,Renew,192.168.20.51,,001A1EC0607A,
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+eventAction=0 (Permit)
+hostIpAddr=192.168.20.51
+eventName=DHCP lease renewed
+reptVendor=Microsoft
+eventType=WIN-DHCP-IP-LEASE-RENEW
+phEventCategory=0 (External)
+reptDevIpAddr=$localhost
+hostMACAddr=00:1a:1e:c0:60:7a
+reptModel=DHCP
+[reptDevIpAddr(key)]
+34.34.34.34
+[eventMsg]
+<13>Mar 29 10:25:05 $reporter WinDHCPLog 0      11,03/29/10,10:25:01,Renew,192.168.20.32,wayne-laptop.ProspectHills.net,00265E16C7AC,
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+reptVendor=Microsoft
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+eventAction=0 (Permit)
+hostIpAddr=192.168.20.32
+eventName=DHCP lease renewed
+computer=wayne-laptop
+eventType=WIN-DHCP-IP-LEASE-RENEW
+phEventCategory=0 (External)
+hostName=wayne-laptop
+reptDevIpAddr=$reporter
+hostMACAddr=00:26:5e:16:c7:ac
+reptModel=DHCP

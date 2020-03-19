@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<189>Jun  2 16:30:20 p1eibzrv01 5523: Jun  2 16:30:20%WS_IPSEC_3-5-REPLAYERR: slot 4/0 Replay Error: Current Seq. No. =1491322, Highest Seq No. =1491588
+[params]
+deviceTime=any
+isHostIntfCritical=No
+eventType=IOS-WS_IPSEC_3-REPLAYERR
+phCustId=$sender
+hostName=p1eibzrv01
+intfName=slot 4/0
+reptModel=IOS
+eventId=any
+eventParsedOk=1
+eventSeverity=2
+hostIpAddr=$localhost
+eventName=Failed anti-replay check on IPSec inbound processing
+phEventCategory=0
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=Success(0)
+reptVendor=Cisco

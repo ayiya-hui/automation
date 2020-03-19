@@ -1,0 +1,22 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>Jul 24 2008 03:23:37: %ASA-6-113004: AAA user authentication Successful : server =  192.168.0.40 : user = wenyong
+[params]
+rawEventMsg=any
+user=wenyong
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+eventAction=0 (Permit)
+eventName=IPsec/WebVPN AAA user authentication successful
+reptVendor=Cisco
+eventType=ASA-113004
+phEventCategory=0 (External)
+reptDevIpAddr=$reporter
+reptModel=ASA

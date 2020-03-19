@@ -1,0 +1,21 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<189>393047 06/29/2009 21:26:10.740 SEV=4 IKE/119 RPT=1162 99.129.50.155  Group [HQ-Dev] User [wenyong] PHASE 1 COMPLETED--automator
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+eventAction=0 (Permit)
+eventName=Cisco-VPN3K-IKE/119
+reptVendor=Cisco
+eventType=Cisco-VPN3K-IKE/119
+phEventCategory=0 (External)
+reptDevIpAddr=$localhost
+reptModel=VPN 3K

@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+10.3.35.32
+[eventMsg]
+477761472 Tue Mar 04 22:00:50 EST 2014 nas_admin Module Added lncmpmasp01.staples.com 10.3.35.32 DeviceID:         50481 Slot:             slot 0 SlotNumber:       0 ModuleModel:      73-11833-11/CISCO2911/K9 ModuleDescription:C2911 Mother board 3GE, integrated VPN and 4W Port adapter, 9 ports ModuleOS:          FirmwareVersion:   HardwareRevision: 1.0 board revision A0 SerialNumber:     FOC17236ABY LastModifiedDate: Tue Mar 04 22:00:50 EST 2014 Status:           Active  DeviceID:         50481 Slot:             2nd generation four port FXO voice interface daughtercard on Slot 0 SubSlot 1 SlotNumber:       2 ModuleModel:      VIC2-4FXO ModuleDescription:2nd generation four port FXO voice interface daughtercard ModuleOS:          FirmwareVersion:   HardwareRevision: V04 SerialNumber:     FOC16473WYF LastModifiedDate: Tue Mar 04 22:00:50 EST 2014 Status:           Active  DeviceID:         50481 Slot:             VWIC2-2MFT-T1/E1 - 2-Port RJ-48 Multiflex Trunk - T1/E1 on Slot 0 SubSlot 2 SlotNumber:       2
+[params]
+customer=Super
+eventId=any
+parserName=CiscoNCMParser
+reptDevIpAddr=10.3.35.32
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+count=1
+eventSeverity=1
+eventType=Cisco-NCM-Module-Added
+serialNumber=FOC17236ABY
+collectorId=any
+eventName=Cisco Network Compliance Manager Module Added
+reptVendor=Cisco
+relayDevIpAddr=any
+user=nas_admin
+extEventRecvProto=Syslog
+phRecvTime=any
+eventRuleTrigger=1
+reptDevName=lncmpmasp01.staples.com
+reptModel=CiscoWorks NCM

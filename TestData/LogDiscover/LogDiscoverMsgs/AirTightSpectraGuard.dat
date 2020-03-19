@@ -1,0 +1,2 @@
+[eventMsg]
+<30><2013.09.09 19:45:16>CEF:0|AirTight|SpectraGuard Enterprise|6.7|5.51.515|Authorized AP operating on non-allowed channel|3|msg=Stop: Authorized AP [AP2.12.c11d] is operating on non-allowed channel. rt=Sep 09 2013 19:45:16 UTC dvc=30.200.89.1 externalId=726574 dmac=58:BF:EA:FA:26:EF cs1Label=TargetDeviceName cs1=AP2.12.c11d cs2Label=SSID cs2=TaisWiFiHiSpeed cs3Label=SecuritySetting cs3=802.11i cn1Label=RSSI_dBm cn1=-50 cn2Label=Channel cn2=149 cs4Label=Location cs4=//FB/FBFL2

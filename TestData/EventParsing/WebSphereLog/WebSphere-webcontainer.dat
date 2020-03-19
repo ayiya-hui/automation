@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+[3/31/14 0:08:24:515 PDT] 00000016 webcontainer  E com.WebContainer.ws.webcontainer.WebContainer handleRequest SRVE0255E: A WebGroup/Virtual Host to handle /cgi-bin/directorypro.cgi has not been defined.
+[params]
+deviceTime=any
+parserName=WebSphereLogParser
+eventType=WebSphere-webcontainer
+threadId=00000016
+reptModel=WebSphere App Server
+eventId=any
+eventParsedOk=1
+eventSeverity=5
+eventName=WebContainer logs
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=MEDIUM
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+eventDesc=com.WebContainer.ws.webcontainer.WebContainer handleRequest SRVE0255E: A WebGroup/Virtual Host to handle /cgi-bin/directorypro.cgi has not been defined.
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=IBM

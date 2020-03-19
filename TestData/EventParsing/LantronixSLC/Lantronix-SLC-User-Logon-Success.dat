@@ -1,0 +1,24 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<182>xwsd[24778]: auth/info-Web Authentication Success for user andbr003
+[params]
+customer=Super
+eventId=any
+eventSeverityCat=MEDIUM
+eventParsedOk=1
+phEventCategory=0 (External)
+parserName=LantronixSLCParser
+count=1
+eventSeverity=5
+eventType=Lantronix-SLC-User-Logon-Success
+reptDevIpAddr=$localhost
+collectorId=any
+eventName=Lantronix admin user successsful logon
+reptVendor=Lantronix
+relayDevIpAddr=$localhost
+user=andbr003
+phRecvTime=any
+eventRuleTrigger=1
+appTransportProto=Syslog
+reptModel=SLC Console Manager

@@ -1,0 +1,124 @@
+<eventParser name="SnortParser">
+  
+  <deviceType>
+    <Vendor>Generic</Vendor>
+    <Model>Generic</Model>
+    <Version>ANY</Version>
+  </deviceType>
+
+  <appType>
+    <Vendor>Snort-org</Vendor>
+    <Model>Snort IPS</Model>
+    <Version>ANY</Version>
+    <Name>Snort IPS</Name>
+  </appType>
+
+  <!-- pattern definitions -->
+  <patternDefinitions>
+    <pattern name="patMesgA"><![CDATA[[^\[]+]]></pattern>
+  </patternDefinitions>
+  
+  <eventFormatRecognizer><![CDATA[snort\[\d+\]]]></eventFormatRecognizer>
+  
+  <testEvents>
+      <testEvent><![CDATA[<161>snort[2242]: [1:206:9] BACKDOOR DeepThroat 3.1 CD ROM Open Client Request [Classification: Misc activity] [Priority: 3]: {UDP} 192.168.19.1:6555 -> 172.16.2.5:514]]></testEvent>
+  </testEvents>
+
+  <parsingInstructions>
+
+    <!-- parsing the fields
+
+	<161>snort[5774]: [1:1560:6] WEB-MISC /doc/ access [Classification: access to a potentially vulnerable web application] [Priority: 2]: {TCP} 192.168.20.53:41218 -> 192.168.0.26:80
+
+        <161>snort[5774]: [1:466:4] ICMP L3retriever Ping [Classification: Attempted Information Leak] [Priority: 2]: {ICMP} 192.168.20.49 -> 192.168.0.10
+
+        <161>snort[5774]: [1:1417:9] SNMP request udp [Classification: Attempted Information Leak] [Priority: 2]: {UDP} 192.168.20.40:1061 -> 192.168.20.2:161
+
+    -->
+
+    <setEventAttribute attr="eventAction">0</setEventAttribute>
+ 
+    <switch>
+      <case>
+        <collectFieldsByRegex src="$_rawmsg">
+          <regex><![CDATA[<:gPatSyslogPRI>snort\[<:gPatInt>\]: \[<:gPatInt>:<_evTypeId:gPatInt>:<:gPatInt>\] <_type:patMesgA>\[\d+\]\s+\[<_name:gPatStr>: <_body:gPatMesgBody>]]></regex>
+        </collectFieldsByRegex>	
+      </case>
+      <case>
+        <collectFieldsByRegex src="$_rawmsg">
+          <regex><![CDATA[<:gPatSyslogPRI>snort\[<:gPatInt>\]: \[<:gPatInt>:<_evTypeId:gPatInt>:<:gPatInt>\] <_type:patMesgA>\[<_name:gPatStr>: <_body:gPatMesgBody>]]></regex>
+        </collectFieldsByRegex>	
+      </case>
+
+      <case> <!-- always put this case above the one below -->
+        <collectFieldsByRegex src="$_rawmsg">
+          <regex><![CDATA[<:gPatSyslogPRI><_NGHeader:gPatSyslogNGHeader> snort\[<:gPatInt>\]: \[<:gPatInt>:<_evTypeId:gPatInt>:<:gPatInt>\] <_type:patMesgA>\[<_name:gPatStr>: <_body:gPatMesgBody>]]></regex>
+        </collectFieldsByRegex>
+        <collectFieldsByRegex src="$_NGHeader">
+          <regex><![CDATA[<:gPatMon>\s+<:gPatDay>\s<:gPatTime>\s<reptDevIpAddr:gPatIpV4Dot>]]></regex>
+        </collectFieldsByRegex>          
+      </case>
+
+      <case>
+        <collectFieldsByRegex src="$_rawmsg">
+          <regex><![CDATA[<:gPatSyslogPRI><_mon:gPatMon>\s+<_day:gPatDay> <_time:gPatTime> <:gPatStr> snort\[<:gPatInt>\]: \[<:gPatInt>:<_evTypeId:gPatInt>:<:gPatInt>\] <_type:patMesgA>\[<_name:gPatStr>: <_body:gPatMesgBody>]]></regex>
+        </collectFieldsByRegex>
+      </case>
+
+    </switch>
+
+
+    <when test='$_name = "Classification"'>
+      <collectAndSetAttrByRegex src="$_body">
+        <regex><![CDATA[<_info:gPatMesgBody>\] \[Priority: <_body2:gPatMesgBody>]]></regex>
+      </collectAndSetAttrByRegex>        
+      <setEventAttribute attr="_body">$_body2</setEventAttribute>
+    </when>
+
+    <collectAndSetAttrByRegex src="$_body">
+      <regex><![CDATA[<_severity:gPatInt>\]: \{<_proto:gPatStr>\} <_body2:gPatMesgBody>]]></regex>      
+    </collectAndSetAttrByRegex>
+    
+    <!-- event severity -->
+    <choose>
+      <when test='$_severity = "1"'>
+        <setEventAttribute attr="eventSeverity">9</setEventAttribute>
+      </when>
+
+      <when test='$_severity = "2"'>
+        <setEventAttribute attr="eventSeverity">5</setEventAttribute>
+      </when>
+
+      <when test='$_severity = "3"'>
+        <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+      </when>
+    </choose>
+
+    <choose>
+
+      <when test='$_proto IN "TCP, UDP"'>
+        <collectAndSetAttrByRegex src="$_body2">
+          <regex><![CDATA[<srcIpAddr:gPatIpV4Dot>:<srcIpPort:gPatInt> -> <destIpAddr:gPatIpV4Dot>:<destIpPort:gPatInt>]]></regex>
+        </collectAndSetAttrByRegex>
+      </when>
+
+      <when test='$_proto = "ICMP"'>
+        <collectAndSetAttrByRegex src="$_body2">
+          <regex><![CDATA[<srcIpAddr:gPatIpV4Dot>:0 -> <destIpAddr:gPatIpV4Dot>:0]]></regex>
+        </collectAndSetAttrByRegex>
+      </when>
+
+      <when test='$_proto = "PROTO:255"'>
+        <collectAndSetAttrByRegex src="$_body2">
+          <regex><![CDATA[<srcIpAddr:gPatIpV4Dot> -> <destIpAddr:gPatIpV4Dot>]]></regex>
+        </collectAndSetAttrByRegex>
+      </when>
+
+    </choose>
+
+    <setEventAttribute attr="eventType">combineMsgId("Snort", "-", $_evTypeId)</setEventAttribute>
+    <setEventAttribute attr="ipProto">convertStrToIntIpProto($_proto)</setEventAttribute>
+     
+  </parsingInstructions>
+
+</eventParser>

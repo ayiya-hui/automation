@@ -1,0 +1,9 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+FortiClient-traffic-blocked,FortiClient_1,FortiClient,$localhost,,syslog
+FortiClient-system,FortiClient_2,FortiClient,$localhost,,syslog
+FortiClient-endpoint,FortiClient_3,FortiClient,$localhost,,syslog
+FortiClient-traffic-passthrough,FortiClient_4,FortiClient,$localhost,,syslog
+FortiClient-traffic-userbrowsed,FortiClient_5,FortiClient,$localhost,,syslog
+FortiClient-update,FortiClient_6,FortiClient,$localhost,,syslog
+FortiClient-sslvpn-connected,FortiClient_7,FortiClient,$localhost,,syslog

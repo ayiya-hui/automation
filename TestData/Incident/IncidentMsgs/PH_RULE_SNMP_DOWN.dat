@@ -1,0 +1,5 @@
+[eventMsg]
+[PH_DEV_MON_SNMP_PING_STAT]:[eventSeverity]=PHL_INFO,[fileName]=phPerfJob.cpp,[lineNumber]=1212,[hostName]=ACCELOPS-E9F061,[hostIpAddr]=19.0.0.7,[avgDurationMSec]=0,[minDurationMSec]=0,[maxDurationMSec]=1,[pktLossPct]=100.000000,[sysDownTime]=0,[sysDegradedTime]=0,[pollIntv]=116,[phLogDetail]=
+
+[clearEventMsg]
+[PH_DEV_MON_SNMP_PING_STAT]:[eventSeverity]=PHL_INFO,[fileName]=phPerfJob.cpp,[lineNumber]=1212,[hostName]=ACCELOPS-E9F061,[hostIpAddr]=19.0.0.7,[avgDurationMSec]=0,[minDurationMSec]=0,[maxDurationMSec]=1,[pktLossPct]=0.000000,[sysDownTime]=0,[sysDegradedTime]=0,[pollIntv]=116,[phLogDetail]=

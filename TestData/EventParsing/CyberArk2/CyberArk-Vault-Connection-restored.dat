@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<30>Mar 22 20:13:42 VA461_1022 CyberArk AIM[2453]: APPAP097I Connection to the Vault has been restored
+[params]
+customer=Super
+eventId=any
+parserName=CyberArk2Parser
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+count=1
+eventSeverity=1
+eventType=CyberArk-Vault-Connection-restored
+reptDevIpAddr=$localhost
+collectorId=any
+extEventRecvProto=Syslog
+eventName=CyberArk-Vault-Connection-restored
+reptVendor=CyberArk
+relayDevIpAddr=$localhost
+rawEventMsg=any
+phRecvTime=any
+reptDevName=any
+reptModel=Enterprise Password Vault

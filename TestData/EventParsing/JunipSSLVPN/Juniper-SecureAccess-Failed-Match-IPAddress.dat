@@ -1,0 +1,23 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>Juniper: 2008-10-28 02:59:44 - ive - [192.168.20.82] wenyong(Users)[Users] - Network Connect: No suitable pool / DHCP server found for user. Please check whether user's roles are mapped to any connection profiles by running policy trace or visual inspection.
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+eventAction=0 (Permit)
+eventType=Juniper-SecureAccess-Failed-Match-IPAddress
+reptVendor=Juniper
+eventName=No suitable pool/DHCP server found for user
+user=wenyong
+phEventCategory=0 (External)
+reptDevIpAddr=$localhost
+userGrp=Users
+reptModel=Secure Access

@@ -1,0 +1,23 @@
+[reptDevIpAddr(key)]
+80.80.80.80
+[eventMsg]
+<190>Dec 27 14:15:15 80.80.80.80 NT: <ZenithArcA;E305;> Failed to retrieve backup job configuration for server [DBSQL]
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+count=1
+phCustId=$sender
+destName=any
+deviceTime=any
+eventAction=1 (Deny)
+eventId=any
+eventName=Failed To Retrieve Backup Job Configuration
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=5
+eventSeverityCat=MEDIUM
+eventType=ZenithArca-E305
+msg=Failed to retrieve backup job configuration for server [DBSQL]
+reptDevIpAddr=$reporter
+reptModel=Zenith ARCA
+reptVendor=Zenith Infotech

@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+172.18.37.201
+[eventMsg]
+Oct 13 11:11:45 172.18.37.201 meru: snmp stopped.
+[params]
+customer=Super
+eventId=any
+parserName=FortiWLANParser
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+count=1
+eventSeverity=1
+eventType=FortiWLC-Process-stop
+reptDevIpAddr=172.18.37.201
+collectorId=any
+extEventRecvProto=Syslog
+eventName=FortiWLC process stop
+procName=snmp
+reptVendor=Fortinet
+relayDevIpAddr=172.18.37.201
+rawEventMsg=any
+phRecvTime=any
+reptDevName=any
+reptModel=FortiWLC

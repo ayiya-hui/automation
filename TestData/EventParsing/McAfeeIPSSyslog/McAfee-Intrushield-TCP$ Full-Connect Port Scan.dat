@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<104>Nov 12 11:50:19 SyslogAlertForwarder: AttackName:TCP: Full-Connect Port Scan,AttackTime:2009-11-12 11:50:16 PST,AttackSeverity:Medium,SourceIp:172.16.20.151,SourcePort:0,DestinationIp:192.168.0.40,DistinationPort:N/A,AlertId:5332552212419904202,AlertType:Port Scan,AttackId:0x40009400,AttackSignature:N/A,AttackConfidence:N/A,AdminDomain:My Company,SensorName:accelopsips,Interface:1A,Category:Reconnaissance,SubCategory:port-scan,Direction:Unknown,ResultStatus:Suspicious,DetectionMechanism:threshold,ApplicationProtocol:N/A,NetworkProtocol:N/A,Relevance:N/A,Quarantine_End_Time:N/A
+[params]
+domain=My Company
+deviceTime=any
+eventType=McAfee-Intrushield-TCP: Full-Connect Port Scan
+phCustId=$sender
+destIpAddr=192.168.0.40
+ipsFPCheckStatus=0 (Couldnot determine)
+srcIpAddr=172.16.20.151
+reptModel=Intrushield
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=McAfee-Intrushield-TCP: Full-Connect Port Scan
+phEventCategory=0 (External)
+srcIntfName=1A
+srcIpPort=0
+eventSeverityCat=LOW
+relayDevIpAddr=$localhost
+reptDevName=accelopsips
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=McAfee

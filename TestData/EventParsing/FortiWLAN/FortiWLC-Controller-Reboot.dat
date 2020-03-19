@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+172.18.37.201
+[eventMsg]
+Oct 13 11:11:32 172.18.37.201 ALARM: 1255432836l | system | notice | NOT | Controller administrative reboot requested
+[params]
+customer=Super
+eventId=any
+parserName=FortiWLANParser
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+count=1
+eventSeverity=1
+eventType=FortiWLC-Controller-Reboot
+reptDevIpAddr=172.18.37.201
+collectorId=any
+extEventRecvProto=Syslog
+eventName=FortiWLC Controller rebooted
+reptVendor=Fortinet
+relayDevIpAddr=172.18.37.201
+rawEventMsg=any
+phRecvTime=any
+reptDevName=any
+reptModel=FortiWLC

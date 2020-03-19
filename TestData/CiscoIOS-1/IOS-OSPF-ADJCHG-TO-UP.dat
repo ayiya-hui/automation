@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+201: May 12 01:10:52: %OSPF-5-ADJCHG: Process 1, Nbr 2.2.2.2 on Ethernet0/0 from LOADING to FULL, Loading Done
+[params]
+deviceTime=any
+destIpAddr=2.2.2.2
+destName=arennes-651-1-107-2.w2-2.abo.wanadoo.fr
+eventType=IOS-OSPF-ADJCHG-TO-UP
+phCustId=$sender
+intfName=Ethernet0/0
+reptModel=IOS
+eventId=any
+eventParsedOk=1
+eventSeverity=2
+hostIpAddr=$localhost
+eventName=OSPF neighbor came back up
+phEventCategory=0
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=Success(0)
+reptVendor=Cisco

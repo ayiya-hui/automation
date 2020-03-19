@@ -1,0 +1,77 @@
+[reptDevIpAddr(key)]
+172.16.1.100
+[eventMsg]
+<15> Aug 28 22:35:53 172.16.1.100 LLDP: LLDP mlldpCtrl:FTR_LLDP_POEP:POE PowerUpdate (mtype = 2) Recvd 145 Port
+[params]
+deviceTime=any
+parserName=HPProCurveParser
+isHostIntfCritical=No
+eventType=HP-ProCurve-LLDP-FTR_LLDP_POEP-Successful
+intfName=145
+reptModel=ProCurve
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=HP-ProCurve-LLDP-FTR_LLDP_POEP-Successful
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=172.16.1.100
+rawEventMsg=any
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=172.16.1.100
+reptVendor=HP
+[reptDevIpAddr(key)]
+172.16.1.100
+[eventMsg]
+<15> Aug 28 22:35:40 172.16.1.100 LLDP: LLDP mlldpCtrl:FTR_LLDP_POEP: PowerType, PowerSource, PowerPriority: 2, 1, 3
+[params]
+customer=Super
+eventId=any
+parserName=HPProCurveParser
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+count=1
+eventSeverity=1
+eventType=HP-ProCurve-LLDP-FTR_LLDP_POEP-Successful
+reptDevIpAddr=172.16.1.100
+collectorId=any
+extEventRecvProto=Syslog
+eventName=HP-ProCurve-LLDP-FTR_LLDP_POEP-Successful
+reptVendor=HP
+relayDevIpAddr=172.16.1.100
+rawEventMsg=any
+phRecvTime=any
+reptDevName=any
+reptModel=ProCurve
+[reptDevIpAddr(key)]
+172.16.1.100
+[eventMsg]
+<15> Aug 28 23:43:09 172.16.1.100 LLDP: LLDP mlldpCtrl:FTR_LLDP_POEP: PseAllocPowerValue = 5968,PdReqPowerValue = 0
+[params]
+customer=Super
+eventId=any
+parserName=HPProCurveParser
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+count=1
+eventSeverity=1
+eventType=HP-ProCurve-LLDP-FTR_LLDP_POEP-Successful
+reptDevIpAddr=172.16.1.100
+collectorId=any
+extEventRecvProto=Syslog
+eventName=HP-ProCurve-LLDP-FTR_LLDP_POEP-Successful
+reptVendor=HP
+relayDevIpAddr=172.16.1.100
+rawEventMsg=any
+phRecvTime=any
+reptDevName=any
+reptModel=ProCurve

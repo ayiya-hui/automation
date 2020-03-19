@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+Wed Jul  9 15:10:24 2014 AccelOps-WVSS [event_type]=WVSS-VULN-INFO [vul_id]=10001 [vul_type]=44
+[params]
+deviceTime=any
+parserName=WVSSParser
+eventType=WVSS-VULN-INFO
+reptModel=WVSS
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=WVSS-VULN-INFO
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+vulnId=10001
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+customer=Super
+vulnType=44
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Green League

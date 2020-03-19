@@ -1,0 +1,2 @@
+[eventMsg]
+<134>Oct 21 15:47:30 12.4.0.1 java: [PH_DEV_MON_HW_STATUS_POWERSUPPLY_CRIT]:[eventSeverity]=PHL_CRITICAL,[hostName]=automator12Dot4Dot0Dot1,[hostIpAddr]=12.4.0.1,[hwStatusCode]=0,[hwComponentName]=Power Supply 2,[hwComponentStatus]=This element is not responding

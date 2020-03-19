@@ -1,0 +1,44 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<29>Jun 15 07:59:03 $localhost nginx: "200.158.115.204","-","Mozilla/5.0 (Windows NT 5.1 WOW64; rv:9.0.1) Gecko/20100178 Firefox/9.0.1","/images/design/header-2-logo.jpg","GET","http://wm-center.com/images/design/header-2-logo.jpg","400","0","/ypf-cookie_auth/index.html","0.000","877","-","10.4.200.203","80","wm-center.com","no-cache, no-store, must-revalidate","-","1.64","_","-","-"
+[params]
+rawEventMsg=any
+httpHeaderExpires=-
+deviceTime=any
+eventType=Nginx-Web-Bad-Request
+phCustId=$sender
+destIpAddr=10.4.200.203
+httpReferrer=http://wm-center.com/images/design/header-2-logo.jpg
+srcName=200-158-115-204.dsl.telesp.net.br
+nginxCv1=-
+srcIpAddr=200.158.115.204
+reptModel=Web Server
+eventId=any
+nginxCv2=-
+eventParsedOk=1
+eventSeverity=5
+testEvent=Real Event(0)
+eventName=Web request denied - bad request
+phEventCategory=0 (External)
+httpHeaderCacheControl=no-cache, no-store, must-revalidate
+destName=_
+httpEndUri=/ypf-cookie_auth/index.html
+httpRequestTime=0.00
+eventSeverityCat=MEDIUM
+collectorId=any
+httpMethod=GET
+user=-
+destIpPort=80
+httpStatusCode=400 (Bad Request - The request could not be understood by the server due to malformed syntax)
+reptDevName=any
+count=1
+uriStem=/images/design/header-2-logo.jpg
+phRecvTime=any
+reptDevIpAddr=$localhost
+httpGzipRatio=1.64
+reptVendor=Nginx
+httpLimitRate=0
+destDomain=wm-center.com
+httpUserAgent=Mozilla/5.0 (Windows NT 5.1 WOW64; rv:9.0.1) Gecko/20100178 Firefox/9.0.1
+sentBytes=877

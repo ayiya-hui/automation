@@ -1,0 +1,21 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<188>18470 01/07/1999 22:10:16.940 SEV=3 SNMP/6 RPT=6 192.168.1.4  Received SNMP request with unsupported community string 'test' --automator
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=5
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=MEDIUM
+eventAction=0 (Permit)
+eventName=Cisco-VPN3K-SNMP/6
+reptVendor=Cisco
+eventType=Cisco-VPN3K-SNMP/6
+phEventCategory=0 (External)
+reptDevIpAddr=$localhost
+reptModel=VPN 3K

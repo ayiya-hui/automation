@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<14> February 25 13:36:55 AirWatch This is an AirWatch test message.
+[params]
+customer=Super
+eventId=any
+parserName=AirWatchParser
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+count=1
+eventSeverity=1
+eventType=AirWatch-MDM-Generic
+reptDevIpAddr=$localhost
+collectorId=any
+eventName=AirWatch MDM  Generic message
+reptVendor=AirWatch
+relayDevIpAddr=$localhost
+extEventRecvProto=Syslog
+phRecvTime=any
+eventRuleTrigger=1
+reptDevName=any
+reptModel=MDM

@@ -1,0 +1,23 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>Dec 04 2008 20:00:45: %PIX-1-107001: RIP auth failed from 20.20.20.20: version=2, type=MD5, mode=testString, sequence=34566776 on interface inside
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=any
+eventSeverity=10
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=HIGH
+srcIpAddr=20.20.20.20
+eventAction=1 (Deny)
+eventName=RIP auth failed
+reptVendor=Cisco
+eventType=PIX-107001
+phEventCategory=0 (External)
+srcIntfName=inside
+reptDevIpAddr=$localhost
+reptModel=PIX

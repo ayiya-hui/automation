@@ -1,0 +1,35 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+2015-11-11T18:09:25.991143+00:00 ukcora-ap39 %DATAPLANE-4-DOSATTACK: INVALID PACKET:  Truncated TCP header : Src IP : 10.52.195.206, Dst IP: 170.37.205.8, Src Mac: A4-4E-31-67-75-98, Dst Mac: E0-89-9D-27-5B-CD, Src Port = 63974, Dst Port = 443, Proto = 6.
+[params]
+destMACAddr=e0:89:9d:27:5b:cd
+destGeoOrg=any
+parserName=MotorolaWiNGParser
+eventType=Motorola-WiNG-DATAPLANE-DOSATTACK
+destGeoState=Massachusetts
+destIpAddr=170.37.205.8
+ipProto=6 (TCP)
+destGeoCountry=any
+srcIpAddr=10.52.195.206
+reptModel=WiNG WLAN AP
+eventId=any
+eventParsedOk=1
+eventSeverity=5
+eventName=Motorola WLAN AP: DOS Attack
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+eventRuleTrigger=1
+count=1
+srcMACAddr=a4:4e:31:67:75:98
+srcIpPort=63974
+eventSeverityCat=MEDIUM
+collectorId=any
+relayDevIpAddr=$localhost
+destIpPort=443 (HTTPS)
+reptDevName=ukcora-ap39
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Motorola
+destGeoCity=any

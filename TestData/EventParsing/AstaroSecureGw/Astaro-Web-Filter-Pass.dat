@@ -1,0 +1,29 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<30>2009:08:17-13:34:09 httpproxy[3706]: id="0001" severity="info" sys="SecureWeb" sub="http" name="http access" action="pass" method="GET" srcip="172.18.22.154" user="wenyong" statuscode="304" cached="0" profile="REF_DefaultHTTPProfile (Default Proxy)" filteraction="REF_DefaultHTTPCFFAction (Default content filter action)" size="0" time="33 ms" request="0xb1034df0" url="http://bloomfieldhillsmi.net/images/na-footer.gif" exceptions="content,url,mime" error="" --automator
+[params]
+rawEventMsg=any
+deviceTime=any
+eventType=Astaro-Web-Filter-Pass
+phCustId=$sender
+totBytes=0
+srcIpAddr=172.18.22.154
+reptModel=Security Gateway
+eventId=any
+policyName=REF_DefaultHTTPProfile (Default Proxy)
+eventParsedOk=1
+eventSeverity=1
+eventName=Web request passed Web Filter
+phEventCategory=0 (External)
+destName=bloomfieldhillsmi.net
+eventSeverityCat=LOW
+httpMethod=GET
+user=wenyong
+httpStatusCode=304 (Not Modified - The client has performed a conditional GET request and access is allowed, but the document has not been modified)
+count=1
+uriStem=http://bloomfieldhillsmi.net/images/na-footer.gif
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Astaro

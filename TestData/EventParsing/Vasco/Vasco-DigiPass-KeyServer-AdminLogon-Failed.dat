@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+70.70.70.70
+[eventMsg]
+May 16 18:55:25 70.70.70.70 ikeyserver[3575]: {Failure}, {Administration}, {F-004001}, {An administrative logon was rejected.}, {0x388B937165D27352C89DF43754C2A8AA}, {Source Location:10.1.2.3}, {Client Location:10.1.2.3}, {Reason:Digipass User account not found, but is required for Local Authentication}, {User ID:flast}, {Domain:}, {Client Type:Administration Program}
+[params]
+parserName=VascoParser
+eventType=Vasco-DigiPass-KeyServer-AdminLogon-Failed
+srcIpAddr=10.1.2.3
+reptModel=DigiPass
+eventId=any
+eventParsedOk=1
+eventSeverity=7
+eventName=An administrative logon was rejected
+appTransportProto=Syslog
+phEventCategory=0 (External)
+msg=An administrative logon was rejected.
+eventRuleTrigger=1
+errReason=Digipass User account not found, but is required for Local Authentication
+count=1
+eventSeverityCat=MEDIUM
+collectorId=any
+relayDevIpAddr=70.70.70.70
+user=flast
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=70.70.70.70
+reptVendor=Vasco

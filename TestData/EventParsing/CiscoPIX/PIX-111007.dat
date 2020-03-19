@@ -1,0 +1,21 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<133>Jul 24 2008 03:14:07: %PIX-5-111007: Begin configuration: SJ-Dev-S-RH-VMW-01 reading from terminal
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=any
+eventSeverity=2
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+eventAction=0 (Permit)
+eventName=Begin configuration - reading from device.
+reptVendor=Cisco
+eventType=PIX-111007
+phEventCategory=0 (External)
+reptDevIpAddr=$localhost
+reptModel=PIX

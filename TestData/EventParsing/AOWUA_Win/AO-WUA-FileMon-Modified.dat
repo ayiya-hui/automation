@@ -1,0 +1,31 @@
+[reptDevIpAddr(key)]
+192.168.1.30
+[eventMsg]
+2015-02-10T02:55:03Z WIN-2008-LAW-agent 192.168.1.30 AccelOps-WUA-FileMon [monitorStatus]="Success" [userId]="Administrator" [eventTime]="Feb 10 2015 02:55:00" [filePath]="C:\\test\\test.txt" [osObjAction]="Modified" [hashCode]="29de240060f396fdd8bd30695aa6447d" [msg]=""
+[params]
+deviceTime=any
+parserName=AOWUA_WinParser
+eventType=AO-WUA-FileMon-Modified
+reptModel=Windows
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+hashCode=29de240060f396fdd8bd30695aa6447d
+eventName=A windows file or directory modified
+extEventRecvProto=Windows Agent
+phEventCategory=0 (External)
+status=Success
+count=1
+filePath=C:\test\test.txt
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=192.168.1.30
+user=Administrator
+rawEventMsg=any
+osObjAction=Modified
+reptDevName=WIN-2008-LAW-agent
+customer=Super
+phRecvTime=any
+reptDevIpAddr=192.168.1.30
+eventAction=0 (Permit)
+reptVendor=Microsoft

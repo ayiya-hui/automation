@@ -1,0 +1,23 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<189>18203 01/07/1999 20:30:27.080 SEV=5 AUTH/36 RPT=17540 192.168.20.35  User [ admin ] Protocol [ HTTP ] attempted ADMIN logon. Status: <ACCESS GRANTED>--automator
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=4
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+srcIpAddr=192.168.20.35
+eventAction=0 (Permit)
+eventName=Successful admin logon
+reptVendor=Cisco
+eventType=Cisco-VPN3K-AUTH/36
+user=admin
+phEventCategory=0 (External)
+reptDevIpAddr=$localhost
+reptModel=VPN 3K

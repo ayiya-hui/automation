@@ -1,0 +1,23 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>Juniper: 2008-10-28 02:59:44 - ive - [192.168.20.82] wenyong(Users)[Users] - Network Connect: IP address cannot be allocated to user wenyong. Solution: Check IP Pools / DHCP server state.
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+eventAction=0 (Permit)
+eventName=IP address cannot be allocated
+reptVendor=Juniper
+eventType=Juniper-SecureAccess-Failed-Allocate-IPAddress
+user=wenyong
+phEventCategory=0 (External)
+reptDevIpAddr=$localhost
+userGrp=Users
+reptModel=Secure Access

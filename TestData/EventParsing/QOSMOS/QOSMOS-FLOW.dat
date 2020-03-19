@@ -1,0 +1,163 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<14> event_id=939825199 src_ip=2.2.2.2 src_port=80 dest_ip=192.168.26.144 dest_port=55455 path=eth.ip.tcp.http http_version=1.1 http_server_agent=EdgePrism/4.0.1.1 http_location=http://abc.com/id/3032091/device/rss/io
+[params]
+rawEventMsg=any
+parserName=QOSMOSParser
+eventType=QOSMOS-FLOW
+destIpAddr=192.168.26.144
+srcIpAddr=2.2.2.2
+reptModel=DeepFlow
+eventId=any
+eventParsedOk=1
+httpServerAgent=EdgePrism/4.0.1.1
+eventSeverity=1
+eventName=QOSMOS-FLOW
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+srcIpPort=80
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+protoPath=eth.ip.tcp.http
+destIpPort=55455
+reptDevName=any
+httpVersion=1.1
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Qosmos
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<14> event_id=941199383 src_ip=192.168.26.144 src_port=55797 dest_ip=2.2.2.2 dest_port=11356 path=eth.ip.tcp.skype
+[params]
+rawEventMsg=any
+parserName=QOSMOSParser
+eventType=QOSMOS-FLOW
+destGeoState=any
+destIpAddr=2.2.2.2
+destGeoCountry=any
+srcIpAddr=192.168.26.144
+reptModel=DeepFlow
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=QOSMOS-FLOW
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+srcIpPort=55797
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+protoPath=eth.ip.tcp.skype
+destIpPort=11356
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Qosmos
+destGeoOrg=any
+destGeoCity=any
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<14> event_id=941317504 src_ip=192.168.26.144 src_port=55833 dest_ip=2.2.2.2 dest_port=80 path=eth.ip.tcp.http.facebook http_method=GET uri=/ http_version=1.1 http_user_agent=Mozilla/5.0 (Windows NT 6.0) AppleWebKit/535.1 (KHTML, like Gecko)
+[params]
+rawEventMsg=any
+parserName=QOSMOSParser
+eventType=QOSMOS-FLOW
+destGeoState=any
+destIpAddr=2.2.2.2
+destGeoCountry=any
+srcIpAddr=192.168.26.144
+reptModel=DeepFlow
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=QOSMOS-FLOW
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+srcIpPort=55833
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+protoPath=eth.ip.tcp.http.facebook
+destIpPort=80
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Qosmos
+destGeoOrg=any
+destGeoCity=any
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<14> event_id=942339256 src_ip=192.168.26.1 src_port=67 dest_ip=192.168.26.118 dest_port=68 path=eth.ip.udp.dhcp srv_ip=0.0.0.0 r mask=255.255.255.0 gateway=192.168.26.1
+[params]
+rawEventMsg=any
+parserName=QOSMOSParser
+eventType=QOSMOS-FLOW
+destIpAddr=192.168.26.118
+srcIpAddr=192.168.26.1
+reptModel=DeepFlow
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+dhcpGateway=192.168.26.1
+eventName=QOSMOS-FLOW
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+srcIpPort=67
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+protoPath=eth.ip.udp.dhcp
+destIpPort=68
+reptDevName=any
+customer=Super
+dhcpSubnetMask=255.255.255.0
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Qosmos
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<14> event_id=942819339 src_ip=2.2.2.2 src_port=21 dest_ip=192.168.26.144 dest_port=56305 path=eth.ip.tcp.ftp ftp_login=Guest
+[params]
+rawEventMsg=any
+parserName=QOSMOSParser
+eventType=QOSMOS-FLOW
+destIpAddr=192.168.26.144
+srcIpAddr=2.2.2.2
+reptModel=DeepFlow
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=QOSMOS-FLOW
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+srcIpPort=21
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+user=Guest
+protoPath=eth.ip.tcp.ftp
+destIpPort=56305
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Qosmos

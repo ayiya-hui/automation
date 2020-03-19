@@ -1,0 +1,200 @@
+
+<Rules>
+  <Rule group="PH_SYS_RULE_Avail_Network" id="PH_Rule_RV_1" phIncidentCategory="Network">
+    <Name>Radvision Gateway Down</Name>
+    <active>true</active>
+    <Description> Detects that the Radvision gateway is down. Cleared by the up event </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_RV_DOWN" severity="9">
+      <ArgList>
+        hostIpAddr = Down.reptDevIpAddr  
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="300">
+      <SubPattern displayName="Down" name="Down">
+        <SingleEvtConstr> eventType = "RV-powerDown"  </SingleEvtConstr>
+	<GroupByAttr> reptDevIpAddr </GroupByAttr>
+	<GroupEvtConstr> COUNT (*) &gt;= 1 </GroupEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,message </AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "patternbased">
+      <ClearIncidentDef name="PH_RULE_RV_DOWN_CLEAR">
+	<ArgList>hostIpAddr = Down_CLEAR.reptDevIpAddr</ArgList>
+      </ClearIncidentDef>
+      <ClearConstr> PH_RULE_RV_DOWN.hostIpAddr = PH_RULE_RV_DOWN_CLEAR.hostIpAddr </ClearConstr>
+      <PatternClause window="300">
+	<SubPattern displayName="Down_CLEAR" name="Down_CLEAR">
+          <SingleEvtConstr> eventType = "RV-powerUp"  </SingleEvtConstr>
+	  <GroupEvtConstr> COUNT(*) &gt;= 1 </GroupEvtConstr>
+	  <GroupByAttr>reptDevIpAddr </GroupByAttr>
+	</SubPattern>
+      </PatternClause>
+    </ClearCondition>
+  </Rule>
+
+  <Rule group="PH_SYS_RULE_Avail_Network" id="PH_Rule_RV_2" phIncidentCategory="Network">
+    <Name>Radvision ISDN Loss</Name>
+    <active>true</active>
+    <Description> Detects that loss of Radvision gateway ISDN link. </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_RV_ISDN_DOWN" severity="9">
+      <ArgList>
+        hostIpAddr = Down.reptDevIpAddr  
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="300">
+      <SubPattern displayName="Down" name="Down">
+        <SingleEvtConstr> eventType = "RV-lossIsdn" AND eventAction = 0 </SingleEvtConstr>
+	<GroupByAttr> reptDevIpAddr </GroupByAttr>
+	<GroupEvtConstr> COUNT (*) &gt;= 1 </GroupEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,message </AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "patternbased">
+      <ClearIncidentDef name="PH_RULE_RV_ISDN_DOWN_CLEAR">
+	<ArgList>hostIpAddr = Down_CLEAR.reptDevIpAddr</ArgList>
+      </ClearIncidentDef>
+      <ClearConstr> PH_RULE_RV_ISDN_DOWN.hostIpAddr = PH_RULE_RV_ISDN_DOWN_CLEAR.hostIpAddr </ClearConstr>
+      <PatternClause window="300">
+	<SubPattern displayName="Down_CLEAR" name="Down_CLEAR">
+          <SingleEvtConstr> eventType = "RV-lossIsdn" AND eventAction = 2 </SingleEvtConstr>
+	  <GroupEvtConstr> COUNT(*) &gt;= 1 </GroupEvtConstr>
+	  <GroupByAttr>reptDevIpAddr </GroupByAttr>
+	</SubPattern>
+      </PatternClause>
+    </ClearCondition>
+  </Rule>
+  
+   <Rule group="PH_SYS_RULE_Avail_Network" id="PH_Rule_RV_3" phIncidentCategory="Network">
+    <Name>Radvision Ethernet Loss</Name>
+    <active>true</active>
+    <Description> Detects that loss of Radvision gateway Ethernet link. </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_RV_ETHERNET_DOWN" severity="9">
+      <ArgList>
+        hostIpAddr = Down.reptDevIpAddr  
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="300">
+      <SubPattern displayName="Down" name="Down">
+        <SingleEvtConstr> eventType = "RV-lossEthernet" AND eventAction = 0 </SingleEvtConstr>
+	<GroupByAttr> reptDevIpAddr </GroupByAttr>
+	<GroupEvtConstr> COUNT (*) &gt;= 1 </GroupEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,message </AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "patternbased">
+      <ClearIncidentDef name="PH_RULE_RV_ETHERNET_DOWN_CLEAR">
+	<ArgList>hostIpAddr = Down_CLEAR.reptDevIpAddr</ArgList>
+      </ClearIncidentDef>
+      <ClearConstr> PH_RULE_RV_ETHERNET_DOWN.hostIpAddr = PH_RULE_RV_ETHERNET_DOWN_CLEAR.hostIpAddr </ClearConstr>
+      <PatternClause window="300">
+	<SubPattern displayName="Down_CLEAR" name="Down_CLEAR">
+          <SingleEvtConstr> eventType = "RV-lossEthernet" AND eventAction = 2 </SingleEvtConstr>
+	  <GroupEvtConstr> COUNT(*) &gt;= 1 </GroupEvtConstr>
+	  <GroupByAttr>reptDevIpAddr </GroupByAttr>
+	</SubPattern>
+      </PatternClause>
+    </ClearCondition>
+  </Rule>
+
+   <Rule group="PH_SYS_RULE_Avail_Network" id="PH_Rule_RV_4" phIncidentCategory="Network">
+    <Name>Radvision call setup issues</Name>
+    <active>true</active>
+    <Description> Detects call setup problems with peer gateways </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_RV_CALL_PROBLEMS" severity="7">
+      <ArgList>
+        hostIpAddr = Down.reptDevIpAddr, compEventType = Down.eventType  
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="300">
+      <SubPattern displayName="Down" name="Down">
+        <SingleEvtConstr> eventType IN ("RV-peerCallRejected","RV-peerCallRejectedCapacity","RV-peerCallRejectedByAll","RV-peerCallFailedNoPeers", "RV-peerCallRejectedNonPeer","RV-maxHighLevelResMeter") </SingleEvtConstr>
+	<GroupByAttr> reptDevIpAddr,eventType </GroupByAttr>
+	<GroupEvtConstr> COUNT (*) &gt;= 1 </GroupEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,message </AttrList>
+    </TriggerEventDisplay>
+  </Rule>
+
+  <Rule group="PH_SYS_RULE_Avail_Network" id="PH_Rule_RV_5" phIncidentCategory="Network">
+    <Name>Radvision Hardware Removed/Swapped</Name>
+    <active>true</active>
+    <Description> Detects a card removed from/inserted into chassis under power, or when the gateway enters maintenance mode </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_RV_HW_REMOVE" severity="9">
+      <ArgList>
+        hostIpAddr = Down.reptDevIpAddr  
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="300">
+      <SubPattern displayName="Down" name="Down">
+        <SingleEvtConstr> eventType = "RV-cardExtractHotSwap" AND eventAction = 0 </SingleEvtConstr>
+	<GroupByAttr> reptDevIpAddr </GroupByAttr>
+	<GroupEvtConstr> COUNT (*) &gt;= 1 </GroupEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,message </AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "patternbased">
+      <ClearIncidentDef name="PH_RULE_RV_HW_REMOVE_CLEAR">
+	<ArgList>hostIpAddr = Down_CLEAR.reptDevIpAddr</ArgList>
+      </ClearIncidentDef>
+      <ClearConstr> PH_RULE_RV_HW_REMOVE.hostIpAddr = PH_RULE_RV_HW_REMOVE_CLEAR.hostIpAddr </ClearConstr>
+      <PatternClause window="300">
+	<SubPattern displayName="Down_CLEAR" name="Down_CLEAR">
+          <SingleEvtConstr> eventType = "RV-cardExtractHotSwap" AND eventAction = 2 </SingleEvtConstr>
+	  <GroupEvtConstr> COUNT(*) &gt;= 1 </GroupEvtConstr>
+	  <GroupByAttr>reptDevIpAddr </GroupByAttr>
+	</SubPattern>
+      </PatternClause>
+    </ClearCondition>
+  </Rule>
+
+  <Rule group="PH_SYS_RULE_Avail_Network" id="PH_Rule_RV_6" phIncidentCategory="Network">
+    <Name>Radvision Corrupt video packets</Name>
+    <active>true</active>
+    <Description> Detects Corrupt or empty video packets present in the gateway </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_RV_CORRUPT_VIDEO" severity="9">
+      <ArgList>
+        hostIpAddr = Down.reptDevIpAddr  
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="300">
+      <SubPattern displayName="Down" name="Down">
+        <SingleEvtConstr> eventType = "RV-badVideo" AND eventAction = 0 </SingleEvtConstr>
+	<GroupByAttr> reptDevIpAddr </GroupByAttr>
+	<GroupEvtConstr> COUNT (*) &gt;= 1 </GroupEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,message </AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "patternbased">
+      <ClearIncidentDef name="PH_RULE_RV_CORRUPT_VIDEO_CLEAR">
+	<ArgList>hostIpAddr = Down_CLEAR.reptDevIpAddr</ArgList>
+      </ClearIncidentDef>
+      <ClearConstr> PH_RULE_RV_CORRUPT_VIDEO.hostIpAddr = PH_RULE_RV_CORRUPT_VIDEO_CLEAR.hostIpAddr </ClearConstr>
+      <PatternClause window="300">
+	<SubPattern displayName="Down_CLEAR" name="Down_CLEAR">
+          <SingleEvtConstr> eventType = "RV-badVideo" AND eventAction = 2 </SingleEvtConstr>
+	  <GroupEvtConstr> COUNT(*) &gt;= 1 </GroupEvtConstr>
+	  <GroupByAttr>reptDevIpAddr </GroupByAttr>
+	</SubPattern>
+      </PatternClause>
+    </ClearCondition>
+  </Rule>
+
+</Rules>

@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+10.4.161.32
+[eventMsg]
+490998571 Mon Mar 03 03:09:31 EST 2014 SavoyR Device Command Script Completed Successfully lncmpnasp01.staples.com 10.4.161.32 Script 'Re-enable EasyTech port for Cisco IOS configuration' completed.  Connect - Succeeded Connected via ssh to 10.170.30.9 [in realm Default Realm]    Login / Authentication - Succeeded Successfully used: Last successful password  (Password rule Retail TACACS NCM Login)    Optional:Script - Succeeded Successfully executed: prepare configuration for deployment  Script - Succeeded Successfully executed: deploy to running configuration via TFTP through CLI Bypassed: deploy to running configuration via SCP through CLI.  (Requires SCP, CLI to be enabled.) Tried: deploy to running configuration via FTP through CLI (Warning: SSH server username or password not specified in NA admin settings.)  Optional:Script - Succeeded Successfully executed: determine result of deployment operation  Script run: ------------------------------------------------------------ ! interface fast0/16 no shut
+[params]
+parserName=CiscoNCMParser
+eventType=Cisco-NCM-Device-Command-Script-Completed-Successfully
+destIpAddr=10.170.30.9
+reptModel=CiscoWorks NCM
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Cisco Network Compliance Manager Device Command Script Completed Successfully
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+eventRuleTrigger=1
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=any
+user=SavoyR
+reptDevName=lncmpnasp01.staples.com
+customer=Super
+phRecvTime=any
+reptDevIpAddr=10.4.161.32
+reptVendor=Cisco
+command=Re-enable EasyTech port for Cisco IOS configuration

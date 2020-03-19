@@ -1,0 +1,304 @@
+<eventParser name="SonicWallAventailSyslogParser">
+  <deviceType>
+    <Vendor>Sonicwall</Vendor>
+    <Model>Aventail VPN</Model>
+    <Version>ANY</Version>
+  </deviceType>
+  
+  <!-- pattern definitions -->
+  <patternDefinitions>
+    <pattern name="patAventailWord"><![CDATA[ap|cp|dc|ev|ew|fm|kp|ks|kt|ls|ps|pt|uk|us|ut]]></pattern>
+    <pattern name="patStrEndQuote"><![CDATA[[^']*]]></pattern>
+    <pattern name="patStrEndAt"><![CDATA[[^@]*]]></pattern>
+    <pattern name="patStrEndSplash"><![CDATA[[^/]*]]></pattern>
+  </patternDefinitions>
+  
+  <eventFormatRecognizer><![CDATA[\[<:gPatDay>/<:gPatMon>/<:gPatYear>:<:gPatTime>\.[\d]{6}\s+[\+-][\d]{4}\]\s+<:gPatStr>\s+[\d]{6}\s+<:patAventailWord>]]></eventFormatRecognizer> 
+  
+  <testEvents>
+      <testEvent><![CDATA[<179>Oct 16 05:26:47 syslog-ng@COS-Node-1 logserver: [16/Oct/2010:05:26:47.294470 -0700] COS-Node-1 020619 ew 10000000 Error   Misc    ::ERROR:: Unable to determine internal URL from request]]></testEvent>
+      <testEvent><![CDATA[<179>Oct 16 05:40:00 syslog-ng@COS-Node-1 logserver: [16/Oct/2010:05:40:00.721010 -0700] COS-Node-1 000000 kt 0000021a Error   Misc    <KERNEL> tunnel_receive:decrypt failed(-22) <40114cb0>]]></testEvent>
+      <testEvent><![CDATA[<182>Oct 16 05:52:47 syslog-ng@COS-Node-1 logserver: [16/Oct/2010:05:52:47.022382 -0700] COS-Node-1 020444 ps 40000141 Info    System  Auth: COS Non-Standard VPN: User 'wooa' is not a member of any RADIUS groups based on attribute Class]]></testEvent>
+      <testEvent><![CDATA[<182>Oct 16 05:52:50 syslog-ng@COS-Node-1 logserver: [16/Oct/2010:05:52:50.039924 -0700] COS-Node-1 000000 ev 0000028a Info    Misc    <KERNEL> User=wooa These local addresses may conflict with the remote network: 172.16.100.22 <40114d4b>]]></testEvent>
+  </testEvents>
+  
+  <parsingInstructions>
+    
+    <!-- parsing common fields -->
+    <collectFieldsByRegex src="$_rawmsg">
+      <regex><![CDATA[<:gPatSyslogPRI><_mon:gPatMon>\s+<_day:gPatDay>\s+<_time:gPatTime>\s+<_host:gPatStr>\s+<:gPatStrEndColon>:\s+<_body:gPatMesgBody>]]></regex>
+    </collectFieldsByRegex>    
+
+    <collectFieldsByRegex src="$_body">
+      <regex><![CDATA[\[<:gPatDay>/<:gPatMon>/<:gPatYear>:<:gPatTime>\.\d{6}\s+[\+-]\d{4}\]\s+<hostName:gPatStr>\s+<:gPatStr>\s+<_aid:gPatStr>\s+<ipConnId:gPatStr>\s+<_severity:gPatStr>\s+<_type:gPatStr>\s+<_body:gPatMesgBody>]]></regex>
+    </collectFieldsByRegex>
+     
+    <setEventAttribute attr="eventType">combineMsgId("Aventail-System-","$_type","-Generic")</setEventAttribute>
+    <setEventAttribute attr="deviceTime">toDateTime($_mon, $_day, $_time)</setEventAttribute>
+     <when test='exist _host'>
+	<when test='matches($_host, gPatIpV4Dot)'>
+		<setEventAttribute attr="reptDevIpAddr">$_host</setEventAttribute>
+	</when>
+     </when>
+     
+    <when test='exist _aid'>
+	    <choose>
+		<when test='$_aid = "ap"'>
+		    <setEventAttribute attr="procName">"API server"</setEventAttribute>
+		</when>
+		<when test='$_aid = "cp"'>
+		    <setEventAttribute attr="procName">"SonicWALL distributed cache client: policy server, client credential storage"</setEventAttribute>
+		</when>
+		<when test='$_aid = "dc"'>
+		    <setEventAttribute attr="procName">"SonicWALL distributed cache server: policy server, client credential storage"</setEventAttribute>
+		</when>
+		<when test='$_aid = "ev"'>
+		    <setEventAttribute attr="procName">"network tunnel service--kernel component"</setEventAttribute>
+		</when>
+		<when test='$_aid = "ew"'>
+		    <setEventAttribute attr="procName">"Web proxy service"</setEventAttribute>
+		</when>
+		<when test='$_aid = "fm"'>
+		    <setEventAttribute attr="procName">"failover monitor"</setEventAttribute>
+		</when>
+		<when test='$_aid = "kp"'>
+		    <setEventAttribute attr="procName">"network tunnel kernel mode policy server interface"</setEventAttribute>
+		</when>
+		<when test='$_aid = "ks"'>
+		    <setEventAttribute attr="procName">"network tunnel kernel mode interface to SSL daemon"</setEventAttribute>
+		</when>
+		<when test='$_aid = "kt"'>
+		    <setEventAttribute attr="procName">"kernel tunnel component"</setEventAttribute>
+		</when>
+		<when test='$_aid = "ls"'>
+		    <setEventAttribute attr="procName">"log server"</setEventAttribute>
+		</when>
+		<when test='$_aid = "ps"'>
+		    <setEventAttribute attr="procName">"policy service"</setEventAttribute>
+		</when>
+		<when test='$_aid = "pt"'>
+		    <setEventAttribute attr="procName">"ping/traceroute tools"</setEventAttribute>
+		</when>
+		<when test='$_aid = "uk"'>
+		    <setEventAttribute attr="procName">"unknown"</setEventAttribute>
+		</when>
+		<when test='$_aid = "up"'>
+		    <setEventAttribute attr="procName">"network tunnel policy server daemon"</setEventAttribute>
+		</when>
+		<when test='$_aid = "us"'>
+		    <setEventAttribute attr="procName">"network tunnel user space SSL daemon"</setEventAttribute>
+		</when>
+	    </choose>
+    </when> 
+    
+    <when test='exist ipConnId'>
+	<choose>
+		<when test="matches($ipConnId, '^0')">
+			<setEventAttribute attr="appName">"policy service"</setEventAttribute>
+		</when>
+		<when test="matches($ipConnId, '^1')">
+			<setEventAttribute attr="appName">"Web proxy service"</setEventAttribute>
+		</when>
+		<when test="matches($ipConnId, '^3')">
+			<setEventAttribute attr="appName">"WorkPlace service"</setEventAttribute>
+		</when>
+	</choose>
+    </when>
+    
+    <when test='exist _severity'>
+	    <choose>
+		<when test='$_severity = "Error"'>
+		    <setEventAttribute attr="eventSeverity">7</setEventAttribute>
+		</when>
+		<when test='$_severity = "Warning"'>
+		    <setEventAttribute attr="eventSeverity">5</setEventAttribute>
+		</when>
+		<when test='$_severity = "Info"'>
+		    <setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		</when>
+		<when test='$_severity = "Verbose"'>
+		    <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		</when>
+	    </choose>
+     </when>     
+     
+     <when test='exist _type'>
+	      <when test='$_type IN "CSACL, EWACL, WPACL, NEACL"'>		
+		<switch>
+			<case>
+				<collectFieldsByRegex src="$_body">
+				      <regex><![CDATA[User\s+'<_user:patStrEndQuote>'\s+connecting from '<_srcIpAddr:patStrEndQuote>'\s+matched rule #[\d]+\s+'<fwRule:patStrEndQuote>',\s+access to '<_destIpAddr:patStrEndQuote>' is permitted\.]]></regex>
+				</collectFieldsByRegex>
+				<setEventAttribute attr="eventType">combineMsgId("Aventail-System-", "$_type", "-", "Success")</setEventAttribute>
+			</case>
+			<case>
+				<collectFieldsByRegex src="$_body">
+				      <regex><![CDATA[User\s+'<_user:patStrEndQuote>'\s+connecting from '<_srcIpAddr:patStrEndQuote>'\s+found no matching access rule,\s+access to '<_destIpAddr:patStrEndQuote>' is denied\.]]></regex>
+				</collectFieldsByRegex>
+				<setEventAttribute attr="eventType">combineMsgId("Aventail-System-", "$_type", "-", "Failure")</setEventAttribute>
+			</case>
+		</switch>
+	      </when>
+	      
+	      <when test='$_type = "System"'>
+		<switch>
+		  <case>
+		    <collectFieldsByRegex src="$_body">
+		      <regex><![CDATA['<_user:gPatMesgBody>'\s+logged in from <_srcIpAddr:gPatStr>\s+and was assigned to '<:gPatMesgBody>'\.]]></regex>
+		    </collectFieldsByRegex>
+		    <setEventAttribute attr="eventType">combineMsgId("Aventail-System-VPNLoginSuccess")</setEventAttribute>
+		  </case>
+		   <case>
+		    <collectFieldsByRegex src="$_body">
+		      <regex><![CDATA[Auth:\s+<domain:gPatStrEndColon>:\s+<usrMsg:gPatMesgBody>]]></regex>
+		    </collectFieldsByRegex>
+		  </case>
+		  <case>
+		    <collectFieldsByRegex src="$_body">
+		      <regex><![CDATA[Session End:\s+'<_user:patStrEndQuote>']]></regex>
+		    </collectFieldsByRegex>
+		  </case>
+		  <default>
+		    <collectAndSetAttrByKeyValuePair src="$_body" sep=' '>
+		      <attrKeyMap attr="_user" key="user " />
+		      <attrKeyMap attr="_user" key="User " />
+		      <attrKeyMap attr="_error" key="error " />
+		    </collectAndSetAttrByKeyValuePair>	  
+		  </default>
+		</switch>
+	      </when>
+	      
+	      <when test='$_type = "Policy"'>
+		<collectFieldsByRegex src="$_body">
+		      <regex><![CDATA[zones_item\(<:gPatMesgBody>\):\s+<usrMsg:gPatMesgBody>]]></regex>
+		    </collectFieldsByRegex>
+	      </when>
+	      
+	      <when test='$_type = "Audit"'>
+		  <collectAndSetAttrByKeyValuePair src="$_body" sep=' '>
+		      <attrKeyMap attr="fqdnName" key="VirtualHost=" />
+		      <attrKeyMap attr="srcIpAddr" key="Src=" />
+		      <attrKeyMap attr="_user" key="User=" />
+		      <attrKeyMap attr="httpMethod" key="Method=" />
+		      <attrKeyMap attr="httpVersion" key="HTTPVersion=" />
+		      <attrKeyMap attr="uriQuery" key="Request=" />
+		      <attrKeyMap attr="httpStatusCode" key="Status=" />
+		      <attrKeyMap attr="sentBytes" key="Bytes=" />
+		      <attrKeyMap attr="_equipMentId" key="EquipmentId=" />
+		  </collectAndSetAttrByKeyValuePair>
+	      </when>
+
+	      <when test='$_type = "Session"'>
+		 <switch>
+		  <case>
+		    <collectFieldsByRegex src="$_body">
+		      <regex><![CDATA[Authentication Restore for user '\(<user:gPatStr>\)@\(<domain:gPatMesgBody>\)'.*]]></regex>
+		    </collectFieldsByRegex>
+		  <setEventAttribute attr="eventType">"Aventail-System-Session-Auth-Restore"</setEventAttribute>
+		  </case>
+		  <default>
+			  <collectAndSetAttrByKeyValuePair src="$_body" sep=' '>
+			      <attrKeyMap attr="_srcIpAddr" key="Src=" />
+			      <attrKeyMap attr="_user" key="User=" />
+			      <attrKeyMap attr="_auth" key="Auth=" />
+			      <attrKeyMap attr="_socksVersion" key="SocksVersion=" />
+			      <attrKeyMap attr="command" key="Command=" />
+			      <attrKeyMap attr="_destIpAddr" key="Dest=" />
+			      <attrKeyMap attr="_error" key="Error=" />
+			      <attrKeyMap attr="sentBytes" key="SrcBytes=" />
+			      <attrKeyMap attr="recvBytes" key="DstBytes=" />
+			      <attrKeyMap attr="durationMSec" key="Duration=" />
+			      <attrKeyMap attr="fqdnName" key="VirtualHost=" />
+			      <attrKeyMap attr="_equipMentId" key="EquipmentId=" />
+			  </collectAndSetAttrByKeyValuePair>
+		</default>
+		</switch>
+	      </when>
+
+	      <when test='$_type = "Misc"'>
+		<switch>
+			<case>
+				<collectFieldsByRegex src="$_body">
+					<regex><![CDATA[\<KERNEL\>\s+<_msg:gPatMesgBody>]]></regex>
+				</collectFieldsByRegex>
+			</case>
+			<case>
+				<collectFieldsByRegex src="$_body">
+					<regex><![CDATA[::ERROR::\s+<_msg:gPatMesgBody>]]></regex>
+				</collectFieldsByRegex>
+			</case>
+		</switch>
+		<when test='exist _msg'>
+			<when test='$_severity IN "Error,Warning"'>
+				<setEventAttribute attr="errReason">$_msg</setEventAttribute>
+			</when>
+			<when test='$_severity IN "Info,Verbose"'>
+				<setEventAttribute attr="usrMsg">$_msg</setEventAttribute>
+			</when>
+		</when>	
+	      </when>
+	      
+     </when>
+    <when test='exist _user'>
+	<switch>
+		<case>
+		    <collectFieldsByRegex src="$_user">
+			<regex><![CDATA[\(<srcIpAddr:gPatIpV4Dot>\s+\(<user:patStrEndAt>\)@\(<domain:gPatMesgBody>\)]]></regex>
+		    </collectFieldsByRegex>
+		</case>
+		<case>
+		    <collectFieldsByRegex src="$_user">
+			<regex><![CDATA[\(<user:patStrEndAt>\)@\(<domain:gPatMesgBody>\)]]></regex>
+		    </collectFieldsByRegex>
+		</case>
+	</switch>
+    </when>
+    
+      
+    <when test='exist _error'>
+	<setEventAttribute attr="errReason">$_error</setEventAttribute>
+    </when>
+	    
+    
+    <when test='exist _srcIpAddr'>
+       <switch>
+	<case>
+	  <collectFieldsByRegex src="$_srcIpAddr">
+                <regex><![CDATA[<srcIpAddr:gPatIpV4Dot>:<srcIpPort:gPatIpPort>]]></regex>
+            </collectFieldsByRegex>
+        </case>
+        <case>
+            <collectFieldsByRegex src="$_srcIpAddr">
+                <regex><![CDATA[<srcIpAddr:gPatIpV4Dot>:<:gPatStr>]]></regex>
+            </collectFieldsByRegex>
+        </case>
+        <case>
+            <collectFieldsByRegex src="$_srcIpAddr">
+                <regex><![CDATA[<srcIpAddr:gPatIpV4Dot>]]></regex>
+            </collectFieldsByRegex>
+        </case>
+      </switch>
+   </when>
+
+    <when test='exist _destIpAddr'>
+      <switch>
+        <case>
+            <collectFieldsByRegex src="$_destIpAddr">
+                <regex><![CDATA[<destIpAddr:gPatIpV4Dot>:<destIpPort:gPatIpPort>]]></regex>
+            </collectFieldsByRegex>
+        </case>
+        <case>
+            <collectFieldsByRegex src="$_destIpAddr">
+                <regex><![CDATA[<destIpAddr:gPatIpV4Dot>:<:gPatStr>]]></regex>
+            </collectFieldsByRegex>
+        </case>
+        <case>
+            <collectFieldsByRegex src="$_destIpAddr">
+                <regex><![CDATA[<destIpAddr:gPatIpV4Dot>]]></regex>
+            </collectFieldsByRegex>
+        </case>
+      </switch>
+    </when>
+    
+  </parsingInstructions>
+</eventParser>

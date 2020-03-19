@@ -1,0 +1,31 @@
+[reptDevIpAddr(key)]
+10.21.0.160
+[eventMsg]
+[CHECKPOINT],[entity]=lea_server_3,[fieldid]=1351069285,[filename]=fw.adtlog,[record_no]=5706093,[time]=24Oct2012 11:39:51,[action]=ctl,[orig]=10.21.0.160,[i/f_dir]=inbound,[i/f_name]=bond0.10,[product]=VPN-1 & FireWall-1,[__policy_id_tag]=product=VPN-1 & FireWall-1[db_tag={75FF15F2-1DEF-11E2-A567-000000000A0A};mgmt=rjo-alg-sc01;date=1351092508;policy_name=Standard_1],[inzone]=Internal,[outzone]=External,[rule]=43,[rule_uid]={6027450A-5069-4F5C-A31E-721701E04577},[rule_name]=VPN BANPARA,[service_id]=snmp,[src]=10.21.0.55,[s_port]=59863,[dst]=192.168.233.14,[service]=161,[proto]=udp,[xlatesrc]=10.255.254.55,[xlatesport]=Unknown,[xlatedport]=Unknown,[NAT_rulenum]=59,[NAT_addtnl_rulenum]=1,[scheme:]=IKE,[methods:]=ESP: 3DES + SHA1,[peer gateway]=200.217.197.2,[community]=VPN_BANPARA,[fw_subproduct]=VPN-1,[vpn_feature_name]=VPN,[has_accounting]=0,[uuid]=<5087efa7_00000073_a000150a_0000ffff>,[Operation]=Modify Object,[Audit Status]=Failure,
+[params]
+rawEventMsg=any
+deviceTime=any
+eventType=CheckPoint-ModifyObject-Failure
+phCustId=$sender
+destIpAddr=192.168.233.14
+ipProto=17 (UDP)
+srcIpAddr=10.21.0.55
+reptModel=FireWall-1
+eventId=any
+eventParsedOk=1
+eventSeverity=9
+testEvent=Real Event(0)
+eventName=Failed Checkpoint firewall object modification
+phEventCategory=0 (External)
+direction=inbound
+srcIpPort=59863
+eventSeverityCat=HIGH
+collectorId=any
+postNATSrcIpAddr=10.255.254.55
+destIpPort=161 (SNMP)
+postNATSrcIpPort=0
+count=1
+phRecvTime=any
+reptDevIpAddr=10.21.0.160
+eventAction=1 (Deny)
+reptVendor=Checkpoint

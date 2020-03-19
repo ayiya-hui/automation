@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<189>date=2010-06-09 time=00:37:44 devname=FortiGate-Shangh device_id=APS3012404201140 log_id=0104032151 type=event subtype=admin pri=notice vd=root user="admin" ui=GUI(10.1.20.204) action=modify msg="User admin changed protection profile 'strict' from GUI(10.1.20.204)"
+[params]
+srcIpAddr=10.1.20.204
+appTransportProto=GUI
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=3
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+eventAction=0 (Permit)
+eventName=A user changed settings within the specified protection profile
+reptVendor=Fortinet
+eventType=FortiGate-event-protection-profile-change
+user=admin
+phEventCategory=0 (External)
+relayDevIpAddr=$reporter
+reptDevIpAddr=$reporter
+usrMsg=User admin changed protection profile 'strict' from GUI(10.1.20.204)
+reptModel=FortiOS

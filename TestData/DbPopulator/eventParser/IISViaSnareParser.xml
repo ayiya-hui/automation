@@ -1,0 +1,286 @@
+<eventParser name="IISViaSnareParser">
+
+  <deviceType>
+    <Vendor>Microsoft</Vendor>
+    <Model>Windows</Model>
+    <Version>ANY</Version>
+  </deviceType>
+
+  <appType>
+    <Vendor>Microsoft</Vendor>
+    <Model>IIS</Model>
+    <Version>ANY</Version>
+    <Name>Microsoft IIS</Name>
+  </appType>
+  
+  <eventFormatRecognizer><![CDATA[IISWebLog|FTPSvcLog]]></eventFormatRecognizer>
+  
+  <testEvents>
+      <testEvent><![CDATA[<13>Oct  9 12:19:05 ADS-Pri.ProspectHills.net IISWebLog              0              2008-10-09 19:18:43 W3SVC1 ADS-PRI 192.168.0.10 GET /iisstart.htm - 80 - 192.168.20.80 HTTP/1.1 Mozilla/5.0+(Windows;+U;+Windows+NT+5.1;+en-US;+rv:1.9.0.3)+Gecko/2008092417+Firefox/3.0.3 - - 192.168.0.10 200 0 0 2158 368 156]]></testEvent>
+      <testEvent><![CDATA[<46>Mar 29 12:21:03 192.168.0.40 FTPSvcLog	0	2010-03-29 19:20:32 127.0.0.1 - MSFTPSVC1 FILER 127.0.0.1 21 [1]PASS IEUser@ - 530 1326 0 0 0 FTP - - - -]]></testEvent>
+  </testEvents>
+
+  <parsingInstructions>
+    <!-- parsing common fields -->
+    <!-- sample message 
+             <13>Jan 24 17:46:37 ADS-Pri.ProspectHills.net IISWebLog    3       2008-01-25 01:45:37 W3SVC1 ADS-PRI 192.168.0.10 GET /Document/ACE/index.htm - 80 - 192.168.20.55 HTTP/1.1 Mozilla/5.0+(Windows;+U;+Windows+NT+5.1;+en-US;+rv:1.8.1.11)+Gecko/20071127+Firefox/2.0.0.11 http://wwwin/Document/ wwwin 200 0 0 5750 445 15
+      -->
+    
+    <collectFieldsByRegex src="$_rawmsg">
+      <regex><![CDATA[<:gPatSyslogPRI><:gPatMon>\s+<:gPatDay> <:gPatTime> <:gPatStr>\s+<_type:gPatStr>(?:\t|\s+)<:gPatInt>(?:\t|\s+)<_body:gPatMesgBody>]]></regex>
+    </collectFieldsByRegex>
+    
+    <!--when test="matches($_senderHostName, '\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}')">
+      <setEventAttribute attr="reptDevIpAddr">$_senderHostName</setEventAttribute>       
+    </when-->
+
+    <setEventAttribute attr="eventAction">0</setEventAttribute>
+    <setEventAttribute attr="eventType">IIS-Generic</setEventAttribute>
+
+    <choose>
+
+      <when test='$_type = "IISWebLog"'>
+
+        <collectFieldsByRegex src="$_body">
+          <regex><![CDATA[<_year:gPatYear>-<_mon:gPatMonNum>-<_day:gPatDay>(?:\t|\s+)<_time:gPatTime>(?:\t|\s+)<_body2:gPatMesgBody>]]></regex>
+        </collectFieldsByRegex>
+        
+        <setEventAttribute attr="deviceTime">toDateTime($_mon, $_day, $_year, $_time)</setEventAttribute>
+        
+        <!-- message specific parsing
+             
+             #Fields: date time s-sitename s-computername s-ip cs-method cs-uri-stem cs-uri-query s-port cs-username c-ip cs-version cs(User-Agent) cs(Cookie) cs(Referer) cs-host sc-status sc-substatus sc-win32-status sc-bytes cs-bytes time-taken
+             
+          -->
+        
+        <collectAndSetAttrByPos src="$_body2" sep=' '>
+          
+          <attrPosMap attr="srvInstName" pos='1'/>
+          <attrPosMap attr="destName" pos='2'/>
+          <!-- attrPosMap attr="relayDevName" pos='2'/-->
+          <attrPosMap attr="destIpAddr" pos='3'/>
+          <attrPosMap attr="httpMethod" pos='4'/>
+          <attrPosMap attr="uriStem" pos='5'/>
+          <attrPosMap attr="uriQuery" pos='6'/>
+          <attrPosMap attr="destIpPort" pos='7'/>
+          <attrPosMap attr="user" pos='8'/>
+          <attrPosMap attr="srcIpAddr" pos='9'/>
+          <attrPosMap attr="httpVersion" pos='10'/>
+          <attrPosMap attr="httpUserAgent" pos='11'/>
+          <attrPosMap attr="httpReferrer" pos='13'/>
+          <attrPosMap attr="httpStatusCode" pos='15'/>
+          <attrPosMap attr="httpSubStatusCode" pos='16'/>
+          <attrPosMap attr="httpWin32Status" pos='17'/>
+          <attrPosMap attr="recvBytes" pos='18'/>
+          <attrPosMap attr="sentBytes" pos='19'/>
+          <attrPosMap attr="durationMSec" pos='20'/>
+        </collectAndSetAttrByPos>
+        
+        
+        <choose>
+          
+	  <when test="matches($httpStatusCode, '^401')">
+            <setEventAttribute attr="eventType">IIS-Web-Client-Access-Denied</setEventAttribute>
+            <setEventAttribute attr="eventSeverity">5</setEventAttribute>
+          </when>
+
+	  <when test="matches($httpStatusCode, '^403')">
+            <setEventAttribute attr="eventType">IIS-Web-Forbidden-Access-Denied</setEventAttribute>
+            <setEventAttribute attr="eventSeverity">5</setEventAttribute>
+          </when>
+	  
+	  <when test="matches($httpStatusCode, '^400')">
+            <setEventAttribute attr="eventType">IIS-Web-Bad-Request</setEventAttribute>
+            <setEventAttribute attr="eventSeverity">5</setEventAttribute>
+          </when>
+
+	  <when test="matches($httpStatusCode, '^411')">
+            <setEventAttribute attr="eventType">IIS-Web-Length-Reqd-Access-Denied</setEventAttribute>
+            <setEventAttribute attr="eventSeverity">5</setEventAttribute>
+          </when>
+
+          <when test="matches($httpStatusCode, '^2')">
+            <!--<when test="$httpStatus in "2xx")'>-->
+            <setEventAttribute attr="eventType">IIS-Web-Request-Success</setEventAttribute>
+            <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+          </when>
+          
+          <when test="matches($httpStatusCode, '^3')">
+            <setEventAttribute attr="eventType">IIS-Web-Request-Redirect</setEventAttribute>
+            <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+          </when>
+          
+          <when test="matches($httpStatusCode, '^4')">
+            <setEventAttribute attr="eventType">IIS-Web-Client-Error</setEventAttribute>
+            <setEventAttribute attr="eventSeverity">5</setEventAttribute>
+          </when>
+          
+          <when test="matches($httpStatusCode, '^5')">
+            <setEventAttribute attr="eventType">IIS-Web-Server-Error</setEventAttribute>
+            <setEventAttribute attr="eventSeverity">6</setEventAttribute>
+          </when>
+        </choose>
+      </when>
+
+      <when test='$_type = "FTPSvcLog"'>
+        <!-- message specific parsing
+
+           **typed user 
+              <13>Mar 19 12:21:41 ADS-Pri.ProspectHills.net FTPSvcLog	3  2008-01-25  19:21:37 192.168.28.22 partha2 MSFTPSVC1 ADS-PRI 192.168.0.10 21 [3]USER partha2 - 331 0 0 0 0 FTP - - - -
+
+           ** typed bad passwd
+              <13>Mar 19 12:21:46 ADS-Pri.ProspectHills.net FTPSvcLog	3 2008-01-25	19:21:41 192.168.28.22 - MSFTPSVC1 ADS-PRI 192.168.0.10 21 [3]PASS - - 530 1326 0 0 0 FTP - - - -
+
+           **typed user
+              <13>Mar 19 12:22:01 ADS-Pri.ProspectHills.net FTPSvcLog	3 2008-01-25	19:21:58 192.168.28.22 partha3 MSFTPSVC1 ADS-PRI 192.168.0.10 21 [3]USER partha3 - 331 0 0 0 0 FTP - - - -
+
+            **typed bad passwd
+              <13>Mar 19 12:22:06 ADS-Pri.ProspectHills.net FTPSvcLog	3 2008-01-25	19:22:02 192.168.28.22 - MSFTPSVC1 ADS-PRI 192.168.0.10 21 [3]PASS - - 530 1326 0 0 0 FTP - - - -
+
+            **typed user
+               <13>Mar 19 12:22:16 ADS-Pri.ProspectHills.net FTPSvcLog	3 2008-01-25	19:22:13 192.168.28.22 partha MSFTPSVC1 ADS-PRI 192.168.0.10 21 [3]USER partha - 331 0 0 0 0 FTP - - - -
+
+            **typed bad passwd
+               <13>Mar 19 12:22:21 ADS-Pri.ProspectHills.net FTPSvcLog	3 2008-01-25	19:22:19 192.168.28.22 - MSFTPSVC1 ADS-PRI 192.168.0.10 21 [3]PASS - - 530 1326 0 0 32 FTP - - - -
+
+            **typed user
+               <13>Mar 19 12:22:41 ADS-Pri.ProspectHills.net FTPSvcLog	3 2008-01-25	19:22:38 192.168.28.22 partha MSFTPSVC1 ADS-PRI 192.168.0.10 21 [3]USER partha - 331 0 0 0 0 FTP - - - -
+
+            **typed good passwd
+              <13>Mar 19 12:22:46 ADS-Pri.ProspectHills.net FTPSvcLog	3 2008-01-25	19:22:42 192.168.28.22 partha MSFTPSVC1 ADS-PRI 192.168.0.10 21 [3]PASS - - 230 0 0 0 0 FTP - - - -
+
+            **typed get
+              <13>Mar 19 12:23:11 ADS-Pri.ProspectHills.net FTPSvcLog	3 2008-01-25	19:23:07 192.168.28.22 partha MSFTPSVC1 ADS-PRI 192.168.0.10 21 [3]sent /iisftp.txt - 226 0 39 0 0 FTP - - - -
+              <13>Mar 19 12:34:11 ADS-Pri.ProspectHills.net FTPSvcLog	3 2008-01-25	19:34:10 192.168.28.22 partha MSFTPSVC1 ADS-PRI 192.168.0.10 21 [4]sent /WinDHCPAgent.exe - 226 0 61440 0 63 FTP - - - -
+
+            **typed put
+              <13>Mar 19 12:23:26 ADS-Pri.ProspectHills.net FTPSvcLog	3 2008-01-25	19:23:21 192.168.28.22 partha MSFTPSVC1 ADS-PRI 192.168.0.10 21 [3]created /iisftp.txt - 226 0 0 39 0 FTP - - - -
+
+            **quit
+		<13>Mar 19 12:23:31 ADS-Pri.ProspectHills.net FTPSvcLog	3 2008-01-25     19:23:30 192.168.28.22 partha MSFTPSVC1 ADS-PRI 192.168.0.10 21 [3]QUIT - - 226 0 0 0 0 FTP - - - -
+
+           #Fields: c-ip cs-username s-sitename s-computername s-ip s-port cs-method cs-uri-stem cs-uri-query sc-status sc-win32-status sc-bytes cs-bytes time-taken cs-version cs-host cs(User-Agent) cs(Cookie) cs(Referer) 
+        -->
+
+	<collectFieldsByRegex src="$_body">
+          <regex><![CDATA[<_year:gPatYear>-<_mon:gPatMonNum>-<_day:gPatDay>(?:\t|\s+)<_time:gPatTime>(?:\t|\s+)<_body3:gPatMesgBody>]]></regex>
+        </collectFieldsByRegex>
+
+        <setEventAttribute attr="deviceTime">toDateTime($_mon, $_day, $_time)</setEventAttribute>
+        
+        <collectAndSetAttrByPos src="$_body3" sep=' '>          
+          <attrPosMap attr="srcIpAddr" pos='1'/>
+          <attrPosMap attr="user" pos='2'/>
+          <attrPosMap attr="srvInstName" pos='3'/>
+          <attrPosMap attr="destName" pos='4'/>
+          <attrPosMap attr="destIpAddr" pos='5'/>         
+          <attrPosMap attr="destIpPort" pos='6'/>
+          <attrPosMap attr="ftpMethod" pos='7'/>
+          <attrPosMap attr="uriStem" pos='8'/>
+          <attrPosMap attr="uriQuery" pos='9'/>
+          <attrPosMap attr="ftpStatusCode" pos='10'/>
+          <attrPosMap attr="recvBytes" pos='12'/>
+          <attrPosMap attr="sentBytes" pos='13'/>
+          <attrPosMap attr="durationMSec" pos='14'/>
+        </collectAndSetAttrByPos>
+
+        <collectAndSetAttrByRegex src="$ftpMethod">
+           <regex><![CDATA[\[<ipConnId:gPatInt>\]<:gPatMesgBody>]]></regex>
+        </collectAndSetAttrByRegex>
+
+        <choose>
+          
+          <when test='$ftpStatusCode = "230"'>
+            <setEventAttribute attr="eventType">IIS-FTP-Login-Success</setEventAttribute>
+	      <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+          </when>
+          
+          <when test='$ftpStatusCode = "530"'>
+            <setEventAttribute attr="eventType">IIS-FTP-Login-Failure</setEventAttribute>
+            <setEventAttribute attr="eventAction">1</setEventAttribute>
+            <setEventAttribute attr="eventSeverity">3</setEventAttribute>
+            <collectAndSetAttrFromAnotherEvent AnotherEventType = "IIS-FTP-Info">
+              <when test = '$ipConnId = $AnotherEvent.ipConnId'>
+                <setEventAttribute attr="user">$AnotherEvent.user</setEventAttribute>
+              </when>
+            </collectAndSetAttrFromAnotherEvent>	
+          </when>
+          
+          <when test='$ftpStatusCode = "500"'>
+            <setEventAttribute attr="eventType">IIS-FTP-Command-Syntax-Error</setEventAttribute>
+            <setEventAttribute attr="eventSeverity">4</setEventAttribute>
+          </when>
+
+          <when test='$ftpStatusCode = "501"'>
+            <setEventAttribute attr="eventType">IIS-FTP-Command-Syntax-Error</setEventAttribute>
+            <setEventAttribute attr="eventSeverity">4</setEventAttribute>
+          </when>
+
+          <when test='$ftpStatusCode = "503"'>
+            <setEventAttribute attr="eventType">IIS-FTP-Command-Not-Implemented</setEventAttribute>
+            <setEventAttribute attr="eventSeverity">5</setEventAttribute>
+          </when>
+
+          <when test='$ftpStatusCode = "504"'>
+            <setEventAttribute attr="eventType">IIS-FTP-Command-Not-Implemented</setEventAttribute>
+            <setEventAttribute attr="eventSeverity">5</setEventAttribute>
+          </when>
+ 
+          <when test='$ftpStatusCode = "550"'>
+            <setEventAttribute attr="eventType">IIS-FTP-File-Not-Found </setEventAttribute>
+            <setEventAttribute attr="eventSeverity">5</setEventAttribute>
+          </when>
+
+          <when test='$ftpStatusCode = "552"'>
+            <setEventAttribute attr="eventType">IIS-FTP-Storage-Exceeded </setEventAttribute>
+            <setEventAttribute attr="eventSeverity">6</setEventAttribute>
+          </when>
+
+          <when test='$ftpStatusCode = "553"'>
+            <setEventAttribute attr="eventType">IIS-FTP-Illegal-File </setEventAttribute>
+            <setEventAttribute attr="eventSeverity">6</setEventAttribute>
+          </when>
+
+          <when test='$ftpStatusCode = "226"'>
+              <when test="matches($ftpMethod, 'sent')">
+                 <setEventAttribute attr="eventType">IIS-FTP-File-Download-Success</setEventAttribute>
+                 <setEventAttribute attr="eventSeverity">2</setEventAttribute>
+              </when>
+
+              <when test="matches($ftpMethod, 'created')">
+                 <setEventAttribute attr="eventType">IIS-FTP-File-Upload-Success</setEventAttribute>
+                 <setEventAttribute attr="eventSeverity">2</setEventAttribute>
+              </when>              
+          </when>
+
+          <when test="matches($ftpStatusCode, '^2')">
+            <setEventAttribute attr="eventType">IIS-FTP-Generic-Success</setEventAttribute>
+            <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+          </when>
+          
+          <when test="matches($ftpStatusCode, '^5')">
+            <setEventAttribute attr="eventType">IIS-FTP-Generic-Failure</setEventAttribute>
+            <setEventAttribute attr="eventAction">1</setEventAttribute>
+            <setEventAttribute attr="eventSeverity">4</setEventAttribute>
+          </when>
+
+          <when test="matches($ftpStatusCode, '^1')">
+            <setEventAttribute attr="eventType">FTP Request - Pending</setEventAttribute>
+            <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+          </when>
+
+          <when test="matches($ftpStatusCode, '^3')">
+            <setEventAttribute attr="eventType">IIS-FTP-Info</setEventAttribute>
+            <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+          </when>
+
+          <when test="matches($ftpStatusCode, '^4')">
+            <setEventAttribute attr="eventType">IIS-FTP-Info</setEventAttribute>
+            <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+          </when>
+  
+        </choose>
+      </when>      
+    </choose>
+  </parsingInstructions>
+</eventParser>

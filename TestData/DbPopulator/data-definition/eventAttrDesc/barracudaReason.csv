@@ -1,0 +1,57 @@
+$barracudaReason,Description
+1,Virus
+2,Banned Attachment
+3,RBL Match
+4,Rate Control
+5,Too Many Message In Session
+6,Timeout Exceeded
+7,No Such Domain
+8,No Such User
+9,Subject Filter Match
+11,Client IP
+12,Recipient Address Rejected
+13,No Valid Recipients
+14,Domain Not Found
+15,Sender Address Rejected
+17,Need Fully Qualified Recipient
+18,Need Fully Qualified Sender
+19,Unsupported Command
+20,MAIL FROM Syntax Error
+21,Bad Address Syntax
+22,RCPT TO Syntax Error
+23,Send EHLO/HELO First
+24,Need MAIL Command
+25,Nested MAIL Command
+27,EHLO/HELO Syntax Error
+30,Mail Protocol Violation
+31,Score
+34,Header Filter Match
+35,Sender Block/Accept
+36,Recipient Block/Accept
+37,Body Filter Match
+38,Message Size Bypass
+39,Intention Analysis Match
+40,SPF/Caller-ID
+41,Client Host Rejected
+44,Authentication Not Enabled
+45,Allowed Message Size Exceeded
+46,Too Many Recipients
+47,Need RCPT Command
+48,DATA Syntax Error
+49,Internal Error
+50,Too Many Hops
+51,Mail Protocol Error
+55,Invalid Parameter Syntax
+56,STARTTLS Syntax Error
+57,TLS Already Active
+58,Too Many Errors
+59,Need STARTTLS First
+60,Spam Fingerprint Found
+61,Barracuda Whitelist
+62,Barracuda Blocklist
+63,DomainKeys
+64,Recipient Verification Unavailable
+65,Realtime Intent
+66,Client Reverse DNS
+67,Email Registry
+68,Invalid Bounce

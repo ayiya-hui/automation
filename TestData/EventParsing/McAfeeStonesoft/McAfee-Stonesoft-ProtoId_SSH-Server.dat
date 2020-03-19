@@ -1,0 +1,35 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<6>CEF:0|McAfee|IPS|5.5.7|75403|ProtoId_SSH-Server|1|spt=57126 deviceExternalId=PANASONIC-PCI-V2 node 1 dmac=01:10:FF:DB:10:00 dst=192.168.94.13 cat=Content Identification app=SSH rt=Apr 08 2016 00:26:00 deviceFacility=Inspection act=Permit deviceOutboundInterface=Interface #2 deviceInboundInterface=Interface #2 proto=6 dpt=22 src=192.168.94.158 dvc=192.168.94.51 dvchost=192.168.94.51 smac=57:3A:A7:56:50:00 cs1Label=RuleId cs1=147.0
+[params]
+domain=PANASONIC-PCI-V2 node 1
+destMACAddr=01:10:FF:DB:10:00
+parserName=McAfeeStonesoftParser
+eventType=McAfee-Stonesoft-ProtoId_SSH-Server
+devEventTypeGrp=Content Identification
+destIpAddr=192.168.94.13
+destIpPort=22 (SSH)
+srcIpAddr=192.168.94.158
+reptModel=Stonesoft IPS
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+fwAction=Permit
+eventName=SSH protocol detected
+appTransportProto=SSH
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+eventRuleTrigger=1
+count=1
+srcMACAddr=57:3A:A7:56:50:00
+srcIpPort=57126
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+ipProto=6 (TCP)
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=McAfee

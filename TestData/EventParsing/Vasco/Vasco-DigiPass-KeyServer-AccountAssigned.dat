@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+70.70.70.70
+[eventMsg]
+May 16 21:47:01 70.70.70.70 ikeyserver[3575]: {Info}, {Administration}, {I-011014}, {A DIGIPASS has been assigned to a DIGIPASS User Account by an Administrator}, {0x3CC3A7D0A459DC12B6B9FE1AB9172682}, {Source Location:10.1.2.3}, {User ID:user001}, {Domain:company.com}, {Serial No:1901156452}, {Expiration Date:2013/05/23}
+[params]
+domain=company.com
+parserName=VascoParser
+eventType=Vasco-DigiPass-KeyServer-AccountAssigned
+srcIpAddr=10.1.2.3
+reptModel=DigiPass
+eventId=any
+eventParsedOk=1
+eventSeverity=7
+eventName=A DIGIPASS has been assigned to a DIGIPASS User Account by an Administrator
+appTransportProto=Syslog
+phEventCategory=0 (External)
+msg=A DIGIPASS has been assigned to a DIGIPASS User Account by an Administrator
+eventRuleTrigger=1
+count=1
+eventSeverityCat=MEDIUM
+collectorId=any
+relayDevIpAddr=70.70.70.70
+user=user001
+customer=Super
+phRecvTime=any
+reptDevIpAddr=70.70.70.70
+reptVendor=Vasco

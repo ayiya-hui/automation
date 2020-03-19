@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<117>1 2014-09-20T17:23:14+00:00 172.18.3.31 Failsafe 2995 Asset/Infected Damballa|Failsafe|5.2.3|Asset/Infected|Asset/Infected|2|cat=infected|cfp1=6|cfp1Label=Incident Severity|cs6=https://DC1-DFS02-V/assets/268|cs6Label=Asset Detail Link|msg=Asset is infected with a threat|shost=192.168.0.73|sourceServiceName=Windows 7 or 8|src=192.168.0.73|start=1411233794000
+[params]
+parserName=DamballaParser
+eventType=Damballa-Failsafe-Asset-Infected
+appGroupName=infected
+osType=Windows 7 or 8
+srcIpAddr=192.168.0.73
+reptModel=Failsafe
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Malware infected asset found
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+msg=Asset is infected with a threat
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Damballa

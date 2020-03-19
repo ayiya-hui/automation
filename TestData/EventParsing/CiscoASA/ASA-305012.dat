@@ -1,0 +1,56 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>Nov 28 2007 17:22:18: %ASA-6-305012: Teardown dynamic TCP translation from inside:192.168.20.31/3530 to outside:99.129.50.157/5967 duration 0:01:30
+[params]
+rawEventMsg=any
+deviceTime=any
+eventType=ASA-305012
+phCustId=$sender
+srcIpAddr=192.168.20.31
+reptModel=ASA
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Teardown address translation
+phEventCategory=0 (External)
+srcIntfName=inside
+srcIpPort=3530
+eventSeverityCat=LOW
+destIntfName=outside
+postNATSrcIpAddr=99.129.50.157
+ipProto=6 (TCP)
+postNATSrcIpPort=5967
+count=1
+phRecvTime=any
+reptDevIpAddr=$reporter
+eventAction=0 (Permit)
+reptVendor=Cisco
+[reptDevIpAddr(key)]
+53.53.53.53
+[eventMsg]
+<134>Mar 29 18:21:57 $reporter %ASA-6-305012: Teardown dynamic TCP translation from inside:192.168.20.40/2946 to outside:216.156.83.134/29158 duration 0:00:30
+[params]
+rawEventMsg=any
+deviceTime=any
+eventType=ASA-305012
+phCustId=$sender
+srcIpAddr=192.168.20.40
+reptModel=ASA
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Teardown address translation
+phEventCategory=0 (External)
+srcIntfName=inside
+srcIpPort=2946
+eventSeverityCat=LOW
+destIntfName=outside
+postNATSrcIpAddr=216.156.83.134
+ipProto=6 (TCP)
+postNATSrcIpPort=29158
+count=1
+phRecvTime=any
+reptDevIpAddr=$reporter
+eventAction=0 (Permit)
+reptVendor=Cisco

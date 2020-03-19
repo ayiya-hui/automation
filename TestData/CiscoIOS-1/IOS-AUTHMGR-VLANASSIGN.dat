@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+May 13 15:41:00.733 EDT: %AUTHMGR-SP-5-VLANASSIGN: VLAN 141 assigned to Interface Gi2/37
+[params]
+deviceTime=any
+isHostIntfCritical=No
+eventType=IOS-AUTHMGR-VLANASSIGN
+phCustId=$sender
+intfName=Gi2/37
+reptModel=IOS
+eventId=any
+eventParsedOk=1
+eventSeverity=2
+testEvent=Real Event(0)
+hostIpAddr=$localhost
+eventName=VLAN assigned to interface
+phEventCategory=0
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+reptDevName=any
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=Success(0)
+reptVendor=Cisco
+hostVLAN=141

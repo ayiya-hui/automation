@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<22>Feb 15 15:57:29 IronPort-Mail: Info: MID 1750703 SPF: mailfrom identity noreply@wsnews.com.br SoftFail (v=spf1)
+[params]
+deviceTime=any
+parserName=IronportMailParser
+eventType=Cisco-IronPort-Mail-SPF-MailfromSoftFail
+reptModel=IronPort AsyncOS Mail
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Cisco-IronPort-Mail-SPF-MailfromSoftFail
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+customer=Super
+senderMailAddr=noreply@wsnews.com.br
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Cisco
+ironportMailMID=1750703

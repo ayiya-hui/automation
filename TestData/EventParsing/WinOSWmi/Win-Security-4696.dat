@@ -1,0 +1,29 @@
+[reptDevIpAddr(key)]
+20.20.20.120
+[eventMsg]
+Fri Oct 30 18:19:58 2009 $reporter AccelOps-WinLog-WMI  [Category]="13312" [CategoryString]="Process Creation" [ComputerName]="sf1dc03.jha.local" [Data]="NULL" [EventCode]="4696" [EventIdentifier]="4696" [EventType]="4" [Logfile]="Security" [RecordNumber]="184033591" [SourceName]="Microsoft-Windows-Security-Auditing" [TimeGenerated]="20100505222650.293514-000" [TimeWritten]="20100505222650.293514-000" [Type]="Audit Success" [User]="(null)" [[Subject]][Security ID]="S-1-5-18" [Account Name]="SF1DC03$" [Account Domain]="JHA" [Logon ID]="0x3e7" [[Process Information]][Process ID]="0x320" [Process Name]="C:\Windows\System32\svchost.exe" [[Target Process]][Target Process ID]="0x1060" [Target Process Name]="C:\Program Files (x86)\Symantec\Symantec Endpoint Protection\SescLU.exe" [[New Token Information]][Security ID]="S-1-5-18" [Account Name]="SF1DC03$" [Account Domain]="JHA"
+[params]
+rawEventMsg=any
+type=Audit Success
+swProcName=C:\Windows\System32\svchost.exe
+eventAction=0 (Permit)
+count=1
+eventId=any
+domain=JHA
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=$reporter
+winLogonId=0x3e7
+eventName=A primary token was assigned to process
+procName=C:\Windows\System32\svchost.exe
+reptVendor=Microsoft
+eventType=Win-Security-4696
+user=SF1DC03$
+phEventCategory=0 (External)
+reptDevIpAddr=$reporter
+reptModel=Windows
+eventSource=Microsoft-Windows-Security-Auditing

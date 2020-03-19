@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<143>2015-09-17 15:58:58,474 10.0.0.20 ClearPassAuth 204 1 0 Auth.Username=john,Auth.Service=Aruba-Wireless-Service (xxxxxxx),Auth.Roles=[AirGroup v2]|[Guest]|[User Authenticated],Endpoint.Device-Category=SmartDevice,Endpoint.Device-Family=Apple,Endpoint.MAC-Address=aabbccddeeff,Endpoint.MAC-Vendor=Apple,Endpoint.IP-Address=10.254.0.1,Endpoint.Hostname=My_iPhone,Endpoint.Device-Name=Apple iPhone,Auth.Auth-Status=User
+[params]
+deviceTime=any
+parserName=ArubaPolicyManagerParser
+eventType=Aruba-ClearPass-User
+srcIpAddr=10.254.0.1
+reptModel=ClearPass PolicyManager
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+hostIpAddr=10.0.0.20
+eventName=Aruba-ClearPass-User
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+eventRuleTrigger=1
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+user=john
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Aruba

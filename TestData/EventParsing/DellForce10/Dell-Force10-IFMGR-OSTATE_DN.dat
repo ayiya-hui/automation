@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+Feb 11 08:36:21 utc: %STKUNIT0-M:CP %IFMGR-5-OSTATE_DN: Changed interface state to down: Te 0/31
+[params]
+customer=Super
+eventId=any
+parserName=DellForce10Parser
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+count=1
+isHostIntfCritical=No
+eventType=Dell-Force10-IFMGR-OSTATE_DN
+reptDevIpAddr=$localhost
+collectorId=any
+eventName=Interface went down
+eventSeverity=1
+reptVendor=Dell
+relayDevIpAddr=$localhost
+phRecvTime=any
+eventRuleTrigger=1
+intfName=Te 0/31
+reptDevName=any
+reptModel=Force10

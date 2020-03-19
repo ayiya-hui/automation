@@ -1,0 +1,34 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<38>Jan 28 15:00:53 IronPort-Web: Info: 1454011254.582 7141 10.226.21.55 NONE_SSL/000 0 TCP_CONNECT 10.16.3.200:443 - NONE/host1 contentType1 OTHER-NONE-NONE-NONE-NONE-NONE-NONE <-,-,-,"-",-,-,-,-,"-",-,-,-,"-",-,-,"-","-",-,-,-,-,"-","-","-","-","-","-",0.00,0,-,"-","-",-,"-",-,-,"-","-"> "28/Jan/2016:15:00:54 -0500" 0 - x-webcat-code-full -
+[params]
+deviceTime=any
+parserName=IronportWebParser
+webCategory=OTHER-NONE-NONE-NONE-NONE-NONE-NONE
+eventType=Cisco-IronPort-Web-Generic
+destIpAddr=10.16.3.200
+srcIpAddr=10.226.21.55
+reptModel=IronPort AsyncOS Web
+eventId=any
+httpProxyAction=NONE_SSL
+eventParsedOk=1
+eventSeverity=1
+eventName=Cisco-IronPort-Web-Generic
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+eventRuleTrigger=1
+destName=host1
+count=1
+eventSeverityCat=LOW
+collectorId=any
+httpMethod=TCP_CONNECT
+relayDevIpAddr=$localhost
+destIpPort=443
+httpStatusCode=000
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+infoURL=10.16.3.200:443
+reptVendor=Cisco

@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+OS400-SV,IBMTownsend_1,IBMTownsend,$localhost,,syslog

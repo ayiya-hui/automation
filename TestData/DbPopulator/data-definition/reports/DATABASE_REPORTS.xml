@@ -1,0 +1,170 @@
+<Reports> 
+  <Report id="PH_Report_DBServer_1" group="PH_SYS_REPORT_DBServer">
+    <Name>Logon: Successful Database Server Logon Details </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Captures successful database server logons </Description>
+    <SelectClause numEntries="All">
+      <AttrList>phRecvTime,reptDevIpAddr,logonTime,logoffTime,srcIpAddr,user,srcApp,srcTerminal</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_DBServer_1" name="Filter_DBServer_1">
+        <SingleEvtConstr>eventType IN (Group@PH_SYS_EVENT_DBLogonSuccess)</SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+     <RelevantFilterAttr>srcIpAddr,reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+   <Report id="PH_Report_DBServer_2" group="PH_SYS_REPORT_DBServer">
+    <Name>Logon: Top Database Users By Successful Logons </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks database users by the number of successful logons</Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,user,COUNT(*)</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_DBServer_2" name="Filter_DBServer_2">
+        <SingleEvtConstr>eventType IN (Group@PH_SYS_EVENT_DBLogonSuccess)</SingleEvtConstr>
+	<GroupByAttr>reptDevIpAddr,user</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_DBServer_2B" group="PH_SYS_REPORT_DBServer">
+    <Name>Logon: Top Database Users By All Logon Activity  </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks users and database servers by logon activity - both success and failure </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,COUNT(*)</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_DBServer_2" name="Filter_DBServer_2">
+        <SingleEvtConstr>eventType IN (Group@PH_SYS_EVENT_DBLogonSuccess,Group@PH_SYS_EVENT_DBLogonFailure)</SingleEvtConstr>
+	<GroupByAttr>reptDevIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+   <Report id="PH_Report_DBServer_3" group="PH_SYS_REPORT_DBServer">
+    <Name>Logon: Failed Database Server Logon Details </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Captures failed database server logons </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,deviceTime,srcIpAddr,user,srcApp,srcTerminal,dbRetCode</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_DBServer_3" name="Filter_DBServer_3">
+        <SingleEvtConstr>eventType IN (Group@PH_SYS_EVENT_DBLogonFailure)</SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>srcIpAddr,reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+   <Report id="PH_Report_DBServer_4" group="PH_SYS_REPORT_DBServer">
+    <Name>Logon: Top Database Users By Failed Logons </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks database users by the number of successful logons</Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,eventType,user,COUNT(*)</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_DBServer_4" name="Filter_DBServer_4">
+        <SingleEvtConstr>eventType IN (Group@PH_SYS_EVENT_DBLogonFailure)</SingleEvtConstr>
+	<GroupByAttr>reptDevIpAddr,eventType,user</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+   <Report id="PH_Report_DBServer_5" group="PH_SYS_REPORT_DBServer">
+    <Name>Change: Database Server DDL Changes </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Captures database DDL changes </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,deviceTime,eventType,srcIpAddr,user</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_DBServer_5" name="Filter_DBServer_5">
+        <SingleEvtConstr>eventType IN (Group@PH_SYS_EVENT_DatabaseChange)</SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>srcIpAddr,reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_DBServer_6" group="PH_SYS_REPORT_DBServer">
+    <Name>Performance: Top Oracle Db by buffer cache hit ratio </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the Oracle database servers by buffer cache hit ratio and presents other metrics</Description>
+    <SelectClause numEntries="All">
+      <AttrList>hostName,dbName,AVG(dbBufferCacheHitRatio),AVG(dbCpuTimeRatio),AVG(dbPhysicalReadsPerSec),AVG(dbPhysicalWritesPerSec),AVG(dbRequestsPerSec),AVG(dbUserTransactionPerSec),AVG(dbUserCount)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(dbBufferCacheHitRatio) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_DBServer_5" name="Filter_DBServer_5">
+        <SingleEvtConstr>eventType = "PH_DEV_MON_PERF_ORADB" </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>hostName,dbName</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_DBServer_7" group="PH_SYS_REPORT_DBServer">
+    <Name>Performance: Top Oracle Db by table space usage </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the Oracle databases by table space usage </Description>
+    <SelectClause numEntries="All">
+      <AttrList>hostName,dbName,AVG(dbSystemTablespaceUsage),AVG(dbTempTablespaceUsage),AVG(dbUsersTablespaceUsage)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(dbSystemTablespaceUsage) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_DBServer_5" name="Filter_DBServer_5">
+        <SingleEvtConstr>eventType = "PH_DEV_MON_PERF_ORADB" </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>hostName,dbName</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_DBServer_8" group="PH_SYS_REPORT_DBServer">
+    <Name>Performance: Top MS SQL Db by buffer cache hit ratio </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the MS SQL Servers by buffer cache hit ratio and presents other metrics</Description>
+    <SelectClause numEntries="All">
+      <AttrList>hostName,AVG(dbBufferCacheHitRatio),AVG(dbLogCacheHitRatio),AVG(dbPageReadsPerSec),AVG(dbPageWritesPerSec),AVG(dbFullScansPerSec), AVG(dbPageSplitsPerSec),AVG(dbTransPerSec),AVG(dbUserConn),AVG(dbLoggedinUserCount)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(dbBufferCacheHitRatio) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_DBServer_5" name="Filter_DBServer_5">
+        <SingleEvtConstr>eventType = "PH_DEV_MON_PERF_MSSQL_SYS" </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>hostName</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_DBServer_9" group="PH_SYS_REPORT_DBServer">
+    <Name>Performance: Top MS SQL Db servers by space usage </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the MS SQL Servers by space usage</Description>
+    <SelectClause numEntries="All">
+      <AttrList>hostName,dbName,AVG(dbDataFileSizeKB),AVG(dbLogFileUsedKB),AVG(dbLogGrowthCount),AVG(dbLogShrinkCount),AVG(dbLogFlushPerSec)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(dbDataFileSizeKB) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_DBServer_5" name="Filter_DBServer_5">
+        <SingleEvtConstr>eventType = "PH_DEV_MON_PERF_MSSQL_SYS" </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>hostName,dbName</RelevantFilterAttr>
+  </Report>
+  
+
+</Reports>

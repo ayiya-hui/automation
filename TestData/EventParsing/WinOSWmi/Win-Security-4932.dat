@@ -1,0 +1,24 @@
+[reptDevIpAddr(key)]
+20.20.20.120
+[eventMsg]
+Fri Oct 30 18:19:58 2009 $reporter AccelOps-WinLog-WMI  [Category]="14082" [CategoryString]="Directory Service Replication" [ComputerName]="sf1dc03.jha.local" [Data]="NULL" [EventCode]="4932" [EventIdentifier]="4932" [EventType]="4" [Logfile]="Security" [RecordNumber]="184035292" [SourceName]="Microsoft-Windows-Security-Auditing" [TimeGenerated]="20100505222910.603249-000" [TimeWritten]="20100505222910.603249-000" [Type]="Audit Success" [User]="(null)" [Destination DRA]="CN=NTDS Settings,CN=SF1DC03,CN=Servers,CN=SF1,CN=Sites,CN=Configuration,DC=jha,DC=local" [Source DRA]="CN=NTDS Settings,CN=SF1DC04,CN=Servers,CN=SF1,CN=Sites,CN=Configuration,DC=jha,DC=local" [Naming Context]="DC=jha,DC=local" [Options]="19" [Session ID]="7253"
+[params]
+rawEventMsg=any
+type=Audit Success
+eventAction=0 (Permit)
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=$reporter
+eventName=Synchronization of a replica of an Active Directory naming context has begun
+reptVendor=Microsoft
+eventType=Win-Security-4932
+phEventCategory=0 (External)
+reptDevIpAddr=$reporter
+reptModel=Windows
+eventSource=Microsoft-Windows-Security-Auditing

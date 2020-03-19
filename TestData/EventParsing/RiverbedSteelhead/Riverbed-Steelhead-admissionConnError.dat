@@ -1,0 +1,24 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+2013-11-20 23:22:31 1.2.3.4(via UDP: [1.2.3.4]:65052) TRAP, SNMP v1, community c1cs3vents	SNMPv2-SMI::enterprises.17163 Enterprise Specific Trap (636) Uptime: 2:44:03.40	DISMAN-EVENT-MIB::sysUpTimeInstance = Timeticks: (984340) 2:44:03.40	SNMPv2-MIB::snmpTrapOID.0 = OID: SNMPv2-SMI::enterprises.17163.1.1.4.0.11
+[params]
+customer=Super
+eventId=any
+eventSeverityCat=LOW
+eventParsedOk=1
+phEventCategory=0 (External)
+parserName=RiverbedSteelheadParser
+count=1
+eventSeverity=1
+eventType=Riverbed-Steelhead-admissionConnError
+reptDevIpAddr=$localhost
+collectorId=any
+extEventRecvProto=Snmp Trap
+eventName=Riverbed-Steelhead-admissionConnError
+reptVendor=Riverbed
+relayDevIpAddr=$localhost
+rawEventMsg=any
+phRecvTime=any
+reptDevName=any
+reptModel=Steelhead

@@ -1,0 +1,29 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<166>CounterACT[9859]: System statistics: CPU usage: 9%, Available memory : 6131056 KB, Used memory: 5735416 KB, Available swap: 2040212 KB, Used swap: 62368 KB
+[params]
+parserName=ForeScoutCounterACTParser
+eventType=ForeScout-CounterACT-SystemPerfStat
+memUtil=48.33
+reptModel=CounterACT
+eventId=any
+eventParsedOk=1
+eventSeverity=3
+freeMemKB=6131056
+eventName=ForeScout-CounterACT-SystemPerfStat
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+usedMemKB=5735416
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+cpuUtil=9.00
+reptVendor=ForeScout
+freeSwapMemKB=2040212

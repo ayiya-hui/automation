@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+2015-11-11T18:20:17.097894+00:00 ukbirrfs600001 %DIAG-4-CPU_LOAD: 15 minute average load limit exceeded, value is 100.0% limit is 95.0% (top processes: hsd using 98.0)
+[params]
+customer=Super
+eventId=any
+eventSeverityCat=MEDIUM
+eventParsedOk=1
+phEventCategory=0 (External)
+parserName=MotorolaWiNGParser
+count=1
+eventSeverity=5
+eventType=Motorola-WiNG-HIGH-CPU_LOAD
+reptDevIpAddr=$localhost
+collectorId=any
+cpuUtil=100.00
+eventName=Motorola WLAN AP: high CPU
+reptVendor=Motorola
+relayDevIpAddr=$localhost
+extEventRecvProto=Syslog
+phRecvTime=any
+eventRuleTrigger=1
+reptDevName=ukbirrfs600001
+reptModel=WiNG WLAN AP

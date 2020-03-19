@@ -1,0 +1,22 @@
+[reptDevIpAddr(key)]
+60.60.60.61
+[eventMsg]
+<134>Apr 09 16:43:00 $reporter java: [Nessus-Error]:[eventSeverity]=PHL_INFO, [reptVendor]=Nessus, [reptModel]=Scan Report, [nessusUserName]=kai, [nessusErrorContent]=Invalid login
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+eventParsedOk=1
+errorString=Invalid login
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+eventName=Nessus-Error
+reptVendor=Nessus
+eventType=Nessus-Error
+user=kai
+phEventCategory=0 (External)
+reptDevIpAddr=$reporter
+reptModel=Nessus Security Scanner
+serverName=60.60.60.61

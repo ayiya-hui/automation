@@ -1,0 +1,30 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134> 08/03/2015:00:21:13  WAFNS1 0-PPE-0 : default EVENT MONITORDOWN 87168593 0 :  Monitor MonServiceBinding_192.168.234.233:83_(DAIS_Monitoring.txt)(DMZ2-APortal-02-MobileBanking-XG) - State DOWN
+[params]
+deviceTime=any
+parserName=CitrixNetScalerParser
+totFlows=1
+eventType=NETSCALER-EVENT-MONITORDOWN
+hostName=MonServiceBinding
+eventId=any
+reptModel=NetScaler
+ipPort=83
+eventParsedOk=1
+eventSeverity=3
+hostIpAddr=192.168.234.233
+eventName=Monitor bound to the NetScaler service is down
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+eventRuleTrigger=1
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Citrix

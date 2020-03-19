@@ -1,0 +1,23 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>Dec 04 2008 20:00:45: %PIX-7-108006: Detected ESMTP size violation from inside:10.10.10.10|8080 to outside:20.20.20.20|9996;declared size is: 4048, actual size is: 3560. --automator
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=any
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+srcIpAddr=10.10.10.10
+eventAction=1 (Deny)
+eventName=Detected ESMTP message size violation
+reptVendor=Cisco
+eventType=PIX-108006
+phEventCategory=0 (External)
+srcIntfName=inside
+reptDevIpAddr=$localhost
+reptModel=PIX

@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+1.1.1.1
+[eventMsg]
+<132>Sep 27 06:01:22 1.1.1.1 nmservic.exe[1016]: Security: EAP authentication failed for User SHARED\WallacgL, session 0x8892a5a4, session handle 0x005e5870, state FAILURE
+[params]
+rawEventMsg=any
+domain=SHARED
+deviceTime=any
+eventType=MobXE-Security-Client-Auth-Failure
+phCustId=$sender
+hostName=any
+procName=nmservic.exe
+reptModel=Mobility XE
+eventId=any
+ipConnId=0x8892a5a4
+eventParsedOk=1
+eventSeverity=5
+eventName=NetMotion MobilityXE device authentication failure
+phEventCategory=0 (External)
+eventSeverityCat=MEDIUM
+collectorId=any
+user=WallacgL
+reptDevName=any
+count=1
+phRecvTime=any
+reptDevIpAddr=1.1.1.1
+reptVendor=NetMotion

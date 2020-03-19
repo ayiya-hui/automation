@@ -1,0 +1,30 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+Nov  8 18:52:00 Time=2014-03-12T09:13:00,Category=Platform Health,CriticalityLevel=Critical,Desc=Certificate Expiry Warning,device=00:00:00:00:00:00(Default),sensor=00:00:00:00:00:00(Default)
+[params]
+deviceTime=any
+parserName=MotorolaAirDefenseParser
+eventType=Motorola-AirDefense-Platform-Health
+srcName=Default
+reptModel=AirDefense
+eventId=any
+eventTime=Wed Mar 12 09:13:00 CST 2014
+eventParsedOk=1
+eventSeverity=7
+eventName=Motorola-AirDefense-Platform-Health
+appTransportProto=Syslog
+phEventCategory=0 (External)
+eventRuleTrigger=1
+destName=Default
+count=1
+srcMACAddr=00:00:00:00:00:00
+eventSeverityCat=MEDIUM
+collectorId=any
+relayDevIpAddr=$localhost
+reptDevIpAddr=$localhost
+eventDesc=Certificate Expiry Warning
+customer=Super
+phRecvTime=any
+destMACAddr=00:00:00:00:00:00
+reptVendor=Motorola

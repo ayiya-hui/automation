@@ -1,0 +1,23 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+%Sep 22 20:38:32:947 2009 H3C DEVD/4/BRD MISPLUG: The board type of MR in 1 is different from the Mate MR's, so the MR can't work properly.
+[params]
+rawEventMsg=any
+eventId=any
+count=1
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+hwComponentName=Slot 1
+eventSeverity=5
+eventType=H3C-Comware-DEVD-BRD_MISPLUG_MODEL
+phCustId=$sender
+reptDevIpAddr=$localhost
+eventSeverityCat=MEDIUM
+collectorId=any
+eventName=Standby MPU failed to work because it is of different model from the active MPU.
+reptVendor=H3C
+phRecvTime=any
+reptDevName=any
+reptModel=Comware

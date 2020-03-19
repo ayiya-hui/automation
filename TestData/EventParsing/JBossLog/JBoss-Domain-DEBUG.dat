@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+10.1.2.16
+[eventMsg]
+<45>Sep 21 01:58:49 10.1.2.16 JBossEventLog 0 23:22:06,243 DEBUG [Domain] org.jboss.classloading.spi.dependency.Domain@838722{DefaultDomain} add module VFSClassLoaderPolicyModule bootstrap-classloader:0.0.0
+[params]
+deviceTime=any
+parserName=JBossLogParser
+eventType=JBoss-Domain-DEBUG
+hostName=10.1.2.16
+reptModel=JBOSS App Server
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=JBoss Domain debug log
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=10.1.2.16
+rawEventMsg=any
+eventDesc=org.jboss.classloading.spi.dependency.Domain@838722{DefaultDomain} add module VFSClassLoaderPolicyModule bootstrap-classloader:0.0.0
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=10.1.2.16
+reptVendor=Redhat

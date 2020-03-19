@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>Sep 10 11:29:19 pf: 00:00:00.082466 rule 1/0(match): block in on em0: (tos 0x0, ttl 128, id 21476, offset 0, flags [none], proto UDP (17), length 78)
+[params]
+customer=Super
+eventId=any
+parserName=PfSenseParser
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+count=1
+eventSeverity=1
+eventType=pfSense-Traffic-Blocked
+reptDevIpAddr=$localhost
+eventAction=1 (Deny)
+collectorId=any
+eventName=pfSense blocked traffic
+reptVendor=pfSense
+relayDevIpAddr=$localhost
+phRecvTime=any
+ipProto=17 (UDP)
+eventRuleTrigger=1
+reptModel=BSD Firewall

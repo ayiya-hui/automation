@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+1.1.1.1
+[eventMsg]
+<134>Sep 27 05:42:40 1.1.1.1 nmservic.exe[1016]: Security: RADIUS Authentication for SPU\griffibw was ACCEPTED  For device 01C9CB83D5DCBD5C0015C5EA691F027 w/reg. date 2009-05-03 0:12:24Z
+[params]
+rawEventMsg=any
+eventId=any
+count=1
+domain=SPU
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+eventSeverity=1
+eventType=MobXE-Security-Client-Auth-Success
+phCustId=$sender
+reptDevIpAddr=1.1.1.1
+collectorId=any
+eventName=NetMotion MobilityXE client authentication success
+procName=nmservic.exe
+reptVendor=NetMotion
+user=griffibw
+phRecvTime=any
+hostName=any
+reptDevName=any
+reptModel=Mobility XE

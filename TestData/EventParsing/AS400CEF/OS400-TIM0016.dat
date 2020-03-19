@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+83.83.83.83
+[eventMsg]
+Aug 20 13:04:22 83.83.83.83 CEF :0|PowerTech|Interact|2.0|TIM0016|A potential intrusion event was detected.  The event type was OPEN.|2| src =10.0.1.179 dst =0.0.0.0 msg=TYPE:JRN CLS :IDS JJOB :QSYSARB JUSER :QSYS JNBR :053542 PGM :QWCAMNAR OBJECT : LIBRARY : MEMBER: DETAIL: P 2007-08-20-13.04.22.544656 1105 U 08471 127.0.0.1 U 09150 127.0.0.1 TR-TCP 3393
+[params]
+rawEventMsg=any
+eventId=any
+count=1
+eventSeverityCat=LOW
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverity=2
+eventType=OS400-TIM0016
+phCustId=$sender
+reptDevIpAddr=83.83.83.83
+collectorId=any
+testEvent=Real Event(0)
+eventName=Intrusion moniOS400-TOR logged activity
+reptVendor=IBM
+user=QSYS
+attackName=TR-TCP
+phRecvTime=any
+srcIpAddr=10.0.1.179
+reptModel=OS400
+reptDevName=any
+wirelessSigName=3393

@@ -1,0 +1,23 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<133>Jul 24 2008 03:14:07: %PIX-5-111008: User 'enable_15' executed the 'configure terminal' command.--automator
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=any
+eventSeverity=2
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+eventAction=0 (Permit)
+eventName=Executed a command that modified config
+reptVendor=Cisco
+command=configure terminal
+user=enable_15
+phEventCategory=0 (External)
+eventType=PIX-111008
+reptDevIpAddr=$localhost
+reptModel=PIX

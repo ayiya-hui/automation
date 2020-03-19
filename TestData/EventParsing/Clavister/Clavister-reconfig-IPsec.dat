@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>[2016-04-26 16:10:05] EFW: IPSEC: prio=1 id=01800211 rev=2 event=reconfig_IPsec action=ipsec_reconfigured
+[params]
+deviceTime=any
+parserName=ClavisterParser
+eventType=Clavister-reconfig-IPsec
+reptModel=cOS Firewall
+eventId=any
+logID=1800211
+eventParsedOk=1
+eventSeverity=1
+fwAction=ipsec_reconfigured
+eventName=Clavister-reconfig-IPsec
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Clavister

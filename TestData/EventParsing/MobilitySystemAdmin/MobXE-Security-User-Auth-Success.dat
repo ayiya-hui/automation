@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+1.1.1.1
+[eventMsg]
+<134>Sep 27 05:31:25 1.1.1.1 nmservic.exe[1016]: Security: Successful EAP authentication for User SPU\ELLISD.
+[params]
+rawEventMsg=any
+eventId=any
+count=1
+domain=SPU
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+eventSeverity=1
+eventType=MobXE-Security-User-Auth-Success
+phCustId=$sender
+reptDevIpAddr=1.1.1.1
+collectorId=any
+eventName=NetMotion MobilityXE user authentication success
+procName=nmservic.exe
+reptVendor=NetMotion
+user=ELLISD
+phRecvTime=any
+hostName=any
+reptDevName=any
+reptModel=Mobility XE

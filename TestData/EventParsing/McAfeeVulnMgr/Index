@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+McAfee-Vuln-Found,McAfeeVulnMgr_1,McAfeeVulnMgr,60.60.60.60,,syslog

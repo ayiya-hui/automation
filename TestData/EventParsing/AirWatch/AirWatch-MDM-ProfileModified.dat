@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<13> March 09 12:28:59 AirWatch  AirWatch Syslog Details are as follows Event Type: Console, Event: ProfileModified, User: staplesams\UserFLast, Event Source: Server, Event Module: Profiles, Event Category: Profiles, Event Data: ProfileName=Launcher testing;SupportedPlatform=Android;Version=5;AssignedSmartGroups=N/A;ProfileScope=Production;AssignmentType=Auto;ExcludedSmartGroups=N/A;AllowRemoval=Never;ManagedBy=Development;EnableGeofencing=N/A;EnableScheduling=N/AEvent Timestamp: March 9, 2016 12:28:59
+[params]
+domain=staplesams
+deviceTime=any
+parserName=AirWatchParser
+eventType=AirWatch-MDM-ProfileModified
+reptModel=MDM
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=AirWatch MDM  profile modified
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+eventRuleTrigger=1
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+user=UserFLast
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=AirWatch

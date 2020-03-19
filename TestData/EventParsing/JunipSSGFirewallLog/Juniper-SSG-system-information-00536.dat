@@ -1,0 +1,162 @@
+[reptDevIpAddr(key)]
+81.81.81.81 (hostIpAddr:99.119.132.14)
+[eventMsg]
+<134>Arlington-ISG1000-Physical: NetScreen device_id=Arlington-ISG1000-Physical [Arlington-VSYS1]system-information-00536: IKE 99.119.132.14 Phase 2 msg ID b9e40016: Completed negotiations with SPI b281ed7a, tunnel ID 65742, and lifetime 3600 seconds/4194303 KB. (2013-02-28 09:09:40)
+[params]
+rawEventMsg=any
+eventId=any
+count=1
+eventSeverityCat=LOW
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverity=1
+eventType=Juniper-SSG-system-information-00536
+phCustId=$sender
+hostIpAddr=99.119.132.14
+hostGeoOrg=AT&T Internet Services
+reptDevIpAddr=81.81.81.81
+destIpAddr=81.81.81.81
+collectorId=any
+eventAction=0 (Permit)
+eventName=Juniper-SSG-system-information-00536
+reptVendor=Juniper
+phRecvTime=any
+reptModel=SSG ScreenOS
+[reptDevIpAddr(key)]
+81.81.81.81 (hostIpAddr:10.42.0.50)
+[eventMsg]
+<166>Nov  7 18:14:52 81.81.81.81 CBUBOT1-SENSATA-FW-2: NetScreen device_id=CBUBOT1-SENSATA-FW-2  [Root]system-information-00536: IKE 10.42.0.50: Received a notification message for DOI 1 40001 NOTIFY_NS_NHTB_INFORM. (2013-11-07 18:42:18)
+[params]
+rawEventMsg=any
+eventId=any
+count=1
+eventSeverityCat=LOW
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverity=1
+eventType=Juniper-SSG-system-information-00536
+phCustId=$sender
+reptDevIpAddr=81.81.81.81
+destIpAddr=81.81.81.81
+hostIpAddr=10.42.0.50
+collectorId=any
+eventAction=0 (Permit)
+eventName=Juniper-SSG-system-information-00536
+reptVendor=Juniper
+phRecvTime=any
+reptModel=SSG ScreenOS
+[reptDevIpAddr(key)]
+81.81.81.81 (hostIpAddr:10.42.0.51)
+[eventMsg]
+<166>Nov  7 18:14:52 81.81.81.81 CBUBOT1-SENSATA-FW-2: NetScreen device_id=CBUBOT1-SENSATA-FW-2  [Root]system-information-00536: IKE 10.42.0.51: Received a notification message for DOI 1 40001 NOTIFY_NS_NHTB_INFORM. (2013-11-07 18:42:18)
+[params]
+rawEventMsg=any
+eventId=any
+count=1
+eventSeverityCat=LOW
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverity=1
+eventType=Juniper-SSG-system-information-00536
+phCustId=$sender
+reptDevIpAddr=81.81.81.81
+destIpAddr=81.81.81.81
+hostIpAddr=10.42.0.51
+collectorId=any
+eventAction=0 (Permit)
+eventName=Juniper-SSG-system-information-00536
+reptVendor=Juniper
+phRecvTime=any
+reptModel=SSG ScreenOS
+[reptDevIpAddr(key)]
+81.81.81.81 (hostIpAddr:10.42.0.52)
+[eventMsg]
+<166>Nov  7 18:14:52 81.81.81.81 CBUBOT1-SENSATA-FW-2: NetScreen device_id=CBUBOT1-SENSATA-FW-2  [Root]system-information-00536: IKE 10.42.0.52: Received a notification message for DOI 1 40001 NOTIFY_NS_NHTB_INFORM. (2013-11-07 18:42:18)
+[params]
+rawEventMsg=any
+eventId=any
+count=1
+eventSeverityCat=LOW
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverity=1
+eventType=Juniper-SSG-system-information-00536
+phCustId=$sender
+reptDevIpAddr=81.81.81.81
+destIpAddr=81.81.81.81
+hostIpAddr=10.42.0.52
+collectorId=any
+eventAction=0 (Permit)
+eventName=Juniper-SSG-system-information-00536
+reptVendor=Juniper
+phRecvTime=any
+reptModel=SSG ScreenOS
+[reptDevIpAddr(key)]
+81.81.81.81 (hostIpAddr:10.42.0.53)
+[eventMsg]
+<166>Nov  7 18:14:52 81.81.81.81 CBUBOT1-SENSATA-FW-2: NetScreen device_id=CBUBOT1-SENSATA-FW-2  [Root]system-information-00536: IKE 10.42.0.53 phase 2:The symmetric crypto key has been generated successfully. (2013-11-07 18:42:18)I
+[params]
+rawEventMsg=any
+eventId=any
+count=1
+eventSeverityCat=LOW
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverity=1
+eventType=Juniper-SSG-system-information-00536
+phCustId=$sender
+reptDevIpAddr=81.81.81.81
+destIpAddr=81.81.81.81
+hostIpAddr=10.42.0.53
+collectorId=any
+eventAction=0 (Permit)
+eventName=Juniper-SSG-system-information-00536
+reptVendor=Juniper
+phRecvTime=any
+reptModel=SSG ScreenOS
+[reptDevIpAddr(key)]
+81.81.81.81 (hostIpAddr:10.42.0.54)
+[eventMsg]
+<166>Nov  7 18:14:52 81.81.81.81 CBUBOT1-SENSATA-FW-2: NetScreen device_id=CBUBOT1-SENSATA-FW-2  [Root]system-information-00536: IKE 10.42.0.54 phase 2:The symmetric crypto key has been generated successfully. (2013-11-07 18:42:18)
+[params]
+rawEventMsg=any
+eventId=any
+count=1
+eventSeverityCat=LOW
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverity=1
+eventType=Juniper-SSG-system-information-00536
+phCustId=$sender
+reptDevIpAddr=81.81.81.81
+destIpAddr=81.81.81.81
+hostIpAddr=10.42.0.54
+collectorId=any
+eventAction=0 (Permit)
+eventName=Juniper-SSG-system-information-00536
+reptVendor=Juniper
+phRecvTime=any
+reptModel=SSG ScreenOS
+[reptDevIpAddr(key)]
+81.81.81.81 (srcIpAddr:10.42.0.55)
+[eventMsg]
+<166>Oct 30 14:58:33 81.81.81.81 CBUBOT1-SENSATA-FW-2: NetScreen device_id=CBUBOT1-SENSATA-FW-2  [Root]system-information-00536: Rejected an IKE packet on ethernet0/0.1 from 10.42.0.55:500 to 10.131.15.12:500 with cookies ff76ab8d6aad8686 and 3e993ef828183747 because There was a preexisting session from the same peer. (2013-10-30 16:25:28)
+[params]
+rawEventMsg=any
+eventId=any
+count=1
+eventSeverityCat=LOW
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverity=1
+eventType=Juniper-SSG-system-information-00536
+phCustId=$sender
+reptDevIpAddr=81.81.81.81
+destIpAddr=10.131.15.12
+hostIpAddr=10.42.0.55
+collectorId=any
+eventAction=0 (Permit)
+eventName=Juniper-SSG-system-information-00536
+reptVendor=Juniper
+phRecvTime=any
+reptModel=SSG ScreenOS

@@ -1,0 +1,14 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+InfoBlox-NiOS-ApplicationSpawner-Stop,InfoBloxApp_1,InfoBloxApp,10.210.252.42,,syslog
+InfoBlox-NiOS-scriptxmld-Successful-Start,InfoBloxApp_2,InfoBloxApp,10.210.252.42,,syslog
+InfoBlox-NiOS-netauto_core-Try-End,InfoBloxApp_3,InfoBloxApp,10.210.252.42,,syslog
+InfoBlox-NiOS-netauto_core-Successful-Start,InfoBloxApp_4,InfoBloxApp,10.210.252.42,,syslog
+InfoBlox-NiOS-netauto_core-Failed,InfoBloxApp_5,InfoBloxApp,10.210.252.42,,syslog
+InfoBlox-NiOS-netauto_core-Switch-Successful,InfoBloxApp_6,InfoBloxApp,10.210.252.42,,syslog
+InfoBlox-NiOS-netauto_core-Successful-Routing-Summary,InfoBloxApp_7,InfoBloxApp,10.210.252.42,,syslog
+InfoBlox-NiOS-netauto_discovery-Successful,InfoBloxApp_8,InfoBloxApp,10.210.252.42,,syslog
+InfoBlox-NiOS-netauto_discovery-Skipping-Path,InfoBloxApp_9,InfoBloxApp,10.210.252.42,,syslog
+InfoBlox-NiOS-netauto_discovery-Successful-Started,InfoBloxApp_10,InfoBloxApp,10.210.252.42,,syslog
+InfoBlox-NiOS-netauto_discovery-Skipping-Worker,InfoBloxApp_11,InfoBloxApp,10.210.252.42,,syslog
+InfoBlox-NiOS-netauto_discovery-Skipping-async,InfoBloxApp_12,InfoBloxApp,10.210.252.42,,syslog

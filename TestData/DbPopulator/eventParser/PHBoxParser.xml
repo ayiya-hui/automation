@@ -1,0 +1,120 @@
+<eventParser name="PHBoxParser">
+
+  <deviceType>
+    <Vendor>CentOS</Vendor>
+    <Model>Linux</Model>
+    <Version>ANY</Version>
+  </deviceType>
+
+  <appType>
+    <Vendor>ProspectHills</Vendor>
+    <Model>AccelOps</Model>
+    <Version>ANY</Version>
+    <Name>ProspectHills AccelOps</Name>
+  </appType>
+
+  <!-- pattern definitions -->
+  <patternDefinitions>
+    <pattern name="patStrEndWithLeftSquareBracket"><![CDATA[[^\[]*]]></pattern>
+    <pattern name="patStrEndWithRightSquareBracket"><![CDATA[[^\]]*]]></pattern>
+  </patternDefinitions>
+  
+  <eventFormatRecognizer><![CDATA[\[PH_]]></eventFormatRecognizer>
+  
+  <testEvents>
+      <testEvent><![CDATA[<174>Mar  5 14:25:54 daniel-linux monitor.supervisor[18209]: [PH_MODULE_ABORT_FOUND]:[eventSeverity]=PHL_CRITICAL,[processName]=monitor.supervisor,[fileName]=phBaseProcessInfo.cpp,[lineNumber]=590,[procName]=phQueryMaster,[eventTime]=Wed Mar  5 14:25:54 2008,[phLogDetail]=Module aborted found by watchdog]]></testEvent>
+  </testEvents>
+
+  <parsingInstructions>
+
+    <switch>
+      <case>
+        <!-- parsing the fields
+             
+             <174>Mar  5 14:25:54 daniel-linux monitor.supervisor[18209]: [PH_MODULE_ABORT_FOUND]:[eventSeverity]=PHL_CRITICAL,[processName]=monitor.supervisor,[fileName]=phBaseProcessInfo.cpp,[lineNumber]=590,[procName]=phQueryMaster,[eventTime]=Wed Mar  5 14:25:54 2008,[phLogDetail]=Module aborted found by watchdog
+               
+               <174>Feb  4 14:25:54 daniel-linux monitor.supervisor[18209]: [PH_DISCOV_HOST_LOCATION]:[eventSeverity]=PHL_INFO,[processName]=phDiscover,[fileName]=hostLoc.cpp,[lineNumber]=214,[hostIpAddr]=192.168.0.10,[hostMACAddr]=00:30:48:84:45:0b,[nepDevIpAddr]=192.168.19.100,[nepDevName]=SJ-Dev-A-Fdy-Big-01,[nepDevPort]=FastEthernet2/4,[phLogDetail]=Host IP: 192.168.0.10 MAC: 00:30:48:84:45:0b attached to switch IP: 192.168.19.100 Name: SJ-Dev-A-Fdy-Big-01 on port FastEthernet2/4
+                 -->
+        <collectFieldsByRegex src="$_rawmsg">
+          <regex><![CDATA[<:gPatSyslogPRI><_mon:gPatMon>\s+<_day:gPatDay> <_time:gPatTime> <computer:gPatStr> <procName:patStrEndWithLeftSquareBracket>\[<:gPatInt>\]: \[<eventType:patStrEndWithRightSquareBracket>\]:<_body:gPatMesgBody>]]></regex>
+        </collectFieldsByRegex>
+        
+        <setEventAttribute attr="deviceTime">toDateTime($_mon, $_day, $_time)</setEventAttribute>    
+      </case>
+
+      <case>
+        <!-- parsing the fields
+
+            May 11 10:14:27 127.0.0.1 [PH_AUDIT_USER_LOGIN_SUCCEED][phEventCategory]=2,[srcIpAddr]=192.168.20.45,[phCustId]=1,[sessionId]=0ab028e5b665b36e5944ae48b2f5,[procName]=AppServer,[eventSeverity]=PHL_INFO,[user]=cust111,[phLogDetail]=User login successfully
+            May 11 01:00:03 127.0.0.1 [PH_AUDIT_SVC_LOGIN_SUCCEED][phEventCategory]=2,[srcIpAddr]=192.168.20.100,[phCustId]=1,[sessionId]=eaf85754c7915a025c4bf7d4ecf3,[procName]=AppServer,[eventSeverity]=PHL_INFO,[user]=1,[phLogDetail]=Service login successfully            
+            May 11 12:39:38 127.0.0.1 [PH_AUDIT_USER_LOGOFF][phEventCategory]=2,[srcIpAddr]=192.168.20.33,[phCustId]=111,[sessionId]=12a54decf9aa6d99c71f358a7131,[procName]=AppServer,[eventSeverity]=PHL_INFO,[user]=cust111,[phLogDetail]=User logoff
+            May 11 01:10:25 127.0.0.1 [PH_AUDIT_DATA_PURGE][phEventCategory]=3,[phCustId]=1,[procName]=AppServer,[eventSeverity]=PHL_INFO,[phLogDetail]=Purged 0 schedules
+	    May 11 10:15:25 127.0.0.1 [PH_AUDIT_OBJECT_UPDATED][phEventCategory]=2,[srcIpAddr]=192.168.20.45,[phCustId]=111,[sessionId]=0ab028e5b665b36e5944ae48b2f5,[procName]=AppServer,[osObjType]=Dashboard widget,[eventSeverity]=PHL_INFO,[osObjName]=Total Event Rate (Per Sec),[user]=cust111,[phLogDetail]=Dashboard widget has been updated
+          -->
+
+        <collectFieldsByRegex src="$_rawmsg">
+          <regex><![CDATA[<_mon:gPatMon>\s+<_day:gPatDay> <_time:gPatTime> <:gPatStr> \[<eventType:patStrEndWithRightSquareBracket>\]:?<_body:gPatMesgBody>]]></regex>
+        </collectFieldsByRegex>
+	<setEventAttribute attr="deviceTime">toDateTime($_mon, $_day, $_time)</setEventAttribute>  
+      </case>
+
+      <case>
+	<collectFieldsByRegex src="$_rawmsg">
+          <regex><![CDATA[<_mon:gPatMon>\s+<_day:gPatDay> <_time:gPatTime> <:gPatStr>\s+java:\s+\[<eventType:patStrEndWithRightSquareBracket>\]:?<_body:gPatMesgBody>]]></regex>
+        </collectFieldsByRegex>
+	<setEventAttribute attr="deviceTime">toDateTime($_mon, $_day, $_time)</setEventAttribute>  
+      </case>
+
+      <case>
+        <!-- parsing the fields
+             [PH_WS_COMM][eventSeverity]=PHL_INFO,[procName]=AppServer,[phCustId]=111,[phEventCategory]=3,[phLogDetail]=Write to existing entity (UserConnectivity@0) using MERGE
+             [PH_WS_COMM]:[eventSeverity]=PHL_INFO,[procName]=AppServer,[phCustId]=111,[phEventCategory]=3,[phLogDetail]=Write to existing entity (UserConnectivity@0) using MERGE
+          -->
+        <collectFieldsByRegex src="$_rawmsg">
+          <regex><![CDATA[\[<eventType:patStrEndWithRightSquareBracket>\]:?<_body:gPatMesgBody>]]></regex>
+        </collectFieldsByRegex>
+      </case>
+
+    </switch>
+
+    <choose>
+      <when test='matches($eventType, "DEV_MON|_JDBC_")'>
+        <setEventAttribute attr="phEventCategory">6</setEventAttribute>
+      </when>
+      <otherwise>
+        <setEventAttribute attr="phEventCategory">3</setEventAttribute>
+      </otherwise>
+    </choose>
+    
+    <collectAndSetAttrBySymbol src="$_body" sep="," symStart="[" symEnd="]=">
+        <excludeAttr>lineNumber,phLogDetail</excludeAttr>
+    </collectAndSetAttrBySymbol>
+
+    <!-- event severity -->
+    <choose>
+      <when test='$eventSeverity = "PHL_ALERT"'>
+        <setEventAttribute attr="eventSeverity">10</setEventAttribute>
+      </when>
+
+      <when test='$eventSeverity = "PHL_CRITICAL"'>
+        <setEventAttribute attr="eventSeverity">10</setEventAttribute>
+      </when>
+
+      <when test='$eventSeverity IN "PHL_ERROR, PHL_WARNING"'>
+        <setEventAttribute attr="eventSeverity">5</setEventAttribute>
+      </when>
+
+      <when test='$eventSeverity = "PHL_INFO"'>
+        <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+      </when>
+    </choose>
+
+    <when test='$phEventCategory = "6"'>
+      <when test='exist hostIpAddr'>
+         <setEventAttribute attr="reptDevIpAddr">$hostIpAddr</setEventAttribute>
+      </when>
+    </when>
+
+  </parsingInstructions>
+
+</eventParser>

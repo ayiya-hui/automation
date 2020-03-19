@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<187>237922: CORTR603 RP/0/RSP0/CPU0:Feb 11 10:20:44.256 CST: SSHD_[65839]: %SECURITY-SSHD-3-ERR_ERRNO : aaa_account failed: 'LOCALD' detected the 'fatal' condition 'No available method was able to process the request'
+[params]
+customer=Super
+eventId=any
+parserName=CiscoIOSParser
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=MEDIUM
+count=1
+totFlows=1
+eventType=IOS-SECURITY-ERR_ERRNO
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+collectorId=any
+eventName=AAA-Account failed
+eventSeverity=5
+reptVendor=Cisco
+relayDevIpAddr=$localhost
+phRecvTime=any
+eventRuleTrigger=1
+reptModel=IOS

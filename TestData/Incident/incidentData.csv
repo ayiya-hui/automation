@@ -1,0 +1,260 @@
+incidentType,name,reptDevIpAddr,createDevice,deviceName,deviceType,domainController,count,method
+PH_RULE_IMPORTANT_APP_DOWN,Important process down,10.1.0.1,TRUE,automator10Dot1Dot0Dot1,linux,,1,syslog
+PH_RULE_NETWORK_PORT_STAY_DOWN,Server Network Low Port Staying Down,10.2.0.1,TRUE,automator10Dot2Dot0Dot1,linux,,1,syslog
+PH_RULE_NON_RESPONSIVE_SERVICE,Service Down-No Response to STM,10.4.0.1,,automator10Dot4Dot0Dot1,,,2,syslog
+PH_RULE_DEGRADED_SERVICE,Service Degraded-Slow Response to STM,10.3.0.1,,automator10Dot3Dot0Dot1,,,3,syslog
+PH_RULE_NON_RESPONSIVE_SERVICE_CONTINUE,Service Staying Down-No Response to STM,10.5.0.1,,automator10Dot5Dot0Dot1,,,4,syslog
+PH_RULE_FPC_CHD_HIGH,FPC Current THD high,15.0.1.1,,Automator15Dot0Dot1Dot1,,,2,syslog
+PH_RULE_FPC_GROUND_CURR_HIGH,FPC ground current high,15.0.2.1,,Automator15Dot0Dot2Dot1,,,2,syslog
+PH_RULE_FPC_VHD_HIGH,FPC Voltage high,15.0.3.1,,Automator15Dot0Dot3Dot1,,,2,syslog
+PH_RULE_HVAC_TOO_HUMID,HVAC humidity high,15.0.4.1,,Automator15Dot0Dot4Dot1,,,2,syslog
+PH_RULE_HVAC_TOO_DRY,HVAC humidity low,15.0.5.1,,Automator15Dot0Dot5Dot1,,,2,syslog
+PH_RULE_HVAC_TOO_HOT,HVAC temp high,15.0.6.1,,Automator15Dot0Dot6Dot1,,,2,syslog
+PH_RULE_HVAC_TOO_COLD,HVAC temp low,15.0.7.1,,Automator15Dot0Dot7Dot1,,,2,syslog
+PH_RULE_UPS_BATTERY_METRIC_CRIT,UPS Battery Metrics Critical,15.0.8.1,,Automator15Dot0Dot8Dot1,,,2,syslog
+PH_RULE_UPS_BATTERY_STAT_CRIT,UPS Battery Status Critical,15.0.9.1,,Automator15Dot0Dot9Dot1,,,1,syslog
+PH_RULE_BGP_NBR_DOWN,BGP Neighbor Down,12.9.0.1,,,,,1,syslog
+PH_RULE_NET_HW_CRITICAL,Network Device Hardware Critical,12.4.0.1,TRUE,automator12Dot4Dot0Dot1,cisco,,1,syslog
+PH_RULE_NET_HW_WARN,Network Device Hardware Warning,12.5.0.1,TRUE,automator12Dot5Dot0Dot1,cisco,,1,syslog
+PH_RULE_ICMP_UNREACH_SAME_HOSTS,Excessive ICMP Unreachable (NetFlow),$localhost,,,,,1,netflow
+PH_RULE_INTF_DUPLEX_MISMATCH,Network Device Interface Duplex Mismatch,12.8.0.1,TRUE,automator12Dot8Dot0Dot1,cisco,,6,syslog
+PH_RULE_INTF_FLAP_NET_DEV,Network Device Interface Flapping,12.6.0.1,TRUE,automator12Dot6Dot0Dot1,cisco,,3,syslog
+PH_RULE_DOWN_INTF_NET,Network Device Interface Staying Down,12.7.0.1,TRUE,automator12Dot7Dot0Dot1,cisco,,1,syslog
+PH_RULE_DEGRADED_PING_NET_DEV,Network Device Degraded-Lossy Ping Response,12.2.0.1,TRUE,automator12Dot2Dot0Dot1,cisco,,1,syslog
+PH_RULE_NON_RESPONSIVE_NET_DEV,Network Device Down-no ping response,12.3.0.1,TRUE,automator12Dot3Dot0Dot1,cisco,,1,syslog
+PH_RULE_OSPF_NBR_DOWN,OSPF Neighbor Down,12.10.0.1,,,,,1,syslog
+PH_RULE_EIGRP_NBR_DOWN,EIGRP Neighbor Down,12.9.0.2,,,,,1,syslog
+PH_RULE_RV_CALL_PROBLEMS,Radvision call setup issues,$localhost,,,,,1,syslog
+PH_RULE_RV_CORRUPT_VIDEO,Radvision Corrupt video packets,$localhost,,,,,1,syslog
+PH_RULE_RV_ETHERNET_DOWN,Radvision Ethernet Loss,$localhost,,,,,1,syslog
+PH_RULE_RV_DOWN,Radvision Gateway Down,$localhost,,,,,1,syslog
+PH_RULE_RV_HW_REMOVE,Radvision Hardware Removed,$localhost,,,,,1,syslog
+PH_RULE_RV_ISDN_DOWN,Radvision ISDN Loss,$localhost,,,,,1,syslog
+PH_RULE_SERVER_HW_CRITICAL,Server Hardware Critical,11.3.0.1,TRUE,automator11Dot3Dot0Dot1,linux,,1,syslog
+PH_RULE_SERVER_HW_WARN,Server Hardware Warning,11.4.0.1,TRUE,automator11Dot4Dot0Dot1,linux,,1,syslog
+PH_RULE_DEGRADED_PING_SERVER,Server Degraded-Lossy Ping Response,11.2.0.1,TRUE,automator11Dot2Dot0Dot1,linux,,1,syslog
+PH_RULE_NON_RESPONSIVE_SERVER,Server Down-no ping response,11.1.0.1,TRUE,automator11Dot1Dot0Dot1,linux,,1,syslog
+PH_RULE_ACCELOPS_HIGH_EPS,System License Warning: High Event Rate,13.4.0.1,,,,,1,syslog
+PH_RULE_ACCELOPS_MAX_DEVICE_EXCEEDED,System License Warning: Max Number of Devices Exceeded License,$localhost,,,,,1,syslog
+PH_RULE_ACCELOPS_LOW_STORAGE,System Warning: Low Storage,13.4.0.2,,,,,1,syslog
+PH_RULE_DIFF_STARTUP_RUNNING_CONFIG,Difference in Running and Startup Config,5.1.0.1,TRUE,automator5Dot1Dot0Dot1,cisco,,1,syslog
+PH_RULE_CHANGE_RUN_CONFIG,Running Config Change,5.2.0.1,,automator5Dot2Dot0Dot1,,,1,syslog
+PH_RULE_CHANGE_STARTUP_CONFIG,Startup Config Change,5.4.0.1,,automator5Dot4Dot0Dot1,,,1,syslog
+PH_RULE_CHANGE_DC_USER_GRP,Domain Controller User and Group Modification,4.1.0.1,TRUE,automator4Dot1Dot0Dot1,win,TRUE,1,syslog
+PH_RULE_LINUX_FILE_CHANGE,Linux file change,$localhost,,,,,1,syslog
+PH_RULE_CHANGE_INST_SW,Server Installed Software Change,4.1.0.1,,automator4Dot1Dot0Dot1,,,1,syslog
+PH_RULE_EXCH_MBOX_QUEUE_CRIT,Exchange Server Mailbox Queue high,7.3.0.1,,automator7Dot3Dot0Dot1,,,2,syslog
+PH_RULE_EXCH_RPC_LATENCY_CRIT,Exchange Server RPC latency high,7.4.0.1,,automator7Dot4Dot0Dot1,,,2,syslog
+PH_RULE_EXCH_RPC_REQ_CRIT,Exchange Server RPC request high,7.5.0.1,,automator7Dot5Dot0Dot1,,,2,syslog
+PH_RULE_POOR_VOIP_MOS,Poor VoIP Call Quality,7.2.0.1,,automator7Dot2Dot0Dot1,,,2,syslog
+PH_RULE_DEGRADED_VOIP_MOS,Degraded VoIP Call Quality,7.1.0.1,,automator7Dot1Dot0Dot1,,,2,syslog
+PH_RULE_NET_CPU_CRIT,Network CPU Critical,9.3.0.1,TRUE,automator9Dot3Dot0Dot1,cisco,,2,syslog
+PH_RULE_NET_CPU_WARN,Network CPU Warning,9.4.0.1,TRUE,automator9Dot4Dot0Dot1,cisco,,2,syslog
+PH_RULE_HIGH_CPU_APPL_NET_DEV,High Process CPU:Nework Device,9.1.0.1,TRUE,automator9Dot1Dot0Dot1,cisco,,3,syslog
+PH_RULE_HIGH_MEM_APPL_NET_DEV,High Process Memory:Nework Device,9.2.0.1,TRUE,automator9Dot2Dot0Dot1,cisco,,3,syslog
+PH_RULE_NET_INTF_ERR_CRIT,Network Intf Error Critical,9.5.0.1,TRUE,automator9Dot5Dot0Dot1,cisco,,2,syslog
+PH_RULE_NET_INTF_ERR_WARN,Network Intf Error Warning,9.6.0.1,TRUE,automator9Dot6Dot0Dot1,cisco,,2,syslog
+PH_RULE_NET_INTF_UTIL_WARN,Network Intf Util Warning,9.8.0.1,TRUE,automator9Dot8Dot0Dot1,cisco,,2,syslog
+PH_RULE_IPS_NET_INTF_UTIL_CRIT,Network IPS Intf Util Critical,9.9.0.1,TRUE,automator9Dot9Dot0Dot1,fortinet,,2,syslog
+PH_RULE_IPS_NET_INTF_UTIL_WARN,Network IPS Intf Util Warning,9.10.0.1,TRUE,automator9Dot10Dot0Dot1,fortinet,,2,syslog
+PH_RULE_NET_MEM_CRIT,Network Memory Critical,9.11.0.1,TRUE,automator9Dot11Dot0Dot1,cisco,,2,syslog
+PH_RULE_NET_MEM_WARN,Network Memory Warning,9.12.0.1,TRUE,automator9Dot12Dot0Dot1,cisco,,2,syslog
+PH_RULE_SERVER_CPU_CRIT,Server CPU Critical,8.13.0.1,TRUE,automator8Dot13Dot0Dot1,linux,,2,syslog
+PH_RULE_SERVER_CPU_WARN,Server CPU Warning,8.14.0.1,TRUE,automator8Dot14Dot0Dot1,linux,,2,syslog
+PH_RULE_NET_INTF_UTIL_CRIT,Network Intf Util Critical,9.7.0.1,TRUE,automator9Dot7Dot0Dot1,juniper-ssg,,2,syslog
+PH_RULE_SERVER_DISK_SPACE_CRIT,Server Disk Space Critical,8.15.0.1,TRUE,automator8Dot15Dot0Dot1,linux,,2,syslog
+PH_RULE_SERVER_DISK_SPACE_WARN,Server Disk Space Warning,8.16.0.1,TRUE,automator8Dot16Dot0Dot1,linux,,2,syslog
+PH_RULE_ESX_CPU_CRIT,ESX CPU Critical,8.1.0.1,TRUE,automator8Dot1Dot0Dot1,esx,,2,syslog
+PH_RULE_ESX_CPU_WARN,ESX CPU Warning,8.2.0.1,TRUE,automator8Dot2Dot0Dot1,esx,,2,syslog
+PH_RULE_ESX_DISKIO_CRIT,ESX Disk IO Critical,8.3.0.1,TRUE,automator8Dot3Dot0Dot1,esx,,2,syslog
+PH_RULE_ESX_DISKIO_WARN,ESX Disk IO Warning,8.4.0.1,TRUE,automator8Dot4Dot0Dot1,esx,,2,syslog
+PH_RULE_ESX_MEM_CRIT,ESX Memory Critical,8.5.0.1,TRUE,automator8Dot5Dot0Dot1,esx,,2,syslog
+PH_RULE_ESX_MEM_WARN,ESX Memory Warning,8.6.0.1,TRUE,automator8Dot6Dot0Dot1,esx,,2,syslog
+PH_RULE_ESX_INTF_CRIT,ESX Network IO Critical,8.7.0.1,TRUE,automator8Dot7Dot0Dot1,esx,,2,syslog
+PH_RULE_ESX_INTF_WARN,ESX Network IO Warning,8.8.0.1,TRUE,automator8Dot8Dot0Dot1,esx,,2,syslog
+PH_RULE_HIGH_CPU_APPL_SERVER,High Process CPU:Server,8.11.0.1,TRUE,automator8Dot11Dot0Dot1,linux,,3,syslog
+PH_RULE_HIGH_MEM_APPL_SERVER,High Process Memory:Server,8.12.0.1,TRUE,automator8Dot12Dot0Dot1,linux,,3,syslog
+PH_RULE_SERVER_INTF_ERR_CRIT,Server Intf Error Critical,8.17.0.1,TRUE,automator8Dot17Dot0Dot1,linux,,2,syslog
+PH_RULE_SERVER_INTF_ERR_WARN,Server Intf Error Warning,8.18.0.1,TRUE,automator8Dot18Dot0Dot1,linux,,2,syslog
+PH_RULE_SERVER_INTF_UTIL_CRIT,Server Intf Util Critical,8.7.0.1,,automator8Dot7Dot0Dot1,,,2,syslog
+PH_RULE_SERVER_INTF_UTIL_WARN,Server Intf Util Warning,8.8.0.1,,automator8Dot8Dot0Dot1,,,2,syslog
+PH_RULE_SERVER_MEM_CRIT,Server Memory Critical,8.21.0.1,TRUE,automator8Dot21Dot0Dot1,linux,,2,syslog
+PH_RULE_SERVER_MEM_WARN,Server Memory Warning,8.22.0.1,TRUE,automator8Dot22Dot0Dot1,linux,,2,syslog
+PH_RULE_STAT_HIGH_PROC_COUNT,Server Process Count Anomaly,8.23.0.1,TRUE,automator8Dot23Dot0Dot1,linux,,3,syslog
+PH_RULE_SWAP_MEM_CRIT,Server Swap Memory Critical,8.34.0.1,TRUE,automator8Dot34Dot0Dot1,linux,,3,syslog
+PH_RULE_VM_CPU_CRIT,Virtual Machine CPU Critical,8.26.0.1,,automator8Dot26Dot0Dot1,,,2,syslog
+PH_RULE_VM_CPU_WARN,Virtual Machine CPU Warning,8.27.0.1,,automator8Dot27Dot0Dot1,,,2,syslog
+PH_RULE_VM_MEM_CRIT,Virtual Machine Memory Critical,8.30.0.1,,automator8Dot30Dot0Dot1,,,2,syslog
+PH_RULE_VM_MEM_WARN,Virtual Machine Memory Warning,8.31.0.1,,automator8Dot31Dot0Dot1,,,2,syslog
+PH_RULE_EXCESS_FAILED_LOGON_DB,Multiple Logon Failures: Database,3.4.1.1,,,,,5,syslog
+PH_RULE_EXCESS_FAILED_LOGON_APPL,Multiple Logon Failures: Misc App,3.4.2.1,,,,,5,syslog
+PH_RULE_EXCESS_FAILED_LOGON_WEB,Multiple Logon Failures: Web Server,3.4.3.1,,,,,5,syslog
+PH_RULE_ACCOUNT_LOCKOUT_NET_DEV,Network Device Account Lockout,3.2.3.1,TRUE,automator3Dot2Dot3Dot1,fortinet,,1,syslog
+PH_RULE_EXCESS_FAILED_LOGON_NET_DEV,Multiple Admin Logon Failures: Net Device (no Source IP),3.2.1.1,TRUE,automator3Dot2Dot1Dot1,juniper_secure_access,,5,syslog
+PH_RULE_EXCESS_FAILED_LOGON_2_NET_DEV,Multiple Admin Logon Failures: Net Device,3.2.2.1,TRUE,automator3Dot2Dot2Dot1,juniper_secure_access,,5,syslog
+PH_RULE_ACCOUNT_LOCKOUT_DOMAIN,Domain Account Lockout,3.1.1.1,TRUE,automator3Dot1Dot1Dot1,win,1,1,syslog
+PH_RULE_EXCESS_FAILED_LOGON_DOMAIN,Multiple Logon Failures: Domain,3.1.2.1,TRUE,automator3Dot1Dot2Dot1,win,1,5,syslog
+PH_RULE_EXCESS_FAILED_LOGON_VPN,Multiple Logon Failures: VPN,3.1.3.1,,,,,5,syslog
+PH_RULE_EXCESS_FAILED_LOGON_WIRELESS,Multiple Logon Failures: WLAN,$localhost,,,,,5,syslog
+PH_RULE_FAILED_LOGON_MULTIPLE_ACCOUNTS,Multiple Logon Failures: Same Src and Dest and Multiple Accounts,$localhost,,,,,1,syslog
+PH_RULE_FAILED_LOGON_MULTIPLE_HOSTS,Multiple Logon Failures: Same Src and Multiple Dest,$localhost,,,,,1,syslog
+PH_RULE_ACCOUNT_LOCKOUT_SERVER,Server Account Lockout,3.3.5.1,TRUE,automator3Dot3Dot5Dot1,win,,1,syslog
+PH_RULE_DISABLED_ACCOUNT_ACCESS,Disabled Account Logon Attempt,3.3.1.1,,automator3Dot3Dot1Dot1,,,3,syslog
+PH_RULE_LOGON_TIME_VIOLATION,Logon Time Restriction Violation,3.3.2.1,,automator3Dot3Dot1Dot1,,,3,syslog
+PH_RULE_EXCESS_FAILED_LOGON_SERVER,Multiple Logon Failures: Server,3.3.3.1,TRUE,automator3Dot3Dot3Dot1,win,,5,syslog
+PH_RULE_EXCESS_FAILED_PRIV_LOGON_SERVER,Multiple Privileged Logon Failures: Server,3.3.4.1,TRUE,automator3Dot3Dot4Dot1,linux,,3,syslog
+PH_RULE_BOTNET_LIKELY,Suspicious Botnet like End host DNS Behavior,$localhost,,,,,1,syslog
+PH_RULE_EXCESS_DENY_DEST,Excessive Denied Connections To Same Destination,$localhost,,,,,105,syslog
+PH_RULE_EXCESS_DENY_SRC,Excessive Denied Connections From Same Src,$localhost,,,,,105,syslog
+PH_RULE_EXCESS_DENY_DNS_QUERY,Excessive Denied DNS Queries,$localhost,,,,,105,syslog
+PH_RULE_EXCESS_DENY_MAIL,Excessive Denied End User Mail To Unauthorized Mail Gateways,2.5.0.1,,,,,6,syslog
+PH_RULE_EXCESS_DNS_QUERY,Excessive End User DNS Queries,2.6.1.1,FALSE,automatorBindDNS,Bind_dns,,500,syslog
+PH_RULE_EXCESS_FTP_CLIENT_ERR,Excessive FTP Client Side Errors,2.8.0.1,,,,,6,syslog
+PH_RULE_HIGH_RR_IPS,High Risk Rating Cisco IPS Exploit,2.16.0.2,TRUE,ciscoIPS,cisco_ips,,1,syslog
+PH_RULE_HIGH_SEV_IPS,High Severity IPS Exploit,2.14.0.1,TRUE,Automator2Dot14Dot0Dot1,snort_ips,,1,syslog
+PH_RULE_HIGH_SEV_SEC_NONIPS,High Severity Security Exploit,2.15.0.1,,,,,1,syslog
+PH_RULE_EXCESS_HTTP_CLIENT_ERR,Excessive HTTP Client Side Errors,2.9.1.1,,,,,6,syslog
+PH_RULE_LARGE_ICMP_ECHO,Unusually Large ICMP Echo Packets,$localhost,,,,,22,netflow
+PH_RULE_BAD_DOMAIN_DNS_QUERY,Excessive Malware Domain Name Queries,2.10.1.1,,,,,1,syslog
+PH_RULE_MULTIPLE_IPS_SAME_SRC,Multiple Distinct IPS Events From Same Src,2.16.0.1,TRUE,snortIPS,snort_ips,,2,syslog
+PH_RULE_SCAN_IPS_SAME_SRC,Multiple IPS Scans From Same Src,2.16.0.2,TRUE,ciscoIPS,cisco_ips,,2,syslog
+PH_RULE_HEAVY_ICMP_PING_SWEEP,Heavy ICMP Ping Sweep,2.16.0.3,,,,,52,syslog
+PH_RULE_DNS_QUERY_SAME_DOMAIN,Excessive Repeated DNS Queries To Same Domain,2.11.1.1,,,,,105,syslog
+PH_RULE_HEAVY_TCP_HOST_SCAN,Heavy TCP Host Scan,2.11.1.5,,,,,210,syslog
+PH_RULE_HEAVY_TCP_HOST_SCAN_FIXED_PORT,Heavy TCP Host Scan On Fixed Port,2.11.1.2,,,,,105,syslog
+PH_RULE_HEAVY_TCP_PORT_SCAN,Heavy TCP Host Scan: Single Host,2.11.1.6,,,,,22,syslog
+PH_RULE_HEAVY_UDP_HOST_SCAN,Heavy UDP Host Scan,2.11.1.3,,,,,210,syslog
+PH_RULE_HEAVY_UDP_HOST_SCAN_FIXED_PORT,Heavy UDP Host Scan Fixed Port,2.11.1.4,,,,,105,syslog
+PH_RULE_HEAVY_UDP_PORT_SCAN,Heavy UDP Port Scan: Single Host,2.11.1.7,,,,,22,syslog
+PH_RULE_REPEAT_HEAVY_TCP_PORT_SCAN,Heavy TCP Host Scan: Multiple Host,$localhost,,,,,32,syslog
+PH_RULE_REPEAT_HEAVY_UDP_PORT_SCAN,Heavy UDP Host Scan: Multiple Host,$localhost,,,,,32,syslog
+PH_RULE_TCP_DDOS_ATTACK,TCP DDOS Attack,2.11.1.8,,,,,210,syslog
+PH_RULE_STAT_HIGH_TRAFFIC_FROM_SRC_FIXED_PORT,Traffic Anomaly from Host On Fixed Port,$localhost,,,,,22,netflow
+PH_RULE_STAT_HIGH_TRAFFIC_SRC_DEST_FIXED_PORT,Traffic Anomaly Between Two Hosts On Fixed Port,$localhost,,,,,22,netflow
+PH_RULE_UNAUTH_DNS_QUERY,End User DNS Queries to Unauthorized DNS Servers,2.1.0.1,,,,,11,syslog
+PH_RULE_UNCOMMON_DNS_QUERY,Excessive Uncommon DNS Queries,2.12.1.1,,,,,55,syslog
+PH_RULE_EXCESS_DNS_QUERY,Excessive End User DNS Queries,2.6.0.1,TRUE,automator2Dot6Dot0Dot1,cisco,,505,syslog
+PH_RULE_EXCESS_END_USER_MAIL,Excessive End User Mail,2.7.0.1,,,,,22,syslog
+PH_RULE_HIGH_SEV_SCANNER,Scanner found severe vulnerability,1.1.1.1,,,,,2,syslog
+PH_RULE_MAILATTACH_NON_REMEDY,Spam-Malicious Mail Attachment found but not remediated,1.2.1.1,FALSE,automatorSonic,SonicWall,,6,syslog
+PH_RULE_SPYWARE_NON_REMEDY,Spyware found but not remediated,1.3.1.1,TRUE,automator1Dot3Dot1Dot1,symantec,,1,syslog
+PH_RULE_VIRUS_NON_REMEDY,Virus found but not remediated,1.4.1.1,TRUE,automator1Dot4Dot1Dot1,symantec,,1,syslog
+PH_RULE_EQLOGIC_CONN_LATENCY_CRIT,Equalogical Connection Read/Write Latency Critical,14.0.1.1,,automator14Dot0Dot1Dot1,,,2,syslog
+PH_RULE_EQLOGIC_CONN_LATENCY_WARN,Equalogical Connection Read/Write Latency Warning,14.0.1.2,,automator14Dot0Dot1Dot2,,,2,syslog
+PH_RULE_NETAPP_CIFS_LATENCY_CRIT,NetApp CIFS Latency Critical,14.0.2.1,,automator14Dot0Dot2Dot1,,,2,syslog
+PH_RULE_NETAPP_CIFS_LATENCY_WARN,NetApp CIFS Read/Write Latency Critical,14.0.2.2,,automator14Dot0Dot2Dot2,,,2,syslog
+PH_RULE_NETAPP_FCP_LATENCY_CRIT,NetApp FCP Read/Write Latency Critical,14.0.3.1,,automator14Dot0Dot3Dot1,,,2,syslog
+PH_RULE_NETAPP_FCP_LATENCY_WARN,NetApp FCP Read/Write Latency Warning,14.0.3.2,,automator14Dot0Dot3Dot2,,,2,syslog
+PH_RULE_NETAPP_ISCSI_LATENCY_CRIT,NetApp ISCSI Read/Write Latency Critical,14.0.4.1,,automator14Dot0Dot4Dot1,,,2,syslog
+PH_RULE_NETAPP_ISCSI_LATENCY_WARN,NetApp ISCSI Read/Write Latency Warning,14.0.4.2,,automator14Dot0Dot4Dot2,,,2,syslog
+PH_RULE_NETAPP_NFS_LATENCY_CRIT,NetApp NFS Read/Write Latency Critical,14.0.5.1,,automator14Dot0Dot5Dot1,,,2,syslog
+PH_RULE_NETAPP_NFS_LATENCY_WARN,NetApp NFS Read/Write Latency Warning,14.0.5.2,,automator14Dot0Dot5Dot2,,,2,syslog
+PH_RULE_NETAPP_VOLUME_LATENCY_CRIT,NetApp VOLUME Read/Write Latency Critical,14.0.6.1,,automator14Dot0Dot6Dot1,,,2,syslog
+PH_RULE_NETAPP_VOLUME_LATENCY_WARN,NetApp VOLUME Read/Write Latency Warning,14.0.6.2,,automator14Dot0Dot6Dot2,,,2,syslog
+PH_RULE_NFS_DISK_SPACE_CRIT,NFS_DISK_SPACE Critical,14.0.7.1,,automator14Dot0Dot7Dot1,,,2,syslog
+PH_RULE_NFS_DISK_SPACE_WARN,NFS_DISK_SPACE Warning,14.0.7.2,,automator14Dot0Dot7Dot2,,,2,syslog
+PH_RULE_WIN_DISK_CONTROLLLER_PROBLEM,Windows Disk controller problem,15.8.0.1,TRUE,automator12Dot8Dot0Dot1,win,,3,syslog
+PH_RULE_AUTO_SRVC_DOWN,Auto Service Stopped,19.0.0.1,,,,,1,syslog
+PH_RULE_WMI_DOWN,WMI Service Unavailable,19.0.0.2,,,,,1,syslog
+PH_RULE_WINDOWS_SUCCESS_FILE_ACCESS,Windows successful file access,19.0.0.3,TRUE,automator19Dot0Dot0Dot3,win,,1,syslog
+PH_RULE_WINDOWS_FAILED_FILE_ACCESS,Windows failed file access,19.0.0.4,TRUE,automator19Dot0Dot04,win,,1,syslog
+PH_RULE_EXCESSIVE_ICMP,Excessive ICMP Traffic From Same Source,$localhost,,,,,210,netflow
+PH_RULE_INVALID_TCP_UDP_PORT,Invalid TCP/UDP Port Traffic,$localhost,,,,,1,netflow
+PH_RULE_SNMP_DOWN,SNMP Service Unavailable,19.0.0.7,,,,,1,syslog
+PH_RULE_UNUSUAL_ICMP,Unusual ICMP Traffic,$localhost,,,,,1,netflow
+PH_RULE_INBOUND_REMOTE_DESKTOP,Remote Desktop from Internet,$localhost,,,,,1,syslog
+PH_RULE_CLEARTEXT_PWD_OUTBOUND,Outbound cleartext password usage detected,$localhost,,,,,1,syslog
+PH_RULE_CLEARTEXT_PWD_INBOUND,Inbound cleartext password usage detected,$localhost,,,,,1,syslog
+PH_RULE_BOGON_TRAFFIC,Traffic to bogon networks,20.0.0.1,TRUE,automator20Dot0Dot0Dot1,juniper-ssg,,1,syslog
+PH_RULE_SYS_DEVICE_NO_EVENTS,No Events Reported In Last Hour,$localhost,,,,,1,syslog
+PH_RULE_DOWN_INTF_NET_NONCRIT,Non-critical Network Device Interface Staying Down,$localhost,,,,,1,syslog
+PH_RULE_ADD_DOMAIN_ADMIN,User added to Domain Admin Group,40.0.0.1,TRUE,automator40Dot0Dot0Dot1,win,TRUE,1,syslog
+PH_RULE_DELETE_DOMAIN_ADMIN,User deleted from Domain Admin Group,40.0.0.2,TRUE,automator40Dot0Dot0Dot1,win,TRUE,1,syslog
+PH_RULE_ADD_WIN_ADMINISTRATOR,User added to Administrator Group,40.0.0.3,TRUE,automator40Dot0Dot0Dot3,win,,1,syslog
+PH_RULE_DELETE_WIN_ADMINISTRATOR,User deleted from Administrator Group,40.0.0.4,TRUE,automator40Dot0Dot0Dot4,win,,1,syslog
+PH_RULE_ADD_REMOTE_DESKTOP_USER,User added to Remote Desktop User Group,40.0.0.5,TRUE,automator40Dot0Dot0Dot5,win,,1,syslog
+PH_RULE_DELETE_REMOTE_DESKTOP_USER,User deleted from Remote Desktop User Group,40.0.0.6,TRUE,automator40Dot0Dot0Dot6,win,,1,syslog
+PH_RULE_ADD_BACKUP_OPERATOR,User added to Backup Operator Group,40.0.0.7,TRUE,automator40Dot0Dot0Dot7,win,,1,syslog
+PH_RULE_DELETE_BACKUP_OPERATOR,User deleted from Backup Operator Group,40.0.0.8,TRUE,automator40Dot0Dot0Dot8,win,,1,syslog
+PH_RULE_ADD_DNS_ADMIN,User added to DNS Admin Group,40.0.0.9,TRUE,automator40Dot0Dot0Dot9,win,1,1,syslog
+PH_RULE_DELETE_DNS_ADMIN,User deleted from DNS Admins Group,40.0.0.10,TRUE,automator40Dot0Dot0Dot4,win,TRUE,1,syslog
+PH_RULE_EMERGING_THREAT_SHADOW_SERVER,Traffic to Emerging Threat Shadow server List,20.0.0.2,TRUE,automator20Dot0Dot0Dot2,juniper-ssg,,1,syslog
+PH_RULE_EMERGING_THREAT_RBN,Traffic to Emerging Threat RBN List,20.20.20.27,TRUE,automator20Dot20Dot20Dot27,juniper-ssg,,1,syslog
+PH_RULE_EMERGING_THREAT_DSHIELD,Traffic to Emerging Threat Dshield List,20.20.20.28,TRUE,automator20Dot20Dot20Dot28,juniper-ssg,,1,syslog
+PH_RULE_EMERGING_THREAT_SPAMHAUS,Traffic to Emerging Threat Spamhaus List,20.20.30.1,TRUE,automator20Dot20Dot20Dot30,juniper-ssg,,1,syslog
+PH_RULE_CHKP_FW_INSTALL_SUCCESS,Successful Checkpoint Firewall Policy Install,20.20.30.2,,,,,1,syslog
+PH_RULE_CHKP_FW_INSTALL_FAILURE,Failed Checkpoint Firewall Policy Install,20.20.30.3,,,,,1,syslog
+PH_RULE_DNS_MALWARE_DOMAIN,DNS Traffic to Malware Domains,20.50.0.1,,,,,1,syslog
+PH_RULE_ORADB_ALERT_LOG_ERROR,Oracle DB Alert Log Error,$localhost,,,,,1,syslog
+PH_RULE_ORACLE_DB_LISTENER_CLOSED,Oracle DB listener CLOSED,$localhost,,,,,1,syslog
+PH_RULE_ORADB_NO_BACKUP,Oracle Database not backed up for 1 day,20.20.20.21,,,,,2,syslog
+PH_RULE_ORADB_LOW_ROW_CACHE_HIT,Oracle DB Low Row Cache Hit Ratio,20.20.20.22,,,,,2,syslog
+PH_RULE_ORADB_LOW_MEMSORT_RATIO,Oracle DB Low Row Memory Sorts Ratio,20.20.20.23,,,,,2,syslog
+PH_RULE_ORADB_LOW_BUFF_CACHE_HIT,Oracle DB Low Buffer Cache Hit Ratio,20.20.20.24,,,,,2,syslog
+PH_RULE_ORADB_LOW_LIB_CACHE_HIT,Oracle DB Low Library Cache Hit Ratio,20.20.20.26,,,,,2,syslog
+PH_RULE_ACCELOPS_COLLECTOR_DOWN,System Collector Down,$appServer,,,,,1,syslog
+PH_RULE_ACCELOPS_WORKER_DOWN,System Worker Down,$appServer,,,,,1,syslog
+PH_RULE_LARGE_INBOUND_XFER_OUTSIDE_COUNTRY,Large Inbound Transfer From Outside My Country,30.0.0.1,TRUE,automator30Dot0Dot0Dot1,juniper-ssg,,1,syslog
+PH_RULE_LARGE_OUTBOUND_XFER_OUTSIDE_COUNTRY,Large Outbound Transfer To Outside My Country,30.0.0.11,TRUE,automator130Dot0Dot0Dot11,juniper-ssg,,1,syslog
+PH_RULE_LARGE_OUTBOUND_XFER,Large Outbound Transfer,30.0.0.12,TRUE,automator30Dot0Dot0Dot12,juniper-ssg,,1,syslog
+PH_RULE_IPS_SQL_INJECTION,SQL Injection Attack,30.0.0.2,TRUE,automator30Dot0Dot0Dot2,fortinet,,1,syslog
+PH_RULE_IRC_TRAFFIC,IRC traffic detected,30.0.0.22,TRUE,automator30Dot0Dot0Dot2,snort_ips,,1,syslog
+PH_RULE_VPN_LOGON_SUCCESS_OUTSIDE_COUNTRY,Successful VPN Logon From Outside My Country,$localhost,,,,,1,syslog
+PH_RULE_VPN_FAILED_LOGON_OUTSIDE_COUNTRY,Failed VPN Logon From Outside My Country,$localhost,,,,,3,syslog
+PH_RULE_CONCURRENT_VPN_AUTH_MULTI_CITY,Concurrent VPN Authentications To Same Account From Different Cities,$localhost,,,,,1,syslog
+PH_RULE_CONCURRENT_SUCCESS_AUTH_MULTI_CITY,Concurrent Successful Authentications To Same Account From Multiple Cities,$localhost,,,,,1,syslog
+PH_RULE_CONCURRENT_SUCCESS_AUTH_MULTI_COUNTRY,Concurrent Successful Authentications To Same Account From Multiple Countries,$localhost,,,,,1,syslog
+PH_RULE_CONCURRENT_FAILED_AUTH_MULTI_COUNTRY,Concurrent Failed Authentications To Same Account  From Multiple Countries,$localhost,,,,,1,syslog
+PH_RULE_CONCURRENT_FAILED_AUTH_MULTI_CITY,Concurrent Failed Authentications To Same Account From Multiple Cities,$localhost,,,,,1,syslog
+PH_RULE_INVALID_TCP_FLAG_HIGH,Invalid TCP Flags - High Intensity,121.121.121.11,,,,,501,netflow
+PH_RULE_INVALID_TCP_FLAG_MEDIUM,Invalid TCP Flags - Medium Intensity,121.121.121.1,,,,,200,syslog
+PH_RULE_INAPPROPRIATE_WEB_TRAFFIC,Inappropriate Website access detected,$localhost,,,,,1,syslog
+PH_RULE_SUCCESS_ACTIVITY_ON_DISABLED_ACCT,Successful Account Activity On a Disabled Account,$localhost,,,,,1,syslog
+PH_RULE_FAILED_ACTIVITY_ON_DISABLED_ACCT,Failed Account Activity On Disabled Account,$localhost,,,,,1,syslog
+PH_RULE_P2P_TRAFFIC,P2P traffic detected,30.0.1.22,TRUE,automator30Dot0Dot1Dot22,snort_ips,,1,syslog
+PH_RULE_TUNNEL_TRAFFIC,Tunneled traffic detected,30.0.3.23,TRUE,automator30Dot0Dot3Dot23,fortinet,,1,syslog
+PH_RULE_CHANGE_RUN_CONFIG_LOGIN,Running Config Change (with login info),5.2.0.1,,,,,1,syslog
+PH_RULE_CHANGE_STARTUP_CONFIG_LOGIN,Startup Config Change (with login info),50.20.0.2,,,,,1,syslog
+PH_RULE_HIGH_SEV_SEC_IPS_IN_PERMIT,High Severity Inbound Permitted IPS Exploit,30.0.3.13,TRUE,automator30Dot0Dot3Dot13,fortinet,,1,syslog
+PH_RULE_HIGH_SEV_SEC_IPS_IN_DENY,High Severity Inbound Denied Security Exploit,30.0.3.23,TRUE,automator30Dot0Dot3Dot23,fortinet,,1,syslog
+PH_RULE_AUDIT_DISABLED,Windows Audit Disabled,30.0.3.23,,,,,1,syslog
+PH_RULE_AUDIT_LOG_CLEARED,Windows Audit Log Cleared,30.30.30.130,,,,,1,syslog
+PH_RULE_ZEUS_BLOCKED_IP,Traffic to Zeus Blocked IP List,30.0.4.22,TRUE,automator30Dot0Dot4Dot22,juniper-ssg,,1,syslog
+PH_RULE_MULTI_ACCOUNT_DISABLED,Multiple Accounts Disabled by Administrator,$localhost,,,,,1,syslog
+PH_RULE_DOWN_INTF_NET_NONCRIT,Non-critical Network Device Interface Staying Down,30.0.4.44,TRUE,automator30Dot0Dot4Dot44,cisco,,1,syslog
+PH_RULE_P2P_TRAFFIC_HIGH_BW,P2P traffic using up high network bandwidth,40.0.0.1,TRUE,automator40Dot0Dot0Dot1,snort_ips,,1,syslog
+PH_RULE_SYS_ARCHIVING_FAILED,System Archiving Failed,$localhost,,,,,1,syslog
+PH_RULE_SYS_ARCHIVE_PURGE_LOW_SPACE,System Archive Purging Completed - Low Available Space,$localhost,,,,,1,syslog
+PH_RULE_SYS_EVENTDB_ARCHIVE,System EventDB Archiving Completed,$localhost,,,,,1,syslog
+PH_RULE_SQL_SRV_LOW_BUFF_CACHE_HIT,SQL Server Low Buffer Cache Hit Ratio,48.48.48.48,,,,,2,syslog
+PH_RULE_SQL_SRV_EXCESS_FULL_SCAN,SQL Server Excessive Full Scan,$localhost,,,,,2,syslog
+PH_RULE_ORADB_NONSYS_TABLESPACE_HIGH,High Oracle Non-System Table Space Usage,20.20.20.20,,,,,2,syslog
+PH_RULE_ORADB_SYSTEM_TABLESPACE_HIGH,High Oracle System Table Space Usage,20.20.20.25,,,,,2,syslog
+PH_RULE_HEAVY_HO_TCP_HOST_SCAN_FIXED_PORT,Heavy Half-Open TCP Host Scan On Fixed Port,20.20.20.26,,,,,105,netflow
+PH_RULE_HEAVY_HO_TCP_HOST_SCAN,Heavy Half-Open TCP Host Scan,20.20.20.27,,,,,105,netflow
+PH_RULE_HEAVY_HO_TCP_PORT_SCAN,Heavy Half-Open TCP Port Scan: Single Destination,20.20.20.28,,,,,23,netflow
+PH_RULE_REPEAT_HEAVY_HO_TCP_PORT_SCAN,Heavy Half-Open TCP Port Scan: Multiple Destinations,$appServer,,,,,1,netflow
+PH_RULE_EXECUTABLE_FILE_POST,Executable file posting from external source,$localhost,,,,,1,syslog
+PH_RULE_SYS_ARCHIVE_PURGE_POLICY,System Archive Purging Completed - Policy Driven,$appServer,,,,,1,syslog
+PH_RULE_SYS_EVENTDB_PURGE,System EventDB Purge Completed,$appServer,,,,,1,syslog
+PH_RULE_SYS_ARCHIVE_PURGE_FAILED,System Archive Purging Failed,$appServer,,,,,1,syslog
+PH_RULE_SYS_ARCHIVE_LOW_SPACE,Low Available System Archive Space,$appServer,,,,,1,syslog
+PH_RULE_SYS_ARCHIVE_UNAVAIL,System Archive Directory Unavailable,$appServer,,,,,1,syslog
+PH_RULE_INTF_FLAP_SERVER,Server Network Interface Flapping,145.145.145.1,TRUE,automator145Dot145Dot145Dot1,linux,,3,syslog
+PH_RULE_SYS_INCIDENT_NOTIF_ERROR,Incident Notification Error,$appServer,,,,,1,syslog
+PH_RULE_SQL_SRV_EXCESS_PAGE_RW,SQL Server Excessive Page Read/Write,48.48.48.50,,,,,2,syslog
+PH_RULE_SQL_SRV_LOW_LOG_CACHE_HIT,SQL Server Low Log Cache Hit Ratio,48.48.48.51,,,,,2,syslog
+PH_RULE_SQL_SRV_EXCESS_DEADLOCK,SQL Server Excessive Deadlock,48.48.48.52,,,,,2,syslog
+PH_RULE_SQL_SRV_LOW_BP_PAGES,SQL Server Low Free Pages in Buffer Pool,48.48.48.53,,,,,2,syslog
+PH_RULE_IMPORTANT_APP_STAY_DOWN,Important Process Staying Down,12.12.12.12,TRUE,automator12Dot12Dot12Dot12,linux,,1,syslog
+PH_RULE_SERVER_PAGING_FILE_CRIT,Windows Server Paging File Usage Critical,177.56.57.175,TRUE,automator177Dot56Dot57Dot175,win,,5,syslog
+PH_RULE_INBOUND_VNC,VNC from Internet,$localhost,,,,,1,syslog
+PH_RULE_RVBD_SYS_HEALTH_CRIT,Riverbed Steelhead System Health Critical,178.56.55.175,,,,,1,syslog
+PH_RULE_RVBD_SYS_HEALTH_WARN,Riverbed Steelhead System Health Degraded,178.56.57.175,,,,,1,syslog
+PH_RULE_RVBD_SVC_HEALTH_CRIT,Riverbed Steelhead Service Health Critical,178.57.57.175,,,,,1,syslog
+PH_RULE_SERVER_DISK_LATENCY_CRIT,Server Disk Latency Critical,88.15.0.1,TRUE,automator88Dot15Dot0Dot1,win,,2,syslog
+PH_RULE_SERVER_DISK_LATENCY_WARN,Server Disk Latency Warning,89.15.0.1,TRUE,automator89Dot15Dot0Dot1,win,,2,syslog
+PH_RULE_DOWN_INTF_SERVER,Server Network Interface Staying Down,145.145.145.21,TRUE,automator145Dot145Dot145Dot21,linux,,1,syslog
+PH_RULE_SUSPICIOUS_FAILED_LOGON_NO_SUCCESS,Suspicious Logon Failure: no following successful login,192.168.20.214,,,,,1,syslog
+PH_RULE_VM_DISKIO_SCSI_BUS_RESET,Virtual Machine SCSI Bus Reset,18.3.0.1,,,,,1,syslog
+PH_RULE_VIRUS_OUTBREAK,Virus outbreak,19.233.233.233,TRUE,automator19Dot233Dot233Dot233,fortinet,,1,syslog

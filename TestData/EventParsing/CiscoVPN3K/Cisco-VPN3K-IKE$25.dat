@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<189>393049 06/29/2009 21:26:10.760 SEV=5 IKE/25 RPT=1388 99.129.50.155  Group [HQ-Dev] User [wenyong] Received remote Proxy Host data in ID Payload: Address 192.168.16.10, Protocol 0, Port 0--automator
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+srcIpAddr=192.168.16.10
+eventAction=0 (Permit)
+preNATDestIpAddr=99.129.50.155
+eventName=Successful VPN logon
+reptVendor=Cisco
+eventType=Cisco-VPN3K-IKE/25
+user=wenyong
+phEventCategory=0 (External)
+reptDevIpAddr=$localhost
+userGrp=HQ-Dev
+reptModel=VPN 3K

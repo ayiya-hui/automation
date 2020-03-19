@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+83.83.83.83
+[eventMsg]
+Jan 16 09:25:52 83.83.83.83 CEF :0|PowerTech|Interact|2.0|UNA0802|A FTP Execute Remote Command (REXEC) transaction was allowed for user JERRYB.|3| src =10.0.1.75 dst =10.0.1.75 msg=TYPE:JRN CLS :AUD JJOB :QTRXC00328 JUSER :JERRYB JNBR :047439 PGM :PLKR108JEL OBJECT : LIBRARY : MEMBER: DETAIL: ST JERRYB *FTPREXEC RMTCMD QTRXC00328 LNS0811 000112 00017 dspsysval qsrlnbr
+[params]
+rawEventMsg=any
+eventId=any
+count=1
+eventSeverityCat=LOW
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverity=3
+eventType=OS400-UNA0802-RMTCMD
+phCustId=$sender
+reptDevIpAddr=83.83.83.83
+destIpAddr=10.0.1.75
+collectorId=any
+testEvent=Real Event(0)
+eventName=OS400-UNA0802-RMTCMD
+reptVendor=IBM
+user=JERRYB
+phRecvTime=any
+srcIpAddr=10.0.1.75
+opName=RMTCMD
+reptDevName=any
+reptModel=OS400

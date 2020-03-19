@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+EMC-VNX-4600,Emc_1,Emc,$localhost,,syslog

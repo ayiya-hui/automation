@@ -1,0 +1,31 @@
+[reptDevIpAddr(key)]
+81.81.81.81
+[eventMsg]
+<132>SH-QA-A-Jnp-FW-01: NetScreen device_id=SH-QA-A-Jnp-FW-01  [Root]system-warning-00515: Admin user netscreen has logged out via SSH from 172.16.10.10:0 (2001-10-20 21:14:28).
+[params]
+rawEventMsg=any
+deviceTime=any
+destGeoOrg=any
+eventType=Juniper-SSG-ssh-logout
+phCustId=$sender
+destIpAddr=any
+destGeoCountry=any
+srcIpAddr=172.16.10.10
+reptModel=SSG ScreenOS
+eventId=any
+eventParsedOk=1
+eventSeverity=2
+testEvent=Real Event(0)
+eventName=Successful admin SSH logoff
+phEventCategory=0 (External)
+destName=any
+srcIpPort=0
+eventSeverityCat=LOW
+collectorId=any
+user=netscreen
+reptDevName=any
+count=1
+phRecvTime=any
+reptDevIpAddr=81.81.81.81
+eventAction=0 (Permit)
+reptVendor=Juniper

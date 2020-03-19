@@ -1,0 +1,43 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<180>date=2013-05-01 time=11:20:50 devname=FortiGate80C devid=FGT80C3912622808 logid=0211008192 type=utm subtype=virus eventtype=infected level=warning vd=root msg=File is infected. status=passthrough service=mm1 srcip=1.1.1.1 dstip=2.2.2.2 srcport=2560 dstport=5120 srcintf=lo dstintf=eth0 policyid=12345 identidx=67890 sessionid=312 direction=rx file=file_name quarskip=No skip virus=virus dtype=cat ref=http://www.fortinet.com/ve?vid=1 user=user group=group
+[params]
+deviceTime=any
+destGeoOrg=any
+eventType=FortiGate-antivirus-infected-file-detect
+phCustId=$sender
+destIpAddr=2.2.2.2
+destGeoCountry=any
+srcIpAddr=1.1.1.1
+hostGeoLongitude=133
+usrMsg=File is infected.
+reptModel=FortiOS
+eventId=any
+eventParsedOk=1
+eventSeverity=5
+hostIpAddr=1.1.1.1
+eventName=An infected file was detected
+serviceName=mm1
+phEventCategory=0 (External)
+destName=any
+infoURL=http://www.fortinet.com/ve?vid=1
+srcIntfName=lo
+srcIpPort=2560
+eventSeverityCat=MEDIUM
+collectorId=any
+hostGeoLatitude=-27
+destIntfName=eth0
+relayDevIpAddr=$localhost
+user=user
+destIpPort=5120
+reptDevName=any
+count=1
+hostGeoCountry=Australia
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Fortinet
+destGeoCity=any
+userGrp=group
+hostGeoOrg=APNIC Debogon Project

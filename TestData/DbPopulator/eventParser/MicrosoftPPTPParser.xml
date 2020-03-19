@@ -1,0 +1,117 @@
+<eventParser name="MicrosoftPPTPParser">
+  <deviceType>
+    <Vendor>Microsoft</Vendor>
+    <Model>Windows</Model>
+    <Version>ANY</Version>
+  </deviceType>
+
+  <appType>
+    <Vendor>Microsoft</Vendor>
+    <Model>PPTP/L2TP VPN</Model>
+    <Version>ANY</Version>
+    <Name>Microsoft PPTP/L2TP VPN</Name>
+  </appType>
+
+  <patternDefinitions>
+    <pattern name="patStrComma"><![CDATA[[^,]*]]></pattern>
+    <pattern name="pagSig"><![CDATA[MSPPTPLog]]></pattern>
+  </patternDefinitions>
+
+  <eventFormatRecognizer><![CDATA[<:gPatSyslogPRI>?<:gPatMon>\s+<:gPatDay>\s+<:gPatTime>\s+<:gPatStr>\s+MSPPTPLog(?:\t|\s+)<:gPatInt>(?:\t|\s+)<:patStrComma>,<:patStrComma>,<:patStrComma>,<:patStrComma>,RAS,]]></eventFormatRecognizer>
+  
+  <testEvents>
+      <testEvent><![CDATA[<13>Apr  1 09:28:03 dev-v-win03-vc MSPPTPLog	0	192.168.24.11,administrator,04/01/2009,09:28:00,RAS,DEV-V-WIN03-VC,44,29,4,192.168.24.11,6,2,7,1,5,129,61,5,64,1,65,1,31,192.168.20.38,66,192.168.20.38,4108,192.168.24.11,4147,311,4148,MSRASV5.20,4155,1,4154,Use Windows authentication for all users,4129,DEV-V-WIN03-VC\administrator,4130,DEV-V-WIN03-VC\administrator,4127,4,25,311 1 192.168.24.11 04/01/2009 16:12:12 3,4149,Connections to Microsoft Routing and Remote Access server,4136,1,4142,0]]></testEvent>
+  </testEvents>
+
+  <parsingInstructions>
+
+    <!-- parsing common fields -->
+    <!-- sample message 
+
+         Successful Logon (PPTP)
+
+<13>Apr  1 09:28:03 dev-v-win03-vc MSPPTPLog	0	192.168.24.11,administrator,04/01/2009,09:28:00,RAS,DEV-V-WIN03-VC,44,29,4,192.168.24.11,6,2,7,1,5,129,61,5,64,1,65,1,31,192.168.20.38,66,192.168.20.38,4108,192.168.24.11,4147,311,4148,MSRASV5.20,4155,1,4154,Use Windows authentication for all users,4129,DEV-V-WIN03-VC\administrator,4130,DEV-V-WIN03-VC\administrator,4127,4,25,311 1 192.168.24.11 04/01/2009 16:12:12 3,4149,Connections to Microsoft Routing and Remote Access server,4136,1,4142,0
+
+        Intermediate Accounting record (PPTP)
+
+<13>Apr  1 09:28:09 dev-v-win03-vc MSPPTPLog	0	192.168.24.11,administrator,04/01/2009,09:28:08,RAS,DEV-V-WIN03-VC,4,192.168.24.11,6,2,7,1,5,129,61,5,64,1,65,1,31,192.168.20.38,66,192.168.20.38,25,311 1 192.168.24.11 04/01/2009 16:12:12 3,44,29,8,192.168.24.235,12,1500,50,3,51,1,55,1238603288,45,2,40,1,4108,192.168.24.11,4147,311,4148,MSRASV5.20,4120,0x014445562D562D57494E30332D5643,4294967206,4,4154,Use Windows authentication for all users,4136,4,4142,0
+
+        Logoff (PPTP) - note new entries 42,43,45,46
+
+<13>Apr  1 09:33:04 dev-v-win03-vc MSPPTPLog	0	192.168.24.11,administrator,04/01/2009,09:33:03,RAS,DEV-V-WIN03-VC,4,192.168.24.11,6,2,7,1,5,129,61,5,64,1,65,1,31,192.168.20.38,66,192.168.20.38,25,311 1 192.168.24.11 04/01/2009 16:12:12 3,44,29,8,192.168.24.235,12,1500,50,3,51,1,55,1238603581,45,2,46,305,43,6799,42,8041,48,76,47,80,49,6,40,2,4108,192.168.24.11,4147,311,4148,MSRASV5.20,4120,0x014445562D562D57494E30332D5643,4294967206,4,4154,Use Windows authentication for all users,4136,4,4142,0
+
+           Failed logon (PPTP)
+
+<13>Apr  1 09:03:52 dev-v-win03-vc MSPPTPLog	0	192.168.24.11,administrator,04/01/2009,09:03:52,RAS,DEV-V-WIN03-VC,25,311 1 192.168.24.11 04/01/2009 15:57:16 3,4127,4,4130,DEV-V-WIN03-VC\administrator,4129,DEV-V-WIN03-VC\administrator,4154,Use Windows authentication for all users,4155,1,4136,3,4142,16
+          
+      -->
+
+    <collectFieldsByRegex src="$_rawmsg">
+      <regex><![CDATA[<:gPatSyslogPRI><:gPatMon>\s+<:gPatDay>\s+<:gPatTime>\s+<:gPatStr>\s+MSPPTPLog(?:\t|\s+)<:gPatInt>(?:\t|\s+)<_body:gPatMesgBody>]]></regex>
+    </collectFieldsByRegex>
+
+    <collectFieldsByRegex src="$_body">
+      <regex><![CDATA[<nepDevIpAddr:gPatIpV4Dot>,<user:patStrComma>,<_date:patStrComma>,<_time:gPatTime>,<relayDevName:patStrComma>,<reptDevName:patStrComma><_body2:gPatMesgBody>]]></regex>
+    </collectFieldsByRegex>
+    
+    <collectAndSetAttrByKeyValuePair src="$_body2" sep=','>
+      <attrKeyMap attr="_pktType" key=",4136,"/>
+      <attrKeyMap attr="_reasonCode" key=",4142,"/>
+      <attrKeyMap attr="srcIpAddr" key=",66,"/>
+      <attrKeyMap attr="ipConnId" key=",44,"/>
+      <attrKeyMap attr="recvBytes" key=",42,"/>
+      <attrKeyMap attr="sentBytes" key=",43,"/>
+      <attrKeyMap attr="recvPkts" key=",47,"/>
+      <attrKeyMap attr="sentPkts" key=",48,"/>
+      <attrKeyMap attr="_durationSec" key=",46,"/>
+      <attrKeyMap attr="_terminateReason" key=",49,"/>
+    </collectAndSetAttrByKeyValuePair>
+
+    <setEventAttribute attr="reptDevIpAddr">$nepDevIpAddr</setEventAttribute>
+
+    <!-- time -->
+    <collectFieldsByRegex src="$_date">
+      <regex><![CDATA[<_mon:gPatMonNum>/<_day:gPatDay>/<_year:gPatYear>]]></regex>
+    </collectFieldsByRegex>
+
+    <setEventAttribute attr="deviceTime">toDateTime($_mon, $_day, $_year, $_time)</setEventAttribute>
+    <setEventAttribute attr="eventAction">0</setEventAttribute>
+    <setEventAttribute attr="eventType">Win-VPN-Generic</setEventAttribute>
+    <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+    <!-- set event type and reason code -->
+
+    <choose>
+
+      <when test='$_pktType = "1"'> 
+	<setEventAttribute attr="eventAction">0</setEventAttribute>
+	<setEventAttribute attr="eventType">Win-VPN-SuccessfulLogon</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+	<setEventAttribute attr="logonTime">toDateTime($_mon, $_day, $_year, $_time)</setEventAttribute>
+      </when>
+      
+      <when test='$_pktType = "4"'>
+	<setEventAttribute attr="eventAction">0</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+        <choose>
+  	  <when test="exist _terminateReason">
+	    <setEventAttribute attr="eventType">Win-VPN-Logoff</setEventAttribute>
+            <setEventAttribute attr="logoffTime">toDateTime($_mon, $_day, $_year, $_time)</setEventAttribute>
+	    <setEventAttribute attr="durationMSec">scale($_durationSec, 1000)</setEventAttribute>
+            <setEventAttribute attr="logonTime">shiftTimeSec($_mon, $_day, $_year, $_time, $_durationSec)</setEventAttribute>
+	  </when>
+          <otherwise>
+            <setEventAttribute attr="eventType">Win-VPN-Accounting</setEventAttribute>
+          </otherwise>
+        </choose>
+      </when>
+	  
+      <when test='$_pktType = "3"'> 
+	<setEventAttribute attr="eventAction">1</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">3</setEventAttribute>	
+	<setEventAttribute attr="eventType">Win-VPN-FailedLogon</setEventAttribute>
+	<setEventAttribute attr="winIASFailCode">$_reasonCode</setEventAttribute>
+      </when>
+      
+    </choose>
+  </parsingInstructions>
+</eventParser>

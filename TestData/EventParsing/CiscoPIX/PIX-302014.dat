@@ -1,0 +1,60 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>Nov 28 2007 17:22:08: %PIX-6-302014: Teardown TCP connection 76121 for outside:77.67.126.83/80 to inside:192.168.20.31/3531 duration 0:01:05 bytes 6410 TCP Reset-I--automator
+[params]
+rawEventMsg=any
+destIpAddr=77.67.126.83
+deviceTime=any
+eventType=PIX-302014
+phCustId=$sender
+destIpAddr=77.67.126.83
+totBytes=6410
+srcIpAddr=192.168.20.31
+reptModel=PIX
+eventId=any
+ipConnId=76121
+eventParsedOk=any
+eventSeverity=1
+eventName=Teardown TCP connection
+phEventCategory=4 (Traffic)
+srcIntfName=inside
+srcIpPort=3531
+eventSeverityCat=LOW
+destIntfName=outside
+destIpPort=80 (HTTP)
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Cisco
+[reptDevIpAddr(key)]
+45.45.45.46
+[eventMsg]
+<134>Mar 24 11:47:24 $reporter %PIX-6-302014: Teardown TCP connection 156441607 for outside:172.16.20.154/43739 to inside:192.168.0.10/135 duration 0:00:00 bytes 1968 TCP FINs--automator
+[params]
+rawEventMsg=any
+destIpAddr=172.16.20.154
+deviceTime=any
+eventType=PIX-302014
+phCustId=$sender
+destIpAddr=172.16.20.154
+totBytes=1968
+srcIpAddr=192.168.0.10
+reptModel=PIX
+eventId=any
+ipConnId=156441607
+eventParsedOk=any
+eventSeverity=1
+eventName=Teardown TCP connection
+phEventCategory=4 (Traffic)
+srcIntfName=inside
+srcIpPort=135
+eventSeverityCat=LOW
+destIntfName=outside
+destIpPort=43739
+count=1
+phRecvTime=any
+reptDevIpAddr=$reporter
+eventAction=0 (Permit)
+reptVendor=Cisco

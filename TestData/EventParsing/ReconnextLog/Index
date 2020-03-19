@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+Reconnex-chein-prevent,ReconnextLog_1,ReconnextLog,200.200.58.1,,syslog

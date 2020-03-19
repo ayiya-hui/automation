@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+54.54.54.54
+[eventMsg]
+<131>Jan 19 12:35:59 $reporter %ASA-3-710003: TCP access denied by ACL from 71.162.118.186/61931 to outside:216.156.83.134/80
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+count=1
+phCustId=$sender
+destIpAddr=216.156.83.134
+destIntfName=outside
+destIpPort=80 (HTTP)
+deviceTime=any
+eventAction=0 (Permit)
+eventId=any
+eventName={TCP|UDP} access to the appliance denied by policy
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=5
+eventSeverityCat=MEDIUM
+eventType=ASA-710003
+ipProto=6 (TCP)
+reptDevIpAddr=$reporter
+reptModel=ASA
+reptVendor=Cisco
+srcIpAddr=71.162.118.186
+srcIpPort=61931

@@ -1,0 +1,14 @@
+<config>
+    <customers>
+        <customer custId="1">
+            <name>Super</name>
+            <fullName>Super Customer</fullName>
+            <description>Super customer account</description>
+            <adminUser>admin</adminUser>
+            <adminPwd>admin*1</adminPwd>
+            <adminEmail>not_set</adminEmail>
+            <svcUser>1</svcUser>
+            <svcPwd>Prospect@Hi123</svcPwd>
+        </customer>
+    </customers>
+</config>

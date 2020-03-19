@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+Tipp_IPS-1919,TipPointNMS_1,TipPointNMS,$localhost,,syslog

@@ -1,0 +1,24 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>Dec 04 2008 20:00:45: %PIX-2-106020: Deny IP teardrop fragment (size = 4356, offset = 36 from 10.10.10.10 to 20.20.20.20--automator
+[params]
+rawEventMsg=any
+destIpAddr=20.20.20.20
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=any
+eventSeverity=8
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=MEDIUM
+destIpAddr=20.20.20.20
+eventAction=1 (Deny)
+eventName=Denied IP traffic - teardrop fragment attack
+srcIpAddr=10.10.10.10
+reptVendor=Cisco
+eventType=PIX-106020
+phEventCategory=0 (External)
+reptDevIpAddr=$localhost
+reptModel=PIX

@@ -1,0 +1,56 @@
+[reptDevIpAddr(key)]
+33.33.33.33
+[eventMsg]
+<12>Mar 29 08:36:31 33.33.33.33 SJ-QA-A-Fdy-BigIron, list 100 permitted udp 172.16.255.70(26042)(Ethernet 2/15 0026.881f.4e01) -> 172.16.20.161(111), 1 event(s)
+[params]
+rawEventMsg=any
+srcMACAddr=00:26:88:1f:4e:01
+srcIpPort=26042
+count=1
+eventId=any
+reptDevIpAddr=33.33.33.33
+eventParsedOk=1
+eventSeverity=5
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=MEDIUM
+destIpAddr=172.16.20.161
+eventAction=0 (Permit)
+eventName=Foundry network traffic permitted
+ipProto=17 (UDP)
+reptVendor=Foundry
+eventType=Foundry-Ironware-Permit-Traffic
+srcIpAddr=172.16.255.70
+phEventCategory=0 (External)
+destIpPort=111 (RPCBIND)
+intfName=Ethernet2/15
+destName=SJ-QA-A-Fdy-BigIron
+reptModel=Ironware
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<12>SJ-QA-A-Fdy-BigIron, list 100 permitted udp 173.9.142.98(ntp)(Ethernet 2/1 0004.23ce.ba11) -> 172.16.20.121(ntp), 1 event(s)
+[params]
+rawEventMsg=any
+srcIpPort=123
+eventType=Foundry-Ironware-Permit-Traffic
+phCustId=$sender
+destIpAddr=172.16.20.121
+destIpPort=123 (NTP)
+srcIpAddr=173.9.142.98
+intfName=Ethernet2/1
+reptModel=Ironware
+eventId=any
+eventParsedOk=1
+eventSeverity=5
+eventName=Foundry network traffic permitted
+phEventCategory=0 (External)
+destName=SJ-QA-A-Fdy-BigIron
+srcMACAddr=00:04:23:ce:ba:11
+eventSeverityCat=MEDIUM
+ipProto=17 (UDP)
+count=1
+phRecvTime=any
+reptDevIpAddr=$reporter
+eventAction=0 (Permit)
+reptVendor=Foundry

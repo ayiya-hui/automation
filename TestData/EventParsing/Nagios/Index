@@ -1,0 +1,7 @@
+eventType,name,module,reptDevIpAddr,key,method
+Nagios_Host_Up,Nagios_1,Nagios,$localhost,,snmptrap
+Nagios_Host_Down,Nagios_2,Nagios,$localhost,,snmptrap
+Nagios_Host_Unreachable,Nagios_3,Nagios,$localhost,,snmptrap
+Nagios_Svc_Warning,Nagios_4,Nagios,$localhost,,snmptrap
+Nagios_Svc_Critical,Nagios_5,Nagios,$localhost,,snmptrap
+Nagios_Svc_Unknown,Nagios_6,Nagios,$localhost,,snmptrap

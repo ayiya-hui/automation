@@ -1,0 +1,6 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+WIN-DHCP-Link-Up,MicrosoftDHCPTrap_1,MicrosoftDHCPTrap,10.6.53.215,,syslog
+WIN-DHCP-Cold-Start,MicrosoftDHCPTrap_2,MicrosoftDHCPTrap,10.6.53.215,,syslog
+WIN-DHCP-Authentication-Failure,MicrosoftDHCPTrap_3,MicrosoftDHCPTrap,10.6.53.215,,syslog
+WIN-DHCP-Authentication-Failure,MicrosoftDHCPTrap_4,MicrosoftDHCPTrap,10.6.53.215,,syslog

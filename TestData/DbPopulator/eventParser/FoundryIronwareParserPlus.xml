@@ -1,0 +1,340 @@
+
+<eventParser name="FoundryIronwareParserPlus">
+
+  <deviceType>
+    <Vendor>Foundry</Vendor>
+    <Model>Ironware</Model>
+    <Version>ANY</Version>
+  </deviceType>
+
+  <!-- pattern definitions -->
+  <patternDefinitions>
+    <pattern name="patIntfId"><![CDATA[[\d+/\d+]*]]></pattern>
+    <pattern name="patStrEndComma"><![CDATA[[^,]*]]></pattern>
+    <pattern name="patReco1"><![CDATA[[^:]*:\s+\w+\s+\w+\s+by\s+\w+\s+from\s+src\s+IP\s+\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}.*]]></pattern>
+    <pattern name="patReco2"><![CDATA[[^:]*:\s+Interface\s+\w+\s+\d+/\d+,\s+state\s+\w+]]></pattern>
+    <pattern name="patReco3"><![CDATA[[^:]*:\s+(?:list|List)\s+[^ ]*\s+permitted\s+\w+\s+\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\(.*\)\(\w+\s+\d+/\d+\s+.*\)\s+-\>\s+\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\(.*\), \d+.*]]></pattern>
+    <pattern name="patReco4"><![CDATA[[^:]*:\s+(?:list|List)\s+[^ ]*\s+denied\s+\w+\s+\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\(.*\)\(\w+\s+\d+/\d+\s+.*\)\s+-\>\s+\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\(.*\), \d+.*]]></pattern>
+    <pattern name="patReco5"><![CDATA[[^:]*:\s+\w+\s+\d+\s+Port\s+\d+/\d+\s+\w+\s+State\s+-\>\s+\w+.*]]></pattern>
+    <pattern name="patReco6"><![CDATA[.*\s+Duplicate IP address\s+\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\s+detected sent from MAC address.*]]></pattern>
+  </patternDefinitions>
+
+  <eventFormatRecognizer><![CDATA[<:patReco1>|<:patReco2>|<:patReco3>|<:patReco4>|<:patReco5>|<:patReco6>]]></eventFormatRecognizer>
+  
+  <testEvents>
+      <testEvent><![CDATA[Jun  4 15:51:18 172.16.20.99 Security: telnet logout by admin from src IP 137.146.28.75, src MAC 000c.dbff.6d00]]></testEvent>
+      <testEvent><![CDATA[Jun  4 15:51:12 172.16.20.100 System: Interface ethernet 4/9, state down]]></testEvent>
+      <testEvent><![CDATA[Jun  4 03:12:53 172.16.20.100 ACL: ACL: List GWI-in permitted tcp 61.158.162.230(6000)(Ethernet 1/4 0023.3368.f500) -> 137.146.0.0(8082), 1 event(s)]]></testEvent>
+      <testEvent><![CDATA[Jun  4 02:54:31 172.16.20.100 ACL: ACL: List XCORE denied udp 137.146.28.75(55603)(Ethernet 1/1 000c.dbde.6000) -> 137.146.3.35(snmp), 1 event(s)]]></testEvent>
+      <testEvent><![CDATA[Jun  4 01:49:09 172.16.20.100 STP: VLAN 3104 Port 4/22 STP State -> LEARNING (FwdDlyExpiry)]]></testEvent>
+  </testEvents>
+
+  <parsingInstructions> 
+    
+    <!-- header -->    
+    <switch>
+     <case>
+        <collectFieldsByRegex src="$_rawmsg">
+          <regex><![CDATA[<:gPatSyslogPRI><:gPatMon>\s+<:gPatDay>\s+<:gPatTime>\s+<:gPatStr>\s+<:gPatStr>,\s+<_body:gPatMesgBody>]]></regex>
+        </collectFieldsByRegex>
+      </case>
+      <case>
+        <collectFieldsByRegex src="$_rawmsg">
+          <regex><![CDATA[<:gPatSyslogPRI><:gPatMon>\s+<:gPatDay>\s+<:gPatTime>\s+<_host:gPatStr> <_body:gPatMesgBody>]]></regex>
+        </collectFieldsByRegex>
+        <switch>
+	<case>
+		<collectFieldsByRegex src="$_host">
+			<regex><![CDATA[<reptDevIpAddr:gPatIpV4Dot>]]></regex>
+		</collectFieldsByRegex>
+	</case>
+	<default>
+		<setEventAttribute attr="hostName">$_host</setEventAttribute>
+	</default>
+       </switch>	
+      </case>
+      </switch>
+             
+    <setEventAttribute attr="destIpAddr">$reptDevIpAddr</setEventAttribute>
+    <setEventAttribute attr="eventAction">0</setEventAttribute>
+    
+
+    <!-- body -->    
+    <switch>
+      
+      <case>
+      <!--
+      <172>Jun  2 16:27:35 p1eirzlb01e0 p1eirzlb01, Duplicate IP address 129.42.56.171 detected sent from MAC address 00d0.6817.6701 interface 2/1, 4 packets
+                -->
+
+        <collectFieldsByRegex src="$_body">
+          <regex><![CDATA[Duplicate IP address\s+<srcIpAddr:gPatIpV4Dot>\s+detected sent from MAC address\s+<_srcmac:gPatStr>\s+interface\s+<intfName:gPatStr>,\s+<recvPkts:gPatInt>\s+packets]]></regex>
+        </collectFieldsByRegex>
+	<setEventAttribute attr="eventType">"Foundry-Ironware-Duplicate-Address"</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+      </case>
+      
+      <case>
+        <!--- 
+	    Logon Successful (no syslog for failures, no syslog for logon without username)
+	    Jun  4 00:17:44 137.146.3.139 Security: telnet login by admin from src IP 137.146.28.77, src MAC 0012.f295.6d00 to PRIVILEGE EXEC mode
+	    <174>Jun  2 16:28:02 p1eirzlb01e0 p1eirzlb01, Security: SSH login by fdpoll from src IP 129.42.6.1, src MAC 001c.f9d6.7400 to USER EXEC mode
+                -->
+
+        <collectFieldsByRegex src="$_body">
+          <regex><![CDATA[.*Security:\s+<appTransportProto:gPatStr>\s+<_action:gPatStr>\s+by\s+<user:gPatStr>\s+from\s+src\s+IP\s+<srcIpAddr:gPatIpV4Dot>,\s+src\s+MAC\s+<_srcmac:gPatStr>\s+to\s+<_mode:gPatStr>\s+EXEC\s+mode.*]]></regex>
+        </collectFieldsByRegex>
+
+        <choose>
+          <when test='$_action = "login"'>
+	    <setEventAttribute attr="_action">Login</setEventAttribute>            
+          </when>
+        </choose>
+
+        <choose>
+          <when test='$_mode = "USER"'>
+	    <setEventAttribute attr="_mode">Admin</setEventAttribute>
+          </when>
+          <when test='$_mode = "PRIVILEGED"'>
+	    <setEventAttribute attr="_mode">Priv-Admin</setEventAttribute>
+          </when>
+        </choose>
+
+        <setEventAttribute attr="eventType">combineMsgId("Foundry-Ironware-", $_mode, "-", $_action)</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">4</setEventAttribute>
+	<when test='$eventType = "Foundry-Ironware-Priv-Admin-Login"'>
+		 <setEventAttribute attr="eventSeverity">7</setEventAttribute>
+	</when>
+      </case>
+      
+      <case>
+
+        <!--
+            Logon Successful 
+	    Jun  4 00:13:30 137.146.3.97 NX08-02,: Security: telnet login by admin from src IP 137.146.28.75 to USER EXEC mode	    
+                -->
+         <collectFieldsByRegex src="$_body">
+		<regex><![CDATA[.*Security:\s+<appTransportProto:gPatStr>\s+<_action:gPatStr>\s+by\s+<user:gPatStr>\s+from\s+src\s+IP\s+<srcIpAddr:gPatIpV4Dot>\s+to\s+<_mode:gPatStr>\s+EXEC\s+mode.*]]></regex>
+	</collectFieldsByRegex>
+
+        <choose>
+          <when test='$_action = "login"'>
+	    <setEventAttribute attr="_action">Login</setEventAttribute>            
+          </when>
+        </choose>
+
+        <choose>
+          <when test='$_mode = "USER"'>
+	    <setEventAttribute attr="_mode">Admin</setEventAttribute>
+          </when>
+          <when test='$_mode = "PRIVILEGED"'>
+	    <setEventAttribute attr="_mode">Priv-Admin</setEventAttribute>
+          </when>
+        </choose>
+
+        <setEventAttribute attr="eventType">combineMsgId("Foundry-Ironware-", $_mode, "-", $_action)</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">4</setEventAttribute>
+	<when test='$eventType = "Foundry-Ironware-Priv-Admin-Login"'>
+		 <setEventAttribute attr="eventSeverity">7</setEventAttribute>
+	</when>
+      </case>
+      
+      <case>
+
+        <!--
+            Logout 
+	    Jun  4 15:51:18 137.146.3.100 Security: telnet logout by admin from src IP 137.146.28.75, src MAC 000c.dbff.6d00
+	    <174>Jun  2 16:28:08 p1eiizgl02e0 p1eiizgl02, Security: SSH logout by fdpoll from src IP 10.111.80.25, src MAC 0019.06f0.ba00 from USER EXEC mode
+                -->
+
+        <collectFieldsByRegex src="$_body">
+          <regex><![CDATA[.*Security:\s+<appTransportProto:gPatStr>\s+<_action:gPatStr>\s+by\s+<user:gPatStr>\s+from\s+src\s+IP\s+<srcIpAddr:gPatIpV4Dot>,\s+src\s+MAC\s+<_srcmac:gPatStr>.*]]></regex>
+        </collectFieldsByRegex>
+
+        <choose>
+          <when test='$_action = "logout"'>
+	    <setEventAttribute attr="_action">Logoff</setEventAttribute>            
+          </when>
+        </choose>
+
+        <setEventAttribute attr="eventType">combineMsgId("Foundry-Ironware-Admin-", $_action)</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">4</setEventAttribute>
+      </case>
+      
+      <case>
+        <!--
+            Interface up/down, VTP changes
+	    Jun  4 15:51:12 137.146.3.68 System: Interface ethernet 4/9, state down
+	    Jun  4 15:51:32 137.146.3.68 System: Interface ethernet 4/9, state up
+                    -->
+        <switch>
+          <case>
+            <collectFieldsByRegex src="$_body">
+              <regex><![CDATA[.*System:\s+Interface\s+<_intfName:gPatStr>\s+<_intfNum:patIntfId>,\s+state\s+<_mode:gPatStr>.*]]></regex>
+            </collectFieldsByRegex>
+            <setEventAttribute attr="intfName">combineMsgId($_intfName,$_intfNum)</setEventAttribute>
+          </case>
+          <case>
+            <collectFieldsByRegex src="$_body">
+              <regex><![CDATA[.*System:\s+Interface\s+<intfName:patStrEndComma>,\s+state\s+<_mode:gPatStr>.*]]></regex>
+            </collectFieldsByRegex>
+          </case>
+        </switch>
+                
+	<choose>
+          <when test='$_mode = "up"'>
+	    <setEventAttribute attr="eventType">Foundry-Ironware-Intf-Up</setEventAttribute>
+          </when>
+          
+          <when test='$_mode = "down"'>
+	    <setEventAttribute attr="eventType">Foundry-Ironware-Intf-Down</setEventAttribute>
+          </when>
+        </choose>
+	<setEventAttribute attr="eventSeverity">6</setEventAttribute>
+      </case>
+
+      <case>
+        <!-- Foundry-Ironware-Permit-Traffic non empty source port
+	    Jun  4 03:12:53 137.146.3.131 ACL: ACL: List GWI-in permitted tcp 61.158.162.230(6000)(Ethernet 1/4 0023.3368.f500) -> 137.146.0.0(8082), 1 event(s)
+               -->
+        <collectFieldsByRegex src="$_body">
+          <regex><![CDATA[[^:]*:\s+(?:list|List)\s+<fwRule:gPatStr>\s+permitted\s+<_proto:gPatStr>\s+<srcIpAddr:gPatIpV4Dot>\(<srcIpPort:gPatIpPort>\)\(<_intfName:gPatStr>\s+<_intfNum:patIntfId>\s+<_srcmac:gPatStr>\)\s+<:gPatStr>\s+<destIpAddr:gPatIpV4Dot>\(<_port:gPatStr>\), <count:gPatInt>.*]]></regex>
+        </collectFieldsByRegex>
+        <setEventAttribute attr="srcIntfName">combineMsgId($_intfName,$_intfNum)</setEventAttribute>
+	<setEventAttribute attr="eventType">Foundry-Ironware-Permit-Traffic</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+	<switch>
+	  <case>
+	    <collectFieldsByRegex src="$_port">
+	      <regex><![CDATA[<destIpPort:gPatIpPort>]]></regex>
+	    </collectFieldsByRegex>
+	  </case>
+	  <case>
+	  <collectFieldsByRegex src="$_port">
+	      <regex><![CDATA[<_destIpPortStr:gPatStr>]]></regex>
+	    </collectFieldsByRegex>
+	  </case>
+	</switch>
+      </case>
+      
+      <case>
+        <!-- Foundry-Ironware-Permit-Traffic empty source port
+             Jun  4 03:12:53 137.146.3.131 ACL: ACL: List GWI-in permitted tcp 61.158.162.230()(Ethernet 1/4 0023.3368.f500) -> 137.146.0.0(), 1 event(s)
+               -->
+        <collectFieldsByRegex src="$_body">
+          <regex><![CDATA[[^:]*:\s+(?:list|List)\s+<fwRule:gPatStr>\s+permitted\s+<_proto:gPatStr>\s+<srcIpAddr:gPatIpV4Dot>\(\)\(<_intfName:gPatStr>\s+<_intfNum:patIntfId>\s+<_srcmac:gPatStr>\)\s+<:gPatStr>\s+<destIpAddr:gPatIpV4Dot>\(\), <count:gPatInt>.*]]></regex>
+        </collectFieldsByRegex>
+        <setEventAttribute attr="srcIntfName">combineMsgId($_intfName,$_intfNum)</setEventAttribute>
+	<setEventAttribute attr="eventType">Foundry-Ironware-Permit-Traffic</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+      </case>
+
+      <case>
+        <!-- Foundry-Ironware-Deny-Traffic with non empty source port
+	    Jun  4 03:12:53 137.146.3.131 ACL: ACL: List GWI-in denied tcp 61.158.162.230(6000)(Ethernet 1/4 0023.3368.f500) -> 137.146.0.0(8082), 1 event(s)
+	    Jun  4 03:12:53 137.146.3.131 ACL: ACL: List GWI-in denied tcp 61.158.162.230(6000)(Ethernet 1/4 0023.3368.f500) -> 137.146.32.0(8082), 1 event(s)
+	    Jun  4 02:54:31 137.146.3.35 ACL: ACL: List XCORE denied udp 137.146.28.75(55603)(Ethernet 1/1 000c.dbde.6000) -> 137.146.3.35(snmp), 1 event(s)
+	    Jun  4 01:14:33 137.146.3.129 NX08-03,: list DMD-OF-in denied udp 192.168.56.1(123)(Ethernet 1/4 0018.8b2b.7fc0) -> 137.146.28.85(123), 8 event(s)
+	    Jun  4 01:14:53 137.146.3.97 NX08-02,: list KYS-LB-in denied udp 10.0.1.1(123)(Ethernet 8/4 0019.b93d.8134) -> 137.146.28.85(123), 8 event(s)
+               -->
+        <collectFieldsByRegex src="$_body">
+          <regex><![CDATA[[^:]*:\s+(?:list|List)\s+<fwRule:gPatStr>\s+denied\s+<_proto:gPatStr>\s+<srcIpAddr:gPatIpV4Dot>\(<_srcport:gPatStr>\)\(<_intfName:gPatStr>\s+<_intfNum:patIntfId>\s+<_srcmac:gPatStr>\)\s+<:gPatStr>\s+<destIpAddr:gPatIpV4Dot>\(<_port:gPatStr>\), <count:gPatInt>.*]]></regex>
+        </collectFieldsByRegex>
+        <setEventAttribute attr="srcIntfName">combineMsgId($_intfName,$_intfNum)</setEventAttribute>
+	<setEventAttribute attr="eventType">Foundry-Ironware-Deny-Traffic</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+	<switch>
+	  <case>
+	    <collectFieldsByRegex src="$_port">
+	      <regex><![CDATA[<destIpPort:gPatIpPort>]]></regex>
+	    </collectFieldsByRegex>
+	  </case>
+	  <case>
+	  <collectFieldsByRegex src="$_port">
+	      <regex><![CDATA[<_destIpPort:gPatStr>]]></regex>
+	    </collectFieldsByRegex>
+	  </case>
+	</switch>
+	<switch>
+	  <case>
+	    <collectFieldsByRegex src="$_srcport">
+	      <regex><![CDATA[<srcIpPort:gPatIpPort>]]></regex>
+	    </collectFieldsByRegex>
+	  </case>
+	  <case>
+	  <collectFieldsByRegex src="$_srcport">
+	      <regex><![CDATA[<_srcIpPort:gPatStr>]]></regex>
+	    </collectFieldsByRegex>
+	  </case>
+	</switch>
+      </case>
+      
+      <case>
+        <!-- Foundry-Ironware-Deny-Traffic with empty source port
+             Jun  4 03:12:53 137.146.3.131 ACL: ACL: List GWI-in denied tcp 61.158.162.230(6000)(Ethernet 1/4 0023.3368.f500) -> 137.146.0.0(8082), 1 event(s)
+	     Jun  4 03:12:53 137.146.3.131 ACL: ACL: List GWI-in denied tcp 61.158.162.230(6000)(Ethernet 1/4 0023.3368.f500) -> 137.146.32.0(8082), 1 event(s)
+	     Jun  4 02:54:31 137.146.3.35 ACL: ACL: List XCORE denied udp 137.146.28.75(55603)(Ethernet 1/1 000c.dbde.6000) -> 137.146.3.35(snmp), 1 event(s)
+	     Jun  4 01:14:33 137.146.3.129 NX08-03,: list DMD-OF-in denied udp 192.168.56.1(123)(Ethernet 1/4 0018.8b2b.7fc0) -> 137.146.28.85(123), 8 event(s)
+	     Jun  4 01:14:53 137.146.3.97 NX08-02,: list KYS-LB-in denied udp 10.0.1.1(123)(Ethernet 8/4 0019.b93d.8134) -> 137.146.28.85(123), 8 event(s)
+               -->
+        <collectFieldsByRegex src="$_body">
+          <regex><![CDATA[[^:]*:\s+(?:list|List)\s+<fwRule:gPatStr>\s+denied\s+<_proto:gPatStr>\s+<srcIpAddr:gPatIpV4Dot>\(\)\(<_intfName:gPatStr>\s+<_intfNum:patIntfId>\s+<_srcmac:gPatStr>\)\s+<:gPatStr>\s+<destIpAddr:gPatIpV4Dot>\(\), <count:gPatInt>.*]]></regex>
+        </collectFieldsByRegex>
+         <setEventAttribute attr="srcIntfName">combineMsgId($_intfName,$_intfNum)</setEventAttribute>
+	<setEventAttribute attr="eventType">Foundry-Ironware-Deny-Traffic</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+      </case>
+
+      <case>
+      <!--	VPN port state
+		Jun  4 01:49:09 137.146.3.106 STP: VLAN 3104 Port 4/22 STP State -> LEARNING (FwdDlyExpiry)
+		Jun  4 01:49:11 137.146.3.106 STP: VLAN 3104 Port 4/22 STP State -> FORWARDING (FwdDlyExpiry)
+		Jun  4 01:49:17 137.146.3.106 STP: VLAN 3104 Port 4/22 STP State -> FORWARDING (PortDown)
+		Jun  4 01:49:17 137.146.3.106 STP: VLAN 3104 Port 4/22 STP State -> DISABLED (PortDown)
+		Jun  4 01:49:19 137.146.3.106 STP: VLAN 3104 Port 4/22 STP State -> LISTENING (MakeFwding)
+		Jun  4 01:49:20 137.146.3.106 STP: VLAN 3104 Port 4/22 STP State -> LEARNING (FwdDlyExpiry)
+		Jun  4 01:49:22 137.146.3.106 STP: VLAN 3104 Port 4/22 STP State -> FORWARDING (FwdDlyExpiry)
+	-->
+      <collectFieldsByRegex src="$_body">
+        <regex><![CDATA[[^:]*:\s+VLAN\s+<hostVLAN:gPatInt>\s+Port\s+<devPort:patIntfId>\s+<appTransportProto:gPatStr>\s+State\s+<:gPatStr>\s+<_mode:gPatStr>.*]]></regex>
+      </collectFieldsByRegex>
+      <choose>
+        <when test='$_mode = "DISABLED"'>
+	  <setEventAttribute attr="eventType">Foundry-Ironware-StpPort-Disabled</setEventAttribute>
+	  <setEventAttribute attr="eventSeverity">7</setEventAttribute>
+        </when>
+        
+        <when test='$_mode = "LISTENING"'>
+	  <setEventAttribute attr="eventType">Foundry-Ironware-StpPort-Listening</setEventAttribute>
+	  <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+        </when>
+	<when test='$_mode = "LEARNING"'>
+	  <setEventAttribute attr="eventType">Foundry-Ironware-StpPort-Learning</setEventAttribute>
+	  <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+        </when>
+	<when test='$_mode = "FORWARDING"'>
+	  <setEventAttribute attr="eventType">Foundry-Ironware-StpPort-Forwarding</setEventAttribute>
+	  <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+        </when>
+      </choose>
+      </case>
+    </switch>
+
+    <when test='exist _proto'>
+      <setEventAttribute attr="ipProto">convertStrToIntIpProto($_proto)</setEventAttribute>
+    </when>
+    <when test='exist _destIpPort'>
+      <setEventAttribute attr="destIpPort">convertStrToIntIpPort($_destIpPort)</setEventAttribute>
+    </when>
+
+    <when test='exist _srcIpPort'>
+      <setEventAttribute attr="srcIpPort">convertStrToIntIpPort($_srcIpPort)</setEventAttribute>
+    </when>
+    
+    <when test='exist _srcmac'>
+	<setEventAttribute attr="srcMACAddr">normalizeMAC($_srcmac)</setEventAttribute>
+    </when>
+    
+  </parsingInstructions>
+  
+</eventParser>

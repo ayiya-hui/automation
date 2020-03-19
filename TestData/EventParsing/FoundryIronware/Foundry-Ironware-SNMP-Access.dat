@@ -1,0 +1,29 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<14>Jul 15 00:05:43 aus-sr-sw02 SNMP access from src IP 172.16.80.117, src MAC 748e.f85d.4700 rejected, 102 attempt(s)
+[params]
+deviceTime=any
+parserName=FoundryIronwareParser
+totFlows=1
+eventType=Foundry-Ironware-SNMP-Access
+srcIpAddr=172.16.80.117
+reptModel=Ironware
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=SNMP access from a client
+phEventCategory=0 (External)
+eventRuleTrigger=1
+destName=aus-sr-sw02
+count=1
+srcMACAddr=74:8e:f8:5d:47:00
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Foundry

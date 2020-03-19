@@ -1,0 +1,19 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<6>OCT 15 15:59:39 2009 PH-QA-TIP1 [sys] Port 1B link state is now UP
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+reptDevIpAddr=$localhost
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+eventName=Tipping Point IPS Network Interface up
+reptVendor=3Com
+eventType=Tipp_Link_Up
+phEventCategory=0 (External)
+reptModel=TippingPoint UnityOne IPS

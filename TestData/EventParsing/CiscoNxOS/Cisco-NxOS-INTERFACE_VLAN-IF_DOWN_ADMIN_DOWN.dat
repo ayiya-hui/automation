@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<189>: 2012 Aug 7 12:56:33 EDT: %INTERFACE_VLAN-5-IF_DOWN_ADMIN_DOWN: Interface vlan 720 is down(Administratively Down)
+[params]
+rawEventMsg=any
+deviceTime=any
+isHostIntfCritical=No
+eventType=Cisco-NxOS-INTERFACE_VLAN-IF_DOWN_ADMIN_DOWN
+phCustId=$sender
+intfName=Vlan720
+reptModel=NX-OS
+eventId=any
+eventParsedOk=1
+eventSeverity=2
+testEvent=Real Event(0)
+hostIpAddr=$localhost
+eventName=Interface is administratively down
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+collectorId=any
+reptDevName=any
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Cisco

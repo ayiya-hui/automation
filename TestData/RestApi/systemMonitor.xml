@@ -1,0 +1,11 @@
+<configureMonitoring>
+	<systemMonitors>
+		<systemMonitor ip="172.16.10.20" method="SNMP" type="Disk Util" enable="true" interval="180"/>
+	</systemMonitors>
+	<appMonitors>
+		<appMonitor target="172.16.20.40" method="myIMAP" enable="false"/>
+	</appMonitors>
+	<eventPullingObjs>
+		<eventPullingObj ip="10.1.2.10" method="WWI-noDomain" enable="false"/>
+	</eventPullingObjs>
+</configureMonitoring>

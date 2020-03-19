@@ -1,0 +1,70 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<46>Jan 28 15:50:50 Filer.ProspectHills.net FTPSvcLog	0	2009-01-28 23:50:49 172.16.20.120 root MSFTPSVC1 FILER 192.168.0.40 21 [119]USER root - 331 0 0 0 0 FTP - - - -
+[params]
+rawEventMsg=any
+deviceTime=any
+eventSeverityCat=LOW
+reptVendor=Microsoft
+ftpMethod=[119]USER
+eventType=IIS-FTP-Info
+phCustId=$sender
+destIpAddr=192.168.0.40
+srvInstName=MSFTPSVC1
+ftpStatusCode=331 (User name okay, need password)
+srcIpAddr=172.16.20.120
+reptModel=IIS
+eventId=any
+ipConnId=119
+eventParsedOk=1
+eventSeverity=1
+eventName=FTP Request - Pending
+phEventCategory=0 (External)
+destName=FILER
+recvBytes=0
+user=root
+destIpPort=21
+count=1
+uriStem=root
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+uriQuery=-
+durationMSec=0
+sentBytes=0
+[reptDevIpAddr(key)]
+192.168.0.40
+[eventMsg]
+<46>Mar 29 12:21:03 192.168.0.40 FTPSvcLog	0	2010-03-29 19:20:32 127.0.0.1 anonymous MSFTPSVC1 FILER 127.0.0.1 21 [2]USER anonymous - 331 0 0 0 0 FTP - - - -
+[params]
+rawEventMsg=any
+deviceTime=any
+eventSeverityCat=LOW
+reptVendor=Microsoft
+ftpMethod=[2]USER
+eventType=IIS-FTP-Info
+phCustId=$sender
+destIpAddr=192.168.0.40
+srvInstName=MSFTPSVC1
+ftpStatusCode=331 (User name okay, need password)
+srcIpAddr=192.168.0.40
+reptModel=IIS
+eventId=any
+ipConnId=2
+eventParsedOk=1
+eventSeverity=1
+eventName=FTP Request - Pending
+phEventCategory=0 (External)
+destName=FILER
+recvBytes=0
+user=anonymous
+destIpPort=21
+count=1
+uriStem=anonymous
+phRecvTime=any
+reptDevIpAddr=192.168.0.40
+eventAction=0 (Permit)
+uriQuery=-
+durationMSec=0
+sentBytes=0

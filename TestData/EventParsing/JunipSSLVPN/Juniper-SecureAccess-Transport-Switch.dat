@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<174>Juniper: 2014-06-30 22:28:13 - ive - [108.120.158.74] MEGAPATH\npost(MegaPath Domain)[NetConnect] - Transport mode switched over to SSL for user with NCIP 172.16.70.161
+[params]
+domain=MEGAPATH
+deviceTime=any
+parserName=JunipSSLVPN
+eventType=Juniper-SecureAccess-Transport-Switch
+srcIpAddr=172.16.70.161
+reptModel=Secure Access
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=VPN Transport mode switched for user
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+user=npost
+reptDevName=ive
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Juniper
+userGrp=NetConnect

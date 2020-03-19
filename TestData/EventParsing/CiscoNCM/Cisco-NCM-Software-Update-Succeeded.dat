@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+10.4.161.32
+[eventMsg]
+491354611 Tue Mar 04 03:38:22 EST 2014 BernA Software Update Succeeded lncmpnasp01.staples.com 10.4.161.32  44571 10.173.30.9 $OrignatorEmail$ BernA Update Device Software 2014-03-04 03:30:00.0 usmist_1699295009 (10.173.30.9) Succeeded
+[params]
+customer=Super
+eventId=any
+eventSeverityCat=LOW
+eventParsedOk=1
+phEventCategory=0 (External)
+parserName=CiscoNCMParser
+count=1
+eventSeverity=1
+eventType=Cisco-NCM-Software-Update-Succeeded
+reptDevIpAddr=10.4.161.32
+destIpAddr=10.173.30.9
+collectorId=any
+eventName=Cisco Network Compliance Manager Software Update Succeeded
+reptVendor=Cisco
+relayDevIpAddr=any
+user=BernA
+extEventRecvProto=Syslog
+phRecvTime=any
+eventRuleTrigger=1
+reptDevName=lncmpnasp01.staples.com
+reptModel=CiscoWorks NCM

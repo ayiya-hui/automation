@@ -1,0 +1,32 @@
+[reptDevIpAddr(key)]
+20.20.20.120
+[eventMsg]
+Fri Oct 30 18:19:58 2009 $reporter AccelOps-WinLog-WMI  [Category]="13056" [CategoryString]="Sensitive Privilege Use" [ComputerName]="sf1dc03.jha.local" [Data]="NULL" [EventCode]="4674" [EventIdentifier]="4674" [EventType]="4" [Logfile]="Security" [RecordNumber]="184035209" [SourceName]="Microsoft-Windows-Security-Auditing" [TimeGenerated]="20100505222908.321955-000" [TimeWritten]="20100505222908.321955-000" [Type]="Audit Success" [User]="(null)" [[Subject]][Security ID]="S-1-5-21-2090294290-982477196-2044928816-8675" [Account Name]="riverbedAdmin" [Account Domain]="JHA" [Logon ID]="0x5509efa" [[Object]][Object Server]="Security" [Object Type]="-" [Object Name]="-" [Object Handle]="0x5d0" [[Process Information]][Process ID]="0xb28" [Process Name]="C:\Windows\System32\wbem\WmiPrvSE.exe" [[Requested Operation]][Desired Access]="17760319"
+[params]
+rawEventMsg=any
+type=Audit Success
+osObjName=-
+swProcName=C:\Windows\System32\wbem\WmiPrvSE.exe
+osObjType=-
+osObjHandleID=0x5d0
+eventAction=0 (Permit)
+count=1
+eventId=any
+domain=JHA
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=$reporter
+winLogonId=0x5509efa
+eventName=An operation was attempted on a privileged object
+procName=C:\Windows\System32\wbem\WmiPrvSE.exe
+reptVendor=Microsoft
+eventType=Win-Security-4674
+user=riverbedAdmin
+phEventCategory=0 (External)
+reptDevIpAddr=$reporter
+reptModel=Windows
+eventSource=Microsoft-Windows-Security-Auditing

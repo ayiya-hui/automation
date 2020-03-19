@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<38>Dec  2 15:47:31 Message forwarded from fiona: syslog: pts/2: failed login attempt for root from 10.136.104.105
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=3
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=$localhost
+eventAction=1 (Deny)
+swProcName=syslog
+eventName=Failed SSH logon
+srcIpAddr=10.136.104.105
+reptVendor=IBM
+eventType=AIX_Failed_SSH_Login
+user=root
+phEventCategory=0 (External)
+reptDevIpAddr=$localhost
+reptModel=AIX

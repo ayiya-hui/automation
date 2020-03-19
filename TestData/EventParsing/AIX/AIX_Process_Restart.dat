@@ -1,0 +1,23 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<46>Dec  2 15:46:55 Message forwarded from fiona: syslogd: restart
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=$localhost
+eventAction=0 (Permit)
+swProcName=syslogd
+eventName=AIX_Process_Restart
+reptVendor=IBM
+eventType=AIX_Process_Restart
+phEventCategory=0 (External)
+reptDevIpAddr=$localhost
+reptModel=AIX

@@ -1,0 +1,23 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>Juniper: 2008-10-28 05:33:02 - ive - [172.16.3.150] admin(Admin Users)[] - Login failed using auth server Administrators (Local Authentication).  Reason: Failed
+[params]
+rawEventMsg=any
+eventSeverity=6
+eventSeverityCat=MEDIUM
+srcIpAddr=172.16.3.150
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+phRecvTime=any
+phCustId=$sender
+reptDevIpAddr=$localhost
+eventAction=1 (Deny)
+eventName=Failed admin logon
+reptVendor=Juniper
+eventType=Juniper-SecureAccess-Admin-Logon-Failure
+user=admin
+phEventCategory=0 (External)
+reptModel=Secure Access

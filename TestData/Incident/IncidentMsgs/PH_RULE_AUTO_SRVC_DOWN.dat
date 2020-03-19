@@ -1,0 +1,5 @@
+[eventMsg]
+[PH_DEV_MON_AUTO_SVC_START_TO_STOP]:[eventSeverity]=PHL_INFO,[hostName]=mySys,[hostIpAddr]=19.0.0.1,[serviceName]=Alert.exe,[servicePath]="C:\Alert.exe",[serviceDesc]=Alert Service
+
+[clearEventMsg]
+[PH_DEV_MON_AUTO_SVC_STOP_TO_START]:[eventSeverity]=PHL_INFO,[hostName]=mySys,[hostIpAddr]=19.0.0.1,[serviceName]=Alert.exe,[servicePath]="C:\Alert.exe",[serviceDesc]=Alert Service

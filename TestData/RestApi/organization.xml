@@ -1,0 +1,32 @@
+<organizations>
+	<organization>
+		<name>organization222</name>
+		<fullName>Test organization</fullName>
+		<description>organization111 account</description>
+		<adminUser>organization111</adminUser>
+		<adminPwd>organization*111</adminPwd>
+		<adminEmail>huiping.zhao@accelops.net</adminEmail>
+		<includeRange>172.16.0.1-172.16.20.1</includeRange>
+		<excludeRange>172.16.0.10,172.16.10.1</excludeRange>
+		<custResource>
+			<diskQuote>536870912000</diskQuote>
+			<eps>100</eps>
+			<configItem>550</configItem>
+			<duration>365</duration>
+		</custResource>
+		<collectors>
+			<collector>
+				<eps>150</eps>
+				<name>coll111</name>
+				<registered>false</registered>
+				<startTime>1303455600</startTime>
+				<endTime>1304060400</endTime>
+			</collector>
+			<collector>
+				<eps>200</eps>
+				<name>coll112</name>
+				<registered>false</registered>
+			</collector>
+		</collectors>
+	</organization>
+</organizations>

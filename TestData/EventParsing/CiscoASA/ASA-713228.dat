@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<166>Dec 14 2009 10:06:58: %ASA-6-713228: Group = ciscoclient, Username = adair, IP = 75.212.186.35, Assigned private IP address 10.2.15.62 to remote user
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+srcIpAddr=75.212.186.35
+eventAction=0 (Permit)
+eventName=Assigned private IP address from local address pool
+reptVendor=Cisco
+eventType=ASA-713228
+postNATSrcIpAddr=10.2.15.62
+phEventCategory=0 (External)
+reptDevIpAddr=$reporter
+user=adair
+userGrp=ciscoclient
+reptModel=ASA

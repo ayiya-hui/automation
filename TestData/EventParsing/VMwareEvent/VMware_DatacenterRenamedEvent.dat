@@ -1,0 +1,24 @@
+[reptDevIpAddr(key)]
+192.168.24.11
+[eventMsg]
+<134>Nov 18 16:12:53 192.168.24.11 java: [VMware_DatacenterRenamedEvent], [eventTime]=2009-11-18 16:12:06:160, [rptIp]=192.168.24.11, [user]=Administrator, [vmwEventId]=67166, [vmwEventCat]=info, [datacenter]=MyCenter, [vmwEventMsg]=Renamed datacenter from New Datacenter to MyCenter
+[params]
+rawEventMsg=any
+count=1
+datacenter=MyCenter
+deviceTime=any
+eventParsedOk=1
+vmwEventCat=info
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+vmwEventMsg=Renamed datacenter from New Datacenter to MyCenter
+eventName=Datacenter renamed
+reptDevIpAddr=192.168.24.11
+reptVendor=VMware
+eventType=VMware_DatacenterRenamedEvent
+user=Administrator
+phEventCategory=0 (External)
+eventId=any
+reptModel=Generic

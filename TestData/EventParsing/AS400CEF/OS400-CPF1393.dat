@@ -1,0 +1,24 @@
+[reptDevIpAddr(key)]
+83.83.83.83
+[eventMsg]
+May 16 14:57:09 83.83.83.83 CEF :0|PowerTech|Interact|3.0|CPF1393|User profile VALKA has been disabled.|3| src =10.0.1.183 dst =0.0.0.0 msg=TYPE:JRN CLS :IDS JJOB :QP0ZSPWP JUSER :QSECOFR JNBR :011074 PGM : OBJECT :*NA LIBRARY:*NA MEMBER:*NA DETAIL: User profile VALKA has been disabled.
+[params]
+rawEventMsg=any
+eventId=any
+count=1
+eventSeverityCat=LOW
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverity=3
+eventType=OS400-CPF1393
+phCustId=$sender
+reptDevIpAddr=83.83.83.83
+collectorId=any
+testEvent=Real Event(0)
+eventName=Subsystem disabled user profile on device.
+reptVendor=IBM
+user=QSECOFR
+phRecvTime=any
+srcIpAddr=10.0.1.183
+reptDevName=any
+reptModel=OS400

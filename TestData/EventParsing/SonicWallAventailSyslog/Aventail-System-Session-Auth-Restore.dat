@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<182>Oct 16 05:26:40 syslog-ng@COS-Node-1 logserver: [16/Oct/2010:05:26:40.629150 -0700] COS-Node-1 020444 ps 10000017 Info    Session Authentication Restore for user '(pair)@(COS Standard VPN)' SUCCESS
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+appName=Web proxy service
+ipConnId=10000017
+count=1
+phCustId=$sender
+deviceTime=any
+domain=COS Standard VPN
+eventId=any
+eventName=Aventail generic system session auth restored
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=3
+eventSeverityCat=LOW
+eventType=Aventail-System-Session-Auth-Restore
+hostName=COS-Node-1
+procName=policy service
+reptDevIpAddr=$reporter
+reptModel=Aventail VPN
+reptVendor=Sonicwall
+user=pair

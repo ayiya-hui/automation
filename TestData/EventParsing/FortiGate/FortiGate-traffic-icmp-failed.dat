@@ -1,0 +1,41 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<188>date=2014-12-23 time=06:20:13 devname=FLFO-VA-ASHL-229338 device_id=FW80CM3913605221 log_id=0038000007 type=traffic subtype=other pri=warning vd=root src=75.75.1.84 src_port=17453 src_int="WAN1-PH1" dst=10.69.124.137 dst_port=137 dst_int="root" SN=332490 status=deny policyid=0 dst_country="Reserved" src_country="United States" service=137/udp proto=17 duration=949332 sent=0 rcvd=0 msg="iprope_in_check() check failed, drop"
+[params]
+deviceTime=any
+parserName=FortiGateParser
+totFlows=1
+eventType=FortiGate-traffic-icmp-failed
+destIpAddr=10.69.124.137
+totBytes=0
+destIpPort=137 (NETBIOS-NS)
+srcIpAddr=75.75.1.84
+usrMsg=iprope_in_check() check failed, drop
+reptModel=FortiOS
+eventId=any
+eventParsedOk=1
+eventSeverity=5
+fwAction=deny
+eventName=any
+serviceName=137/udp
+phEventCategory=4 (Traffic)
+eventRuleTrigger=1
+count=1
+srcIntfName=WAN1-PH1
+recvBytes=0
+srcIpPort=17453
+eventSeverityCat=MEDIUM
+collectorId=any
+destIntfName=root
+relayDevIpAddr=$localhost
+ipProto=17 (UDP)
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=1 (Deny)
+reptVendor=Fortinet
+durationMSec=949332000
+fwRule=0
+sentBytes=0

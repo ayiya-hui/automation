@@ -1,0 +1,19 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<6>OCT 28 13:10:46 2009  PH-QA-TIP1 [sys] Invalid SESSIONID for 192.168.1.20.  Could be logon attempt(OK - should not be followed by same message) or attempt to spoof connection(BAD - watch for multiples).
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+reptDevIpAddr=$localhost
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+eventName=Tipp_Sys_Generic
+reptVendor=3Com
+eventType=Tipp_Sys_Generic
+phEventCategory=0 (External)
+reptModel=TippingPoint UnityOne IPS

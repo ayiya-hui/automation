@@ -1,0 +1,72 @@
+<Rules>
+  
+  <!-- second -->
+  <Rule group="PH_SYS_RULE_Perf_Network" id="PH_Rule_Stat_2" phIncidentCategory="Network">
+    <Name>Traffic Anomaly From Host On Fixed Port</Name>
+    <active>true</active>
+    <Description> Detects traffic anomaly from a source to a fixed port. This means that the traffic pattern from the source on the destination port is statistically anomalous in the following sense: (a) the number of flows from the source on the given port is more than twice the hourly average flow count, (b) total bytes exchanged by the source on the given port is more than twice the hourly average (c) more than 500 flows (with different 5 tuples) over a 10 minute window from the source on the port </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_STAT_HIGH_TRAFFIC_FROM_SRC_FIXED_PORT" severity="9">
+      <ArgList>
+        srcIpAddr = StatHighFlowFromSrc.srcIpAddr,destIpPort = StatHighFlowFromSrc.destIpPort,totFlows = StatHighFlowFromSrc.SUM(totFlows)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+      <SubPattern displayName="StatHighFlowFromSrc" name="StatHighFlowFromSrc">
+	<SingleEvtConstr> eventType = "IOS-NETFLOW-BI" AND (ipProto = 17 OR ipProto = 6) AND srcIpAddr NOT IN (Group@PH_SYS_APP_ACCELOPS) </SingleEvtConstr>
+        <GroupEvtConstr> PH_FUNC_DIFF_STAT_AVG_1(SUM(totFlows), 2.0) &gt;= 0 AND PH_FUNC_DIFF_STAT_AVG_1(SUM(totBytes), 2.0) &gt;= 0 AND SUM(totFlows) &gt;= 600</GroupEvtConstr>
+        <GroupByAttr> srcIpAddr,destIpPort, ipProto </GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,srcIpAddr,destIpAddr,ipProto,srcIpPort,destIpPort,srcDestTCPFlags,reptDevIpAddr,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+  </Rule>
+
+  <!-- third -->
+  <Rule group="PH_SYS_RULE_Perf_Network" id="PH_Rule_Stat_3" phIncidentCategory="Network">
+    <Name>Traffic Anomaly To Host On Fixed Port</Name>
+    <active>true</active>
+    <Description> Detects traffic anomaly to a destination on a fixed port. This means that the traffic pattern to the destination on the given port is statistically anomalous in the following sense: (a) the number of flows to the destination on the given port is more than twice the hourly average flow count, (b) total bytes exchanged by the destination on the given port is more than twice the hourly average (c) more than 500 flows (with different 5 tuples) over a 10 minute window to the destination on the port </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_STAT_HIGH_TRAFFIC_TO_DEST_FIXED_PORT" severity="9">
+      <ArgList>
+        destIpAddr = StatHighFlowToDest.destIpAddr,destIpPort = StatHighFlowToDest.destIpPort,totFlows = StatHighFlowToDest.SUM(totFlows)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+      <SubPattern displayName="StatHighFlowToDest" name="StatHighFlowToDest">
+	<SingleEvtConstr> eventType = "IOS-NETFLOW-BI" AND (ipProto = 17 OR ipProto = 6) AND destIpAddr NOT IN (Group@PH_SYS_APP_ACCELOPS) </SingleEvtConstr>
+        <GroupEvtConstr> PH_FUNC_DIFF_STAT_AVG_1(SUM(totFlows), 2.0) &gt;= 0 AND PH_FUNC_DIFF_STAT_AVG_1(SUM(totBytes), 2.0) &gt;= 0 AND SUM(totFlows) &gt;= 2000</GroupEvtConstr>
+        <GroupByAttr> destIpAddr,destIpPort,ipProto </GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,srcIpAddr,destIpAddr,ipProto,srcIpPort,destIpPort,srcDestTCPFlags,reptDevIpAddr,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+  </Rule>
+
+  <!-- fourth -->
+  <Rule group="PH_SYS_RULE_Perf_Network" id="PH_Rule_Stat_4" phIncidentCategory="Network">
+    <Name>Traffic Anomaly Between Two Hosts On Fixed Port</Name>
+    <active>true</active>
+    <Description> Detects traffic anomaly between a source and a destination on a fixed port. This means that the traffic pattern between the source and the destination on the given port is statistically anomalous in the following sense: (a) the number of flows between the source and the destination on the given port is more than twice the hourly average flow count, (b) total bytes exchanged between the source and the destination on the given port is more than twice the hourly average (c) more than 500 flows (with different 5 tuples) over a 10 minute window between the source and the destination on the port </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_STAT_HIGH_TRAFFIC_SRC_DEST_FIXED_PORT" severity="9">
+      <ArgList>
+        srcIpAddr = StatHighFlowSrcDestPair.srcIpAddr,destIpAddr = StatHighFlowSrcDestPair.destIpAddr,destIpPort = StatHighFlowSrcDestPair.destIpPort, totFlows = StatHighFlowSrcDestPair.SUM(totFlows)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+      <SubPattern displayName="StatHighFlowSrcDestPair" name="StatHighFlowSrcDestPair">
+	<SingleEvtConstr> eventType = "IOS-NETFLOW-BI" AND (ipProto = 17 OR ipProto = 6) AND srcIpAddr NOT IN (Group@PH_SYS_APP_ACCELOPS) AND destIpAddr NOT IN (Group@PH_SYS_APP_ACCELOPS)</SingleEvtConstr>
+        <GroupEvtConstr> PH_FUNC_DIFF_STAT_AVG_1(SUM(totFlows), 2.0) &gt;= 0 AND PH_FUNC_DIFF_STAT_AVG_1(SUM(totBytes), 2.0) &gt;= 0 AND SUM(totFlows) &gt;= 600</GroupEvtConstr>
+        <GroupByAttr> srcIpAddr,destIpAddr,destIpPort,ipProto </GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,srcIpAddr,destIpAddr,ipProto,srcIpPort,destIpPort,srcDestTCPFlags,reptDevIpAddr,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+  </Rule>
+
+</Rules>

@@ -1,0 +1,31 @@
+[reptDevIpAddr(key)]
+125.15.125.15
+[eventMsg]
+<142>Sep 17 13:27:37 SJ-Dev-S-RH-VMW-01.prospecthills.net ApacheLog   192.168.20.35 - - [17/Sep/2009:13:27:37 -0700] "GET /icons/apache_pb2.gif HTTP/1.1" 420 2414 "http://192.168.0.30/" "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 2.0.50727)".--automator
+[params]
+rawEventMsg=any
+user=-
+deviceTime=any
+eventType=Apache-Web-Client-Error
+phCustId=$sender
+destIpAddr=125.15.125.15
+httpReferrer=http://192.168.0.30/
+srcIpAddr=192.168.20.35
+reptModel=Apache Tomcat
+eventId=any
+eventParsedOk=1
+eventSeverity=5
+eventName=Web request failed - client error
+phEventCategory=0 (External)
+recvBytes=2414
+eventSeverityCat=MEDIUM
+httpMethod=GET
+httpStatusCode=420
+httpVersion=HTTP/1.1
+count=1
+uriStem=/icons/apache_pb2.gif
+phRecvTime=any
+reptDevIpAddr=125.15.125.15
+eventAction=0 (Permit)
+reptVendor=Apache
+httpUserAgent=Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 2.0.50727)

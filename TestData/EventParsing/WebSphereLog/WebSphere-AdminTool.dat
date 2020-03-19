@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<13>Oct 12 01:27:14 xxx WebsphereLog	0	[10/28/14 9:48:56:492 GMT] 0000000a AdminTool     A   ADMU7705E: Failed while trying to stop the Windows Service associated with server: server1;
+[params]
+deviceTime=any
+parserName=WebSphereLogParser
+eventType=WebSphere-AdminTool
+hostName=xxx
+threadId=0000000a
+reptModel=WebSphere App Server
+eventId=any
+eventTime=Tue Oct 28 09:48:56 CST 2014
+eventParsedOk=1
+eventSeverity=1
+eventName=AdminTool logs
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+eventDesc=ADMU7705E: Failed while trying to stop the Windows Service associated with server: server1;
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=IBM

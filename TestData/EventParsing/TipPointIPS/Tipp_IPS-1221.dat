@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+172.16.20.41
+[eventMsg]
+<36>Oct 28 13:09:43 172.16.20.41 ALT,v4,20091028T130943+0480,"PH-QA-TIP1"/$reporter,835156,1,Permit,Minor,00000002-0002-0002-0002-000000001221,"1221: SNMP: 'public' Access","1221: SNMP: 'public' Access",snmp," ",172.16.10.18:46920,172.16.0.1:161,20091028T130840+0480,2622," ",0,ANY-ANY
+[params]
+rawEventMsg=any
+count=2622
+eventId=any
+reptDevIpAddr=172.16.20.41
+eventParsedOk=1
+reptVendor=3Com
+eventSeverity=3
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=172.16.0.1
+eventName=Detects SNMP requests that carry the community string "public".
+ipProto=255
+appTransportProto=snmp
+eventType=Tipp_IPS-1221
+srcIpAddr=172.16.10.18
+remedyAction=Permit
+phEventCategory=0 (External)
+destIpPort=161
+srcIpPort=46920
+reptModel=TippingPoint UnityOne IPS

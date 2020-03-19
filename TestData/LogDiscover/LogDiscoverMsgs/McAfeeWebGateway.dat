@@ -1,0 +1,3 @@
+[eventMsg]
+"[21/Feb/2012:11:44:19  -0500]  """"""""""""    ""10.200.11.170 200 """"GET http://abc.com/ HTTP/1.1"""" """"General News"""" """"Minimal Risk"""" """"text/html"""" 101527 """""""" """""""" """"0""""""
+[30/May/2012:10:39:44 -0400] "" 10.19.2.63 200 "GET http://abc.com/html.ng/site=cnn&cnn_pagetype=main&cnn_position=126x31_spon2&cnn_rollup=homepage&page.allowcompete=no&params.styles=fs&Params.User.UserID=4fc6251c068c9f0aa51475025d0040b8&transactionID=7179860628805012&tile=4893878838331&domId=135492 HTTP/1.1" "Web Ads, Forum/Bulletin Boards" "MinimalRisk" "text/html" 1 "" "" "0"

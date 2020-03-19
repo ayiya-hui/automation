@@ -1,0 +1,69 @@
+<eventParser name="PHRuleIncidentParser">
+
+  <deviceType>
+    <Vendor>CentOS</Vendor>
+    <Model>Linux</Model>
+    <Version>ANY</Version>
+  </deviceType>
+
+  <appType>
+    <Vendor>ProspectHills</Vendor>
+    <Model>AccelOps</Model>
+    <Version>ANY</Version>
+    <Name>ProspectHills AccelOps</Name>
+  </appType>
+
+  <eventFormatRecognizer><![CDATA[PHBOX RULE ENGINE]]></eventFormatRecognizer>
+  
+  <testEvents>
+      <testEvent><![CDATA[]]></testEvent>
+  </testEvents>
+
+  <parsingInstructions>
+    <setEventAttributeFromXPath attr="eventType"><![CDATA[event/eventType/text()]]></setEventAttributeFromXPath>
+    <setEventAttributeFromXPath attr="deviceTime"><![CDATA[event/deviceTime/text()]]></setEventAttributeFromXPath>
+    <setEventAttributeFromXPath attr="count"><![CDATA[event/count/text()]]></setEventAttributeFromXPath>
+    <setEventAttributeFromXPath attr="durationMSec"><![CDATA[event/durationMSec/text()]]></setEventAttributeFromXPath>
+    <setEventAttributeFromXPath attr="eventSeverityCat"><![CDATA[event/eventSeverityCat/text()]]></setEventAttributeFromXPath>
+    <setEventAttributeFromXPath attr="phCustId"><![CDATA[event/phCustId/text()]]></setEventAttributeFromXPath>
+    <setEventAttributeFromXPath attr="phEventCategory"><![CDATA[event/phEventCategory/text()]]></setEventAttributeFromXPath>
+    <setEventAttributeFromXPath attr="perfHealth"><![CDATA[event/perfHealth/text()]]></setEventAttributeFromXPath>
+    <setEventAttributeFromXPath attr="incidentRptIp"><![CDATA[event/incidentRptIp/text()]]></setEventAttributeFromXPath>
+    <setEventAttributeFromXPath attr="incidentSrc"><![CDATA[event/incidentSrc/text()]]></setEventAttributeFromXPath>
+    <setEventAttributeFromXPath attr="incidentTarget"><![CDATA[event/incidentTarget/text()]]></setEventAttributeFromXPath>
+    <setEventAttributeFromXPath attr="incidentDetail"><![CDATA[event/incidentDetail/text()]]></setEventAttributeFromXPath>
+    <setEventAttributeFromXPath attr="hostIpAddr"><![CDATA[event/hostIpAddr/text()]]></setEventAttributeFromXPath>
+    <setEventAttributeFromXPath attr="eventSeverity"><![CDATA[event/eventSeverity/text()]]></setEventAttributeFromXPath>    
+    <setEventAttributeFromXPath attr="srcIpAddr"><![CDATA[event/srcIpAddr/text()]]></setEventAttributeFromXPath>
+    <setEventAttributeFromXPath attr="destIpAddr"><![CDATA[event/destIpAddr/text()]]></setEventAttributeFromXPath>
+    <setEventAttributeFromXPath attr="srcIpPort"><![CDATA[event/srcIpPort/text()]]></setEventAttributeFromXPath>
+    <setEventAttributeFromXPath attr="destIpPort"><![CDATA[event/destIpPort/text()]]></setEventAttributeFromXPath>
+    <setEventAttributeFromXPath attr="user"><![CDATA[event/user/text()]]></setEventAttributeFromXPath>
+
+    <setEventAttributeFromXPath attr="cpuUtil"><![CDATA[event/cpuUtil/text()]]></setEventAttributeFromXPath>
+    <setEventAttributeFromXPath attr="memUtil"><![CDATA[event/memUtil/text()]]></setEventAttributeFromXPath>
+    <setEventAttributeFromXPath attr="intfName"><![CDATA[event/intfName/text()]]></setEventAttributeFromXPath>
+    <setEventAttributeFromXPath attr="inIntfUtil"><![CDATA[event/inIntfUtil/text()]]></setEventAttributeFromXPath>
+    <setEventAttributeFromXPath attr="outIntfUtil"><![CDATA[event/outIntfUtil/text()]]></setEventAttributeFromXPath>
+    <setEventAttributeFromXPath attr="inIntfPktErrPct"><![CDATA[event/inIntfPktErrPct/text()]]></setEventAttributeFromXPath>
+    <setEventAttributeFromXPath attr="outIntfPktErrPct"><![CDATA[event/outIntfPktErrPct/text()]]></setEventAttributeFromXPath>
+    <setEventAttributeFromXPath attr="diskUtil"><![CDATA[event/diskUtil/text()]]></setEventAttributeFromXPath>
+    <setEventAttributeFromXPath attr="diskName"><![CDATA[event/diskName/text()]]></setEventAttributeFromXPath>
+    <setEventAttributeFromXPath attr="bizService"><![CDATA[event/bizService/text()]]></setEventAttributeFromXPath>
+    <setEventAttributeFromXPath attr="incidentCount"><![CDATA[event/incidentCount/text()]]></setEventAttributeFromXPath>
+    <setEventAttributeFromXPath attr="triggeringAttrList"><![CDATA[event/triggeringAttrList/text()]]></setEventAttributeFromXPath>
+    
+    <setEventAttributeFromXPath attr="srcName"><![CDATA[event/srcName/text()]]></setEventAttributeFromXPath>
+    <setEventAttributeFromXPath attr="destName"><![CDATA[event/destName/text()]]></setEventAttributeFromXPath>
+    <setEventAttributeFromXPath attr="hostName"><![CDATA[event/hostName/text()]]></setEventAttributeFromXPath>
+    <setEventAttributeFromXPath attr="appName"><![CDATA[event/appName/text()]]></setEventAttributeFromXPath>
+    <setEventAttributeFromXPath attr="incidentId"><![CDATA[event/incidentId/text()]]></setEventAttributeFromXPath>
+    
+  </parsingInstructions>
+  
+
+</eventParser>
+
+<!--setEventAttributeFromXPathNode><![CDATA[event/node()]]></setEventAttributeFromXPathNode-->
+<!--setEventAttribute attr="deviceTime">toDateTimeFromTimeT($mesgDevTimeT)</setEventAttribute-->
+<!--setEventAttribute attr="eventSeverity">$mesgIdSev</setEventAttribute-->

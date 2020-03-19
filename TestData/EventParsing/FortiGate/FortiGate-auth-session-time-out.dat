@@ -1,0 +1,33 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<181>date=2013-05-01 time=11:20:50 devname=FortiGate80C devid=FGT80C3912622808 logid=0102043011 type=event subtype=user level=notice vd=root src=1.1.1.1 dst=2.2.2.2 policyid=3 user=user group=usergroup ui=HTTP(1.1.1.1) action=authentication status=timed_out reason=reason msg=User from 1.1.1.1 was timed out
+[params]
+deviceTime=any
+destGeoOrg=any
+eventType=FortiGate-auth-session-time-out
+phCustId=$sender
+destIpAddr=2.2.2.2
+destGeoCountry=any
+srcIpAddr=1.1.1.1
+usrMsg=User from 1.1.1.1 was timed out
+reptModel=FortiOS
+eventId=any
+eventParsedOk=1
+eventSeverity=3
+eventName=FortiGate Session timeout
+appTransportProto=HTTP
+phEventCategory=0 (External)
+destName=any
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+user=user
+reptDevName=any
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Fortinet
+destGeoCity=any
+userGrp=usergroup

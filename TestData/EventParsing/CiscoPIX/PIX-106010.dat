@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>Dec 04 2008 20:00:45: %PIX-3-106010: Deny inbound TCP src inside:20.20.20.20/9996 dst outside:10.10.10.10/8080--automator
+[params]
+rawEventMsg=any
+destIpAddr=10.10.10.10
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=any
+eventSeverity=5
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=MEDIUM
+destIpAddr=10.10.10.10
+eventAction=1 (Deny)
+eventName=Denied IP traffic by policy
+srcIpAddr=20.20.20.20
+destIntfName=dst outside
+reptVendor=Cisco
+eventType=PIX-106010
+phEventCategory=0 (External)
+ipProto=6 (TCP)
+srcIntfName=src inside
+reptDevIpAddr=$localhost
+reptModel=PIX

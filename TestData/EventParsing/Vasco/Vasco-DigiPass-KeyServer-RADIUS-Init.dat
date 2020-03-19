@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+70.70.70.70
+[eventMsg]
+May 17 18:43:21 70.70.70.70 ikeyserver[3582]: {Info}, {Initialization}, {I-002004}, {The RADIUS protocol handler has been initialized successfully.}, {0x3D21D6384BC47E3425A689A8D811D4EE}, {Version:3.4.7.115}, {Configuration Details:Accounting-Port: 1813, Authentication-Port: 1812}
+[params]
+customer=Super
+eventId=any
+eventSeverityCat=LOW
+eventParsedOk=1
+phEventCategory=0 (External)
+parserName=VascoParser
+count=1
+eventSeverity=1
+eventType=Vasco-DigiPass-KeyServer-RADIUS-Init
+reptDevIpAddr=70.70.70.70
+collectorId=any
+eventName=The RADIUS protocol handler has been initialized successfully
+reptVendor=Vasco
+relayDevIpAddr=70.70.70.70
+phRecvTime=any
+msg=The RADIUS protocol handler has been initialized successfully.
+eventRuleTrigger=1
+appTransportProto=Syslog
+reptDevName=any
+reptModel=DigiPass

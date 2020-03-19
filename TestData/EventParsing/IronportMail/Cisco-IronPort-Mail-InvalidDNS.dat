@@ -1,0 +1,31 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<12>Nov 13 13:21:51 ironport-mail: Warning: Received an invalid DNS Response: '' to IP 208.247.100.30 looking up searshc.com
+[params]
+deviceTime=any
+destGeoOrg=any
+parserName=IronportMailParser
+eventType=Cisco-IronPort-Mail-InvalidDNS
+destGeoState=Illinois
+destIpAddr=208.247.100.30
+destGeoCountry=any
+reptModel=IronPort AsyncOS Mail
+eventId=any
+eventParsedOk=1
+eventSeverity=5
+eventName=IronPort invalid DNS
+appTransportProto=Syslog
+phEventCategory=0 (External)
+eventRuleTrigger=1
+destName=searshc.com
+count=1
+eventSeverityCat=MEDIUM
+collectorId=any
+relayDevIpAddr=$localhost
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Cisco
+destGeoCity=any

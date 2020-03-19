@@ -1,0 +1,110 @@
+<Reports>
+  <Report id="PH_Report_NIPS_1" group="PH_SYS_REPORT_NIPS">
+    <Name>All Events: Top Reporting Network IPS By Event Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Top Reporting Network IPS Devices By Event Count</Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr, COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_NIPS_1" name="Filter_NIPS_1">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_NETWORK_IPS)  </SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_NIPS_2" group="PH_SYS_REPORT_NIPS,PH_SYS_REPORT_Exploits,PH_SYS_REPORT_Freq">
+    <Name>All Events: Top Network IPS Events By Severity, Count (Detailed) </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the network IPS events by count</Description>
+    <SelectClause numEntries="All">
+        <AttrList>srcIpAddr,srcName,destIpAddr,destName,eventType,eventSeverity,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>eventSeverity DESC,COUNT(*) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_NIPS_1" name="Filter_NIPS_2">
+           <SingleEvtConstr> reptDevIpAddr IN (Group@PH_SYS_DEVICE_NETWORK_IPS) </SingleEvtConstr>
+	   <GroupByAttr>srcIpAddr,srcName,destIpAddr,destName,eventType,eventSeverity </GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>srcIpAddr,destIpAddr,hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_NIPS_3" group="PH_SYS_REPORT_NIPS,PH_SYS_REPORT_Exploits">
+    <Name>Exploit: Top Network Scanners By Event Count (Detailed)</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the source IP addresses by detected network scan or reconnaissance events </Description>
+    <SelectClause numEntries="All">
+        <AttrList>srcIpAddr,srcName,eventType,eventSeverity,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_NIPS_3" name="Filter_NIPS_3">
+           <SingleEvtConstr> reptDevIpAddr IN (Group@PH_SYS_DEVICE_NETWORK_IPS) AND eventType IN (Group@PH_SYS_EVENT_Reconn) </SingleEvtConstr>
+	   <GroupByAttr>srcIpAddr,srcName,eventType,eventSeverity </GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>srcIpAddr</RelevantFilterAttr>
+  </Report>
+
+   <Report id="PH_Report_NIPS_4" group="PH_SYS_REPORT_NIPS,PH_SYS_REPORT_Exploits">
+    <Name>All Events: Top Blocked Network Attacks By Count (Detailed)</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the network attacks attacks blocked by network IPS </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,srcIpAddr,srcName,eventType,eventSeverity,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_NIPS_4" name="Filter_NIPS_4">
+           <SingleEvtConstr> reptDevIpAddr IN (Group@PH_SYS_DEVICE_NETWORK_IPS) AND eventAction = 1 </SingleEvtConstr>
+	   <GroupByAttr>reptDevIpAddr,srcIpAddr,srcName,eventType,eventSeverity</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>srcIpAddr,reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_NIPS_4B" group="PH_SYS_REPORT_NIPS,PH_SYS_REPORT_Exploits,PH_SYS_REPORT_Freq">
+    <Name>All Events: Top Network IPS events By Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the network IPS events by count</Description>
+    <SelectClause numEntries="All">
+        <AttrList>eventSeverity,eventType,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>eventSeverity DESC,COUNT(*) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_NIPS_1" name="Filter_NIPS_2">
+           <SingleEvtConstr> reptDevIpAddr IN (Group@PH_SYS_DEVICE_NETWORK_IPS) </SingleEvtConstr>
+	   <GroupByAttr>eventType,eventSeverity </GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>srcIpAddr,destIpAddr,hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_NIPS_5" group="PH_SYS_REPORT_NIPS,PH_SYS_REPORT_Exploits">
+    <Name>Exploit: Top Network Scanners By Event Count</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the source IP addresses by detected network scan or reconnaissance events </Description>
+    <SelectClause numEntries="All">
+        <AttrList>srcIpAddr,srcName,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_NIPS_3" name="Filter_NIPS_3">
+           <SingleEvtConstr> reptDevIpAddr IN (Group@PH_SYS_DEVICE_NETWORK_IPS) AND eventType IN (Group@PH_SYS_EVENT_Reconn) </SingleEvtConstr>
+	   <GroupByAttr>srcIpAddr,srcName </GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>srcIpAddr</RelevantFilterAttr>
+  </Report>
+
+</Reports>

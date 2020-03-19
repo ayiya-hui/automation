@@ -1,0 +1,23 @@
+[reptDevIpAddr(key)]
+1.2.3.4
+[eventMsg]
+<85>Dec 20 12:17:11 1.2.3.4 gnome-screensaver-dialog: pam_unix(gnome-screensaver:auth): authentication failure; logname= uid=500 euid=500 tty=:0.0 ruser= rhost=  user=partha
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=3
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=1.2.3.4
+eventAction=1 (Deny)
+eventName=Failed console logon
+reptVendor=Generic
+eventType=Generic_Unix_Failed_Console_Login
+user=partha
+phEventCategory=0 (External)
+reptDevIpAddr=1.2.3.4
+reptModel=Unix

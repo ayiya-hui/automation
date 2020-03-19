@@ -1,0 +1,37 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<135>id=firewall sn=C0EAE44DFBF0 time="2015-10-15 12:00:58 UTC" fw=24.30.249.50 pri=7 c=32 m=609 msg="IPS Prevention Alert: WEB-CLIENT DOM Object Use-After-Free Attack 14" sid=7635 ipscat="WEB-CLIENT" ipspri=2  sess=None n=1 src=54.192.53.239:80:X1:server-54-192-53-239.jfk6.r.cloudfront.net dst=10.216.1.53:50797:X0
+[params]
+ipsSeverity=2
+deviceTime=any
+parserName=SonicwallFirewallParser
+eventType=SonicOS-609
+destIpAddr=10.216.1.53
+srcName=any
+threatCategory=WEB-CLIENT
+srcIpAddr=54.192.53.239
+reptModel=SonicOS
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=IPS Prevention Alert: %s
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+eventRuleTrigger=1
+type=IPS_Prevention_Alert
+count=1
+srcIntfName=X1:server-54-192-53-239.jfk6.r.cloudfront.net
+srcIpPort=80
+eventSeverityCat=LOW
+collectorId=any
+destIntfName=X0
+relayDevIpAddr=$localhost
+destIpPort=50797
+reptDevName=any
+customer=Super
+ipsSignatureId=7635
+phRecvTime=any
+reptDevIpAddr=$localhost
+ipsEventName=WEB-CLIENT DOM Object Use-After-Free Attack 14
+reptVendor=Sonicwall

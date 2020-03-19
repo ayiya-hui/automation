@@ -1,0 +1,31 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<6>CEF:0|McAfee|IPS|5.7.0|70019|Connection_Discarded|0|spt=137 deviceExternalId=NOC-IPS-1205 node 1 dst=192.168.12.255 app=NetBIOS-NS (UDP) rt=Apr 08 2016 00:25:59 deviceFacility=Packet filter proto=17 dpt=137 src=192.168.12.31 dvc=192.168.12.28 dvchost=192.168.12.28 cs1Label=RuleId cs1=260009.0
+[params]
+domain=NOC-IPS-1205 node 1
+parserName=McAfeeStonesoftParser
+eventType=McAfee-Stonesoft-Connection_Discarded
+destIpAddr=192.168.12.255
+destIpPort=137 (NETBIOS-NS)
+srcIpAddr=192.168.12.31
+reptModel=Stonesoft IPS
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Connection Discarded According to Security Policy
+appTransportProto=NetBIOS-NS (UDP)
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+eventRuleTrigger=1
+count=1
+srcIpPort=137
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+ipProto=17 (UDP)
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=McAfee

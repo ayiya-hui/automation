@@ -1,0 +1,38 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>[2016-04-26 16:10:07] EFW: CONN: prio=1 id=00600001 rev=1 event=conn_open rule=NetconBeforeRules conn=open connipproto=TCP connrecvif=If1 connsrcip=199.66.81.118 connsrcport=63993 conndestif=core conndestip=208.68.133.194 conndestport=999
+[params]
+deviceTime=any
+destGeoOrg=any
+parserName=ClavisterParser
+eventType=Clavister-conn-open
+destGeoState=any
+destIpAddr=208.68.133.194
+ipProto=6 (TCP)
+destGeoCountry=any
+srcIpAddr=199.66.81.118
+reptModel=cOS Firewall
+eventId=any
+logID=600001
+eventParsedOk=1
+eventSeverity=1
+connMode=open
+eventName=Clavister-conn-open
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+srcIpPort=63993
+eventSeverityCat=LOW
+collectorId=any
+destIntfName=core
+relayDevIpAddr=$localhost
+rawEventMsg=any
+destIpPort=999 (GARCON)
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Clavister
+destGeoCity=any
+fwRule=NetconBeforeRules

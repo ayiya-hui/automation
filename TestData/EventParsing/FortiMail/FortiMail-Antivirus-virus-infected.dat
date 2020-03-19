@@ -1,0 +1,33 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+date=2012-07-24 time=17:07:42 device_id=FE100C3909600504 log_id=0100000924 type=virus subtype=infected pri=information from="syntax@www.ca" to="user2@1.ca" src=172.20.140.94 session_id="q6OL7fsQ018870-q6OL7fsR018870" msg="The file inline-16-69.dat is infected with EICAR_TEST_FILE."
+[params]
+deviceTime=any
+parserName=FortiMailParser
+eventType=FortiMail-Antivirus-virus-infected
+srcIpAddr=172.20.140.94
+usrMsg=The file inline-16-69.dat is infected with EICAR_TEST_FILE.
+reptModel=FortiMail
+eventId=any
+srcUser=syntax@www.ca
+eventSeverity=1
+eventName=FortiMail detected virus
+destUser=user2@1.ca
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+type=Antivirus
+count=1
+eventSeverityCat=LOW
+collectorId=any
+fileName=inline-16-69.dat
+virusName=EICAR_TEST_FILE
+relayDevIpAddr=$localhost
+rawEventMsg=any
+eventParsedOk=1
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+subtype=infected
+sessionId=q6OL7fsQ018870-q6OL7fsR018870
+reptVendor=Fortinet

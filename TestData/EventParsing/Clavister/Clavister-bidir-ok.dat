@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<133>[2016-04-26 16:10:07] EFW: SYSTEM: prio=2 id=03200607 rev=2 event=bidir_ok localcfgver=7 remotecfgver=35
+[params]
+deviceTime=any
+parserName=ClavisterParser
+eventType=Clavister-bidir-ok
+reptModel=cOS Firewall
+eventId=any
+logID=3200607
+eventParsedOk=1
+eventSeverity=3
+eventName=Clavister-bidir-ok
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Clavister

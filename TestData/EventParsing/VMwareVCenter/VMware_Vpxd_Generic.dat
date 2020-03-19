@@ -1,0 +1,95 @@
+[reptDevIpAddr(key)]
+$localhost (destName:vcenter01-mgma)
+[eventMsg]
+<166>2016-03-22T10:47:50.558Z vcenter01-mgma Fdm: [FFD40B70 info 'Cluster' opID=SWI-56f32f43] [ClusterManagerImpl::LogState] hostId=host-12397 state=Slave master=host-250 isolated=false host-list-version=72 config-version=56 vm-metadata-version=38165
+[params]
+deviceTime=any
+destGeoOrg=any
+parserName=VMwareVCenterParser
+eventType=VMware_Vpxd_Generic
+destIpAddr=any
+procName=Cluster
+destGeoCountry=any
+reptModel=vCenter
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=VMware Vpxd generic message
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+type=info
+destName=vcenter01-mgma
+status=ClusterManagerImpl::LogState
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+reptDevName=vcenter01-mgma
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+sessionId=SWI-56f32f43
+reptVendor=VMware
+[reptDevIpAddr(key)]
+$localhost (procName:vpxdvpxdInvtHostCnx)
+[eventMsg]
+<0>Apr  8 23:17:01 vcenter01-mgm 2016-03-22T10:40:52.721Z [7FAF14B86700 info 'vpxdvpxdInvtHostCnx' opID=HB-host-420@162527-1a4f3e81] [VpxdHostSync] Synchronizing host: host-420 (esxi08.ad.elixir.cidronpay.com, 10.233.59.18)
+[params]
+deviceTime=any
+parserName=VMwareVCenterParser
+eventType=VMware_Vpxd_Generic
+procName=vpxdvpxdInvtHostCnx
+reptModel=vCenter
+eventId=any
+eventTime=Tue Mar 22 10:40:52 CST 2016
+eventParsedOk=1
+eventSeverity=1
+eventName=VMware Vpxd generic message
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+type=info
+destName=vcenter01-mgm
+status=VpxdHostSync
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+reptDevName=vcenter01-mgm
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+sessionId=HB-host-420@162527-1a4f3e81
+reptVendor=VMware
+[reptDevIpAddr(key)]
+$localhost (procName:vpxdvpxdInvtHostDb)
+[eventMsg]
+<0>Apr  8 23:17:01 vcenter01-mgm 2016-03-22T10:40:52.796Z [7FAF14B86700 info 'vpxdvpxdInvtHostDb' opID=HB-host-420@162527-1a4f3e81] [VpxdInvtHost::SaveFieldsToDb] IPMI info of host esxi08.ad.elixir.cidronpay.com is not set
+[params]
+deviceTime=any
+parserName=VMwareVCenterParser
+eventType=VMware_Vpxd_Generic
+procName=vpxdvpxdInvtHostDb
+reptModel=vCenter
+eventId=any
+eventTime=Tue Mar 22 10:40:52 CST 2016
+eventParsedOk=1
+eventSeverity=1
+eventName=VMware Vpxd generic message
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+type=info
+destName=vcenter01-mgm
+status=VpxdInvtHost::SaveFieldsToDb
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+reptDevName=vcenter01-mgm
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+sessionId=HB-host-420@162527-1a4f3e81
+reptVendor=VMware

@@ -1,0 +1,7 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+QOSMOS-FLOW,QOSMOS_1,QOSMOS,$localhost,,syslog
+QOSMOS-FLOW,QOSMOS_2,QOSMOS,$localhost,,syslog
+QOSMOS-FLOW,QOSMOS_3,QOSMOS,$localhost,,syslog
+QOSMOS-FLOW,QOSMOS_4,QOSMOS,$localhost,,syslog
+QOSMOS-FLOW,QOSMOS_5,QOSMOS,$localhost,,syslog

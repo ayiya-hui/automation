@@ -1,0 +1,24 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<182>xasd: sw/info-[30842] /bin/ntpd started
+[params]
+customer=Super
+eventId=any
+eventSeverityCat=LOW
+eventParsedOk=1
+phEventCategory=0 (External)
+parserName=LantronixSLCParser
+count=1
+eventSeverity=1
+eventType=Lantronix-SLC-ProcessStarted
+reptDevIpAddr=$localhost
+collectorId=any
+eventName=Lantronix process started
+procName=/bin/ntpd
+reptVendor=Lantronix
+relayDevIpAddr=$localhost
+phRecvTime=any
+eventRuleTrigger=1
+appTransportProto=Syslog
+reptModel=SLC Console Manager

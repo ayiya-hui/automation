@@ -1,0 +1,23 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<188>392916 06/29/2009 20:38:39.370 SEV=3 HTTP/7 RPT=123 192.168.20.35  HTTP 401 Unauthorized: Authorization Failed--automator
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=6
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=MEDIUM
+destIpAddr=$localhost
+eventAction=1 (Deny)
+eventName=Failed admin HTTP logon
+srcIpAddr=192.168.20.35
+reptVendor=Cisco
+eventType=Cisco-VPN3K-HTTP/7
+phEventCategory=0 (External)
+reptDevIpAddr=$localhost
+reptModel=VPN 3K

@@ -1,0 +1,488 @@
+<eventParser name="SymantecAVParser">
+ 
+  <deviceType>
+    <Vendor>Generic</Vendor>
+    <Model>Generic</Model>
+    <Version>ANY</Version>
+  </deviceType>
+
+  <appType>
+    <Vendor>Symantec</Vendor>
+    <Model>Endpoint Protection Service</Model>
+    <Version>ANY</Version>
+    <Name>Symantec Endpoint Protection Service</Name>
+  </appType>
+
+  <patternDefinitions>
+    <pattern name="patStrEndWithComma"><![CDATA[[^,]*]]></pattern>
+    <pattern name="patStrEndWithColon"><![CDATA[[^:]*]]></pattern>
+    <pattern name="patStrEndBrack"><![CDATA[[^\]]*]]></pattern>
+    <pattern name="patStrLocal"><![CDATA[(?:Local:[^,]*,)+]]></pattern>
+    <pattern name="patStrRemote"><![CDATA[(?:Remote:[^,]*,)+]]></pattern>
+  </patternDefinitions>
+
+  <eventFormatRecognizer><![CDATA[<:gPatSyslogPRI>?<:gPatMon>\s+<:gPatDay>\s+<:gPatTime>\s+<:gPatStr>?\s*(SymAntiVirus|SymantecServer)]]></eventFormatRecognizer>
+  
+  <testEvents>
+      <testEvent><![CDATA[<13>Feb 23 12:36:37 QA-V-Win03-App1.ProspectHills.net SymAntiVirus  0       2701170C2410,3,2,1,QA-V-WIN03-APP1,Administrator,,,,,,,16777216,"Scan started on selected drives and folders and all extensions.",1235421384,,0,,,,,0,,,,,,,,,,,{C11B44CF-35C9-4342-AB3D-E0E9E3756510},,(IP)-0.0.0.0,,PROSPECTHILLS,00:50:56:A3:30:2F,11.0.1000.1112,,,,,,,,,,,,,,,,0,,,,,]]></testEvent>
+      <testEvent><![CDATA[<54>Jun 11 12:24:38 SymantecServer sjdevswinapp05: Site: Site sjdevswinapp05,Server: sjdevswinapp05,Domain: Default,Admin: admin,Administrator  log on failed]]></testEvent>
+  </testEvents>
+
+  <parsingInstructions>
+
+    <collectFieldsByRegex src="$_rawmsg">
+      <regex><![CDATA[<:gPatSyslogPRI>?<_mon:gPatMon>\s+<_day:gPatDay>\s+<_time:gPatTime>\s+<_body:gPatMesgBody>]]></regex>
+    </collectFieldsByRegex>
+
+    <setEventAttribute attr="deviceTime">toDateTime($_mon, $_day, $_time)</setEventAttribute>
+
+    <!-- message group specific parsing -->
+
+     <switch>
+
+      <!-- the first type 
+	   <13>Feb 23 12:36:37 QA-V-Win03-App1.ProspectHills.net SymAntiVirus  0       2701170C2410,3,2,1,QA-V-WIN03-APP1,Administrator,,,,,,,16777216,"Scan started on selected drives and folders and all extensions.",1235421384,,0,,,,,0,,,,,,,,,,,{C11B44CF-35C9-4342-AB3D-E0E9E3756510},,(IP)-0.0.0.0,,PROSPECTHILLS,00:50:56:A3:30:2F,11.0.1000.1112,,,,,,,,,,,,,,,,0,,,,, 
+       -->
+      <case>
+	<collectFieldsByRegex src="$_body">
+	  <regex><![CDATA[<_senderIp:gPatStr>\s+SymAntiVirus(?:\t|\s)+<:gPatInt>(?:\t|\s)+<_body2:gPatMesgBody>]]></regex>
+	</collectFieldsByRegex>  
+
+	<collectAndSetAttrByPosWithQuotes src="$_body2" sep=',' quo='"'>
+	  <attrPosMap attr="_eventType" pos='2'/>
+	  <attrPosMap attr="_eventCat" pos='3'/>
+	  <attrPosMap attr="computer" pos='5'/>
+	  <attrPosMap attr="user" pos='6'/>
+	  <attrPosMap attr="virusName" pos='7'/>
+	  <attrPosMap attr="fileName" pos='8'/>
+	  <attrPosMap attr="_configAction1" pos='9'/>
+	  <attrPosMap attr="_configAction2" pos='10'/>
+	  <attrPosMap attr="virusAction" pos='11'/>
+	  <attrPosMap attr="virusType" pos='12'/>
+	  <attrPosMap attr="_symAVMsg" pos='14'/>
+	  <attrPosMap attr="_symAV8efstMsg" pos='18'/>
+	  <attrPosMap attr="virusQuarantStatus" pos='21'/>
+	  <attrPosMap attr="hostIpAddr" pos='35'/>
+	  <attrPosMap attr="domain" pos='37'/>
+	  <attrPosMap attr="_hostMACAddr" pos='38'/>
+	</collectAndSetAttrByPosWithQuotes>
+	
+	
+	<choose>
+	  
+	  <when test='$_eventType = "5"'>
+
+            <choose>	    
+  	      <when test='$virusAction IN "2,3,5,6"'>
+	        <setEventAttribute attr="eventSeverity">9</setEventAttribute>
+	        <setEventAttribute attr="eventType">combineMsgId("Symantec-AV-",$_eventType,"-remedy-success")</setEventAttribute>
+              </when>
+	    
+	      <when test='$virusAction IN "12"'>
+	        <setEventAttribute attr="eventSeverity">10</setEventAttribute>
+	        <setEventAttribute attr="eventType">combineMsgId("Symantec-AV-",$_eventType,"-remedy-failure")</setEventAttribute>
+	      </when>
+	    
+	      <when test='$virusAction IN "4,7,8,9,10,11,13"'>
+	        <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+	        <setEventAttribute attr="eventType">combineMsgId("Symantec-AV-",$_eventType,"-found-pass")</setEventAttribute>
+              </when>
+            </choose>
+          </when>
+
+          <when test='$_eventType = "1"'>
+            <choose>
+  	      <when test='$virusQuarantineStatus = "1"'>
+                <setEventAttribute attr="eventType">combineMsgId("Symantec-AV-",$_eventType,"-remedy-failure")</setEventAttribute>
+                <setEventAttribute attr="eventSeverity">10</setEventAttribute>
+	      </when>
+              <when test='$virusQuarantineStatus = "2"'>
+	        <setEventAttribute attr="eventType">combineMsgId("Symantec-AV-",$_eventType,"-remedy-success")</setEventAttribute>
+	        <setEventAttribute attr="eventSeverity">9</setEventAttribute>
+	      </when> 
+            </choose>
+          </when>
+
+	  <otherwise>
+	    <setEventAttribute attr="eventType">combineMsgId("Symantec-AV-",$_eventType)</setEventAttribute>
+	  </otherwise>
+	</choose>
+      </case>
+      
+
+      <!-- the second kind
+	   <54>Jun 11 12:24:38 SymantecServer sjdevswinapp05: Site: Site sjdevswinapp05,Server: sjdevswinapp05,Domain: Default,Admin: admin,Administrator  log on failed
+	   <54>Jun 11 12:27:11 SymantecServer sjdevswinapp05: Site: Site sjdevswinapp05,Server: sjdevswinapp05,Domain: Unknown domain (),Admin: hacker,Administrator  log on failed
+      -->
+      <case>
+	<collectFieldsByRegex src="$_body">
+	  <regex><![CDATA[SymantecServer\s+<:patStrEndWithColon>:\s+Site:\s+<:patStrEndWithComma>,Server:\s+<destName:patStrEndWithComma>,Domain:\s+<domain:patStrEndWithComma>,Admin:\s+<user:patStrEndWithComma>,Administrator\s+log\s+on\s+failed]]></regex>
+	</collectFieldsByRegex> 
+	<setEventAttribute attr="eventType">combineMsgId("Symantec-AV-","Admin-Login-Failure")</setEventAttribute>
+        <setEventAttribute attr="eventSeverity">3</setEventAttribute>
+      </case>
+
+      <!-- logout
+           <54>Jun 11 12:26:42 SymantecServer sjdevswinapp05: Site: Site sjdevswinapp05,Server: sjdevswinapp05,Domain: Default,Admin: admin,Administrator logout
+      -->
+      <case>
+	<collectFieldsByRegex src="$_body">
+	  <regex><![CDATA[SymantecServer\s+<:patStrEndWithColon>:\s+Site:\s+<:patStrEndWithComma>,Server:\s+<destName:patStrEndWithComma>,Domain:\s+<domain:patStrEndWithComma>,Admin:\s+<user:patStrEndWithComma>,Administrator\s+logout]]></regex>
+	</collectFieldsByRegex> 
+	<setEventAttribute attr="eventType">combineMsgId("Symantec-AV-","Admin-Logout")</setEventAttribute>	
+        <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+      </case>
+
+
+      <!-- the third kind
+	  <54>Jun 11 12:24:51 SymantecServer sjdevswinapp05: Site: Site sjdevswinapp05,Server: sjdevswinapp05,Domain: Default,Admin: admin,Administrator  log on succeeded
+      -->
+      <case>
+	<collectFieldsByRegex src="$_body">
+          <regex><![CDATA[SymantecServer\s+<:patStrEndWithColon>:\s+Site:\s+<:patStrEndWithComma>,Server:\s+<destName:patStrEndWithComma>,Domain:\s+<domain:patStrEndWithComma>,Admin:\s+<user:patStrEndWithComma>,Administrator\s+log\s+on\s+succeeded]]></regex>
+	</collectFieldsByRegex> 
+	<setEventAttribute attr="eventType">combineMsgId("Symantec-AV-","Admin-Login-Success")</setEventAttribute>
+        <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+      </case>
+
+      <!-- the fourth kind
+	 <54>Feb 23 13:08:29 SymantecServer sjdevswinapp05: Virus found,Computer name: Filer,Source: Real Time Scan,Risk name: EICAR Test String,Occurrences: 1,C:/Documents and Settings/Administrator.PROSPECTHILLS/Local Settings/Temp/vpqz3cxj.com,"",Actual action: Cleaned by deletion,Requested action: Cleaned,Secondary action: Quarantined,Event time: 2009-02-23 21:06:51,Inserted: 2009-02-23 21:08:29,End: 2009-02-23 21:06:51,Domain: Default,Group: Global\Prospecthills,Server: sjdevswinapp05,User: Administrator,Source computer:  ,Source IP: 0.0.0.0
+      -->
+      <case>
+	<collectFieldsByRegex src="$_body">
+	  <regex><![CDATA[SymantecServer\s+<:patStrEndWithColon>:\s+Virus\s+found,Computer\s+name:\s+<computer:patStrEndWithComma>,Source:\s+<:patStrEndWithComma>,Risk name:\s+<virusName:patStrEndWithComma>,Occurrences:\s+<count:gPatInt>,<fileName:patStrEndWithComma>,<:patStrEndWithComma>,Actual\s+action:\s+<virusAction:patStrEndWithComma>,Requested action:\s+<:patStrEndWithComma>,Secondary action:\s+<_virusAction2:patStrEndWithComma>,Event\s+time:\s+<_year:gPatYear>-<_mon:gPatMon>-<_day:gPatDay>\s+<_time:gPatTime>,Inserted:\s+<:patStrEndWithComma>,End:\s+<:patStrEndWithComma>,Domain:<domain:patStrEndWithComma>,Group:\s+<:patStrEndWithComma>,Server:\s+<reptDevName:patStrEndWithComma>,User:\s+<user:patStrEndWithComma>,<:gPatMesgBody>]]></regex>
+	</collectFieldsByRegex> 
+	<setEventAttribute attr="eventType">combineMsgId("Symantec-AV-","Virus Found")</setEventAttribute>
+      </case>
+	
+      <!-- the fifth kind
+	 Mar 16 15:11:06 SymantecServer aschq97: NF77088-PCA,Local: 192.168.128.255,Local: 138,Local: FFFFFFFFFFFF,Remote: 192.168.128.86,Remote: ,Remote: 138,Remote: 0015C53B9216,UDP,Inbound,Begin: 2009-03-16 15:05:02,End: 2009-03-16 15:05:02,Occurrences: 1,Application: C:/WINDOWS/system32/ntoskrnl.exe,Rule: Allow local file sharing,Location: Default,User: ,Domain: ASC
+
+        Mar 13 20:57:44 SymantecServer aschq97: CH103408-JT,Local: 172.23.255.255,Local: 138,Local: FFFFFFFFFFFF,Remote: 172.23.4.98,Remote: ,Remote: 138,Remote: 0019D1E04486,UDP,Inbound,Begin: 2009-03-13 19:56:27,End: 2009-03-13 19:56:27,Occurrences: 1,Application: C:/WINDOWS/system32/ntoskrnl.exe,Rule: Allow local file sharing,Location: Default,User: JTaff,Domain: ASC
+      -->
+
+      <case>
+	<collectFieldsByRegex src="$_body">
+	  <regex><![CDATA[SymantecServer\s+<reptDevName:patStrEndWithColon>:\s+<computer:patStrEndWithComma>,<_localEndPt:patStrLocal><_remoteEndPt:patStrRemote><_proto:gPatProto>,<_direction:patStrEndWithComma>,<:patStrEndWithComma>,<:patStrEndWithComma>,Occurrences:\s+<count:gPatInt>,Application:\s+<swProcName:patStrEndWithComma>,<:patStrEndWithComma>,<:patStrEndWithComma>,User:\s+<user:patStrEndWithComma>,Domain:\s+<domain:patStrEndWithComma>]]></regex>
+	</collectFieldsByRegex> 
+	<setEventAttribute attr="eventType">combineMsgId("Symantec-AV-","Traffic")</setEventAttribute>
+      </case>
+
+
+      <!-- the sixth kind
+	<54>Feb 24 11:51:19 SymantecServer sjdevswinapp05: QA-V-Win03-App2,[SID: 20352] HTTP Whisker/Libwhisker Scan (1) detected.  Traffic has been allowed from this application: C:\WINDOWS\system32 toskrnl.exe,Local: 0.0.0.0,Local: 000000000000,Remote: ,Remote: 192.168.1.4,Remote: 000000000000,Inbound,TCP,Intrusion ID: 0,Begin: 2009-02-24 11:50:01,End: 2009-02-24 11:50:01,Occurrences: 1,Application: C:/WINDOWS/system32/ntoskrnl.exe,Location: Default,User: Administrator,Domain: PROSPECTHILLS
+	 <54>Feb 24 12:01:43 SymantecServer sjdevswinapp05: QA-V-Win03-App2,Active Response that started at 02/24/2009 11:50:01 is disengaged. The traffic from IP address 192.168.1.4 was blocked for 600 second(s).,Local: 0.0.0.0,Local: 000000000000,Remote: ,Remote: 192.168.1.4,Remote: 000000000000,Unknown,OTHERS,,Begin: 2009-02-24 12:00:02,End: 2009-02-24 12:00:02,Occurrences: 1,Application: ,Location: Default,User: Administrator,Domain: PROSPECTHILLS
+
+	    <54>Feb 24 11:51:19 SymantecServer sjdevswinapp05: QA-V-Win03-App2,Traffic from IP address 192.168.1.4 is blocked from 2/24/2009 11:50:01 AM to 2/24/2009 12:00:01 PM.,Local: 0.0.0.0,Local: 000000000000,Remote: ,Remote: 192.168.1.4,Remote: 000000000000,Inbound,OTHERS,,Begin: 2009-02-24 11:50:01,End: 2009-02-24 11:50:01,Occurrences: 1,Application: ,Location: Default,User: Administrator,Domain: PROSPECTHILLS
+      -->
+      <case>
+	<collectFieldsByRegex src="$_body">
+	  <regex><![CDATA[SymantecServer\s+<reptDevName:patStrEndWithColon>:\s+<computer:patStrEndWithComma>,<_desc:patStrEndWithComma>,<_localEndPt:patStrLocal><_remoteEndPt:patStrRemote><_direction:patStrEndWithComma>,<_proto:gPatProto>,<:patStrEndWithComma>,<:patStrEndWithComma>,<:patStrEndWithComma>,Occurrences:\s+<count:gPatInt>,Application:\s+<swProcName:patStrEndWithComma>,<:patStrEndWithComma>,User:\s+<user:patStrEndWithComma>,Domain:\s+<domain:patStrEndWithComma>]]></regex>
+	</collectFieldsByRegex> 
+        <choose>
+          <when test='matches($_desc, "allowed")'>
+       	    <setEventAttribute attr="eventType">Symantec-AV-Traffic-Permit</setEventAttribute>
+          </when>
+          <when test='matches($_desc, "blocked")'>
+       	    <setEventAttribute attr="eventType">Symantec-AV-Traffic-Deny</setEventAttribute>
+          </when>
+          <otherwise>
+       	    <setEventAttribute attr="eventType">Symantec-AV-Traffic</setEventAttribute>
+          </otherwise>
+        </choose>
+      </case>
+
+     </switch>
+    
+     <!-- collect local values ip, mac port -->
+     <when test='exist _localEndPt'>
+       <switch>
+	 <case>
+	   <collectFieldsByRegex src="$_localEndPt">
+	     <regex><![CDATA[Local:\s+<_locVal1:patStrEndWithComma>,Local:\s+<_locVal2:patStrEndWithComma>,Local:\s+<_locVal3:patStrEndWithComma>,]]></regex>
+	   </collectFieldsByRegex>
+	 </case>
+	 <case>
+	   <collectFieldsByRegex src="$_localEndPt">
+	     <regex><![CDATA[Local:\s+<_locVal1:patStrEndWithComma>,Local:\s+<_locVal2:patStrEndWithComma>,]]></regex>
+	   </collectFieldsByRegex>
+	 </case>
+	 <case>
+	   <collectFieldsByRegex src="$_localEndPt">
+	     <regex><![CDATA[Local:\s+<_locVal1:patStrEndWithComma>,]]></regex>
+	   </collectFieldsByRegex>
+	 </case>
+       </switch>
+     </when>
+
+     <when test='exist _remoteEndPt'>
+       <switch>
+	 <case>
+	   <collectFieldsByRegex src="$_remoteEndPt">
+	     <regex><![CDATA[Remote:\s+<_remVal1:patStrEndWithComma>,Remote:\s+<_remVal2:patStrEndWithComma>,Remote:\s+<_remVal3:patStrEndWithComma>,]]></regex>
+	   </collectFieldsByRegex>
+	 </case>
+	 <case>
+	   <collectFieldsByRegex src="$_remoteEndPt">
+	     <regex><![CDATA[Remote:\s+<_remVal1:patStrEndWithComma>,Remote:\s+<_remVal2:patStrEndWithComma>,]]></regex>
+	   </collectFieldsByRegex>
+	 </case>
+	 <case>
+	   <collectFieldsByRegex src="$_remoteEndPt">
+	     <regex><![CDATA[Remote:\s+<_remVal1:patStrEndWithComma>,]]></regex>
+	   </collectFieldsByRegex>
+	 </case>
+       </switch>
+     </when>
+     
+     <when test='exist _locVal1'>
+       <choose>
+	 <when test="matches($_locVal1, '\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}')">
+	   <choose>
+	     <when test="$_direction = 'Outbound'">
+	       <setEventAttribute attr="srcIpAddr">$_locVal1</setEventAttribute>
+	     </when>
+	     <otherwise>
+	       <setEventAttribute attr="destIpAddr">$_locVal1</setEventAttribute>
+	     </otherwise>
+	   </choose>
+	 </when>
+	 <when test="matches($_locVal1, '[a-fA-F\d]{12}')">
+           <when test="$_locVal1 != '000000000000'">
+             <when test="$_locVal1 != 'FFFFFFFFFFFF'">
+	       <choose>
+	         <when test="$_direction = 'Outbound'">
+	           <setEventAttribute attr="_srcMACAddr">$_locVal1</setEventAttribute>
+	         </when>
+	         <otherwise>
+	           <setEventAttribute attr="_destMACAddr">$_locVal1</setEventAttribute>
+	         </otherwise>
+	       </choose>
+             </when>
+           </when>
+	 </when>
+	 <when test="matches($_locVal1, '\d{1,5}')">
+	   <choose>
+	     <when test="$_direction = 'Outbound'">
+	       <setEventAttribute attr="srcIpPort">$_locVal1</setEventAttribute>
+	     </when>
+	     <otherwise>
+	       <setEventAttribute attr="destIpPort">$_locVal1</setEventAttribute>
+	     </otherwise>
+	   </choose>
+	 </when>
+       </choose>
+     </when>
+
+     <when test='exist _locVal2'>
+       <choose>
+	 <when test="matches($_locVal2, '\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}')">
+	   <choose>
+	     <when test="$_direction = 'Outbound'">
+	       <setEventAttribute attr="srcIpAddr">$_locVal2</setEventAttribute>
+	     </when>
+	     <otherwise>
+	       <setEventAttribute attr="destIpAddr">$_locVal2</setEventAttribute>
+	     </otherwise>
+	   </choose>
+	 </when>
+	 <when test="matches($_locVal2, '[a-fA-F\d]{12}')">
+           <when test="$_locVal2 != '000000000000'">
+             <when test="$_locVal2 != 'FFFFFFFFFFFF'">
+ 	       <choose>
+	         <when test="$_direction = 'Outbound'">
+	           <setEventAttribute attr="_srcMACAddr">$_locVal2</setEventAttribute>
+	         </when>
+	         <otherwise>
+	           <setEventAttribute attr="_destMACAddr">$_locVal2</setEventAttribute>
+	         </otherwise>
+	       </choose>
+             </when>
+           </when>
+	 </when>
+	 <when test="matches($_locVal2, '\d{1,5}')">
+	   <choose>
+	     <when test="$_direction = 'Outbound'">
+	       <setEventAttribute attr="srcIpPort">$_locVal2</setEventAttribute>
+	     </when>
+	     <otherwise>
+	       <setEventAttribute attr="destIpPort">$_locVal2</setEventAttribute>
+	     </otherwise>
+	   </choose>
+	 </when>
+       </choose>
+     </when>
+
+     <when test='exist _locVal3'>
+       <choose>
+	 <when test="matches($_locVal3, '\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}')">
+	   <choose>
+	     <when test="$_direction = 'Outbound'">
+	       <setEventAttribute attr="srcIpAddr">$_locVal3</setEventAttribute>
+	     </when>
+	     <otherwise>
+	       <setEventAttribute attr="destIpAddr">$_locVal3</setEventAttribute>
+	     </otherwise>
+	   </choose>
+	 </when>
+	 <when test="matches($_locVal3, '[a-fA-F\d]{12}')">
+           <when test="$_locVal3 != '000000000000'">
+             <when test="$_locVal3 != 'FFFFFFFFFFFF'">
+	       <choose>
+	         <when test="$_direction = 'Outbound'">
+	           <setEventAttribute attr="_srcMACAddr">$_locVal3</setEventAttribute>
+	         </when>
+	         <otherwise>
+	           <setEventAttribute attr="_destMACAddr">$_locVal3</setEventAttribute>
+	         </otherwise>
+	       </choose>
+             </when>
+           </when>
+	 </when>
+	 <when test="matches($_locVal3, '\d{1,5}')">
+	   <choose>
+	     <when test="$_direction = 'Outbound'">
+	       <setEventAttribute attr="srcIpPort">$_locVal3</setEventAttribute>
+	     </when>
+	     <otherwise>
+	       <setEventAttribute attr="destIpPort">$_locVal3</setEventAttribute>
+	     </otherwise>
+	   </choose>
+	 </when>
+       </choose>
+     </when>
+
+     <when test='exist _remVal1'>
+       <choose>
+	 <when test="matches($_remVal1, '\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}')">
+	   <choose>
+	     <when test="$_direction = 'Outbound'">
+	       <setEventAttribute attr="destIpAddr">$_remVal1</setEventAttribute>
+	     </when>
+	     <otherwise>
+	       <setEventAttribute attr="srcIpAddr">$_remVal1</setEventAttribute>
+	     </otherwise>
+	   </choose>
+	 </when>
+	 <when test="matches($_remVal1, '[a-fA-F\d]{12}')">
+           <when test="$_remVal1 != '000000000000'">
+             <when test="$_remVal1 != 'FFFFFFFFFFFF'">
+	       <choose>
+	         <when test="$_direction = 'Outbound'">
+	           <setEventAttribute attr="_destMACAddr">$_remVal1</setEventAttribute>
+	         </when>
+	         <otherwise>
+	           <setEventAttribute attr="_srcMACAddr">$_remVal1</setEventAttribute>
+	         </otherwise>
+	       </choose>
+             </when>
+           </when>
+	 </when>
+	 <when test="matches($_remVal1, '\d{1,5}')">
+	   <choose>
+	     <when test="$_direction = 'Outbound'">
+	       <setEventAttribute attr="destIpPort">$_remVal1</setEventAttribute>
+	     </when>
+	     <otherwise>
+	       <setEventAttribute attr="srcIpPort">$_remVal1</setEventAttribute>
+	     </otherwise>
+	   </choose>
+	 </when>
+       </choose>
+     </when>
+
+     <when test='exist _remVal2'>
+       <choose>
+	 <when test="matches($_remVal2, '\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}')">
+	   <choose>
+	     <when test="$_direction = 'Outbound'">
+	       <setEventAttribute attr="destIpAddr">$_remVal2</setEventAttribute>
+	     </when>
+	     <otherwise>
+	       <setEventAttribute attr="srcIpAddr">$_remVal2</setEventAttribute>
+	     </otherwise>
+	   </choose>
+	 </when>
+	 <when test="matches($_remVal2, '[a-fA-F\d]{12}')">
+           <when test="$_remVal2 != '000000000000'">
+             <when test="$_remVal2 != 'FFFFFFFFFFFF'">
+	       <choose>
+	         <when test="$_direction = 'Outbound'">
+	           <setEventAttribute attr="_destMACAddr">$_remVal2</setEventAttribute>
+	         </when>
+	         <otherwise>
+	           <setEventAttribute attr="_srcMACAddr">$_remVal2</setEventAttribute>
+	         </otherwise>
+	       </choose>
+             </when>
+           </when>
+	 </when>
+	 <when test="matches($_remVal2, '\d{1,5}')">
+	   <choose>
+	     <when test="$_direction = 'Outbound'">
+	       <setEventAttribute attr="destIpPort">$_remVal2</setEventAttribute>
+	     </when>
+	     <otherwise>
+	       <setEventAttribute attr="srcIpPort">$_remVal2</setEventAttribute>
+	     </otherwise>
+	   </choose>
+	 </when>
+       </choose>
+     </when>
+
+     <when test='exist _remVal3'>
+       <choose>
+	 <when test="matches($_remVal3, '\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}')">
+	   <choose>
+	     <when test="$_direction = 'Outbound'">
+	       <setEventAttribute attr="destIpAddr">$_remVal3</setEventAttribute>
+	     </when>
+	     <otherwise>
+	       <setEventAttribute attr="srcIpAddr">$_remVal3</setEventAttribute>
+	     </otherwise>
+	   </choose>
+	 </when>
+	 <when test="matches($_remVal3, '[a-fA-F\d]{12}')">
+           <when test="$_remVal3 != '000000000000'">
+             <when test="$_remVal3 != 'FFFFFFFFFFFF'">
+	       <choose>
+	         <when test="$_direction = 'Outbound'">
+	           <setEventAttribute attr="_destMACAddr">$_remVal3</setEventAttribute>
+	         </when>
+	         <otherwise>
+	           <setEventAttribute attr="_srcMACAddr">$_remVal3</setEventAttribute>
+	         </otherwise>
+	       </choose>
+             </when>
+           </when>
+	 </when>
+	 <when test="matches($_remVal3, '\d{1,5}')">
+	   <choose>
+	     <when test="$_direction = 'Outbound'">
+	       <setEventAttribute attr="destIpPort">$_remVal3</setEventAttribute>
+	     </when>
+	     <otherwise>
+	       <setEventAttribute attr="srcIpPort">$_remVal3</setEventAttribute>
+	     </otherwise>
+	   </choose>
+	 </when>
+       </choose>
+     </when>
+
+     <when test='exist _hostMACAddr'>
+       <setEventAttribute attr="hostMACAddr">normalizeMAC($_hostMACAddr)</setEventAttribute>
+     </when>
+     <when test='exist _srcMACAddr'>
+       <setEventAttribute attr="srcMACAddr">normalizeMAC($_srcMACAddr)</setEventAttribute>
+     </when>
+     <when test='exist _destMACAddr'>
+       <setEventAttribute attr="destMACAddr">normalizeMAC($_destMACAddr)</setEventAttribute>
+     </when>
+     <when test='exist _proto'>
+       <when test='$_proto != "OTHERS"'>
+         <setEventAttribute attr="ipProto">convertStrToIntIpProto($_proto)</setEventAttribute>
+       </when>
+     </when>
+     
+  </parsingInstructions>
+</eventParser>

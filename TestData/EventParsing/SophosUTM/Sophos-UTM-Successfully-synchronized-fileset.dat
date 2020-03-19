@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<30>2016:03:11-10:00:28 ActiveUTM-2 audld[21898]: id="3707" severity="info" sys="system" sub="up2date" name="Successfully synchronized fileset" status="success" action="download" package="aptp"
+[params]
+customer=Super
+eventId=any
+eventSeverityCat=LOW
+eventParsedOk=1
+phEventCategory=0 (External)
+parserName=SophosUTMParser
+count=1
+eventSeverity=1
+eventType=Sophos-UTM-Successfully-synchronized-fileset
+reptDevIpAddr=$localhost
+collectorId=any
+fwAction=download
+eventName=Sophos UTM synchronized fileset
+procName=audld
+reptVendor=Sophos
+relayDevIpAddr=$localhost
+extEventRecvProto=Syslog
+phRecvTime=any
+eventRuleTrigger=1
+reptDevName=any
+reptModel=UTM

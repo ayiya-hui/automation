@@ -1,0 +1,71 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<14>May  6 15:51:15 1,2010/05/06 15:51:15,0006C101167,SYSTEM,general,0,2010/05/06 15:51:15,,unknown,,0,0,general,informational,User admin logged in via CLI from 192.168.28.21
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=$localhost
+eventName=Admin login success
+srcIpAddr=192.168.28.21
+reptDevIpAddr=$localhost
+reptVendor=Palo Alto
+eventType=PAN-OS-SYSTEM-login-success
+user=admin
+phEventCategory=0 (External)
+appPort=CLI
+reptModel=PAN-OS
+[reptDevIpAddr(key)]
+30.30.30.1
+[eventMsg]
+<14>May 26 14:59:59 $reporter 14:59:59,0006C101167,SYSTEM,general,0,2010/05/26 14:59:59,,unknown,,0,0,general,informational,User admin logged in via ssh2 from 192.168.19.199
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+reptDevIpAddr=$reporter
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=$reporter
+eventName=Admin login success
+ipProto=6 (TCP)
+reptVendor=Palo Alto
+eventType=PAN-OS-SYSTEM-login-success
+srcIpAddr=192.168.19.199
+phEventCategory=0 (External)
+destIpPort=22 (SSH)
+appPort=ssh2
+user=admin
+reptModel=PAN-OS
+[reptDevIpAddr(key)]
+30.30.30.2
+[eventMsg]
+<14>May 26 14:59:59 $reporter 14:59:59,0006C101167,SYSTEM,general,0,2010/05/26 14:59:59,,unknown,,0,0,general,informational,User admin logged in via CLI from 192.168.19.199
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+reptDevIpAddr=$reporter
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=$reporter
+eventName=Admin login success
+srcIpAddr=192.168.19.199
+reptVendor=Palo Alto
+eventType=PAN-OS-SYSTEM-login-success
+user=admin
+phEventCategory=0 (External)
+appPort=CLI
+reptModel=PAN-OS

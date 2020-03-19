@@ -1,0 +1,24 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<188>Apr 13 2008 19:27:43 SH-Quidway-SW1 %%01IFNET/4/UPDOWN(l): The state of interface Ethernet0/0/3 was changed to DOWN.
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+count=1
+phCustId=$sender
+deviceTime=any
+eventAction=1 (Deny)
+eventId=any
+eventName=Interface down
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=3
+eventSeverityCat=LOW
+eventType=VRP-IFNET-UPDOWN-TO-DOWN
+hostName=SH-Quidway-SW1
+reptDevName=SH-Quidway-SW1
+reptDevIpAddr=$reporter
+reptModel=VRP
+reptVendor=Huawei
+srcIntfName=Ethernet0/0/3

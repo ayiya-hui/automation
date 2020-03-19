@@ -1,0 +1,23 @@
+[reptDevIpAddr(key)]
+80.80.80.80
+[eventMsg]
+<190>Dec 27 14:15:15 80.80.80.80 NT: <ZenithArcA;E331;> verification of backup image failed Folder name :D:\Backup\D6EE6F71B05348DC-scmfile File Name : D-VOL-b002-i29919.spi Failure code : Sbhard Process Hangs for Verifying File. Failed after 3 Attempts File Name :D_VOL-b002-i29921.spi Failure code :Sbhard Process Hangs for Verifying File. Failed after 3 Attempts File Name :D_VOL-b002-i29922.spi Failure code :Sbhard Process Hangs for Verifying File. Failed after 3 Attempts
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+count=1
+phCustId=$sender
+destName=any
+deviceTime=any
+eventAction=1 (Deny)
+eventId=any
+eventName=Verification Of Backup Image Failed
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=5
+eventSeverityCat=MEDIUM
+eventType=ZenithArca-E331
+msg=verification of backup image failed Folder name :D:\Backup\D6EE6F71B05348DC-scmfile File Name : D-VOL-b002-i29919.spi Failure code : Sbhard Process Hangs for Verifying File. Failed after 3 Attempts File Name :D_VOL-b002-i29921.spi Failure code :Sbhard Process Hangs for Verifying File. Failed after 3 Attempts File Name :D_VOL-b002-i29922.spi Failure code :Sbhard Process Hangs for Verifying File. Failed after 3 Attempts
+reptDevIpAddr=$reporter
+reptModel=Zenith ARCA
+reptVendor=Zenith Infotech

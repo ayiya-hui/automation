@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<189>3755586: Mar 16 21:26:46: %MAB-5-FAIL: Authentication failed for client (0080.f08a.95cc) on Interface Gi1/0/12 AuditSessionID AC1032150000305CFE272A1F
+[params]
+deviceTime=any
+eventType=IOS-MAB-FAIL
+phCustId=$sender
+reptModel=IOS
+eventId=any
+ipConnId=AC1032150000305CFE272A1F
+eventParsedOk=1
+eventSeverity=2
+hostIpAddr=$localhost
+eventName=IOS-MAB-FAIL
+phEventCategory=0
+srcIntfName=Gi1/0/12
+srcMACAddr=00:80:f0:8a:95:cc
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=Success(0)
+reptVendor=Cisco

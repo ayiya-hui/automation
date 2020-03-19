@@ -1,0 +1,84 @@
+[reptDevIpAddr(key)]
+20.2.2.10
+[eventMsg]
+<13>Aug 10 19:14:36 $reporter MSDNSLog 0 20090810 19:13:43 15EC PACKET 025AED90 UDP Rcv 192.168.20.35 b66e Q [0001 D NOERROR] A (12)autodiscover(8)accelops(3)net(0)
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+appTransportProto=UDP
+ipConnId=Rcv
+count=1
+phCustId=$sender
+destIpAddr=$reporter
+destName=autodiscover.accelops.net
+destIpPort=53 (DOMAIN)
+deviceTime=any
+eventAction=0 (Permit)
+eventId=any
+eventName=Successful domain name to IP query
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=1
+eventSeverityCat=LOW
+eventType=MS_DNS_A_Success
+ipProto=17 (UDP)
+reptDevIpAddr=$reporter
+reptModel=DNS
+reptVendor=Microsoft
+srcIpAddr=192.168.20.35
+[reptDevIpAddr(key)]
+$localhost (destName:metrics.sun.com)
+[eventMsg]
+<13>Aug 26 16:45:44 ADS-Pri.ProspectHills.net MSDNSLog      0       20090826 16:45:42 1214 PACKET  021ADD90 UDP Snd 192.168.20.69   e755 R Q [8081   DR  NOERROR] A     (7)metrics(3)sun(3)com(0)
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+appTransportProto=UDP
+ipConnId=Snd
+count=1
+phCustId=$sender
+destName=metrics.sun.com
+destIpAddr=192.168.20.69
+destIpPort=53 (DOMAIN)
+deviceTime=any
+eventAction=0 (Permit)
+eventId=any
+eventName=Successful domain name to IP query
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=1
+eventSeverityCat=LOW
+eventType=MS_DNS_A_Success
+ipProto=17 (UDP)
+reptDevName=ADS-Pri.ProspectHills.net
+reptDevIpAddr=$reporter
+reptModel=DNS
+reptVendor=Microsoft
+srcIpAddr=$reporter
+[reptDevIpAddr(key)]
+$localhost (destName:ocsp.verisign.net)
+[eventMsg]
+<13>Mar 26 14:43:47 ADS-Pri.ProspectHills.net MSDNSLog      0      20100326 14:43:44 1390 PACKET  023CC330 UDP Snd 68.94.156.1     d0e3   Q [0001   D   NOERROR] A     (4)ocsp(8)verisign(3)net(0)
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+appTransportProto=UDP
+ipConnId=Snd
+count=1
+phCustId=$sender
+destName=ocsp.verisign.net
+destIpPort=53 (DOMAIN)
+deviceTime=any
+eventAction=0 (Permit)
+eventId=any
+eventName=Successful domain name to IP query
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=1
+eventSeverityCat=LOW
+eventType=MS_DNS_A_Success
+ipProto=17 (UDP)
+reptDevName=ADS-Pri.ProspectHills.net
+reptDevIpAddr=$reporter
+reptModel=DNS
+reptVendor=Microsoft

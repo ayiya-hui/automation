@@ -1,0 +1,3 @@
+[eventMsg]
+<25>Oct 11 14:31:41 10.146.68.68 20101011, 58637698, 2010/10/11 18:31:39, 2010/10/11 18:35:23, global.IDP, 1631, ddc-idp, 30.200.34.1, traffic, network scan, (NULL), (NULL), 161.178.26.158, 0, 0.0.0.0, 0, (NULL), (NULL), 10.146.240.0, 14247, 0.0.0.0, 0, hopopt, global.IDP, 1631, Metro IDP IP / Port Scan Policy, traffic anomalies, 2, accepted, info, yes, 'interface=eth2', (NULL), (NULL), (NULL), 0, 0, 0, 0, 0, 0, 0, 0, no, 25, Not
+

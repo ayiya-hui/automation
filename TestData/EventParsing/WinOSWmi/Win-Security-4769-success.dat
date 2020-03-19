@@ -1,0 +1,29 @@
+[reptDevIpAddr(key)]
+20.20.20.120
+[eventMsg]
+Fri Oct 30 18:19:58 2009 $reporter AccelOps-WinLog-WMI  [Category]="14337" [CategoryString]="Kerberos Service Ticket Operations" [ComputerName]="sf1dc03.jha.local" [Data]="NULL" [EventCode]="4769" [EventIdentifier]="4769" [EventType]="4" [Logfile]="Security" [RecordNumber]="184035342" [SourceName]="Microsoft-Windows-Security-Auditing" [TimeGenerated]="20100505222912.462659-000" [TimeWritten]="20100505222912.462659-000" [Type]="Audit Success" [User]="(null)" [[Account Information]][Account Name]="rimru@JHA.LOCAL" [Account Domain]="JHA.LOCAL" [Logon GUID]="{EB8EC719-6AF5-C47B-BEEA-0E59199B7366}" [[Service Information]][Service Name]="RTCService" [Service ID]="S-1-5-21-2090294290-982477196-2044928816-8703" [[Network Information]][Client Address]="::ffff:10.0.0.65" [Client Port]="51553" [[Additional Information]][Ticket Options]="0x40810000" [Ticket Encryption Type]="0x17" [Failure Code]="0x0" [Transited Services]="-"
+[params]
+rawEventMsg=any
+type=Audit Success
+domain=JHA.LOCAL
+eventSeverity=1
+eventSeverityCat=LOW
+eventAction=0 (Permit)
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+phRecvTime=any
+phCustId=$sender
+reptDevIpAddr=$reporter
+destIpAddr=$reporter
+eventName=Windows kerberos service ticket grant successful
+srcIpAddr=10.0.0.65
+winSrvcName=RTCService
+reptVendor=Microsoft
+eventType=Win-Security-4769-success
+user=rimru
+phEventCategory=0 (External)
+srcIpPort=51553
+reptModel=Windows
+eventSource=Microsoft-Windows-Security-Auditing

@@ -1,0 +1,1614 @@
+
+<Reports>
+
+  <Report id="PH_Report_COBIT24_1" group="PH_SYS_REPORT_COBIT">
+    <Name>COBIT AI2.4: Successful Database Server Logon Details </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Captures successful database server logons </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,logonTime,logoffTime,srcIpAddr,user,srcApp,srcTerminal</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_DBServer_1" name="Filter_DBServer_1">
+        <SingleEvtConstr>eventType IN (Group@PH_SYS_EVENT_DBLogonSuccess) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+     <RelevantFilterAttr>srcIpAddr,reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_COBIT24_2" group="PH_SYS_REPORT_COBIT">
+    <Name>COBIT AI2.4: Failed Database Server Logon Details </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Captures failed database server logons </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,deviceTime,srcIpAddr,user,srcApp,srcTerminal,dbRetCode</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_DBServer_3" name="Filter_DBServer_3">
+        <SingleEvtConstr>eventType IN (Group@PH_SYS_EVENT_DBLogonFailure) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>srcIpAddr,reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_COBIT24_3" group="PH_SYS_REPORT_COBIT">
+    <Name>COBIT AI2.4: Top App Servers By Current Uptime</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks App servers by current uptime (i.e. time since last reboot) </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,LAST(sysUpTime)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> LAST(sysUpTime) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Minute" val="4"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_AppServer_5" name="Filter_AppServer_5">
+        <SingleEvtConstr>eventType = "JEE_APPSERVER_PERF" AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+        <GroupByAttr>reptDevIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_COBIT25_1" group="PH_SYS_REPORT_COBIT">
+    <Name>COBIT AI2.5: Server Installed Software Changes </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report captures detected installed software changes </Description>
+    <SelectClause numEntries="All">
+      <AttrList>phRecvTime,hostName,hostIpAddr,eventType,oldSVNVersion,newSVNVersion,addedItem,deletedItem </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_FW_36" name="Filter_FW_36">
+        <SingleEvtConstr> hostIpAddr IN (Group@PH_SYS_DEVICE_Server) AND eventType IN ("PH_DEV_MON_CHANGE_INST_SW")  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_COBIT3x_1" group="PH_SYS_REPORT_COBIT">
+     <Name>COBIT DS3.x: Top Devices By CPU Util </Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description> Ranks the devices by average cpu utilization over a window </Description> 
+     <SelectClause numEntries="All">
+         <AttrList> hostName,cpuName, AVG(cpuUtil) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(cpuUtil) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600" >
+         <SubPattern displayName="Filter_PERF_MON_2" name="Filter_PERF_MON_2">
+           <SingleEvtConstr> eventType = "PH_DEV_MON_SYS_CPU_UTIL" AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+           <GroupByAttr> hostName,cpuName </GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+      <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_COBIT3x_2" group="PH_SYS_REPORT_COBIT">
+     <Name>COBIT DS3.x: Top Devices By Memory Util</Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description> Ranks the devices by average memory utilization over a window </Description> 
+     <SelectClause numEntries="All">
+         <AttrList> hostName,memName, AVG(memUtil) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(memUtil) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_PERF_MON_3" name="Filter_PERF_MON_3">
+           <SingleEvtConstr> eventType = "PH_DEV_MON_SYS_MEM_UTIL" AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+           <GroupByAttr> hostName,memName </GroupByAttr>  
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_COBIT3x_3" group="PH_SYS_REPORT_COBIT">
+     <Name>COBIT DS3.x: Top Devices By Disk Util </Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description>Ranks the devices by average system disk utilization over a window </Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName,diskName,diskUtil</AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(diskUtil) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_PERF_MON_6" name="Filter_PERF_MON_6">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_SYS_DISK_UTIL" AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr> 
+           <GroupByAttr>hostName,diskName </GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_COBIT3x_4" group="PH_SYS_REPORT_COBIT">
+     <Name>COBIT DS3.x: Top Firewalls By Connections </Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description> Ranks the firewalls by average connection count over a window. The ratio of the connection count to the max connection count since startup is also provided. If the ratio is close 1 and the firewall is up for a long time, the the firewall must be busy from a firewalled connection point of view. </Description> 
+     <SelectClause numEntries="All">
+         <AttrList> hostName,AVG(fwConnCount), AVG(fwConnPct) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(fwConnCount) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_PERF_MON_7" name="Filter_PERF_MON_7">
+           <SingleEvtConstr> eventType = "PH_DEV_MON_FW_CONN_UTIL" AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+           <GroupByAttr>hostName</GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_COBIT3x_5" group="PH_SYS_REPORT_COBIT">
+     <Name>COBIT DS3.x: Top Device Intf By Util, Error, Discards </Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+   <Description> Ranks the devices and their network interfaces by first average inbound and then by outbound interface utilization. The utilization is computed by accounting for the link bandwidth. </Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName,intfName,AVG(inIntfUtil),SUM(recvBytes),AVG(inIntfPktErrPct), AVG(inIntfPktDiscardedPct), AVG(outIntfUtil), SUM(sentBytes), AVG(outIntfPktErrPct), AVG(outIntfPktDiscardedPct) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(inIntfUtil) DESC, AVG(outIntfUtil) DESC </AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_PERF_MON_8" name="Filter_PERF_MON_8">
+           <SingleEvtConstr> eventType = "PH_DEV_MON_NET_INTF_UTIL"  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+           <GroupByAttr>hostName,intfName </GroupByAttr>  
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_COBIT3x_6" group="PH_SYS_REPORT_COBIT">
+     <Name>COBIT DS3.x: Top Server Apps By CPU, Mem Util </Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description>Ranks the server processes by first average cpu utilization and then by memory utilization over a window</Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName,appName,swProcName,AVG(cpuUtil),AVG(memUtil) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(cpuUtil) DESC, AVG(memUtil) DESC </AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_PERF_MON_4" name="Filter_PERF_MON_4">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_PROC_RESOURCE_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Server)  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr> 
+           <GroupByAttr>hostName,appName,swProcName </GroupByAttr>  
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_COBIT3x_7" group="PH_SYS_REPORT_COBIT">
+     <Name>COBIT DS3.x: Top Network Device Processes By CPU, Mem Util </Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description>Ranks the host processes by average cpu utilization over a window</Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName,appName,swProcName,AVG(cpuUtil),AVG(memUtil) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(cpuUtil) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_PERF_MON_4" name="Filter_PERF_MON_4">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_PROC_RESOURCE_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Network)  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr> 
+           <GroupByAttr>hostName,appName,swProcName </GroupByAttr>  
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_COBIT3x_8" group="PH_SYS_REPORT_COBIT">
+    <Name>COBIT DS3.x: Top App Servers By CPU Usage With Other Performance Metrics</Name>
+    <CustomerScope groupByEachCustomer="true"> 
+      <Include all="true"/> 
+      <Exclude/> 
+    </CustomerScope>
+    <Description>Ranks App servers by the amount of CPU usage - this report provides details on other performance aspects such as memory, threads and classes</Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,AVG(cpuUtil),MAX(cpuUtil), AVG(heapUtil),MAX(heapUtil), AVG(nonHeapUtil),MAX(nonHeapUtil), AVG(liveThreads), MAX(liveThreadsMax), AVG(loadedClasses)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(cpuUtil) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_AppServer_4" name="Filter_AppServer_4">
+        <SingleEvtConstr>eventType = "JEE_APPSERVER_PERF" AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+        <GroupByAttr>reptDevIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_COBIT3x_9" group="PH_SYS_REPORT_COBIT">
+     <Name>COBIT DS3.x: All devices under performance monitoring </Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description>Captures all devices under performance monitoring</Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName</AttrList> 
+     </SelectClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_PERF_MON_4" name="Filter_PERF_MON_4">
+           <SingleEvtConstr>eventType IN ("PH_DEV_MON_SYS_CPU_UTIL", "PH_DEV_MON_SYS_MEM_UTIL", "PH_DEV_MON_PROC_RESOURCE_UTIL", "PH_DEV_MON_SYS_DISK_UTIL", "PH_DEV_MON_FW_CONN_UTIL", "PH_DEV_MON_NET_INTF_UTIL") AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr> 
+           <GroupByAttr>hostName</GroupByAttr>  
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+   <Report id="PH_Report_COBIT4x_1" group="PH_SYS_REPORT_COBIT">
+     <Name>COBIT DS4.x: Device Ping Monitor Statistics </Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description>Tracks the PING response times and packet loss for the monitored devices </Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostIpAddr, AVG(avgDurationMSec),MIN(minDurationMSec),MAX(maxDurationMSec),AVG(pktLossPct) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(avgDurationMSec) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600" >
+       <SubPattern displayName="Filter_PERF_MON_17" name="Filter_PERF_MON_17">
+         <SingleEvtConstr> eventType = "PH_DEV_MON_PING_STAT"  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+	 <GroupByAttr>hostIpAddr </GroupByAttr> 
+       </SubPattern>
+     </PatternClause>
+     <inline>true</inline>
+    <active>true</active>
+      <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_COBIT4x_2" group="PH_SYS_REPORT_COBIT">
+    <Name>COBIT DS4.x: Network Device Down/Restart </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks network device down and restart events</Description>
+    <SelectClause numEntries="All">
+      <AttrList>phRecvTime,reptDevIpAddr,eventType,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_OVERALL_AVAIL_1" name="Filter_OVERALL_AVAIL_1">
+        <SingleEvtConstr>eventType IN (Group@PH_SYS_EVENT_SystemShutdown,Group@PH_SYS_EVENT_SystemRestart) AND (reptDevIpAddr IN (Group@PH_SYS_DEVICE_Network) OR hostIpAddr IN (Group@PH_SYS_DEVICE_Network))  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+     <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_COBIT4x_3" group="PH_SYS_REPORT_COBIT">
+    <Name>COBIT DS4.x: Server Down/Restart </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks server down and restart events</Description>
+    <SelectClause numEntries="All">
+      <AttrList>phRecvTime,reptDevIpAddr,eventType,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_OVERALL_AVAIL_2" name="Filter_OVERALL_AVAIL_2">
+        <SingleEvtConstr>eventType IN (Group@PH_SYS_EVENT_SystemShutdown,Group@PH_SYS_EVENT_SystemRestart) AND (reptDevIpAddr IN (Group@PH_SYS_DEVICE_Server) OR hostIpAddr IN (Group@PH_SYS_DEVICE_Server))  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+  
+  <Report id="PH_Report_COBIT4x_4" group="PH_SYS_REPORT_COBIT">
+    <Name>COBIT AI2.4,DS4.x: Application Down/Restart </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks application stop and start events</Description>
+    <SelectClause numEntries="All">
+      <AttrList>phRecvTime,reptDevIpAddr,eventType,appName,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_OVERALL_AVAIL_3" name="Filter_OVERALL_AVAIL_3">
+        <SingleEvtConstr>eventType IN (Group@PH_SYS_EVENT_AppShutdown,Group@PH_SYS_EVENT_AppRestart) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_COBIT4x_5" group="PH_SYS_REPORT_COBIT">
+    <Name>COBIT DS4.x: Network Device Failover </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks network device failovers</Description>
+    <SelectClause numEntries="All">
+      <AttrList>phRecvTime,reptDevIpAddr,eventType,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_OVERALL_AVAIL_5" name="Filter_OVERALL_AVAIL_5">
+        <SingleEvtConstr>eventType IN (Group@PH_SYS_EVENT_Failover) AND (reptDevIpAddr IN (Group@PH_SYS_DEVICE_Network)) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_COBIT4x_6" group="PH_SYS_REPORT_COBIT">
+    <Name>COBIT DS4.x: Network Device Interface Down/Up</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks network device interface down and up events</Description>
+    <SelectClause numEntries="All">
+      <AttrList>phRecvTime,reptDevIpAddr,eventType,intfName,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_OVERALL_AVAIL_6" name="Filter_OVERALL_AVAIL_6">
+        <SingleEvtConstr>eventType IN (Group@PH_SYS_EVENT_NetIntfShutdown,Group@PH_SYS_EVENT_NetIntfRestart) AND (reptDevIpAddr IN (Group@PH_SYS_DEVICE_Network))  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+   <Report id="PH_Report_COBIT4x_7" group="PH_SYS_REPORT_COBIT">
+    <Name>COBIT AI2.4,DS4.x: Server Interface Down/Up</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks server network interface down and up events</Description>
+    <SelectClause numEntries="All">
+      <AttrList>phRecvTime,reptDevIpAddr,eventType,intfName,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_OVERALL_AVAIL_7" name="Filter_OVERALL_AVAIL_7">
+        <SingleEvtConstr>eventType IN (Group@PH_SYS_EVENT_NetIntfShutdown,Group@PH_SYS_EVENT_NetIntfRestart) AND (reptDevIpAddr IN (Group@PH_SYS_DEVICE_Server))  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+   <Report id="PH_Report_COBIT4x_8" group="PH_SYS_REPORT_COBIT">
+    <Name>COBIT DS4.x: Network Device License Expiry</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks network device license expiry events</Description>
+    <SelectClause numEntries="All">
+      <AttrList>phRecvTime,reptDevIpAddr,eventType,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_OVERALL_AVAIL_8" name="Filter_OVERALL_AVAIL_8">
+        <SingleEvtConstr>eventType IN (Group@PH_SYS_EVENT_LicenseExpired) AND (reptDevIpAddr IN (Group@PH_SYS_DEVICE_Network)) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_COBIT4x_9" group="PH_SYS_REPORT_COBIT">
+    <Name>COBIT DS4.x: Application License Expiry</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks application license expiry events</Description>
+    <SelectClause numEntries="All">
+      <AttrList>phRecvTime,reptDevIpAddr,eventType,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_OVERALL_AVAIL_9" name="Filter_OVERALL_AVAIL_9">
+        <SingleEvtConstr>eventType IN (Group@PH_SYS_EVENT_LicenseExpired) AND (reptDevIpAddr IN (Group@PH_SYS_DEVICE_Server)) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_COBIT4x_10" group="PH_SYS_REPORT_COBIT">
+    <Name>COBIT DS4.x: Network Device Link Module Down/Up</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks network device miscellaneous module (e.g. fan, power etc.) down/up events</Description>
+    <SelectClause numEntries="All">
+      <AttrList>phRecvTime,reptDevIpAddr,eventType,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_OVERALL_AVAIL_11" name="Filter_OVERALL_AVAIL_11">
+        <SingleEvtConstr>eventType IN (Group@PH_SYS_EVENT_OtherModuleDown) AND (reptDevIpAddr IN (Group@PH_SYS_DEVICE_Network)) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_COBIT4x_11" group="PH_SYS_REPORT_COBIT">
+    <Name>COBIT DS4.x: Top Network Devices, Errors By Count</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks network devices by reported error count </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,eventType,COUNT(*)</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_OVERALL_AVAIL_12" name="Filter_OVERALL_AVAIL_12">
+        <SingleEvtConstr>eventType IN (Group@PH_SYS_EVENT_Error) AND (reptDevIpAddr IN (Group@PH_SYS_DEVICE_Network))  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+        <GroupByAttr>reptDevIpAddr,eventType</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_COBIT4x_12" group="PH_SYS_REPORT_COBIT">
+     <Name>COBIT DS4.x: Top Devices by Accumulated Downtime </Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description>Ranks the devices by total system downtime over the last week</Description> 
+     <SelectClause numEntries="All">
+         <AttrList> hostName,SUM(sysDownTime) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> SUM(sysDownTime) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Minute" val="3"/></ReportInterval>
+     <PatternClause window="604800" >
+         <SubPattern displayName="Filter_PERF_MON_1" name="Filter_PERF_MON_1">
+           <SingleEvtConstr> eventType = "PH_DEV_MON_SYS_UPTIME"  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+           <GroupByAttr> hostName </GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+   <Report id="PH_Report_COBIT4x_12b" group="PH_SYS_REPORT_COBIT" >
+     <Name>COBIT DS4.x: Top Devices by Uptime Pct (Achieved SLA)</Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description> Ranks the devices by system uptime pct over a time window </Description> 
+     <SelectClause numEntries="All">
+      <AttrList> hostName,100*(1-SUM(sysDownTime)/SUM(pollIntv)) "Achieved Uptime (SLA)" </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="F1" name="F1">
+	<SingleEvtConstr>eventType = "PH_DEV_MON_SYS_UPTIME" </SingleEvtConstr>
+	<GroupByAttr>hostName</GroupByAttr>
+	</SubPattern>
+      </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_COBIT4x_13" group="PH_SYS_REPORT_COBIT">
+     <Name>COBIT AI2.4,DS4.x: Top Applications By Response Time </Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description>Ranks the services by average application level probe response times</Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName,hostIpAddr,appPort,endUserMonitorName,AVG(appResponseTimeMSec),MAX(appResponseTimeMSec),MIN(appResponseTimeMSec) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(appResponseTimeMSec) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_AVAIL" name="Filter_AVAIL">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_EUM_SUCCESS"  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+           <GroupByAttr>hostName,hostIpAddr,appGroupName,appPort,endUserMonitorName</GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_COBIT54_1"  group="PH_SYS_REPORT_COBIT">
+    <Name>COBIT DS5.4: Windows Server Account Lock/Unlock history </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Captures account lockouts and unlocks on windows servers. Account lockouts happen on repeated login failures and may be suspicious if they are repeated or happen at odd hours of operation. </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,eventType,srcIpAddr,user,domain,targetUser,targetDomain,rawEventMsg</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>phRecvTime DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WINDOWS_43" name="Filter_WINDOWS_43">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER)  AND eventType IN (Group@PH_SYS_EVENT_HostAccountLocked,Group@PH_SYS_EVENT_HostAccountUnlocked)  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_COBIT54_2" group="PH_SYS_REPORT_COBIT">
+    <Name>COBIT DS5.4: Domain Account Lock/Unlock history </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Captures account lockouts and unlocks on domain accounts. Account lockouts happen on repeated login failures and may be suspicious if they are repeated or happen at odd hours of operation. </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,eventType,srcIpAddr,user,domain,targetUser,targetDomain,rawEventMsg</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>phRecvTime DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_DC_38" name="Filter_DC_38">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_APP_DOMAIN_CONTROLLER)  AND eventType IN (Group@PH_SYS_EVENT_DomainAccountLocked,Group@PH_SYS_EVENT_DomainAccountUnlocked)  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report> 
+
+  <Report id="PH_Report_COBIT54_3" group="PH_SYS_REPORT_COBIT">
+    <Name>COBIT DS5.4: Server Password Changes </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks password changes </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,phRecvTime,srcIpAddr,user,domain,targetUser,targetDomain,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WINDOWS_42" name="Filter_WINDOWS_42">
+        <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_PasswordChange)  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_COBIT54_4" group="PH_SYS_REPORT_COBIT">
+    <Name>COBIT DS5.4: Local Windows User Accounts Created </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report captures user accounts added on a server </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,phRecvTime,srcIpAddr,user,computer,targetUser,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WINDOWS_26" name="Filter_WINDOWS_26">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER)  AND  eventType = "Win-Security-624"  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_COBIT54_5" group="PH_SYS_REPORT_COBIT">
+    <Name>COBIT DS5.4: Local Windows User Accounts Deleted</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report captures user accounts removed from a server </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,phRecvTime,srcIpAddr,user,computer,targetUser,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WINDOWS_27" name="Filter_WINDOWS_27">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER) AND eventType = "Win-Security-630"  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_COBIT54_6" group="PH_SYS_REPORT_COBIT">
+    <Name>COBIT DS5.4: Local Windows User Accounts Modified </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report captures local user account modifications. </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,phRecvTime,eventType, srcIpAddr,user,computer,targetUser,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WINDOWS_28" name="Filter_WINDOWS_28">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER)  AND  eventType IN ("Win-Security-625", "Win-Security-626","Win-Security-642", "Win-Security-627", "Win-Security-628", "Win-Security-629","Win-Security-636","Win-Security-650","Win-Security-637","Win-Security-651","Win-Security-632","Win-Security-633","Win-Security-655","Win-Security-656","Win-Security-660","Win-Security-661","Win-Security-665","Win-Security-666")  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_COBIT54_7" group="PH_SYS_REPORT_COBIT">
+    <Name>COBIT DS5.4: Users Added To Local Windows User Groups </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report captures users added to local groups. </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,phRecvTime,srcIpAddr,user,computer,targetUser,targetUserGrp,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WINDOWS_32" name="Filter_WINDOWS_32">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER)  AND  eventType IN ("Win-Security-636", "Win-Security-650")  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_COBIT54_18" group="PH_SYS_REPORT_COBIT">
+    <Name>COBIT DS5.4: Users Added To Global Windows User Groups </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report captures users added to global or univeral groups. </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,phRecvTime,srcIpAddr,user,computer,targetUser,targetUserGrp,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WINDOWS_33" name="Filter_WINDOWS_33">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER)  AND  eventType IN ("Win-Security-632", "Win-Security-655","Win-Security-660", "Win-Security-665")  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_COBIT54_8" group="PH_SYS_REPORT_COBIT">
+    <Name>COBIT DS5.4: Users Deleted From Local Windows User Groups </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report captures users deleted from local groups. </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,phRecvTime,srcIpAddr,user,computer,targetUser,targetUserGrp,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WINDOWS_34" name="Filter_WINDOWS_34">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER)  AND  eventType IN ("Win-Security-637", "Win-Security-651")  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_COBIT54_9" group="PH_SYS_REPORT_COBIT">
+    <Name>COBIT DS5.4: Users Deleted From Global Windows User Groups </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report captures users deleted from global or univeral groups. </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,phRecvTime,srcIpAddr,user,computer,targetUser,targetUserGrp,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WINDOWS_35" name="Filter_WINDOWS_35">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER)  AND  eventType IN ("Win-Security-633", "Win-Security-656","Win-Security-661", "Win-Security-666")  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_COBIT54_10" group="PH_SYS_REPORT_COBIT">
+    <Name>COBIT DS5.4: Local Windows Groups Deleted </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report captures local group deletions </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,phRecvTime,srcIpAddr,user,computer,targetUserGrp,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WINDOWS_36" name="Filter_WINDOWS_36">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER)  AND  eventType IN ("Win-Security-638", "Win-Security-652")  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_COBIT54_11" group="PH_SYS_REPORT_COBIT">
+    <Name>COBIT DS5.4: Local Windows Groups Modified </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report captures local group modifications </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,phRecvTime,srcIpAddr,user,computer,targetUserGrp,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WINDOWS_37" name="Filter_WINDOWS_37">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER) AND eventType IN ("Win-Security-639", "Win-Security-649")  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_COBIT54_12" group="PH_SYS_REPORT_COBIT">
+    <Name>COBIT DS5.4: Local Windows Groups Created </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report captures local group creations </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,phRecvTime,srcIpAddr,user,computer,targetUserGrp,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WINDOWS_41" name="Filter_WINDOWS_41">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER) AND eventType IN ("Win-Security-635", "Win-Security-648")  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_COBIT54_13" group="PH_SYS_REPORT_COBIT">
+    <Name>COBIT DS5.4: Global Windows Groups Created </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report captures global group creations </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,phRecvTime,srcIpAddr,user,computer,targetUserGrp,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WINDOWS_38" name="Filter_WINDOWS_38">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER) AND eventType IN ("Win-Security-631", "Win-Security-653","Win-Security-658", "Win-Security-663")  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_COBIT54_14" group="PH_SYS_REPORT_COBIT">
+    <Name>COBIT DS5.4: Global Windows Groups Deleted</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report captures global group deletions </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,phRecvTime,srcIpAddr,user,computer,targetUserGrp,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WINDOWS_39" name="Filter_WINDOWS_39">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER) AND eventType IN ("Win-Security-634", "Win-Security-657","Win-Security-662", "Win-Security-667")  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_COBIT54_15" group="PH_SYS_REPORT_COBIT">
+    <Name>COBIT DS5.4: Global Windows Groups Modified</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report captures global group modifications </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,phRecvTime,srcIpAddr,user,computer,targetUserGrp,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WINDOWS_40" name="Filter_WINDOWS_40">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER) AND eventType IN ("Win-Security-641", "Win-Security-654","Win-Security-659", "Win-Security-664")  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+   <Report id="PH_Report_COBIT54_16" group="PH_SYS_REPORT_COBIT">
+    <Name>COBIT DS5.4: Unix Users Added To Group</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks user additions to groups </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr,srcIpAddr,user,targetUser,targetUserGrp,rawEventMsg</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_UNIX_12" name="Filter_UNIX_12">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_DEVICE_UNIX_SERVER)  AND  eventType = "Generic_Unix_User_Add") AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_COBIT54_17"  group="PH_SYS_REPORT_COBIT">
+    <Name>COBIT DS5.4: Unix User Password Changed</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks password changes</Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr,srcIpAddr,user,targetUser,rawEventMsg</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_UNIX_13" name="Filter_UNIX_13">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_UNIX_SERVER)  AND  eventType IN (Group@PH_SYS_EVENT_PasswordChange) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_COBIT55_1"  group="PH_SYS_REPORT_COBIT">
+    <Name>COBIT DS5.5: Privileged Windows Server Logon Attempts using the Administrator Account </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report details prvileged logon attempts to a windows server using the Administrator account </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,eventType, eventAction,srcIpAddr,user,domain,winLogonType,winLogonFailCode,rawEventMsg</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WINDOWS_29" name="Filter_WINDOWS_29">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER)  AND  user = "Administrator" AND eventType IN (Group@PH_SYS_EVENT_HostLogonFailure,Group@PH_SYS_EVENT_HostLogonSuccess)  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report> 
+
+  <Report id="PH_Report_COBIT55_2"  group="PH_SYS_REPORT_COBIT">
+    <Name>COBIT DS5.5: Remote Desktop Connections to Windows Servers </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report details successful and failed remote desktop connections </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,eventType, eventAction,srcIpAddr,user,domain,winLogonType,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WINDOWS_30" name="Filter_WINDOWS_30">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER)  AND winLogonType = 10 AND eventType IN (Group@PH_SYS_EVENT_HostLogonFailure,Group@PH_SYS_EVENT_HostLogonSuccess)  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_COBIT55_3" group="PH_SYS_REPORT_COBIT">
+    <Name>COBIT DS5.5: Unix Server Privileged Logon</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report details UNIX server privileged logon (su) details with all parsed parameters and raw logs </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,eventType,reptDevIpAddr,srcIpAddr,user,targetUser,rawEventMsg</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_UNIX_10" name="Filter_UNIX_10">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_DEVICE_UNIX_SERVER)  AND  (eventType IN (Group@PH_SYS_EVENT_HostPrivLogonSuccess) OR eventType IN (Group@PH_SYS_EVENT_HostPrivLogonFailure))  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_COBIT55_4"  group="PH_SYS_REPORT_COBIT">
+    <Name>COBIT DS5.5: Unix Server Privileged Command Execution</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report details privilege command execuations (sudo) at a Unix server  </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,eventType,reptDevIpAddr,srcIpAddr,user,targetUser,command,rawEventMsg</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_UNIX_9" name="Filter_UNIX_9">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_DEVICE_UNIX_SERVER)  AND  (eventType IN (Group@PH_SYS_EVENT_HostPrivExecSuccess) OR eventType IN (Group@PH_SYS_EVENT_HostPrivExecFailure))  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_COBIT55_5" group="PH_SYS_REPORT_COBIT">
+    <Name>COBIT DS5.5: Successful Firewall Admin Logon Details </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Details about successful firewall logons </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr,eventType,srcIpAddr,user,srcIntfName,destIpPort,rawEventMsg</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW_3" name="Filter_FW_3">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_HostLogonSuccess))  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_COBIT55_6" group="PH_SYS_REPORT_COBIT">
+    <Name>COBIT DS5.5: Failed Firewall Admin Logon Details </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Details about failed firewall logons</Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr,eventType,srcIpAddr,user,srcIntfName,destIpPort,rawEventMsg</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW_4" name="Filter_FW_4">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_HostLogonFailure))  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+ <Report id="PH_Report_COBIT55_7" group="PH_SYS_REPORT_COBIT">
+    <Name>COBIT DS5.5: Successful Router Admin Logon Details</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Details about successful router logons</Description>
+    <SelectClause numEntries="All">
+      <AttrList>phRecvTime,reptDevIpAddr,eventType,srcIpAddr,user,srcIntfName,destIpPort,rawEventMsg</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_Router_24" name="Filter_Router_24">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_ROUTER_SWITCH) AND eventType IN (Group@PH_SYS_EVENT_HostLogonSuccess))  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+ <Report id="PH_Report_COBIT55_8" group="PH_SYS_REPORT_COBIT">
+    <Name>COBIT DS5.5: Failed Router Admin Logon Details </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Details about failed router logons</Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr,eventType,srcIpAddr,user,srcIntfName,destIpPort,rawEventMsg</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_Router_3" name="Filter_Router_3">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_ROUTER_SWITCH) AND eventType IN (Group@PH_SYS_EVENT_HostLogonFailure))  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_COBIT55_9"  group="PH_SYS_REPORT_COBIT">
+    <Name>COBIT DS5.5: Successful VPN Admin Logon</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Provides event details for all successful VPN admin logons </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr, eventType,srcIpAddr,user,durationMSec,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_VPNGW_13" name="Filter_VPNGW_13">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_VPN_GATEWAY)  AND  eventType IN (Group@PH_SYS_EVENT_HostLogonSuccess,Group@PH_SYS_EVENT_HostLogoff)  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_COBIT55_10" group="PH_SYS_REPORT_COBIT">
+    <Name>COBIT DS5.5: Failed VPN Admin Logon</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Provides event details for all failed VPN admin logons </Description>
+    <SelectClause numEntries="All">
+      <AttrList>phRecvTime,reptDevIpAddr, eventType,srcIpAddr,user,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_VPNGW_14" name="Filter_VPNGW_14">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_VPN_GATEWAY)  AND  eventType IN (Group@PH_SYS_EVENT_HostLogonFailure)  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_COBIT55_11" group="PH_SYS_REPORT_COBIT">
+    <Name>COBIT DS5.5: Successful WLAN Admin Logon</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks successful admin logons to the WLAN Controller</Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr,eventType,srcIpAddr,user,rawEventMsg </AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT (*)</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WLAN_11" name="Filter_WLAN_11">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WLAN_CONTROLLER) AND eventType IN (Group@PH_SYS_EVENT_HostLogonSuccess)  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_COBIT55_12" group="PH_SYS_REPORT_COBIT">
+    <Name>COBIT DS5.5: Failed WLAN Admin Logon</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks failed admin logons to the WLAN Controller</Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr,eventType,srcIpAddr,user,rawEventMsg </AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT (*)</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WLAN_11" name="Filter_WLAN_11">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WLAN_CONTROLLER) AND eventType IN (Group@PH_SYS_EVENT_HostLogonFailure)  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_COBIT56_1" group="PH_SYS_REPORT_COBIT">
+    <Name>COBIT DS5.6: Top Incidents Ranked By Severity, Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> Ranks the incidents by first their severity and then by their count.  </Description>
+    <SelectClause numEntries="All">
+      <AttrList>eventType,eventSeverity,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>eventSeverity DESC,COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_OVERALL_STATUS" name="Filter_OVERALL_STATUS">
+        <SingleEvtConstr>phEventCategory = 1 AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+        <GroupByAttr>eventType,eventSeverity </GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <inline>false</inline>
+    <active>false</active>
+    <RelevantFilterAttr>bizService</RelevantFilterAttr>
+  </Report>
+  
+  <Report id="PH_Report_COBIT56_2" group="PH_SYS_REPORT_COBIT">
+    <Name>COBIT DS5.6: All Availability Incidents </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Captures the availability incidents</Description>
+    <SelectClause numEntries="All">
+      <AttrList>eventType,eventSeverity,incidentSrc,incidentTarget,incidentDetail,incidentRptIp</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_OVERALL_STATUS" name="Filter_OVERALL_STATUS">
+        <SingleEvtConstr>phEventCategory = 1 AND eventType IN (Group@PH_SYS_EVENT_PH_RULE_AVAIL) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <inline>false</inline>
+    <active>false</active>
+    <RelevantFilterAttr>bizService</RelevantFilterAttr>
+  </Report>
+  
+  <Report id="PH_Report_COBIT56_3" group="PH_SYS_REPORT_COBIT">
+    <Name>COBIT DS5.6: Performance Incidents</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Captures the performance related incidents</Description>
+    <SelectClause numEntries="All">
+      <AttrList>eventType,eventSeverity,incidentSrc,incidentTarget,incidentDetail,incidentRptIp</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>eventSeverity DESC,COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_OVERALL_STATUS" name="Filter_OVERALL_STATUS">
+        <SingleEvtConstr>phEventCategory = 1 AND eventType IN (Group@PH_SYS_EVENT_PH_RULE_PERF) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <inline>false</inline>
+    <active>false</active>
+    <RelevantFilterAttr>bizService</RelevantFilterAttr>
+  </Report>
+  
+  <Report id="PH_Report_COBIT56_4" group="PH_SYS_REPORT_COBIT">
+    <Name>COBIT DS5.6: Security Incidents</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Captures the security related incidents</Description>
+    <SelectClause numEntries="All">
+      <AttrList>eventType,eventSeverity,incidentSrc,incidentTarget,incidentDetail,incidentRptIp</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_OVERALL_STATUS" name="Filter_OVERALL_STATUS">
+        <SingleEvtConstr>phEventCategory = 1 AND eventType IN (Group@PH_SYS_EVENT_PH_RULE_SEC)  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <inline>false</inline>
+    <active>false</active>
+    <RelevantFilterAttr>bizService</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_COBIT59_1" group="PH_SYS_REPORT_COBIT">
+   <Name>COBIT DS5.9: Virus found but not remediated by Host Antivirus </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Captures events that indicate the viruses that Host Antivirus found but failed to remedy </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr,eventType,hostIpAddr,computer,user,virusName,virusType,fileName,virusAction,virusQuarantStatus</AttrList>    
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_AV_2" name="Filter_AV_2">
+           <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_Worm_Remedy_Failed) AND reptDevIpAddr IN (Group@PH_SYS_APP_SEC_MGMT)  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_COBIT59_3" group="PH_SYS_REPORT_COBIT">
+   <Name>COBIT DS5.9: Spyware found but not remediated by Host Antivirus </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr,eventType,hostIpAddr,computer,user,fileName</AttrList>    
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_AV_4" name="Filter_AV_4">
+           <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_Spyware_Remedy_Failed) AND reptDevIpAddr IN (Group@PH_SYS_APP_SEC_MGMT)  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_COBIT59_4" group="PH_SYS_REPORT_COBIT">
+   <Name>COBIT DS5.9: Top Hosts with Malware found by Host Antivirus</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> </Description>
+    <SelectClause numEntries="All">
+        <AttrList>computer,eventType,COUNT(*)</AttrList>    
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_AV_5" name="Filter_AV_5">
+           <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_Malware) AND reptDevIpAddr IN (Group@PH_SYS_APP_SEC_MGMT)  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+	   <GroupByAttr>computer,eventType</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_COBIT59_5" group="PH_SYS_REPORT_COBIT">
+    <Name>COBIT DS5.9: Top Hosts with Malware Found By Network IPS and Firewalls</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> Tracks IP addresses with Malware as found by IPS </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,eventType,srcIpAddr,COUNT(*)</AttrList>    
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_Vuln_10" name="Filter_Vuln_10">
+        <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_Malware) AND reptDevIpAddr IN (Group@PH_SYS_DEVICE_NETWORK_IPS,Group@PH_SYS_APP_NETWORK_IPS,Group@PH_SYS_DEVICE_FIREWALL) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+	<GroupByAttr>reptDevIpAddr,eventType,srcIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_COBIT59_6" group="PH_SYS_REPORT_COBIT">
+   <Name>COBIT DS5.9: Top Hosts with Malware Found By Antivirus and Security Gateways</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks IP addresses with Malware as found by Host Anti-virus and Security Gateways</Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,eventType,srcIpAddr,COUNT(*)</AttrList>    
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT (*) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_Vuln_8" name="Filter_Vuln_8">
+           <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_Malware) AND reptDevIpAddr IN (Group@PH_SYS_APP_SEC_MGMT,Group@PH_SYS_DEVICE_SEC_GW)  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+	   <GroupByAttr>reptDevIpAddr,eventType,srcIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_COBIT59_7" group="PH_SYS_REPORT_COBIT">
+    <Name>COBIT DS5.9: Non-compliant Hosts and Security Software License Expirations</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks non-compliant hosts and license expiry events from Security Management Gateways and Firewalls. Non-compliant hosts may not have proper security software running and therefore may pose a security threat. License expiration of security software may expose exploitable security vulnerabilities.</Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,eventType,hostIpAddr,rawEventMsg</AttrList>    
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT (*) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_Vuln_12" name="Filter_Vuln_12">
+        <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_LicenseExpired,Group@PH_SYS_EVENT_NoncompliantHost) AND reptDevIpAddr IN (Group@PH_SYS_DEVICE_NETWORK_IPS,Group@PH_SYS_APP_NETWORK_IPS,Group@PH_SYS_APP_SEC_MGMT,Group@PH_SYS_DEVICE_FIREWALL,Group@PH_SYS_DEVICE_SEC_GW)  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_COBIT59_8" group="PH_SYS_REPORT_COBIT">
+    <Name>COBIT DS5.10: Top Firewalls and Permitted Outbound Services By Connections, Bytes </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks firewalls and permitted outbound services by first the total number of connections and then by bytes for that service</Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,ipProto, destIpPort, srcIntfName,destIntfName,COUNT(*),SUM(sentBytes), SUM(recvBytes), SUM (totBytes)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> COUNT(*)  DESC, SUM(totBytes) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW_20" name="Filter_FW_20">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic) AND srcIpAddr IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) AND destIpAddr NOT IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_PCI)  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr,ipProto, destIpPort,srcIntfName,destIntfName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_COBIT510_1" group="PH_SYS_REPORT_COBIT">
+    <Name>COBIT DS5.10: Top Firewalls and Permitted Inbound Services By Connections, Bytes  </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks firewalls and permitted inbound services by first the total number of connections and then by bytes for that service</Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,ipProto, destIpPort,srcIntfName,destIntfName, COUNT(*),SUM(sentBytes), SUM(recvBytes), SUM (totBytes)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> COUNT(*)  DESC, SUM(totBytes) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW_21" name="Filter_FW_21">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic) AND srcIpAddr NOT IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) AND destIpAddr IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_PCI)  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr,ipProto, destIpPort,srcIntfName,destIntfName </GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_COBIT510_2" group="PH_SYS_REPORT_COBIT">
+    <Name>COBIT DS5.10: Top Firewalls and Permitted High Port Services By Connections, Bytes</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks the high port services permitted by firewalls - these services may pose security risk </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,srcIpAddr,destIpAddr,ipProto,destIpPort,srcIntfName,destIntfName,COUNT(*), SUM(sentBytes), SUM(recvBytes), SUM (totBytes) </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_FW_38" name="Filter_FW_38">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_PCI)  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+        <GroupByAttr>reptDevIpAddr,srcIpAddr,destIpAddr,ipProto,destIpPort,srcIntfName,destIntfName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_COBIT510_3" group="PH_SYS_REPORT_COBIT">
+    <Name>COBIT DS5.10: Top Firewalls and Permitted Uncommon Services By Connections, Bytes</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks uncommon services permitted by firewalls - common services include DNS, SMTP, Web </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,srcIpAddr,destIpAddr,ipProto,destIpPort,srcIntfName,destIntfName,COUNT(*), SUM(sentBytes), SUM(recvBytes), SUM (totBytes) </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_FW_39" name="Filter_FW_39">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic) AND destIpPort NOT IN (25,53,80,443,123)  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+        <GroupByAttr>reptDevIpAddr,srcIpAddr,destIpAddr,ipProto,destIpPort,srcIntfName,destIntfName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_COBIT510_4" group="PH_SYS_REPORT_COBIT">
+    <Name>COBIT DS5.10: Top Firewalls and Permitted Vulnerable Low Port Services By Connections, Bytes</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks uncommon services permitted by firewalls - vulnerable services include Microsoft services such as MS-RPC (135), NETBIOS-SSN (139), MICROSOFT-DS (445), MS-SQL (1433,1434), FTP (23), TELNET (21)</Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,srcIpAddr,destIpAddr,ipProto,destIpPort,srcIntfName,destIntfName,COUNT(*), SUM(sentBytes), SUM(recvBytes), SUM (totBytes) </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_FW_40" name="Filter_FW_40">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic) AND destIpPort IN (135,139,445,1433,1434,23,21) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_PCI)  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+        <GroupByAttr>reptDevIpAddr,srcIpAddr,destIpAddr,ipProto,destIpPort,srcIntfName,destIntfName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_COBIT510_5" group="PH_SYS_REPORT_COBIT">
+    <Name>COBIT DS5.10: Top Firewall Originated Or Destined Permitted Connections By Count</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the firewall originated or destined connections - these connections would be typically be for administrative and monitoring purposes</Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,srcIpAddr,destIpAddr,ipProto,destIpPort,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList></AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW_8" name="Filter_FW_8">
+           <SingleEvtConstr> reptDevIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic) AND (srcIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) OR destIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL)) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_PCI)  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr,srcIpAddr,destIpAddr,ipProto,destIpPort</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  
+  <Report id="PH_Report_COBIT510_6" group="PH_SYS_REPORT_COBIT">
+    <Name> COBIT DS5.10: Top Blocked Internal Sources, Services, Destinations </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks blocked Internal Sources, Services, Destinations Ranked By Connection Count </Description>
+    <SelectClause numEntries="All">
+        <AttrList>srcIpAddr,reptDevIpAddr,srcIntfName,ipProto, destIpPort, destIpAddr, COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList></AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW_13" name="Filter_FW_13">
+           <SingleEvtConstr> reptDevIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_DenyTraffic) AND srcIpAddr IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET)  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+           <GroupByAttr>srcIpAddr,reptDevIpAddr,srcIntfName,ipProto, destIpPort, destIpAddr </GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>srcIpAddr,destIpAddr,reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_COBIT510_7" group="PH_SYS_REPORT_COBIT">
+    <Name> COBIT DS5.10: Top Blocked Internal Destinations, Services Ranked By Connection Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks blocked Internal Destinations, Services Ranked By Connection Count </Description>
+    <SelectClause numEntries="All">
+        <AttrList>destIpAddr,ipProto, destIpPort, reptDevIpAddr,destIntfName, COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList></AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW_15" name="Filter_FW_15">
+           <SingleEvtConstr> reptDevIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_DenyTraffic) AND destIpAddr IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET)  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+           <GroupByAttr>destIpAddr,ipProto, destIpPort, reptDevIpAddr,destIntfName </GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>destIpAddr,reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_COBIT510_8" group="PH_SYS_REPORT_COBIT">
+    <Name>COBIT DS5.10: Top Network IPS events By Severity, Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the network IPS events by count</Description>
+    <SelectClause numEntries="All">
+        <AttrList>srcIpAddr,destIpAddr,eventType,eventSeverity,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>eventSeverity DESC,COUNT(*) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_NIPS_1" name="Filter_NIPS_2">
+           <SingleEvtConstr> reptDevIpAddr IN (Group@PH_SYS_DEVICE_NETWORK_IPS,Group@PH_SYS_APP_NETWORK_IPS)  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+	   <GroupByAttr>srcIpAddr,destIpAddr,eventType,eventSeverity </GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>srcIpAddr,destIpAddr,hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_COBIT510_9" group="PH_SYS_REPORT_COBIT">
+    <Name>COBIT DS5.10: Top Network Scanners By Event Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the source IP addresses by detected network scan or reconnaissance events </Description>
+    <SelectClause numEntries="All">
+        <AttrList>srcIpAddr,eventType,eventSeverity,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_NIPS_3" name="Filter_NIPS_3">
+           <SingleEvtConstr> reptDevIpAddr IN (Group@PH_SYS_DEVICE_NETWORK_IPS,Group@PH_SYS_APP_NETWORK_IPS) AND eventType IN (Group@PH_SYS_EVENT_Reconn)  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+	   <GroupByAttr>srcIpAddr,eventType,eventSeverity </GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>srcIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_COBIT510_10" group="PH_SYS_REPORT_COBIT">
+    <Name>COBIT DS5.10: Top Blocked Network Attacks By Count</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the network attacks attacks blocked by network IPS </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,srcIpAddr,eventType,eventSeverity,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_NIPS_4" name="Filter_NIPS_4">
+           <SingleEvtConstr> reptDevIpAddr IN (Group@PH_SYS_DEVICE_NETWORK_IPS,Group@PH_SYS_APP_NETWORK_IPS) AND eventAction = 1  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+	   <GroupByAttr>reptDevIpAddr,srcIpAddr,eventType,eventSeverity</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>srcIpAddr,reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_COBIT510_11" group="PH_SYS_REPORT_COBIT">
+    <Name>COBIT DS5.10: Top Web Users By Uncommon HTTP Method Connections</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks web users by uncommon HTTP methods used </Description>
+    <SelectClause numEntries="All">
+        <AttrList>srcIpAddr,httpMethod,uriStem,httpStatusCode,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> COUNT(*) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WEB_PROXY_8" name="Filter_WEB_PROXY_8">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_SEC_GW,Group@PH_SYS_APP_SEC_GW) AND httpMethod NOT IN ("GET", "POST")  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+           <GroupByAttr>srcIpAddr,httpMethod,uriStem,httpStatusCode</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_COBIT510_12" group="PH_SYS_REPORT_COBIT">
+    <Name>COBIT DS5.10: Top Web Users By HTTP POST Exchanged Bytes </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks web clients by HTTP POST byte count - can catch malware sending confidential information out</Description>
+    <SelectClause numEntries="All">
+        <AttrList>srcIpAddr,destIpAddr,uriStem,httpUserAgent,SUM(sentBytes),COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>SUM(sentBytes) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WEB_PROXY_10" name="Filter_WEB_PROXY_10">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_DEVICE_SEC_GW,Group@PH_SYS_APP_SEC_GW)  AND  httpStatusCode IN ("200") AND httpMethod = "POST"  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+           <GroupByAttr>srcIpAddr,destIpAddr,uriStem,httpUserAgent</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_COBIT510_13"  group="PH_SYS_REPORT_COBIT">
+    <Name>COBIT DS5.10: Top Visited Web Sites And Categories By Connections</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks (successfully) visited web sites and categories by the number of connections</Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,destName,webCategory,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WEB_PROXY_11" name="Filter_WEB_PROXY_11">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_SEC_GW,Group@PH_SYS_APP_SEC_GW) AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic)  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr,destName,webCategory</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  
+  <Report id="PH_Report_COBIT510_14"  group="PH_SYS_REPORT_COBIT">
+    <Name>COBIT DS5.10: Top Denied Web Sites And Categories By Connections</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks web sites and categories that were denied by policy, by the number of connections</Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,destName,webCategory,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WEB_PROXY_12" name="Filter_WEB_PROXY_12">
+        <SingleEvtConstr>eventType IN (Group@PH_SYS_EVENT_WebsiteCategoryViolation)  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+        <GroupByAttr>reptDevIpAddr,destName,webCategory</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+  
+  <Report id="PH_Report_COBIT510_23"  group="PH_SYS_REPORT_COBIT">
+    <Name>COBIT DS5.10: Top Web Users, Denied Sites And Categories By Connections</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks users, web sites and categories that were denied by policy, by the number of connections</Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,srcIpAddr,destName,webCategory,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WEB_PROXY_13" name="Filter_WEB_PROXY_13">
+           <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_WebsiteCategoryViolation) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr,srcIpAddr,destName,webCategory</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+  
+  <Report id="PH_Report_COBIT510_15"  group="PH_SYS_REPORT_COBIT">
+    <Name>COBIT DS5.10: Top Inbound Blacklisted Mail Gateways By Connections</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks denied mail gateways by the number of attempted SMTP connections. The most common reason of denial is often the gateway being included in blacklists.</Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,srcIpAddr,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WEB_PROXY_14" name="Filter_WEB_PROXY_14">
+        <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_MailMalware_GwBlocked) AND srcIpAddr NOT IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET)  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+        <GroupByAttr>reptDevIpAddr,srcIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_COBIT510_16"  group="PH_SYS_REPORT_COBIT">
+    <Name>COBIT DS5.10: Top Inbound Blacklisted Mail Gateways and SMTP Error Types By Connections</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks denied mail gateways and the SMTP errors by the number of attempted connections. The most common SMTP error is often the gateway being included in mail blacklists.</Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,srcIpAddr,smtpFailCode,errReason,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WEB_PROXY_15" name="Filter_WEB_PROXY_15">
+        <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_MailMalware_GwBlocked) AND srcIpAddr NOT IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET)  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+        <GroupByAttr>reptDevIpAddr,srcIpAddr,smtpFailCode,errReason</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+  
+  <Report id="PH_Report_COBIT510_17"  group="PH_SYS_REPORT_COBIT">
+    <Name>COBIT DS5.10: Filtered Inbound Spam Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Counts total inbound spam denied by spam filtering policy</Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,eventType,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WEB_PROXY_16" name="Filter_WEB_PROXY_16">
+        <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_MailMalware_GwBlocked) AND srcIpAddr NOT IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET)  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+        <GroupByAttr>reptDevIpAddr,eventType</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  
+  <Report id="PH_Report_COBIT510_18"  group="PH_SYS_REPORT_COBIT">
+    <Name>COBIT DS5.10: Top Outbound Blacklisted Mail Gateways By Connections</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks denied mail gateways by the number of attempted SMTP connections. The most common reason of denial is often the gateway being included in blacklists.</Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,destIpAddr,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WEB_PROXY_17" name="Filter_WEB_PROXY_17">
+        <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_MailMalware_GwBlocked) AND destIpAddr NOT IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET)  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+        <GroupByAttr>reptDevIpAddr,destIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+  
+  <Report id="PH_Report_COBIT510_19"  group="PH_SYS_REPORT_COBIT">
+    <Name>COBIT DS5.10: Top Outbound Blacklisted Mail Gateways and SMTP Error Types By Connections</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks denied mail gateways and the SMTP errors by the number of attempted connections. The most common SMTP error is often the gateway being included in mail blacklists.</Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,destIpAddr,smtpFailCode,errReason,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WEB_PROXY_18" name="Filter_WEB_PROXY_18">
+        <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_MailMalware_GwBlocked) AND destIpAddr NOT IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+        <GroupByAttr>reptDevIpAddr,destIpAddr,smtpFailCode,errReason</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_COBIT510_20"  group="PH_SYS_REPORT_COBIT">
+    <Name>COBIT DS5.10: Filtered Outbound Spam Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Counts total outbound spam denied by policy</Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,eventType,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WEB_PROXY_16" name="Filter_WEB_PROXY_16">
+        <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_MailMalware_GwBlocked) AND destIpAddr NOT IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+        <GroupByAttr>reptDevIpAddr,eventType</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_COBIT510_21"  group="PH_SYS_REPORT_COBIT">
+    <Name>COBIT DS5.10: Total Denied Web Connections By Policy</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Counts denied web site connections because of policy violations</Description>
+    <SelectClause numEntries="All">
+      <AttrList>COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WEB_PROXY_20" name="Filter_WEB_PROXY_20">
+        <SingleEvtConstr>eventType IN (Group@PH_SYS_EVENT_WebsiteCategoryViolation)  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+  
+  <Report id="PH_Report_COBIT510_22"  group="PH_SYS_REPORT_COBIT">
+    <Name>COBIT DS5.10: Top Mail Security Gateway Actions By Count</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the actions taken by the mail security gateway - actions include blocking an inbound/outbound mail gateway because of RBL or other SMTP violations, blocking a mail because of spam or other policy violations and delivering a mail </Description>
+    <SelectClause numEntries="All">
+      <AttrList>eventType,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WEB_PROXY_21" name="Filter_WEB_PROXY_21">
+        <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_MailMalware_GwBlocked,Group@PH_SYS_EVENT_MailMalware_Remedy_Success,Group@PH_SYS_EVENT_PermitTraffic) AND reptDevIpAddr IN (Group@PH_SYS_DEVICE_SEC_GW,Group@PH_SYS_APP_SEC_GW)  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+        <GroupByAttr>eventType</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+  
+  
+  <Report id="PH_Report_COBIT9x_1" group="PH_SYS_REPORT_COBIT">
+    <Name>COBIT DS9.x: Firewall Config Changes Detected Via Login </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report captures detected startup or running config changes - the changes are detected by logging into the device and hence is accurate. </Description>
+    <SelectClause numEntries="All">
+      <AttrList>phRecvTime,hostName,hostIpAddr,eventType,oldSVNVersion,newSVNVersion,addedItem,deletedItem </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_FW_36" name="Filter_FW_36">
+        <SingleEvtConstr> hostIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN ("PH_DEV_MON_CHANGE_RUN_CONFIG","PH_DEV_MON_CHANGE_STARTUP_CONFIG")  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_COBIT9x_2" group="PH_SYS_REPORT_COBIT">
+    <Name>COBIT DS9.x: Firewall Run vs Startup Config Difference Via Login </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report captures detected differences between a routers running and startup config </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,hostName,hostIpAddr,eventType,startUpConfVer,runningConfVer,addedItem,deletedItem </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW_35" name="Filter_FW_35">
+           <SingleEvtConstr> hostIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) AND eventType = "PH_DEV_MON_DELTA_CONFIG"  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_COBIT9x_3" group="PH_SYS_REPORT_COBIT">
+    <Name>COBIT DS9.x: Router/Switch Config Changes Detected Via Login </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report captures detected startup or running config changes - the changes are detected by logging into the device and hence is accurate. </Description>
+    <SelectClause numEntries="All">
+      <AttrList>phRecvTime,hostName,hostIpAddr,eventType,oldSVNVersion,newSVNVersion,addedItem,deletedItem </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_FW_36" name="Filter_FW_36">
+        <SingleEvtConstr> hostIpAddr IN (Group@PH_SYS_DEVICE_ROUTER_SWITCH) AND eventType IN ("PH_DEV_MON_CHANGE_RUN_CONFIG","PH_DEV_MON_CHANGE_STARTUP_CONFIG")  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_COBIT9x_4" group="PH_SYS_REPORT_COBIT">
+    <Name>COBIT DS9.x: Firewall Run vs Startup Config Difference Via Login </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report captures detected differences between a routers running and startup config </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,hostName,hostIpAddr,eventType,startUpConfVer,runningConfVer,addedItem,deletedItem </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW_35" name="Filter_FW_35">
+           <SingleEvtConstr> hostIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) AND eventType = "PH_DEV_MON_DELTA_CONFIG"  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+</Reports>

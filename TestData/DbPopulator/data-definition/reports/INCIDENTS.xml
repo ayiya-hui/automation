@@ -1,0 +1,480 @@
+
+<Reports>
+
+<Report group="PH_SYS_REPORT_Incident" id="PH_Report_sys_Incident_Overall">
+  <Name>All Incidents</Name>
+  <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+  <Description>Captures the incidents in a time window </Description>
+  <SelectClause numEntries="All">
+    <AttrList> phRecvTime, eventType, eventSeverity, eventSeverityCat, incidentSrc, incidentTarget, reptDevIpAddr, bizService, count </AttrList>
+  </SelectClause>
+  <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+  <PatternClause window="3600">
+    <SubPattern displayName="Filter_OVERALL_STATUS" name="Filter_OVERALL_STATUS">
+      <SingleEvtConstr> phEventCategory = 1 </SingleEvtConstr>
+    </SubPattern>
+  </PatternClause>
+  <inline>false</inline>
+  <active>false</active>
+  <RelevantFilterAttr>bizService</RelevantFilterAttr>
+</Report>
+
+<Report group="PH_SYS_REPORT_Incident" id="PH_Report_sys_Incident_Severity">
+  <Name>Incident Severities Ranked By Count</Name>
+  <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+  <Description>Ranks the event severities by count </Description>
+  <SelectClause numEntries="All">
+    <AttrList> eventSeverityCat, COUNT(*) </AttrList>
+  </SelectClause>
+  <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+  <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+  <PatternClause window="3600">
+    <SubPattern displayName="Filter_OVERALL_STATUS" name="Filter_OVERALL_STATUS">
+      <SingleEvtConstr> phEventCategory = 1 </SingleEvtConstr>
+      <GroupByAttr> eventSeverityCat </GroupByAttr>
+    </SubPattern>
+  </PatternClause>
+  <inline>false</inline>
+  <active>false</active>
+  <RelevantFilterAttr>bizService</RelevantFilterAttr>
+</Report>
+
+<Report group="PH_SYS_REPORT_Incident" id="PH_Report_OVERALL_STATUS_INCIDENT_BY_SEV_COUNT">
+    <Name>Top Incidents By Severity, Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> Ranks the incidents by first their severity and then by their count.  </Description>
+    <SelectClause numEntries="All">
+        <AttrList>eventType,eventSeverity,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>eventSeverity DESC,COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_OVERALL_STATUS" name="Filter_OVERALL_STATUS">
+           <SingleEvtConstr>phEventCategory = 1</SingleEvtConstr>
+           <GroupByAttr>eventType,eventSeverity </GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <inline>false</inline>
+    <active>false</active>
+    <RelevantFilterAttr>bizService</RelevantFilterAttr>
+</Report>
+
+<Report group="PH_SYS_REPORT_Incident" id="PH_Report_OVERALL_STATUS_INCIDENT_CAT_BY_SEV_COUNT">
+    <Name>Top Incidents Categories By Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> Ranks the incident categories by count  </Description>
+    <SelectClause numEntries="All">
+        <AttrList>eventTypeGrp,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_OVERALL_STATUS" name="Filter_OVERALL_STATUS">
+           <SingleEvtConstr>phEventCategory = 1</SingleEvtConstr>
+           <GroupByAttr>eventTypeGrp</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <inline>false</inline>
+    <active>false</active>
+    <RelevantFilterAttr>bizService</RelevantFilterAttr>
+</Report>
+
+<Report group="PH_SYS_REPORT_Incident,PH_SYS_REPORT_Avail_Overall" id="PH_Report_INCIDENT_1">
+    <Name>Top Availability Incidents By Severity, Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> Ranks the availability incidents by first their severity and then by their count.  </Description>
+    <SelectClause numEntries="All">
+        <AttrList>eventType,eventSeverity,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>eventSeverity DESC,COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_OVERALL_STATUS" name="Filter_OVERALL_STATUS">
+           <SingleEvtConstr>phEventCategory = 1 AND eventType IN (Group@PH_SYS_EVENT_PH_RULE_AVAIL)</SingleEvtConstr>
+           <GroupByAttr>eventType,eventSeverity </GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <inline>false</inline>
+    <active>false</active>
+    <RelevantFilterAttr>bizService</RelevantFilterAttr>
+</Report>
+
+<Report group="PH_SYS_REPORT_Incident,PH_SYS_REPORT_Perf_Overall" id="PH_Report_INCIDENT_2">
+    <Name>Top Performance Incidents By Severity, Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> Ranks the performance related incidents by first their severity and then by their count.  </Description>
+    <SelectClause numEntries="All">
+        <AttrList>eventType,eventSeverity,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>eventSeverity DESC,COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_OVERALL_STATUS" name="Filter_OVERALL_STATUS">
+           <SingleEvtConstr>phEventCategory = 1 AND eventType IN (Group@PH_SYS_EVENT_PH_RULE_PERF)</SingleEvtConstr>
+           <GroupByAttr>eventType,eventSeverity </GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <inline>false</inline>
+    <active>false</active>
+    <RelevantFilterAttr>bizService</RelevantFilterAttr>
+</Report>
+
+<Report group="PH_SYS_REPORT_Incident,PH_SYS_REPORT_Security_Overall" id="PH_Report_INCIDENT_3">
+    <Name>Top Security Incidents By Severity, Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the security related incidents by first their severity and then by their count</Description>
+    <SelectClause numEntries="All">
+        <AttrList>eventType,eventSeverity,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>eventSeverity DESC,COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_OVERALL_STATUS" name="Filter_OVERALL_STATUS">
+           <SingleEvtConstr>phEventCategory = 1 AND eventType IN (Group@PH_SYS_EVENT_PH_RULE_SEC) </SingleEvtConstr>
+           <GroupByAttr>eventType,eventSeverity </GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <inline>false</inline>
+    <active>false</active>
+    <RelevantFilterAttr>bizService</RelevantFilterAttr>
+</Report>
+
+<Report group="PH_SYS_REPORT_Incident,PH_SYS_REPORT_Security_Overall" id="PH_Report_OVERALL_STATUS_DEVICE_SEC_INCIDENT_DETAILS">
+    <Name>Top Devices and Security Incident Details By Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> Ranks the affected devices and security related incidents by count </Description>
+    <SelectClause numEntries="All">
+        <AttrList>incidentSrc,incidentTarget,eventType,eventSeverityCat,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter" name="Filter">
+           <SingleEvtConstr>phEventCategory = 1 AND eventType IN (Group@PH_SYS_EVENT_PH_RULE_SEC) </SingleEvtConstr>
+           <GroupByAttr>incidentSrc,incidentTarget,eventType,eventSeverityCat</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <inline>false</inline>
+    <active>false</active>
+    <RelevantFilterAttr>bizService</RelevantFilterAttr>
+</Report>
+
+<Report group="PH_SYS_REPORT_Incident,PH_SYS_REPORT_Avail_Overall" id="PH_Report_OVERALL_STATUS_DEVICE_AVAIL_INCIDENT_DETAILS">
+    <Name>Top Devices and Availability Incident Details By Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the affected devices and availability incidents by count </Description>
+    <SelectClause numEntries="All">
+        <AttrList>incidentSrc,incidentTarget,eventType,eventSeverityCat,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter" name="Filter">
+           <SingleEvtConstr>phEventCategory = 1 AND eventType IN (Group@PH_SYS_EVENT_PH_RULE_AVAIL) </SingleEvtConstr>
+           <GroupByAttr>incidentSrc,incidentTarget,eventType,eventSeverityCat</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <inline>false</inline>
+    <active>false</active>
+    <RelevantFilterAttr>bizService</RelevantFilterAttr>
+</Report>
+
+
+<Report group="PH_SYS_REPORT_Incident,PH_SYS_REPORT_Perf_Overall" id="PH_Report_OVERALL_STATUS_DEVICE_PERF_INCIDENT_DETAILS">
+    <Name>Top Devices and Performance Incident Details By Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the affected devices and performance related incidents by count </Description>
+    <SelectClause numEntries="All">
+        <AttrList>incidentSrc,incidentTarget,eventType,eventSeverityCat,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter" name="Filter">
+           <SingleEvtConstr>phEventCategory = 1 AND eventType IN (Group@PH_SYS_EVENT_PH_RULE_PERF) </SingleEvtConstr>
+           <GroupByAttr>incidentSrc,incidentTarget,eventType,eventSeverityCat</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <inline>false</inline>
+    <active>false</active>
+    <RelevantFilterAttr>bizService</RelevantFilterAttr>
+</Report>
+
+<Report group="PH_SYS_REPORT_Incident" id="PH_Report_OVERALL_STATUS_DEV_ALL_INCIDENT_DETAILS">
+    <Name>Top Devices and Incident Details By Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the devices and incidents by count. This is over all incidents. </Description>
+    <SelectClause numEntries="All">
+        <AttrList>eventSeverityCat,eventType,incidentSrc,incidentTarget,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter" name="Filter">
+           <SingleEvtConstr>phEventCategory = 1</SingleEvtConstr>
+           <GroupByAttr>eventSeverityCat,eventType,incidentSrc,incidentTarget</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <inline>false</inline>
+    <active>false</active>
+    <RelevantFilterAttr>bizService</RelevantFilterAttr>
+</Report>
+
+<Report group="PH_SYS_REPORT_Incident" id="PH_Report_OVERALL_STATUS_DEV_ALL_ACTIVE_INCIDENT_DETAILS">
+    <Name>Top Devices and Active Incident Details By Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the devices and incidents by count. This is over all incidents. </Description>
+    <SelectClause numEntries="All">
+        <AttrList>eventSeverityCat,eventType,incidentSrc,incidentTarget,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter" name="Filter">
+           <SingleEvtConstr>phEventCategory = 1 AND incidentStatus = 0</SingleEvtConstr>
+           <GroupByAttr>eventSeverityCat,eventType,incidentSrc,incidentTarget</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>bizService</RelevantFilterAttr>
+</Report>
+
+<Report group="PH_SYS_REPORT_Incident" id="PH_Report_OVERALL_STATUS_DEV_ALL_ACTIVE_INCIDENT_CNT_DETAILS">
+    <Name>Top Devices and Active Incident Details By Incident Src and Target </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the devices and incidents by count for incident source and target. This is over all incidents. </Description>
+    <SelectClause numEntries="All">
+        <AttrList>eventSeverityCat,incidentSrc,incidentTarget,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter" name="Filter">
+           <SingleEvtConstr>phEventCategory = 1 AND incidentStatus = 0</SingleEvtConstr>
+           <GroupByAttr>eventSeverityCat,incidentSrc,incidentTarget</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>bizService</RelevantFilterAttr>
+</Report>
+
+<Report group="PH_SYS_REPORT_Incident" id="PH_Report_Incident_4">
+    <Name>Top Incident Categories and Servers By Incident Count</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> Ranks the incident categories and servers by incident count </Description>
+    <SelectClause numEntries="All">
+        <AttrList>eventTypeGrp,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_OVERALL_STATUS" name="Filter_OVERALL_STATUS">
+           <SingleEvtConstr>phEventCategory = 1 AND hostIpAddr IN (Group@PH_SYS_DEVICE_Server) </SingleEvtConstr>
+           <GroupByAttr>eventTypeGrp, hostIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <inline>false</inline>
+    <active>false</active>
+    <RelevantFilterAttr>bizService</RelevantFilterAttr>
+</Report>
+
+<Report group="PH_SYS_REPORT_Incident" id="PH_Report_Incident_5">
+    <Name>Top Incident Categories and Network Devices By Incident Count</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> Ranks the incident categories and network devices by incident count </Description>
+    <SelectClause numEntries="All">
+        <AttrList>eventTypeGrp,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_OVERALL_STATUS" name="Filter_OVERALL_STATUS">
+           <SingleEvtConstr>phEventCategory = 1 AND hostIpAddr IN (Group@PH_SYS_DEVICE_Network) </SingleEvtConstr>
+           <GroupByAttr>eventTypeGrp, hostIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <inline>false</inline>
+    <active>false</active>
+    <RelevantFilterAttr>bizService</RelevantFilterAttr>
+</Report>
+
+<Report group="PH_SYS_REPORT_Incident" id="PH_Report_Incident_6">
+    <Name>Top Monitored Device Groups By Incident Severity, Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> Ranks monitored device groups by incident severity and count </Description>
+    <SelectClause numEntries="All">
+	<AttrList>DeviceToCMDBAttr(incidentTarget:deviceGroup),eventSeverityCat, COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter" name="Filter">
+	   <SingleEvtConstr>phEventCategory = 1 </SingleEvtConstr>
+	      <GroupByAttr>DeviceToCMDBAttr(incidentTarget:deviceGroup),eventSeverityCat</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <inline>false</inline>
+    <active>false</active>
+    <RelevantFilterAttr>bizService</RelevantFilterAttr>
+</Report> 
+
+
+<Report group="PH_SYS_REPORT_Incident" id="PH_Report_Incident_7">
+    <Name>Top Monitored Device Groups By Incident Name, Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> Ranks monitored device groups by incident name and count </Description>
+    <SelectClause numEntries="All">
+	<AttrList>DeviceToCMDBAttr(incidentTarget:deviceGroup),eventType,eventSeverityCat, COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter" name="Filter">
+	   <SingleEvtConstr>phEventCategory = 1 </SingleEvtConstr>
+	      <GroupByAttr>DeviceToCMDBAttr(incidentTarget:deviceGroup),eventType,eventSeverityCat</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <inline>false</inline>
+    <active>false</active>
+    <RelevantFilterAttr>bizService</RelevantFilterAttr>
+</Report> 
+
+<Report group="PH_SYS_REPORT_Incident" id="PH_Report_Incident_8">
+    <Name>Weekly Incident Trend </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Shows incident trend on a week-by-week basis </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvWeek,eventSeverityCat, COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter" name="Filter">
+           <SingleEvtConstr>phEventCategory = 1 </SingleEvtConstr>
+           <GroupByAttr>phRecvWeek</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <inline>false</inline>
+    <active>false</active>
+    <RelevantFilterAttr>bizService</RelevantFilterAttr>
+   </Report> 
+
+<Report group="PH_SYS_REPORT_Incident" id="PH_Report_Incident_9">
+    <Name>Monthly Incident Trend </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Shows incident trend on a month-by-month basis </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvMonth,eventSeverityCat, COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter" name="Filter">
+           <SingleEvtConstr>phEventCategory = 1 </SingleEvtConstr>
+           <GroupByAttr>phRecvMonth</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <inline>false</inline>
+    <active>false</active>
+    <RelevantFilterAttr>bizService</RelevantFilterAttr>
+   </Report> 
+
+ <Report group="PH_SYS_REPORT_Incident" id="PH_Report_Incident_10">
+    <Name>Incidents, Assigned Users By Resolution Time</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Incidents By Assigned Users and resolution time </Description>
+    <SelectClause numEntries="All">
+        <AttrList>eventType,incidentSrc,incidentTarget,eventSeverityCat,incidentTicketStatus,incidentTicketUser,AVG(incidentResoTime)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(incidentResoTime) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter" name="Filter">
+           <SingleEvtConstr>phEventCategory = 1 </SingleEvtConstr>
+           <GroupByAttr>eventType,incidentSrc,incidentTarget,eventSeverityCat,incidentTicketStatus,incidentTicketUser</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <inline>false</inline>
+    <active>false</active>
+    <RelevantFilterAttr>bizService</RelevantFilterAttr>
+  </Report> 
+
+  <Report group="PH_SYS_REPORT_Incident" id="PH_Report_Incident_11">
+    <Name>Incidents Severity By Resolution Time</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Incidents severities by resolution time </Description>
+    <SelectClause numEntries="All">
+        <AttrList>eventSeverityCat,AVG(incidentResoTime)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(incidentResoTime) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter" name="Filter">
+           <SingleEvtConstr>phEventCategory = 1 </SingleEvtConstr>
+           <GroupByAttr>eventSeverityCat</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <inline>false</inline>
+    <active>false</active>
+    <RelevantFilterAttr>bizService</RelevantFilterAttr>
+  </Report> 
+
+  <Report group="PH_SYS_REPORT_Incident" id="PH_Report_Incident_12">
+    <Name>Monthly Incident Resolution Time Trend</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Incidents severities by resolution time </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvMonth,eventSeverityCat,AVG(incidentResoTime)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> phRecvMonth DESC, eventSeverityCat DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter" name="Filter">
+           <SingleEvtConstr>phEventCategory = 1 </SingleEvtConstr>
+           <GroupByAttr>phRecvMonth,eventSeverityCat</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <inline>false</inline>
+    <active>false</active>
+    <RelevantFilterAttr>bizService</RelevantFilterAttr>
+  </Report> 
+
+  <Report group="PH_SYS_REPORT_Incident" id="PH_Report_Incident_13">
+    <Name>Monthly Assigned Incident User Trend</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Monthly Incidents By Assigned Users </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvMonth,incidentTicketUser,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter" name="Filter">
+           <SingleEvtConstr>phEventCategory = 1 </SingleEvtConstr>
+           <GroupByAttr>phRecvMonth,incidentTicketUser</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <inline>false</inline>
+    <active>false</active>
+    <RelevantFilterAttr>bizService</RelevantFilterAttr>
+  </Report> 
+
+  <Report group="PH_SYS_REPORT_Incident" id="PH_Report_Incident_14">
+    <Name>Incidents By Location and Category</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Incidents By Location and Category </Description>
+    <SelectClause numEntries="All">
+        <AttrList>eventType,phIncidentCategory,eventSeverityCat,DeviceToCMDBAttr(incidentTarget:country) "Country",DeviceToCMDBAttr(incidentTarget:state) "State",COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter" name="Filter">
+           <SingleEvtConstr>phEventCategory = 1 </SingleEvtConstr>
+           <GroupByAttr>eventType,phIncidentCategory,eventSeverityCat,DeviceToCMDBAttr(incidentTarget:country),DeviceToCMDBAttr(incidentTarget:state)</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <inline>false</inline>
+    <active>false</active>
+    <RelevantFilterAttr>bizService</RelevantFilterAttr>
+   </Report> 
+
+</Reports>

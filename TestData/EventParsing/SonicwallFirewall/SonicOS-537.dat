@@ -1,0 +1,37 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>id=firewall sn=C0EAE486A242 time="2014-12-30 18:06:35 UTC" fw=64.237.18.46 pri=6 c=1024 m=537 msg="Connection Closed" app=49201 appName='General TCP' sess=None n=13223009 src=60.173.11.195:6000:X1 dst=64.237.18.46:9064:X1 proto=tcp/9064 sent=46 spkt=3
+[params]
+deviceTime=any
+destGeoOrg=any
+parserName=SonicwallFirewallParser
+eventType=SonicOS-537
+destGeoState=any
+destIpAddr=64.237.18.46
+ipProto=6 (TCP)
+destGeoCountry=any
+srcIpAddr=60.173.11.195
+reptModel=SonicOS
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+sentPkts=3
+eventName=Connection closed
+phEventCategory=0 (External)
+eventRuleTrigger=1
+count=1
+srcIntfName=X1
+srcIpPort=6000
+eventSeverityCat=LOW
+collectorId=any
+destIntfName=X1
+relayDevIpAddr=$localhost
+destIpPort=9064
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Sonicwall
+destGeoCity=any
+sentBytes=46

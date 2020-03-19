@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+RSAS-GENERIC,RSAS_1,RSAS,$localhost,,syslog

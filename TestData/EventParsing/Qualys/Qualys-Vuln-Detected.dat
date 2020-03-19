@@ -1,0 +1,30 @@
+[reptDevIpAddr(key)]
+50.50.50.51
+[eventMsg]
+<134>Apr 09 16:43:00 50.50.50.51 java: [Qualys-Vuln-Detected]:[eventSeverity]=PHL_INFO, [reptVendor]= Qualys, [reptModel]= Scan Report, [qualysUserName]= prspe_wy, [qualysDate]= 2010-04-13T01:02:13Z, [qualysScanName]= scan/1271120534.15444, [qualysScanedIP]= 209.31.16.75, [qualysScanedHostName]=QA-1.accelops.net.cn, [qualysOS]= CentOS 5.2, [qualysVulnCategory]= CGI, [qualysVulnTittle]= PHP Multiple Vulnerabilities May 2008, [qualysVulnSeverity]= 3, [qualysVulnCveId]= CVE-2008-0599,  CVE-2008-2050, CVE-2008-2051 , [qualysVulnBugTraqID]= 29009, [qualysVulnConseq]= Successful exploits could allow an attacker to bypass security restrictions, cause a denial of service, and potentially execute code., [qualysVulnVendor]= RHSA-2008:0545 PHP 5.2.6 RHSA-2008-0544 RHSA-2008-0546
+[params]
+rawEventMsg=any
+eventType=Qualys-Vuln-Detected
+phCustId=$sender
+hostName=QA-1.accelops.net.cn
+vulnCVEId=CVE-2008-0599, CVE-2008-2050, CVE-2008-2051
+vulnBugTraqID=29009
+scanProfile=scan/1271120534.15444
+osType=CentOS 5.2
+reptModel=QualysGuard Scanner
+eventId=any
+eventParsedOk=1
+eventSeverity=7
+hostIpAddr=209.31.16.75
+eventName=Vulnerability detected by QualysGuard scanner
+phEventCategory=0 (External)
+eventSeverityCat=MEDIUM
+user=prspe_wy
+vulnConseq=Successful exploits could allow an attacker to bypass security restrictions, cause a denial of service, and potentially execute code.
+vulnName=PHP Multiple Vulnerabilities May 2008
+count=1
+vulnType=CGI
+phRecvTime=any
+reptDevIpAddr=50.50.50.51
+vulnVendor=RHSA-2008:0545 PHP 5.2.6 RHSA-2008-0544 RHSA-2008-0546
+reptVendor=Qualys

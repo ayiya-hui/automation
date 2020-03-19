@@ -1,0 +1,30 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+2015-11-11T12:57:12.182678-06:00 uswinf1belo-ap06 %DATAPLANE-4-ARPPOISON: ARP CACHE POISONING:  Conflicting ethernet header and inner arp header :Ethernet Src Mac: 00-19-88-24-93-1E, Ethernet Dst Mac: 00-19-88-43-4F-2A, ARP Src Mac: 10-73-01-00-2C-17, ARP Dst Mac: 00-19-88-43-4F-2A, ARP Src IP: 216.250.138.155, ARP Target IP: 0.0.0.0 .
+[params]
+destMACAddr=00:19:88:43:4f:2a
+parserName=MotorolaWiNGParser
+eventType=Motorola-WiNG-DATAPLANE-ARPPOISON
+reptModel=WiNG WLAN AP
+eventId=any
+eventParsedOk=1
+eventSeverity=5
+eventName=Motorola WLAN AP: Arp Poison attack
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+eventRuleTrigger=1
+count=1
+arpSrcMACAddr=10:73:01:00:2c:17
+testResult=Conflicting ethernet header and inner arp header
+srcMACAddr=00:19:88:24:93:1e
+eventSeverityCat=MEDIUM
+collectorId=any
+arpDestMACAddr=00:19:88:43:4f:2a
+relayDevIpAddr=$localhost
+reptDevName=uswinf1belo-ap06
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Motorola
+arpSrcIpAddr=216.250.138.155

@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<166>Nov 23 2010 08:55:28: %ASA-6-338301: Intercepted DNS reply for name tags.bluekai.com from outside:24.92.226.11/53 to inside:10.201.201.16/60457, matched blacklist    False Positive Tuning
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+count=1
+phCustId=$sender
+destIpAddr=24.92.226.11
+destIntfName=outside
+destIpPort=53
+destDomain=tags.bluekai.com
+deviceTime=any
+eventAction=0 (Permit)
+eventId=any
+eventName=Intercepted DNS reply from administrator defined whitelist/blacklist/Ironport list
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=1
+eventSeverityCat=LOW
+eventType=ASA-338301
+reptDevIpAddr=$reporter
+reptModel=ASA
+reptVendor=Cisco
+srcIpAddr=10.201.201.16
+srcIntfName=inside
+srcIpPort=60457

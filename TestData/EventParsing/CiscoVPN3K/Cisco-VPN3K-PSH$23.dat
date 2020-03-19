@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<188>18176 01/07/1999 20:25:27.220 SEV=3 PSH/23 RPT=12 192.168.1.4  PSH - Telnet user "admin" failed login--automator
+[params]
+rawEventMsg=any
+destIpAddr=$reporter
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=6
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=MEDIUM
+destIpAddr=$localhost
+eventAction=1 (Deny)
+eventName=Failed admin Telnet logon
+srcIpAddr=192.168.1.4
+reptVendor=Cisco
+eventType=Cisco-VPN3K-PSH/23
+user=admin
+phEventCategory=0 (External)
+reptDevIpAddr=$localhost
+reptModel=VPN 3K

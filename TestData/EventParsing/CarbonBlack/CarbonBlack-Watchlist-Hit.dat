@@ -1,0 +1,36 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+2015-07-29 13:20:05 [3279] <warning>  reason=watchlist.hit type=module md5=8289EEBD09B4BF5EE26773500859C0C2 host='ADFS01-PC' sensor_id=2 watchlist_id=6 watchlist_name='Newly Loaded Modules' timestamp='1438190405.48' first_seen='2015-07-29T17:07:01.401Z' group=['Default Group'] desc='Skype for Business' company_name='Microsoft Corporation' product_name='Microsoft Office 2013' product_version='15.0.4735.1000' file_version='15.0.4735.1000' signed='Signed'
+[params]
+deviceTime=any
+parserName=CarbonBlackParser
+appName=Microsoft Office 2013
+eventType=CarbonBlack-Watchlist-Hit
+hostName=ADFS01-PC
+reptModel=Security Platform
+eventId=any
+eventTime=Wed Jul 29 17:07:01 CST 2015
+eventParsedOk=1
+fileVersion=15.0.4735.1000
+eventSeverity=1
+appVersion=15.0.4735.1000
+hashCode=8289EEBD09B4BF5EE26773500859C0C2
+eventName=Carbon Black File Watch list hit
+phEventCategory=0 (External)
+srcApp=Skype for Business
+eventRuleTrigger=1
+type=module
+errReason=watchlist.hit
+count=1
+appVendor=Microsoft Corporation
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Carbon Black
+envSensorId=2
+fwRule=Newly Loaded Modules

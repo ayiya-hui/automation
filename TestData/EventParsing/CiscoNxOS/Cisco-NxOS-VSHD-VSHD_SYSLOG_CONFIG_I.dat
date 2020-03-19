@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<189>: 2011 Oct 19 17:26:51 UTC: %VSHD-5-VSHD_SYSLOG_CONFIG_I: Configured from vty by admin on 192.168.20.179@pts/0
+[params]
+rawEventMsg=any
+deviceTime=any
+eventType=Cisco-NxOS-VSHD-VSHD_SYSLOG_CONFIG_I
+phCustId=$sender
+srcIpAddr=192.168.20.179
+reptModel=NX-OS
+eventId=any
+eventParsedOk=1
+eventSeverity=2
+testEvent=Real Event(0)
+hostIpAddr=$localhost
+eventName=CLI Configuration mode was exited
+phEventCategory=0 (External)
+srcMACAddr=00:10:49:25:cf:d7
+eventSeverityCat=LOW
+collectorId=any
+user=admin
+reptDevName=any
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Cisco

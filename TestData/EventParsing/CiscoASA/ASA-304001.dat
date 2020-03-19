@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<165>Jul 09 2010 11:35:15: %ASA-5-304001: 10.10.49.84 Accessed URL 66.150.203.80:http://www.gsn.com/dynamic/images/skin/slider_construct/hp_view_all_slider_top.gif
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+appTransportProto=http
+count=1
+phCustId=$sender
+destIpAddr=66.150.203.80
+destIpPort=80 (HTTP)
+deviceTime=any
+eventAction=0 (Permit)
+eventId=any
+eventName=Permitted HTTP Traffic
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=2
+eventSeverityCat=LOW
+eventType=ASA-304001
+ipProto=6 (TCP)
+reptDevIpAddr=$reporter
+reptModel=ASA
+reptVendor=Cisco
+srcIpAddr=10.10.49.84
+uriStem=/dynamic/images/skin/slider_construct/hp_view_all_slider_top.gif

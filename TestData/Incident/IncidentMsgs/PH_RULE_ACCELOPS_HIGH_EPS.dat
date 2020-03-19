@@ -1,0 +1,2 @@
+[eventMsg]
+<174>Nov 04 01:40:20 13.4.0.1 phParser[3824]: [PH_SYSTEM_EVENT_RATE_EXCEED_LICENSE]:[eventSeverity]=PHL_WARNING,[procName]=phParser,[fileName]=parserProcess.cpp,[eventsPerSec]=51.9625,[phLogDetail]=51.9625 events/sec exceeds licensed event rate of 20 events/sec

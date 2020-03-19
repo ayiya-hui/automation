@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+Qualys-Vuln-Detected,Qualys_1,Qualys,50.50.50.51,,syslog
+Qualys-Error,Qualys_2,Qualys,50.50.50.52,,syslog

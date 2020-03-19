@@ -1,0 +1,46 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>1 2013-09-06T12:38:23-05:00 cos-lb01.hayneedle.com tmm 8705 23003137 [F5@12276 acl_policy_name="/Common/cos_afm_policy_web_servers_http" acl_policy_type="Enforced" acl_rule_name="cos_afm_rule_allow_80" action="Accept" hostname="cos-lb01.hayneedle.com" bigip_mgmt_ip="10.11.99.21" context_name="/Common/cos_vs_hayneedle.com" context_type="Virtual Server" date_time="Sep 06 2013 12:38:23" dest_ip="216.58.243.100" dest_port="80" device_product="Advanced Firewall Module" device_vendor="F5" device_version="11.4.0.2419.0" drop_reason="" errdefs_msgno="23003137" errdefs_msg_name="Network Event" ip_protocol="TCP" severity="8" partition_name="Common" route_domain="0" sa_translation_pool="" sa_translation_type="" source_ip="66.249.82.62" source_port="65328" translated_dest_ip="10.11.201.25" translated_dest_port="80" translated_ip_protocol="TCP" translated_route_domain="0" translated_source_ip="66.249.82.62" translated_source_port="65328" translated_vlan="/Common/internal" vlan="/Common/external"] Accept
+[params]
+deviceTime=any
+parserName=F5AFMParser
+eventType=F5-AFM-Permit
+hostName=cos-lb01.hayneedle.com
+destIpAddr=10.11.201.25
+ipProto=6 (TCP)
+srcIpAddr=66.249.82.62
+reptModel=Big-IPOS
+eventId=any
+policyName=/Common/cos_afm_policy_web_servers_http
+postNATSrcGeoLatitude=any
+eventParsedOk=1
+eventSeverity=8
+preNATDestIpAddr=216.58.243.100
+fwAction=Accept
+eventName=F5-AFM-Permit
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+postNATSrcGeoOrg=any
+postNATSrcGeoState=any
+count=1
+srcIpPort=65328
+preNATDestIpPort=80 (HTTP)
+eventSeverityCat=MEDIUM
+collectorId=any
+relayDevIpAddr=$localhost
+postNATSrcIpAddr=66.249.82.62
+rawEventMsg=any
+destIpPort=80 (HTTP)
+osVersion=11.4.0.2419.0
+postNATSrcIpPort=65328
+reptDevName=cos-lb01.hayneedle.com
+customer=Super
+postNATSrcGeoCity=any
+phRecvTime=any
+reptDevIpAddr=$localhost
+postNATSrcGeoCountry=any
+eventAction=0 (Permit)
+reptVendor=F5
+postNATSrcGeoLongitude=any
+fwRule=cos_afm_rule_allow_80

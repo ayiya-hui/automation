@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+10.100.2.10
+[eventMsg]
+<134>Jul 01 2013 09:07:44 10.100.2.10 : %ASA-6-734001: DAP: User joeUser, Addr 192.168.0.1, Connection AnyConnect: The following DAP records were selected for this connection: DAP_POLICY1, DAP_POLICY2
+[params]
+deviceTime=any
+parserName=CiscoASAParser
+totFlows=1
+eventType=ASA-734001
+phCustId=$sender
+vpnConnType=AnyConnect
+srcIpAddr=192.168.0.1
+reptModel=ASA
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=DAP records were selected for this connection
+phEventCategory=0 (External)
+customer=Super
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=10.100.2.10
+user=joeUser
+count=1
+phRecvTime=any
+reptDevIpAddr=10.100.2.10
+eventAction=0 (Permit)
+reptVendor=Cisco

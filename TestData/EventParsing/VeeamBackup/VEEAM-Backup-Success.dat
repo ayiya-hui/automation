@@ -1,0 +1,29 @@
+[reptDevIpAddr(key)]
+10.60.253.8
+[eventMsg]
+2013-06-27 19:14:46 10.60.253.8(via UDP: [10.60.253.8]:59321) TRAP, SNMP v1, community B35412-RO    SNMPv2-SMI::enterprises.31023.1.1.1 Enterprise Specific Trap (1) Uptime: 4 days, 3:33:22.40		SNMPv2-SMI::enterprises.31023.1.1.101 = STRING: "d6273707-f690-420e-be69-5b50773f98d8"     SNMPv2-SMI::enterprises.31023.1.1.102 = STRING: "WS-SVR-VIE01"          SNMPv2-SMI::enterprises.31023.1.1.103 = STRING: "Success"            SNMPv2-SMI::enterprises.31023.1.1.104 = ""
+[params]
+deviceTime=any
+parserName=VeeamBackupParser
+eventType=VEEAM-Backup-Success
+jobId=d6273707-f690-420e-be69-5b50773f98d8
+reptModel=Backup and Replication
+srcDevPort=59321
+eventParsedOk=1
+eventSeverity=1
+eventName=VEEAM-Backup-Success
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+eventId=any
+eventSeverityCat=LOW
+backupStatus=Success
+collectorId=any
+relayDevIpAddr=10.60.253.8
+rawEventMsg=any
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=10.60.253.8
+count=1
+jobName=WS-SVR-VIE01
+reptVendor=Veeam

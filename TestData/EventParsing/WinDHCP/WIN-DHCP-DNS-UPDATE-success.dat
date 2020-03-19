@@ -1,0 +1,24 @@
+[reptDevIpAddr(key)]
+36.36.36.36
+[eventMsg]
+<13>Mar 29 10:25:05 $reporter WinDHCPLog 0      32,03/29/10,10:25:01,DNS Update Successful,192.168.20.32,wayne-laptop.ProspectHills.net,,
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+reptVendor=Microsoft
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+eventAction=0 (Permit)
+hostIpAddr=192.168.20.32
+eventName=DHCP DNS Update Request Success
+computer=wayne-laptop
+eventType=WIN-DHCP-DNS-UPDATE-success
+phEventCategory=0 (External)
+hostName=any
+reptDevIpAddr=$reporter
+reptModel=DHCP

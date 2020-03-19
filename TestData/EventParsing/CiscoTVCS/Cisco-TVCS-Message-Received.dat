@@ -1,0 +1,34 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>1 2015-10-01T13:56:21-05:00 BHMCUCMVCSE tvcs - - [meta sequenceId="5943"] 2015-10-01T13:56:21-05:00 BHMCUCMVCSE tvcs: Event="Message Received" Service="SIP" Src-ip="104.2.198.13" Src-port="42248" Dst-ip="192.168.254.250" Dst-port="5061" Protocol="TLS" Num-bytes="1368" Level="4" UTCTime="2015-10-01 18:56:21,672"
+[params]
+deviceTime=any
+parserName=CiscoTVCSParser
+eventType=Cisco-TVCS-Message-Received
+destIpAddr=192.168.254.250
+totBytes=1368
+srcName=104-2-198-13.lightspeed.brhmal.sbcglobal.net
+srcIpAddr=104.2.198.13
+reptModel=Telepresence Video Comm Server
+eventId=any
+eventTime=Thu Oct 01 18:56:21 CST 2015
+eventParsedOk=1
+eventSeverity=1
+eventName=Incoming SIP message received
+serviceName=SIP
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+srcIpPort=42248
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+destIpPort=5061
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+appTransportProto=TLS
+reptVendor=Cisco

@@ -1,0 +1,22 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>Jul 24 2008 03:23:37: %ASA-6-611101: User authentication succeeded: Uname: wenyong
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+eventAction=0 (Permit)
+eventName=Appliance admin user authentication succeeded
+reptVendor=Cisco
+eventType=ASA-611101
+user=wenyong
+phEventCategory=0 (External)
+reptDevIpAddr=$reporter
+reptModel=ASA

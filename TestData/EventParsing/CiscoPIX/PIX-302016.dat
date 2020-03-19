@@ -1,0 +1,32 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>Nov 28 2007 17:20:48: %PIX-6-302016: Teardown UDP connection 76116 for outside:99.129.50.158/53 to inside:192.168.0.10/1041 duration 0:00:00 bytes 268--automator
+[params]
+rawEventMsg=any
+destIpAddr=99.129.50.158
+deviceTime=any
+eventType=PIX-302016
+phCustId=$sender
+destIpAddr=99.129.50.158
+totBytes=268
+destIpPort=53 (DOMAIN)
+srcIpAddr=192.168.0.10
+reptModel=PIX
+eventId=any
+ipConnId=76116
+eventParsedOk=any
+eventSeverity=1
+eventName=Teardown UDP connection
+phEventCategory=4 (Traffic)
+srcIntfName=inside
+srcIpPort=1041
+eventSeverityCat=LOW
+destIntfName=outside
+ipProto=17 (UDP)
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Cisco
+durationMSec=0

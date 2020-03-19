@@ -1,0 +1,30 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<190>date=2011-01-10 time=18:37:16 devname=FG200B3910600343 device_id=FG200B3910600343 log_id=0134039948 type=event subtype=sslvpn-session pri=information action=tunnel-down tunnel_type=ssl-tunnel vd="root" tunnel_id=210374325 remote_ip=65.186.68.62 tunnel_ip=10.10.20.14 user="sherring" group="SSLVPNFRP" dst_host="N/A" duration=8651 sent=19084972 rcvd=5957663 reason="N/A" msg="SSL tunnel shutdown"
+[params]
+count=1
+eventId=any
+deviceTime=any
+durationMSec=8651000
+eventAction=0 (Permit)
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+eventName=The SSL-VPN tunnel was down
+reptVendor=Fortinet
+eventType=FortiGate-sslvpn-tunnel-down
+user=sherring
+userGrp=SSLVPNFRP
+phEventCategory=0 (External)
+relayDevIpAddr=$localhost
+reptDevIpAddr=$localhost
+usrMsg=SSL tunnel shutdown
+reptModel=FortiOS
+totBytes=25042635
+sentBytes=19084972
+recvBytes=5957663
+postNATSrcIpAddr=10.10.20.14
+srcIpAddr=65.186.68.62

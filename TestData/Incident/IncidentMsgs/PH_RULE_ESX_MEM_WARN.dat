@@ -1,0 +1,2 @@
+[eventMsg]
+[PH_DEV_MON_SYS_MEM_UTIL]:[eventSeverity]=PHL_INFO,[hostName]=automator8Dot6Dot0Dot1,[hostIpAddr]=8.6.0.1,[pollIntv]=180,[swapReadKBytesPerSec]=1450.0,[memUtil]=88.51,[swapWriteKBytesPerSec]=0.0,[freeMemState]=0

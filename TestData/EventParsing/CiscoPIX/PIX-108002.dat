@@ -1,0 +1,21 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>Dec 04 2008 20:00:45: %PIX-2-108002: SMTP replaced "This is real thing.": out 10.10.10.10 in 10.10.10.10 data: "This is a test thing." --automator
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=any
+eventSeverity=8
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=MEDIUM
+eventAction=0 (Permit)
+eventName=SMTP replaced invalid character in mail message
+reptVendor=Cisco
+eventType=PIX-108002
+phEventCategory=0 (External)
+reptDevIpAddr=$localhost
+reptModel=PIX

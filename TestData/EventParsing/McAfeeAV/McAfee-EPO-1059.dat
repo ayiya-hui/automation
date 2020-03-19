@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+enterprises.3401 6 5 enterprises.3401.12.2.1.1.4.1.1.9.315 s "To SJ-Dev-S-RH-DNS-01"     enterprises.3401.12.2.1.1.4.1.1.11.1 s "My Organization"  enterprises.3401.12.2.1.1.4.1.1.12.1 s "Directory"  enterprises.3401.12.2.1.1.4.1.1.18.1 s "Any" enterprises.3401.12.2.1.1.4.1.1.19.1 s "Any" enterprises.3401.12.2.1.1.4.1.1.33.1 s "(Any)" enterprises.3401.12.2.1.1.4.1.1.15.1 s "6/11/09 2:59:40 PM"       enterprises.3401.12.2.1.1.4.1.1.31.1 s "1059" enterprises.3401.12.2.1.1.4.1.1.32.1 s "Scan Timed Out" enterprises.3401.12.2.1.1.4.1.1.16.1 s "1" enterprises.3401.12.2.1.1.4.1.1.17.1 s "1" enterprises.3401.12.2.1.1.4.1.1.13.1 s "VirusScan" enterprises.3401.12.2.1.1.4.1.1.14.1 s "Software failure or error"        enterprises.3401.12.2.1.1.4.1.1.22.1 s "Not Available"      enterprises.3401.12.2.1.1.4.1.1.23.1 s "Not Available"    enterprises.3401.12.2.1.1.4.1.1.24.1 s "192.168.0.10"       enterprises.3401.12.2.1.1.4.1.1.25.1 s "ADS-PRI"  enterprises.3401.12.2.1.1.4.1.1.26.1 s "C:\\Program Files\\Common Files\\McAfee\\Engine\\avvclean.dat" enterprises.3401.12.2.1.1.4.1.1.27.1 s "3" enterprises.3401.12.2.1.1.4.1.1.6.1 s "6/11/09 2:59:40 PM"
+[params]
+rawEventMsg=any
+eventSeverity=1
+eventSeverityCat=LOW
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+virusName=Not Available
+reptVendor=McAfee
+phRecvTime=any
+phCustId=$sender
+hostName=ADS-PRI
+destIpAddr=192.168.0.10
+hostIpAddr=192.168.0.10
+fileName=C:\Program Files\Common Files\McAfee\Engine\avvclean.dat
+eventName=Scan timed out
+computer=ADS-PRI
+eventType=McAfee-EPO-1059
+phEventCategory=0 (External)
+reptDevIpAddr=$localhost
+destName=ADS-PRI
+reptModel=ePolicy Orchestrator

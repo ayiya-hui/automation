@@ -1,0 +1,2 @@
+[eventMsg]
+<134>May 06 17:11:00 30.200.46.1 java: [MSSQL_Logon_Success]:[eventSeverity]=PHL_INFO, [eventTime]=2009-05-06 18:50:22.587, [rptIp]=30.200.46.1, [relayIp]=30.200.46.1, [srcIp]=192.168.64.6, [user]=NT AUTHORITY\SYSTEM, [srcApp]=Report Server,

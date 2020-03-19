@@ -1,0 +1,24 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<37>May 14 23:19:45 su: [ID 366847 auth.notice] 'su partha' succeeded for wenyong on /dev/pts/2
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=4
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=$localhost
+eventAction=0 (Permit)
+eventName=Successful privilege escalation
+targetUser=partha
+reptVendor=Sun
+eventType=Solaris_Successful_Switch_User
+user=wenyong
+phEventCategory=0 (External)
+reptDevIpAddr=$localhost
+reptModel=Solaris

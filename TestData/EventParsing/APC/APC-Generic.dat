@@ -1,0 +1,22 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+2013-11-20 23:22:31 10.97.243.210(via UDP: [10.97.243.210]:65052) TRAP, SNMP v1, community c1cs3vents   SNMPv2-SMI::enterprises.318 Enterprise Specific Trap (636) Uptime: 2:44:03.40   DISMAN-EVENT-MIB::sysUpTimeInstance = Timeticks: (984340) 2:44:03.40    SNMPv2-MIB::snmpTrapOID.0 = OID: SNMPv2-SMI::enterprises.318.0.636
+[params]
+rawEventMsg=any
+eventId=any
+count=1
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+eventSeverity=1
+eventType=APC-Generic
+phCustId=$sender
+reptDevIpAddr=$localhost
+collectorId=any
+eventName=APC-Generic
+reptVendor=APC
+phRecvTime=any
+reptDevName=any
+reptModel=Generic

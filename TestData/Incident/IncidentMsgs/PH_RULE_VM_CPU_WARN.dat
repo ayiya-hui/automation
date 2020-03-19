@@ -1,0 +1,4 @@
+[eventMsg]
+[PH_DEV_MON_VM_CPU_UTIL]:[eventSeverity]=PHL_INFO,[phyMachName]=esx160,[phyMachIpAddr]=8.0.0.1,[pollIntv]=180,[vmName]=VM1,[hostName]=automator8Dot27Dot0Dot1,[hostIpAddr]=8.27.0.1,[processors]=2,[cpuUtil]=2.41,[cpuMlmtedPct]=0,[vCpus]=1,[cpuSysPct]=0.01,[cpuRunPct]=2.3,[cpuReadyPct]=22.19,[phyCpuUtil]=1.15
+
+[clearEventMsg]

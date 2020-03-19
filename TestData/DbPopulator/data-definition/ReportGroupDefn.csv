@@ -1,0 +1,82 @@
+PH_SYS_REPORT_Freq,,Frequently Used,1,,,"PH_SYS_View_Network,PH_SYS_View_Server,PH_SYS_View_Security,PH_SYS_View_VMWare"
+
+PH_SYS_REPORT_OverallStatus,,Event Status,2,,,"PH_SYS_View_Network,PH_SYS_View_Server,PH_SYS_View_Security,PH_SYS_View_VMWare"
+PH_SYS_REPORT_Incident,,Incidents,3,,,"PH_SYS_View_Network,PH_SYS_View_Server,PH_SYS_View_Security,PH_SYS_View_VMWare"
+PH_SYS_REPORT_BizSvc,,Biz Service,4,,,"PH_SYS_View_Network,PH_SYS_View_Server,PH_SYS_View_Security,PH_SYS_View_VMWare"
+PH_SYS_REPORT_DeviceType,,Device,5,,,
+PH_SYS_REPORT_Function,,Function,6,,,
+PH_SYS_REPORT_Role,,Role,7,,,
+PH_SYS_REPORT_PH,,System Internal,8,,,"PH_SYS_View_Network,PH_SYS_View_Server,PH_SYS_View_Security,PH_SYS_View_VMWare"
+PH_SYS_REPORT_PH_Audit,,System Audit,9,,,"PH_SYS_View_Network,PH_SYS_View_Server,PH_SYS_View_Security,PH_SYS_View_VMWare"
+PH_SYS_REPORT_SuperGlobal,,Super Global,10,,,
+,,,,,,
+PH_SYS_REPORT_Compliance,PH_SYS_REPORT_Function,Compliance,5,,,"PH_SYS_View_Network,PH_SYS_View_Server,PH_SYS_View_Security,PH_SYS_View_VMWare"
+PH_SYS_REPORT_OverallAvailability,PH_SYS_REPORT_Function,Availability,1,,,PH_SYS_View_Server
+PH_SYS_REPORT_Security,PH_SYS_REPORT_Function,Security,4,,,"PH_SYS_View_Network,PH_SYS_View_Server,PH_SYS_View_Security"
+PH_SYS_REPORT_OverallPerformance,PH_SYS_REPORT_Function,Performance,2,,,PH_SYS_View_Server
+PH_SYS_REPORT_Change,PH_SYS_REPORT_Function,Change,3,,,"PH_SYS_View_Network,PH_SYS_View_Security,PH_SYS_View_VMWare"
+,,,,,,
+PH_SYS_REPORT_Perf_Overall,PH_SYS_REPORT_OverallPerformance,Overall,1,,,
+PH_SYS_REPORT_SysPerf,PH_SYS_REPORT_OverallPerformance,System,2,,,
+PH_SYS_REPORT_AppPerf,PH_SYS_REPORT_OverallPerformance,App,3,,,
+,,,,,,
+PH_SYS_REPORT_Avail_Overall,PH_SYS_REPORT_OverallAvailability,Overall,1,,,
+PH_SYS_REPORT_SysAvail,PH_SYS_REPORT_OverallAvailability,System,2,,,
+PH_SYS_REPORT_AppAvail,PH_SYS_REPORT_OverallAvailability,App,3,,,
+,,,,,,
+PH_SYS_REPORT_PCI,PH_SYS_REPORT_Compliance,PCI,1,,,
+PH_SYS_REPORT_COBIT,PH_SYS_REPORT_Compliance,COBIT,2,,,
+PH_SYS_REPORT_ITIL,PH_SYS_REPORT_Compliance,ITIL,3,,,
+PH_SYS_REPORT_ISO,PH_SYS_REPORT_Compliance,ISO,5,,,
+PH_SYS_REPORT_SOX,PH_SYS_REPORT_Compliance,SOX,4,,,
+PH_SYS_REPORT_HIPAA,PH_SYS_REPORT_Compliance,HIPAA,6,,,
+PH_SYS_REPORT_GLBA,PH_SYS_REPORT_Compliance,GLBA,7,,,
+PH_SYS_REPORT_FISMA,PH_SYS_REPORT_Compliance,FISMA,8,,,
+PH_SYS_REPORT_NERC,PH_SYS_REPORT_Compliance,NERC,9,,,
+,,,,,,
+PH_SYS_REPORT_Security_Overall,PH_SYS_REPORT_Security,Overall,1,,,
+PH_SYS_REPORT_Authentication,PH_SYS_REPORT_Security,Authentication,2,,,
+PH_SYS_REPORT_Exploits,PH_SYS_REPORT_Security,Exploits,3,,,
+PH_SYS_REPORT_Vulnerabilities,PH_SYS_REPORT_Security,Vulnerabilities,4,,,
+PH_SYS_REPORT_Traffic_Flow,PH_SYS_REPORT_Security,Traffic Baselines,5,,,
+PH_SYS_REPORT_Traffic_Analysis,PH_SYS_REPORT_Security,Traffic Analysis,6,,,
+,,,,,,
+PH_SYS_REPORT_Network,PH_SYS_REPORT_DeviceType,Network,1,,,PH_SYS_View_Network
+PH_SYS_REPORT_Server,PH_SYS_REPORT_DeviceType,Server,2,,,"PH_SYS_View_Server,PH_SYS_View_VMWare"
+PH_SYS_REPORT_Storage,PH_SYS_REPORT_DeviceType,Storage,3,,,"PH_SYS_View_Server,PH_SYS_View_VMWare"
+PH_SYS_REPORT_Application,PH_SYS_REPORT_DeviceType,Application,4,,,PH_SYS_View_Server
+PH_SYS_REPORT_Environ,PH_SYS_REPORT_DeviceType,Environmental,5,,,PH_SYS_View_Server
+,,,,,,
+PH_SYS_REPORT_Firewall,PH_SYS_REPORT_Network,Firewall,2,,,
+PH_SYS_REPORT_Router/Switch,PH_SYS_REPORT_Network,Router/Switch,1,,,
+PH_SYS_REPORT_NIPS,PH_SYS_REPORT_Network,Network IPS,5,,,
+PH_SYS_REPORT_WebProxy,PH_SYS_REPORT_Network,Sec Gateway,6,,,
+PH_SYS_REPORT_VPNGateway,PH_SYS_REPORT_Network,VPN Gateway,3,,,
+PH_SYS_REPORT_WLAN,PH_SYS_REPORT_Network,WLAN,4,,,
+PH_SYS_REPORT_Printer,PH_SYS_REPORT_Network,Printer,7,,,
+,,,,,,
+PH_SYS_REPORT_AAAServer,PH_SYS_REPORT_Application,AAA Server,4,,,
+PH_SYS_REPORT_DNS,PH_SYS_REPORT_Application,DNS,1,,,
+PH_SYS_REPORT_DHCPServer,PH_SYS_REPORT_Application,DHCP,2,,,
+PH_SYS_REPORT_DomainController,PH_SYS_REPORT_Application,Domain Controller,3,,,
+PH_SYS_REPORT_AppServer,PH_SYS_REPORT_Application,App Server,5,,,
+PH_SYS_REPORT_WebServer,PH_SYS_REPORT_Application,Web Server,6,,,
+PH_SYS_REPORT_DBServer,PH_SYS_REPORT_Application,Database,7,,,
+PH_SYS_REPORT_MailServer,PH_SYS_REPORT_Application,Mail Server,8,,,
+PH_SYS_REPORT_VOIP,PH_SYS_REPORT_Application,VOIP,9,,,
+PH_SYS_REPORT_IPSLA,PH_SYS_REPORT_Application,IP SLA,10,,,
+PH_SYS_REPORT_SecMgmt,PH_SYS_REPORT_Application,Sec Mgmt,11,,,
+PH_SYS_REPORT_TermServer,PH_SYS_REPORT_Application,Terminal Server,12,,,
+,,,,,,
+PH_SYS_REPORT_UnixServer,PH_SYS_REPORT_Server,Unix,2,,,
+PH_SYS_REPORT_WindowsServer,PH_SYS_REPORT_Server,Windows,1,,,
+PH_SYS_REPORT_NetwareServer,PH_SYS_REPORT_Server,Netware,3,,,
+PH_SYS_REPORT_VMware,PH_SYS_REPORT_Server,VMware,4,,,
+,,,,,,
+PH_SYS_REPORT_Executive,PH_SYS_REPORT_Role,"Executive			",,,,
+PH_SYS_REPORT_Admin,PH_SYS_REPORT_Role,Admin,,,,
+PH_SYS_REPORT_Biz,PH_SYS_REPORT_Executive,Business,,,,
+PH_SYS_REPORT_IT,PH_SYS_REPORT_Executive,IT,,,,
+PH_SYS_REPORT_DBAdmin,PH_SYS_REPORT_Admin,DB,,,,
+PH_SYS_REPORT_ServerAdmin,PH_SYS_REPORT_Admin,Server,,,,
+PH_SYS_REPORT_NetworkAdmin,PH_SYS_REPORT_Admin,Network,,,,

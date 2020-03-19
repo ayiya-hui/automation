@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<29>Aug 17 01:23:45 ProxySG: E000A Access Log FTP (main): Error sending USER m_CommandBuffer.  Client received -1 response. Closing connections.(54) SEVERE_ERROR ../alog_ftp_client.cpp 471
+[params]
+deviceTime=any
+parserName=BluecoatWebProxyParser
+eventType=Bluecoat-SGOS-AccessLog-FTP-Error
+srcIpAddr=$localhost
+reptModel=SGOS Web Proxy
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Bluecoat FTP Error
+phEventCategory=0 (External)
+eventRuleTrigger=1
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Blue Coat

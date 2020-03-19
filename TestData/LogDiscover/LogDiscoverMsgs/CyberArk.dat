@@ -1,0 +1,2 @@
+[eventMsg]
+<5>1 2016-02-02T17:24:42Z HOST-30.200.110.1 CYBERARK: Product="Vault";Version="9.20.0000";MessageID="295";Message="Retrieve password";Issuer="Administrator";Station="10.10.110.11";File="Root\snmpCommunity";Safe="TestPasswords";Reason="Test";Severity="Info"

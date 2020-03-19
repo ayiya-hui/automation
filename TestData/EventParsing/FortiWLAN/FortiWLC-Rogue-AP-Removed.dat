@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+172.18.86.229
+[eventMsg]
+Mar 29 13:12:43 172.18.86.229 ALARM: 1269864763l | system | info | ALR | ROGUE AP REMOVED CONTROLLER (1:24490) ROGUE AP DETECTED. AP mac=00:12:f2:00:17:63 bss=00:12:f2:00:17:63 cch=161 ess=rogue-35
+[params]
+customer=Super
+eventId=any
+parserName=FortiWLANParser
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+count=1
+eventSeverity=1
+eventType=FortiWLC-Rogue-AP-Removed
+reptDevIpAddr=172.18.86.229
+collectorId=any
+extEventRecvProto=Syslog
+eventName=Rogue AP removed
+reptVendor=Fortinet
+relayDevIpAddr=172.18.86.229
+rawEventMsg=any
+phRecvTime=any
+reptDevName=any
+reptModel=FortiWLC

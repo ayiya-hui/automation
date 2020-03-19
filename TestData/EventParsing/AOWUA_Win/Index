@@ -1,0 +1,9 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+AO-WUA-FileMon-Modified,AOWUA_Win_1,AOWUA_Win,192.168.1.30,,syslog
+AO-WUA-InstSw-Added,AOWUA_Win_2,AOWUA_Win,10.1.2.242,,syslog
+AO-WUA-Powershell,AOWUA_Win_3,AOWUA_Win,192.168.1.30,,syslog
+AO-WUA-Registry-Modified,AOWUA_Win_4,AOWUA_Win,192.168.1.30,,syslog
+AO-WUA-WMI-Win32_NetworkAdapter,AOWUA_Win_5,AOWUA_Win,192.168.1.30,,syslog
+AO-WUA-User,AOWUA_Win_6,AOWUA_Win,10.1.2.242,,syslog
+AO-WUA-RemovableMedia-Insert,AOWUA_Win_7,AOWUA_Win,192.168.1.10,,syslog

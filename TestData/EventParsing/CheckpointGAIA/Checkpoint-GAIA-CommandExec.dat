@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<13>clish[24110]: cmd by lastf: Processing : delete syslog log-remote-address 10.3.2.1 (cmd md5: 05e3271e406b795cb232af0e914397d4)
+[params]
+parserName=CheckpointGAIAParser
+eventType=Checkpoint-GAIA-CommandExec
+procName=clish
+reptModel=FireWall-1 GAIA
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Checkpoint-GAIA-CommandExec
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+user=lastf
+rawEventMsg=any
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Checkpoint
+command=delete syslog log-remote-address 10.3.2.1

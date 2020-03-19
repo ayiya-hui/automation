@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<22>Feb  2 17:27:52 $localhost postfix/smtp[520]: D40B112CE4D: enabling PIX workarounds: disable_esmtp delay_dotcrlf for mailsvr.girobankltd.com[41.139.143.154]:25
+[params]
+deviceTime=any
+parserName=PostfixParser
+eventType=Postfix-Generic
+procName=smtp
+reptGeoState=Shanghai
+reptModel=Postfix
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Generic postfix message
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+eventRuleTrigger=1
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+reptDevName=any
+customer=Super
+reptGeoCity=any
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Generic

@@ -1,0 +1,23 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<13>Aug 26 19:28:10 DNS-Pri dhcpd: DHCPDISCOVER from 00:50:56:88:4e:17 via eth0
+[params]
+rawEventMsg=any
+eventSeverity=1
+eventSeverityCat=LOW
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+srcMACAddr=00:50:56:88:4e:17
+phRecvTime=any
+phCustId=$sender
+hostName=DNS-Pri
+eventAction=0 (Permit)
+eventName=Client IP Request Broadcast
+reptVendor=Generic
+eventType=Linux_DHCPDISCOVER
+phEventCategory=0 (External)
+reptDevIpAddr=$localhost
+reptModel=Linux DHCP

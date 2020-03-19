@@ -1,0 +1,30 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+date=2012-08-09 time=10:30:31 device_id=FE100C3909600504 log_id=0004001036 type=event subtype=ha pri=notice user=ha ui=ha action=none status=success msg="hahbd: heart beat status changed to primary-hearbeat-port1=FAILED;secondary-hearbeat-port2=OK"
+[params]
+deviceTime=any
+parserName=FortiMailParser
+eventType=FortiMail-Event-Hearbeat-Check
+usrMsg=hahbd: heart beat status changed to primary-hearbeat-port1=FAILED;secondary-hearbeat-port2=OK
+reptModel=FortiMail
+eventId=any
+eventParsedOk=1
+subtype=ha
+eventSeverity=1
+eventName=Hearbeat check
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+type=Event
+status=success
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+user=ha
+rawEventMsg=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+infoURL=ha
+reptVendor=Fortinet

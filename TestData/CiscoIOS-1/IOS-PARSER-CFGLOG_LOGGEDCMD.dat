@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<189>22565: 022559: Aug  5 14:33:21: %PARSER-5-CFGLOG_LOGGEDCMD: User:chris  logged command:no shutdown
+[params]
+deviceTime=any
+eventType=IOS-PARSER-CFGLOG_LOGGEDCMD
+phCustId=$sender
+reptModel=IOS
+eventId=any
+eventParsedOk=1
+eventSeverity=2
+hostIpAddr=$localhost
+eventName=User logged in command activity
+phEventCategory=0
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+user=chris
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=Success(0)
+reptVendor=Cisco
+command=no shutdown

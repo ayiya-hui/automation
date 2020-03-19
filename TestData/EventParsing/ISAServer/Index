@@ -1,0 +1,7 @@
+eventType,name,module,reptDevIpAddr,key,method
+ISA-Proxy-301-Moved-Permanently,ISAServer_1,ISAServer,$localhost,,syslog
+ISA-Proxy-200-OK,ISAServer_2,ISAServer,$localhost,fwRule:Local Machine,syslog
+ISA-Proxy-200-OK,ISAServer_3,ISAServer,$localhost,fwRule:Web Outgoing,syslog
+ISA-FW-Terminate-Session,ISAServer_4,ISAServer,$localhost,,syslog
+ISA-FW-Connection-Denied,ISAServer_5,ISAServer,$localhost,,syslog
+ISA-Proxy-202-Accepted,ISAServer_6,ISAServer,$localhost,,syslog

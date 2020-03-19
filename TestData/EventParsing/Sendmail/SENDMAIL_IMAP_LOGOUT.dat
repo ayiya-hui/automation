@@ -1,0 +1,22 @@
+[reptDevIpAddr(key)]
+137.146.28.76
+[eventMsg]
+<21>Mar 10 19:33:12 137.146.28.76 1938176061  IMAP.USER.LOGOUT ssl[74.209.42.173]:           elfreema             plaintext 1803840
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+srcIpAddr=74.209.42.173
+eventName=User Logged Out of Mailbox via IMAP
+reptVendor=Sendmail.org
+eventType=SENDMAIL_IMAP_LOGOUT
+user=elfreema
+phEventCategory=0 (External)
+reptDevIpAddr=137.146.28.76
+reptModel=Sendmail Mail Server

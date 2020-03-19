@@ -1,0 +1,10 @@
+eventType,name,module,reptDevIpAddr,key,method
+McAfee-EPO-1278,McAfeeAV_1,McAfeeAV,$localhost,,snmptrap@1@public
+McAfee-EPO-1027,McAfeeAV_2,McAfeeAV,$localhost,,snmptrap@1@public
+McAfee-EPO-1280,McAfeeAV_3,McAfeeAV,$localhost,,snmptrap@1@public
+McAfee-EPO-1284,McAfeeAV_6,McAfeeAV,$localhost,,snmptrap@1@public
+McAfee-EPO-1038,McAfeeAV_7,McAfeeAV,$localhost,,snmptrap@1@public
+McAfee-EPO-1024,McAfeeAV_8,McAfeeAV,$localhost,,snmptrap@1@public
+McAfee-EPO-1035,McAfeeAV_9,McAfeeAV,$localhost,,snmptrap@1@public
+McAfee-EPO-2401,McAfeeAV_10,McAfeeAV,$localhost,,snmptrap@1@public
+McAfee-EPO-1059,McAfeeAV_11,McAfeeAV,$localhost,,snmptrap@1@public

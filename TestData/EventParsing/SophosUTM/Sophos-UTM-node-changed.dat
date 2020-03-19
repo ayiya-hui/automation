@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<30>2016:03:11-10:00:29 ActiveUTM-2 confd[3811]: I main::top-level:557() => id="310c" severity="info" sys="System" sub="confd" name="node changed" node="notifications->reboot_reason" value="{'1' => 'Rebooted by Up2Date','2' => 'Rebooted by Up2Date'}" oldvalue="{'1' => 'Rebooted by Up2Date','2' => ''}" user="system" srcip="127.0.0.1" sid="jskiOEmXVNwvgcwfHiwV" facility="system" client="auisys.plx" pid="22158"
+[params]
+parserName=SophosUTMParser
+eventType=Sophos-UTM-node-changed
+procName=confd
+srcIpAddr=$localhost
+reptModel=UTM
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Sophos UTM node changed
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+eventRuleTrigger=1
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+user=system
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Sophos

@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+Feb 10 03:00:31.412 CST: %BGP-3-NOTIFICATION: received from neighbor 2001:428:1C02:10:0:4:0:1 6/3 (cease) 0 bytes
+[params]
+customer=Super
+eventId=any
+parserName=CiscoIOSParser
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=MEDIUM
+count=1
+totFlows=1
+eventType=IOS-BGP-NOTIFICATION
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+collectorId=any
+recvBytes=0
+eventSeverity=5
+eventName=BGP notification
+reptVendor=Cisco
+relayDevIpAddr=$localhost
+phRecvTime=any
+eventRuleTrigger=1
+reptModel=IOS

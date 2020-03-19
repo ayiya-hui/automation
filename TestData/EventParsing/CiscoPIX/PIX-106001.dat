@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>Dec 04 2008 20:00:45: %PIX-2-106001: Inbound TCP connection denied from 20.20.20.20/9996 to 10.10.10.10/8080 flags ACK on interface outside
+[params]
+rawEventMsg=any
+destIpAddr=10.10.10.10
+deviceTime=any
+eventType=PIX-106001
+phCustId=$sender
+destIpAddr=10.10.10.10
+destIpPort=8080 (HTTP-APP-SERVER-0)
+srcIpAddr=20.20.20.20
+reptModel=PIX
+eventId=any
+eventParsedOk=any
+eventSeverity=8
+eventName=Denied IP traffic by policy
+phEventCategory=0 (External)
+srcIntfName=outside
+srcIpPort=9996
+eventSeverityCat=MEDIUM
+ipProto=6 (TCP)
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=1 (Deny)
+reptVendor=Cisco

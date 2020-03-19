@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+172.16.20.41
+[eventMsg]
+<37>Nov  5 20:16:19 172.16.20.41 BLK,v4,20091105T201619+0480,"PH-QA-TIP1"/$reporter,70,2,Block,Low,00000002-0002-0002-0002-000000004316,"4316: OSPF: OSPF Packet With Time-To-Live of 1","4316: OSPF: OSPF Packet With Time-To-Live of 1",ip," ",172.16.10.1:0,224.0.0.5:0,20091105T201619+0480,1," ",0,1A-1B
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+reptDevIpAddr=172.16.20.41
+eventParsedOk=1
+reptVendor=3Com
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=224.0.0.5
+eventName=Detects an OSPF packet with a Time-To-Live (TTL) value of 1.
+ipProto=255
+appTransportProto=ip
+eventType=Tipp_IPS-4316
+srcIpAddr=172.16.10.1
+remedyAction=Block
+phEventCategory=0 (External)
+destIpPort=0
+srcIpPort=0
+reptModel=TippingPoint UnityOne IPS

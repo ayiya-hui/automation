@@ -1,0 +1,7 @@
+eventType,name,module,reptDevIpAddr,key,method
+McAfee-Intrushield-TCP: Full-Connect Port Scan,McAfeeIPSSyslog_1,McAfeeIPSSyslog,$localhost,,syslog
+McAfee-Intrushield-ARP: MAC Address Flip-Flop,McAfeeIPSSyslog_2,McAfeeIPSSyslog,$localhost,,syslog
+McAfee-Intrushield-SNMP: TrapWatcher Msg Length Buffer Overflow,McAfeeIPSSyslog_3,McAfeeIPSSyslog,$localhost,,syslog
+McAfee-Intrushield-TCP: SYN Port Scan,McAfeeIPSSyslog_4,McAfeeIPSSyslog,$localhost,,syslog
+McAfee-Intrushield-SNMP: PROTOS Test Suite Buffer Overflow Attack,McAfeeIPSSyslog_5,McAfeeIPSSyslog,$localhost,,syslog
+McAfee-Intrushield-Invalid Packets detected,McAfeeIPSSyslog_6,McAfeeIPSSyslog,$localhost,,syslog

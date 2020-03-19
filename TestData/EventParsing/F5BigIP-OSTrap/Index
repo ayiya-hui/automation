@@ -1,0 +1,7 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+F5-BigIP-bigipAgentStart,F5BigIP-OSTrap_1,F5BigIP-OSTrap,$localhost,,syslog
+F5-BigIP-bigipActive,F5BigIP-OSTrap_2,F5BigIP-OSTrap,$localhost,,syslog
+F5-BigIP-bigipAgentRestart,F5BigIP-OSTrap_3,F5BigIP-OSTrap,$localhost,,syslog
+F5-BigIP-bigipAgentShutdown,F5BigIP-OSTrap_4,F5BigIP-OSTrap,$localhost,,syslog
+F5-BigIP-bigipBladeTempHigh,F5BigIP-OSTrap_5,F5BigIP-OSTrap,$localhost,,syslog

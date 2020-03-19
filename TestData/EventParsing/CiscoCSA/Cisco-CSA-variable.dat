@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+2008-05-13 11:00:36 192.168.1.39 [192.168.1.39]:SNMPv2-MIB::sysUpTime.0 = Timeticks: (52695748) 6 days, 2:22:37.48    SNMPv2-MIB::snmpTrapOID.0 = OID: SNMPv2-SMI::enterprises.8590.3.1       SNMPv2-SMI::enterprises.8590.2.1 = INTEGER: 619 SNMPv2-SMI::enterprises.8590.2.2 = INTEGER: 261 SNMPv2-SMI::enterprises.8590.2.3 = STRING: "sjdevVwindb06.ProspectHills.net"    SNMPv2-SMI::enterprises.8590.2.4 = STRING: "2008-05-13 19:03:21.157"    SNMPv2-SMI::enterprises.8590.2.5 = INTEGER: 5   SNMPv2-SMI::enterprises.8590.2.6 = INTEGER: 452 SNMPv2-SMI::enterprises.8590.2.7 = STRING: "C:\\Program Files\\RealVNC\\VNC4\\winvnc4.exe"      SNMPv2-SMI::enterprises.8590.2.8 = NULL SNMPv2-SMI::enterprises.8590.2.9 = STRING: "192.168.20.38"      SNMPv2-SMI::enterprises.8590.2.10 = STRING: "192.168.1.39"      SNMPv2-SMI::enterprises.8590.2.11 = STRING: "The process 'C:\\Program Files\\RealVNC\\VNC4\\winvnc4.exe' (as user NT AUTHORITY\\SYSTEM) attempted to accept a connection as a server on TCP port 5900 from 192.168.20.38 using interface Wired\\VMware Accelerated AMD PCNet Adapter. The operation was denied."        SNMPv2-SMI::enterprises.8590.2.12 = INTEGER: 109 SNMPv2-SMI::enterprises.8590.2.17 = STRING: "variable"
+[params]
+rawEventMsg=any
+deviceTime=any
+eventType=Cisco-CSA-variable
+phCustId=$sender
+destIpAddr=192.168.1.39
+procName=C:\Program Files\RealVNC\VNC4\winvnc4.exe
+computer=sjdevVwindb06.ProspectHills.net
+srcIpAddr=192.168.20.38
+reptModel=CSA Management Center
+eventId=any
+eventParsedOk=1
+eventSeverity=5
+eventName=Cisco-CSA-variable
+phEventCategory=0 (External)
+destName=any
+eventSeverityCat=MEDIUM
+collectorId=any
+reptDevName=any
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=1 (Deny)
+reptVendor=Cisco

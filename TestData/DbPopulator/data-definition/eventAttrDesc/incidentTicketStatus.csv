@@ -1,0 +1,8 @@
+$incidentTicketStatus,Description
+0,New
+1,Opened
+2,Closed
+3,ExtProcessed
+4,ReOpen
+5,None
+

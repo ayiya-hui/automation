@@ -1,0 +1,41 @@
+[reptDevIpAddr(key)]
+20.20.20.20
+[eventMsg]
+Fri Oct 30 18:19:58 2009 20.20.20.20 AccelOps-WinLog-WMI  [Category]="12803" [CategoryString]="SAM" [ComputerName]="sf1dc03.jha.local" [Data]="NULL" [EventCode]="5142" [EventIdentifier]="5142" [EventType]="4" [Logfile]="Security" [RecordNumber]="184035316" [SourceName]="Microsoft-Windows-Security-Auditing" [TimeGenerated]="20100505222910.822003-000" [TimeWritten]="20100505222910.822003-000" [Type]="Audit Success" [User]="(null)" [[Subject]][Security ID]="S-1-5-21-2090294290-982477196-2044928816-8287" [Account Name]="ACTIVITIES13$" [Account Domain]="JHA" [Logon ID]="0x550bb1d" [[Share Information]][Share Name]="shareName1" [Share Path]="sharePath1"
+[params]
+domain=JHA
+deviceTime=any
+destGeoOrg=any
+parserName=WinOSWmiParser
+eventType=Win-Security-5142
+destGeoState=Virginia
+hostName=sf1dc03.jha.local
+destIpAddr=20.20.20.20
+eventSource=Microsoft-Windows-Security-Auditing
+destGeoCountry=any
+reptGeoState=Virginia
+reptModel=Windows
+eventId=any
+latency=0.00
+eventParsedOk=1
+eventSeverity=1
+eventName=Network Share object added
+phEventCategory=0 (External)
+eventRuleTrigger=1
+type=Audit Success
+destName=any
+count=1
+seqNum=184035316
+eventSeverityCat=LOW
+collectorId=any
+fileName=sharePath1
+user=ACTIVITIES13$
+reptDevName=any
+customer=Super
+winLogonId=0x550bb1d
+reptGeoCity=any
+phRecvTime=any
+reptDevIpAddr=20.20.20.20
+eventAction=0 (Permit)
+reptVendor=Microsoft
+destGeoCity=any

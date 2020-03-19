@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+20.20.20.120
+[eventMsg]
+Fri Oct 30 18:19:58 2009 $reporter AccelOps-WinLog-WMI  [Category]="14081" [CategoryString]="Directory Service Changes" [ComputerName]="sf1dc03.jha.local" [Data]="NULL" [EventCode]="5136" [EventIdentifier]="5136" [EventType]="4" [Logfile]="Security" [RecordNumber]="184032053" [SourceName]="Microsoft-Windows-Security-Auditing" [TimeGenerated]="20100505222439.962887-000" [TimeWritten]="20100505222439.962887-000" [Type]="Audit Success" [User]="(null)" [[Subject]][Security ID]="S-1-5-21-2090294290-982477196-2044928816-8735" [Account Name]="SF1DHCP$" [Account Domain]="JHA" [Logon ID]="0x54d6382" [[Directory Service]][Name]="jha.local" [Type]="Active Directory Domain Services" [[Object]][DN]="DC=SF1HRLT-302145,DC=jha.local,cn=MicrosoftDNS,DC=ForestDnsZones,DC=jha,DC=local" [GUID]="{B148AA55-B83F-4B94-8F5D-BB9F6974FAEE}" [Class]="dnsNode" [[Attribute]][LDAP Display Name]="dNSTombstoned" [Syntax (OID)]="2.5.5.8" [Value]="FALSE" [[Operation]][Type]="Value Added" [Correlation ID]="{DEE17952-AE94-4528-B0E7-3A9CE0AF3CC6}"
+[params]
+rawEventMsg=any
+type=Audit Success
+domain=JHA
+user=SF1DHCP$
+winLogonId=0x54d6382
+eventAction=0 (Permit)
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=$reporter
+eventName=A directory service object was modified
+reptVendor=Microsoft
+eventType=Win-Security-5136
+phEventCategory=0 (External)
+reptDevIpAddr=$reporter
+reptModel=Windows
+eventSource=Microsoft-Windows-Security-Auditing

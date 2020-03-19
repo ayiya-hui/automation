@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<150>Oct 17 11:13:44 Datasphere (2013-10-17T16:13:44) admd[1089]: msg_id="1100-0004" Authentication of SSLVPN user [username@secure.local] from 68.170.151.90 accepted
+[params]
+rawEventMsg=any
+deviceTime=any
+parserName=WatchGuardFirewallParser
+eventType=WatchGuard-SSLVPN-Logon-Success
+phCustId=$sender
+reptGeoState=Shanghai
+reptModel=Firebox
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+hostIpAddr=68.170.151.90
+eventName=WatchGuard SSLVPN logon success
+phEventCategory=0 (External)
+customer=Super
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+user=username@secure.local
+count=1
+reptGeoCity=any
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=WatchGuard

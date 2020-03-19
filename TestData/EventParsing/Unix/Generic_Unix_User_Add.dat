@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+1.2.3.4
+[eventMsg]
+<86>Oct 21 16:40:12 1.2.3.4 useradd[4675]: account added to group - account=wenyong, group=video, gid=33, by=0--automator
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=1.2.3.4
+eventAction=0 (Permit)
+targetUserGrp=video
+eventName=Successful user add
+targetUser=wenyong
+reptVendor=Generic
+eventType=Generic_Unix_User_Add
+user=root
+phEventCategory=0 (External)
+reptDevIpAddr=1.2.3.4
+reptModel=Unix

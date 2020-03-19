@@ -1,0 +1,13 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+Snort-1,Sourcefire_1,Sourcefire,$localhost,,syslog
+Snort-15,Sourcefire_2,Sourcefire,$localhost,,syslog
+Snort-1000044,Sourcefire_3,Sourcefire,$localhost,,syslog
+Snort-385,Sourcefire_4,Sourcefire,$localhost,srcIpAddr:195.66.241.163,syslog
+Sourcefire-Network-Based-Malware,Sourcefire_5,Sourcefire,$localhost,,syslog
+Sourcefire-Network-Based-Retrospective,Sourcefire_6,Sourcefire,$localhost,,syslog
+Sourcefire-Audit-Apply,Sourcefire_7,Sourcefire,$localhost,,syslog
+Sourcefire-Audit-Login-Failed,Sourcefire_8,Sourcefire,$localhost,,syslog
+Sourcefire-Audit-Login-Success,Sourcefire_9,Sourcefire,$localhost,,syslog
+Sourcefire-Audit-Logout-Success,Sourcefire_10,Sourcefire,$localhost,,syslog
+Sourcefire-AccessControl-Malware-Detected,Sourcefire_11,Sourcefire,$localhost,,syslog

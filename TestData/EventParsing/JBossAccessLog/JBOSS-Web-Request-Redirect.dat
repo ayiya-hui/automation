@@ -1,0 +1,34 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<13>Mar 24 14:07:45 panjb7ppb02 JBOSSLog: [24/Mar/2016:14:07:40 +0100] 10.30.202.145 - - GET /main-web/bootstrap/css/ElegantIconsPanel.css HTTP/1.1 304 - https://panjb7ppb02:8443/main-web/timeout.zul "Mozilla/5.0 (Windows NT 6.1 WOW64 rv:47.0) Gecko/20100101 Firefox/47.0"" LIMmQVGSYkh4DBA3QToeP4uR.undefined 0.002"
+[params]
+deviceTime=any
+parserName=JBossAccessLogParser
+eventType=JBOSS-Web-Request-Redirect
+hostName=panjb7ppb02
+httpReferrer=https://panjb7ppb02:8443/main-web/timeout.zul
+srcIpAddr=10.30.202.145
+reptModel=JBOSS App Server
+eventId=any
+eventTime=Thu Mar 24 14:07:40 CST 2016
+eventParsedOk=1
+eventSeverity=1
+eventName=Web request redirected
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=LOW
+collectorId=any
+httpMethod=GET
+relayDevIpAddr=$localhost
+rawEventMsg=any
+httpStatusCode=304 (Not Modified - The client has performed a conditional GET request and access is allowed, but the document has not been modified)
+reptDevName=any
+httpVersion=HTTP/1.1
+customer=Super
+uriStem=/main-web/bootstrap/css/ElegantIconsPanel.css
+phRecvTime=any
+reptDevIpAddr=any
+reptVendor=Redhat
+httpUserAgent=Mozilla/5.0 (Windows NT 6.1 WOW64 rv:47.0) Gecko/20100101 Firefox/47.0"" LIMmQVGSYkh4DBA3QToeP4uR.undefined 0.002

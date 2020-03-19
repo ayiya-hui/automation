@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<14> March 09 15:52:11 AirWatch  AirWatch Syslog Details are as follows Event Type: Console, Event: AdminUserLoggedIn, User: staplesams\User123, Event Source: Server, Event Module: Administration, Event Category: Login, Event Data: LoginSessionID=3aoh1qtibfnzsae5byodkf0zEvent Timestamp: March 9, 2016 15:52:10
+[params]
+domain=staplesams
+deviceTime=any
+parserName=AirWatchParser
+eventType=AirWatch-MDM-AdminUserLoggedIn
+reptModel=MDM
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=AirWatch MDM User log in
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+eventRuleTrigger=1
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+user=User123
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=AirWatch

@@ -1,0 +1,62 @@
+<eventParser name="ReconnextLogParser">
+  <deviceType>
+    <Vendor>Microsoft</Vendor>
+    <Model>Windows</Model>
+    <Version>ANY</Version>
+  </deviceType>
+
+  <appType>
+    <Vendor>McAfee</Vendor>
+    <Model>Cisco Secure ACS</Model>
+    <Version>ANY</Version>
+    <Name>Cisco Secure ACS Auth Server</Name>
+  </appType>
+  
+  <eventFormatRecognizer><![CDATA[<_mon:gPatMon>\s+<_day:gPatDay>\s+<_time:gPatTime>\s+<:gPatIpV4Dot>\s+RTS:CEF:0\|Reconnex\|iGuard]]></eventFormatRecognizer>
+  
+  <testEvents>
+      <testEvent><![CDATA[Jul 7 15:38:18 172.16.0.50 RTS:CEF:0|Reconnex|iGuard|3.2|-test-rule1|3|cs1=-chein-prevent cs1Label=policies cn1=0 cn1Label=MatchCount src=51.0.16.172 dst=53.0.16.172 spt= 5281 dpt= 25 suser= duser=cs2="testing" cs2Label=Subject filename="specscdrom.pdf"]]></testEvent>
+  </testEvents>
+  
+  <!-- pattern definitions --> 
+  <patternDefinitions>
+    <pattern name="patStrQuote"><![CDATA[[^']+]]></pattern>
+    <pattern name="patStrBar"><![CDATA[[^|]+]]></pattern>
+  </patternDefinitions>
+  
+  <parsingInstructions>
+    <!-- parsing common fields -->
+    <collectFieldsByRegex src="$_rawmsg">
+      <regex><![CDATA[<_mon:gPatMon>\s+<_day:gPatDay>\s+<_time:gPatTime>\s+<reptDevIpAddr:gPatIpV4Dot>\s+RTS:CEF:0\|Reconnex\|iGuard\|\d+\.\d+\|<_ruleName:patStrBar>\|\d+\|<_body:gPatMesgBody>]]></regex>
+    </collectFieldsByRegex>
+    
+    <setEventAttribute attr="deviceTime">toDateTime($_mon, $_day, $_time)</setEventAttribute>
+    <setEventAttribute attr="eventAction">0</setEventAttribute>
+    
+    <!-- message specific parsing
+      Jul 7 15:38:18 172.16.0.50 RTS:CEF:0|Reconnex|iGuard|3.2|-test-rule1|3|cs1=-chein-prevent cs1Label=policies cn1=0 cn1Label=MatchCount src=51.0.16.172 dst=53.0.16.172 spt= 5281 dpt= 25 suser= duser=cs2="testing" cs2Label=Subject filename="specscdrom.pdf"
+
+      Jul 7 15:38:18 172.16.0.50 RTS:CEF:0|Reconnex|iGuard|3.2|Use of Offensive Language in Corporate Email|4|cs1=Acceptable Use cs1Label=policies cn1=10 cn1Label=MatchCount src=98.191.27.32 dst=68.142.202.247 spt= 27909 dpt= 25  suser= duser= cs2="Shit" cs2Label=Subject filename=
+      -->
+  
+    <collectFieldsByRegex src="$_body">
+      <regex><![CDATA[cs1=<_cs1:gPatMesgBody>cs1Label=<_cs1Label:gPatMesgBody>\s+cn1=<_cn1:gPatInt>\s+cn1Label=<_cn1Label:gPatMesgBody>\s+src=<srcIpAddr:gPatIpV4Dot><_body:gPatMesgBody>]]></regex>
+    </collectFieldsByRegex>
+
+    <collectAndSetAttrByKeyValuePair src="$_body" sep=" ">
+      <attrKeyMap attr="destIpAddr" key="dst="/>
+      <attrKeyMap attr="srcIpPort" key="spt= "/>
+      <attrKeyMap attr="destIpPort" key="dpt= "/>
+      <attrKeyMap attr="user" key="suser="/>
+      <attrKeyMap attr="_targetUser" key="duser="/>
+      <attrKeyMap attr="_cs2" key="cs2="/>
+      <attrKeyMap attr="_cs2Label" key="cs2Label="/>
+      <attrKeyMap attr="fileName" key="filename="/>
+    </collectAndSetAttrByKeyValuePair>	
+
+    <when test="not_matches($_targetUser, '=')">
+      <setEventAttribute attr="targetUser">$_targetUser</setEventAttribute>
+    </when>
+
+  </parsingInstructions>
+</eventParser>

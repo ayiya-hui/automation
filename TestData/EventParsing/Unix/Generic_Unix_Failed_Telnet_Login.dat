@@ -1,0 +1,24 @@
+[reptDevIpAddr(key)]
+1.2.3.4
+[eventMsg]
+<86>Dec 20 17:44:55 1.2.3.4 login: FAILED LOGIN 2 FROM 192.168.20.45 FOR 123 User not known to the underlying authentication module
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=3
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=1.2.3.4
+eventAction=1 (Deny)
+eventName=Failed telnet logon
+srcIpAddr=192.168.20.45
+reptVendor=Generic
+eventType=Generic_Unix_Failed_Telnet_Login
+user=123
+phEventCategory=0 (External)
+reptDevIpAddr=1.2.3.4
+reptModel=Unix

@@ -1,0 +1,29 @@
+[reptDevIpAddr(key)]
+10.10.10.11
+[eventMsg]
+<29>May 17 07:14:26 10.10.10.11 httpd: 2016-05-17 11:14:26.313Z [adminflast]: Called - EmptyRecycleBinObj: Args category="ALL"
+[params]
+deviceTime=any
+parserName=InfoBloxAuditParser
+webCategory=ALL
+eventType=InfoBlox-Audit-EmptyRecycleBinObj-Called
+srcName=HOST-10.10.10.11
+srcIpAddr=10.10.10.11
+reptModel=NiOS
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=EmptyRecycleBinObj Called
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=10.10.10.11
+user=adminflast
+rawEventMsg=any
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=10.10.10.11
+reptVendor=InfoBlox

@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<54>Feb 24 11:51:19 SymantecServer $localhost: QA-V-Win03-App2,[SID: 20352] HTTP Whisker/Libwhisker Scan (1) detected.  Traffic has been allowed from this application: C:\WINDOWS\system32 toskrnl.exe,Local: 0.0.0.0,Local: 000000000000,Remote: ,Remote: 192.168.1.4,Remote: 000000000000,Inbound,TCP,Intrusion ID: 0,Begin: 2009-02-24 11:50:01,End: 2009-02-24 11:50:01,Occurrences: 1,Application: C:/WINDOWS/system32/ntoskrnl.exe,Location: Default,User: Administrator,Domain: PROSPECTHILLS
+[params]
+rawEventMsg=any
+eventSeverity=1
+eventSeverityCat=LOW
+swProcName=C:/WINDOWS/system32/ntoskrnl.exe
+reptDevName=$localhost
+count=1
+eventId=any
+domain=PROSPECTHILLS
+deviceTime=any
+eventParsedOk=1
+reptVendor=Symantec
+phRecvTime=any
+phCustId=$sender
+reptDevIpAddr=$localhost
+srcIpAddr=192.168.1.4
+eventName=Symantec traffic event
+computer=any
+eventType=Symantec-AV-Traffic-Permit
+user=Administrator
+phEventCategory=0 (External)
+ipProto=6 (TCP)
+reptModel=Endpoint Protection Service

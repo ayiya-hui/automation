@@ -1,0 +1,46 @@
+<Rules>
+  <Rule group="PH_SYS_RULE_Perf_App" id="PH_Rule_VoIP_1" phIncidentCategory="Network">
+    <Name>Degraded VoIP Call Quality</Name>
+    <active>true</active>
+    <Description> Detects degraded voip call quality (mos score between 2.2 and 3.5) </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_DEGRADED_VOIP_MOS" severity="7">
+      <ArgList>
+        srcName = MediumCallQuality.srcName, destName = MediumCallQuality.destName, ipSLAProto= MediumCallQuality.ipSLAProto, codec = MediumCallQuality.codec  
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="300">
+      <SubPattern displayName="MediumCallQuality" name="MediumCallQuality">
+        <SingleEvtConstr> eventType = "PH_DEV_MON_IPSLA_VOIP_MET" </SingleEvtConstr>
+	<GroupByAttr> srcName,destName,ipSLAProto,codec </GroupByAttr>
+	<GroupEvtConstr> AVG(mosScore) &gt; 2.2 AND AVG(mosScore) &lt;= 3.5 AND COUNT (*) &gt;= 2 </GroupEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,srcIpAddr,srcName,destIpAddr,destName,ipSLAProto,codec,mosScore,icpifScore,avgDurationMSec,avgJitterMs,pktLost,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+  </Rule>
+
+  <Rule group="PH_SYS_RULE_Perf_App" id="PH_Rule_VoIP_2" phIncidentCategory="Network">
+    <Name>Poor VoIP Call Quality</Name>
+    <active>true</active>
+    <Description> Detects poor voip call quality (mos score less than 2.2) </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_POOR_VOIP_MOS" severity="9">
+      <ArgList>
+        srcName = PoorCallQuality.srcName, destName = PoorCallQuality.destName, ipSLAProto= PoorCallQuality.ipSLAProto, codec = PoorCallQuality.codec  
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="300">
+      <SubPattern displayName="PoorCallQuality" name="PoorCallQuality">
+        <SingleEvtConstr> eventType = "PH_DEV_MON_IPSLA_VOIP_MET" </SingleEvtConstr>
+	<GroupByAttr> srcName,destName,ipSLAProto,codec </GroupByAttr>
+	<GroupEvtConstr> AVG(mosScore) &lt;= 2.2 AND COUNT (*) &gt;= 2 </GroupEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,srcIpAddr,srcName,destIpAddr,destName,ipSLAProto,codec,mosScore,icpifScore,avgDurationMSec,avgJitterMs,pktLost,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+  </Rule>
+
+</Rules>

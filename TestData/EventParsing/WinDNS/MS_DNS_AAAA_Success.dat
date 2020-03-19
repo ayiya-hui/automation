@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+20.2.2.14
+[eventMsg]
+<13>Aug 10 19:08:32 $reporter MSDNSLog 0 20090810 19:08:29 15F0 PACKET 02572BB0 UDP Rcv 172.16.10.40 1806 Q [0001 D NOERROR] AAAA (13)QA-V-CtOS-ora(14)prospecthills(3)net(13)prospecthills(3)net(0)
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+appTransportProto=UDP
+ipConnId=Rcv
+count=1
+phCustId=$sender
+destName=QA-V-CtOS-ora.prospecthills.net.prospecthills.net
+destIpAddr=$reporter
+destIpPort=53 (DOMAIN)
+deviceTime=any
+eventAction=0 (Permit)
+eventId=any
+eventName=Successful domain name to IP6 query
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=1
+eventSeverityCat=LOW
+eventType=MS_DNS_AAAA_Success
+ipProto=17 (UDP)
+reptDevIpAddr=$reporter
+reptModel=DNS
+reptVendor=Microsoft
+srcIpAddr=172.16.10.40

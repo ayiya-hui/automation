@@ -1,0 +1,29 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+12/18/2014:16:55:01 GMT va3hud-lb01 0-PPE-0 : UI CMD_EXECUTED 6957500 0 : User noah - Remote_ip 10.28.1.21 - Command "login noah "********"" - Status "ERROR: Invalid username or password"
+[params]
+deviceTime=any
+parserName=CitrixNetScalerParser
+totFlows=1
+eventType=NETSCALER-UI-CMD_EXECUTED-FAILURE
+reptModel=NetScaler
+eventId=any
+eventParsedOk=1
+eventSeverity=3
+hostIpAddr=10.28.1.21
+eventName=Command failed to execute in Netscalar appliance via GUI/CLI
+phEventCategory=0 (External)
+eventRuleTrigger=1
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+user=noah
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=1 (Deny)
+reptVendor=Citrix
+command="login noah "********""

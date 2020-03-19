@@ -1,0 +1,34 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<22>Feb  2 17:31:32 $localhost postfix/smtpd[690]: disconnect from mailgate.xtranet.co.ke[41.78.26.196]
+[params]
+deviceTime=any
+destGeoOrg=any
+parserName=PostfixParser
+eventType=Postfix-Disconnect-From
+destGeoState=Nairobi Area
+destIpAddr=41.78.26.196
+procName=smtpd
+destGeoCountry=any
+reptGeoState=Shanghai
+reptModel=Postfix
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=SMTP connection disconnected from another SMTP gateway
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+eventRuleTrigger=1
+destName=mailgate.xtranet.co.ke
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+reptDevName=any
+customer=Super
+reptGeoCity=any
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Generic
+destGeoCity=any

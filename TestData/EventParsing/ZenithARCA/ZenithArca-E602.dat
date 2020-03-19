@@ -1,0 +1,23 @@
+[reptDevIpAddr(key)]
+80.80.80.80
+[eventMsg]
+<190>Dec 27 14:15:15 ARCA-REMOTE NT: <ZenithArcA;E602;> Error in communicating with Replica device gateway service from Backup device for server:inet
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+count=1
+phCustId=$sender
+destName=ARCA-REMOTE
+deviceTime=any
+eventAction=1 (Deny)
+eventId=any
+eventName=Error In Communicating With Replica Device
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=5
+eventSeverityCat=MEDIUM
+eventType=ZenithArca-E602
+msg=Error in communicating with Replica device gateway service from Backup device for server:inet
+reptDevIpAddr=$reporter
+reptModel=Zenith ARCA
+reptVendor=Zenith Infotech

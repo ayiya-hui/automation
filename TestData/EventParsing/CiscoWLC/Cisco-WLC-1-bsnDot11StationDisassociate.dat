@@ -1,0 +1,22 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+enterprises.14179.2.6.3.1	enterprises.14179.2.6.2.35.0 x "00 21 55 4D 66 B0"	enterprises.14179.2.6.2.34.0 x "00 21 55 7A 4C E2"
+[params]
+rawEventMsg=any
+eventSeverity=1
+eventSeverityCat=LOW
+srcMACAddr=00:21:55:4d:66:b0
+destMACAddr=00:21:55:7a:4c:e2
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+phRecvTime=any
+phCustId=$sender
+reptDevIpAddr=$localhost
+eventName=AP sent a disassociation frame to a wireless client
+reptVendor=Cisco
+eventType=Cisco-WLC-1-bsnDot11StationDisassociate
+phEventCategory=0 (External)
+reptModel=WLAN Controller

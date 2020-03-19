@@ -1,0 +1,9 @@
+$phEventCategory,Description
+1,Incident
+2,Audit
+3,System logs
+4,Traffic
+5,Internal Incident
+6,Performance Event
+99,Internal
+

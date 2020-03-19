@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<187>201: May 12 01:10:52: %BGP-5-ADJCHANGE: neighbor 172.17.1.2 Up
+[params]
+deviceTime=any
+eventType=IOS-BGP-ADJCHANGE-TO-UP
+phCustId=$sender
+destIpAddr=172.17.1.2
+srcIpAddr=any
+reptModel=IOS
+eventId=any
+eventParsedOk=1
+eventSeverity=2
+hostIpAddr=$localhost
+eventName=BGP neighbor came up
+phEventCategory=0
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=Success(0)
+reptVendor=Cisco

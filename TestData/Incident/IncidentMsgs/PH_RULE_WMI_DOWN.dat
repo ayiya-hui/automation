@@ -1,0 +1,6 @@
+[eventMsg]
+[PH_DEV_MON_WMI_PING_STAT]:[eventSeverity]=PHL_INFO,[fileName]=phPerfJob.cpp,[lineNumber]=1212,[hostName]=testWMI,[hostIpAddr]=$reporter,[avgDurationMSec]=228,[minDurationMSec]=177,[maxDurationMSec]=296,[pktLossPct]=100.000000,[sysDownTime]=0,[sysDegradedTime]=0,[pollIntv]=116,[phLogDetail]=
+
+[clearEventMsg]
+[PH_DEV_MON_WMI_PING_STAT]:[eventSeverity]=PHL_INFO,[fileName]=phPerfJob.cpp,[lineNumber]=1212,[hostName]=testWMI,[hostIpAddr]=$reporter,[avgDurationMSec]=228,[minDurationMSec]=177,[maxDurationMSec]=296,[pktLossPct]=0.000000,[sysDownTime]=0,[sysDegradedTime]=0,[pollIntv]=116,[phLogDetail]=
+

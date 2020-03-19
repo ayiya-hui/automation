@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+Imperva-DB-Audit,Imperva_1,Imperva,$localhost,,syslog

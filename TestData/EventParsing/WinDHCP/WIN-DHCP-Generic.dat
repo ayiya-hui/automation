@@ -1,0 +1,21 @@
+[reptDevIpAddr(key)]
+38.38.38.38
+[eventMsg]
+<13>Jun  1 14:24:08 $reporter WinDHCPLog	0	25,06/01/10,14:24:07,0 leases expired and 1 leases deleted,,,,
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+eventAction=0 (Permit)
+eventName=WIN-DHCP-Generic
+reptVendor=Microsoft
+eventType=WIN-DHCP-Generic
+phEventCategory=0 (External)
+reptDevIpAddr=$reporter
+reptModel=DHCP

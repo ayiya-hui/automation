@@ -1,0 +1,22 @@
+[reptDevIpAddr(key)]
+90.90.90.96
+[eventMsg]
+<134>Mar 29 15:59:27 $reporter SYST: Port 2 link active 100Mbs FULL duplex
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+eventSeverityCat=LOW
+eventParsedOk=1
+eventSeverity=3
+phRecvTime=any
+phCustId=$sender
+phEventCategory=0 (External)
+destIpAddr=$reporter
+eventAction=0 (Permit)
+eventName=Extremeware-Link-Up
+reptVendor=Extreme
+eventType=Extremeware-Link-Up
+devPort=2
+reptDevIpAddr=$reporter
+reptModel=Extremeware

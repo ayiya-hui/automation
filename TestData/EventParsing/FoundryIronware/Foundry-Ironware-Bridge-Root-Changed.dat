@@ -1,0 +1,23 @@
+[reptDevIpAddr(key)]
+20.20.20.39
+[eventMsg]
+<14> 20.20.20.39 SJ-Dev-A-Fdy-FastIron, Bridge root changed, vlan 3, new root ID 80000004806137c6, root interface 3
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+srcIntfName=vlan3
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=20.20.20.39
+eventAction=0 (Permit)
+eventName=Foundry-Ironware-Bridge-Root-Changed
+reptVendor=Foundry
+eventType=Foundry-Ironware-Bridge-Root-Changed
+phEventCategory=0 (External)
+reptDevIpAddr=20.20.20.39
+destName=SJ-Dev-A-Fdy-FastIron
+reptModel=Ironware

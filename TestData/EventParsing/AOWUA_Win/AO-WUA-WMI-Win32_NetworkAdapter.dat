@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+192.168.1.30
+[eventMsg]
+2015-02-11T05:46:58Z WIN-I6.com 192.168.1.30 AccelOps-WUA-WMI [monitorStatus]="Success"  [__CLASS]="Win32_NetworkAdapter" [AdapterType]="" [AdapterTypeId]="" [AutoSense]="" [Availability]="3" [Caption]="[00000003] WAN Miniport (PPTP)" [ConfigManagerErrorCode]="0" [ConfigManagerUserConfig]="0" [CreationClassName]="Win32_NetworkAdapter" [Description]="WAN Miniport (PPTP)" [DeviceID]="3" [ErrorCleared]="" [ErrorDescription]="" [GUID]="" [Index]="3" [InstallDate]="" [Installed]="-1" [InterfaceIndex]="4" [LastErrorCode]="" [MACAddress]="" [Manufacturer]="Microsoft" [MaxNumberControlled]="0" [MaxSpeed]="" [Name]="WAN Miniport (PPTP)" [NetConnectionID]="" [NetConnectionStatus]="" [NetEnabled]="" [NetworkAddresses]="" [PermanentAddress]="" [PhysicalAdapter]="0" [PNPDeviceID]="ROOT\\MS_PPTPMINIPORT\\0000" [PowerManagementCapabilities]="" [PowerManagementSupported]="0" [ProductName]="WAN Miniport (PPTP)" [ServiceName]="PptpMiniport" [Speed]="" [Status]="" [StatusInfo]="" [SystemCreationClassName]="Win32_ComputerSystem" [SystemName]="WIN-I6UT18V6CBR"
+[params]
+deviceTime=any
+parserName=AOWUA_WinParser
+eventType=AO-WUA-WMI-Win32_NetworkAdapter
+reptModel=Windows
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=AO-WUA-WMI-Win32_NetworkAdapter
+serviceName=PptpMiniport
+extEventRecvProto=Windows Agent
+phEventCategory=0 (External)
+status=Success
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=192.168.1.30
+rawEventMsg=any
+reptDevName=WIN-I6.com
+customer=Super
+phRecvTime=any
+reptDevIpAddr=192.168.1.30
+eventAction=0 (Permit)
+reptVendor=Microsoft

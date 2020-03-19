@@ -1,0 +1,7 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+Cisco-Meraki-WebTraffic-Permit,CiscoMeraki_1,CiscoMeraki,192.168.10.1,,syslog
+Cisco-Meraki-Events-dhcp-lease-extended,CiscoMeraki_3,CiscoMeraki,192.168.10.1,,syslog
+Cisco-Meraki-Flow-Deny,CiscoMeraki_4,CiscoMeraki,192.168.10.1,,syslog
+
+Cisco-Meraki-Flow-Permit,CiscoMeraki_5,CiscoMeraki,192.168.10.1,,syslog

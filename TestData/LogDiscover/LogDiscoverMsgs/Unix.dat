@@ -1,0 +1,2 @@
+[eventMsg]
+<86>Dec 14 16:53:39 30.200.75.1 sshd[14666]: pam_unix(sshd:session): session opened for user partha by (uid=0)

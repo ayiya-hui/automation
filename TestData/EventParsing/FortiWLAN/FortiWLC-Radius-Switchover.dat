@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+172.18.65.202
+[eventMsg]
+Mar 21 16:38:57 172.18.65.202 ALARM: 1206097736l | system | info | ALR | RADIUS SERVER SWITCHOVER MAJOR RADIUS Server switched over from Primary < 1.1.1.1 > to Secondary < 172.18.1.7 > for Mac Filtering
+[params]
+customer=Super
+eventId=any
+parserName=FortiWLANParser
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+count=1
+eventSeverity=1
+eventType=FortiWLC-Radius-Switchover
+reptDevIpAddr=172.18.65.202
+collectorId=any
+extEventRecvProto=Syslog
+eventName=Switched over to Secondary RADIUS Server since Primary RADIUS server is not accessible
+reptVendor=Fortinet
+relayDevIpAddr=172.18.65.202
+rawEventMsg=any
+phRecvTime=any
+reptDevName=any
+reptModel=FortiWLC

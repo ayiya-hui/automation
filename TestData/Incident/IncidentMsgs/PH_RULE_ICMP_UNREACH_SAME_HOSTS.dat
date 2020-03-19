@@ -1,0 +1,4 @@
+[eventMsg]
+version=5,count=12,srcIp=110.10.10.1,dstIp=120.0.0.1,option=none,icmpTypeCode=301,nextHop=10.10.10.254,protocol=icmp
+
+[clearEventMsg]

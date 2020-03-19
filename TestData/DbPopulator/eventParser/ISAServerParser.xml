@@ -1,0 +1,328 @@
+<eventParser name="ISAServerParser">
+
+  <deviceType>
+    <Vendor>Microsoft</Vendor>
+    <Model>Windows</Model>
+    <Version>ANY</Version>
+  </deviceType>
+
+  <appType>
+    <Vendor>Microsoft</Vendor>
+    <Model>ISA Server</Model>
+    <Version>ANY</Version>
+    <Name>Microsoft ISA Server</Name>
+  </appType>
+ 
+  <!-- pattern definitions -->
+  <patternDefinitions>
+    <pattern name="patAuthClient"><![CDATA[Y|N]]></pattern>
+	<pattern name="patColonNoColon"><![CDATA[:\s|\s+]]></pattern>
+	<pattern name="patStrEndTab"><![CDATA[[^\t]*]]></pattern>
+	<pattern name="patStrEndPercent"><![CDATA[[^%]*]]></pattern>
+	<pattern name="patURL"><![CDATA[.+?]]></pattern>
+	<pattern name="patSep"><![CDATA[\s+|\t+]]></pattern>
+	<pattern name="patSentence"><![CDATA[[^ ]*[\s[^ ]*]*]]></pattern>
+	<pattern name="patISA"><![CDATA[ISAWebLog|ISAFWSLog]]></pattern>
+  </patternDefinitions>
+  
+  
+  <!-- ISA Web Proxy Log Examples
+#Fields: c-ip	cs-username	c-agent	sc-authenticated	date	time	s-svcname	s-computername	cs-referred	r-host	r-ip	r-port	time-taken	cs-bytes	sc-bytes	cs-protocol	cs-transport	s-operation	cs-uri	cs-mime-type	s-object-source	sc-status	s-cache-info	rule	FilterInfo	cs-Network	sc-Network	error-info	action	GMT Time	AuthenticationServer
+192.168.69.9	anonymous	Mozilla/5.0 (Windows; U; Windows NT 5.2; en-GB; rv:1.9.2.12) Gecko/20101026 Firefox/3.6.12	Y	2011-03-05	21:33:55	w3proxy	ISA	-	212.58.246.82	212.58.246.82	80	156	636	634	http	TCP	GET	http://212.58.246.82/rss/newsonline_uk_edition/front_page/rss.xml	text/html; charset=iso-8859-1	Inet	301	0x41200100	Local Machine	Req ID: 07c10445; Compression: client=No, server=No, compress rate=0% decompress rate=0%	Local Host	External	0x400	Allowed	2011-03-05 21:33:55	-
+192.168.69.9	anonymous	Mozilla/5.0 (Windows; U; Windows NT 5.2; en-GB; rv:1.9.2.12) Gecko/20101026 Firefox/3.6.12	Y	2011-03-05	21:33:55	w3proxy	ISA	-	92.122.217.139	92.122.217.139	80	625	440	62544	http	TCP	GET	http://92.122.217.139/news/rss.xml?edition=uk	text/xml	Inet	200	0x61a00102	Local Machine	Req ID: 07c10448; Compression: client=No, server=No, compress rate=0% decompress rate=0%	Local Host	External	0x400	Allowed	2011-03-05 21:33:55	-
+
+<13>Mar  6 20:56:03 ISA.test.local ISAWebLog	0	192.168.203.130	anonymous	Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 5.1; Trident/4.0)	Y	2011-03-06	20:55:31	w3proxy	ISA	http://news.sky.com/
+	 -->
+  
+  <eventFormatRecognizer><![CDATA[.*?<:patISA>]]></eventFormatRecognizer>
+  
+  <testEvents>
+      <testEvent><![CDATA[<13>Mar  6 20:56:03 ISA.test.local ISAWebLog	0	192.168.69.9	anonymous	Mozilla/5.0 (Windows; U; Windows NT 5.2; en-GB; rv:1.9.2.12) Gecko/20101026 Firefox/3.6.12	Y	2011-03-05	21:33:55	w3proxy	ISA	-	212.58.246.82	212.58.246.82	80	156	636	634	http	TCP	GET	http://212.58.246.82/rss/newsonline_uk_edition/front_page/rss.xml	text/html; charset=iso-8859-1	Inet	301	0x41200100	Local Machine	Req ID: 07c10445; Compression: client=No, server=No, compress rate=0% decompress rate=0%	Local Host	External	0x400	Allowed	2011-03-05 21:33:55	-]]></testEvent>
+  </testEvents>
+  
+  <parsingInstructions>
+		
+    <collectFieldsByRegex src="$_rawmsg">
+      <regex><![CDATA[<:gPatSyslogPRI><:gPatMon><:patSep><:gPatDay><:patSep><:gPatTime>\s+<:gPatStr>\s+<_type:gPatStr>(?:\t|\s+)<:gPatInt>(?:\t|\s+)<_body:gPatMesgBody>]]></regex>
+    </collectFieldsByRegex>
+    
+    <choose>
+	<when test='$_type = "ISAWebLog"'>
+	    <collectFieldsByRegex src="$_body">
+		    <regex><![CDATA[<srcIpAddr:gPatIpV4Dot><:patSep><user:gPatStr><:patSep><httpUserAgent:patStrEndTab><:patSep><:patAuthClient><:patSep><_year:gPatYear>-<_mon:gPatMonNum>-<_day:gPatDay>(?:\t|\s+)<_time:gPatTime>(?:\t|\s+)<_body1:gPatMesgBody>]]></regex>
+	    </collectFieldsByRegex>		
+	    <collectFieldsByRegex src="$_body1">
+		    <regex><![CDATA[<srvInstName:gPatStr><:patSep><:gPatStr><:patSep><:gPatStr><:patSep><:gPatStr><:patSep><destIpAddr:gPatIpV4Dot><:patSep><destIpPort:gPatIpPort><:patSep><durationMSec:gPatInt><:patSep><recvBytes:gPatInt><:patSep><sentBytes:gPatInt><:patSep><_scheme:gPatStr><:patSep><_proto:gPatStr><:patSep><httpMethod:gPatStr><:patSep><_urlandquery:gPatStr><:patSep><:gPatStr><:patSep><:gPatStr><:patSep><_httpStatusCode:gPatInt><:patSep><:gPatStr><:patSep><_body2:gPatMesgBody>]]></regex>
+	    </collectFieldsByRegex>	
+	    <collectFieldsByRegex src="$_body2">
+		    <regex><![CDATA[<fwRule:gPatSentence><:patSep>Req ID:\s+<:gPatStr>;\s+Compression:\s+<:patStrEndPercent>%\s+<:patStrEndPercent>%\s+<srcIntfName:gPatSentence>\s{2,}<destIntfName:gPatSentence>\s+0x<:gPatMesgBody>]]></regex>
+	    </collectFieldsByRegex>
+	    
+	    
+	    <setEventAttribute attr="eventType">ISA-Proxy-Generic</setEventAttribute>
+	    <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+	    <setEventAttribute attr="deviceTime">toDateTime($_mon, $_day, $_year, $_time)</setEventAttribute>
+	   
+	    <collectFieldsByRegex src="$_urlandquery">
+		<regex><![CDATA[^.+?://<_urlshort:patURL>/.*?$]]></regex>
+	     </collectFieldsByRegex>	
+	     <switch>
+		<case>
+		    <collectAndSetAttrByRegex src="$_urlshort">
+			<regex><![CDATA[<destName:gPatStrEndColon>:.*]]></regex>
+		    </collectAndSetAttrByRegex>
+		 </case>
+		 <default>
+		    <setEventAttribute attr="destName">$_urlshort</setEventAttribute>
+		</default>
+	  </switch>
+	     <setEventAttribute attr="infoURL">$_urlandquery</setEventAttribute>
+	     <setEventAttribute attr="httpStatusCode">$_httpStatusCode</setEventAttribute>
+	    
+	    
+		     	
+	     <choose>
+                <!--<Set ISA Proxy Event Type Via HTTP Status Code> -->
+		  
+		  <when test="matches($httpStatusCode, '200')">
+		    <setEventAttribute attr="eventType">ISA-Proxy-200-OK</setEventAttribute>
+		    <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		  </when>
+			
+			<when test="matches($httpStatusCode, '201')">
+				<setEventAttribute attr="eventType">ISA-Proxy-201-Created</setEventAttribute>
+				<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+			</when>
+			
+			<when test="matches($httpStatusCode, '202')">
+				<setEventAttribute attr="eventType">ISA-Proxy-202-Accepted</setEventAttribute>
+				<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+			</when>
+			
+			<when test="matches($httpStatusCode, '204')">
+				<setEventAttribute attr="eventType">ISA-Proxy-204-No-Content</setEventAttribute>
+				<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+			</when>
+			
+			<when test="matches($httpStatusCode, '301')">
+				<setEventAttribute attr="eventType">ISA-Proxy-301-Moved-Permanently</setEventAttribute>
+				<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+			</when>
+			
+			<when test="matches($httpStatusCode, '302')">
+				<setEventAttribute attr="eventType">ISA-Proxy-302-Moved-Temporalily</setEventAttribute>
+				<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+			</when>
+			
+			<when test="matches($httpStatusCode, '304')">
+				<setEventAttribute attr="eventType">ISA-Proxy-304-Not-Modified</setEventAttribute>
+				<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+			</when>
+			
+			<when test="matches($httpStatusCode, '400')">
+				<setEventAttribute attr="eventType">ISA-Proxy-400-Bad-Request</setEventAttribute>
+				<setEventAttribute attr="eventSeverity">4</setEventAttribute>
+			</when>
+			
+			<when test="matches($httpStatusCode, '401')">
+				<setEventAttribute attr="eventType">ISA-Proxy-401-Unauthorized</setEventAttribute>
+				<setEventAttribute attr="eventSeverity">4</setEventAttribute>
+			</when>
+			
+			<when test="matches($httpStatusCode, '403')">
+				<setEventAttribute attr="eventType">ISA-Proxy-403-Forbidden</setEventAttribute>
+				<setEventAttribute attr="eventSeverity">4</setEventAttribute>
+			</when>
+			
+			<when test="matches($httpStatusCode, '404')">
+				<setEventAttribute attr="eventType">ISA-Proxy-404-Not-Found</setEventAttribute>
+				<setEventAttribute attr="eventSeverity">4</setEventAttribute>
+			</when>
+			
+			<when test="matches($httpStatusCode, '500')">
+				<setEventAttribute attr="eventType">ISA-Proxy-500-Server-Error</setEventAttribute>
+				<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+			</when>
+	
+			<when test="matches($httpStatusCode, '501')">
+				<setEventAttribute attr="eventType">ISA-Proxy-501-Not-Implemented</setEventAttribute>
+				<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+			</when>
+			
+			<when test="matches($httpStatusCode, '502')">
+				<setEventAttribute attr="eventType">ISA-Proxy-502-Bad-Gateway</setEventAttribute>
+				<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+			</when>
+			
+			<when test="matches($httpStatusCode, '503')">
+				<setEventAttribute attr="eventType">ISA-Proxy-503-Out-Of-Resources</setEventAttribute>
+				<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+			</when>
+
+			<when test="matches($httpStatusCode, '995')">
+				<setEventAttribute attr="eventType">ISA-Proxy-995-Operation-Aborted</setEventAttribute>
+				<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+			</when>	
+
+			<when test="matches($httpStatusCode, '10060')">
+				<setEventAttribute attr="eventType">ISA-Proxy-10060-Connection-Timeout</setEventAttribute>
+				<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+			</when>
+	
+			<when test="matches($httpStatusCode, '10061')">
+				<setEventAttribute attr="eventType">ISA-Proxy-10061-Connection-Refused</setEventAttribute>
+				<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+			</when>
+			
+			<when test="matches($httpStatusCode, '10065')">
+				<setEventAttribute attr="eventType">ISA-Proxy-10065-No-Route-to-Host</setEventAttribute>
+				<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+			</when>
+			
+			<when test="matches($httpStatusCode, '11001')">
+				<setEventAttribute attr="eventType">ISA-Proxy-11001-Host-Not-Found</setEventAttribute>
+				<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+			</when>
+
+			<when test="matches($httpStatusCode, '12217')">
+				<setEventAttribute attr="eventType">ISA-Proxy-12217-HTTP-Filter-Rejection</setEventAttribute>
+				<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+			</when>	
+			
+		</choose>	  
+	</when>	
+	
+	<!-- ISA FWLog Examples
+	#Fields: computer	date	time	IP protocol	source	destination	original client IP	source network	destination network	action	status	rule	application protocol	bytes sent	bytes sent intermediate	bytes received	bytes received intermediate	connection time	connection time intermediate	username	agent	session ID	connection ID
+ISA	2011-03-09	00:07:42	UDP	192.168.69.9:53551	8.8.8.8:53	192.168.69.9	Local Host	External	Terminate	0x80074e20	[System] Allow DNS from ISA Server to selected servers	DNS	119	119	194	194	61000	61000	-	-	607	10126
+ISA	2011-03-09	00:07:50	UDP	192.168.203.130:138	192.168.203.255:138	192.168.203.130	Internal	Local Host	Denied	0xc004000d	Default rule	NetBios Datagram	0	0	0	0	-	-	-	-	0	0	
+	-->
+	
+	<when test='$_type = "ISAFWSLog"'>	
+		<collectFieldsByRegex src="$_body">
+			<regex><![CDATA[<reptDevName:gPatStr><:patSep><_year:gPatYear>-<_mon:gPatMonNum>-<_day:gPatDay>(?:\t|\s+)<_time:gPatTime>(?:\t|\s+)<_body2:gPatMesgBody>]]></regex>
+		</collectFieldsByRegex>
+		
+		<setEventAttribute attr="eventType">ISAServer-FW-Generic</setEventAttribute>    
+		<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		
+		<setEventAttribute attr="deviceTime">toDateTime($_mon, $_day, $_year, $_time)</setEventAttribute>
+		
+		<collectAndSetAttrByPos src="$_body2" sep='\t'>
+		      <attrPosMap attr="_proto" pos='1'/>
+		      <attrPosMap attr="_srcIpandPort" pos='2'/>
+			  <attrPosMap attr="_destIpandPort" pos='3'/>
+			  <attrPosMap attr="srcIntfName" pos='5'/>
+			  <attrPosMap attr="destIntfName" pos='6'/>
+			  <attrPosMap attr="paFwAction" pos='7'/>
+			  <attrPosMap attr="fwRule" pos='9'/>
+			  <attrPosMap attr="appTransportProto" pos='10'/>
+			  <attrPosMap attr="sentBytes" pos='12'/> 
+			  <attrPosMap attr="recvBytes" pos='14'/>  
+			  
+		</collectAndSetAttrByPos>
+		
+		<collectFieldsByRegex src="$_srcIpandPort">
+			<regex><![CDATA[<srcIpAddr:gPatIpV4Dot>:<srcIpPort:gPatIpPort>]]></regex>
+	      </collectFieldsByRegex>	  
+		
+		<collectFieldsByRegex src="$_destIpandPort">
+			<regex><![CDATA[<destIpAddr:gPatIpV4Dot>:<destIpPort:gPatIpPort>]]></regex>
+	      </collectFieldsByRegex>
+		
+		<choose>
+          <!--<Map ISA FW Event Types to Firewall Action String> -->
+		  
+			<when test="matches($paFwAction, 'QuarantineTimeout')">
+				<setEventAttribute attr="eventType">ISA-FW-QuarantineTimeout</setEventAttribute>
+				<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+			</when>
+			
+			<when test="matches($paFwAction, 'UserClearedQuarantine')">
+				<setEventAttribute attr="eventType">ISA-FW-UserClearedQuarantine</setEventAttribute>
+				<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+			</when>
+			
+			<when test="matches($paFwAction, 'Disconnect')">
+				<setEventAttribute attr="eventType">ISA-FW-Connection-Closed</setEventAttribute>
+				<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+			</when>
+			
+			<when test="matches($paFwAction, 'UnsuccessfulConnection')">
+				<setEventAttribute attr="eventType">ISA-FW-Connection-Unsuccessful</setEventAttribute>
+				<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+			</when>
+			
+			<when test="matches($paFwAction, 'SuccessfulConnection')">
+				<setEventAttribute attr="eventType">ISA-FW-Connection-Success</setEventAttribute>
+				<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+			</when>
+			
+			<when test="matches($paFwAction, 'Intermediate')">
+				<setEventAttribute attr="eventType">ISA-FW-Connection-Information</setEventAttribute>
+				<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+			</when>
+			
+			<when test="matches($paFwAction, 'Failed')">
+				<setEventAttribute attr="eventType">ISA-FW-Connection-Failed</setEventAttribute>
+				<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+			</when>
+			
+			<when test="matches($paFwAction, 'Allowed')">
+				<setEventAttribute attr="eventType">ISA-FW-Connection-Allowed</setEventAttribute>
+				<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+			</when>
+			
+			<when test="matches($paFwAction, 'Denied')">
+				<setEventAttribute attr="eventType">ISA-FW-Connection-Denied</setEventAttribute>
+				<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+			</when>
+			
+			<when test="matches($paFwAction, 'Terminate')">
+				<setEventAttribute attr="eventType">ISA-FW-Terminate-Session</setEventAttribute>
+				<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+			</when>
+			
+			<when test="matches($paFwAction, 'Establish')">
+				<setEventAttribute attr="eventType">ISA-FW-Connection-Established</setEventAttribute>
+				<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+			</when>
+			
+			<when test="matches($paFwAction, 'RedirectBind')">
+				<setEventAttribute attr="eventType">ISA-FW-RedirectBind</setEventAttribute>
+				<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+			</when>
+			
+			<when test="matches($paFwAction, 'GHBA')">
+				<setEventAttribute attr="eventType">ISA-FW-GetHostByAddress</setEventAttribute>
+				<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+			</when>
+			
+			<when test="matches($paFwAction, 'GHBN')">
+				<setEventAttribute attr="eventType">ISA-FW-GetHostByName</setEventAttribute>
+				<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+			</when>
+			
+			<when test="matches($paFwAction, 'Listen')">
+				<setEventAttribute attr="eventType">ISA-FW-Listen</setEventAttribute>
+				<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+			</when>
+			
+			<when test="matches($paFwAction, 'Bind')">
+				<setEventAttribute attr="eventType">ISA-FW-Bind</setEventAttribute>
+				<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+			</when>
+			
+			<when test="matches($paFwAction, 'NotLogged')">
+				<setEventAttribute attr="eventType">ISA-FW-Not-Logged</setEventAttribute>
+				<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+			</when>
+		</choose>
+		
+	</when>
+	
+</choose>
+	
+	<setEventAttribute attr="ipProto">convertStrToIntIpProto($_proto)</setEventAttribute>
+  </parsingInstructions>
+</eventParser>

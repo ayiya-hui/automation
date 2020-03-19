@@ -1,0 +1,2 @@
+eventType,name,module,reptDevIpAddr,key,method
+MS-EXCHG-RECEIVE,MS-EXCHG-RECEIVE_1,MicrosoftExchangeTrackingLog,$localhost,,syslog

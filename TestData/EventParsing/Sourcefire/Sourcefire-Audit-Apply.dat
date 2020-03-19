@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<46>Jan 05 21:19:18 ActionQueueScrape.pl: [DCauditLogs] SrcFireMgr: admin@127.0.0.1, System > Local > System Policy > Apply > Initial_System_Policy 2014-10-10 10:27:14 > ndcsfips2, Apply
+[params]
+deviceTime=any
+parserName=Sourcefire3Parser
+eventType=Sourcefire-Audit-Apply
+hostName=any
+reptModel=FirePOWER
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+hostIpAddr=$localhost
+eventName=Applied system policy
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+eventRuleTrigger=1
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+user=admin
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Cisco

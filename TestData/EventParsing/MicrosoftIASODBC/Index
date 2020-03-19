@@ -1,0 +1,5 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+Win-IAS-AcptReq,MicrosoftIASODBC_1,MicrosoftIASODBC,$localhost,user:scott.mace,syslog
+Win-IAS-PassedAuth,MicrosoftIASODBC_2,MicrosoftIASODBC,$localhost,user:scott.mace,syslog
+Win-IAS-FailedAuth,MicrosoftIASODBC_3,MicrosoftIASODBC,$localhost,user:scott.mace,syslog

@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+172.16.20.41
+[eventMsg]
+<37>Oct 28 13:09:43 172.16.20.41 ALT,v4,20091028T130943+0480,"PH-QA-TIP1"/$reporter,835157,1,Permit,Low,00000002-0002-0002-0002-000000000079,"0079: ICMP: Echo Reply","0079: ICMP: Echo Reply",icmp," ",172.16.0.1:0,172.16.10.18:0,20091028T130801+0480,1," ",0,1A-1B
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+reptDevIpAddr=172.16.20.41
+eventParsedOk=1
+reptVendor=3Com
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=172.16.10.18
+eventName=Detects ICMP Echo Reply packets.
+ipProto=1 (ICMP)
+appTransportProto=icmp
+eventType=Tipp_IPS-0079
+srcIpAddr=172.16.0.1
+remedyAction=Permit
+phEventCategory=0 (External)
+destIpPort=0
+srcIpPort=0
+reptModel=TippingPoint UnityOne IPS

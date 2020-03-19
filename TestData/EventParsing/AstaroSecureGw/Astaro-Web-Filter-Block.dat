@@ -1,0 +1,29 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<30>2009:08:17-13:34:22 httpproxy[3706]: id="0060" severity="info" sys="SecureWeb" sub="http" name="web request blocked, forbidden category detected" action="block" method="GET" srcip="172.18.22.150" user="" statuscode="403" cached="0" profile="REF_DefaultHTTPProfile (Default Proxy)" filteraction="REF_DefaultHTTPCFFAction (Default content filter action)" size="2798" time="1 ms" request="0xb0427040" url="http://desktopfw.weather.com/weather/local/48382?site=us&amp;fitness=*&amp;h1=%H1%&amp;h2=%H2%&amp;h3=%H3%&amp;ut=%ut%" exceptions="" error="" reason="category" category="148" categoryname="Shareware/Freeware" --automator
+[params]
+rawEventMsg=any
+deviceTime=any
+eventType=Astaro-Web-Filter-Block
+phCustId=$sender
+totBytes=2798
+srcIpAddr=172.18.22.150
+reptModel=Security Gateway
+eventId=any
+policyName=REF_DefaultHTTPProfile (Default Proxy)
+eventParsedOk=1
+eventSeverity=7
+eventName=Web request denied by Web Filter
+phEventCategory=0 (External)
+destName=desktopfw.weather.com
+webCategory=Shareware/Freeware
+eventSeverityCat=MEDIUM
+httpMethod=GET
+httpStatusCode=403 (Forbidden - The server understood the request, but is refusing to fulfill it. Authorization will not help)
+count=1
+uriStem=http://desktopfw.weather.com/weather/local/48382?site=us&amp;fitness=*&amp;h1=%H1%&amp;h2=%H2%&amp;h3=%H3%&amp;ut=%ut%
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=1 (Deny)
+reptVendor=Astaro

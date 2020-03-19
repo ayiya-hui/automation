@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+33.33.33.36
+[eventMsg]
+<11>Feb  7 05:40:37 $reporter CisACS_13_AdminAudit  1n4sfgpg 1 0 AAA Server=ADS-PRI,admin-username=-SECURITY-,browser-ip=192.168.20.35,text-message=Administrator 'admin' login failed.
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=3
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+srcIpAddr=192.168.20.35
+eventAction=1 (Deny)
+eventName=Admin authentication failed
+reptVendor=Cisco
+eventType=CisACS_13_AdminAudit_Fail
+user=admin
+phEventCategory=0 (External)
+reptDevIpAddr=$reporter
+relayDevName=ADS-PRI
+reptDevName=ADS-PRI
+reptModel=Cisco Secure ACS

@@ -1,0 +1,24 @@
+[reptDevIpAddr(key)]
+80.80.80.80
+[eventMsg]
+<190>Dec 27 14:15:15 80.80.80.80 NT: <ZenithArcA;I302;> Backup chain continuity successful Server name: MSPDATASERVER backup Folder name: D:\Backup\83B1037541A84B6B-MSPDATASERVER Volume name: C File name: C_VOL-b001-i4016.spi
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+count=1
+phCustId=$sender
+destName=any
+deviceTime=any
+eventAction=0 (Permit)
+eventId=any
+eventName=Backup Chain Continuity Successful
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=3
+eventSeverityCat=LOW
+eventType=ZenithArca-I302
+msg=backup Folder name: D:\Backup\83B1037541A84B6B-MSPDATASERVER Volume name: C File name: C_VOL-b001-i4016.spi
+reptDevIpAddr=$reporter
+reptModel=Zenith ARCA
+reptVendor=Zenith Infotech
+serverName=MSPDATASERVER

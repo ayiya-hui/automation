@@ -1,0 +1,22 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+enterprises.14179.2.6.3.3	enterprises.14179.2.6.2.35.0 x "00 21 55 4D DD 30"	enterprises.14179.2.6.2.36.0 i 0	enterprises.14179.2.6.2.37.0 i 1	enterprises.14179.2.6.2.34.0 x "00 24 36 2F 2D 84"
+[params]
+rawEventMsg=any
+eventSeverity=1
+eventSeverityCat=LOW
+srcMACAddr=00:21:55:4d:dd:30
+destMACAddr=00:24:36:2f:2d:84
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+phRecvTime=any
+phCustId=$sender
+reptDevIpAddr=$localhost
+eventName=AP sent an authenticate failure notification to a wireless client
+reptVendor=Cisco
+eventType=Cisco-WLC-3-bsnDot11StationAuthenticateFail
+phEventCategory=0 (External)
+reptModel=WLAN Controller

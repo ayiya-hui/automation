@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+10.3.10.5
+[eventMsg]
+<189>Sep 24 09:26:33 2012 US-ABC-01 %%10BGP/5/BGP_STATE_CHANGED(l): -DevIP=10.3.10.5;   10.3.98.10 state is changed from OPENCONFIRM to ESTABLISHED.
+[params]
+deviceTime=any
+parserName=H3CComwareHPParser
+eventType=H3C-Comware-BGP-BGP_STATE_CHANGED
+hostName=US-ABC-01
+reptModel=Comware
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+hostIpAddr=10.3.10.5
+eventName=H3C-Comware-BGP-BGP_STATE_CHANGED
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+eventRuleTrigger=1
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=10.3.10.5
+reptDevName=US-ABC-01
+customer=Super
+phRecvTime=any
+reptDevIpAddr=10.3.10.5
+eventAction=0 (Permit)
+reptVendor=H3C

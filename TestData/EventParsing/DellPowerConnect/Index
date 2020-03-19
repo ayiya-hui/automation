@@ -1,0 +1,7 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+Dell-PowerConnect-Generic,DellPowerConnect_1,DellPowerConnect,192.168.5.43,,syslog
+Dell-PowerConnect-Logout,DellPowerConnect_2,DellPowerConnect,192.168.5.43,,syslog
+Dell-PowerConnect-Login,DellPowerConnect_3,DellPowerConnect,192.168.5.43,,syslog
+Dell-PowerConnect-Generic,DellPowerConnect_4,DellPowerConnect,$localhost,,syslog
+Dell-PowerConnect-Generic,DellPowerConnect_5,DellPowerConnect,$localhost,,syslog

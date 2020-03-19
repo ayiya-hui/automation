@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+187.0.198.8
+[eventMsg]
+[Sep 24 11:39:49 187.0.198.8 IronPort-Mail: Info: MID 1347076 ICID 346818 From: <Eliane.Farias@arcon.com.br>
+[params]
+rawEventMsg=any
+deviceTime=any
+eventType=Cisco-IronPort-Mail-From
+phCustId=$sender
+reptModel=IronPort AsyncOS Mail
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=IronPort mail sender processed
+ironportMailICID=346818
+phEventCategory=0 (External)
+reptGeoCountry=any
+eventSeverityCat=LOW
+collectorId=any
+reptDevName=mx2.arcon.com.br
+count=1
+senderMailAddr=Eliane.Farias@arcon.com.br
+phRecvTime=any
+reptGeoOrg=any
+reptDevIpAddr=187.0.198.8
+reptVendor=Cisco
+ironportMailMID=1347076

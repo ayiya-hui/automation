@@ -1,0 +1,134 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<13>Jul 19 14:18:58 WIN-6IDDILU233L DB2Diag	0	2013-07-16-18.56.19.695000-420 E10443388F387      LEVEL: Error (OS)	PID     : 2512                 TID  : 2720        PROC : db2fmp64.exe	INSTANCE: DB2                  NODE : 000	EDUID   : 2720	FUNCTION: DB2 UDB, oper system services, sqloSSemOpen, probe:2	MESSAGE : ZRC=0x83000002=-2097151998	CALLED  : OS, -, OpenEvent	OSERR   : 2 "The system cannot find the file specified."\n
+[params]
+procId=2512
+deviceTime=any
+parserName=IBMDB2DiagParser
+eventType=DB2-Diag-Generic
+procName=db2fmp64.exe
+threadId=2720
+reptGeoState=any
+reptModel=DB2
+eventId=any
+eventParsedOk=1
+eventSeverity=7
+eventName=DB2-Diag-Generic
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+msg=ZRC=0x83000002=-2097151998
+instanceName=DB2
+count=1
+dbPartition=000
+errorString=2 "The system cannot find the file specified."\n
+funName=OS, -, OpenEvent
+eventSeverityCat=MEDIUM
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+customer=Super
+componentName=DB2 UDB, oper system services, sqloSSemOpen, probe:2
+reptGeoCity=any
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=IBM
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<13>Jul 19 14:16:17 WIN-6IDDILU233L DB2Diag	0	2013-07-16-18.56.24.177000-420 I10445044F479      LEVEL: Warning	PID     : 1568                 TID  : 3016        PROC : db2syscs.exe	INSTANCE: DB2                  NODE : 000         DB   : SAMPLE	APPHDL  : 0-3273               APPID: *LOCAL.DB2.130717015717	AUTHID  : DB2ADMIN	EDUID   : 3016                 EDUNAME: db2agent (SAMPLE) 0	FUNCTION: DB2 UDB, database utilities, sqluvtld_route_in, probe:839	DATA #1 : <preformatted>	Starting LOAD operation (S) (1) (I).\n
+[params]
+procId=1568
+deviceTime=any
+parserName=IBMDB2DiagParser
+eventType=DB2-Diag-Generic
+procName=db2syscs.exe
+threadId=3016
+reptGeoState=any
+reptModel=DB2
+eventId=any
+eventParsedOk=1
+eventSeverity=5
+eventName=DB2-Diag-Generic
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+instanceName=DB2
+count=1
+dbPartition=000
+componentName=DB2 UDB, database utilities, sqluvtld_route_in, probe:839
+eventSeverityCat=MEDIUM
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+customer=Super
+reptGeoCity=any
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=IBM
+dbName=SAMPLE
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<13>Jul 19 14:34:30 WIN-6IDDILU233L DB2Diag	0	2013-07-16-18.56.26.319000-420 I10445525F503      LEVEL: Warning	PID     : 1568                 TID  : 1980        PROC : db2syscs.exe	INSTANCE: DB2                  NODE : 000         DB   : SAMPLE	APPHDL  : 0-3273               APPID: *LOCAL.DB2.130717015717	AUTHID  : DB2ADMIN	EDUID   : 1980                 EDUNAME: db2lrid 0	FUNCTION: DB2 UDB, database utilities, DIAG_NOTE, probe:0	DATA #1 : String, 78 bytes	LOADID: 3016.2013-07-16-18.56.24.177001.0 (2;19)	Load CPU parallelism is: 3, 0\n
+[params]
+procId=1568
+deviceTime=any
+parserName=IBMDB2DiagParser
+eventType=DB2-Diag-Generic
+procName=db2syscs.exe
+threadId=1980
+reptGeoState=any
+reptModel=DB2
+eventId=any
+eventParsedOk=1
+eventSeverity=5
+eventName=DB2-Diag-Generic
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+instanceName=DB2
+count=1
+dbPartition=000
+componentName=DB2 UDB, database utilities, DIAG_NOTE, probe:0
+eventSeverityCat=MEDIUM
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+customer=Super
+reptGeoCity=any
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=IBM
+dbName=SAMPLE
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<13>Jul 19 14:36:40 WIN-6IDDILU233L DB2Diag	0	2013-07-16-18.56.46.325000-420 I10452861F538      LEVEL: Warning	PID     : 1568                 TID  : 1508        PROC : db2syscs.exe	INSTANCE: DB2                  NODE : 000         DB   : SAMPLE	APPHDL  : 0-3273               APPID: *LOCAL.DB2.130717015717	AUTHID  : DB2ADMIN	EDUID   : 1508                 EDUNAME: db2lrid 0	FUNCTION: DB2 UDB, database utilities, sqlulPrintPhaseMsg, probe:314	DATA #1 : String, 103 bytes	LOADID: 3016.2013-07-16-18.56.43.918013.0 (2;22) 	Completed LOAD phase at 07/16/2013 18:56:46.217606.\n
+[params]
+procId=1568
+deviceTime=any
+parserName=IBMDB2DiagParser
+eventType=DB2-Diag-Generic
+procName=db2syscs.exe
+threadId=1508
+reptGeoState=any
+reptModel=DB2
+eventId=any
+eventParsedOk=1
+eventSeverity=5
+eventName=DB2-Diag-Generic
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+instanceName=DB2
+count=1
+dbPartition=000
+componentName=DB2 UDB, database utilities, sqlulPrintPhaseMsg, probe:314
+eventSeverityCat=MEDIUM
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+customer=Super
+reptGeoCity=any
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=IBM
+dbName=SAMPLE

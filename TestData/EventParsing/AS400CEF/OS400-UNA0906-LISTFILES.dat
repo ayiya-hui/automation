@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+83.83.83.83
+[eventMsg]
+May 16 15:30:42 83.83.83.83 CEF :0|PowerTech|Interact|3.0|UNA0906|A System i FTP Server transaction was allowed for user JERRYB.|3| src =192.168.1.50 dst =192.168.1.57 msg=TYPE:JRN CLS :AUD JJOB :QTFTP65465 JUSER :JERRYB JNBR :416002 PGM :PLKR108JE OBJECT : LIBRARY: MEMBER: DETAIL: ST JERRYB *FTPSERVER LISTFILES QTFTP65465 LNS0811 000112 00018 /QSYS.LIB/QGPL.LIB
+[params]
+rawEventMsg=any
+eventId=any
+count=1
+eventSeverityCat=LOW
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverity=3
+eventType=OS400-UNA0906-LISTFILES
+phCustId=$sender
+reptDevIpAddr=83.83.83.83
+destIpAddr=192.168.1.57
+collectorId=any
+testEvent=Real Event(0)
+eventName=OS400-UNA0906-LISTFILES
+reptVendor=IBM
+user=JERRYB
+phRecvTime=any
+srcIpAddr=192.168.1.50
+opName=LISTFILES
+reptDevName=any
+reptModel=OS400

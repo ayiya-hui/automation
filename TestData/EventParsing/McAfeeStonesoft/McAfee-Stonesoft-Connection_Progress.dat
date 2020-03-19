@@ -1,0 +1,33 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<6>CEF:0|McAfee|IPS|5.5.7|70026|Connection_Progress|0|spt=38138 deviceExternalId=PANASONIC-PCI-V2 node 1 dst=172.25.251.50 app=TCP/48003 rt=Apr 08 2016 00:26:11 deviceFacility=Packet filter deviceInboundInterface=Interface #2 proto=6 dpt=48003 in=133300 out=155624 src=192.168.92.50 dvc=192.168.94.51 dvchost=192.168.94.51
+[params]
+domain=PANASONIC-PCI-V2 node 1
+parserName=McAfeeStonesoftParser
+eventType=McAfee-Stonesoft-Connection_Progress
+destIpAddr=172.25.251.50
+destIpPort=48003
+srcIpAddr=192.168.92.50
+reptModel=Stonesoft IPS
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Connection Progress
+appTransportProto=TCP/48003
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+eventRuleTrigger=1
+count=1
+recvBytes=133300
+srcIpPort=38138
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+ipProto=6 (TCP)
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=McAfee
+sentBytes=155624

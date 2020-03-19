@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+10.210.252.42
+[eventMsg]
+<13>Apr 28 14:11:57 10.210.252.42 netauto_discovery[4615]: dataProc.pl: 04615 (worker01) Device(898335346568137728): Skipping Normal Worker due to blackout period in effect. (1461889800)
+[params]
+deviceTime=any
+parserName=InfoBloxAppParser
+eventType=InfoBlox-NiOS-netauto_discovery-Skipping-Worker
+reptModel=NiOS
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Netauto discovery skipping worker
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=10.210.252.42
+rawEventMsg=any
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=10.210.252.42
+targetUser=worker01
+reptVendor=InfoBlox

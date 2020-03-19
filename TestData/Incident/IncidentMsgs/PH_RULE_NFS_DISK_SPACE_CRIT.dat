@@ -1,0 +1,3 @@
+[eventMsg]
+[PH_DEV_MON_SYS_DISK_UTIL]:[eventSeverity]=PHL_INFO,[diskName]=/data,[hostName]=automator14Dot0Dot7Dot1,[hostIpAddr]=14.0.7.1,[diskUtil]=96,[totalDiskMB]=2180,[usedDiskMB]=2090,[freeDiskMB]=90,[devDiskWrLatency]=52,[inodeUsedPct]=34,[inodeUsed]=134,[inodeFree]=43,[inodeMax]=177,[fileUsedPct]=24,[fileUsed]=134,[fileFree]=43,[fileMax]=177,[pollIntv]=30
+

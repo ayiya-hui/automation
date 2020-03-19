@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<11> February 25 16:16:52 AirWatch  AirWatch Syslog Details are as follows Event Type: Console, Event: EnterpriseIntegrationAccConnectionFailed, User: sysadmin, Event Source: Server, Event Module: Administration, Event Category: Communication, Event Data: Event Timestamp: February 25, 2016 16:16:51
+[params]
+customer=Super
+eventId=any
+parserName=AirWatchParser
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+count=1
+eventSeverity=1
+eventType=AirWatch-MDM-EnterpriseIntegrationAccConnectionFailed
+reptDevIpAddr=$localhost
+collectorId=any
+eventName=AirWatch MDM Enterprise IntegrationAcc connection failed
+reptVendor=AirWatch
+relayDevIpAddr=$localhost
+user=sysadmin
+extEventRecvProto=Syslog
+phRecvTime=any
+eventRuleTrigger=1
+reptDevName=any
+reptModel=MDM

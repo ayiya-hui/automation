@@ -1,0 +1,94 @@
+<eventParser name="MSSQLParser">
+  <deviceType>
+    <Vendor>Microsoft</Vendor>
+    <Model>Windows</Model>
+    <Version>ANY</Version>
+  </deviceType>
+
+  <appType>
+    <Vendor>Microsoft</Vendor>
+    <Model>SQL Server</Model>
+    <Version>ANY</Version>
+    <Name> Microsoft SQL Server</Name>
+  </appType>
+
+  <patternDefinitions>
+    <pattern name="patStrEndWithRightSquareBracket"><![CDATA[[^\]]*]]></pattern>
+    <pattern name="patStrEndBrack"><![CDATA[[^\]+]]></pattern>
+  </patternDefinitions>
+  <eventFormatRecognizer><![CDATA[\[MSSQL_]]></eventFormatRecognizer>
+  
+  <testEvents>
+      <testEvent><![CDATA[<134>May 06 17:11:00 192.168.64.6 java: [MSSQL_Logon_Success]:[eventSeverity]=PHL_INFO, [eventTime]=2009-05-06 18:50:22.587, [rptIp]=192.168.64.6, [relayIp]=192.168.64.6, [srcIp]=192.168.64.6, [user]=NT AUTHORITY\SYSTEM, [srcApp]=Report Server,]]></testEvent>
+  </testEvents>
+
+  <parsingInstructions>
+    
+    <collectFieldsByRegex src="$_rawmsg">
+      <regex><![CDATA[<:gPatSyslogPRI><_altMon:gPatMon>\s+<_altDay:gPatDay>\s+<_altTime:gPatTime>\s+<:gPatStr>\s+java:\s+\[<eventType:patStrEndWithRightSquareBracket>\]<_body:gPatMesgBody>]]></regex>
+    </collectFieldsByRegex>
+    
+    <collectAndSetAttrByKeyValuePair sep=',' src="$_body">
+      <attrKeyMap attr="_severity" key="[eventSeverity]="/>
+      <attrKeyMap attr="_eventTime" key="[eventTime]="/>
+      <attrKeyMap attr="reptDevIpAddr" key="[rptIp]="/>
+      <attrKeyMap attr="relayDevIpAddr" key="[relayIp]="/>
+      <attrKeyMap attr="_srcIp" key="[srcIp]="/>
+      <attrKeyMap attr="srcName" key="[srcName]="/>
+      <attrKeyMap attr="user" key="[user]="/>
+      <attrKeyMap attr="srcApp" key="[srcApp]="/>
+      <attrKeyMap attr="dbName" key="[dbName]="/>
+      <attrKeyMap attr="targetUser" key="[targetUser]="/>
+      <attrKeyMap attr="dbObjName" key="[objName]="/>
+    </collectAndSetAttrByKeyValuePair>
+
+    <!-- parse this 2009-03-26 19:27:52:752505 -->
+    <choose>
+	    <when test='exist _eventTime'>
+		<collectFieldsByRegex src="$_eventTime">
+		      <regex><![CDATA[<_year:gPatYear>-<_mon:gPatMonNum>-<_day:gPatDay>\s+<_time:gPatTime>.*]]></regex>
+		</collectFieldsByRegex>
+		<setEventAttribute attr="deviceTime">toDateTime($_mon, $_day, $_year, $_time)</setEventAttribute>
+	    </when>
+	    <otherwise>
+		<setEventAttribute attr="deviceTime">toDateTime($_altMon, $_altDay, $_altTime)</setEventAttribute>
+	    </otherwise>
+    </choose>
+
+    <when test='$eventType = "MSSQL_Logon_Success"'>
+      <setEventAttribute attr="logonTime">$deviceTime</setEventAttribute>
+    </when>
+    
+    <when test="exist _srcIp">
+      <choose> 
+        <when test="matches($_srcIp, '\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}')"> 
+  	  <setEventAttribute attr="srcIpAddr">$_srcIp</setEventAttribute>
+        </when>
+        <otherwise>
+	  <setEventAttribute attr="srcName">$_srcIp</setEventAttribute>
+        </otherwise>
+      </choose>
+    </when>
+    
+    <!-- event severity -->
+    <when test='exist _severity'>
+	    <choose>
+	      <when test='$_severity = "PHL_ALERT"'>
+		<setEventAttribute attr="eventSeverity">10</setEventAttribute>
+	      </when>
+	      
+	      <when test='$_severity = "PHL_CRITICAL"'>
+		<setEventAttribute attr="eventSeverity">8</setEventAttribute>
+	      </when>
+	      
+	      <when test='$_severity IN "PHL_ERROR, PHL_WARNING"'>
+		<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+	      </when>
+	      
+	      <when test='$_severity = "PHL_INFO"'>
+		<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+	      </when>
+	    </choose>
+    </when>
+  </parsingInstructions>
+</eventParser>

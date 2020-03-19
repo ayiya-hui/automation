@@ -1,0 +1,33 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>id=firewall sn=0017C5148478 time="2015-04-26 17:14:20" fw=74.203.128.131 pri=6 c=512 gcat=4 m=597 msg="ICMP packet allowed" srcMac=b0:a8:6e:32:3f:cb src=144.9.58.32::X1 srcZone=VPN dstMac=02:17:c5:14:84:79 dst=74.203.128.170::X3 dstZone=DMZ rcvd=60 app=49262 appName='Service Echo' n=281180
+[params]
+deviceTime=any
+destGeoOrg=any
+parserName=SonicwallFirewallParser
+eventType=SonicOS-597
+destGeoState=Florida
+destIpAddr=74.203.128.170
+destGeoCountry=any
+srcIpAddr=144.9.58.32
+reptModel=SonicOS
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=ICMP packet allowed
+phEventCategory=0 (External)
+eventRuleTrigger=1
+count=1
+srcIntfName=X1
+recvBytes=60
+eventSeverityCat=LOW
+collectorId=any
+destIntfName=X3
+relayDevIpAddr=$localhost
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Sonicwall
+destGeoCity=any

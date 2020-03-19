@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<22>Oct 17 18:07:32 smtp_logs: Info: ICID 175169666 >> 250-spam.domain.net\r\n250-8BITMIME\r\n250 SIZE 14680064
+[params]
+rawEventMsg=any
+eventId=any
+count=1
+domain=spam.domain.net
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+eventSeverity=1
+eventType=Cisco-IronPort-Mail-SMTP-OK
+phCustId=$sender
+reptDevIpAddr=$localhost
+collectorId=any
+smtpFailCode=250 (Server successfully delivered message)
+eventName=IronPort mail SMTP OK message
+ironportMailICID=175169666
+reptVendor=Cisco
+phRecvTime=any
+reptModel=IronPort AsyncOS Mail
+reptDevName=any
+size=14680064

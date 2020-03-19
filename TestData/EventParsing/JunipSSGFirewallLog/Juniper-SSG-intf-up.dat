@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+81.81.81.81
+[eventMsg]
+<133>SH-QA-A-Jnp-FW-01: NetScreen device_id=SH-QA-A-Jnp-FW-01  [Root]system-notification-00513: The physical state of interface ethernet0/6 has changed to Up. (2001-10-20 21:51:45).--automator
+[params]
+rawEventMsg=any
+deviceTime=any
+eventType=Juniper-SSG-intf-up
+phCustId=$sender
+destIpAddr=81.81.81.81
+reptModel=SSG ScreenOS
+eventId=any
+eventParsedOk=1
+eventSeverity=2
+testEvent=Real Event(0)
+eventName=Network interface back up
+phEventCategory=0 (External)
+destName=any
+intfName=ethernet0/6
+hostIpAddr=81.81.81.81
+eventSeverityCat=LOW
+collectorId=any
+reptDevName=any
+count=1
+phRecvTime=any
+reptDevIpAddr=81.81.81.81
+eventAction=0 (Permit)
+reptVendor=Juniper

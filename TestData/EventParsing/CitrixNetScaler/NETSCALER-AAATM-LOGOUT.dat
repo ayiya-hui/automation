@@ -1,0 +1,30 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134> 11/25/2013:11:15:39  clxns 0-PPE-0 : AAATM LOGOUT 12309889 0 : Context anonymous@166.137.108.216 - SessionId: 17085- User anonymous - Client_ip 166.137.108.216 - Nat_ip Mapped Ip - Vserver 172.22.36.80:443 - Start_time 11/25/2013:11:15:39  - End_time 11/25/2013:11:15:39  - Duration 00:00:00  - Http_resources_accessed 0 - Total_TCP_connections 0 - Total_policies_allowed 0 - Total_policies_denied 0 - Total_bytes_send 0 - Total_bytes_recv 0 - Total_compressedbytes_send 0 - Total_compressedbytes_recv 0 - Compression_ratio_send 0.00% - Compression_ratio_recv 0.00% - LogoutMethod InternalError - Group(s) N/A
+[params]
+rawEventMsg=any
+deviceTime=any
+totFlows=1
+eventType=NETSCALER-AAATM-LOGOUT
+phCustId=$sender
+reptModel=NetScaler
+eventId=any
+eventParsedOk=1
+eventSeverity=3
+hostIpAddr=172.22.36.80
+eventName=NetScaler AAA TM logout
+phEventCategory=0 (External)
+ipPort=443
+recvBytes=0
+eventSeverityCat=LOW
+collectorId=any
+user=anonymous
+reptDevName=any
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Citrix
+userGrp=N/A
+sentBytes=0

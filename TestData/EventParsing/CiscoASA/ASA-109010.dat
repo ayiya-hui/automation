@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>Dec 05 2008 13:02:16: %ASA-3-109010: Auth from 192.168.30.50/1758 to 64.56.77.124/8080 failed (too many pending auths) on interface outside.
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=5
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=MEDIUM
+destIpAddr=64.56.77.124
+eventAction=1 (Deny)
+eventName=AAA Authorization failed-too many pending auth
+srcIpAddr=192.168.30.50
+reptVendor=Cisco
+eventType=ASA-109010
+phEventCategory=0 (External)
+destIpPort=8080
+srcIntfName=outside
+reptDevIpAddr=$reporter
+srcIpPort=1758
+reptModel=ASA

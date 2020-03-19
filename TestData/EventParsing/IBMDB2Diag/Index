@@ -1,0 +1,6 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+DB2-Diag-Generic,IBMDB2Diag_1,IBMDB2Diag,$localhost,,syslog
+DB2-Diag-Generic,IBMDB2Diag_2,IBMDB2Diag,$localhost,,syslog
+DB2-Diag-Generic,IBMDB2Diag_3,IBMDB2Diag,$localhost,,syslog
+DB2-Diag-Generic,IBMDB2Diag_4,IBMDB2Diag,$localhost,,syslog

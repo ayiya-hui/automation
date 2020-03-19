@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+Hostname=f5-51-01.safehost.net,Entity=UserAgent,AVRProfileName=/FLA_PROD_WEB/FLA_PROD_WEB_ANALYTICS,AggrInterval=299,EOCTimestamp=1387536600,HitCount=2,ApplicationName=<Unassigned>,VSName=/FLA_PROD_WEB/FLA-PROD-CRM-SSL,UserAgent=Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)
+[params]
+rawEventMsg=any
+eventId=any
+count=2
+parserName=F5Parser
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+eventSeverity=1
+eventType=F5-LTM-UserAgent
+phCustId=$sender
+ruleName=/FLA_PROD_WEB/FLA_PROD_WEB_ANALYTICS
+collectorId=any
+eventName=F5 HTTP user agent
+customer=Super
+reptVendor=F5
+relayDevIpAddr=$localhost
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptDevName=f5-51-01.safehost.net
+reptModel=Big-IPOS

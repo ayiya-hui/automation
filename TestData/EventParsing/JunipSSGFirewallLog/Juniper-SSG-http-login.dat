@@ -1,0 +1,30 @@
+[reptDevIpAddr(key)]
+81.81.81.81
+[eventMsg]
+<132>SH-QA-A-Jnp-FW-01: NetScreen device_id=SH-QA-A-Jnp-FW-01  [Root]system-warning-00519: Admin user "netscreen" logged in for Web(http) management (port 80) from 172.16.10.10:37939 (2001-10-20 21:00:20).
+[params]
+rawEventMsg=any
+deviceTime=any
+eventType=Juniper-SSG-http-login
+phCustId=$sender
+destIpAddr=81.81.81.81
+srcIpAddr=172.16.10.10
+reptModel=SSG ScreenOS
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+testEvent=Real Event(0)
+eventName=Successful admin HTTP logon
+phEventCategory=0 (External)
+destName=any
+srcIpPort=37939
+eventSeverityCat=LOW
+collectorId=any
+user="netscreen"
+destIpPort=80
+reptDevName=any
+count=1
+phRecvTime=any
+reptDevIpAddr=81.81.81.81
+eventAction=0 (Permit)
+reptVendor=Juniper

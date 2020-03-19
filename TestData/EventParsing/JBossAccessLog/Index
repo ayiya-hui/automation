@@ -1,0 +1,4 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+JBOSS-Web-Request-Redirect,JBossAccessLog_1,JBossAccessLog,$localhost,,syslog
+JBOSS-Web-Request-Success,JBossAccessLog_2,JBossAccessLog,$localhost,,syslog

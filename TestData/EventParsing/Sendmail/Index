@@ -1,0 +1,9 @@
+eventType,name,module,reptDevIpAddr,key,method
+SENDMAIL_ACCEPT,Sendmail_1,Sendmail,137.146.28.72,,syslog
+SENDMAIL_REJECT,Sendmail_2,Sendmail,137.146.28.72,,syslog
+SENDMAIL_POP_LOGIN,Sendmail_3,Sendmail,137.146.28.76,,syslog
+SENDMAIL_POP_LOGOUT,Sendmail_4,Sendmail,137.146.28.76,,syslog
+SENDMAIL_IMAP_LOGIN,Sendmail_5,Sendmail,137.146.28.76,,syslog
+SENDMAIL_IMAP_LOGOUT,Sendmail_6,Sendmail,137.146.28.76,,syslog
+SENDMAIL_POP_BADLOGIN,Sendmail_7,Sendmail,137.146.28.76,,syslog
+SENDMAIL_ACCEPT,Sendmail_8,Sendmail,$localhost,,syslog

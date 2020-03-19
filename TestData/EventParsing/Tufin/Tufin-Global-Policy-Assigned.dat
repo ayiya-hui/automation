@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<5>Global Policy Assigned: revision 934 on CallCenter; revision ticket ids: CHG000459676, last modified by barma002, Additional Info: timestamp: 2015-12-08 05:45:34.133
+[params]
+parserName=TufinParser
+eventType=Tufin-Global-Policy-Assigned
+reptModel=SecureTrack
+eventId=any
+policyName=CallCenter
+eventParsedOk=1
+eventSeverity=1
+eventName=Tufin-Global-Policy-Assigned
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+seqNum=934
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+user=barma002
+rawEventMsg=any
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Tufin

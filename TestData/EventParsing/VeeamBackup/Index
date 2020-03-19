@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+VEEAM-Backup-Success,VeeamBackup_1,VeeamBackup,10.60.253.8,,syslog

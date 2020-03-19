@@ -1,0 +1,88 @@
+<eventParser name="CiscoIPSParser">
+
+  <deviceType>
+    <Vendor>Cisco</Vendor>
+    <Model>IPS</Model>
+    <Version>ANY</Version>
+  </deviceType>
+
+  <eventFormatRecognizer><![CDATA[CISCO IPS]]></eventFormatRecognizer>
+  
+  <testEvents>
+      <testEvent><![CDATA[<!-- CISCO IPS --><evAlert eventId="1203541079317487802" severity="low"><originator><hostId>MainFW-IPS</hostId><appName>sensorApp</appName><appInstanceId>376</appInstanceId></originator><time offset="0" timeZone="UTC">1204938398491122000</time><signature sigName="ICMP Network Sweep w/Echo" sigId="2100" subSigId="0" version="S2"></signature><interfaceGroup>vs1</interfaceGroup><vlan>0</vlan><participants><attack><attacker><addr locality="OUT">2.2.2.1</addr></attacker><victim><addr locality="OUT">171.64.10.225</addr><os idSource="unknown" type="unknown" relevance="relevant"></os></victim><victim><addr locality="OUT">171.66.255.87</addr><os idSource="unknown" type="unknown" relevance="relevant"></os></victim><victim><addr locality="OUT">171.66.255.86</addr><os idSource="unknown" type="unknown" relevance="relevant"></os></victim><victim><addr locality="OUT">171.66.255.84</addr><os idSource="unknown" type="unknown" relevance="relevant"></os></victim><victim><addr locality="OUT">171.66.255.85</addr><os idSource="unknown" type="unknown" relevance="relevant"></os></victim><victim><addr locality="OUT">171.66.255.82</addr><os idSource="unknown" type="unknown" relevance="relevant"></os></victim></attack></participants><alertDetails>InterfaceAttributes:  context="single_vf" physical="Unknown" backplane="GigabitEthernet0/1" ; </alertDetails></evAlert>]]></testEvent>
+  </testEvents>
+
+  <parsingInstructions>    
+
+    <setEventAttributeFromXPath attr="_format1"><![CDATA[evAlert/@eventId]]></setEventAttributeFromXPath>
+    <setEventAttributeFromXPath attr="_format2"><![CDATA[evIdsAlert/@eventId]]></setEventAttributeFromXPath>
+    
+    <when test='exist _format1'>
+	<when test='$_format2 = ""'>
+		 <setEventAttributeFromXPath attr="reptDevName"><![CDATA[evAlert/originator/hostId/text()]]></setEventAttributeFromXPath>
+		 <setEventAttributeFromXPath attr="appName"><![CDATA[evAlert/originator/appName/text()]]></setEventAttributeFromXPath>
+		 <setEventAttributeFromXPath attr="srcIpAddr"><![CDATA[evAlert/participants/attack/attacker/addr/text()]]></setEventAttributeFromXPath>
+		 <setEventAttributeFromXPath attr="srcIpPort"><![CDATA[evAlert/participants/attack/attacker/port/text()]]></setEventAttributeFromXPath>
+		 <setEventAttributeFromXPath attr="_intfName"><![CDATA[evAlert/alertDetails/text()]]></setEventAttributeFromXPath>
+		 <setEventAttributeFromXPath attr="destIpAddr"><![CDATA[evAlert/participants/attack/victim/addr/text()]]></setEventAttributeFromXPath>
+		 <setEventAttributeFromXPath attr="destIpPort"><![CDATA[evAlert/participants/attack/victim/port/text()]]></setEventAttributeFromXPath>
+		 <setEventAttributeFromXPath attr="_sigId"><![CDATA[evAlert/signature/@sigId]]></setEventAttributeFromXPath>
+		 <setEventAttributeFromXPath attr="_subSigId"><![CDATA[evAlert/signature/@subSigId]]></setEventAttributeFromXPath>
+		 <setEventAttributeFromXPath attr="eventName"><![CDATA[evAlert/signature/@sigName]]></setEventAttributeFromXPath>
+		 <setEventAttributeFromXPath attr="_severity"><![CDATA[evAlert/@severity]]></setEventAttributeFromXPath>
+		
+		<collectFieldsByRegex src="$_intfName">
+			  <regex><![CDATA[InterfaceAttributes:\s+.*backplane="<intfName:gPatStr>".*]]></regex>
+		</collectFieldsByRegex>
+	</when>
+    </when>
+    
+    <when test='exist _format2'>    
+	<when test='$_format1 = ""'>
+		 <setEventAttributeFromXPath attr="reptDevName"><![CDATA[evIdsAlert/originator/hostId/text()]]></setEventAttributeFromXPath>
+		 <setEventAttributeFromXPath attr="appName"><![CDATA[evIdsAlert/originator/appName/text()]]></setEventAttributeFromXPath>
+		 <setEventAttributeFromXPath attr="srcIpAddr"><![CDATA[evIdsAlert/participants/attacker/addr/text()]]></setEventAttributeFromXPath>
+		 <setEventAttributeFromXPath attr="srcIpPort"><![CDATA[evIdsAlert/participants/attacker/port/text()]]></setEventAttributeFromXPath>
+		 <setEventAttributeFromXPath attr="intfName"><![CDATA[evIdsAlert/interface/text()]]></setEventAttributeFromXPath>
+		 <setEventAttributeFromXPath attr="destIpAddr"><![CDATA[evIdsAlert/participants/target/addr/text()]]></setEventAttributeFromXPath>
+		 <setEventAttributeFromXPath attr="destIpPort"><![CDATA[evIdsAlert/participants/target/port/text()]]></setEventAttributeFromXPath>
+		 <setEventAttributeFromXPath attr="ipsEvRR"><![CDATA[evIdsAlert/riskRatingValue/text()]]></setEventAttributeFromXPath>
+		 <setEventAttributeFromXPath attr="ipsEvTR"><![CDATA[evIdsAlert/threatRatingValue/text()]]></setEventAttributeFromXPath>
+		 <setEventAttributeFromXPath attr="_ipProto"><![CDATA[evIdsAlert/protocol/text()]]></setEventAttributeFromXPath>
+		 <setEventAttributeFromXPath attr="_sigId"><![CDATA[evIdsAlert/signature/@id]]></setEventAttributeFromXPath>
+		 <setEventAttributeFromXPath attr="_subSigId"><![CDATA[evIdsAlert/signature/subsigId/text()]]></setEventAttributeFromXPath>
+		 <setEventAttributeFromXPath attr="eventType"><![CDATA[evIdsAlert/signature/@id]]></setEventAttributeFromXPath>
+		 <setEventAttributeFromXPath attr="eventName"><![CDATA[evIdsAlert/signature/@type]]></setEventAttributeFromXPath>
+		 <setEventAttributeFromXPath attr="_severity"><![CDATA[evIdsAlert/@severity]]></setEventAttributeFromXPath>
+	</when>
+     </when>
+  
+     <setEventAttribute attr="eventType">combineMsgId("Cisco_IPS","-",$_sigId,"/",$_subSigId)</setEventAttribute>
+    
+    <!-- event severity -->
+    <choose>
+      <when test='$_severity = "high"'>
+        <setEventAttribute attr="eventSeverity">7</setEventAttribute>
+      </when>
+
+      <when test='$_severity = "medium"'>
+        <setEventAttribute attr="eventSeverity">5</setEventAttribute>
+      </when>
+
+      <when test='$_severity = "low"'>
+        <setEventAttribute attr="eventSeverity">2</setEventAttribute>
+      </when>
+
+      <when test='$_severity = "informational"'>
+        <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+      </when>
+    </choose>
+    
+    <when test='exist _ipProto'>
+       <setEventAttribute attr="ipProto">convertStrToIntIpProto($_ipProto)</setEventAttribute>
+    </when>
+
+    
+  </parsingInstructions>
+  
+</eventParser>

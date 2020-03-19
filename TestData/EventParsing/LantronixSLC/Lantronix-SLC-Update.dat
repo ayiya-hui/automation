@@ -1,0 +1,24 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<182>xmsd: gen/info-NTP settings updated
+[params]
+customer=Super
+eventId=any
+eventSeverityCat=LOW
+eventParsedOk=1
+phEventCategory=0 (External)
+parserName=LantronixSLCParser
+count=1
+eventSeverity=1
+eventType=Lantronix-SLC-Update
+reptDevIpAddr=$localhost
+collectorId=any
+eventName=Lantronix system update
+reptVendor=Lantronix
+relayDevIpAddr=$localhost
+phRecvTime=any
+command=NTP settings
+eventRuleTrigger=1
+appTransportProto=Syslog
+reptModel=SLC Console Manager

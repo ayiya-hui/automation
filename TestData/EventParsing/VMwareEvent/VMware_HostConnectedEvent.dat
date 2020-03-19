@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+192.168.24.11
+[eventMsg]
+<134>Jan 15 10:40:11 192.168.24.11 java: [VMware_HostConnectedEvent], [eventTime]=2010-01-15 10:38:56:650, [rptIp]=192.168.24.11, [user]=Administrator, [vmwEventId]=210899, [vmwEventCat]=info, [vmHost]=192.168.64.102, [cluster]=192.168.64.102, [datacenter]=add-DC-test, [vmwEventMsg]=Connected to 192.168.64.102 in add-DC-test
+[params]
+rawEventMsg=any
+count=1
+datacenter=add-DC-test
+deviceTime=any
+eventParsedOk=1
+vmwEventCat=info
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+vmwEventMsg=Connected to 192.168.64.102 in add-DC-test
+eventName=Host connection established
+cluster=192.168.64.102
+reptDevIpAddr=192.168.24.11
+reptVendor=VMware
+eventType=VMware_HostConnectedEvent
+user=Administrator
+phEventCategory=0 (External)
+eventId=any
+reptDevName=192.168.64.102
+reptModel=Generic

@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+CylancePROTECT: Event Type: Device, Event Name: Device Updated, Device Message: Renamed: 'WIN-55NATVQHBUU' to 'WIN-2008R2-IRV1'; Policy Changed: 'Default' to 'IRVPolicy1'; Zones Added: 'IRV1', User: John Smith (johnsmith@contoso.com)
+[params]
+customer=Super
+eventId=any
+eventSeverityCat=LOW
+eventParsedOk=1
+phEventCategory=0 (External)
+parserName=CylanceProtectParser
+count=1
+eventSeverity=1
+eventType=CylanceProtect-Device-Device-Updated
+reptDevIpAddr=$localhost
+collectorId=any
+eventName=CylanceProtect-Device-Device-Updated
+reptVendor=Cylance
+relayDevIpAddr=$localhost
+user=johnsmith@contoso.com
+extEventRecvProto=Syslog
+phRecvTime=any
+eventRuleTrigger=1
+reptDevName=any
+reptModel=Protect

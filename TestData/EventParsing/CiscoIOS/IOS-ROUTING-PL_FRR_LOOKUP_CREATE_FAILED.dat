@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<188>2181070: CORTR601 LC/1/0/CPU0:Feb 11 11:00:38.176 CST: fib_mgr[174]: %ROUTING-FIB-4-PL_FRR_LOOKUP_CREATE_FAILED : Failed to create FRR state for proto ipv6, interface Null0 (parent Unknown Interface ID 00000000), nexthop 2607:f3f8:6:480::4/128 - No such file or directory
+[params]
+customer=Super
+eventId=any
+parserName=CiscoIOSParser
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=MEDIUM
+count=1
+totFlows=1
+eventType=IOS-ROUTING-PL_FRR_LOOKUP_CREATE_FAILED
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+collectorId=any
+eventName=Failed to create FRR state
+eventSeverity=5
+reptVendor=Cisco
+relayDevIpAddr=$localhost
+phRecvTime=any
+eventRuleTrigger=1
+reptModel=IOS

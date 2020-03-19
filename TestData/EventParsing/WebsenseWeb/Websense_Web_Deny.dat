@@ -1,0 +1,36 @@
+[reptDevIpAddr(key)]
+192.168.0.43
+[eventMsg]
+Apr 10 13:01:26 abc-desktop java: [Websense_Web_Deny]:[eventSeverity]=PHL_INFO, [retCode]=1, [eventTime]=2009-04-01 21:27:35.0, [rptIp]=192.168.0.43, [relayIp]=192.168.0.43, [srcIp]=192.168.20.35, [destPort]=80, [destIp]=2.2.2.2, [destName]=www.abc.net, [destCategory]=Productivity,
+[params]
+deviceTime=any
+destGeoOrg=any
+parserName=WebsenseWebParser
+webCategory=Productivity
+eventType=Websense_Web_Deny
+destGeoState=any
+destIpAddr=2.2.2.2
+srcName=any
+destGeoCountry=any
+srcIpAddr=192.168.20.35
+reptModel=Web Security
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Websense Web request denied by Web Filter inspection
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+destName=www.abc.net
+count=1
+srcMACAddr=00:0d:56:39:07:6c
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=192.168.0.43
+rawEventMsg=any
+destIpPort=80
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=192.168.0.43
+reptVendor=Websense
+destGeoCity=any

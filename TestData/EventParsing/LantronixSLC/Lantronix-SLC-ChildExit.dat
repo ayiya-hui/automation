@@ -1,0 +1,23 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<182>xasd: sw/info-PID[1348] WIFEXITED on sig Child exited
+[params]
+customer=Super
+eventId=any
+eventSeverityCat=MEDIUM
+eventParsedOk=1
+phEventCategory=0 (External)
+parserName=LantronixSLCParser
+count=1
+eventSeverity=7
+eventType=Lantronix-SLC-ChildExit
+reptDevIpAddr=$localhost
+collectorId=any
+eventName=Lantronix process exit
+reptVendor=Lantronix
+relayDevIpAddr=$localhost
+phRecvTime=any
+eventRuleTrigger=1
+appTransportProto=Syslog
+reptModel=SLC Console Manager

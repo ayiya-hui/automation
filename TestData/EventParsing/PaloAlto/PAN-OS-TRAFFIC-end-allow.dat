@@ -1,0 +1,42 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<14>May  6 15:51:10 1,2010/05/06 15:51:10,0006C101167,TRAFFIC,end,1,2010/05/06 15:51:04,192.168.28.21,172.16.255.78,::172.16.255.78,172.16.255.78,rule3,,,ping,vsys1,untrust,untrust,ethernet1/1,ethernet1/1,syslog-172.16.20.152,2010/05/06 15:51:10,600,2,0,0,0,0,0x40,icmp,allow,196,196,196,2,2010/05/06 15:50:58,0,any,0
+[params]
+rawEventMsg=any
+appName=ping
+eventType=PAN-OS-TRAFFIC-end-allow
+phCustId=$sender
+destIpAddr=172.16.255.78
+totBytes=196
+destIpPort=0
+srcIpAddr=192.168.28.21
+reptModel=PAN-OS
+eventId=any
+ipConnId=600
+eventParsedOk=1
+eventSeverity=1
+preNATDestIpAddr=172.16.255.78
+eventName=Permitted traffic flow ended
+appTransportProto=ping
+phEventCategory=4 (Traffic)
+paFwAction=allow
+webCategory=any
+srcIntfName=ethernet1/1
+srcFwZone=untrust
+srcIpPort=0
+preNATDestIpPort=0
+eventSeverityCat=LOW
+totPkts=2
+destIntfName=ethernet1/1
+postNATSrcIpAddr=172.16.255.78
+ipProto=1 (ICMP)
+destFwZone=untrust
+postNATSrcIpPort=0
+count=2
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Palo Alto
+durationMSec=0
+fwRule=rule3

@@ -1,0 +1,90 @@
+<eventParser name="WebsenseMailParser">
+  <deviceType>
+    <Vendor>Generic</Vendor>
+    <Model>Generic</Model>
+    <Version>ANY</Version>
+  </deviceType>
+
+  <appType>
+    <Vendor>Websense</Vendor>
+    <Model>Mail Security</Model>
+    <Version>ANY</Version>
+    <Name>Websense Mail Security</Name>
+  </appType>
+
+  <patternDefinitions>
+    <pattern name="patStrEndWithRightSquareBracket"><![CDATA[[^\]]*]]></pattern>
+    <pattern name="patStrEndBrack"><![CDATA[[^\]+]]></pattern>
+  </patternDefinitions>
+  <eventFormatRecognizer><![CDATA[\[Websense_Mail]]></eventFormatRecognizer>
+  
+  <testEvents>
+      <testEvent><![CDATA[Apr 10 12:50:45 partha-desktop java: [Websense_Mail_Deny_policy]:[eventSeverity]=PHL_INFO, [eventTime]=2009-04-03 07:20:39.617, [rptIp]=192.168.64.6, [relayIp]=192.168.64.6,[prevGwIp]=83.26.186.254,[senderMailAddr]=kefxcelcarsdiz@xcelcars.com,[policyName]=Anti-Spam Agent - DFP,[policyAction]=Isolate,[subject]=View Our Wholesale Rolex Replica watches Today,]]></testEvent>
+  </testEvents>
+
+  <parsingInstructions>
+
+    <!--
+      Apr 10 12:50:45 partha-desktop java: [Websense_Mail_Deny_policy]:[eventSeverity]=PHL_INFO, [eventTime]=2009-04-03 07:20:39.617, [rptIp]=192.168.64.6, [relayIp]=192.168.64.6,[prevGwIp]=83.26.186.254,[senderMailAddr]=kefxcelcarsdiz@xcelcars.com,[policyName]=Anti-Spam Agent - DFP,[policyAction]=Isolate,[subject]=View Our Wholesale Rolex Replica watches Today,
+
+Apr  9 21:58:13 partha-desktop java: [Websense_Mail_Permit]:[eventSeverity]=PHL_INFO, [eventTime]=2009-04-03 06:15:50.94, [rptIp]=192.168.64.6,[subject]=LAST DAY for standard Easter delivery ... FREE on select gifts!,[prevGwIp]=66.165.105.253,[prevGwHost]=mta134.e.harryanddavid.com,[nextGwIp]=172.23.2.5,
+
+Apr  9 21:58:13 partha-desktop java: [Websense_Mail_Deny_Gw]:[eventSeverity]=PHL_INFO, [eventTime]=2009-04-03 07:00:00.0, [rptIp]=192.168.64.6,[reason]=421 scout.AmericanSystems.com has refused your connection as your mail server appears to be blacklisted,[prevGwIp]=67.218.163.15,
+    -->
+
+    <collectFieldsByRegex src="$_rawmsg">
+      <regex><![CDATA[<:gPatSyslogPRI><:gPatMon>\s+<:gPatDay>\s+<:gPatTime>\s+<:gPatStr>\s+java:\s+\[<eventType:patStrEndWithRightSquareBracket>\]<_body:gPatMesgBody>]]></regex>
+    </collectFieldsByRegex>
+    
+    <collectAndSetAttrByKeyValuePair sep=',' src="$_body">
+      <attrKeyMap attr="_severity" key="[eventSeverity]="/>
+      <attrKeyMap attr="_eventTime" key="[eventTime]="/>
+      <attrKeyMap attr="reptDevIpAddr" key="[rptIp]="/>
+      <attrKeyMap attr="relayDevIpAddr" key="[relayIp]="/>
+      <attrKeyMap attr="mailSubject" key="[subject]="/>
+      <attrKeyMap attr="user" key="[user]="/>
+      <attrKeyMap attr="srcIpAddr" key="[prevGwIp]="/>
+      <attrKeyMap attr="destIpAddr" key="[nextGwIp]="/>
+      <attrKeyMap attr="srcName" key="[prevGwHost]="/>
+      <attrKeyMap attr="senderMailAddr" key="[senderMailAddr]="/>
+      <attrKeyMap attr="errReason" key="[reason]="/>
+      <attrKeyMap attr="policyName" key="[policyName]="/>
+      <attrKeyMap attr="mailAction" key="[policyAction]="/>
+      <attrKeyMap attr="spamScore" key="[spamScore]="/>
+    </collectAndSetAttrByKeyValuePair>
+    
+    <!-- parse the reason code to get the number in front -->
+    <when test='exist errReason'>
+      <collectFieldsByRegex src="$errReason">
+	<regex><![CDATA[<smtpFailCode:gPatInt>\s+.*]]></regex>
+      </collectFieldsByRegex>
+    </when>
+
+    <!-- parse this 2009-03-26 19:27:52:752505 -->
+    <collectFieldsByRegex src="$_eventTime">
+      <regex><![CDATA[<_year:gPatYear>-<_mon:gPatMonNum>-<_day:gPatDay>\s+<_time:gPatTime>.*]]></regex>
+    </collectFieldsByRegex>
+
+    <setEventAttribute attr="deviceTime">toDateTime($_mon, $_day, $_year, $_time)</setEventAttribute>
+    
+    <!-- event severity -->
+    <choose>
+      <when test='$_severity = "PHL_ALERT"'>
+	<setEventAttribute attr="eventSeverity">10</setEventAttribute>
+      </when>
+      
+      <when test='$_severity = "PHL_CRITICAL"'>
+	<setEventAttribute attr="eventSeverity">8</setEventAttribute>
+      </when>
+      
+      <when test='$_severity IN "PHL_ERROR, PHL_WARNING"'>
+	<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+      </when>
+      
+      <when test='$_severity = "PHL_INFO"'>
+	<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+      </when>
+    </choose>
+
+  </parsingInstructions>
+</eventParser>

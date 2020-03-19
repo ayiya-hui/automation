@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+83.83.83.83
+[eventMsg]
+Aug 24 16:25:40 83.83.83.83 CEF :0|PowerTech|Interact|2.0|UNA2012|A SQL Server transaction was allowed for user PLCM2ADM.|2| src =127.0.0.1 dst =10.0.1.179 msg=TYPE:JRN CLS :AUD JJOB :QZDASOINIT JUSER :PLCM2ADM JNBR :059767 PGM :PLKR108JEL OBJECT : LIBRARY : MEMBER: DETAIL: ST PLCM2ADM *SQLSRV PRPDESCRB QZDASOINIT LNS0811 000112 00061 DELETE FROM PTCMT2.CMCOLL WHERE SUBMITTED < ? AND PRIVATE = 0
+[params]
+rawEventMsg=any
+eventType=OS400-UNA2012-PRPDESCRB
+phCustId=$sender
+destIpAddr=10.0.1.179
+srcName=any
+srcIpAddr=any
+reptModel=OS400
+eventId=any
+eventParsedOk=1
+eventSeverity=2
+testEvent=Real Event(0)
+eventName=OS400-UNA2012-PRPDESCRB
+phEventCategory=0 (External)
+opName=PRPDESCRB
+eventSeverityCat=LOW
+collectorId=any
+user=PLCM2ADM
+reptDevName=any
+count=1
+phRecvTime=any
+reptDevIpAddr=83.83.83.83
+reptVendor=IBM
+command=DELETE FROM PTCMT2.CMCOLL WHERE SUBMITTED < ? AND PRIVATE = 0

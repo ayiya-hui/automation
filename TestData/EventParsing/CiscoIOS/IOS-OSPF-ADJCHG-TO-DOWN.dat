@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<187>201: May 12 01:10:52: %OSPF-5-ADJCHG: Process 1, Nbr 2.2.2.2 on Ethernet0/0 from FULL to DOWN, Neighbor Down: Interface down or detached
+[params]
+rawEventMsg=any
+deviceTime=any
+destIpAddr=2.2.2.2
+destName=any
+eventType=IOS-OSPF-ADJCHG-TO-DOWN
+phCustId=$sender
+intfName=Ethernet0/0
+reptModel=IOS
+eventId=any
+eventParsedOk=1
+eventSeverity=2
+hostIpAddr=$localhost
+eventName=OSPF neighbor went down
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+collectorId=any
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Cisco

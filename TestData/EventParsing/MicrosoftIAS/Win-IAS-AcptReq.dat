@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+$localhost (user:haitian.fang)
+[eventMsg]
+<13>Nov  6 14:09:08 WIN2008-ADS.accelops MSIASLog	0	192.168.26.7,haitian.fang,11/06/2012,14:09:06,IAS,WIN2008-ADS,4,192.168.26.7,5,0,61,19,31,88C6631F38C3,30,000B866D64F4,6,1,26,0x000039E7050A416363656C4F5053,26,0x000039E7061364383A63373A63383A63363A62323A3837,26,0x000039E70A10616363656C6F70735F6172756261,4108,192.168.26.7,4116,0,4128,ArubaWLAN,4154,Use Windows authentication for all users,4155,1,4129,ACCELOPS\haitian.fang,4127,4,25,311 1 fe80::b1a2:8904:1eec:22b3 10/11/2012 10:23:00 7184,8153,0,8111,0,4130,accelops.net/Users/Haitian Fang,4149,Cisco ASA VPN,4136,1,4142,0
+[params]
+deviceTime=any
+eventType=Win-IAS-AcptReq
+phCustId=$sender
+reptModel=IAS
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=AAA authentication started
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+user=haitian.fang
+reptDevName=WIN2008-ADS
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Microsoft
+nepDevIpAddr=192.168.26.7
+relayDevName=IAS

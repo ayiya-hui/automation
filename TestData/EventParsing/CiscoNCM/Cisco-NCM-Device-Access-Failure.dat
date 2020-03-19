@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+10.3.35.32
+[eventMsg]
+05 21 2014 10:08:02 10.4.101.170 <USER:INFO> 477056942 Sat Mar 01 04:14:13 EST 2014 nas_admin Device Access Failure lncmpmasp01.staples.com 10.3.35.32 Attempt to retrieve data from device failed:   Attempt to retrieve data from device failed:   Retrieve configuration - Failed Bypassed: retrieve configuration via SCP through CLI.  (Requires SCP, CLI to be enabled.) Bypassed: retrieve configuration via SCP Tried: retrieve configuration via FTP through CLI (Warning: SSH server username or password not specified in NA admin settings.) Tried: retrieve configuration via TFTP through CLI (Warning: Can't open Telnet connection to 10.171.20.9 (port 23) Unable to establish a connection to device, tried: snmp, ssh, telnet) Tried: retrieve configuration via CLI (Warning: Can't open Telnet connection to 10.171.20.9 (port 23) Unable to establish a connection to device, tried: snmp, ssh, telnet) Tried: retrieve configuration via TFTP through SNMP (Warning: Unable to establish a connection to device, tried: snmp, ssh, telnet)  3301 10.171.20.9 $OrignatorEmail$ nas_
+[params]
+parserName=CiscoNCMParser
+eventType=Cisco-NCM-Device-Access-Failure
+destIpAddr=10.171.20.9
+reptModel=CiscoWorks NCM
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Cisco Network Compliance Manager Device Access Failure
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+eventRuleTrigger=1
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=any
+user=nas_admin
+destIpPort=23
+reptDevName=lncmpmasp01.staples.com
+customer=Super
+phRecvTime=any
+reptDevIpAddr=10.3.35.32
+reptVendor=Cisco

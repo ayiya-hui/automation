@@ -1,0 +1,391 @@
+<eventParser name="PaloAltoParser">
+	<deviceType>
+		<Vendor>Palo Alto</Vendor>
+		<Model>PAN-OS</Model>
+		<Version>ANY</Version>
+	</deviceType>
+
+	<!-- examples
+     <14>May  6 15:51:04 1,2010/05/06 15:51:04,0006C101167,TRAFFIC,start,1,2010/05/06 15:50:58,192.168.28.21,172.16.255.78,::172.16.255.78,172.16.255.78,rule3,,,icmp,vsys1,untrust,untrust,ethernet1/1,ethernet1/1,syslog-172.16.20.152,2010/05/06 15:51:04,600,2,0,0,0,0,0x40,icmp,allow,196,196,196,2,2010/05/06 15:50:58,0,any,0
+	 
+	 <14>May  6 15:51:15 1,2010/05/06 15:51:15,0006C101167,SYSTEM,general,0,2010/05/06 15:51:15,,unknown,,0,0,general,informational,User admin logged in via CLI from 192.168.28.21
+	   -->
+
+	<eventFormatRecognizer><![CDATA[<:gPatTime>,\w+,(?:TRAFFIC|THREAT|CONFIG|SYSTEM)]]></eventFormatRecognizer>
+	
+   <testEvents>
+      <testEvent><![CDATA[<14>May  6 15:51:04 1,2010/05/06 15:51:04,0006C101167,TRAFFIC,start,1,2010/05/06 15:50:58,192.168.28.21,172.16.255.78,::172.16.255.78,172.16.255.78,rule3,,,icmp,vsys1,untrust,untrust,ethernet1/1,ethernet1/1,syslog-172.16.20.152,2010/05/06 15:51:04,600,2,0,0,0,0,0x40,icmp,allow,196,196,196,2,2010/05/06 15:50:58,0,any,0]]></testEvent>
+      <testEvent><![CDATA[<14>May  6 15:51:15 1,2010/05/06 15:51:15,0006C101167,SYSTEM,general,0,2010/05/06 15:51:15,,unknown,,0,0,general,informational,User admin logged in via CLI from 192.168.28.21]]></testEvent>
+      <testEvent><![CDATA[<14>May  9 17:55:21 1,2010/05/09 17:55:21,0006C101167,THREAT,url,6,2010/05/09 17:55:20,172.16.2.2,216.163.137.68,::172.16.255.78,216.163.137.68,DynamicDefault,,,web-browsing,vsys1,trust,untrust,ethernet1/2,ethernet1/1,syslog-172.16.20.152,2010/05/09 17:55:21,976,1,1126,80,38931,80,0x40,tcp,block-url,"www.playboy.com/favicon.ico",(9999),adult-and-pornography,informational,0]]></testEvent>
+  </testEvents>
+
+	<!-- pattern definitions -->
+	<patternDefinitions>
+		<pattern name="patTime"><![CDATA[<:gPatYear>/<:gPatMonNum>/<:gPatDay>\s+<:gPatTime>]]></pattern>
+		<pattern name="patType"><![CDATA[[TRAFFIC|THREAT|CONFIG|SYSTEM]]]></pattern>
+	</patternDefinitions>
+
+	<parsingInstructions>
+
+		<!-- parsing common fields -->
+		<switch>
+			<case>
+				<collectFieldsByRegex src="$_rawmsg">
+					<regex><![CDATA[<:gPatSyslogPRI><_mon:gPatMon>\s+<_day:gPatDay>\s+<_time:gPatTime>\s+<reptDevIpAddr:gPatIpV4Dot>\s+<_body:gPatMesgBody>]]></regex>
+				</collectFieldsByRegex>
+				<collectAndSetAttrByRegex src="$_body">
+					<regex><![CDATA[<:gPatTime>,<:gPatWord>,<_type:gPatWord>,<_body:gPatMesgBody>]]></regex>
+				</collectAndSetAttrByRegex>
+				<setEventAttribute attr="deviceTime">toDateTime($_mon, $_day, $_time)</setEventAttribute> 
+			</case>      
+			<case>
+				<collectFieldsByRegex src="$_rawmsg">
+					<regex><![CDATA[<:gPatSyslogPRI><:gPatMon>\s+<:gPatDay>\s+<:gPatTime>\s+<_body:gPatMesgBody>]]></regex>
+				</collectFieldsByRegex>
+				<collectAndSetAttrByRegex src="$_body">
+					<regex><![CDATA[\d+,<_year:gPatYear>/<_mon:gPatMonNum>/<_day:gPatDay>\s+<_time:gPatTime>,<:gPatWord>,<_type:gPatWord>,<_body:gPatMesgBody>]]></regex>
+				</collectAndSetAttrByRegex>
+				<setEventAttribute attr="deviceTime">toDateTime($_mon, $_day, $_year, $_time)</setEventAttribute> 
+			</case>
+		</switch>
+
+		<setEventAttribute attr="eventType">PAN-OS-</setEventAttribute>
+
+		<choose>
+			<when test='$_type = "TRAFFIC"'>
+				<collectAndSetAttrByPos src="$_body" sep=','>
+					<attrPosMap attr="_subtype" pos='1'/>
+					<attrPosMap attr="_srcIpAddr" pos='4'/> 
+					<attrPosMap attr="_destIpAddr" pos='5'/>
+					<attrPosMap attr="_postNATSrcIpAddr" pos='6'/>	 
+					<attrPosMap attr="_preNATDestIpAddr" pos='7'/>	  
+					<attrPosMap attr="fwRule" pos='8'/>
+					<attrPosMap attr="user" pos='9'/>
+					<attrPosMap attr="targetUser" pos='10'/>
+					<attrPosMap attr="appTransportProto" pos='11'/>
+					<attrPosMap attr="srcFwZone" pos='13'/>
+					<attrPosMap attr="destFwZone" pos='14'/>
+					<attrPosMap attr="srcIntfName" pos='15'/>
+					<attrPosMap attr="destIntfName" pos='16'/>
+					<attrPosMap attr="ipConnId" pos='19'/>
+					<attrPosMap attr="count" pos='20'/>
+					<attrPosMap attr="srcIpPort" pos='21'/> 
+					<attrPosMap attr="destIpPort" pos='22'/> 
+					<attrPosMap attr="postNATSrcIpPort" pos='23'/>
+					<attrPosMap attr="preNATDestIpPort" pos='24'/>
+					<attrPosMap attr="_ipProto" pos='26'/>
+					<attrPosMap attr="paFwAction" pos='27'/>
+					<attrPosMap attr="totBytes" pos='28'/>
+					<attrPosMap attr="totPkts" pos='31'/>
+					<attrPosMap attr="_deviceTime" pos='32'/>
+					<attrPosMap attr="durationMSec" pos='33'/>
+					<attrPosMap attr="webCategory" pos='34'/>
+				</collectAndSetAttrByPos>
+
+				<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+
+				<switch>
+					<case>
+						<collectAndSetAttrByRegex src="$_deviceTime">
+							<regex><![CDATA[<_year:gPatYear>/<_mon:gPatMonNum>/<_day:gPatDay>\s+<_time:gPatTime>]]></regex>
+						</collectAndSetAttrByRegex>
+						<setEventAttribute attr="deviceTime">toDateTime($_mon, $_day, $_year, $_time)</setEventAttribute>
+					</case>
+				</switch>
+
+
+				<choose>
+					<when test='$paFwAction = "allow"'>
+						<setEventAttribute attr="eventType">combineMsgId($eventType, $_type, "-", $_subtype, "-", $paFwAction)</setEventAttribute>
+						<setEventAttribute attr="eventAction">0</setEventAttribute>
+					</when>
+					<when test='$paFwAction = "drop"'>
+						<when test='$_subtype = "start"'>
+							<setEventAttribute attr="eventType">combineMsgId($eventType, $_type, "-", $_subtype, "-", $paFwAction)</setEventAttribute>
+							<setEventAttribute attr="eventAction">1</setEventAttribute>
+						</when>
+						<otherwise>
+							<setEventAttribute attr="eventType">combineMsgId($eventType, $_type, "-", "deny")</setEventAttribute>
+							<setEventAttribute attr="eventAction">1</setEventAttribute>
+						</otherwise>
+					</when>
+					<otherwise>
+						<setEventAttribute attr="eventType">combineMsgId($eventType, $_type, "-", "deny")</setEventAttribute>
+					</otherwise>
+				</choose>
+
+				<switch>
+					<case>
+						<collectFieldsByRegex src="$_srcIpAddr">
+							<regex><![CDATA[::<srcIpAddr:gPatIpV4Dot>]]></regex>
+						</collectFieldsByRegex>
+					</case>
+					<default>
+						<setEventAttribute attr="srcIpAddr">$_srcIpAddr</setEventAttribute>
+					</default>
+				</switch>
+
+				<switch>
+					<case>
+						<collectFieldsByRegex src="$_preNATDestIpAddr">
+							<regex><![CDATA[::<preNATDestIpAddr:gPatIpV4Dot>]]></regex>
+						</collectFieldsByRegex>
+					</case>
+					<default>
+						<setEventAttribute attr="preNATDestIpAddr">$_preNATDestIpAddr</setEventAttribute>
+					</default>
+				</switch>
+
+				<switch>
+					<case>
+						<collectFieldsByRegex src="$_destIpAddr">
+							<regex><![CDATA[::<destIpAddr:gPatIpV4Dot>]]></regex>
+						</collectFieldsByRegex>
+					</case>
+					<default>
+						<setEventAttribute attr="destIpAddr">$_destIpAddr</setEventAttribute>
+					</default>
+				</switch>
+
+				<switch>
+					<case>
+						<collectFieldsByRegex src="$_postNATSrcIpAddr">
+							<regex><![CDATA[::<postNATSrcIpAddr:gPatIpV4Dot>]]></regex>
+						</collectFieldsByRegex>
+					</case>
+					<default>
+						<setEventAttribute attr="postNATSrcIpAddr">$_postNATSrcIpAddr</setEventAttribute>
+					</default>
+				</switch>
+			</when>
+
+			<when test='$_type = "THREAT"'>
+				<collectAndSetAttrByPos src="$_body" sep=','>
+					<attrPosMap attr="_subtype" pos='1'/>
+					<attrPosMap attr="_srcIpAddr" pos='4'/> 
+					<attrPosMap attr="_destIpAddr" pos='5'/>
+					<attrPosMap attr="_postNATSrcIpAddr" pos='6'/>	 
+					<attrPosMap attr="_preNATDestIpAddr" pos='7'/>	
+					<attrPosMap attr="fwRule" pos='8'/>
+					<attrPosMap attr="user" pos='9'/>
+					<attrPosMap attr="targetUser" pos='10'/>
+					<attrPosMap attr="appTransportProto" pos='11'/>
+					<attrPosMap attr="srcFwZone" pos='13'/>
+					<attrPosMap attr="destFwZone" pos='14'/>
+					<attrPosMap attr="srcIntfName" pos='15'/>
+					<attrPosMap attr="destIntfName" pos='16'/>
+					<attrPosMap attr="ipConnId" pos='19'/>
+					<attrPosMap attr="count" pos='20'/>
+					<attrPosMap attr="srcIpPort" pos='21'/> 
+					<attrPosMap attr="destIpPort" pos='22'/> 
+					<attrPosMap attr="postNATSrcIpPort" pos='23'/>
+					<attrPosMap attr="preNATDestIpPort" pos='24'/>
+					<attrPosMap attr="_ipProto" pos='26'/>
+					<attrPosMap attr="paFwAction" pos='27'/>
+					<attrPosMap attr="_misc" pos='28'/>
+					<attrPosMap attr="_rawthreatID" pos='29'/>
+					<attrPosMap attr="webCategory" pos='30'/>
+					<attrPosMap attr="_severity" pos='31'/>
+				</collectAndSetAttrByPos>
+
+				<collectAndSetAttrByRegex src="$_rawthreatID">
+						<regex><![CDATA[.*\(<_threatID:gPatWord>\)]]></regex>
+				</collectAndSetAttrByRegex>
+					
+				<choose>
+					<when test='$paFwAction = "allow"'>
+						<setEventAttribute attr="eventType">combineMsgId($eventType, $_type, "-", $_subtype, "-", $_threatID, "-", "alert")</setEventAttribute>
+						<setEventAttribute attr="eventAction">0</setEventAttribute>
+					</when>
+					<when test='$paFwAction = "alert"'>
+						<setEventAttribute attr="eventType">combineMsgId($eventType, $_type, "-", $_subtype, "-", $_threatID, "-", "alert")</setEventAttribute>
+						<setEventAttribute attr="eventAction">0</setEventAttribute>
+					</when>
+					<otherwise>
+						<setEventAttribute attr="eventType">combineMsgId($eventType, $_type, "-", $_subtype, "-", $_threatID, "-", "deny")</setEventAttribute>
+						<setEventAttribute attr="eventAction">1</setEventAttribute>
+					</otherwise>
+				</choose>
+
+				<when test='$_subtype = "vulnerability"'>
+					<collectAndSetAttrByRegex src="$_rawthreatID">
+						<regex><![CDATA[.*\(<_idpthreatID:gPatInt>\)]]></regex>
+					</collectAndSetAttrByRegex>
+					<setEventAttribute attr="eventType">combineMsgId("PAN-IDP-", $_idpthreatID)</setEventAttribute>
+				</when>
+
+				<when test='$_subtype = "url"'>
+					<setEventAttribute attr="destName">$_misc</setEventAttribute>
+				</when>
+				<when test='$_subtype = "virus"'>
+					<setEventAttribute attr="virusName">$_misc</setEventAttribute>
+				</when>
+
+				<switch>
+					<case>
+						<collectFieldsByRegex src="$_srcIpAddr">
+							<regex><![CDATA[::<srcIpAddr:gPatIpV4Dot>]]></regex>
+						</collectFieldsByRegex>
+					</case>
+					<default>
+						<setEventAttribute attr="srcIpAddr">$_srcIpAddr</setEventAttribute>
+					</default>
+				</switch>
+
+				<switch>
+					<case>
+						<collectFieldsByRegex src="$_preNATDestIpAddr">
+							<regex><![CDATA[::<preNATDestIpAddr:gPatIpV4Dot>]]></regex>
+						</collectFieldsByRegex>
+					</case>
+					<default>
+						<setEventAttribute attr="preNATDestIpAddr">$_preNATDestIpAddr</setEventAttribute>
+					</default>
+				</switch>
+
+				<switch>
+					<case>
+						<collectFieldsByRegex src="$_destIpAddr">
+							<regex><![CDATA[::<destIpAddr:gPatIpV4Dot>]]></regex>
+						</collectFieldsByRegex>
+					</case>
+					<default>
+						<setEventAttribute attr="destIpAddr">$_destIpAddr</setEventAttribute>
+					</default>
+				</switch>
+
+				<switch>
+					<case>
+						<collectFieldsByRegex src="$_postNATSrcIpAddr">
+							<regex><![CDATA[::<postNATSrcIpAddr:gPatIpV4Dot>]]></regex>
+						</collectFieldsByRegex>
+					</case>
+					<default>
+						<setEventAttribute attr="postNATSrcIpAddr">$_postNATSrcIpAddr</setEventAttribute>
+					</default>
+				</switch>
+
+				<choose>
+					<when test='$_severity = "informational"'>
+						<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+					</when>
+
+					<when test='$_severity = "low"'>
+						<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+					</when>
+
+					<when test='$_severity = "medium"'>
+						<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+					</when>
+
+					<when test='$_severity = "high"'>
+						<setEventAttribute attr="eventSeverity">7</setEventAttribute>
+					</when>
+
+					<when test='$_severity = "critical"'>
+						<setEventAttribute attr="eventSeverity">9</setEventAttribute>
+					</when>
+				</choose>			
+			</when>
+
+			<when test='$_type = "CONFIG"'>
+				<collectAndSetAttrByPos src="$_body" sep=','>
+					<attrPosMap attr="_subtype" pos='1'/>
+				</collectAndSetAttrByPos>
+				<setEventAttribute attr="eventType">combineMsgId($eventType, $_type, $_subtype)</setEventAttribute>
+			</when>
+
+			<when test='$_type = "SYSTEM"'>
+				<collectAndSetAttrByPos src="$_body" sep=','>
+					<attrPosMap attr="_subtype" pos='1'/>
+					<attrPosMap attr="_eventID" pos='5'/>
+					<attrPosMap attr="_severity" pos='10'/>
+					<attrPosMap attr="_description" pos='11'/>
+				</collectAndSetAttrByPos>
+
+				<switch>
+					<case>
+						<collectFieldsByRegex src="$_description">
+							<regex><![CDATA[User <user:gPatStr> logged in via <appPort:gPatStr> from <srcIpAddr:gPatIpV4Dot>]]></regex>
+						</collectFieldsByRegex>
+						<setEventAttribute attr="eventType">combineMsgId($eventType, $_type, "-", "login-success")</setEventAttribute>
+						<setEventAttribute attr="destIpAddr">$reptDevIpAddr</setEventAttribute>
+					</case>
+
+					<case>
+						<collectFieldsByRegex src="$_description">
+							<regex><![CDATA[Failed password for invalid user <user:gPatStr> from <srcIpAddr:gPatIpV4Dot> <:gPatMesgBody>]]></regex>
+						</collectFieldsByRegex>
+						<setEventAttribute attr="eventType">combineMsgId($eventType, $_type, "-", "login-failed")</setEventAttribute>
+						<setEventAttribute attr="destIpAddr">$reptDevIpAddr</setEventAttribute>
+					</case>
+
+					<case>
+						<collectFieldsByRegex src="$_description">
+							<regex><![CDATA[Accepted password for <user:gPatStr> from <srcIpAddr:gPatIpV4Dot> port <srcIpPort:gPatStr> <appPort:gPatStr>]]></regex>
+						</collectFieldsByRegex>
+						<setEventAttribute attr="eventType">combineMsgId($eventType, $_type, "-", "login-success")</setEventAttribute>
+						<setEventAttribute attr="destIpAddr">$reptDevIpAddr</setEventAttribute>
+					</case>
+
+					<case>
+						<collectFieldsByRegex src="$_description">
+							<regex><![CDATA[Authentication failed for user <user:gPatStr> via <appPort:gPatStr> from <srcIpAddr:gPatIpV4Dot>]]></regex>
+						</collectFieldsByRegex>
+						<setEventAttribute attr="eventType">combineMsgId($eventType, $_type, "-", "login-failed")</setEventAttribute>
+						<setEventAttribute attr="destIpAddr">$reptDevIpAddr</setEventAttribute>
+					</case>
+
+					<default>
+						<setEventAttribute attr="eventType">combineMsgId($eventType, $_type, "-", "generic")</setEventAttribute>
+					</default>
+				</switch>
+
+				<choose>
+					<when test='$_severity = "informational"'>
+						<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+					</when>
+
+					<when test='$_severity = "low"'>
+						<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+					</when>
+
+					<when test='$_severity = "medium"'>
+						<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+					</when>
+
+					<when test='$_severity = "high"'>
+						<setEventAttribute attr="eventSeverity">7</setEventAttribute>
+					</when>
+
+					<when test='$_severity = "critical"'>
+						<setEventAttribute attr="eventSeverity">9</setEventAttribute>
+					</when>
+				</choose>			
+			</when>
+		</choose>
+
+		<when test='exist _ipProto'>
+			<setEventAttribute attr="ipProto">convertStrToIntIpProto($_ipProto)</setEventAttribute>
+		</when>
+
+		<when test='exist appPort'>
+			<when test='$appPort = "Web"'>
+				<setEventAttribute attr="ipProto">6</setEventAttribute>
+			</when>
+			<when test='$appPort = "ssh2"'>
+				<setEventAttribute attr="destIpPort">22</setEventAttribute>
+				<setEventAttribute attr="ipProto">6</setEventAttribute>
+			</when>
+			<when test='$appPort = "telnet"'>
+				<setEventAttribute attr="destIpPort">23</setEventAttribute>
+				<setEventAttribute attr="ipProto">6</setEventAttribute>
+			</when>
+		</when>
+
+		<when test='exist appTransportProto'>
+			<setEventAttribute attr="appName">$appTransportProto</setEventAttribute>
+		</when>
+
+	</parsingInstructions>
+</eventParser>

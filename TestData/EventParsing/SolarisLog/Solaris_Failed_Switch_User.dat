@@ -1,0 +1,24 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<34>May 14 22:41:25 su: [ID 810491 auth.crit] 'su root' failed for wenyong on /dev/pts/2
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=7
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=MEDIUM
+destIpAddr=$localhost
+eventAction=1 (Deny)
+eventName=Failed switch user
+targetUser=root
+reptVendor=Sun
+eventType=Solaris_Failed_Switch_User
+user=wenyong
+phEventCategory=0 (External)
+reptDevIpAddr=$localhost
+reptModel=Solaris

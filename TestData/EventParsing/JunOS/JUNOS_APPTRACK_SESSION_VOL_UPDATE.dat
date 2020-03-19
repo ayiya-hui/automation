@@ -1,0 +1,45 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<14>Nov 17 20:42:45 RT_FLOW: APPTRACK_SESSION_VOL_UPDATE: AppTrack volume update: 209.152.215.131/0->205.132.171.3/0 unkn None None 209.152.215.131/0->205.132.171.3/0 None None 50 untrust-to-untrust untrust untrust 163739 132227530(3816368432) 181767802(1045295088) 12521740 N/A N/A
+[params]
+rawEventMsg=any
+deviceTime=any
+appName=None
+eventType=JUNOS_APPTRACK_SESSION_VOL_UPDATE
+phCustId=$sender
+destIpAddr=205.132.171.3
+totBytes=566696224
+preNATDestIpAddr=205.132.171.3
+srcIpAddr=209.152.215.131
+reptModel=JunOS
+eventId=any
+policyName=untrust-to-untrust
+ipConnId=163739
+eventParsedOk=1
+eventSeverity=1
+appTransportProto=50
+sentPkts=132227530
+eventName=Periodic updates for a session monitored by the Application tracking service
+serviceName=unkn
+phEventCategory=0 (External)
+srcFwZone=untrust
+recvBytes=1045295088
+srcIpPort=0
+preNATDestIpPort=0
+eventSeverityCat=LOW
+collectorId=any
+totPkts=313995332
+postNATSrcIpAddr=209.152.215.131
+destIpPort=0
+destFwZone=untrust
+postNATSrcIpPort=0
+reptDevName=any
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+recvPkts=181767802
+eventAction=0 (Permit)
+reptVendor=Juniper
+durationMSec=12521740
+sentBytes=3816368432

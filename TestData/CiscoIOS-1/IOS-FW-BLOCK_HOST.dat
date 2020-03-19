@@ -1,0 +1,24 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<190>43: Dec 14 23:35:01.463: %FW-2-BLOCK_HOST: Blocking new TCP connections to host 14.14.14.13 for 10 minute[chars] (half-open count [dec] exceeded)
+[params]
+deviceTime=any
+eventType=IOS-FW-BLOCK_HOST
+phCustId=$sender
+destIpAddr=14.14.14.13
+reptModel=IOS
+eventId=any
+eventParsedOk=1
+eventSeverity=8
+hostIpAddr=$localhost
+eventName=Host blocked - half-open conns above threshold
+phEventCategory=0
+eventSeverityCat=MEDIUM
+collectorId=any
+relayDevIpAddr=$localhost
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=Success(0)
+reptVendor=Cisco

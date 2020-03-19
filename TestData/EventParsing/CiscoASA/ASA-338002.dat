@@ -1,0 +1,35 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<164>Nov 23 2010 08:55:12: %ASA-4-338002: Dynamic Filter monitored blacklisted TCP traffic from inside:10.200.200.104/56328 (24.97.162.243/23179) to outside:72.14.204.156/80 (72.14.204.156/80), destination 72.14.204.156 resolved from dynamic list: pagead.l.doubleclick.net, threat-level: low, category: Ads    False Positive Tuning
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+count=1
+phCustId=$sender
+destIpAddr=72.14.204.156
+destIntfName=outside
+destIpPort=80 (HTTP)
+destDomain=pagead.l.doubleclick.net
+deviceTime=any
+eventAction=0 (Permit)
+eventId=any
+eventName=Traffic to a blacklisted domain
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=5
+eventSeverityCat=MEDIUM
+eventType=ASA-338002
+ipProto=6 (TCP)
+postNATSrcIpAddr=24.97.162.243
+postNATSrcIpPort=23179
+preNATDestIpAddr=72.14.204.156
+preNATDestIpPort=80 (HTTP)
+reptDevIpAddr=$reporter
+reptModel=ASA
+reptVendor=Cisco
+srcIpAddr=10.200.200.104
+srcIntfName=inside
+srcIpPort=56328
+threatCategory=Ads
+threatLevel=low

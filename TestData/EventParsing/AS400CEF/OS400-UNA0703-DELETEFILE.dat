@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+83.83.83.83
+[eventMsg]
+Mar 18 17:53:00 83.83.83.83 CEF :0|PowerTech|Interact|2.0|UNA0703|A System i FTP Client transaction was allowed for user BRENDAN.|3| src =10.0.1.180 dst =10.0.1.180 msg=TYPE:JRN CLS :AUD JJOB :QTFTP00149 JUSER :BRENDAN JNBR :029256 PGM :PLKR108JEL OBJECT : LIBRARY : MEMBER: DETAIL: ST BRENDAN *FTPCLIENT DELETEFILE QTFTP00149 LNS0811 000112 00033 /QSYS.LIB/PAYROLL.LIB/NEVADA.FILE
+[params]
+rawEventMsg=any
+eventType=OS400-UNA0703-DELETEFILE
+phCustId=$sender
+destIpAddr=10.0.1.180
+srcIpAddr=10.0.1.180
+reptModel=OS400
+eventId=any
+eventParsedOk=1
+eventSeverity=3
+testEvent=Real Event(0)
+eventName=OS400-UNA0703-DELETEFILE
+phEventCategory=0 (External)
+opName=DELETEFILE
+dirName=/QSYS.LIB/PAYROLL.LIB/NEVADA.FILE
+eventSeverityCat=LOW
+collectorId=any
+user=BRENDAN
+reptDevName=any
+count=1
+phRecvTime=any
+reptDevIpAddr=83.83.83.83
+reptVendor=IBM

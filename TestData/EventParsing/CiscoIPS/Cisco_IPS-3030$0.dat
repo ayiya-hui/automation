@@ -1,0 +1,86 @@
+[reptDevIpAddr(key)]
+$localhost (srcIpAddr:2.1.2.2)
+[eventMsg]
+<!-- CISCO IPS --><evAlert eventId="1203541079310561111" severity="informational"><originator><hostId>MainFW-IPS</hostId><appName>sensorApp</appName><appInstanceId>376</appInstanceId></originator><time offset="0" timeZone="UTC">1203985007585765000</time><signature sigName="TCP SYN Host Sweep" sigId="3030" subSigId="0" version="S2"></signature><interfaceGroup>vs1</interfaceGroup><vlan>0</vlan><participants><attack><attacker><addr locality="OUT">2.1.2.2</addr><port>2271</port></attacker><victim><addr locality="OUT">72.14.253.99</addr><os idSource="unknown" type="unknown" relevance="relevant"></os></victim><victim><addr locality="OUT">209.85.201.109</addr><os idSource="unknown" type="unknown" relevance="relevant"></os></victim><victim><addr locality="OUT">209.85.139.99</addr><os idSource="unknown" type="unknown" relevance="relevant"></os></victim><victim><addr locality="OUT">169.254.161.83</addr><os idSource="unknown" type="unknown" relevance="relevant"></os></victim><victim><addr locality="OUT">72.14.253.104</addr><os idSource="unknown" type="unknown" relevance="relevant"></os></victim><victim><addr locality="OUT">209.85.147.109</addr><os idSource="unknown" type="unknown" relevance="relevant"></os></victim></attack></participants><alertDetails>InterfaceAttributes:  context="single_vf" physical="Unknown" backplane="GigabitEthernet0/1" ; </alertDetails></evAlert>
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+appName=sensorApp
+count=1
+phCustId=$sender
+destIpAddr=72.14.253.99
+eventId=any
+eventName=TCP SYN Host Sweep
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=1
+eventSeverityCat=LOW
+eventType=Cisco_IPS-3030/0
+ipsFPCheckStatus=0 (Couldnot determine)
+intfName=GigabitEthernet0/1
+reptDevName=MainFW-IPS
+reptDevIpAddr=$reporter
+reptModel=IPS
+reptVendor=Cisco
+srcIpAddr=2.1.2.2
+srcIpPort=2271
+[reptDevIpAddr(key)]
+$localhost (srcIpAddr:2.1.2.4)
+[eventMsg]
+<!-- CISCO IPS --><evIdsAlert eventId="1252555306296791649" vendor="Cisco" severity="informational"><originator><hostId>SJ-SaaS-ASA-IPS</hostId><appName>sensorApp</appName><appInstanceId>445</appInstanceId></originator><time offset="-420" timeZone="UTC">1288309512266777000</time><signature  description="TCP SYN Host Sweep" id="3030" version="S2" type="anomaly" created="20010202"><subsigId>0</subsigId><marsCategory>Probe/SpecificPorts</marsCategory></signature><interfaceGroup>vs1</interfaceGroup><vlan>0</vlan><participants><attacker><addr locality="OUT">2.1.2.4</addr><port>51004</port></attacker><target><addr locality="OUT">207.5.72.188</addr><os idSource="unknown" type="unknown" relevance="relevant" /></target><target><addr locality="OUT">67.195.135.148</addr><os idSource="learned" type="bsd" relevance="relevant" /></target><target><addr locality="OUT">72.14.213.102</addr><os idSource="unknown" type="unknown" relevance="relevant" /></target><target><addr locality="OUT">63.217.232.146</addr><os idSource="unknown" type="unknown" relevance="relevant" /></target><target><addr locality="OUT">208.71.125.72</addr><os idSource="unknown" type="unknown" relevance="relevant" /></target><target><addr locality="OUT">216.38.169.106</addr><os idSource="unknown" type="unknown" relevance="relevant" /></target><target><addr locality="OUT">65.49.92.50</addr><os idSource="unknown" type="unknown" relevance="relevant" /></target></participants><alertDetails>InterfaceAttributes:  context="single_vf" physical="Unknown" backplane="GigabitEthernet0/1" ; </alertDetails><riskRatingValue targetValueRating="medium" attackRelevanceRating="relevant">31</riskRatingValue><threatRatingValue>31</threatRatingValue><interface context="single_vf" physical="Unknown" backplane="GigabitEthernet0/1">GigabitEthernet0/1</interface><protocol>tcp</protocol><globalCorrelation><globalCorrelationScore>0</globalCorrelationScore><globalCorrelationRiskDelta>0</globalCorrelationRiskDelta><globalCorrelationModifiedRiskRating>false</globalCorrelationModifiedRiskRating><globalCorrelationDenyPacket>false</globalCorrelationDenyPacket><globalCorrelationDenyAttacker>false</globalCorrelationDenyAttacker><globalCorrelationOtherOverrides>false</globalCorrelationOtherOverrides><globalCorrelationAuditMode>false</globalCorrelationAuditMode></globalCorrelation></evIdsAlert>
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+appName=sensorApp
+count=1
+phCustId=$sender
+destIpAddr=207.5.72.188
+eventId=any
+eventName=TCP SYN Host Sweep
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=1
+eventSeverityCat=LOW
+eventType=Cisco_IPS-3030/0
+ipsFPCheckStatus=0 (Couldnot determine)
+intfName=GigabitEthernet0/1
+ipProto=6 (TCP)
+ipsEvRR=31
+ipsEvTR=31
+reptDevName=SJ-SaaS-ASA-IPS
+reptDevIpAddr=$reporter
+reptModel=IPS
+reptVendor=Cisco
+srcIpAddr=2.1.2.4
+srcIpPort=51004
+devEventTypeGrp=Probe/SpecificPorts
+[reptDevIpAddr(key)]
+$localhost (srcIpAddr:2.1.2.5)
+[eventMsg]
+<!-- CISCO IPS --><evIdsAlert eventId="1252555306296791649" vendor="Cisco" severity="informational"><originator><hostId>SJ-SaaS-ASA-IPS</hostId><appName>sensorApp</appName><appInstanceId>445</appInstanceId></originator><time offset="-420" timeZone="UTC">1288309512266777000</time><signature  description="TCP SYN Host Sweep" id="3030" version="S2" type="anomaly" created="20010202"><subsigId>0</subsigId><marsCategory>Probe/SpecificPorts</marsCategory></signature><interfaceGroup>vs1</interfaceGroup><vlan>0</vlan><participants><attacker><addr locality="OUT">2.1.2.5</addr><port>51004</port></attacker><target><addr locality="OUT">207.5.72.188</addr><os idSource="unknown" type="unknown" relevance="relevant" /></target><target><addr locality="OUT">96.6.237.205</addr><os idSource="unknown" type="unknown" relevance="relevant" /></target><target><addr locality="OUT">66.235.132.152</addr><os idSource="unknown" type="unknown" relevance="relevant" /></target><target><addr locality="OUT">64.94.107.24</addr><os idSource="unknown" type="unknown" relevance="relevant" /></target><target><addr locality="OUT">208.71.125.72</addr><os idSource="unknown" type="unknown" relevance="relevant" /></target><target><addr locality="OUT">67.195.135.148</addr><os idSource="learned" type="bsd" relevance="relevant" /></target><target><addr locality="OUT">72.14.213.102</addr><os idSource="unknown" type="unknown" relevance="relevant" /></target><target><addr locality="OUT">63.217.232.146</addr><os idSource="unknown" type="unknown" relevance="relevant" /></target></participants><alertDetails>InterfaceAttributes:  context="single_vf" physical="Unknown" backplane="GigabitEthernet0/1" ; </alertDetails><riskRatingValue targetValueRating="medium" attackRelevanceRating="relevant">31</riskRatingValue><threatRatingValue>31</threatRatingValue><interface context="single_vf" physical="Unknown" backplane="GigabitEthernet0/1">GigabitEthernet0/1</interface><protocol>tcp</protocol><globalCorrelation><globalCorrelationScore>0</globalCorrelationScore><globalCorrelationRiskDelta>0</globalCorrelationRiskDelta><globalCorrelationModifiedRiskRating>false</globalCorrelationModifiedRiskRating><globalCorrelationDenyPacket>false</globalCorrelationDenyPacket><globalCorrelationDenyAttacker>false</globalCorrelationDenyAttacker><globalCorrelationOtherOverrides>false</globalCorrelationOtherOverrides><globalCorrelationAuditMode>false</globalCorrelationAuditMode></globalCorrelation></evIdsAlert>
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+appName=sensorApp
+count=1
+phCustId=$sender
+destIpAddr=207.5.72.188
+eventId=any
+eventName=TCP SYN Host Sweep
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=1
+eventSeverityCat=LOW
+eventType=Cisco_IPS-3030/0
+ipsFPCheckStatus=0 (Couldnot determine)
+intfName=GigabitEthernet0/1
+ipProto=6 (TCP)
+ipsEvRR=31
+ipsEvTR=31
+reptDevName=SJ-SaaS-ASA-IPS
+reptDevIpAddr=$reporter
+reptModel=IPS
+reptVendor=Cisco
+srcIpAddr=2.1.2.5
+srcIpPort=51004
+devEventTypeGrp=Probe/SpecificPorts

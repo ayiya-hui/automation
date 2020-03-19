@@ -1,0 +1,29 @@
+[reptDevIpAddr(key)]
+20.20.20.120
+[eventMsg]
+Fri Oct 30 18:19:58 2009 $reporter AccelOps-WinLog-WMI  [Category]="12810" [CategoryString]="Filtering Platform Connection" [ComputerName]="sf1dc03.jha.local" [Data]="NULL" [EventCode]="5156" [EventIdentifier]="5156" [EventType]="4" [Logfile]="Security" [RecordNumber]="184035403" [SourceName]="Microsoft-Windows-Security-Auditing" [TimeGenerated]="20100505222919.072161-000" [TimeWritten]="20100505222919.072161-000" [Type]="Audit Success" [User]="(null)" [[Application Information]][Process ID]="2008" [Application Name]="\device\harddiskvolume1\windows\system32\dns.exe" [[Network Information]][Direction]="Outbound" [Source Address]="10.0.0.54" [Source Port]="61758" [Destination Address]="208.67.220.220" [Destination Port]="53" [Protocol]="17" [[Filter Information]][Filter Run-Time ID]="0" [Layer Name]="Connect"
+[params]
+rawEventMsg=any
+type=Audit Success
+eventAction=0 (Permit)
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+appName=\device\harddiskvolume1\windows\system32\dns.exe
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=208.67.220.220
+eventName=Windows Filtering allowed a connection
+ipProto=17 (UDP)
+reptVendor=Microsoft
+eventType=Win-Security-5156
+srcIpAddr=10.0.0.54
+phEventCategory=0 (External)
+destIpPort=53 (DOMAIN)
+reptDevIpAddr=$reporter
+srcIpPort=61758
+reptModel=Windows
+eventSource=Microsoft-Windows-Security-Auditing

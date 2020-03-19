@@ -1,0 +1,29 @@
+[reptDevIpAddr(key)]
+10.10.10.11
+[eventMsg]
+<29>May 17 07:18:52 10.10.10.11 httpd: 2016-05-17 11:18:52.036Z [adminflast]: Called - GetSupportFiles message=downloaded\040support\040files: Args message="downloaded support files"
+[params]
+deviceTime=any
+parserName=InfoBloxAuditParser
+eventType=InfoBlox-Audit-GetSupportFiles-Called
+srcName=HOST-10.10.10.11
+srcIpAddr=10.10.10.11
+reptModel=NiOS
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=GetSupportFiles Called
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+msg=downloaded support files
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=10.10.10.11
+user=adminflast
+rawEventMsg=any
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=10.10.10.11
+reptVendor=InfoBlox

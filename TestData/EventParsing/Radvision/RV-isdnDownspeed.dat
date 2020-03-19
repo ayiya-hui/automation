@@ -1,0 +1,22 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+enterprises.903.8.0.1	enterprises.903.1.9.2.1.2 i 2	enterprises.903.1.9.2.1.3 x "07 DB 03 01 11 12 1B 00 2B 00 00 00"	enterprises.903.1.9.2.1.4 i 12	enterprises.903.1.9.2.1.5 i 1	enterprises.903.1.9.2.1.6 s "ISDN Speed Down "	enterprises.903.1.1.9 i 1	enterprises.903.1.9.2.1.1 i 12
+[params]
+rawEventMsg=any
+eventSeverity=1
+eventSeverityCat=LOW
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+phRecvTime=any
+phCustId=$sender
+eventAction=0 (Permit)
+eventName=ISDN downspeeding to a lower rate
+reptVendor=Radvision
+eventType=RV-isdnDownspeed
+phEventCategory=0 (External)
+reptDevIpAddr=$localhost
+reptModel=IP/VC Gateway
+hostName=any

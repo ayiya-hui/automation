@@ -1,0 +1,4 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+ELB-HTTP-Entry,AWSELB_1,AWSELB,$localhost,,syslog
+ELB-SSL-Entry,AWSELB_2,AWSELB,$localhost,,syslog

@@ -1,0 +1,2 @@
+[eventMsg]
+<172>Oct 24 14:57:31 13.4.0.2 phMonitorSupervisor[2972]: [PH_SYSTEM_STORAGE_LOW]:[eventSeverity]=PHL_WARNING,[procName]=phMonitorSupervisor,[fileName]=phSystemStatus.cpp,[lineNumber]=78,[phLogDetail]=Data storage is low (free bytes: 20471115776)

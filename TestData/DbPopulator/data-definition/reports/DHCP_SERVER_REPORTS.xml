@@ -1,0 +1,17 @@
+<Reports>
+<Report id="PH_Report_DHCP_1" group="PH_SYS_REPORT_DHCPServer">
+    <Name>DHCP IP Address Assignments</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This query reports DHCP IP Address Assignments </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr,hostIpAddr,hostMACAddr,computer</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_DHCP_1" name="Filter_DHCP_1">
+           <SingleEvtConstr> eventType IN ("WIN-DHCP-IP-LEASE-RENEW") </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>hostIpAddr,reptDevIpAddr</RelevantFilterAttr>
+</Report>
+</Reports>

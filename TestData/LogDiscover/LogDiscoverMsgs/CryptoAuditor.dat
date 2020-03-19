@@ -1,0 +1,2 @@
+[eventMsg]
+<189>Jun 24 15:43:01 HOST-30.200.109.1 ssh-auditor[4067]: CEF:0|SSH|CryptoAuditor|1.6.0|4201|Connection_received|1|rt=Jun 26 2015 07:48:24 SshAuditorSrc=10.1.78.8 spt=34453 SshAuditorDst=10.1.78.8 dpt=10022 SshAuditorSessionId=21 SshAuditorUsername=testuser SshAuditorRemoteusername=testuser SshAuditorProtocolsessionId=C089C55D9ADE0A4F901917D69B46B01223A02B70 SshAuditorVirtualLAN=0 cs1=source connection cs1Label=Text

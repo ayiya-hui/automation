@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<13> February 25 16:02:21 AirWatch  AirWatch Syslog Details are as follows Event Type: Console, Event: AdminRoleModified, User: staplesams\HornsleK, Event Source: Server, Event Module: Administration, Event Category: UserManagement, Event Data: Event Timestamp: February 25, 2016 16:02:21
+[params]
+domain=staplesams
+deviceTime=any
+parserName=AirWatchParser
+eventType=AirWatch-MDM-AdminRoleModified
+reptModel=MDM
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=AirWatch MDM Admin Role Modified
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+eventRuleTrigger=1
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+user=HornsleK
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=AirWatch

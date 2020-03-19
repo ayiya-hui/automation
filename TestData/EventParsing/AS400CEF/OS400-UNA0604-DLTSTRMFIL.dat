@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+83.83.83.83
+[eventMsg]
+Mar 18 17:48:36 83.83.83.83 CEF :0|PowerTech|Interact|2.0|UNA0604|A File Server transaction was allowed for user BRENDAN.|2| src =10.0.1.60 dst =10.0.1.180 msg=TYPE:JRN CLS :AUD JJOB :QPWFSERVSO JUSER :BRENDAN JNBR :025355 PGM :PLKR108JEL OBJECT : LIBRARY : MEMBER: DETAIL: OB BRENDAN *FILESRV DLTSTRMFIL QPWFSERVSO LNS0811 000112 00025 /home/BRENDAN/BoardReport
+[params]
+rawEventMsg=any
+eventType=OS400-UNA0604-DLTSTRMFIL
+phCustId=$sender
+destIpAddr=10.0.1.180
+srcIpAddr=10.0.1.60
+reptModel=OS400
+eventId=any
+eventParsedOk=1
+eventSeverity=2
+testEvent=Real Event(0)
+eventName=OS400-UNA0604-DLTSTRMFIL
+phEventCategory=0 (External)
+opName=DLTSTRMFIL
+dirName=/home/BRENDAN/BoardReport
+eventSeverityCat=LOW
+collectorId=any
+user=BRENDAN
+reptDevName=any
+count=1
+phRecvTime=any
+reptDevIpAddr=83.83.83.83
+reptVendor=IBM

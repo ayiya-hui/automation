@@ -1,0 +1,24 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<182>Oct 16 05:27:22 syslog-ng@COS-Node-1 logserver: [16/Oct/2010:05:27:21.275657 -0700] COS-Node-1 020444 ps 40000138 Info    Policy  zones_item(COS Non-Standard VPN EPC Zone:COS Trusted EPC Requiring Integrity): Match for Client Profile 'Integrity'.
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+ipConnId=40000138
+count=1
+phCustId=$sender
+deviceTime=any
+eventId=any
+eventName=Aventail generic system policy log
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=3
+eventSeverityCat=LOW
+eventType=Aventail-System-Policy-Generic
+hostName=COS-Node-1
+procName=policy service
+reptDevIpAddr=$reporter
+reptModel=Aventail VPN
+reptVendor=Sonicwall
+usrMsg=Match for Client Profile 'Integrity'.

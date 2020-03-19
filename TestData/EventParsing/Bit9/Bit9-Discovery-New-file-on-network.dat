@@ -1,0 +1,41 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<14>1 2015-04-06T16:24:02Z server1.foo.com - - - - Bit9 event:  text="Server discovered new file 'c:\usersacct\appdata\local\temp\3cziegdd.dll' [361aa7fbd5d00aa9952e94adc01d6f8d4cb08766eb03ff522ba5c7a2f9e99f9f]." type="Discovery" subtype="New file on network" hostname="SVR123" username="SVR123\acct" date="4/6/2015 4:22:52 PM" ip_address="10.168.1.1" process="c:\abc\infrastructure\bin\scannerreset.exe" file_path="c:\users\acct\appdata\local\temp\3cziegdd.dll" file_name="3cziegdd.dll" file_hash="361aa7fbd5d00aa9952e94adc01d6f8d4cb08766eb03ff522ba5c7a2f9e99f9f" installer_name="csc.exe" policy="High Enforce" process_key="00000000-0000-1258-01d0-7085edb50080" server_version="7.2.0.1395" file_trust="-2" file_threat="-2" process_trust="-1" process_threat="-1"
+[params]
+deviceTime=any
+parserName=Bit9Parser
+eventType=Bit9-Discovery-New-file-on-network
+hostName=SVR123
+procName=c:\abc\infrastructure\bin\scannerreset.exe
+hashCode=361aa7fbd5d00aa9952e94adc01d6f8d4cb08766eb03ff522ba5c7a2f9e99f9f
+reptModel=Security Platform
+eventId=any
+policyName=High Enforce
+eventParsedOk=1
+procThreatLevel=-1
+eventSeverity=1
+fileType=dll
+appVersion=7.2.0.1395
+hostIpAddr=10.168.1.1
+fileThreatLevel=-2
+eventName=Server discovered new file
+phEventCategory=0 (External)
+msg=Server discovered new file 'c:\usersacct\appdata\local\temp\3cziegdd.dll' [361aa7fbd5d00aa9952e94adc01d6f8d4cb08766eb03ff522ba5c7a2f9e99f9f].
+eventRuleTrigger=1
+type=Discovery
+count=1
+filePath=c:\users\acct\appdata\local\temp\3cziegdd.dll
+eventSeverityCat=LOW
+collectorId=any
+procTrustLevel=-1
+fileName=3cziegdd.dll
+relayDevIpAddr=$localhost
+user=acct
+fileTrustLevel=-2
+reptDevName=server1.foo.com
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+subtype=New file on network
+reptVendor=Bit9

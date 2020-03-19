@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+172.16.22.2
+[eventMsg]
+<132> Jan 10 14:10:34 172.16.22.2 00419 auth: Invalid user name/password on TELNET session
+[params]
+customer=Super
+eventId=any
+parserName=HPProCurveParser
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=MEDIUM
+count=1
+eventSeverity=5
+eventType=HP-ProCurve-00419
+reptDevIpAddr=172.16.22.2
+collectorId=any
+extEventRecvProto=Syslog
+eventName=HP-ProCurve-00419
+reptVendor=HP
+relayDevIpAddr=172.16.22.2
+rawEventMsg=any
+phRecvTime=any
+reptDevName=any
+reptModel=ProCurve

@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<143>2012-05-30 16:07:55,484  192.168.1.68 AO361 0 1 0 protocol=RADIUS,username=test1,login_status=REJECT,request_timestamp=2012-05-30 16:06:23-07,connection_dest_ip_address=192.168.1.68,connection_nad_ip_address=192.168.26.7,
+[params]
+rawEventMsg=any
+deviceTime=any
+eventType=Aruba-ClearPass-REJECT
+phCustId=$sender
+hostName=any
+destIpAddr=192.168.1.68
+reptModel=ClearPass PolicyManager
+eventId=any
+eventParsedOk=1
+eventSeverity=3
+hostIpAddr=192.168.1.68
+eventName=Aruba-ClearPass-REJECT
+appTransportProto=RADIUS
+phEventCategory=0 (External)
+destName=any
+eventSeverityCat=LOW
+user=test1
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Aruba
+nepDevIpAddr=192.168.26.7

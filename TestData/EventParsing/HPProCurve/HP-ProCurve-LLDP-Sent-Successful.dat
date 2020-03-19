@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+172.16.1.100
+[eventMsg]
+<15> Aug 28 22:35:55 172.16.1.100 LLDP: LLDP mlldpCtrl:lldp refresh pkt sent out port : 1
+[params]
+deviceTime=any
+parserName=HPProCurveParser
+isHostIntfCritical=No
+eventType=HP-ProCurve-LLDP-Sent-Successful
+intfName=1
+reptModel=ProCurve
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=HP-ProCurve-LLDP-Sent-Successful
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=172.16.1.100
+rawEventMsg=any
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=172.16.1.100
+reptVendor=HP

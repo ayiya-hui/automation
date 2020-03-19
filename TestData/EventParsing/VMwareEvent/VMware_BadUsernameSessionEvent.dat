@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+10.1.2.53
+[eventMsg]
+<134>Jan 12 14:22:27 10.1.2.53 java: [VMware_BadUsernameSessionEvent],[phLogDetail]=, [eventTime]=2010-01-12 22:19:53:681, [rptIp]=10.1.2.53, [user]=root, [vmwEventId]=94, [vmwEventCat]=error, [srcIpAddr]=10.1.20.109, [vmwEventMsg]=Cannot login root@10.1.20.109
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+vmwEventCat=error
+eventSeverity=8
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=MEDIUM
+destIpAddr=10.1.2.53
+vmwEventMsg=Cannot login root@10.1.20.109
+eventName=Logon failure due to bad username
+srcIpAddr=10.1.20.109
+reptVendor=VMware
+eventType=VMware_BadUsernameSessionEvent
+user=root
+phEventCategory=0 (External)
+reptDevIpAddr=10.1.2.53
+reptModel=Generic

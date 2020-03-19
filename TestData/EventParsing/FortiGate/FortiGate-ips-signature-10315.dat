@@ -1,0 +1,36 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<185>date=2010-06-17 time=03:46:02 devname=FGT50B3G10615108 device_id=FGT50B3G10615108 log_id=0419016384 type=ips subtype=signature pri=alert fwver=040002 severity=low carrier_ep="N/A" profile="testIPS" src=172.16.6.6 dst=172.16.10.10 src_int="internal" dst_int="wan1" policyid=2 serial=9998 status=detected proto=6 service=ftp vd="root" count=1 src_port=51988 dst_port=21 attack_id=10315 sensor="protect_http_server" ref="http://www.fortinet.com/ids/VID107937794" user="N/A" group="N/A" incident_serialno=1093323870 msg="tcp_reassembler: TCP.Stealth.Activity, syn from client at state: ESTABLISHED"
+[params]
+deviceTime=any
+eventType=FortiGate-ips-signature-10315
+phCustId=$sender
+destIpAddr=172.16.10.10
+ipsFPCheckStatus=0 (Couldnot determine)
+ipProto=6 (TCP)
+reptGeoState=Ohio
+srcIpAddr=172.16.6.6
+usrMsg=tcp_reassembler: TCP.Stealth.Activity, syn from client at state: ESTABLISHED
+reptModel=FortiOS
+eventId=any
+eventParsedOk=1
+eventSeverity=10
+eventName=IISProtect.GroupName.SQL.Injection
+serviceName=ftp
+phEventCategory=0 (External)
+infoURL=http://www.fortinet.com/ids/VID107937794
+srcIntfName=internal
+srcIpPort=51988
+eventSeverityCat=HIGH
+collectorId=any
+destIntfName=wan1
+relayDevIpAddr=$localhost
+destIpPort=21 (FTP)
+count=1
+reptGeoCity=any
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Fortinet
+userGrp=N/A

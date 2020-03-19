@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+Cisco_UC_CDRREP-CDRFileDeliveryFailureContinues,CiscoCM_1,CiscoCM,$localhost,,syslog

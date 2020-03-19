@@ -1,0 +1,315 @@
+
+<eventParser name="FoundryIronwareParser">
+
+  <deviceType>
+    <Vendor>Foundry</Vendor>
+    <Model>Ironware</Model>
+    <Version>ANY</Version>
+  </deviceType>
+
+  <!-- pattern definitions -->
+  <patternDefinitions>
+    <pattern name="patIntfId"><![CDATA[[\d+/\d+]*]]></pattern>
+    <pattern name="patStrEndComma"><![CDATA[[^,]*]]></pattern>
+    <pattern name="patReco1"><![CDATA[[^,]*,\s+[^ ]*\s+was\s+changed\s+from\s+console.*]]></pattern>
+    <pattern name="patReco2"><![CDATA[[^,]*,\s+[^ ]*\s+was\s+changed\s+from\s+\w+\s+client\s+\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}.*]]></pattern>
+    <pattern name="patReco3"><![CDATA[[^,]*,\s+[^ ]*\s+\w+\s+\w+\s+\w+\s+EXEC\s+mode.*]]></pattern>
+    <pattern name="patReco4"><![CDATA[[^,]*,\s+Interface\s+\w+,\s+state\s+\w+]]></pattern>
+    <pattern name="patReco5"><![CDATA[[^,]*,\s+Interface\s+\w+\s+\d+/\d+,\s+state\s+\w+]]></pattern>
+    <pattern name="patReco6"><![CDATA[[^,]*,\s+list\s+[^ ]*\s+permitted\s+\w+\s+\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\(.*\)\(\w+\s+\d+/\d+\s+.*\)\s+-\>\s+\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\(.*\), \d+.*]]></pattern>
+    <pattern name="patReco7"><![CDATA[[^,]*,\s+Bridge\s+root\s+changed,\s+\w+\s+\d+,\s+new\s+root\s+ID\s+[^,]*,\s+root\s+interface\s+\d+]]></pattern>
+    <pattern name="patReco8"><![CDATA[[^,]*,\s+\w+\s+\d+\s+Port\s+\d+/\d+\s+\w+\s+State\s+-\>\s+\w+.*]]></pattern>
+  </patternDefinitions>
+
+  <eventFormatRecognizer><![CDATA[<:patReco1>|<:patReco2>|<:patReco3>|<:patReco4>|<:patReco5>|<:patReco6>|<:patReco7>|<:patReco8>]]></eventFormatRecognizer>
+  
+  <testEvents>
+      <testEvent><![CDATA[<14>SJ-Dev-A-Fdy-FastIron, running-config was changed from console]]></testEvent>
+      <testEvent><![CDATA[<14>SJ-Dev-A11-Fdy-FastIron, startup-config was changed from telnet client 192.168.20.18]]></testEvent>
+      <testEvent><![CDATA[<14>SJ-Dev-A-Fdy-FastIron, phoenix_agent login to USER EXEC mode]]></testEvent>
+      <testEvent><![CDATA[<14>SJ-Dev-A-Fdy-FastIron, Interface ethernet3, state up]]></testEvent>
+      <testEvent><![CDATA[<14>SJ-Dev-A-Fdy-FastIron, Interface ethernet 20/3, state up]]></testEvent>
+      <testEvent><![CDATA[<12>SJ-QA-A-Fdy-BigIron, list 100 permitted udp 173.9.142.98(ntp)(Ethernet 2/1 0004.23ce.ba11) -> 172.16.20.121(ntp), 1 event(s)]]></testEvent>
+      <testEvent><![CDATA[<14>SJ-Dev-A-Fdy-FastIron, Bridge root changed, vlan 3, new root ID 80000004806137c6, root interface 3]]></testEvent>
+      <testEvent><![CDATA[<14>SJ-QA-A-Fdy-BigIron, VLAN 4 Port 2/7 STP State -> DISABLED (PortDown)]]></testEvent>
+  </testEvents>
+
+  <parsingInstructions> 
+
+    <!-- header -->
+    <switch>
+      <case>
+        <collectFieldsByRegex src="$_rawmsg">
+          <regex><![CDATA[<:gPatSyslogPRI><_NGHeader:gPatSyslogNGHeader> <_body:gPatMesgBody>]]></regex>
+        </collectFieldsByRegex>
+        <collectFieldsByRegex src="$_NGHeader">
+          <regex><![CDATA[<:gPatMon>\s+<:gPatDay>\s<:gPatTime>\s<reptDevIpAddr:gPatIpV4Dot>]]></regex>
+        </collectFieldsByRegex>
+      </case>
+      
+      <case>
+        <collectFieldsByRegex src="$_rawmsg">
+          <regex><![CDATA[<:gPatSyslogPRI><_body:gPatMesgBody>]]></regex>
+        </collectFieldsByRegex>
+      </case>
+    </switch>
+    
+    <setEventAttribute attr="destIpAddr">$reptDevIpAddr</setEventAttribute>
+    <setEventAttribute attr="eventAction">0</setEventAttribute>
+    
+
+    <!-- body -->    
+    <switch>
+      
+      <case>
+    <!-- 
+         config change:
+         
+         <14>SJ-Dev-A-Fdy-FastIron, running-config was changed from console
+           <14>SJ-Dev-A-Fdy-FastIron, startup-config was changed from console	
+             -->
+
+        <collectFieldsByRegex src="$_body">
+          <regex><![CDATA[<destName:patStrEndComma>,\s+<_configType:gPatStr>\s+was\s+changed\s+from\s+console.*]]></regex>
+        </collectFieldsByRegex>
+        
+	<choose>
+          <when test='$_configType = "startup-config"'>
+	    <setEventAttribute attr="eventType">Foundry-Ironware-Startup-Config-Change</setEventAttribute>
+	    <setEventAttribute attr="eventSeverity">7</setEventAttribute>
+          </when>
+          
+          <when test='$_configType = "running-config"'>
+	    <setEventAttribute attr="eventType">Foundry-Ironware-Running-Config-Change</setEventAttribute>
+	    <setEventAttribute attr="eventSeverity">7</setEventAttribute>
+          </when>
+        </choose>
+      </case>
+      
+      <case>
+        <!--
+            config change:
+            
+            <14>SJ-Dev-A-Fdy-FastIron, startup-config was changed from telnet client 192.168.20.18
+              <14>SJ-Dev-A-Fdy-FastIron, running-config was changed from telnet client 192.168.20.18	
+                -->
+        
+        <collectFieldsByRegex src="$_body">
+          <regex><![CDATA[<destName:patStrEndComma>,\s+<_configType:gPatStr>\s+was\s+changed\s+from\s+<_method:gPatStr>\s+client\s+<srcIpAddr:gPatIpV4Dot>.*]]></regex>
+        </collectFieldsByRegex>
+        
+	<choose>
+          <when test='$_configType = "startup-config"'>
+	    <setEventAttribute attr="eventType">Foundry-Ironware-Startup-Config-Change</setEventAttribute>
+	    <setEventAttribute attr="eventSeverity">7</setEventAttribute>
+          </when>
+          
+          <when test='$_configType = "running-config"'>
+	    <setEventAttribute attr="eventType">Foundry-Ironware-Running-Config-Change</setEventAttribute>
+	    <setEventAttribute attr="eventSeverity">7</setEventAttribute>
+          </when>
+        </choose>
+        
+        <choose>
+          <when test='$_method = "telnet"'>
+	    <setEventAttribute attr="destIpPort">23</setEventAttribute>
+          </when>
+          
+          <when test='$_method = "ssh"'>          
+	    <setEventAttribute attr="destIpPort">22</setEventAttribute>
+          </when>
+          
+          <when test='$_method = "http"'>
+	    <setEventAttribute attr="destIpPort">80</setEventAttribute>
+          </when>
+        </choose>
+	
+      </case>	  
+      
+      <case>
+        <!--- 
+	    Logon Successful (no syslog for failures, no syslog for logon without username)
+            <14>SJ-Dev-A-Fdy-FastIron, phoenix_agent login to USER EXEC mode
+              <14>SJ-Dev-A-Fdy-FastIron, phoenix_agent login to PRIVILEGED EXEC mode
+                -->
+        <!--
+            Logout 
+            <14>SJ-Dev-A-Fdy-FastIron, phoenix_agent logout from PRIVILEGED EXEC mode
+              <14>SJ-Dev-A-Fdy-FastIron, phoenix_agent logout from USER EXEC mode
+                -->
+
+        <collectFieldsByRegex src="$_body">
+          <regex><![CDATA[<destName:patStrEndComma>,\s+<user:gPatStr>\s+<_action:gPatStr>\s+<:gPatStr>\s+<_mode:gPatStr>\s+EXEC\s+mode.*]]></regex>
+        </collectFieldsByRegex>
+
+        <choose>
+          <when test='$_action = "login"'>
+	    <setEventAttribute attr="_action">Login</setEventAttribute>            
+          </when>
+          <when test='$_action = "logout"'>
+	    <setEventAttribute attr="_action">Logoff</setEventAttribute>            
+          </when>
+        </choose>
+
+        <choose>
+          <when test='$_mode = "USER"'>
+	    <setEventAttribute attr="_mode">Admin</setEventAttribute>
+          </when>
+          <when test='$_mode = "PRIVILEGED"'>
+	    <setEventAttribute attr="_mode">Priv-Admin</setEventAttribute>
+          </when>
+        </choose>
+
+        <setEventAttribute attr="eventType">combineMsgId("Foundry-Ironware-", $_mode, "-", $_action)</setEventAttribute>
+         <setEventAttribute attr="eventSeverity">4</setEventAttribute>
+	<when test='$eventType = "Foundry-Ironware-Priv-Admin-Login"'>
+		 <setEventAttribute attr="eventSeverity">7</setEventAttribute>
+	</when>
+	
+      </case>
+      
+      <case>
+        <!--
+            Interface up/down, VTP changes
+            <14>SJ-Dev-A-Fdy-FastIron, Interface ethernet3, state up
+              <14>SJ-Dev-A-Fdy-FastIron, Interface ethernet3, state down
+	        <14>SJ-QA-A-Fdy-BigIron, Interface ethernet 2/7, state up 
+	          <14>SJ-QA-A-Fdy-BigIron, Interface ethernet 2/7, state down  
+                    -->
+        <switch>
+          <case>
+            <collectFieldsByRegex src="$_body">
+              <regex><![CDATA[<destName:patStrEndComma>,\s+Interface\s+<_intfName:gPatStr>\s+<_intfNum:patIntfId>,\s+state\s+<_mode:gPatStr>.*]]></regex>
+            </collectFieldsByRegex>
+            <setEventAttribute attr="intfName">combineMsgId($_intfName,$_intfNum)</setEventAttribute>
+          </case>
+          <case>
+            <collectFieldsByRegex src="$_body">
+              <regex><![CDATA[<destName:patStrEndComma>,\s+Interface\s+<intfName:patStrEndComma>,\s+state\s+<_mode:gPatStr>.*]]></regex>
+            </collectFieldsByRegex>
+          </case>
+        </switch>
+	<setEventAttribute attr="eventSeverity">6</setEventAttribute>     
+	<choose>
+          <when test='$_mode = "up"'>
+	    <setEventAttribute attr="eventType">Foundry-Ironware-Intf-Up</setEventAttribute>
+          </when>
+          
+          <when test='$_mode = "down"'>
+	    <setEventAttribute attr="eventType">Foundry-Ironware-Intf-Down</setEventAttribute>
+          </when>
+        </choose>
+
+      </case>
+
+      <case>
+        <!-- Foundry-Ironware-Permit-Traffic
+             <12>SJ-QA-A-Fdy-BigIron, list 100 permitted tcp 172.16.1.11(43721)(Ethernet 2/3 0050.56a3.1cbe) -> 172.16.10.6(22), 1 event(s)
+             <12>SJ-QA-A-Fdy-BigIron, list 100 permitted udp 172.16.10.8(33629)(Ethernet 2/15 00e0.290e.a416) -> 128.63.2.53(domain), 1 event(s)
+               -->
+        <collectFieldsByRegex src="$_body">
+          <regex><![CDATA[<destName:patStrEndComma>,\s+list\s+<:gPatStr>\s+permitted\s+<_proto:gPatStr>\s+<srcIpAddr:gPatIpV4Dot>\(<_srcPort:gPatStr>\)\(<_intfName:gPatStr>\s+<_intfNum:patIntfId>\s+<srcMACAddr:gPatStr>\)\s+<:gPatStr>\s+<destIpAddr:gPatIpV4Dot>\(<_port:gPatStr>\), <count:gPatInt>.*]]></regex>
+        </collectFieldsByRegex>
+        <setEventAttribute attr="intfName">combineMsgId($_intfName,$_intfNum)</setEventAttribute>
+	<setEventAttribute attr="eventType">Foundry-Ironware-Permit-Traffic</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+	<switch>
+	  <case>
+	    <collectFieldsByRegex src="$_port">
+	      <regex><![CDATA[<destIpPort:gPatIpPort>]]></regex>
+	    </collectFieldsByRegex>
+	  </case>
+	  <case>
+	    <collectFieldsByRegex src="$_port">
+	      <regex><![CDATA[<_destIpPort:gPatStr>]]></regex>
+	    </collectFieldsByRegex>
+	  </case>
+	</switch>
+
+	<switch>
+	  <case>
+	    <collectFieldsByRegex src="$_srcPort">
+	      <regex><![CDATA[<srcIpPort:gPatIpPort>]]></regex>
+	    </collectFieldsByRegex>
+	  </case>
+	  <case>
+	    <collectFieldsByRegex src="$_srcPort">
+	      <regex><![CDATA[<_srcIpPort:gPatStr>]]></regex>
+	    </collectFieldsByRegex>
+	  </case>
+	</switch>
+
+      </case>
+      
+      <case>
+        <!-- Foundry-Ironware-Permit-Traffic
+             <12>SJ-QA-A-Fdy-BigIron, list 100 permitted ospf 172.16.3.2()(Ethernet 2/7 0007.8580.9372) -> 224.0.0.5(), 1 event(s)
+             <12>SJ-QA-A-Fdy-BigIron, list 100 permitted icmp 172.16.1.11()(Ethernet 2/3 0050.56a3.1cbe) -> 192.168.237.41(), 1 event(s)
+               -->
+        <collectFieldsByRegex src="$_body">
+          <regex><![CDATA[<destName:patStrEndComma>,\s+list\s+<:gPatStr>\s+permitted\s+<_proto:gPatStr>\s+<srcIpAddr:gPatIpV4Dot>\(\)\(<_intfName:gPatStr>\s+<_intfNum:patIntfId>\s+<srcMACAddr:gPatStr>\)\s+<:gPatStr>\s+<destIpAddr:gPatIpV4Dot>\(\), <count:gPatInt>.*]]></regex>
+        </collectFieldsByRegex>
+        <setEventAttribute attr="srcIntfName">combineMsgId($_intfName,$_intfNum)</setEventAttribute>
+	<setEventAttribute attr="eventType">Foundry-Ironware-Permit-Traffic</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+      </case>
+      <case>
+      <!--	Foundry-Ironware-Bridge-Root-Changed
+		<14>SJ-Dev-A-Fdy-FastIron, Bridge root changed, vlan 3, new root ID 80000004806137c6, root interface 3
+		-->
+      <collectFieldsByRegex src="$_body">
+          <regex><![CDATA[<destName:patStrEndComma>,\s+Bridge\s+root\s+changed,\s+<_intfName:gPatStr>\s+<_intfNum:gPatInt>,\s+new\s+root\s+ID\s+<:patStrEndComma>,\s+root\s+interface\s+<:gPatInt>]]></regex>
+        </collectFieldsByRegex>
+        <setEventAttribute attr="srcIntfName">combineMsgId($_intfName,$_intfNum)</setEventAttribute>
+	<setEventAttribute attr="eventType">Foundry-Ironware-Bridge-Root-Changed</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+      </case>
+      <case>
+      <!--	VPN port state
+		<14>SJ-QA-A-Fdy-BigIron, VLAN 4 Port 2/7 STP State -> DISABLED (PortDown)
+		<14>SJ-QA-A-Fdy-BigIron, VLAN 4 Port 2/7 STP State -> LISTENING (MakeFwding)
+		<14>SJ-QA-A-Fdy-BigIron, VLAN 4 Port 2/7 STP State -> LEARNING (FwdDlyExpiry)
+		<14>SJ-QA-A-Fdy-BigIron, VLAN 4 Port 2/7 STP State -> FORWARDING (FwdDlyExpiry)
+		-->
+      <collectFieldsByRegex src="$_body">
+              <regex><![CDATA[<destName:patStrEndComma>,\s+<_intfName:gPatStr>\s+<_intfNum:gPatInt>\s+Port\s+<_portNum:patIntfId>\s+<appTransportProto:gPatStr>\s+State\s+<:gPatStr>\s+<_mode:gPatStr>.*]]></regex>
+      </collectFieldsByRegex>
+      <setEventAttribute attr="srcIntfName">combineMsgId($_intfName,$_intfNum)</setEventAttribute>
+      <choose>
+          <when test='$_mode = "DISABLED"'>
+	    <setEventAttribute attr="eventType">Foundry-Ironware-StpPort-Disabled</setEventAttribute>
+	    <setEventAttribute attr="eventSeverity">7</setEventAttribute>
+          </when>
+          
+          <when test='$_mode = "LISTENING"'>
+	    <setEventAttribute attr="eventType">Foundry-Ironware-StpPort-Listening</setEventAttribute>
+	    <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+          </when>
+	<when test='$_mode = "LEARNING"'>
+	    <setEventAttribute attr="eventType">Foundry-Ironware-StpPort-Learning</setEventAttribute>
+	    <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+          </when>
+	  <when test='$_mode = "FORWARDING"'>
+	    <setEventAttribute attr="eventType">Foundry-Ironware-StpPort-Forwarding</setEventAttribute>
+	    <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+          </when>
+        </choose>
+      </case>
+      
+    </switch>
+
+    <when test='exist _proto'>
+      <setEventAttribute attr="ipProto">convertStrToIntIpProto($_proto)</setEventAttribute>
+    </when>
+
+    <when test='exist _destIpPort'>
+      <setEventAttribute attr="destIpPort">convertStrToIntIpPort($_destIpPort)</setEventAttribute>
+    </when>
+
+    <when test='exist _srcIpPort'>
+      <setEventAttribute attr="srcIpPort">convertStrToIntIpPort($_srcIpPort)</setEventAttribute>
+    </when>
+
+  </parsingInstructions>
+  
+</eventParser>

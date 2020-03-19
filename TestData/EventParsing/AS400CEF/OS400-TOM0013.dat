@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+83.83.83.83
+[eventMsg]
+Jan 11 15:33:40 83.83.83.83 CEF :0|PowerTech|Interact|2.0|TOM0013|The file POWERCA/Q99CB47490  has been moved to a different library.|3| src =10.0.1.75 dst =0.0.0.0 msg=TYPE:JRN CLS :AUD JJOB :QPADEV0004 JUSER :JERRYB JNBR :047344 PGM :PTPC001 OBJECT : LIBRARY : MEMBER: DETAIL: M Q99CB47490 POWERCA *FILE     6448 52576     *NA
+[params]
+rawEventMsg=any
+eventType=OS400-TOM0013
+phCustId=$sender
+osObjType=*FILE
+osObjName=Q99CB47490
+srcIpAddr=10.0.1.75
+reptModel=OS400
+eventId=any
+eventParsedOk=1
+eventSeverity=3
+testEvent=Real Event(0)
+eventName=Object moved
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+collectorId=any
+user=JERRYB
+reptDevName=any
+count=1
+phRecvTime=any
+reptDevIpAddr=83.83.83.83
+reptVendor=IBM
+command=M

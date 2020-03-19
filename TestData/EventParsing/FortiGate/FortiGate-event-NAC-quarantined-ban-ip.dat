@@ -1,0 +1,32 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<181>date=2013-05-01 time=11:20:50 devname=FortiGate80C devid=FGT80C3912622808 logid=0100043776 type=event subtype=system level=notice vd=root src=2.1.3.4 dst=aaaa:bbbb:cccc:dddd:eeee:ffff:7777:6666 src_int=lo dst_int=eth0 src_port=55312 dst_port=2586 proto=21 service=other action=ban-ip user=N/A group=N/A policyid=10 banned_src=dos banned_rule=test sensor=sensor
+[params]
+deviceTime=any
+eventType=FortiGate-event-NAC-quarantined-ban-ip
+phCustId=$sender
+ipProto=21 (Packet Radio Measurement)
+srcIpAddr=2.1.3.4
+reptModel=FortiOS
+eventId=any
+eventParsedOk=1
+eventSeverity=3
+eventName=NAC module quarantined a host
+serviceName=other
+phEventCategory=0 (External)
+srcIntfName=lo
+srcIpPort=55312
+eventSeverityCat=LOW
+collectorId=any
+destIntfName=eth0
+relayDevIpAddr=$localhost
+destIpPort=2586
+reptDevName=any
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=1 (Deny)
+fwRule=10
+reptVendor=Fortinet
+userGrp=N/A

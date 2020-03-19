@@ -1,0 +1,33 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>Oct 09 09:19:25 IronPort-Web: Info: 1349795965.314 92 10.63.254.53 TCP_CLIENT_REFRESH_MISS/200 70798 GET http://forefrontdl.microsoft.com/server/scanengineupdate/x86/Kaspersky/Package/1210090007/bases/base1b1d.kdc.cab - DIRECT/forefrontdl.microsoft.com application/octet-stream ALLOW_CUSTOMCAT_11-UnAuthenticated_Applications-AFCU_No_Auth-NONE-NONE-NONE-DefaultGroup <C_Whit,6.9,-,""-"",-,-,-,-,""-"",-,-,-,""-"",-,-,""-"",""-"",-,-,IW_swup,-,""-"",""-"",""Unknown"",""Unknown"",""-"",""-"",6156.35,0,-,""-"",""-""> - ""09/Oct/2012:09:19:25 -0600"" 71052 ""V3S;{6ADC64A3-11F9-4B04-8257-BEB541BE2975};""
+[params]
+rawEventMsg=any
+deviceTime=any
+webCategory=ALLOW_CUSTOMCAT_11-UnAuthenticated_Applications-AFCU_No_Auth-NONE-NONE-NONE-DefaultGroup
+eventType=Cisco-IronPort-Web-Request-Success
+phCustId=$sender
+srcIpAddr=10.63.254.53
+reptModel=IronPort AsyncOS Web
+eventId=any
+httpProxyAction=TCP_CLIENT_REFRESH_MISS
+eventParsedOk=1
+eventSeverity=1
+testEvent=Real Event(0)
+eventName=Web request successful
+phEventCategory=0 (External)
+infoURL=http://forefrontdl.microsoft.com/server/scanengineupdate/x86/Kaspersky/Package/1210090007/bases/base1b1d.kdc.cab
+recvBytes=71052
+eventSeverityCat=LOW
+collectorId=any
+httpMethod=GET
+user=-
+httpStatusCode=200 (The request has succeeded)
+reptDevName=any
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Cisco
+httpContentType=application/octet-stream
+httpUserAgent=V3S;{6ADC64A3-11F9-4B04-8257-BEB541BE2975};""

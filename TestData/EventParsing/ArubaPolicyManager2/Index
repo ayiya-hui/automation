@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+Aruba-ClearPass-Generic-INFO,ArubaPolicyManager2_1,ArubaPolicyManager2,$localhost,,syslog

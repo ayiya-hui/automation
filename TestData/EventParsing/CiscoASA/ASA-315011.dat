@@ -1,0 +1,51 @@
+[reptDevIpAddr(key)]
+$localhost (srcName:SJ-Dev-S-RH-VMW-01)
+[eventMsg]
+<134>Jul 24 2008 03:19:07: %ASA-6-315011: SSH session from SJ-Dev-S-RH-VMW-01 on interface inside for user "pix" terminated normally
+[params]
+rawEventMsg=any
+ipProto=6 (TCP)
+srcIntfName=inside
+user=pix
+destIpPort=22 (SSH)
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+eventAction=0 (Permit)
+eventName=SSH session ended
+reptVendor=Cisco
+eventType=ASA-315011
+phEventCategory=0 (External)
+reptDevIpAddr=$reporter
+reptModel=ASA
+[reptDevIpAddr(key)]
+$localhost (srcIpAddr:192.168.1.1)
+[eventMsg]
+<134>Jul 24 2008 03:19:07: %ASA-6-315011: SSH session from 192.168.1.1 on interface inside for user "pix" terminated normally
+[params]
+rawEventMsg=any
+ipProto=6 (TCP)
+srcIpAddr=192.168.1.1
+srcIntfName=inside
+user=pix
+destIpPort=22 (SSH)
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+eventAction=0 (Permit)
+eventName=SSH session ended
+reptVendor=Cisco
+eventType=ASA-315011
+phEventCategory=0 (External)
+reptDevIpAddr=$reporter
+reptModel=ASA

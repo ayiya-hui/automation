@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+83.83.83.83
+[eventMsg]
+Jul 27 12:13:55 83.83.83.83 CEF :0|PowerTech|Interact|2.0|UNA0901|A System i FTP Server transaction was allowed for user BRENDANP.|2| src =10.0.1.39 dst =10.0.1.179 msg=TYPE:JRN CLS :AUD JJOB :QTFTP00207 JUSER :BRENDANP JNBR :055246 PGM :PLKR108JEL OBJECT : LIBRARY: MEMBER: DETAIL: ST BRENDANP *FTPSERVER CHGCURLIB QTFTP00207 LNS0811 000112 00040 /home/pt_test/pt_test2/pt_test3/../../..
+[params]
+rawEventMsg=any
+eventType=OS400-UNA0901-CHGCURLIB
+phCustId=$sender
+destIpAddr=10.0.1.179
+srcIpAddr=10.0.1.39
+reptModel=OS400
+eventId=any
+eventParsedOk=1
+eventSeverity=2
+testEvent=Real Event(0)
+eventName=OS400-UNA0901-CHGCURLIB
+phEventCategory=0 (External)
+opName=CHGCURLIB
+dirName=/home/pt_test/pt_test2/pt_test3/../../..
+eventSeverityCat=LOW
+collectorId=any
+user=BRENDANP
+reptDevName=any
+count=1
+phRecvTime=any
+reptDevIpAddr=83.83.83.83
+reptVendor=IBM

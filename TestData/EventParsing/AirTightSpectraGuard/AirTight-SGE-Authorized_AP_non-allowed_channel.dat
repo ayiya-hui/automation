@@ -1,0 +1,31 @@
+[reptDevIpAddr(key)]
+10.255.1.36
+[eventMsg]
+<30><2013.09.09 19:45:16>CEF:0|AirTight|SpectraGuard Enterprise|6.7|5.51.515|Authorized AP operating on non-allowed channel|3|msg=Stop: Authorized AP [AP2.12.c11d] is operating on non-allowed channel. rt=Sep 09 2013 19:45:16 UTC dvc=10.255.1.36 externalId=726574 dmac=58:BF:EA:FA:26:EF cs1Label=TargetDeviceName cs1=AP2.12.c11d cs2Label=SSID cs2=TaisWiFiHiSpeed cs3Label=SecuritySetting cs3=802.11i cn1Label=RSSI_dBm cn1=-50 cn2Label=Channel cn2=149 cs4Label=Location cs4=//FB/FBFL2
+[params]
+deviceTime=any
+parserName=AirTightSpectraGuardParser
+eventType=AirTight-SGE-Authorized_AP_non-allowed_channel
+hostLocation=//FB/FBFL2
+reptModel=SpectraGuard
+eventId=any
+eventParsedOk=1
+eventSeverity=3
+wlanChannelId=149
+eventName=Authorized AP operating on non-allowed channel
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=10.255.1.36
+wlanRssi=-50
+rawEventMsg=any
+reptDevIpAddr=10.255.1.36
+reptDevName=any
+customer=Super
+phRecvTime=any
+destMACAddr=58:BF:EA:FA:26:EF
+wlanSsid=TaisWiFiHiSpeed
+reptVendor=AirTight
+wlanSecuritySetting=802.11i

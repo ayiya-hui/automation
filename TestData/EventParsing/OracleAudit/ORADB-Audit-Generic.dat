@@ -1,0 +1,161 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<172>Oracle Audit[25487]: LENGTH : '153' ACTION :[004] 'bjn' DATABASE USER:[9] 'user' PRIVILEGE :[4] 'NONE' CLIENT USER:[9] 'user' CLIENT TERMINAL:[14] 'terminal' STATUS:[1] '0'
+[params]
+parserName=OracleAuditParser
+eventType=ORADB-Audit-Generic
+computer=terminal
+reptModel=Database Server
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=ORADB-Audit-Generic
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+user=user
+rawEventMsg=any
+dbUser=user
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Oracle
+oraAuditAction=bjn
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<172>Oracle Audit[6561]: LENGTH : '158' ACTION :[6] 'COMMIT' DATABASE USER:[8] 'user' PRIVILEGE :[6] 'SYSDBA' CLIENT USER:[6] 'user' CLIENT TERMINAL:[0] '' STATUS:[1] '0' DBID:[9] '200958341'
+[params]
+parserName=OracleAuditParser
+eventType=ORADB-Audit-Generic
+computer=STATUS:
+reptModel=Database Server
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=ORADB-Audit-Generic
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+user=user
+rawEventMsg=any
+dbUser=user
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Oracle
+oraAuditAction=COMMIT
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<172>Oracle Audit[27581]: LENGTH : '187' ACTION :[34] 'select distinct sid from v$mystat
+[params]
+customer=Super
+eventId=any
+eventSeverityCat=LOW
+eventParsedOk=1
+phEventCategory=0 (External)
+parserName=OracleAuditParser
+count=1
+eventSeverity=1
+eventType=ORADB-Audit-Generic
+reptDevIpAddr=$localhost
+collectorId=any
+extEventRecvProto=Syslog
+eventName=ORADB-Audit-Generic
+reptVendor=Oracle
+relayDevIpAddr=$localhost
+oraAuditAction=select distinct sid from v$mystat
+rawEventMsg=any
+phRecvTime=any
+reptDevName=any
+reptModel=Database Server
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<172>Oracle Audit[6608]: LENGTH : '208' ACTION :[55] 'alter session set remote_dependencies_mode = signature
+[params]
+customer=Super
+eventId=any
+eventSeverityCat=LOW
+eventParsedOk=1
+phEventCategory=0 (External)
+parserName=OracleAuditParser
+count=1
+eventSeverity=1
+eventType=ORADB-Audit-Generic
+reptDevIpAddr=$localhost
+collectorId=any
+extEventRecvProto=Syslog
+eventName=ORADB-Audit-Generic
+reptVendor=Oracle
+relayDevIpAddr=$localhost
+oraAuditAction=alter session set remote_dependencies_mode = signature
+rawEventMsg=any
+phRecvTime=any
+reptDevName=any
+reptModel=Database Server
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<172>Oracle Audit[29336]: LENGTH: 180 SESSIONID:[6] 919778 ENTRYID:[1] 1 ACTION:[3] 101 RETURNCODE:[1] 0 LOGOFF$PREAD:[1] 0 LOGOFF$LREAD:[2] 37 LOGOFF$LWRITE:[1] 0 LOGOFF$DEAD:[1] 0 SESSIONCPU:[1] 0
+[params]
+parserName=OracleAuditParser
+eventType=ORADB-Audit-Generic
+reptModel=Database Server
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=ORADB-Audit-Generic
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+oraAuditAction=101
+rawEventMsg=any
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+sessionId=919778
+reptVendor=Oracle
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<172>Oracle Audit[26609]: LENGTH: 212 SESSIONID:[8] 81378312 ENTRYID:[1] 2 STATEMENT:[1] 7 USERID:[8] SCSFMLDR USERHOST:[14] z1t1brpavla126 ACTION:[2] 55 RETURNCODE:[1] 0 OBJ$NAME:[3] ALL OS$USERID:[6] oracle DBID:[9] 866609593
+[params]
+parserName=OracleAuditParser
+eventType=ORADB-Audit-Generic
+computer=z1t1brpavla126
+reptModel=Database Server
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=ORADB-Audit-Generic
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+dbId=866609593
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+user=SCSFMLDR
+rawEventMsg=any
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+sessionId=81378312
+reptVendor=Oracle
+oraAuditAction=55

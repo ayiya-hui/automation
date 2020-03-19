@@ -1,0 +1,58 @@
+[reptDevIpAddr(key)]
+$localhost (policyName:56656)
+[eventMsg]
+<134>Dec 04 2008 20:00:45: %ASA-2-106100: access-list 56656 est-allowed tcp ether05/192.168.20.20(8080) -> ether06/20.20.20.20(80) hit-cnt 1000 (first hit)
+[params]
+rawEventMsg=any
+deviceTime=any
+eventType=ASA-106100-permit
+phCustId=$sender
+destIpAddr=20.20.20.20
+destIpPort=80 (HTTP)
+srcIpAddr=192.168.20.20
+reptModel=ASA
+eventId=any
+policyName=56656
+eventParsedOk=1
+eventSeverity=8
+eventName=Permitted IP traffic by policy
+phEventCategory=0 (External)
+srcIntfName=ether05
+srcIpPort=8080
+eventSeverityCat=MEDIUM
+destIntfName=ether06
+ipProto=6 (TCP)
+count=1
+phRecvTime=any
+reptDevIpAddr=$reporter
+eventAction=0 (Permit)
+reptVendor=Cisco
+[reptDevIpAddr(key)]
+$localhost (policyName:56556)
+[eventMsg]
+<134>Dec 04 2008 20:00:45: %ASA-2-106100: access-list 56556 permitted tcp ether05/192.168.20.20(8080) -> ether06/20.20.20.20(80) hit-cnt 1000 (first hit)
+[params]
+rawEventMsg=any
+deviceTime=any
+eventType=ASA-106100-permit
+phCustId=$sender
+destIpAddr=20.20.20.20
+destIpPort=80 (HTTP)
+srcIpAddr=192.168.20.20
+reptModel=ASA
+eventId=any
+policyName=56556
+eventParsedOk=1
+eventSeverity=8
+eventName=Permitted IP traffic by policy
+phEventCategory=0 (External)
+srcIntfName=ether05
+srcIpPort=8080
+eventSeverityCat=MEDIUM
+destIntfName=ether06
+ipProto=6 (TCP)
+count=1
+phRecvTime=any
+reptDevIpAddr=$reporter
+eventAction=0 (Permit)
+reptVendor=Cisco

@@ -1,0 +1,29 @@
+[reptDevIpAddr(key)]
+10.1.32.3
+[eventMsg]
+<123>Mar  3 11:19:01 10.1.32.3 ht1-dc1-b2-isg2: NetScreen device_id=ht1-dc1-b2-isg2  [Root]system-notification-00018: Address proptablet4-duo for IP address 10.3.34.167    /255.255.255.255 in zone public has been modified by akuo-admin via web from host 10.1.37.250 to 10.1.32.1:443 session. (2011-03-03 11:18:59)-->
+[params]
+rawEventMsg=any
+deviceTime=any
+eventType=Juniper-SSG-config-modify
+phCustId=$sender
+destIpAddr=10.1.32.1
+srcIpAddr=10.1.37.250
+reptModel=SSG ScreenOS
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+testEvent=Real Event(0)
+eventName=Configure items modified by admin
+appTransportProto=web
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+collectorId=any
+user=akuo-admin
+destIpPort=443
+count=1
+phRecvTime=any
+reptDevIpAddr=10.1.32.3
+eventAction=0 (Permit)
+reptVendor=Juniper
+addedItem=Address proptablet4-duo for IP address 10.3.34.167    /255.255.255.255 in zone public

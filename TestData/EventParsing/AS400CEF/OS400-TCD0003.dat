@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+83.83.83.83
+[eventMsg]
+Apr  4 10:23:40 83.83.83.83 CEF :0|PowerTech|Interact|3.0|TCD0003|A command (RTVJOBA) was run.|3| src =10.0.1.185 dst =0.0.0.0 msg=TYPE:JRN CLS :AUD JJOB :QPADEV000B JUSER :PTUSER21C JNBR :020307 PGM :PABC0002 OBJECT : LIBRARY : MEMBER: DETAIL: C RTVJOBA QSYS *CMD Y
+[params]
+rawEventMsg=any
+eventType=OS400-TCD0003
+phCustId=$sender
+osObjType=*CMD
+osObjName=RTVJOBA
+srcIpAddr=10.0.1.185
+reptModel=OS400
+eventId=any
+eventParsedOk=1
+eventSeverity=3
+testEvent=Real Event(0)
+eventName=Command string - Command run
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+collectorId=any
+user=PTUSER21C
+reptDevName=any
+count=1
+phRecvTime=any
+reptDevIpAddr=83.83.83.83
+reptVendor=IBM
+command=C

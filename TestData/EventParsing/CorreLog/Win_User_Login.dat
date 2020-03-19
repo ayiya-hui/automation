@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<108>2014 Dec 17 15:05:47 CorreLog_Win_Agent 1NDCITVWCVLT05.tsi.lan Login Monitor: Local Console User Login: User Name: weighalll-admin
+[params]
+deviceTime=any
+parserName=CorreLogParser
+eventType=Win_User_Login
+reptModel=Windows
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Win_User_Login
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+user=weighalll-admin
+rawEventMsg=any
+reptDevName=1NDCITVWCVLT05.tsi.lan
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=1 (Deny)
+reptVendor=Microsoft

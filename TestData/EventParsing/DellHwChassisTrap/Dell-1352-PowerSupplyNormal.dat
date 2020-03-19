@@ -1,0 +1,23 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+enterprises.674.10892.1.5000 6 1352 enterprises.674.10892.1.5000.10.1.0 s "Openmanage"
+[params]
+rawEventMsg=any
+hostIpAddr=$localhost
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=any
+eventSeverity=1
+eventSeverityCat=LOW
+phRecvTime=any
+phCustId=$sender
+hostName=Openmanage
+hostIpAddr=any
+eventName=Power Supply returned to normal
+reptVendor=Generic
+eventType=Dell-1352-PowerSupplyNormal
+phEventCategory=0 (External)
+reptDevIpAddr=$localhost
+reptModel=Generic

@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+10.210.252.42
+[eventMsg]
+<181>Apr 28 14:11:25 10.210.252.42 scriptxmld[32766]: status: [4895] msgs processed since: 2016-02-16 19:46:04
+[params]
+deviceTime=any
+startTime=Tue Feb 16 19:46:04 CST 2016
+parserName=InfoBloxAppParser
+eventType=InfoBlox-NiOS-scriptxmld-Successful-Start
+reptModel=NiOS
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Netauto scriptxmld status
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=10.210.252.42
+rawEventMsg=any
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=10.210.252.42
+reptVendor=InfoBlox

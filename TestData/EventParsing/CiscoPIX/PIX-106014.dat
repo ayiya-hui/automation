@@ -1,0 +1,21 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>Dec 04 2008 20:00:45: %PIX-3-106014: Deny inbound icmp src outside: 10.10.10.10 dst inside: 20.20.20.20 (0, 3)--automator
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=any
+eventSeverity=5
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=MEDIUM
+eventAction=0 (Permit)
+eventName=Denied IP traffic
+reptVendor=Cisco
+eventType=PIX-106014
+phEventCategory=0 (External)
+reptDevIpAddr=$localhost
+reptModel=PIX

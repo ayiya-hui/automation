@@ -1,0 +1,38 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<1350>1 2015-05-15T12:57:37.152000+00:00 localhost qualys_waf - QUALYS_WAF - {"timestamp":"2015-05-15T12:57:37.152-00:00","duration":38,"id":"4dd6ba19-0d02-46f3-8bf4-8bce690d2239","clientIp":"172.27.80.170","clientPort":9073,"sensorId":"d3acc41f-d1fc-43be-af71-e7e10e9e66e2","siteId":"41db0970-8413-4648-b7e2-c50ed53cf355","connection":{"id":"bc1379fe-317e-4bae-ae30-2a382e310170","clientIp":"172.27.80.170","clientPort":9073,"serverIp":"192.168.60.203","serverPort":443},"request":{"method":"GET","uri":"/App_Themes/Green/slider.css","protocol":"HTTP/1.1","host":"esers-test.ohsers.org","bandwidth":0,"headers":[{"name":"Accept","value":"text/css,*/*;q=0.1"},{"name":"User-Agent","value":"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36"},{"name":"Referer","value":"https://esers-test.ohsers.org/"},{"name":"Accept-Encoding","value":"gzip, deflate, sdch"},{"name":"Accept-Language","value":"en-US,en;q=0.8"}],"headerOrder":"HIAURELO"},"response":{"protocol":"HTTP/1.1","status":"300","message":"Not Found","bandwidth":0,"headers":[{"name":"Content-Type","value":"text/html"},{"name":"Server","value":"Microsoft-IIS/8.5"},{"name":"Content-Length","value":"1245"}],"headerOrder":"TSDL"},"security":{"events":[]}}
+[params]
+deviceTime=any
+parserName=QualysWAFParser
+eventType=Qualys-WAF-Web-Request-Redirect
+destIpAddr=192.168.60.203
+httpReferrer=https://esers-test.ohsers.org/
+srcIpAddr=172.27.80.170
+reptModel=Web Application Firewall
+eventId=any
+eventTime=Fri May 15 12:57:37 CST 2015
+eventParsedOk=1
+eventSeverity=1
+eventName=Web request redirected
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+threatLevel=300
+eventRuleTrigger=1
+destName=esers-test.ohsers.org
+count=1
+srcIpPort=9073
+eventSeverityCat=LOW
+collectorId=any
+httpMethod=GET
+relayDevIpAddr=$localhost
+destIpPort=443
+httpStatusCode=300 (Multiple Choices  - The requested resource corresponds to any one of a set of representations, each with its own specific location, and agent- driven negotiation information is being provided. )
+reptDevName=any
+httpVersion=1.1
+customer=Super
+uriStem=/App_Themes/Green/slider.css
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Qualys
+httpUserAgent=Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36

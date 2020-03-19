@@ -1,0 +1,29 @@
+[reptDevIpAddr(key)]
+187.0.198.8
+[eventMsg]
+[Sep 24 11:39:49 187.0.198.8 IronPort-Mail: Info: New SMTP DCID 99957 interface 187.0.198.8 address 201.36.160.196 port 25
+[params]
+rawEventMsg=any
+deviceTime=any
+eventType=Cisco-IronPort-Mail-NewSMTP
+phCustId=$sender
+hostName=any
+reptModel=IronPort AsyncOS Mail
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+hostIpAddr=201.36.160.196
+eventName=IronPort new SMTP conenction
+phEventCategory=0 (External)
+reptGeoCountry=any
+ipPort=25
+eventSeverityCat=LOW
+collectorId=any
+reptDevName=mx2.arcon.com.br
+count=1
+ironportMailDCID=99957
+hostGeoCountry=Brazil
+phRecvTime=any
+reptGeoOrg=any
+reptDevIpAddr=187.0.198.8
+reptVendor=Cisco

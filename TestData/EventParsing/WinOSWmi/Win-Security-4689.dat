@@ -1,0 +1,29 @@
+[reptDevIpAddr(key)]
+20.20.20.120
+[eventMsg]
+Fri Oct 30 18:19:58 2009 $reporter AccelOps-WinLog-WMI  [Category]="13313" [CategoryString]="Process Termination" [ComputerName]="sf1dc03.jha.local" [Data]="NULL" [EventCode]="4689" [EventIdentifier]="4689" [EventType]="4" [Logfile]="Security" [RecordNumber]="184033662" [SourceName]="Microsoft-Windows-Security-Auditing" [TimeGenerated]="20100505222656.590510-000" [TimeWritten]="20100505222656.590510-000" [Type]="Audit Success" [User]="(null)" [[Subject]][Security ID]="S-1-5-18" [Account Name]="SF1DC03$" [Account Domain]="JHA" [Logon ID]="0x3e7" [[Process Information]][Process ID]="0x1060" [Process Name]="C:\Program Files (x86)\Symantec\Symantec Endpoint Protection\SescLU.exe"
+[params]
+rawEventMsg=any
+type=Audit Success
+swProcName=C:\Program Files (x86)\Symantec\Symantec Endpoint Protection\SescLU.exe
+eventAction=0 (Permit)
+count=1
+eventId=any
+domain=JHA
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=$reporter
+winLogonId=0x3e7
+eventName=A process has exited
+procName=C:\Program Files (x86)\Symantec\Symantec Endpoint Protection\SescLU.exe
+reptVendor=Microsoft
+eventType=Win-Security-4689
+user=SF1DC03$
+phEventCategory=0 (External)
+reptDevIpAddr=$reporter
+reptModel=Windows
+eventSource=Microsoft-Windows-Security-Auditing

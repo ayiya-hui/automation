@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+2015-11-11T13:59:05.785280-05:00 NDCNACNX951001 %DAEMON-5-NOTICE: radiusd[5971]: Login incorrect: [SteCa002] (from client localhost port 1 cli 40-0E-85-02-33-CC)
+[params]
+customer=Super
+eventId=any
+eventSeverityCat=LOW
+eventParsedOk=1
+phEventCategory=0 (External)
+parserName=MotorolaWiNGParser
+count=1
+eventSeverity=2
+eventType=Motorola-WiNG-RADIUS-LOGIN-FAILURE
+reptDevIpAddr=$localhost
+collectorId=any
+eventName=Motorola WLAN AP: RADIUS Logon failure
+srcMACAddr=40:0e:85:02:33:cc
+reptVendor=Motorola
+relayDevIpAddr=$localhost
+extEventRecvProto=Syslog
+phRecvTime=any
+eventRuleTrigger=1
+reptDevName=NDCNACNX951001
+reptModel=WiNG WLAN AP

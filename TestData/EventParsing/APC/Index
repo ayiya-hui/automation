@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+APC-Generic,APC_1,APC,$localhost,,syslog

@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+192.168.1.30
+[eventMsg]
+2015-02-11T02:07:45Z WIN-2008-LAW-agent 192.168.1.30 AccelOps-WUA-DHCP [monitorStatus]="Success" [ID]="01" [Date]="02/11/15" [Time]="10:07:43" [Description]="Stopped" [IP Address]="" [Host Name]="" [MAC Address]="" [User Name]="" [ TransactionID]="0" [ QResult]="6" [Probationtime]="" [ CorrelationID]="" [Dhcid.]=""
+[params]
+deviceTime=any
+parserName=AOWUA_DHCPParser
+eventType=AO-WUA-DHCP-Generic
+reptModel=DHCP
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=AO-WUA-DHCP-Generic
+extEventRecvProto=Windows Agent
+phEventCategory=0 (External)
+msg=Stopped
+status=Success
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=192.168.1.30
+rawEventMsg=any
+reptDevName=WIN-2008-LAW-agent
+customer=Super
+phRecvTime=any
+reptDevIpAddr=192.168.1.30
+reptVendor=Microsoft

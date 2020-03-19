@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+CylancePROTECT: Event Type: Device, Event Name: Registration, Device Name: WIN-55NATVQHBUU
+[params]
+customer=Super
+eventId=any
+parserName=CylanceProtectParser
+hostName=WIN-55NATVQHBUU
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+count=1
+eventSeverity=1
+eventType=CylanceProtect-Device-Registration
+reptDevIpAddr=$localhost
+collectorId=any
+eventName=CylanceProtect-Device-Registration
+reptVendor=Cylance
+relayDevIpAddr=$localhost
+extEventRecvProto=Syslog
+phRecvTime=any
+eventRuleTrigger=1
+reptDevName=any
+reptModel=Protect

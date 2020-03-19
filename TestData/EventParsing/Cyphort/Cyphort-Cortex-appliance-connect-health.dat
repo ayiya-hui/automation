@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+2016-03-17 01:42:38.439745+00 cyphortcore-lkf-soc CEF:0|Cyphort|Cortex|3.3.1.46|3|appliance-connect-health|5|desc=Lost connection to core panasonic all (192.168.15.53) for 11 minutes json={"ip": "192.168.15.53", "age": 11.072577, "type": "core", "appliance": "panasonic all", "pretty_age": "11 minutes"}
+[params]
+deviceTime=any
+parserName=CyphortParser
+eventType=Cyphort-Cortex-appliance-connect-health
+reptModel=Cortex
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+hostIpAddr=192.168.15.53
+eventName=Cyphort Cortex Appliance connection health
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+msg=Lost connection to core panasonic all (192.168.15.53) for 11 minutes
+eventRuleTrigger=1
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+user=192.168.15.53
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Cyphort

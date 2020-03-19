@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+20.20.20.20
+[eventMsg]
+<13>Jan 14 19:14:15 $reporter MSWinEventLog	1	Security	9361	Wed Jan 14 19:14:10 2009	576	Security	SYSTEM	User	Success Audit	ADS-PRI	Logon/Logoff		Special privileges assigned to new logon:     User Name: ADS-PRI$     Domain: PROSPECTHILLS     Logon ID: (0x0,0x38CAB9)     Privileges: SeSecurityPrivilege   SeBackupPrivilege   SeRestorePrivilege   SeTakeOwnershipPrivilege   SeDebugPrivilege   SeSystemEnvironmentPrivilege   SeLoadDriverPrivilege   SeImpersonatePrivilege   SeEnableDelegationPrivilege  	8790  Automation
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+domain=PROSPECTHILLS
+deviceTime=any
+eventParsedOk=any
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=$reporter
+eventAction=0 (Permit)
+eventName=Windows administrator equivalent successful logon
+reptVendor=Microsoft
+eventType=Win-Security-576
+user=ADS-PRI$
+phEventCategory=0 (External)
+reptDevIpAddr=$reporter
+winLogonId=(0x0,0x38CAB9)
+reptModel=Windows

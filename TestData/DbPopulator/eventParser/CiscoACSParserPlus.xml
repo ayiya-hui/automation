@@ -1,0 +1,79 @@
+<eventParser name="CiscoACSParserPlus">
+
+  <deviceType>
+    <Vendor>Microsoft</Vendor>
+    <Model>Windows</Model>
+    <Version>ANY</Version>
+  </deviceType>
+
+  <appType>
+    <Vendor>Cisco</Vendor>
+    <Model>Cisco Secure ACS</Model>
+    <Version>ANY</Version>
+    <Name>Cisco Secure ACS Auth Server</Name>
+  </appType>
+  
+  <eventFormatRecognizer><![CDATA[CSCOacs_]]></eventFormatRecognizer>
+  
+  <testEvents>
+      <testEvent><![CDATA[<38>Apr 20 06:36:11 11.22.11.22 CSCOacs_01_PassedAuth phvdc8d 1 0 Message-Type=Authen OK,User-Name=WenYong,NAS-IP-Address=192.168.19.18,Caller-ID=192.168.29.8,NAS-Port=6,Group-Name=Default Group,Filter Information=No Filters activated.,Access Device=SJ-Dev-A-IOS-Lab-01]]></testEvent>
+  </testEvents>
+  
+  <!-- pattern definitions --> 
+  <patternDefinitions>
+    <pattern name="patStrQuote"><![CDATA[[^']+]]></pattern>
+  </patternDefinitions>
+  
+  <parsingInstructions>
+    <!-- parsing common fields -->
+    <switch>
+      <case>
+	<collectFieldsByRegex src="$_rawmsg">
+	  <regex><![CDATA[<:gPatSyslogPRI><_mon:gPatMon>\s+<_day:gPatDay>\s+<_time:gPatTime> <_rept:gPatStr> <eventType:gPatStr>\s+<:gPatStr>\s+<:gPatStr>\s+<:gPatStr>\s+<_body:gPatMesgBody>]]></regex>
+	</collectFieldsByRegex>
+        <switch>
+          <case>
+            <collectFieldsByRegex src="$_rept">
+              <regex><![CDATA[<reptDevIpAddr:gPatIpV4Dot>]]></regex>
+            </collectFieldsByRegex>
+          </case>
+          <default>
+            <setEventAttribute attr="reptDevName">$_rept</setEventAttribute>
+          </default>
+        </switch>
+	<setEventAttribute attr="deviceTime">toDateTime($_mon, $_day, $_time)</setEventAttribute>
+      </case>
+      <case>
+	<collectFieldsByRegex src="$_rawmsg">
+	  <regex><![CDATA[<:gPatStr>\s+<:gPatStr>\s+<:gPatStr>\s+<:gPatStr>\s+<_body:gPatMesgBody>]]></regex>
+	</collectFieldsByRegex>
+      </case>
+    </switch>
+   
+    <setEventAttribute attr="eventAction">0</setEventAttribute>
+    <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+    
+    <!-- message specific parsing
+    <181>Jan  6 19:56:00 vmacs10 CSCOacs_Passed_Authentications 0000000009 3 1  Step=15035 , Step=15042 , Step=15036 , Step=15004 , Step=13015 , SelectedAuthenticationIdentityStores=AD1, NetworkDeviceGroups=Device Type:All Device Types, NetworkDeviceGroups=Location:All Locations:Hovedkontor, ServiceSelectionMatchedRule=Rule-2, IdentityPolicyMatchedRule=Default, ADDomain=STATSBYGG.PRO, GroupMappingPolicyMatchedRule=Rule-1, AuthorizationPolicyMatchedRule=Rule-1, Action=Login, Privilege-Level=1, Authen-Type=ASCII, Service=Login, Remote-Address=172.24.220.228, IdentityAccessRestricted=false, ExternalGroups=statsbygg.pro/Ressurser/Administrative Grupper/CTX-PRODUsers GG, ExternalGroups=statsbygg.pro/Ressurser/Administrative Grupper/AD-NettverksAdministrator GG, ExternalGroups=statsbygg.pro/Users/Domain Admins, ExternalGroups=statsbygg.pro/Users/Domain Users, ExternalGroups=statsbygg.pro/Users/Denied RODC Password Replication Group, ExternalGroups=statsbygg.pro/Ressurser/Administrative Grupper/WTS-AL-Shadow GG,
+    -->
+  
+    <collectAndSetAttrByKeyValuePairMultiValue src="$_body" sep=",">
+      <attrKeyMap attr="_step" key="Step="/>
+      <attrKeyMap attr="_identity" key="SelectedAuthenticationIdentityStores="/>
+      <attrKeyMap attr="_netDevGrp" key="NetworkDeviceGroups="/>
+      <attrKeyMap attr="_srvRule" key="ServiceSelectionMatchedRule="/>
+      <attrKeyMap attr="_idyRule" key="IdentityPolicyMatchedRule="/>
+      <attrKeyMap attr="domain" key="ADDomain="/>
+      <attrKeyMap attr="_grpRule" key="GroupMappingPolicyMatchedRule="/>
+      <attrKeyMap attr="_authRule" key="AuthorizationPolicyMatchedRule="/>
+      <attrKeyMap attr="_action" key="Action="/>
+      <attrKeyMap attr="_priLevel" key="Privilege-Level="/>
+      <attrKeyMap attr="_authType" key="Authen-Type="/>
+      <attrKeyMap attr="_service" key="Service="/>
+      <attrKeyMap attr="destIpAddr" key="Remote-Address="/>
+      <attrKeyMap attr="_idyAccessResticted" key="IdentityAccessRestricted="/>
+      <attrKeyMap attr="_extGroups" key="ExternalGroups="/>
+    </collectAndSetAttrByKeyValuePairMultiValue>
+
+  </parsingInstructions>
+</eventParser>

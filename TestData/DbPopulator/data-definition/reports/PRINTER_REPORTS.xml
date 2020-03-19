@@ -1,0 +1,56 @@
+<Reports>
+ 
+  <Report id="PH_Report_Printer_1" group="PH_SYS_REPORT_Printer">
+    <Name>Printer Output Status</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Captures printer status </Description>
+    <SelectClause numEntries="All">
+      <AttrList>phRecvTime,hostName, hostIpAddr,prtDevStatus,prtPrintStatus,prtErrorState </AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(phRecvTime) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_Printer_1" name="Filter_Printer_1">
+        <SingleEvtConstr>eventType = "PH_DEV_MON_PRINTER_OUTPUT_STATUS"</SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_Printer_2" group="PH_SYS_REPORT_Printer">
+    <Name>Top Printers By Supply Utilization </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks printers by supply utilization </Description>
+    <SelectClause numEntries="All">
+      <AttrList>hostName, hostIpAddr, prtSupplyName, prtSupplyType, AVG(prtCurrSupplyUsedPct), MAX(prtMaxSupplyLevel), MIN(prtMaxSupplyLevel) </AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(prtCurrSupplyUsedPct) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_Printer_1" name="Filter_Printer_1">
+        <SingleEvtConstr>eventType = "PH_DEV_MON_PRINTER_SUPPLY_STATUS"</SingleEvtConstr>
+	<GroupByAttr>hostName,hostIpAddr,prtSupplyName, prtSupplyType</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_Printer_3" group="PH_SYS_REPORT_Printer">
+    <Name>Top Printers By Printed Page Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks printers by printed pages </Description>
+    <SelectClause numEntries="All">
+      <AttrList>hostName, hostIpAddr, SUM(prtPrintPageCount) </AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> SUM(prtPrintPageCount) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_Printer_1" name="Filter_Printer_1">
+        <SingleEvtConstr>eventType = "PH_DEV_MON_PRINTER_OUTPUT_STATUS"</SingleEvtConstr>
+	<GroupByAttr>hostName,hostIpAddr </GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+</Reports>

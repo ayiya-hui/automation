@@ -1,0 +1,64 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<133>Jul 24 2008 03:14:39: %ASA-5-111004: 192.168.1.27 end configuration: FAILED
+[params]
+rawEventMsg=any
+srcIpAddr=192.168.1.27
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=2
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+eventAction=1 (Deny)
+eventName=End configuration: FAILED
+reptVendor=Cisco
+eventType=ASA-111004-failure
+phEventCategory=0 (External)
+reptDevIpAddr=$reporter
+reptModel=ASA
+[reptDevIpAddr(key)]
+10.200.3.4
+[eventMsg]
+<133>Jul 24 03:14:39 $reporter %ASA-5-111004: console end configuration: FAILED
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=2
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+eventAction=1 (Deny)
+eventName=End configuration: FAILED
+reptVendor=Cisco
+eventType=ASA-111004-failure
+phEventCategory=0 (External)
+reptDevIpAddr=$reporter
+reptModel=ASA
+[reptDevIpAddr(key)]
+10.200.3.5
+[eventMsg]
+<133>Jul 24 03:14:39 $reporter %ASA-5-111004: SJ-Dev-S-RH-VMW-01 end configuration: FAILED
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=2
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+eventAction=1 (Deny)
+eventName=End configuration: FAILED
+reptVendor=Cisco
+eventType=ASA-111004-failure
+phEventCategory=0 (External)
+reptDevIpAddr=$reporter
+reptModel=ASA

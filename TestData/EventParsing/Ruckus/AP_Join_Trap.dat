@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+2013-05-28 10:59:01 0.0.0.0(via UDP: [172.17.0.250]:60424) TRAP2, SNMP v2c, community public	. Cold Start Trap (0) Uptime: 0:00:00.00	DISMAN-EVENT-MIB::sysUpTimeInstance = Timeticks: (64408111) 7 days, 10:54:41.11	SNMPv2-MIB::snmpTrapOID.0 = OID: SNMPv2-SMI::enterprises.25053.2.2.1.1	SNMPv2-SMI::enterprises.25053.2.2.2.18 = STRING: 8c:0c:90:3b:d6:00	SNMPv2-SMI::enterprises.25053.2.2.2.1 = STRING: 2494	SNMPv2-SMI::enterprises.25053.2.2.2.2 = STRING: 321223000349	SNMPv2-SMI::enterprises.25053.2.2.2.3 = STRING: normal	SNMPv2-SMI::enterprises.25053.2.2.2.4 = STRING: environment	SNMPv2-SMI::enterprises.25053.2.2.2.6 = INTEGER: 1	SNMPv2-SMI::enterprises.25053.2.2.2.5 = STRING: Tue May 28 10:59:01 2013	SNMPv2-SMI::enterprises.25053.2.2.2.7 = STRING: AP joined	SNMPv2-SMI::enterprises.25053.2.2.2.8 = STRING: AP[NIJ-BNBPRINC1@8c:0c:90:3b:d6:00] joins with uptime [36153] s and last disconnected reason [Heartbeat Loss]
+[params]
+deviceTime=any
+parserName=RuckusParser
+eventType=AP_Join_Trap
+reptModel=SmartOS WLAN Controller
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=AP_Join_Trap
+extEventRecvProto=Snmp Trap
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+nepMACAddr=8c:0c:90:3b:d6:00
+eventDesc=The AP MAC address is enclosed
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Ruckus

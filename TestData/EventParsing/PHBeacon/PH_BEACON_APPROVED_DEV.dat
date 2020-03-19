@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+192.168.65.158
+[eventMsg]
+<134>Feb 26 19:27:00 192.168.65.158 devH [PH_BEACON_APPROVED_DEV]: [phEventCategory]=7,[eventSeverity]=PHL_INFO,[ph_device.name]=AP4055.39b2.57ae,[ph_device.access_ip]=192.168.30.8,[ph_device_type.vendor]=Cisco,[ph_device_type.model]=WLAN AP,[ph_device.discover_time]=17:56:01 02/24/2015
+[params]
+customer=Super
+eventId=any
+parserName=PHBeaconParser
+deviceTime=any
+eventParsedOk=1
+phEventCategory=7
+eventSeverityCat=LOW
+count=1
+eventSeverity=1
+eventType=PH_BEACON_APPROVED_DEV
+reptDevIpAddr=192.168.65.158
+collectorId=any
+hostIpAddr=192.168.30.8
+eventName=PH_BEACON_APPROVED_DEV
+reptVendor=Cisco
+relayDevIpAddr=192.168.65.158
+rawEventMsg=any
+phRecvTime=any
+reptDevName=devH
+reptModel=WLAN AP

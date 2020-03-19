@@ -1,0 +1,106 @@
+<eventParser name="MicrosoftIASParser">
+  <deviceType>
+    <Vendor>Microsoft</Vendor>
+    <Model>Windows</Model>
+    <Version>ANY</Version>
+  </deviceType>
+
+  <appType>
+    <Vendor>Microsoft</Vendor>
+    <Model>IAS</Model>
+    <Version>ANY</Version>
+    <Name>Microsoft IAS</Name>
+  </appType>
+
+  <patternDefinitions>
+    <pattern name="patStrComma"><![CDATA[[^,]*]]></pattern>
+    <pattern name="pagSig"><![CDATA[MSIASLog]]></pattern>
+  </patternDefinitions>
+
+  <eventFormatRecognizer><![CDATA[<:gPatSyslogPRI>?<:gPatMon>\s+<:gPatDay>\s+<:gPatTime> <:gPatStr>\s+MSIASLog(?:\t|\s+)<:gPatInt>(?:\t|\s+)<:patStrComma>,<:patStrComma>,<:patStrComma>,<:patStrComma>,IAS]]></eventFormatRecognizer>
+  
+  <testEvents>
+      <testEvent><![CDATA[<45>Oct 30 15:14:55 Filer.ProspectHills.net MSIASLog      0       192.168.19.1,Partha,10/30/2008,15:14:53,IAS,FILER,5,684032,6,2,7,1,30,64.81.25.66,31,99.129.50.155,61,5,66,99.129.50.155,4,192.168.19.1,4108,192.168.19.1,4116,0,4128,Cisco ASA,5000,ip:source-ip=99.129.50.155...,4155,1,4154,Use Windows authentication for all users,4129,PROSPECTHILLS\Partha,4130,PROSPECTHILLS\Partha,4127,1,25,311 1 192.168.0.40 10/24/2008 10:07:13 25,4136,1,4142,0]]></testEvent>
+  </testEvents>
+
+  <parsingInstructions>
+
+    <!-- parsing common fields -->
+    <!-- sample message 
+
+	  Accepted Request
+
+<13>May 13 16:02:04 Filer.ProspectHills.net MSIASLog      0       192.168.19.1,automationUser,05/06/2008,23:55:46,IAS,FILER,4,192.168.19.1,5,158,61,5,31,ip:source-ip=192.18.0.30,4108,192.168.19.1,4116,0,4128,Cisco ASA,5000,ip:source-ip=192.168.0.30,4155,1,4154,Use Windows authentication for all users,4129,PROSPECTHILLS\automationUser,4127,1,4149,Connections to other access servers,25,311 1 192.168.0.40 05/07/2008 06:49:51 1,4130,ProspectHills.net/Users/WenYong Yang,4136,1,4142,0
+
+	   Failed auth 
+
+ <13>May 13 16:02:04 Filer.ProspectHills.net MSIASLog      0       192.168.19.1,Partha_Hacker,05/13/2008,12:01:56,IAS,FILER,25,311 1 192.168.0.40 05/07/2008 10:07:07 7,4127,1,4130,PROSPECTHILLS\Partha_Hacker,4129,PROSPECTHILLS\Partha_Hacker,4154,Use Windows authentication for all users,4155,1,4108,192.168.19.1,4116,0,4128,Cisco ASA,4136,3,4142,16
+
+      -->
+
+    <collectFieldsByRegex src="$_rawmsg">
+      <regex><![CDATA[<:gPatSyslogPRI>?<:gPatMon>\s+<:gPatDay>\s+<:gPatTime> <:gPatStr> <:pagSig>(?:\t|\s+)<:gPatInt>(?:\t|\s+)<_body:gPatMesgBody>]]></regex>
+    </collectFieldsByRegex>
+
+    <collectFieldsByRegex src="$_body">
+      <regex><![CDATA[<nepDevIpAddr:gPatIpV4Dot>,<user:patStrComma>,<_date:patStrComma>,<_time:gPatTime>,<relayDevName:patStrComma>,<reptDevName:patStrComma><_body2:gPatMesgBody>]]></regex>
+    </collectFieldsByRegex>
+
+    <!--collectAndSetAttrByKeyValPair src="$_body2" keyValSep=',' pairSep=','-->
+    <collectAndSetAttrByKeyValuePair src="$_body2" sep=','>
+      <attrKeyMap attr="_srcIp" key=",ip:source-ip="/>
+      <attrKeyMap attr="_pktType" key=",4136,"/>
+      <attrKeyMap attr="_reasonCode" key=",4142,"/>
+    </collectAndSetAttrByKeyValuePair>
+    <!--/collectAndSetAttrByKeyValPair-->
+
+    <!-- time -->
+    <collectFieldsByRegex src="$_date">
+      <regex><![CDATA[<_mon:gPatMonNum>/<_day:gPatDay>/<_year:gPatYear>]]></regex>
+    </collectFieldsByRegex>
+
+    <setEventAttribute attr="deviceTime">toDateTime($_mon, $_day, $_year, $_time)</setEventAttribute>
+    <setEventAttribute attr="eventAction">0</setEventAttribute>
+    <setEventAttribute attr="eventType">Win-IAS-Generic</setEventAttribute>
+    <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+
+    <!-- set event type and reason code -->
+
+    <choose>
+
+      <when test='$_pktType = "1"'> 
+	<setEventAttribute attr="eventAction">0</setEventAttribute>
+	<setEventAttribute attr="eventType">Win-IAS-AcptReq</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+	<when test="exist _srcIp">
+	  <collectAndSetAttrByRegex src="$_srcIp">
+	    <regex><![CDATA[<srcIpAddr:gPatIpV4Dot><:gPatMesgBody>]]></regex>
+	  </collectAndSetAttrByRegex> 
+	</when>   
+      </when>
+
+      <when test='$_pktType = "2"'> 
+	<setEventAttribute attr="eventAction">0</setEventAttribute>
+	<setEventAttribute attr="eventType">Win-IAS-PassedAuth</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+        <collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-IAS-AcptReq">
+          <when test = '$user = $AnotherEvent.user'>
+            <setEventAttribute attr="srcIpAddr">$AnotherEvent.srcIpAddr</setEventAttribute>
+          </when>
+        </collectAndSetAttrFromAnotherEvent>	
+      </when>
+
+      <when test='$_pktType = "3"'> 
+	<setEventAttribute attr="eventAction">1</setEventAttribute>
+	<setEventAttribute attr="eventType">Win-IAS-FailedAuth</setEventAttribute>
+	<setEventAttribute attr="winIASFailCode">$_reasonCode</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+        <collectAndSetAttrFromAnotherEvent AnotherEventType = "Win-IAS-AcptReq">
+          <when test = '$user = $AnotherEvent.user'>
+            <setEventAttribute attr="srcIpAddr">$AnotherEvent.srcIpAddr</setEventAttribute>
+          </when>
+        </collectAndSetAttrFromAnotherEvent>	
+      </when>
+    </choose>
+  </parsingInstructions>
+</eventParser>

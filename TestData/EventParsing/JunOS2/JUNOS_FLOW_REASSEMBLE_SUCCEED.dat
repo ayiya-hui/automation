@@ -1,0 +1,32 @@
+[reptDevIpAddr(key)]
+86.86.86.86
+[eventMsg]
+<14>Nov 19 18:27:38 RT_FLOW: FLOW_REASSEMBLE_SUCCEED: Packet merged source 173.88.153.145 destination 209.152.215.6 ipid 10371 succeed
+[params]
+deviceTime=any
+destGeoOrg=any
+parserName=JunOSParser
+eventType=JUNOS_FLOW_REASSEMBLE_SUCCEED
+destGeoState=Ohio
+destIpAddr=209.152.215.6
+srcName=any
+srcIpAddr=173.88.153.145
+destGeoCountry=any
+reptModel=JunOS
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Flow reassembly succeeded
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+eventRuleTrigger=1
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=86.86.86.86
+customer=Super
+phRecvTime=any
+reptDevIpAddr=86.86.86.86
+eventAction=0 (Permit)
+reptVendor=Juniper
+destGeoCity=any

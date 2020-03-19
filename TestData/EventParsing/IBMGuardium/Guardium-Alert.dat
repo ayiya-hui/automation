@@ -1,0 +1,29 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<25>Dec 15 16:23:19 guardprd6 guard_sender[32524]: Alert based on rule ID ALERT-Repeat-Failed-Logins|Category: Exception|Classification: Login-Failure|Severity: MED|Rule #: 27461 [ALERT-Repeat-Failed-Logins]|Request Info: [Session start:2015-12-15 16:22:48]|Server Type: ORACLE|Client IP: 10.4.136.45|ServerIP: 10.4.19.20|Client PORT: 36791|Server Port: 51521|Net Protocol: TCP|DB Protocol: TNS|DB Protocol Version: 3.10|DB User: ?|Application User Name: |Source Program: JDBC THIN CLIENT|Request Type: LOGIN_FAILED|Last Error: ORA-12521|SQL:dd
+[params]
+parserName=IBMGuardiumParser
+eventType=Guardium-Alert
+destIpAddr=10.4.19.20
+srcIpAddr=10.4.136.45
+reptModel=Guardium
+eventId=any
+eventParsedOk=1
+eventSeverity=5
+eventName=Guardium-Alert
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=MEDIUM
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+ruleName=27461 [ALERT-Repeat-Failed-Logins]
+destIpPort=51521
+dbUser=?
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=IBM
+fwRule=ALERT-Repeat-Failed-Logins

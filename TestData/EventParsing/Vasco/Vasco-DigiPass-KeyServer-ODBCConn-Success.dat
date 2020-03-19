@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+70.70.70.70
+[eventMsg]
+May 17 18:43:21 70.70.70.70 ikeyserver[3582]: {Info}, {Database}, {I-013001}, {A connection to an ODBC data source has been made successfully.}, {0xAE076244167D760D95D11E2C946A54D2}
+[params]
+customer=Super
+eventId=any
+eventSeverityCat=LOW
+eventParsedOk=1
+phEventCategory=0 (External)
+parserName=VascoParser
+count=1
+eventSeverity=1
+eventType=Vasco-DigiPass-KeyServer-ODBCConn-Success
+reptDevIpAddr=70.70.70.70
+collectorId=any
+eventName=A connection to an ODBC data source has been made successfully
+reptVendor=Vasco
+relayDevIpAddr=70.70.70.70
+phRecvTime=any
+msg=A connection to an ODBC data source has been made successfully.
+eventRuleTrigger=1
+appTransportProto=Syslog
+reptDevName=any
+reptModel=DigiPass

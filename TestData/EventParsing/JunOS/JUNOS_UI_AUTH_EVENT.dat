@@ -1,0 +1,22 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<190>Nov 17 20:04:36 mgd[33271]: %INTERACT-6-UI_AUTH_EVENT: Authenticated user 'phoenix_agent' at permission level 'j-super-user'
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+count=1
+phCustId=$sender
+deviceTime=any
+eventAction=0 (Permit)
+eventId=any
+eventName=User authenticated
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=6
+eventSeverityCat=MEDIUM
+eventType=JUNOS_UI_AUTH_EVENT
+reptDevIpAddr=$reporter
+reptModel=JunOS
+reptVendor=Juniper
+user=phoenix_agent

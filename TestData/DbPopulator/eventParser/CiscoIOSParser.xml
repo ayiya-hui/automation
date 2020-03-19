@@ -1,0 +1,758 @@
+<eventParser name="CiscoIOSParser">
+
+  <deviceType>
+    <Vendor>Cisco</Vendor>
+    <Model>IOS</Model>
+    <Version>ANY</Version>
+  </deviceType>
+  
+  <!-- pattern definitions -->
+  <patternDefinitions>
+    <pattern name="patCiscoIOSMod" list="begin"><![CDATA[FW|SEC|SSH|SEC_LOGIN|SYS|SNMP|STACKMGR|]]></pattern>
+    <pattern name="patCiscoIOSMod" list="continue"><![CDATA[LINK|SPANTREE|LINEPROTO|DTP|PARSER|]]></pattern>
+    <pattern name="patCiscoIOSMod" list="continue"><![CDATA[CDP|DHCPD|CONTROLLER|PORT_SECURITY-SP|]]></pattern>  
+     <pattern name="patCiscoIOSMod" list="continue"><![CDATA[AUTHMGR|MAB|DOT1X|PFINIT|WS_IPSEC_3|]]></pattern>  
+    <pattern name="patCiscoIOSMod" list="end"><![CDATA[BGP|OSPF|C4K_IOSMODPORTMAN]]></pattern>
+    <pattern name="patIpV4Dot"><![CDATA[\w.\w.\d{1,3}.\d{1,3}]]></pattern>
+    <pattern name="patComm"><![CDATA[[^,]+]]></pattern>
+    <pattern name="patUpDown"><![CDATA[up|down]]></pattern>
+    <pattern name="patStrEndColon"><![CDATA[[^:]*]]></pattern>
+    <pattern name="patStrEndQuote"><![CDATA[[^)]*]]></pattern>
+    <pattern name="patCode"><![CDATA[\d+:\s+]]></pattern>
+    <pattern name="macFormat"><![CDATA[[0-9A-Fa-f]{4}\.[0-9A-Fa-f]{4}\.[0-9A-Fa-f]{4}]]></pattern>
+  </patternDefinitions>
+
+  <eventFormatRecognizer><![CDATA[%<:patCiscoIOSMod>(?:-<:gPatStr>)?-<:gPatInt>-<:patStrEndColon>:]]></eventFormatRecognizer>
+  
+  <testEvents>
+      <testEvent><![CDATA[<190>109219: Jan  9 18:03:35.281: %FW-6-SESS_AUDIT_TRAIL_START: Start tcp session: initiator (192.168.20.33:1876) -- responder (192.168.0.10:445)]]></testEvent>
+      <testEvent><![CDATA[<190>263951: 2w6d: %SEC-6-IPACCESSLOGP: list permit-any permitted udp 192.168.20.35(0) -> 192.168.23.255(0), 1 packet]]></testEvent>
+      <testEvent><![CDATA[<188>84354: Dec  6 08:15:20: %SEC_LOGIN-4-LOGIN_FAILED: Login failed [user: Admin] [Source: 192.168.135.125] [localport: 80] [Reason: Login Authentication Failed - BadPassword] at 08:15:20 PST Mon Dec 6 2010]]></testEvent>
+      <testEvent><![CDATA[<189>217: May 12 13:57:23.720: %SYS-5-CONFIG_I: Configured from console by vty1 (192.168.29.8)]]></testEvent>
+      <testEvent><![CDATA[<189>Oct 27 20:18:43.254 UTC: %SNMP-3-AUTHFAIL: Authentication failure for SNMP request from host 192.168.2.98]]></testEvent>
+      <testEvent><![CDATA[<187>44: Mar 29 23:13:00.005: %LINK-3-UPDOWN: Interface FastEthernet0/10, changed state to up]]></testEvent>
+      <testEvent><![CDATA[<186>Aug 13 17:39:28:647 UTC: %SPANTREE-2-BLOCK_BPDUGUARD: Received BPDU on port Gi0/25 with BPDU Guard enabled. Disabling port.)]]></testEvent>
+      <testEvent><![CDATA[<187>201: May 12 01:10:52: %LINEPROTO-5-CHANGED: Interface FastEthernet0/1, changed state to down]]></testEvent>
+      <testEvent><![CDATA[<189>22567: 022561: Aug  5 14:33:26: %DTP-5-TRUNKPORTON: Port Gi1/1 has become dot1q trunk]]></testEvent>
+      <testEvent><![CDATA[<189>22565: 022559: Aug  5 14:33:21: %PARSER-5-CFGLOG_LOGGEDCMD: User:chris  logged command:no shutdown]]></testEvent>
+      <testEvent><![CDATA[<188>20983367: Aug 27 03:18:17.053: %CDP-4-DUPLEX_MISMATCH: duplex mismatch discovered on FastEthernet5/46 (not full duplex), with SJ-Dev-A-Cat-Adm-01.prospecthills.net FastEthernet0/1 (full duplex).]]></testEvent>
+      <testEvent><![CDATA[<187>201: May 12 01:10:52: %DHCPD-4-DECLINE_CONFLICT: DHCP address conflict: client desk135 declined 22.33.22.33]]></testEvent>
+      <testEvent><![CDATA[<189>3755503: Mar 16 21:23:20: %CONTROLLER-5-UPDOWN: Controller T1 1/1/1, changed state to down]]></testEvent>
+      <testEvent><![CDATA[<186>1391: Aug 16 2010 12:00:01: %PORT_SECURITY-SP-2-PSECURE_VIOLATION: Security violation occurred, caused by MAC address 0012.3f4a.c031 on port FastEthernet1/16]]></testEvent>
+      <testEvent><![CDATA[<189>3755503: Mar 16 21:23:20: %AUTHMGR-5-SUCCESS: Authorization succeeded for client (001e.c96d.65fb) on Interface Gi1/0/25 AuditSessionID AC1032150000360DD25F3B9F]]></testEvent>
+      <testEvent><![CDATA[<189>3755586: Mar 16 21:26:46: %MAB-5-FAIL: Authentication failed for client (0080.f08a.95cc) on Interface Gi1/0/12 AuditSessionID AC1032150000305CFE272A1F]]></testEvent>
+      <testEvent><![CDATA[<189>3755502: Mar 16 21:23:20: %DOT1X-5-SUCCESS: Authentication successful for client (001e.c96d.65fb) on Interface Gi1/0/25 AuditSessionID AC1032150000360DD25F3B9F]]></testEvent>
+      <testEvent><![CDATA[<187>201: May 12 01:10:52: %BGP-5-ADJCHANGE: neighbor 172.17.1.2 Down - Peer closed the session]]></testEvent>
+      <testEvent><![CDATA[<187>201: May 12 01:10:52: %OSPF-5-ADJCHG: Process 1, Nbr 2.2.2.2 on Ethernet0/0 from FULL to DOWN, Neighbor Down: Interface down or detached]]></testEvent>
+      <testEvent><![CDATA[<188>36: *May 20 04:42:41: %C4K_IOSMODPORTMAN-4-POWERSUPPLYBAD: Power supply 2 has failed or been turned off]]></testEvent>
+  </testEvents>
+  
+  <parsingInstructions>
+    <!-- parsing common fields --> 
+    <switch>
+      <case>
+	<!--<187>Mar 29 16:13:32 192.168.19.11 46: Mar 29 23:13:31.807: %LINK-3-UPDOWN: Interface FastEthernet0/10, changed state to down
+	   Mar 29 16:13:01 55.55.55.55 Mar 29 23:13:00.005: %LINK-3-UPDOWN: Interface FastEthernet0/10, changed state to up
+	   Mar 29 16:13:01 55.55.55.55 44: Mar 29 23:13:00.005: %LINK-3-UPDOWN: Interface FastEthernet0/10, changed state to up
+	   May 13 15:41:00.733 EDT: %AUTHMGR-SP-5-VLANASSIGN: VLAN 141 assigned to Interface Gi2/37-->
+	   <collectFieldsByRegex src="$_rawmsg">
+		<regex><![CDATA[<:gPatSyslogPRI>?<:gPatMon>\s+<:gPatDay>\s+<:gPatTime>\s+<_host:gPatStr>\s+<_header:gPatMesgBody>?%<_evIdPrefix:patCiscoIOSMod>-<_severity:gPatInt>-<_evIdSuffix:patStrEndColon>: <_body:gPatMesgBody>]]></regex>
+	    </collectFieldsByRegex>
+	    <switch>
+		<case>
+			<collectFieldsByRegex src="$_host">
+          			<regex><![CDATA[<hostIpAddr:gPatIpV4Dot>]]></regex>
+        		</collectFieldsByRegex>
+			<setEventAttribute attr="reptDevIpAddr">$hostIpAddr</setEventAttribute>
+		</case>
+		<default>
+			<setEventAttribute attr="hostName">$_host</setEventAttribute>
+		</default>
+	</switch>
+      </case>
+      <case>
+	    <collectFieldsByRegex src="$_rawmsg">
+	      <regex><![CDATA[<:gPatSyslogPRI>?<_header:gPatMesgBody>%<_evIdPrefix:patCiscoIOSMod>(?:-<:gPatStr>)?-<_severity:gPatInt>-<_evIdSuffix:patStrEndColon>: <_body:gPatMesgBody>]]></regex>
+	    </collectFieldsByRegex>
+      </case>
+   </switch>
+   
+    <setEventAttribute attr="eventType">combineMsgId("IOS-", $_evIdPrefix, "-", $_evIdSuffix)</setEventAttribute>
+    <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+      
+    <!-- parse header -->
+      
+	<!--<188>84354: Dec  6 08:15:20: %SEC_LOGIN-4-LOGIN_FAILED: Login failed [user: Admin] [Source: 192.168.135.125] [localport: 80] [Reason: Login Authentication Failed - BadPassword] at 08:15:20 PST Mon Dec 6 2010
+	  <188>36: *May 20 04:42:41: %C4K_IOSMODPORTMAN-4-POWERSUPPLYBAD: Power supply 2 has failed or been turned off
+	  <190>37: *May 20 04:43:06: %C4K_IOSMODPORTMAN-6-POWERSUPPLYGOOD: Power supply 2 is okay
+	  <188>41: *Jun  8 10:50:15: %C4K_IOSMODPORTMAN-4-MODULETEMPHIGH: Module 3 Sensor air outlet temperature is at or over threshold - CurrentTemp: 44C, Threshold:44C
+	  <190>91827: Jan  9 02:39:06.648: %SEC-6-IPACCESSLOGRP: list 130 permitted eigrp 172.16.34.4(Serial1 ) -> 172.16.34.3, 1 packet 
+          
+	  <182>Mar 29 23:13:00.005: %LINK-3-UPDOWN: Interface FastEthernet0/10, changed state to up
+	  <181>44: Mar 29 23:13:00.005: %LINK-3-UPDOWN: Interface FastEthernet0/10, changed state to up
+	  Mar 29 23:13:00.005: %LINK-3-UPDOWN: Interface FastEthernet0/10, changed state to up
+	-->
+       
+	
+     <switch>
+	<case>
+	     <collectFieldsByRegex src="$_header">
+		    <regex><![CDATA[<:patCode>?[\*]?<_mon:gPatMon>\s+<_day:gPatDay>\s+<_time:gPatTime><:gPatMesgBody>]]></regex>
+	     </collectFieldsByRegex>
+	     <setEventAttribute attr="deviceTime">toDateTime($_mon, $_day, $_time)</setEventAttribute>
+	</case>
+	<case>
+	<!--<190>263951: 2w6d: %SEC-6-IPACCESSLOGP: list permit-any permitted udp 192.168.20.35(0) -> 192.168.23.255(0), 1 packet  -->
+	     <collectFieldsByRegex src="$_header">
+		    <regex><![CDATA[<:patCode><:gPatStr>:]]></regex>
+	     </collectFieldsByRegex>
+	</case>
+     </switch>     
+     <setEventAttribute attr="eventAction">0</setEventAttribute>
+    <setEventAttribute attr="hostIpAddr">$reptDevIpAddr</setEventAttribute>
+
+    <!-- event severity -->
+    <choose>
+      <when test='$_severity IN "6, 7"'>
+        <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+      </when>
+
+      <when test='$_severity = "1"'>
+        <setEventAttribute attr="eventSeverity">10</setEventAttribute>
+      </when>
+
+      <when test='$_severity = "2"'>
+        <setEventAttribute attr="eventSeverity">8</setEventAttribute>
+      </when>
+
+      <when test='$_severity IN "3, 4"'>
+        <setEventAttribute attr="eventSeverity">5</setEventAttribute>
+      </when>
+
+      <when test='$_severity = "5"'>
+        <setEventAttribute attr="eventSeverity">2</setEventAttribute>
+      </when>
+    </choose>
+
+    
+    <!-- message specific parsing -->
+
+    <choose>
+        
+      <when test='$eventType IN "IOS-SEC-IPACCESSLOGP, IOS-SEC-IPACCESSLOGDP, IOS-SEC-IPACCESSLOGRP"'>
+	<!--
+	   <190>91809: Jan  9 02:38:47.872: %SEC-6-IPACCESSLOGP: list testlog permitted tcp 192.168.20.33(3438) -> 69.147.86.184(80), 1 packet
+           <190>91827: Jan  9 02:39:06.648: %SEC-6-IPACCESSLOGP: list testlog permitted udp 192.168.1.254(1900) -> 239.255.255.250(1900), 1 packet
+           <190>91819: Jan  9 02:38:59.648: %SEC-6-IPACCESSLOGP: list testlog permitted icmp 192.168.20.40 -> 192.168.0.10 (8/0), 1 packet
+                3690969: 3690977: Dec  5 15:02:06.296 central: %SEC-6-IPACCESSLOGP: list 101 permitted tcp 10.160.36.27(1494) (Serial1/0:0 ) -> 10.254.143.2(11006), 1 packet
+           <190>91827: Jan  9 02:39:06.648: %SEC-6-IPACCESSLOGRP: list 130 permitted eigrp 172.16.34.4(Serial1 ) -> 172.16.34.3, 1 packet
+                -->
+
+    	<collectAndSetAttrByRegex src="$_body">
+    	  <regex><![CDATA[list <_aclName:gPatStr> <_action:gPatWord> <_proto:gPatWord> <_body:patComm>, <totPkts:gPatInt> <:gPatMesgBody>]]></regex>
+ 	</collectAndSetAttrByRegex>
+
+        <choose>
+          <when test='$_action = "permitted"'>
+            <setEventAttribute attr="eventType">combineMsgId("IOS-", $_evIdPrefix, "-", $_evIdSuffix, "-PERMITTED")</setEventAttribute>
+	    <setEventAttribute attr="eventAction">1</setEventAttribute>
+	    <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+          </when>
+          <when test='$_action = "denied"'>
+            <setEventAttribute attr="eventAction">1</setEventAttribute>
+            <setEventAttribute attr="eventType">combineMsgId("IOS-", $_evIdPrefix, "-", $_evIdSuffix, "-DENIED")</setEventAttribute>
+            <setEventAttribute attr="eventSeverity">3</setEventAttribute>
+          </when>
+        </choose>
+
+        <choose>
+          <when test='$_proto IN "tcp, udp"'>
+            <collectAndSetAttrByRegex src="$_body">
+              <regex><![CDATA[<srcIpAddr:gPatIpV4Dot>\(<srcIpPort:gPatInt>\)<:gPatMesgBody>-> <destIpAddr:gPatIpV4Dot>\(<destIpPort:gPatInt>\)]]></regex>
+            </collectAndSetAttrByRegex>
+          </when>
+          
+          <when test='$_proto = "icmp"'>
+            <collectAndSetAttrByRegex src="$_body">
+              <regex><![CDATA[<srcIpAddr:gPatIpV4Dot> -> <destIpAddr:gPatIpV4Dot>]]></regex>
+            </collectAndSetAttrByRegex>
+          </when>
+
+          <when test='$_proto = "eigrp"'>
+            <collectAndSetAttrByRegex src="$_body">
+              <regex><![CDATA[<srcIpAddr:gPatIpV4Dot>\(<:patStrEndQuote>\) -> <destIpAddr:gPatIpV4Dot>]]></regex>
+            </collectAndSetAttrByRegex>
+          </when>
+
+	  <when test='$_proto = "ospf"'>
+            <collectAndSetAttrByRegex src="$_body">
+              <regex><![CDATA[<srcIpAddr:gPatIpV4Dot>\(<:patStrEndQuote>\) -> <destIpAddr:gPatIpV4Dot>]]></regex>
+            </collectAndSetAttrByRegex>
+          </when>
+
+        </choose>
+        
+        <setEventAttribute attr="ipProto">convertStrToIntIpProto($_proto)</setEventAttribute>
+      </when>
+      
+      <when test='$eventType = "IOS-SEC-IPACCESSLOGS"'>
+	<!--
+	    Apr 26 07:51:34.540 EDT: %SEC-6-IPACCESSLOGS: list 110 denied x.y.59.83 1 packet
+          -->
+        
+        <collectAndSetAttrByRegex src="$_body">
+    	  <regex><![CDATA[list <_aclName:gPatStr> <_action:gPatWord> <srcIpAddr:patIpV4Dot> <totPkts:gPatInt> packet]]> </regex>
+ 	</collectAndSetAttrByRegex>
+
+        <choose>
+          <when test='$_action = "permitted"'>
+            <setEventAttribute attr="eventType">combineMsgId("IOS-", $_evIdPrefix, "-", $_evIdSuffix, "-PERMITTED")</setEventAttribute>
+          </when>
+          <when test='$_action = "denied"'>
+            <setEventAttribute attr="eventAction">1</setEventAttribute>
+            <setEventAttribute attr="eventType">combineMsgId("IOS-", $_evIdPrefix, "-", $_evIdSuffix, "-DENIED")</setEventAttribute>
+            <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+          </when>
+        </choose>
+
+      </when>
+
+     
+
+      <when test='$eventType = "IOS-FW-SESS_AUDIT_TRAIL_START"'>
+        <!--
+	    <190>109219: Jan  9 18:03:35.281: %FW-6-SESS_AUDIT_TRAIL_START: Start tcp session: initiator (192.168.20.33:1876) \-\- responder (192.168.0.10:445)
+             <190>91790: Jan  9 02:38:30.575: %FW-6-SESS_AUDIT_TRAIL_START: Start udp session: initiator (192.168.20.40:1531) \-\- responder (192.168.0.10:53)
+               <190>91791: Jan  9 02:38:30.647: %FW-6-SESS_AUDIT_TRAIL_START: Start http session: initiator (192.168.20.40:2325) \-\- responder (206.169.37.146:80)
+                 -->
+        
+        <collectAndSetAttrByRegex src="$_body">
+    	  <regex><![CDATA[Start <_proto:gPatWord> session: initiator \(<srcIpAddr:gPatIpV4Dot>:<srcIpPort:gPatIpPort>\) -- responder \(<destIpAddr:gPatIpV4Dot>:<destIpPort:gPatIpPort>\)]]> </regex>
+ 	</collectAndSetAttrByRegex>
+        <setEventAttribute attr="ipProto">convertStrToIntIpProto($_proto)</setEventAttribute>
+      </when>      
+
+
+      <when test='$eventType = "IOS-FW-SESS_AUDIT_TRAIL"'>
+	<!--
+	    <190>109237: Jan  9 18:03:40.381: %FW-6-SESS_AUDIT_TRAIL: Stop http session: initiator (192.168.20.33:1840) sent 712 bytes \-\- responder (207.46.28.145:80) sent 17821 bytes
+              <190>109249: Jan  9 18:03:44.477: %FW-6-SESS_AUDIT_TRAIL: Stop udp session: initiator (192.168.20.33:1454) sent 82 bytes \-\- responder (192.168.0.10:53) sent 217 bytes
+                -->
+        
+        <collectAndSetAttrByRegex src="$_body">
+    	  <regex><![CDATA[Stop <_proto:gPatWord> session: initiator \(<srcIpAddr:gPatIpV4Dot>:<srcIpPort:gPatIpPort>\) sent <sentBytes:gPatInt> bytes -- responder \(<destIpAddr:gPatIpV4Dot>:<destIpPort:gPatIpPort>\) sent <recvBytes:gPatInt> bytes]]></regex>
+ 	</collectAndSetAttrByRegex>
+        <setEventAttribute attr="ipProto">convertStrToIntIpProto($_proto)</setEventAttribute>
+        <setEventAttribute attr="totBytes">add($sentBytes, $recvBytes)</setEventAttribute>
+      </when>
+      
+      
+      <when test='$eventType = "IOS-SYS-CONFIG_I"'>
+	<!--
+            <189>217: May 12 13:57:23.720: %SYS-5-CONFIG_I: Configured from console by vty1 (192.168.29.8)
+	    <189>42: Dec 14 23:35:00.463: %SYS-5-CONFIG_I: Configured from console by partha on vty0 (192.168.20.47)
+              -->
+        <switch>
+          <case>
+            <collectAndSetAttrByRegex src="$_body">
+    	      <regex><![CDATA[Configured from console by <user:gPatWord> on <:gPatStr> \(<srcIpAddr:gPatIpV4Dot>\)]]></regex>
+ 	    </collectAndSetAttrByRegex>
+          </case>
+          <case>
+            <collectAndSetAttrByRegex src="$_body">
+              <regex><![CDATA[Configured from console by <user:gPatWord> <:gPatStr> \(<srcIpAddr:gPatIpV4Dot>\)]]></regex>
+            </collectAndSetAttrByRegex>
+          </case>
+          <case>
+            <collectAndSetAttrByRegex src="$_body">
+    	      <regex><![CDATA[Configured from console by <:gPatStr> \(<srcIpAddr:gPatIpV4Dot>\)]]></regex>
+ 	    </collectAndSetAttrByRegex>
+          </case>
+        </switch>
+      <setEventAttribute attr="eventSeverity">4</setEventAttribute>
+      </when>
+      
+
+      <when test='$eventType = "IOS-SYS-LOGGINGHOST_STARTSTOP"'>
+	<!--
+	    <190>43: Dec 14 23:35:01.463: %SYS-6-LOGGINGHOST_STARTSTOP: Logging to host 192.168.20.47 port 514 started - CLI initiated
+              -->
+        <collectAndSetAttrByRegex src="$_body">
+    	  <regex><![CDATA[Logging to host <destIpAddr:gPatIpV4Dot> port <destIpPort:gPatInt> <:gPatMesgBody>]]> </regex>
+ 	</collectAndSetAttrByRegex>
+	<!-- setEventAttribute attr="srcIpAddr">origIpAddr</setEventAttribute-->
+      <setEventAttribute attr="eventSeverity">4</setEventAttribute>
+      </when>
+
+     <when test='$eventType = "IOS-SYS-CPUHOG"'>
+	<!--
+	    <190>43: Dec 14 23:35:01.463: %SYS-3-CPUHOG: Task ran for [dec] msec ([dec]/[dec]), process = [chars], PC =[hex].
+       -->
+          <setEventAttribute attr="destIpAddr">$reptDevIpAddr</setEventAttribute>
+          <setEventAttribute attr="eventSeverity">7</setEventAttribute>
+     </when>
+
+     <when test='$eventType IN "IOS-LINK-CHANGED, IOS-LINK-UPDOWN, IOS-LINEPROTO-UPDOWN"'>
+       <!--
+	   %LINK-5-CHANGED: Interface [chars], changed state to [chars]
+         -->
+       
+       <collectAndSetAttrByRegex src="$_body">
+    	 <regex><![CDATA[Interface <intfName:gPatStr>, changed state to <_ifState:patUpDown>]]></regex>
+       </collectAndSetAttrByRegex>
+       
+       <choose>
+         <when test='$_ifState = "down"'>
+           <setEventAttribute attr="eventType">combineMsgId("IOS-", $_evIdPrefix, "-", $_evIdSuffix, "-", "TO-DOWN")</setEventAttribute>
+           <setEventAttribute attr="eventSeverity">5</setEventAttribute>
+         </when>
+         
+         <when test='$_ifState = "up"'>
+           <setEventAttribute attr="eventType">combineMsgId("IOS-", $_evIdPrefix, "-", $_evIdSuffix, "-", "TO-UP")</setEventAttribute>
+           <setEventAttribute attr="eventSeverity">4</setEventAttribute>
+         </when>
+       </choose>
+
+     </when>
+
+     <when test='$eventType = "IOS-SPANTREE-PORT_SELF_LOOPED"'>
+       <!--
+	   %SPANTREE-3-PORT_SELF_LOOPED: [chars] disabled.- received BPDU src mac ([enet])
+         -->
+       
+       <collectAndSetAttrByRegex src="$_body">
+    	 <regex><![CDATA[<intfName:gPatStr> disabled.- received BPDU src mac \(<srcMacAddr:gPatStr>\)]]> </regex>
+       </collectAndSetAttrByRegex>
+       
+     </when>     
+     
+     <when test='$eventType = "IOS-SPANTREE-BLOCK_BPDUGUARD"'>
+       <!--
+	   <186>30927:Aug 13 17:39:28:647 UTC:%SPANTREE-2-BLOCK_BPDUGUARD: Received BPDU on port Gi0/25 with BPDU Guard enabled. Disabling port.)
+        
+       -->
+	<collectAndSetAttrByRegex src="$_body">
+		<regex><![CDATA[Received\s+BPDU\s+on\s+port\s+<intfName:gPatStr>\s+<:gPatMesgBody>]]> </regex>
+	</collectAndSetAttrByRegex>
+     </when>     
+    
+     <when test='$eventType = "IOS-DHCPD-DECLINE_CONFLICT"'>
+       <!--
+	   %DHCPD-4-DECLINE_CONFLICT: DHCP address conflict: client [chars] declined [IP_address].
+         -->
+       
+       <collectAndSetAttrByRegex src="$_body">
+    	 <regex><![CDATA[DHCP address conflict: client <srcMacAddr:gPatStr> declined <srcIpAddr:gPatIpV4Dot>]]> </regex>
+       </collectAndSetAttrByRegex>
+       
+     </when>
+     
+     <when test='$eventType = "IOS-FW-HOST_TCP_ALERT_ON"'>
+       <!--
+	   %FW-4-HOST_TCP_ALERT_ON: Max tcp half-open connections ([dec]) exceeded for host [IP_address].
+         -->
+       
+       <collectAndSetAttrByRegex src="$_body">
+    	 <regex><![CDATA[Max tcp half-open connections \(<:gPatInt>\) exceeded for host <destIpAddr:gPatIpV4Dot>]]> </regex>
+       </collectAndSetAttrByRegex>
+       
+     </when>
+     
+     <when test='$eventType = "IOS-FW-BLOCK_HOST"'>
+       <!--
+	   %FW-2-BLOCK_HOST: Blocking new TCP connections to host [IP_address] for [dec] minute[chars] (half-open count [dec] exceeded).
+           
+         -->
+       
+       <collectAndSetAttrByRegex src="$_body">
+    	 <regex><![CDATA[Blocking new TCP connections to host <destIpAddr:gPatIpV4Dot> <:gPatMesgBody>]]> </regex>
+       </collectAndSetAttrByRegex>
+       
+     </when>     
+
+     <when test='$eventType = "IOS-FW-UNBLOCK_HOST"'>
+	<!--
+	    %FW-4-UNBLOCK_HOST: New TCP connections to host [IP_address] no longer blocked
+          -->
+        
+        <collectAndSetAttrByRegex src="$_body">
+    	  <regex><![CDATA[New TCP connections to host <destIpAddr:gPatIpV4Dot> <:gPatMesgBody>]]> </regex>
+ 	</collectAndSetAttrByRegex>
+        
+     </when>
+     
+     <when test='$eventType = "IOS-FW-FTP_NON_MATCHING_IP_ADDR"'>
+       <!--
+	   %FW-3-FTP_NON_MATCHING_IP_ADDR: Non-matching address [IP_address] used in [chars] \-\- FTP client [IP_address] FTP server [IP_address]
+         -->
+           
+           <collectAndSetAttrByRegex src="$_body">
+    	     <regex><![CDATA[Non-matching address <:gPatIpV4Dot> used in <:gPatStr> -- FTP client <srcIpAddr:gPatIpV4Dot> FTP Server <destIpAddr:gPatIpV4Dot>]]> </regex>
+ 	   </collectAndSetAttrByRegex>
+           
+     </when>
+     
+     
+     <when test='$eventType = "IOS-FW-FTP_PRIV_PORT"'>
+       <!--
+	   %FW-3-FTP_PRIV_PORT: Privileged port [dec] used in [chars] \-\- FTP client [IP_address] FTP server [IP_address]
+          
+         -->
+           <collectAndSetAttrByRegex src="$_body">
+    	     <regex><![CDATA[Privileged port <:gPatInt> used in <:gPatStr> -- FTP client <srcIpAddr:gPatIpV4Dot> FTP Server <destIpAddr:gPatIpV4Dot>]]> </regex>
+ 	   </collectAndSetAttrByRegex>
+           
+     </when>     
+     
+     
+     <when test='$eventType = "IOS-FW-FTP_SESSION_NOT_AUTHENTICATED"'>
+       <!--
+	   %FW-3-FTP_SESSION_NOT_AUTHENTICATED: Command issued before the session is authenticated \-\- FTP client [IP_address] FTP server [IP_address]
+         -->
+           <collectAndSetAttrByRegex src="$_body">
+    	     <regex><![CDATA[Command issued before the session is authenticated -- FTP client <srcIpAddr:gPatIpV4Dot> FTP Server <destIpAddr:gPatIpV4Dot>]]> </regex>
+ 	   </collectAndSetAttrByRegex>
+           
+     </when>
+     
+
+     <when test='$eventType = "IOS-FW-HTTP_JAVA_BLOCK"'>
+	<!--
+	    %FW-3-HTTP_JAVA_BLOCK: JAVA applet is blocked from ([IP_address]:[dec]) to ([IP_address]:[dec]).
+       -->
+        <collectAndSetAttrByRegex src="$_body">
+    	  <regex><![CDATA[JAVA applet is blocked from \(<srcIpAddr:gPatIpV4Dot>:<srcIpPort:gPatInt>\) to \(<destIpAddr:gPatIpV4Dot>:<destIpPort:gPatInt>\)<:gPatMesgBody>]]> </regex>
+ 	</collectAndSetAttrByRegex>
+
+     </when>
+
+
+     <when test='$eventType = "IOS-FW-SMTP_INVALID_COMMAND"'>
+       <!--
+	   %FW-3-SMTP_INVALID_COMMAND: Invalid SMTP command ([chars])(total [dec] chars) from initiator ([IP_address]:[dec])
+       -->
+       <collectAndSetAttrByRegex src="$_body">
+    	 <regex><![CDATA[Invalid SMTP command \(<command:gPatWord>\)\(total <:gPatInt> chars\) from initiator \(<srcIpAddr:gPatIpV4Dot>:<srcIpPort:gPatInt>\)]]> </regex>
+       </collectAndSetAttrByRegex>
+       
+     </when>     
+
+
+     <when test='$eventType = "IOS-FW-TCP_MAJORDOMO_EXEC_BUG"'>
+	<!--
+	    %FW-4-TCP_MAJORDOMO_EXEC_BUG: Majordomo Execute Attack - from [IP_address] to [IP_address]
+       -->
+        <collectAndSetAttrByRegex src="$_body">
+    	  <regex><![CDATA[Majordomo Execute Attack - from <srcIpAddr:gPatIpV4Dot> to <destIpAddr:gPatIpV4Dot>]]></regex>
+ 	</collectAndSetAttrByRegex>
+        
+     </when>
+     
+     
+     <when test='$eventType = "IOS-FW-TCP_SENDMAIL_BAD_FROM_SIG"'>
+       <!--
+	   %FW-4-TCP_SENDMAIL_BAD_FROM_SIG: Sendmail Invalid Sender - from [IP_address] to [IP_address]
+         -->
+       
+       <collectAndSetAttrByRegex src="$_body">
+    	 <regex><![CDATA[Sendmail Invalid Sender - from <srcIpAddr:gPatIpV4Dot> to <destIpAddr:gPatIpV4Dot>]]></regex>
+       </collectAndSetAttrByRegex>
+       
+     </when>
+
+
+     <when test='$eventType = "IOS-FW-TCP_SENDMAIL_BAD_TO_SIG"'>
+       <!--
+	   %FW-4-TCP_SENDMAIL_BAD_TO_SIG: Sendmail Invalid Recipient - from [IP_address] to [IP_address]
+         -->
+       
+       <collectAndSetAttrByRegex src="$_body">
+    	 <regex><![CDATA[Sendmail Invalid Recipient - from <srcIpAddr:gPatIpV4Dot> to <destIpAddr:gPatIpV4Dot>]]></regex>
+       </collectAndSetAttrByRegex>
+       
+     </when>
+
+
+     <when test='$eventType = "IOS-FW-TCP_SENDMAIL_DECODE"'>
+       <!--
+	   %FW-4-TCP_SENDMAIL_DECODE: Sendmail Decode Alias - from [IP_address] to [IP_address]
+         -->
+       
+       <collectAndSetAttrByRegex src="$_body">
+    	 <regex><![CDATA[Sendmail Decode Alias - from <srcIpAddr:gPatIpV4Dot> to <destIpAddr:gPatIpV4Dot>]]> </regex>
+       </collectAndSetAttrByRegex>
+       
+     </when>
+
+     
+     <when test='$eventType = "IOS-FW-TCP_SENDMAIL_INVALID_COMMAND"'>
+       <!--
+	   %FW-4-TCP_SENDMAIL_INVALID_COMMAND: Invalid SMTP command - [IP_address] to [IP_address]
+           
+         -->
+       <collectAndSetAttrByRegex src="$_body">
+    	 <regex><![CDATA[Invalid SMTP command - <srcIpAddr:gPatIpV4Dot> to <destIpAddr:gPatIpV4Dot>]]></regex>
+       </collectAndSetAttrByRegex>
+       
+     </when>
+
+
+     <when test='$eventType = "IOS-FW-TCP_SENDMAIL_OLD_SIG"'>
+	<!--
+	    %FW-4-TCP_SENDMAIL_OLD_SIG: Archaic Sendmail Attacks - from [IP_address] to [IP_address]
+       -->
+
+          <collectAndSetAttrByRegex src="$_body">
+    	    <regex><![CDATA[Archaic Sendmail Attacks - from <srcIpAddr:gPatIpV4Dot> to <destIpAddr:gPatIpV4Dot>]]> </regex>
+ 	  </collectAndSetAttrByRegex>
+          
+     </when>     
+
+     <when test='$eventType = "IOS-CDP-DUPLEX_MISMATCH"'>
+       <!--
+         #Event from catalyst 6500
+         <188>20983367: Aug 27 03:18:17.053: %CDP-4-DUPLEX_MISMATCH: duplex mismatch discovered on FastEthernet5/46 (not full duplex), with SJ-Dev-A-Cat-Adm-01.prospecthills.net FastEthernet0/1 (full duplex).
+         #Event from catalyst 2900
+         <188>489: .Aug 26 20:07:43.976: %CDP-4-DUPLEX_MISMATCH: duplex mismatch discovered on FastEthernet0/1 (not full duplex), with SJ-Dev-A-Cat-Cor.prospecthills.net FastEthernet5/46 (full duplex).
+       -->
+
+       <collectAndSetAttrByRegex src="$_body">
+         <regex><![CDATA[duplex mismatch discovered on <srcIntfName:gPatStr> <:gPatStrComma>, with <destName:gPatStr> <destIntfName:gPatStr> <:gPatMesgBody>]]></regex>
+       </collectAndSetAttrByRegex>
+     </when>
+     
+     <when test='$eventType = "IOS-SEC_LOGIN-LOGIN_SUCCESS"'>
+     	 <!--
+     	   Feb  2 16:32:26 192.168.19.18 1048484: Feb  3 00:32:25.712: %SEC_LOGIN-5-LOGIN_SUCCESS: Login Success [user: phoenix_agent] [Source: 192.168.29.18] [localport: 23] at 00:32:25 UTC Wed Feb 3 2010
+	-->
+     	 <collectAndSetAttrByRegex src="$_body">
+           <regex><![CDATA[Login Success \[user: <user:gPatStr>\] \[Source: <srcIpAddr:gPatIpV4Dot>\] \[localport: <destIpPort:gPatInt>\] <:gPatMesgBody>]]></regex>
+	 </collectAndSetAttrByRegex>
+	 <setEventAttribute attr="destIpAddr">$reptDevIpAddr</setEventAttribute>
+     </when>
+     
+     <when test='$eventType = "IOS-SEC_LOGIN-LOGIN_FAILED"'>
+     	 <!--
+     	   <188>84354: Dec  6 08:15:20: %SEC_LOGIN-4-LOGIN_FAILED: Login failed [user: Admin] [Source: 192.168.135.125] [localport: 80] [Reason: Login Authentication Failed - BadPassword] at 08:15:20 PST Mon Dec 6 2010
+     	 -->
+     	 <collectAndSetAttrByRegex src="$_body">
+           <regex><![CDATA[Login failed \[user: <user:gPatStr>\] \[Source: <srcIpAddr:gPatIpV4Dot>\] \[localport: <destIpPort:gPatInt>\] \[Reason: <errReason:gPatMesgBody>\]<:gPatMesgBody>]]></regex>
+	 </collectAndSetAttrByRegex>
+	 <setEventAttribute attr="destIpAddr">$reptDevIpAddr</setEventAttribute>
+	 <setEventAttribute attr="eventAction">1</setEventAttribute>
+     </when>
+     
+      <when test='$eventType = "IOS-CONTROLLER-UPDOWN"'>
+       <!--
+	   %CONTROLLER-5-UPDOWN: Controller T1 1/1/1, changed state to [chars]
+         -->
+       <collectAndSetAttrByRegex src="$_body">	
+    	 <regex><![CDATA[Controller\s+<intfName:gPatStrComma>,\s+changed\s+state\s+to\s+<_ifState:gPatStr>\s+<:gPatMesgBody>]]></regex>
+       </collectAndSetAttrByRegex>
+       
+       <choose>
+         <when test='$_ifState = "down"'>
+           <setEventAttribute attr="eventType">combineMsgId("IOS-", $_evIdPrefix, "-", $_evIdSuffix, "-", "TO-DOWN")</setEventAttribute>
+           <setEventAttribute attr="eventSeverity">5</setEventAttribute>
+         </when>
+         
+         <when test='$_ifState = "up"'>
+           <setEventAttribute attr="eventType">combineMsgId("IOS-", $_evIdPrefix, "-", $_evIdSuffix, "-", "TO-UP")</setEventAttribute>
+           <setEventAttribute attr="eventSeverity">4</setEventAttribute>
+         </when>
+       </choose>
+
+     </when>
+     
+     <when test='$eventType = "IOS-DTP-TRUNKPORTON"'>
+	<!--
+		<189>22567: 022561: Aug  5 14:33:26: %DTP-5-TRUNKPORTON: Port Gi1/1 has become dot1q trunk
+	-->
+	<collectAndSetAttrByRegex src="$_body">	
+		<regex><![CDATA[Port\s+<intfName:gPatStr>\s+has\s+become\s+dot1q\s+trunk]]></regex>
+	</collectAndSetAttrByRegex>
+	 <setEventAttribute attr="eventType">combineMsgId("IOS-", $_evIdPrefix, "-", $_evIdSuffix, "-", "Trunk-Create")</setEventAttribute>
+     </when>
+     
+     <when test='$eventType = "IOS-PARSER-CFGLOG_LOGGEDCMD"'>
+     <!--
+		<189>22565: 022559: Aug  5 14:33:21: %PARSER-5-CFGLOG_LOGGEDCMD: User:chris  logged command:no shutdown
+     -->
+	<collectAndSetAttrByRegex src="$_body">	
+		<regex><![CDATA[User:<user:gPatStr>\s+logged\s+command:<command:gPatMesgBody>]]></regex>
+	</collectAndSetAttrByRegex>
+     </when>
+     
+     <when test='$eventType = "IOS-PORT_SECURITY-SP-PSECURE_VIOLATION"'>
+     	<!--
+		<186>1391: Aug 16 2010 12:00:01: %PORT_SECURITY-SP-2-PSECURE_VIOLATION: Security violation occurred, caused by MAC address 0012.3f4a.c031 on port FastEthernet1/16
+    	 -->
+	<collectAndSetAttrByRegex src="$_body">	
+		<regex><![CDATA[Security\s+violation\s+occurred,\s+caused\s+by\s+MAC\s+address\s+<_mac:gPatStr>\s+on\s+port\s+<intfName:gPatStr>]]></regex>
+	</collectAndSetAttrByRegex>
+     </when>
+
+     <when test='$eventType = "IOS-BGP-ADJCHANGE"'>
+       <!--
+         <187>201: May 12 01:10:52: %BGP-5-ADJCHANGE: neighbor 172.17.1.2 Down - Peer closed the session
+	 <187>201: May 12 01:10:52: %BGP-5-ADJCHANGE: neighbor 172.17.1.2 Up
+       -->
+       <collectAndSetAttrByRegex src="$_body">
+         <regex><![CDATA[neighbor\s+<destIpAddr:gPatIpV4Dot>\s+<_ifState:gPatStr><_reason:gPatMesgBody>]]></regex>
+       </collectAndSetAttrByRegex>
+       <setEventAttribute attr="srcIpAddr">$reptDevIpAddr</setEventAttribute>
+       <choose>
+         <when test='$_ifState = "Down"'>
+	   <collectAndSetAttrByRegex src="$_reason">
+	     <regex><![CDATA[\s+-?\s*<msg:gPatMesgBody>]]></regex>
+	   </collectAndSetAttrByRegex>
+	   <setEventAttribute attr="eventType">combineMsgId("IOS-", $_evIdPrefix, "-", $_evIdSuffix, "-", "TO-DOWN")</setEventAttribute>
+	 </when>
+	 <when test='$_ifState = "Up"'>
+	   <setEventAttribute attr="eventType">combineMsgId("IOS-", $_evIdPrefix, "-", $_evIdSuffix, "-", "TO-UP")</setEventAttribute>
+	 </when>
+       </choose>
+     </when>
+
+     <when test='$eventType = "IOS-OSPF-ADJCHG"'>
+       <!--
+         <187>201: May 12 01:10:52: %OSPF-5-ADJCHG: Process 1, Nbr 2.2.2.2 on Ethernet0/0 from FULL to DOWN, Neighbor Down: Interface down or detached
+	 <187>201: May 12 01:10:52: %OSPF-5-ADJCHG: Process 1, Nbr 2.2.2.2 on Ethernet0/0 from DOWN to INIT, Received Hello
+	 <187>201: May 12 01:10:52: %OSPF-5-ADJCHG: Process 1, Nbr 2.2.2.2 on Ethernet0/0 from INIT to 2WAY, 2-Way Received
+	 <187>201: May 12 01:10:52: %OSPF-5-ADJCHG: Process 1, Nbr 2.2.2.2 on Ethernet0/0 from 2WAY to EXSTART, AdjOK?
+	 <187>201: May 12 01:10:52: %OSPF-5-ADJCHG: Process 1, Nbr 2.2.2.2 on Ethernet0/0 from EXSTART to EXCHANGE, Negotiation Done
+	 <187>201: May 12 01:10:52: %OSPF-5-ADJCHG: Process 1, Nbr 2.2.2.2 on Ethernet0/0 from EXCHANGE to LOADING, Exchange Done
+	 <187>201: May 12 01:10:52: %OSPF-5-ADJCHG: Process 1, Nbr 2.2.2.2 on Ethernet0/0 from LOADING to FULL, Loading Done
+       -->
+       <collectAndSetAttrByRegex src="$_body">
+         <regex><![CDATA[Process\s+<_procId:gPatInt>,\s+Nbr\s+<destIpAddr:gPatIpV4Dot>\s+on\s+<srcIntfName:gPatStr>\s+from\s+<_prevStat:gPatStr>\s+to\s+<_currStat:gPatStr>,\s+<msg:gPatMesgBody>]]></regex>
+       </collectAndSetAttrByRegex>
+       <setEventAttribute attr="srcIpAddr">$reptDevIpAddr</setEventAttribute>
+       <choose>
+	 <when test='$_currStat = "DOWN"'>
+	   <setEventAttribute attr="eventType">combineMsgId("IOS-", $_evIdPrefix, "-", $_evIdSuffix, "-", "TO-DOWN")</setEventAttribute>
+	 </when>
+	 <when test='$_currStat = "FULL"'>
+	   <setEventAttribute attr="eventType">combineMsgId("IOS-", $_evIdPrefix, "-", $_evIdSuffix, "-", "TO-UP")</setEventAttribute>
+	 </when>
+	 <otherwise>
+	   <setEventAttribute attr="eventType">combineMsgId("IOS-", $_evIdPrefix, "-", $_evIdSuffix, "-", "MISC")</setEventAttribute>
+	 </otherwise>
+       </choose>
+     </when>     
+          
+     <when test='$eventType = "IOS-AUTHMGR-START"'>
+       <!--
+       <189>3755145: Mar 16 21:08:17: %AUTHMGR-5-START: Starting 'mab' for client (0018.8b5b.fcd1) on Interface Gi1/0/8 AuditSessionID AC103215000035FBD0A4A1CE
+       -->
+       <collectAndSetAttrByRegex src="$_body">
+         <regex><![CDATA[Starting\s+'<procName:gPatStr>'\s+for client\s+\(<_srcMAC:patStrEndQuote>\)\s+on Interface\s+<srcIntfName:gPatStr>\s+AuditSessionID\s+<ipConnId:gPatStr>]]></regex>
+       </collectAndSetAttrByRegex>
+       <setEventAttribute attr="srcMACAddr">normalizeMAC($_srcMAC)</setEventAttribute>
+     </when>   
+     
+     <when test='$eventType = "IOS-AUTHMGR-SUCCESS"'>
+       <!--
+       <189>3755503: Mar 16 21:23:20: %AUTHMGR-5-SUCCESS: Authorization succeeded for client (001e.c96d.65fb) on Interface Gi1/0/25 AuditSessionID AC1032150000360DD25F3B9F
+       -->
+       <collectAndSetAttrByRegex src="$_body">
+         <regex><![CDATA[Authorization succeeded\s+for client\s+\(<_srcMAC:patStrEndQuote>\)\s+on Interface\s+<srcIntfName:gPatStr>(?:\s+AuditSessionID\s+<ipConnId:gPatStr>)?]]></regex>
+       </collectAndSetAttrByRegex> 
+     </when>
+     
+      <when test='$eventType = "IOS-AUTHMGR-VLANASSIGN"'>
+       <!--
+	   May 13 15:41:00.733 EDT: %AUTHMGR-SP-5-VLANASSIGN: VLAN 141 assigned to Interface Gi2/37        
+         -->
+	<collectAndSetAttrByRegex src="$_body">
+		<regex><![CDATA[VLAN\s+<hostVLAN:gPatInt>\s+assigned to Interface\s+<intfName:gPatStr>]]></regex>
+	</collectAndSetAttrByRegex>           
+     </when>     
+      
+     
+     <when test='$eventType IN "IOS-DOT1X-SUCCESS, IOS-DOT1X-FAIL, IOS-MAB-FAIL"'>
+       <!--
+       <189>3755586: Mar 16 21:26:46: %MAB-5-FAIL: Authentication failed for client (0080.f08a.95cc) on Interface Gi1/0/12 AuditSessionID AC1032150000305CFE272A1F
+       <189>3755579: Mar 16 21:26:46: %DOT1X-5-FAIL: Authentication failed for client (0018.8b5a.1e6b) on Interface Gi1/0/8 AuditSessionID AC103215000035FAD0A44695
+       <189>3755502: Mar 16 21:23:20: %DOT1X-5-SUCCESS: Authentication successful for client (001e.c96d.65fb) on Interface Gi1/0/25 AuditSessionID AC1032150000360DD25F3B9F
+       -->
+       <collectAndSetAttrByRegex src="$_body">
+         <regex><![CDATA[Authentication\s+<:gPatStr>\s+for client\s+\(<_srcMAC:patStrEndQuote>\)\s+on Interface\s+<srcIntfName:gPatStr>(?:\s+AuditSessionID\s+<ipConnId:gPatStr>)?]]></regex>
+       </collectAndSetAttrByRegex>
+       
+     </when> 
+
+     <when test='$eventType = "IOS-STACKMGR-STACK_LINK_CHANGE"'>
+       <!--May 11 08:45:59.431: %STACKMGR-4-STACK_LINK_CHANGE: Stack Port 2 Switch 2 has changed to state DOWN
+	 May 11 08:46:00.437: %STACKMGR-4-STACK_LINK_CHANGE: Stack Port 2 Switch 2 has changed to state UP    -->
+	<collectAndSetAttrByRegex src="$_body">
+		<regex><![CDATA[Stack Port\s+<_portNum:gPatInt>\s+Switch\s+<_switchNum:gPatInt>\s+has changed to state\s+<_status:gPatStr>]]></regex>
+	</collectAndSetAttrByRegex>
+	<setEventAttribute attr="intfName">combineMsgId("Switch", $_switchNum, "/Port", $_portNum)</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">7</setEventAttribute>
+	<choose>
+		<when test='$_status = "UP"'>
+			 <setEventAttribute attr="eventType">"IOS-STACK-LINK-CHANGED-TO-UP"</setEventAttribute>
+		</when>
+		<when test='$_status = "DOWN"'>
+			<setEventAttribute attr="eventType">"IOS-STACK-LINK-CHANGED-TO-DOWN"</setEventAttribute>			
+		</when>
+	</choose>
+     </when> 
+
+    <when test='$eventType = "IOS-WS_IPSEC_3-ILLEGALCLEAR"'>
+       <!--
+	  <189>Jun  2 16:27:00 p1eibzrv01 21253: Jun  2 16:27:00%WS_IPSEC_3-5-ILLEGALCLEAR: slot 4/0 Illegal Clear Packet: Src =9.17.249.178, Dst =9.44.14.46, Proto =6    
+         -->
+	<collectAndSetAttrByRegex src="$_body">
+		<regex><![CDATA[<intfName:gPatMesgBody>\s+Illegal Clear Packet: Src =<srcIpAddr:gPatIpV4Dot>,\s+Dst =<destIpAddr:gPatIpV4Dot>,\s+Proto =<ipProto:gPatInt>]]></regex>
+	</collectAndSetAttrByRegex>           
+     </when>   
+
+   <when test='$eventType = "IOS-WS_IPSEC_3-REPLAYERR"'>
+       <!--
+	  <189>Jun  2 16:30:20 p1eibzrv01 5523: Jun  2 16:30:20%WS_IPSEC_3-5-REPLAYERR: slot 4/0 Replay Error: Current Seq. No. =1491322, Highest Seq No. =1491588
+         -->
+	<collectAndSetAttrByRegex src="$_body">
+		<regex><![CDATA[<intfName:gPatMesgBody>\s+Replay Error: <:gPatMesgBody>]]></regex>
+	</collectAndSetAttrByRegex>           
+     </when> 
+     
+     <when test='$eventType = "IOS-WS_IPSEC_3-SELCHECKERR"'>
+       <!--
+         -->
+	<collectAndSetAttrByRegex src="$_body">
+		<regex><![CDATA[<intfName:gPatMesgBody>\s+Selector Check Error: Src =<srcIpAddr:gPatIpV4Dot>:<srcIpPort:gPatInt>,\s+Dst =<destIpAddr:gPatIpV4Dot>:<destIpPort:gPatInt>,\s+Proto =<ipProto:gPatInt><:gPatMesgBody>]]></regex>
+	</collectAndSetAttrByRegex>           
+     </when> 
+
+<when test='$eventType = "IOS-WS_IPSEC_3-SEQOVERFLOW"'>
+       <!--
+         -->
+	<collectAndSetAttrByRegex src="$_body">
+		<regex><![CDATA[<intfName:gPatMesgBody>\s+Sequence number overflow: Src =<srcIpAddr:gPatIpV4Dot>,\s+Dst =<destIpAddr:gPatIpV4Dot>,\s+Proto =<ipProto:gPatInt><:gPatMesgBody>]]></regex>
+	</collectAndSetAttrByRegex>           
+     </when>   
+     
+   </choose>
+   
+   <when test='exist _srcMAC'>
+	<switch>
+	       <case>
+	       <collectAndSetAttrByRegex src="$_srcMAC">
+		 <regex><![CDATA[<_srcMacAddr:macFormat>]]></regex>
+	       </collectAndSetAttrByRegex>
+	       <setEventAttribute attr="srcMACAddr">normalizeMAC($_srcMAC)</setEventAttribute>
+	       </case>
+	       <default />
+       </switch>
+   </when>
+
+    <when test='exist _mac'>
+	<setEventAttribute attr="hostMACAddr">normalizeMAC($_mac)</setEventAttribute>
+    </when>
+   
+    
+  </parsingInstructions>
+</eventParser>
+

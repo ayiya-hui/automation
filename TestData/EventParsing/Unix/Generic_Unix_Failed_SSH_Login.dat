@@ -1,0 +1,24 @@
+[reptDevIpAddr(key)]
+1.2.3.4
+[eventMsg]
+<85>Mar 17 17:50:04 1.2.3.4 sshd[14340]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=192.168.20.33 user=daniel  192.168.20.45
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=4
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=1.2.3.4
+eventAction=1 (Deny)
+eventName=Failed SSH logon
+srcIpAddr=192.168.20.45
+reptVendor=Generic
+eventType=Generic_Unix_Failed_SSH_Login
+user=daniel
+phEventCategory=0 (External)
+reptDevIpAddr=1.2.3.4
+reptModel=Unix

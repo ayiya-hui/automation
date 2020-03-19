@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+Oct 7 21:18:00.517: %PM-4-ERR_RECOVER: Attempting to recover from security-violation err-disable state on Gi3/0/31 (switch-2b-1-3)
+[params]
+rawEventMsg=any
+deviceTime=any
+isHostIntfCritical=No
+eventType=IOS-PM-ERR_RECOVER
+phCustId=$sender
+hostName=switch-2b-1-3
+intfName=Gi3/0/31
+reptModel=IOS
+eventId=any
+eventParsedOk=1
+eventSeverity=5
+hostIpAddr=$localhost
+eventName=Recover from security violation error disable statue on interface
+phEventCategory=0 (External)
+eventSeverityCat=MEDIUM
+collectorId=any
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Cisco

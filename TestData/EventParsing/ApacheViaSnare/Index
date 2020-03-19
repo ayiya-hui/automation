@@ -1,0 +1,12 @@
+eventType,name,module,reptDevIpAddr,key,method
+Apache-Web-Request-Success,ApacheViaSnare_1,ApacheViaSnare,125.15.125.15,,syslog
+Apache-Web-Request-Redirect,ApacheViaSnare_2,ApacheViaSnare,125.15.125.15,,syslog
+Apache-Web-Client-Access-Denied,ApacheViaSnare_3,ApacheViaSnare,125.15.125.15,,syslog
+Apache-Web-Forbidden-Access-Denied,ApacheViaSnare_4,ApacheViaSnare,125.15.125.15,,syslog
+Apache-Web-Bad-Request,ApacheViaSnare_5,ApacheViaSnare,125.15.125.15,,syslog
+Apache-Web-Length-Reqd-Access-Denied,ApacheViaSnare_6,ApacheViaSnare,125.15.125.15,,syslog
+Apache-Web-Client-Error,ApacheViaSnare_7,ApacheViaSnare,125.15.125.15,,syslog
+Apache-Web-Server-Error,ApacheViaSnare_8,ApacheViaSnare,125.15.125.15,,syslog
+Apache-Web-Request-Success,ApacheViaSnare_9,ApacheViaSnare,137.146.28.68,,syslog
+Apache-Web-Forbidden-Access-Denied,ApacheViaSnare_10,ApacheViaSnare,172.16.10.8,,syslog
+Apache-Web-Request-Success,ApacheViaSnare_11,ApacheViaSnare,51.51.51.51,,syslog

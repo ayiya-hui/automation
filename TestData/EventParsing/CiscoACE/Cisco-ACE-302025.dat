@@ -1,0 +1,72 @@
+[reptDevIpAddr(key)]
+$localhost (srcIpPort:9546)
+[eventMsg]
+<166>Jun  4 2010 10:06:37 FLOODCERT_DMZ: %ACE-6-302025: Teardown UDP connection 0x2a1064 for vlan746:208.33.52.10/9546 (208.33.52.10/9546) to vlan746:10.7.46.2/5002 (10.7.46.2/5002) duration 0:00:11 bytes 206 Idle Timeout
+[params]
+rawEventMsg=any
+virtContext=FLOODCERT_DMZ
+postNATSrcIpPort=9546
+deviceTime=any
+eventType=Cisco-ACE-302025
+phCustId=$sender
+destIpAddr=10.7.46.2
+totBytes=206
+destIpPort=5002 (RFE)
+srcIpAddr=208.33.52.10
+reptModel=ACE
+eventId=any
+ipConnId=2756708
+eventParsedOk=1
+eventSeverity=1
+preNATDestIpAddr=10.7.46.2
+eventName=Teardown UDP connection
+phEventCategory=0 (External)
+srcIntfName=vlan746
+srcIpPort=9546
+preNATDestIpPort=5002 (RFE)
+eventSeverityCat=LOW
+destIntfName=vlan746
+postNATSrcIpAddr=208.33.52.10
+ipProto=17 (UDP)
+count=1
+phRecvTime=any
+reptDevIpAddr=$reporter
+eventAction=0 (Permit)
+reptVendor=Cisco
+durationMSec=11000
+[reptDevIpAddr(key)]
+$localhost (srcIpPort:1027)
+[eventMsg]
+<166>Jun  4 2010 10:27:29 Admin: %ACE-6-302025: Teardown UDP connection 0xb06ab for vlan762:10.7.62.18/1027 (10.7.62.18/1027) to vlan762:10.0.1.10/514 (10.0.1.10/514) duration 0:00:11 bytes 662 Idle Timeout
+[params]
+rawEventMsg=any
+virtContext=Admin
+postNATSrcIpPort=1027
+durationMSec=11000
+deviceTime=any
+eventType=Cisco-ACE-302025
+phCustId=$sender
+destIpAddr=10.0.1.10
+totBytes=662
+destIpPort=514 (SYSLOG)
+srcIpAddr=10.7.62.18
+reptModel=ACE
+eventId=any
+ipConnId=722603
+eventParsedOk=1
+eventSeverity=1
+preNATDestIpAddr=10.0.1.10
+eventName=Teardown UDP connection
+phEventCategory=0 (External)
+srcIntfName=vlan762
+srcIpPort=1027
+preNATDestIpPort=514 (SYSLOG)
+eventSeverityCat=LOW
+destIntfName=vlan762
+postNATSrcIpAddr=10.7.62.18
+ipProto=17 (UDP)
+count=1
+phRecvTime=any
+reptDevIpAddr=$reporter
+eventAction=0 (Permit)
+reptVendor=Cisco

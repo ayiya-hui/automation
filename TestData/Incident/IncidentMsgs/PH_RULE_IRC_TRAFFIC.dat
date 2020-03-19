@@ -1,0 +1,2 @@
+[eventMsg]
+<161>snort[2242]: [1:542:9] CHAT IRC nick change [Classification: Misc activity] [Priority: 3]: {UDP} 192.168.19.1:6555 -> 172.16.2.5:514

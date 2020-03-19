@@ -1,0 +1,2 @@
+[eventMsg]
+[PH_DEV_MON_NET_INTF_UTIL]:[eventSeverity]=PHL_INFO,[hostName]=automator8Dot7Dot0Dot1,[hostIpAddr]=8.7.0.1,[pollIntv]=180,[intfName]=vmnic1,[vSwitch]=vSwitch0,[sentBytes]=11407360,[outIntfUtil]=65.044,[recvBytes]=1884160,[inIntfUtil]=72.0070,[sentPkts]=10508,[recvPkts]=11304,[outIntfPktDiscarded]=0,[inIntfPktDiscarded]=0

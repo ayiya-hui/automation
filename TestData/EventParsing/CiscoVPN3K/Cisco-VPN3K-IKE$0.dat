@@ -1,0 +1,21 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<189>393007 06/29/2009 21:17:35.700 SEV=4 IKE/0 RPT=46656 99.129.50.155  Group [HQ-Dev] received an unencrypted packet when crypto active!! Dropping packet.--automator
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+eventAction=0 (Permit)
+eventName=Cisco-VPN3K-IKE/0
+reptVendor=Cisco
+eventType=Cisco-VPN3K-IKE/0
+phEventCategory=0 (External)
+reptDevIpAddr=$localhost
+reptModel=VPN 3K

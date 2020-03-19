@@ -1,0 +1,4 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+AO-WUA-DNS-PTR-Query-Success,AOWUA_DNS_1,AOWUA_DNS,10.30.23.82,,syslog
+AO-WUA-DNS-PTR-Query-Failed,AOWUA_DNS_3,AOWUA_DNS,10.30.2.249,,syslog

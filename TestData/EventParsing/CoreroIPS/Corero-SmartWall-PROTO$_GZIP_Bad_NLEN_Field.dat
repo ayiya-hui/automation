@@ -1,0 +1,36 @@
+[reptDevIpAddr(key)]
+192.168.51.65
+[eventMsg]
+<36>Dec 10 05:37:32 192.168.51.65 IPS5500-75EC: id=060001 pt=TLN-KA prot=TCP cip=165.254.27.90 cprt=80 sip=50.58.90.98 sprt=1734 atck=tln-017109 disp=mitigate ckt=1 src=extern msg="PROTO: GZIP Bad NLEN Field"
+[params]
+destGeoOrg=any
+parserName=CoreroIPSParser
+eventType=Corero-SmartWall-PROTO:_GZIP_Bad_NLEN_Field
+destGeoState=any
+destIpAddr=50.58.90.98
+srcName=any
+destIpPort=1734
+srcIpAddr=165.254.27.90
+destGeoCountry=any
+usrMsg=PROTO: GZIP Bad NLEN Field
+reptModel=SmartWall
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=any
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+destName=any
+count=1
+srcIpPort=80
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=192.168.51.65
+rawEventMsg=any
+ipProto=6 (TCP)
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=192.168.51.65
+reptVendor=Corero
+destGeoCity=any

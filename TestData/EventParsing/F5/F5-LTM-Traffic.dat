@@ -1,0 +1,33 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+Hostname=f5-51-01.safehost.net,Entity=Traffic,AggrInterval=10,EOCTimestamp=1385545452,RequestStartTimestamp=1385545452,ResponseStartTimestamp=1385545453,AVRProfileName=/FLA_PROD_WEB/FLA_PROD_WEB_ANALYTICS,ApplicationName=<Unassigned>,VSName=/FLA_PROD_WEB/FLA-PROD-CRM-SSL,POOLIP=172.22.7.52,POOLIPRouteDomain=172,POOLPort=443,URLString=/,ClientIP=80.80.231.88,ClientIPRouteDomain=172,ClientPort=50670,UserAgentString=Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1),MethodString=GET,ResponseCode=302,GeoCode=CH,ServerLatency=48,RequestSize=131,ResponseSize=1371,RequestHeaderTruncated=0,ResponseHeaderTruncated=0,RequestPayloadTruncated=0,ResponsePayloadTruncated=0
+[params]
+rawEventMsg=any
+deviceTime=any
+parserName=F5Parser
+eventType=F5-LTM-Traffic
+phCustId=$sender
+srcIpAddr=80.80.231.88
+reptModel=Big-IPOS
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=F5 HTTP traffic
+phEventCategory=0 (External)
+customer=Super
+recvBytes=131
+srcIpPort=50670
+eventSeverityCat=LOW
+collectorId=any
+httpMethod=GET
+relayDevIpAddr=$localhost
+ruleName=/FLA_PROD_WEB/FLA_PROD_WEB_ANALYTICS
+httpStatusCode=302 (Found - The requested resource resides temporarily under a different URI.)
+reptDevName=f5-51-01.safehost.net
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=F5
+httpUserAgent=Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)
+sentBytes=1371

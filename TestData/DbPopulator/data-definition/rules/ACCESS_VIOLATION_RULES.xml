@@ -1,0 +1,611 @@
+
+<Rules>
+
+   <Rule group="PH_SYS_RULE_Authen_NetDev" id="PH_Rule_Access_1" phIncidentCategory="Network">
+       <Name>Multiple Admin Login Failures: Net Device (no Source IP)</Name>
+       <active>true</active>
+    <Description> Detects multiple logon failures at a network device - 5 consecutive failures in a 10 minute period. This rule triggers for network devices that do not report a source IP address.  </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_EXCESS_FAILED_LOGON_NET_DEV" severity="8">
+      <ArgList>
+        destIpAddr = ExcessNetLoginFailure.reptDevIpAddr, user = ExcessNetLoginFailure.user, incidentCount = ExcessNetLoginFailure.COUNT(*)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+       <SubPattern displayName="ExcessNetLoginFailure" name="ExcessNetLoginFailure">
+         <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_HostLogonFailure) AND reptDevIpAddr IN (Group@PH_SYS_DEVICE_Network) AND srcIpAddr IS NULL </SingleEvtConstr>
+	 <GroupEvtConstr>COUNT (*) &gt;= 5</GroupEvtConstr>
+	 <GroupByAttr>reptDevIpAddr, user </GroupByAttr>
+       </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,reptDevIpAddr,user,destIpPort,reptDevIpAddr,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+   </Rule>
+
+   <Rule group="PH_SYS_RULE_Authen_NetDev" id="PH_Rule_Access_2" phIncidentCategory="Network">
+       <Name>Multiple Admin Login Failures: Net Device</Name>
+       <active>true</active>
+    <Description> Detects excessive logon failures at a network device - 5 consecutive failures in a 10 minute period. This rule triggers for network devices that report a source IP address.  </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_EXCESS_FAILED_LOGON_2_NET_DEV" severity="8">
+      <ArgList>
+        srcIpAddr = ExcessNetLoginFailure.srcIpAddr, destIpAddr = ExcessNetLoginFailure.reptDevIpAddr, user = ExcessNetLoginFailure.user, incidentCount = ExcessNetLoginFailure.COUNT(*)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+       <SubPattern displayName="ExcessNetLoginFailure" name="ExcessNetLoginFailure">
+         <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_HostLogonFailure) AND reptDevIpAddr IN (Group@PH_SYS_DEVICE_Network) AND srcIpAddr IS NOT NULL </SingleEvtConstr>
+	 <GroupEvtConstr>COUNT (*) &gt;= 5</GroupEvtConstr>
+	 <GroupByAttr>srcIpAddr, reptDevIpAddr, user </GroupByAttr>
+       </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,reptDevIpAddr,srcIpAddr,user,destIpPort,reptDevIpAddr,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+   </Rule>
+
+   <Rule group="PH_SYS_RULE_Authen_NetDev" id="PH_Rule_Access_3" phIncidentCategory="Network">
+       <Name>Repeated Admin Multiple Login Failures: Net Device</Name>
+       <active>false</active>
+    <Description> Detects repeating occurrences of multiple logon failures at a network device </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_REPEAT_EXCESS_FAILED_LOGON_2_NET_DEV" severity="9">
+      <ArgList>
+        srcIpAddr = RepeatExcessNetLoginFailure.srcIpAddr, destIpAddr = RepeatExcessNetLoginFailure.destIpAddr, incidentCount =RepeatExcessNetLoginFailure.COUNT(*)  
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="86400">
+       <SubPattern displayName="RepeatExcessNetLoginFailure" name="RepeatExcessNetLoginFailure">
+         <SingleEvtConstr> eventType = "PH_RULE_EXCESS_FAILED_LOGON_2_NET_DEV" </SingleEvtConstr>
+	 <GroupEvtConstr>COUNT (*) &gt;= 3 </GroupEvtConstr>
+	 <GroupByAttr>srcIpAddr,eventType,destIpAddr </GroupByAttr>
+       </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,reptDevIpAddr,srcIpAddr,destIpAddr,user,reptDevIpAddr,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+   </Rule>
+
+   <Rule group="PH_SYS_RULE_Authen_Server" id="PH_Rule_Access_5" phIncidentCategory="Server">
+       <Name>Multiple Logon Failures: Server</Name>
+       <active>true</active>
+    <Description> Detects excessive logon failures at a server - 5 consecutive failures in a 10 minute period </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_EXCESS_FAILED_LOGON_SERVER" severity="6">
+      <ArgList>
+        srcIpAddr = ExcessServerLoginFailure.srcIpAddr, destIpAddr = ExcessServerLoginFailure.reptDevIpAddr, user = ExcessServerLoginFailure.user, incidentCount = ExcessServerLoginFailure.COUNT(*)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+       <SubPattern displayName="ExcessServerLoginFailure" name="ExcessServerLoginFailure">
+         <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_HostLogonFailure) AND reptDevIpAddr IN (Group@PH_SYS_DEVICE_Server) </SingleEvtConstr>
+	 <GroupEvtConstr>COUNT (*) &gt;= 5</GroupEvtConstr>
+	 <GroupByAttr>srcIpAddr, reptDevIpAddr, user </GroupByAttr>
+       </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,reptDevIpAddr,srcIpAddr,user,destIpPort,reptDevIpAddr,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+   </Rule>
+
+   <Rule group="PH_SYS_RULE_Authen_Server" id="PH_Rule_Access_6" phIncidentCategory="Server">
+       <Name>Repeated Multiple Logon Failures: Server</Name>
+       <active>false</active>
+    <Description> Detects repeating occurrences of multiple logon failures at a server from the same user. </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_REPEAT_EXCESS_FAILED_LOGON_SERVER" severity="9">
+      <ArgList>
+        srcIpAddr = RepeatExcessServerLoginFailure.srcIpAddr, destIpAddr = RepeatExcessServerLoginFailure.destIpAddr, incidentCount = RepeatExcessServerLoginFailure.COUNT(*)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="86400">
+       <SubPattern displayName="RepeatExcessServerLoginFailure" name="RepeatExcessServerLoginFailure">
+         <SingleEvtConstr> eventType = "PH_RULE_EXCESS_FAILED_LOGON_SERVER" </SingleEvtConstr>
+	 <GroupEvtConstr>COUNT (*) &gt;= 3 </GroupEvtConstr>
+	 <GroupByAttr>srcIpAddr,eventType,destIpAddr </GroupByAttr>
+       </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,reptDevIpAddr,srcIpAddr,destIpAddr,user,reptDevIpAddr,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+   </Rule>
+
+   <Rule group="PH_SYS_RULE_Authen_Server" id="PH_Rule_Access_10" phIncidentCategory="Server">
+       <Name>Multiple Privileged Logon Failures: Server</Name>
+       <active>true</active>
+    <Description> Detects excessive privileged logon failures at a server - 3 consecutive failures in a 10 minute period </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_EXCESS_FAILED_PRIV_LOGON_SERVER" severity="9">
+      <ArgList>
+        srcIpAddr = ExcessPrivLoginFailure.srcIpAddr, destIpAddr = ExcessPrivLoginFailure.reptDevIpAddr, user = ExcessPrivLoginFailure.user, incidentCount = ExcessPrivLoginFailure.COUNT(*)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+      <SubPattern displayName="ExcessPrivLoginFailure" name="ExcessPrivLoginFailure">
+        <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_HostPrivLogonFailure) AND reptDevIpAddr IN (Group@PH_SYS_DEVICE_Server) </SingleEvtConstr>
+	<GroupEvtConstr>COUNT (*) &gt;= 3</GroupEvtConstr>
+	<GroupByAttr>srcIpAddr, reptDevIpAddr, user</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,reptDevIpAddr,srcIpAddr,user,reptDevIpAddr,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+   </Rule>
+
+   <Rule group="PH_SYS_RULE_Authen_App" id="PH_Rule_Access_15A" phIncidentCategory="Application">
+       <Name>Multiple Logon Failures: Web Server</Name>
+       <active>true</active>
+    <Description> Detects excessive application logon failures - 5 consecutive failures in a 10 minute period. Application logsons include the one that may require authentication for accessing the authentication, such as HTTP, SNMP, FTP, POP3, IMAP etc. </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_EXCESS_FAILED_LOGON_WEB" severity="6">
+      <ArgList>
+        srcIpAddr = ExcessWebLoginFailure.srcIpAddr, destIpAddr = ExcessWebLoginFailure.reptDevIpAddr, user = ExcessWebLoginFailure.user, incidentCount = ExcessWebLoginFailure.COUNT(*)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+       <SubPattern displayName="ExcessWebLoginFailure" name="ExcessWebLoginFailure">
+         <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_WebLogonFailure) </SingleEvtConstr>
+	 <GroupEvtConstr>COUNT (*) &gt;= 5</GroupEvtConstr>
+	 <GroupByAttr> srcIpAddr, reptDevIpAddr, user </GroupByAttr>
+       </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,reptDevIpAddr,srcIpAddr,user,destIpPort,reptDevIpAddr,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+   </Rule>
+
+   <Rule group="PH_SYS_RULE_Authen_App" id="PH_Rule_Access_16A" phIncidentCategory="Application">
+       <Name>Repeated Multiple Logon Failures: Web Server</Name>
+       <active>false</active>
+    <Description> Detects repeating occurrences of multiple application logon failures </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_REPEAT_EXCESS_FAILED_LOGON_WEB" severity="9">
+      <ArgList>
+        srcIpAddr = Filter_Rule_Access_16_1.srcIpAddr, destIpAddr = Filter_Rule_Access_16_1.destIpAddr, incidentCount = Filter_Rule_Access_16_1.COUNT(*)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="86400">
+      <SubPattern displayName="Filter_Rule_Access_16_1" name="Filter_Rule_Access_16_1">
+        <SingleEvtConstr> eventType = "PH_RULE_EXCESS_FAILED_LOGON_APPL" </SingleEvtConstr>
+	<GroupEvtConstr>COUNT (*) &gt;= 3 </GroupEvtConstr>
+	<GroupByAttr>srcIpAddr,eventType,destIpAddr </GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,reptDevIpAddr,srcIpAddr,destIpAddr,user,reptDevIpAddr,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+   </Rule>
+
+   <Rule group="PH_SYS_RULE_Authen_App" id="PH_Rule_Access_15B" phIncidentCategory="Application">
+       <Name>Multiple Logon Failures: Database</Name>
+       <active>true</active>
+    <Description> Detects excessive application logon failures - 5 consecutive failures in a 10 minute period. Application logsons include the one that may require authentication for accessing the authentication, such as HTTP, SNMP, FTP, POP3, IMAP etc. </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_EXCESS_FAILED_LOGON_DB" severity="6">
+      <ArgList>
+        srcIpAddr = ExcessDBLoginFailure1.srcIpAddr, srcName = ExcessDBLoginFailure2.srcName, destIpAddr = ExcessDBLoginFailure1.reptDevIpAddr, user = ExcessDBLoginFailure1.user, incidentCount = ExcessDBLoginFailure1.COUNT(*)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+       <SubPattern displayName="ExcessDBLoginFailure1" name="ExcessDBLoginFailure1">
+         <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_DBLogonFailure) </SingleEvtConstr>
+	 <GroupEvtConstr>COUNT (*) &gt;= 5</GroupEvtConstr>
+	 <GroupByAttr> srcIpAddr, reptDevIpAddr, user </GroupByAttr>
+       </SubPattern>
+       <Operator rank="0" type="OR"/>
+       <SubPattern displayName="ExcessDBLoginFailure2" name="ExcessDBLoginFailure2">
+         <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_DBLogonFailure) </SingleEvtConstr>
+	 <GroupEvtConstr>COUNT (*) &gt;= 5</GroupEvtConstr>
+	 <GroupByAttr> srcName, reptDevIpAddr, user </GroupByAttr>
+       </SubPattern>
+    </PatternClause>
+    <GlobalConstr>ExcessDBLoginFailure1.reptDevIpAddr = ExcessDBLoginFailure2.reptDevIpAddr, ExcessDBLoginFailure1.user = ExcessDBLoginFailure2.user </GlobalConstr>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,reptDevIpAddr,srcIpAddr,srcName,user,destIpPort,reptDevIpAddr,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+   </Rule>
+
+   <Rule group="PH_SYS_RULE_Authen_App" id="PH_Rule_Access_16B" phIncidentCategory="Application">
+       <Name>Repeated Multiple Logon Failures: Database</Name>
+       <active>false</active>
+    <Description> Detects repeating occurrences of multiple application logon failures </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_REPEAT_EXCESS_FAILED_LOGON_DB" severity="9">
+      <ArgList>
+        srcIpAddr = Filter_Rule_Access_16_1.srcIpAddr, srcName = Filter_Rule_Access_16_2.srcName, destIpAddr = Filter_Rule_Access_16_1.destIpAddr, incidentCount = Filter_Rule_Access_16_1.COUNT(*)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="86400">
+      <SubPattern displayName="Filter_Rule_Access_16_1" name="Filter_Rule_Access_16_1">
+        <SingleEvtConstr> eventType = "PH_RULE_EXCESS_FAILED_LOGON_DB" </SingleEvtConstr>
+	<GroupEvtConstr>COUNT (*) &gt;= 3 </GroupEvtConstr>
+	<GroupByAttr>srcIpAddr,eventType,destIpAddr </GroupByAttr>
+      </SubPattern>
+      <Operator rank="0" type="OR"/>
+      <SubPattern displayName="Filter_Rule_Access_16_2" name="Filter_Rule_Access_16_2">
+        <SingleEvtConstr> eventType = "PH_RULE_EXCESS_FAILED_LOGON_DB" </SingleEvtConstr>
+	<GroupEvtConstr>COUNT (*) &gt;= 3 </GroupEvtConstr>
+	<GroupByAttr>srcName,eventType,destIpAddr </GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <GlobalConstr>Filter_Rule_Access_16_1.destIpAddr = Filter_Rule_Access_16_2.destIpAddr </GlobalConstr>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,reptDevIpAddr,srcIpAddr,srcName,destIpAddr,user,reptDevIpAddr,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+   </Rule>
+   
+   <Rule group="PH_SYS_RULE_Authen_App" id="PH_Rule_Access_15C" phIncidentCategory="Application">
+       <Name>Multiple Logon Failures: Misc App</Name>
+       <active>true</active>
+    <Description> Detects excessive application logon failures - 5 consecutive failures in a 10 minute period. Application logsons include the one that may require authentication for accessing the authentication, such as HTTP, SNMP, FTP, POP3, IMAP etc. </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_EXCESS_FAILED_LOGON_APPL" severity="6">
+      <ArgList>
+        srcIpAddr = ExcessMiscAppLoginFailure1.srcIpAddr, destIpAddr = ExcessMiscAppLoginFailure1.reptDevIpAddr, user = ExcessMiscAppLoginFailure1.user, incidentCount = ExcessMiscAppLoginFailure1.COUNT(*), destIpAddr = ExcessMiscAppLoginFailure2.reptDevIpAddr, user = ExcessMiscAppLoginFailure2.user, incidentCount = ExcessMiscAppLoginFailure2.COUNT(*)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+       <SubPattern displayName="ExcessMiscAppLoginFailure1" name="ExcessMiscAppLoginFailure1">
+         <SingleEvtConstr> srcIpAddr IS NOT NULL AND eventType IN (Group@PH_SYS_EVENT_AppLogonFailure) AND eventType NOT IN (Group@PH_SYS_EVENT_AAALogonFailure) </SingleEvtConstr>
+	 <GroupEvtConstr>COUNT (*) &gt;= 5</GroupEvtConstr>
+	 <GroupByAttr> srcIpAddr, reptDevIpAddr, user </GroupByAttr>
+       </SubPattern>
+       <Operator rank="0" type="OR"/>
+       <SubPattern displayName="ExcessMiscAppLoginFailure2" name="ExcessMiscAppLoginFailure2">
+         <SingleEvtConstr> srcIpAddr IS NULL AND eventType IN (Group@PH_SYS_EVENT_AppLogonFailure) AND eventType NOT IN (Group@PH_SYS_EVENT_AAALogonFailure) </SingleEvtConstr>
+	 <GroupEvtConstr>COUNT (*) &gt;= 5</GroupEvtConstr>
+	 <GroupByAttr> reptDevIpAddr, user </GroupByAttr>
+       </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,reptDevIpAddr,srcIpAddr,user,destIpPort,reptDevIpAddr,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+   </Rule>
+
+   <Rule group="PH_SYS_RULE_Authen_App" id="PH_Rule_Access_16C" phIncidentCategory="Application">
+       <Name>Repeated Multiple Logon Failures: Misc App</Name>
+       <active>false</active>
+    <Description> Detects repeating occurrences of multiple application logon failures </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_REPEAT_EXCESS_FAILED_LOGON_APPL" severity="9">
+      <ArgList>
+        srcIpAddr = RepeatExcessMiscAppLoginFailure1.srcIpAddr, destIpAddr = RepeatExcessMiscAppLoginFailure1.destIpAddr, incidentCount = RepeatExcessMiscAppLoginFailure1.COUNT(*), destIpAddr = RepeatExcessMiscAppLoginFailure2.destIpAddr, incidentCount = RepeatExcessMiscAppLoginFailure2.COUNT(*)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="86400">
+      <SubPattern displayName="RepeatExcessMiscAppLoginFailure1" name="RepeatExcessMiscAppLoginFailure1">
+        <SingleEvtConstr> srcIpAddr IS NOT NULL AND eventType = "PH_RULE_EXCESS_FAILED_LOGON_APPL" </SingleEvtConstr>
+	<GroupEvtConstr>COUNT (*) &gt;= 3 </GroupEvtConstr>
+	<GroupByAttr>srcIpAddr,eventType,destIpAddr </GroupByAttr>
+      </SubPattern>
+      <Operator rank="0" type="OR"/>
+      <SubPattern displayName="RepeatExcessMiscAppLoginFailure2" name="RepeatExcessMiscAppLoginFailure2">
+        <SingleEvtConstr> srcIpAddr IS NULL AND eventType = "PH_RULE_EXCESS_FAILED_LOGON_APPL" </SingleEvtConstr>
+	<GroupEvtConstr>COUNT (*) &gt;= 3 </GroupEvtConstr>
+	<GroupByAttr>eventType,destIpAddr </GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,reptDevIpAddr,srcIpAddr,destIpAddr,user,reptDevIpAddr,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+   </Rule>
+
+
+   <Rule group="PH_SYS_RULE_Authen_Network" id="PH_Rule_Access_20" phIncidentCategory="Application">
+       <Name>Multiple Logon Failures: Domain</Name>
+       <active>true</active>
+    <Description> Detects multiple domain logon failures - 5 consecutive failures in a 10 minute period </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_EXCESS_FAILED_LOGON_DOMAIN" severity="4">
+      <ArgList>
+        srcIpAddr = ExcessDomainLoginFailure.srcIpAddr, destIpAddr = ExcessDomainLoginFailure.reptDevIpAddr, domain = ExcessDomainLoginFailure.domain, user = ExcessDomainLoginFailure.user, incidentCount = ExcessDomainLoginFailure.COUNT(*)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+       <SubPattern displayName="ExcessDomainLoginFailure" name="ExcessDomainLoginFailure">
+         <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_DomainLogonFailure) </SingleEvtConstr>
+	 <GroupEvtConstr>COUNT (*) &gt;= 5</GroupEvtConstr>
+	 <GroupByAttr> srcIpAddr, reptDevIpAddr, user, domain </GroupByAttr>
+       </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,reptDevIpAddr,srcIpAddr,user,computer,winLogonType,winLogonFailCode,reptDevIpAddr,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+   </Rule>
+
+   <Rule group="PH_SYS_RULE_Authen_Network" id="PH_Rule_Access_21" phIncidentCategory="Application">
+       <Name>Repeated Multiple Logon Failures: Domain</Name>
+       <active>false</active>
+    <Description> Detects repeating occurrences of multiple domain logon failures </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_REPEAT_EXCESS_FAILED_LOGON_DOMAIN" severity="8">
+      <ArgList>
+        srcIpAddr = RepeatExcessDomainLoginFailure.srcIpAddr, destIpAddr = RepeatExcessDomainLoginFailure.destIpAddr, incidentCount = RepeatExcessDomainLoginFailure.COUNT(*)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="86400">
+       <SubPattern displayName="RepeatExcessDomainLoginFailure" name="RepeatExcessDomainLoginFailure">
+         <SingleEvtConstr> eventType = "PH_RULE_EXCESS_FAILED_LOGON_DOMAIN" </SingleEvtConstr>
+	 <GroupEvtConstr>COUNT (*) &gt;= 3 </GroupEvtConstr>
+	 <GroupByAttr>srcIpAddr,eventType,destIpAddr </GroupByAttr>
+       </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,reptDevIpAddr,srcIpAddr,destIpAddr,user,reptDevIpAddr,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+   </Rule>
+
+   <Rule group="PH_SYS_RULE_Authen_Network" id="PH_Rule_Access_25" phIncidentCategory="Network">
+       <Name> Multiple Logon Failures: VPN </Name>
+       <active>true</active>
+    <Description> Detects multiple VPN logon failures - 5 consecutive failures in a 10 minute period </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_EXCESS_FAILED_LOGON_VPN" severity="4">
+      <ArgList>
+        srcIpAddr = ExcessVPNLoginFailure.srcIpAddr, destIpAddr = ExcessVPNLoginFailure.reptDevIpAddr, user = ExcessVPNLoginFailure.user, incidentCount = ExcessVPNLoginFailure.COUNT(*)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+       <SubPattern displayName="ExcessVPNLoginFailure" name="ExcessVPNLoginFailure">
+         <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_VPNLogonFailure) </SingleEvtConstr>
+	 <GroupEvtConstr>COUNT (*) &gt;= 5</GroupEvtConstr>
+	 <GroupByAttr> srcIpAddr, reptDevIpAddr, user </GroupByAttr>
+       </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,reptDevIpAddr,srcIpAddr,user,reptDevIpAddr,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+   </Rule>
+
+   <Rule group="PH_SYS_RULE_Authen_Network" id="PH_Rule_Access_26" phIncidentCategory="Network">
+       <Name> Repeated Multiple Logon Failures: VPN </Name>
+       <active>false</active>
+    <Description> Detects repeating occurrences of excessive VPN logon failures </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_REPEAT_EXCESS_FAILED_LOGON_VPN" severity="8">
+      <ArgList>
+        srcIpAddr = RepeatExcessVPNLoginFailure.srcIpAddr, destIpAddr = RepeatExcessVPNLoginFailure.destIpAddr, incidentCount = RepeatExcessVPNLoginFailure.COUNT(*)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="86400">
+       <SubPattern displayName="RepeatExcessVPNLoginFailure" name="RepeatExcessVPNLoginFailure">
+         <SingleEvtConstr> eventType = "PH_RULE_EXCESS_FAILED_LOGON_VPN" </SingleEvtConstr>
+	 <GroupEvtConstr>COUNT (*) &gt;= 3 </GroupEvtConstr>
+	 <GroupByAttr>srcIpAddr,eventType,destIpAddr </GroupByAttr>
+       </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,reptDevIpAddr,srcIpAddr,destIpAddr,user,reptDevIpAddr,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+   </Rule>
+   
+   <Rule group="PH_SYS_RULE_Authen_Network" id="PH_Rule_Access_30" phIncidentCategory="Network">
+       <Name>Multiple Logon Failures: WLAN</Name>
+       <active>true</active>
+    <Description> Detects multiple Wireless logon failures - 5 consecutive failures in a 10 minute period </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_EXCESS_FAILED_LOGON_WIRELESS" severity="4">
+      <ArgList>
+        srcMACAddr = ExcessWLANLoginFailure.srcMACAddr, destIpAddr = ExcessWLANLoginFailure.reptDevIpAddr, user = ExcessWLANLoginFailure.user, incidentCount = ExcessWLANLoginFailure.COUNT(*)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+       <SubPattern displayName="ExcessWLANLoginFailure" name="ExcessWLANLoginFailure">
+         <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_WirelessLogonFailure) </SingleEvtConstr>
+	 <GroupEvtConstr>COUNT (*) &gt;= 5 </GroupEvtConstr>
+	 <GroupByAttr> srcMACAddr,reptDevIpAddr,user,eventType </GroupByAttr>
+       </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,reptDevIpAddr,srcMACAddr,user,reptDevIpAddr,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+   </Rule>
+
+   <Rule group="PH_SYS_RULE_Authen_Network" id="PH_Rule_Access_31" phIncidentCategory="Network">
+       <Name>Repeated Multiple Logon Failures: WLAN</Name>
+       <active>false</active>
+    <Description> Detects repeating occurrences of excessive wireless LAN logon failures </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_REPEAT_EXCESS_FAILED_LOGON_WIRELESS" severity="8">
+      <ArgList>
+        srcMACAddr = RepeatExcessWLANLoginFailure.srcMACAddr, destIpAddr = RepeatExcessWLANLoginFailure.destIpAddr, incidentCount = RepeatExcessWLANLoginFailure.COUNT(*)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="86400">
+       <SubPattern displayName="RepeatExcessWLANLoginFailure" name="RepeatExcessWLANLoginFailure">
+         <SingleEvtConstr> eventType = "PH_RULE_EXCESS_FAILED_LOGON_WIRELESS" </SingleEvtConstr>
+	 <GroupEvtConstr>COUNT (*) &gt;= 3 </GroupEvtConstr>
+	 <GroupByAttr>srcMACAddr,user,destIpAddr,eventType </GroupByAttr>
+       </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,reptDevIpAddr,srcIpAddr,destIpAddr,user,reptDevIpAddr,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+   </Rule>
+
+
+   <Rule group="PH_SYS_RULE_Authen_Network" id="PH_Rule_Access_51A" phIncidentCategory="Application">
+       <Name> Domain Account Lockout </Name>
+       <active>true</active>
+    <Description> Detects account lockout caused by excessive logon failures </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_ACCOUNT_LOCKOUT_DOMAIN" severity="10">
+      <ArgList>
+        destIpAddr = DomainAcctLockout.reptDevIpAddr, user = DomainAcctLockout.user, incidentCount = DomainAcctLockout.COUNT(*)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+       <SubPattern displayName="DomainAcctLockout" name="DomainAcctLockout">
+         <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_DomainAccountLocked) AND reptDevIpAddr IN (Group@PH_SYS_APP_DOMAIN_CONTROLLER) </SingleEvtConstr>
+	 <GroupEvtConstr>COUNT (*) &gt;= 1</GroupEvtConstr>
+	 <GroupByAttr>reptDevIpAddr, user </GroupByAttr>
+       </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,reptDevIpAddr,srcIpAddr,user,computer,winLogonType,reptDevIpAddr,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+   </Rule>
+
+   
+   <Rule group="PH_SYS_RULE_Authen_NetDev" id="PH_Rule_Access_51B" phIncidentCategory="Network">
+       <Name> Network Device Account Lockout </Name>
+       <active>true</active>
+    <Description> Detects account lockout caused by excessive logon failures </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_ACCOUNT_LOCKOUT_NET_DEV" severity="10">
+      <ArgList>
+        srcIpAddr = NetDevAcctLockout.srcIpAddr, destIpAddr = NetDevAcctLockout.reptDevIpAddr, user = NetDevAcctLockout.user, incidentCount = NetDevAcctLockout.COUNT(*)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+       <SubPattern displayName="NetDevAcctLockout" name="NetDevAcctLockout">
+         <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_HostAccountLocked) AND reptDevIpAddr IN (Group@PH_SYS_DEVICE_Network) </SingleEvtConstr>
+	 <GroupEvtConstr>COUNT (*) &gt;= 1</GroupEvtConstr>
+	 <GroupByAttr>srcIpAddr,reptDevIpAddr, user </GroupByAttr>
+       </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,reptDevIpAddr,srcIpAddr,user,computer,winLogonType,reptDevIpAddr,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+   </Rule>
+
+   <Rule group="PH_SYS_RULE_Authen_Server" id="PH_Rule_Access_51C" phIncidentCategory="Server">
+       <Name>Server Account Lockout</Name>
+       <active>true</active>
+    <Description> Detects account lockout caused by excessive logon failures </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_ACCOUNT_LOCKOUT_SERVER" severity="10">
+      <ArgList>
+        destIpAddr = ServerAcctLockout.reptDevIpAddr, user = ServerAcctLockout.user, incidentCount = ServerAcctLockout.COUNT(*)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+       <SubPattern displayName="ServerAcctLockout" name="ServerAcctLockout">
+         <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_HostAccountLocked) AND reptDevIpAddr IN (Group@PH_SYS_DEVICE_Server) AND reptDevIpAddr NOT IN (Group@PH_SYS_APP_DOMAIN_CONTROLLER) </SingleEvtConstr>
+	 <GroupEvtConstr>COUNT (*) &gt;= 1</GroupEvtConstr>
+	 <GroupByAttr>reptDevIpAddr, user </GroupByAttr>
+       </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,reptDevIpAddr,srcIpAddr,user,computer,winLogonType,reptDevIpAddr,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+   </Rule>
+
+   <Rule group="PH_SYS_RULE_Authen_Server" id="PH_Rule_Access_52" phIncidentCategory="Server">
+       <Name> Disabled Account Logon Attempt </Name>
+       <active>true</active>
+    <Description> Detects logon attempts to disabled accounts </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_DISABLED_ACCOUNT_ACCESS" severity="9">
+      <ArgList>
+        destIpAddr = DisabledAcctLogin.reptDevIpAddr, user = DisabledAcctLogin.user, incidentCount = DisabledAcctLogin.COUNT(*)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+       <SubPattern displayName="DisabledAcctLogin" name="DisabledAcctLogin">
+         <SingleEvtConstr> eventType = "Win-Security-531" </SingleEvtConstr>
+	 <GroupEvtConstr>COUNT (*) &gt;= 3 </GroupEvtConstr>
+	 <GroupByAttr>reptDevIpAddr, user </GroupByAttr>
+       </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,reptDevIpAddr,srcIpAddr,user,computer,winLogonType,reptDevIpAddr,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+   </Rule>
+
+   <Rule group="PH_SYS_RULE_Authen_Server" id="PH_Rule_Access_53" phIncidentCategory="Server">
+     <Name> Logon Time Restriction Violation </Name>
+     <active>true</active>
+    <Description> Detects logon attempts at times which are not permitted by policy </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_LOGON_TIME_VIOLATION" severity="8">
+      <ArgList>
+        destIpAddr = LoginTimeViolation.reptDevIpAddr, user = LoginTimeViolation.user, incidentCount = LoginTimeViolation.COUNT(*)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+       <SubPattern displayName="LoginTimeViolation" name="LoginTimeViolation">
+         <SingleEvtConstr> eventType = "Win-Security-530" </SingleEvtConstr>
+	 <GroupEvtConstr>COUNT (*) &gt;= 3 </GroupEvtConstr>
+	 <GroupByAttr>reptDevIpAddr, user </GroupByAttr>
+       </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,reptDevIpAddr,srcIpAddr,user,computer,winLogonType,reptDevIpAddr,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+   </Rule>
+
+   <Rule group="PH_SYS_RULE_Authen_Overall" id="PH_Rule_Access_54" phIncidentCategory="Other">
+       <Name> Multiple Logon Failures: Same Src, Multiple Hosts </Name>
+       <active>true</active>
+    <Description> Detects the same source having excessive logon failures at distinct hosts </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_FAILED_LOGON_MULTIPLE_HOSTS" severity="10">
+      <ArgList>
+        srcIpAddr = PasswordScan_ManyDest.srcIpAddr, incidentCount = PasswordScan_ManyDest.COUNT (DISTINCT destIpAddr)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="3600">
+       <SubPattern displayName="PasswordScan_ManyDest" name="PasswordScan_ManyDest">
+         <SingleEvtConstr> eventType IN ("PH_RULE_EXCESS_FAILED_LOGON_2_NET_DEVICE","PH_RULE_EXCESS_FAILED_LOGON_SERVER","PH_RULE_EXCESS_FAILED_PRIV_LOGON_SERVER","PH_RULE_EXCESS_FAILED_LOGON_DB", "PH_RULE_REPEAT_EXCESS_FAILED_LOGON_WEB", "PH_RULE_EXCESS_FAILED_LOGON_APPL","PH_RULE_EXCESS_FAILED_LOGON_DOMAIN", "PH_RULE_EXCESS_FAILED_LOGON_VPN", "PH_RULE_EXCESS_FAILED_LOGON_WIRELESS") </SingleEvtConstr>
+	 <GroupEvtConstr>COUNT (DISTINCT destIpAddr) &gt;= 10 </GroupEvtConstr>
+	 <GroupByAttr>srcIpAddr </GroupByAttr>
+       </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,reptDevIpAddr,srcIpAddr,destIpAddr,user,reptDevIpAddr,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+   </Rule>
+
+   <Rule group="PH_SYS_RULE_Authen_Overall" id="PH_Rule_Access_55" phIncidentCategory="Other">
+     <Name> Multiple Logon Failures: Same Src and Dest, Multiple Accounts </Name>
+     <active>true</active>
+    <Description> Detects same source having excessive login failures at the same destination host but multiple distinct accounts are used during the logon failure </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_FAILED_LOGON_MULTIPLE_ACCOUNTS" severity="10">
+      <ArgList>
+        srcIpAddr = PasswordScan_SameDest_ManyAcct.srcIpAddr, destIpAddr = PasswordScan_SameDest_ManyAcct.destIpAddr, incidentCount = PasswordScan_SameDest_ManyAcct.COUNT (DISTINCT user)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="3600">
+      <SubPattern displayName="PasswordScan_SameDest_ManyAcct" name="PasswordScan_SameDest_ManyAcct">
+        <SingleEvtConstr> eventType IN ("PH_RULE_EXCESS_FAILED_LOGON_2_NET_DEVICE","PH_RULE_EXCESS_FAILED_LOGON_SERVER","PH_RULE_EXCESS_FAILED_PRIV_LOGON_SERVER","PH_RULE_EXCESS_FAILED_LOGON_DB", "PH_RULE_REPEAT_EXCESS_FAILED_LOGON_WEB", "PH_RULE_EXCESS_FAILED_LOGON_APPL","PH_RULE_EXCESS_FAILED_LOGON_DOMAIN", "PH_RULE_EXCESS_FAILED_LOGON_VPN","PH_RULE_EXCESS_FAILED_LOGON_WIRELESS") </SingleEvtConstr>
+	<GroupEvtConstr>COUNT (DISTINCT user) &gt;= 3 </GroupEvtConstr>
+	<GroupByAttr>srcIpAddr,destIpAddr </GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,reptDevIpAddr,srcIpAddr,destIpAddr,user,reptDevIpAddr,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+   </Rule>
+   
+   <Rule group="PH_SYS_RULE_Authen_Overall" id="PH_Rule_Access_56" phIncidentCategory="Other">
+       <Name> Suspicious Logon Failure: no following successful login </Name>
+       <active>true</active>
+    <Description> Detects an unusual condition where a source has authentication failures at a host but that is not followed by a successful authentication at the same host within 2 hours </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_SUSPICIOUS_FAILED_LOGON_NO_SUCCESS" severity="8">
+      <ArgList>
+        srcIpAddr = FailedLogin.srcIpAddr, destIpAddr = FailedLogin.destIpAddr, user = FailedLogin.user
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="7200">
+      <SubPattern displayName="FailedLogin" name="FailedLogin">
+        <SingleEvtConstr> eventType IN ("PH_RULE_EXCESS_FAILED_LOGON_NET_DEVICE","PH_RULE_EXCESS_FAILED_LOGON_SERVER","PH_RULE_EXCESS_FAILED_PRIV_LOGON_SERVER","PH_RULE_EXCESS_FAILED_LOGON_DB", "PH_RULE_REPEAT_EXCESS_FAILED_LOGON_WEB", "PH_RULE_EXCESS_FAILED_LOGON_APPL","PH_RULE_EXCESS_FAILED_LOGON_DOMAIN", "PH_RULE_EXCESS_FAILED_LOGON_VPN","PH_RULE_EXCESS_FAILED_LOGON_WIRELESS") </SingleEvtConstr>
+	<GroupEvtConstr>COUNT (*) &gt;= 1 </GroupEvtConstr>
+	<GroupByAttr>srcIpAddr,destIpAddr,user </GroupByAttr>
+      </SubPattern>
+      <Operator rank="0" type="NOT_FOLLOWED_BY"/>
+      <SubPattern displayName="SuccessLogin" name="SuccessLogin">
+	<SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_HostLogonSuccess, Group@PH_SYS_EVENT_HostPrivLogonSuccess, Group@PH_SYS_EVENT_DomainLogonSuccess, Group@PH_SYS_EVENT_VPNLogonSuccess, Group@PH_SYS_EVENT_WirelessLogonSuccess, Group@PH_SYS_EVENT_AppLogonSuccess) </SingleEvtConstr>
+	<GroupByAttr>srcIpAddr,reptDevIpAddr,user </GroupByAttr>
+      </SubPattern>
+      <GlobalConstr>FailedLogin.destIpAddr = SuccessLogin.reptDevIpAddr, FailedLogin.srcIpAddr = SuccessLogin.srcIpAddr, FailedLogin.user = SuccessLogin.user   </GlobalConstr>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,reptDevIpAddr,srcIpAddr,destIpAddr,user,reptDevIpAddr,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+   </Rule>
+
+</Rules>

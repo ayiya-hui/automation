@@ -1,0 +1,813 @@
+
+<Reports>
+ 
+  <Report id="PH_Report_Router_1" group="PH_SYS_REPORT_Router/Switch">
+    <Name>Logon: Top Router Admin Users By Successful Logon Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks router/switch admin users by the number of successful logons </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,srcIpAddr,srcName,user,COUNT( *)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT ( * )</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_Router_1" name="Filter_Router_1">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_DEVICE_ROUTER_SWITCH)  AND  eventType IN ( Group@PH_SYS_EVENT_HostLogonSuccess)</SingleEvtConstr>
+           <GroupByAttr>destIpAddr,srcIpAddr,srcName,user</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_Router_2" group="PH_SYS_REPORT_Router/Switch">
+    <Name>Logon: Top Router Admin Users By Failed Logon Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks router/switch admin users by the number of failed logons </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,srcIpAddr,srcName,user,COUNT( *) </AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT ( * )</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_Router_2" name="Filter_Router_2">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_DEVICE_ROUTER_SWITCH)  AND  eventType IN ( Group@PH_SYS_EVENT_HostLogonFailure)</SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr,srcIpAddr,srcName,user</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+	
+  <Report id="PH_Report_Router_3" group="PH_SYS_REPORT_Router/Switch">
+    <Name>Logon: Failed Router Admin Logons </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Details about failed router logons</Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr,eventType,srcIpAddr,srcName,user,srcIntfName,destIpPort,rawEventMsg</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_Router_3" name="Filter_Router_3">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_ROUTER_SWITCH) AND eventType IN (Group@PH_SYS_EVENT_HostLogonFailure))</SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_Router_4" group="PH_SYS_REPORT_Router/Switch" >
+    <Name>All Events: Top Reporting Router/Switches By Event Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Top Reporting Router/Switches By Event Count</Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr, COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_Router_4" name="Filter_Router_4">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_ROUTER_SWITCH) AND eventType NOT CONTAIN "PH_DEV_MON" </SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_Router_5" group="PH_SYS_REPORT_Router/Switch"> 
+    <Name>All Events: Top Reporting Router/Switches and External Events By Severity, Count</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Top Reporting Router/Switches and Events By Severity, Count. This exclude system generated monitoring events. </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,eventType,eventSeverity,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>eventSeverity DESC,COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_Router_5" name="Filter_Router_5">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_ROUTER_SWITCH) AND eventType NOT CONTAIN "PH_DEV_MON" </SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr,eventType,eventSeverity</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+   <Report id="PH_Report_Router_5B" group="PH_SYS_REPORT_Router/Switch"> 
+    <Name>All Events: Top Reporting Router/Switches and System Generated Monitoring Events By Severity, Count</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Top Reporting Router/Switches and Events By Severity, Count</Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,eventType,eventSeverity,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>eventSeverity DESC,COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_Router_5" name="Filter_Router_5">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_ROUTER_SWITCH) AND eventType CONTAIN "PH_DEV_MON" </SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr,eventType,eventSeverity</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_Router_6" group="PH_SYS_REPORT_Router/Switch">
+    <Name> All Events: Router Non-flow Event Details </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report provides details about all non-flow router events </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr,eventType,rawEventMsg</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_Router_6" name="Filter_Router_6">
+           <SingleEvtConstr> reptDevIpAddr IN (Group@PH_SYS_DEVICE_ROUTER_SWITCH) AND eventType NOT IN (Group@PH_SYS_EVENT_RegularTraffic) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_Router_7" group="PH_SYS_REPORT_Router/Switch">
+    <Name> Change: Router Configuration Changes Detected From Log </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report provides details about router config changes </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr,eventType,srcIpAddr,srcName,user,rawEventMsg</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_Router_7" name="Filter_Router_7">
+           <SingleEvtConstr> reptDevIpAddr IN (Group@PH_SYS_DEVICE_ROUTER_SWITCH) AND eventType IN (Group@PH_SYS_EVENT_ConfigChange) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_Router_8" group="PH_SYS_REPORT_Router/Switch,PH_SYS_REPORT_Freq">
+    <Name> Change: Router Run versus Startup Config Difference Via Login </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report captures detected differences between a routers running and startup config </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,hostName,hostIpAddr,eventType,startUpConfVer,runningConfVer,addedItem, deletedItem </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_Router_8" name="Filter_Router_8">
+           <SingleEvtConstr> hostIpAddr IN (Group@PH_SYS_DEVICE_ROUTER_SWITCH) AND eventType = "PH_DEV_MON_DELTA_CONFIG" </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+  
+  <Report id="PH_Report_Router_9" group="PH_SYS_REPORT_Router/Switch,PH_SYS_REPORT_Freq">
+    <Name> Change: Router Config Changes Detected Via Login </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report captures detected configuration changes via login </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,hostName,hostIpAddr,eventType,oldSVNVersion,newSVNVersion,addedItem, deletedItem </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_Router_9" name="Filter_Router_9">
+           <SingleEvtConstr> hostIpAddr IN (Group@PH_SYS_DEVICE_ROUTER_SWITCH) AND eventType IN ("PH_DEV_MON_CHANGE_RUN_CONFIG","PH_DEV_MON_CHANGE_STARTUP_CONFIG") </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_Router_10A" group="PH_SYS_REPORT_Router/Switch,PH_SYS_REPORT_Traffic_Analysis">
+    <Name> Router Permit: Top Conversations By Bytes</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report ranks the top connections by bytes. The data is collected from netflow and acl logs. </Description>
+    <SelectClause numEntries="All">
+        <AttrList>srcIpAddr,srcName,destIpAddr,destName,SUM(totBytes)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>SUM(totBytes) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_Router_10" name="Filter_Router_10">
+           <SingleEvtConstr> reptDevIpAddr IN (Group@PH_SYS_DEVICE_ROUTER_SWITCH) AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic) </SingleEvtConstr>
+	   <GroupByAttr>srcIpAddr,srcName,destIpAddr,destName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_Router_10B" group="PH_SYS_REPORT_Router/Switch,PH_SYS_REPORT_Traffic_Analysis,PH_SYS_REPORT_Freq">
+    <Name>Router Permit: Top Conversations By Bytes: Detailed View</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report ranks the top connections by bytes. The data is collected from netflow and acl logs. </Description>
+    <SelectClause numEntries="All">
+        <AttrList>srcIpAddr,srcName,destIpAddr,destName,ipProto,destIpPort,SUM(totBytes),SUM(sentBytes),SUM(recvBytes)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>SUM(totBytes) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_Router_10" name="Filter_Router_10">
+           <SingleEvtConstr> reptDevIpAddr IN (Group@PH_SYS_DEVICE_ROUTER_SWITCH) AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic) </SingleEvtConstr>
+	   <GroupByAttr>srcIpAddr,srcName,destIpAddr,destName,ipProto,destIpPort</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_Router_10C" group="PH_SYS_REPORT_Router/Switch,PH_SYS_REPORT_Traffic_Analysis">
+    <Name>Router Permit: Top Source IPs By Bytes</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report ranks the top source IPs by bytes. The data is collected from netflow and acl logs. </Description>
+    <SelectClause numEntries="All">
+        <AttrList>srcIpAddr,srcName,SUM(totBytes),COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>SUM(totBytes) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_Router_10" name="Filter_Router_10">
+           <SingleEvtConstr> reptDevIpAddr IN (Group@PH_SYS_DEVICE_ROUTER_SWITCH) AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic) </SingleEvtConstr>
+	   <GroupByAttr>srcIpAddr,srcName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_Router_10D" group="PH_SYS_REPORT_Router/Switch,PH_SYS_REPORT_Traffic_Analysis">
+    <Name>Router Permit: Top Source IPs By Bytes: Detailed View</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report ranks the top source IPs and destionation ports by bytes. The data is collected from netflow and acl logs. </Description>
+    <SelectClause numEntries="All">
+        <AttrList>srcIpAddr,srcName,ipProto,destIpPort,SUM(totBytes),SUM(sentBytes),SUM(recvBytes)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>SUM(totBytes) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_Router_10" name="Filter_Router_10">
+           <SingleEvtConstr> reptDevIpAddr IN (Group@PH_SYS_DEVICE_ROUTER_SWITCH) AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic) </SingleEvtConstr>
+	   <GroupByAttr>srcIpAddr,srcName,ipProto,destIpPort</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_Router_10E" group="PH_SYS_REPORT_Router/Switch,PH_SYS_REPORT_Traffic_Analysis">
+    <Name>Router Permit: Top Destination IPs By Bytes</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report ranks the top destination IPs by bytes. The data is collected from netflow and acl logs. </Description>
+    <SelectClause numEntries="All">
+        <AttrList>destIpAddr,destName,SUM(totBytes),COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>SUM(totBytes) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_Router_10" name="Filter_Router_10">
+           <SingleEvtConstr> reptDevIpAddr IN (Group@PH_SYS_DEVICE_ROUTER_SWITCH) AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic) </SingleEvtConstr>
+	   <GroupByAttr>destIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_Router_10F" group="PH_SYS_REPORT_Router/Switch,PH_SYS_REPORT_Traffic_Analysis">
+    <Name>Router Permit: Top Destination IPs By Bytes: Detailed View</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report ranks the top destination IPs and ports by bytes. The data is collected from netflow and acl logs. </Description>
+    <SelectClause numEntries="All">
+        <AttrList>destIpAddr,destName,ipProto,destIpPort,SUM(totBytes),SUM(sentBytes),SUM(recvBytes)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>SUM(totBytes) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_Router_10" name="Filter_Router_10">
+           <SingleEvtConstr> reptDevIpAddr IN (Group@PH_SYS_DEVICE_ROUTER_SWITCH) AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic) </SingleEvtConstr>
+	   <GroupByAttr>destIpAddr,ipProto,destIpPort</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_Router_10G" group="PH_SYS_REPORT_Router/Switch,PH_SYS_REPORT_Traffic_Analysis">
+    <Name>Router Permit: Top Protocols By Bytes</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report ranks the top protocols by bytes. The data is collected from netflow and acl logs. </Description>
+    <SelectClause numEntries="All">
+        <AttrList>ipProto,destIpPort,SUM(totBytes)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>SUM(totBytes) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_Router_10" name="Filter_Router_10">
+           <SingleEvtConstr> reptDevIpAddr IN (Group@PH_SYS_DEVICE_ROUTER_SWITCH) AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic) </SingleEvtConstr>
+	   <GroupByAttr>ipProto,destIpPort</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report> 
+
+  <Report id="PH_Report_Router_10H" group="PH_SYS_REPORT_Router/Switch,PH_SYS_REPORT_Traffic_Analysis,PH_SYS_REPORT_Freq">
+    <Name>Router Permit: Top Protocols By Bytes: Detailed View</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report ranks the top protocol and destination ports by bytes. The data is collected from netflow and acl logs. </Description>
+    <SelectClause numEntries="All">
+      <AttrList>ipProto,destIpPort,SUM(totBytes),SUM(sentBytes),SUM(recvBytes)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>SUM(totBytes) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_Router_10" name="Filter_Router_10">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_ROUTER_SWITCH) AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic) </SingleEvtConstr>
+	<GroupByAttr>ipProto,destIpPort</GroupByAttr>
+      </SubPattern>
+     </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report> 
+
+  <Report id="PH_Report_Router_10I" group="PH_SYS_REPORT_Router/Switch,PH_SYS_REPORT_Traffic_Analysis">
+    <Name>Router Permit: Top Router Link Usage By Bytes</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report ranks the top router link usage by bytes. The data is collected from netflow and acl logs. </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,srcSnmpIntfIndex,SUM(totBytes),SUM(sentBytes),SUM(recvBytes)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>SUM(totBytes) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_Router_10" name="Filter_Router_10">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_ROUTER_SWITCH) AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic) </SingleEvtConstr>
+	<GroupByAttr>reptDevIpAddr,srcSnmpIntfIndex</GroupByAttr>
+      </SubPattern>
+     </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report> 
+
+
+  <!-- ************************************************************ -->
+  <Report id="PH_Report_Router_11" group="PH_SYS_REPORT_Traffic_Flow,PH_SYS_REPORT_Router/Switch">
+    <Name> Router Permit: Baseline Client and Server Traffic Flow: day of month view   </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report provides baseline traffic flow analysis results from a day of month perspective. It answers questions of the type: "What does my baseline traffic look like on 1st of the month during business hours and after hours"? For every day of the month and activity hour type, the most active connections in terms of the hourly average flows is captured in the report. There is an additional report that captures more detailed statistics. </Description>
+    <SelectClause numEntries="All">
+        <AttrList> profDate, profHourType, srcIpAddr,srcName,destIpAddr,destName,ipProto,destIpPort, avgTotFlows, avgSentBytes, avgRecvBytes </AttrList>
+    </SelectClause>
+    <OrderByClause> <AttrList> profDate ASC, profHourType ASC, avgTotFlows DESC  </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_Router_11" name="Filter_Router_11">
+           <SingleEvtConstr> eventType = "PH_PROF_FLOW_FULL" AND profDateType = 2 </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>srcIpAddr,srcName,destIpAddr,destName</RelevantFilterAttr>
+  </Report>
+
+  <!-- ************************************************************ -->
+  <Report id="PH_Report_Router_12" group="PH_SYS_REPORT_Traffic_Flow,PH_SYS_REPORT_Router/Switch">
+    <Name> Router Permit: Baseline Client and Server Traffic Flow: day of week view  </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report provides baseline traffic flow analysis results from a day of week perspective. It answers questions of the type: "What does my baseline traffic look like on Mondays during business hours and after hours"? For every day of the week and activity hour type, the most active connections in terms of the hourly average flows is captured in the report. There is an additional report that captures more detailed statistics. </Description>
+    <SelectClause numEntries="All">
+        <AttrList> profDate, profHourType, srcIpAddr,srcName,destIpAddr,destName,ipProto,destIpPort,avgTotFlows, avgSentBytes, avgRecvBytes </AttrList>
+    </SelectClause>
+    <OrderByClause> <AttrList> profDate ASC, profHourType ASC, avgTotFlows DESC  </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_Router_12" name="Filter_Router_12">
+         <SingleEvtConstr> eventType = "PH_PROF_FLOW_FULL" AND profDateType = 1 </SingleEvtConstr>
+       </SubPattern>
+    </PatternClause>
+     <RelevantFilterAttr>srcIpAddr,srcName,destIpAddr,destName</RelevantFilterAttr>
+  </Report>
+
+  <!-- ************************************************************ -->
+  <Report id="PH_Report_Router_13" group="PH_SYS_REPORT_Traffic_Flow,PH_SYS_REPORT_Router/Switch">
+    <Name> Router Permit: Baseline Client and Server Traffic Flow: detailed day of month view   </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report provides detailed baseline traffic flow analysis results from a day of month perspective. It answers questions of the type: "What does my detailed baseline traffic statistics look like on 1st of the month during business hours and after hours"? For every day of the month and activity hour type, the most active connections in terms of the hourly average flows is captured in the report, along with other flow measures such min,max and standard deviation of flows, sent Bytes and received Bytes. </Description>
+    <SelectClause numEntries="All">
+        <AttrList> profDate, profHourType, srcIpAddr,srcName,destIpAddr,destName,ipProto,destIpPort,avgTotFlows, minTotFlows, maxTotFlows, sdevTotFlows, avgSentBytes, minSentBytes, maxSentBytes, sdevSentBytes, avgRecvBytes, minRecvBytes,maxRecvBytes, sdevRecvBytes </AttrList>
+    </SelectClause>
+    <OrderByClause> <AttrList> profDate ASC, profHourType ASC, avgTotFlows DESC  </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_Router_13" name="Filter_Router_13">
+           <SingleEvtConstr> eventType = "PH_PROF_FLOW_FULL" AND profDateType = 2 </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+     <RelevantFilterAttr>srcIpAddr,srcName,destIpAddr,destName</RelevantFilterAttr>
+  </Report>
+
+   <!-- ************************************************************ -->
+  <Report id="PH_Report_Router_14" group="PH_SYS_REPORT_Traffic_Flow,PH_SYS_REPORT_Router/Switch">
+    <Name> Router Permit: Baseline Client and Server Traffic Flow: detailed day of week view  </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report provides detailed baseline traffic flow analysis results from a day of week perspective. It answers questions of the type: "What does my detailed baseline traffic statistics look like on Mondays during business hours and after hours"? For every week of day and activity hour type, the most active connections in terms of the hourly average flows is captured in the report, along with other flow measures such min,max and standard deviation of flows, sent Bytes and received Bytes. </Description>
+    <SelectClause numEntries="All">
+        <AttrList> profDate, profHourType, srcIpAddr,srcName,destIpAddr,destName,ipProto,destIpPort, avgTotFlows, minTotFlows, maxTotFlows, sdevTotFlows, avgSentBytes, minSentBytes, maxSentBytes, sdevSentBytes, avgRecvBytes, minRecvBytes,maxRecvBytes, sdevRecvBytes </AttrList>
+    </SelectClause>
+    <OrderByClause> <AttrList> profDate ASC, profHourType ASC, avgTotFlows DESC  </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_Router_14" name="Filter_Router_14">
+         <SingleEvtConstr> eventType = "PH_PROF_FLOW_FULL" AND profDateType = 1 </SingleEvtConstr>
+       </SubPattern>
+    </PatternClause>
+     <RelevantFilterAttr>srcIpAddr,srcName,destIpAddr,destName</RelevantFilterAttr>
+  </Report>
+
+  <!-- ************************************************************ -->
+  <!-- ************************************************************ -->
+  <Report id="PH_Report_Router_15" group="PH_SYS_REPORT_Traffic_Flow,PH_SYS_REPORT_Router/Switch">
+    <Name> Router Permit: Baseline Client Traffic Flow: day of month view   </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report provides baseline client traffic flow analysis results from a day of month perspective. A client is a connection initiator. The report answers questions of the type: "What does my baseline client traffic look like on 1st of the month during business hours and after hours"? For every day of the month and activity hour type, the most active client connections in terms of the hourly average flows are captured in the report. There is an additional report that captures more detailed statistics. </Description>
+    <SelectClause numEntries="All">
+        <AttrList> profDate, profHourType, srcIpAddr,srcName,ipProto,destIpPort,avgTotFlows, avgSentBytes, avgRecvBytes </AttrList>
+    </SelectClause>
+    <OrderByClause> <AttrList> profDate ASC, profHourType ASC, avgTotFlows DESC  </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_Router_15" name="Filter_Router_15">
+           <SingleEvtConstr> eventType = "PH_PROF_FLOW_CLIENT" AND profDateType = 2 </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+     <RelevantFilterAttr>srcIpAddr,srcName</RelevantFilterAttr>
+  </Report>
+
+  <!-- ************************************************************ -->
+  <Report id="PH_Report_Router_16" group="PH_SYS_REPORT_Traffic_Flow,PH_SYS_REPORT_Router/Switch">
+    <Name> Router Permit: Baseline Client Traffic Flow: day of week view  </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report provides baseline client traffic flow analysis results from a day of week perspective. A client is a connection initiator. The report answers questions of the type: "What does my baseline client traffic look like on Mondays during business hours and after hours"? For every day of the week and activity hour type, the most active client connections in terms of the hourly average flows are captured in the report. There is an additional report that captures more detailed statistics. </Description>
+    <SelectClause numEntries="All">
+        <AttrList> profDate, profHourType, srcIpAddr,srcName,ipProto,destIpPort,avgTotFlows, avgSentBytes, avgRecvBytes </AttrList>
+    </SelectClause>
+    <OrderByClause> <AttrList> profDate ASC, profHourType ASC, avgTotFlows DESC  </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_Router_16" name="Filter_Router_16">
+         <SingleEvtConstr> eventType = "PH_PROF_FLOW_CLIENT" AND profDateType = 1 </SingleEvtConstr>
+       </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>srcIpAddr,srcName</RelevantFilterAttr>
+  </Report>
+
+  <!-- ************************************************************ -->
+  <Report id="PH_Report_Router_17" group="PH_SYS_REPORT_Traffic_Flow,PH_SYS_REPORT_Router/Switch">
+    <Name> Router Permit: Baseline Client Traffic Flow: detailed day of month view </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report provides baseline client traffic flow analysis results from a day of month perspective. A client is a connection initiator. The report answers questions of the type: "What does my baseline client traffic look like on 1st of the month during business hours and after hours"? For every day of the month and activity hour type, the most active connections in terms of the hourly average flows is captured in the report, along with other flow measures such min,max and standard deviation of flows, sent Bytes and received Bytes. </Description>
+    <SelectClause numEntries="All">
+        <AttrList> profDate, profHourType, srcIpAddr,srcName,ipProto,destIpPort,avgTotFlows, minTotFlows, maxTotFlows, avgSentBytes, minSentBytes, maxSentBytes, avgRecvBytes, minRecvBytes,maxRecvBytes </AttrList>
+    </SelectClause>
+    <OrderByClause> <AttrList> profDate ASC, profHourType ASC, avgTotFlows DESC  </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_Router_17" name="Filter_Router_17">
+           <SingleEvtConstr> eventType = "PH_PROF_FLOW_CLIENT" AND profDateType = 2 </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>srcIpAddr,srcName</RelevantFilterAttr>
+  </Report>
+
+   <!-- ************************************************************ -->
+  <Report id="PH_Report_Router_18" group="PH_SYS_REPORT_Traffic_Flow,PH_SYS_REPORT_Router/Switch">
+    <Name> Router Permit: Baseline Client Traffic Flow: detailed day of week view  </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report provides baseline client traffic flow analysis results from a day of week perspective. A client is a connection initiator. The report answers questions of the type: "What does my baseline client traffic look like on Mondays during business hours and after hours"? For every day of the month and activity hour type, the most active connections in terms of the hourly average flows is captured in the report, along with other flow measures such min,max and standard deviation of flows, sent Bytes and received Bytes. </Description>
+    <SelectClause numEntries="All">
+        <AttrList> profDate, profHourType, srcIpAddr,srcName,ipProto,destIpPort,avgTotFlows, minTotFlows, maxTotFlows, avgSentBytes, minSentBytes, maxSentBytes, avgRecvBytes, minRecvBytes,maxRecvBytes </AttrList>
+    </SelectClause>
+    <OrderByClause> <AttrList> profDate ASC, profHourType ASC, avgTotFlows DESC  </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_Router_18" name="Filter_Router_18">
+         <SingleEvtConstr> eventType = "PH_PROF_FLOW_CLIENT" AND profDateType = 1 </SingleEvtConstr>
+       </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>srcIpAddr,srcName</RelevantFilterAttr>
+  </Report>
+
+  <!-- ************************************************************ -->
+  <!-- ************************************************************ -->
+  <Report id="PH_Report_Router_19" group="PH_SYS_REPORT_Traffic_Flow,PH_SYS_REPORT_Router/Switch">
+    <Name> Router Permit: Baseline Server Traffic Flow: day of month view   </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report provides baseline server traffic flow analysis results from a day of month perspective. A server is a connection responder. The report answers questions of the type: "What does my baseline server traffic look like on 1st of the month during business hours and after hours"? For every day of the month and activity hour type, the most active server connections in terms of the hourly average flows are captured in the report. There is an additional report that captures more detailed statistics. </Description>
+    <SelectClause numEntries="All">
+        <AttrList> profDate, profHourType,destIpAddr,ipProto,destIpPort,avgTotFlows, avgSentBytes, avgRecvBytes </AttrList>
+    </SelectClause>
+    <OrderByClause> <AttrList> profDate ASC, profHourType ASC, avgTotFlows DESC  </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_Router_19" name="Filter_Router_19">
+           <SingleEvtConstr> eventType = "PH_PROF_FLOW_SERVER" AND profDateType = 2 </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>destIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <!-- ************************************************************ -->
+  <Report id="PH_Report_Router_20" group="PH_SYS_REPORT_Traffic_Flow,PH_SYS_REPORT_Router/Switch">
+    <Name> Router Permit: Baseline Server Traffic Flow: day of week view  </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report provides baseline server traffic flow analysis results from a day of week perspective. A server is a connection responder. The report answers questions of the type: "What does my baseline server traffic look like on Mondays during business hours and after hours"? For every day of the week and activity hour type, the most active server connections in terms of the hourly average flows are captured in the report. There is an additional report that captures more detailed statistics. </Description>
+    <SelectClause numEntries="All">
+        <AttrList> profDate, profHourType, srcIpAddr,srcName,destIpAddr,destName,ipProto,destIpPort,avgTotFlows, avgSentBytes, avgRecvBytes </AttrList>
+    </SelectClause>
+    <OrderByClause> <AttrList> profDate ASC, profHourType ASC, avgTotFlows DESC  </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_Router_20" name="Filter_Router_20">
+         <SingleEvtConstr> eventType = "PH_PROF_FLOW_SERVER" AND profDateType = 1 </SingleEvtConstr>
+       </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>srcIpAddr,srcName,destIpAddr,destName</RelevantFilterAttr>
+  </Report>
+
+  <!-- ************************************************************ -->
+  <Report id="PH_Report_Router_21" group="PH_SYS_REPORT_Traffic_Flow,PH_SYS_REPORT_Router/Switch">
+    <Name> Router Permit: Baseline Server Traffic Flow: detailed day of month view   </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report provides baseline server traffic flow analysis results from a day of month perspective. A server is a connection responder. The report answers questions of the type: "What does my baseline server traffic look like on 1st of the month during business hours and after hours"? For every day of the month and activity hour type, the most active connections in terms of the hourly average flows is captured in the report, along with other flow measures such min,max and standard deviation of flows, sent Bytes and received Bytes. </Description>
+    <SelectClause numEntries="All">
+        <AttrList> profDate, profHourType, destIpAddr,ipProto,destIpPort,avgTotFlows, minTotFlows, maxTotFlows, avgSentBytes, minSentBytes, maxSentBytes, avgRecvBytes, minRecvBytes,maxRecvBytes </AttrList>
+    </SelectClause>
+    <OrderByClause> <AttrList> profDate ASC, profHourType ASC, avgTotFlows DESC  </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_Router_21" name="Filter_Router_21">
+           <SingleEvtConstr> eventType = "PH_PROF_FLOW_SERVER" AND profDateType = 2 </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>destIpAddr</RelevantFilterAttr>
+  </Report>
+
+   <!-- ************************************************************ -->
+  <Report id="PH_Report_Router_22" group="PH_SYS_REPORT_Traffic_Flow,PH_SYS_REPORT_Router/Switch">
+    <Name> Router Permit: Baseline Server Traffic Flow: detailed day of week view  </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report provides baseline server traffic flow analysis results from a day of week perspective. A server is a connection responder. The report answers questions of the type: "What does my baseline server traffic look like on Mondays during business hours and after hours"? For every day of the month and activity hour type, the most active connections in terms of the hourly average flows is captured in the report, along with other flow measures such min,max and standard deviation of flows, sent Bytes and received Bytes. </Description>
+    <SelectClause numEntries="All">
+        <AttrList> profDate, profHourType, destIpAddr,ipProto,destIpPort,avgTotFlows, minTotFlows, maxTotFlows, avgSentBytes, minSentBytes, maxSentBytes, avgRecvBytes, minRecvBytes,maxRecvBytes </AttrList>
+    </SelectClause>
+    <OrderByClause> <AttrList> profDate ASC, profHourType ASC, avgTotFlows DESC  </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_Router_22" name="Filter_Router_22">
+         <SingleEvtConstr> eventType = "PH_PROF_FLOW_SERVER" AND profDateType = 1 </SingleEvtConstr>
+       </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>destIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <!-- ************************************************************ -->
+  <Report id="PH_Report_Router_23" group="PH_SYS_REPORT_Router/Switch">
+    <Name>Logon: Router Admin Activity Details</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Provides details about router admin activity - logons, command executions and logoff </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr,eventType,srcIpAddr,srcName,user,rawEventMsg</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_Router_23" name="Filter_Router_23">
+           <SingleEvtConstr> reptDevIpAddr IN (Group@PH_SYS_DEVICE_ROUTER_SWITCH) AND eventType IN (Group@PH_SYS_EVENT_HostLogonSuccess,Group@PH_SYS_EVENT_ConfigChange,Group@PH_SYS_EVENT_HostLogoff) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_Router_24" group="PH_SYS_REPORT_Router/Switch">
+    <Name>Logon: Successful Router Admin Logon</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Details about successful router logons</Description>
+    <SelectClause numEntries="All">
+      <AttrList>phRecvTime,reptDevIpAddr,eventType,srcIpAddr,srcName,user,srcIntfName,destIpPort,rawEventMsg</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_Router_24" name="Filter_Router_24">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_ROUTER_SWITCH) AND eventType IN (Group@PH_SYS_EVENT_HostLogonSuccess))</SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+  
+  <Report id="PH_Report_Router_25" group="PH_SYS_REPORT_Router/Switch">
+     <Name>Performance: Top Routers Ranked By CPU Utilization</Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description> Ranks the routers by average cpu utilization over a window </Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName,hostIpAddr,AVG(cpuUtil),MAX(cpuUtil)</AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(cpuUtil) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600" >
+         <SubPattern displayName="Filter_PERF_MON_2" name="Filter_PERF_MON_2">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_SYS_CPU_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_ROUTER_SWITCH) </SingleEvtConstr>
+           <GroupByAttr>hostName, hostIpAddr</GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+      <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+
+  <Report id="PH_Report_Router_26" group="PH_SYS_REPORT_Router/Switch">
+     <Name>Performance: Top Router Network Intf By Util, Error, Discards </Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+   <Description> Ranks the routers and their network interfaces by first average inbound and then by outbound interface utilization. The utilization is computed by accounting for the link bandwidth. </Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName,intfName,AVG(inIntfUtil),AVG(recvBitsPerSec),AVG(inIntfPktErrPct), AVG(inIntfPktDiscardedPct), AVG(outIntfUtil), AVG(sentBitsPerSec), AVG(outIntfPktErrPct), AVG(outIntfPktDiscardedPct) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(inIntfUtil) DESC, AVG(outIntfUtil) DESC </AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_PERF_MON_8" name="Filter_PERF_MON_8">
+           <SingleEvtConstr> eventType = "PH_DEV_MON_NET_INTF_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_ROUTER_SWITCH) </SingleEvtConstr>
+           <GroupByAttr>hostName,intfName </GroupByAttr>  
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_Router_27" group="PH_SYS_REPORT_Router/Switch">
+     <Name>Performance: Top Routers By Memory Utilization</Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description>Ranks the routers by average memory utilization over a window</Description> 
+     <SelectClause numEntries="All">
+         <AttrList> hostName,hostIpAddr,memName,AVG(memUtil) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(memUtil) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_PERF_MON_3" name="Filter_PERF_MON_3">
+           <SingleEvtConstr> eventType = "PH_DEV_MON_SYS_MEM_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_ROUTER_SWITCH)</SingleEvtConstr>
+           <GroupByAttr>hostName,hostIpAddr,memName</GroupByAttr>  
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_Router_28" group="PH_SYS_REPORT_Router/Switch">
+     <Name>Availability: Ping Monitor Statistics </Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description>Tracks the PING response times and packet loss for the monitored devices </Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName, hostIpAddr, AVG(avgDurationMSec) "Avg RTT (sec)",MIN(minDurationMSec) "Min RTT", MAX(maxDurationMSec) "Max RTT", AVG(pktLossPct) "Avg Pkt Loss(%)"</AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(avgDurationMSec) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600" >
+       <SubPattern displayName="Filter_PERF_MON_17" name="Filter_PERF_MON_17">
+         <SingleEvtConstr> eventType = "PH_DEV_MON_PING_STAT" AND hostIpAddr IN (Group@PH_SYS_DEVICE_ROUTER_SWITCH) </SingleEvtConstr>
+	 <GroupByAttr>hostName,hostIpAddr </GroupByAttr> 
+       </SubPattern>
+     </PatternClause>
+     <inline>true</inline>
+    <active>true</active>
+      <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_Router_29" group="PH_SYS_REPORT_Router/Switch">
+    <Name>Availability: Router Network Interface Down/Up</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks network device interface down and up events</Description>
+    <SelectClause numEntries="All">
+      <AttrList>phRecvTime,reptDevIpAddr,eventType,intfName,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_OVERALL_AVAIL_6" name="Filter_OVERALL_AVAIL_6">
+        <SingleEvtConstr>eventType IN (Group@PH_SYS_EVENT_NetIntfShutdown,Group@PH_SYS_EVENT_NetIntfRestart) AND (reptDevIpAddr IN (Group@PH_SYS_DEVICE_ROUTER_SWITCH))</SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_Router_30" group="PH_SYS_REPORT_Router/Switch">
+    <Name>Availability: Router Down/Restart </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks network device down and restart events</Description>
+    <SelectClause numEntries="All">
+      <AttrList>phRecvTime,reptDevIpAddr,eventType,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_OVERALL_AVAIL_1" name="Filter_OVERALL_AVAIL_1">
+        <SingleEvtConstr>eventType IN (Group@PH_SYS_EVENT_SystemShutdown,Group@PH_SYS_EVENT_SystemRestart) AND (reptDevIpAddr IN (Group@PH_SYS_DEVICE_ROUTER_SWITCH) OR hostIpAddr IN (Group@PH_SYS_DEVICE_ROUTER_SWITCH))</SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+     <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+   <Report id="PH_Report_Router_31" group="PH_SYS_REPORT_Router/Switch">
+    <Name>Availability: Network Device Failover</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks network device failovers</Description>
+    <SelectClause numEntries="All">
+      <AttrList>phRecvTime,reptDevIpAddr,eventType,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_OVERALL_AVAIL_5" name="Filter_OVERALL_AVAIL_5">
+        <SingleEvtConstr>eventType IN (Group@PH_SYS_EVENT_Failover) AND (reptDevIpAddr IN (Group@PH_SYS_DEVICE_ROUTER_SWITCH))</SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+   <Report id="PH_Report_Router_32" group="PH_SYS_REPORT_Router/Switch">
+     <Name>Router CBQoS: Top Interface Classmaps by drop pct</Name>
+     <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks interface classmaps by drop pct </Description>
+    <SelectClause numEntries="All">
+        <AttrList>hostName,intfName,qosPolicy,qosClass,AVG(qosPrePoliceRate),AVG(qosPostPoliceRate),AVG(qosDropRate),AVG(qosDropPct)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>AVG(qosDropPct) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_Router_2" name="Filter_Router_2">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_CBQOS_CMSTAT" </SingleEvtConstr>
+           <GroupByAttr>hostName,intfName,qosPolicy,qosClass</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+   <Report id="PH_Report_Router_33" group="PH_SYS_REPORT_Router/Switch">
+     <Name>Router CBQoS: Top Interface Police Actions by drop pct</Name>
+     <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks interface police actions by drop pct </Description>
+    <SelectClause numEntries="All">
+        <AttrList>hostName,intfName,qosPolicy,qosClass,AVG(qosConformRate),AVG(qosExceedRate),AVG(qosViolateRate)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>AVG(qosViolateRate) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_Router_2" name="Filter_Router_2">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_CBQOS_POLICESTAT" </SingleEvtConstr>
+           <GroupByAttr>hostName,intfName,qosPolicy,qosClass</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+   <Report id="PH_Report_Router_34" group="PH_SYS_REPORT_Router/Switch">
+     <Name>Router CBQoS: Top Interface Queue Stats by discarded packets</Name>
+     <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks interface queues by discarded packets </Description>
+    <SelectClause numEntries="All">
+        <AttrList> hostName,intfName,qosPolicy,qosClass,AVG(qosCurrQueue),AVG(qosMaxQueue),AVG(qosDiscardPkt) </AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>AVG(qosDiscardPkt) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_Router_2" name="Filter_Router_2">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_CBQOS_QUEUESTAT" </SingleEvtConstr>
+           <GroupByAttr>hostName,intfName,qosPolicy,qosClass</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_Router_35" group="PH_SYS_REPORT_Router/Switch">
+     <Name>Routing: OSPF Neighbor status</Name>
+     <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Provides OSPF neighbor status </Description>
+    <SelectClause numEntries="All">
+        <AttrList>srcIpAddr,srcName,destIpAddr,destName,ospfAreaId,ospfState</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList></AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_Router_2" name="Filter_Router_2">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_OSPF_NBR_STATUS" </SingleEvtConstr>
+           <GroupByAttr>srcIpAddr,srcName,destIpAddr,destName,ospfAreaId,ospfState</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>srcIpAddr,srcName,destIpAddr,destName</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_Router_36" group="PH_SYS_REPORT_Router/Switch">
+     <Name>Routing: BGP Neighbor status</Name>
+     <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Provides BGP neighbor status </Description>
+    <SelectClause numEntries="All">
+        <AttrList>srcIpAddr,srcName,destIpAddr,destName,srcASNum,destASNum,bgpState</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList></AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_Router_2" name="Filter_Router_2">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_BGP_NBR_STATUS" </SingleEvtConstr>
+           <GroupByAttr>srcIpAddr,srcName,destIpAddr,destName,srcASNum,destASNum,bgpState</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>srcIpAddr,srcName,destIpAddr,destName</RelevantFilterAttr>
+  </Report>
+
+</Reports>

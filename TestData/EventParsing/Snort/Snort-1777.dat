@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<161>snort[2242]: [1:1777:9] FTP EXPLOIT STAT // attack-responses.rules backdoor.rules bad-traffic.rules cgi-bin.list chat.rules classification.config ddos.rules deleted.rules dns.rules dos.rules experimental.rules exploit.rules finger.rules ftp.rules generators gen-msg.map icmp-info.rules icmp.rules imap.rules info.rules local.rules misc.rules multimedia.rules mysql.rules netbios.rules newFile.txt nntp.rules oracle.rules other-ids.rules p2p.rules policy.rules pop2.rules pop3.rules porn.rules reference.config rpc.rules rservices.rules scan.rules shellcode.rules sid sid-msg.map sid-msg.map.my sid-msg.txt sid.txt smtp.rules snmp.rules snortCodedEvents.txt snort.conf snortEventGen.sh sql.rules telnet.rules test.txt tftp.rules threshold.conf tmp.txt unicode.map virus.rules VRT-License.txt web-attacks.rules web-cgi.rules web-client.rules web-coldfusion.rules web-frontpage.rules web-iis.rules web-misc.rules web-php.rules x11.rules dos attempt [Classification: Misc activity] [Priority: 3]: {UDP} 192.168.19.1:6555 -> 172.16.2.5:514
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+reptDevIpAddr=$localhost
+eventParsedOk=1
+eventSeverity=8
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=MEDIUM
+destIpAddr=172.16.2.5
+eventAction=0 (Permit)
+eventName=FTP EXPLOIT STAT * dos attempt
+ipProto=17 (UDP)
+reptVendor=Snort-org
+eventType=Snort-1777
+srcIpAddr=192.168.19.1
+phEventCategory=0 (External)
+destIpPort=514 (SYSLOG)
+srcIpPort=6555
+reptModel=Snort IPS
+devEventTypeGrp=Misc activity

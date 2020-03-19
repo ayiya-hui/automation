@@ -1,0 +1,24 @@
+[reptDevIpAddr(key)]
+20.20.20.39
+[eventMsg]
+<14>SJ-QA-A-Fdy-BigIron, VLAN 4 Port 2/7 STP State -> DISABLED (PortDown)
+[params]
+rawEventMsg=any
+count=1
+appTransportProto=STP
+eventId=any
+srcIntfName=VLAN4
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=20.20.20.39
+eventAction=0 (Permit)
+eventName=Foundry STP port entered DISABLED state
+reptVendor=Foundry
+eventType=Foundry-Ironware-StpPort-Disabled
+phEventCategory=0 (External)
+reptDevIpAddr=20.20.20.39
+destName=SJ-QA-A-Fdy-BigIron
+reptModel=Ironware

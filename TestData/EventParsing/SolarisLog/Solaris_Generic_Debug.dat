@@ -1,0 +1,21 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<15>Jun  1 13:09:28 lpstat[15906]: [ID 462742 user.debug] database: printers, default: user files nis nisplus
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+eventAction=0 (Permit)
+eventName=Solaris_Generic_Debug
+reptVendor=Sun
+eventType=Solaris_Generic_Debug
+phEventCategory=0 (External)
+reptDevIpAddr=$localhost
+reptModel=Solaris

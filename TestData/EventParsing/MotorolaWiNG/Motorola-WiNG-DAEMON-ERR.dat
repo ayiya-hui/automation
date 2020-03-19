@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+2015-11-11T13:27:16.821472-05:00 NDCNACNX951001 %DAEMON-3-ERR: dhcpd: Abandoning IP address 172.18.108.110: pinged before offer
+[params]
+errReason=dhcpd: Abandoning IP address 172.18.108.110: pinged before offer
+customer=Super
+eventSeverityCat=MEDIUM
+eventParsedOk=1
+phEventCategory=0 (External)
+parserName=MotorolaWiNGParser
+count=1
+eventSeverity=5
+eventType=Motorola-WiNG-DAEMON-ERR
+reptDevIpAddr=$localhost
+collectorId=any
+eventName=Motorola WLAN AP: Daemon error
+reptVendor=Motorola
+relayDevIpAddr=$localhost
+extEventRecvProto=Syslog
+phRecvTime=any
+eventRuleTrigger=1
+eventId=any
+reptDevName=NDCNACNX951001
+reptModel=WiNG WLAN AP

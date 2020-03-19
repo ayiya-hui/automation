@@ -1,0 +1,97 @@
+<eventParser name="TrendMicroOfficeScanParser">
+
+  <deviceType>
+    <Vendor>Generic</Vendor>
+    <Model>Generic</Model>
+    <Version>ANY</Version>
+  </deviceType>
+
+  <appType>
+    <Vendor>TrendMicro</Vendor>
+    <Model>Antivirus Manager</Model>
+    <Version>ANY</Version>
+    <Name>TrendMicro Antivirus Manager</Name>
+  </appType>
+  
+  <eventFormatRecognizer><![CDATA[SNMPv2-SMI::enterprises.6101]]></eventFormatRecognizer>
+  
+  <testEvents>
+      <testEvent><![CDATA[2011-04-14 02:17:54 192.168.20.214(via UDP: [192.168.20.214]:45440) TRAP, SNMP v1, community public	SNMPv2-SMI::enterprises.6101 Enterprise Specific Trap (5) Uptime: 0:00:00.30	SNMPv2-SMI::enterprises.6101.141 = STRING: "Virus/Malware: Eicar_test_file Computer: SJDEVVWINDB05 Domain: Prospecthills File: C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\yc8eayj0.com Date/Time: 4/10/2008 14:23:26 Result: Virus successfully detected, cannot perform the Clean action (Quarantine) "]]></testEvent>
+  </testEvents>
+
+  <!-- pattern definitions -->
+  <patternDefinitions>
+    <pattern name="patStrRightParenthesis"><![CDATA[[^\)]*]]></pattern>
+    <pattern name="patStrColon"><![CDATA[[^:]*]]></pattern>
+  </patternDefinitions>
+
+  <!-- keep the white space at the end -->
+  <parsingInstructions>
+    <!-- parsing common fields -->
+    <!-- sample message 
+        2008-04-11 16:01:46 192.168.1.43(via UDP: [192.168.20.8]:59829) TRAP, SNMP v1, community public       SNMPv2-SMI::enterprises.6101 Enterprise Specific Trap (5) Uptime: 0:00:00.00   SNMPv2-SMI::enterprises.6101.141 = STRING: "Virus/Malware: Eicar_test_file Computer: SJDEVVWINDB05 Domain: Prospecthills File: C:\\DOCUME~1\\ADMINI~1\\LOCALS~1\\Temp\\yc8eayj0.com Date/Time: 4/10/2008 14:23:26 Result: Virus successfully detected, cannot perform the Clean action (Quarantine) "
+      -->
+
+    <switch>
+      <case>
+        <collectFieldsByRegex src="$_rawmsg">
+          <regex><![CDATA[<_year:gPatYear>-<_mon:gPatMonNum>-<_day:gPatDay> <_time:gPatTime> <:gPatIpV4Dot>\(via <_reptIp:patStrRightParenthesis>\)<:gPatMesgBody>STRING: "<_body:gPatMesgBody>File: <_body2:gPatMesgBody> Date/Time: <_mon2:gPatMonNum>/<_day2:gPatDay>/<_year2:gPatYear> <_time2:gPatTime> Result: <_body3:gPatMesgBody>"]]>
+          </regex>
+        </collectFieldsByRegex>
+      </case>
+      <case>
+        <collectFieldsByRegex src="$_rawmsg">
+          <regex><![CDATA[<_year:gPatYear>-<_mon:gPatMonNum>-<_day:gPatDay> <_time:gPatTime> <hostName:gPatStr> <:gPatStr> \(via <_reptIp:patStrRightParenthesis>\)<:gPatMesgBody>STRING: "<_body:gPatMesgBody>File: <_body2:gPatMesgBody> Date/Time: <_mon2:gPatMonNum>/<_day2:gPatDay>/<_year2:gPatYear> <_time2:gPatTime> Result: <_body3:gPatMesgBody>"]]>
+          </regex>
+        </collectFieldsByRegex>
+      </case>
+    </switch>
+   
+    <setEventAttribute attr="deviceTime">toDateTime($_mon, $_day, $_year, $_time)</setEventAttribute>
+    <setEventAttribute attr="eventTime">toDateTime($_mon2, $_day2, $_year2, $_time2)</setEventAttribute>
+
+    <!-- parse reporting ip -->
+    <when test='matches($_reptIp, "^\w+:")'>
+      <collectFieldsByRegex src="$_reptIp">
+        <regex><![CDATA[<:patStrColon>:\s+\[<_reptIp:gPatIpV4Dot>\]<:gPatMesgBody>]]></regex>
+      </collectFieldsByRegex>
+    </when>
+    <when test='$_reptIp != "127.0.0.1"'>
+      <when test='$_reptIp != "0.0.0.0"'>
+        <setEventAttribute attr="reptDevIpAddr">$_reptIp</setEventAttribute>
+      </when>
+    </when>
+
+    <collectAndSetAttrByKeyValuePair sep=' ' src="$_body">
+      <attrKeyMap attr="domain" key="Domain: "/>
+      <attrKeyMap attr="computer" key="Computer: "/>
+      <attrKeyMap attr="virusName" key="Virus/Malware: "/>
+    </collectAndSetAttrByKeyValuePair>
+
+    <choose>
+      <when test="matches($_body2, 'Username:')">
+        <collectFieldsByRegex src="$_body2">
+          <regex><![CDATA[<fileName:gPatMesgBody> Username: <user:gPatMesgBody>]]></regex>
+        </collectFieldsByRegex>
+      </when>
+      <otherwise>
+        <setEventAttribute attr="fileName">$_body2</setEventAttribute>
+      </otherwise>
+    </choose>
+
+    <choose>
+      <when test="matches($_body3, 'successfully')">
+        <setEventAttribute attr="eventAction">0</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">9</setEventAttribute>
+	<setEventAttribute attr="eventType">combineMsgId("Trend-AV-Virus","-remedy-success")</setEventAttribute>
+      </when>
+      <otherwise>
+        <setEventAttribute attr="eventAction">1</setEventAttribute>
+        <setEventAttribute attr="eventSeverity">10</setEventAttribute>
+        <setEventAttribute attr="eventType">combineMsgId("Trend-AV-Virus","-remedy-failure")</setEventAttribute>
+      </otherwise>
+    </choose>
+
+  </parsingInstructions>
+
+</eventParser>

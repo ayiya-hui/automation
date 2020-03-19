@@ -1,0 +1,100 @@
+$httpStatusCode,Description
+200,The request has succeeded
+201,Created - request has been fulfilled and resulted in a new resource being created.
+202,"Accepted - The request has been accepted for processing, but the processing has not been completed"
+203, Non-Authoritative Information - returned meta-information in the entity-header is not the definitive but gathered from a local or a third-party copy
+204,"No Content - The server has fulfilled the request but does not need to return an entity-body, and might want to return updated meta-information"
+205,Reset Content - The server has fulfilled the partial GET request for the resource
+206,Partial Content - A file has been partially downloaded
+207,Multi-Status (WebDAV) - the message body that follows is an XML message and can contain a number of separate response codes
+300,"Multiple Choices  - The requested resource corresponds to any one of a set of representations, each with its own specific location, and agent- driven negotiation information is being provided. "
+301,Moved Permanently - The requested resource has been assigned a new permanent URI and any future references to this resource SHOULD use one of the returned URI
+302,Found - The requested resource resides temporarily under a different URI.
+303,See Other - The response to the request can be found under a different URI and SHOULD be retrieved using a GET method on that resource
+304,"Not Modified - The client has performed a conditional GET request and access is allowed, but the document has not been modified"
+305,Use Proxy - The requested resource MUST be accessed through the proxy given by the Location field
+306,Unused
+307,Temporary Redirect - The requested resource resides temporarily under a different URI
+400,Bad Request - The request could not be understood by the server due to malformed syntax
+401,Access Denied - The request requires user authentication
+401.1,Access Denied - Logon failed.
+401.2,Access Denied - Logon failed due to server configuration.
+401.3,Access Denied - ACL checking failed
+401.4,Access Denied - Authorization failed by filter
+401.5,Access Denied - Authorization failed by CGI/ISAPI application
+401.7,Access Denied - Authorization failed by URL auth policy
+402,Payment required
+403,"Forbidden - The server understood the request, but is refusing to fulfill it. Authorization will not help"
+403.1,Forbidden - execute access
+403.2,Forbidden - read access
+403.3,Forbidden - write access
+403.4,Forbidden - SSL required
+403.5,Forbidden - SSL 128 required
+403.6,Forbidden - IP address rejected
+403.7,Forbidden - client cert required
+403.8,Forbidden - site access denied
+403.9,Forbidden - too many users
+403.1,Forbidden - invalid config
+403.11,Forbidden - password change
+403.12,Forbidden - mapper denied access
+403.13,Forbidden - client cert revoked
+403.14,Forbidden - directory listing denied
+403.15,Forbidden - client access licenses exceeded
+403.16,Forbidden - client cert untrusted or invalid
+403.17,Forbidden - client cert expired or not yet valid
+403.18,Forbidden - cannot execute requested URL in current application pool
+403.19,Forbidden - cannot execute CGIs for the client in current application pool
+403.2,Forbidden - passport logon failed
+404,Not Found - The server has not found anything matching the Request-URI
+404.1,Not Found - web site not accessible on requested port
+404.2,Not Found - Web service extension lockdown policy prevents this request
+404.3,Not Found - MIME map policy prevents this request.
+404.4,Not Found - No Handler
+404.5,Not Found - Request Filtering: URL Sequence Denied
+404.6,Not Found - Request Filtering: Verb denied
+404.7,Not Found - Request Filtering: File extension denied
+404.8,Not Found - Request Filtering: Denied by hidden namespace
+404.9,Not Found - Denied since hidden file attribute has been set
+404.1,Not Found - Request Filtering: Denied because request header is too long
+404.11,Not Found - Request Filtering: Denied because URL doubled escaping
+404.12,Not Found - Request Filtering: Denied because of high bit characters
+404.13,Not Found - Request Filtering: Denied because content length too large
+404.14,Not Found - Request Filtering: Denied because URL too long
+404.15,Not Found - Request Filtering: Denied because query string too long
+405,Method Not Allowed - The method specified in the Request-Line is not allowed for the resource identified by the Request-URI
+406,Not Acceptable - The resource identified by the request is only capable of generating response entities which have content characteristics not acceptable according to the accept headers sent in the request
+407,"Proxy Authentication Required - This code is similar to 401 (Unauthorized), but indicates that the client must first authenticate itself with the proxy"
+408,Request Timeout - The client did not produce a request within the time that the server was prepared to wait
+409,Conflict - The request could not be completed due to a conflict with the current state of the resource
+410,Gone - The requested resource is no longer available at the server and no forwarding address is known. This condition is expected to be considered permanent
+411,Length Required - The server refuses to accept the request without a defined Content- Length
+412,Precondition Failed - The precondition given in one or more of the request-header fields evaluated to false when it was tested on the server
+413,Request Entity Too Large - The server is refusing to process a request because the request entity is larger than the server is willing or able to process
+414,"Request-URI Too Long - The server is refusing to service the request because the Request-URI is longer than the server is willing to interpret. This rare condition is only likely to occur when a client has improperly converted a POST request to a GET request with long query information, when the client has descended into a URI ""black hole"" of redirection (e.g., a redirected URI prefix that points to a suffix of itself), or when the server is under attack by a client attempting to exploit security holes present in some servers using fixed-length buffers for reading or manipulating the Request-URI"
+415,Unsupported Media Type
+416,Requested Range Not Satisfiable
+417,Expectation Failed
+422,Unprocessable Entity (WebDAV)
+423,Locked (WebDAV)
+424,Failed Dependency (WebDAV)
+425,Unordered Collection (WebDAV)
+426,Upgrade Required (WebDAV)
+427,Retry With
+500,Internal Server Error
+500.12,Internal Server Error - Application busy restarting on the Web server
+500.13,Internal Server Error - Web server too busy.
+500.15,Internal Server Error -  Direct requests for Global.asa not allowed
+500.16,Internal Server Error - UNC authorization credentials incorrect.
+500.18,Internal Server Error - URL authorization store cannot be opened.
+500.1,Internal Server Error - Internal ASP error
+501,Not Implemented
+502,"Bad Gateway - The server, while acting as a gateway or proxy, received an invalid response from the upstream server it accessed in attempting to fulfill the request"
+502.1,Bad Gateway - CGI app timeout
+502.2,Bad Gateway  - error in CGI application
+503,Service Unavailable
+504,"Gateway Timeout - The server, while acting as a gateway or proxy, did not receive a timely response from the upstream server specified by the URI (e.g. HTTP, FTP, LDAP) or some other auxiliary server (e.g. DNS) it needed to access in attempting to complete the request."
+505,HTTP Version Not Supported
+506,Variant Also Negotiates
+507,Insufficient Storage (WebDAV)
+509,Bandwidth Limit Exceeded
+510,Not extended

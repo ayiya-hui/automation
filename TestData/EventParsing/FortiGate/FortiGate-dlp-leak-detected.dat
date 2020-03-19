@@ -1,0 +1,45 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<180>date=2013-05-01 time=11:20:50 devname=FortiGate80C devid=FGT80C3912622808 logid=0954024576 type=utm subtype=dlp eventtype=dlp level=warning vd=root filteridx=0 filtertype=none sessionid=312 epoch=0 eventid=0 user=user group=group srcip=1.1.1.1 srcport=2560 srcintf=lo dstip=2.2.2.2 dstport=5120 dstintf=eth0 service=mm1 filetype=unknown sentbyte=0 rcvdbyte=0 hostname=host url=www.abcd.com action=block
+[params]
+deviceTime=any
+destGeoOrg=any
+eventType=FortiGate-dlp-leak-detected
+phCustId=$sender
+destIpAddr=2.2.2.2
+totBytes=0
+destGeoCountry=any
+srcIpAddr=1.1.1.1
+hostGeoLongitude=133
+reptModel=FortiOS
+eventId=any
+eventParsedOk=1
+eventSeverity=5
+hostIpAddr=1.1.1.1
+eventName=A data leak was detected by a specified DLP sensor rule
+serviceName=mm1
+phEventCategory=0 (External)
+destName=host
+srcIntfName=lo
+recvBytes=0
+srcIpPort=2560
+eventSeverityCat=MEDIUM
+collectorId=any
+hostGeoLatitude=-27
+destIntfName=eth0
+relayDevIpAddr=$localhost
+user=user
+destIpPort=5120
+reptDevName=any
+count=1
+uriStem=www.abcd.com
+hostGeoCountry=Australia
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Fortinet
+destGeoCity=any
+userGrp=group
+sentBytes=0
+hostGeoOrg=APNIC Debogon Project

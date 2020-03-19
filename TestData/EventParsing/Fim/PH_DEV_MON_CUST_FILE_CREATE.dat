@@ -1,0 +1,29 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<13>Jan 30 17:06:28 WIN-2k8-Hyper-V meshmonevt    object="C:\fim\New Microsoft Office Word Document.docx"         type="create" status="0x0"   user="WIN-2K8-HYPER-V\Administrator"       client="<unknown>"        process="<remote app>"         pid="0"    luid="0x0:0x3A4D960"    timestamp="Wed Jan 30 17:06:27 2013"       string="User WIN-2K8-HYPER-V\Administrator created file C:\fim\New Microsoft Office Word Document.docx from machine <unknown> on Wed Jan 30 17:06:27 2013"
+[params]
+domain=WIN-2K8-HYPER-V
+deviceTime=any
+parserName=FimParser
+eventType=PH_DEV_MON_CUST_FILE_CREATE
+hostName=WIN-2k8-Hyper-V
+procName=<remote app>
+osObjName=C:\fim\New Microsoft Office Word Document.docx
+reptModel=any
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=New file or directory created
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+user=WIN-2K8-HYPER-V\Administrator
+rawEventMsg=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=any

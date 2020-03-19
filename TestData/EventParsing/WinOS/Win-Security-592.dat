@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+20.20.20.20
+[eventMsg]
+<13>Jan 14 19:14:15 $reporter MSWinEventLog	1	Security	9359	Wed Jan 14 19:14:10 2009	592	Security	SYSTEM	User	Success Audit	ADS-PRI	Detailed Tracking		A new process has been created:     New Process ID: 3688     Image File Name: C:\WINDOWS\system32\userinit.exe     Creator Process ID: 344     User Name: ADS-PRI$     Domain: PROSPECTHILLS     Logon ID: (0x0,0x3E7)    	8788  Automation
+[params]
+rawEventMsg=any
+domain=PROSPECTHILLS
+deviceTime=any
+eventType=Win-Security-592
+phCustId=$sender
+destIpAddr=$reporter
+procName=C:\WINDOWS\system32\userinit.exe
+reptModel=Windows
+eventId=any
+eventParsedOk=any
+eventSeverity=1
+eventName=Windows process created
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+fileName=C:\WINDOWS\system32\userinit.exe
+user=ADS-PRI$
+count=1
+winLogonId=(0x0,0x3E7)
+phRecvTime=any
+reptDevIpAddr=$reporter
+eventAction=0 (Permit)
+reptVendor=Microsoft

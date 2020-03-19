@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+enterprises.3401 6 5 enterprises.3401.12.2.1.1.4.1.1.9.272 s "To SJ-Dev-S-RH-DNS-01"     enterprises.3401.12.2.1.1.4.1.1.11.272 s "My Organization"   enterprises.3401.12.2.1.1.4.1.1.12.272 s "Directory"        enterprises.3401.12.2.1.1.4.1.1.18.272 s "Any"       enterprises.3401.12.2.1.1.4.1.1.19.272 s "Any"      enterprises.3401.12.2.1.1.4.1.1.33.272 s "(Any)"     enterprises.3401.12.2.1.1.4.1.1.15.272 s "4/16/08 3:27:14 AM"        enterprises.3401.12.2.1.1.4.1.1.31.272 s "1035"     enterprises.3401.12.2.1.1.4.1.1.32.272 s "Scan was cancelled."       enterprises.3401.12.2.1.1.4.1.1.16.272 s "1"        enterprises.3401.12.2.1.1.4.1.1.17.272 s "1" enterprises.3401.12.2.1.1.4.1.1.13.272 s "VirusScan"        enterprises.3401.12.2.1.1.4.1.1.14.272 s "Scan cancelled"    enterprises.3401.12.2.1.1.4.1.1.22.272 s "On-Demand Scan"    enterprises.3401.12.2.1.1.4.1.1.23.272 s "Not Available"    enterprises.3401.12.2.1.1.4.1.1.24.272 s "192.168.1.6"       enterprises.3401.12.2.1.1.4.1.1.25.272 s "SJDEVSWINIIS01"   enterprises.3401.12.2.1.1.4.1.1.26.272 s "Not Available"     enterprises.3401.12.2.1.1.4.1.1.27.272 s "0"        enterprises.3401.12.2.1.1.4.1.1.6.272 s "4/16/08 3:27:14 AM"
+[params]
+rawEventMsg=any
+eventSeverity=1
+eventSeverityCat=LOW
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+virusName=On-Demand Scan
+reptVendor=McAfee
+phRecvTime=any
+phCustId=$sender
+hostName=SJDEVSWINIIS01
+destIpAddr=192.168.1.6
+hostIpAddr=192.168.1.6
+fileName=Not Available
+eventName=Scan canceled
+computer=SJDEVSWINIIS01
+eventType=McAfee-EPO-1035
+phEventCategory=0 (External)
+reptDevIpAddr=$localhost
+destName=SJDEVSWINIIS01
+reptModel=ePolicy Orchestrator

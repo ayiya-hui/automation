@@ -1,0 +1,30 @@
+[reptDevIpAddr(key)]
+10.10.10.10
+[eventMsg]
+<29>May 17 01:03:14 10.10.10.10 httpd: 2016-05-17 05:03:14.721Z [user001]: Logout - - ip=10.3.2.1 group=InfoBloxAdmins trigger_event=Normal\040Logout
+[params]
+deviceTime=any
+parserName=InfoBloxAuditParser
+eventType=InfoBlox-Audit-Logout
+destIpAddr=10.3.2.1
+srcName=HOST-10.10.10.10
+srcIpAddr=10.10.10.10
+reptModel=NiOS
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=InfoBlox Logout
+groupName=InfoBloxAdmins
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=10.10.10.10
+user=user001
+rawEventMsg=any
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=10.10.10.10
+reptVendor=InfoBlox

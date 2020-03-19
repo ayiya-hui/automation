@@ -1,0 +1,29 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<14>Jul 14 17:22:53 sw3-cm Syslog server 172.20.80.142 added from telnet session.
+[params]
+deviceTime=any
+parserName=FoundryIronwareParser
+totFlows=1
+eventType=Foundry-Ironware-Syslog-Server-Added
+reptModel=Ironware
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+hostIpAddr=172.20.80.142
+eventName=syslog server added
+phEventCategory=0 (External)
+eventRuleTrigger=1
+destName=sw3-cm
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+destIpPort=23
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Foundry

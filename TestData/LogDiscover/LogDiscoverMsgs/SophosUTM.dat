@@ -1,0 +1,2 @@
+[eventMsg]
+<29>2016:03:11-05:07:34 HOST-30.200.168.1 confd-sync[8588]: id="3850" severity="info" sys="System" sub="ha" name="Change synced to slave 198.19.250.1"

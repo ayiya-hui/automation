@@ -1,0 +1,6 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+Cisco-UCS-F0459,CiscoUCS_1,CiscoUCS,$localhost,,syslog
+Cisco-UCS-F0283,CiscoUCS_2,CiscoUCS,$localhost,,syslog
+Cisco-UCS-F0207,CiscoUCS_3,CiscoUCS,$localhost,,syslog
+Cisco-UCS-F0206,CiscoUCS_4,CiscoUCS,$localhost,,syslog

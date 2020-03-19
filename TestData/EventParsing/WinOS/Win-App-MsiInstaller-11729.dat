@@ -1,0 +1,21 @@
+[reptDevIpAddr(key)]
+20.20.20.20
+[eventMsg]
+<13>Jan 14 18:59:07 20.20.20.20 MSWinEventLog	1	Application	9202	Wed Jan 14 18:59:07 2009	11729	MsiInstaller	Administrator	User	Information	ADS-PRI	None	0000: 7b 45 42 42 30 32 45 38     0008: 34 2d 38 43 35 31 2d 34     0010: 38 38 31 2d 41 39 33 33     0018: 2d 45 34 32 45 31 36 43     0020: 41 39 41 38 39 7d 2c 20     0028: 31 36 30 32 00 c1 a4 00   ....  	Product: SymmTime -- Configuration failed.  	486  Automation
+[params]
+rawEventMsg=any
+eventSeverity=1
+eventSeverityCat=LOW
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+phRecvTime=any
+phCustId=$sender
+reptDevIpAddr=20.20.20.20
+destIpAddr=20.20.20.20
+eventName=Win-App-MsiInstaller-11729
+reptVendor=Microsoft
+eventType=Win-App-MsiInstaller-11729
+phEventCategory=0 (External)
+reptModel=Windows

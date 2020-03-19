@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>[2016-04-26 16:10:05] EFW: NETCON: prio=1 id=02300001 rev=1 event=init_complete
+[params]
+deviceTime=any
+parserName=ClavisterParser
+eventType=Clavister-init-complete
+reptModel=cOS Firewall
+eventId=any
+logID=2300001
+eventParsedOk=1
+eventSeverity=1
+eventName=Clavister-init-complete
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Clavister

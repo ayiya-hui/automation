@@ -1,0 +1,35 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<116> device=FCTEMS0036759495 severity=medium from=FAZVM64(FAZ-VM0000000001) trigger=EVT2SIEM1 log="itime=1490261538 date=2017-03-23 time=17:32:18 logver=2 level=info uid=03866CA3DFBD45AD8009E0C59A6F513C vd=root fctver=5.5.23.1022 os="Microsoft Windows 7 Professional Edition, 64-bit Service Pack 1 (build 7601)" usingpolicy=AOFCT fgtserial=N/A emsserial=FCTEMS0036759495 devid=FCT8000424633208 hostname=Hui-PC pcdomain=clientfeature=system deviceip=devicemac=N/A type=event user=N/A id=96882 msg="Policy 'AOFCT' was received and applied""
+[params]
+deviceTime=any
+parserName=FortiClientParser
+eventType=FortiClient-system
+hostName=Hui-PC
+srcName=EVT2SIEM1
+osType=Microsoft Windows 7 Professional Edition, 64-bit Service Pack 1 (build 7601)
+reptModel=FortiClient
+eventId=any
+policyName=AOFCT
+eventParsedOk=1
+eventSeverity=2
+feature=system
+eventName=FortiClient system message
+reptDevName=any
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+msg=Policy 'AOFCT' was received and applied
+count=1
+srcMACAddr=N/A
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+user=N/A
+rawEventMsg=any
+vdom=root
+serialNumber=5.5.23.1022
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Fortinet

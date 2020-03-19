@@ -1,0 +1,839 @@
+
+<Reports>
+  <Report id="PH_Report_OVERALL_PERF_2" group="PH_SYS_REPORT_SysPerf,PH_SYS_REPORT_Freq">
+     <Name>Top Devices By CPU Util </Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description> Ranks the devices by average cpu utilization over a window </Description> 
+     <SelectClause numEntries="All">
+         <AttrList> hostName,cpuName, AVG(cpuUtil) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(cpuUtil) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600" >
+         <SubPattern displayName="Filter_PERF_MON_2" name="Filter_PERF_MON_2">
+           <SingleEvtConstr> eventType = "PH_DEV_MON_SYS_CPU_UTIL" </SingleEvtConstr>
+           <GroupByAttr> hostName,cpuName </GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+      <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_OVERALL_PERF_2B" group="PH_SYS_REPORT_SysPerf,PH_SYS_REPORT_Freq">
+     <Name>Top Network Devices By CPU Util </Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description> Ranks the network devices by average cpu utilization over a window </Description> 
+     <SelectClause numEntries="All">
+         <AttrList> hostName,AVG(cpuUtil) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(cpuUtil) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600" >
+         <SubPattern displayName="Filter_PERF_MON_2" name="Filter_PERF_MON_2">
+           <SingleEvtConstr> eventType = "PH_DEV_MON_SYS_CPU_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Network)</SingleEvtConstr>
+           <GroupByAttr> hostName </GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+      <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_OVERALL_PERF_2C" group="PH_SYS_REPORT_SysPerf,PH_SYS_REPORT_Freq">
+     <Name>Top Servers By CPU Util </Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description> Ranks the servers by average cpu utilization over a window </Description> 
+     <SelectClause numEntries="All">
+         <AttrList> hostName,cpuName, AVG(cpuUtil) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(cpuUtil) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600" >
+         <SubPattern displayName="Filter_PERF_MON_2" name="Filter_PERF_MON_2">
+           <SingleEvtConstr> eventType = "PH_DEV_MON_SYS_CPU_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Server) </SingleEvtConstr>
+           <GroupByAttr> hostName</GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+      <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_OVERALL_PERF_3" group="PH_SYS_REPORT_SysPerf,PH_SYS_REPORT_Freq">
+     <Name>Top Devices By Memory Util (Detailed)</Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description> Ranks the devices by average memory utilization over a window </Description> 
+     <SelectClause numEntries="All">
+         <AttrList> hostName,AVG(memUtil), AVG(swapInRate), AVG(swapOutRate),AVG(swapRate) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(memUtil) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_PERF_MON_3" name="Filter_PERF_MON_3">
+           <SingleEvtConstr> eventType = "PH_DEV_MON_SYS_MEM_UTIL" </SingleEvtConstr>
+           <GroupByAttr> hostName </GroupByAttr>  
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_OVERALL_PERF_3B" group="PH_SYS_REPORT_SysPerf,PH_SYS_REPORT_Freq">
+     <Name>Top Network Devices By Memory Util</Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description> Ranks the devices by average memory utilization over a window </Description> 
+     <SelectClause numEntries="All">
+         <AttrList> hostName,AVG(memUtil)</AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(memUtil) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_PERF_MON_3" name="Filter_PERF_MON_3">
+           <SingleEvtConstr> eventType = "PH_DEV_MON_SYS_MEM_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Network) AND (memName = "Physical Memory") </SingleEvtConstr>
+           <GroupByAttr> hostName</GroupByAttr>  
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_OVERALL_PERF_3C" group="PH_SYS_REPORT_SysPerf,PH_SYS_REPORT_Freq">
+    <Name>Top Servers By Memory Util</Name> 
+    <CustomerScope groupByEachCustomer="true">
+      <Include all="true" /> 
+      <Exclude /> 
+    </CustomerScope>
+    <Description> Ranks the servers by average memory utilization over a window </Description> 
+    <SelectClause numEntries="All">
+      <AttrList> hostName,AVG(memUtil) </AttrList> 
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(memUtil) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_PERF_MON_3" name="Filter_PERF_MON_3">
+         <SingleEvtConstr> eventType = "PH_DEV_MON_SYS_MEM_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Server) AND (memName = "Physical Memory") </SingleEvtConstr>
+         <GroupByAttr> hostName</GroupByAttr>  
+       </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_OVERALL_PERF_3D" group="PH_SYS_REPORT_SysPerf,PH_SYS_REPORT_Freq">
+     <Name>Top Servers By Swapping Rate</Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description> Ranks the devices by average swapping rate </Description> 
+     <SelectClause numEntries="All">
+         <AttrList> hostName,AVG(swapRate) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(swapRate) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_PERF_MON_3" name="Filter_PERF_MON_3">
+           <SingleEvtConstr> eventType = "PH_DEV_MON_SYS_MEM_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Server) AND (memName = "Physical Memory") </SingleEvtConstr>
+           <GroupByAttr> hostName</GroupByAttr>  
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_OVERALL_PERF_6" group="PH_SYS_REPORT_SysPerf,PH_SYS_REPORT_Freq">
+     <Name>Top Servers By Disk Space Util </Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description>Ranks the devices by average system disk utilization over a window </Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName,diskName,AVG(diskUtil),PctChange(diskUtil)</AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(diskUtil) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_PERF_MON_6" name="Filter_PERF_MON_6">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_SYS_DISK_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Server) AND diskName NOT IN ("/boot") </SingleEvtConstr> 
+           <GroupByAttr>hostName,diskName </GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_OVERALL_PERF_6B" group="PH_SYS_REPORT_SysPerf,PH_SYS_REPORT_Freq">
+     <Name>Servers By Least Free Disk Space </Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description>Ranks the devices by minimum free disk space over a window </Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName,diskName,AVG(diskUtil), PctChange(diskUtil)</AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(freeDiskMB) ASC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_PERF_MON_6" name="Filter_PERF_MON_6">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_SYS_DISK_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Server) AND diskName NOT IN ("/boot") </SingleEvtConstr> 
+           <GroupByAttr>hostName,diskName </GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_OVERALL_PERF_6C" group="PH_SYS_REPORT_SysPerf,PH_SYS_REPORT_Freq">
+     <Name>Top Servers By Disk Space Util (Detailed) </Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description>Ranks the devices by average system disk utilization over a window. It also provides details about total, used and free disk sizes </Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName,diskName,AVG(diskUtil), PctChange(diskUtil), AVG(totalDiskMB),AVG(usedDiskMB),AVG(freeDiskMB) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(diskUtil) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_PERF_MON_6" name="Filter_PERF_MON_6">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_SYS_DISK_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Server) AND diskName NOT IN ("/boot") </SingleEvtConstr> 
+           <GroupByAttr>hostName,diskName </GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_OVERALL_PERF_6D" group="PH_SYS_REPORT_SysPerf,PH_SYS_REPORT_Freq">
+     <Name>Top Servers By Daily Disk Space Growth (Detailed)</Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description>Ranks the devices by average daily disk space growth disk </Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName,diskName,AVG(diskGrowthMBDaily),AVG(diskUtil),AVG(totalDiskMB),AVG(usedDiskMB),AVG(freeDiskMB),MIN(timeToDiskFull)</AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(diskGrowthMBDaily) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="93600">
+         <SubPattern displayName="Filter_PERF_MON_6" name="Filter_PERF_MON_6">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_SYS_DISK_TREND_DAY" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Server) AND diskName NOT IN ("/boot") </SingleEvtConstr> 
+           <GroupByAttr>hostName,diskName </GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_OVERALL_PERF_6E" group="PH_SYS_REPORT_SysPerf,PH_SYS_REPORT_Freq">
+    <Name>Servers By Least Days to Disk Full (Daily estimate)</Name> 
+    <CustomerScope groupByEachCustomer="true">
+      <Include all="true" /> 
+      <Exclude /> 
+    </CustomerScope>
+    <Description>Ranks the servers by the estimated days before the disk will become full </Description> 
+    <SelectClause numEntries="All">
+      <AttrList>hostName,diskName,MIN(timeToDiskFull),AVG(diskGrowthMBDaily),AVG(diskUtil),AVG(totalDiskMB),AVG(usedDiskMB),AVG(freeDiskMB)</AttrList> 
+    </SelectClause>
+    <OrderByClause><AttrList> MIN(timeToDiskFull) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="93600">
+      <SubPattern displayName="Filter_PERF_MON_6" name="Filter_PERF_MON_6">
+        <SingleEvtConstr>eventType = "PH_DEV_MON_SYS_DISK_TREND_DAY" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Server) AND diskName NOT IN ("/boot") </SingleEvtConstr> 
+        <GroupByAttr>hostName,diskName </GroupByAttr> 
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_OVERALL_PERF_6F" group="PH_SYS_REPORT_SysPerf,PH_SYS_REPORT_Freq">
+     <Name>Top Servers By Weekly Disk Space Growth (Detailed)</Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description>Ranks the devices by average daily disk space growth disk </Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName,diskName,AVG(diskGrowthMBWeekly),AVG(diskUtil),AVG(totalDiskMB),AVG(usedDiskMB),AVG(freeDiskMB),MIN(timeToDiskFull)</AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(diskGrowthMBWeekly) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="93600">
+         <SubPattern displayName="Filter_PERF_MON_6" name="Filter_PERF_MON_6">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_SYS_DISK_TREND_WEEK" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Server) AND diskName NOT IN ("/boot") </SingleEvtConstr> 
+           <GroupByAttr>hostName,diskName </GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+   <Report id="PH_Report_OVERALL_PERF_6G" group="PH_SYS_REPORT_SysPerf,PH_SYS_REPORT_Freq">
+     <Name>Top Servers By Monthly Disk Space Growth (Detailed)</Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description>Ranks the devices by average daily disk space growth disk </Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName,diskName,AVG(diskGrowthMBMonthly),AVG(diskUtil),AVG(totalDiskMB),AVG(usedDiskMB),AVG(freeDiskMB),MIN(timeToDiskFull)</AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(diskGrowthMBMonthly) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="93600">
+         <SubPattern displayName="Filter_PERF_MON_6" name="Filter_PERF_MON_6">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_SYS_DISK_TREND_MONTH" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Server) AND diskName NOT IN ("/boot") </SingleEvtConstr> 
+           <GroupByAttr>hostName,diskName </GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+  
+  <!--   ******* -->
+  <Report id="PH_Report_OVERALL_PERF_7" group="PH_SYS_REPORT_SysPerf,PH_SYS_REPORT_Freq">
+     <Name>Top Firewalls By Connection Count </Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description> Ranks the firewalls by average connection count over a window. The ratio of the connection count to the max connection count since startup is also provided. If the ratio is close 1 and the firewall is up for a long time, the the firewall must be busy from a firewalled connection point of view. </Description> 
+     <SelectClause numEntries="All">
+         <AttrList> hostName,AVG(fwConnCount), AVG(fwConnPct) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(fwConnCount) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_PERF_MON_7" name="Filter_PERF_MON_7">
+           <SingleEvtConstr> eventType = "PH_DEV_MON_FW_CONN_UTIL" </SingleEvtConstr>
+           <GroupByAttr>hostName</GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_OVERALL_PERF_8" group="PH_SYS_REPORT_SysPerf,PH_SYS_REPORT_Freq">
+     <Name>Top Device Interfaces By Util</Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+   <Description> Ranks the devices and their network interfaces by first average inbound and then by outbound interface utilization. The utilization is computed by accounting for the link bandwidth. </Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName,intfName,AVG(inIntfUtil),AVG(recvBitsPerSec),AVG(outIntfUtil), AVG(sentBitsPerSec) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(inIntfUtil) DESC, AVG(outIntfUtil) DESC </AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_PERF_MON_8" name="Filter_PERF_MON_8">
+           <SingleEvtConstr> eventType = "PH_DEV_MON_NET_INTF_UTIL" AND intfName NOT IN ("lo","Null0") </SingleEvtConstr>
+           <GroupByAttr>hostName,intfName </GroupByAttr>  
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_OVERALL_PERF_8B" group="PH_SYS_REPORT_SysPerf,PH_SYS_REPORT_Freq">
+     <Name>Top Network Interfaces By Util </Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+   <Description> Ranks the network devices interfaces by first average inbound and then by outbound interface utilization. The utilization is computed by accounting for the link bandwidth. </Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName,intfName,AVG(inIntfUtil),AVG(recvBitsPerSec),AVG(outIntfUtil), AVG(sentBitsPerSec) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(inIntfUtil) DESC, AVG(outIntfUtil) DESC </AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_PERF_MON_8" name="Filter_PERF_MON_8">
+           <SingleEvtConstr> eventType = "PH_DEV_MON_NET_INTF_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Network) AND intfName NOT IN ("lo","Null0") </SingleEvtConstr>
+           <GroupByAttr>hostName,intfName </GroupByAttr>  
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+   <Report id="PH_Report_OVERALL_PERF_8C" group="PH_SYS_REPORT_SysPerf,PH_SYS_REPORT_Freq">
+     <Name>Top Network Interfaces By 95th Pctile Traffic </Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+   <Description> Ranks the network devices interfaces by 95th percentile traffic </Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName,intfName,Pctile95(recvBitsPerSec),Pctile95(sentBitsPerSec) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> Pctile95(recvBitsPerSec) DESC, Pctile95(sentBitsPerSec) DESC </AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_PERF_MON_8" name="Filter_PERF_MON_8">
+           <SingleEvtConstr> eventType = "PH_DEV_MON_NET_INTF_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Network) AND intfName NOT IN ("lo","Null0") </SingleEvtConstr>
+           <GroupByAttr>hostName,intfName </GroupByAttr>  
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_OVERALL_PERF_9" group="PH_SYS_REPORT_SysPerf">
+     <Name>Top Device Interfaces By Errors </Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description> Ranks the devices and network interfaces by average interface packet errors over a window </Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName,intfName,AVG(inIntfPktErrPct),SUM(inIntfPktErr),AVG(outIntfPktErrPct),SUM(outIntfPktErr) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(outIntfPktErrPct) DESC, SUM(inIntfPktErr) DESC, AVG(outIntfPktErrPct) DESC, SUM(outIntfPktErr) DESC, AVG(outIntfPktErrPct) DESC </AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_PERF_MON_9" name="Filter_PERF_MON_9">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_NET_INTF_UTIL" </SingleEvtConstr>
+           <GroupByAttr>hostName,intfName </GroupByAttr>  
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+ 
+  <Report id="PH_Report_OVERALL_PERF_11" group="PH_SYS_REPORT_SysPerf">
+     <Name>Top Network Devices By Free Memory</Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description> Ranks the network devices by amount of free memory </Description> 
+     <SelectClause numEntries="All">
+         <AttrList> hostName, memName, AVG(freeMemKB) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(freeMemKB) ASC </AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_PERF_MON_11" name="Filter_PERF_MON_11">
+           <SingleEvtConstr> eventType = "PH_DEV_MON_SYS_MEM_FREE"  </SingleEvtConstr>  
+	   <GroupByAttr>hostName,memName</GroupByAttr>
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+ 
+  <Report id="PH_Report_OVERALL_PERF_15" group="PH_SYS_REPORT_SysPerf">
+     <Name>Top Devices By Per-CPU Util </Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description> This report ranks the devices by per cpu utilization over a window </Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName,cpuName, AVG(cpuUtil) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(cpuUtil) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600" >
+         <SubPattern displayName="Filter_PERF_MON_15" name="Filter_PERF_MON_15">
+           <SingleEvtConstr> eventType = "PH_DEV_MON_SYS_PER_CPU_UTIL" </SingleEvtConstr>
+           <GroupByAttr>hostName,cpuName </GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+  
+  <Report id="PH_Report_OVERALL_PERF_16" group="PH_SYS_REPORT_OverallPerformance">
+     <Name>Monitor Duration </Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description> Captures the monitoring status of devices monitored by PH - it describes which aspects of the devices is being monitored by PH and for how long </Description> 
+     <SelectClause numEntries="All">
+         <AttrList> hostIpAddr, phRecvTime,sysUpTimeMonDuration, sysProcMonDuration, sysCPUMonDuration, sysMemMonDuration, sysDiskUsageMonDuration, intfMonDuration, procResourceMonDuration, instSwMonDuration, configMonDuration, fwConnMonDuration </AttrList> 
+     </SelectClause>
+     <ReportInterval><Window unit="Minute" val="16"/></ReportInterval>
+     <PatternClause window="3600" >
+         <SubPattern displayName="Filter_PERF_MON_16" name="Filter_PERF_MON_16">
+           <SingleEvtConstr> eventType = "PH_DEV_MON_STATUS" </SingleEvtConstr> 
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_OVERALL_PERF_23" group="PH_SYS_REPORT_SysPerf">
+     <Name>Top Device Interfaces By Discards </Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description> Ranks the devices and network interfaces by average interface packet discards over a window </Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName,intfName, AVG(inIntfPktDiscardedPct),SUM(inIntfPktDiscarded),AVG(outIntfPktDiscardedPct),SUM(outIntfPktDiscarded) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(inIntfPktDiscardedPct),SUM(inIntfPktDiscarded),AVG(outIntfPktDiscardedPct),SUM(outIntfPktDiscarded) </AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_PERF_MON_9" name="Filter_PERF_MON_9">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_NET_INTF_UTIL" </SingleEvtConstr>
+           <GroupByAttr>hostName,intfName </GroupByAttr>  
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_OVERALL_PERF_28" group="PH_SYS_REPORT_SysPerf">
+    <Name>Top Windows Servers By Disk I/O Activity (Detailed) </Name> 
+    <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description>Ranks the windows servers by average disk I/O utilization over a window. This requires WMI. </Description> 
+     <SelectClause numEntries="All">
+         <AttrList> hostName,diskName,AVG(diskIOUtil), AVG(devDiskRdLatency),AVG(devDiskWrLatency),AVG(diskQLen),AVG(diskReadKBytesPerSec), AVG(diskWriteKBytesPerSec),AVG(diskReadReqPerSec), AVG(diskWriteReqPerSec) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(diskIOUtil) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_PERF_MON_6" name="Filter_PERF_MON_6">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_DISK_IO_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER) </SingleEvtConstr> 
+           <GroupByAttr>hostName,diskName</GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_OVERALL_PERF_28B" group="PH_SYS_REPORT_SysPerf">
+    <Name>Top Unix Servers By Disk I/O Activity (Detailed)</Name> 
+    <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description>Ranks the Unix servers by average disk I/O utilization over a window. Different Unix flavors provide different parameters. Linux and IBM AIX provides disk utilization, latency, separate read/write frequencies and transfer rates. HP UX provides combined (read and write) transfer rate and disk seek rate. </Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName,diskName,AVG(diskIOUtil), AVG(devDiskRWLatency),AVG(appDiskRWLatency),AVG(diskReadReqPerSec), AVG(diskWriteReqPerSec),AVG(diskNumofSeeksPerSec),AVG(diskReadKBytesPerSec),AVG(diskWriteKBytesPerSec),AVG(diskTfrKBytesPerSec)</AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(diskIOUtil) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_PERF_MON_6" name="Filter_PERF_MON_6">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_DISK_IO_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_UNIX_SERVER) </SingleEvtConstr> 
+           <GroupByAttr>hostName,diskName</GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+   <Report id="PH_Report_OVERALL_PERF_28C" group="PH_SYS_REPORT_SysPerf">
+    <Name>Top Unix Servers By Disk I/O Utilization </Name> 
+    <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description>Ranks the Unix servers by average disk I/O utilization over a window. </Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName,diskName,AVG(diskIOUtil) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(diskIOUtil) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_PERF_MON_6" name="Filter_PERF_MON_6">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_DISK_IO_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_UNIX_SERVER) </SingleEvtConstr> 
+           <GroupByAttr>hostName,diskName</GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_OVERALL_PERF_28C2" group="PH_SYS_REPORT_SysPerf">
+    <Name>Top Unix Servers By Disk RW Latency </Name> 
+    <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description>Ranks the Unix servers by average disk I/O RW Latency </Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName,diskName,AVG(devDiskRWLatency) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(devDiskRWLatency) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_PERF_MON_6" name="Filter_PERF_MON_6">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_DISK_IO_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_UNIX_SERVER) </SingleEvtConstr> 
+           <GroupByAttr>hostName,diskName</GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+   <Report id="PH_Report_OVERALL_PERF_28D" group="PH_SYS_REPORT_SysPerf">
+    <Name>Top Windows Servers By Disk I/O Utilization </Name> 
+    <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description>Ranks the windows servers by average disk I/O utilization over a window. This requires WMI. </Description> 
+     <SelectClause numEntries="All">
+         <AttrList> hostName,diskName,AVG(diskIOUtil) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(diskIOUtil) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_PERF_MON_6" name="Filter_PERF_MON_6">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_DISK_IO_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER) </SingleEvtConstr> 
+           <GroupByAttr>hostName,diskName</GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+   <Report id="PH_Report_OVERALL_PERF_28E" group="PH_SYS_REPORT_SysPerf">
+    <Name>Top Windows Servers By Disk I/O Latency </Name> 
+    <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description>Ranks the windows servers by average disk I/O read/write latency. This requires WMI. </Description> 
+     <SelectClause numEntries="All">
+         <AttrList> hostName,diskName,AVG(devDiskRdLatency),AVG(devDiskWrLatency) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(devDiskRdLatency) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_PERF_MON_6" name="Filter_PERF_MON_6">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_DISK_IO_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER) </SingleEvtConstr> 
+           <GroupByAttr>hostName,diskName</GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_OVERALL_PERF_28F" group="PH_SYS_REPORT_SysPerf">
+    <Name>Top Windows Servers By Disk I/O Queue length </Name> 
+    <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description>Ranks the windows servers by average disk I/O queue length. This requires WMI. </Description> 
+     <SelectClause numEntries="All">
+         <AttrList> hostName,diskName,AVG(diskQLen) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(diskQLen) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_PERF_MON_6" name="Filter_PERF_MON_6">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_DISK_IO_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER) </SingleEvtConstr> 
+           <GroupByAttr>hostName,diskName</GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_OVERALL_PERF_29" group="PH_SYS_REPORT_SysPerf">
+     <Name>Top Unix Servers By Memory Util (Detailed)</Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description> Ranks the unix devices by average memory utilization over a window and provides details of memory utilization components such as buffered and cached memory</Description> 
+     <SelectClause numEntries="All">
+         <AttrList> hostName,memName, AVG(memUtil), AVG(swapMemUtil), AVG(freeMemKB), AVG(bufMemKB), AVG(cacheMemKB), AVG(swapInRate), AVG(swapOutRate),AVG(swapRate),AVG(freeSwapMemKB) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(memUtil) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_PERF_MON_3" name="Filter_PERF_MON_3">
+           <SingleEvtConstr> eventType = "PH_DEV_MON_SYS_MEM_UTIL" AND hostIpAddr IN ( Group@PH_SYS_DEVICE_UNIX_SERVER)</SingleEvtConstr>
+           <GroupByAttr> hostName,memName </GroupByAttr>  
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_OVERALL_PERF_29B" group="PH_SYS_REPORT_SysPerf">
+     <Name>Top Unix Servers By Swap Memory Utilization </Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description> Ranks the unix devices by average swap memory utilization </Description> 
+     <SelectClause numEntries="All">
+         <AttrList> hostName,AVG(swapMemUtil) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(swapMemUtil) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_PERF_MON_3" name="Filter_PERF_MON_3">
+           <SingleEvtConstr> eventType = "PH_DEV_MON_SYS_MEM_UTIL" AND hostIpAddr IN ( Group@PH_SYS_DEVICE_UNIX_SERVER)</SingleEvtConstr>
+           <GroupByAttr> hostName </GroupByAttr>  
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report group="PH_SYS_REPORT_Incident,PH_SYS_REPORT_Perf_Overall" id="PH_Report_OVERALL_PERF_30">
+    <Name>Incidents: Top Performance Incidents and Devices By Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the performance related incidents and affected devices by count </Description>
+    <SelectClause numEntries="All">
+        <AttrList>eventType,eventSeverityCat,hostIpAddr,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter" name="Filter">
+           <SingleEvtConstr>phEventCategory = 1 AND eventType IN (Group@PH_SYS_EVENT_PH_RULE_PERF) </SingleEvtConstr>
+           <GroupByAttr>eventType,eventSeverityCat,hostIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <inline>false</inline>
+    <active>false</active>
+    <RelevantFilterAttr>bizService</RelevantFilterAttr>
+  </Report>
+
+  <Report group="PH_SYS_REPORT_OverallStatus,PH_SYS_REPORT_Perf_Overall,PH_SYS_REPORT_Freq" id="PH_Report_OVERALL_PERF_31">
+    <Name>Events: Top Performance Event Types By Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the performance related events and affected devices by count </Description>
+    <SelectClause numEntries="All">
+        <AttrList>eventType,eventSeverityCat,hostIpAddr,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter" name="Filter">
+           <SingleEvtConstr>eventType IN (Group@PH_SYS_EVENT_ResourceUtilization) AND eventType NOT IN (Group@PH_SYS_EVENT_OtherResourceUtil) </SingleEvtConstr>
+           <GroupByAttr>eventType,eventSeverityCat,hostIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <inline>true</inline>
+    <active>true</active>
+    <RelevantFilterAttr>bizService</RelevantFilterAttr>
+  </Report>
+
+   <Report id="PH_Report_OVERALL_PERF_32" group="PH_SYS_REPORT_SysPerf">
+     <Name>Top Network Devices By Errors </Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description> Ranks the network devices by the number of reported errors </Description> 
+     <SelectClause numEntries="All">
+         <AttrList> reptDevIpAddr, eventType, COUNT(*) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> COUNT(*) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600" >
+         <SubPattern displayName="Filter_PERF_MON_2" name="Filter_PERF_MON_2">
+           <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_Error) AND hostIpAddr IN (Group@PH_SYS_DEVICE_Network) </SingleEvtConstr>
+           <GroupByAttr> reptDevIpAddr, eventType </GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+      <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_OVERALL_PERF_33" group="PH_SYS_REPORT_SysPerf">
+     <Name>Top Servers By Errors </Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description> Ranks the servers by the number of reported errors </Description> 
+     <SelectClause numEntries="All">
+         <AttrList> reptDevIpAddr, eventType, COUNT(*) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> COUNT(*) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600" >
+         <SubPattern displayName="Filter_PERF_MON_2" name="Filter_PERF_MON_2">
+           <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_Error) AND hostIpAddr IN (Group@PH_SYS_DEVICE_Server) </SingleEvtConstr>
+           <GroupByAttr> reptDevIpAddr, eventType </GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+      <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report group="PH_SYS_REPORT_Perf_Overall" id="PH_Report_OVERALL_PERF_34">
+    <Name>Incidents: Top Performance Incident Categories By Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the availability related incident categories by count </Description>
+    <SelectClause numEntries="All">
+        <AttrList>eventTypeGrp,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter" name="Filter">
+           <SingleEvtConstr>eventType IN (Group@PH_SYS_EVENT_PH_RULE_PERF) AND phEventCategory = 1 </SingleEvtConstr>
+           <GroupByAttr>eventTypeGrp</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <inline>false</inline>
+    <active>false</active>
+    <RelevantFilterAttr>bizService</RelevantFilterAttr>
+  </Report>
+
+  <Report group="PH_SYS_REPORT_Perf_Overall" id="PH_Report_OVERALL_PERF_35">
+    <Name>Incidents: Top Performance Incident Severities By Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the performance related incident severities by count </Description>
+    <SelectClause numEntries="All">
+        <AttrList>eventSeverityCat,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter" name="Filter">
+           <SingleEvtConstr>eventType IN (Group@PH_SYS_EVENT_PH_RULE_PERF) AND phEventCategory = 1 </SingleEvtConstr>
+           <GroupByAttr>eventSeverityCat</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <inline>false</inline>
+    <active>false</active>
+    <RelevantFilterAttr>bizService</RelevantFilterAttr>
+  </Report>
+
+  <Report group="PH_SYS_REPORT_Perf_Overall" id="PH_Report_OVERALL_PERF_36">
+    <Name>Incidents: Top Business Services By Performance Incident Count</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks business services by the count of performance related incidents </Description>
+    <SelectClause numEntries="All">
+        <AttrList>bizService,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter" name="Filter">
+           <SingleEvtConstr>phEventCategory = 1  AND bizService != "" AND eventType IN (Group@PH_SYS_EVENT_PH_RULE_PERF) </SingleEvtConstr>
+           <GroupByAttr>bizService</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <inline>false</inline>
+    <active>false</active>
+    <RelevantFilterAttr>bizService</RelevantFilterAttr>
+  </Report>
+
+  <Report group="PH_SYS_REPORT_Perf_Overall" id="PH_Report_OVERALL_PERF_37">
+    <Name>Incidents: Top Business Service Devices By Performance Incident Count</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks devices (that belong to business services) by the count of performance related incidents </Description>
+    <SelectClause numEntries="All">
+        <AttrList>bizService,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter" name="Filter">
+           <SingleEvtConstr>phEventCategory = 1  AND bizService != "" AND eventType IN (Group@PH_SYS_EVENT_PH_RULE_PERF) </SingleEvtConstr>
+           <GroupByAttr>eventType,hostIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <inline>false</inline>
+    <active>false</active>
+    <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+</Reports>
+  
+
+  

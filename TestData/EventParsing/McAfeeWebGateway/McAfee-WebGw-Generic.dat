@@ -1,0 +1,23 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+[30/May/2012:10:39:44 -0400] "" 10.19.2.63 200 "GEThttp://ads.cnn.com/html.ng/site=cnn&cnn_pagetype=main&cnn_position=126x31_spon2&cnn_rollup=homepage&page.allowcompete=no&params.styles=fs&Params.User.UserID=4fc6251c068c9f0aa51475025d0040b8&transactionID=7179860628805012&tile=4893878838331&domId=135492 HTTP/1.1" "Web Ads, Forum/Bulletin Boards" "MinimalRisk" "text/html" 1 "" "" "0"
+[params]
+rawEventMsg=any
+eventId=any
+count=1
+deviceTime=any
+eventParsedOk=0
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+eventSeverity=1
+eventType=McAfee-WebGw-Generic
+phCustId=$sender
+reptDevIpAddr=$localhost
+collectorId=any
+testEvent=Real Event(0)
+eventName=McAfee-WebGw-Generic
+reptVendor=McAfee
+phRecvTime=any
+reptDevName=any
+reptModel=WebGateway

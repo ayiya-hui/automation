@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+10.1.2.53
+[eventMsg]
+<134>Jan 12 14:37:27 10.1.2.53 java: [VMware_VmPoweredOnEvent], [eventTime]=2010-01-12 18:01:20:878, [rptIp]=10.1.2.53, [user]=root, [vmwEventId]=28, [vmwEventCat]=info, [vmHost]=localhost.localdomain, [cluster]=localhost.localdomain, [vm]=QA-1.accelops.net.cn, [datacenter]=ha-datacenter, [vmwEventMsg]=QA-1.accelops.net.cn on  localhost.localdomain in ha-datacenter is powered on
+[params]
+rawEventMsg=any
+count=1
+datacenter=ha-datacenter
+deviceTime=any
+eventParsedOk=1
+vmwEventCat=info
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+vmwEventMsg=QA-1.accelops.net.cn on localhost.localdomain in ha-datacenter is powered on
+eventName=Virtual machine powered on
+cluster=localhost.localdomain
+reptDevIpAddr=10.1.2.53
+reptVendor=VMware
+eventType=VMware_VmPoweredOnEvent
+user=root
+phEventCategory=0 (External)
+eventId=any
+reptDevName=localhost.localdomain
+reptModel=Generic

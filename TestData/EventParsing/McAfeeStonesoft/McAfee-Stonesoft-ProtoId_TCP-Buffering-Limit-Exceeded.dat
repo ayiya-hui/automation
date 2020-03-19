@@ -1,0 +1,35 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<6>CEF:0|McAfee|IPS|5.5.7|71960|ProtoId_TCP-Buffering-Limit-Exceeded|1|spt=36801 deviceExternalId=PANASONIC-PCI-V2 node 1 dmac=BD:49:E1:29:0C:00 dst=192.168.92.50 cat=Content Identification app=TCP/48001 rt=Apr 08 2016 00:25:59 deviceFacility=Inspection act=Permit deviceOutboundInterface=Interface #2 deviceInboundInterface=Interface #2 proto=6 dpt=48001 src=192.168.92.60 dvc=192.168.94.51 dvchost=192.168.94.51 smac=34:40:86:56:50:00 cs1Label=RuleId cs1=147.0
+[params]
+domain=PANASONIC-PCI-V2 node 1
+destMACAddr=BD:49:E1:29:0C:00
+parserName=McAfeeStonesoftParser
+eventType=McAfee-Stonesoft-ProtoId_TCP-Buffering-Limit-Exceeded
+devEventTypeGrp=Content Identification
+destIpAddr=192.168.92.50
+destIpPort=48001
+srcIpAddr=192.168.92.60
+reptModel=Stonesoft IPS
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+fwAction=Permit
+eventName=Buffering limit exceeded while trying to identify the protocol in a TCP connection
+appTransportProto=TCP/48001
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+eventRuleTrigger=1
+count=1
+srcMACAddr=34:40:86:56:50:00
+srcIpPort=36801
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+ipProto=6 (TCP)
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=McAfee

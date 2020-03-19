@@ -1,0 +1,21 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<189>393061 06/29/2009 21:26:10.840 SEV=4 NAC/27 RPT=1462  NAC is disabled for peer - PUB_IP:99.129.50.155, PRV_IP:192.168.16.10--automator
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+eventAction=0 (Permit)
+eventName=Cisco-VPN3K-NAC/27
+reptVendor=Cisco
+eventType=Cisco-VPN3K-NAC/27
+phEventCategory=0 (External)
+reptDevIpAddr=$localhost
+reptModel=VPN 3K

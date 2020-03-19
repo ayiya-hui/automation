@@ -1,0 +1,52 @@
+[reptDevIpAddr(key)]
+$localhost (destIntfName:FastEthernet0/1)
+[eventMsg]
+<188>20983367: Aug 27 03:18:17.053: %CDP-4-DUPLEX_MISMATCH: duplex mismatch discovered on FastEthernet5/46 (not full duplex), with SJ-Dev-A-Cat-Adm-01.prospecthills.net FastEthernet0/1 (full duplex).
+[params]
+rawEventMsg=any
+deviceTime=any
+eventType=IOS-CDP-DUPLEX_MISMATCH
+phCustId=$sender
+reptModel=IOS
+eventId=any
+eventParsedOk=1
+eventSeverity=5
+hostIpAddr=$localhost
+eventName=Half/Full duplex mismatch on an interface
+phEventCategory=0 (External)
+destName=SJ-Dev-A-Cat-Adm-01.prospecthills.net
+srcIntfName=FastEthernet5/46
+eventSeverityCat=MEDIUM
+collectorId=any
+destIntfName=FastEthernet0/1
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Cisco
+[reptDevIpAddr(key)]
+$localhost (destIntfName:FastEthernet5/46)
+[eventMsg]
+489: .Aug 26 20:07:43.976: %CDP-4-DUPLEX_MISMATCH: duplex mismatch discovered on FastEthernet0/1 (not full duplex), with SJ-Dev-A-Cat-Cor.prospecthills.net FastEthernet5/46 (full duplex).
+[params]
+rawEventMsg=any
+deviceTime=any
+eventType=IOS-CDP-DUPLEX_MISMATCH
+phCustId=$sender
+reptModel=IOS
+eventId=any
+eventParsedOk=1
+eventSeverity=5
+hostIpAddr=$localhost
+eventName=Half/Full duplex mismatch on an interface
+phEventCategory=0 (External)
+destName=SJ-Dev-A-Cat-Cor.prospecthills.net
+srcIntfName=FastEthernet0/1
+eventSeverityCat=MEDIUM
+collectorId=any
+destIntfName=FastEthernet5/46
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Cisco

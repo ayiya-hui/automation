@@ -1,0 +1,23 @@
+[reptDevIpAddr(key)]
+20.20.20.120
+[eventMsg]
+Fri Oct 30 18:19:58 2009 $reporter AccelOps-WinLog-WMI  [Category]="14083" [CategoryString]="Detailed Directory Service Replication" [ComputerName]="sf1dc03.jha.local" [Data]="NULL" [EventCode]="4931" [EventIdentifier]="4931" [EventType]="4" [Logfile]="Security" [RecordNumber]="184004068" [SourceName]="Microsoft-Windows-Security-Auditing" [TimeGenerated]="20100505215204.070667-000" [TimeWritten]="20100505215204.070667-000" [Type]="Audit Success" [User]="(null)" [Destination DRA]="75dec58d-b79a-47be-8587-af63fb283679._msdcs.jha.local" [Source DRA]="CN=NTDS Settings,CN=SF1DC03,CN=Servers,CN=SF1,CN=Sites,CN=Configuration,DC=jha,DC=local" [Destination Address]="-" [Naming Context]="DC=ForestDnsZones,DC=jha,DC=local" [Options]="23"
+[params]
+rawEventMsg=any
+type=Audit Success
+eventAction=0 (Permit)
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+eventName=An Active Directory replica destination naming context was modified
+reptVendor=Microsoft
+eventType=Win-Security-4931
+phEventCategory=0 (External)
+reptDevIpAddr=$reporter
+reptModel=Windows
+eventSource=Microsoft-Windows-Security-Auditing

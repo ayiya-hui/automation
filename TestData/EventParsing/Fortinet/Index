@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+FortiGate-virtual-wlan-status,Fortinet_1,Fortinet,88.88.88.88,,syslog

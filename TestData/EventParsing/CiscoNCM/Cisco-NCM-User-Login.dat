@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+10.1.2.3
+[eventMsg]
+491085271 Mon Oct 03 09:40:47 EST 2015 UserName User Login servername.staples.com 10.1.2.3 User username logged in from Web. Host: aus45673.staples.com
+[params]
+customer=Super
+eventId=any
+parserName=CiscoNCMParser
+hostName=aus45673.staples.com
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+count=1
+eventSeverity=1
+eventType=Cisco-NCM-User-Login
+reptDevIpAddr=10.1.2.3
+collectorId=any
+eventName=Cisco Network Compliance Manager User Login
+reptVendor=Cisco
+relayDevIpAddr=10.1.2.3
+user=UserName
+phRecvTime=any
+eventRuleTrigger=1
+appTransportProto=Web
+reptDevName=servername.staples.com
+reptModel=CiscoWorks NCM

@@ -1,0 +1,23 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>Juniper: 2008-10-28 03:09:56 - ive - [172.16.3.150] admin(Admin Users)[.Administrators] - Policy 'JuniperOffice' is created
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+eventAction=0 (Permit)
+eventName=Policy is created
+reptVendor=Juniper
+eventType=Juniper-SecureAccess-Policy-Created
+user=admin
+phEventCategory=0 (External)
+reptDevIpAddr=$localhost
+userGrp=.Administrators
+reptModel=Secure Access

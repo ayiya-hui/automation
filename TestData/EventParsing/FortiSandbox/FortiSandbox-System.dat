@@ -1,0 +1,29 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<30>2016-10-25T03:23:28 devhost=FSA35D0000000006 devid=FSA35D0000000006 tzone=-25200 tz=PDT  date=2016-10-25 time=03:23:28 logid=0106000001 type=event subtype=system level=information user=system ui=GUI action=update status=success  reason=none letype=9 msg="Start installing package AntiVirus Active Signature."
+[params]
+errReason=none
+deviceTime=any
+parserName=FortiSandboxParser
+eventType=FortiSandbox-System
+reptModel=FortiSandbox
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Generic FortiSandbox system message
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+msg=Start installing package AntiVirus Active Signature.
+status=success
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+user=system
+rawEventMsg=any
+reptDevName=FSA35D0000000006
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Fortinet

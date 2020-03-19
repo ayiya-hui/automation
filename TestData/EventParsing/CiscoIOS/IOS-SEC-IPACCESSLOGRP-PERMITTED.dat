@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<188>41: *Jun  8 10:50:15: %C4K_IOSMODPORTMAN-4-MODULETEMPHIGH: Module 3 Sensor air outlet temperature is at or over threshold - CurrentTemp: 44C, Threshold:44C91827: Jan  9 02:39:06.648: %SEC-6-IPACCESSLOGRP: list 130 permitted eigrp 172.16.34.4(Serial1 ) -> 172.16.34.3, 1 packet
+[params]
+rawEventMsg=any
+deviceTime=any
+destIpAddr=172.16.34.3
+eventType=IOS-SEC-IPACCESSLOGRP-PERMITTED
+phCustId=$sender
+reptModel=IOS
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+hostIpAddr=$localhost
+eventName=Network traffic permitted
+phEventCategory=4 (Traffic)
+eventSeverityCat=LOW
+collectorId=any
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=1 (Deny)
+reptVendor=Cisco
+srcIpAddr=172.16.34.4

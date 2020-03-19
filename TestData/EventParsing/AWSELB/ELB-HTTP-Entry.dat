@@ -1,0 +1,39 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+2015-05-13T23:39:43.945958Z my-loadbalancer 192.168.131.39:2817 10.0.0.1:80 0.000073 0.001048 0.000057 200 200 0 29 "GET http://www.example.com:80/ HTTP/1.1" "curl/7.38.0" - -
+[params]
+deviceTime=any
+parserName=AWSELBParser
+eventType=ELB-HTTP-Entry
+destIpAddr=10.0.0.1
+loadBalancerName=my-loadbalancer
+srcIpAddr=192.168.131.39
+reptModel=AWS ELB
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+respProcessTimeAvg=0
+eventName=AWS ELB HTTP Entry
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+recvBytes=0
+srcIpPort=2817
+eventSeverityCat=LOW
+collectorId=any
+httpMethod=GET
+relayDevIpAddr=$localhost
+rawEventMsg=any
+destIpPort=80
+httpStatusCode=200 (The request has succeeded)
+reqProcessTimeAvg=0
+reptDevName=any
+httpVersion=HTTP/1.1
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+infoURL=http://www.example.com:80/
+reptVendor=Amazon
+httpUserAgent=curl/7.38.0
+sentBytes=29

@@ -1,0 +1,40 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<6>CEF:0|McAfee|IPS|5.4.3|70018|Connection_Allowed|0|spt=123 deviceExternalId=PAC-NY-GCS01 node 1 dmac=84:B2:61:DC:E1:31 dst=169.132.200.3 cat=System Situations app=NTP (UDP) rt=Apr 08 2016 00:26:13 deviceFacility=Inspection act=Allow deviceOutboundInterface=Interface #5 deviceInboundInterface=Interface #4 proto=17 dpt=123 src=10.64.9.3 dvc=172.17.2.17 dvchost=172.17.2.17 smac=78:DA:6E:0D:FF:C0 cs1Label=RuleId cs1=2097152.6
+[params]
+domain=PAC-NY-GCS01 node 1
+destMACAddr=84:B2:61:DC:E1:31
+destGeoOrg=any
+parserName=McAfeeStonesoftParser
+eventType=McAfee-Stonesoft-Connection_Allowed
+destGeoState=New Jersey
+devEventTypeGrp=System Situations
+destIpAddr=169.132.200.3
+destIpPort=123 (NTP)
+srcIpAddr=10.64.9.3
+destGeoCountry=any
+reptModel=Stonesoft IPS
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+fwAction=Allow
+eventName=Connection Allowed According to Security Policy
+appTransportProto=NTP (UDP)
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+eventRuleTrigger=1
+destName=any
+count=1
+srcMACAddr=78:DA:6E:0D:FF:C0
+srcIpPort=123
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+ipProto=17 (UDP)
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=McAfee
+destGeoCity=any

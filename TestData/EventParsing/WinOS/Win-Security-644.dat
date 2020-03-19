@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+20.20.20.20
+[eventMsg]
+<13>Jul 23 17:38:35 20.20.20.20 MSWinEventLog	1	Security	34035	Thu Jul 23 17:38:31 2009	644	Security	SYSTEM	User	Success Audit	ADS-PRI	Account Management		User Account Locked Out:     Target Account Name: connie.hsu     Target Account ID: %{S-1-5-21-3383442562-1768178646-255068551-1250}     Caller Machine Name: ADS-Pri     Caller User Name: ADS-PRI$     Caller Domain: PROSPECTHILLS     Caller Logon ID: (0x0,0x3E7)    	33720  Automation
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+domain=PROSPECTHILLS
+deviceTime=any
+eventParsedOk=1
+reptVendor=Microsoft
+eventSeverity=10
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=HIGH
+destIpAddr=20.20.20.20
+eventAction=0 (Permit)
+eventName=Windows user account locked out - excessive failed logins
+computer=ADS-Pri
+eventType=Win-Security-644
+user=connie.hsu
+phEventCategory=0 (External)
+reptDevIpAddr=20.20.20.20
+winLogonId=(0x0,0x3E7)
+reptModel=Windows

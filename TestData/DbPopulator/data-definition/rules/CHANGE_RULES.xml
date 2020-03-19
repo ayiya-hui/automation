@@ -1,0 +1,178 @@
+<Rules>
+  <Rule group="PH_SYS_RULE_Change_Network" id="PH_Rule_Change_1" phIncidentCategory="Network">
+    <Name>Difference in Running and Startup Config</Name>
+    <active>true</active>
+    <Description>Detects that the startup and running configurations of a network device (router or firewall) are different. This is achieved via logging in. </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_DIFF_STARTUP_RUNNING_CONFIG" severity="9">
+      <ArgList>
+        hostIpAddr = StartupRunDelta.hostIpAddr, hostName = StartupRunDelta.hostName, addedItem = StartupRunDelta.addedItem, deletedItem = StartupRunDelta.deletedItem
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="300">
+      <SubPattern displayName="StartupRunDelta" name="StartupRunDelta">
+        <SingleEvtConstr> hostIpAddr IN (Group@PH_SYS_DEVICE_ROUTER_SWITCH,Group@PH_SYS_DEVICE_FIREWALL) AND eventType = "PH_DEV_MON_DELTA_CONFIG" </SingleEvtConstr>
+	<GroupByAttr> hostIpAddr, hostName, addedItem, deletedItem </GroupByAttr>
+	<GroupEvtConstr>COUNT (*) &gt;= 1</GroupEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,hostName,hostIpAddr,eventType,startUpConfVer,runningConfVer,addedItem, deletedItem </AttrList>
+    </TriggerEventDisplay>
+  </Rule>
+  
+  <Rule group="PH_SYS_RULE_Change_Network" id="PH_Rule_Change_2" phIncidentCategory="Network">
+    <Name>Startup Config Change (with login info)</Name>
+    <active>true</active>
+    <Description>Detects that the configuration of a network device (router or firewall) has changed. This is achieved via logging in and keeping track of the last change and requires the network devices to forward syslog to the AccelOps appliance.</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_CHANGE_STARTUP_CONFIG"  severity="6">
+      <ArgList>srcIpAddr = login.srcIpAddr, hostIpAddr = delta.hostIpAddr, hostName = delta.hostName, addedItem = delta.addedItem, deletedItem = delta.deletedItem</ArgList>
+    </IncidentDef>
+    <PatternClause window="1800">
+      <SubPattern displayName="login" name="login">
+        <SingleEvtConstr>eventType = "IOS-SYS-CONFIG_I"  OR  eventType = "ASA-605005" OR eventType = "Foundry-Ironware-Startup-Config-Change"</SingleEvtConstr>
+        <GroupByAttr>reptDevIpAddr ,srcIpAddr</GroupByAttr>
+      </SubPattern>
+      <Operator rank="0" type="FOLLOWED_BY"/>
+      <SubPattern displayName="delta" name="delta">
+        <SingleEvtConstr>eventType = "PH_DEV_MON_CHANGE_STARTUP_CONFIG"</SingleEvtConstr>
+        <GroupEvtConstr>COUNT ( * )&gt;= 1</GroupEvtConstr>
+        <GroupByAttr>hostIpAddr ,hostName ,addedItem ,deletedItem</GroupByAttr>
+      </SubPattern>
+      <GlobalConstr>login.reptDevIpAddr = delta.hostIpAddr</GlobalConstr>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,hostName,hostIpAddr,eventType,srcIpAddr,oldSVNVersion,newSVNVersion,addedItem, deletedItem </AttrList>
+    </TriggerEventDisplay>
+  </Rule>
+
+  <Rule group="PH_SYS_RULE_Change_Server" id="PH_Rule_Change_3" phIncidentCategory="Application">
+    <Name>Domain Controller User/Group Modification</Name>
+    <active>true</active>
+    <Description>Detects user/group configuration in a domain controller. This rule would trigger on all changes made by any person. To prevent false positives, a restriction on the user attribute should be made by excluding the domain administrators. </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_CHANGE_DC_USER_GRP" severity="6">
+      <ArgList>
+        user = DCUserGrpChange.user, computer = DCUserGrpChange.computer, domain = DCUserGrpChange.domain, targetUser = DCUserGrpChange.targetUser, targetDomain = DCUserGrpChange.targetDomain
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="300">
+      <SubPattern displayName="DCUserGrpChange" name="DCUserGrpChange">
+        <SingleEvtConstr> reptDevIpAddr IN (Group@PH_SYS_APP_DOMAIN_CONTROLLER)  AND  eventType IN ( Group@PH_SYS_EVENT_AccountChanged) </SingleEvtConstr>
+	<GroupByAttr>reptDevIpAddr,user,computer,domain,targetUser,targetDomain</GroupByAttr>
+	<GroupEvtConstr>COUNT(*) &gt;= 1</GroupEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,reptDevIpAddr,eventType,user,computer,domain,targetUser,targetDomain</AttrList>
+    </TriggerEventDisplay>
+  </Rule>
+
+  <Rule group="PH_SYS_RULE_Change_Network" id="PH_Rule_Change_4" phIncidentCategory="Network">
+    <Name>Running Config Change (with login info)</Name> 
+    <Description>Detects that the configuration of a network device (router or firewall) has changed. This is achieved via logging in and keeping track of the last change and requires the network device to forward syslog messages to the AccelOps appliance. </Description>
+    <CustomerScope groupByEachCustomer="true"><Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_CHANGE_RUN_CONFIG"  severity="6">
+      <ArgList>srcIpAddr = login.srcIpAddr, hostIpAddr = delta.hostIpAddr, hostName = delta.hostName, addedItem = delta.addedItem, deletedItem = delta.deletedItem</ArgList>
+    </IncidentDef>
+    <PatternClause window="1800">
+      <SubPattern displayName="login" name="login">
+        <SingleEvtConstr>eventType = "IOS-SYS-CONFIG_I"  OR  eventType = "ASA-605005" OR eventType = "Foundry-Ironware-Running-Config-Change"</SingleEvtConstr>
+        <GroupByAttr>reptDevIpAddr ,srcIpAddr</GroupByAttr>
+      </SubPattern>
+      <Operator rank="0" type="FOLLOWED_BY"/>
+      <SubPattern displayName="delta" name="delta">
+        <SingleEvtConstr>eventType = "PH_DEV_MON_CHANGE_RUN_CONFIG"</SingleEvtConstr>
+        <GroupEvtConstr>COUNT ( * )&gt;= 1</GroupEvtConstr>
+        <GroupByAttr>hostIpAddr ,hostName ,addedItem ,deletedItem</GroupByAttr>
+      </SubPattern>
+      <GlobalConstr>login.reptDevIpAddr = delta.hostIpAddr</GlobalConstr>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,hostName,hostIpAddr,eventType,srcIpAddr,oldSVNVersion,newSVNVersion,addedItem, deletedItem </AttrList>
+    </TriggerEventDisplay>
+  </Rule>
+
+  <Rule group="PH_SYS_RULE_Change_Network" id="PH_Rule_Change_5" phIncidentCategory="Network">
+    <Name>Startup Config Change</Name>
+    <active>true</active>
+    <Description>Detects that the configuration of a network device (router or firewall) has changed. This is achieved via logging in and keeping track of the last change </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_CHANGE_STARTUP_CONFIG"  severity="6">
+      <ArgList>hostIpAddr = delta.hostIpAddr, hostName = delta.hostName, addedItem = delta.addedItem, deletedItem = delta.deletedItem</ArgList>
+    </IncidentDef>
+    <PatternClause window="1800">
+      <SubPattern displayName="delta" name="delta">
+        <SingleEvtConstr>eventType = "PH_DEV_MON_CHANGE_STARTUP_CONFIG"</SingleEvtConstr>
+        <GroupEvtConstr>COUNT ( * )&gt;= 1</GroupEvtConstr>
+        <GroupByAttr>hostIpAddr ,hostName ,addedItem ,deletedItem</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,hostName,hostIpAddr,eventType,oldSVNVersion,newSVNVersion,addedItem, deletedItem </AttrList>
+    </TriggerEventDisplay>
+  </Rule>
+
+  <Rule group="PH_SYS_RULE_Change_Network" id="PH_Rule_Change_6" phIncidentCategory="Network">
+    <Name>Running Config Change</Name>
+    <Description>Detects that the configuration of a network device (router or firewall) has changed.  This is achieved via logging in and keeping track of the last change</Description>
+    <CustomerScope groupByEachCustomer="true"><Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_CHANGE_RUN_CONFIG"  severity="6">
+      <ArgList>hostIpAddr = delta.hostIpAddr, hostName = delta.hostName, addedItem = delta.addedItem, deletedItem = delta.deletedItem</ArgList>
+    </IncidentDef>
+    <PatternClause window="1800">
+      <SubPattern displayName="delta" name="delta">
+        <SingleEvtConstr>eventType = "PH_DEV_MON_CHANGE_RUN_CONFIG"</SingleEvtConstr>
+        <GroupEvtConstr>COUNT ( * )&gt;= 1</GroupEvtConstr>
+        <GroupByAttr>hostIpAddr ,hostName ,addedItem ,deletedItem</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,hostName,hostIpAddr,eventType,oldSVNVersion,newSVNVersion,addedItem, deletedItem </AttrList>
+    </TriggerEventDisplay>
+  </Rule>
+  
+  <Rule group="PH_SYS_RULE_Change_Server" id="PH_Rule_Change_7" phIncidentCategory="Server">
+    <Name>Server Installed Software Change</Name>
+    <active>true</active>
+    <Description>Detects that a new software has been installed on a server or an existing software has been deleted. </Description>
+    <CustomerScope groupByEachCustomer="true"><Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_CHANGE_INST_SW"  severity="6">
+      <ArgList>hostIpAddr = delta.hostIpAddr, hostName = delta.hostName, addedItem = delta.addedItem, deletedItem = delta.deletedItem</ArgList>
+    </IncidentDef>
+    <PatternClause window="1800">
+      <SubPattern displayName="delta" name="delta">
+        <SingleEvtConstr>eventType = "PH_DEV_MON_CHANGE_INST_SW"</SingleEvtConstr>
+        <GroupEvtConstr>COUNT ( * )&gt;= 1</GroupEvtConstr>
+        <GroupByAttr>hostIpAddr,hostName,addedItem ,deletedItem</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,hostName,hostIpAddr,eventType,oldSVNVersion,newSVNVersion,addedItem, deletedItem </AttrList>
+    </TriggerEventDisplay>
+  </Rule>
+
+  <Rule group="PH_SYS_RULE_Change_Server" id="PH_Rule_Change_8" phIncidentCategory="Server">
+    <Name>Linux file change</Name>
+    <active>true</active>
+    <Description>Detects that a user modified either the content or the attributes of a file or directory </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_LINUX_FILE_CHANGE" severity="5">
+      <ArgList>
+        hostIpAddr = FileChange.reptDevIpAddr, user = FileChange.user, osObjType = FileChange.osObjType, osObjAction = FileChange.osObjAction, osObjName = FileChange.osObjName, targetOsObjType =FileChange.targetOsObjType, targetOsObjName = FileChange.targetOsObjName 
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="300">
+      <SubPattern displayName="FileChange" name="FileChange">
+        <SingleEvtConstr> eventType = "LINUX_FILE_CHANGE" </SingleEvtConstr>
+	<GroupByAttr> reptDevIpAddr,user,osObjType,osObjAction,osObjName,targetOsObjType,targetOsObjName </GroupByAttr>
+	<GroupEvtConstr>COUNT (*) &gt;= 1</GroupEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,reptDevIpAddr,user,osObjType,osObjAction,osObjName,targetOsObjType,targetOsObjName</AttrList>
+    </TriggerEventDisplay>
+  </Rule>
+
+</Rules>

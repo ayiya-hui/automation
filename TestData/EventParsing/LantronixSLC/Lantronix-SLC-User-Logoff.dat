@@ -1,0 +1,24 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<182>xmsd: gen/info-User andbr003 logged off of Web session
+[params]
+customer=Super
+eventId=any
+eventSeverityCat=LOW
+eventParsedOk=1
+phEventCategory=0 (External)
+parserName=LantronixSLCParser
+count=1
+eventSeverity=1
+eventType=Lantronix-SLC-User-Logoff
+reptDevIpAddr=$localhost
+collectorId=any
+eventName=Lantronix admin user logoff
+reptVendor=Lantronix
+relayDevIpAddr=$localhost
+user=andbr003
+phRecvTime=any
+eventRuleTrigger=1
+appTransportProto=Syslog
+reptModel=SLC Console Manager

@@ -1,0 +1,43 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<133>Jul 24 2008 03:14:07: %ASA-5-111007: Begin configuration: SJ-Dev-S-RH-VMW-01 reading from terminal
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=2
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+eventAction=0 (Permit)
+eventName=Begin configuration - reading from device.
+reptVendor=Cisco
+eventType=ASA-111007
+phEventCategory=0 (External)
+reptDevIpAddr=$reporter
+reptModel=ASA
+[reptDevIpAddr(key)]
+10.200.3.7
+[eventMsg]
+<133>Jul 24 03:14:07 $reporter %ASA-5-111007: Begin configuration: 192.168.1.27 reading from terminal
+[params]
+rawEventMsg=any
+srcIpAddr=192.168.1.27
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=2
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+eventAction=0 (Permit)
+eventName=Begin configuration - reading from device.
+reptVendor=Cisco
+eventType=ASA-111007
+phEventCategory=0 (External)
+reptDevIpAddr=$reporter
+reptModel=ASA

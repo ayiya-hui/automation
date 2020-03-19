@@ -1,0 +1,31 @@
+[reptDevIpAddr(key)]
+20.20.20.120
+[eventMsg]
+Fri Oct 30 18:19:58 2009 $reporter AccelOps-WinLog-WMI  [Category]="12544" [CategoryString]="Logon" [ComputerName]="sf1dc03.jha.local" [Data]="NULL" [EventCode]="4624" [EventIdentifier]="4624" [EventType]="4" [Logfile]="Security" [RecordNumber]="184035395" [SourceName]="Microsoft-Windows-Security-Auditing" [TimeGenerated]="20100505222917.259626-000" [TimeWritten]="20100505222917.259626-000" [Type]="Audit Success" [User]="(null)" [[Subject]][Security ID]="S-1-0-0" [Account Name]="-" [Account Domain]="-" [Logon ID]="0x0" [Logon Type]="3" [[New Logon]][Security ID]="S-1-5-21-2090294290-982477196-2044928816-3909" [Account Name]="NURSINGADMIN$" [Account Domain]="JHA" [Logon ID]="0x550c8f8" [Logon GUID]="{2B5C6AD5-88D7-9D6F-1C8C-7289450ED0F7}" [[Process Information]][Process ID]="0x0" [Process Name]="-" [[Network Information]][Workstation Name]="	" [Source Network Address]="10.0.2.126" [Source Port]="2109" [[Detailed Authentication Information]][Logon Process]="Kerberos" [Authentication Package]="Kerberos" [Transited Services]="-" [Package Name (NTLM only)]="-" [Key Length]="0"
+[params]
+rawEventMsg=any
+type=Audit Success
+procName=Kerberos
+eventAction=0 (Permit)
+winLogonCallerUser=-
+domain=JHA
+deviceTime=any
+eventType=Win-Security-4624
+phCustId=$sender
+destIpAddr=$reporter
+srcIpAddr=10.0.2.126
+winLogonType=3(Network - logon)
+reptModel=Windows
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Windows logon success
+phEventCategory=0 (External)
+srcIpPort=2109
+eventSeverityCat=LOW
+user=NURSINGADMIN$
+count=1
+winLogonId=0x550c8f8
+phRecvTime=any
+reptDevIpAddr=$reporter
+reptVendor=Microsoft

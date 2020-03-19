@@ -1,0 +1,24 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>Dec 04 2008 20:00:45: %ASA-2-106002: TCP Connection denied by outbound list 5555 src 20.20.20.20 dest 192.168.20.20
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=8
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=MEDIUM
+destIpAddr=192.168.20.20
+eventAction=1 (Deny)
+eventName=Denied IP traffic by policy
+srcIpAddr=20.20.20.20
+reptVendor=Cisco
+eventType=ASA-106002
+phEventCategory=0 (External)
+ipProto=6 (TCP)
+reptDevIpAddr=$reporter
+reptModel=ASA

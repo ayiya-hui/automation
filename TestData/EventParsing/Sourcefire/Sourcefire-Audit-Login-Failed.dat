@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<46>Jan 05 21:27:06 login.cgi: [DCauditLogs] SrcFireMgr: flast@10.4.203.237, Login, Login Failed
+[params]
+deviceTime=any
+parserName=Sourcefire3Parser
+eventType=Sourcefire-Audit-Login-Failed
+reptModel=FirePOWER
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+hostIpAddr=10.4.203.237
+eventName=FirePOWER login failed
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+eventRuleTrigger=1
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+user=flast
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Cisco

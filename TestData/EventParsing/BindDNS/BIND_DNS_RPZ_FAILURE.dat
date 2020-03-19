@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+10.1.5.23
+[eventMsg]
+<28>Nov 11 12:08:46 10.1.5.23 named[7750]: client 10.1.152.133#56182 (ocsp.disa.mil): rpz NSIP rewrite ocsp.csd.disa.mil via ocsp.csd.disa.mil NS db_find() failed: failure
+[params]
+deviceTime=any
+parserName=BindDNSParser
+eventType=BIND_DNS_RPZ_FAILURE
+srcIpAddr=10.1.152.133
+reptModel=BIND DNS
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=DNS Response Policy Zone (RPZ) failure
+appTransportProto=Syslog
+phEventCategory=0 (External)
+eventRuleTrigger=1
+errReason=NS db_find() failed: failure
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=10.1.5.23
+customer=Super
+phRecvTime=any
+reptDevIpAddr=10.1.5.23
+eventAction=0 (Permit)
+reptVendor=ISC
+destDomain=ocsp.disa.mil

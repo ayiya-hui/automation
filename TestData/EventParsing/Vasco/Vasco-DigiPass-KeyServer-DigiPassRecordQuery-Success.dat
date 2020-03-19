@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+70.70.70.70
+[eventMsg]
+May 16 18:21:39 70.70.70.70 ikeyserver[3575]: {Success}, {Administration}, {S-001002}, {A query for [Digipass] records was successful.}, {0xBEBE3BD76FCF64045920386E62B15248}, {Source Location:10.1.2.3}, {Client Location:10.1.2.3}, {User ID:flast}, {Domain:company.com}, {Input Details:}, {Object:Digipass}, {Client Type:Administration Program}
+[params]
+domain=company.com
+parserName=VascoParser
+eventType=Vasco-DigiPass-KeyServer-DigiPassRecordQuery-Success
+srcIpAddr=10.1.2.3
+reptModel=DigiPass
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=A query for DigiPass records was successful
+appTransportProto=Syslog
+phEventCategory=0 (External)
+msg=A query for [Digipass] records was successful.
+eventRuleTrigger=1
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=70.70.70.70
+user=flast
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=70.70.70.70
+reptVendor=Vasco

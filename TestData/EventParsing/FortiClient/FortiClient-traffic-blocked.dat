@@ -1,0 +1,52 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<116> device=FCTEMS0036759495 severity=medium from=FAZVM64(FAZ-VM0000000001) trigger=EVT2SIEM log="itime=1489562233 date=2017-03-15 time=00:17:13 logver=2 type=traffic sessionid=N/A hostname=rlee-mbp.local uid=1390858798 devid=FCT8001390858798 fgtserial=FCTEMS0036759495 level=warning regip=172.30.248.75 srcname="Opera" srcproduct=N/A srcip=192.168.112.210 srcport=18398 direction=outbound dstip=91.109.250.104 remotename="777.com" dstport=20480 user="russ.lee" service=http proto=6 rcvdbyte=N/A sentbyte=N/A utmaction=blocked utmevent=webfilter threat="Gambling" vd=root fctver=5.4.2.523 os="Mac OS X 10.12.3" usingpolicy=N/A url=/ userinitiated=0 browsetime=N/A"
+[params]
+deviceTime=any
+destGeoOrg=any
+parserName=FortiClientParser
+appName=N/A
+eventType=FortiClient-traffic-blocked
+activityType=webfilter
+destIpAddr=91.109.250.104
+srcName=Opera
+customer=Super
+destGeoCountry=any
+osType=Mac OS X 10.12.3
+srcIpAddr=192.168.112.210
+reptModel=FortiClient
+eventId=any
+policyName=N/A
+eventParsedOk=1
+eventSeverity=2
+hostIpAddr=172.30.248.75
+eventName=FortiClient blocked traffic
+serviceName=http
+vdom=root
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+threatLevel=Gambling
+destName=777.com
+count=1
+direction=outbound
+hostName=rlee-mbp.local
+sentBytes64=0
+srcIpPort=18398
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+user=russ.lee
+rawEventMsg=any
+ipProto=6 (TCP)
+runTime=0
+destIpPort=20480
+reptDevName=any
+serialNumber=5.4.2.523
+recvBytes64=0
+actionName=blocked
+phRecvTime=any
+reptDevIpAddr=$localhost
+infoURL=/
+sessionId=N/A
+reptVendor=Fortinet

@@ -1,0 +1,23 @@
+[reptDevIpAddr(key)]
+80.80.80.80
+[eventMsg]
+<190>Dec 27 14:15:15 80.80.80.80 NT: <ZenithArcA;W345;> Low Disk Space Drive name: D Available space: 0 MB Drive name: C Available space: 452.46 MB
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+count=1
+phCustId=$sender
+destName=any
+deviceTime=any
+eventAction=0 (Permit)
+eventId=any
+eventName=Low Disk Space
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=3
+eventSeverityCat=LOW
+eventType=ZenithArca-W345
+msg=Low Disk Space Drive name: D Available space: 0 MB Drive name: C Available space: 452.46 MB
+reptDevIpAddr=$reporter
+reptModel=Zenith ARCA
+reptVendor=Zenith Infotech

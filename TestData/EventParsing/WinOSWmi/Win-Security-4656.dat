@@ -1,0 +1,33 @@
+[reptDevIpAddr(key)]
+20.20.20.120
+[eventMsg]
+Fri Oct 30 18:19:58 2009 $reporter AccelOps-WinLog-WMI  [Category]="12804" [CategoryString]="Other Object Access Events" [ComputerName]="sf1dc03.jha.local" [Data]="NULL" [EventCode]="4656" [EventIdentifier]="4656" [EventType]="4" [Logfile]="Security" [RecordNumber]="184035290" [SourceName]="Microsoft-Windows-Security-Auditing" [TimeGenerated]="20100505222910.509497-000" [TimeWritten]="20100505222910.509497-000" [Type]="Audit Success" [User]="(null)" [[Subject]][Security ID]="S-1-5-18" [Account Name]="SF1DC03$" [Account Domain]="JHA" [Logon ID]="0x3e7" [[Object]][Object Server]="PlugPlayManager" [Object Type]="Security" [Object Name]="PlugPlaySecurityObject" [Handle ID]="0x0" [[Process Information]][Process ID]="0x320" [Process Name]="C:\Windows\System32\svchost.exe" [[Access Request Information]][Transaction ID]="{00000000-0000-0000-0000-000000000000}" [Accesses]="Unknown specific access (bit 1),			" [Access Mask]="0x2" [Privileges Used for Access Check]="-"
+[params]
+rawEventMsg=any
+type=Audit Success
+osObjName=PlugPlaySecurityObject
+swProcName=C:\Windows\System32\svchost.exe
+osObjType=Security
+osObjAccessType=Unknown specific access (bit 1),
+osObjHandleID=0x0
+eventAction=0 (Permit)
+count=1
+eventId=any
+domain=JHA
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=$reporter
+winLogonId=0x3e7
+eventName=A handle to an object was requested
+procName=C:\Windows\System32\svchost.exe
+reptVendor=Microsoft
+eventType=Win-Security-4656
+user=SF1DC03$
+phEventCategory=0 (External)
+reptDevIpAddr=$reporter
+reptModel=Windows
+eventSource=Microsoft-Windows-Security-Auditing

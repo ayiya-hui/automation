@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<13> March 09 15:26:20 AirWatch  AirWatch Syslog Details are as follows Event Type: Console, Event: UserModified, User: ATLANTAWIFI\User123, Event Source: Server, Event Module: Administration, Event Category: UserManagement, Event Data: User=Staging;LoginSessionID=z21ltg3ib0ozs3q4qzfxgqyqEvent Timestamp: March 9, 2016 15:26:20
+[params]
+domain=ATLANTAWIFI
+deviceTime=any
+parserName=AirWatchParser
+eventType=AirWatch-MDM-UserModified
+reptModel=MDM
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=AirWatch MDM  user modified
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+eventRuleTrigger=1
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+user=User123
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=AirWatch

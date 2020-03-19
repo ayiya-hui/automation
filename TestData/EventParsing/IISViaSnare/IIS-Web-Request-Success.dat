@@ -1,0 +1,78 @@
+[reptDevIpAddr(key)]
+$localhost (uriStem:/iisstart.htm)
+[eventMsg]
+<13>Oct  9 12:19:05 ADS-Pri.ProspectHills.net IISWebLog              0              2008-10-09 19:18:43 W3SVC1 ADS-PRI 192.168.0.10 GET /iisstart.htm - 80 - 192.168.20.80 HTTP/1.1 Mozilla/5.0+(Windows;+U;+Windows+NT+5.1;+en-US;+rv:1.9.0.3)+Gecko/2008092417+Firefox/3.0.3 - - 192.168.0.10 200 0 0 2158 368 156
+[params]
+rawEventMsg=any
+deviceTime=any
+eventType=IIS-Web-Request-Success
+phCustId=$sender
+destIpAddr=192.168.0.10
+httpReferrer=-
+srcIpAddr=192.168.20.80
+reptModel=IIS
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Web request successful
+httpSubStatusCode=0
+phEventCategory=0 (External)
+httpWin32Status=0
+destName=ADS-PRI
+recvBytes=2158
+eventSeverityCat=LOW
+srvInstName=W3SVC1
+httpMethod=GET
+user=-
+destIpPort=80
+httpStatusCode=200 (The request has succeeded)
+httpVersion=HTTP/1.1
+count=1
+uriStem=/iisstart.htm
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+uriQuery=-
+reptVendor=Microsoft
+durationMSec=156
+httpUserAgent=Mozilla/5.0+(Windows;+U;+Windows+NT+5.1;+en-US;+rv:1.9.0.3)+Gecko/2008092417+Firefox/3.0.3
+sentBytes=368
+[reptDevIpAddr(key)]
+$localhost (uriStem:/Document/ACE/index.htm)
+[eventMsg]
+<13>Jan 24 17:46:37 ADS-Pri.ProspectHills.net IISWebLog             3              2008-01-25 01:45:37 W3SVC1 ADS-PRI 192.168.0.10 GET /Document/ACE/index.htm - 80 - 192.168.20.55 HTTP/1.1 Mozilla/5.0+(Windows;+U;+Windows+NT+5.1;+en-US;+rv:1.8.1.11)+Gecko/20071127+Firefox/2.0.0.11 - http://wwwin/Document/ wwwin 200 0 0 5750 445 15
+[params]
+rawEventMsg=any
+deviceTime=any
+eventType=IIS-Web-Request-Success
+phCustId=$sender
+destIpAddr=192.168.0.10
+httpReferrer=http://wwwin/Document/
+srcIpAddr=192.168.20.55
+reptModel=IIS
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Web request successful
+httpSubStatusCode=0
+phEventCategory=0 (External)
+httpWin32Status=0
+destName=ADS-PRI
+recvBytes=5750
+eventSeverityCat=LOW
+srvInstName=W3SVC1
+httpMethod=GET
+user=-
+destIpPort=80
+httpStatusCode=200 (The request has succeeded)
+httpVersion=HTTP/1.1
+count=1
+uriStem=/Document/ACE/index.htm
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+uriQuery=-
+reptVendor=Microsoft
+durationMSec=15
+httpUserAgent=Mozilla/5.0+(Windows;+U;+Windows+NT+5.1;+en-US;+rv:1.8.1.11)+Gecko/20071127+Firefox/2.0.0.11
+sentBytes=445

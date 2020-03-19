@@ -1,0 +1,33 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<181>date=2013-05-01 time=11:20:50 devname=FortiGate80C devid=FGT80C3912622808 logid=0102043013 type=event subtype=user level=notice vd=root src=1.1.1.1 dst=2.2.2.2 policyid=3 user=user adgroup=adgroup ui=user(1.1.1.1) action=FSS0-auth status=failure reason=reason msg=AD group adgroup user user failed in authentication
+[params]
+deviceTime=any
+destGeoOrg=any
+eventType=FortiGate-auth-FSAE-authentication-failed
+phCustId=$sender
+destIpAddr=2.2.2.2
+destGeoCountry=any
+srcIpAddr=1.1.1.1
+usrMsg=AD group adgroup user user failed in authentication
+reptModel=FortiOS
+eventId=any
+eventParsedOk=1
+eventSeverity=3
+eventName=FortiGate FSAE Authentication failed
+appTransportProto=user
+phEventCategory=0 (External)
+destName=any
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+user=user
+reptDevName=any
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Fortinet
+destGeoCity=any
+userGrp=adgroup

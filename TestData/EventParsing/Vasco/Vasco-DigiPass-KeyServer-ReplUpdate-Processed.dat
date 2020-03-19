@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+70.70.70.70
+[eventMsg]
+May 16 15:17:06 70.70.70.70 ikeyserver[3575]: {Success}, {Replication}, {S-003002}, {A Replication update received has been processed successfully.}, {0x8362A378AC015B8A434F95B6DB1B876C}, {Source Location:10.1.2.3}, {Client Location:10.9.8.7}, {Request ID:140}, {Input Details: {User ID : admin} {User Name : Identikey Administrator} {Description : Identikey fully privileged admin user} {Email : } {Phone Number : } {Mobile Phone Number : } {Password : ********} {Created Time : 2013/03/04 18:48:57} {Modified Time : 2013/05/16 15:17:06} {Domain Name : company.com} {Organizational Unit : } {Linked User ID : } {Linked User's Domain : } {Administration Privileges : ********} {Local Authentication : Default} {Back-end Authentication : Default} {Disabled : no} {Lock Count : 0} {Locked : no} {Offline Authentication Enabled : } {Last Password Set Time : 2013/05/16 14:52:00} {Static Password History : wwwwwwwwwwwwwwwwwwwwwwwww$Oh75N8isuA3w=} {Key ID : SSMINSTALLSENSITIVEKEY} {Last Authentication Time : 2013/05/16 15:
+[params]
+parserName=VascoParser
+eventType=Vasco-DigiPass-KeyServer-ReplUpdate-Processed
+srcIpAddr=10.1.2.3
+reptModel=DigiPass
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=A Replication update received has been processed successfully
+appTransportProto=Syslog
+phEventCategory=0 (External)
+msg=A Replication update received has been processed successfully.
+eventRuleTrigger=1
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=70.70.70.70
+user=Identikey Administrator
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=70.70.70.70
+reptVendor=Vasco

@@ -1,0 +1,2 @@
+[eventMsg]
+<134>Feb 26 19:27:00 30.200.157.1 HOST-30.200.157.1 [PH_BEACON_APPROVED_DEV]: [phEventCategory]=7,[eventSeverity]=PHL_INFO,[ph_device.name]=AP4055.39b2.57ae,[ph_device.access_ip]=30.200.157.1,[ph_device_type.vendor]=Cisco,[ph_device_type.model]=WLAN AP,[ph_device.discover_time]=17:56:01 02/24/2015

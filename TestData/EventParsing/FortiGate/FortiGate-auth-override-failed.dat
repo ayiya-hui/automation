@@ -1,0 +1,30 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<180>date=2013-05-01 time=11:20:50 devname=FortiGate80C devid=FGT80C3912622808 logid=0102043019 type=event subtype=user level=warning vd=root src=1.1.1.1 dst=2.2.2.2 initiator=N/A status=failure reason=reason msg=FortiGuard Web Filtering override table is full
+[params]
+deviceTime=any
+destGeoOrg=any
+eventType=FortiGate-auth-override-failed
+phCustId=$sender
+destIpAddr=2.2.2.2
+destGeoCountry=any
+srcIpAddr=1.1.1.1
+usrMsg=FortiGuard Web Filtering override table is full
+reptModel=FortiOS
+eventId=any
+eventParsedOk=1
+eventSeverity=3
+eventName=FortiGate Auth override failed
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+reptDevName=any
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+destName=any
+reptVendor=Fortinet
+destGeoCity=any

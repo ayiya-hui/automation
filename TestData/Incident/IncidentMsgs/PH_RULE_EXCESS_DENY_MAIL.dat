@@ -1,0 +1,7 @@
+[eventMsg]
+<134>Nov 28 17:20:48 2.5.0.1 %ASA-6-302013: Built outbound TCP connection 76118 for outside:10.0.0.199/3456 (207.68.178.45/3456) to inside:$randomIP/25 (99.129.50.157/5967)
+<134>Dec 04 20:00:45 2.5.0.1 %ASA-2-106001: Inbound TCP connection denied from 10.0.0.199/3456 to $randomIP/25 flags SYN on interface ether03
+<134>Dec 04 20:00:45 2.5.0.1 %ASA-2-106001: Inbound TCP connection denied from 10.0.0.199/3456 to $randomIP/25 flags SYN on interface ether03
+<134>Dec 04 20:00:45 2.5.0.1 %ASA-2-106001: Inbound TCP connection denied from 10.0.0.199/3456 to $randomIP/25 flags SYN on interface ether03
+<134>Dec 04 20:00:45 2.5.0.1 %ASA-2-106001: Inbound TCP connection denied from 10.0.0.199/3456 to $randomIP/25 flags SYN on interface ether03
+<134>Dec 04 20:00:45 2.5.0.1 %ASA-2-106001: Inbound TCP connection denied from 10.0.0.199/3456 to $randomIP/25 flags SYN on interface ether03

@@ -1,0 +1,7 @@
+eventType,name,module,reptDevIpAddr,key,method
+Cisco-ACE-302022,CiscoACE_1,CiscoACE,$localhost,,syslog
+Cisco-ACE-302023,CiscoACE_2,CiscoACE,$localhost,,syslog
+Cisco-ACE-302024,CiscoACE_3,CiscoACE,$localhost,srcIpPort:57417,syslog
+Cisco-ACE-302025,CiscoACE_4,CiscoACE,$localhost,srcIpPort:9546,syslog
+Cisco-ACE-302024,CiscoACE_5,CiscoACE,$localhost,srcIpPort:1027,syslog
+Cisco-ACE-302025,CiscoACE_6,CiscoACE,$localhost,srcIpPort:1027,syslog

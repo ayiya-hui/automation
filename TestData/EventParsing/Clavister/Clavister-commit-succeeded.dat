@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>[2016-04-26 16:10:05] EFW: IPSEC: prio=1 id=01800201 rev=1 event=commit_succeeded
+[params]
+deviceTime=any
+parserName=ClavisterParser
+eventType=Clavister-commit-succeeded
+reptModel=cOS Firewall
+eventId=any
+logID=1800201
+eventParsedOk=1
+eventSeverity=1
+eventName=Clavister-commit-succeeded
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Clavister

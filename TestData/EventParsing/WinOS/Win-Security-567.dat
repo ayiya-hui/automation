@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+52.52.52.52
+[eventMsg]
+<13>Dec 12 10:09:00 $reporter MSWinEventLog	1	Security	1756	Wed Dec 12 10:08:53 2007	567	Security	SYSTEM	User	Success Audit	ADS-PRI	Object Access Attempt	 Object Type: File  Handle ID: 144 	Image File Name: C:\WINDOWS\system32\notepad.exe Accesses: WriteData (or AddFile) AppendData (or AddSubdirectory or CreatePipeInstance)
+[params]
+rawEventMsg=any
+eventAction=0 (Permit)
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+osObjType=File
+reptVendor=Microsoft
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=$reporter
+eventName=Windows object accessed
+procName=C:\WINDOWS\system32\notepad.exe
+osObjAccessType=WriteData
+eventType=Win-Security-567
+phEventCategory=0 (External)
+osObjHandleID=144
+reptDevIpAddr=$reporter
+reptModel=Windows

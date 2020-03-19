@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<148>Oct 18 17:43:24 Datasphere (2013-10-18T22:43:24) admd[1089]: msg_id="1100-0008" Authentication of Firewall user [wg@Firebox-DB] from 173.21.221.115 rejected, user doesn't exist
+[params]
+rawEventMsg=any
+deviceTime=any
+parserName=WatchGuardFirewallParser
+eventType=WatchGuard-admin-logon-failure
+phCustId=$sender
+reptGeoState=Shanghai
+reptModel=Firebox
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+hostIpAddr=173.21.221.115
+eventName=Failed WatchGuard admin logon
+phEventCategory=0 (External)
+customer=Super
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+user=wg@Firebox-DB
+count=1
+reptGeoCity=any
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=WatchGuard

@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<38>Jun  1 13:09:28 sshd[15903]: [ID 800047 auth.info] Illegal user hacker from 192.168.0.30
+[params]
+rawEventMsg=any
+destIpPort=22
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=4
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=$localhost
+eventAction=1 (Deny)
+eventName=Failed SSH logon
+srcIpAddr=192.168.0.30
+reptVendor=Sun
+eventType=Solaris_Failed_SSH_Login
+user=hacker
+phEventCategory=0 (External)
+reptDevIpAddr=$localhost
+reptModel=Solaris

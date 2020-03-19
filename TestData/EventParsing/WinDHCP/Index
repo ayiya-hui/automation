@@ -1,0 +1,8 @@
+eventType,name,module,reptDevIpAddr,key,method
+WIN-DHCP-IP-ASSIGN,WinDHCP_1,WinDHCP,$localhost,,syslog
+WIN-DHCP-IP-LEASE-RENEW,WinDHCP_2,WinDHCP,$localhost,,syslog
+WIN-DHCP-IP-LEASE-RENEW,WinDHCP_3,WinDHCP,34.34.34.34,,syslog
+WIN-DHCP-DNS-UPDATE-request,WinDHCP_4,WinDHCP,35.35.35.35,,syslog
+WIN-DHCP-DNS-UPDATE-success,WinDHCP_5,WinDHCP,36.36.36.36,,syslog
+WIN-DHCP-DNS-UPDATE-failure,WinDHCP_6,WinDHCP,37.37.37.37,,syslog
+WIN-DHCP-Generic,WinDHCP_7,WinDHCP,38.38.38.38,,syslog

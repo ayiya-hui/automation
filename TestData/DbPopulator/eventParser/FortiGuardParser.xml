@@ -1,0 +1,1619 @@
+<eventParser name="FortiGuardParser">
+  <deviceType>
+    <Vendor>Fortinet</Vendor>
+    <Model>FortiOS</Model>
+    <Version>ANY</Version>
+  </deviceType>
+
+  <eventFormatRecognizer><![CDATA[type=<:gPatStr>\s+subtype=<:gPatStr>]]></eventFormatRecognizer>
+  
+  <testEvents>
+      <testEvent><![CDATA[<185>date=2010-04-11 time=20:31:25 devname=APS3012404200944 device_id=APS3012404200944 log_id=0104032002 type=event subtype=admin pri=alert vd=root user="root" ui=ssh(10.1.20.21) action=login status=failed reason="name_invalid" msg="Administrator root login failed from ssh(10.1.20.21) because of invalid user name"]]></testEvent>
+  </testEvents>
+
+  <!-- pattern definitions --> 
+  <patternDefinitions>
+    <pattern name="patTime"><![CDATA[<:gPatYear>-<:gPatMonNum>-<:gPatDay>\s+<:gPatTime>]]></pattern>
+    <pattern name="patId"><![CDATA[\d{5}]]></pattern>
+    <pattern name="patStrBracket"><![CDATA[[^\(]*]]></pattern>
+  </patternDefinitions>
+
+  <parsingInstructions>
+
+    <!-- parsing common fields --> 
+    <switch>
+      <case>
+	<collectFieldsByRegex src="$_rawmsg">
+	  <regex><![CDATA[<:gPatSyslogPRI><:gPatMon>\s+<:gPatDay>\s+<:gPatTime> <reptDevIpAddr:gPatIpV4Dot>\s+<_body:gPatMesgBody>]]></regex>
+	</collectFieldsByRegex>
+      </case>
+      <case>
+	<collectFieldsByRegex src="$_rawmsg">
+	  <regex><![CDATA[<:gPatSyslogPRI><_body:gPatMesgBody>]]></regex>	 
+	</collectFieldsByRegex>	
+      </case>
+    </switch>
+    <setEventAttribute attr="eventType">"FortiGate-Generic"</setEventAttribute>  
+     
+
+    <collectAndSetAttrByKeyValuePair src="$_body" sep=' '>
+	      <attrKeyMap attr="_type" key="type="/>
+	      <attrKeyMap attr="_subtype" key="subtype="/>
+	      <attrKeyMap attr="_date" key="date="/>
+	      <attrKeyMap attr="_time" key="time="/>
+	      <attrKeyMap attr="_severity" key="pri="/>
+	      <attrKeyMap attr="ipProto" key="proto="/>
+	      <attrKeyMap attr="srcIpAddr" key="src="/>
+	      <attrKeyMap attr="srcName" key="srcname="/>
+	      <attrKeyMap attr="destIpAddr" key="dst="/>
+	      <attrKeyMap attr="destName" key="dstname="/>
+	      <attrKeyMap attr="sentBytes" key="sent="/>
+	      <attrKeyMap attr="sentPkts" key="sent_pkt="/>
+	      <attrKeyMap attr="recvBytes" key="rcvd="/>
+	      <attrKeyMap attr="recvPkts" key="rcvd_pkt="/>
+	      <attrKeyMap attr="srcIpPort" key="src_port="/>
+	      <attrKeyMap attr="destIpPort" key="dst_port="/>
+	      <attrKeyMap attr="_attackId" key="attack_id="/>
+	      <attrKeyMap attr="srcIntfName" key="src_int="/>
+	      <attrKeyMap attr="destIntfName" key="dst_int="/>
+	      <attrKeyMap attr="_user" key="user="/>
+	      <attrKeyMap attr="senderMailAddr" key="from="/>
+	      <attrKeyMap attr="receiverMailAddr" key=" to="/>
+	      <attrKeyMap attr="usrMsg" key="msg="/>
+	      <attrKeyMap attr="_service" key="service="/>
+	      <attrKeyMap attr="_action" key="action="/>
+	      <attrKeyMap attr="_status" key="status="/>
+	      <attrKeyMap attr="_deviceId" key="device_id="/>
+	      <attrKeyMap attr="_logId" key="log_id="/>
+	      <attrKeyMap attr="_vd" key="vd="/>
+	      <attrKeyMap attr="_direction" key="dir_disp"/>
+	      <attrKeyMap attr="_tran" key="tran_disp"/>
+	      <attrKeyMap attr="_tranIp" key="tran_ip"/>
+	      <attrKeyMap attr="_tranPort" key="tran_port"/>
+	      <attrKeyMap attr="appName" key="app_type="/>
+	      <attrKeyMap attr="_duration" key="duration="/>
+	      <attrKeyMap attr="fwRule" key="rule="/>
+	      <attrKeyMap attr="_vpnName" key="vpn="/>
+	      <attrKeyMap attr="userGrp" key="group="/>
+	      <attrKeyMap attr="_server" key="server="/>
+	      <attrKeyMap attr="_name" key="name="/>
+	      <attrKeyMap attr="infoURL" key="ref="/>
+	      <attrKeyMap attr="_srcIp" key="ui="/>
+	      <attrKeyMap attr="_srcIp1" key="rem_ip="/>
+	      <attrKeyMap attr="_srcIp2" key="remote_ip="/>
+	      <attrKeyMap attr="postNATSrcIpAddr" key="tunnel_ip="/>
+	      <attrKeyMap attr="_srcPort" key="rem_port="/>
+	      <attrKeyMap attr="_destIp1" key="loc_ip="/>
+	      <attrKeyMap attr="_destPort" key="loc_port="/>
+	      <attrKeyMap attr="_xauthUser" key="xauth_user="/>
+	      <attrKeyMap attr="_xauthGroup" key="xauth_group="/>
+	      <attrKeyMap attr="_stage" key="stage="/>
+	      <attrKeyMap attr="_vpnTunnel" key="vpn_tunnel="/>
+	      <attrKeyMap attr="_outIntf" key="out_intf="/>
+	      <attrKeyMap attr="_hostName" key="hostname="/>
+	      <attrKeyMap attr="uriStem" key="url="/>
+	      <attrKeyMap attr="webCategory" key="cat_desc="/>
+	      
+	      
+    </collectAndSetAttrByKeyValuePair>	
+    
+    <!-- reformat device time -->
+    <collectFieldsByRegex src="$_date">
+      <regex><![CDATA[<_year:gPatYear>-<_mon:gPatMonNum>-<_day:gPatDay>]]></regex>
+    </collectFieldsByRegex>
+    <setEventAttribute attr="deviceTime">toDateTime($_mon, $_day, $_year, $_time)</setEventAttribute>
+
+    <collectFieldsByRegex src="$_logId">
+      <regex><![CDATA[<:patId><_id:patId>]]></regex>
+    </collectFieldsByRegex>
+    
+    <!-- event type -->
+    <setEventAttribute attr="eventAction">0</setEventAttribute>
+
+
+    <!-- special handling case  Severity level: Information 1, Notification 3, Warning 4, Error 5, Critical 7, Alert 8, Emergency 9-->
+
+   <choose>
+   
+	<!-- traffic log -->
+	<when test='$_id IN "10000,10001,00002"'>
+		 <setEventAttribute attr="eventType">"FortiGate-traffic-allowed"</setEventAttribute>
+		 <setEventAttribute attr="eventSeverity">3</setEventAttribute>
+	</when>
+	<when test='$_id IN "13001,00003"'>
+		 <setEventAttribute attr="eventType">"FortiGate-traffic-violation"</setEventAttribute>
+		 <setEventAttribute attr="eventSeverity">3</setEventAttribute>
+	</when>
+	<when test='$_id IN "16001,16002,00004"'>
+		 <setEventAttribute attr="eventType">"FortiGate-traffic-other"</setEventAttribute>
+		 <setEventAttribute attr="eventSeverity">3</setEventAttribute>
+	</when>
+	<when test='$_id = "00005"'>
+		<setEventAttribute attr="eventType">"FortiGate-traffic-icmp-allowed"</setEventAttribute>
+		 <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+	</when>
+	<when test='$_id IN "16003,00006,00007"'>
+		<setEventAttribute attr="eventType">"FortiGate-traffic-icmp-violation"</setEventAttribute>
+		 <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+	</when>
+	<when test='$_id = "00008"'>
+		 <setEventAttribute attr="eventType">"FortiGate-traffic-WANOpt"</setEventAttribute>
+		 <setEventAttribute attr="eventSeverity">3</setEventAttribute>
+	</when>
+	<when test='$_id = "00009"'>
+		 <setEventAttribute attr="eventType">"FortiGate-traffic-WebCache"</setEventAttribute>
+		 <setEventAttribute attr="eventSeverity">3</setEventAttribute>
+	</when>
+	
+	
+	<!--	admin event log -->
+	<when test='$_id IN "32002,32005,41985"'>
+	     <setEventAttribute attr="eventType">"FortiGate-event-login-failure"</setEventAttribute>
+	     <setEventAttribute attr="eventSeverity">8</setEventAttribute>
+	     <setEventAttribute attr="eventAction">1</setEventAttribute>
+	</when>
+	<when test='$_id = "32004"'>
+	     <setEventAttribute attr="eventType">"FortiGate-event-error-mode"</setEventAttribute>
+	     <setEventAttribute attr="eventSeverity">9</setEventAttribute>
+	</when>
+	<when test='$_id = "41986"'>
+	     <!-- shutdown, restore-image, reboot, loaded-image -->
+	     <setEventAttribute attr="eventType">combineMsgId("FortiGate-event-", $_action)</setEventAttribute>
+	     <setEventAttribute attr="eventSeverity">7</setEventAttribute>
+	</when>
+	<when test='$_id = "41987"'>
+	     <setEventAttribute attr="eventType">"FortiGate-event-backup-failure"</setEventAttribute>
+	     <setEventAttribute attr="eventSeverity">5</setEventAttribute>
+	</when>
+	<when test='$_id = "41988"'>
+	     <!-- download, password-change, restore -->
+	     <setEventAttribute attr="eventType">combineMsgId("FortiGate-event-", $_action)</setEventAttribute>
+	     <setEventAttribute attr="eventSeverity">4</setEventAttribute>
+	</when> 
+	<when test='$_id = "41989"'>
+	     <setEventAttribute attr="eventSeverity">3</setEventAttribute>
+	     
+	     <switch>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[User\s+<:gPatStr>\s+added an admin user\s+<:gPatStr>\s+from<:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-admin-add"</setEventAttribute>			
+		      </case>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[User\s+<:gPatStr>\s+added[\s|\sa\s]local user\s+<:gPatStr>\s+from\s+<:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-local-admin-add"</setEventAttribute>
+		      </case>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[Administrator\s+<:gPatStr>\s+edited the settings of administrator\s+<:gPatStr>\s+from\s+<:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-admin-settings-edit"</setEventAttribute>
+		      </case>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[User\s+<:gPatStr>\s+deleted an admin user\s+<:gPatStr>\s+from\s+<:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-admin-delete"</setEventAttribute>
+		      </case>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[User\s+<:gPatStr>\s+added a new access profile\s+<:gPatStr>\s+from\s+<:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-access-profile-add"</setEventAttribute>
+		      </case>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[User daemon_admin deleted an access profile\s+<:gPatStr>\s+from init]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-access-profile-delete"</setEventAttribute>
+		      </case>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[User daemon_admin changed the ip settings of interface\s+<:gPatStr>\s+from LCD]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-intf-addr-change"</setEventAttribute>
+			<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		      </case>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[Interface IP Address has been changed from\s+<:gPatStr>\s+by LCD]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-intf-addr-change'</setEventAttribute>
+			<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		      </case>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[User Fortimanager Access deleted a traffic-shaper high-priority from fgfm_tunner]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-high-traffic-shaper-delete"</setEventAttribute>
+			<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		      </case>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[User Fortimanager Access deleted a traffic-shaper medium-priority from fgfm_tunner]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-medium-traffic-shaper-delete"</setEventAttribute>
+			<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		      </case>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[User Fortimanager Access deleted a traffic-shaper low-priority from fgfm_tunner]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-low-traffic-shaper-delete"</setEventAttribute>
+			<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		      </case>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[User Fortimanager Access deleted a traffic-shaper guarantee-100Kbps from fgfm_tunner]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-gurantee-traffic-shaper-delete"</setEventAttribute>
+			<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		      </case>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[User Fortimanager Access deleted a traffic-shaper shared-1M-pipe from fgfm_tunner]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-shared-traffic-shaper-delete"</setEventAttribute>
+			<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		      </case>
+		       <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[User Fortimanager Access changed global setting from fgfm_tunner]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-tunnel-global-setting-change"</setEventAttribute>
+			<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		      </case>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[User\s+<:gPatStr>\s+added a traffic-shaper entry\s+<:gPatStr>\s+from\s+<:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-traffic-shaper-add"</setEventAttribute>
+			<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		      </case>
+		       <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[User\s+<:gPatStr>\s+added IPv4 interface policy\s+<:gPatStr>\s+from\s+<:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-interface-firewall-policy-add"</setEventAttribute>
+		      </case>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[User\s+<:gPatStr>\s+added a file pattern\s+<:gPatStr>\s+from\s+<:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-admin-file-pattern-add"</setEventAttribute>
+		      </case>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[User\s+<:gPatStr>\s+added new zone\s+<:gPatStr>\s+from\s+<:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-zone-add"</setEventAttribute>
+		      </case>
+		       <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[User\s+<:gPatStr>\s+changed protection profile\s+<:gPatStr>\s+from\s+<:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-protection-profile-change"</setEventAttribute>
+		      </case>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[Administrator daemon_admin added an application control list\s+<:gPatStr>\s+from init]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-application-control-list-add"</setEventAttribute>
+		      </case>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[User\s+<:gPatStr>\s+added a recurring schedule\s+<:gPatStr>\s+from\s+<:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-recurring-schedule-add"</setEventAttribute>
+		      </case>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[User\s+<:gPatStr>\s+added a one-time schedule\s+<:gPatStr>\s+from\s+<:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-one-time-schedule-add"</setEventAttribute>
+		      </case>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[User\s+<:gPatStr>\s+added a new interface\s+<:gPatStr>\s+from\s+<:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-one-time-schedule-add"</setEventAttribute>
+		      </case>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[User\s+<:gPatStr>\s+added im/p2p\s+<:gPatStr>\s+user\s+<:gPatStr>\s+from\s+<:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-interface-add"</setEventAttribute>
+		      </case>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[User\s+<:gPatStr>\s+loaded a CRL certificate\s+<:gPatStr>\s+from\s+<:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-CRL-cert-load"</setEventAttribute>
+		      </case>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[Disk log has rolled.]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-logfile-roll"</setEventAttribute>
+		      </case>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[User\s+<:gPatStr>\s+added a service group\s+<:gPatStr>\s+from\s+<:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-service-group-change"</setEventAttribute>
+		      </case>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[User\s+<:gPatStr>\s+added a user group\s+<:gPatStr>\s+from\s+<:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-user-group-change"</setEventAttribute>
+		      </case>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[User\s+<:gPatStr>\s+deleted IPv4 interface policy\s+<:gPatStr>\s+from\s+<:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-firewall-policy-delete"</setEventAttribute>
+		      </case>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[User\s+<:gPatStr>\s+deleted IPv4 interface policy\s+<:gPatStr>\s+from\s+<:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-firewall-policy-delete"</setEventAttribute>
+		      </case>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[User\s+<:gPatStr>\s+added a report summary entry\s+<:gPatStr>\s+from\s+<:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-report-summary-add"</setEventAttribute>
+		      </case>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[User\s+<:gPatStr>\s+added a report chart widget from\s+<:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-report-chart-add"</setEventAttribute>
+		      </case>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[Configuration script has been restored by user\s+<:gPatStr>\s+via\s+<:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-config-script-restore"</setEventAttribute>
+		      </case>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[User\s+<:gPatStr>\s+added a Directory Service (FSAE) entry\s+<:gPatStr>\s+from\s+<:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-directory-service-add"</setEventAttribute>
+		      </case>
+		       <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[User\s+<:gPatStr>\s+deleted radius server\s+<:gPatStr>\s+from\s+<:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-RADIUS-server-delete"</setEventAttribute>
+		      </case>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[User\s+<:gPatStr>\s+changed sensor\s+<:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-DLP-sensor-change"</setEventAttribute>
+		      </case>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[User\s+<:gPatStr>\s+backuped the configuration from\s+<:gPatStr>\s+to management station]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-config-file-backup"</setEventAttribute>
+		      </case>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[User\s+<:gPatStr>\s+added a file pattern\s+<:gPatStr>\s+from\s+<:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-user-file-pattern-add"</setEventAttribute>
+		      </case>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[User\s+<:gPatStr>\s+deleted a TACACS+ server\s+<:gPatStr>\s+from\s+<:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-user-TACACS-server-delete"</setEventAttribute>
+		      </case>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[User\s+<:gPatStr>\s+added a TACACS+ server\s+<:gPatStr>\s+from\s+<:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-user-TACACS-server-add"</setEventAttribute>
+		      </case>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[User\s+<:gPatStr>\s+changed a TACACS+ server\s+<:gPatStr>\s+setting from\s+<:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-user-TACACS-server-change"</setEventAttribute>
+		      </case>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[Administrator\s+<:gPatStr>\s+edited zone\s+<:gPatStr>\s+setting from\s+<:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-zone-change"</setEventAttribute>
+		      </case>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[User\s+<:gPatStr>\s+added antispam IP black/white entry\s+<:gPatStr>\s+setting from\s+<:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-Antispam-entry-add"</setEventAttribute>
+		      </case>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[User\s+<:gPatStr>\s+added antispam banned word entry\s+<:gPatStr>\s+setting from\s+<:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-banned-word-add"</setEventAttribute>
+		      </case>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[User\s+<:gPatStr>\s+changed the status of antivirus settings grayware from\s+<:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-antivirus-grayware-sett-change"</setEventAttribute>
+		      </case>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[User\s+<:gPatStr>\s+deleted an application control list\s+<:gPatStr>\s+from\s+<:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-application-control-list-delete"</setEventAttribute>
+		      </case>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[User\s+<:gPatStr>\s+edited an application control list\s+<:gPatStr>\s+from\s+<:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-application-control-list-edit"</setEventAttribute>
+		      </case>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[User\s+<:gPatStr>\s+added an application control list\s+<:gPatStr>\s+from\s+<:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-application-control-list-add"</setEventAttribute>
+		      </case>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[User\s+<:gPatStr>\s+added URL filter entry\s+<:gPatStr>\s+from\s+<:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-application-URL-filter-add"</setEventAttribute>
+		      </case>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[User\s+<:gPatStr>\s+added a firewall service\s+<:gPatStr>\s+from\s+<:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-firewall-service-add"</setEventAttribute>
+		      </case>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[User\s+<:gPatStr>\s+added radius server\s+<:gPatStr>\s+from\s+<:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-RADIUS-server-add"</setEventAttribute>
+		      </case>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[User\s+<:gPatStr>\s+added ldap server\s+<:gPatStr>\s+from\s+<:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-LDAP-server-add"</setEventAttribute>
+		      </case>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[User\s+<:gPatStr>\s+changed the status of interface\s+<:gPatStr>\s+from\s+<:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-intf-change"</setEventAttribute>
+		      </case>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[User\s+<:gPatStr>\s+added an ipsec phase2\s+<:gPatStr>\s+from\s+<:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-IPSec-P2-add"</setEventAttribute>
+		      </case>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[User\s+<:gPatStr>\s+added an ipsec phase1\s+<:gPatStr>\s+from\s+<:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-IPSec-P1-add"</setEventAttribute>
+		      </case>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[User\s+<:gPatStr>\s+changed to TP opmode from\s+<:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-fw-mode-change"</setEventAttribute>
+		      </case>
+		       <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[User\s+<:gPatStr>\s+changed auth-timeout user setting to\s+<:gPatStr>\s+from\s+<:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-auth-timeout-change"</setEventAttribute>
+		      </case>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[User\s+<:gPatStr>\s+changed the setting of static route entry\s+<:gPatStr>\s+from\s+<:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-static-route-change"</setEventAttribute>
+		      </case>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[User\s+<:gPatStr>\s+added a new static entry\s+<:gPatStr>\s+from\s+<:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-static-route-add"</setEventAttribute>
+		      </case>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[Virtual domain\s+<:gPatStr>\s+is added]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-virtual-domain-add"</setEventAttribute>
+		      </case>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[Virtual domain\s+<:gPatStr>\s+is deleted]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-virtual-domain-delete"</setEventAttribute>
+		      </case>
+	    </switch>
+		
+	    <when test='exist _name'>
+		<when test='$_name = "ISAKMP Phase 2"'>
+			<setEventAttribute attr="eventType">"FortiGate-event-IPSec-P2-add"</setEventAttribute>
+		</when>
+		<when test='$_name = "ISAKMP Phase 1"'>
+			<setEventAttribute attr="eventType">"FortiGate-event-IPSec-P1-add"</setEventAttribute>
+		</when>
+	   </when> 
+	    
+	</when>
+	
+	<when test='$_id IN "32001,32003,41990"'>
+		
+	     <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+	    <switch>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[<:gPatStr>\s+made a change from\s+<:gPatStr>:\s+Antivirus\s+<:gPatMesgBody>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-antivirus-sizelimit-change"</setEventAttribute>			
+		      </case>
+		       <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[User\s+<:gPatStr>\s+made a change via\s+<:gPatStr>:\s+VPN local certificate<:gPatMesgBody>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-VPN-localcert-generated"</setEventAttribute>			
+		      </case>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[User\s+<:gPatStr>\s+made a change via\s+<:gPatStr>:System update\s+<:gPatMesgBody>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-system-update"</setEventAttribute>
+		      </case>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[Fortigate started]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-appliance-start"</setEventAttribute>
+		      </case>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[User\s+<:gPatStr>\s+has entered the virtual domain\s+<:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-virtual-domain-enter"</setEventAttribute>
+		      </case>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[User\s+<:gPatStr>\s+has left the virtual domain\s+<:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-virtual-domain-exit"</setEventAttribute>
+		      </case>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[Administrator\s+<:gPatStr>\s+logged out from\s+<:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-admin-logout"</setEventAttribute>			
+		      </case>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[Administrator LCD timed out\s+<:gPatMesgBody>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-admin-logout"</setEventAttribute>			
+		      </case>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[Administrator\s+<:gPatStr>\s+timed out on\s+<:gPatMesgBody>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-admin-logout"</setEventAttribute>			
+		      </case>
+		       <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[Administrator\s+<:gPatStr>\s+logged in successfully from\s+<:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-login-success"</setEventAttribute>			
+		      </case>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[Administrator\s+<:gPatStr>\s+login in accepted from\s+<:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-login-success"</setEventAttribute>			
+		      </case>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[Administrator LCD logged in\s+<:gPatMesgBody>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-admin-login-success"</setEventAttribute>			
+		      </case>
+	    </switch>
+	</when>
+	<when test='$_id = "32121"'>
+	<setEventAttribute attr="eventSeverity">3</setEventAttribute>	     
+	     <switch>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[User\s+<user:gPatStr>\s+changed the setting of an interface from\s+<:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-intf-setting-change"</setEventAttribute>			
+		      </case>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[User\s+<user:gPatStr>\s+changed the status of interface\s+<interface:gPatStr>\s+from\s+<:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-intf-status-change"</setEventAttribute>
+		      </case>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[User\s+<user:gPatStr>\s+changed the mtu setting of interface\s+<interface:gPatStr>\s+from\s+<:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-intf-mtu-change"</setEventAttribute>
+		      </case>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[User\s+<user:gPatStr>\s+changed the ip setting of interface\s+<interface:gPatStr>\s+from\s+<:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-intf-addr-change"</setEventAttribute>
+		      </case>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[User\s+<user:gPatStr>\s+changed an ipsec phase1\s+<:gPatStr>\s+from\s+<:gPatStr>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-IPSec-P1-change"</setEventAttribute>
+		      </case>
+	    </switch>
+	</when>    
+	<when test='$_id = "32151"'>
+		<setEventAttribute attr="eventType">"FortiGate-event-protection-profile-change"</setEventAttribute>
+		<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+	</when> 
+	<when test='$_id = "32152"'>
+		<setEventAttribute attr="eventType">"FortiGate-event-protection-profile-delete"</setEventAttribute>
+		<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+	</when> 
+	<when test='$_id IN "32156,32157"'>
+		<setEventAttribute attr="eventType">"FortiGate-event-admin-filter-activity"</setEventAttribute>
+		<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+	</when> 
+	<when test='$_id = "32140"'>
+		<setEventAttribute attr="eventType">"FortiGate-event-global-setting-change"</setEventAttribute>
+		<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+	</when>
+	<!-- system event -->
+	<when test='$_id = "36866"'>
+	     <setEventAttribute attr="eventSeverity">7</setEventAttribute>
+	     <switch>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[Log disk failure\s+<:gPatMesgBody>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-diskfailure-expect"</setEventAttribute>			
+		      </case>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[FortiGuard - AntiSpam\s+<:gPatMesgBody>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-AntiSpam-license-expire"</setEventAttribute>
+		      </case>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[FortiGuard - Web Filter\s+<:gPatMesgBody>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-WebFilter-license-expire"</setEventAttribute>
+		      </case>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[The system has deactivated\s+<:gPatMesgBody>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-session-fail-mode-deactive"</setEventAttribute>
+		      </case>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[The system exited system conserve\s+<:gPatMesgBody>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-conserve-mode-exit"</setEventAttribute>
+		      </case>
+	     </switch>
+	</when>
+	<when test='$_id = "36869"'>
+	      <setEventAttribute attr="eventSeverity">3</setEventAttribute>
+	      <switch>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[Connected to FortiAnalyzer\s+<:gPatMesgBody>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-fortianalyzer-connect"</setEventAttribute>
+		      </case>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[FortiGuard Analysis Service server is changed to Home]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-fortianalyzer-change"</setEventAttribute>
+		      </case>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[FortiGuard Analysis Service Home server is up]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-fortianlayzer-up"</setEventAttribute>
+		      </case>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[Can't resolve the IP address of\s+<:gPatMesgBody>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-mailserver-resolve-problem"</setEventAttribute>
+		      </case>
+		      <case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[Can't resolve the IP address of\s+<:gPatMesgBody>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-mailserver-resolve-problem"</setEventAttribute>
+		      </case>
+	     </switch>
+	</when>	
+	<when test='$_id IN "20099,38670"'>
+	     <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+	     <when test='exist _action'>
+		     <when test='$_action = "interface-stat-change"'>
+			  <when test='$_status = "UP"'>
+				<setEventAttribute attr="eventType">"FortiGate-event-interface-up"</setEventAttribute>
+			</when>
+			<when test='$_status = "DOWN"'>
+				<setEventAttribute attr="eventType">"FortiGate-event-interface-down"</setEventAttribute>
+			</when>
+		       </when>
+	     </when>
+	</when>
+	
+	<!-- event DHCP -->
+	<when test='$_id = "26001"'>
+		<setEventAttribute attr="eventType">"FortiGate-event-dhcp-response"</setEventAttribute>
+		<setEventAttribute attr="eventSeverity">9</setEventAttribute>
+	</when>
+	
+	<!-- event his performance -->
+	<when test='$_id = "40704"'>
+		<setEventAttribute attr="eventType">"FortiGate-event-performance-stats"</setEventAttribute>
+		<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+	</when>
+	
+	<!-- event Firewall Authentication -->
+	<when test='$_id = "38001"'>
+		<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		<when test='$_action = "FSAE-auth"'>
+			<setEventAttribute attr="eventType">"FortiGate-event-FSAE-auth-success"</setEventAttribute>
+		</when>
+		<when test='$_action = "authenticate"'>
+			<setEventAttribute attr="eventType">"FortiGate-event-authenticate-success"</setEventAttribute>
+		</when>
+		<when test='$_action = "NTML-auth"'>
+			<when test='$_status = "success"'>
+				<setEventAttribute attr="eventType">"FortiGate-event-NTML-authenticate-success"</setEventAttribute>
+			</when>
+			<when test='$_status = "failure"'>
+				<setEventAttribute attr="eventType">"FortiGate-event-NTML-authenticate-failure"</setEventAttribute>
+			</when>
+		</when>
+	</when>
+	<when test='$_id IN "38002,38005"'>
+		<setEventAttribute attr="eventSeverity">4</setEventAttribute>
+		<when test='$_action = "FSAE-auth"'>
+			<setEventAttribute attr="eventType">"FortiGate-event-FSAE-auth-failure"</setEventAttribute>
+		</when>
+		<when test='$_action = "authenticate"'>
+			<setEventAttribute attr="eventType">"FortiGate-event-authenticate-timeout"</setEventAttribute>
+		</when>
+	</when>
+	<when test='$_id = "38003"'>
+		<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-event-authenticate-lockout"</setEventAttribute>
+	</when>
+	<when test='$_id = "38004"'>
+		<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		<when test='$_action = "FSAE-logon"'>
+			<setEventAttribute attr="eventType">"FortiGate-event-FSAE-logon-success"</setEventAttribute>
+		</when>
+		<when test='$_action = "FSAE-logoff"'>
+			<setEventAttribute attr="eventType">"FortiGate-event-FSAE-logoff"</setEventAttribute>
+		</when>
+	</when>
+	<when test='$_id = "38010"'>
+	    <setEventAttribute attr="eventSeverity">4</setEventAttribute>
+	    <switch>
+		<case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[User\s+<:gPatStr>\s+failed authentication\s+<:gPatMesgBody>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-webfilter-auth-failure"</setEventAttribute>
+		</case>
+		<case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[EVP encryption failed]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-encryption-failed"</setEventAttribute>
+		</case>
+	     </switch>
+	</when>
+	<when test='$_id = "38011"'>
+	    <setEventAttribute attr="eventSeverity">4</setEventAttribute>
+	    <switch>
+		<case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[FortiGuard Web Filtering\s+<:gPatMesgBody>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-webfilter-full"</setEventAttribute>
+		</case>
+		<case>
+			<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[EVP decryption failed]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"FortiGate-event-decryption-failed"</setEventAttribute>
+		</case>
+	     </switch>
+	</when>
+	<when test='$_id = "38012"'>
+		<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-event-webfilter-override"</setEventAttribute>
+	</when>
+	<when test='$_id = "38020"'>
+		<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-event-clientcheck-failed"</setEventAttribute>
+	</when>
+	<!--- ip-traffic-shaper-blocked, policy-traffic-shaper-blocked, ip-traffic-shaper-allowed, policy-traffic-shaper-allowed -->
+	<when test='$_id IN "38021,38022"'>
+		<setEventAttribute attr="eventSeverity">4</setEventAttribute>
+		<setEventAttribute attr="eventType">combineMsgId("FortiGate-event-", $_action, "-", $_status)"</setEventAttribute>
+	</when>
+	<when test='$_id = "38026"'>
+		<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-event-license-keys-assigned"</setEventAttribute>
+	</when>
+	<when test='$_id = "38027"'>
+		<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-event-endpt-app-detected"</setEventAttribute>
+	</when>
+	
+	<!-- event Wireless -->
+	<when test='$_id = "43520"'>
+		<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-wlan-system-activity"</setEventAttribute>
+	</when>
+	<when test='$_id = "43521"'>
+		<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-wlan-rogue-AP-detected"</setEventAttribute>
+	</when>
+	<when test='$_id = "43522"'>
+		<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-wlan--AP-activity"</setEventAttribute>
+	</when>
+	<when test='$_id = "43524"'>
+		<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-wlan-client-activity"</setEventAttribute>
+	</when>
+	
+	<!-- Event IPSec negotiation -->
+	<when test='$_id = "37120"'>
+		<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		<when test='exist _action'>
+			<when test='exist _status'>
+				<setEventAttribute attr="eventType">combineMsgId("FortiGate-ipsec-p1-xauth-", $_action,"-",$_status)</setEventAttribute>
+			</when>
+		</when>
+	</when>
+	<when test='$_id = "37184"'>
+		<setEventAttribute attr="eventSeverity">3</setEventAttribute>	
+		<when test='exist _action'>
+			<when test='exist _status'>
+				<setEventAttribute attr="eventType">combineMsgId("FortiGate-ipsec-p1-", $_action,"-",$_status)</setEventAttribute>
+			</when>
+		</when>
+	</when>
+	<when test='$_id IN "37121,37185"'>
+		<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+		<setEventAttribute attr="eventType">combineMsgId("FortiGate-ipsec-p1-xauth-",$_status)</setEventAttribute>
+		<setEventAttribute attr="eventAction">1</setEventAttribute>
+	</when>
+	<when test='$_id IN "37122,37186,37187,37193"'>
+		<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		<when test='exist _action'>
+			<when test='exist _status'>
+				<setEventAttribute attr="eventType">combineMsgId("FortiGate-ipsec-p2-", $_action,"-",$_status)</setEventAttribute>
+			</when>
+		</when>
+	</when>
+	<when test='$_id = "37123"'>
+		<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-ipsec-p2-negotiation-error"</setEventAttribute>
+	</when>
+	<when test='$_id IN "37124,37188,37189,37190"'>
+		<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-ipsec-p1-error"</setEventAttribute>
+	</when>
+	<when test='$_id IN "37125,37194"'>
+		<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-ipsec-p2-error"</setEventAttribute>
+	</when>
+	<when test='$_id IN "37126,37191"'>
+		<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-ipsec-no-state-error"</setEventAttribute>
+	</when>
+	<when test='$_id = "37127"'>
+		<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		<when test='exist _stage'>
+			<when test='exist _action'>
+				<when test='exist _status'>
+					<setEventAttribute attr="eventType">combineMsgId("FortiGate-ipsec-p1-stage", $_stage, "-", $_action,"-",$_status)</setEventAttribute>
+				</when>
+			</when>
+		</when>
+	</when>
+	<when test='$_id IN "37128,37192"'>
+		<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-ipsec-p1-progress-error"</setEventAttribute>
+	</when>
+	<when test='$_id = "37129"'>
+		<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		<when test='exist _stage'>
+			<when test='exist _action'>
+				<when test='exist _status'>
+					<setEventAttribute attr="eventType">combineMsgId("FortiGate-ipsec-p2-stage", $_stage, "-", $_action,"-",$_status)</setEventAttribute>
+				</when>
+			</when>
+		</when>
+	</when>
+	<when test='$_id = "37130"'>
+		<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-ipsec-p2-progress-error"</setEventAttribute>
+	</when>
+	<when test='$_id IN "37131,37132,37195,37196"'>
+		<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-ipsec-esp-error"</setEventAttribute>
+	</when>
+	<when test='$_id IN "37133,37197"'>
+		<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-ipsec-sa-installed"</setEventAttribute>
+	</when>
+	<when test='$_id IN "37134,37198"'>
+		<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-ipsec-p1-sa-deleted"</setEventAttribute>
+	</when>
+	<when test='$_id IN "37135,37199"'>
+		<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-ipsec-p2-sa-deleted"</setEventAttribute>
+	</when>
+	<when test='$_id IN "37136,37200"'>
+		<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-ipsec-dpd-failed"</setEventAttribute>
+	</when>
+	<when test='$_id IN "37137,37201"'>
+		<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-ipsec-conn-failed"</setEventAttribute>
+	</when>
+	<when test='$_id IN "37138,37202"'>
+		<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		<when test='exist _action'>
+			<setEventAttribute attr="eventType">combineMsgId("FortiGate-ipsec-", $_action)</setEventAttribute>
+			<when test='exist sentBytes'>
+				<setEventAttribute attr="sentPkts">$sentBytes</setEventAttribute>
+				<setEventAttribute attr="sentBytes">""</setEventAttribute>
+			</when>
+			<when test='exist recvBytes'>				
+				<setEventAttribute attr="recvPkts">$recvBytes</setEventAttribute>
+				<setEventAttribute attr="recvBytes">""</setEventAttribute>
+			</when>
+		</when>
+	</when>
+	<when test='$_id IN "37139,37203"'>
+		<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		<when test='exist _action'>
+			<setEventAttribute attr="eventType">combineMsgId("FortiGate-ipsec-", $_action)</setEventAttribute>
+		</when>
+	</when>
+	
+	<!-- event l2tp/ppp/pppoe -->
+	<when test='$_id = "29001"'>
+		<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-ppp-log"</setEventAttribute>
+	</when>
+	<when test='$_id = "29002"'>
+		<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-ppp-auth-success"</setEventAttribute>
+	</when>
+	<when test='$_id = "29003"'>
+		<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-ppp-auth-failure"</setEventAttribute>
+	</when>
+	<when test='$_id = "29004"'>
+		<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-ppp-conn-limit-reached"</setEventAttribute>
+	</when>
+	<when test='$_id = "29009"'>
+		<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-pppoe-status"</setEventAttribute>
+	</when>
+	<when test='$_id = "29011"'>
+		<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-ppp-exec-failure"</setEventAttribute>
+	</when>
+	<when test='$_id = "29012"'>
+		<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-ppp-wrong-option"</setEventAttribute>
+	</when>
+	<when test='$_id = "29013"'>
+		<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-ppp-start"</setEventAttribute>
+	</when>
+	<when test='$_id = "29014"'>
+		<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-ppp-stop"</setEventAttribute>
+	</when>
+	<when test='$_id IN "29015,29016"'>
+		<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-ppp-bad-option"</setEventAttribute>
+	</when>
+	<when test='$_id = "29022"'>
+		<setEventAttribute attr="eventSeverity">4</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-ppp-ip-exhausted"</setEventAttribute>
+	</when>
+	<when test='$_id = "29024"'>
+		<setEventAttribute attr="eventSeverity">4</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-ppp-mem-full"</setEventAttribute>
+	</when>
+	<when test='$_id = "30004"'>
+		<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-ppp-ppptpd-log"</setEventAttribute>
+		<when test='exist _action'>
+			<setEventAttribute attr="eventType">"FortiGate-ppp-ppptpd-start"</setEventAttribute>
+		</when>
+	</when>
+	<when test='$_id = "30005"'>
+		<setEventAttribute attr="eventSeverity">4</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-ppp-ppptpd-failed"</setEventAttribute>
+	</when>
+	<when test='$_id = "30006"'>
+		<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-ppp-ppptpd-exit"</setEventAttribute>
+	</when>
+	<when test='$_id = "30007"'>
+		<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-ppp-conn-disconnect"</setEventAttribute>
+	</when>
+	<when test='$_id = "30008"'>
+		<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGateppp-client-connect"</setEventAttribute>
+	</when>
+	<when test='$_id = "30009"'>
+		<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-ppp-client-disconnect"</setEventAttribute>
+	</when>
+	<when test='$_id = "31004"'>
+		<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-l2tp-log"</setEventAttribute>
+	</when>
+	<when test='$_id = "31005"'>
+		<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-l2tp-exit"</setEventAttribute>
+	</when>
+	<when test='$_id = "31006"'>
+		<setEventAttribute attr="eventSeverity">4</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-l2tp-conn-disconnect"</setEventAttribute>
+	</when>
+	<when test='$_id = "31007"'>
+		<setEventAttribute attr="eventSeverity">4</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-l2tp-ip-exhausted"</setEventAttribute>
+	</when>
+	<when test='$_id = "31008"'>
+		<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-l2tp-client-connect"</setEventAttribute>
+	</when>
+	<when test='$_id = "31009"'>
+		<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-l2tp-client-disconnect"</setEventAttribute>
+	</when>
+	
+	<!-- Event SSL VPN -->
+	<when test='$_id = "99601"'>
+		<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-sslvpn-logon-success"</setEventAttribute>
+	</when>
+	<when test='$_id = "99602"'>
+		<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-sslvpn-logon-failure"</setEventAttribute>
+	</when>
+	<when test='$_id = "99603"'>
+		<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-sslvpn-logout"</setEventAttribute>
+	</when>
+	<when test='$_id = "99604"'>
+		<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-sslvpn-session-closed"</setEventAttribute>
+	</when>
+	<when test='$_id = "99703"'>
+		<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-sslvpn-config-update"</setEventAttribute>
+	</when>
+	<when test='$_id = "99705"'>
+		<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-sslvpn-cacert-loaded"</setEventAttribute>
+	</when>
+	<when test='$_id = "99706"'>
+		<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-sslvpn-cacert-removed"</setEventAttribute>
+	</when>
+	<when test='$_id = "99707"'>
+		<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-sslvpn-localcert-loaded"</setEventAttribute>
+	</when>
+	<when test='$_id = "99708"'>
+		<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-sslvpn-localcert-removed"</setEventAttribute>
+	</when>
+	<when test='$_id = "99709"'>
+		<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-sslvpn-crl-loaded"</setEventAttribute>
+	</when>
+	<when test='$_id = "99710"'>
+		<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-sslvpn-crl-updated"</setEventAttribute>
+	</when>
+	<when test='$_id = "99805"'>
+		<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-sslvpn-cert-verified"</setEventAttribute>
+	</when>
+	<when test='$_id = "99806"'>
+		<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-sslvpn-tunnel-established"</setEventAttribute>
+	</when>
+	<when test='$_id = "99807"'>
+		<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-sslvpn-tunnel-timeout"</setEventAttribute>
+	</when>
+	<when test='$_id = "99808"'>
+		<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-sslvpn-tunnel-closed"</setEventAttribute>
+	</when>
+	<!-- added as customer requires -->
+	<when test='$_id = "39948"'>
+		<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-sslvpn-tunnel-down"</setEventAttribute>
+	</when>
+	<when test='$_id = "99809"'>
+		<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-sslvpn-webapp-started"</setEventAttribute>
+	</when>
+	<when test='$_id = "99810"'>
+		<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-sslvpn-webapp-closed"</setEventAttribute>
+	</when>
+	<when test='$_id = "99811"'>
+		<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-sslvpn-webapp-blocked"</setEventAttribute>
+	</when>
+	<when test='$_id = "99812"'>
+		<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-sslvpn-webapp-timeout"</setEventAttribute>
+	</when>
+	<when test='$_id = "99820"'>
+		<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-sslvpn-unknown-tag"</setEventAttribute>
+	</when>
+	<when test='$_id = "99825"'>
+		<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-sslvpn-unknown-control"</setEventAttribute>
+	</when>
+	<when test='$_id = "99826"'>
+		<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-sslvpn-validation-pkt"</setEventAttribute>
+	</when>
+	<when test='$_id = "99827"'>
+		<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-sslvpn-av-control-pkt"</setEventAttribute>
+	</when>
+	<when test='$_id = "99840"'>
+		<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-sslvpn-alert-exchange"</setEventAttribute>
+	</when>
+	<when test='$_id = "99841"'>
+		<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-sslvpn-conn-error"</setEventAttribute>
+	</when>
+	<when test='$_id = "99842"'>
+		<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-sslvpn-conn-failure-error"</setEventAttribute>
+	</when>
+	<when test='$_id = "99843"'>
+		<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-sslvpn-conn-created"</setEventAttribute>
+	</when>
+	<when test='$_id = "99844"'>
+		<setEventAttribute attr="eventSeverity">4</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-sslvpn-warn-exchange"</setEventAttribute>
+	</when>
+	
+	<!-- Event his performance -->
+	<when test='$_id = "40704"'>
+		<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-event-performance-stats"</setEventAttribute>
+	</when>
+	
+	<!-- Event pattern 
+	<133>date=2010-09-16 time=06:05:09 devname=California_Republic_Bank_Newport device_id=FGT80C3909641470 log_id=0107038149 type=event subtype=pattern pri=notice fwver=040004 vd=root status=update virdb=yes idsdb=yes libav=yes aven=yes imap=yes smtp=yes pop3=yes http=yes ftp=yes fcni=yes fdni=yes idsmn=yes idssn=yes msg="Fortigate scheduled update virdb(9.00795) extdb(0.00000) idsdb(2.00863) aven(3.00013) idsen(1.00127) from 208.91.112.70:443
+	-->
+	<when test='$_id = "38149"'>
+		<collectFieldsByRegex src="$usrMsg">
+			  <regex><![CDATA[Fortigate scheduled update\s+virdb\(<virdbVer:gPatStr>\)\s+extdb\(<extdbVer:gPatStr>\)\s+idsdb\(<idsdbVer:gPatStr>\)\s+aven\(<avenVer:gPatStr>\)\s+idsen\(<idsenVer:gPatStr>\)\s+from\s+<srcIpAddr:gPatIpV4Dot>:<srcIpPort:gPatIpPort>]]></regex>
+		</collectFieldsByRegex>
+		<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-event-pattern-scheduled-update"</setEventAttribute>
+	</when>
+	<!-- Date Leak Prevention -->
+	<when test='$_id IN "24576,24577"'>
+		<setEventAttribute attr="eventSeverity">4</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-dlp-leak-detected"</setEventAttribute>
+	</when>
+	
+	<!--Application Controll -->
+	<when test='$_id = "28672"'>
+		<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-appctrl-im-basic-log"</setEventAttribute>
+	</when>
+	<when test='$_id = "28673"'>
+		<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-appctrl-im-log"</setEventAttribute>
+	</when>
+	<when test='$_id = "28674"'>
+		<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-appctrl-im-msg-count"</setEventAttribute>
+	</when>
+	<when test='$_id = "28675"'>
+		<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-appctrl-im-file"</setEventAttribute>
+	</when>
+	<when test='$_id = "28676"'>
+		<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-appctrl-im-chat"</setEventAttribute>
+	</when>
+	<when test='$_id = "28677"'>
+		<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-appctrl-im-chat-blocked"</setEventAttribute>
+	</when>
+	<when test='$_id = "28678"'>
+		<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-appctrl-im-blocked"</setEventAttribute>
+	</when>
+	<when test='$_id = "28688"'>
+		<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-appctrl-im-voip-basic"</setEventAttribute>
+	</when>
+	<when test='$_id = "28689"'>
+		<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-appctrl-im-voip-call-blocked"</setEventAttribute>
+	</when>
+	<when test='$_id = "28690"'>
+		<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-appctrl-im-sip-blocked"</setEventAttribute>
+	</when>
+	<when test='$_id = "28704"'>
+		<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-appctrl-im-ips-log"</setEventAttribute>
+	</when>
+	<when test='$_id = "28704"'>
+		<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-appctrl-im-ips-log"</setEventAttribute>
+	</when>
+	<!-- Antivirus -->
+	<when test='$_id IN "08192,08193,08194,08195"'>
+		<setEventAttribute attr="eventSeverity">4</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-antivirus-infected-file-detect"</setEventAttribute>
+	</when>
+	<when test='$_id IN "08196,08197,08198,08199"'>
+		<setEventAttribute attr="eventSeverity">4</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-antivirus-worm-detect"</setEventAttribute>
+	</when>
+	<when test='$_id IN "08448,08449,08450,08451,08452"'>
+		<setEventAttribute attr="eventSeverity">4</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-antivirus-infected-blocked"</setEventAttribute>
+	</when>
+	<when test='$_id IN "08453,08454,08455"'>
+		<setEventAttribute attr="eventSeverity">4</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-antivirus-file-intercepted"</setEventAttribute>
+	</when>
+	<when test='$_id = "08456"'>
+		<setEventAttribute attr="eventSeverity">4</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-antivirus-infected-file-exempted"</setEventAttribute>
+	</when>
+	<when test='$_id IN "08704,08705,08706,08707,08960,08961"'>
+		<setEventAttribute attr="eventSeverity">4</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-antivirus-file-oversize"</setEventAttribute>
+	</when>
+	
+	<!-- attack -->
+	<when test='$_id IN "16384,16385,16386,70000"'>		
+		<setEventAttribute attr="eventSeverity">8</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-ips-signature-generic"</setEventAttribute>
+		<when test='exist _attackId'>
+			<setEventAttribute attr="eventType">combineMsgId("FortiGate-ips-signature-",$_attackId)</setEventAttribute>
+		</when>
+	</when>
+	<when test='$_id IN "18432,18433,18434,73001"'>
+		<setEventAttribute attr="eventSeverity">8</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-ips-anomaly-generic"</setEventAttribute>
+		<when test='exist _attackId'>
+			<setEventAttribute attr="eventType">combineMsgId("FortiGate-ips-anomaly-",$_attackId)</setEventAttribute>
+		</when>		
+	</when> 
+	
+	<!-- Email Fillter -->
+	<when test='$_id IN "20480,20481,20482,20483,20484,20491"'>
+		<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		<when test='$_status = "detected"'>
+			<setEventAttribute attr="eventType">"FortiGate-emailfilter-detected"</setEventAttribute>
+		</when>
+		<when test='$_status = "blocked"'>
+			<setEventAttribute attr="eventType">"FortiGate-emailfilter-blocked"</setEventAttribute>
+		</when>
+		<when test='$_status = "exempted"'>
+			<setEventAttribute attr="eventType">"FortiGate-emailfilter-exempted"</setEventAttribute>
+		</when>
+	</when> 
+	
+	 <!-- Webfilter -->
+	<when test='$_id = "12288"'>
+		<setEventAttribute attr="eventSeverity">4</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-webfilter-blacklist-urlblock"</setEventAttribute>
+	</when>
+	<when test='$_id = "12289"'>
+		<setEventAttribute attr="eventSeverity">4</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-webfilter-bannedword-urlblock"</setEventAttribute>
+	</when>
+	<when test='$_id IN "12290,12291"'>
+		<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-webfilter-blacklist-urlblock"</setEventAttribute>
+	</when>
+	<when test='$_id = "12544"'>
+		<setEventAttribute attr="eventSeverity">4</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-webfilter-exempt"</setEventAttribute>
+	</when>
+	<when test='$_id = "12545"'>
+		<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-webfilter-catexempt"</setEventAttribute>
+	</when>
+	<when test='$_id = "12546"'>
+		<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-webfilter-catpermit"</setEventAttribute>
+	</when>
+	<when test='$_id = "12547"'>
+		<setEventAttribute attr="eventSeverity">4</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-webfilter-baddomain-block"</setEventAttribute>
+	</when>
+	<when test='$_id = "12548"'>
+		<setEventAttribute attr="eventSeverity">4</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-webfilter-badcert-block"</setEventAttribute>
+	</when>
+	<when test='$_id = "12549"'>
+		<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-webfilter-baddomain-blockIP"</setEventAttribute>
+	</when>
+	<when test='$_id = "12550"'>
+		<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-webfilter-badcert-blockIP"</setEventAttribute>
+	</when>
+	<when test='$_id = "12551"'>
+		<setEventAttribute attr="eventSeverity">7</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-webfilter-no-resource"</setEventAttribute>
+	</when>
+	<when test='$_id = "12552"'>
+		<setEventAttribute attr="eventSeverity">7</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-webfilter-gethostname-failure"</setEventAttribute>
+	</when>
+	<when test='$_id = "12553"'>
+		<setEventAttribute attr="eventSeverity">4</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-webfilter-cert-invalid"</setEventAttribute>
+	</when>
+	<when test='$_id IN "12554,12555"'>
+		<setEventAttribute attr="eventSeverity">4</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-webfilter-ssl-blocked"</setEventAttribute>
+	</when>
+	<when test='$_id = "12556"'>
+		<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-webfilter-ssl-ignored"</setEventAttribute>
+	</when>
+	<when test='$_id = "12557"'>
+		<setEventAttribute attr="eventSeverity">7</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-webfilter-disabled"</setEventAttribute>
+	</when>
+	<when test='$_id IN "12558,12800"'>
+		<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-webfilter-rating-error"</setEventAttribute>
+	</when>
+	<when test='$_id = "13056"'>
+		<setEventAttribute attr="eventSeverity">4</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-webfilter-url-firewall-deny"</setEventAttribute>
+	</when>
+	<when test='$_id = "13312"'>
+		<setEventAttribute attr="eventSeverity">4</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-webfilter-url-firewall-allow"</setEventAttribute>
+	</when>
+	<when test='$_id IN "13313,13314"'>
+		<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-webfilter-url-override"</setEventAttribute>
+	</when>
+	<when test='$_id = "13568"'>
+		<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-webfilter-activex-removed"</setEventAttribute>
+	</when>
+	<when test='$_id = "13573"'>
+		<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-webfilter-cookie-removed"</setEventAttribute>
+	</when>
+	<when test='$_id = "13584"'>
+		<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-webfilter-javaapplet-removed"</setEventAttribute>
+	</when>
+	
+	<!-- DLP archives -->
+	<when test='$_id IN "32782,32783,32784,32785,32786,32787,32788,32789,32790,32791,32792,32793"'>
+		<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-contentarchive-IM"</setEventAttribute>
+	</when>
+	<when test='$_id IN "32794,32795,32796,32797,32798"'>
+		<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-contentarchive-VoIP"</setEventAttribute>
+	</when>
+	<when test='$_id = "32678"'>
+		<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-contentarchive-HTTP"</setEventAttribute>
+	</when>
+	<when test='$_id = "32679"'>
+		<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-contentarchive-HTTPS"</setEventAttribute>
+	</when>
+	<when test='$_id = "32770"'>
+		<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-contentarchive-SMTP"</setEventAttribute>
+	</when>
+	<when test='$_id = "32771"'>
+		<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-contentarchive-SMTPS"</setEventAttribute>
+	</when>
+	<when test='$_id = "32772"'>
+		<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-contentarchive-POP3"</setEventAttribute>
+	</when>
+	<when test='$_id = "32773"'>
+		<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-contentarchive-POP3S"</setEventAttribute>
+	</when>
+	<when test='$_id = "32774"'>
+		<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-contentarchive-IMAP"</setEventAttribute>
+	</when>
+	<when test='$_id = "32775"'>
+		<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-contentarchive-IMAPS"</setEventAttribute>
+	</when>
+	<when test='$_id = "32776"'>
+		<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-contentarchive-FTP"</setEventAttribute>
+	</when>
+	<when test='$_id = "32777"'>
+		<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		<setEventAttribute attr="eventType">"FortiGate-contentarchiveNNTP"</setEventAttribute>
+	</when>
+	
+    </choose> 
+    <when test='exist ipProto'>
+	<when test='$ipProto = "1"'>
+		<collectFieldsByRegex src="$_service">
+			<regex><![CDATA[<icmpType:gPatInt>/icmp]]></regex>
+		</collectFieldsByRegex>
+	</when>
+    </when>
+	
+    <when test='exist _tran'>
+	<when test='$_tran = "snat"'>
+		<setEventAttribute attr="postNATSrcIpAddr">$_tranIp</setEventAttribute>
+		<setEventAttribute attr="postNATSrcIpPort">$_tranPort</setEventAttribute>
+	</when>
+	<when test='$_tran = "dnat"'>
+		<setEventAttribute attr="preNATDestIpAddr">$destIpAddr</setEventAttribute>
+		<setEventAttribute attr="pretNATEestIpPort">$destIpPort</setEventAttribute>
+		<setEventAttribute attr="destIpAddr">$_tranIp</setEventAttribute>
+		<setEventAttribute attr="destIpPort">$_tranPort</setEventAttribute>
+	</when>
+    </when>
+    
+    <when test='exist _srcIp'>
+	<switch>
+		<case>
+			<collectFieldsByRegex src="$_srcIp">
+				<regex><![CDATA[<appTransportProto:gPatStr>\(<srcIpAddr:gPatIpV4Dot>\)]]></regex>
+			</collectFieldsByRegex>
+		</case>
+		<default />
+	</switch>
+    </when>
+    
+    <when test='exist _srcIp1'>
+	<setEventAttribute attr="srcIpAddr">$_srcIp1</setEventAttribute>
+    </when>
+    
+    <when test='exist _srcIp2'>
+	<setEventAttribute attr="srcIpAddr">$_srcIp2</setEventAttribute>
+    </when>
+    
+    <when test='exist _destIp1'>
+	<setEventAttribute attr="destIpAddr">$_destIp1</setEventAttribute>
+    </when>
+    
+    <when test='exist _srcPort'>
+	<setEventAttribute attr="srcIpPort">$_srcPort</setEventAttribute>
+    </when>
+    
+    <when test='exist _destPort'>
+	<setEventAttribute attr="destIpPort">$_destPort</setEventAttribute>
+    </when>
+    
+    <when test='exist _user'>
+	<choose>
+		<when test='$_user = "N/A"'>
+			<when test='exist _xauthUser'>
+				<setEventAttribute attr="user">$_xauthUser</setEventAttribute>
+			</when>
+		</when>
+		<otherwise>
+			<setEventAttribute attr="user">$_user</setEventAttribute>
+		</otherwise>
+	</choose>
+    </when>
+    
+    <when test='exist userGrp'>
+	<when test='$userGrp = "N/A"'>
+		<when test='exist _xauthGroup'>
+			<setEventAttribute attr="userGrp">$_xauthGroup</setEventAttribute>
+		</when>
+	</when>
+    </when>
+    
+    <when test='exist _duration'>
+	<setEventAttribute attr="durationMSec">combineMsgId($_duration,"000")</setEventAttribute>
+    </when>
+    
+    <when test='exist _vpnTunnel'>
+	<setEventAttribute attr="vpnTunnelName">$_vpnTunnel</setEventAttribute>
+    </when>
+    
+    <when test='exist _outIntf'>
+	<setEventAttribute attr="srcIntfName">$_outIntf</setEventAttribute>
+    </when>
+     
+     <when test='exist sentBytes'>
+	<when test='exist recvBytes'>
+		<setEventAttribute attr="totBytes">add($sentBytes, $recvBytes)</setEventAttribute>
+	</when>
+      </when>
+      
+      <when test='exist sentPkts'>
+	<when test='exist recvPkts'>
+		<setEventAttribute attr="totPkts">add($sentPkts, $recvPkts)</setEventAttribute>
+	</when>
+      </when>
+      
+      <when test='not_exist destName'>
+	<when test='exist _hostName'>
+		<setEventAttribute attr="destName">$_hostName</setEventAttribute>
+	</when>
+      </when>
+  </parsingInstructions>
+</eventParser>

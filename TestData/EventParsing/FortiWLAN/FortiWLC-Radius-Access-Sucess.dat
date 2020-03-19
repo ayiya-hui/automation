@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+172.18.86.229
+[eventMsg]
+Mar 29 13:43:40 172.18.86.229 SecurityMM: 1269866620l | security | info | RBAC | Sending RADIUS Access-Request message for user : pat
+[params]
+customer=Super
+eventId=any
+parserName=FortiWLANParser
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+count=1
+eventSeverity=1
+eventType=FortiWLC-Radius-Access-Sucess
+reptDevIpAddr=172.18.86.229
+collectorId=any
+extEventRecvProto=Syslog
+eventName=FortiWLC-Radius-Access-Sucess
+reptVendor=Fortinet
+relayDevIpAddr=172.18.86.229
+user=pat
+rawEventMsg=any
+phRecvTime=any
+reptDevName=any
+reptModel=FortiWLC

@@ -1,0 +1,63 @@
+<eventParser name="TipPointIPSParser">
+
+ <deviceType>
+    <Vendor>3Com</Vendor>
+    <Model>TippingPoint UnityOne IPS</Model>
+    <Version>ANY</Version>
+ </deviceType>
+ 
+ <patternDefinitions>
+    <pattern name="patTipType"><![CDATA[ALT|BLK|P2P]]></pattern>
+    <pattern name="patTipHead"><![CDATA[\d{8}T\d{6}\+\d{4}]]></pattern>
+    <pattern name="patTipAction"><![CDATA[Permit|Block]]></pattern>
+    <pattern name="patTipSev"><![CDATA[Low|Minor|Major|Critical]]></pattern>
+    <pattern name="patTipUuid"><![CDATA[\w{8}-\w{4}-\w{4}-\w{4}-\w{12}]]></pattern>
+	<pattern name="patSep"><![CDATA[\t|,|;]]></pattern>
+ </patternDefinitions>
+ 
+ <eventFormatRecognizer><![CDATA[<:gPatMon>\s+<:gPatDay> <:gPatTime> <:gPatIpV4Dot> <:patTipType>]]></eventFormatRecognizer>
+ 
+ <testEvents>
+      <testEvent><![CDATA[<36>Oct 28 13:10:45 9.0.0.1 ALT,v4,20091028T131045+0480,"PH-QA-TIP1"/20.30.44.44,835197,1,Permit,Minor,00000002-0002-0002-0002-000000000089,"0089: IP: Short Time To Live (1)","0089: IP: Short Time To Live (1)",ip," ",172.16.10.1:0,224.0.0.5:0,20091028T130945+0480,6," ",0,1A-1B]]></testEvent>
+      <testEvent><![CDATA[<37>Nov  5 20:16:19 20.30.44.44 BLK,v4,20091105T201619+0480,"PH-QA-TIP1"/20.30.44.44,70,2,Block,Low,00000002-0002-0002-0002-000000004316,"4316: OSPF: OSPF Packet With Time-To-Live of 1","4316: OSPF: OSPF Packet With Time-To-Live of 1",ip," ",172.16.10.1:0,224.0.0.5:0,20091105T201619+0480,1," ",0,1A-1B]]></testEvent>
+  </testEvents>
+
+ <parsingInstructions>
+ 
+	<setEventAttribute attr="eventType">Tipp-Generic</setEventAttribute>
+ 
+ <!-- <36>Oct 16 15:48:42 172.16.20.41 ALT,v4,20091016T154842+0480,"PH-QA-TIP1"/172.16.20.41,57946,1,
+          Permit,Minor,00000002-0002-0002-0002-000000001221,"1221: SNMP: 'public' Access","1221: SNMP: 'public' Access",
+          snmp," ",192.168.20.103:57576,172.16.10.8:161,20091016T154742+0480,10825," ",0,1A-1B  -->
+   <collectFieldsByRegex src="$_rawmsg">
+    <regex><![CDATA[<:gPatSyslogPRI><_mon:gPatMon>\s+<_day:gPatDay>\s+<_time:gPatTime>\s+<reptDevIpAddr:gPatIpV4Dot>\s+<_tiptype:patTipType><:patSep>v4<:patSep><:patTipHead><:patSep><_body:gPatMesgBody>]]></regex>
+   </collectFieldsByRegex>
+  
+   <setEventAttribute attr="eventType">combineMsgId("Tipp", "_", "IPS", "-", $_tiptype)</setEventAttribute>
+   
+   <collectFieldsByRegex src="$_body">
+    <regex><![CDATA[\"<hostName:gPatStr>\"/<:gPatIpV4Dot><:patSep><:gPatInt><:patSep><:gPatInt><:patSep><remedyAction:patTipAction><:patSep><_severity:patTipSev><:patSep><_uuid:patTipUuid><:patSep>\"<:gPatMesgBody>\"<:patSep>\"<_tid:gPatInt>: <:gPatMesgBody>\"<:patSep><appTransportProto:gPatProto><:patSep>\"<:gPatMesgBody>\"<:patSep><srcIpAddr:gPatIpV4Dot>:<srcIpPort:gPatInt><:patSep><destIpAddr:gPatIpV4Dot>:<destIpPort:gPatInt><:patSep><:patTipHead><:patSep><count:gPatInt><:gPatMesgBody>]]></regex>
+   </collectFieldsByRegex>
+   
+   <setEventAttribute attr="eventType">combineMsgId("Tipp", "_", "IPS", "-",  $_tid)</setEventAttribute>
+   <setEventAttribute attr="ipProto">convertStrToIntIpProto($appTransportProto)</setEventAttribute>
+   
+   <when test='$_severity = "Low"'>
+       <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+   </when>
+   
+   <when test='$_severity = "Minor"'>
+       <setEventAttribute attr="eventSeverity">3</setEventAttribute>
+   </when>
+   
+   <when test='$_severity = "Major"'>
+       <setEventAttribute attr="eventSeverity">6</setEventAttribute>
+   </when>
+   
+   <when test='$_severity = "Critical"'>
+       <setEventAttribute attr="eventSeverity">9</setEventAttribute>
+   </when>
+   
+ </parsingInstructions>
+ 
+</eventParser>

@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<182>Oct 16 05:27:22 syslog-ng@COS-Node-1 logserver: [16/Oct/2010:05:27:21.275682 -0700] COS-Node-1 020444 ps 40000138 Info    System  '(wooa)@(COS Non-Standard VPN)' logged in from 174.24.159.106 and was assigned to 'COS Non-Standard VPN EPC Zone'.
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+ipConnId=40000138
+count=1
+phCustId=$sender
+deviceTime=any
+domain=COS Non-Standard VPN
+eventId=any
+eventName=Aventail VPN login success
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=3
+eventSeverityCat=LOW
+eventType=Aventail-System-VPNLoginSuccess
+hostName=COS-Node-1
+procName=policy service
+reptDevIpAddr=$reporter
+reptModel=Aventail VPN
+reptVendor=Sonicwall
+srcIpAddr=174.24.159.106
+user=wooa

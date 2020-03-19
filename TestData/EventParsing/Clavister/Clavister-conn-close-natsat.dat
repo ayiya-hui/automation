@@ -1,0 +1,39 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>[2016-04-26 16:10:07] EFW: CONN: prio=1 id=00600005 rev=1 event=conn_close_natsat action=close rule=if2_net_nat_out conn=close connipproto=TCP connrecvif=If2 connsrcip=192.168.12.10 connsrcport=55090 conndestif=If1 conndestip=76.77.136.44 conndestport=443 connnewsrcip=208.68.133.195 connnewsrcport=51561 connnewdestip=76.77.136.44 connnewdestport=443 origsent=1756 termsent=1022 conntime=82
+[params]
+deviceTime=any
+destGeoOrg=any
+parserName=ClavisterParser
+eventType=Clavister-conn-close-natsat
+destGeoState=any
+destIpAddr=76.77.136.44
+ipProto=6 (TCP)
+destGeoCountry=any
+srcIpAddr=192.168.12.10
+connMode=close
+reptModel=cOS Firewall
+eventId=any
+logID=600005
+eventParsedOk=1
+eventSeverity=1
+fwAction=close
+eventName=Clavister-conn-close-natsat
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+srcIpPort=55090
+eventSeverityCat=LOW
+collectorId=any
+destIntfName=If1
+relayDevIpAddr=$localhost
+rawEventMsg=any
+destIpPort=443 (HTTPS)
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Clavister
+destGeoCity=any
+fwRule=if2_net_nat_out

@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+172.16.20.41
+[eventMsg]
+<37>Nov  5 20:16:49 172.16.20.41 BLK,v4,20091105T201649+0480,"PH-QA-TIP1"/$reporter,79,2,Block,Low,00000002-0002-0002-0002-000000005601,"5601: SSH: SSH Login Attempt","5601: SSH: SSH Login Attempt",tcp," ",172.16.20.151:60825,172.16.10.40:22,20091105T201649+0480,1," ",0,1A-1B
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+reptDevIpAddr=172.16.20.41
+eventParsedOk=1
+reptVendor=3Com
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=172.16.10.40
+eventName=Detects a login attempt to an SSH server.
+ipProto=6 (TCP)
+appTransportProto=tcp
+eventType=Tipp_IPS-5601
+srcIpAddr=172.16.20.151
+remedyAction=Block
+phEventCategory=0 (External)
+destIpPort=22 (SSH)
+srcIpPort=60825
+reptModel=TippingPoint UnityOne IPS

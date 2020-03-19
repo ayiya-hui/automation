@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<181>date=2013-05-01 time=11:20:50 devname=FortiGate80C devid=FGT80C3912622808 logid=0102043015 type=event subtype=user level=notice vd=root src=1.1.1.1 user=user server=server action=FSS0-logoff msg=FSSO-logoff event from server: user user logged off 1.1.1.1
+[params]
+eventId=any
+count=1
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+eventSeverity=3
+eventType=FortiGate-auth-FSAE-logout
+phCustId=$sender
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+collectorId=any
+eventName=FortiGate FSAE logout
+reptVendor=Fortinet
+relayDevIpAddr=$localhost
+user=user
+phRecvTime=any
+srcIpAddr=1.1.1.1
+usrMsg=FSSO-logoff event from server: user user logged off 1.1.1.1
+reptDevName=any
+reptModel=FortiOS

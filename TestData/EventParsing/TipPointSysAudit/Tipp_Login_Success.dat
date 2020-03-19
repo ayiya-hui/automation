@@ -1,0 +1,42 @@
+[reptDevIpAddr(key)]
+$localhost (srcIpAddr:192.168.1.19)
+[eventMsg]
+<6>OCT 15 16:01:52 2009 PH-QA-TIP1 [audit] user=[phoenix_agent] src=192.168.1.19 iface=1 access=8 Logged into system
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+reptDevIpAddr=$localhost
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+srcIpAddr=192.168.1.19
+eventName=Tipping Point IPS Administrative login success
+reptVendor=3Com
+eventType=Tipp_Login_Success
+user=phoenix_agent
+phEventCategory=0 (External)
+reptModel=TippingPoint UnityOne IPS
+[reptDevIpAddr(key)]
+$localhost (srcIpAddr:192.168.1.29)
+[eventMsg]
+<6>OCT 15 16:01:52 2009 PH-QA-TIP1 [audit] user=[phoenix_agent] src=192.168.1.29 iface=3 access=8 Logged into system
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+reptDevIpAddr=$localhost
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+srcIpAddr=192.168.1.29
+eventName=Tipping Point IPS Administrative login success
+reptVendor=3Com
+eventType=Tipp_Login_Success
+user=phoenix_agent
+phEventCategory=0 (External)
+reptModel=TippingPoint UnityOne IPS

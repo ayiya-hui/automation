@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+CylancePROTECT: Event Type: Device, Event Name: Device Removed, Device Names: (sanaz-xp-test), User: (sheydari@cylance.com)
+[params]
+customer=Super
+eventId=any
+eventSeverityCat=LOW
+eventParsedOk=1
+phEventCategory=0 (External)
+parserName=CylanceProtectParser
+count=1
+eventSeverity=1
+eventType=CylanceProtect-Device-Device-Removed
+reptDevIpAddr=$localhost
+collectorId=any
+eventName=CylanceProtect-Device-Device-Removed
+reptVendor=Cylance
+relayDevIpAddr=$localhost
+user=sheydari@cylance.com
+extEventRecvProto=Syslog
+phRecvTime=any
+eventRuleTrigger=1
+reptDevName=any
+reptModel=Protect

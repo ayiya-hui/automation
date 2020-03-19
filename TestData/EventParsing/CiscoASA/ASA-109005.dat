@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>Dec 05 2008 13:02:16: %ASA-6-109005: Authentication succeeded for user admin from 20.20.20.10/1559 to 192.168.20.55/8080 on interface eth04.
+[params]
+rawEventMsg=any
+destIpAddr=192.168.20.55
+srcIpAddr=20.20.20.10
+srcIntfName=eth04
+srcIpPort=1559
+user=admin
+destIpPort=8080
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+eventAction=0 (Permit)
+eventName=AAA Authen succeeded
+reptVendor=Cisco
+eventType=ASA-109005
+phEventCategory=0 (External)
+reptDevIpAddr=$reporter
+reptModel=ASA

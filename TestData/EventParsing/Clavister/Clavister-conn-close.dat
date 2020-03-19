@@ -1,0 +1,36 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>[2016-04-26 16:10:13] EFW: CONN: prio=1 id=00600002 rev=1 event=conn_close action=close rule=ftp4_membserv_com_Allow conn=close connipproto=TCP connrecvif=core connsrcip=52.1.157.217 connsrcport=16559 conndestif=If2 conndestip=192.168.12.127 conndestport=21 origsent=865 termsent=740 conntime=3
+[params]
+deviceTime=any
+parserName=ClavisterParser
+eventType=Clavister-conn-close
+destIpAddr=192.168.12.127
+srcName=any
+ipProto=6 (TCP)
+srcIpAddr=52.1.157.217
+connMode=close
+reptModel=cOS Firewall
+eventId=any
+logID=600002
+eventParsedOk=1
+eventSeverity=1
+fwAction=close
+eventName=Clavister-conn-close
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+srcIpPort=16559
+eventSeverityCat=LOW
+collectorId=any
+destIntfName=If2
+relayDevIpAddr=$localhost
+rawEventMsg=any
+destIpPort=21 (FTP)
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Clavister
+fwRule=ftp4_membserv_com_Allow

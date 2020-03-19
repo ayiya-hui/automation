@@ -1,0 +1,29 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+2015 Feb 17 09:54:43.452 prld %OSPF-5-ADJCHANGE: ospf-1 [27656] Nbr 10.10.10.66 on Vlan581 went UP
+[params]
+deviceTime=any
+parserName=CiscoIOSParser
+totFlows=1
+eventType=IOS-OSPF-ADJCHANGE-TO-UP
+destIpAddr=10.10.10.66
+intfName=Vlan581
+reptModel=IOS
+eventId=any
+eventParsedOk=1
+eventSeverity=2
+eventName=IOS-OSPF-ADJCHANGE-TO-UP
+isHostIntfCritical=No
+phEventCategory=0 (External)
+eventRuleTrigger=1
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Cisco

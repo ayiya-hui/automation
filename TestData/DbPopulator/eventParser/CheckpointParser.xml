@@ -1,0 +1,143 @@
+<eventParser name="CheckpointParser">
+  
+  <deviceType>
+    <Vendor>Checkpoint</Vendor>
+    <Model>FireWall-1</Model>
+    <Version>ANY</Version>
+  </deviceType>
+  
+  <patternDefinitions>
+    <pattern name="patMesgA"><![CDATA[[^\[]+]]></pattern>
+  </patternDefinitions>
+  
+  <eventFormatRecognizer><![CDATA[\[CHECKPOINT\]]]></eventFormatRecognizer>
+  
+  <testEvents>
+      <testEvent><![CDATA[]]></testEvent>
+  </testEvents>
+  
+  <parsingInstructions>
+    
+    <collectAndSetAttrByKeyValuePair src="$_rawmsg" sep=",">
+      <attrKeyMap attr="srcIpAddr" key="[src]="/>
+      <attrKeyMap attr="srcIpPort" key="[s_port]="/>
+      <attrKeyMap attr="postNATSrcIpAddr" key="[xlatesrc]="/>
+      <attrKeyMap attr="postNATSrcIpPort" key="[xlatesport]="/>
+      <attrKeyMap attr="_proto" key="[proto]="/>
+      <attrKeyMap attr="_destIpAddr" key="[dst]="/>
+      <attrKeyMap attr="_destIpAddr2" key="[xlatedst]="/>
+      <attrKeyMap attr="destIpPort" key="[service]="/>
+      <attrKeyMap attr="icmpType" key="[icmp-type]="/>
+      <attrKeyMap attr="icmpCode" key="[icmp-code]="/>
+      <attrKeyMap attr="_eventAction" key="[action]="/>
+      <!---<attrKeyMap attr="aclRuleId" key="[rule]="/> -->
+      <attrKeyMap attr="reptDevIpAddr" key="[orig]="/>
+      <attrKeyMap attr="hostName" key="[orig_name]="/>
+      <attrKeyMap attr="relayDevName" key="[mgmt]="/>
+      <attrKeyMap attr="srcIntfName" key="[if_Name]="/>
+      <attrKeyMap attr="_deviceTime" key="[time]="/>
+      <attrKeyMap attr="_attackName" key="[attack]="/>
+      <!---<attrKeyMap attr="_eventType2" key="[Attack Info]="/> -->
+      <attrKeyMap attr="totBytes" key="[bytes]="/>
+      <attrKeyMap attr="totPkts" key="[packets]="/>
+      <attrKeyMap attr="durationMSec" key="[elapsed]="/>
+      <attrKeyMap attr="destName" key="[dns_query]="/>
+      <attrKeyMap attr="_dnsType" key="[dns_type]="/>
+      <attrKeyMap attr="relayDevIpAddr" key="[orig_mgmt_ip]="/>
+      <attrKeyMap attr="direction" key="[i/f_dir]="/>
+      <attrKeyMap attr="fwAction" key="[Internal_CA:]="/>
+    </collectAndSetAttrByKeyValuePair>
+    
+    <!-- special handling of all attrib with "_" -->
+    
+    <!-- 1.event action and severity
+	 [action]=drop,
+	 [action]=accept,
+	 [action]=reject,
+	 [action]=ctl,
+      -->
+   
+    <choose>
+
+      <when test='exist _eventAction'>
+        <choose>
+          <when test='$_eventAction = "accept"'>
+            <setEventAttribute attr="eventAction">0</setEventAttribute>
+            <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+	    <setEventAttribute attr="eventType">combineMsgId("CheckPoint-permit-traffic")
+	    </setEventAttribute>
+          </when>
+          
+          <when test='$_eventAction IN "reject, drop, deny"'>
+	    <setEventAttribute attr="eventAction">1</setEventAttribute>
+            <setEventAttribute attr="eventSeverity">3</setEventAttribute>
+	    <setEventAttribute attr="eventType">combineMsgId("CheckPoint-", $_eventAction, "-traffic")
+	    </setEventAttribute>
+          </when>
+          
+          <when test='$_eventAction = "ctl"'>
+	    <setEventAttribute attr="eventAction">0</setEventAttribute>
+            <setEventAttribute attr="eventSeverity">3</setEventAttribute>
+	    <setEventAttribute attr="eventType">combineMsgId("CheckPoint-install-firewall-policy")
+	    </setEventAttribute>
+          </when>
+
+	  <when test='$_eventAction = "keyinst"'>
+	    <setEventAttribute attr="eventAction">0</setEventAttribute>
+	    <setEventAttribute attr="eventSeverity">3</setEventAttribute>
+	    <setEventAttribute attr="eventType">Checkpoint-keyinst</setEventAttribute>
+	  </when>
+        </choose>
+      </when>
+
+      <otherwise>
+        <setEventAttribute attr="eventAction">0</setEventAttribute>
+        <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+        <setEventAttribute attr="eventType">combineMsgId("CheckPoint-Generic")
+        </setEventAttribute>
+      </otherwise>
+    </choose>
+
+     
+    <!-- 2.dest ip -->
+    <choose>
+      <when test="exist _destIpAddr2">
+        <when test="matches($_destIpAddr2, gPatIpV4Dot)">
+          <setEventAttribute attr="destIpAddr">$_destIpAddr2</setEventAttribute> 
+        </when>    
+      </when>
+      <when test="exist _destIpAddr">
+        <when test="matches($_destIpAddr, gPatIpV4Dot)">
+          <setEventAttribute attr="destIpAddr">$_destIpAddr</setEventAttribute> 
+        </when>
+      </when>
+    </choose>
+    
+    <!-- 3.device time
+         [time]= 9May2008  8:05:00, -->
+    <collectFieldsByRegex src="$_deviceTime">
+      <regex><![CDATA[<_day:gPatDay><_mon:gPatMon><_year:gPatYear>\s+<_time:gPatTime>]]></regex>
+    </collectFieldsByRegex>
+    <setEventAttribute attr="deviceTime">toDateTime($_mon, $_day, $_year, $_time)</setEventAttribute>
+
+    
+    <!-- 4.event type (override for attack or IPS case) -->
+    <when test='exist _attackName'>
+      <setEventAttribute attr="eventType">combineMsgId("CheckPoint-", $_attackName)</setEventAttribute>
+    </when>
+
+    <!-- 5.ip proto -->
+    <when test='exist _proto'>
+      <choose>
+        <when test='matches($_proto, "\d+")'>
+          <setEventAttribute attr="ipProto">$_proto</setEventAttribute>
+        </when>
+        <otherwise>
+          <setEventAttribute attr="ipProto">convertStrToIntIpProto($_proto)</setEventAttribute>
+        </otherwise>
+      </choose>
+    </when>
+
+  </parsingInstructions>
+  
+</eventParser>

@@ -1,0 +1,42 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<30>Mar 11 15:06:41 SWA.na.local ep=1: sxl=n h=10.4.42.213 u="na\\dchoma" s=200 X=+ t=1457707885 T=- Ts=- act=3 cat="0x0300000000" app="-" rsn=- threat="-" type="-" ctype="-" sav-ev=- sav-dv=- uri-dv=- cache=- in=0 out=0 meth=CONNECT ref="-" ua="-" req="CONNECT https://ssl.gstatic.com HTTP/1.1" dom="gstatic.com" filetype="-" rule="-" filesize=- axtime=- fttime=- scantime=- src_cat="-" labs_cat="-" dcat_prox="-" target_ip="216.58.193.131" labs_rule_id="-" reqtime=- adtime=- ftbypass=- os=- authn=- auth_by=- dnstime=- quotatime=- sandbox=-
+[params]
+domain=na
+destGeoOrg=any
+parserName=SophosWebFilterParser
+webCategory=Uncategorized
+eventType=Sophos-User-Proceeded
+destGeoState=California
+destIpAddr=216.58.193.131
+destGeoCountry=any
+srcIpAddr=10.4.42.213
+reptModel=Web Filter
+eventId=any
+eventTime=Fri Mar 11 22:51:25 CST 2016
+eventParsedOk=1
+eventSeverity=5
+eventName=Sophos-User-Proceeded
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+eventRuleTrigger=1
+destName=any
+reptGeoState=Shanghai
+count=1
+recvBytes=0
+httpFullRequest=CONNECT https://ssl.gstatic.com HTTP/1.1
+eventSeverityCat=MEDIUM
+collectorId=any
+httpMethod=CONNECT
+relayDevIpAddr=$localhost
+user=dchoma
+httpStatusCode=200 (The request has succeeded)
+reptDevName=SWA.na.local
+customer=Super
+reptGeoCity=any
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Sophos
+destGeoCity=any
+sentBytes=0

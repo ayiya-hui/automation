@@ -1,0 +1,52 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>Jul 24 2008 03:19:06: %ASA-6-605005: Login permitted from SJ-Dev-S-RH-VMW-01/44190 to inside:192.168.19.1/ssh for user "pix"
+[params]
+rawEventMsg=any
+destIpAddr=192.168.19.1
+srcIntfName=inside
+srcIpPort=44190
+user=pix
+destIpPort=22
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+eventAction=0 (Permit)
+eventName=Successful admin login to the appliance
+reptVendor=Cisco
+eventType=ASA-605005
+phEventCategory=0 (External)
+reptDevIpAddr=$reporter
+reptModel=ASA
+[reptDevIpAddr(key)]
+10.100.2.9
+[eventMsg]
+<134>Jul 24 03:19:06 $reporter %ASA-6-605005: Login permitted from 192.168.19.1/ssh to inside:SJ-Dev-S-RH-VMW-01/44190 for user "pix"
+[params]
+rawEventMsg=any
+srcIpAddr=192.168.19.1
+srcIntfName=inside
+srcIpPort=22
+user=pix
+destIpPort=44190
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+eventAction=0 (Permit)
+eventName=Successful admin login to the appliance
+reptVendor=Cisco
+eventType=ASA-605005
+phEventCategory=0 (External)
+reptDevIpAddr=$reporter
+reptModel=ASA

@@ -1,0 +1,190 @@
+<Reports>
+<Report id="PH_Report_DNS_1" group="PH_SYS_REPORT_DNS">
+    <Name>Top Internal DNS Servers By Requests Served</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the internal DNS servers by requests served. A DNS is internal if it is in a private address space. </Description>
+    <SelectClause numEntries="All">
+        <AttrList>destIpAddr,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_DNS_1" name="Filter_DNS_1">
+           <SingleEvtConstr>destIpPort = 53 AND destIpAddr IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) </SingleEvtConstr>
+           <GroupByAttr>destIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>destIpAddr</RelevantFilterAttr>
+</Report>	   
+
+<Report id="PH_Report_DNS_2" group="PH_SYS_REPORT_DNS">
+    <Name>Top DNS Requesters By Requests</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the IP addresses making DNS queries by the total number of requests. DNS servers are expected to show up at the top followed by other end hosts. User machines making a large number of DNS queries are suspect. </Description>
+    <SelectClause numEntries="All">
+        <AttrList>srcIpAddr,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_DNS_2" name="Filter_DNS_2">
+           <SingleEvtConstr>destIpPort = 53</SingleEvtConstr>
+           <GroupByAttr>srcIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>srcIpAddr</RelevantFilterAttr>
+</Report>	   
+
+<Report id="PH_Report_DNS_3" group="PH_SYS_REPORT_DNS" >
+    <Name>Top Queried Domain Names</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the queried domain names by the number of name resolution requests </Description>
+    <SelectClause numEntries="All">
+        <AttrList>destName,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_DNS_3" name="Filter_DNS_3">
+           <SingleEvtConstr>
+              reptDevIpAddr IN (Group@PH_SYS_APP_DNS_SERVER) AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic)
+           </SingleEvtConstr>
+           <GroupByAttr>destName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>srcIpAddr,destIpAddr,reptDevIpAddr,relayDevIpAddr</RelevantFilterAttr>
+</Report>	   
+	   
+<Report id="PH_Report_DNS_4" group="PH_SYS_REPORT_DNS">
+    <Name>Top DNS Query Types</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Top DNS query types </Description>
+    <SelectClause numEntries="All">
+        <AttrList> reptDevIpAddr,eventType,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_DNS_4" name="Filter_DNS_4">
+           <SingleEvtConstr> reptDevIpAddr IN (Group@PH_SYS_APP_DNS_SERVER) AND (eventType CONTAIN "BIND_DNS_" OR eventType CONTAIN "MS_DNS_")</SingleEvtConstr>
+           <GroupByAttr> reptDevIpAddr,eventType</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>srcIpAddr,destIpAddr,reptDevIpAddr,relayDevIpAddr</RelevantFilterAttr>
+</Report>
+	   
+<Report id="PH_Report_DNS_5" group="PH_SYS_REPORT_DNS">
+    <Name>Top DNS Requesters, DNS Servers By Uncommon DNS Query Count</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks IP addresses making uncommon DNS queries and the DNS servers by the total count of such queries. Any DNS query other than A and PTR query is considered uncommon </Description>
+    <SelectClause numEntries="All">
+        <AttrList> reptDevIpAddr,srcIpAddr,eventType,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_DNS_5" name="Filter_DNS_5">
+           <SingleEvtConstr>
+             reptDevIpAddr IN (Group@PH_SYS_APP_DNS_SERVER) AND (eventType CONTAIN "BIND_DNS_" OR eventType CONTAIN "MS_DNS_") AND eventType NOT IN ("BIND_DNS_A_Query", "BIND_DNS_PTR_Query","MS_DNS_A_Query", "MS_DNS_PTR_Query")
+           </SingleEvtConstr>
+           <GroupByAttr> reptDevIpAddr,srcIpAddr,eventType</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>srcIpAddr,reptDevIpAddr</RelevantFilterAttr>
+</Report>	   
+
+<Report id="PH_Report_DNS_6" group="PH_SYS_REPORT_DNS">
+    <Name>Top DNS Requesters and Resolved Names By Count</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the DNS requesters and the host for whom DNS service is requested by the total number of requests. </Description>
+    <SelectClause numEntries="All">
+        <AttrList>srcIpAddr,destName,eventType,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_DNS_6" name="Filter_DNS_6">
+           <SingleEvtConstr> eventType IN ("BIND_DNS_A_Query", "BIND_DNS_PTR_Query","MS_DNS_A_Query", "MS_DNS_PTR_Query") </SingleEvtConstr>
+           <GroupByAttr>srcIpAddr,destName,eventType</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>srcIpAddr</RelevantFilterAttr>
+</Report>
+
+<Report id="PH_Report_DNS_7" group="PH_SYS_REPORT_DNS">
+    <Name>Server Processes Started/Stopped</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks started/stopped server processes </Description>
+    <SelectClause numEntries="All">
+      <AttrList>phRecvTime,hostIpAddr,hostName,eventType,appName,appGroupName</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> hostName,eventType</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_SRVC_UPDOWN" name="Filter_SRVC_UPDOWN">
+        <SingleEvtConstr>eventType IN ("PH_DEV_MON_PROC_START","PH_DEV_MON_PROC_STOP") AND (hostIpAddr IN (Group@PH_SYS_DEVICE_Server))</SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr> 
+  </Report>
+
+  <Report id="PH_Report_DNS_8" group="PH_SYS_REPORT_DNS">
+    <Name>DNS Ports Up/Down</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks DNS ports that went up or down</Description>
+    <SelectClause numEntries="All">
+      <AttrList>phRecvTime,hostIpAddr,hostName,eventType,ipProto,ipPort</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> hostName,eventType</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_PORT_UPDOWN" name="Filter_PORT_UPDOWN">
+        <SingleEvtConstr>eventType IN ("PH_DEV_MON_PORT_OPEN","PH_DEV_MON_PORT_CLOSE") AND ipPort = 53)</SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr> 
+  </Report>
+  
+  <Report id="PH_Report_DNS_9" group="PH_SYS_REPORT_DNS">
+     <Name>Top DNS Servers By Response Time </Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description>Ranks the DNS Servers by average application level probe response times</Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName,hostIpAddr,appPort,endUserMonitorName,AVG(appResponseTimeMSec),MAX(appResponseTimeMSec),MIN(appResponseTimeMSec) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(appResponseTimeMSec) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_AVAIL" name="Filter_AVAIL">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_EUM_SUCCESS" AND appPort = "53" </SingleEvtConstr>
+           <GroupByAttr>hostName,hostIpAddr,appPort,endUserMonitorName </GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_DNS_10" group="PH_SYS_REPORT_DNS">
+     <Name>Top DNS Server Processes by Uptime</Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description> Ranks the windows applications (processes) by application uptime </Description> 
+     <SelectClause numEntries="All">
+         <AttrList> hostName, appName,swProcName, LAST(sysUpTime) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> LAST(sysUpTime) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Minute" val="3"/></ReportInterval>
+     <PatternClause window="3600" >
+         <SubPattern displayName="Filter_PERF_MON_1" name="Filter_PERF_MON_1">
+           <SingleEvtConstr> eventType = "PH_DEV_MON_PROC_RESOURCE_UTIL" AND ((appName CONTAIN "Microsoft DNS") OR (appName CONTAIN "Bind DNS")) </SingleEvtConstr>
+           <GroupByAttr> hostName,appName,swProcName </GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+</Reports>

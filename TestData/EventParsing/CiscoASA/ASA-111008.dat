@@ -1,0 +1,23 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<133>Jul 24 2008 03:14:07: %ASA-5-111008: User 'enable_15' executed the 'configure terminal' command.
+[params]
+rawEventMsg=any
+reptDevIpAddr=$reporter
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=2
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+eventAction=0 (Permit)
+eventName=Executed a command that modified config
+reptVendor=Cisco
+command=configure terminal
+user=enable_15
+phEventCategory=0 (External)
+eventType=ASA-111008
+reptModel=ASA

@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+83.83.83.83
+[eventMsg]
+Jan 16 10:58:10 83.83.83.83 CEF :0|PowerTech|Interact|2.0|TOR0005|The existing *PGM PNS5150AF/PRDINFOR  was restored to the system; the object is not signed.|1| src =10.0.1.75 dst =0.0.0.0 msg=TYPE:JRN CLS :AUD JJOB :QTRXC00282 JUSER :QTCP JNBR :047552 PGM :QTMXSRVR OBJECT : LIBRARY : MEMBER: DETAIL: E PRDINFOR PNS5150AF *PGM PRDINFOR PNS5150AF         0000 00000
+[params]
+rawEventMsg=any
+eventType=OS400-TOR0005
+phCustId=$sender
+osObjType=*PGM
+osObjName=PRDINFOR
+srcIpAddr=10.0.1.75
+reptModel=OS400
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+testEvent=Real Event(0)
+eventName=Object reSTORed replace
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+collectorId=any
+user=QTCP
+reptDevName=any
+count=1
+phRecvTime=any
+reptDevIpAddr=83.83.83.83
+reptVendor=IBM
+command=E

@@ -1,0 +1,32 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>id=firewall sn=0017C5148478 time="2015-04-26 17:14:50" fw=74.203.128.131 pri=6 c=16 gcat=7 m=346 src=64.129.65.18:500 dst=74.203.128.131:500 note="VPN Policy: Denver Data Center"
+[params]
+deviceTime=any
+destGeoOrg=any
+parserName=SonicwallFirewallParser
+eventType=SonicOS-346
+destGeoState=Florida
+destIpAddr=74.203.128.131
+destGeoCountry=any
+srcIpAddr=64.129.65.18
+reptModel=SonicOS
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=IKE Initiator: Start Quick Mode (Phase 2).
+phEventCategory=0 (External)
+eventRuleTrigger=1
+count=1
+srcIpPort=500
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+destIpPort=500
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Sonicwall
+destGeoCity=any

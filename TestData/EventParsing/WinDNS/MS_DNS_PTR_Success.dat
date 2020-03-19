@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+20.2.2.12
+[eventMsg]
+<13>Aug 10 19:13:06 $reporter MSDNSLog 0 20090810 19:12:39 15EC PACKET 02A90CF0 UDP Rcv 192.168.21.16 0410 Q [0001 D NOERROR] PTR (1)7(2)20(3)168(3)192(7)in-addr(4)arpa(0)
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+appTransportProto=UDP
+ipConnId=Rcv
+count=1
+phCustId=$sender
+destName=192.168.20.7
+destIpAddr=$reporter
+destIpPort=53 (DOMAIN)
+deviceTime=any
+eventAction=0 (Permit)
+eventId=any
+eventName=Successful IP to domain name query
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=1
+eventSeverityCat=LOW
+eventType=MS_DNS_PTR_Success
+ipProto=17 (UDP)
+reptDevIpAddr=$reporter
+reptModel=DNS
+reptVendor=Microsoft
+srcIpAddr=192.168.21.16

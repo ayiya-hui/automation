@@ -1,0 +1,23 @@
+[reptDevIpAddr(key)]
+100.1.1.1
+[eventMsg]
+<158>Jan 30 15:47:17 100.1.1.1 named[24146]: Jan 30 15:47:17.639 client 192.168.1.20#36451: query: accelops.net IN NS --automator
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+srcIpAddr=192.168.1.20
+eventAction=0 (Permit)
+eventName=DNS domain name server query
+reptVendor=ISC
+eventType=BIND_DNS_NS_Query
+phEventCategory=0 (External)
+destIpPort=53
+reptDevIpAddr=100.1.1.1
+reptModel=BIND DNS

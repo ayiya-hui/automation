@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+Hostname=f5-51-01.safehost.net,Entity=Method,AVRProfileName=/FLA_PROD_WEB/FLA_PROD_WEB_ANALYTICS,AggrInterval=299,EOCTimestamp=1387536600,HitCount=2,ApplicationName=<Unassigned>,VSName=/FLA_PROD_WEB/FLA-PROD-WEB-SSL,Method=GET
+[params]
+rawEventMsg=any
+eventId=any
+count=2
+parserName=F5Parser
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+eventSeverity=1
+eventType=F5-LTM-Method
+phCustId=$sender
+ruleName=/FLA_PROD_WEB/FLA_PROD_WEB_ANALYTICS
+collectorId=any
+eventName=F5 HTTP method
+httpMethod=GET
+reptVendor=F5
+relayDevIpAddr=$localhost
+phRecvTime=any
+reptDevIpAddr=$localhost
+customer=Super
+reptDevName=f5-51-01.safehost.net
+reptModel=Big-IPOS

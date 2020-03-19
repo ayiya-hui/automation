@@ -1,0 +1,23 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<29>Jan 29 05:13:36 ProxySG: 260017 Console user password authentication from 192.168.20.35 failed for user 'admin'(0) NORMAL_EVENT ../../AuthConsole.cpp 177
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+srcIpAddr=192.168.20.35
+eventAction=1 (Deny)
+eventName=Failed Admin logon
+reptVendor=Blue Coat
+eventType=Bluecoat-SGOS-Login-Failure
+user=admin
+phEventCategory=0 (External)
+reptDevIpAddr=$localhost
+reptModel=SGOS Web Proxy

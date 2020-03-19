@@ -1,0 +1,17 @@
+eventType,name,module,reptDevIpAddr,key,method
+Solaris_Failed_Switch_User,SolarisLog_1,SolarisLog,$localhost,,syslog
+Solaris_Successful_Switch_User,SolarisLog_2,SolarisLog,$localhost,,syslog
+Linux_Successful_SUDO_Exec,SolarisLog_3,SolarisLog,$localhost,,syslog
+Linux_Failed_SUDO_Exec,SolarisLog_4,SolarisLog,$localhost,,syslog
+Solaris_Generic_Syslog,SolarisLog_5,SolarisLog,$localhost,,syslog
+Solaris_Successful_SSH_Login,SolarisLog_6,SolarisLog,$localhost,,syslog
+Solaris_Failed_SSH_Login,SolarisLog_7,SolarisLog,$localhost,,syslog
+Solaris_Successful_Telnet_Login,SolarisLog_8,SolarisLog,$localhost,,syslog
+Solaris_Failed_Telnet_Login,SolarisLog_9,SolarisLog,$localhost,,syslog
+Solaris_Generic_Debug,SolarisLog_10,SolarisLog,$localhost,,syslog
+Solaris_Successful_SSH_Login,SolarisLog_11,SolarisLog,25.25.25.26,,syslog
+Solaris_Generic_Syslog,SolarisLog_12,SolarisLog,172.16.10.6,,syslog
+Solaris_Audit_Logon,SolarisLog_13,SolarisLog,$localhost,,syslog
+Solaris_Audit_Logoff,SolarisLog_14,SolarisLog,$localhost,,syslog
+Solaris_Audit_Command_Success,SolarisLog_15,SolarisLog,$localhost,,syslog
+Solaris_Audit_Command_Failed,SolarisLog_16,SolarisLog,$localhost,,syslog

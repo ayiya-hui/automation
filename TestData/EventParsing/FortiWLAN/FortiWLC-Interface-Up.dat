@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+info NOT 10/08/2009 00:12:42 <00:90:0b:0a:81:b0> 1st interface link up.
+[params]
+customer=Super
+eventId=any
+parserName=FortiWLANParser
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+count=1
+eventSeverity=1
+eventType=FortiWLC-Interface-Up
+reptDevIpAddr=$localhost
+collectorId=any
+extEventRecvProto=Syslog
+eventName=FortiWLC intertface up
+reptVendor=Fortinet
+relayDevIpAddr=$localhost
+rawEventMsg=any
+phRecvTime=any
+hostMACAddr=00:90:0b:0a:81:b0
+reptDevName=any
+reptModel=FortiWLC

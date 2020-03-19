@@ -1,0 +1,33 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<190>9242: Dec 4 17:25:02.528 EST: %SW_DAI-6-ARP_PROBE_PERMIT: 1 ARPs (Req) on abc/45, vlan 75.([a467.06be.7d27/0.0.0.0/0000.0000.0000/10.200.75.192/17:24:43 EST Wed Dec 4 2013])
+[params]
+rawEventMsg=any
+deviceTime=any
+parserName=CiscoIOSParser
+totFlows=1
+eventType=IOS-SW_DAI-ARP_PROBE_PERMIT
+phCustId=$sender
+destIpAddr=10.200.75.192
+intfName=abc/45
+reptModel=IOS
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+hostIpAddr=$localhost
+eventName=Excessive ARP probes received
+isHostIntfCritical=No
+phEventCategory=0 (External)
+customer=Super
+srcMACAddr=a4:67:06:be:7d:27
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+reptDevName=any
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Cisco
+hostVLAN=75

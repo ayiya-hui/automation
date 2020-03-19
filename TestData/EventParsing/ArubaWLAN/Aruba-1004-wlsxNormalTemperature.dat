@@ -1,0 +1,21 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+enterprises.14823.1.1.10 6 1004 enterprises.14823.2.3.1.11.1.1.60 x "07 D8 0B 06 11 12 21 00 2D 08 00" 	enterprises.14823.2.2.1.1.2.1.1.2.192.168.40.1 x "00 1D 60 6F 2F 29"
+[params]
+rawEventMsg=any
+eventSeverity=1
+eventSeverityCat=LOW
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+phRecvTime=any
+phCustId=$sender
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+eventName=Temperature has returned to an acceptable range
+reptVendor=Aruba
+eventType=Aruba-1004-wlsxNormalTemperature
+phEventCategory=0 (External)
+reptModel=ArubaOS WLAN Controller

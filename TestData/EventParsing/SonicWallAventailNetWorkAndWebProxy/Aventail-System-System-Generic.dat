@@ -1,0 +1,76 @@
+[reptDevIpAddr(key)]
+75.75.75.2
+[eventMsg]
+<180>Oct 16 05:52:47 75.75.75.2 logserver: [16/Oct/2010:05:52:47.022356 -0700] COS-Node-1 020444 ps 40000141 Warning System  Auth: PWD-RADIUS: iconv() failed, error 'Invalid or incomplete multibyte or wide character'
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+ipConnId=40000141
+count=1
+phCustId=$sender
+deviceTime=any
+domain=PWD-RADIUS
+eventId=any
+eventName=Aventail generic system log
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=5
+eventSeverityCat=MEDIUM
+eventType=Aventail-System-System-Generic
+hostName=COS-Node-1
+procName=policy service
+reptDevIpAddr=75.75.75.2
+reptModel=Aventail VPN
+reptVendor=Sonicwall
+usrMsg=iconv() failed, error 'Invalid or incomplete multibyte or wide character'
+[reptDevIpAddr(key)]
+$localhost (ipConnId:00000001)
+[eventMsg]
+<182>Oct 16 05:45:10 syslog-ng@COS-Node-1 logserver: [16/Oct/2010:05:45:10.896604 -0700] COS-Node-1 020444 ps 00000001 Info    System  Session End: '(wooa)@(COS Non-Standard VPN)'
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+appName=policy service
+ipConnId=00000001
+count=1
+phCustId=$sender
+deviceTime=any
+domain=COS Non-Standard VPN
+eventId=any
+eventName=Aventail generic system log
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=3
+eventSeverityCat=LOW
+eventType=Aventail-System-System-Generic
+hostName=COS-Node-1
+procName=policy service
+reptDevIpAddr=$localhost
+reptModel=Aventail VPN
+reptVendor=Sonicwall
+user=wooa
+[reptDevIpAddr(key)]
+$localhost (ipConnId:40000141)
+[eventMsg]
+<182>Oct 16 05:52:47 syslog-ng@COS-Node-1 logserver: [16/Oct/2010:05:52:47.022382 -0700] COS-Node-1 020444 ps 40000141 Info    System  Auth: COS Non-Standard VPN: User 'wooa' is not a member of any RADIUS groups based on attribute Class
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+ipConnId=40000141
+count=1
+phCustId=$sender
+deviceTime=any
+domain=COS Non-Standard VPN
+eventId=any
+eventName=Aventail generic system log
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=3
+eventSeverityCat=LOW
+eventType=Aventail-System-System-Generic
+hostName=COS-Node-1
+procName=policy service
+reptDevIpAddr=$localhost
+reptModel=Aventail VPN
+reptVendor=Sonicwall
+usrMsg=User 'wooa' is not a member of any RADIUS groups based on attribute Class

@@ -1,0 +1,68 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>Nov 28 2007 17:20:48: %PIX-6-302013: Built outbound TCP connection 76118 for outside:207.68.178.45/80 (207.68.178.45/80) to inside:192.168.20.31/3530 (99.129.50.157/5967)--automator
+[params]
+rawEventMsg=any
+destIpAddr=207.68.178.45
+deviceTime=any
+eventType=PIX-302013
+phCustId=$sender
+destIpAddr=207.68.178.45
+destIpPort=80 (HTTP)
+srcIpAddr=192.168.20.31
+reptModel=PIX
+eventId=any
+ipConnId=76118
+eventParsedOk=any
+eventSeverity=1
+preNATDestIpAddr=207.68.178.45
+eventName=Built TCP connection
+phEventCategory=4 (Traffic)
+srcIntfName=inside
+srcIpPort=3530
+preNATDestIpPort=80 (HTTP)
+eventSeverityCat=LOW
+destIntfName=outside
+postNATSrcIpAddr=99.129.50.157
+ipProto=6 (TCP)
+postNATSrcIpPort=5967
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Cisco
+[reptDevIpAddr(key)]
+45.45.45.45
+[eventMsg]
+<134>Mar 24 11:47:24 $reporter %PIX-6-302013: Built inbound TCP connection 156441610 for outside:172.16.20.154/36971 (172.16.20.154/36971) to inside:192.168.0.10/1067 (192.168.0.10/1067) --automator
+[params]
+rawEventMsg=any
+destIpAddr=172.16.20.154
+deviceTime=any
+eventType=PIX-302013
+phCustId=$sender
+destIpAddr=172.16.20.154
+destIpPort=36971
+srcIpAddr=192.168.0.10
+reptModel=PIX
+eventId=any
+ipConnId=156441610
+eventParsedOk=any
+eventSeverity=1
+preNATDestIpAddr=172.16.20.154
+eventName=Built TCP connection
+phEventCategory=4 (Traffic)
+srcIntfName=inside
+srcIpPort=1067
+preNATDestIpPort=36971
+eventSeverityCat=LOW
+destIntfName=outside
+postNATSrcIpAddr=192.168.0.10
+ipProto=6 (TCP)
+postNATSrcIpPort=1067
+count=1
+phRecvTime=any
+reptDevIpAddr=$reporter
+eventAction=0 (Permit)
+reptVendor=Cisco

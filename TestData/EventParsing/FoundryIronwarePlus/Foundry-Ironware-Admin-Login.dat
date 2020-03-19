@@ -1,0 +1,48 @@
+[reptDevIpAddr(key)]
+58.58.58.59
+[eventMsg]
+<14>Jun  4 00:13:30 58.58.58.59 NX08-02,: Security: telnet login by admin from src IP 137.146.28.75 to USER EXEC mode
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+reptDevIpAddr=58.58.58.59
+eventParsedOk=1
+reptVendor=Foundry
+eventSeverity=4
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=58.58.58.59
+eventAction=0 (Permit)
+eventName=Foundry successful admin logon
+srcIpAddr=137.146.28.75
+appTransportProto=telnet
+eventType=Foundry-Ironware-Admin-Login
+user=admin
+phEventCategory=0 (External)
+reptModel=Ironware
+
+[reptDevIpAddr(key)]
+58.58.58.72
+[eventMsg]
+<14>Aug 16 14:25:26 58.58.58.72 Security: telnet login by line password from src IP 192.168.91.201, src MAC 001b.ed18.ce00 to USER EXEC mode
+[params]
+parserName=FoundryIronwareParserPlus
+eventType=Foundry-Ironware-Admin-Login
+destIpAddr=58.58.58.72
+srcIpAddr=192.168.91.201
+reptModel=Ironware
+eventId=any
+eventParsedOk=1
+eventSeverity=4
+eventName=Foundry successful admin logon
+appTransportProto=telnet
+srcMACAddr=00:1b:ed:18:ce:00
+eventSeverityCat=LOW
+relayDevIpAddr=58.58.58.72
+user=line
+reptDevName=any
+reptDevIpAddr=58.58.58.72
+eventAction=0 (Permit)
+reptVendor=Foundry

@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+70.70.70.2
+[eventMsg]
+<134>Mar 11 12:26:45 70.70.70.2 java: [PH_DEV_MON_PERF_MSSQL_PERDB]:[eventSeverity]=PHL_INFO,[hostIpAddr]=,[dbName]=master,[appGroupName]=Microsoft SQL Server,[dbDataFileSizeKB]=4096,[dbLogFileUsedKB]=540,[dbLogGrowthCount]=0,[dbLogShrinkCount]=0,[dbLogFlushPerSec]=0,[dbTransPerSec]=0.14,[dbLogCacheHitRatio]=58.33,[appVersion]=Microsoft SQL Server 2008 R2 (RTM) - 10.50.1600.1 (Intel X86),[serverName]=MSSQL-219,[instanceName]=MSSQLSERVER,[appPort]=1433,[hostIpAddr]=70.70.70.2,[hostName]=Host-70.70.70.2
+[params]
+rawEventMsg=any
+phEventCategory=6 (Performance Event)
+count=1
+dbLogFlushPerSec=0.00
+dbLogShrinkCount=0
+dbLogGrowthCount=0
+dbLogFileUsedKB=540
+dbDataFileSizeKB=4096
+dbLogCacheHitRatio=58.33
+dbTransPerSec=0.14
+dbName=master
+deviceTime=any
+eventId=any
+reptDevIpAddr=70.70.70.2
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+eventSeverityCat=LOW
+eventName=Metrics for per database in SQL Server
+reptVendor=Fortinet
+eventType=PH_DEV_MON_PERF_MSSQL_PERDB
+hostIpAddr=70.70.70.2
+reptModel=FortiSIEM

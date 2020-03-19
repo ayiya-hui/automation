@@ -1,0 +1,1125 @@
+
+<Reports>
+  
+ <Report group="PH_SYS_REPORT_GLBA" id="PH_Report_GLBA_161"  >
+  <Name>GLBA 1.6.1: Top Reporting Modules Ranked By Event Rate</Name>
+  <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+  <Description>Ranks the reporting devices by events per second. This report shows the breadth of the devices from where security logs are collected. </Description>
+  <SelectClause numEntries="All">
+    <AttrList> reptDevIpAddr,reptVendor,reptModel, AVG(eventsPerSec),MAX(eventsPerSec),MIN(eventsPerSec)  </AttrList>
+  </SelectClause>
+  <OrderByClause> <AttrList>  AVG(eventsPerSec) DESC </AttrList></OrderByClause>
+  <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+  <PatternClause window="3600">
+    <SubPattern displayName="Filter_OVERALL_STATUS" name="Filter_OVERALL_STATUS">
+      <SingleEvtConstr> phEventCategory = 3 AND eventType = "PH_SYSTEM_DEVAPP_EVENTS_PER_SEC" AND eventType NOT CONTAIN "PH_DEV_MON" </SingleEvtConstr>
+      <GroupByAttr> reptDevIpAddr, reptVendor, reptModel </GroupByAttr>
+    </SubPattern>
+  </PatternClause>
+  <inline>true</inline>
+  <active>true</active>
+  <RelevantFilterAttr> reptDevIpAddr</RelevantFilterAttr>
+ </Report>
+
+ <Report group="PH_SYS_REPORT_GLBA" id="PH_Report_GLBA_164">
+    <Name>GLBA 1.6.4: Top Security Incidents By Severity, Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the security related incidents by first their severity and then by their count</Description>
+    <SelectClause numEntries="All">
+        <AttrList>eventType,eventSeverity,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>eventSeverity DESC,COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_OVERALL_STATUS" name="Filter_OVERALL_STATUS">
+           <SingleEvtConstr>phEventCategory = 1 AND eventType IN (Group@PH_SYS_EVENT_PH_RULE_SEC) </SingleEvtConstr>
+           <GroupByAttr>eventType,eventSeverity </GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <inline>false</inline>
+    <active>false</active>
+    <RelevantFilterAttr>bizService</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_GLBA_177_1" group="PH_SYS_REPORT_GLBA">
+    <Name>GLBA 1.7.7: Firewall Configuration Changes </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report captures detected firewall configuration changes</Description>
+    <SelectClause numEntries="All">
+      <AttrList>phRecvTime,hostName,hostIpAddr,eventType,oldSVNVersion,newSVNVersion,addedItem,deletedItem </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_FW_36" name="Filter_FW_36">
+        <SingleEvtConstr> hostIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN ("PH_DEV_MON_CHANGE_RUN_CONFIG","PH_DEV_MON_CHANGE_STARTUP_CONFIG") AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_GLBA) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_GLBA_177_2" group="PH_SYS_REPORT_GLBA">
+    <Name>GLBA 1.7.7: Router/Switch Configuration Changes </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report captures detected startup or running config changes </Description>
+    <SelectClause numEntries="All">
+      <AttrList>phRecvTime,hostName,hostIpAddr,eventType,oldSVNVersion,newSVNVersion,addedItem,deletedItem </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_FW_36" name="Filter_FW_36">
+        <SingleEvtConstr> hostIpAddr IN (Group@PH_SYS_DEVICE_ROUTER_SWITCH) AND eventType IN ("PH_DEV_MON_CHANGE_RUN_CONFIG","PH_DEV_MON_CHANGE_STARTUP_CONFIG") AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_GLBA) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+   <Report id="PH_Report_GLBA_177_3" group="PH_SYS_REPORT_GLBA">
+    <Name>GLBA 1.7.7: Firewall Run vs Startup Configuration Change</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report captures detected differences between a firewall's running and startup config </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,hostName,hostIpAddr,eventType,startUpConfVer,runningConfVer,addedItem,deletedItem </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW_35" name="Filter_FW_35">
+           <SingleEvtConstr> hostIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) AND eventType = "PH_DEV_MON_DELTA_CONFIG" AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_GLBA) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+  
+  <Report id="PH_Report_GLBA_177_4" group="PH_SYS_REPORT_GLBA">
+    <Name>GLBA 1.7.7: Router Run vs Startup Configuration Difference </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report captures detected differences between a routers running and startup config </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,hostName,hostIpAddr,eventType,startUpConfVer,runningConfVer,addedItem,deletedItem </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW_35" name="Filter_FW_35">
+           <SingleEvtConstr> hostIpAddr IN (Group@PH_SYS_DEVICE_ROUTER_SWITCH) AND eventType = "PH_DEV_MON_DELTA_CONFIG" AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_GLBA) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_GLBA_177_5" group="PH_SYS_REPORT_GLBA">
+    <Name>GLBA 1.7.7,2.C.9: Audited Linux file changes</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks user modifications to Linux files and directories. Both the content and attribute modifications are captured. For actions on directories, the affected files in the directories are also captured.</Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr,user,osObjType,osObjAction,osObjName,targetOsObjType,targetOsObjName</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_UNIX_12" name="Filter_UNIX_12">
+           <SingleEvtConstr>eventType = "LINUX_FILE_CHANGE")</SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_GLBA_177_6" group="PH_SYS_REPORT_GLBA">
+    <Name>GLBA 1.7.7: Windows Domain Controller Config Changes </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Provides detailed windows domain controller config changes</Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,eventType,eventAction,phRecvTime,srcIpAddr,user,computer,domain,rawEventMsg</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>phRecvTime DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_DC_20" name="Filter_DC_20">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_APP_DOMAIN_CONTROLLER) AND eventType IN (Group@PH_SYS_EVENT_ConfigChange)</SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr,srcIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_GLBA_177_7" group="PH_SYS_REPORT_GLBA">
+    <Name>GLBA 1.7.7: Windows Server Config Modification Details </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report captures the details of windows server configuration or policy modification events. Details include the administrative user, file/directory, the operation performed and the raw log </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,phRecvTime,eventType, eventAction,user,computer,domain,rawEventMsg</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>phRecvTime DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WINDOWS_12" name="Filter_WINDOWS_12">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER) AND eventType IN ( Group@PH_SYS_EVENT_ConfigChange) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_GLBA_177_8"  group="PH_SYS_REPORT_GLBA">
+    <Name>GLBA 1.7.7,2.C.9: Windows File Access Failures </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report captures the details of windows server file access failures. Details include the administrative user, file/directory, the operation performed and the raw log </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,phRecvTime,eventType,eventAction,user,domain,procName,osObjName,osObjType,rawEventMsg</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>phRecvTime DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WINDOWS_8" name="Filter_WINDOWS_8">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER)  AND  eventType IN (Group@PH_SYS_EVENT_FileChange) AND eventAction = 1 </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_GLBA_2A4_1" group="PH_SYS_REPORT_GLBA">
+    <Name>GLBA 2.A.4: Successful Firewall Admin Logons </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Details about successful firewall logons </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr,eventType,srcIpAddr,user,srcIntfName,destIpPort,rawEventMsg</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW_3" name="Filter_FW_3">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_HostLogonSuccess))  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_GLBA) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_GLBA_2A4_2" group="PH_SYS_REPORT_GLBA">
+    <Name>GLBA 2.A.4: Failed Firewall Admin Logons </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Details about failed firewall logons</Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr,eventType,srcIpAddr,user,srcIntfName,destIpPort,rawEventMsg</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW_4" name="Filter_FW_4">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_HostLogonFailure))  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_GLBA) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+ <Report id="PH_Report_GLBA_2A4_3" group="PH_SYS_REPORT_GLBA">
+    <Name>GLBA 2.A.4: Successful Router Admin Logons </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Details about successful router logons</Description>
+    <SelectClause numEntries="All">
+      <AttrList>phRecvTime,reptDevIpAddr,eventType,srcIpAddr,user,srcIntfName,destIpPort,rawEventMsg</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_Router_24" name="Filter_Router_24">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_ROUTER_SWITCH) AND eventType IN (Group@PH_SYS_EVENT_HostLogonSuccess))  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_GLBA) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+ <Report id="PH_Report_GLBA_2A4_4" group="PH_SYS_REPORT_GLBA">
+    <Name>GLBA 2.A.4: Failed Router Admin Logons </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Details about failed router logons</Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr,eventType,srcIpAddr,user,srcIntfName,destIpPort,rawEventMsg</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_Router_3" name="Filter_Router_3">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_ROUTER_SWITCH) AND eventType IN (Group@PH_SYS_EVENT_HostLogonFailure))  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_GLBA) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_GLBA_2A4_5"  group="PH_SYS_REPORT_GLBA">
+    <Name>GLBA 2.A.4,2.B.17: Successful VPN Admin Logon</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Provides event details for all successful VPN admin logons </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr, eventType,srcIpAddr,user,durationMSec,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_VPNGW_13" name="Filter_VPNGW_13">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_VPN_GATEWAY)  AND  eventType IN (Group@PH_SYS_EVENT_HostLogonSuccess,Group@PH_SYS_EVENT_HostLogoff)  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_GLBA) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_GLBA_2A4_6" group="PH_SYS_REPORT_GLBA">
+    <Name>GLBA 2.A.4,2.B.17: Failed VPN Admin Logon</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Provides event details for all failed VPN admin logons </Description>
+    <SelectClause numEntries="All">
+      <AttrList>phRecvTime,reptDevIpAddr, eventType,srcIpAddr,user,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_VPNGW_14" name="Filter_VPNGW_14">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_VPN_GATEWAY)  AND  eventType IN (Group@PH_SYS_EVENT_HostLogonFailure)  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_GLBA) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_GLBA_2A4_7" group="PH_SYS_REPORT_GLBA">
+    <Name>GLBA 2.A.4,2.B.17: Successful WLAN Admin Logon</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks successful admin logons to the WLAN Controller</Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr,eventType,srcIpAddr,user,rawEventMsg </AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT (*)</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WLAN_11" name="Filter_WLAN_11">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WLAN_CONTROLLER) AND eventType IN (Group@PH_SYS_EVENT_HostLogonSuccess)  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_GLBA) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_GLBA_2A4_8" group="PH_SYS_REPORT_GLBA">
+    <Name>GLBA 2.A.4,2.B.17: Failed WLAN Admin Logon</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks failed admin logons to the WLAN Controller</Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr,eventType,srcIpAddr,user,rawEventMsg </AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT (*)</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WLAN_11" name="Filter_WLAN_11">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WLAN_CONTROLLER) AND eventType IN (Group@PH_SYS_EVENT_HostLogonFailure)  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_GLBA) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_GLBA_2A4_9"  group="PH_SYS_REPORT_GLBA">
+    <Name>GLBA 2.A.4: Privileged Windows Server Logon Attempts using the Administrator Account </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report details prvileged logon attempts to a windows server using the Administrator account </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,eventType, eventAction,srcIpAddr,user,domain,winLogonType,winLogonFailCode,rawEventMsg</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WINDOWS_29" name="Filter_WINDOWS_29">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER)  AND  user = "Administrator" AND eventType IN (Group@PH_SYS_EVENT_HostLogonFailure,Group@PH_SYS_EVENT_HostLogonSuccess)  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_GLBA) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report> 
+
+  <Report id="PH_Report_GLBA_2A4_10"  group="PH_SYS_REPORT_GLBA">
+    <Name>GLBA 2.A.4: Remote Desktop Connections to Windows Servers </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report details successful and failed remote desktop connections </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,eventType, eventAction,srcIpAddr,user,domain,winLogonType,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WINDOWS_30" name="Filter_WINDOWS_30">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER)  AND winLogonType = 10 AND eventType IN (Group@PH_SYS_EVENT_HostLogonFailure,Group@PH_SYS_EVENT_HostLogonSuccess)  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_GLBA) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_GLBA_2A4_11" group="PH_SYS_REPORT_GLBA">
+    <Name>GLBA 2.A.4: Unix Server Privileged Logon</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report details UNIX server privileged logon (su) details with all parsed parameters and raw logs </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,eventType,reptDevIpAddr,srcIpAddr,user,targetUser,rawEventMsg</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_UNIX_10" name="Filter_UNIX_10">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_DEVICE_UNIX_SERVER)  AND  (eventType IN (Group@PH_SYS_EVENT_HostPrivLogonSuccess) OR eventType IN (Group@PH_SYS_EVENT_HostPrivLogonFailure))  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_GLBA) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_GLBA_2A4_12"  group="PH_SYS_REPORT_GLBA">
+    <Name>GLBA 2.A.4: Unix Server Privileged Command Execution</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report details privilege command execuations (sudo) at a Unix server  </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,eventType,reptDevIpAddr,srcIpAddr,user,targetUser,command,rawEventMsg</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_UNIX_9" name="Filter_UNIX_9">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_DEVICE_UNIX_SERVER)  AND  (eventType IN (Group@PH_SYS_EVENT_HostPrivExecSuccess) OR eventType IN (Group@PH_SYS_EVENT_HostPrivExecFailure))  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_GLBA) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_GLBA_2A4_13" group="PH_SYS_REPORT_GLBA">
+    <Name>GLBA 2.A.4: Detailed Successful Login At GLBA Device </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Captures detailed successful logins at any device or application including servers, network devices, domain controllers, VPN gateways, WLAN controllers and applications </Description>
+    <SelectClause numEntries="All">
+      <AttrList>phRecvTime,reptDevIpAddr,eventType,srcIpAddr,srcMACAddr,user,domain,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_Auth_2" name="Filter_Auth_2">
+	<SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_DomainLogonSuccess, Group@PH_SYS_EVENT_HostLogonSuccess, Group@PH_SYS_EVENT_HostPrivLogonSuccess,Group@PH_SYS_EVENT_DomainLogonSuccess, Group@PH_SYS_EVENT_VPNLogonSuccess, Group@PH_SYS_EVENT_WirelessLogonSuccess,Group@PH_SYS_EVENT_AppLogonSuccess) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_GLBA) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+   <Report id="PH_Report_GLBA_2A4_14" group="PH_SYS_REPORT_GLBA">
+    <Name>GLBA 2.A.4: Privileged Domain Controller Logon Attempts using the Administrator Account </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the windows servers and their users by the number of failed logons using the administrator account</Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,eventType, eventAction,srcIpAddr,user,domain,winLogonType,winLogonFailCode,rawEventMsg</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_DC_32" name="Filter_DC_32">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_APP_DOMAIN_CONTROLLER)  AND  user = "Administrator" AND eventType IN (Group@PH_SYS_EVENT_HostLogonFailure,Group@PH_SYS_EVENT_HostLogonSuccess) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr,srcIpAddr</RelevantFilterAttr>
+  </Report> 
+  
+  <Report id="PH_Report_GLBA_2A4_15" group="PH_SYS_REPORT_GLBA" >
+    <Name>GLBA 2.A.4: Remote Desktop Connections to Domain Controller </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Details successful remote desktop connections </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,eventType, eventAction,srcIpAddr,user,domain,winLogonType,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_DC_33" name="Filter_DC_33">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_APP_DOMAIN_CONTROLLER)  AND winLogonType = 10 AND eventType IN (Group@PH_SYS_EVENT_HostLogonFailure,Group@PH_SYS_EVENT_HostLogonSuccess) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr,srcIpAddr</RelevantFilterAttr>
+  </Report> 
+
+  <Report id="PH_Report_GLBA_2A2_1"  group="PH_SYS_REPORT_GLBA">
+    <Name>GLBA 2.A.2: Windows Server Account Lock/Unlock history </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Captures account lockouts and unlocks on windows servers. Account lockouts happen on repeated login failures and may be suspicious if they are repeated or happen at odd hours of operation. </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,eventType,srcIpAddr,user,domain,targetUser,targetDomain,rawEventMsg</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>phRecvTime DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WINDOWS_43" name="Filter_WINDOWS_43">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER)  AND eventType IN (Group@PH_SYS_EVENT_HostAccountLocked,Group@PH_SYS_EVENT_HostAccountUnlocked) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_GLBA) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_GLBA_2A2_2" group="PH_SYS_REPORT_GLBA">
+    <Name>GLBA 2.A.2: Local Windows User Accounts Created </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report captures user accounts added on a server </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,phRecvTime,srcIpAddr,user,computer,targetUser,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WINDOWS_26" name="Filter_WINDOWS_26">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER)  AND  eventType = "Win-Security-624" AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_GLBA) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_GLBA_2A2_3" group="PH_SYS_REPORT_GLBA">
+    <Name>GLBA 2.A.2: Local Windows User Accounts Modified </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report captures local user account modifications. </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,phRecvTime,eventType, srcIpAddr,user,computer,targetUser,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WINDOWS_28" name="Filter_WINDOWS_28">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER)  AND  eventType IN ("Win-Security-625", "Win-Security-626","Win-Security-642", "Win-Security-627", "Win-Security-628", "Win-Security-629","Win-Security-636","Win-Security-650","Win-Security-637","Win-Security-651","Win-Security-632","Win-Security-633","Win-Security-655","Win-Security-656","Win-Security-660","Win-Security-661","Win-Security-665","Win-Security-666")  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_GLBA) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_GLBA_2A2_4" group="PH_SYS_REPORT_GLBA">
+    <Name>GLBA 2.A.2: Users Added To Local Groups </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report captures users added to local groups. </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,phRecvTime,srcIpAddr,user,computer,targetUser,targetUserGrp,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WINDOWS_32" name="Filter_WINDOWS_32">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER)  AND  eventType IN ("Win-Security-636", "Win-Security-650")  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_GLBA) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_GLBA_2A2_5" group="PH_SYS_REPORT_GLBA">
+    <Name>GLBA 2.A.2: Users Added To Global Groups </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report captures users added to global or univeral groups. </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,phRecvTime,srcIpAddr,user,computer,targetUser,targetUserGrp,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WINDOWS_33" name="Filter_WINDOWS_33">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER)  AND  eventType IN ("Win-Security-632", "Win-Security-655","Win-Security-660", "Win-Security-665") </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_GLBA_2A2_6" group="PH_SYS_REPORT_GLBA">
+    <Name>GLBA 2.A.2: Local Windows Groups Modified </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report captures local group modifications </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,phRecvTime,srcIpAddr,user,computer,targetUserGrp,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WINDOWS_37" name="Filter_WINDOWS_37">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER) AND eventType IN ("Win-Security-639", "Win-Security-649")  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_GLBA) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_GLBA_2A2_7" group="PH_SYS_REPORT_GLBA">
+    <Name>GLBA 2.A.2: Local Windows Groups Created </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report captures local group creations </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,phRecvTime,srcIpAddr,user,computer,targetUserGrp,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WINDOWS_41" name="Filter_WINDOWS_41">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER) AND eventType IN ("Win-Security-635", "Win-Security-648")  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_GLBA) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_GLBA_2A2_8" group="PH_SYS_REPORT_GLBA">
+    <Name>GLBA 2.A.2: Global Windows Groups Created </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report captures global group creations </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,phRecvTime,srcIpAddr,user,computer,targetUserGrp,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WINDOWS_38" name="Filter_WINDOWS_38">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER) AND eventType IN ("Win-Security-631", "Win-Security-653","Win-Security-658", "Win-Security-663")  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_GLBA) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_GLBA_2A2_9" group="PH_SYS_REPORT_GLBA">
+    <Name>GLBA 2.A.2: Global Windows Groups Modified</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report captures global group modifications </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,phRecvTime,srcIpAddr,user,computer,targetUserGrp,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WINDOWS_40" name="Filter_WINDOWS_40">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER) AND eventType IN ("Win-Security-641", "Win-Security-654","Win-Security-659", "Win-Security-664")  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_GLBA) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_GLBA_2B12_1" group="PH_SYS_REPORT_GLBA">
+    <Name>GLBA 2.B.12,2.M.9: Top Outbound Permitted Services By Connections, Bytes </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks firewalls and permitted outbound services by first the total number of connections and then by bytes for that service</Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,ipProto, destIpPort, srcIntfName,destIntfName,COUNT(*),SUM(sentBytes), SUM(recvBytes), SUM (totBytes)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> COUNT(*)  DESC, SUM(totBytes) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW_20" name="Filter_FW_20">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic) AND srcIpAddr IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) AND destIpAddr NOT IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_GLBA) </SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr,ipProto, destIpPort,srcIntfName,destIntfName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_GLBA_2B12_2" group="PH_SYS_REPORT_GLBA">
+    <Name>GLBA 2.B.12,2.M.9: Top Inbound Permitted Services By Connections, Bytes  </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks firewalls and permitted inbound services by first the total number of connections and then by bytes for that service</Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,ipProto, destIpPort,srcIntfName,destIntfName, COUNT(*),SUM(sentBytes), SUM(recvBytes), SUM (totBytes)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> COUNT(*)  DESC, SUM(totBytes) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW_21" name="Filter_FW_21">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic) AND srcIpAddr NOT IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) AND destIpAddr IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_GLBA) </SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr,ipProto, destIpPort,srcIntfName,destIntfName </GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_GLBA_2B12_3" group="PH_SYS_REPORT_GLBA">
+    <Name>GLBA 2.B.12,2.M.9: Top Permitted High Port Services By Connections, Bytes</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks the high port services permitted by firewalls - these services may pose security risk </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,srcIpAddr,destIpAddr,ipProto,destIpPort,srcIntfName,destIntfName,COUNT(*), SUM(sentBytes), SUM(recvBytes), SUM (totBytes) </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_FW_38" name="Filter_FW_38">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_GLBA) </SingleEvtConstr>
+        <GroupByAttr>reptDevIpAddr,srcIpAddr,destIpAddr,ipProto,destIpPort,srcIntfName,destIntfName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_GLBA_2B12_4" group="PH_SYS_REPORT_GLBA">
+    <Name>GLBA 2.B.12,2.M.9: Top Permitted Uncommon Services By Connections, Bytes</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks uncommon services permitted by firewalls - common services include DNS, SMTP, Web </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,srcIpAddr,destIpAddr,ipProto,destIpPort,srcIntfName,destIntfName,COUNT(*), SUM(sentBytes), SUM(recvBytes), SUM (totBytes) </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_FW_39" name="Filter_FW_39">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic) AND destIpPort NOT IN (25,53,80,443,123) </SingleEvtConstr>
+        <GroupByAttr>reptDevIpAddr,srcIpAddr,destIpAddr,ipProto,destIpPort,srcIntfName,destIntfName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_GLBA_2B12_5" group="PH_SYS_REPORT_GLBA">
+    <Name>GLBA 2.B.12,2.M.9: Top Permitted Vulnerable Low Port Services By Connections, Bytes</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks uncommon services permitted by firewalls - vulnerable services include Microsoft services such as MS-RPC (135), NETBIOS-SSN (139), MICROSOFT-DS (445), MS-SQL (1433,1434), FTP (23), TELNET (21)</Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,srcIpAddr,destIpAddr,ipProto,destIpPort,srcIntfName,destIntfName,COUNT(*), SUM(sentBytes), SUM(recvBytes), SUM (totBytes) </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_FW_40" name="Filter_FW_40">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic) AND destIpPort IN (135,139,445,1433,1434,23,21) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_GLBA) </SingleEvtConstr>
+        <GroupByAttr>reptDevIpAddr,srcIpAddr,destIpAddr,ipProto,destIpPort,srcIntfName,destIntfName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_GLBA_2B12_6" group="PH_SYS_REPORT_GLBA">
+    <Name>GLBA 2.B.12,2.M.9: Top Firewall Originated Or Destined Permitted Connections By Count</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the firewall originated or destined connections - these connections would be typically be for administrative and monitoring purposes</Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,srcIpAddr,destIpAddr,ipProto,destIpPort,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList></AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW_8" name="Filter_FW_8">
+           <SingleEvtConstr> reptDevIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_PermitTraffic) AND (srcIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL) OR destIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL)) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_GLBA) </SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr,srcIpAddr,destIpAddr,ipProto,destIpPort</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_GLBA_2B12_7" group="PH_SYS_REPORT_GLBA">
+    <Name>GLBA 2.B.12: Top Network IPS events By Severity, Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the network IPS events by count</Description>
+    <SelectClause numEntries="All">
+        <AttrList>srcIpAddr,destIpAddr,eventType,eventSeverity,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>eventSeverity DESC,COUNT(*) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_NIPS_1" name="Filter_NIPS_2">
+           <SingleEvtConstr> reptDevIpAddr IN (Group@PH_SYS_DEVICE_NETWORK_IPS,Group@PH_SYS_APP_NETWORK_IPS)  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+	   <GroupByAttr>srcIpAddr,destIpAddr,eventType,eventSeverity </GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>srcIpAddr,destIpAddr,hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_GLBA_2B12_8" group="PH_SYS_REPORT_GLBA">
+    <Name>GLBA 2.B.12,2.M.9: Top Network Scanners By Event Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the source IP addresses by detected network scan or reconnaissance events </Description>
+    <SelectClause numEntries="All">
+        <AttrList>srcIpAddr,eventType,eventSeverity,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_NIPS_3" name="Filter_NIPS_3">
+           <SingleEvtConstr> reptDevIpAddr IN (Group@PH_SYS_DEVICE_NETWORK_IPS,Group@PH_SYS_APP_NETWORK_IPS) AND eventType IN (Group@PH_SYS_EVENT_Reconn)  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+	   <GroupByAttr>srcIpAddr,eventType,eventSeverity </GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>srcIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_GLBA_2B12_9" group="PH_SYS_REPORT_GLBA">
+    <Name>GLBA 2.B.12,2.M.9: Top Blocked Network Attacks By Count</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the network attacks attacks blocked by network IPS </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,srcIpAddr,eventType,eventSeverity,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_NIPS_4" name="Filter_NIPS_4">
+           <SingleEvtConstr> reptDevIpAddr IN (Group@PH_SYS_DEVICE_NETWORK_IPS,Group@PH_SYS_APP_NETWORK_IPS) AND eventAction = 1  AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_COBIT) </SingleEvtConstr>
+	   <GroupByAttr>reptDevIpAddr,srcIpAddr,eventType,eventSeverity</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>srcIpAddr,reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_GLBA_2B12_10"  group="PH_SYS_REPORT_GLBA">
+    <Name>GLBA 2.B.12,2.M.9: Top Inbound Blacklisted Mail Gateways By Connections</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks denied mail gateways by the number of attempted SMTP connections. The most common reason of denial is often the gateway being included in blacklists.</Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,srcIpAddr,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WEB_PROXY_14" name="Filter_WEB_PROXY_14">
+           <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_MailMalware_GwBlocked) AND srcIpAddr NOT IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) </SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr,srcIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+</Report>
+
+<Report id="PH_Report_GLBA_2B12_11"  group="PH_SYS_REPORT_GLBA">
+    <Name>GLBA 2.B.12,2.M.9: Top Inbound Blacklisted Mail Gateways and SMTP Error Types By Connections</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks denied mail gateways and the SMTP errors by the number of attempted connections. The most common SMTP error is often the gateway being included in mail blacklists.</Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,srcIpAddr,smtpFailCode,errReason,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WEB_PROXY_15" name="Filter_WEB_PROXY_15">
+           <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_MailMalware_GwBlocked) AND srcIpAddr NOT IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) </SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr,srcIpAddr,smtpFailCode,errReason</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+</Report>
+
+<Report id="PH_Report_GLBA_2B12_12"  group="PH_SYS_REPORT_GLBA">
+    <Name>GLBA 2.B.12,2.M.9: Filtered Inbound Spam Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Counts total inbound spam denied by spam filtering policy</Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,eventType,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WEB_PROXY_16" name="Filter_WEB_PROXY_16">
+           <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_MailMalware_GwBlocked) AND srcIpAddr NOT IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) </SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr,eventType</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+</Report>
+
+
+<Report id="PH_Report_GLBA_2B12_13"  group="PH_SYS_REPORT_GLBA">
+    <Name>GLBA 2.B.12,2.M.9: Top Outbound Blacklisted Mail Gateways By Connections</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks denied mail gateways by the number of attempted SMTP connections. The most common reason of denial is often the gateway being included in blacklists.</Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,destIpAddr,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WEB_PROXY_17" name="Filter_WEB_PROXY_17">
+           <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_MailMalware_GwBlocked) AND destIpAddr NOT IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) </SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr,destIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+</Report>
+
+<Report id="PH_Report_GLBA_2B12_14"  group="PH_SYS_REPORT_GLBA">
+    <Name>GLBA 2.B.12,2.M.9: Top Outbound Blacklisted Mail Gateways and SMTP Error Types By Connections</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks denied mail gateways and the SMTP errors by the number of attempted connections. The most common SMTP error is often the gateway being included in mail blacklists.</Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,destIpAddr,smtpFailCode,errReason,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WEB_PROXY_18" name="Filter_WEB_PROXY_18">
+           <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_MailMalware_GwBlocked) AND destIpAddr NOT IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET)</SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr,destIpAddr,smtpFailCode,errReason</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+</Report>
+
+<Report id="PH_Report_GLBA_2B12_15"  group="PH_SYS_REPORT_GLBA">
+    <Name>GLBA 2.B.12,2.M.9: Filtered Outbound Spam Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Counts total outbound spam denied by policy</Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,eventType,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WEB_PROXY_16" name="Filter_WEB_PROXY_16">
+           <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_MailMalware_GwBlocked) AND destIpAddr NOT IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET)</SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr,eventType</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+</Report>
+
+<Report id="PH_Report_GLBA_2B12_16"  group="PH_SYS_REPORT_GLBA">
+    <Name>GLBA 2.B.12: Total Denied Web Connections By Policy</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Counts denied web site connections because of policy violations</Description>
+    <SelectClause numEntries="All">
+        <AttrList>COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WEB_PROXY_20" name="Filter_WEB_PROXY_20">
+           <SingleEvtConstr>eventType IN (Group@PH_SYS_EVENT_WebsiteCategoryViolation) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+</Report>
+
+<Report id="PH_Report_GLBA_2B12_17"  group="PH_SYS_REPORT_GLBA">
+    <Name>GLBA 2.B.12: Top Mail Security Gateway Actions By Count</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the actions taken by the mail security gateway - actions include blocking an inbound/outbound mail gateway because of RBL or other SMTP violations, blocking a mail because of spam or other policy violations and delivering a mail </Description>
+    <SelectClause numEntries="All">
+        <AttrList>eventType,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WEB_PROXY_21" name="Filter_WEB_PROXY_21">
+           <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_MailMalware_GwBlocked,Group@PH_SYS_EVENT_MailMalware_Remedy_Success,Group@PH_SYS_EVENT_PermitTraffic) AND reptDevIpAddr IN (Group@PH_SYS_DEVICE_SEC_GW,Group@PH_SYS_APP_SEC_GW) </SingleEvtConstr>
+           <GroupByAttr>eventType</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+</Report>
+
+  <Report id="PH_Report_GLBA_2C8_1" group="PH_SYS_REPORT_GLBA">
+   <Name>GLBA 2.C.8: Top hosts with Malware found by Host Antivirus</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> </Description>
+    <SelectClause numEntries="All">
+        <AttrList>computer,COUNT(*)</AttrList>    
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_AV_5" name="Filter_AV_5">
+           <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_Malware) AND reptDevIpAddr IN (Group@PH_SYS_APP_SEC_MGMT) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_GLBA) </SingleEvtConstr>
+	   <GroupByAttr>computer</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_GLBA_2C8_2" group="PH_SYS_REPORT_GLBA">
+    <Name>GLBA 2.C.8: Top IPs with Malware Found By IPS and Firewalls</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> Tracks IP addresses with Malware as found by IPS </Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,eventType,srcIpAddr,COUNT(*)</AttrList>    
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_Vuln_10" name="Filter_Vuln_10">
+        <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_Malware) AND reptDevIpAddr IN (Group@PH_SYS_DEVICE_NETWORK_IPS,Group@PH_SYS_APP_NETWORK_IPS,Group@PH_SYS_DEVICE_FIREWALL) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_GLBA) </SingleEvtConstr>
+	<GroupByAttr>reptDevIpAddr,eventType,srcIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_GLBA_2C8_3" group="PH_SYS_REPORT_GLBA">
+   <Name>GLBA 2.C.8: Top IPs with Malware Found By Antivirus and Security Gateways</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks IP addresses with Malware as found by Host Anti-virus and Security Gateways</Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,eventType,srcIpAddr,COUNT(*)</AttrList>    
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT (*) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_Vuln_8" name="Filter_Vuln_8">
+           <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_Malware) AND reptDevIpAddr IN (Group@PH_SYS_APP_SEC_MGMT,Group@PH_SYS_DEVICE_SEC_GW) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_GLBA) </SingleEvtConstr>
+	   <GroupByAttr>reptDevIpAddr,eventType,srcIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+
+  <Report id="PH_Report_GLBA_2C8_4" group="PH_SYS_REPORT_GLBA">
+    <Name>GLBA 2.C.8: Non-compliant Hosts and Security Software License Expirations</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks non-compliant hosts and license expiry events from Security Management Gateways and Firewalls. Non-compliant hosts may not have proper security software running and therefore may pose a security threat. License expiration of security software may expose exploitable security vulnerabilities.</Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,eventType,hostIpAddr,rawEventMsg</AttrList>    
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT (*) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_Vuln_12" name="Filter_Vuln_12">
+        <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_LicenseExpired,Group@PH_SYS_EVENT_NoncompliantHost) AND reptDevIpAddr IN (Group@PH_SYS_DEVICE_NETWORK_IPS,Group@PH_SYS_APP_NETWORK_IPS,Group@PH_SYS_APP_SEC_MGMT,Group@PH_SYS_DEVICE_FIREWALL,Group@PH_SYS_DEVICE_SEC_GW) AND reptDevIpAddr IN (BizService@PH_SYS_BizSrvc_GLBA) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <Report id="PH_Report_GLBA_2C17_1"  group="PH_SYS_REPORT_GLBA">
+    <Name>GLBA 2.C.17: Windows File Access Successes </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> This report captures the details of windows server file access successes. Details include the administrative user, file/directory, the operation performed and the raw log </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,phRecvTime,eventType,eventAction,user,domain,procName,osObjName,osObjType,rawEventMsg</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>phRecvTime DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WINDOWS_8" name="Filter_WINDOWS_8">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER)  AND  eventType IN ("Win-Security-560","Win-Security-564") AND eventAction = 0 </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+
+  <Report id="PH_Report_GLBA_2C17_2" group="PH_SYS_REPORT_GLBA">
+    <Name>GLBA 2.C.17: Windows Audit Policy Changes</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report captures audit policy changes </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,phRecvTime,srcIpAddr,user,computer,targetUser,winLogonId,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WINDOWS_26" name="Filter_WINDOWS_26">
+           <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER)  AND  eventType IN ("Win-Security-807","Win-Security-4902","Win-Security-517","Win-Security-612","Win-Security-4912","Win-Security-4715","Win-Security-4907") </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+
+  <!-- ********************************************************************* -->
+  <Report id="PH_Report_GLBA_2M9_1" group="PH_SYS_REPORT_GLBA">
+    <Name>GLBA 2.M.9: Virus found and remediated</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description> Captures events that indicate the viruses found and remediated. This report is applicable for host antivirus, security gateways, proxies and firewalls that do content inspection e.g. Palo Alto Firewall, Untangle etc. </Description>
+    <SelectClause numEntries="All">
+      <AttrList>phRecvTime,reptDevIpAddr,eventType,hostIpAddr,computer,user,virusName,virusType,fileName,virusAction,virusQuarantStatus</AttrList>    
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_Vuln_1" name="Filter_Vuln_1">
+        <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_Worm_Remedy_Success) AND reptDevIpAddr IN (Group@PH_SYS_APP_SEC_MGMT,Group@PH_SYS_DEVICE_SEC_GW) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr,hostIpAddr</RelevantFilterAttr>
+  </Report>
+ 
+  <!-- ********************************************************************* -->
+  <Report id="PH_Report_GLBA_2M9_2" group="PH_SYS_REPORT_GLBA">
+   <Name>GLBA 2.M.9: Virus found but not remediated</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Captures events that indicate viruses found but failed to remedy - the events could be from Host Anti-virus or Network Security Gateways. This report is applicable for host antivirus, security gateways, proxies and firewalls that do content inspection e.g. Palo Alto Firewall, Untangle etc. </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr,eventType,hostIpAddr,computer,user,virusName,virusType,fileName,virusAction,virusQuarantStatus</AttrList>    
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_Vuln_2" name="Filter_Vuln_2">
+           <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_Worm_Remedy_Failed) AND reptDevIpAddr IN (Group@PH_SYS_APP_SEC_MGMT,Group@PH_SYS_DEVICE_SEC_GW) </SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr,hostIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+  </Report>
+
+  <!-- ********************************************************************* -->
+  <Report id="PH_Report_GLBA_2M9_3" group="PH_SYS_REPORT_GLBA">
+   <Name>GLBA 2.M.9: Spyware found and remediated</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Captures events that indicate spyware was found and remediated on a host. This report is applicable for host antivirus, security gateways, proxies and firewalls that do content inspection e.g. Palo Alto Firewall, Untangle etc. </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr,eventType,hostIpAddr,computer,user,fileName</AttrList>    
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_Vuln_3" name="Filter_Vuln_3">
+           <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_Spyware_Remedy_Success) AND reptDevIpAddr IN (Group@PH_SYS_APP_SEC_MGMT,Group@PH_SYS_DEVICE_SEC_GW) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr,hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <!-- ********************************************************************* -->
+  <Report id="PH_Report_GLBA_2M9_4" group="PH_SYS_REPORT_GLBA">
+   <Name>GLBA 2.M.9: Spyware found but not remediated </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Captures events that indicate spyware was found but the detecting software failed to remediated the vulnerability. This report is applicable for host antivirus, security gateways, proxies and firewalls that do content inspection e.g. Palo Alto Firewall, Untangle etc. </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr,eventType,hostIpAddr,computer,user,fileName</AttrList>    
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_Vuln_4" name="Filter_Vuln_4">
+           <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_Spyware_Remedy_Failed) AND reptDevIpAddr IN (Group@PH_SYS_APP_SEC_MGMT,Group@PH_SYS_DEVICE_SEC_GW) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr,hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <!-- ********************************************************************* -->
+  <Report id="PH_Report_GLBA_2M9_5" group="PH_SYS_REPORT_GLBA">
+   <Name>GLBA 2.M.9: Spam/Malicious Mail Attachment found and remediated </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Captures events that indicate spam or mailicious mail attachments were found and remediated on a host. This report is applicable for host antivirus, security gateways, proxies and firewalls that do content inspection e.g. Palo Alto Firewall, Untangle, Websense Mail gateway, Ironport Mail Gateway etc. </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr,eventType,srcIpAddr,senderMailAddr,receiverMailAddr,mailSubject,vendor,spamScore </AttrList>    
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_Vuln_5" name="Filter_Vuln_5">
+           <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_MailMalware_Remedy_Success) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr,srcIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <!-- ********************************************************************* -->
+  <Report id="PH_Report_GLBA_2M9_6" group="PH_SYS_REPORT_GLBA">
+   <Name>GLBA 2.M.9: Spam/Malicious Mail Attachment found but not remediated </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Captures events that indicate spyware was found but the detecting software did not remediated the vulnerability. This report is applicable for host antivirus, security gateways, proxies and firewalls that do content inspection e.g. Palo Alto Firewall, Untangle, Websense Mail gateway, Ironport Mail Gateway etc. </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr,eventType,srcIpAddr,senderMailAddr,receiverMailAddr,mailSubject,vendor,spamScore</AttrList>    
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_Vuln_6" name="Filter_Vuln_6">
+           <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_MailMalware_Found)</SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr,srcIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <!-- ********************************************************************* -->
+  <Report id="PH_Report_GLBA_2M9_7" group="PH_SYS_REPORT_GLBA">
+   <Name>GLBA 2.M.9: Phishing attempt found and remediated </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Captures events that indicate phishing attempt </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr,eventType,srcIpAddr,destIpAddr</AttrList>    
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_Vuln_7" name="Filter_Vuln_7">
+           <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_Phish_Remedy_Success) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr,srcIpAddr,destIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <!-- ********************************************************************* -->
+  <Report id="PH_Report_GLBA_2M9_8" group="PH_SYS_REPORT_GLBA">
+    <Name>GLBA 2.M.9: Host vulnerabilities found by scanners</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report details the host vulnerabilties found by scanners like Qyalys, Nessus, nCircle etc </Description>
+    <SelectClause numEntries="All">
+      <AttrList>hostName,osType,vulnName,eventSeverity,COUNT(*)</AttrList>    
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT (*) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_Vuln_13" name="Filter_Vuln_13">
+        <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_Vulnerability) </SingleEvtConstr>
+	<GroupByAttr>hostName,osType,vulnName,eventSeverity</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>hostName</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_GLBA_2M9_9" group="PH_SYS_REPORT_GLBA">
+    <Name>GLBA 2.B.12,2.M.9: Top Blocked Inbound Connections By Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Top Inbound Denied Connections Ranked By Count </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,srcIpAddr,srcName, destIpAddr,destName, ipProto, destIpPort, COUNT(*) </AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> COUNT(*)  DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW_28" name="Filter_FW_28">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_DenyTraffic) AND srcIpAddr NOT IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) AND destIpAddr IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) </SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr, srcIpAddr,srcName, destIpAddr,destName, ipProto, destIpPort </GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+     <RelevantFilterAttr>destIpAddr,reptDevIpAddr,srcIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_GLBA_2M9_10" group="PH_SYS_REPORT_GLBA">
+    <Name>GLBA 2.B.12,2.M.9: Top Blocked Outbound Connections By Count  </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Top Blocked Outbound Connections Ranked By Count </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,srcIpAddr,srcName, destIpAddr,destName, ipProto, destIpPort, COUNT(*) </AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList> COUNT(*)  DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW_30" name="Filter_FW_30">
+           <SingleEvtConstr>reptDevIpAddr IN ( Group@PH_SYS_DEVICE_FIREWALL) AND eventType IN (Group@PH_SYS_EVENT_DenyTraffic) AND srcIpAddr IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) AND destIpAddr NOT IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) </SingleEvtConstr>
+           <GroupByAttr>reptDevIpAddr, srcIpAddr,srcName, destIpAddr,destName, ipProto, destIpPort </GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+     <RelevantFilterAttr>srcIpAddr,destIpAddr,reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_GLBA_2M6_1" group="PH_SYS_REPORT_GLBA">
+    <Name>GLBA 2.M.6: All Monitoring System Admin User Logon Attempts </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Details all Monitoring System Admin User Logon Attempts </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,phRecvTime,eventType,srcIpAddr,user,phCustId</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*)</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_FW_1" name="Filter_FW_1">
+           <SingleEvtConstr>phEventCategory = 2 AND eventType IN ("PH_AUDIT_USER_LOGIN_SUCCESS","PH_AUDIT_USER_LOGIN_FAILURE","PH_AUDIT_USER_LOGOFF","PH_AUDIT_USER_SESSION_TIMEOUT")</SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>srcIpAddr,reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+
+</Reports>

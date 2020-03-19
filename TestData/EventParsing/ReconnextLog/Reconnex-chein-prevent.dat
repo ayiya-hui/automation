@@ -1,0 +1,31 @@
+[reptDevIpAddr(key)]
+200.200.58.1
+[eventMsg]
+Jul 7 15:38:18 200.200.58.1 RTS:CEF:0|Reconnex|iGuard|3.2|-test-rule1|3|cs1=-chein-prevent cs1Label=policies cn1=0 cn1Label=MatchCount src=51.0.16.172 dst=53.0.16.172 spt= 5281 dpt= 25 suser= duser= cs2="testing" cs2Label=Subject filename="specscdrom.pdf"
+[params]
+rawEventMsg=any
+deviceTime=any
+destGeoOrg=any
+parserName=ReconnextLogParser
+eventType=Reconnex-chein-prevent
+phCustId=$sender
+destIpAddr=53.0.16.172
+destGeoCountry=any
+srcIpAddr=51.0.16.172
+reptModel=Cisco Secure ACS
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Reconnex-chein-prevent
+phEventCategory=0 (External)
+customer=Super
+srcIpPort=5281
+eventSeverityCat=LOW
+collectorId=any
+fileName=specscdrom.pdf
+destIpPort=25
+count=1
+phRecvTime=any
+reptDevIpAddr=200.200.58.1
+eventAction=0 (Permit)
+reptVendor=McAfee

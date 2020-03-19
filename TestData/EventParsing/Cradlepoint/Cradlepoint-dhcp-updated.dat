@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<14>(Gallatin) dhcp: Updated DHCP client: KHANNURLAP7 10.4.42.222 58:94:6b:8d:2b:94
+[params]
+parserName=CradlepointParser
+eventType=Cradlepoint-dhcp-updated
+hostName=KHANNURLAP7
+procName=dhcp
+reptModel=Router
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+hostIpAddr=10.4.42.222
+eventName=Cradlepoint Router assigned DHCP address updated
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+hostMACAddr=58:94:6b:8d:2b:94
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+reptDevName=Gallatin
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Cradlepoint

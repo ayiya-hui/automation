@@ -1,0 +1,4 @@
+[eventMsg]
+<161>Mar 20 20:34:45 2.16.0.1 snort[2242]: [1:2378:9] EXPLOIT ISAKMP third payload certificate request length overflow attempt [Classification: Misc activity] [Priority: 1]: {UDP} 192.168.19.1:6555 -> 172.16.2.5:514
+<161>Mar 20 20:34:45 2.16.0.1 snort[2242]: [1:727:9] Virus - Possible MyRomeo Worm [Classification: Misc activity] [Priority: 1]: {UDP} 192.168.19.1:6555 -> 172.16.2.6:514
+<161>Mar 20 20:34:45 2.16.0.1 snort[2242]: [1:311:9] EXPLOIT Netscape 4.7 unsucessful overflow [Classification: Misc activity] [Priority: 1]: {UDP} 192.168.19.1:6555 -> 172.16.2.7:514

@@ -1,0 +1,21 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<189>392936 06/29/2009 20:46:15.830 SEV=4 AUTH/83 RPT=46  User [admin] connected--automator
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+eventAction=0 (Permit)
+eventName=Cisco-VPN3K-AUTH/83
+reptVendor=Cisco
+eventType=Cisco-VPN3K-AUTH/83
+phEventCategory=0 (External)
+reptDevIpAddr=$localhost
+reptModel=VPN 3K

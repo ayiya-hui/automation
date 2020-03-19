@@ -1,0 +1,23 @@
+[reptDevIpAddr(key)]
+90.90.90.92
+[eventMsg]
+<134>Mar 29 15:59:01 $reporter SYST: User admin logged out from telnet (192.168.20.34)
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+reptDevIpAddr=$reporter
+eventParsedOk=1
+eventSeverity=3
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=$reporter
+eventAction=0 (Permit)
+eventName=Successful logoff
+srcIpAddr=192.168.20.34
+reptVendor=Extreme
+eventType=Extremeware-Successful-Logout
+user=admin
+phEventCategory=0 (External)
+reptModel=Extremeware

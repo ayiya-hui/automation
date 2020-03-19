@@ -1,0 +1,42 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134> 08/03/2015:11:08:01  WAFNS1 0-PPE-0 : default SSLVPN TCPCONNSTAT 88307700 0 : Context pivanov@bacb.bg@77.85.193.230 - SessionId: 113- User pivanov@bacb.bg - Client_ip 77.85.193.230 - Nat_ip 192.168.1.240 - Vserver 192.168.33.70:443 - Source 77.85.193.230:43844 - Destination 192.168.1.197:443 - Start_time "08/03/2015:11:08:01 " - End_time "08/03/2015:11:08:01 " - Duration 00:00:00  - Total_bytes_send 0 - Total_bytes_recv 314 - Total_compressedbytes_send 0 - Total_compressedbytes_recv 0 - Compression_ratio_send 0.00% - Compression_ratio_recv 0.00% - Access Allowed - Group(s) "N/A"
+[params]
+deviceTime=any
+parserName=CitrixNetScalerParser
+totFlows=1
+eventType=NETSCALER-SSLVPN-TCPCONNSTAT
+hostName=192.168.33.70
+destIpAddr=192.168.1.197
+srcName=any
+ipPort=443
+srcIpAddr=77.85.193.230
+reptModel=NetScaler
+eventId=any
+eventParsedOk=1
+eventSeverity=3
+hostIpAddr=77.85.193.230
+eventName=NetScaler SSL VPN TCP Connection statistics
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+eventRuleTrigger=1
+count=1
+recvBytes=314
+srcIpPort=43844
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+postNATSrcIpAddr=192.168.1.240
+destIpPort=443
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+sessionId=113
+reptVendor=Citrix
+durationMSec=0
+userGrp=N/A
+sentBytes=0
+user=pivanov@bacb.bg

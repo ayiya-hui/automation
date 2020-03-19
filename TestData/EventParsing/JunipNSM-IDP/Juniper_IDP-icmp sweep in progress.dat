@@ -1,0 +1,40 @@
+[reptDevIpAddr(key)]
+10.146.68.73
+[eventMsg]
+<25>Oct 11 14:29:36 10.146.68.68 20101011, 58433538, 2010/10/11 18:29:32, 2010/10/11 18:33:17, global.IDP, 1631, par-real-idp200, 10.146.68.73, traffic, icmp sweep in progress, (NULL), (NULL), 10.146.65.45, 0, 0.0.0.0, 0, (NULL), (NULL), 10.80.188.0, 0, 0.0.0.0, 0, icmp, global.IDP, 1631, Metro IDP IP / Port Scan Policy, traffic anomalies, 2, accepted, info, yes, 'interface=eth3', (NULL), (NULL), (NULL), 0, 0, 0, 0, 0, 0, 0, 0, no, 25, Not
+[params]
+phEventCategory=0 (External)
+count=1
+phCustId=$sender
+destFwZone=(NULL)
+destIpAddr=10.80.188.0
+destIpPort=0
+deviceTime=any
+durationMSec=0
+eventId=any
+eventName=Juniper_IDP-icmp sweep in progress
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=2
+eventSeverityCat=LOW
+eventType=Juniper_IDP-icmp sweep in progress
+ipProto=1 (ICMP)
+policyName=Metro IDP IP / Port Scan Policy
+postNATSrcIpAddr=10.146.65.45
+postNATSrcIpPort=0
+preNATDestIpAddr=10.80.188.0
+preNATDestIpPort=0
+recvPkts=0
+recvBytes=0
+relayDevIpAddr=10.146.68.68
+reptDevName=par-real-idp200
+reptDevIpAddr=$reporter
+reptModel=IDP
+reptVendor=Juniper
+sentBytes=0
+sentPkts=0
+srcFwZone=(NULL)
+srcIpAddr=10.146.65.45
+srcIpPort=0
+totBytes=0
+totPkts=0

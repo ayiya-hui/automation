@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+192.168.24.11
+[eventMsg]
+<134>Nov 18 17:52:55 192.168.24.11 java: [VMware_VmDiscoveredEvent], [eventTime]=2009-11-18 17:50:59:640, [rptIp]=192.168.24.11, [user]=Administrator, [vmwEventId]=67849, [vmwEventCat]=info, [vmHost]=192.168.29.20, [cluster]=192.168.29.20, [vm]=SaaS-PH-cust112, [datacenter]=test, [vmwEventMsg]=Discovered SaaS-PH-cust112 on 192.168.29.20 in test
+[params]
+rawEventMsg=any
+count=1
+datacenter=test
+deviceTime=any
+eventParsedOk=1
+vmwEventCat=info
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+vmwEventMsg=Discovered SaaS-PH-cust112 on 192.168.29.20 in test
+eventName=Virtual machine discovered
+cluster=192.168.29.20
+reptDevIpAddr=192.168.24.11
+reptVendor=VMware
+eventType=VMware_VmDiscoveredEvent
+user=Administrator
+phEventCategory=0 (External)
+eventId=any
+reptDevName=192.168.29.20
+reptModel=Generic

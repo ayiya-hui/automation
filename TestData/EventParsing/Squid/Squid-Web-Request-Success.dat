@@ -1,0 +1,68 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<166>May  6 17:55:24 squid[1773]: [ID 702911 local4.info] 192.168.20.39 1703 66.94.228.100 172.16.10.6 3128 731 - - - - - [06/May/2008:17:55:24 -0700] CONNECT "edit.yahoo.com:443" HTTP/1.1 200 92621 196 "-" "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.14) Gecko/20080404 Firefox/2.0.0.14" TCP_MISS:DIRECT
+[params]
+rawEventMsg=any
+deviceTime=any
+eventType=Squid-Web-Request-Success
+phCustId=$sender
+destIpAddr=66.94.228.100
+httpReferrer=-
+srcIpAddr=192.168.20.39
+reptModel=Squid Web Proxy
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Web request successful
+phEventCategory=0 (External)
+recvBytes=92621
+srcIpPort=1703
+eventSeverityCat=LOW
+httpMethod=CONNECT
+user=-
+httpStatusCode=200 (The request has succeeded)
+httpVersion=HTTP/1.1
+count=1
+uriStem=edit.yahoo.com:443
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Squid-cache-org
+durationMSec=731
+httpUserAgent=Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.14) Gecko/20080404 Firefox/2.0.0.14
+sentBytes=196
+[reptDevIpAddr(key)]
+172.16.10.34
+[eventMsg]
+<166>Mar 25 18:15:29 172.16.10.34 squid[4535]: 192.168.22.4 52019 220.181.6.175 172.16.10.34 3128 699 - - - - - [25/Mar/2010:15:53:10 -0700] GET "http://www.baidu.com/" HTTP/1.1 200 2338 699 "-" "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0; Trident/4.0; GTB6.4; SLCC1; .NET CLR 2.0.50727; Media Center PC 5.0; InfoPath.2; .NET CLR 3.5.30729; .NET CLR 3.0.30618; msn OptimizedIE8;ENUS; AskTB5.6)" TCP_MISS:DIRECT
+[params]
+rawEventMsg=any
+deviceTime=any
+eventType=Squid-Web-Request-Success
+phCustId=$sender
+destIpAddr=220.181.6.175
+httpReferrer=-
+srcIpAddr=192.168.22.4
+reptModel=Squid Web Proxy
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Web request successful
+phEventCategory=0 (External)
+recvBytes=2338
+srcIpPort=52019
+eventSeverityCat=LOW
+httpMethod=GET
+user=-
+httpStatusCode=200 (The request has succeeded)
+httpVersion=HTTP/1.1
+count=1
+uriStem=http://www.baidu.com/
+phRecvTime=any
+reptDevIpAddr=172.16.10.34
+eventAction=0 (Permit)
+reptVendor=Squid-cache-org
+durationMSec=699
+httpUserAgent=	Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0; Trident/4.0; GTB6.4; SLCC1; .NET CLR 2.0.50727; Media Center PC 5.0; InfoPath.2; .NET CLR 3.5.30729; .NET CLR 3.0.30618; msn OptimizedIE8;ENUS; AskTB5.6)
+sentBytes=699

@@ -1,0 +1,24 @@
+[reptDevIpAddr(key)]
+58.58.58.65
+[eventMsg]
+<14>Jun  4 15:51:12 58.58.58.65 System: Interface ethernet 4/9, state down
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+reptDevIpAddr=58.58.58.65
+eventParsedOk=1
+eventSeverity=6
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=MEDIUM
+destIpAddr=$reporter
+eventAction=0 (Permit)
+eventName=Foundry interface down
+reptVendor=Foundry
+eventType=Foundry-Ironware-Intf-Down
+phEventCategory=0 (External)
+intfName=ethernet4/9
+reptModel=Ironware
+
+

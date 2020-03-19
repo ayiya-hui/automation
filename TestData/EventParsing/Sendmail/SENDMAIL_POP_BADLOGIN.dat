@@ -1,0 +1,22 @@
+[reptDevIpAddr(key)]
+137.146.28.76
+[eventMsg]
+<21>Mar 10 19:30:06 137.146.28.76 1938172713  POP.USER.BADLOGIN    clr[137.146.139.109]:       japatter                plaintext                inbox open failed
+[params]
+rawEventMsg=any
+reptVendor=Sendmail.org
+srcIpAddr=137.146.139.109
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+eventName=User Mailbox Login Attempt Unsucessful  via POP
+eventType=SENDMAIL_POP_BADLOGIN
+user=japatter
+phEventCategory=0 (External)
+reptDevIpAddr=137.146.28.76
+reptModel=Sendmail Mail Server

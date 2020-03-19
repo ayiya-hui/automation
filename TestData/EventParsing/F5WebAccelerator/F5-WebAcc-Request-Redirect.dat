@@ -1,0 +1,29 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<182>Oct 20 13:52:56 local/BadReligion1 info logger: [ssl_acc] 1.1.1.2 - admin [20/Oct/2011: 13:52:56 -0400] "POST /iControl/iControlPortal.cgi HTTP/1.1" 303 654
+[params]
+rawEventMsg=any
+deviceTime=any
+eventType=F5-WebAcc-Request-Redirect
+phCustId=$sender
+srcIpAddr=1.1.1.2
+reptModel=Big-IPOS
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+testEvent=Real Event(0)
+eventName=Web request redirected
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+collectorId=any
+httpMethod=POST
+user=admin
+httpStatusCode=303 (See Other - The response to the request can be found under a different URI and SHOULD be retrieved using a GET method on that resource)
+reptDevName=any
+httpVersion=HTTP/1.1
+count=1
+uriStem=/iControl/iControlPortal.cgi
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=F5

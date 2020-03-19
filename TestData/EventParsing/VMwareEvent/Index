@@ -1,0 +1,16 @@
+eventType,name,module,reptDevIpAddr,key,method
+VMware_UserLoginSessionEvent,VMwareEvent_1,VMwareEvent,192.168.24.11,,syslog
+VMware_DatacenterCreatedEvent,VMwareEvent_2,VMwareEvent,192.168.24.11,,syslog
+VMware_DatacenterRenamedEvent,VMwareEvent_3,VMwareEvent,192.168.24.11,,syslog
+VMware_VmDiscoveredEvent,VMwareEvent_4,VMwareEvent,192.168.24.11,,syslog
+VMware_TaskEvent,VMwareEvent_5,VMwareEvent,192.168.24.11,,syslog
+VMware_HostConnectedEvent,VMwareEvent_6,VMwareEvent,192.168.24.11,,syslog
+VMware_HostConnectionLostEvent,VMwareEvent_7,VMwareEvent,192.168.24.11,,syslog
+VMware_DatastoreDestroyedEvent,VMwareEvent_8,VMwareEvent,192.168.24.11,,syslog
+VMware_DatastoreDiscoveredEvent,VMwareEvent_9,VMwareEvent,192.168.24.11,,syslog
+VMware_UserLogoutSessionEvent,VMwareEvent_10,VMwareEvent,10.1.2.53,,syslog
+VMware_BadUsernameSessionEvent,VMwareEvent_11,VMwareEvent,10.1.2.53,,syslog
+VMware_VmPoweredOnEvent,VMwareEvent_12,VMwareEvent,10.1.2.53,,syslog
+VMware_VmCreatedEvent,VMwareEvent_13,VMwareEvent,10.1.2.70,,syslog
+VMware_VmRenamedEvent,VMwareEvent_14,VMwareEvent,10.1.2.70,,syslog
+VMware_VmRemovedEvent,VMwareEvent_15,VMwareEvent,10.1.2.70,,syslog

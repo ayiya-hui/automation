@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+10.4.161.32
+[eventMsg]
+05 21 2014 10:08:02 10.4.101.170 <USER:INFO> 490568301 Sat Mar 01 20:23:15 EST 2014 nas_admin Module Removed lncmpnasp01.staples.com 10.4.161.32 DeviceID:         121391 Slot:             Ethernet3/26 transceiver SlotNumber:       3 ModuleModel:      SFBR-5766PZ ModuleDescription:1000base-SX ModuleOS:          FirmwareVersion:   SerialNumber:     AGM11331688 LastModifiedDate: 2014-02-22 20:24:53.0 Status:           Active  121391 10.4.0.101
+[params]
+parserName=CiscoNCMParser
+eventType=Cisco-NCM-Module-Removed
+destIpAddr=10.4.0.101
+reptModel=CiscoWorks NCM
+eventId=any
+eventParsedOk=1
+hwComponentName=Ethernet3/26 transceiver
+eventSeverity=1
+eventName=Cisco Network Compliance Manager Module Removed
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+eventRuleTrigger=1
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=any
+user=nas_admin
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=10.4.161.32
+reptVendor=Cisco

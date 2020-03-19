@@ -1,0 +1,132 @@
+<eventParser name="AstaroSecureGwParser">
+
+  <deviceType>
+    <Vendor>Astaro</Vendor>
+    <Model>Security Gateway</Model>
+    <Version>ANY</Version>
+  </deviceType>
+  
+  <eventFormatRecognizer><![CDATA[<:gPatYear>:<:gPatMon>:<:gPatDay>-<:gPatTime>\s+<_sig:patSig>\[\d+\]:\s+id="\d+"\s+severity="[a-zA-Z]+"\s+sys=]]></eventFormatRecognizer>
+  
+  <testEvents>
+      <testEvent><![CDATA[<30>2009:08:17-13:34:09 httpproxy[3706]: id="0001" severity="info" sys="SecureWeb" sub="http" name="http access" action="pass" method="GET" srcip="172.18.22.154" user="automationUser" statuscode="304" cached="0" profile="REF_DefaultHTTPProfile (Default Proxy)" filteraction="REF_DefaultHTTPCFFAction (Default content filter action)" size="0" time="33 ms" request="0xb1034df0" url="http://bloomfieldhillsmi.net/images/na-footer.gif" exceptions="content,url,mime" error=""]]></testEvent>
+      <testEvent><![CDATA[<30>2009:08:17-13:27:47 ulogd[3004]: id="2001" severity="info" sys="SecureNet" sub="packetfilter" name="Packet dropped" action="drop" fwrule="60001" seq="0" initf="br0" outitf="br0" dstmac="00:90:0b:07:8f:ce" srcmac="00:00:00:00:00:00" srcip="172.18.22.126" dstip="172.18.22.255" proto="17" length="78" tos="0x00" prec="0x00" ttl="128" srcport="137" dstport="137"]]></testEvent>
+  </testEvents>
+  
+  <!-- pattern definitions --> 
+  <patternDefinitions>
+    <pattern name="patSig"><![CDATA[httpproxy|ulogd]]></pattern>
+    <pattern name="patDestName"><![CDATA[[^/]+]]></pattern>
+  </patternDefinitions>
+  
+  <parsingInstructions>
+    <!-- parsing common fields -->
+    <switch>
+	<case>
+		<collectFieldsByRegex src="$_rawmsg">
+			<regex><![CDATA[<:gPatSyslogPRI><_year:gPatYear>:<_mon:gPatMon>:<_day:gPatDay>-<_time:gPatTime>\s+<_sig:patSig>\[\d+\]: <_body:gPatMesgBody>]]></regex>
+		</collectFieldsByRegex>
+	</case>
+	<case>
+		<collectFieldsByRegex src="$_rawmsg">
+			<regex><![CDATA[<:gPatSyslogPRI><:gPatMon>\s+<:gPatDay>\s+<:gPatTime>\s+<reptDevIpAddr:gPatIpV4Dot>\s<_year:gPatYear>:<_mon:gPatMon>:<_day:gPatDay>-<_time:gPatTime>\s+<_sig:patSig>\[\d+\]: <_body:gPatMesgBody>]]></regex>
+		</collectFieldsByRegex>
+	</case>
+    </switch>
+
+    <setEventAttribute attr="deviceTime">toDateTime($_mon, $_day, $_year, $_time)</setEventAttribute>
+    <setEventAttribute attr="eventAction">0</setEventAttribute>
+    <setEventAttribute attr="eventType">Astaro-Generic</setEventAttribute>
+    <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+    
+    <!-- message specific parsing
+    2009:03:31-11:12:21 httpproxy[3948]: id="0001" severity="info" sys="SecureWeb" sub="http" name="http access" action="pass" method="GET" srcip="10.0.2.53" user="" statuscode="200" cached="0" profile="REF_GlCTfbCuuA (IT )" filteraction="REF_FXbUQQToxQ (IT)" size="204" time="2358 ms" request="0xb2728318" url="http://suggestqueries.google.com/complete/search?qu=untangle" exceptions="" error="" category="145" categoryname="Search Engines" content-type="text/javascript"
+    <30>2009:08:17-13:27:47 ulogd[3004]: id="2001" severity="info" sys="SecureNet" sub="packetfilter" name="Packet dropped" action="drop" fwrule="60001" seq="0" initf="br0" outitf="br0" dstmac="00:90:0b:07:8f:ce" srcmac="00:00:00:00:00:00" srcip="172.18.22.126" dstip="172.18.22.255" proto="17" length="78" tos="0x00" prec="0x00" ttl="128" srcport="137" dstport="137
+    <30>2009:08:17-13:27:47 ulogd[3004]: id="2002" severity="info" sys="SecureNet" sub="packetfilter" name="Packet accepted" action="accept" fwrule="6" seq="0" initf="br0" outitf="br0" dstmac="00:90:0b:07:8f:ce" srcmac="00:90:0b:07:8f:ce" srcip="172.18.22.128" dstip="172.16.206.10" proto="17" length="71" tos="0x00" prec="0x00" ttl="128" srcport="24991" dstport="53"
+    <30>Mar 30 16:30:53 172.16.255.68 2009:08:17-13:27:47 ulogd[3004]: id="2001" severity="info" sys="SecureNet" sub="packetfilter" name="Packet dropped" action="drop" fwrule="60001" seq="0" initf="br0" outitf="br0" dstmac="00:90:0b:07:8f:ce" srcmac="00:00:00:00:00:00" srcip="172.18.22.126" dstip="172.18.22.255" proto="17" length="78" tos="0x00" prec="0x00" ttl="128" srcport="137" dstport="137"
+      -->
+
+    <choose>
+      <when test='$_sig = "httpproxy"'>
+        <collectAndSetAttrByKeyValuePair src="$_body" sep=" ">
+          <attrKeyMap attr="_name" key="name="/>
+          <attrKeyMap attr="_action" key="action="/>
+          <attrKeyMap attr="httpMethod" key="method="/>
+          <attrKeyMap attr="srcIpAddr" key="srcip="/>
+          <attrKeyMap attr="user" key="user="/>
+          <attrKeyMap attr="httpStatusCode" key="statuscode="/>
+          <attrKeyMap attr="policyName" key="profile="/>
+          <attrKeyMap attr="_filterPolicy" key="filteraction="/>
+          <attrKeyMap attr="totBytes" key="size="/>
+          <attrKeyMap attr="_durationMsec" key="time="/>
+          <attrKeyMap attr="uriStem" key="url="/>
+          <attrKeyMap attr="_excep" key="exceptions="/>
+          <attrKeyMap attr="_error" key="error="/>
+          <attrKeyMap attr="webCategory" key="categoryname="/>
+          <attrKeyMap attr="httpContentType" key="content-type="/>
+        </collectAndSetAttrByKeyValuePair>
+
+        <choose>
+          <when test='$_action = "pass"'>
+            <setEventAttribute attr="eventAction">0</setEventAttribute>
+            <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+	    <setEventAttribute attr="eventType">"Astaro-Web-Filter-Pass"</setEventAttribute>
+          </when>
+          <when test='$_action = "deny"'>
+            <setEventAttribute attr="eventAction">1</setEventAttribute>
+            <setEventAttribute attr="eventSeverity">7</setEventAttribute>
+	    <setEventAttribute attr="eventType">"Astaro-Web-Filter-Block"</setEventAttribute>
+          </when>
+          <when test='$_action = "block"'>
+            <setEventAttribute attr="eventAction">1</setEventAttribute>
+            <setEventAttribute attr="eventSeverity">7</setEventAttribute>
+	    <setEventAttribute attr="eventType">"Astaro-Web-Filter-Block"</setEventAttribute>
+          </when>
+        </choose>
+
+        <when test="exist uriStem">
+          <when test="matches($uriStem,'http://[^/]+/')">
+            <collectFieldsByRegex src="$uriStem">
+              <regex><![CDATA[http://<destName:patDestName>/<:gPatMesgBody>]]></regex>
+            </collectFieldsByRegex>
+          </when>
+          <when test="matches($destName, '^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}')">
+            <setEventAttribute attr="destIpAddr">$destName</setEventAttribute>
+          </when>
+        </when>
+      </when>
+
+      <when test='$_sig = "ulogd"'>
+
+        <collectAndSetAttrByKeyValuePair src="$_body" sep=" ">
+          <attrKeyMap attr="_action" key="action="/>
+          <attrKeyMap attr="srcIpAddr" key="srcip="/>
+          <attrKeyMap attr="srcIpPort" key="srcport="/>
+          <attrKeyMap attr="destIpAddr" key="dstip="/>
+          <attrKeyMap attr="destIpPort" key="dstport="/>
+          <attrKeyMap attr="srcMACAddr" key="srcmac="/>
+          <attrKeyMap attr="destMACAddr" key="dstmac="/>
+          <attrKeyMap attr="srcIntfName" key="initf="/>
+          <attrKeyMap attr="destIntfName" key="outitf="/>
+          <attrKeyMap attr="totBytes" key="length="/>
+          <attrKeyMap attr="ipProto" key="proto="/>
+        </collectAndSetAttrByKeyValuePair>	
+
+        <choose>
+          <when test='$_action = "accept"'>
+	    <setEventAttribute attr="eventAction">0</setEventAttribute>
+            <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+	    <setEventAttribute attr="eventType">"Astaro-Packet-Accept"</setEventAttribute>
+          </when>
+          <when test='$_action = "drop"'>
+            <setEventAttribute attr="eventAction">1</setEventAttribute>
+            <setEventAttribute attr="eventSeverity">7</setEventAttribute>
+	    <setEventAttribute attr="eventType">"Astaro-Packet-Drop"</setEventAttribute>
+          </when>
+        </choose>
+      </when>
+
+    </choose>
+
+  </parsingInstructions>
+</eventParser>

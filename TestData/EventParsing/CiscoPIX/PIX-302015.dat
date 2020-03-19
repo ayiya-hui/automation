@@ -1,0 +1,34 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>Nov 28 2007 17:20:48: %PIX-6-302015: Built outbound UDP connection 76116 for outside:99.129.50.158/53 (99.129.50.158/53) to inside:192.168.0.10/1041 (99.129.50.157/1411)--automator
+[params]
+rawEventMsg=any
+destIpAddr=99.129.50.158
+deviceTime=any
+eventType=PIX-302015
+phCustId=$sender
+destIpAddr=99.129.50.158
+destIpPort=53 (DOMAIN)
+srcIpAddr=192.168.0.10
+reptModel=PIX
+eventId=any
+ipConnId=76116
+eventParsedOk=any
+eventSeverity=1
+preNATDestIpAddr=99.129.50.158
+eventName=Built UDP connection
+phEventCategory=4 (Traffic)
+srcIntfName=inside
+srcIpPort=1041
+preNATDestIpPort=53 (DOMAIN)
+eventSeverityCat=LOW
+destIntfName=outside
+postNATSrcIpAddr=99.129.50.157
+ipProto=17 (UDP)
+postNATSrcIpPort=1411
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Cisco

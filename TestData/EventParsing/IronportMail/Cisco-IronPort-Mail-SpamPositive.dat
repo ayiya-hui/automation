@@ -1,0 +1,23 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<22>Oct 18 17:35:45 IronPort-Mail: Info: MID 19597403 interim verdict using engine: CASE spam positive
+[params]
+rawEventMsg=any
+eventId=any
+count=1
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+eventSeverity=1
+eventType=Cisco-IronPort-Mail-SpamPositive
+phCustId=$sender
+reptDevIpAddr=$localhost
+collectorId=any
+eventName=IronPort found spam
+reptVendor=Cisco
+phRecvTime=any
+ironportMailMID=19597403
+reptDevName=any
+reptModel=IronPort AsyncOS Mail

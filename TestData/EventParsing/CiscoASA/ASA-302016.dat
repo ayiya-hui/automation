@@ -1,0 +1,62 @@
+[reptDevIpAddr(key)]
+$localhost (ipConnId:76117)
+[eventMsg]
+<134>Nov 28 2007 17:20:48: %ASA-6-302016: Teardown UDP connection 76117 for outside:99.129.50.158/53 to inside:192.168.0.10/1041 duration 0:00:00 bytes 268
+[params]
+rawEventMsg=any
+deviceTime=any
+eventType=ASA-302016
+phCustId=$sender
+destIpAddr=any
+totBytes=268
+destIpPort=1041
+srcIpAddr=any
+reptModel=ASA
+eventId=any
+ipConnId=76117
+eventParsedOk=1
+eventSeverity=1
+eventName=Teardown UDP connection
+phEventCategory=4 (Traffic)
+srcIntfName=sanJose
+srcIpPort=53
+eventSeverityCat=LOW
+destIntfName=stataClara
+ipProto=17 (UDP)
+count=1
+phRecvTime=any
+reptDevIpAddr=$reporter
+eventAction=0 (Permit)
+reptVendor=Cisco
+durationMSec=0
+[reptDevIpAddr(key)]
+$localhost (ipConnId:76116)
+[eventMsg]
+<134>Nov 28 2007 17:20:48: %ASA-6-302016: Teardown UDP connection 76116 for outside:99.129.50.158/53 to inside:192.168.0.10/1041 duration 0:00:00 bytes 268
+[params]
+rawEventMsg=any
+deviceTime=any
+eventType=ASA-302016
+phCustId=$sender
+destIpAddr=any
+totBytes=268
+destIpPort=1041
+srcIpAddr=any
+reptModel=ASA
+eventId=any
+ipConnId=76116
+eventParsedOk=1
+eventSeverity=1
+eventName=Teardown UDP connection
+phEventCategory=4 (Traffic)
+srcIntfName=sanJose
+srcIpPort=53
+eventSeverityCat=LOW
+destIntfName=stataClara
+ipProto=17 (UDP)
+count=1
+phRecvTime=any
+reptDevIpAddr=$reporter
+eventAction=0 (Permit)
+reptVendor=Cisco
+durationMSec=0

@@ -1,0 +1,29 @@
+[reptDevIpAddr(key)]
+70.70.70.70
+[eventMsg]
+May 16 18:21:37 70.70.70.70 ikeyserver[3575]: {Success}, {Administration}, {S-001001}, {A query for a single [Component] record was successful.}, {0xF3CE4F9DD1D7F4F685A186CD52C464E2}, {Source Location:10.1.2.3}, {Client Location:10.1.2.3}, {User ID:flast}, {Domain:company.com}, {Input Details: {Component Type : Identikey Server} {Location : 10.1.2.3}}, {Output Details: {Component Type : Identikey Server} {Location : 10.1.2.3} {Policy ID : Identikey Administration Logon} {Created Time : 2013/03/04 18:48:51} {Modified Time : 2013/04/09 21:00:54} {License Key : ----- VASCO LICENCE ----- Authentication=Yes Company=STAPLES, INC. (US) Component=Identikey Server ConfigKey=2e92ccf3-3959-4139-80a2-f055fd525a96 Description=Perf - Ned EMV-CAP=No HSM=No HostKey=1b361a14-9e5c-487c-b998-8cd2349577f2 InstallationRef=A0000000-000-00 LayoutVersion=1 License=0002-00015401 Location=10.1.2.3 Product=Identikey Server Provisioning=No RADIUS=Yes SEAL=Yes SOAP=Yes SerialNo=0000000000 Signature=No Username=First Last WindowsLogon=Yes Version=3.1 Expires=Never Generated=2013/03/04 18:39:31 GMT ----- SIGNATURE ----- 3:302C021430B946C8E8CE91 CCDADC30528A12DA4999EFFD 3302141226076660D840B998 21944BB0D018AA47FED212 ----- END LICENCE -----} {Key ID : SSMINSTALLSENSITIVEKEY}}, {Object:Component}, {Client Type:Administration Program}
+[params]
+domain=company.com
+parserName=VascoParser
+eventType=Vasco-DigiPass-KeyServer-ComponentQuery-Success
+srcIpAddr=10.1.2.3
+reptModel=DigiPass
+eventId=any
+policyName=Identikey Administration Logon
+eventParsedOk=1
+eventSeverity=1
+eventName=A query for a single Component record was successful
+appTransportProto=Syslog
+phEventCategory=0 (External)
+msg=A query for a single [Component] record was successful.
+eventRuleTrigger=1
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=70.70.70.70
+user=flast
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=70.70.70.70
+reptVendor=Vasco

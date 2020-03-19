@@ -1,0 +1,37 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<181>date=2013-05-01 time=11:20:50 devname=FortiGate80C devid=FGT80C3912622808 logid=0000000008 type=traffic subtype=forward level=notice vd=root srcip=172.16.78.32 srcport=900 srcintf=unknown-0 dstip=1.1.1.32 dstport=800 dstintf=unknown-0 dstcountry=Australia srccountry=Reserved service=800/tcp wanoptapptype=cifs duration=20 policyid=100 user=test user group=test group identidx=200 wanin=400 wanout=300 lanin=200 lanout=100
+[params]
+deviceTime=any
+destGeoOrg=any
+appName=cifs
+eventType=FortiGate-traffic-WANOpt
+phCustId=$sender
+destIpAddr=1.1.1.32
+destGeoCountry=any
+srcIpAddr=172.16.78.32
+reptModel=FortiOS
+eventId=any
+eventParsedOk=1
+eventSeverity=3
+hostIpAddr=172.16.78.32
+eventName=WAN optimization traffic
+serviceName=800/tcp
+phEventCategory=4 (Traffic)
+srcIntfName=unknown-0
+srcIpPort=900
+eventSeverityCat=LOW
+collectorId=any
+destIntfName=unknown-0
+relayDevIpAddr=$localhost
+user=test user
+destIpPort=800
+reptDevName=any
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Fortinet
+durationMSec=20000
+userGrp=test group

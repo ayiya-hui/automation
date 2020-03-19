@@ -1,0 +1,12 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+CylanceProtect-Device-Registration,CylanceProtect_1,CylanceProtect,$localhost,,syslog
+CylanceProtect-Device-SystemSecurity,CylanceProtect_2,CylanceProtect,$localhost,,syslog
+CylanceProtect-Device-Device-Updated,CylanceProtect_3,CylanceProtect,$localhost,,syslog
+CylanceProtect-AuditLog-ThreatGlobalQuarantine,CylanceProtect_4,CylanceProtect,$localhost,,syslog
+CylanceProtect-Threat-threat_found,CylanceProtect_5,CylanceProtect,$localhost,,syslog
+CylanceProtect-AppControl-executionfromexternaldrives,CylanceProtect_6,CylanceProtect,$localhost,,syslog
+CylanceProtect-ExploitAttempt-blocked,CylanceProtect_7,CylanceProtect,$localhost,,syslog
+CylanceProtect-Device-Device-Removed,CylanceProtect_8,CylanceProtect,$localhost,,syslog
+CylanceProtect-ThreatClassification-ResearchSaved,CylanceProtect_9,CylanceProtect,$localhost,,syslog
+CylanceProtect-AppControl-pechange,CylanceProtect_10,CylanceProtect,$localhost,,syslog

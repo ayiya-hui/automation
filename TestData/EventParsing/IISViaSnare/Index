@@ -1,0 +1,11 @@
+eventType,name,module,reptDevIpAddr,key,method
+IIS-FTP-Login-Failure,IISViaSnare_1,IISViaSnare,$localhost,,syslog
+IIS-FTP-Info,IISViaSnare_2,IISViaSnare,$localhost,,syslog
+IIS-FTP-Login-Success,IISViaSnare_3,IISViaSnare,$localhost,,syslog
+IIS-FTP-Generic-Success,IISViaSnare_4,IISViaSnare,$localhost,,syslog
+IIS-FTP-File-Download-Success,IISViaSnare_5,IISViaSnare,$localhost,,syslog
+IIS-FTP-Login-Failure,IISViaSnare_6,IISViaSnare,192.168.0.40,,syslog
+IIS-FTP-Info,IISViaSnare_7,IISViaSnare,192.168.0.40,,syslog
+IIS-Web-Forbidden-Access-Denied,IISViaSnare_8,IISViaSnare,192.168.0.40,,syslog
+IIS-Web-Request-Success,IISViaSnare_9,IISViaSnare,$localhost,uriStem:/iisstart.htm,syslog
+IIS-Web-Request-Success,IISViaSnare_10,IISViaSnare,$localhost,uriStem:/Document/ACE/index.htm,syslog

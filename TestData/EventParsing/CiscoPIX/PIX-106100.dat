@@ -1,0 +1,21 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>Dec 04 2008 20:00:45: %PIX-2-106100: access-list myAcl permitted TCP inside/10.10.10.10(9996) ->outside/20.20.20.20(8080) hit-cnt 1000 first hit --automator
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=any
+eventSeverity=8
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=MEDIUM
+eventAction=0 (Permit)
+eventName=PIX-106100
+reptVendor=Cisco
+eventType=PIX-106100
+phEventCategory=0 (External)
+reptDevIpAddr=$localhost
+reptModel=PIX

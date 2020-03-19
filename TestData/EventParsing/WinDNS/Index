@@ -1,0 +1,11 @@
+eventType,name,module,reptDevIpAddr,key,method
+MS_DNS_A_Success,WinDNS_1,WinDNS,20.2.2.10,,syslog
+MS_DNS_A_Success,WinDNS_2,WinDNS,$localhost,destName:metrics.sun.com,syslog
+MS_DNS_A_Fail,WinDNS_3,WinDNS,20.2.2.11,,syslog
+MS_DNS_PTR_Success,WinDNS_4,WinDNS,20.2.2.12,,syslog
+MS_DNS_PTR_Fail,WinDNS_5,WinDNS,20.2.2.13,,syslog
+MS_DNS_AAAA_Success,WinDNS_6,WinDNS,20.2.2.14,,syslog
+MS_DNS_AAAA_Fail,WinDNS_7,WinDNS,20.2.2.15,,syslog
+MS_DNS_SRV_Success,WinDNS_8,WinDNS,20.2.2.16,,syslog
+MS_DNS_SRV_Fail,WinDNS_9,WinDNS,20.2.2.17,,syslog
+MS_DNS_A_Success,WinDNS_10,WinDNS,$localhost,destName:ocsp.verisign.net,syslog

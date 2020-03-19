@@ -1,0 +1,23 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<189>date=2010-06-25 time=05:36:40 devname=FortiGate50B device_id=FGT50B3G10615108 log_id=0104032140 type=event subtype=admin pri=notice vd=root user="admin" ui=jsconsole field=hostname old_value="FGT50B3G10615108" new_value="FortiGate50B" msg="User admin changed hostname global setting to FortiGate50B from jsconsole"
+[params]
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=3
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+eventAction=0 (Permit)
+eventName=Admin changed the global setting
+reptVendor=Fortinet
+eventType=FortiGate-event-global-setting-change
+user=admin
+phEventCategory=0 (External)
+relayDevIpAddr=$reporter
+reptDevIpAddr=$reporter
+usrMsg=User admin changed hostname global setting to FortiGate50B from jsconsole
+reptModel=FortiOS

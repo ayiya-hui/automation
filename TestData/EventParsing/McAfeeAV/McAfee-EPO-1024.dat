@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+enterprises.3401 6 5 enterprises.3401.12.2.1.1.4.1.1.9.294 s "To SJ-Dev-S-RH-DNS-01"     enterprises.3401.12.2.1.1.4.1.1.11.294 s "My Organization"   enterprises.3401.12.2.1.1.4.1.1.12.294 s "Directory"        enterprises.3401.12.2.1.1.4.1.1.18.294 s "Any"       enterprises.3401.12.2.1.1.4.1.1.19.294 s "Any"      enterprises.3401.12.2.1.1.4.1.1.33.294 s "(Any)"     enterprises.3401.12.2.1.1.4.1.1.15.294 s "4/16/08 12:01:02 PM"       enterprises.3401.12.2.1.1.4.1.1.31.294 s "1024"     enterprises.3401.12.2.1.1.4.1.1.32.294 s "Infected file found."      enterprises.3401.12.2.1.1.4.1.1.16.294 s "1"        enterprises.3401.12.2.1.1.4.1.1.17.294 s "1" enterprises.3401.12.2.1.1.4.1.1.13.294 s "VirusScan"        enterprises.3401.12.2.1.1.4.1.1.14.294 s "Virus detected and NOT removed"    enterprises.3401.12.2.1.1.4.1.1.22.294 s "W32/CodeRed.worm.c"        enterprises.3401.12.2.1.1.4.1.1.23.294 s "Not Available"    enterprises.3401.12.2.1.1.4.1.1.24.294 s "192.168.1.6"       enterprises.3401.12.2.1.1.4.1.1.25.294 s "SJDEVSWINIIS01"   enterprises.3401.12.2.1.1.4.1.1.26.294 s "C:\Documents and Settings\administrator.PROSPECTHILLS\Desktop\CodeRed.bin"      enterprises.3401.12.2.1.1.4.1.1.27.294 s "4"        enterprises.3401.12.2.1.1.4.1.1.6.294 s "4/16/08 12:01:02 PM"
+[params]
+rawEventMsg=any
+eventSeverity=1
+eventSeverityCat=LOW
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+virusName=W32/CodeRed.worm.c
+reptVendor=McAfee
+phRecvTime=any
+phCustId=$sender
+hostName=SJDEVSWINIIS01
+destIpAddr=192.168.1.6
+hostIpAddr=192.168.1.6
+fileName=C:\Documents and Settings\administrator.PROSPECTHILLS\Desktop\CodeRed.bin
+eventName=Infected file found
+computer=SJDEVSWINIIS01
+eventType=McAfee-EPO-1024
+phEventCategory=0 (External)
+reptDevIpAddr=$localhost
+destName=SJDEVSWINIIS01
+reptModel=ePolicy Orchestrator

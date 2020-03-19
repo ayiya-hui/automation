@@ -1,0 +1,53 @@
+[reptDevIpAddr(key)]
+172.16.10.8
+[eventMsg]
+<161>Jul  1 11:15:19 $reporter snort[2242]: [1:1417:9] SNMP request udp [Classification: Attempted Information Leak] [Priority: 2]: {UDP} 192.168.1.42:47639 -> 172.16.2.51:161
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+reptDevIpAddr=$reporter
+eventParsedOk=1
+eventSeverity=9
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=HIGH
+destIpAddr=172.16.2.51
+eventAction=0 (Permit)
+eventName=SNMP request udp
+ipProto=17 (UDP)
+reptVendor=Snort-org
+eventType=Snort-1417
+srcIpAddr=192.168.1.42
+phEventCategory=0 (External)
+destIpPort=161 (SNMP)
+srcIpPort=47639
+reptModel=Snort IPS
+devEventTypeGrp=Attempted Information Leak
+
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<161>snort[2242]: [1:1417:9] SNMP request udp [Classification: Misc activity] [Priority: 3]: {UDP} 192.168.19.1:6555 -> 172.16.2.5:514
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+reptDevIpAddr=$localhost
+eventParsedOk=1
+eventSeverity=8
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=MEDIUM
+destIpAddr=172.16.2.5
+eventAction=0 (Permit)
+eventName=SNMP request udp
+ipProto=17 (UDP)
+reptVendor=Snort-org
+eventType=Snort-1417
+srcIpAddr=192.168.19.1
+phEventCategory=0 (External)
+destIpPort=514 (SYSLOG)
+srcIpPort=6555
+reptModel=Snort IPS
+devEventTypeGrp=Misc activity

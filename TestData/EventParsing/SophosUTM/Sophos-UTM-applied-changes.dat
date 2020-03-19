@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<30>2016:03:11-10:00:29 ActiveUTM-1 confd[3738]: I main::top-level:774() => id="310n" severity="info" sys="System" sub="confd" name="applied changes" user="ha_sync" srcip="198.19.250.2" sid="nQwPgUQKHrbqRzqRRzQy" facility="system" client="confd-sync" pid="14680" version="10088" storage="/cfg"
+[params]
+parserName=SophosUTMParser
+eventType=Sophos-UTM-applied-changes
+procName=confd
+srcIpAddr=198.19.250.2
+reptModel=UTM
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Sophos UTM changes applied
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+eventRuleTrigger=1
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+user=ha_sync
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Sophos

@@ -1,0 +1,24 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134> 11/25/2013:11:27:56  clxns 0-PPE-0 : SNMP TRAP_SENT 12316087 0 :  appfwSQL (appfwLogMsg = 209.55.115.233 3855301-PPE0 jgCTJDYDJZIkK6Rgm/..., sysIpAddress = 172.22.36.79)
+[params]
+rawEventMsg=any
+eventId=any
+count=1
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+totFlows=1
+eventType=NETSCALER-SNMP-TRAP_SENT
+phCustId=$sender
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+collectorId=any
+eventName=NETSCALER-SNMP-TRAP_SENT
+eventSeverity=1
+reptVendor=Citrix
+phRecvTime=any
+reptDevName=any
+reptModel=NetScaler

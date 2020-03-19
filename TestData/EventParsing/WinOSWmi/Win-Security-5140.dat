@@ -1,0 +1,29 @@
+[reptDevIpAddr(key)]
+20.20.20.120
+[eventMsg]
+Fri Oct 30 18:19:58 2009 $reporter AccelOps-WinLog-WMI  [Category]="12808" [CategoryString]="File Share" [ComputerName]="sf1dc03.jha.local" [Data]="NULL" [EventCode]="5140" [EventIdentifier]="5140" [EventType]="4" [Logfile]="Security" [RecordNumber]="184035396" [SourceName]="Microsoft-Windows-Security-Auditing" [TimeGenerated]="20100505222917.259626-000" [TimeWritten]="20100505222917.259626-000" [Type]="Audit Success" [User]="(null)" [[Subject]][Security ID]="S-1-5-21-2090294290-982477196-2044928816-3909" [Account Name]="NURSINGADMIN$" [Account Domain]="JHA" [Logon ID]="0x550c8f8" [Network Information]="	" [Source Address]="10.0.2.126" [Source Port]="2109"
+[params]
+rawEventMsg=any
+type=Audit Success
+eventAction=0 (Permit)
+count=1
+eventId=any
+domain=JHA
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=$reporter
+winLogonId=0x550c8f8
+eventName=A network share object was accessed
+srcIpAddr=10.0.2.126
+reptVendor=Microsoft
+eventType=Win-Security-5140
+user=NURSINGADMIN$
+phEventCategory=0 (External)
+reptDevIpAddr=$reporter
+srcIpPort=2109
+reptModel=Windows
+eventSource=Microsoft-Windows-Security-Auditing

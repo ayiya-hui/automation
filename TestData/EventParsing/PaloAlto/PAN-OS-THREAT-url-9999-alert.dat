@@ -1,0 +1,40 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<14>May  9 17:55:21 1,2010/05/09 17:55:21,0006C101167,THREAT,url,6,2010/05/09 17:55:20,172.16.2.4,98.137.149.56,::172.16.255.88,98.137.149.56,DynamicDefault,,,web-browsing,vsys1,trust,untrust,ethernet1/2,ethernet1/1,syslog-172.16.20.152,2010/05/09 18:35:33,976,1,1127,80,38932,80,0x40,tcp,alert,"www.yahoo.com",(9999),news,informational,0
+[params]
+rawEventMsg=any
+appName=web-browsing
+destName="www.yahoo.com"
+eventType=PAN-OS-THREAT-url-9999-alert
+phCustId=$sender
+destIpAddr=98.137.149.56
+destIpPort=80 (HTTP)
+srcIpAddr=172.16.2.4
+reptModel=PAN-OS
+eventId=any
+ipConnId=976
+eventParsedOk=1
+eventSeverity=1
+preNATDestIpAddr=98.137.149.56
+eventName=URL inspected traffic permitted
+appTransportProto=web-browsing
+phEventCategory=0 (External)
+paFwAction=alert
+webCategory=news
+srcIntfName=ethernet1/2
+srcFwZone=trust
+srcIpPort=1127
+preNATDestIpPort=80 (HTTP)
+eventSeverityCat=LOW
+destIntfName=ethernet1/1
+postNATSrcIpAddr=172.16.255.88
+ipProto=6 (TCP)
+destFwZone=untrust
+postNATSrcIpPort=38932
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Palo Alto
+fwRule=DynamicDefault

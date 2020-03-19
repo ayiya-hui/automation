@@ -1,0 +1,11 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+Cyphort-Cortex-cnc-Malware,Cyphort_1,Cyphort,$localhost,,syslog
+Cyphort-Cortex-datatheft-Malware,Cyphort_2,Cyphort,$localhost,,syslog
+Cyphort-Cortex-email-Malware,Cyphort_3,Cyphort,$localhost,,syslog
+Cyphort-Cortex-exploit-Malware,Cyphort_4,Cyphort,$localhost,,syslog
+Cyphort-Cortex-http-Malware,Cyphort_5,Cyphort,$localhost,,syslog
+Cyphort-Cortex-submission-Malware,Cyphort_6,Cyphort,$localhost,,syslog
+Cyphort-Cortex-appliance-connect-health,Cyphort_7,Cyphort,$localhost,,syslog
+Cyphort-Cortex-link-health,Cyphort_8,Cyphort,$localhost,,syslog
+Cyphort-Cortex-services-health,Cyphort_9,Cyphort,$localhost,,syslog

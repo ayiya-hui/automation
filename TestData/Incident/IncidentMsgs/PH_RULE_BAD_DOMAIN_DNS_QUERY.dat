@@ -1,0 +1,6 @@
+[eventMsg]
+<158>Jan 30 15:47:17 2.10.1.1 named[24146]: Jan 30 15:47:17.639 client 30.20.20.1#36451: query: 12flu.in IN AAAA
+<158>Jan 30 15:47:17 2.10.1.1 named[24146]: Jan 30 15:47:17.639 client 30.20.20.1#36451: query: 10flu.in IN AAAA
+<158>Jan 30 15:47:17 2.10.1.1 named[24146]: Jan 30 15:47:17.639 client 30.20.20.1#36451: query: 11flu.in IN AAAA
+<158>Jan 30 15:47:17 2.10.1.1 named[24146]: Jan 30 15:47:17.639 client 30.20.20.1#36451: query: 13flu.in IN AAAA
+<158>Jan 30 15:47:17 2.10.1.1 named[24146]: Jan 30 15:47:17.639 client 30.20.20.1#36451: query: 14flu.in IN AAAA

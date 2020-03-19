@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+70.70.70.70
+[eventMsg]
+May 17 18:43:27 70.70.70.70 ikeyserver[3582]: {Warning}, {Replication}, {W-012002}, {A Replication update received has been ignored, as the local data is more up-to-date.}, {0x2A1FCABC12916B2520AC4A744B7C3A44}, {Source Location:10.1.2.3}, {Client Location:10.9.8.7}, {Request ID:141}, {Input Details: {User ID : admin} {User Name : Identikey Administrator} {Description : Identikey fully privileged admin user} {Email : } {Phone Number : } {Mobile Phone Number : } {Password : ********} {Created Time : 2013/03/04 18:48:57} {Modified Time : 2013/05/17 18:41:09} {Domain Name : company.com} {Organizational Unit : } {Linked User ID : } {Linked User's Domain : } {Administration Privileges : ********} {Local Authentication : Default} {Back-end Authentication : Default} {Disabled : no} {Lock Count : 0} {Locked : no} {Offline Authentication Enabled : } {Last Password Set Time : 2013/05/17 18:39:12} {Static Password History : wwwwwwwwwwwwwwwwwwwwwwwww$a0iW$Oh75N8isuA3w=} {Key ID : SSMINSTALLSENSITIVEKEY} {Last Authentication Time : 2013/05/17 18:41:09} {Expiration Time : 2013/05/17 18:43:27}}, {Object:User}, {Command:Update}
+[params]
+parserName=VascoParser
+eventType=Vasco-DigiPass-KeyServer-ReplUpdate-Ignore
+srcIpAddr=10.1.2.3
+reptModel=DigiPass
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=A Replication update received has been ignored, as the local data is more up-to-date
+appTransportProto=Syslog
+phEventCategory=0 (External)
+msg=A Replication update received has been ignored, as the local data is more up-to-date.
+eventRuleTrigger=1
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=70.70.70.70
+user=Identikey Administrator
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=70.70.70.70
+reptVendor=Vasco

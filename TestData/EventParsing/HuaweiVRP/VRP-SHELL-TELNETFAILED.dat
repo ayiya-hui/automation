@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<188>Apr 13 2008 08:39:59 SH-Quidway-SW1 %%01SHELL/4/TELNETFAILED(l): Login through telnet failed( ip=192.168.20.36 times=1).
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+appTransportProto=telnet
+count=1
+phCustId=$sender
+deviceTime=any
+eventAction=1 (Deny)
+eventId=any
+eventName=Failed to login through telnet
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=3
+eventSeverityCat=LOW
+eventType=VRP-SHELL-TELNETFAILED
+hostName=SH-Quidway-SW1
+reptDevName=SH-Quidway-SW1
+reptDevIpAddr=$reporter
+reptModel=VRP
+reptVendor=Huawei
+srcIpAddr=192.168.20.36

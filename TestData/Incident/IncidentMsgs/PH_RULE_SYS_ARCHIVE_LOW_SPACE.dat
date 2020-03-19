@@ -1,0 +1,2 @@
+[eventMsg]
+[PH_SYSTEM_ARCHIVE_LOW]:[eventSeverity]=PHL_WARNING,[procName]=phMonitorSupervisor,[fileName]=phSystemStatus.cpp,[lineNumber]=78,[phLogDetail]= Data archive is low (directory: evtData, free bytes: 128KB)

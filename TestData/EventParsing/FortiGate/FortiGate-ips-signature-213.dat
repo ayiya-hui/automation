@@ -1,0 +1,44 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<177>date=2013-05-01 time=11:20:50 devname=FortiGate80C devid=FGT80C3912622808 logid=0419016384 type=utm subtype=ips eventtype=signature level=alert vd=root severity=info srcip=32.78.16.172 dstip=32.1.1.1 dstintf=lo policyid=N/A identidx=N/A sessionid=1234 status=detected proto=6 service=5120/tcp count=1 attackname=tcp_syn_flood srcport=2560 dstport=5120 attackid=213 sensor=sensor ref=http://www.fortinet.com/ids/VID213 user=user group=group incidentserialno=0
+[params]
+hostGeoState=New Jersey
+deviceTime=any
+destGeoOrg=any
+eventType=FortiGate-ips-signature-213
+phCustId=$sender
+destIpAddr=32.1.1.1
+ipsFPCheckStatus=0 (Couldnot determine)
+destIpPort=5120
+destGeoCountry=any
+srcIpAddr=32.78.16.172
+hostGeoLongitude=-74.1075
+reptModel=FortiOS
+eventId=any
+eventParsedOk=1
+eventSeverity=4
+hostIpAddr=32.78.16.172
+eventName=FortiGate-ips-signature-213
+serviceName=5120/tcp
+phEventCategory=0 (External)
+infoURL=http://www.fortinet.com/ids/VID213
+srcIpPort=2560
+eventSeverityCat=LOW
+collectorId=any
+hostGeoLatitude=40.3965
+destIntfName=lo
+relayDevIpAddr=$localhost
+user=user
+ipProto=6 (TCP)
+reptDevName=any
+count=1
+hostGeoCountry=United States
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+hostGeoCity=Middletown
+reptVendor=Fortinet
+destGeoCity=any
+userGrp=group
+hostGeoOrg=AT&T Wireless

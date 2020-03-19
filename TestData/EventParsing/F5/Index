@@ -1,0 +1,11 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+F5-LTM-ClientIP,F5_1,F5,$localhost,,syslog
+F5-LTM-Country,F5_2,F5,$localhost,,syslog
+F5-LTM-VS,F5_3,F5,$localhost,,syslog
+F5-LTM-URL,F5_4,F5,$localhost,,syslog
+F5-LTM-ResponseCode,F5_5,F5,$localhost,,syslog
+F5-LTM-Method,F5_6,F5,$localhost,,syslog
+F5-LTM-Traffic,F5_7,F5,$localhost,,syslog
+F5-LTM-UserAgent,F5_8,F5,$localhost,,syslog
+F5-LTM-POOL,F5_9,F5,$localhost,,syslog

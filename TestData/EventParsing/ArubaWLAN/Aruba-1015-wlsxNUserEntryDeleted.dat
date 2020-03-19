@@ -1,0 +1,23 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+enterprises.14823.1.1.10 6 1015 enterprises.14823.2.3.1.11.1.1.60 x "07 D8 0B 06 11 12 21 00 2D 08 00" 	enterprises.14823.2.3.1.11.1.1.51.0 a "192.168.40.1"	enterprises.14823.2.3.1.11.1.1.52.0 x "00 1D 60 6F 2F 29"
+[params]
+rawEventMsg=any
+eventSeverity=1
+eventSeverityCat=LOW
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+srcMACAddr=00:1d:60:6f:2f:29
+phRecvTime=any
+phCustId=$sender
+reptDevIpAddr=$localhost
+srcIpAddr=192.168.40.1
+eventAction=0 (Permit)
+eventName=An existing user was deleted
+reptVendor=Aruba
+eventType=Aruba-1015-wlsxNUserEntryDeleted
+phEventCategory=0 (External)
+reptModel=ArubaOS WLAN Controller

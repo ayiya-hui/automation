@@ -1,0 +1,4 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+NetApp-vscanServerUpgrade,NetApp_1,NetApp,$localhost,,syslog
+NetApp-quotaExceeded,NetApp_2,NetApp,$localhost,,syslog

@@ -1,0 +1,33 @@
+[reptDevIpAddr(key)]
+20.20.20.120
+[eventMsg]
+Fri Oct 30 18:19:58 2009 $reporter AccelOps-WinLog-WMI  [Category]="12803" [CategoryString]="SAM" [ComputerName]="sf1dc03.jha.local" [Data]="NULL" [EventCode]="4661" [EventIdentifier]="4661" [EventType]="4" [Logfile]="Security" [RecordNumber]="184035316" [SourceName]="Microsoft-Windows-Security-Auditing" [TimeGenerated]="20100505222910.822003-000" [TimeWritten]="20100505222910.822003-000" [Type]="Audit Success" [User]="(null)" [[Subject ]][Security ID]="S-1-5-21-2090294290-982477196-2044928816-8287" [Account Name]="ACTIVITIES13$" [Account Domain]="JHA" [Logon ID]="0x550bb1d" [[Object]][Object Server]="Security Account Manager" [Object Type]="SAM_USER" [Object Name]="S-1-5-21-2090294290-982477196-2044928816-6428" [Handle ID]="0x9683170" [[Process Information]][Process ID]="0x240" [Process Name]="C:\Windows\System32\lsass.exe" [[Access Request Information]][Transaction ID]="{00000000-0000-0000-0000-000000000000}" [Accesses]="READ_CONTROL,WritePreferences,ReadAccount,SetTrueword (without knowledge of old Trueword),			" [Access Mask]="0x20094" [Privileges Used for Access Check]="-" [Properties]="---,{bf967aba-0de6-11d0-a285-00aa003049e2}"
+[params]
+rawEventMsg=any
+type=Audit Success
+osObjName=S-1-5-21-2090294290-982477196-2044928816-6428
+swProcName=C:\Windows\System32\lsass.exe
+osObjType=SAM_USER
+osObjAccessType=READ_CONTROL,WritePreferences,ReadAccount,SetTrueword (without knowledge of old Trueword),
+osObjHandleID=0x9683170
+eventAction=0 (Permit)
+count=1
+eventId=any
+domain=JHA
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=$reporter
+winLogonId=0x550bb1d
+eventName=A handle to an object was requested
+procName=C:\Windows\System32\lsass.exe
+reptVendor=Microsoft
+eventType=Win-Security-4661
+user=ACTIVITIES13$
+phEventCategory=0 (External)
+reptDevIpAddr=$reporter
+reptModel=Windows
+eventSource=Microsoft-Windows-Security-Auditing

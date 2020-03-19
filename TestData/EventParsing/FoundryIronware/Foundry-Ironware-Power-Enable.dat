@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<14>Jul 14 17:49:39 aus-noc-sw01 System: PoE: Power enabled on port 1/1/4.
+[params]
+parserName=FoundryIronwareParserPlus
+totFlows=1
+eventType=Foundry-Ironware-Power-Enable
+destIpAddr=$localhost
+reptModel=Ironware
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Power enabled on a port
+phEventCategory=0 (External)
+eventRuleTrigger=1
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+devPort=1/1/4
+reptDevName=aus-noc-sw01
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Foundry

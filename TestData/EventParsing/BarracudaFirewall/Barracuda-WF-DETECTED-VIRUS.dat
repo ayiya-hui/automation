@@ -1,0 +1,39 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<164>barracuda_pqman[27088]: 1459965663 1 10.224.60.125 65.55.44.108 - 10.224.60.125 https://settings-win.data.microsoft.com/ 0 BYF DETECTED VIRUS  2 0 0 0 0 (-) 0 - 0 - 0 microsoft.com computing-technology [ldap0:richbarie] https://settings-win.data.microsoft.com/
+[params]
+destGeoOrg=any
+parserName=BarracudaWebFilterParser
+eventType=Barracuda-WF-DETECTED-VIRUS
+destGeoState=any
+activityType=allowed
+destIpAddr=65.55.44.108
+totBytes=0
+srcName=HOST-10.224.60.125
+destGeoCountry=any
+srcIpAddr=10.224.60.125
+reptModel=Web Filter
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+serverName=0
+eventName=Detected but permitted web traffic - virus
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+destName=settings-win.data.microsoft.com
+webCategory=microsoft.com
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+user=computing-technology
+rawEventMsg=any
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+count=1
+infoURL=https://settings-win.data.microsoft.com/
+reptVendor=Barracuda
+destGeoCity=any
+fileType=-

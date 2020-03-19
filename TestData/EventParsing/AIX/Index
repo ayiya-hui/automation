@@ -1,0 +1,4 @@
+eventType,name,module,reptDevIpAddr,key,method
+AIX_Failed_SSH_Login,AIX_1,AIX,$localhost,,syslog
+AIX_Process_Restart,AIX_2,AIX,$localhost,,syslog
+AIX_SSH_Login_Timeout,AIX_3,AIX,$localhost,,syslog

@@ -1,0 +1,935 @@
+<Reports>
+
+  <Report id="PH_Report_Storage_1" group="PH_SYS_REPORT_Storage">
+    <Name>Top Reporting Storage Devices</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks reporting storage systems by event count</Description>
+    <SelectClause numEntries="All">
+      <AttrList>hostIpAddr,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter" name="Filter_Storage">
+        <SingleEvtConstr>hostIpAddr IN (Group@PH_SYS_DEVICE_Storage)</SingleEvtConstr>
+        <GroupByAttr>hostIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_Storage_2" group="PH_SYS_REPORT_Storage">
+    <Name>Top Reporting Storage Device Event Types By Count</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks reporting storage systems event types by count</Description>
+    <SelectClause numEntries="All">
+      <AttrList>hostName,hostIpAddr,eventType, COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter" name="Filter_Storage">
+        <SingleEvtConstr>hostIpAddr IN (Group@PH_SYS_DEVICE_Storage)</SingleEvtConstr>
+        <GroupByAttr>hostName,hostIpAddr,eventType</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_Storage_3" group="PH_SYS_REPORT_Storage,PH_SYS_REPORT_Freq">
+    <Name>Top Storage Devices By CPU Util </Name> 
+    <CustomerScope groupByEachCustomer="true">
+      <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description> Ranks the storage devices by average cpu utilization over a window </Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName,hostIpAddr,AVG(cpuUtil),MAX(cpuUtil),MIN(cpuUtil)</AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(cpuUtil) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600" >
+         <SubPattern displayName="Filter_PERF_MON_2" name="Filter_PERF_MON_2">
+           <SingleEvtConstr> eventType = "PH_DEV_MON_SYS_CPU_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Storage)</SingleEvtConstr>
+           <GroupByAttr>hostName,hostIpAddr</GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+      <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_Storage_4" group="PH_SYS_REPORT_Storage">
+    <Name>Top NetApp storage devices by disk activity </Name> 
+    <CustomerScope groupByEachCustomer="true">
+      <Include all="true" /> 
+      <Exclude /> 
+    </CustomerScope>
+    <Description> Ranks the storage devices by disk activity and presents other metrics </Description> 
+    <SelectClause numEntries="All">
+      <AttrList>hostName,hostIpAddr,MIN(cacheAgeMin),AVG(cifsOpsPerSec),AVG(nfsOpsPerSec),AVG(diskReadKBytesPerSec),AVG(diskWriteKBytesPerSec),AVG(netSentKBytesPerSec),AVG(netRecvdKBytesPerSec) </AttrList> 
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(diskReadKBytesPerSec) DESC,AVG(diskWriteKBytesPerSec) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600" >
+      <SubPattern displayName="Filter_PERF_MON_2" name="Filter_PERF_MON_2">
+        <SingleEvtConstr> eventType = "PH_DEV_MON_NETAPP_NFS_MET" </SingleEvtConstr>
+        <GroupByAttr>hostName,hostIpAddr</GroupByAttr> 
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+  
+  <Report id="PH_Report_Storage_5" group="PH_SYS_REPORT_Storage">
+    <Name>Top NetApp storage devices by errors </Name> 
+    <CustomerScope groupByEachCustomer="true">
+      <Include all="true" /> 
+      <Exclude /> 
+    </CustomerScope>
+    <Description> Ranks the storage devices by NFS protocol level errors </Description> 
+    <SelectClause numEntries="All">
+      <AttrList>hostName,hostIpAddr,AVG(rpcBadCallsDelta), AVG(nfsBadCallsDelta),AVG(cifsBadCallsDelta) </AttrList> 
+    </SelectClause>
+     <OrderByClause>
+       <AttrList> AVG(nfsBadCallsDelta) DESC, AVG(cifsBadCallsDelta) DESC 
+     </AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600" >
+         <SubPattern displayName="Filter_PERF_MON_2" name="Filter_PERF_MON_2">
+           <SingleEvtConstr> eventType = "PH_DEV_MON_NETAPP_NFS_MET" </SingleEvtConstr>
+           <GroupByAttr>hostName,hostIpAddr</GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+  
+  <Report id="PH_Report_Storage_6" group="PH_SYS_REPORT_Storage,PH_SYS_REPORT_Freq">
+    <Name>Top NetApp Devices By Disk Space Util </Name> 
+    <CustomerScope groupByEachCustomer="true">
+      <Include all="true" /> 
+      <Exclude /> 
+    </CustomerScope>
+    <Description>Ranks the NetApp Storage devices by average system disk utilization over a window </Description> 
+    <SelectClause numEntries="All">
+      <AttrList>hostName,diskName,AVG(diskUtil)</AttrList> 
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(diskUtil) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_PERF_MON_6" name="Filter_PERF_MON_6">
+        <SingleEvtConstr>eventType = "PH_DEV_MON_SYS_DISK_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Storage) </SingleEvtConstr> 
+        <GroupByAttr>hostName,diskName </GroupByAttr> 
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_Storage_6B" group="PH_SYS_REPORT_Storage">
+    <Name>Top NetApp Devices By Disk Space Util (Detailed) </Name> 
+    <CustomerScope groupByEachCustomer="true">
+      <Include all="true" /> 
+      <Exclude /> 
+    </CustomerScope>
+    <Description>Ranks the NetApp Storage devices by average system disk utilization over a window.Provides additional details such as total, used and free disk spaces </Description> 
+    <SelectClause numEntries="All">
+      <AttrList>hostName,diskName,AVG(diskUtil),AVG(totalDiskMB),AVG(usedDiskMB),AVG(freeDiskMB)</AttrList> 
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(diskUtil) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_PERF_MON_6" name="Filter_PERF_MON_6">
+        <SingleEvtConstr>eventType = "PH_DEV_MON_SYS_DISK_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Storage) </SingleEvtConstr> 
+        <GroupByAttr>hostName,diskName </GroupByAttr> 
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_Storage_6C" group="PH_SYS_REPORT_Storage">
+    <Name>Top NetApp Devices By Disk Space Growth </Name> 
+    <CustomerScope groupByEachCustomer="true">
+      <Include all="true" /> 
+      <Exclude /> 
+    </CustomerScope>
+    <Description>Ranks the NetApp Storage devices by average daily disk space growth </Description> 
+    <SelectClause numEntries="All">
+      <AttrList>hostName,diskName,AVG(diskGrowthMBDaily),AVG(diskUtil),AVG(totalDiskMB),AVG(usedDiskMB),AVG(freeDiskMB),MIN(timeToDiskFull)</AttrList> 
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(diskGrowthMBDaily) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="93600">
+      <SubPattern displayName="Filter_PERF_MON_6" name="Filter_PERF_MON_6">
+        <SingleEvtConstr>eventType = "PH_DEV_MON_SYS_DISK_TREND_DAY" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Storage) </SingleEvtConstr> 
+        <GroupByAttr>hostName,diskName </GroupByAttr> 
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+  
+  <Report id="PH_Report_Storage_6D" group="PH_SYS_REPORT_Storage">
+    <Name>NetApp Devices By Least Days To Disk Full </Name> 
+    <CustomerScope groupByEachCustomer="true">
+      <Include all="true" /> 
+      <Exclude /> 
+    </CustomerScope>
+    <Description>Ranks the NetApp Storage devices by the estimated days before the disk will become full </Description> 
+    <SelectClause numEntries="All">
+      <AttrList>hostName,diskName,MIN(timeToDiskFull),AVG(diskGrowthMBDaily),AVG(diskUtil),AVG(totalDiskMB),AVG(usedDiskMB),AVG(freeDiskMB)</AttrList> 
+    </SelectClause>
+    <OrderByClause><AttrList>MIN(timeToDiskFull) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="93600">
+      <SubPattern displayName="Filter_PERF_MON_6" name="Filter_PERF_MON_6">
+        <SingleEvtConstr>eventType = "PH_DEV_MON_SYS_DISK_TREND_DAY" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Storage) </SingleEvtConstr> 
+        <GroupByAttr>hostName,diskName </GroupByAttr> 
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_Storage_7" group="PH_SYS_REPORT_Storage">
+    <Name>Storage Hardware Errors</Name> 
+    <CustomerScope groupByEachCustomer="true">
+      <Include all="true" /> 
+      <Exclude /> 
+    </CustomerScope>
+    <Description>Captures Storage hardware warning or critical errors. Includes both NetApp and EMC Clariion. </Description> 
+    <SelectClause numEntries="All">
+      <AttrList>phRecvTime,hostName,hostIpAddr,hwStatusCode,hwComponentName,hwComponentStatus </AttrList> 
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_PERF_MON_6" name="Filter_PERF_MON_6">
+         <SingleEvtConstr>hostIpAddr IN (Group@PH_SYS_DEVICE_Storage) AND eventType IN (Group@PH_SYS_EVENT_HwProblem)</SingleEvtConstr>  
+       </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+  
+  <Report id="PH_Report_Storage_8" group="PH_SYS_REPORT_Storage">
+    <Name>NetApp Hardware Status</Name> 
+    <CustomerScope groupByEachCustomer="true">
+      <Include all="true" /> 
+      <Exclude /> 
+    </CustomerScope>
+    <Description>Captures NetApp hardware status</Description> 
+    <SelectClause numEntries="All">
+      <AttrList>phRecvTime,hostName,hostIpAddr,hwStatusCode,hwBatteryStatus,hwDiskStatus,hwPowerSupplyStatus,hwFailedPowerSupplyCount,hwTempSensorStatus,hwFanStatus,hwFailedFanCount</AttrList> 
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_PERF_MON_6" name="Filter_PERF_MON_6">
+        <SingleEvtConstr>hostIpAddr IN (Group@PH_SYS_DEVICE_Storage) AND eventType = "PH_DEV_MON_HW_STATUS" </SingleEvtConstr>  
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_Storage_9" group="PH_SYS_REPORT_Storage">
+    <Name>Top Clarion Storage Processors By CPU, I/O (Detailed)</Name> 
+    <CustomerScope groupByEachCustomer="true">
+      <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description> Ranks Clarion Storage processors by cpu and then I/O </Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName,spName,AVG(cpuUtil),AVG(diskRWKBytesPerSec),AVG(diskReadKBytesPerSec),AVG(diskWriteKBytesPerSec),AVG(diskRWReqPerSec),AVG(diskReadReqPerSec),AVG(diskWriteReqPerSec)</AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(cpuUtil) DESC,AVG(diskRWKBytesPerSec) DESC </AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600" >
+         <SubPattern displayName="Filter_PERF_MON_2" name="Filter_PERF_MON_2">
+           <SingleEvtConstr> eventType = "PH_DEV_MON_CLARION_SP_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Storage)</SingleEvtConstr>
+           <GroupByAttr>hostName,spName</GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+      <RelevantFilterAttr>hostName</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_Storage_10" group="PH_SYS_REPORT_Storage">
+    <Name>Top Clarion Storage Ports By I/O Activity (Detailed)</Name> 
+    <CustomerScope groupByEachCustomer="true">
+      <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description> Ranks Clarion Storage ports by I/O activity </Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName,spPortName,AVG(diskRWKBytesPerSec),AVG(diskReadKBytesPerSec),AVG(diskWriteKBytesPerSec),AVG(diskRWReqPerSec),AVG(diskReadReqPerSec),AVG(diskWriteReqPerSec)</AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(diskRWKBytesPerSec) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600" >
+       <SubPattern displayName="Filter_PERF_MON_2" name="Filter_PERF_MON_2">
+         <SingleEvtConstr> eventType = "PH_DEV_MON_CLARION_PORT_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Storage)</SingleEvtConstr>
+         <GroupByAttr>hostName,spPortName</GroupByAttr> 
+       </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostName</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_Storage_11" group="PH_SYS_REPORT_Storage">
+    <Name>Top Clarion LUNs By I/O Activity (Detailed)</Name> 
+    <CustomerScope groupByEachCustomer="true">
+      <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description> Ranks Clarion LUNs by I/O Activity</Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName,lunName,AVG(diskRWKBytesPerSec),AVG(diskReadKBytesPerSec),AVG(diskWriteKBytesPerSec),AVG(diskRWReqPerSec),AVG(diskReadReqPerSec),AVG(diskWriteReqPerSec)</AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(diskRWKBytesPerSec) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600" >
+       <SubPattern displayName="Filter_PERF_MON_2" name="Filter_PERF_MON_2">
+         <SingleEvtConstr> eventType = "PH_DEV_MON_CLARION_LUN_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Storage)</SingleEvtConstr>
+         <GroupByAttr>hostName,lunName</GroupByAttr> 
+       </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostName</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_Storage_12" group="PH_SYS_REPORT_Storage">
+    <Name>Top Clarion RAID Groups By I/O Activity (Detailed) </Name> 
+    <CustomerScope groupByEachCustomer="true">
+      <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description> Ranks Clarion RAID Groups by I/O </Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName,raidType,raidGrpId,AVG(diskRWKBytesPerSec),AVG(diskReadKBytesPerSec),AVG(diskWriteKBytesPerSec),AVG(diskRWReqPerSec),AVG(diskReadReqPerSec),AVG(diskWriteReqPerSec)</AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(diskRWKBytesPerSec) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600" >
+       <SubPattern displayName="Filter_PERF_MON_2" name="Filter_PERF_MON_2">
+         <SingleEvtConstr> eventType = "PH_DEV_MON_CLARION_RG_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Storage)</SingleEvtConstr>
+         <GroupByAttr>hostName,raidGrpId,raidType</GroupByAttr> 
+       </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostName</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_Storage_13" group="PH_SYS_REPORT_Storage">
+    <Name>Top Clarion Storage Ports By Total I/O Mbps</Name> 
+    <CustomerScope groupByEachCustomer="true">
+      <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description> Ranks the Clarion Storage ports by total read + write I/O Mbps </Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName,spPortName,AVG(diskRWKBytesPerSec)</AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(diskRWKBytesPerSec) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600" >
+       <SubPattern displayName="Filter_PERF_MON_2" name="Filter_PERF_MON_2">
+         <SingleEvtConstr> eventType = "PH_DEV_MON_CLARION_PORT_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Storage)</SingleEvtConstr>
+         <GroupByAttr>hostName,spPortName</GroupByAttr> 
+       </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostName</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_Storage_14" group="PH_SYS_REPORT_Storage">
+    <Name>Top Clarion Storage Processors By CPU</Name> 
+    <CustomerScope groupByEachCustomer="true">
+      <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description> Ranks the Clarion Storage processors by cpu </Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName,spName,AVG(cpuUtil)</AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(cpuUtil) DESC </AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600" >
+         <SubPattern displayName="Filter_PERF_MON_2" name="Filter_PERF_MON_2">
+           <SingleEvtConstr> eventType = "PH_DEV_MON_CLARION_SP_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Storage)</SingleEvtConstr>
+           <GroupByAttr>hostName,spName</GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+      <RelevantFilterAttr>hostName</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_Storage_15" group="PH_SYS_REPORT_Storage">
+    <Name>Top Clarion Storage Processors By I/O Mbps</Name> 
+    <CustomerScope groupByEachCustomer="true">
+      <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description> Ranks the Clarion Storage processors by I/O Mbps</Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName,spName,AVG(diskRWKBytesPerSec)</AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(diskRWKBytesPerSec) DESC </AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600" >
+         <SubPattern displayName="Filter_PERF_MON_2" name="Filter_PERF_MON_2">
+           <SingleEvtConstr> eventType = "PH_DEV_MON_CLARION_SP_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Storage)</SingleEvtConstr>
+           <GroupByAttr>hostName,spName</GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+      <RelevantFilterAttr>hostName</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_Storage_16" group="PH_SYS_REPORT_Storage">
+    <Name>Top Clarion Storage Ports By I/O operations/sec</Name> 
+    <CustomerScope groupByEachCustomer="true">
+      <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description> Ranks the Clarion Storage ports by I/O operations/sec </Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName,spPortName,AVG(diskRWReqPerSec)</AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(diskRWReqPerSec) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600" >
+       <SubPattern displayName="Filter_PERF_MON_2" name="Filter_PERF_MON_2">
+         <SingleEvtConstr> eventType = "PH_DEV_MON_CLARION_PORT_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Storage)</SingleEvtConstr>
+         <GroupByAttr>hostName,spPortName</GroupByAttr> 
+       </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostName</RelevantFilterAttr>
+  </Report>
+
+  
+  <Report id="PH_Report_Storage_17" group="PH_SYS_REPORT_Storage">
+    <Name>Top Clarion Storage LUNs By I/O Mbps</Name> 
+    <CustomerScope groupByEachCustomer="true">
+      <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description> Ranks the Storage LUNs By I/O Mbps </Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName,lunName,AVG(diskRWKBytesPerSec) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(diskRWKBytesPerSec) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600" >
+       <SubPattern displayName="Filter_PERF_MON_2" name="Filter_PERF_MON_2">
+         <SingleEvtConstr> eventType = "PH_DEV_MON_CLARION_LUN_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Storage)</SingleEvtConstr>
+         <GroupByAttr>hostName,lunName</GroupByAttr> 
+       </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostName</RelevantFilterAttr>
+  </Report>
+
+   <Report id="PH_Report_Storage_18" group="PH_SYS_REPORT_Storage">
+    <Name>Top Clarion Storage LUNs By I/O Operations/sec</Name> 
+    <CustomerScope groupByEachCustomer="true">
+      <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description> Ranks Clarion LUNs by I/O Operations/sec</Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName,lunName,AVG(diskRWReqPerSec) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(diskRWReqPerSec) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600" >
+       <SubPattern displayName="Filter_PERF_MON_2" name="Filter_PERF_MON_2">
+         <SingleEvtConstr> eventType = "PH_DEV_MON_CLARION_LUN_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Storage)</SingleEvtConstr>
+         <GroupByAttr>hostName,lunName</GroupByAttr> 
+       </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostName</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_Storage_19" group="PH_SYS_REPORT_Storage">
+    <Name>Top Clarion RAID Groups By I/O Mbps </Name> 
+    <CustomerScope groupByEachCustomer="true">
+      <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description> Ranks the Clarion RAID Groups by I/O Mbps</Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName,raidType,raidGrpId,AVG(diskRWKBytesPerSec)</AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(diskRWKBytesPerSec) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600" >
+       <SubPattern displayName="Filter_PERF_MON_2" name="Filter_PERF_MON_2">
+         <SingleEvtConstr> eventType = "PH_DEV_MON_CLARION_RG_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Storage)</SingleEvtConstr>
+         <GroupByAttr>hostName,raidGrpId,raidType</GroupByAttr> 
+       </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostName</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_Storage_20" group="PH_SYS_REPORT_Storage">
+    <Name>Top Clarion RAID Groups By I/O Operations/sec </Name> 
+    <CustomerScope groupByEachCustomer="true">
+      <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description> Ranks the Clarion RAID Groups by I/O Operations/sec </Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName,raidType,raidGrpId,AVG(diskRWReqPerSec) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(diskRWReqPerSec) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600" >
+       <SubPattern displayName="Filter_PERF_MON_2" name="Filter_PERF_MON_2">
+         <SingleEvtConstr> eventType = "PH_DEV_MON_CLARION_RG_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Storage)</SingleEvtConstr>
+         <GroupByAttr>hostName,raidGrpId,raidType</GroupByAttr> 
+       </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostName</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_Storage_21" group="PH_SYS_REPORT_Storage">
+    <Name>Top Clarion Storage Disks By I/O Utilization </Name> 
+    <CustomerScope groupByEachCustomer="true">
+      <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description> Ranks Clarion disks by I/O utilization </Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName,diskName,diskType,AVG(diskIOUtil) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(diskIOUtil) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600" >
+       <SubPattern displayName="Filter_PERF_MON_2" name="Filter_PERF_MON_2">
+         <SingleEvtConstr> eventType = "PH_DEV_MON_DISK_IO_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Storage)</SingleEvtConstr>
+         <GroupByAttr>hostName,diskName,diskType</GroupByAttr> 
+       </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostName</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_Storage_22" group="PH_SYS_REPORT_Storage">
+    <Name>Host to Clarion SAN Connections </Name> 
+    <CustomerScope groupByEachCustomer="true">
+      <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description> Reports the Host to Clarion SAN connections </Description> 
+     <SelectClause numEntries="All">
+         <AttrList>phRecvTime,srcName,srcIpAddr,srcWWN,destName,destIpAddr,spPortName,fcLoginStatus,fcRegStatus,lunNameList,sgName </AttrList> 
+     </SelectClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600" >
+       <SubPattern displayName="Filter_PERF_MON_2" name="Filter_PERF_MON_2">
+         <SingleEvtConstr> eventType = "PH_DEV_MON_CLARION_HOST_CONN" </SingleEvtConstr>
+       </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>destIpAddr</RelevantFilterAttr>
+  </Report>
+
+   <Report id="PH_Report_Storage_23" group="PH_SYS_REPORT_Storage">
+    <Name>Host to EMC Clariion Fiberchannel Connections (Detailed) </Name> 
+    <CustomerScope groupByEachCustomer="true">
+      <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description> Reports the Host to Clarion SAN connection details </Description> 
+     <SelectClause numEntries="All">
+         <AttrList>phRecvTime,srcName,srcIpAddr,srcWWN,destName,destIpAddr,spPortName,fcLoginStatus,fcRegStatus,lunNameList,sgName </AttrList> 
+     </SelectClause>
+      <OrderByClause><AttrList> destName ASC, phRecvTime DESC </AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600" >
+       <SubPattern displayName="Filter_PERF_MON_2" name="Filter_PERF_MON_2">
+         <SingleEvtConstr> eventType = "PH_DEV_MON_CLARION_HOST_CONN" </SingleEvtConstr>
+       </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>destIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_Storage_24" group="PH_SYS_REPORT_Storage">
+    <Name>Host to EMC Clariion Fiberchannel Connections </Name> 
+    <CustomerScope groupByEachCustomer="true">
+      <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description> Reports the Host to Clarion Controller connections </Description> 
+     <SelectClause numEntries="All">
+         <AttrList>phRecvTime,srcName,srcWWN,destName,spPortName,fcLoginStatus,fcRegStatus </AttrList> 
+     </SelectClause>
+      <OrderByClause><AttrList> destName ASC, phRecvTime DESC </AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600" >
+       <SubPattern displayName="Filter_PERF_MON_2" name="Filter_PERF_MON_2">
+         <SingleEvtConstr> eventType = "PH_DEV_MON_CLARION_HOST_CONN" </SingleEvtConstr>
+       </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>destIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_Storage_25" group="PH_SYS_REPORT_Storage">
+    <Name>Unregistered Host to EMC Clariion Fiberchannel Connections </Name> 
+    <CustomerScope groupByEachCustomer="true">
+      <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description> Reports the Host to Clarion Controller connections </Description> 
+     <SelectClause numEntries="All">
+         <AttrList>phRecvTime,srcName,srcWWN,destName,spPortName,fcLoginStatus,fcRegStatus </AttrList> 
+     </SelectClause>
+      <OrderByClause><AttrList> destName ASC, phRecvTime DESC </AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600" >
+       <SubPattern displayName="Filter_PERF_MON_2" name="Filter_PERF_MON_2">
+         <SingleEvtConstr> eventType = "PH_DEV_MON_CLARION_HOST_CONN" AND fcLoginStatus = 1 AND fcRegStatus = 0 </SingleEvtConstr>
+       </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>destIpAddr</RelevantFilterAttr>
+  </Report>
+
+   <Report id="PH_Report_Storage_26" group="PH_SYS_REPORT_Storage">
+    <Name>Registered Host to EMC Clariion Fiberchannel Connections </Name> 
+    <CustomerScope groupByEachCustomer="true">
+      <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description> Reports the Host to Clarion Controller connections </Description> 
+     <SelectClause numEntries="All">
+         <AttrList>phRecvTime,srcName,srcWWN,destName,spPortName,fcLoginStatus,fcRegStatus </AttrList> 
+     </SelectClause>
+      <OrderByClause><AttrList> destName ASC, phRecvTime DESC </AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600" >
+       <SubPattern displayName="Filter_PERF_MON_2" name="Filter_PERF_MON_2">
+         <SingleEvtConstr> eventType = "PH_DEV_MON_CLARION_HOST_CONN" AND fcLoginStatus = 1 AND fcRegStatus = 1 </SingleEvtConstr>
+       </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>destIpAddr</RelevantFilterAttr>
+  </Report>
+  
+  <Report id="PH_Report_Storage_27" group="PH_SYS_REPORT_Storage">
+    <Name>Top NetApp Devices By NFS V3 Operations per second (Detailed)</Name> 
+    <CustomerScope groupByEachCustomer="true">
+      <Include all="true" /> 
+      <Exclude /> 
+    </CustomerScope>
+    <Description>Ranks the NetApp filers by average NFS operations/sec </Description> 
+    <SelectClause numEntries="All">
+      <AttrList>hostName,AVG(nfsOpsPerSec),AVG(nfsReadOpsPerSec),AVG(nfsWriteOpsPerSec),AVG(nfsReadLatency),AVG(nfsWriteLatency),AVG(nfsReadKBytesPerSec),AVG(nfsWriteKBytesPerSec)</AttrList> 
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(nfsOpsPerSec) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_PERF_MON_6" name="Filter_PERF_MON_6">
+        <SingleEvtConstr>eventType = "PH_DEV_MON_NETAPP_NFS3_MET" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Storage) </SingleEvtConstr> 
+        <GroupByAttr>hostName</GroupByAttr> 
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+  
+  <Report id="PH_Report_Storage_28" group="PH_SYS_REPORT_Storage">
+    <Name>Top NetApp Devices By NFS V4 Operations per second (Detailed)</Name> 
+    <CustomerScope groupByEachCustomer="true">
+      <Include all="true" /> 
+      <Exclude /> 
+    </CustomerScope>
+    <Description>Ranks the NetApp filers by average NFS V3 operations/sec </Description> 
+    <SelectClause numEntries="All">
+      <AttrList>hostName,AVG(nfsOpsPerSec),AVG(nfsReadOpsPerSec),AVG(nfsWriteOpsPerSec),AVG(nfsReadLatency),AVG(nfsWriteLatency),AVG(nfsReadKBytesPerSec),AVG(nfsWriteKBytesPerSec)</AttrList> 
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(nfsOpsPerSec) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_PERF_MON_6" name="Filter_PERF_MON_6">
+        <SingleEvtConstr>eventType = "PH_DEV_MON_NETAPP_NFS4_MET" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Storage) </SingleEvtConstr> 
+        <GroupByAttr>hostName</GroupByAttr> 
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_Storage_29" group="PH_SYS_REPORT_Storage">
+    <Name>Top NetApp Devices By NFS Latency </Name> 
+    <CustomerScope groupByEachCustomer="true">
+      <Include all="true" /> 
+      <Exclude /> 
+    </CustomerScope>
+    <Description>Ranks the NetApp filers by average NFS Latency </Description> 
+    <SelectClause numEntries="All">
+      <AttrList>hostName,AVG(nfsReadLatency),AVG(nfsWriteLatency)</AttrList> 
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(nfsReadLatency) DESC, AVG(nfsWriteLatency) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_PERF_MON_6" name="Filter_PERF_MON_6">
+        <SingleEvtConstr>eventType IN ("PH_DEV_MON_NETAPP_NFS3_MET","PH_DEV_MON_NETAPP_NFS4_MET") AND hostIpAddr IN (Group@PH_SYS_DEVICE_Storage) </SingleEvtConstr> 
+        <GroupByAttr>hostName</GroupByAttr> 
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_Storage_30" group="PH_SYS_REPORT_Storage">
+    <Name>Top NetApp Devices By CIFS Latency </Name> 
+    <CustomerScope groupByEachCustomer="true">
+      <Include all="true" /> 
+      <Exclude /> 
+    </CustomerScope>
+    <Description>Ranks the NetApp filers by average CIFS Latency </Description> 
+    <SelectClause numEntries="All">
+      <AttrList>hostName,AVG(cifsLatency),AVG(cifsOpsPerSec)</AttrList> 
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(cifsLatency) DESC, AVG(cifsOpsPerSec) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_PERF_MON_6" name="Filter_PERF_MON_6">
+        <SingleEvtConstr>eventType = "PH_DEV_MON_NETAPP_CIFS_MET" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Storage) </SingleEvtConstr> 
+        <GroupByAttr>hostName</GroupByAttr> 
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_Storage_31" group="PH_SYS_REPORT_Storage">
+    <Name>Top NetApp Devices By FCP Operations per second (Detailed)</Name> 
+    <CustomerScope groupByEachCustomer="true">
+      <Include all="true" /> 
+      <Exclude /> 
+    </CustomerScope>
+    <Description>Ranks the NetApp filers by average FCP operations/sec </Description> 
+    <SelectClause numEntries="All">
+      <AttrList>hostName,AVG(fcpReadOpsPerSec),AVG(fcpWriteOpsPerSec),AVG(fcpReadLatency),AVG(fcpWriteLatency),AVG(fcpReadKBytesPerSec),AVG(fcpWriteKBytesPerSec)</AttrList> 
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(fcpReadOpsPerSec) DESC, AVG(fcpWriteOpsPerSec) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_PERF_MON_6" name="Filter_PERF_MON_6">
+        <SingleEvtConstr>eventType = "PH_DEV_MON_NETAPP_FCP_MET" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Storage) </SingleEvtConstr> 
+        <GroupByAttr>hostName</GroupByAttr> 
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+   </Report>
+
+  <Report id="PH_Report_Storage_32" group="PH_SYS_REPORT_Storage">
+    <Name>Top NetApp Devices By FCP Latency </Name> 
+    <CustomerScope groupByEachCustomer="true">
+      <Include all="true" /> 
+        <Exclude /> 
+    </CustomerScope>
+    <Description>Ranks the NetApp filers by average FCP latency </Description> 
+    <SelectClause numEntries="All">
+      <AttrList>hostName,AVG(fcpReadLatency),AVG(fcpWriteLatency) </AttrList> 
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(fcpReadLatency) DESC, AVG(fcpWriteLatency) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_PERF_MON_6" name="Filter_PERF_MON_6">
+        <SingleEvtConstr>eventType = "PH_DEV_MON_NETAPP_FCP_MET" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Storage) </SingleEvtConstr> 
+        <GroupByAttr>hostName</GroupByAttr> 
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_Storage_33" group="PH_SYS_REPORT_Storage">
+       <Name>Top NetApp Devices By ISCI Operations per second (Detailed)</Name> 
+    <CustomerScope groupByEachCustomer="true">
+      <Include all="true" /> 
+      <Exclude /> 
+    </CustomerScope>
+    <Description>Ranks the NetApp filers by average ISCSI operations/sec </Description> 
+    <SelectClause numEntries="All">
+      <AttrList>hostName,AVG(iscsiReadOpsPerSec),AVG(iscsiWriteOpsPerSec),AVG(iscsiReadLatency),AVG(iscsiWriteLatency),AVG(iscsiReadKBytesPerSec),AVG(iscsiWriteKBytesPerSec)</AttrList> 
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(iscsiReadOpsPerSec) DESC, AVG(iscsiWriteOpsPerSec) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_PERF_MON_6" name="Filter_PERF_MON_6">
+        <SingleEvtConstr>eventType = "PH_DEV_MON_NETAPP_ISCSI_MET" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Storage) </SingleEvtConstr> 
+        <GroupByAttr>hostName</GroupByAttr> 
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_Storage_34" group="PH_SYS_REPORT_Storage">
+    <Name>Top NetApp Devices By ISCI Latency </Name> 
+    <CustomerScope groupByEachCustomer="true">
+      <Include all="true" /> 
+      <Exclude /> 
+    </CustomerScope>
+    <Description>Ranks the NetApp filers by average ISCSI latency </Description> 
+    <SelectClause numEntries="All">
+      <AttrList>hostName,AVG(iscsiReadLatency),AVG(iscsiWriteLatency) </AttrList> 
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(iscsiReadLatency) DESC, AVG(iscsiWriteLatency) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_PERF_MON_6" name="Filter_PERF_MON_6">
+        <SingleEvtConstr>eventType = "PH_DEV_MON_NETAPP_ISCSI_MET" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Storage) </SingleEvtConstr> 
+        <GroupByAttr>hostName</GroupByAttr> 
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_Storage_35" group="PH_SYS_REPORT_Storage">
+       <Name>Top NetApp Aggregates By IOPS </Name> 
+    <CustomerScope groupByEachCustomer="true">
+      <Include all="true" /> 
+      <Exclude /> 
+    </CustomerScope>
+    <Description>Ranks the NetApp aggregates by operations/sec </Description> 
+    <SelectClause numEntries="All">
+      <AttrList>hostName,aggrName,AVG(aggrReadOpsPerSec),AVG(aggrWriteOpsPerSec),AVG(aggrTxfrPerSec),AVG(aggrCpReadPerSec) </AttrList> 
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(aggrReadOpsPerSec) DESC, AVG(aggrWriteOpsPerSec) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_PERF_MON_6" name="Filter_PERF_MON_6">
+        <SingleEvtConstr>eventType = "PH_DEV_MON_NETAPP_AGGR_MET" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Storage) </SingleEvtConstr> 
+        <GroupByAttr>hostName,aggrName</GroupByAttr> 
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_Storage_36" group="PH_SYS_REPORT_Storage">
+       <Name>Top NetApp Volumes By Latency, I/O </Name> 
+    <CustomerScope groupByEachCustomer="true">
+      <Include all="true" /> 
+      <Exclude /> 
+    </CustomerScope>
+    <Description>Ranks the NetApp volumes by latency and IOPS </Description> 
+    <SelectClause numEntries="All">
+      <AttrList>hostName,volName,AVG(devDiskRdLatency),AVG(devDiskWrLatency),AVG(diskReadReqPerSec),AVG(diskWriteReqPerSec) </AttrList> 
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(devDiskRdLatency) DESC,AVG(devDiskWrLatency) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_PERF_MON_6" name="Filter_PERF_MON_6">
+        <SingleEvtConstr>eventType = "PH_DEV_MON_NETAPP_VOL_MET" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Storage) </SingleEvtConstr> 
+        <GroupByAttr>hostName,volName</GroupByAttr> 
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+<Report id="PH_Report_Storage_37" group="PH_SYS_REPORT_Storage">
+       <Name>Top NetApp Volumes By NFS Latency, I/O </Name> 
+    <CustomerScope groupByEachCustomer="true">
+      <Include all="true" /> 
+      <Exclude /> 
+    </CustomerScope>
+    <Description>Ranks the NetApp volumes by NFS latency and IOPS </Description> 
+    <SelectClause numEntries="All">
+      <AttrList>hostName,volName,AVG(nfsReadLatency),AVG(nfsWriteLatency),AVG(nfsReadOpsPerSec),AVG(nfsWriteOpsPerSec) </AttrList> 
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(nfsReadLatency) DESC,AVG(nfsWriteLatency) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_PERF_MON_6" name="Filter_PERF_MON_6">
+        <SingleEvtConstr>eventType = "PH_DEV_MON_NETAPP_VOL_MET" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Storage) </SingleEvtConstr> 
+        <GroupByAttr>hostName,volName</GroupByAttr> 
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_Storage_38" group="PH_SYS_REPORT_Storage">
+       <Name>Top NetApp Volumes By CIFS Latency, I/O </Name> 
+    <CustomerScope groupByEachCustomer="true">
+      <Include all="true" /> 
+      <Exclude /> 
+    </CustomerScope>
+    <Description>Ranks the NetApp volumes by CIFS latency and IOPS </Description> 
+    <SelectClause numEntries="All">
+      <AttrList>hostName,volName,AVG(cifsReadLatency),AVG(cifsWriteLatency), AVG(cifsReadOpsPerSec),AVG(cifsWriteOpsPerSec)</AttrList> 
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(cifsReadLatency) DESC,AVG(cifsWriteLatency) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_PERF_MON_6" name="Filter_PERF_MON_6">
+        <SingleEvtConstr>eventType = "PH_DEV_MON_NETAPP_VOL_MET" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Storage) </SingleEvtConstr> 
+        <GroupByAttr>hostName,volName</GroupByAttr> 
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_Storage_39" group="PH_SYS_REPORT_Storage">
+       <Name>Top NetApp Volumes By SAN Latency, I/O </Name> 
+    <CustomerScope groupByEachCustomer="true">
+      <Include all="true" /> 
+      <Exclude /> 
+    </CustomerScope>
+    <Description>Ranks the NetApp volumes by SAN latency and IOPS </Description> 
+    <SelectClause numEntries="All">
+      <AttrList>hostName,volName,AVG(sanReadLatency),AVG(sanWriteLatency),AVG(sanReadOpsPerSec),AVG(sanWriteOpsPerSec)</AttrList> 
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(sanReadLatency) DESC,AVG(sanWriteLatency) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_PERF_MON_6" name="Filter_PERF_MON_6">
+        <SingleEvtConstr>eventType = "PH_DEV_MON_NETAPP_VOL_MET" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Storage) </SingleEvtConstr> 
+        <GroupByAttr>hostName,volName</GroupByAttr> 
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_Storage_40" group="PH_SYS_REPORT_Storage">
+       <Name>Top NetApp Disks By Utilization, Latency, IOPS </Name> 
+    <CustomerScope groupByEachCustomer="true">
+      <Include all="true" /> 
+      <Exclude /> 
+    </CustomerScope>
+    <Description>Ranks the NetApp disks by utilization, latency and disk I/O </Description> 
+    <SelectClause numEntries="All">
+      <AttrList>hostName,diskName,AVG(diskUtil),AVG(devDiskRdLatency),AVG(devDiskWrLatency),AVG(diskReadReqPerSec), AVG(diskWriteReqPerSec), AVG(diskTfrOpsPerSec)</AttrList> 
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(diskUtil) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_PERF_MON_6" name="Filter_PERF_MON_6">
+        <SingleEvtConstr>eventType = "PH_DEV_MON_NETAPP_DISK_MET" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Storage) </SingleEvtConstr> 
+        <GroupByAttr>hostName,diskName</GroupByAttr> 
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+   <Report id="PH_Report_Storage_41" group="PH_SYS_REPORT_Storage">
+       <Name>Top EqualLogic Disks By Utilization, Queue, Transfer Rate </Name> 
+    <CustomerScope groupByEachCustomer="true">
+      <Include all="true" /> 
+      <Exclude /> 
+    </CustomerScope>
+    <Description>Ranks the EqualLogic disks by utilization, queue and transfer rate </Description> 
+    <SelectClause numEntries="All">
+      <AttrList>hostName,diskName,AVG(diskIOUtil),AVG(ioQueue),AVG(diskTransferRate), AVG(diskReadKBytesPerSec), AVG(diskWriteKBytesPerSec)</AttrList> 
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(diskIOUtil) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_PERF_MON_6" name="Filter_PERF_MON_6">
+        <SingleEvtConstr>eventType = "PH_DEV_MON_EQL_DISK_MET"  </SingleEvtConstr> 
+        <GroupByAttr>hostName,diskName</GroupByAttr> 
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_Storage_42" group="PH_SYS_REPORT_Storage">
+       <Name>Top EqualLogic Systems By Connections, Latency, IOPS </Name> 
+    <CustomerScope groupByEachCustomer="true">
+      <Include all="true" /> 
+      <Exclude /> 
+    </CustomerScope>
+    <Description>Ranks the EqualLogic systems by connection count, latency, IOPS </Description> 
+    <SelectClause numEntries="All">
+      <AttrList>hostName,AVG(sanConnCount),AVG(devDiskRdLatency),AVG(devDiskWrLatency),AVG(diskReadKBytesPerSec), AVG(diskWriteKBytesPerSec)</AttrList> 
+    </SelectClause>
+    <OrderByClause><AttrList> AVG(sanConnCount) DESC </AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_PERF_MON_6" name="Filter_PERF_MON_6">
+        <SingleEvtConstr>eventType = "PH_DEV_MON_EQL_CONN_MET"  </SingleEvtConstr> 
+        <GroupByAttr>hostName,diskName</GroupByAttr> 
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+</Reports>

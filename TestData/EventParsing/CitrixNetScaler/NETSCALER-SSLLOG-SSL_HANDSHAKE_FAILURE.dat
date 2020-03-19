@@ -1,0 +1,29 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<135> 11/25/2013:12:43:14  clxns 0-PPE-0 : SSLLOG SSL_HANDSHAKE_FAILURE 12355121 0 :  SPCBId 2973718 - ClientIP 174.254.33.144 - ClientPort 28213 - VserverServiceIP 172.22.36.67 - VserverServicePort 443 - ClientVersion TLSv1.0 - CipherSuite RC4-MD5 TLSv1 Non-Export 128-bit - Reason Unexpected SSL handshake message
+[params]
+rawEventMsg=any
+deviceTime=any
+totFlows=1
+eventType=NETSCALER-SSLLOG-SSL_HANDSHAKE_FAILURE
+phCustId=$sender
+destIpAddr=172.22.36.67
+srcName=any
+srcIpAddr=174.254.33.144
+reptModel=NetScaler
+eventId=any
+eventParsedOk=1
+eventSeverity=3
+eventName=NetScaler SSL handshake failed
+phEventCategory=0 (External)
+srcIpPort=28213
+eventSeverityCat=LOW
+collectorId=any
+destIpPort=443
+reptDevName=any
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Citrix

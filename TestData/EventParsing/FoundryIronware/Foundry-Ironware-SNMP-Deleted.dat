@@ -1,0 +1,30 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<14>Jul 14 17:23:21 sw3-cm SNMP trap host "172.20.80.142" deleted from telnet session.
+[params]
+deviceTime=any
+parserName=FoundryIronwareParser
+totFlows=1
+eventType=Foundry-Ironware-SNMP-Deleted
+reptModel=Ironware
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+hostIpAddr=172.20.80.142
+eventName=SNMP client deleted
+phEventCategory=0 (External)
+eventRuleTrigger=1
+destName=sw3-cm
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+destIpPort=23
+eventDesc=trap host "172.20.80.142" deleted
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Foundry

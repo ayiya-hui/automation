@@ -1,0 +1,24 @@
+[reptDevIpAddr(key)]
+20.20.20.20
+[eventMsg]
+<13>Jan 14 18:57:59 20.20.20.20 MSWinEventLog	1	System	9180	Wed Jan 14 18:57:56 2009	7036	Service Control Manager	Unknown User	N/A	Information	ADS-PRI	None		The SNMP Service service entered the stopped state.  	61  Automation
+[params]
+rawEventMsg=any
+eventSeverity=1
+eventSeverityCat=LOW
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+appName=SNMP Service
+phRecvTime=any
+phCustId=$sender
+reptDevIpAddr=20.20.20.20
+destIpAddr=20.20.20.20
+swProcName=SNMP Service
+eventName=Windows Application Shutdown
+procName=SNMP Service
+reptVendor=Microsoft
+eventType=Win-System-Service-Control-Manager-7036-Stop
+phEventCategory=0 (External)
+reptModel=Windows

@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+83.83.83.83
+[eventMsg]
+May 16 15:37:29 83.83.83.83 CEF :0|PowerTech|Interact|3.0|UNR1001|A FTP Signon Server transaction was rejected for user JERRYB.|3| src =192.168.1.50 dst =192.168.1.57 msg=TYPE:JRN CLS :IDS JJOB :QTFTP01680 JUSER :JERRYB JNBR :416005 PGM :PLKR108JE OBJECT : LIBRARY: MEMBER: DETAIL: ST JERRYB *FTPSIGNON SIGNON QTFTP01680 LNS0800 000112 00015 192.168.001.050
+[params]
+rawEventMsg=any
+eventId=any
+count=1
+eventSeverityCat=LOW
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverity=3
+eventType=OS400-UNR1001-SIGNON
+phCustId=$sender
+reptDevIpAddr=83.83.83.83
+destIpAddr=192.168.1.57
+collectorId=any
+testEvent=Real Event(0)
+eventName=OS400-UNR1001-SIGNON
+reptVendor=IBM
+user=JERRYB
+phRecvTime=any
+srcIpAddr=192.168.1.50
+opName=SIGNON
+reptDevName=any
+reptModel=OS400

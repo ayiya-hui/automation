@@ -1,0 +1,70 @@
+PH_SYS_DASHBOARD_Incident,,Incident Dashboard,1,,,"PH_SYS_View_Network,PH_SYS_View_Server,PH_SYS_View_Security,PH_SYS_View_VMWare"
+PH_SYS_DASHBOARD_Exec_Summary,,Exec Summary,2,,,
+PH_SYS_DASHBOARD_Summary,,Summary Dashboards,3,,,
+PH_SYS_DASHBOARD_Avail_Perf,,Availability/Performance,4,,,
+PH_SYS_DASHBOARD_Security,,Security Dashboard,5,,,
+PH_SYS_DASHBOARD_BizSvc,,Biz Svc Dashboard,6,,,"PH_SYS_View_Network,PH_SYS_View_Server,PH_SYS_View_Security,PH_SYS_View_VMWare"
+PH_SYS_DASHBOARD_Device,,Dashboard By Function,7,,,
+PH_SYS_DASHBOARD_My,,My Dashboard,8,,,
+
+PH_SYS_DASHBOARD_Summary_BizSvc,PH_SYS_DASHBOARD_Summary,Biz Service Summary,1,,,
+PH_SYS_DASHBOARD_Summary_All_Devices,PH_SYS_DASHBOARD_Summary,All Devices,2,,,"PH_SYS_View_Network,PH_SYS_View_Security"
+PH_SYS_DASHBOARD_Summary_NetworkDevices,PH_SYS_DASHBOARD_Summary,Network Devices,3,,,PH_SYS_View_Network
+PH_SYS_DASHBOARD_Summary_Server,PH_SYS_DASHBOARD_Summary,Servers,4,,,PH_SYS_View_Server
+PH_SYS_DASHBOARD_Summary_Devices_My,PH_SYS_DASHBOARD_Summary,My Devices,5,,,"PH_SYS_View_Network,PH_SYS_View_Server"
+
+PH_SYS_DASHBOARD_Summary_Hardware,PH_SYS_DASHBOARD_Avail_Perf,Hardware Summary,1,,,
+PH_SYS_DASHBOARD_Summary_NETAPP,PH_SYS_DASHBOARD_Avail_Perf,Storage,2,,,
+PH_SYS_DASHBOARD_Performance,PH_SYS_DASHBOARD_Avail_Perf,Avail/Perf Widgets,3,,,
+PH_SYS_DASHBOARD_Summary_App_Folder,PH_SYS_DASHBOARD_Avail_Perf,Application Summary,4,,,
+PH_SYS_DASHBOARD_Summary_Env_Folder,PH_SYS_DASHBOARD_Avail_Perf,Environmental,5,,,
+,,,,,,
+PH_SYS_DASHBOARD_Perf_BizSvc,PH_SYS_DASHBOARD_BizSvc,Avail/Perf Widgets,1,,,
+PH_SYS_DASHBOARD_Sec_BizSvc,PH_SYS_DASHBOARD_BizSvc,Security Widgets,2,,,
+,,,,,,
+
+PH_SYS_DASHBOARD_Device_Network,PH_SYS_DASHBOARD_Device,Network,1,,,
+PH_SYS_DASHBOARD_Device_Server,PH_SYS_DASHBOARD_Device,Server,2,,,
+PH_SYS_DASHBOARD_Device_VM,PH_SYS_DASHBOARD_Device,Virtualization,3,,,
+PH_SYS_DASHBOARD_Device_Appl,PH_SYS_DASHBOARD_Device,Application,4,,,
+PH_SYS_DASHBOARD_Device_Storage,PH_SYS_DASHBOARD_Device,Storage,5,,,
+PH_SYS_DASHBOARD_Device_Env,PH_SYS_DASHBOARD_Device,Environment,6,,,
+PH_SYS_DASHBOARD_OverallStatus,PH_SYS_DASHBOARD_Device,Event/Log Mgmt,7,,
+,,,,,,
+PH_SYS_DASHBOARD_Device_Network_Generic,PH_SYS_DASHBOARD_Device_Network,Generic,1,,,
+PH_SYS_DASHBOARD_Device_Network_Netflow,PH_SYS_DASHBOARD_Device_Network,Netflow,2,,,
+PH_SYS_DASHBOARD_Device_Network_VoIP,PH_SYS_DASHBOARD_Device_Network,VoIP,3,,,
+PH_SYS_DASHBOARD_Device_Network_IPSLA,PH_SYS_DASHBOARD_Device_Network,IPSLA,4,,,
+,,,,,
+PH_SYS_DASHBOARD_Device_VMS,PH_SYS_DASHBOARD_Device_VM,VM,1
+PH_SYS_DASHBOARD_Device_ESX,PH_SYS_DASHBOARD_Device_VM,ESX,2
+PH_SYS_DASHBOARD_Device_Cluster,PH_SYS_DASHBOARD_Device_VM,Cluster,3
+PH_SYS_DASHBOARD_Device_ResourcePool,PH_SYS_DASHBOARD_Device_VM,Resource Pool,4
+,,,,,,
+PH_SYS_DASHBOARD_Device_Appl_Generic,PH_SYS_DASHBOARD_Device_Appl,Generic,1
+PH_SYS_DASHBOARD_Device_Appl_Exchange,PH_SYS_DASHBOARD_Device_Appl,Mail,2
+PH_SYS_DASHBOARD_Device_Appl_DB,PH_SYS_DASHBOARD_Device_Appl,Database,3
+PH_SYS_DASHBOARD_Device_Appl_Web,PH_SYS_DASHBOARD_Device_Appl,Web,4
+,,,,,,
+PH_SYS_DASHBOARD_Summary_NETAPP_NETAPP,PH_SYS_DASHBOARD_Summary_NETAPP,NetApp Summary,1
+PH_SYS_DASHBOARD_Summary_NETAPP_EMC,PH_SYS_DASHBOARD_Summary_NETAPP,EMC CLARiiON Summary,2
+PH_SYS_DASHBOARD_Summary_NETAPP_DELL,PH_SYS_DASHBOARD_Summary_NETAPP,Dell Equallogic Summary,3
+,,,,,,
+PH_SYS_DASHBOARD_Summary_Env_UPS,PH_SYS_DASHBOARD_Summary_Env_Folder,UPS,1
+PH_SYS_DASHBOARD_Summary_Env_HVAC,PH_SYS_DASHBOARD_Summary_Env_Folder,HVAC,2
+PH_SYS_DASHBOARD_Summary_Env_Distn,PH_SYS_DASHBOARD_Summary_Env_Folder,Distribution,3
+,,,,,,
+PH_SYS_DASHBOARD_Summary_Apps_All,PH_SYS_DASHBOARD_Summary_App_Folder,Top Monitored Processes,1,,,PH_SYS_View_Server
+PH_SYS_DASHBOARD_Summary_Apps_APACHE,PH_SYS_DASHBOARD_Summary_App_Folder,Apache Servers,2,,,PH_SYS_View_Server
+PH_SYS_DASHBOARD_Summary_Apps_EXCHANGE,PH_SYS_DASHBOARD_Summary_App_Folder,Exchange Servers,3,,,PH_SYS_View_Server
+PH_SYS_DASHBOARD_Summary_Apps_DHCP,PH_SYS_DASHBOARD_Summary_App_Folder,Windows DHCP Servers,4,,,PH_SYS_View_Server
+PH_SYS_DASHBOARD_Summary_Apps_DNS,PH_SYS_DASHBOARD_Summary_App_Folder,Windows DNS Servers,5,,,PH_SYS_View_Server
+PH_SYS_DASHBOARD_Summary_Apps_IIS,PH_SYS_DASHBOARD_Summary_App_Folder,IIS Servers,6,,,PH_SYS_View_Server
+PH_SYS_DASHBOARD_Summary_Apps_ASP_NET,PH_SYS_DASHBOARD_Summary_App_Folder,ASP.Net Servers,7,,,PH_SYS_View_Server
+PH_SYS_DASHBOARD_Summary_Active_Dir,PH_SYS_DASHBOARD_Summary_App_Folder,MS Active Directory,8,,,PH_SYS_View_Server
+PH_SYS_DASHBOARD_Summary_MS_SQL,PH_SYS_DASHBOARD_Summary_App_Folder,MS SQL Servers,9,,,PH_SYS_View_Server
+PH_SYS_DASHBOARD_Summary_Oracle_DB,PH_SYS_DASHBOARD_Summary_App_Folder,Oracle DB Servers,10,,,PH_SYS_View_Server
+PH_SYS_DASHBOARD_Summary_Apps_DB,PH_SYS_DASHBOARD_Summary_App_Folder,Other DB Servers,11,,,PH_SYS_View_Server
+PH_SYS_DASHBOARD_Summary_Apps_VOIP,PH_SYS_DASHBOARD_Summary_App_Folder,VoIP Summary,12,,,PH_SYS_View_Server
+PH_SYS_DASHBOARD_Summary_Apps_IPSLA,PH_SYS_DASHBOARD_Summary_App_Folder,IP SLA Summary,13,,,PH_SYS_View_Server
+PH_SYS_DASHBOARD_Summary_Apps_EUM,PH_SYS_DASHBOARD_Summary_App_Folder,Synthetic Transaction Monitoring,14,,,PH_SYS_View_Server

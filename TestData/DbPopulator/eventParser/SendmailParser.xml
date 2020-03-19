@@ -1,0 +1,69 @@
+<eventParser name="SendmailParser">
+
+  <deviceType>
+    <Vendor>Generic</Vendor>
+    <Model>Generic</Model>
+    <Version>ANY</Version>
+  </deviceType>
+
+  <appType>
+    <Vendor>Sendmail.org</Vendor>
+    <Model>Sendmail Mail Server</Model>
+    <Version>ANY</Version>
+    <Name>Sendmail Mail Server</Name>
+  </appType>
+
+  <eventFormatRecognizer><![CDATA[sendmail\[\d+\]|sendmail-in\[\d+\]]]></eventFormatRecognizer>
+  
+  <testEvents>
+      <testEvent><![CDATA[<22>Mar 10 19:04:34 137.146.28.72 sendmail[21478]: [ID 801593 mail.info] o2B046Ha021349: to=<teyoung@colby.edu>, delay=00:00:19, xdelay=00:00:00, mailer=relay, pri=139292, relay=mirapoint.colby.edu. [137.146.28.76], dsn=2.0.0, stat=Sent (AUV36627 Message accepted for delivery)]]></testEvent>
+      <testEvent><![CDATA[<21>Mar 10 19:15:51 137.146.28.72 sendmail-in[24209]: [ID 801593 mail.notice] o2B0Ffcv024209: ruleset=check_rcpt, arg1=<ldmeader@colby.edu>, relay=[124.50.112.176], reject=550 5.7.1 <ldmeader@colby.edu>... Mail from 124.50.112.176 REFUSED.  See http://www.spamhaus.org/query/bl?ip=124.50.112.176]]></testEvent>
+  </testEvents>
+
+  <parsingInstructions>
+  <switch>
+	<case>
+		<collectFieldsByRegex src="$_rawmsg">
+			<regex><![CDATA[<:gPatSyslogPRI><_mon:gPatMon>\s+<_day:gPatDay>\s+<_time:gPatTime>\s+<reptDevIpAddr:gPatIpV4Dot>\s<_body:gPatMesgBody>]]></regex>
+		</collectFieldsByRegex>
+	</case>
+	<case>
+		<collectFieldsByRegex src="$_rawmsg">
+			<regex><![CDATA[<:gPatSyslogPRI><_body:gPatMesgBody>]]></regex>
+		</collectFieldsByRegex>
+	</case>
+    </switch>
+
+    <setEventAttribute attr="eventType">SENDMAIL_GENERIC</setEventAttribute>
+    <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+    <setEventAttribute attr="eventAction">0</setEventAttribute>
+
+    <switch>
+      <case>
+        <collectFieldsByRegex src="$_body">
+          <regex><![CDATA[.*ruleset=.*,\s*arg1=\<<user:gPatStr>\@.*\>,\s*relay=.*\[<srcIpAddr:gPatIpV4Dot>\],\s*reject=<errReason:gPatMesgBody>]]></regex>
+        </collectFieldsByRegex>
+	<setEventAttribute attr="eventType">SENDMAIL_REJECT</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">3</setEventAttribute>
+	<setEventAttribute attr="eventAction">1</setEventAttribute>
+      </case>
+      <case>
+         <switch>
+		<case>
+        		<collectFieldsByRegex src="$_body">
+	  			<regex><![CDATA[.*to=<receiverMailAddr:gPatStr>,\s*ctladdr=<senderMailAddr:gPatStr>\s*\(\d+/\d+\),\s*.*relay=.*\[<srcIpAddr:gPatIpV4Dot>\],\s*.*stat=<_stat:gPatStr>\s*.*accepted.*]]></regex>
+			</collectFieldsByRegex>
+		</case>
+		<case>
+			<collectFieldsByRegex src="$_body">
+	  			<regex><![CDATA[.*to=\<<receiverMailAddr:gPatStr>\@.*\>,\s*.*relay=.*\[<srcIpAddr:gPatIpV4Dot>\],\s*.*stat=<_stat:gPatStr>\s*.*accepted.*]]></regex>
+			</collectFieldsByRegex>
+		</case>
+	</switch>
+	<setEventAttribute attr="eventType">SENDMAIL_ACCEPT</setEventAttribute>
+      </case>
+    </switch>
+
+  </parsingInstructions>
+
+</eventParser>

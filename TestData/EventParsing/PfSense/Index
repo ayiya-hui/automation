@@ -1,0 +1,8 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+pfSense-Generic,PfSense_1,PfSense,$localhost,,syslog
+pfSense-DHCP-Reply,PfSense_2,PfSense,$localhost,,syslog
+pfSense-DHCP-Request,PfSense_3,PfSense,$localhost,,syslog
+pfSense-IGMP,PfSense_4,PfSense,$localhost,,syslog
+pfSense-Traffic-Blocked,PfSense_5,PfSense,$localhost,,syslog
+pfSense-Traffic-Permitted,PfSense_6,PfSense,$localhost,,syslog

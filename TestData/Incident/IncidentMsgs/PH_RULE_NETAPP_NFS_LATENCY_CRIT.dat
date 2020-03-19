@@ -1,0 +1,3 @@
+[eventMsg]
+[PH_DEV_MON_NETAPP_NFS3_MET]:[eventSeverity]=PHL_INFO,[hostName]=automator14Dot0Dot5Dot1,[hostIpAddr]=14.0.5.1,[nfsReadOpsPerSec]=156,[nfsWriteOpsPerSec]=134,[nfsOpsPerSec]=145,[nfsReadLatency]=53,[nfsWriteLatency]=54,[nfsReadKBytesPerSec]=124,[nfsWriteKBytesPerSec]=134
+

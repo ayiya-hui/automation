@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<189>: 2013 Sep 27 21:19:16 EDT: %LACP-FEX110-5-LACP_SUSPEND_INDIVIDUAL: LACP port Ethernet110/1/25(0x1f6d0600) of port-channel port-channel13(0x1600000c) not receiving any LACP BPDUs suspending (individual) port
+[params]
+rawEventMsg=any
+deviceTime=any
+totFlows=1
+eventType=Cisco-NxOS-LACP-LACP_SUSPEND_INDIVIDUAL
+phCustId=$sender
+intfName=Ethernet110/1/25
+reptModel=NX-OS
+eventId=any
+eventParsedOk=1
+eventSeverity=2
+hostIpAddr=$localhost
+eventName=LACP port of port-channel not receiving any LACP BPDUs
+isHostIntfCritical=No
+phEventCategory=0 (External)
+intfAlias=port-channel13
+eventSeverityCat=LOW
+collectorId=any
+reptDevName=any
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Cisco

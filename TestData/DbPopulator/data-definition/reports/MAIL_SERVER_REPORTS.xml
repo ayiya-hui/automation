@@ -1,0 +1,417 @@
+<Reports>
+  <Report id="PH_Report_Mail_1" group="PH_SYS_REPORT_MailServer">
+    <Name>Top Reporting Mail Servers</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks reporting mail servers by event count</Description>
+    <SelectClause numEntries="All">
+      <AttrList>hostIpAddr,COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter" name="Filter_Storage">
+        <SingleEvtConstr>hostIpAddr IN (Group@PH_SYS_APP_MAIL_SERVER)</SingleEvtConstr>
+        <GroupByAttr>hostIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_Mail_2" group="PH_SYS_REPORT_MailServer">
+    <Name>Top Reporting Mail Server Event Types By Count</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks reporting mail server event types by count</Description>
+    <SelectClause numEntries="All">
+      <AttrList>hostName,hostIpAddr,eventType, COUNT(*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT(*) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter" name="Filter_Storage">
+        <SingleEvtConstr>hostIpAddr IN (Group@PH_SYS_APP_MAIL_SERVER)</SingleEvtConstr>
+        <GroupByAttr>hostName,hostIpAddr,eventType</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_Mail_3" group="PH_SYS_REPORT_AppPerf,PH_SYS_REPORT_MailServer">
+     <Name>Top Mail Server Processes By CPU, Memory, I/O</Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description>Ranks the mail server processes by average cpu, memory utilization over a window</Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName,appName,swProcName,AVG(memUtil),AVG(cpuUtil),AVG(ioReadKBytesPerSec),AVG(ioWriteKBytesPerSec)</AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(cpuUtil) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_PERF_MON_5" name="Filter_PERF_MON_5">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_PROC_RESOURCE_UTIL" AND ((appName CONTAIN "MS Exchange") OR (appName CONTAIN "Sendmail") OR (appName CONTAIN "Postfix")) </SingleEvtConstr>
+           <GroupByAttr>hostName,appName,swProcName </GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostName</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_Mail_3B" group="PH_SYS_REPORT_AppPerf,PH_SYS_REPORT_MailServer">
+     <Name>Top Mail Server Processes By CPU</Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description>Ranks the mail server processes by average cpu utilization over a window</Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName,appName,swProcName,AVG(cpuUtil)</AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(cpuUtil) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_PERF_MON_5" name="Filter_PERF_MON_5">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_PROC_RESOURCE_UTIL" AND ((appName CONTAIN "MS Exchange") OR (appName CONTAIN "Sendmail") OR (appName CONTAIN "Postfix")) </SingleEvtConstr>
+           <GroupByAttr>hostName,appName,swProcName </GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostName</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_Mail_3C" group="PH_SYS_REPORT_AppPerf,PH_SYS_REPORT_MailServer">
+     <Name>Top Mail Server Processes By Memory </Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description>Ranks the mail server processes by average memory utilization over a window</Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName,appName,swProcName,AVG(memUtil) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(memUtil) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_PERF_MON_5" name="Filter_PERF_MON_5">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_PROC_RESOURCE_UTIL" AND ((appName CONTAIN "MS Exchange") OR (appName CONTAIN "Sendmail") OR (appName CONTAIN "Postfix")) </SingleEvtConstr>
+           <GroupByAttr>hostName,appName,swProcName </GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostName</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_Mail_3D" group="PH_SYS_REPORT_AppPerf,PH_SYS_REPORT_MailServer">
+     <Name>Top Mail Server Processes By I/O Activity</Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description>Ranks the mail server processes by average I/O activity </Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName,appName,swProcName,AVG(ioReadKBytesPerSec),AVG(ioWriteKBytesPerSec)</AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(cpuUtil) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_PERF_MON_5" name="Filter_PERF_MON_5">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_PROC_RESOURCE_UTIL" AND ((appName CONTAIN "MS Exchange") OR (appName CONTAIN "Sendmail") OR (appName CONTAIN "Postfix")) </SingleEvtConstr>
+           <GroupByAttr>hostName,appName,swProcName </GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostName</RelevantFilterAttr>
+  </Report>
+  
+  <Report id="PH_Report_Mail_3E" group="PH_SYS_REPORT_AppPerf,PH_SYS_REPORT_MailServer">
+    <Name>Top Exchange Servers By Disk I/O Utilization </Name> 
+    <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description>Ranks the mail servers by average disk I/O utilization over a window. This requires WMI. </Description> 
+     <SelectClause numEntries="All">
+       <AttrList> hostName,diskName,AVG(diskIOUtil) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(diskIOUtil) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+       <SubPattern displayName="Filter_PERF_MON_6" name="Filter_PERF_MON_6">
+         <SingleEvtConstr>eventType = "PH_DEV_MON_DISK_IO_UTIL" AND hostIpAddr IN (Group@PH_SYS_APP_MAIL_SERVER) AND hostIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER)</SingleEvtConstr> 
+         <GroupByAttr>hostName,diskName</GroupByAttr> 
+       </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+   <Report id="PH_Report_Mail_3F" group="PH_SYS_REPORT_AppPerf,PH_SYS_REPORT_MailServer">
+    <Name>Top Exchange Servers By Disk I/O Latency </Name> 
+    <CustomerScope groupByEachCustomer="true">
+      <Include all="true" /> 
+      <Exclude /> 
+    </CustomerScope>
+    <Description>Ranks the mail servers by average disk I/O read/write latency. This requires WMI. </Description> 
+     <SelectClause numEntries="All">
+         <AttrList> hostName,diskName,AVG(devDiskRdLatency),AVG(devDiskWrLatency) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(devDiskRdLatency) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_PERF_MON_6" name="Filter_PERF_MON_6">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_DISK_IO_UTIL" AND hostIpAddr IN (Group@PH_SYS_APP_MAIL_SERVER) AND hostIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER) </SingleEvtConstr> 
+           <GroupByAttr>hostName,diskName</GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_Mail_3G" group="PH_SYS_REPORT_AppPerf,PH_SYS_REPORT_MailServer">
+    <Name>Top Exchange Servers By Disk Queue length </Name> 
+    <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description>Ranks the mail servers by average disk I/O queue length. This requires WMI. </Description> 
+     <SelectClause numEntries="All">
+         <AttrList> hostName,diskName,AVG(diskQLen) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(diskQLen) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_PERF_MON_6" name="Filter_PERF_MON_6">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_DISK_IO_UTIL" AND hostIpAddr IN (Group@PH_SYS_APP_MAIL_SERVER) AND hostIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER) </SingleEvtConstr> 
+           <GroupByAttr>hostName,diskName</GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_OVERALL_PERF_3H" group="PH_SYS_REPORT_AppPerf,PH_SYS_REPORT_MailServer">
+     <Name>Top Exchange Servers By Page Swapping Rate</Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description> Ranks the mail servers by average swapping rate </Description> 
+     <SelectClause numEntries="All">
+         <AttrList> hostName,AVG(swapRate) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(swapRate) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_PERF_MON_3" name="Filter_PERF_MON_3">
+           <SingleEvtConstr> eventType = "PH_DEV_MON_SYS_MEM_UTIL" AND hostIpAddr IN (Group@PH_SYS_APP_MAIL_SERVER) AND hostIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER) AND memName = "Physical Memory" </SingleEvtConstr>
+           <GroupByAttr> hostName</GroupByAttr>  
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostIpAddr</RelevantFilterAttr>
+  </Report>
+
+
+  <Report id="PH_Report_Mail_4" group="PH_SYS_REPORT_AppPerf,PH_SYS_REPORT_MailServer">
+     <Name>Top Microsoft Exchange Servers By User Count</Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description>Ranks the Microsoft Exchange Servers by user count and provides other metrics (collected via WMI)</Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName, AVG(exchUserCount), AVG(exchActiveUserCount), MAX(exchPeakUserCount), AVG(exchActiveConnCount), MAX(exchMaxConn)</AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(exchUserCount) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_PERF_MON_5" name="Filter_PERF_MON_5">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_APP_MSEXCH_MET" </SingleEvtConstr>
+           <GroupByAttr>hostName</GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostName</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_Mail_5" group="PH_SYS_REPORT_AppPerf,PH_SYS_REPORT_MailServer">
+     <Name>Top Microsoft Exchange Servers By RPC Requests</Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description>Ranks the Microsoft Exchange Servers by rpc requests and provides other metrics (collected via WMI)</Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName, AVG(exchRPCReq), AVG(exchRPCAvgLatency), AVG(exchRPCOpsPerSec), MAX(exchRPCReqPeak),  SUM(exchRPCReq), SUM(exchRPCFailed), SUM(exchRPCSuccess) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(exchRPCReq) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_PERF_MON_5" name="Filter_PERF_MON_5">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_APP_MSEXCH_MET" </SingleEvtConstr>
+           <GroupByAttr>hostName</GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostName</RelevantFilterAttr>
+  </Report>
+
+   <Report id="PH_Report_Mail_6" group="PH_SYS_REPORT_AppPerf,PH_SYS_REPORT_MailServer">
+     <Name>Top Microsoft Exchange Servers By RPC Errors</Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description>Ranks the Microsoft Exchange Servers by rpc errors and provides error details (collected via WMI)</Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName, SUM(exchRPCFailed), SUM(exchRPCSuccess), SUM(exchRPCCallFailed), SUM(exchRPCDenied), SUM(exchRPCFailedServBusy), SUM(exchRPCFailedServUnavail), SUM(exchBgRPCFailed), SUM(exchFgRPCFailed) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> SUM(exchRPCFailed) DESC</AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_PERF_MON_5" name="Filter_PERF_MON_5">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_APP_MSEXCH_MET" </SingleEvtConstr>
+           <GroupByAttr>hostName</GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostName</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_Mail_7" group="PH_SYS_REPORT_AppPerf,PH_SYS_REPORT_MailServer">
+     <Name>Top Microsoft Exchange Mailbox Queues by Count (Detailed)</Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description>Ranks the Microsoft Exchange mailbox queues by count and along with other details (collected via WMI)</Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName, exchMboxName, AVG(exchMboxSendQueue),AVG(exchMboxRecvQueue),AVG(exchMboxSentMsg),AVG(exchMboxSubmitMsg),AVG(exchMboxDelivMsg),AVG(exchMboxActiveUserCount),AVG(exchMboxPeakUserCount) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(exchMboxSendQueue) DESC, AVG(exchMboxRecvQueue) DESC </AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_PERF_MON_5" name="Filter_PERF_MON_5">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_APP_MSEXCH_MBOX_MET" </SingleEvtConstr>
+           <GroupByAttr>hostName, exchMboxName </GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostName</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_Mail_8" group="PH_SYS_REPORT_AppPerf,PH_SYS_REPORT_MailServer">
+     <Name>Top Microsoft Exchange Mailbox Queues by Count </Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description>Ranks the Microsoft Exchange mailbox queues by count and along with other details (collected via WMI)</Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName, exchMboxName, AVG(exchMboxSendQueue),AVG(exchMboxRecvQueue) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(exchMboxSendQueue) DESC, AVG(exchMboxRecvQueue) DESC </AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_PERF_MON_5" name="Filter_PERF_MON_5">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_APP_MSEXCH_MBOX_MET" </SingleEvtConstr>
+           <GroupByAttr>hostName, exchMboxName</GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostName</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_Mail_9" group="PH_SYS_REPORT_AppPerf,PH_SYS_REPORT_MailServer">
+     <Name>Top Microsoft Exchange Servers by SMTP Queues</Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description>Ranks the Microsoft Exchange SMTP queues by count (collected via WMI)</Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName, AVG(exchCatQueue), AVG(exchSMTPLocalQueue), AVG(exchSMTPRemoteQueue) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(exchCatQueue) DESC, AVG(exchSMTPLocalQueue) DESC, AVG(exchSMTPRemoteQueue) DESC </AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_PERF_MON_5" name="Filter_PERF_MON_5">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_APP_MSEXCH_SMTP_MET" </SingleEvtConstr>
+           <GroupByAttr>hostName</GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostName</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_Mail_10" group="PH_SYS_REPORT_AppPerf,PH_SYS_REPORT_MailServer">
+     <Name>Top Microsoft Exchange Servers by SMTP Connections</Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description>Ranks the Microsoft Exchange mailbox queues by count and along with other details (collected via WMI)</Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName,AVG(exchSMTPInConn), AVG(exchSMTPOutConn), AVG(sentBytesPerSec),AVG(recvBytesPerSec) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(exchSMTPInConn) DESC, AVG(exchSMTPOutConn) DESC </AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_PERF_MON_5" name="Filter_PERF_MON_5">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_APP_MSEXCH_SMTP_MET" </SingleEvtConstr>
+           <GroupByAttr>hostName</GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostName</RelevantFilterAttr>
+  </Report>
+  
+  <Report id="PH_Report_Mail_11" group="PH_SYS_REPORT_AppPerf,PH_SYS_REPORT_MailServer">
+     <Name>Top Microsoft Exchange Servers by SMTP Retries</Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true"/> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description>Ranks the Microsoft Exchange mailbox queues by count and along with other details (collected via WMI)</Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName,AVG(exchSMTPRetries),AVG(exchSMTPLocalRetryQueue),AVG(exchSMTPRemoteRetryQueue) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(exchSMTPRetries) DESC </AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_PERF_MON_5" name="Filter_PERF_MON_5">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_APP_MSEXCH_SMTP_MET" </SingleEvtConstr>
+           <GroupByAttr>hostName</GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostName</RelevantFilterAttr>
+  </Report>
+
+  <Report id="PH_Report_Mail_12" group="PH_SYS_REPORT_AppPerf,PH_SYS_REPORT_MailServer">
+     <Name>Top Microsoft Exchange Servers by SMTP Metrics (Detailed) </Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true" /> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description>Ranks the Microsoft Exchange servers by SMTP queues and presents all SMTP metrics in one report (collected via WMI)</Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName, AVG(exchCatQueue), AVG(exchSMTPLocalQueue), AVG(exchSMTPRemoteQueue), AVG(exchSMTPInConn), AVG(exchSMTPOutConn), AVG(sentBytesPerSec),AVG(recvBytesPerSec),AVG(exchSMTPRetries),AVG(exchSMTPLocalRetryQueue),AVG(exchSMTPRemoteRetryQueue) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(exchCatQueue) DESC, AVG(exchSMTPLocalQueue) DESC, AVG(exchSMTPRemoteQueue) </AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_PERF_MON_5" name="Filter_PERF_MON_5">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_APP_MSEXCH_SMTP_MET" </SingleEvtConstr>
+           <GroupByAttr>hostName</GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostName</RelevantFilterAttr>
+  </Report>
+
+   <Report id="PH_Report_Mail_14" group="PH_SYS_REPORT_AppPerf,PH_SYS_REPORT_MailServer">
+     <Name>Top Microsoft Exchange Servers by Mailbox Whitespace Utilization</Name> 
+     <CustomerScope groupByEachCustomer="true">
+        <Include all="true"/> 
+        <Exclude /> 
+     </CustomerScope>
+     <Description>Ranks the Microsoft Exchange mailbox whitespace utilization (collected via WMI)</Description> 
+     <SelectClause numEntries="All">
+         <AttrList>hostName,exchMboxName,AVG(exchMboxWs) </AttrList> 
+     </SelectClause>
+     <OrderByClause><AttrList> AVG(exchMboxWs) ASC </AttrList></OrderByClause>
+     <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+     <PatternClause window="3600">
+         <SubPattern displayName="Filter_PERF_MON_5" name="Filter_PERF_MON_5">
+           <SingleEvtConstr>eventType = "PH_DEV_MON_APP_MSEXCH_WS_MET" </SingleEvtConstr>
+           <GroupByAttr>hostName, exchMboxName</GroupByAttr> 
+         </SubPattern>
+     </PatternClause>
+     <RelevantFilterAttr>hostName</RelevantFilterAttr>
+  </Report>
+
+</Reports>

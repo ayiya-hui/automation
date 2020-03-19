@@ -1,0 +1,269 @@
+<eventParser name="JunipSSLVPN">
+  
+  <deviceType>
+    <Vendor>Juniper</Vendor>
+    <Model>Secure Access</Model>
+    <Version>ANY</Version>
+  </deviceType>
+
+  <eventFormatRecognizer><![CDATA[Juniper: <:gPatInt>-<:gPatMonNum>-<:gPatDay>\s+<:gPatTime> - ive -]]></eventFormatRecognizer>
+  
+  <testEvents>
+      <testEvent><![CDATA[<134>Juniper: 2008-10-28 04:34:43 - ive - [192.168.20.82] System()[] - Connection from IP 192.168.20.82 not authenticated yet (URL=/dana-na/imgs/space.gif)]]></testEvent>
+  </testEvents>
+
+  <patternDefinitions>
+    <pattern name="patStrLeftBracket"><![CDATA[[^\(]*]]></pattern>
+    <pattern name="patStrRightBracket"><![CDATA[[^\)]*]]></pattern>
+    <pattern name="patStrRightSquareBracket"><![CDATA[[^\]]*]]></pattern>
+    <pattern name="patStrRightSqos"><![CDATA[[^\']*]]></pattern>
+  </patternDefinitions>
+
+
+  <!-- sample events -->
+
+  <!-- vpn login failed
+  <134>Juniper: 2008-10-28 04:34:53 - ive - [192.168.20.82] admin(Users)[] - Login failed using auth server SteelBelted (Radius Server).  Reason: Failed
+  -->
+
+  <!-- vpn logon success 
+  <134>Juniper: 2008-10-28 03:12:03 - ive - [192.168.20.82] automationUser(Users)[Users] - Login succeeded for automationUser/Users from 192.168.20.82.
+  -->
+
+  <!-- vpn logoff
+  <134>Juniper: 2008-10-28 03:55:20 - ive - [192.168.20.82] automationUser(Users)[Users] - Network Connect: Session ended for user with IP 172.16.3.240
+  -->
+
+  <!-- admin logon success
+  <134>Juniper: 2008-10-28 03:05:25 - ive - [172.16.3.150] admin(Admin Users)[] - Primary authentication successful for admin/Administrators from 172.16.3.150
+  -->
+
+  <!-- admin logon failed
+  <134>Juniper: 2008-10-28 05:33:02 - ive - [172.16.3.150] admin(Admin Users)[] - Primary authentication failed for admin/Administrators from 172.16.3.150
+  -->
+
+
+
+
+
+
+  <!-- Juniper-Radius-Server-Logon-Failure
+  <132>Mar 30 16:11:32 172.16.3.130 Juniper: 2010-03-30 08:11:15 - ive - [192.168.22.4] root(Users)[] - Radius Server SteelBelted: Login failed for root because host 172.16.3.150:1812 is unreachable.
+  -->
+   <!-- Juniper-Roles-In-Policy-Modified
+   <134>Juniper: 2008-10-28 03:11:40 - ive - [172.16.3.150] admin(Admin Users)[.Administrators] - Roles in Policy 'JuniperOfficeVPNIPs' is modified from [] to [Users]
+  -->
+   <!-- Juniper-Extra-Action-In-Policy-Modified
+  <134>Juniper: 2008-10-28 03:11:40 - ive - [172.16.3.150] admin(Admin Users)[.Administrators] - Extra Action in Policy 'JuniperOfficeVPNIPs' is modified to [Xport Config=ESPProxy Server Config=No proxy server,Custom DNS settings=OFF,Custom AutoAllow settings=OFF,Primary DNS=,Secondary DNS=,DNS Domain(s)=,WINS=,DNS Search Order=Client First]
+  -->
+     <!-- Juniper-Action-In-Policy-Modified
+   <134>Juniper: 2008-10-28 03:09:56 - ive - [172.16.3.150] admin(Admin Users)[.Administrators] - Action in Policy 'JuniperOffice' is modified from [Use Detailed Rules] to [Allow access]
+  -->
+    <!-- Juniper-Resource-In-Policy-Modified
+   <134>Juniper: 2008-10-28 03:09:56 - ive - [172.16.3.150] admin(Admin Users)[.Administrators] - Resources in Policy 'JuniperOffice' is modified from [] to [172.16.3.128/255.255.255.128]
+  -->
+   <!-- Juniper-Policy-Created
+   <134>Juniper: 2008-10-28 03:09:56 - ive - [172.16.3.150] admin(Admin Users)[.Administrators] - Policy 'JuniperOffice' is created
+  -->
+  <!-- Juniper-User-Deleted
+   <134>Juniper: 2008-10-28 03:05:47 - ive - [172.16.3.150] admin(Admin Users)[.Administrators] - Deleted User realm 'Remote Access Realm'
+  -->
+    <!-- Juniper-Concurrent-Users-Login
+   <134>Juniper: 2008-10-28 04:00:11 - ive - [127.0.0.1] System()[] - Number of concurrent users logged in to the device: 0
+  -->
+     <!-- Juniper-Session-Timeout
+   <134>Juniper: 2008-10-28 03:30:29 - ive - [172.16.3.150] admin(Admin Users)[.Administrators] - Session timed out for admin/Admin Users due to inactivity (last access at 03:11:40 2008/10/28). Idle session identified during routine system scan.
+  -->
+   <!-- Juniper-Key-Exchange
+  <134>Juniper: 2008-10-28 03:12:34 - ive - [192.168.20.82] automationUser(Users)[Users] - Key Exchange number 1 occured for user with NCIP 172.16.3.240
+  -->
+  <!-- Juniper-Session-Start
+ <134>Juniper: 2008-10-28 03:12:21 - ive - [192.168.20.82] automationUser(Users)[Users] - Network Connect: Session started for user with IP 172.16.3.240
+  -->
+   <!-- Juniper-Failed-Allocate-IPAddress
+<134>Juniper: 2008-10-28 02:59:44 - ive - [192.168.20.82] automationUser(Users)[Users] - Network Connect: IP address cannot be allocated to user automationUser. Solution: Check IP Pools / DHCP server state.
+  -->
+    <!-- Juniper-Failed-Match-IPAddress
+<134>Juniper: 2008-10-28 02:59:44 - ive - [192.168.20.82] automationUser(Users)[Users] - Network Connect: No suitable pool / DHCP server found for user. Please check whether user's roles are mapped to any connection profiles by running policy trace or visual inspection.
+  -->
+<!-- Juniper-Unauthenticated
+<134>Juniper: 2008-10-28 04:34:43 - ive - [192.168.20.82] System()[] - Connection from IP 192.168.20.82 not authenticated yet (URL=/dana-na/imgs/space.gif)
+  -->
+
+  <parsingInstructions>
+
+  <!-- parsing common fields --> 
+  <switch>
+  <case>
+  <collectFieldsByRegex src="$_rawmsg">
+    <regex><![CDATA[<:gPatSyslogPRI>Juniper: <_year:gPatInt>-<_mon:gPatMonNum>-<_day:gPatDay>\s+<_time:gPatTime> - ive - \[<_alterSrc:gPatIpV4Dot>\] <user:patStrLeftBracket>\((?:<userGrp:patStrRightBracket>)?\)\[(?:<:patStrRightSquareBracket>)?\] - <_body:gPatMesgBody>]]></regex>
+  </collectFieldsByRegex>
+  </case>
+  <case>
+  <collectFieldsByRegex src="$_rawmsg">
+    <regex><![CDATA[<:gPatSyslogPRI><:gPatMon>\s+<:gPatDay>\s+<:gPatTime>\s+<reptDevIpAddr:gPatIpV4Dot>\s+Juniper: <_year:gPatInt>-<_mon:gPatMonNum>-<_day:gPatDay>\s+<_time:gPatTime> - ive - \[<:gPatIpV4Dot>\] <user:patStrLeftBracket>\((?:<userGrp:patStrRightBracket>)?\)\[(?:<:patStrRightSquareBracket>)?\] - <_body:gPatMesgBody>]]></regex>
+  </collectFieldsByRegex>
+  </case>
+  </switch>
+  
+  <setEventAttribute attr="deviceTime">toDateTime($_mon, $_day, $_year, $_time)</setEventAttribute>
+
+  <setEventAttribute attr="eventAction">0</setEventAttribute>
+  <setEventAttribute attr="eventType">"Juniper-SecureAccess-Generic"</setEventAttribute>
+  <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+
+  <choose>
+    <when test='matches($_body, "Primary authentication")'>
+      <collectFieldsByRegex src="$_body">
+        <regex><![CDATA[Primary authentication <_status:gPatStr> for <:gPatStr> from <srcIpAddr:gPatIpV4Dot>]]></regex>
+      </collectFieldsByRegex>
+      <choose>
+        <when test='$_status = "successful"'>
+          <setEventAttribute attr="eventType">"Juniper-SecureAccess-User-Logon-Success"</setEventAttribute>
+	  <setEventAttribute attr="eventSeverity">4</setEventAttribute>
+        </when>
+        <when test='$_status = "failed"'>
+          <setEventAttribute attr="eventAction">1</setEventAttribute>
+          <setEventAttribute attr="eventType">"Juniper-SecureAccess-User-Logon-Failure"</setEventAttribute>    
+	<setEventAttribute attr="eventSeverity">6</setEventAttribute>
+        </when>
+      </choose>
+    </when>
+    <when test='matches($_body, "Radius Server")'>
+      <collectFieldsByRegex src="$_body">
+        <regex><![CDATA[Radius Server SteelBelted:\s+Login <_status:gPatStr> for <:gPatStr> because host <srcIpAddr:gPatIpV4Dot>:<srcIpPort:gPatIpPort> .*]]></regex>
+      </collectFieldsByRegex>
+      <choose>
+        <when test='$_status = "successful"'>
+          <setEventAttribute attr="eventType">"Juniper-SecureAccess-Radius-Server-Logon-Success"</setEventAttribute>
+	  <setEventAttribute attr="eventSeverity">4</setEventAttribute>
+        </when>
+        <when test='$_status = "failed"'>
+          <setEventAttribute attr="eventAction">1</setEventAttribute>
+          <setEventAttribute attr="eventType">"Juniper-SecureAccess-Radius-Server-Logon-Failure"</setEventAttribute>    
+	<setEventAttribute attr="eventSeverity">6</setEventAttribute>
+        </when>
+      </choose>
+    </when>
+    <when test='matches($_body, "Login failed")'>
+      <setEventAttribute attr="eventAction">1</setEventAttribute>
+      <when test='exist _alterSrc'>
+	<setEventAttribute attr="srcIpAddr">$_alterSrc</setEventAttribute>
+       </when>
+      <setEventAttribute attr="eventType">"Juniper-SecureAccess-VPN-Logon-Failure"</setEventAttribute>   
+       <setEventAttribute attr="eventSeverity">6</setEventAttribute>
+       <when test='matches($_body, "Administrators")'>
+	<setEventAttribute attr="eventType">"Juniper-SecureAccess-Admin-Logon-Failure"</setEventAttribute>
+       </when>
+    </when>
+    <when test='matches($_body, "Login succeeded")'>
+      <switch>
+	<case>
+		<collectFieldsByRegex src="$_body">
+			<regex><![CDATA[Login succeeded for\s+<:gPatStr>\s+Users from <srcIpAddr:gPatIpV4Dot>\s+via internal port.]]></regex>
+		</collectFieldsByRegex>
+		<setEventAttribute attr="eventType">"Juniper-SecureAccess-Admin-Logon-Success"</setEventAttribute>
+	</case>
+	<case>
+		 <collectFieldsByRegex src="$_body">
+			<regex><![CDATA[Login succeeded for\s+<:gPatStr>\s+from <srcIpAddr:gPatIpV4Dot>.]]></regex>
+		</collectFieldsByRegex>
+		<setEventAttribute attr="eventType">"Juniper-SecureAccess-VPN-Logon-Success"</setEventAttribute>   
+	</case>
+       </switch>     
+    </when>
+    <when test='matches($_body, "Network Connect: Session ended")'>
+      <setEventAttribute attr="eventType">"Juniper-SecureAccess-VPN-Logoff"</setEventAttribute>        
+      <collectFieldsByRegex src="$_body">
+        <regex><![CDATA[Network Connect: Session ended for user with IP <srcIpAddr:gPatIpV4Dot>]]></regex>
+      </collectFieldsByRegex>
+    </when>
+    <when test='matches($_body, "Network Connect: Session started")'>
+      <setEventAttribute attr="eventType">"Juniper-SecureAccess-Session-Start"</setEventAttribute>        
+      <collectFieldsByRegex src="$_body">
+        <regex><![CDATA[Network Connect: Session started for user with IP <srcIpAddr:gPatIpV4Dot>]]></regex>
+      </collectFieldsByRegex>
+    </when>
+    <when test='matches($_body, "Key Exchange")'>
+      <setEventAttribute attr="eventType">"Juniper-SecureAccess-Key-Exchange"</setEventAttribute>        
+      <collectFieldsByRegex src="$_body">
+        <regex><![CDATA[Key Exchange number <:gPatInt> occured for user with NCIP <srcIpAddr:gPatIpV4Dot>]]></regex>
+      </collectFieldsByRegex>
+    </when>
+    <when test='matches($_body, "Number of concurrent users logged in")'>
+      <setEventAttribute attr="eventType">"Juniper-SecureAccess-Concurrent-Users-Login"</setEventAttribute>        
+      <collectFieldsByRegex src="$_body">
+        <regex><![CDATA[Number of concurrent users logged in to the device: <:gPatInt>]]></regex>
+      </collectFieldsByRegex>
+    </when>
+      <when test='matches($_body, "Session timed out")'>
+      <setEventAttribute attr="eventType">"Juniper-SecureAccess-Session-Timeout"</setEventAttribute>        
+      <collectFieldsByRegex src="$_body">
+        <regex><![CDATA[Session timed out for <:gPatStr>.*]]></regex>
+      </collectFieldsByRegex>
+    </when>
+      <when test='matches($_body, "not authenticated")'>
+      <setEventAttribute attr="eventType">"Juniper-SecureAccess-Unauthenticated"</setEventAttribute>        
+      <collectFieldsByRegex src="$_body">
+        <regex><![CDATA[Connection from IP <srcIpAddr:gPatIpV4Dot> not authenticated yet.*]]></regex>
+      </collectFieldsByRegex>
+    </when>
+            <when test='matches($_body, "Network Connect: IP address cannot be allocated")'>
+      <setEventAttribute attr="eventType">"Juniper-SecureAccess-Failed-Allocate-IPAddress"</setEventAttribute>        
+      <collectFieldsByRegex src="$_body">
+        <regex><![CDATA[Network Connect: IP address cannot be allocated.*]]></regex>
+      </collectFieldsByRegex>
+    </when>
+        <when test='matches($_body, "Network Connect: No suitable")'>
+      <setEventAttribute attr="eventType">"Juniper-SecureAccess-Failed-Match-IPAddress"</setEventAttribute>        
+      <collectFieldsByRegex src="$_body">
+        <regex><![CDATA[Network Connect: No suitable.*]]></regex>
+      </collectFieldsByRegex>
+    </when>
+    <when test='matches($_body, "Deleted User")'>
+      <setEventAttribute attr="eventType">"Juniper-SecureAccess-User-Deleted"</setEventAttribute>        
+    </when>
+    <when test='matches($_body, "Roles in Policy")'>
+      <setEventAttribute attr="eventType">"Juniper-SecureAccess-Roles-In-Policy-Modified"</setEventAttribute>        
+      <collectFieldsByRegex src="$_body">
+        <regex><![CDATA[Roles in Policy <:gPatStr> is modified from \[<:patStrRightSquareBracket>\] to \[<:patStrRightSquareBracket>\]]]></regex>
+      </collectFieldsByRegex>
+    </when>
+    
+    <when test='matches($_body, "Extra Action in Policy")'>
+      <setEventAttribute attr="eventType">"Juniper-SecureAccess-Extra-Action-In-Policy-Modified"</setEventAttribute>        
+      <collectFieldsByRegex src="$_body">
+        <regex><![CDATA[Extra Action in Policy \'<:patStrRightSqos>\' is modified to \[<:patStrRightSquareBracket>\]]]></regex>
+      </collectFieldsByRegex>
+    </when>
+    
+    <when test='matches($_body, "Action in Policy")'>
+      <setEventAttribute attr="eventType">"Juniper-SecureAccess-Action-In-Policy-Modified"</setEventAttribute>        
+      <collectFieldsByRegex src="$_body">
+        <regex><![CDATA[Action in Policy \'<:patStrRightSqos>\' is modified from \[<:patStrRightSquareBracket>\] to \[<:patStrRightSquareBracket>\]]]></regex>
+      </collectFieldsByRegex>
+    </when>    
+     
+    <when test='matches($_body, "Resources in Policy")'>
+      <setEventAttribute attr="eventType">"Juniper-SecureAccess-Resource-In-Policy-Modified"</setEventAttribute>        
+      <collectFieldsByRegex src="$_body">
+        <regex><![CDATA[Resources in Policy \'<:patStrRightSqos>\' is modified from \[<:patStrRightSquareBracket>\] to \[<:patStrRightSquareBracket>\]]]></regex>
+      </collectFieldsByRegex>
+    </when>
+    <when test='matches($_body, "created")'>
+      <setEventAttribute attr="eventType">"Juniper-SecureAccess-Policy-Created"</setEventAttribute>        
+      <collectFieldsByRegex src="$_body">
+        <regex><![CDATA[Policy \'<:patStrRightSqos>\' is created]]></regex>
+      </collectFieldsByRegex>
+    </when>
+    <when test='matches($_body, "Logout")'>
+      <setEventAttribute attr="eventType">"Juniper-SecureAccess-VPN-Logoff"</setEventAttribute>        
+      <collectFieldsByRegex src="$_body">
+        <regex><![CDATA[Logout from\s+<srcIpAddr:gPatIpV4Dot>]]></regex>
+      </collectFieldsByRegex>
+    </when>
+  </choose>
+
+  </parsingInstructions>
+
+</eventParser>

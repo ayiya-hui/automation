@@ -1,0 +1,11 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+
+Cisco-IronPort-Web-Request-Success,IronportWeb_1,IronportWeb,$localhost,,syslog
+Cisco-IronPort-Web-Client-Error,IronportWeb_2,IronportWeb,$localhost,,syslog
+Cisco-IronPort-Web-Request-Redirect,IronportWeb_3,IronportWeb,$localhost,,syslog
+Cisco-IronPort-Web-Server-Error,IronportWeb_4,IronportWeb,$localhost,,syslog
+Cisco-IronPort-Web-Request-Denied,IronportWeb_5,IronportWeb,$localhost,,syslog
+
+Cisco-IronPort-Web-Forbidden-Access-Denied,IronportWeb_6,IronportWeb,$localhost,,syslog
+Cisco-IronPort-Web-Generic,IronportWeb_7,IronportWeb,$localhost,,syslog

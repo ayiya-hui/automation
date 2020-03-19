@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+enterprises.3401 6 5 enterprises.3401.12.2.1.1.4.1.1.9.309 s "To SJ-Dev-S-RH-DNS-01"     enterprises.3401.12.2.1.1.4.1.1.11.309 s "My Organization" enterprises.3401.12.2.1.1.4.1.1.12.309 s "Directory"        enterprises.3401.12.2.1.1.4.1.1.18.309 s "Any"     enterprises.3401.12.2.1.1.4.1.1.19.309 s "Any"      enterprises.3401.12.2.1.1.4.1.1.33.309 s "(Any)"   enterprises.3401.12.2.1.1.4.1.1.15.309 s "4/16/08 12:06:03 PM"      enterprises.3401.12.2.1.1.4.1.1.31.309 s "1280"    enterprises.3401.12.2.1.1.4.1.1.32.309 s "file infected.  Undetermined clean error, deleted successfully" enterprises.3401.12.2.1.1.4.1.1.16.309 s "1" enterprises.3401.12.2.1.1.4.1.1.17.309 s "1"        enterprises.3401.12.2.1.1.4.1.1.13.309 s "VirusScan"       enterprises.3401.12.2.1.1.4.1.1.14.309 s "Virus detected and removed"      enterprises.3401.12.2.1.1.4.1.1.22.309 s "W32/CodeRed.worm.c"       enterprises.3401.12.2.1.1.4.1.1.23.309 s "Not Available"   enterprises.3401.12.2.1.1.4.1.1.24.309 s "192.168.1.6"      enterprises.3401.12.2.1.1.4.1.1.25.309 s "SJDEVSWINIIS01"  enterprises.3401.12.2.1.1.4.1.1.26.309 s "C:\Documents and Settings\administrator.PROSPECTHILLS\Desktop\CodeRed.bin"   enterprises.3401.12.2.1.1.4.1.1.27.309 s "3"        enterprises.3401.12.2.1.1.4.1.1.6.309 s "4/16/08 12:06:03 PM"
+[params]
+rawEventMsg=any
+eventSeverity=1
+eventSeverityCat=LOW
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+virusName=W32/CodeRed.worm.c
+reptVendor=McAfee
+phRecvTime=any
+phCustId=$sender
+hostName=SJDEVSWINIIS01
+destIpAddr=192.168.1.6
+hostIpAddr=192.168.1.6
+fileName=C:\Documents and Settings\administrator.PROSPECTHILLS\Desktop\CodeRed.bin
+eventName=Clean error - undetermined error; deleted successfully
+computer=SJDEVSWINIIS01
+eventType=McAfee-EPO-1280
+phEventCategory=0 (External)
+reptDevIpAddr=$localhost
+destName=SJDEVSWINIIS01
+reptModel=ePolicy Orchestrator

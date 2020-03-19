@@ -1,0 +1,2 @@
+[eventMsg]
+[PH_DEV_MON_SYS_PAGEFILE_USAGE]:[eventSeverity]=PHL_INFO,[procName]=phMonitorSupervisor,[fileName]=phSystemStatus.cpp,[lineNumber]=78,[hostName]=automator177Dot56Dot57Dot175,[hostIpAddr]=177.56.57.175,[pageFileUsage]=99,[pageFilePeakUsage]=99

@@ -1,0 +1,33 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<182>Oct 16 05:26:40 syslog-ng@COS-Node-1 logserver: [16/Oct/2010:05:26:40.634484 -0700] COS-Node-1 020619 ew 10000017 Info    Audit   VirtualHost='mocha.seattle.gov' StartTime='16/Oct/2010 05:26:40 -0700' Src='122.98.30.4' User='(pair)@(COS Standard VPN)' Method='GET' HTTPVersion='0x3e9' Request='GET http://127.0.0.1:8085/workplace/assets/aventail/transparent.gif HTTP/1.1' Status='200' Bytes='43' EquipmentId='-'
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+appName=Web proxy service
+ipConnId=10000017
+count=1
+phCustId=$sender
+deviceTime=any
+domain=COS Standard VPN
+eventId=any
+eventName=Aventail generic system audit log
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=3
+eventSeverityCat=LOW
+eventType=Aventail-System-Audit-Generic
+fqdnName=mocha.seattle.gov
+httpMethod=GET
+httpVersion=0x3e9
+httpStatusCode=200 (The request has succeeded)
+hostName=COS-Node-1
+procName=Web proxy service
+reptDevIpAddr=$reporter
+reptModel=Aventail VPN
+reptVendor=Sonicwall
+sentBytes=43
+srcIpAddr=122.98.30.4
+uriQuery=GET http://127.0.0.1:8085/workplace/assets/aventail/transparent.gif HTTP/1.1
+user=pair

@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+1.2.3.4
+[eventMsg]
+Nov  7 20:49:38 1.2.3.4 ikauditmgrd[4140]: Failed to determine disk size: Failed to get db size, no status available in DCD (retrying in 20 seconds)
+[params]
+deviceTime=any
+parserName=UnixParser
+eventType=Generic_Unix_ikauditmgrd
+reptModel=Unix
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Generic_Unix_ikauditmgrd
+appTransportProto=Syslog
+phEventCategory=0 (External)
+eventRuleTrigger=1
+destName=HOST-1.2.3.4
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=1.2.3.4
+customer=Super
+phRecvTime=any
+reptDevIpAddr=1.2.3.4
+eventAction=0 (Permit)
+reptVendor=Generic

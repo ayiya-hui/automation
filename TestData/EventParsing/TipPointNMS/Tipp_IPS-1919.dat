@@ -1,0 +1,30 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<36> 7 2	00000002-0002-0002-0002-000000001919 00000001-0001-0001-0001-000000001919 1919: Backdoor: Psychward 1919 tcp 10.1.1.100 13013 10.1.1.101 1240 3 3 2 207-2400-Jack 33761793 1109876221622
+[params]
+rawEventMsg=any
+parserName=TipPointNMSParser
+eventType=Tipp_IPS-1919
+destIpAddr=10.1.1.101
+srcIpAddr=10.1.1.100
+reptModel=TippingPoint UnityOne IPS
+eventId=any
+eventParsedOk=1
+eventSeverity=3
+eventName=Tipp_IPS-1919
+appTransportProto=tcp
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=3
+srcIpPort=13013
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+remedyAction=Permit
+destIpPort=1240
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=3Com

@@ -1,0 +1,2 @@
+[eventMsg]
+<174>Nov 04 02:02:28 [PH_MAX_DEVICES_EXCEEDED]:[totalQuote]=25,[phEventCategory]=2,[srcIpAddr]=$localhost,[phCustId]=1,[totalUsed]=25,[sessionId]=5a6a3ded2df3d423d091ddeea062,[procName]=AppServer,[eventSeverity]=PHL_INFO,[user]=admin,[phLogDetail]=Maximum devices in CMDB exceeded system quote

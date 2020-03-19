@@ -1,0 +1,11 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+VMware_Vpxa_Generic,VMwareVCenter_1,VMwareVCenter,$localhost,,syslog
+VMware_Vpxd_Generic,VMwareVCenter_2,VMwareVCenter,$localhost,destName:vcenter01-mgma,syslog
+VMware_Vpxd_Generic,VMwareVCenter_3,VMwareVCenter,$localhost,procName:vpxdvpxdInvtHostCnx,syslog
+VMware_Vpxd_Generic,VMwareVCenter_4,VMwareVCenter,$localhost,procName:vpxdvpxdInvtHostDb,syslog
+Vmware_Generic,VMwareVCenter_5,VMwareVCenter,$localhost,destName:vcenter01-mgmmm,syslog
+Vmware_Generic,VMwareVCenter_6,VMwareVCenter,$localhost,destName:vcenter01-mgmb,syslog
+Vmware_Generic,VMwareVCenter_7,VMwareVCenter,$localhost,destName:cidronpayll.com,syslog
+Vmware_Generic,VMwareVCenter_8,VMwareVCenter,$localhost,destName:esxi11.ad.elixir.cidronpayy.com,syslog
+Vmware_Generic,VMwareVCenter_9,VMwareVCenter,$localhost,destName:radius02-mgm,syslog

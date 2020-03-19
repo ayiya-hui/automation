@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>Dec 05 2008 13:02:16: %ASA-2-108003: Terminating ESMTP/SMTP connection; malicious pattern detected in the mail address from ether03:20.20.20.20/588 to ether05:192.168.20.20/334. Data:"This is a real situation."
+[params]
+rawEventMsg=any
+destIpAddr=192.168.20.20
+srcIpAddr=20.20.20.20
+srcIntfName=ether03
+srcIpPort=588
+destIntfName=ether05
+destIpPort=334
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=8
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=MEDIUM
+eventAction=1 (Deny)
+eventName=Terminating ESMTP/SMTP connection - malicious pattern mail address
+reptVendor=Cisco
+eventType=ASA-108003
+phEventCategory=0 (External)
+reptDevIpAddr=$reporter
+reptModel=ASA

@@ -1,0 +1,23 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<190>37: *May 20 04:43:06: %C4K_IOSMODPORTMAN-6-POWERSUPPLYGOOD: Power supply 2 is okay
+[params]
+deviceTime=any
+eventType=IOS-C4K_IOSMODPORTMAN-POWERSUPPLYGOOD
+phCustId=$sender
+reptModel=IOS
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+hostIpAddr=$localhost
+eventName=Catalyst 4000 Power supply is good
+phEventCategory=0
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=Success(0)
+reptVendor=Cisco

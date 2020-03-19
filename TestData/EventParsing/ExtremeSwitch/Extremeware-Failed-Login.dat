@@ -1,0 +1,23 @@
+[reptDevIpAddr(key)]
+90.90.90.93
+[eventMsg]
+<132>Mar 29 15:59:01 $reporter USER: Login failed for user admin through telnet (192.168.20.34)
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+reptDevIpAddr=$reporter
+eventParsedOk=1
+eventSeverity=3
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=$reporter
+eventAction=1 (Deny)
+eventName=Failed logon
+srcIpAddr=192.168.20.34
+reptVendor=Extreme
+eventType=Extremeware-Failed-Login
+user=admin
+phEventCategory=0 (External)
+reptModel=Extremeware

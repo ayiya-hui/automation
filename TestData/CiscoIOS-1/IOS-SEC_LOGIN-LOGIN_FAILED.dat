@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<188>84354: Dec  6 08:15:20: %SEC_LOGIN-4-LOGIN_FAILED: Login failed [user: Admin] [Source: 192.168.135.125] [localport: 80] [Reason: Login Authentication Failed - BadPassword] at 08:15:20 PST Mon Dec 6 2010
+[params]
+deviceTime=any
+eventType=IOS-SEC_LOGIN-LOGIN_FAILED
+phCustId=$sender
+destIpAddr=$localhost
+srcIpAddr=192.168.135.125
+reptModel=IOS
+eventId=any
+eventParsedOk=1
+eventSeverity=5
+hostIpAddr=$localhost
+eventName=Failed admin login
+phEventCategory=0
+errReason=Login Authentication Failed - BadPassword
+eventSeverityCat=MEDIUM
+collectorId=any
+relayDevIpAddr=$localhost
+user=Admin
+destIpPort=80
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=Failure(1)
+reptVendor=Cisco

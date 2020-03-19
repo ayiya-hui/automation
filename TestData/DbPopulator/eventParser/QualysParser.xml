@@ -1,0 +1,82 @@
+<eventParser name="QualysParser">
+
+  <deviceType>
+    <Vendor>Qualys</Vendor>
+    <Model>QualysGuard Scanner</Model>
+    <Version>ANY</Version>
+  </deviceType>
+
+  <patternDefinitions>
+    <pattern name="patStrEndWithRightSquareBracket"><![CDATA[[^\]]*]]></pattern>
+    <pattern name="patStrEndBrack"><![CDATA[[^\]+]]></pattern>
+  </patternDefinitions>
+
+  <eventFormatRecognizer><![CDATA[\[Qualys-]]></eventFormatRecognizer>
+  
+  <testEvents>
+      <testEvent><![CDATA[<134>Apr 09 16:43:00 $reporter java: [Qualys-Vuln-Detected]:[eventSeverity]=PHL_INFO, [reptVendor]= Qualys, [reptModel]= Scan Report, [qualysUserName]= prspe_wy, [qualysDate]= 2010-04-13T01:02:13Z, [qualysScanName]= scan/1271120534.15444, [qualysScanedIP]= 209.31.16.75, [qualysScanedHostName]=QA-1.accelops.net.cn, [qualysOS]= CentOS 5.2, [qualysVulnCategory]= CGI, [qualysVulnTittle]= PHP Multiple Vulnerabilities May 2008, [qualysVulnSeverity]= 3, [qualysVulnCveId]= CVE-2008-0599,  CVE-2008-2050, CVE-2008-2051 , [qualysVulnBugTraqID]= 29009, [qualysVulnConseq]= Successful exploits could allow an attacker to bypass security restrictions, cause a denial of service, and potentially execute code., [qualysVulnVendor]= RHSA-2008:0545 PHP 5.2.6 RHSA-2008-0544 RHSA-2008-0546]]></testEvent>
+  </testEvents>
+
+  <parsingInstructions>
+
+    <!-- sample event
+	 <134>Apr 09 16:43:00 172.16.10.60 java: [Qualys_Report_Vuln]:[eventSeverity]=PHL_INFO, [reptVendor]= Qualys, [reptModel]= Scan Report, [qualysUserName]= prspe_wy, [qualysDate]= 2010-04-13T01:02:13Z, [qualysScanName]= scan/1271120534.15444, [qualysIP]= 209.31.16.75, [qualysOS]= CentOS 5.2, [qualysVulnCategory]= CGI, [qualysVulnTittle]= PHP Multiple Vulnerabilities May 2008, [qualysVulnSeverity]= 3, [qualysVulnCveId]= CVE-2008-0599, CVE-2008-2050, CVE-2008-2051, , [qualysVulnBugTraqID]= 29009, , [qualysVulnConseq]= Successful exploits could allow an attacker to bypass security restrictions, cause a denial of service, and potentially execute code., [qualysVulnVendor]= RHSA-2008:0545, PHP 5.2.6, RHSA-2008-0544, RHSA-2008-0546,
+	 -->
+
+    <collectFieldsByRegex src="$_rawmsg">
+      <regex><![CDATA[<:gPatSyslogPRI><:gPatMon>\s+<:gPatDay>\s+<:gPatTime>\s+<serverName:gPatStr>\s+java:\s*\[<eventType:patStrEndWithRightSquareBracket>\]:<_body:gPatMesgBody>]]></regex>
+    </collectFieldsByRegex>
+
+    <when test='$eventType = "Qualys-Get-Error"'>
+      <setEventAttribute attr="eventSeverity">8</setEventAttribute>
+    </when>
+
+    <collectAndSetAttrByKeyValuePair sep=', [' src="$_body">
+      <attrKeyMap attr="reptVendor" key="[reptVendor]="/>
+      <attrKeyMap attr="user" key="[qualysUserName]="/>
+      <attrKeyMap attr="_reptTime" key="[qualysDeviceTime]="/>
+      <attrKeyMap attr="scanProfile" key="[qualysScanName]="/>
+      <attrKeyMap attr="hostIpAddr" key="[qualysScanedIP]="/>
+      <attrKeyMap attr="osType" key="[qualysOS]="/>
+      <attrKeyMap attr="vulnType" key="[qualysVulnCategory]="/>
+      <attrKeyMap attr="vulnName" key="[qualysVulnTittle]="/>
+      <attrKeyMap attr="_severity" key="[qualysVulnSeverity]="/>
+      <attrKeyMap attr="vulnCVEId" key="[qualysVulnCveId]="/>
+      <attrKeyMap attr="vulnBugTraqID" key="[qualysVulnBugTraqID]="/>
+      <attrKeyMap attr="vulnConseq" key="[qualysVulnConseq]="/>
+      <attrKeyMap attr="vulnVendor" key="[qualysVulnVendor]="/>
+      <attrKeyMap attr="hostName" key="[qualysScanedHostName]="/>
+      <attrKeyMap attr="errorString" key="[qualysErrorContent]="/>
+    </collectAndSetAttrByKeyValuePair>
+
+
+    <when test='$eventType = "Qualys-Vuln-Detected"'>
+      <when test='exist _reptTime'>
+	<collectFieldsByRegex src="$_reptTime">
+		<regex><![CDATA[<_year:gPatYear>-<_mon:gPatMonNum>-<_day:gPatDay>T<_time:gPatTime>Z]]></regex>
+	</collectFieldsByRegex>
+	<setEventAttribute attr="scanEnd">toDateTime($_mon, $_day, $_year, $_time)</setEventAttribute>
+      </when>
+    </when>
+
+    <when test='exist _severity'>
+	    <choose>
+	      <when test='$_severity = "1"'>
+		<setEventAttribute attr="eventSeverity">4</setEventAttribute>
+	      </when>
+	      <when test='$_severity = "2"'>
+		<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+	      </when>
+	      <when test='$_severity = "3"'>
+		<setEventAttribute attr="eventSeverity">7</setEventAttribute>
+	      </when>
+	      <when test='$_severity = "4"'>
+		<setEventAttribute attr="eventSeverity">8</setEventAttribute>
+	      </when>
+	      <when test='$_severity = "5"'>
+		<setEventAttribute attr="eventSeverity">10</setEventAttribute>
+	      </when>
+	</choose>
+   </when>
+  </parsingInstructions>
+</eventParser>

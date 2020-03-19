@@ -1,0 +1,24 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+2015-11-11T18:55:51.973869+00:00 usmonf1kansrfs600002 %DIAG-4-FREE_FLASH_DISK: Free flash: file system space, 1.1% is less than limit 90.0%
+[params]
+customer=Super
+eventId=any
+eventSeverityCat=MEDIUM
+eventParsedOk=1
+phEventCategory=0 (External)
+parserName=MotorolaWiNGParser
+count=1
+eventSeverity=5
+eventType=Motorola-WiNG-DIAG-FREE_FLASH_DISK
+reptDevIpAddr=$localhost
+collectorId=any
+eventName=Motorola WLAN AP: flash disk close to full
+reptVendor=Motorola
+relayDevIpAddr=$localhost
+extEventRecvProto=Syslog
+phRecvTime=any
+eventRuleTrigger=1
+reptDevName=usmonf1kansrfs600002
+reptModel=WiNG WLAN AP

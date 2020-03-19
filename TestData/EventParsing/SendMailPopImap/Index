@@ -1,0 +1,4 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+SENDMAIL_POP_LOGOUT,SendMailPopImap_1,SendMailPopImap,2.2.2.2,,syslog
+SENDMAIL_IMAP_LOGIN,SendMailPopImap_2,SendMailPopImap,2.2.2.2,,syslog

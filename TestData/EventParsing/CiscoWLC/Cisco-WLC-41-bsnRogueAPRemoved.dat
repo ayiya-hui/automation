@@ -1,0 +1,22 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+enterprises.14179.2.6.3.41	enterprises.14179.2.1.7.1.1.0 x "00 23 51 32 FF B9"	enterprises.14179.2.1.8.1.1.0 x "00 21 55 4D DD 30"	enterprises.14179.2.1.8.1.2.0 i 0	enterprises.14179.2.1.8.1.3.0 i 1	enterprises.14179.2.1.8.1.4.0  s "AP001d.e556.f3a2"
+[params]
+rawEventMsg=any
+eventSeverity=1
+eventSeverityCat=LOW
+srcMACAddr=00:23:51:32:ff:b9
+hostMACAddr=00:21:55:4d:dd:30
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+phRecvTime=any
+phCustId=$sender
+reptDevIpAddr=$localhost
+eventName=An earlier detected rogue AP no longer exists
+reptVendor=Cisco
+eventType=Cisco-WLC-41-bsnRogueAPRemoved
+phEventCategory=0 (External)
+reptModel=WLAN Controller

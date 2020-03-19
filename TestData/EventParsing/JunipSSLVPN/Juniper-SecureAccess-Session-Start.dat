@@ -1,0 +1,24 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>Juniper: 2008-10-28 03:12:21 - ive - [192.168.20.82] wenyong(Users)[Users] - Network Connect: Session started for user with IP 172.16.3.240
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+srcIpAddr=172.16.3.240
+eventAction=0 (Permit)
+eventName=Session started for user
+reptVendor=Juniper
+eventType=Juniper-SecureAccess-Session-Start
+user=wenyong
+phEventCategory=0 (External)
+reptDevIpAddr=$localhost
+userGrp=Users
+reptModel=Secure Access

@@ -1,0 +1,21 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+enterprises.20006.1.5	enterprises.20006.1.1.1.2 s "test_lieven"	enterprises.20006.1.1.1.4 i 2	enterprises.20006.1.1.1.14 s "UNREACHABLE"	enterprises.20006.1.1.1.8 s "Unknown"
+[params]
+rawEventMsg=any
+eventSeverity=7
+eventSeverityCat=MEDIUM
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+phRecvTime=any
+phCustId=$sender
+hostName=test_lieven
+eventName=Host unreachable
+reptVendor=Nagios
+eventType=Nagios_Host_Unreachable
+phEventCategory=0 (External)
+reptDevIpAddr=$localhost
+reptModel=Mgmt Server

@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+172.18.86.229
+[eventMsg]
+Mar 29 13:50:43 172.18.86.229 xems: 1269867043l | security | info | WAU | Controller Access User local1234@172.18.45.17 login to controller at time Mon Mar 29 18:20:43 2010 is FAILED
+[params]
+deviceTime=any
+parserName=FortiWLANParser
+eventType=FortiWLC-Admin-Logon-Failure
+srcName=HOST-172.18.45.17
+srcIpAddr=172.18.45.17
+reptModel=FortiWLC
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=FortiWLC Admin login failure
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=172.18.86.229
+user=local1234
+rawEventMsg=any
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=172.18.86.229
+reptVendor=Fortinet

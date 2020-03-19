@@ -1,0 +1,1437 @@
+<Rules>
+
+ <!-- ******************CPU********************* -->
+  <Rule group="PH_SYS_RULE_Perf_Server" id="PH_Rule_Perf_201" fireInternalIncident = "true" phIncidentCategory="Server">
+    <Name>Server CPU Warning </Name>
+    <active>true</active>
+    <Description>Detects that server CPU has reached a warning level (between 75% and 85% based on 2 successive readings in a 10 minute interval</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_SERVER_CPU_WARN" severity="5"  >
+      <ArgList>
+        hostIpAddr = ServCPUWarn.hostIpAddr, hostName = ServCPUWarn.hostName, cpuUtil = ServCPUWarn.AVG(cpuUtil)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+       <SubPattern displayName="ServCPUWarn" name="ServCPUWarn">
+	 <Description>Average CPU Utilization is between 75% and 85% for 2 readings over 10 min period </Description>
+	 <SingleEvtConstr>eventType = "PH_DEV_MON_SYS_CPU_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Server) </SingleEvtConstr>
+         <GroupEvtConstr> AVG(cpuUtil) &gt;= 75 AND AVG(cpuUtil) &lt;= 85 AND COUNT(*) &gt;= 2 </GroupEvtConstr>
+         <GroupByAttr>hostIpAddr,hostName</GroupByAttr>
+       </SubPattern>
+    </PatternClause>  
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,reptDevIpAddr,hostIpAddr,hostName,cpuUtil,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "timebased">
+      <QuietPeriod>1200</QuietPeriod>
+    </ClearCondition>
+  </Rule> 
+  
+ <!-- ***************************************************** -->
+  <Rule group="PH_SYS_RULE_Perf_Server" id="PH_Rule_Perf_202" fireInternalIncident = "true" phIncidentCategory="Server">
+    <Name>Server CPU Critical </Name>
+    <active>true</active>
+    <Description>Detects that server CPU has reached a critical level (greater than 85% based on 2 successive readings in a 10 minute interval</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_SERVER_CPU_CRIT" severity="9"  >
+      <ArgList>
+        hostIpAddr = ServCPUCrit.hostIpAddr, hostName = ServCPUCrit.hostName, cpuUtil = ServCPUCrit.AVG(cpuUtil)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+       <SubPattern displayName="ServCPUCrit" name="ServCPUCrit">
+	 <Description>Average CPU Utilization is greater than 85% for 2 readings over 10 min period </Description>
+	 <SingleEvtConstr>eventType = "PH_DEV_MON_SYS_CPU_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Server) </SingleEvtConstr>
+         <GroupEvtConstr> AVG(cpuUtil) &gt; 85 AND COUNT(*) &gt;= 2 </GroupEvtConstr>
+         <GroupByAttr>hostIpAddr,hostName</GroupByAttr>
+       </SubPattern>
+    </PatternClause>  
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,reptDevIpAddr,hostIpAddr,hostName,cpuUtil,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "timebased">
+      <QuietPeriod>1200</QuietPeriod>
+    </ClearCondition>
+  </Rule> 
+
+  <!-- ***************************************************** -->
+  <Rule group="PH_SYS_RULE_Perf_Network" id="PH_Rule_Perf_203" fireInternalIncident = "true" phIncidentCategory="Network">
+    <Name>Network CPU Warning </Name>
+    <active>true</active>
+    <Description>Detects that a network device CPU has reached a warning level (between 75% and 90% based on 2 successive readings in a 10 minute interval</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_NET_CPU_WARN" severity="5"  >
+      <ArgList>
+        hostIpAddr = NetCPUWarn.hostIpAddr, hostName = NetCPUWarn.hostName, cpuUtil = NetCPUWarn.AVG(cpuUtil)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+       <SubPattern displayName="NetCPUWarn" name="NetCPUWarn">
+	 <Description>Average CPU Utilization is between 75% and 90% for 2 readings over 10 min period </Description>
+	 <SingleEvtConstr>eventType = "PH_DEV_MON_SYS_CPU_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Network) </SingleEvtConstr>
+         <GroupEvtConstr> AVG(cpuUtil) &gt;= 75 AND AVG(cpuUtil) &lt;= 90 AND COUNT(*) &gt;= 2 </GroupEvtConstr>
+         <GroupByAttr>hostIpAddr,hostName</GroupByAttr>
+       </SubPattern>
+    </PatternClause>  
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,reptDevIpAddr,hostIpAddr,hostName,cpuUtil,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "timebased">
+      <QuietPeriod>1200</QuietPeriod>
+    </ClearCondition>
+  </Rule> 
+  
+  <!-- ***************************************************** -->
+  <Rule group="PH_SYS_RULE_Perf_Network" id="PH_Rule_Perf_204" fireInternalIncident = "true" phIncidentCategory="Network">
+    <Name>Network CPU Critical </Name>
+    <active>true</active>
+    <Description>Detects that a network device CPU has reached a critical level (greater than 90% based on 2 successive readings in a 10 minute interval</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_NET_CPU_CRIT" severity="9"  >
+      <ArgList>
+        hostIpAddr = NetCPUCrit.hostIpAddr, hostName = NetCPUCrit.hostName, cpuUtil = NetCPUCrit.AVG(cpuUtil)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+       <SubPattern displayName="NetCPUCrit" name="NetCPUCrit">
+	 <Description>Average CPU Utilization is greater than 90% for 2 readings over 10 min period </Description>
+	 <SingleEvtConstr>eventType = "PH_DEV_MON_SYS_CPU_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Network) </SingleEvtConstr>
+         <GroupEvtConstr> AVG(cpuUtil) &gt; 90 AND COUNT(*) &gt;= 2 </GroupEvtConstr>
+         <GroupByAttr>hostIpAddr,hostName</GroupByAttr>
+       </SubPattern>
+    </PatternClause>  
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,reptDevIpAddr,hostIpAddr,hostName,cpuUtil,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "timebased">
+      <QuietPeriod>1200</QuietPeriod>
+    </ClearCondition>
+  </Rule> 
+
+  <!-- ******************* memory ******************* -->
+  <Rule group="PH_SYS_RULE_Perf_Server" id="PH_Rule_Perf_205" fireInternalIncident = "true" phIncidentCategory="Server">
+    <Name>Server Memory Warning </Name>
+    <active>true</active>
+    <Description>Detects that server Memory has reached a warning level (between 75% and 85% based on 2 successive readings in a 10 minute interval</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_SERVER_MEM_WARN" severity="5"  >
+      <ArgList>
+        hostIpAddr = ServMemWarn.hostIpAddr, hostName = ServMemWarn.hostName, memUtil = ServMemWarn.AVG(memUtil)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+       <SubPattern displayName="ServMemWarn" name="ServMemWarn">
+	 <Description>Average Memory Utilization is between 75% and 85% for 2 readings over 10 min period </Description>
+	 <SingleEvtConstr>eventType = "PH_DEV_MON_SYS_MEM_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Server) AND memName = "Physical Memory" AND hostIpAddr NOT IN (Group@PH_SYS_APP_DATABASE_SERVER, Group@PH_SYS_APP_MAIL_SERVER) </SingleEvtConstr>
+         <GroupEvtConstr> AVG(memUtil) &gt;= 75 AND AVG(memUtil) &lt;= 85 AND COUNT(*) &gt;= 2 </GroupEvtConstr>
+         <GroupByAttr>hostIpAddr,hostName</GroupByAttr>
+       </SubPattern>
+    </PatternClause>  
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,reptDevIpAddr,hostIpAddr,hostName,memUtil,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "timebased">
+      <QuietPeriod>1200</QuietPeriod>
+    </ClearCondition>
+  </Rule> 
+  
+ <!-- ***************************************************** -->
+  <Rule group="PH_SYS_RULE_Perf_Server" id="PH_Rule_Perf_206" fireInternalIncident = "true" phIncidentCategory="Server">
+    <Name>Server Memory Critical </Name>
+    <active>true</active>
+    <Description>Detects that server memory has reached a critical level (greater than 85% based on 2 successive readings in a 10 minute interval</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_SERVER_MEM_CRIT" severity="9"  >
+      <ArgList>
+        hostIpAddr = ServMemCrit.hostIpAddr, hostName = ServMemCrit.hostName, memUtil = ServMemCrit.AVG(memUtil)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+       <SubPattern displayName="ServMemCrit" name="ServMemCrit">
+	 <Description>Average Memory Utilization is greater than 85% for 2 readings over 10 min period </Description>
+	 <SingleEvtConstr>eventType = "PH_DEV_MON_SYS_MEM_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Server) AND memName = "Physical Memory" AND hostIpAddr NOT IN (Group@PH_SYS_APP_DATABASE_SERVER, Group@PH_SYS_APP_MAIL_SERVER) </SingleEvtConstr>
+         <GroupEvtConstr> AVG(memUtil) &gt; 85 AND COUNT(*) &gt;= 2 </GroupEvtConstr>
+         <GroupByAttr>hostIpAddr,hostName</GroupByAttr>
+       </SubPattern>
+    </PatternClause>  
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,reptDevIpAddr,hostIpAddr,hostName,memUtil,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "timebased">
+      <QuietPeriod>1200</QuietPeriod>
+    </ClearCondition>
+  </Rule> 
+
+  <Rule group="PH_SYS_RULE_Perf_Server" id="PH_Rule_Perf_206B" fireInternalIncident = "true" phIncidentCategory="Server">
+    <active>true</active>
+    <Name>Server Swap Memory Critical</Name>
+    <Description>Detects that server swap memory has reached a critical level (free swap less than minimum swap)</Description>
+    <CustomerScope groupByEachCustomer="true">
+      <Include all="true"/>
+      <Exclude/>
+    </CustomerScope>
+    <IncidentDef eventType="PH_RULE_SWAP_MEM_CRIT" fireFreq="3600" severity="9">
+      <ArgList>hostIpAddr = ServSwapMemCrit.hostIpAddr, hostName = ServSwapMemCrit.hostName, swapMemUtil = ServSwapMemCrit.AVG(swapMemUtil)</ArgList>
+    </IncidentDef>
+    <ClearCondition method="Auto" type="timebased">
+      <QuietPeriod>1200</QuietPeriod>
+    </ClearCondition>
+    <PatternClause window="600">
+      <SubPattern displayName="ServSwapMemCrit" name="ServSwapMemCrit">
+        <SingleEvtConstr>eventType = "PH_DEV_MON_SYS_MEM_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Server)</SingleEvtConstr>
+        <GroupEvtConstr>COUNT (*) &gt; 2 AND AVG(swapMemUtil) &gt; 90 </GroupEvtConstr>
+        <GroupByAttr>hostIpAddr, hostName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,memName,hostName,hostIpAddr,swapMemUtil,freeSwapMemKB,memMinimumSwap,swapMemErrorString,rawEventMsg</AttrList>
+    </TriggerEventDisplay>
+  </Rule>
+  
+  <!-- ***************************************************** -->
+  <Rule group="PH_SYS_RULE_Perf_Network" id="PH_Rule_Perf_207" fireInternalIncident = "true" phIncidentCategory="Network">
+    <Name>Network Memory Warning </Name>
+    <active>true</active>
+    <Description>Detects that a network device memory usage has reached a warning level (between 50% and 85% based on 2 successive readings in a 10 minute interval</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_NET_MEM_WARN" severity="5"  >
+      <ArgList>
+        hostIpAddr = NetMemWarn.hostIpAddr, hostName = NetMemWarn.hostName, memUtil = NetMemWarn.AVG(memUtil)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+       <SubPattern displayName="NetMemWarn" name="NetMemWarn">
+	 <Description>Average Memory Utilization is between 65% and 85% for 2 readings over 10 min period </Description>
+	 <SingleEvtConstr>eventType = "PH_DEV_MON_SYS_MEM_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Network) AND memName = "Physical Memory" </SingleEvtConstr>
+         <GroupEvtConstr> AVG(memUtil) &gt;= 65 AND AVG(memUtil) &lt;= 85 AND COUNT(*) &gt;= 2 </GroupEvtConstr>
+         <GroupByAttr>hostIpAddr,hostName</GroupByAttr>
+       </SubPattern>
+    </PatternClause>  
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,reptDevIpAddr,hostIpAddr,hostName,memUtil,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "timebased">
+      <QuietPeriod>1200</QuietPeriod>
+    </ClearCondition>
+  </Rule> 
+  
+  <!-- ***************************************************** -->
+  <Rule group="PH_SYS_RULE_Perf_Network" id="PH_Rule_Perf_208" fireInternalIncident = "true" phIncidentCategory="Network">
+    <Name>Network Memory Critical </Name>
+    <active>true</active>
+    <Description>Detects that a network device memory has reached a critical level (greater than 85% based on 2 successive readings in a 10 minute interval</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_NET_MEM_CRIT" severity="9"  >
+      <ArgList>
+        hostIpAddr = NetMemCrit.hostIpAddr, hostName = NetMemCrit.hostName, memUtil = NetMemCrit.AVG(memUtil)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+      <SubPattern displayName="NetMemCrit" name="NetMemCrit">
+	<Description>Average Memory Utilization is greater than 85% for 2 readings over 10 min period </Description>
+	<SingleEvtConstr>eventType = "PH_DEV_MON_SYS_MEM_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Network) AND memName = "Physical Memory" </SingleEvtConstr>
+        <GroupEvtConstr> AVG(memUtil) &gt; 85 AND COUNT(*) &gt;= 2 </GroupEvtConstr>
+        <GroupByAttr>hostIpAddr,hostName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>  
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,reptDevIpAddr,hostIpAddr,hostName,memUtil,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "timebased">
+      <QuietPeriod>1200</QuietPeriod>
+    </ClearCondition>
+  </Rule> 
+
+  <!-- ***************Disk space******************** -->
+  <Rule group="PH_SYS_RULE_Perf_Server" id="PH_Rule_Perf_209" fireInternalIncident = "true" phIncidentCategory="Server">
+    <Name>Server Disk space Warning </Name>
+    <active>true</active>
+    <Description>Detects that server disk space usage has reached a warning level (utilization between 80% and 95% and free disk still greater than 100 MB) based on 2 successive readings in a 10 minute interval</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_SERVER_DISK_SPACE_WARN" severity="5"  fireFreq="21600">
+      <ArgList>
+        hostIpAddr = ServDiskWarn.hostIpAddr, hostName = ServDiskWarn.hostName, diskName = ServDiskWarn.diskName, diskUtil = ServDiskWarn.AVG(diskUtil), freeDiskMB =  ServDiskWarn.AVG(freeDiskMB) 
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+       <SubPattern displayName=" ServDiskWarn" name=" ServDiskWarn">
+	 <Description>Average Disk Utilization for a logical volume between 85% and 95% for 2 readings over 10 min period </Description>
+	 <SingleEvtConstr>eventType = "PH_DEV_MON_SYS_DISK_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Server) AND diskName NOT IN ("/boot") </SingleEvtConstr>
+         <GroupEvtConstr> ((AVG(diskUtil) &gt;= 80 AND AVG(diskUtil) &lt;= 95) OR (AVG(diskUtil) &gt;= 95 AND AVG(freeDiskMB) &gt; 100)) AND COUNT(*) &gt;= 2 </GroupEvtConstr>
+         <GroupByAttr>hostIpAddr,hostName,diskName</GroupByAttr>
+       </SubPattern>
+    </PatternClause>  
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,reptDevIpAddr,hostIpAddr,hostName,diskName,diskUtil,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "timebased">
+      <QuietPeriod>1200</QuietPeriod>
+    </ClearCondition>
+  </Rule> 
+  
+ <!-- ***************************************************** -->
+  <Rule group="PH_SYS_RULE_Perf_Server" id="PH_Rule_Perf_210" fireInternalIncident = "true" phIncidentCategory="Server">
+    <Name>Server Disk Space Critical </Name>
+    <active>true</active>
+    <Description>Detects that server disk space usage has reached a critical level (greater than 95% and free disk less than 100 MB) based on 2 successive readings in a 10 minute interval</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_SERVER_DISK_SPACE_CRIT" severity="9"  fireFreq="21600">
+      <ArgList>
+        hostIpAddr = ServDiskCrit.hostIpAddr, hostName = ServDiskCrit.hostName, diskName = ServDiskCrit.diskName, diskUtil = ServDiskCrit.AVG(diskUtil), freeDiskMB =  ServDiskCrit.AVG(freeDiskMB)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+       <SubPattern displayName="ServDiskCrit" name=" ServDiskCrit">
+	 <Description>Average CPU Utilization is greater than 85% for 2 readings over 10 min period </Description>
+	 <SingleEvtConstr>eventType = "PH_DEV_MON_SYS_DISK_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Server) AND diskName NOT IN ("/boot") </SingleEvtConstr>
+         <GroupEvtConstr> AVG(diskUtil) &gt; 95 AND AVG(freeDiskMB) &lt; 100 AND COUNT(*) &gt;= 2 </GroupEvtConstr>
+         <GroupByAttr>hostIpAddr,hostName,diskName</GroupByAttr>
+       </SubPattern>
+    </PatternClause>  
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,reptDevIpAddr,hostIpAddr,hostName,diskName,diskUtil,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "timebased">
+      <QuietPeriod>1200</QuietPeriod>
+    </ClearCondition>
+  </Rule> 
+
+  <!-- ***************Disk I/O latency ******************** -->
+  <Rule group="PH_SYS_RULE_Perf_Server" id="PH_Rule_Perf_209B" fireInternalIncident = "true" phIncidentCategory="Server">
+    <Name>Server Disk Latency Warning </Name>
+    <active>true</active>
+    <Description>Detects that server disk I/O latency has reached a warning level (between 20 and 50 msec) based on 2 successive readings in a 10 minute interval</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_SERVER_DISK_LATENCY_WARN" severity="5"  fireFreq="21600">
+      <ArgList>
+        hostIpAddr = ServDiskLatencyWarn.hostIpAddr, hostName = ServDiskLatencyWarn.hostName, diskName = ServDiskLatencyWarn.diskName, devDiskRdLatency = ServDiskLatencyWarn.AVG(devDiskRdLatency), devDiskWrLatency = ServDiskLatencyWarn.AVG(devDiskWrLatency)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+       <SubPattern displayName=" ServDiskLatencyWarn" name=" ServDiskLatencyWarn">
+	 <Description>Average Disk Read or Write latency for a logical volume between between 20 and 50 msec for 2 readings over 10 min period </Description>
+	 <SingleEvtConstr>eventType = "PH_DEV_MON_DISK_IO_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Server) AND diskName NOT IN ("/boot") </SingleEvtConstr>
+         <GroupEvtConstr> ((AVG(devDiskRdLatency) &gt;= 20 AND AVG(devDiskRdLatency) &lt; 50) OR (AVG(devDiskWrLatency) &gt;= 20 AND AVG(devDiskWrLatency) &lt; 50)) AND COUNT(*) &gt;= 2 </GroupEvtConstr>
+         <GroupByAttr>hostIpAddr,hostName,diskName</GroupByAttr>
+       </SubPattern>
+    </PatternClause>  
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,reptDevIpAddr,hostIpAddr,hostName,diskName,devDiskRdLatency,devDiskWrLatency,diskQLen,diskIOUtil,diskReadReqPerSec,diskWriteReqPerSec,diskReadKBytesPerSec,diskWriteKBytesPerSec</AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "timebased">
+      <QuietPeriod>1200</QuietPeriod>
+    </ClearCondition>
+  </Rule> 
+  
+  <Rule group="PH_SYS_RULE_Perf_Server" id="PH_Rule_Perf_209C" fireInternalIncident = "true" phIncidentCategory="Server">
+    <Name>Server Disk Latency Critical </Name>
+    <active>true</active>
+    <Description>Detects that server disk I/O latency has reached a critical level (greater  than 50 msec) based on 2 successive readings in a 10 minute interval</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_SERVER_DISK_LATENCY_CRIT" severity="9"  fireFreq="21600">
+      <ArgList>
+        hostIpAddr = ServDiskLatencyCrit.hostIpAddr, hostName = ServDiskLatencyCrit.hostName, diskName = ServDiskLatencyCrit.diskName,devDiskRdLatency = ServDiskLatencyCrit.AVG(devDiskRdLatency), devDiskWrLatency = ServDiskLatencyCrit.AVG(devDiskWrLatency)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+       <SubPattern displayName=" ServDiskLatencyCrit" name=" ServDiskLatencyCrit">
+	 <Description>Average Disk Read or Write latency for a logical volume greater than 50 msec for 2 readings over 10 min period </Description>
+	 <SingleEvtConstr>eventType = "PH_DEV_MON_DISK_IO_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Server) AND diskName NOT IN ("/boot") </SingleEvtConstr>
+         <GroupEvtConstr> (AVG(devDiskRdLatency) &gt;= 50 OR AVG(devDiskWrLatency) &gt;= 50) AND COUNT(*) &gt;= 2 </GroupEvtConstr>
+         <GroupByAttr>hostIpAddr,hostName,diskName</GroupByAttr>
+       </SubPattern>
+    </PatternClause>  
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,reptDevIpAddr,hostIpAddr,hostName,diskName,devDiskRdLatency,devDiskWrLatency,diskQLen,diskIOUtil,diskReadReqPerSec,diskWriteReqPerSec,diskReadKBytesPerSec,diskWriteKBytesPerSec</AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "timebased">
+      <QuietPeriod>1200</QuietPeriod>
+    </ClearCondition>
+  </Rule> 
+
+  <!-- *****************Intf util********************* -->
+  <Rule group="PH_SYS_RULE_Perf_Network" id="PH_Rule_Perf_211" fireInternalIncident = "true" phIncidentCategory="Network">
+    <Name>Network Intf Util Warning </Name>
+    <active>true</active>
+    <Description>Detects that interface utilization of a network device has reached a warning level (utilization between 30% and 50% based on 2 successive readings in a 10 minute interval. IPS devices are excluded since being a sniffing interface, they have high utilization under normal circumstances.</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_NET_INTF_UTIL_WARN" severity="5"  >
+      <ArgList>
+        hostIpAddr = IntfUtilWarn.hostIpAddr, hostName = IntfUtilWarn.hostName, intfName = IntfUtilWarn.intfName, inIntfUtil = IntfUtilWarn.AVG(inIntfUtil),outIntfUtil = IntfUtilWarn.AVG(outIntfUtil) 
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+      <SubPattern displayName="IntfUtilWarn" name="IntfUtilWarn">
+	<Description>Average Interface Utilization is between 30% and 50% for 2 readings over 10 min period </Description>
+	<SingleEvtConstr>eventType = "PH_DEV_MON_NET_INTF_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Network) AND hostIpAddr NOT IN (Group@PH_SYS_DEVICE_NETWORK_IPS) </SingleEvtConstr>
+        <GroupEvtConstr> ((AVG(inIntfUtil) &gt;= 30 AND AVG(inIntfUtil) &lt;= 50) OR
+          (AVG(outIntfUtil) &gt;= 30 AND AVG(outIntfUtil) &lt;= 50)) AND COUNT(*) &gt;= 2 </GroupEvtConstr>
+        <GroupByAttr>hostIpAddr,hostName,intfName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>  
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,reptDevIpAddr,hostIpAddr,hostName,intfName,inIntfUtil,outIntfUtil,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "timebased">
+      <QuietPeriod>1800</QuietPeriod>
+    </ClearCondition>
+  </Rule> 
+  
+  <!-- ***************************************************** -->
+  <Rule group="PH_SYS_RULE_Perf_Network" id="PH_Rule_Perf_212" fireInternalIncident = "true" phIncidentCategory="Network">
+    <Name>Network Intf Util Critical </Name>
+    <active>true</active>
+    <Description>Detects that interface utilization of a network device has reached a critical level (utilization greater than 50% based on 2 successive readings in a 10 minute interval. IPS devices are excluded since being a sniffing interface, they have high utilization under normal circumstances.</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_NET_INTF_UTIL_CRIT" severity="9"  >
+      <ArgList>
+        hostIpAddr = IntfUtilCrit.hostIpAddr, hostName = IntfUtilCrit.hostName, intfName = IntfUtilCrit.intfName, inIntfUtil = IntfUtilCrit.AVG(inIntfUtil),outIntfUtil = IntfUtilCrit.AVG(outIntfUtil) 
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+      <SubPattern displayName="IntfUtilCrit" name="IntfUtilCrit">
+	<Description>Average Interface Utilization greater than 50% for 2 readings over 10 min period </Description>
+	<SingleEvtConstr>eventType = "PH_DEV_MON_NET_INTF_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Network) AND hostIpAddr NOT IN (Group@PH_SYS_DEVICE_NETWORK_IPS) AND intfName NOT IN ("lo","Null0") </SingleEvtConstr>
+        <GroupEvtConstr> (AVG(inIntfUtil) &gt; 50 OR AVG(outIntfUtil) &gt; 50) AND COUNT(*) &gt;= 2 </GroupEvtConstr>
+        <GroupByAttr>hostIpAddr,hostName,intfName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>  
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,reptDevIpAddr,hostIpAddr,hostName,intfName,inIntfUtil,outIntfUtil,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "timebased">
+      <QuietPeriod>1800</QuietPeriod>
+    </ClearCondition>
+  </Rule> 
+
+   <Rule group="PH_SYS_RULE_Perf_Network" id="PH_Rule_Perf_211_B" fireInternalIncident = "true" phIncidentCategory="Network">
+    <Name>Network IPS Intf Util Warning </Name>
+    <active>true</active>
+    <Description>Detects that interface utilization of a network IPS device has reached a warning level (utilization between 60% and 80% based on 2 successive readings in a 10 minute interval. </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_IPS_NET_INTF_UTIL_WARN" severity="5"  >
+      <ArgList>
+        hostIpAddr = IntfUtilWarn.hostIpAddr, hostName = IntfUtilWarn.hostName, intfName = IntfUtilWarn.intfName, inIntfUtil = IntfUtilWarn.AVG(inIntfUtil),outIntfUtil = IntfUtilWarn.AVG(outIntfUtil) 
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+      <SubPattern displayName="IntfUtilWarn" name="IntfUtilWarn">
+	<Description>Average Interface Utilization is between 60% and 80% for 2 readings over 10 min period </Description>
+	<SingleEvtConstr>eventType = "PH_DEV_MON_NET_INTF_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Network) AND hostIpAddr IN (Group@PH_SYS_DEVICE_NETWORK_IPS) AND intfName NOT IN ("lo","Null0") </SingleEvtConstr>
+        <GroupEvtConstr> ((AVG(inIntfUtil) &gt;= 60 AND AVG(inIntfUtil) &lt;= 80) OR
+          (AVG(outIntfUtil) &gt;= 60 AND AVG(outIntfUtil) &lt;= 80)) AND COUNT(*) &gt;= 2 </GroupEvtConstr>
+        <GroupByAttr>hostIpAddr,hostName,intfName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>  
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,reptDevIpAddr,hostIpAddr,hostName,intfName,inIntfUtil,outIntfUtil,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "timebased">
+      <QuietPeriod>1800</QuietPeriod>
+    </ClearCondition>
+  </Rule> 
+  
+  <!-- ***************************************************** -->
+  <Rule group="PH_SYS_RULE_Perf_Network" id="PH_Rule_Perf_212_B" fireInternalIncident = "true" phIncidentCategory="Network">
+    <Name>Network IPS Intf Util Critical </Name>
+    <active>true</active>
+    <Description>Detects that interface utilization of a network IPS device has reached a critical level (utilization greater than 80% based on 2 successive readings in a 10 minute interval. </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_IPS_NET_INTF_UTIL_CRIT" severity="9"  >
+      <ArgList>
+        hostIpAddr = IntfUtilCrit.hostIpAddr, hostName = IntfUtilCrit.hostName, intfName = IntfUtilCrit.intfName, inIntfUtil = IntfUtilCrit.AVG(inIntfUtil),outIntfUtil = IntfUtilCrit.AVG(outIntfUtil) 
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+      <SubPattern displayName="IntfUtilCrit" name="IntfUtilCrit">
+	<Description>Average Interface Utilization greater than 80% for 2 readings over 10 min period </Description>
+	<SingleEvtConstr>eventType = "PH_DEV_MON_NET_INTF_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Network) AND hostIpAddr IN (Group@PH_SYS_DEVICE_NETWORK_IPS) AND intfName NOT CONTAIN "Loopback" AND intfName NOT IN ("lo","Null0") </SingleEvtConstr>
+        <GroupEvtConstr> (AVG(inIntfUtil) &gt; 80 OR AVG(outIntfUtil) &gt; 80) AND COUNT(*) &gt;= 2 </GroupEvtConstr>
+        <GroupByAttr>hostIpAddr,hostName,intfName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>  
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,reptDevIpAddr,hostIpAddr,hostName,intfName,inIntfUtil,outIntfUtil,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "timebased">
+      <QuietPeriod>1800</QuietPeriod>
+    </ClearCondition>
+  </Rule> 
+
+   <!-- ***************************************************** -->
+  <Rule group="PH_SYS_RULE_Perf_Server" id="PH_Rule_Perf_213" fireInternalIncident = "true" phIncidentCategory="Server">
+    <Name>Server Intf Util Warning </Name>
+    <active>true</active>
+    <Description>Detects that interface utilization of a server has reached a warning level (utilization between 30% and 50% based on 2 successive readings in a 10 minute interval</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_SERVER_INTF_UTIL_WARN" severity="5"  >
+      <ArgList>
+        hostIpAddr = IntfUtilWarn.hostIpAddr, hostName = IntfUtilWarn.hostName, intfName = IntfUtilWarn.intfName, inIntfUtil = IntfUtilWarn.AVG(inIntfUtil),outIntfUtil = IntfUtilWarn.AVG(outIntfUtil) 
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+      <SubPattern displayName="IntfUtilWarn" name="IntfUtilWarn">
+	<Description>Average Interface Utilization is between 30% and 50% for 2 readings over 10 min period </Description>
+	<SingleEvtConstr>eventType = "PH_DEV_MON_NET_INTF_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Server) AND hostIpAddr NOT IN (Group@PH_SYS_APP_NETWORK_IPS) AND intfName NOT CONTAIN "Loopback" AND intfName NOT IN ("lo","Null0") </SingleEvtConstr>
+        <GroupEvtConstr>((AVG(inIntfUtil) &gt;= 30 AND AVG(inIntfUtil) &lt;= 50) OR
+          (AVG(outIntfUtil) &gt;= 30 AND AVG(outIntfUtil) &lt;= 50)) AND COUNT(*) &gt;= 2 </GroupEvtConstr>
+        <GroupByAttr>hostIpAddr,hostName,intfName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>  
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,reptDevIpAddr,hostIpAddr,hostName,intfName,inIntfUtil,outIntfUtil,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "timebased">
+      <QuietPeriod>1800</QuietPeriod>
+    </ClearCondition>
+  </Rule> 
+  
+  <!-- ***************************************************** -->
+  <Rule group="PH_SYS_RULE_Perf_Server" id="PH_Rule_Perf_214" fireInternalIncident = "true" phIncidentCategory="Server">
+    <Name>Server Intf Util Critical </Name>
+    <active>true</active>
+    <Description>Detects that interface utilization of a network device has reached a critical level (utilization greater than 50% based on 2 successive readings in a 10 minute interval</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_SERVER_INTF_UTIL_CRIT" severity="9"  >
+      <ArgList>
+        hostIpAddr = IntfUtilCrit.hostIpAddr, hostName = IntfUtilCrit.hostName, intfName = IntfUtilCrit.intfName, inIntfUtil = IntfUtilCrit.AVG(inIntfUtil),outIntfUtil = IntfUtilCrit.AVG(outIntfUtil) 
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+      <SubPattern displayName="IntfUtilCrit" name="IntfUtilCrit">
+	<Description>Average Interface Utilization greater than 50% for 2 readings over 10 min period </Description>
+	<SingleEvtConstr>eventType = "PH_DEV_MON_NET_INTF_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Server) AND hostIpAddr NOT IN (Group@PH_SYS_APP_NETWORK_IPS) AND intfName NOT CONTAIN "Loopback" AND intfName NOT IN ("lo","Null0") </SingleEvtConstr>
+        <GroupEvtConstr>  (AVG(inIntfUtil) &gt; 50 OR AVG(outIntfUtil) &gt; 50) AND COUNT(*) &gt;= 2 </GroupEvtConstr>
+        <GroupByAttr>hostIpAddr,hostName,intfName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>  
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,reptDevIpAddr,hostIpAddr,hostName,intfName,inIntfUtil,outIntfUtil,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "timebased">
+      <QuietPeriod>1800</QuietPeriod>
+    </ClearCondition>
+  </Rule> 
+
+   <!-- **********Interface Error*********** -->
+  <Rule group="PH_SYS_RULE_Perf_Network" id="PH_Rule_Perf_215" fireInternalIncident = "true" phIncidentCategory="Network">
+    <Name>Network Intf Error Warning </Name>
+    <active>true</active>
+    <Description>Detects that a network device interface error has reached a warning level (utilization between 1% and 5% based on 2 successive readings in a 10 minute interval</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_NET_INTF_ERR_WARN" severity="5"  >
+      <ArgList>
+        hostIpAddr = IntfErrorWarn.hostIpAddr, hostName = IntfErrorWarn.hostName, intfName = IntfErrorWarn.intfName,inIntfPktErrPct = IntfErrorWarn.AVG(inIntfPktErrPct), outIntfPktErrPct = IntfErrorWarn.AVG(outIntfPktErrPct)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+      <SubPattern displayName="IntfErrorWarn" name="IntfErrorWarn">
+	<Description>Average Interface Error between 1% and 5% for 2 readings over 10 min period </Description>
+	<SingleEvtConstr>eventType = "PH_DEV_MON_NET_INTF_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Network) </SingleEvtConstr>
+        <GroupEvtConstr> AVG(inIntfPktErrPct) &gt;= 1 AND AVG(inIntfPktErrPct) &lt;= 5 OR
+          AVG(outIntfPktErrPct) &gt;= 1 AND AVG(outIntfPktErrPct) &lt;= 5 AND COUNT(*) &gt;= 2 </GroupEvtConstr>
+        <GroupByAttr>hostIpAddr,hostName,intfName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>  
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,reptDevIpAddr,hostIpAddr,hostName,intfName,inIntfPktErrPct,outIntfPktErrPct,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "timebased">
+      <QuietPeriod>1800</QuietPeriod>
+    </ClearCondition>
+  </Rule> 
+  
+  <!-- ***************************************************** -->
+  <Rule group="PH_SYS_RULE_Perf_Network" id="PH_Rule_Perf_216" fireInternalIncident = "true" phIncidentCategory="Network">
+    <Name>Network Intf Error Critical </Name>
+    <active>true</active>
+    <Description>Detects that a network device interface errors has reached a critical level (greater than 5% based on 2 successive readings in a 10 minute interval</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_NET_INTF_ERR_CRIT" severity="9"  >
+      <ArgList>
+        hostIpAddr = IntfErrorCrit.hostIpAddr, hostName = IntfErrorCrit.hostName, intfName = IntfErrorCrit.intfName, inIntfPktErrPct = IntfErrorCrit.AVG(inIntfPktErrPct), outIntfPktErrPct = IntfErrorCrit.AVG(outIntfPktErrPct)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+      <SubPattern displayName="IntfErrorCrit" name="IntfErrorCrit">
+	<Description>Average Interface errors greater than 5% for 2 readings over 10 min period </Description>
+	<SingleEvtConstr>eventType = "PH_DEV_MON_NET_INTF_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Network) </SingleEvtConstr>
+        <GroupEvtConstr> AVG(inIntfPktErrPct) &gt; 5 OR AVG(outIntfPktErrPct) &gt; 5) AND COUNT(*) &gt;= 2 </GroupEvtConstr>
+        <GroupByAttr>hostIpAddr,hostName,intfName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>  
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,reptDevIpAddr,hostIpAddr,hostName,intfName,inIntfPktErrPct,outIntfPktErrPct,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "timebased">
+      <QuietPeriod>1800</QuietPeriod>
+    </ClearCondition>
+  </Rule> 
+
+  <Rule group="PH_SYS_RULE_Perf_Server" id="PH_Rule_Perf_217" fireInternalIncident = "true" phIncidentCategory="Server">
+    <Name>Server Intf Error Warning </Name>
+    <active>true</active>
+    <Description>Detects that a server interface error has reached a warning level (utilization between 1% and 5% based on 2 successive readings in a 10 minute interval</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_SERVER_INTF_ERR_WARN" severity="5"  >
+      <ArgList>
+        hostIpAddr = IntfErrorWarn.hostIpAddr, hostName = IntfErrorWarn.hostName, intfName = IntfErrorWarn.intfName,inIntfPktErrPct = IntfErrorWarn.AVG(inIntfPktErrPct), outIntfPktErrPct = IntfErrorWarn.AVG(outIntfPktErrPct)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+      <SubPattern displayName="IntfErrorWarn" name="IntfErrorWarn">
+	<Description>Average Interface Error between 1% and 5% for 2 readings over 10 min period </Description>
+	<SingleEvtConstr>eventType = "PH_DEV_MON_NET_INTF_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Server) </SingleEvtConstr>
+        <GroupEvtConstr> AVG(inIntfPktErrPct) &gt;= 1 AND AVG(inIntfPktErrPct) &lt;= 5 OR
+          AVG(outIntfPktErrPct) &gt;= 1 AND AVG(outIntfPktErrPct) &lt;= 5 AND COUNT(*) &gt;= 2 </GroupEvtConstr>
+        <GroupByAttr>hostIpAddr,hostName,intfName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>  
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,reptDevIpAddr,hostIpAddr,hostName,intfName,inIntfPktErrPct,outIntfPktErrPct,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "timebased">
+      <QuietPeriod>1800</QuietPeriod>
+    </ClearCondition>
+  </Rule> 
+  
+  <!-- ***************************************************** -->
+  <Rule group="PH_SYS_RULE_Perf_Server" id="PH_Rule_Perf_218" fireInternalIncident = "true" phIncidentCategory="Server">
+    <Name>Server Intf Error Critical </Name>
+    <active>true</active>
+    <Description>Detects that a server interface errors has reached a critical level (greater than 5% based on 2 successive readings in a 10 minute interval</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_SERVER_INTF_ERR_CRIT" severity="9" >
+      <ArgList>
+        hostIpAddr = IntfErrorCrit.hostIpAddr, hostName = IntfErrorCrit.hostName, intfName = IntfErrorCrit.intfName, inIntfPktErrPct = IntfErrorCrit.AVG(inIntfPktErrPct), outIntfPktErrPct = IntfErrorCrit.AVG(outIntfPktErrPct)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+      <SubPattern displayName="IntfErrorCrit" name="IntfErrorCrit" >
+	<Description>Average Interface errors greater than 5% for 2 readings over 10 min period </Description>
+	<SingleEvtConstr>eventType = "PH_DEV_MON_NET_INTF_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Server) </SingleEvtConstr>
+        <GroupEvtConstr> AVG(inIntfPktErrPct) &gt; 5 OR AVG(outIntfPktErrPct) &gt; 5) AND COUNT(*) &gt;= 2 </GroupEvtConstr>
+        <GroupByAttr>hostIpAddr,hostName,intfName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>  
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,reptDevIpAddr,hostIpAddr,hostName,intfName,inIntfPktErrPct,outIntfPktErrPct,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "timebased">
+      <QuietPeriod>1800</QuietPeriod>
+    </ClearCondition>
+  </Rule> 
+
+  <!-- ******************VM CPU********************* -->
+  <Rule group="PH_SYS_RULE_Perf_Server" id="PH_Rule_Perf_219" fireInternalIncident = "true" phIncidentCategory="Virtualization">
+    <Name>Virtual Machine CPU Warning </Name>
+    <active>true</active>
+    <Description>Detects that virtual server CPU ready percent has reached a warning level (between 20% and 25% based on 2 successive readings in a 10 minute interval</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_VM_CPU_WARN" severity="5">
+      <ArgList>
+        hostIpAddr = VMCPUMedium.hostIpAddr,hostName = VMCPUMedium.hostName,phyMachIpAddr = VMCPUMedium.phyMachIpAddr,phyMachName = VMCPUMedium.phyMachName,cpuReadyPct = VMCPUMedium.AVG(cpuReadyPct)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+      <SubPattern displayName="VMCPUMedium" name="VMCPUMedium">
+	<Description>Average Ready Percent is between 20% and 25% for 3 consecutive readings over 10 min period </Description>
+	<SingleEvtConstr>eventType = "PH_DEV_MON_VM_CPU_UTIL"  </SingleEvtConstr>
+        <GroupEvtConstr> AVG(cpuReadyPct) &gt;= 20 AND AVG(cpuReadyPct) &lt; 25 AND COUNT(*) &gt;= 2 </GroupEvtConstr>
+        <GroupByAttr>hostName,hostIpAddr,phyMachIpAddr,phyMachName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>  
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,hostName,hostIpAddr,phyMachIpAddr,phyMachName,cpuUtil,cpuSysPct,cpuReadyPct,phyCpuUtil,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "timebased">
+      <QuietPeriod>1200</QuietPeriod>
+    </ClearCondition>
+  </Rule> 
+
+  <!-- ******************VM CPU********************* -->
+  <Rule group="PH_SYS_RULE_Perf_Server" id="PH_Rule_Perf_220" fireInternalIncident = "true" phIncidentCategory="Virtualization">
+    <Name>Virtual Machine CPU Critical </Name>
+    <active>true</active>
+    <Description>Detects that virtual server CPU ready percent has reached a critical level (greater than 25% based on 2 successive readings in a 10 minute interval</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_VM_CPU_CRIT" severity="9">
+      <ArgList>
+        hostIpAddr = VMCPUHigh.hostIpAddr,hostName = VMCPUHigh.hostName,phyMachIpAddr = VMCPUHigh.phyMachIpAddr,phyMachName = VMCPUHigh.phyMachName,cpuReadyPct = VMCPUHigh.AVG(cpuReadyPct)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+      <SubPattern displayName="VMCPUHigh" name="VMCPUHigh">
+	<Description>Average Ready Percent is greater than 25% for 3 consecutive readings over 10 min period </Description>
+	<SingleEvtConstr>eventType = "PH_DEV_MON_VM_CPU_UTIL" </SingleEvtConstr>
+        <GroupEvtConstr> AVG(cpuReadyPct) &gt;= 25 AND COUNT(*) &gt;= 2 </GroupEvtConstr>
+        <GroupByAttr>hostName,hostIpAddr,phyMachIpAddr,phyMachName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>  
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,hostName,hostIpAddr,phyMachIpAddr,phyMachName,cpuUtil,cpuSysPct,cpuReadyPct,phyCpuUtil,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "timebased">
+      <QuietPeriod>1200</QuietPeriod>
+    </ClearCondition>
+  </Rule> 
+  
+  <!-- ******************VM Mem********************* -->
+  <Rule group="PH_SYS_RULE_Perf_Server" id="PH_Rule_Perf_221" fireInternalIncident = "true" phIncidentCategory="Virtualization">
+    <Name>Virtual Machine Memory Warning </Name>
+    <active>true</active>
+    <Description>Detects that virtual machine memory has reached a warning level based on swapping rate between 1MBps and 1.5MBps based on 2 successive readings in a 10 minute interval</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_VM_MEM_WARN" severity="5">
+      <ArgList>
+        hostIpAddr = VMMemMedium.hostIpAddr,hostName = VMMemMedium.hostName,phyMachIpAddr = VMMemMedium.phyMachIpAddr,phyMachName = VMMemMedium.phyMachName,swapReadKBytesPerSec  = VMMemMedium.AVG(swapReadKBytesPerSec)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+      <SubPattern displayName="VMMemMedium" name="VMMemMedium">
+	 <Description>Average swapping rate is between 1 MBps and 1.5 MBps for 3 consecutive readings over 10 min period </Description>
+	 <SingleEvtConstr>eventType = "PH_DEV_MON_VM_MEM_UTIL"  </SingleEvtConstr>
+         <GroupEvtConstr> AVG(swapReadKBytesPerSec) &gt;= 1000 AND AVG(swapReadKBytesPerSec) &lt; 1500 AND COUNT(*) &gt;= 2 </GroupEvtConstr>
+         <GroupByAttr>hostName,hostIpAddr,phyMachIpAddr,phyMachName</GroupByAttr>
+       </SubPattern>
+    </PatternClause>  
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,hostName,hostIpAddr,phyMachIpAddr,phyMachName,memUtil,swapReadKBytesPerSec,swapWriteKBytesPerSec,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "timebased">
+      <QuietPeriod>1200</QuietPeriod>
+    </ClearCondition>
+  </Rule> 
+
+  <!-- ******************VM Memory********************* -->
+  <Rule group="PH_SYS_RULE_Perf_Server" id="PH_Rule_Perf_222" fireInternalIncident = "true" phIncidentCategory="Virtualization">
+    <Name>Virtual Machine Memory Critical </Name>
+    <active>true</active>
+    <Description>Detects that virtual machine memory has reached a warning level based on swapping rate greater than 1.5MBps based on 2 successive readings in a 10 minute interval</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_VM_MEM_CRIT" severity="9">
+      <ArgList>
+        hostIpAddr = VMMemHigh.hostIpAddr,hostName = VMMemHigh.hostName,phyMachIpAddr = VMMemHigh.phyMachIpAddr,phyMachName = VMMemHigh.phyMachName,swapReadKBytesPerSec  = VMMemHigh.AVG(swapReadKBytesPerSec)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+      <SubPattern displayName="VMMemHigh" name="VMMemHigh">
+	<Description>Average swapping rate is greater than 1.5 MBps for 3 consecutive readings over 10 min period </Description>
+	<SingleEvtConstr>eventType = "PH_DEV_MON_VM_MEM_UTIL" </SingleEvtConstr>
+	<GroupEvtConstr> AVG(swapReadKBytesPerSec) &gt; 1500 AND COUNT(*) &gt;= 2 </GroupEvtConstr>
+	<GroupByAttr>hostName,hostIpAddr,phyMachIpAddr,phyMachName</GroupByAttr>
+      </SubPattern> 
+    </PatternClause> 
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,hostName,hostIpAddr,phyMachIpAddr,phyMachName,cpuUtil,cpuSysPct,cpuReadyPct,phyCpuUtil,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "timebased">
+      <QuietPeriod>1200</QuietPeriod>
+    </ClearCondition>
+  </Rule>
+
+  <!-- ******************VM Disk IO********************* -->
+  <!-- Hongbo: PH_DEV_MON_VM_DISK_IO does not have guestDiskRdLatency, only PH_DEV_MON_ESX_DISK_IO message contains this attribute
+  <Rule group="PH_SYS_RULE_Perf_Server" id="PH_Rule_Perf_223" fireInternalIncident = "true" phIncidentCategory="Virtualization">
+    <Name>Virtual Machine Disk I/O Warning </Name>
+    <active>true</active>
+    <Description>Detects that virtual machine disk I/O has reached a warning level based on 2 successive readings of average Disk IO Latency between 20msec and 50msec in a 10 minute interval</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_VM_DISKIO_WARN" severity="5">
+      <ArgList>
+        hostIpAddr = VMDiskIOMedium.hostIpAddr,hostName = VMDiskIOMedium.hostName,phyMachIpAddr = VMDiskIOMedium.phyMachIpAddr,phyMachName = VMDiskIOMedium.phyMachName,diskAdapter = VMDiskIOMedium.diskAdapter, guestDiskRdLatency = VMDiskIOMedium.AVG(guestDiskRdLatency), guestDiskWrLatency = VMDiskIOMedium.AVG(guestDiskWrLatency)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+      <SubPattern displayName="VMDiskIOMedium" name="VMDiskIOMedium">
+	<Description>Average Disk IO Latency between 20msec and 50msec for 3 consecutive readings over 10 min period </Description>
+	<SingleEvtConstr>eventType = "PH_DEV_MON_VM_DISK_IO"  </SingleEvtConstr>
+	<GroupEvtConstr>
+          ((AVG(guestDiskRdLatency) &gt;= 20 AND AVG(guestDiskRdLatency) &lt; 50) OR 
+	  (AVG(guestDiskWrLatency) &gt;= 20 AND AVG(guestDiskWrLatency) &lt; 50))AND COUNT(*) &gt; 0 </GroupEvtConstr>
+	<GroupByAttr>hostName,hostIpAddr,phyMachIpAddr,phyMachName,diskAdapter</GroupByAttr>
+      </SubPattern> 
+    </PatternClause> 
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,hostName,hostIpAddr,phyMachIpAddr,phyMachName,diskAdapter,guestDiskRdLatency,guestDiskWrLatency,diskReadKBytesPerSec,diskWriteKBytesPerSec,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "timebased">
+      <QuietPeriod>1200</QuietPeriod>
+    </ClearCondition>
+  </Rule> 
+  -->
+  <!-- ******************VM Disk IO********************* -->
+  <!--
+  <Rule group="PH_SYS_RULE_Perf_Server" id="PH_Rule_Perf_224" fireInternalIncident = "true" phIncidentCategory="Virtualization">
+    <Name>Virtual Machine Disk I/O Critical </Name>
+    <active>true</active>
+    <Description>Detects that virtual machine disk I/O has reached a warning level based on 2 successive readings of average Disk IO Latency greater than 50msec in a 10 minute interval </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_VM_DISKIO_CRIT" severity="9">
+      <ArgList>
+        hostIpAddr = VMDiskIOHigh.hostIpAddr,hostName = VMDiskIOHigh.hostName,phyMachIpAddr = VMDiskIOHigh.phyMachIpAddr,phyMachName = VMDiskIOHigh.phyMachName,diskAdapter = VMDiskIOHigh.diskAdapter, guestDiskRdLatency = VMDiskIOHigh.AVG(guestDiskRdLatency), guestDiskWrLatency = VMDiskIOHigh.AVG(guestDiskWrLatency)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+      <SubPattern displayName="VMDiskIOHigh" name="VMDiskIOHigh">
+	<Description>Average Disk IO Latency greater than 50msec for 3 consecutive readings over 10 min period </Description>
+	<SingleEvtConstr>eventType = "PH_DEV_MON_VM_DISK_IO"  </SingleEvtConstr>
+	<GroupEvtConstr>
+          (AVG(guestDiskRdLatency) &gt; 50 OR AVG(guestDiskWrLatency) &gt; 50) AND COUNT(*) &gt; 0 </GroupEvtConstr>
+	<GroupByAttr>hostName,hostIpAddr,phyMachIpAddr,phyMachName,diskAdapter</GroupByAttr>
+      </SubPattern> 
+    </PatternClause>  
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,hostName,hostIpAddr,phyMachIpAddr,phyMachName,cpuUtil,cpuSysPct,cpuReadyPct,phyCpuUtil,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "timebased">
+      <QuietPeriod>1200</QuietPeriod>
+    </ClearCondition>
+  </Rule>
+  -->
+  <!-- ******************ESX CPU********************* -->
+  <Rule group="PH_SYS_RULE_Perf_Server" id="PH_Rule_Perf_225" fireInternalIncident = "true" phIncidentCategory="Virtualization">
+    <Name>ESX CPU Warning </Name>
+    <active>true</active>
+    <Description>Detects that ESX CPU utilization has reached a warning level (between 75% and 95% based on 2 successive readings in a 10 minute interval</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_ESX_CPU_WARN" severity="5">
+      <ArgList>
+        hostIpAddr = ESXCPUWarn.hostIpAddr,hostName = ESXCPUWarn.hostName,cpuUtil = ESXCPUWarn.AVG(cpuUtil)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+      <SubPattern displayName="ESXCPUWarn" name="ESXCPUWarn">
+	<Description> </Description>
+	<SingleEvtConstr>eventType = "PH_DEV_MON_SYS_CPU_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_VM_SERVER) </SingleEvtConstr>
+        <GroupEvtConstr> AVG(cpuUtil) &gt;= 75 AND AVG(cpuUtil) &lt;= 95 AND COUNT(*) &gt;= 2 </GroupEvtConstr>
+        <GroupByAttr>hostName,hostIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>  
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,hostName,hostIpAddr,cpuUtil,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "timebased">
+      <QuietPeriod>1200</QuietPeriod>
+    </ClearCondition>
+  </Rule> 
+
+  <Rule group="PH_SYS_RULE_Perf_Server" id="PH_Rule_Perf_226" fireInternalIncident = "true" phIncidentCategory="Virtualization">
+    <Name>ESX CPU Critical</Name>
+    <active>true</active>
+    <Description>Detects that ESX CPU utilization has reached a critical level (greater than 95% based on 2 successive readings in a 10 minute interval</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_ESX_CPU_CRIT" severity="9">
+      <ArgList>
+        hostIpAddr = ESXCPUCrit.hostIpAddr,hostName = ESXCPUCrit.hostName,cpuUtil = ESXCPUCrit.AVG(cpuUtil)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+      <SubPattern displayName="ESXCPUCrit" name="ESXCPUCrit">
+	<Description> </Description>
+	<SingleEvtConstr>eventType = "PH_DEV_MON_SYS_CPU_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_VM_SERVER) </SingleEvtConstr>
+        <GroupEvtConstr> AVG(cpuUtil) &gt; 95 AND COUNT(*) &gt;= 2 </GroupEvtConstr>
+        <GroupByAttr>hostName,hostIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>  
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,hostName,hostIpAddr,cpuUtil,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "timebased">
+      <QuietPeriod>1200</QuietPeriod>
+    </ClearCondition>
+  </Rule>
+  
+  <!-- ******************ESX Memory********************* -->
+  <Rule group="PH_SYS_RULE_Perf_Server" id="PH_Rule_Perf_227" fireInternalIncident = "true" phIncidentCategory="Virtualization">
+    <Name>ESX Memory Warning </Name>
+    <active>true</active>
+    <Description>Detects that ESX memory utilization has reached a warning level (greater than 85% and swap rate between 1MBps and 1.5 MBps) based on 2 successive readings in a 10 minute interval</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_ESX_MEM_WARN" severity="5">
+      <ArgList>
+        hostIpAddr = ESXMemWarn.hostIpAddr, hostName = ESXMemWarn.hostName, memUtil = ESXMemWarn.AVG(memUtil), swapReadKBytesPerSec = ESXMemWarn.AVG(swapReadKBytesPerSec)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+      <SubPattern displayName="ESXMemWarn" name="ESXMemWarn">
+	<Description> </Description>
+	<SingleEvtConstr>eventType = "PH_DEV_MON_SYS_MEM_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_VM_SERVER) </SingleEvtConstr>
+        <GroupEvtConstr> AVG(memUtil) &gt;= 85 AND AVG(swapReadKBytesPerSec) &gt;= 1000 AND AVG(swapReadKBytesPerSec) &lt;= 1500 AND COUNT(*) &gt;= 2 </GroupEvtConstr>
+        <GroupByAttr>hostName,hostIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>  
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,hostName,hostIpAddr,memUtil,swapReadKBytesPerSec,swapWriteKBytesPerSec,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "timebased">
+      <QuietPeriod>1200</QuietPeriod>
+    </ClearCondition>
+  </Rule> 
+  
+  <Rule group="PH_SYS_RULE_Perf_Server" id="PH_Rule_Perf_228" fireInternalIncident = "true" phIncidentCategory="Virtualization">
+    <Name>ESX Memory Critical</Name>
+    <active>true</active>
+    <Description>Detects that ESX CPU utilization has reached a critical level (greater than 95% based on 2 successive readings in a 10 minute interval</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_ESX_MEM_CRIT" severity="9">
+      <ArgList>
+        hostIpAddr = ESXMemCrit.hostIpAddr,hostName = ESXMemCrit.hostName, memUtil = ESXMemCrit.AVG(memUtil), swapReadKBytesPerSec = ESXMemCrit.AVG(swapReadKBytesPerSec)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+      <SubPattern displayName="ESXMemCrit" name="ESXMemCrit">
+	<Description> </Description>
+	<SingleEvtConstr>eventType = "PH_DEV_MON_SYS_MEM_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_VM_SERVER) </SingleEvtConstr>
+        <GroupEvtConstr> AVG(memUtil) &gt; 95 AND AVG(swapReadKBytesPerSec) &gt; 1500 AND COUNT(*) &gt;= 2 </GroupEvtConstr>
+        <GroupByAttr>hostName,hostIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>  
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,hostName,hostIpAddr,memUtil,swapReadKBytesPerSec,swapWriteKBytesPerSec,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "timebased">
+      <QuietPeriod>1200</QuietPeriod>
+    </ClearCondition>
+  </Rule>
+
+  <!-- ******************ESX Disk I/O********************* -->
+  <Rule group="PH_SYS_RULE_Perf_Server" id="PH_Rule_Perf_229" fireInternalIncident = "true" phIncidentCategory="Virtualization">
+    <Name>ESX Disk I/O Warning </Name>
+    <active>true</active>
+    <Description>Detects that ESX disk I/O utilization has reached a warning level - average Disk IO Latency between 20ms and 50ms based on 2 successive readings in a 10 minute interval</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_ESX_DISKIO_WARN" severity="5">
+      <ArgList>
+        hostIpAddr = ESXDiskWarn.hostIpAddr, hostName = ESXDiskWarn.hostName, diskAdapter = ESXDiskWarn.diskAdapter,
+        guestDiskRdLatency = ESXDiskWarn.AVG(guestDiskRdLatency), guestDiskWrLatency = ESXDiskWarn.AVG(guestDiskWrLatency)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+      <SubPattern displayName="ESXDiskWarn" name="ESXDiskWarn">
+	<Description> </Description>
+	<SingleEvtConstr>eventType = "PH_DEV_MON_ESX_DISK_IO"  </SingleEvtConstr>
+        <GroupEvtConstr> AVG(guestDiskRdLatency) &gt;= 20 AND AVG(guestDiskRdLatency) &lt;= 50 AND AVG(guestDiskWrLatency) &gt;= 20 AND AVG(guestDiskWrLatency) &lt; 50 AND COUNT(*) &gt;= 2 </GroupEvtConstr>
+        <GroupByAttr>hostName,hostIpAddr,diskAdapter</GroupByAttr>
+      </SubPattern>
+    </PatternClause>  
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,hostName,hostIpAddr,diskAdapter,guestDiskRdLatency,guestDiskWrLatency,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "timebased">
+      <QuietPeriod>1200</QuietPeriod>
+    </ClearCondition>
+  </Rule> 
+  
+  <Rule group="PH_SYS_RULE_Perf_Server" id="PH_Rule_Perf_230" fireInternalIncident = "true" phIncidentCategory="Virtualization">
+    <Name>ESX Disk I/O Critical </Name>
+    <active>true</active>
+    <Description>Detects that ESX disk I/O utilization has reached a critical level - average Disk IO Latency greater than 50ms based on 2 successive readings in a 10 minute interval</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_ESX_DISKIO_CRIT" severity="9">
+      <ArgList>
+        hostIpAddr = ESXDiskCrit.hostIpAddr, hostName = ESXDiskCrit.hostName, diskAdapter = ESXDiskCrit.diskAdapter,
+        guestDiskRdLatency = ESXDiskCrit.AVG(guestDiskRdLatency), guestDiskWrLatency = ESXDiskCrit.AVG(guestDiskWrLatency)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+      <SubPattern displayName="ESXDiskCrit" name="ESXDiskCrit">
+	<Description> </Description>
+	<SingleEvtConstr>eventType = "PH_DEV_MON_ESX_DISK_IO"  </SingleEvtConstr>
+        <GroupEvtConstr> AVG(guestDiskRdLatency) &gt;= 50 OR AVG(guestDiskWrLatency) &gt;= 50 AND COUNT(*) &gt;= 2 </GroupEvtConstr>
+        <GroupByAttr>hostName,hostIpAddr,diskAdapter</GroupByAttr>
+      </SubPattern>
+    </PatternClause>  
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,hostName,hostIpAddr,diskAdapter,guestDiskRdLatency,guestDiskWrLatency,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "timebased">
+      <QuietPeriod>1200</QuietPeriod>
+    </ClearCondition>
+  </Rule>
+  
+  <!-- ******************ESX Network I/O********************* -->
+  <Rule group="PH_SYS_RULE_Perf_Server" id="PH_Rule_Perf_231" fireInternalIncident = "true" phIncidentCategory="Virtualization">
+    <Name>ESX Network I/O Warning </Name>
+    <active>true</active>
+    <Description>Detects that ESX network I/O utilization has reached a warning level - average network interface utilization between 35% and 50% based on 2 successive readings in a 10 minute interval</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_ESX_INTF_WARN" severity="5">
+      <ArgList>
+        hostIpAddr = ESXIntfWarn.hostIpAddr, hostName = ESXIntfWarn.hostName, vSwitch = ESXIntfWarn.vSwitch,
+        inIntfUtil = ESXIntfWarn.AVG(inIntfUtil), outIntfUtil = ESXIntfWarn.AVG(outIntfUtil)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+      <SubPattern displayName="ESXIntfWarn" name="ESXIntfWarn">
+	<Description> </Description>
+	<SingleEvtConstr>eventType = "PH_DEV_MON_NET_INTF_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_VM_SERVER) </SingleEvtConstr>
+        <GroupEvtConstr>
+          ((AVG(inIntfUtil) &gt;= 35 AND AVG(inIntfUtil) &lt;= 50) OR (AVG(outIntfUtil) &gt;= 35 AND AVG(outIntfUtil) &lt;= 50)) AND COUNT(*) &gt;= 2 </GroupEvtConstr>
+        <GroupByAttr>hostName,hostIpAddr,vSwitch</GroupByAttr>
+      </SubPattern>
+    </PatternClause>  
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,hostName,hostIpAddr,vSwitch, inIntfUtil, outIntfUtil, rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "timebased">
+      <QuietPeriod>1200</QuietPeriod>
+    </ClearCondition>
+  </Rule> 
+
+  <Rule group="PH_SYS_RULE_Perf_Server" id="PH_Rule_Perf_232" fireInternalIncident = "true" phIncidentCategory="Virtualization">
+    <Name>ESX Network I/O Critical </Name>
+    <active>true</active>
+    <Description>Detects that ESX network I/O utilization has reached a critical level - average network interface utilization greater than 50% based on 2 successive readings in a 10 minute interval</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_ESX_INTF_CRIT" severity="9">
+      <ArgList>
+        hostIpAddr = ESXIntfCrit.hostIpAddr, hostName = ESXIntfCrit.hostName, vSwitch = ESXIntfCrit.vSwitch,
+        inIntfUtil = ESXIntfCrit.AVG(inIntfUtil), outIntfUtil = ESXIntfCrit.AVG(outIntfUtil)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+      <SubPattern displayName="ESXIntfCrit" name="ESXIntfCrit">
+	<Description> </Description>
+	<SingleEvtConstr>eventType = "PH_DEV_MON_NET_INTF_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_VM_SERVER) </SingleEvtConstr>
+        <GroupEvtConstr>
+           (AVG(inIntfUtil) &gt; 50 OR AVG(outIntfUtil) &gt; 50) AND COUNT(*) &gt;= 2 </GroupEvtConstr>
+        <GroupByAttr>hostName,hostIpAddr,vSwitch</GroupByAttr>
+      </SubPattern>
+    </PatternClause>  
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,hostName,hostIpAddr,vSwitch, inIntfUtil, outIntfUtil, rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "timebased">
+      <QuietPeriod>1200</QuietPeriod>
+    </ClearCondition>
+  </Rule> 
+
+  <!-- ******************Storage********************* -->
+  <!-- ******************CPU********************* -->
+  <Rule group="PH_SYS_RULE_Perf_Storage" id="PH_Rule_Perf_233" fireInternalIncident = "true" phIncidentCategory="Storage">
+    <Name>Storage CPU Warning </Name>
+    <active>true</active>
+    <Description>Detects that storage CPU has reached a warning level (between 85% and 95% based on 2 successive readings in a 10 minute interval</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_STORAGE_CPU_WARN" severity="5"  >
+      <ArgList>
+        hostIpAddr = StorCPUWarn.hostIpAddr, hostName = StorCPUWarn.hostName, cpuUtil = StorCPUWarn.AVG(cpuUtil)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+       <SubPattern displayName="StorCPUWarn" name="StorCPUWarn">
+	 <Description>Average CPU Utilization is between 85% and 95% for 2 readings over 10 min period </Description>
+	 <SingleEvtConstr>eventType IN ("PH_DEV_MON_SYS_CPU_UTIL","PH_DEV_MON_CLARION_SP_UTIL") AND hostIpAddr IN (Group@PH_SYS_DEVICE_Storage) </SingleEvtConstr>
+         <GroupEvtConstr> AVG(cpuUtil) &gt;= 85 AND AVG(cpuUtil) &lt;= 95 AND COUNT(*) &gt;= 2 </GroupEvtConstr>
+         <GroupByAttr>hostIpAddr,hostName</GroupByAttr>
+       </SubPattern>
+    </PatternClause>  
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,reptDevIpAddr,hostIpAddr,hostName,cpuUtil,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "timebased">
+      <QuietPeriod>1200</QuietPeriod>
+    </ClearCondition>
+  </Rule> 
+  
+ <!-- ***************************************************** -->
+  <Rule group="PH_SYS_RULE_Perf_Storage" id="PH_Rule_Perf_234" fireInternalIncident = "true" phIncidentCategory="Storage">
+    <Name>Storage CPU Critical </Name>
+    <active>true</active>
+    <Description>Detects that storage CPU has reached a critical level (greater than 95% based on 2 successive readings in a 10 minute interval</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_STORAGE_CPU_CRIT" severity="9"  >
+      <ArgList>
+        hostIpAddr = StorCPUCrit.hostIpAddr, hostName = StorCPUCrit.hostName, cpuUtil = StorCPUCrit.AVG(cpuUtil)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+       <SubPattern displayName="StorCPUCrit" name="StorCPUCrit">
+	 <Description>Average CPU Utilization is greater than 95% for 2 readings over 10 min period </Description>
+	 <SingleEvtConstr>eventType IN ("PH_DEV_MON_SYS_CPU_UTIL","PH_DEV_MON_CLARION_SP_UTIL") AND hostIpAddr IN (Group@PH_SYS_DEVICE_Storage) </SingleEvtConstr>
+         <GroupEvtConstr> AVG(cpuUtil) &gt; 95 AND COUNT(*) &gt;= 2 </GroupEvtConstr>
+         <GroupByAttr>hostIpAddr,hostName</GroupByAttr>
+       </SubPattern>
+    </PatternClause>  
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,reptDevIpAddr,hostIpAddr,hostName,cpuUtil,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "timebased">
+      <QuietPeriod>1200</QuietPeriod>
+    </ClearCondition>
+  </Rule> 
+
+  <!-- ***************NetApp Disk space******************** -->
+  <Rule group="PH_SYS_RULE_Perf_Storage" id="PH_Rule_Perf_235" fireInternalIncident = "true" phIncidentCategory="Storage">
+    <Name>NFS Disk space Warning </Name>
+    <active>true</active>
+    <Description>Detects that NFS disk space usage has reached a warning level (utilization between 80% and 95% and free disk still greater than 100 MB) based on 2 successive readings in a 10 minute interval</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_NFS_DISK_SPACE_WARN" severity="5"  fireFreq="21600">
+      <ArgList>
+        hostIpAddr = NFSDiskWarn.hostIpAddr, hostName = NFSDiskWarn.hostName, diskName = NFSDiskWarn.diskName, diskUtil = NFSDiskWarn.AVG(diskUtil)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+       <SubPattern displayName=" NFSDiskWarn" name=" NFSDiskWarn">
+	 <Description>Average Disk Utilization for a logical volume between 85% and 95% for 2 readings over 10 min period </Description>
+	 <SingleEvtConstr>eventType = "PH_DEV_MON_SYS_DISK_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Storage) </SingleEvtConstr>
+         <GroupEvtConstr> ((AVG(diskUtil) &gt;= 80 AND AVG(diskUtil) &lt;= 95) OR (AVG(diskUtil) &gt;= 95 AND AVG(freeDiskMB) &gt; 100)) AND COUNT(*) &gt;= 2 </GroupEvtConstr>
+         <GroupByAttr>hostIpAddr,hostName,diskName</GroupByAttr>
+       </SubPattern>
+    </PatternClause>  
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,reptDevIpAddr,hostIpAddr,hostName,diskName,diskUtil,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "timebased">
+      <QuietPeriod>1200</QuietPeriod>
+    </ClearCondition>
+  </Rule> 
+  
+ <!-- ***************************************************** -->
+  <Rule group="PH_SYS_RULE_Perf_Storage" id="PH_Rule_Perf_236" fireInternalIncident = "true" phIncidentCategory="Storage">
+    <Name>NFS Disk Space Critical </Name>
+    <active>true</active>
+    <Description>Detects that NFS disk space usage has reached a critical level (greater than 95% and free disk less than 100 MB) based on 2 successive readings in a 10 minute interval</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_NFS_DISK_SPACE_CRIT" severity="9"  fireFreq="21600">
+      <ArgList>
+        hostIpAddr = NFSDiskCrit.hostIpAddr, hostName = NFSDiskCrit.hostName, diskName = NFSDiskCrit.diskName, diskUtil = NFSDiskCrit.AVG(diskUtil)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+       <SubPattern displayName="NFSDiskCrit" name=" NFSDiskCrit">
+	 <Description>Average CPU Utilization is greater than 85% for 2 readings over 10 min period </Description>
+	 <SingleEvtConstr>eventType = "PH_DEV_MON_SYS_DISK_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Storage) </SingleEvtConstr>
+         <GroupEvtConstr> AVG(diskUtil) &gt; 95 AND AVG(freeDiskMB) &lt; 100 AND COUNT(*) &gt;= 2 </GroupEvtConstr>
+         <GroupByAttr>hostIpAddr,hostName,diskName</GroupByAttr>
+       </SubPattern>
+    </PatternClause>  
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,reptDevIpAddr,hostIpAddr,hostName,diskName,diskUtil,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "timebased">
+      <QuietPeriod>1200</QuietPeriod>
+    </ClearCondition>
+  </Rule> 
+
+  <!-- ***************NetApp NFS latency ******************** -->
+  <Rule group="PH_SYS_RULE_Perf_Storage" id="PH_Rule_Perf_237" fireInternalIncident = "true" phIncidentCategory="Storage">
+    <Name>NetApp NFS Read/Write Latency Warning </Name>
+    <active>true</active>
+    <Description>Detects that the NFS Read or Write latency has reached a warning level (between 20 and 50 msec) based on 2 successive readings in a 10 minute interval</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_NETAPP_NFS_LATENCY_WARN" severity="5"  fireFreq="21600">
+      <ArgList>
+        hostIpAddr = StorageDiskLatencyWarn.hostIpAddr, hostName = StorageDiskLatencyWarn.hostName, nfsReadLatency = StorageDiskLatencyWarn.AVG(nfsReadLatency), nfsWriteLatency = StorageDiskLatencyWarn.AVG(nfsWriteLatency)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+       <SubPattern displayName=" StorageDiskLatencyWarn" name=" StorageDiskLatencyWarn">
+	 <Description>Average NFS Read or Write latency for a logical volume between between 20 and 50 msec for 2 readings over 10 min period </Description>
+	 <SingleEvtConstr>eventType IN ("PH_DEV_MON_NETAPP_NFS3_MET", "PH_DEV_MON_NETAPP_NFS4_MET")  </SingleEvtConstr>
+         <GroupEvtConstr> ((AVG(nfsReadLatency) &gt;= 20 AND AVG(nfsReadLatency) &lt; 50) OR (AVG(nfsWriteLatency) &gt;= 20 AND AVG(nfsWriteLatency) &lt; 50)) AND COUNT(*) &gt;= 2 </GroupEvtConstr>
+         <GroupByAttr>hostIpAddr,hostName</GroupByAttr>
+       </SubPattern>
+    </PatternClause>  
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,hostIpAddr,hostName,nfsReadOpsPerSec,nfsWriteOpsPerSec,nfsOpsPerSec,nfsReadLatency,nfsWriteLatency,nfsReadKBytesPerSec,nfsWriteKBytesPerSec</AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "timebased">
+      <QuietPeriod>1200</QuietPeriod>
+    </ClearCondition>
+  </Rule> 
+  
+  <Rule group="PH_SYS_RULE_Perf_Storage" id="PH_Rule_Perf_238" fireInternalIncident = "true" phIncidentCategory="Storage">
+    <Name>NetApp NFS Read/Write Latency Critical </Name>
+    <active>true</active>
+    <Description>Detects that NetApp NFS Read/Write latency has reached a critical level (greater  than 50 msec) based on 2 successive readings in a 10 minute interval</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_NETAPP_NFS_LATENCY_CRIT" severity="9"  fireFreq="21600">
+      <ArgList>
+        hostIpAddr = StorageDiskLatencyCrit.hostIpAddr, hostName = StorageDiskLatencyCrit.hostName, nfsReadLatency = StorageDiskLatencyCrit.AVG(nfsReadLatency), nfsWriteLatency = StorageDiskLatencyCrit.AVG(nfsWriteLatency)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+       <SubPattern displayName=" StorageDiskLatencyCrit" name=" StorageDiskLatencyCrit">
+	 <Description>Average Disk Read or Write latency for a logical volume greater than 50 msec for 2 readings over 10 min period </Description>
+	 <SingleEvtConstr> eventType IN ("PH_DEV_MON_NETAPP_NFS3_MET", "PH_DEV_MON_NETAPP_NFS4_MET")  </SingleEvtConstr>
+         <GroupEvtConstr> (AVG(nfsReadLatency) &gt;= 50 OR AVG(nfsWriteLatency) &gt;= 50) AND COUNT(*) &gt;= 2 </GroupEvtConstr>
+         <GroupByAttr>hostIpAddr,hostName</GroupByAttr>
+       </SubPattern>
+    </PatternClause>  
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,hostIpAddr,hostName,nfsReadOpsPerSec,nfsWriteOpsPerSec,nfsOpsPerSec,nfsReadLatency,nfsWriteLatency,nfsReadKBytesPerSec,nfsWriteKBytesPerSec </AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "timebased">
+      <QuietPeriod>1200</QuietPeriod>
+    </ClearCondition>
+  </Rule> 
+
+  <!-- ***************NetApp CIFS latency ******************** -->
+  <Rule group="PH_SYS_RULE_Perf_Storage" id="PH_Rule_Perf_239" fireInternalIncident = "true" phIncidentCategory="Storage">
+    <Name>NetApp CIFS Read/Write Latency Warning </Name>
+    <active>true</active>
+    <Description>Detects that the CIFS Read or Write latency has reached a warning level (between 20 and 50 msec) based on 2 successive readings in a 10 minute interval</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_NETAPP_CIFS_LATENCY_WARN" severity="5"  fireFreq="21600">
+      <ArgList>
+        hostIpAddr = StorageDiskLatencyWarn.hostIpAddr, hostName = StorageDiskLatencyWarn.hostName, cifsLatency = StorageDiskLatencyWarn.AVG(cifsLatency)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+       <SubPattern displayName=" StorageDiskLatencyWarn" name=" StorageDiskLatencyWarn">
+	 <Description>Average CIFS Read or Write latency for a logical volume between between 20 and 50 msec for 2 readings over 10 min period </Description>
+	 <SingleEvtConstr>eventType IN ("PH_DEV_MON_NETAPP_CIFS_MET")  </SingleEvtConstr>
+         <GroupEvtConstr> (AVG(cifsLatency) &gt;= 20 AND AVG(cifsLatency) &lt; 50) AND COUNT(*) &gt;= 2 </GroupEvtConstr>
+         <GroupByAttr>hostIpAddr,hostName</GroupByAttr>
+       </SubPattern>
+    </PatternClause>  
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,hostIpAddr,hostName,cifsOpsPerSec,cifsLatency</AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "timebased">
+      <QuietPeriod>1200</QuietPeriod>
+    </ClearCondition>
+  </Rule> 
+  
+  <Rule group="PH_SYS_RULE_Perf_Storage" id="PH_Rule_Perf_240" fireInternalIncident = "true" phIncidentCategory="Storage">
+    <Name>NetApp CIFS Latency Critical </Name>
+    <active>true</active>
+    <Description>Detects that NetApp CIFS latency has reached a critical level (greater  than 50 msec) based on 2 successive readings in a 10 minute interval</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_NETAPP_CIFS_LATENCY_CRIT" severity="9"  fireFreq="21600">
+      <ArgList>
+        hostIpAddr = StorageDiskLatencyCrit.hostIpAddr, hostName = StorageDiskLatencyCrit.hostName, cifsLatency = StorageDiskLatencyCrit.AVG(cifsLatency)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+       <SubPattern displayName=" StorageDiskLatencyCrit" name=" StorageDiskLatencyCrit">
+	 <Description>Average Disk Read or Write latency for a logical volume greater than 50 msec for 2 readings over 10 min period </Description>
+	 <SingleEvtConstr> eventType IN ("PH_DEV_MON_NETAPP_CIFS_MET")  </SingleEvtConstr>
+         <GroupEvtConstr> AVG(cifsLatency) &gt;= 50  AND COUNT(*) &gt;= 2 </GroupEvtConstr>
+         <GroupByAttr>hostIpAddr,hostName</GroupByAttr>
+       </SubPattern>
+    </PatternClause>  
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,hostIpAddr,hostName,cifsOpsPerSec,cifsLatency </AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "timebased">
+      <QuietPeriod>1200</QuietPeriod>
+    </ClearCondition>
+  </Rule> 
+
+   <!-- ***************NetApp ISCSI latency ******************** -->
+  <Rule group="PH_SYS_RULE_Perf_Storage" id="PH_Rule_Perf_241" fireInternalIncident = "true" phIncidentCategory="Storage">
+    <Name>NetApp ISCSI Read/Write Latency Warning </Name>
+    <active>true</active>
+    <Description>Detects that the ISCSI Read or Write latency has reached a warning level (between 20 and 50 msec) based on 2 successive readings in a 10 minute interval</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_NETAPP_ISCSI_LATENCY_WARN" severity="5"  fireFreq="21600">
+      <ArgList>
+        hostIpAddr = StorageDiskLatencyWarn.hostIpAddr, hostName = StorageDiskLatencyWarn.hostName, iscsiReadLatency = StorageDiskLatencyWarn.AVG(iscsiReadLatency), iscsiWriteLatency = StorageDiskLatencyWarn.AVG(iscsiWriteLatency)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+       <SubPattern displayName=" StorageDiskLatencyWarn" name=" StorageDiskLatencyWarn">
+	 <Description>Average ISCSI Read or Write latency for a logical volume between between 20 and 50 msec for 2 readings over 10 min period </Description>
+	 <SingleEvtConstr>eventType IN ("PH_DEV_MON_NETAPP_ISCSI_MET")  </SingleEvtConstr>
+         <GroupEvtConstr> ((AVG(iscsiReadLatency) &gt;= 20 AND AVG(iscsiReadLatency) &lt; 50) OR (AVG(iscsiWriteLatency) &gt;= 20 AND AVG(iscsiWriteLatency) &lt; 50)) AND COUNT(*) &gt;= 2 </GroupEvtConstr>
+         <GroupByAttr>hostIpAddr,hostName</GroupByAttr>
+       </SubPattern>
+    </PatternClause>  
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,hostIpAddr,hostName,iscsiReadOpsPerSec,iscsiWriteOpsPerSec,iscsiOpsPerSec,iscsiReadLatency,iscsiWriteLatency,iscsiReadKBytesPerSec,iscsiWriteKBytesPerSec</AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "timebased">
+      <QuietPeriod>1200</QuietPeriod>
+    </ClearCondition>
+  </Rule> 
+  
+  <Rule group="PH_SYS_RULE_Perf_Storage" id="PH_Rule_Perf_242" fireInternalIncident = "true" phIncidentCategory="Storage">
+    <Name>NetApp ISCSI Read/Write Latency Critical </Name>
+    <active>true</active>
+    <Description>Detects that NetApp ISCSI Read/Write latency has reached a critical level (greater  than 50 msec) based on 2 successive readings in a 10 minute interval</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_NETAPP_ISCSI_LATENCY_CRIT" severity="9"  fireFreq="21600">
+      <ArgList>
+        hostIpAddr = StorageDiskLatencyCrit.hostIpAddr, hostName = StorageDiskLatencyCrit.hostName, iscsiReadLatency = StorageDiskLatencyCrit.AVG(iscsiReadLatency), iscsiWriteLatency = StorageDiskLatencyCrit.AVG(iscsiWriteLatency)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+       <SubPattern displayName=" StorageDiskLatencyCrit" name=" StorageDiskLatencyCrit">
+	 <Description>Average Disk Read or Write latency for a logical volume greater than 50 msec for 2 readings over 10 min period </Description>
+	 <SingleEvtConstr> eventType IN ("PH_DEV_MON_NETAPP_ISCSI_MET")  </SingleEvtConstr>
+         <GroupEvtConstr> (AVG(iscsiReadLatency) &gt;= 50 OR AVG(iscsiWriteLatency) &gt;= 50) AND COUNT(*) &gt;= 2 </GroupEvtConstr>
+         <GroupByAttr>hostIpAddr,hostName</GroupByAttr>
+       </SubPattern>
+    </PatternClause>  
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,hostIpAddr,hostName,iscsiReadOpsPerSec,iscsiWriteOpsPerSec,iscsiOpsPerSec,iscsiReadLatency,iscsiWriteLatency,iscsiReadKBytesPerSec,iscsiWriteKBytesPerSec </AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "timebased">
+      <QuietPeriod>1200</QuietPeriod>
+    </ClearCondition>
+  </Rule> 
+
+   <!-- ***************NetApp FCP latency ******************** -->
+  <Rule group="PH_SYS_RULE_Perf_Storage" id="PH_Rule_Perf_243" fireInternalIncident = "true" phIncidentCategory="Storage">
+    <Name>NetApp FCP Read/Write Latency Warning </Name>
+    <active>true</active>
+    <Description>Detects that the FCP Read or Write latency has reached a warning level (between 20 and 50 msec) based on 2 successive readings in a 10 minute interval</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_NETAPP_FCP_LATENCY_WARN" severity="5"  fireFreq="21600">
+      <ArgList>
+        hostIpAddr = StorageDiskLatencyWarn.hostIpAddr, hostName = StorageDiskLatencyWarn.hostName, fcpReadLatency = StorageDiskLatencyWarn.AVG(fcpReadLatency), fcpWriteLatency = StorageDiskLatencyWarn.AVG(fcpWriteLatency)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+       <SubPattern displayName=" StorageDiskLatencyWarn" name=" StorageDiskLatencyWarn">
+	 <Description>Average FCP Read or Write latency for a logical volume between between 20 and 50 msec for 2 readings over 10 min period </Description>
+	 <SingleEvtConstr>eventType IN ("PH_DEV_MON_NETAPP_FCP_MET")  </SingleEvtConstr>
+         <GroupEvtConstr> ((AVG(fcpReadLatency) &gt;= 20 AND AVG(fcpReadLatency) &lt; 50) OR (AVG(fcpWriteLatency) &gt;= 20 AND AVG(fcpWriteLatency) &lt; 50)) AND COUNT(*) &gt;= 2 </GroupEvtConstr>
+         <GroupByAttr>hostIpAddr,hostName</GroupByAttr>
+       </SubPattern>
+    </PatternClause>  
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,hostIpAddr,hostName,fcpReadOpsPerSec,fcpWriteOpsPerSec,fcpOpsPerSec,fcpReadLatency,fcpWriteLatency,fcpReadKBytesPerSec,fcpWriteKBytesPerSec</AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "timebased">
+      <QuietPeriod>1200</QuietPeriod>
+    </ClearCondition>
+  </Rule> 
+  
+  <Rule group="PH_SYS_RULE_Perf_Storage" id="PH_Rule_Perf_244" fireInternalIncident = "true" phIncidentCategory="Storage">
+    <Name>NetApp FCP Read/Write Latency Critical </Name>
+    <active>true</active>
+    <Description>Detects that NetApp FCP Read/Write latency has reached a critical level (greater  than 50 msec) based on 2 successive readings in a 10 minute interval</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_NETAPP_FCP_LATENCY_CRIT" severity="9"  fireFreq="21600">
+      <ArgList>
+        hostIpAddr = StorageDiskLatencyCrit.hostIpAddr, hostName = StorageDiskLatencyCrit.hostName, fcpReadLatency = StorageDiskLatencyCrit.AVG(fcpReadLatency), fcpWriteLatency = StorageDiskLatencyCrit.AVG(fcpWriteLatency)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+       <SubPattern displayName=" StorageDiskLatencyCrit" name=" StorageDiskLatencyCrit">
+	 <Description>Average Disk Read or Write latency for a logical volume greater than 50 msec for 2 readings over 10 min period </Description>
+	 <SingleEvtConstr> eventType IN ("PH_DEV_MON_NETAPP_FCP_MET")  </SingleEvtConstr>
+         <GroupEvtConstr> (AVG(fcpReadLatency) &gt;= 50 OR AVG(fcpWriteLatency) &gt;= 50) AND COUNT(*) &gt;= 2 </GroupEvtConstr>
+         <GroupByAttr>hostIpAddr,hostName</GroupByAttr>
+       </SubPattern>
+    </PatternClause>  
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,hostIpAddr,hostName,fcpReadOpsPerSec,fcpWriteOpsPerSec,fcpOpsPerSec,fcpReadLatency,fcpWriteLatency,fcpReadKBytesPerSec,fcpWriteKBytesPerSec </AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "timebased">
+      <QuietPeriod>1200</QuietPeriod>
+    </ClearCondition>
+  </Rule> 
+
+   <!-- ***************NetApp Volume latency ******************** -->
+  <Rule group="PH_SYS_RULE_Perf_Storage" id="PH_Rule_Perf_245" fireInternalIncident = "true" phIncidentCategory="Storage">
+    <Name>NetApp Volume Read/Write Latency Warning </Name>
+    <active>true</active>
+    <Description>Detects that the FCP Read or Write latency has reached a warning level (between 20 and 50 msec) based on 2 successive readings in a 10 minute interval</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_NETAPP_VOLUME_LATENCY_WARN" severity="5"  fireFreq="21600">
+      <ArgList>
+        hostIpAddr = StorageDiskLatencyWarn.hostIpAddr, hostName = StorageDiskLatencyWarn.hostName, devDiskRdLatency = StorageDiskLatencyWarn.AVG(devDiskRdLatency), devDiskWrLatency = StorageDiskLatencyWarn.AVG(devDiskWrLatency)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+       <SubPattern displayName=" StorageDiskLatencyWarn" name=" StorageDiskLatencyWarn">
+	 <Description>Average Read or Write latency for a logical volume between between 20 and 50 msec for 2 readings over 10 min period </Description>
+	 <SingleEvtConstr>eventType IN ("PH_DEV_MON_NETAPP_VOL_MET")  </SingleEvtConstr>
+         <GroupEvtConstr> ((AVG(devDiskRdLatency) &gt;= 20 AND AVG(devDiskRdLatency) &lt; 50) OR (AVG(devDiskWrLatency) &gt;= 20 AND AVG(devDiskWrLatency) &lt; 50)) AND COUNT(*) &gt;= 2 </GroupEvtConstr>
+         <GroupByAttr>hostIpAddr,hostName</GroupByAttr>
+       </SubPattern>
+    </PatternClause>  
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,hostIpAddr,hostName, devDiskRdLatency, devDiskWrLatency,diskReadReqPerSec,diskWriteReqPerSec</AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "timebased">
+      <QuietPeriod>1200</QuietPeriod>
+    </ClearCondition>
+  </Rule> 
+  
+  <Rule group="PH_SYS_RULE_Perf_Storage" id="PH_Rule_Perf_246" fireInternalIncident = "true" phIncidentCategory="Storage">
+    <Name>NetApp Volume Read/Write Latency Critical </Name>
+    <active>true</active>
+    <Description>Detects that NetApp Volume Read/Write latency has reached a critical level (greater  than 50 msec) based on 2 successive readings in a 10 minute interval</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_NETAPP_VOLUME_LATENCY_CRIT" severity="9"  fireFreq="21600">
+      <ArgList>
+        hostIpAddr = StorageDiskLatencyCrit.hostIpAddr, hostName = StorageDiskLatencyCrit.hostName, devDiskRdLatency = StorageDiskLatencyCrit.AVG(devDiskRdLatency), devDiskWrLatency = StorageDiskLatencyCrit.AVG(devDiskWrLatency)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+       <SubPattern displayName=" StorageDiskLatencyCrit" name=" StorageDiskLatencyCrit">
+	 <Description>Average Disk Read or Write latency for a logical volume greater than 50 msec for 2 readings over 10 min period </Description>
+	 <SingleEvtConstr> eventType IN ("PH_DEV_MON_NETAPP_VOL_MET")  </SingleEvtConstr>
+         <GroupEvtConstr> (AVG(devDiskRdLatency) &gt;= 50 OR AVG(devDiskWrLatency) &gt;= 50) AND COUNT(*) &gt;= 2 </GroupEvtConstr>
+         <GroupByAttr>hostIpAddr,hostName</GroupByAttr>
+       </SubPattern>
+    </PatternClause>  
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,hostIpAddr,hostName,devDiskRdLatency, devDiskWrLatency,diskReadReqPerSec,diskWriteReqPerSec</AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "timebased">
+      <QuietPeriod>1200</QuietPeriod>
+    </ClearCondition>
+  </Rule> 
+
+   <!-- ***************EqualLogic connection latency ******************** -->
+  <Rule group="PH_SYS_RULE_Perf_Storage" id="PH_Rule_Perf_247" fireInternalIncident = "true" phIncidentCategory="Storage">
+    <Name>EqualLogic Connection Read/Write Latency Warning </Name>
+    <active>true</active>
+    <Description>Detects that the EqualLogic connection Read or Write latency has reached a warning level (between 20 and 50 msec) based on 2 successive readings in a 10 minute interval</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_EQLOGIC_CONN_LATENCY_WARN" severity="5"  fireFreq="21600">
+      <ArgList>
+        hostIpAddr = StorageDiskLatencyWarn.hostIpAddr, hostName = StorageDiskLatencyWarn.hostName, devDiskRdLatency = StorageDiskLatencyWarn.AVG(devDiskRdLatency), devDiskWrLatency = StorageDiskLatencyWarn.AVG(devDiskWrLatency)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+       <SubPattern displayName=" StorageDiskLatencyWarn" name=" StorageDiskLatencyWarn">
+	 <Description>Average Read or Write latency between between 20 and 50 msec for 2 readings over 10 min period </Description>
+	 <SingleEvtConstr>eventType IN ("PH_DEV_MON_EQL_CONN_MET")  </SingleEvtConstr>
+         <GroupEvtConstr> ((AVG(devDiskRdLatency) &gt;= 20 AND AVG(devDiskRdLatency) &lt; 50) OR (AVG(devDiskWrLatency) &gt;= 20 AND AVG(devDiskWrLatency) &lt; 50)) AND COUNT(*) &gt;= 2 </GroupEvtConstr>
+         <GroupByAttr>hostIpAddr,hostName</GroupByAttr>
+       </SubPattern>
+    </PatternClause>  
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,hostIpAddr,hostName, devDiskRdLatency, devDiskWrLatency,diskReadReqPerSec,diskWriteReqPerSec</AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "timebased">
+      <QuietPeriod>1200</QuietPeriod>
+    </ClearCondition>
+  </Rule> 
+  
+  <Rule group="PH_SYS_RULE_Perf_Storage" id="PH_Rule_Perf_248" fireInternalIncident = "true" phIncidentCategory="Storage">
+    <Name>EqualLogic Connection Read/Write Latency Critical </Name>
+    <active>true</active>
+    <Description>Detects that EqualLogic Connection Read/Write latency has reached a critical level (greater  than 50 msec) based on 2 successive readings in a 10 minute interval</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_EQLOGIC_CONN_LATENCY_CRIT" severity="9"  fireFreq="21600">
+      <ArgList>
+        hostIpAddr = StorageDiskLatencyCrit.hostIpAddr, hostName = StorageDiskLatencyCrit.hostName, devDiskRdLatency = StorageDiskLatencyCrit.AVG(devDiskRdLatency), devDiskWrLatency = StorageDiskLatencyCrit.AVG(devDiskWrLatency)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+       <SubPattern displayName=" StorageDiskLatencyCrit" name=" StorageDiskLatencyCrit">
+	 <Description>Average Disk Read or Write latency for a logical volume greater than 50 msec for 2 readings over 10 min period </Description>
+	 <SingleEvtConstr> eventType IN ("PH_DEV_MON_EQL_CONN_MET")  </SingleEvtConstr>
+         <GroupEvtConstr> (AVG(devDiskRdLatency) &gt;= 50 OR AVG(devDiskWrLatency) &gt;= 50) AND COUNT(*) &gt;= 2 </GroupEvtConstr>
+         <GroupByAttr>hostIpAddr,hostName</GroupByAttr>
+       </SubPattern>
+    </PatternClause>  
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,hostIpAddr,hostName,devDiskRdLatency, devDiskWrLatency,diskReadReqPerSec,diskWriteReqPerSec</AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "timebased">
+      <QuietPeriod>1200</QuietPeriod>
+    </ClearCondition>
+  </Rule> 
+
+</Rules>

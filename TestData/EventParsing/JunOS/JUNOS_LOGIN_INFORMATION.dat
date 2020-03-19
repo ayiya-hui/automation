@@ -1,0 +1,23 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<38>Nov 18 17:50:46 login: %AUTH-6-LOGIN_INFORMATION: User phoenix_agent logged in from host 192.168.20.116 on device ttyp0
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+count=1
+phCustId=$sender
+deviceTime=any
+eventAction=0 (Permit)
+eventId=any
+eventName=User logged in
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=6
+eventSeverityCat=MEDIUM
+eventType=JUNOS_LOGIN_INFORMATION
+hostIpAddr=192.168.20.116
+reptDevIpAddr=$reporter
+reptModel=JunOS
+reptVendor=Juniper
+user=phoenix_agent

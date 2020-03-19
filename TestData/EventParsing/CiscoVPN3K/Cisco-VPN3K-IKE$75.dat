@@ -1,0 +1,21 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<189>393055 06/29/2009 21:26:10.760 SEV=5 IKE/75 RPT=1388 99.129.50.155  Group [HQ-Dev] User [wenyong] Overriding Initiator's IPSec rekeying duration from 2147483 to 28800 seconds--automator
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+eventAction=0 (Permit)
+eventName=Cisco-VPN3K-IKE/75
+reptVendor=Cisco
+eventType=Cisco-VPN3K-IKE/75
+phEventCategory=0 (External)
+reptDevIpAddr=$localhost
+reptModel=VPN 3K

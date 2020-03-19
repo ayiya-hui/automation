@@ -1,0 +1,23 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<14>SJ-QA-A-Fdy-BigIron, VLAN 4 Port 2/7 STP State -> FORWARDING (FwdDlyExpiry)
+[params]
+rawEventMsg=any
+appTransportProto=STP
+count=1
+eventId=any
+srcIntfName=VLAN4
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+eventAction=0 (Permit)
+eventName=Foundry STP port entered FORWARDING state
+reptVendor=Foundry
+eventType=Foundry-Ironware-StpPort-Forwarding
+phEventCategory=0 (External)
+reptDevIpAddr=$localhost
+destName=SJ-QA-A-Fdy-BigIron
+reptModel=Ironware

@@ -1,0 +1,38 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<116> device=FCTEMS0036759495 severity=medium from=FAZVM64(FAZ-VM0000000001) trigger=EVT2SIEM1 log="itime=1490661841 date=2017-03-28 time=08:44:01 logver=2 level=info uid=52D9E30355CA48B38A15381C0BB29A24 vd=root fctver=5.4.3.0870 os="Microsoft Windows 7 Ultimate Edition, 64-bit Service Pack 1 (build 7601)" usingpolicy=AOFCT fgtserial=N/A emsserial=FCTEMS0036759495 devid=FCT8002625078547 hostname=xiaobo-PC pcdomain=clientfeature=sslvpn deviceip=devicemac=N/A type=event user=N/A id=96600 msg="SSLVPN tunnel status" vpnstate=connected vpntunnel=us-vpn3.myfortinet.com vpntype=ssl"
+[params]
+deviceTime=any
+parserName=FortiClientParser
+eventType=FortiClient-sslvpn-connected
+hostName=xiaobo-PC
+vpnTunnelName=us-vpn3.myfortinet.com
+feature=sslvpn
+srcName=EVT2SIEM1
+osType=Microsoft Windows 7 Ultimate Edition, 64-bit Service Pack 1 (build 7601)
+vpnConnType=ssl
+reptModel=FortiClient
+eventId=any
+policyName=AOFCT
+eventParsedOk=1
+eventSeverity=2
+vpnStatus=connected
+eventName=FortiClient-sslvpn-connected
+reptDevName=any
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+msg=SSLVPN tunnel status
+count=1
+srcMACAddr=N/A
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+user=N/A
+rawEventMsg=any
+vdom=root
+serialNumber=5.4.3.0870
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Fortinet

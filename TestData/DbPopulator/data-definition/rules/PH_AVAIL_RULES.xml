@@ -1,0 +1,166 @@
+<Rules>
+
+  <!-- ***************************************************** -->
+  <Rule group="PH_SYS_RULE_Avail_AccelOps" id="PH_Rule_Avail_PH_1" phIncidentCategory="Internal">
+    <Name>System Warning: Low Storage</Name>
+    <active>true</active>
+    <Description> Detects the free space of the file system containing the folder /data/eventdb used for storing events is lower than 20GB. Once the free space is lower than 10GB, the system will automatically purge old events until the free space is more than 20GB. If you do not want this automatical purge of old events, please backup old events to a remote location using nfs, cifs or sftp, otherwise, you can disable this rule.</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_ACCELOPS_LOW_STORAGE" severity="8">
+      <ArgList>
+        hostIpAddr = AOStorageLow.reptDevIpAddr
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+      <SubPattern displayName="AOStorageLow" name="AOStorageLow">
+        <SingleEvtConstr> eventType = "PH_SYSTEM_STORAGE_LOW" </SingleEvtConstr>
+	<GroupEvtConstr>COUNT (*) &gt;= 1</GroupEvtConstr>
+	<GroupByAttr>reptDevIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,reptDevIpAddr,rawEventMsg </AttrList>
+    </TriggerEventDisplay> 
+  </Rule>
+  
+  <!-- ***************************************************** -->
+  <Rule group="PH_SYS_RULE_Avail_AccelOps" id="PH_Rule_Avail_PH_2" phIncidentCategory="Internal">
+    <Name>System License Warning: High Event Rate</Name>
+    <active>true</active>
+    <Description> Detects that the system is receiving events at a rate that is higher than the license limit. Events beyond the license limit would be dropped unless the license is upgraded.</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_ACCELOPS_HIGH_EPS" severity="10">
+      <ArgList>
+        hostIpAddr = AOLicenseExpire.reptDevIpAddr
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+      <SubPattern displayName="AOLicenseExpire" name="AOLicenseExpire">
+        <SingleEvtConstr> eventType = "PH_SYSTEM_EVENT_RATE_EXCEED_LICENSE" </SingleEvtConstr>
+	<GroupEvtConstr>COUNT (*) &gt;= 1</GroupEvtConstr>
+	<GroupByAttr>reptDevIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,reptDevIpAddr,rawEventMsg </AttrList>
+    </TriggerEventDisplay> 
+  </Rule>
+
+  <!-- ***************************************************** -->
+  <Rule group="PH_SYS_RULE_Avail_AccelOps" id="PH_Rule_Avail_PH_3" phIncidentCategory="Internal">
+    <Name>System License Warning: High Config Items</Name>
+    <active>true</active>
+    <Description> Detects that the number of CMDB configuration items is close to the license limit - additonal configuration items would not be stored unless the license is upgraded. </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_ACCELOPS_HIGH_CI" severity="10">
+      <ArgList>
+        hostIpAddr = AOHighCI.reptDevIpAddr
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+      <SubPattern displayName="AOHighCI" name="AOHighCI">
+        <SingleEvtConstr> eventType = "PH_AUDIT_CI_QUOTE_EXCEEDED" </SingleEvtConstr>
+	<GroupEvtConstr>COUNT (*) &gt;= 0</GroupEvtConstr>
+	<GroupByAttr>reptDevIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,customer,rawEventMsg </AttrList>
+    </TriggerEventDisplay> 
+  </Rule>
+
+  <Rule group="PH_SYS_RULE_Avail_AccelOps" id="PH_Rule_Avail_PH_4" phIncidentCategory="Internal">
+    <Name>System Collector Down</Name>
+    <active>true</active>
+    <Description> Detects that collector is down.</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_ACCELOPS_COLLECTOR_DOWN"  severity="9">
+      <ArgList>
+        customer = AOCollectorDown.customer, phCollectorName = AOCollectorDown.phCollectorName
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+      <SubPattern displayName="AOCollectorDown" name="AOCollectorDown">
+        <SingleEvtConstr> eventType = "PH_COLLECTOR_DOWN" </SingleEvtConstr>
+	<GroupEvtConstr>COUNT (*) &gt;= 1</GroupEvtConstr>
+        <GroupByAttr>customer,phCollectorName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,customer,phCollectorName,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "patternbased">
+      <ClearIncidentDef name="PH_RULE_ACCELOPS_COLLECTOR_DOWN_CLEAR">
+	<ArgList>customer = AOCollectorDown_CLEAR.customer, phCollectorName = AOCollectorDown_CLEAR.phCollectorName
+        </ArgList>
+      </ClearIncidentDef>
+      <ClearConstr> PH_RULE_ACCELOPS_COLLECTOR_DOWN.customer = PH_RULE_ACCELOPS_COLLECTOR_DOWN_CLEAR.customer,
+                    PH_RULE_ACCELOPS_COLLECTOR_DOWN.phCollectorName = PH_RULE_ACCELOPS_COLLECTOR_DOWN_CLEAR.phCollectorName 
+      </ClearConstr>
+      <PatternClause window="600">
+	<SubPattern displayName="AOCollectorDown_CLEAR" name="AOCollectorDown_CLEAR">
+          <SingleEvtConstr> eventType = "PH_COLLECTOR_UP" </SingleEvtConstr>
+	  <GroupEvtConstr> COUNT(*) &gt;= 1 </GroupEvtConstr>
+	  <GroupByAttr>customer,phCollectorName</GroupByAttr>
+	</SubPattern>
+      </PatternClause>
+    </ClearCondition> 
+  </Rule>
+
+  <!-- ***************************************************** -->
+  <Rule group="PH_SYS_RULE_Avail_AccelOps" id="PH_Rule_Avail_PH_8" phIncidentCategory="Internal">
+    <Name>System License Warning: Max Number of Devices Exceeded License</Name>
+    <active>true</active>
+    <Description> Detects that the system discovered more devices than what license allows.</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_ACCELOPS_MAX_DEVICE_EXCEEDED"  severity="10">
+      <ArgList/>
+    </IncidentDef>
+    <PatternClause window="600">
+      <SubPattern displayName="AOLicenseMaxDevice" name="AOLicenseMaxDevice">
+        <SingleEvtConstr> eventType = "PH_MAX_DEVICES_EXCEEDED" </SingleEvtConstr>
+	<GroupEvtConstr>COUNT (*) &gt;= 1</GroupEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,rawEventMsg </AttrList>
+    </TriggerEventDisplay> 
+  </Rule>
+
+  <Rule group="PH_SYS_RULE_Avail_AccelOps" id="PH_Rule_Avail_PH_9" phIncidentCategory="Internal">
+    <Name>System Worker Down</Name>
+    <active>true</active>
+    <Description> Detects that system worker is down.</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_ACCELOPS_WORKER_DOWN"  severity="9">
+      <ArgList>
+        hostIpAddr = AOWorkerDown.hostIpAddr
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+      <SubPattern displayName="AOWorkerDown" name="AOWorkerDown">
+        <SingleEvtConstr> eventType = "PH_WORKER_DOWN" </SingleEvtConstr>
+        <GroupEvtConstr>COUNT (*) &gt;= 1</GroupEvtConstr>
+        <GroupByAttr>hostIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,hostIpAddr,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "patternbased">
+      <ClearIncidentDef name="PH_RULE_ACCELOPS_WORKER_DOWN_CLEAR">
+        <ArgList>hostIpAddr = AOWorkerDown_CLEAR.hostIpAddr
+        </ArgList>
+      </ClearIncidentDef>
+      <ClearConstr> PH_RULE_ACCELOPS_WORKER_DOWN.hostIpAddr = PH_RULE_ACCELOPS_WORKER_DOWN_CLEAR.hostIpAddr
+      </ClearConstr>
+      <PatternClause window="600">
+        <SubPattern displayName="AOWorkerDown_CLEAR" name="AOWorkerDown_CLEAR">
+          <SingleEvtConstr> eventType = "PH_WORKER_UP" </SingleEvtConstr>
+          <GroupEvtConstr> COUNT(*) &gt;= 1 </GroupEvtConstr>
+          <GroupByAttr>hostIpAddr</GroupByAttr>
+        </SubPattern>
+      </PatternClause>
+    </ClearCondition>
+  </Rule>
+</Rules>

@@ -1,0 +1,35 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<6>CEF:0|McAfee|IPS|5.5.7|70607|TCP_Segment-SYN-Unexpected-Reply|2|spt=3333 deviceExternalId=PANASONIC-PCI-V2 node 1 dmac=6C:20:56:BE:37:BF dst=192.168.94.59 cat=Suspected Attack Related Anomalies app=HTTPS rt=Apr 08 2016 00:26:02 deviceFacility=Inspection act=Permit deviceOutboundInterface=Interface #2 deviceInboundInterface=Interface #2 proto=6 dpt=443 src=192.168.91.59 dvc=192.168.94.51 dvchost=192.168.94.51 smac=78:2B:CB:08:D7:50 cs1Label=RuleId cs1=153.0
+[params]
+domain=PANASONIC-PCI-V2 node 1
+destMACAddr=6C:20:56:BE:37:BF
+parserName=McAfeeStonesoftParser
+eventType=McAfee-Stonesoft-TCP_Segment-SYN-Unexpected-Reply
+devEventTypeGrp=Suspected Attack Related Anomalies
+destIpAddr=192.168.94.59
+destIpPort=443 (HTTPS)
+srcIpAddr=192.168.91.59
+reptModel=Stonesoft IPS
+eventId=any
+eventParsedOk=1
+eventSeverity=2
+fwAction=Permit
+eventName=Reply to SYN packet was illegible
+appTransportProto=HTTPS
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+eventRuleTrigger=1
+count=1
+srcMACAddr=78:2B:CB:08:D7:50
+srcIpPort=3333
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+ipProto=6 (TCP)
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=McAfee

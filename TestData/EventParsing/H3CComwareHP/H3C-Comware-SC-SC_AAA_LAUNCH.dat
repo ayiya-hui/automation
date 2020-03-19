@@ -1,0 +1,33 @@
+[reptDevIpAddr(key)]
+10.30.20.252
+[eventMsg]
+<190>Feb 17 14:30:15 2016 A5500IRF-24-BARB-CORE %%10SC/6/SC_AAA_LAUNCH(l): -DevIP=10.30.20.252-AAAType=ACCOUNT-AAAScheme= local-Service=login-UserName=admin@system; AAA launched.
+[params]
+domain=system
+deviceTime=any
+parserName=H3CComwareHPParser
+eventType=H3C-Comware-SC-SC_AAA_LAUNCH
+hostName=A5500IRF-24-BARB-CORE
+reptModel=Comware
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+hostIpAddr=10.30.20.252
+eventName=H3C-Comware-SC-SC_AAA_LAUNCH
+serviceName=login
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+eventRuleTrigger=1
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=10.30.20.252
+user=admin
+reptDevName=A5500IRF-24-BARB-CORE
+customer=Super
+phRecvTime=any
+reptDevIpAddr=10.30.20.252
+eventAction=0 (Permit)
+subtype=ACCOUNT
+reptVendor=H3C
+authenMethod=local

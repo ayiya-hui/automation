@@ -1,0 +1,2 @@
+[eventMsg]
+[PH_DEV_MON_NETAPP_CIFS_MET]:[eventSeverity]=PHL_INFO,[hostName]=automator14Dot0Dot2Dot2,[hostIpAddr]=14.0.2.2,[cifsOpsPerSec]=180,[cifsLatency]=45.67

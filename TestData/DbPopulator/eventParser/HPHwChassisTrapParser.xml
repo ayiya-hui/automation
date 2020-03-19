@@ -1,0 +1,297 @@
+<eventParser name="HPHwChassisTrapParser">
+  <deviceType>
+    <Vendor>Generic</Vendor>
+    <Model>Generic</Model>
+    <Version>ANY</Version>
+  </deviceType>
+
+  <!-- sample
+       
+  -->
+
+  <eventFormatRecognizer><![CDATA[SNMPv2-SMI::enterprises.232.6]]></eventFormatRecognizer>
+  
+  <testEvents>
+      <testEvent><![CDATA[2011-04-19 12:17:41 192.168.20.214(via UDP: [192.168.20.214]:49992) TRAP, SNMP v1, community public	SNMPv2-SMI::enterprises.232.6 Enterprise Specific Trap (6001) Uptime: 0:00:00.30	SNMPv2-MIB::sysName.0 = STRING: Insight]]></testEvent>
+  </testEvents>
+  <parsingInstructions>
+
+    <switch>
+      <case>
+        <collectFieldsByRegex src="$_rawmsg">
+          <regex><![CDATA[<_year:gPatYear>-<_mon:gPatMonNum>-<_day:gPatDay>\s+<_time:gPatTime>\s+<hostIpAddr:gPatIpV4Dot>.*SNMPv2-SMI::enterprises.232.6\s+Enterprise Specific Trap \(<_id:gPatInt>\) Uptime: (?:\d+\s+<:gPatStr>,\s+)?<:gPatTimeMSec><_body:gPatMesgBody>]]>
+          </regex>
+        </collectFieldsByRegex>
+      </case>
+      <case>
+        <collectFieldsByRegex src="$_rawmsg">
+          <regex><![CDATA[<_year:gPatYear>-<_mon:gPatMonNum>-<_day:gPatDay>\s+<_time:gPatTime>\s+<hostName:gPatStr> .*SNMPv2-SMI::enterprises.232.6\s+Enterprise Specific Trap \(<_id:gPatInt>\) Uptime: (?:\d+\s+<:gPatStr>,\s+)?<:gPatTimeMSec><_body:gPatMesgBody>]]>
+          </regex>
+        </collectFieldsByRegex>
+      </case>
+    </switch>    
+
+
+    <setEventAttribute attr="deviceTime">toDateTime($_mon, $_day, $_year, $_time)</setEventAttribute>
+    <setEventAttribute attr="eventType">HP-Chassis-Generic</setEventAttribute>
+    <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+
+    <collectAndSetAttrByKeyValuePair sep='\t\\| SNMP' src="$_body">
+      <attrKeyMap attr="hostName" key="SNMPv2-MIB::sysName.0 = STRING: "/>
+      <attrKeyMap attr="_cpqDaLogDrvStatus" key="SNMPv2-SMI::enterprises.674.10892.1.5000.10.3.0 = STRING: "/> 
+      <attrKeyMap attr="_cpqDaSpareStatus" key="SNMPv2-SMI::enterprises.674.10893.1.20.200.200.2 = STRING: "/>
+      <attrKeyMap attr="_cpqDaSpareBus" key="SNMPv2-SMI::enterprises.674.10893.1.20.200.200.2 = STRING: "/>
+
+      <attrKeyMap attr="_objLocation" key="SNMPv2-SMI::enterprises.674.10893.1.20.200.200.3 = STRING: "/>
+      <attrKeyMap attr="_objName" key="SNMPv2-SMI::enterprises.674.10893.1.20.200.200.4 = STRING: "/>
+      <attrKeyMap attr="_extraData" key="SNMPv2-SMI::enterprises.674.10892.1.5000.10.6.0 = STRING: "/>
+    </collectAndSetAttrByKeyValuePair>
+
+    <choose>
+      <when test='$_id = "1"'>
+	<setEventAttribute attr="eventType">"HP-1-CorrectableMemoryError"</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+      </when>
+      <when test='$_id = "6001"'>
+	<setEventAttribute attr="eventType">"HP-6001-CorrectableMemoryError"</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+      </when>
+      <when test='$_id = "6015"'>
+	<setEventAttribute attr="eventType">"HP-6015-CorrectableMemoryError"</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+      </when>
+
+      <when test='$_id = "2"'>
+	<setEventAttribute attr="eventType">"HP-2-CorrectableMemoryLogDisabled"</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">10</setEventAttribute>
+      </when>
+      <when test='$_id = "6002"'>
+	<setEventAttribute attr="eventType">"HP-6002-CorrectableMemoryLogDisabled"</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">10</setEventAttribute>
+      </when>
+      <when test='$_id = "6016"'>
+	<setEventAttribute attr="eventType">"HP-6016-CorrectableMemoryLogDisabled"</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">10</setEventAttribute>
+      </when>
+
+      <when test='$_id = "6003"'>
+	<setEventAttribute attr="eventType">"HP-6003-TempStatusFailed"</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">10</setEventAttribute>
+      </when>
+      <when test='$_id = "6017"'>
+	<setEventAttribute attr="eventType">"HP-6017-TempStatusFailed"</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">10</setEventAttribute>
+      </when>
+      <when test='$_id = "6040"'>
+	<setEventAttribute attr="eventType">"HP-6040-TempStatusFailed"</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">10</setEventAttribute>
+      </when>
+
+     <when test='$_id = "6041"'>
+	<setEventAttribute attr="eventType">"HP-6041-TempStatusDegraded"</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+      </when> 
+      <when test='$_id = "6004"'>
+	<setEventAttribute attr="eventType">"HP-6004-TempStatusDegraded"</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+      </when>
+      <when test='$_id = "6018"'>
+	<setEventAttribute attr="eventType">"HP-6018-TempStatusDegraded"</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+      </when>
+      
+
+      <when test='$_id = "6005"'>
+	<setEventAttribute attr="eventType">"HP-6005-TempStatusNormal"</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+      </when>
+      <when test='$_id = "6019"'>
+	<setEventAttribute attr="eventType">"HP-6019-TempStatusNormal"</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+      </when>
+      <when test='$_id = "6042"'>
+	<setEventAttribute attr="eventType">"HP-6042-TempStatusNormal"</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+      </when>
+
+      <when test='$_id = "6006"'>
+	<setEventAttribute attr="eventType">"HP-6006-FanStatusFailed"</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">10</setEventAttribute>
+      </when>
+      <when test='$_id = "6020"'>
+	<setEventAttribute attr="eventType">"HP-6020-FanStatusFailed"</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">10</setEventAttribute>
+      </when>
+      <when test='$_id = "6036"'>
+	<setEventAttribute attr="eventType">"HP-6036-FanStatusFailed"</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">10</setEventAttribute>
+      </when>
+      <when test='$_id = "6035"'>
+	<setEventAttribute attr="eventType">"HP-6035-FanStatusDegraded"</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+      </when>
+      <when test='$_id = "6007"'>
+	<setEventAttribute attr="eventType">"HP-6007-FanStatusDegraded"</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+      </when>
+      <when test='$_id = "6021"'>
+	<setEventAttribute attr="eventType">"HP-6021-FanStatusDegraded"</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+      </when>
+
+      <when test='$_id = "6008"'>
+	<setEventAttribute attr="eventType">"HP-6008-FanStatusNormal"</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+      </when>
+      <when test='$_id = "6022"'>
+	<setEventAttribute attr="eventType">"HP-6022-FanStatusNormal"</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+      </when>
+
+      <when test='$_id = "6009"'>
+	<setEventAttribute attr="eventType">"HP-6009-CPUFanFailed"</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">10</setEventAttribute>
+      </when>
+      <when test='$_id = "6023"'>
+	<setEventAttribute attr="eventType">"HP-6023-CPUFanFailed"</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">10</setEventAttribute>
+      </when>
+
+      <when test='$_id = "6010"'>
+	<setEventAttribute attr="eventType">"HP-6010-CPUFanOk"</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+      </when>
+      <when test='$_id = "6024"'>
+	<setEventAttribute attr="eventType">"HP-6024-CPUFanOk"</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+      </when>
+
+      <when test='$_id = "6011"'>
+	<setEventAttribute attr="eventType">"HP-6011-AsrConfirmation"</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">10</setEventAttribute>
+      </when>
+      <when test='$_id = "6025"'>
+	<setEventAttribute attr="eventType">"HP-6025-AsrConfirmation"</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">10</setEventAttribute>
+      </when>
+
+      <when test='$_id = "6012"'>
+	<setEventAttribute attr="eventType">"HP-6012-ThermalConfirmation"</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">10</setEventAttribute>
+      </when>
+      <when test='$_id = "6026"'>
+	<setEventAttribute attr="eventType">"HP-6026-ThermalConfirmation"</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">10</setEventAttribute>
+      </when>
+
+      <when test='$_id = "6013"'>
+	<setEventAttribute attr="eventType">"HP-6013-POSTError"</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+      </when>
+      <when test='$_id = "6027"'>
+	<setEventAttribute attr="eventType">"HP-6027-POSTError"</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+      </when>
+      
+      <when test='$_id = "6048"'>
+	<setEventAttribute attr="eventType">"HP-6048-PowerSupplyNormal"</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+      </when>
+
+      <when test='$_id = "6014"'>
+	<setEventAttribute attr="eventType">"HP-6014-PowerSupplyDegraded"</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+      </when>
+      <when test='$_id = "6028"'>
+	<setEventAttribute attr="eventType">"HP-6028-PowerSupplyDegraded"</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+      </when>
+      <when test='$_id = "6049"'>
+	<setEventAttribute attr="eventType">"HP-6049-PowerSupplyDegraded"</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+      </when>
+
+      <when test='$_id = "6050"'>
+	<setEventAttribute attr="eventType">"HP-6050-PowerSupplyFailed"</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">10</setEventAttribute>
+      </when>
+
+      <when test='$_id = "6032"'>
+	<setEventAttribute attr="eventType">"HP-6032-PowerSupplyRedundancyLost"</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">10</setEventAttribute>
+      </when>
+       <when test='$_id = "6033"'>
+	<setEventAttribute attr="eventType">"HP-6033-PowerSupplyInserted"</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+      </when>
+       <when test='$_id = "6034"'>
+	<setEventAttribute attr="eventType">"HP-6034-PowerSupplyRemoved"</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">10</setEventAttribute>
+      </when>
+        <when test='$_id = "6037"'>
+	<setEventAttribute attr="eventType">"HP-6037-FanRedundancyLost"</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">10</setEventAttribute>
+      </when>
+	<when test='$_id = "6038"'>
+	<setEventAttribute attr="eventType">"HP-6038-FanInserted"</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+      </when>
+       <when test='$_id = "6039"'>
+	<setEventAttribute attr="eventType">"HP-6039-FanRemoved"</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">10</setEventAttribute>
+      </when>
+       <when test='$_id = "6043"'>
+	<setEventAttribute attr="eventType">"HP-6043-PowerConverterDegraded"</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+      </when>
+       <when test='$_id = "6044"'>
+	<setEventAttribute attr="eventType">"HP-6044-PowerConverterFailed"</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">10</setEventAttribute>
+      </when>
+       <when test='$_id = "6045"'>
+	<setEventAttribute attr="eventType">"HP-6045-PowerConverterRedundancyLost"</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">10</setEventAttribute>
+      </when>
+       <when test='$_id = "6046"'>
+	<setEventAttribute attr="eventType">"HP-6046-CacheAccelaretorParityError"</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">10</setEventAttribute>
+      </when>
+       <when test='$_id = "6047"'>
+	<setEventAttribute attr="eventType">"HP-6047-AdvancedMemoryProtectionSpareEngaged"</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">10</setEventAttribute>
+      </when>
+       <when test='$_id = "6052"'>
+	<setEventAttribute attr="eventType">"HP-6052-AdvancedMemoryProtectionECCEngaged"</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+      </when>
+       <when test='$_id = "6051"'>
+	<setEventAttribute attr="eventType">"HP-6051-AdvancedMemoryProtectionMirrorEngaged"</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+      </when>
+       <when test='$_id = "6053"'>
+	<setEventAttribute attr="eventType">"HP-6053-AdvancedMemoryProtectionXOREngaged"</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+      </when>
+       <when test='$_id = "6054"'>
+	<setEventAttribute attr="eventType">"HP-6054-PowerRedundancyRestored"</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+      </when>
+       <when test='$_id = "6055"'>
+	<setEventAttribute attr="eventType">"HP-6055-FanRedundancyRestored"</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+      </when>
+       <when test='$_id = "6056"'>
+	<setEventAttribute attr="eventType">"HP-6056-CorrectedMemoryErrorsDetected"</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">5</setEventAttribute>
+      </when>
+       <when test='$_id = "6057"'>
+	<setEventAttribute attr="eventType">"HP-6057-MemoryBoardRemoved"</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+      </when>
+      <when test='$_id = "6058"'>
+	<setEventAttribute attr="eventType">"HP-6058-MemoryBoardInserted"</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+      </when>
+    </choose>
+  </parsingInstructions>
+</eventParser> 

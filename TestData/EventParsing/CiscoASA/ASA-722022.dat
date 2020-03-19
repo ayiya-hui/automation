@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+25.25.25.25
+[eventMsg]
+<134>Aug  3 14:07:43 $reporter %ASA-6-722022: Group <AnyConnPolicy> User <admin> IP <99.129.50.155> TCP SVC connection established with compression
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+policyName=AnyConnPolicy
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+srcIpAddr=99.129.50.155
+eventAction=0 (Permit)
+eventName= WebVPN Client connection established{with|without}compression
+reptVendor=Cisco
+eventType=ASA-722022
+user=admin
+phEventCategory=0 (External)
+ipProto=6 (TCP)
+reptDevIpAddr=$reporter
+reptModel=ASA

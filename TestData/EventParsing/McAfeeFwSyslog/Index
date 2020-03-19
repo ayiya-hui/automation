@@ -1,0 +1,2 @@
+eventType,name,module,reptDevIpAddr,key,method
+McAfee-Fw-t_nettraffic,McAfee-Fw-t_nettraffic_1,McAfeeFwSyslog,192.168.2.10,,syslog

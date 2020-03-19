@@ -1,0 +1,33 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<13>Mar  6 20:56:03 ISA.test.local ISAFWSLog	0	ISA	2011-03-09	00:07:50	UDP	192.168.203.130:138	192.168.203.255:138	192.168.203.130	Internal	Local Host	Denied	0xc004000d	Default rule	NetBios Datagram	0	0	0	0	-	-	-	-	0	0
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+appTransportProto=NetBios Datagram
+count=1
+phCustId=$sender
+destIpAddr=192.168.203.255
+destIntfName=Local Host
+destIpPort=138 (NETBIOS-DGM)
+deviceTime=any
+eventId=any
+eventName=The action requested was denied.
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=5
+eventSeverityCat=MEDIUM
+eventType=ISA-FW-Connection-Denied
+fwRule=Default rule
+ipProto=17 (UDP)
+paFwAction=Denied
+recvBytes=0
+reptDevName=ISA
+reptDevIpAddr=$reporter
+reptModel=ISA Server
+reptVendor=Microsoft
+sentBytes=0
+srcIpAddr=192.168.203.130
+srcIntfName=Internal
+srcIpPort=138

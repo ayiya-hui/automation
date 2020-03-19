@@ -1,0 +1,24 @@
+[reptDevIpAddr(key)]
+83.83.83.83
+[eventMsg]
+Apr  8 10:53:12 83.83.83.83 CEF :0|PowerTech|Interact|3.0|TJS0013|Job QTSMTPSRVD had its profile/group profile changed.|3| src =10.0.1.185 dst =0.0.0.0 msg=TYPE:JRN CLS :AUD JJOB :QTSMTPSRVD JUSER :QTCP JNBR :020684 PGM :QTMSSRCD OBJECT : LIBRARY : MEMBER: DETAIL: M B   QTSMTPSRVD QTCP 020684  QSYS QTMSMTPS QUSRSYS QSYSNOMAX QSYS *DEV  PRT01     QSYS QSYS QSYS   Y Y Y Y Y Y Y 0000  *NONE *SYSBAS 00000    000000
+[params]
+rawEventMsg=any
+eventId=any
+count=1
+eventSeverityCat=LOW
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverity=3
+eventType=OS400-TJS0013
+phCustId=$sender
+reptDevIpAddr=83.83.83.83
+collectorId=any
+testEvent=Real Event(0)
+eventName=Job change - Change profile or group profile
+reptVendor=IBM
+user=QTCP
+phRecvTime=any
+srcIpAddr=10.0.1.185
+reptDevName=any
+reptModel=OS400

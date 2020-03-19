@@ -1,0 +1,29 @@
+[reptDevIpAddr(key)]
+10.137.101.201
+[eventMsg]
+Wed Dec 17 20:10:10 2014 10.137.101.201 AccelOps-WinLog-WMI [Category]="0" [CategoryString]="(null)" [ComputerName]="vdi-share.gruppoitas.local" [Data]="NULL" [EventCode]="98" [EventIdentifier]="98" [EventType]="3" [Logfile]="System" [RecordNumber]="244987" [SourceName]="Microsoft-Windows-Ntfs" [TimeGenerated]="20141217190430.611687-000" [TimeWritten]="20141217190430.611687-000" [Type]="Information" [User]="NT AUTHORITY\SYSTEM" [Message]="Volume System Reserved (\Device\HarddiskVolumeShadowCopy152) is healthy.  No action is needed."
+[params]
+diskName=System Reserved (\Device\HarddiskVolumeShadowCopy152)
+deviceTime=any
+parserName=WinOSWmiParser
+eventType=Win-System-Microsoft-Windows-Ntfs-98-Disk-Healthy
+hostName=vdi-share.gruppoitas.local
+destIpAddr=10.137.101.201
+eventSource=Microsoft-Windows-Ntfs
+reptModel=Windows
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Windows disk healthy
+phEventCategory=0 (External)
+msg=Volume System Reserved (\Device\HarddiskVolumeShadowCopy152) is healthy.  No action is needed.
+eventRuleTrigger=1
+type=Information
+count=1
+seqNum=244987
+eventSeverityCat=LOW
+collectorId=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=10.137.101.201
+reptVendor=Microsoft

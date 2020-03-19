@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+76.76.76.76
+[eventMsg]
+<46>Dec 13 06:07:08 76.76.76.76 OracleListenerLog 0         $variable: Connect failed because target host or object does not exist
+[params]
+rawEventMsg=any
+eventId=any
+count=1
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=HIGH
+eventSeverity=10
+eventType=ORADB-Log-Generic
+phCustId=$sender
+reptDevIpAddr=76.76.76.76
+collectorId=any
+fileName=Listener.log
+eventName=ORADB-Log-Generic
+reptVendor=Oracle
+testEvent=Real Event(0)
+phRecvTime=any
+hostName=76.76.76.76
+eventDesc=$variable: Connect failed because target host or object does not exist
+reptDevName=any
+reptModel=Database Server

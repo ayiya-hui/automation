@@ -1,0 +1,24 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<14>SJ-QA-A-Fdy-BigIron, VLAN 4 Port 2/7 STP State -> LISTENING (MakeFwding)
+[params]
+rawEventMsg=any
+count=1
+appTransportProto=STP
+eventId=any
+srcIntfName=VLAN4
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=$localhost
+eventAction=0 (Permit)
+eventName=Foundry STP port entered LISTENING state
+reptVendor=Foundry
+eventType=Foundry-Ironware-StpPort-Listening
+phEventCategory=0 (External)
+reptDevIpAddr=$localhost
+destName=SJ-QA-A-Fdy-BigIron
+reptModel=Ironware

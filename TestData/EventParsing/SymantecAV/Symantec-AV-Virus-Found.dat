@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<54>Feb 23 13:07:09 SymantecServer $localhost: Virus found,Computer name: Filer,Source: Real Time Scan,Risk name: EICAR Test String,Occurrences: 1,C:/Documents and Settings/Administrator.PROSPECTHILLS/Local Settings/Temp/dj68id6l.com,"",Actual action: Cleaned by deletion,Requested action: Cleaned,Secondary action: Quarantined,Event time: 2009-02-23 21:06:02,Inserted: 2009-02-23 21:07:09,End: 2009-02-23 21:06:02,Domain: Default,Group: Global\Prospecthills,Server: sjdevswinapp05,User: Administrator,Source computer:  ,Source IP: 0.0.0.0 --automator
+[params]
+rawEventMsg=any
+eventSeverity=1
+eventSeverityCat=LOW
+virusAction=Cleaned by deletion
+count=1
+eventId=any
+domain=Default
+deviceTime=any
+eventParsedOk=1
+virusName=EICAR Test String
+reptVendor=Symantec
+phRecvTime=any
+phCustId=$sender
+reptDevIpAddr=$localhost
+fileName=any
+eventName=Symantec AV detected trojan worm
+computer=any
+eventType=Symantec-AV-Virus-Found
+user=Administrator
+phEventCategory=0 (External)
+reptModel=Endpoint Protection Service

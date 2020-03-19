@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+Websense_Web_Deny,WebsenseWeb_1,WebsenseWeb,192.168.0.43,,syslog

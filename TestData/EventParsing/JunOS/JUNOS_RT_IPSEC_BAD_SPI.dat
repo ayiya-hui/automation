@@ -1,0 +1,56 @@
+[reptDevIpAddr(key)]
+$localhost (srcIpAddr:74.114.44.2)
+[eventMsg]
+<11>Nov 18 20:32:54 RT_IPSEC: RT_IPSEC_BAD_SPI: IPSec tunnel on int reth0.2094 with tunnel ID 0x9 received a packet with a bad SPI.  74.114.44.2->209.152.215.6/120, ESP, SPI 0x154906eb, SEQ 0x1.
+[params]
+rawEventMsg=any
+deviceTime=any
+isHostIntfCritical=No
+eventType=JUNOS_RT_IPSEC_BAD_SPI
+phCustId=$sender
+destIpAddr=209.152.215.6
+srcName=any
+srcIpAddr=74.114.44.2
+intfName=reth0.2094
+reptModel=JunOS
+eventId=any
+eventParsedOk=1
+eventSeverity=5
+eventName=Received IPSec packet with bad SPI
+phEventCategory=0 (External)
+eventSeverityCat=MEDIUM
+collectorId=any
+reptDevName=any
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Juniper
+[reptDevIpAddr(key)]
+$localhost (srcIpAddr:173.88.153.145)
+[eventMsg]
+<11>Nov 18 06:24:57 RT_IPSEC: RT_IPSEC_BAD_SPI: IPSec tunnel on int reth0.2094 with tunnel ID 0x7fc0005 received a packet with a bad SPI.  173.88.153.145->209.152.215.6/300, ESP, SPI 0x4e9c1830, SEQ 0x1.
+[params]
+rawEventMsg=any
+deviceTime=any
+isHostIntfCritical=No
+eventType=JUNOS_RT_IPSEC_BAD_SPI
+phCustId=$sender
+destIpAddr=209.152.215.6
+srcName=any
+srcIpAddr=173.88.153.145
+intfName=reth0.2094
+reptModel=JunOS
+eventId=any
+eventParsedOk=1
+eventSeverity=5
+eventName=Received IPSec packet with bad SPI
+phEventCategory=0 (External)
+eventSeverityCat=MEDIUM
+collectorId=any
+reptDevName=any
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Juniper

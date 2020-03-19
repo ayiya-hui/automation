@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>Sep 10 11:29:18 pf:     10.100.56.121.138 > 10.100.255.255.138: NBT UDP PACKET(138)
+[params]
+deviceTime=any
+parserName=PfSenseParser
+eventType=pfSense-Traffic-Permitted
+destIpAddr=10.100.255.255
+ipProto=17 (UDP)
+srcIpAddr=10.100.56.121
+reptModel=BSD Firewall
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=pfSense-Traffic-Permitted
+phEventCategory=0 (External)
+eventRuleTrigger=1
+count=1
+srcIpPort=138
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+destIpPort=138 (NETBIOS-DGM)
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=pfSense

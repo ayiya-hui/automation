@@ -1,0 +1,29 @@
+[reptDevIpAddr(key)]
+10.137.101.201
+[eventMsg]
+Wed Dec 17 20:10:10 2014 10.137.101.201 AccelOps-WinLog-WMI [Category]="0" [CategoryString]="(null)" [ComputerName]="vdi-share.gruppoitas.local" [Data]="NULL" [EventCode]="98" [EventIdentifier]="98" [EventType]="1" [Logfile]="System" [RecordNumber]="244986" [SourceName]="Microsoft-Windows-Ntfs" [TimeGenerated]="20141217190430.471062-000" [TimeWritten]="20141217190430.471062-000" [Type]="Error" [User]="NT AUTHORITY\SYSTEM" [Message]="Volume Folder-Redirect (\Device\HarddiskVolumeShadowCopy151) needs to be taken offline to perform a Full Chkdsk.  Please run "CHKDSK /F" locally via the command line, or run "REPAIR-VOLUME <drive]=">" locally or remotely via PowerShell. "
+[params]
+diskName=Folder-Redirect (\Device\HarddiskVolumeShadowCopy151)
+deviceTime=any
+parserName=WinOSWmiParser
+eventType=Win-System-Microsoft-Windows-Ntfs-98-Chkdsk
+hostName=vdi-share.gruppoitas.local
+destIpAddr=10.137.101.201
+eventSource=Microsoft-Windows-Ntfs
+reptModel=Windows
+eventId=any
+eventParsedOk=1
+eventSeverity=3
+eventName=Windows disk potentially unhealthy: needs to run chkdsk
+phEventCategory=0 (External)
+msg=Volume Folder-Redirect (\Device\HarddiskVolumeShadowCopy151) needs to be taken offline to perform a Full Chkdsk.  Please run "CHKDSK /F" locally via the command line, or run "REPAIR-VOLUME <drive]=">" locally or remotely via PowerShell.
+eventRuleTrigger=1
+type=Audit Failure
+count=1
+seqNum=244986
+eventSeverityCat=LOW
+collectorId=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=10.137.101.201
+reptVendor=Microsoft

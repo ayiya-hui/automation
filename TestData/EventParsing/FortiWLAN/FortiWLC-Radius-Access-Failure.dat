@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+172.18.86.229
+[eventMsg]
+Mar 29 13:50:42 172.18.86.229 SecurityMM: 1269867043l | security | info | RBAC | RADIUS Access failed for user <local1234>
+[params]
+customer=Super
+eventId=any
+parserName=FortiWLANParser
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+count=1
+eventSeverity=1
+eventType=FortiWLC-Radius-Access-Failure
+reptDevIpAddr=172.18.86.229
+collectorId=any
+extEventRecvProto=Syslog
+eventName=FortiWLC RADIUS login failure
+reptVendor=Fortinet
+relayDevIpAddr=172.18.86.229
+user=local1234
+rawEventMsg=any
+phRecvTime=any
+reptDevName=any
+reptModel=FortiWLC

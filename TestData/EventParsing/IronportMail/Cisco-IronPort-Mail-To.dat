@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+187.0.198.8
+[eventMsg]
+[Sep 24 11:39:49 187.0.198.8 IronPort-Mail: Info: MID 1347075 ICID 346817 RID 3 To: <Thiago.Marum@arcon.com.br>
+[params]
+rawEventMsg=any
+deviceTime=any
+receiverMailAddr=Thiago.Marum@arcon.com.br
+eventType=Cisco-IronPort-Mail-To
+phCustId=$sender
+reptModel=IronPort AsyncOS Mail
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=IronPort mail receiver processed
+ironportMailICID=346817
+phEventCategory=0 (External)
+reptGeoCountry=any
+eventSeverityCat=LOW
+collectorId=any
+reptDevName=mx2.arcon.com.br
+count=1
+phRecvTime=any
+reptGeoOrg=any
+reptDevIpAddr=187.0.198.8
+reptVendor=Cisco
+ironportMailMID=1347075

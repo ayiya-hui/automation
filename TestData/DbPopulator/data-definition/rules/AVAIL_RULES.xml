@@ -1,0 +1,933 @@
+
+<Rules>
+  <Rule group="PH_SYS_RULE_Avail_Network" id="PH_Rule_Excessive_ICMP_Unreachables" phIncidentCategory="Network">
+    <Name>Excessive ICMP Unreachables</Name>
+    <active>true</active>
+    <Description> Detects an usually high frequency of ICMP destination unreachable packets between the same source and destination - this indicates routing error </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_ICMP_UNREACH_SAME_HOSTS" severity="6">
+      <ArgList>
+        srcIpAddr = ExcessICMPUnreach.srcIpAddr, destIpAddr =ExcessICMPUnreach.destIpAddr   
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="300">
+      <SubPattern displayName="ExcessICMPUnreach" name="ExcessICMPUnreach">
+        <SingleEvtConstr> ipProto = 1 AND icmpType = 3 AND eventType IN ("IOS-NETFLOW-BI", Group@PH_SYS_EVENT_PermitTraffic,Group@PH_SYS_EVENT_DenyTraffic) AND srcIpAddr NOT IN (Group@PH_SYS_APP_ACCELOPS) </SingleEvtConstr>
+	<GroupByAttr> srcIpAddr, destIpAddr </GroupByAttr>
+	<GroupEvtConstr> COUNT (*) &gt;= 10 </GroupEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,srcIpAddr,destIpAddr,ipProto,icmpType,icmpCode,reptDevIpAddr,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "timebased">
+      <QuietPeriod>1200</QuietPeriod>
+    </ClearCondition>
+  </Rule>
+
+  <!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
+  <Rule group="PH_SYS_RULE_Avail_Network" id="PH_Rule_No_Response_To_Ping_Net" phIncidentCategory="Network">
+    <Name>Network Device Down - no ping response</Name>
+    <Description>Detects a device does not respond to ping - 10 out of 10 ping packets are lost - either the host is down or there is a routing problem</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_NON_RESPONSIVE_NET_DEV" severity="10">
+      <ArgList>
+        hostIpAddr = AllPingLossNet.hostIpAddr
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="60">
+       <SubPattern displayName="AllPingLossNet" name="AllPingLossNet">
+         <SingleEvtConstr> eventType = "PH_DEV_MON_PING_STAT" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Network) </SingleEvtConstr>
+	  <GroupEvtConstr> AVG(pktLossPct) = 100 AND COUNT(*) &gt;= 1 </GroupEvtConstr>
+          <GroupByAttr>hostIpAddr</GroupByAttr>
+       </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,reptDevIpAddr,hostIpAddr,pktLossPct,reptDevIpAddr,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "patternbased">
+      <ClearIncidentDef name="PH_RULE_NON_RESPONSIVE_NET_DEV_CLEAR">
+	<ArgList>hostIpAddr = AllPingLossNet_CLEAR.hostIpAddr</ArgList>
+      </ClearIncidentDef>
+      <ClearConstr> PH_RULE_NON_RESPONSIVE_NET_DEV.hostIpAddr = PH_RULE_NON_RESPONSIVE_NET_DEV_CLEAR.hostIpAddr </ClearConstr>
+      <PatternClause window="300">
+	<SubPattern displayName="AllPingLossNet_CLEAR" name="AllPingLossNet_CLEAR">
+          <SingleEvtConstr> eventType = "PH_DEV_MON_PING_STAT" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Network) </SingleEvtConstr>
+	  <GroupEvtConstr> AVG(pktLossPct) &lt; 10 AND COUNT(*) &gt;= 1 </GroupEvtConstr>
+	  <GroupByAttr>hostIpAddr</GroupByAttr>
+	</SubPattern>
+      </PatternClause>
+    </ClearCondition>
+  </Rule>
+
+  <!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
+  <Rule group="PH_SYS_RULE_Avail_Network" id="PH_Rule_Degraded_Ping_Net" phIncidentCategory="Network">
+    <Name>Network Device Degraded - Lossy Ping Response</Name>
+    <active>true</active>
+    <Description> Detects a host with degraded ping response - more than 50% packet loss and more than 100 ms avg response time</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_DEGRADED_PING_NET_DEV" severity="8">
+      <ArgList>
+        hostIpAddr = PartPingLossNet.hostIpAddr,pktLossPct=PartPingLossNet.AVG(pktLossPct))
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="300">
+       <SubPattern displayName="PartPingLossNet" name="PartPingLossNet">
+         <SingleEvtConstr> eventType = "PH_DEV_MON_PING_STAT" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Network) </SingleEvtConstr>
+	 <GroupEvtConstr> AVG(pktLossPct) &gt;= 50 AND AVG(pktLossPct) &lt; 100 AND COUNT(*) &gt;= 1 </GroupEvtConstr>
+         <GroupByAttr>hostIpAddr</GroupByAttr>
+       </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,reptDevIpAddr,hostIpAddr,avgDurationMSec,minDurationMSec,pktLossPct,reptDevIpAddr,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Aut-o" type = "patternbased">
+      <ClearIncidentDef name="PH_RULE_DEGRADED_PING_NET_DEV_CLEAR">
+	<ArgList>hostIpAddr = PartPingLossNet_CLEAR.hostIpAddr</ArgList>
+      </ClearIncidentDef>
+      <ClearConstr> PH_RULE_DEGRADED_PING_NET_DEV.hostIpAddr = PH_RULE_DEGRADED_PING_NET_DEV_CLEAR.hostIpAddr </ClearConstr>
+      <PatternClause window="300">
+	<SubPattern displayName="PartPingLossNet_CLEAR" name="PartPingLossNet_CLEAR">
+          <SingleEvtConstr> eventType = "PH_DEV_MON_PING_STAT" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Network) </SingleEvtConstr>
+	  <!--<GroupEvtConstr> AVG(pktLossPct) &lt; 10 AND AVG(avgDurationMSec) &lt; 50 AND COUNT(*) &gt;= 2 </GroupEvtConstr>-->
+          <GroupEvtConstr> AVG(pktLossPct) &lt; 10 AND COUNT(*) &gt;= 2 </GroupEvtConstr>
+	  <GroupByAttr>hostIpAddr</GroupByAttr>
+	</SubPattern>
+      </PatternClause>
+    </ClearCondition>
+  </Rule>
+
+  <!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
+  <Rule group="PH_SYS_RULE_Avail_Server" id="PH_Rule_No_Response_To_Ping_Server" phIncidentCategory="Server">
+    <Name>Server Down - No Ping Response</Name>
+    <Description>Detects a device does not respond to ping - 10 out of 10 ping packets are lost - either the host is down or there is a routing problem</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_NON_RESPONSIVE_SERVER" severity="10">
+      <ArgList>
+        hostIpAddr = AllPingLossSrv.hostIpAddr
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="60">
+       <SubPattern displayName="AllPingLossSrv" name="AllPingLossSrv">
+         <SingleEvtConstr> eventType = "PH_DEV_MON_PING_STAT" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Server) </SingleEvtConstr>
+	  <GroupEvtConstr> AVG(pktLossPct) = 100 AND COUNT(*) &gt;= 1 </GroupEvtConstr>
+          <GroupByAttr>hostIpAddr</GroupByAttr>
+       </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,reptDevIpAddr,hostIpAddr,pktLossPct,reptDevIpAddr,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "patternbased">
+      <ClearIncidentDef name="PH_RULE_NON_RESPONSIVE_SERVER_CLEAR">
+	<ArgList>hostIpAddr = AllPingLossSrv_CLEAR.hostIpAddr</ArgList>
+      </ClearIncidentDef>
+      <ClearConstr> PH_RULE_NON_RESPONSIVE_SERVER.hostIpAddr = PH_RULE_NON_RESPONSIVE_SERVER_CLEAR.hostIpAddr </ClearConstr>
+      <PatternClause window="300">
+	<SubPattern displayName="AllPingLossSrv_CLEAR" name="AllPingLossSrv_CLEAR">
+          <SingleEvtConstr> eventType = "PH_DEV_MON_PING_STAT" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Server) </SingleEvtConstr>
+	  <GroupEvtConstr> COUNT(*) &gt;= 1 AND AVG(pktLossPct) &lt; 10 </GroupEvtConstr>
+	  <GroupByAttr>hostIpAddr</GroupByAttr>
+	</SubPattern>
+      </PatternClause>
+    </ClearCondition>
+  </Rule>
+
+  <!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
+  <Rule group="PH_SYS_RULE_Avail_Server" id="PH_Rule_Degraded_Ping_Server" phIncidentCategory="Server">
+    <Name>Server Degraded - Lossy Ping Response</Name>
+    <active>true</active>
+    <Description> Detects a host with degraded ping response - more than 50% packet loss and more than 100 ms avg response time</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_DEGRADED_PING_SERVER" severity="8">
+      <ArgList>
+        hostIpAddr = PartPingLossSrv.hostIpAddr,pktLossPct=PartPingLossSrv.AVG(pktLossPct)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="300">
+       <SubPattern displayName="PartPingLossSrv" name="PartPingLossSrv">
+         <SingleEvtConstr> eventType = "PH_DEV_MON_PING_STAT" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Server) </SingleEvtConstr>
+	 <!--<GroupEvtConstr> (AVG(pktLossPct) &gt;= 50 OR AVG(avgDurationMSec) &gt;= 100) AND COUNT(*) &gt;= 1 </GroupEvtConstr>-->
+	 <GroupEvtConstr> (AVG(pktLossPct) &gt;= 50) AND AVG(pktLossPct) &lt; 100 AND COUNT(*) &gt;= 1 </GroupEvtConstr>
+         <GroupByAttr>hostIpAddr</GroupByAttr>
+       </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,reptDevIpAddr,hostIpAddr,avgDurationMSec,minDurationMSec,pktLossPct,reptDevIpAddr,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "patternbased">
+      <ClearIncidentDef name="PH_RULE_DEGRADED_PING_SERVER_CLEAR">
+	<ArgList>hostIpAddr = PartPingLossSrv_CLEAR.hostIpAddr</ArgList>
+      </ClearIncidentDef>
+      <ClearConstr> PH_RULE_DEGRADED_PING_SERVER.hostIpAddr = PH_RULE_DEGRADED_PING_SERVER_CLEAR.hostIpAddr </ClearConstr>
+      <PatternClause window="300">
+	<SubPattern displayName="PartPingLossSrv_CLEAR" name="PartPingLossSrv_CLEAR">
+          <SingleEvtConstr> eventType = "PH_DEV_MON_PING_STAT" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Server) </SingleEvtConstr>
+	  <!--<GroupEvtConstr> AVG(pktLossPct) &lt; 10 AND AVG(avgDurationMSec) &lt; 50 AND COUNT(*) &gt;= 2 </GroupEvtConstr>-->
+          <GroupEvtConstr> AVG(pktLossPct) &lt; 10 AND COUNT(*) &gt;= 2 </GroupEvtConstr>
+	  <GroupByAttr>hostIpAddr</GroupByAttr>
+	</SubPattern>
+      </PatternClause>
+    </ClearCondition>
+  </Rule>
+
+  <!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
+  <Rule group="PH_SYS_RULE_Avail_Network" id="PH_Rule_Avail_10" phIncidentCategory="Network">
+    <Name>Network Device Interface Staying Down</Name>
+    <active>true</active>
+    <Description> Detects that a network interface of a network device is staying down - that is didn't come up within 5 minutes of going down </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_DOWN_INTF_NET" severity="9">
+      <ArgList>
+        hostIpAddr = IntfDownNetDev.hostIpAddr,intfName = IntfDownNetDev.intfName
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="300">
+       <SubPattern displayName="IntfDownNetDev" name="IntfDownNetDev">
+         <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_NetIntfShutdown) AND hostIpAddr IN (Group@PH_SYS_DEVICE_Network) </SingleEvtConstr>
+         <GroupByAttr>hostIpAddr,intfName</GroupByAttr>
+       </SubPattern>
+       <Operator rank="0" type="NOT_FOLLOWED_BY"/>
+       <SubPattern displayName="IntfUpNetDev" name="IntfUpNetDev">
+         <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_NetIntfRestart) AND hostIpAddr IN (Group@PH_SYS_DEVICE_Network) </SingleEvtConstr>
+         <GroupByAttr>hostIpAddr,intfName</GroupByAttr>
+       </SubPattern>
+       <GlobalConstr>IntfDownNetDev.hostIpAddr = IntfUpNetDev.hostIpAddr, IntfDownNetDev.intfName = IntfUpNetDev.intfName 
+       </GlobalConstr>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,reptDevIpAddr,hostIpAddr,intfName,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+
+    <ClearCondition method="Auto" type = "patternbased">
+      <ClearIncidentDef name="PH_RULE_DOWN_INTF_NET_CLEAR">
+	<ArgList>hostIpAddr = IntfDownNetDev_CLEAR.hostIpAddr,intfName = IntfDownNetDev_CLEAR.intfName</ArgList>
+      </ClearIncidentDef>
+      <ClearConstr> PH_RULE_DOWN_INTF_NET.hostIpAddr = PH_RULE_DOWN_INTF_NET_CLEAR.hostIpAddr, PH_RULE_DOWN_INTF_NET.intfName = PH_RULE_DOWN_INTF_NET_CLEAR.intfName </ClearConstr>
+      <PatternClause window="60">
+	<SubPattern displayName="IntfDownNetDev_CLEAR" name="IntfDownNetDev_CLEAR">
+          <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_NetIntfRestart) AND hostIpAddr IN (Group@PH_SYS_DEVICE_Network) </SingleEvtConstr>
+          <GroupByAttr>hostIpAddr,intfName</GroupByAttr>
+	</SubPattern>
+	<Operator rank="0" type="NOT_FOLLOWED_BY"/>
+	<SubPattern displayName="IntfUpNetDev_CLEAR" name="IntfUpNetDev_CLEAR">
+          <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_NetIntfShutdown) AND hostIpAddr IN (Group@PH_SYS_DEVICE_Network) </SingleEvtConstr>
+          <GroupByAttr>hostIpAddr,intfName</GroupByAttr>
+	</SubPattern>
+	<GlobalConstr>IntfDownNetDev_CLEAR.hostIpAddr = IntfUpNetDev_CLEAR.hostIpAddr, IntfDownNetDev_CLEAR.intfName = IntfUpNetDev_CLEAR.intfName 
+	</GlobalConstr>
+      </PatternClause>
+    </ClearCondition>
+  </Rule>
+
+   <!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
+  <Rule group="PH_SYS_RULE_Avail_Server" id="PH_Rule_Avail_11" phIncidentCategory="Network">
+    <Name>Server Network Interface Staying Down</Name>
+    <active>true</active>
+    <Description> Detects that a network interface of a server stays down - that is didn't come up within 5 minutes of going down </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_DOWN_INTF_SERVER" severity="6">
+      <ArgList>
+        hostIpAddr = IntfDownSrv.hostIpAddr, intfName = IntfDownSrv.intfName
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="300">
+       <SubPattern displayName="IntfDownSrv" name="IntfDownSrv">
+         <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_NetIntfShutdown) AND hostIpAddr IN (Group@PH_SYS_DEVICE_Server) </SingleEvtConstr>
+         <GroupByAttr>hostIpAddr,intfName</GroupByAttr>
+       </SubPattern>
+       <Operator rank="0" type="NOT_FOLLOWED_BY"/>
+       <SubPattern displayName="IntfUpSrv" name="IntfUpSrv">
+         <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_NetIntfRestart) AND hostIpAddr IN (Group@PH_SYS_DEVICE_Server) </SingleEvtConstr>
+         <GroupByAttr>hostIpAddr,intfName</GroupByAttr>
+       </SubPattern>
+       <GlobalConstr>IntfDownSrv.hostIpAddr = IntfUpSrv.hostIpAddr, IntfDownSrv.intfName = IntfUpSrv.intfName 
+       </GlobalConstr>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,reptDevIpAddr,hostIpAddr,intfName,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+  </Rule>
+
+  <Rule group="PH_SYS_RULE_Avail_Network" id="PH_Rule_Avail_12" phIncidentCategory="Network">
+    <Name>Network Device Interface Flapping</Name>
+    <active>true</active>
+    <Description> Detects that a network interface of a network device is flapping - that is, coming up and down more than 3 times in 15 minutes. This may indicate hardware issues. </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_INTF_FLAP_NET_DEV" severity="9">
+      <ArgList>
+        hostIpAddr = IntfDownNetDev.hostIpAddr, intfName = IntfDownNetDev.intfName
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="300">
+       <SubPattern displayName="IntfDownNetDev" name="IntfDownNetDev">
+         <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_NetIntfShutdown) AND hostIpAddr IN (Group@PH_SYS_DEVICE_Network) </SingleEvtConstr>
+	 <GroupEvtConstr> COUNT(*) &gt;= 3 </GroupEvtConstr>
+         <GroupByAttr>hostIpAddr,intfName</GroupByAttr>
+       </SubPattern>
+       <Operator rank="0" type="AND"/>
+       <SubPattern displayName="IntfUpNetDev" name="IntfUpNetDev">
+         <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_NetIntfRestart) AND hostIpAddr IN (Group@PH_SYS_DEVICE_Network) </SingleEvtConstr>
+	 <GroupEvtConstr> COUNT(*) &gt;= 3 </GroupEvtConstr>
+         <GroupByAttr>hostIpAddr,intfName</GroupByAttr>
+       </SubPattern>
+       <GlobalConstr>IntfDownNetDev.hostIpAddr = IntfUpNetDev.hostIpAddr, IntfDownNetDev.intfName = IntfUpNetDev.intfName 
+       </GlobalConstr>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,reptDevIpAddr,hostIpAddr,intfName,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+  </Rule>
+
+  <Rule group="PH_SYS_RULE_Avail_Server" id="PH_Rule_Avail_13" phIncidentCategory="Server">
+    <Name>Server Network Interface Flapping</Name>
+    <active>true</active>
+    <Description> Detects that a network interface of a server is flapping - that is, coming up and down more than 3 times in 15 minutes. This may indicate hardware issues. </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_INTF_FLAP_SERVER" severity="9">
+      <ArgList>
+        hostIpAddr = IntfDownSrv.hostIpAddr, intfName = IntfDownSrv.intfName
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="300">
+       <SubPattern displayName="IntfDownSrv" name="IntfDownSrv">
+         <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_NetIntfShutdown) AND hostIpAddr IN (Group@PH_SYS_DEVICE_Server) </SingleEvtConstr>
+	 <GroupEvtConstr> COUNT(*) &gt;= 3 </GroupEvtConstr>
+         <GroupByAttr>hostIpAddr,intfName</GroupByAttr>
+       </SubPattern>
+       <Operator rank="0" type="AND"/>
+       <SubPattern displayName="IntfUpSrv" name="IntfUpSrv">
+         <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_NetIntfRestart) AND hostIpAddr IN (Group@PH_SYS_DEVICE_Server) </SingleEvtConstr>
+	 <GroupEvtConstr> COUNT(*) &gt;= 3 </GroupEvtConstr>
+         <GroupByAttr>hostIpAddr,intfName</GroupByAttr>
+       </SubPattern>
+       <GlobalConstr>IntfDownSrv.hostIpAddr = IntfUpSrv.hostIpAddr, IntfDownSrv.intfName = IntfUpSrv.intfName 
+       </GlobalConstr>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,reptDevIpAddr,hostIpAddr,intfName,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+  </Rule>
+
+  <Rule group="PH_SYS_RULE_Avail_Network" id="PH_Rule_Avail_14" phIncidentCategory="Network">
+    <Name>Network Interface Duplex Mismatch</Name>
+    <active>true</active>
+    <Description> Detects half/Full duplex mismatch on an network interface. This indicates configuration issues. </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_INTF_DUPLEX_MISMATCH" severity="9">
+      <ArgList>
+        srcIpAddr = IntfDuplexMismatch.reptDevIpAddr,srcIntfName = IntfDuplexMismatch.srcIntfName,destName = IntfDuplexMismatch.destName,destIntfName = IntfDuplexMismatch.destIntfName	
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="300">
+      <SubPattern displayName="IntfDuplexMismatch" name="IntfDuplexMismatch">
+        <SingleEvtConstr> eventType = "IOS-CDP-DUPLEX_MISMATCH" AND reptDevIpAddr IN (Group@PH_SYS_DEVICE_Network) </SingleEvtConstr>
+	<GroupEvtConstr>COUNT(*) &gt; 5</GroupEvtConstr>
+        <GroupByAttr>reptDevIpAddr,srcIntfName,destName,destIntfName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,reptDevIpAddr,srcIntfName,destName,destIntfName,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+  </Rule>
+
+  <!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
+  <Rule group="PH_SYS_RULE_Avail_App" id="PH_Rule_No_Service_Response"> phIncidentCategory="Application"
+    <Name>Service Down - No Response to STM</Name>
+    <Description>Detects a service suddenly went down from up state and is no longer responding to synthetic transaction monitoring probes.</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_NON_RESPONSIVE_SERVICE" severity="9">
+      <ArgList>
+        hostName=AppDown.hostName,hostIpAddr=AppDown.hostIpAddr,appPort=AppDown.appPort,endUserMonitorName=AppDown.endUserMonitorName
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+       <SubPattern displayName="AppDown" name="AppDown">
+         <SingleEvtConstr> eventType = "PH_DEV_MON_EUM_FAIL" </SingleEvtConstr>
+	 <GroupEvtConstr> COUNT(*) &gt;= 2 </GroupEvtConstr>
+         <GroupByAttr>hostName,hostIpAddr,appPort,endUserMonitorName</GroupByAttr>
+       </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,reptDevIpAddr,hostName,hostIpAddr,appGroupName,appPort,endUserMonitorName,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "patternbased">
+      <ClearIncidentDef name="PH_RULE_NON_RESPONSIVE_SERVICE_CLEAR">
+	<ArgList>hostIpAddr=AppDown_CLEAR.hostIpAddr,hostName=AppDown_CLEAR.hostName,appPort=AppDown_CLEAR.appPort,endUserMonitorName=AppDown_CLEAR.endUserMonitorName
+        </ArgList>
+      </ClearIncidentDef>
+      <ClearConstr> PH_RULE_NON_RESPONSIVE_SERVICE.hostIpAddr = PH_RULE_NON_RESPONSIVE_SERVICE_CLEAR.hostIpAddr,
+                    PH_RULE_NON_RESPONSIVE_SERVICE.hostName = PH_RULE_NON_RESPONSIVE_SERVICE_CLEAR.hostName,
+                    PH_RULE_NON_RESPONSIVE_SERVICE.appPort = PH_RULE_NON_RESPONSIVE_SERVICE_CLEAR.appPort,
+                    PH_RULE_NON_RESPONSIVE_SERVICE.endUserMonitorName = PH_RULE_NON_RESPONSIVE_SERVICE_CLEAR.endUserMonitorName
+      </ClearConstr>
+      <PatternClause window="600">
+	<SubPattern displayName="AppDown_CLEAR" name="AppDown_CLEAR">
+          <SingleEvtConstr> eventType = "PH_DEV_MON_EUM_SUCCESS" </SingleEvtConstr>
+	  <GroupEvtConstr> COUNT(*) &gt;= 2 </GroupEvtConstr>
+	  <GroupByAttr>hostName,hostIpAddr,appPort,endUserMonitorName</GroupByAttr>
+	</SubPattern>
+      </PatternClause>
+    </ClearCondition>
+  </Rule>
+
+   <!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
+  <Rule group="PH_SYS_RULE_Avail_App" id="PH_Rule_Avail_15" phIncidentCategory="Application">
+    <Name>Important Process Staying Down</Name>
+    <active>true</active>
+    <Description> Detects that an important server process staying down - that is didn't come up within 5 minutes of going down </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_IMPORTANT_APP_STAY_DOWN" severity="10">
+      <ArgList>
+        hostIpAddr = AppDownSrv.hostIpAddr, appName = AppDownSrv.appName, swProcName = AppDownSrv.swProcName
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="300">
+       <SubPattern displayName="AppDownSrv" name="AppDownSrv">
+         <SingleEvtConstr> eventType = "PH_DEV_MON_PROC_STOP" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Server) </SingleEvtConstr>
+	 <GroupEvtConstr> COUNT(*) &gt;= 1 </GroupEvtConstr>
+         <GroupByAttr>hostIpAddr,appName,swProcName</GroupByAttr>
+       </SubPattern>
+       <Operator rank="0" type="NOT_FOLLOWED_BY"/>
+       <SubPattern displayName="AppUpSrv" name="AppUpSrv">
+         <SingleEvtConstr> eventType = "PH_DEV_MON_PROC_START" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Server) </SingleEvtConstr>
+	 <GroupEvtConstr> COUNT(*) &gt;= 1 </GroupEvtConstr>
+         <GroupByAttr>hostIpAddr,appName,swProcName</GroupByAttr>
+       </SubPattern>
+       <GlobalConstr>AppDownSrv.hostIpAddr = AppUpSrv.hostIpAddr, AppDownSrv.appName = AppUpSrv.appName 
+       </GlobalConstr>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,reptDevIpAddr,hostIpAddr,hostName,appName,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+  </Rule>
+
+  <!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
+  <Rule group="PH_SYS_RULE_Avail_App" id="PH_Rule_Avail_15B" phIncidentCategory="Application">
+    <Name>Important Process Stopped</Name>
+    <active>true</active>
+    <Description> Detects that an important server process stopped </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_IMPORTANT_APP_DOWN" severity="10">
+      <ArgList>
+        hostIpAddr = AppDownSrv.hostIpAddr, appName = AppDownSrv.appName, swProcName = AppDownSrv.swProcName
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="300">
+       <SubPattern displayName="AppDownSrv" name="AppDownSrv">
+         <SingleEvtConstr> eventType = "PH_DEV_MON_PROC_STOP" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Server) </SingleEvtConstr>
+	 <GroupEvtConstr> COUNT(*) &gt;= 1 </GroupEvtConstr>
+         <GroupByAttr>hostIpAddr,appName,swProcName</GroupByAttr>
+       </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,reptDevIpAddr,hostIpAddr,hostName,appName,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "patternbased">
+      <ClearIncidentDef name="PH_RULE_IMPORTANT_APP_DOWN_CLEAR">
+	<ArgList>hostIpAddr=AppDownSrv_CLEAR.hostIpAddr,appName = AppDownSrv_CLEAR.appName, swProcName = AppDownSrv_CLEAR.swProcName
+        </ArgList>
+      </ClearIncidentDef>
+      <ClearConstr> PH_RULE_IMPORTANT_APP_DOWN.hostIpAddr =PH_RULE_IMPORTANT_APP_DOWN_CLEAR.hostIpAddr,
+                    PH_RULE_IMPORTANT_APP_DOWN.appPort = PH_RULE_IMPORTANT_APP_DOWN_CLEAR.appPort,
+                    PH_RULE_IMPORTANT_APP_DOWN.endUserMonitorName = PH_RULE_IMPORTANT_APP_DOWN_CLEAR.endUserMonitorName
+      </ClearConstr>
+      <PatternClause window="600">
+	<SubPattern displayName="AppDownSrv_CLEAR" name="AppDownSrv_CLEAR">
+          <SingleEvtConstr> eventType = "PH_DEV_MON_PROC_START" </SingleEvtConstr>
+	  <GroupEvtConstr> COUNT(*) &gt;= 1 </GroupEvtConstr>
+	  <GroupByAttr>hostIpAddr,appName,swProcName</GroupByAttr>
+	</SubPattern>
+      </PatternClause>
+    </ClearCondition>
+  </Rule>
+
+  <!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
+  <Rule group="PH_SYS_RULE_Avail_App" id="PH_Rule_Avail_15C" phIncidentCategory="Application">
+    <Name>Auto Service Stopped</Name>
+    <active>true</active>
+    <Description> Detects that an automatically running service stopped. Currently this works for windows servers and is detected via WMI. </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_AUTO_SRVC_DOWN" severity="10">
+      <ArgList>
+        hostIpAddr = SrvcDown.hostIpAddr, hostName = SrvcDown.hostName, serviceName = SrvcDown.serviceName, servicePath = SrvcDown.servicePath
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="300">
+       <SubPattern displayName="SrvcDown" name="SrvcDown">
+         <SingleEvtConstr> eventType = "PH_DEV_MON_AUTO_SVC_START_TO_STOP" </SingleEvtConstr>
+	 <GroupEvtConstr> COUNT(*) &gt;= 1 </GroupEvtConstr>
+         <GroupByAttr>hostIpAddr,hostName,serviceName,servicePath</GroupByAttr>
+       </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,hostIpAddr,hostName,serviceName,servicePath,serviceDesc </AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "patternbased">
+      <ClearIncidentDef name="PH_RULE_AUTO_SRVC_DOWN_CLEAR">
+	<ArgList>hostIpAddr=SrvcDown_CLEAR.hostIpAddr,hostName = SrvcDown_CLEAR.hostName, serviceName = SrvcDown_CLEAR.serviceName,servicePath = SrvcDown_CLEAR.servicePath
+        </ArgList>
+      </ClearIncidentDef>
+      <ClearConstr> 
+           PH_RULE_AUTO_SRVC_DOWN.hostIpAddr = PH_RULE_AUTO_SRVC_DOWN_CLEAR.hostIpAddr, 
+           PH_RULE_AUTO_SRVC_DOWN.hostName = PH_RULE_AUTO_SRVC_DOWN_CLEAR.hostName, 
+           PH_RULE_AUTO_SRVC_DOWN.serviceName = PH_RULE_AUTO_SRVC_DOWN_CLEAR.serviceName, 
+           PH_RULE_AUTO_SRVC_DOWN.servicePath = PH_RULE_AUTO_SRVC_DOWN_CLEAR.servicePath
+      </ClearConstr>
+      <PatternClause window="600">
+	<SubPattern displayName="SrvcDown_CLEAR" name="SrvcDown_CLEAR">
+          <SingleEvtConstr> eventType = "PH_DEV_MON_AUTO_SVC_STOP_TO_START" </SingleEvtConstr>
+	  <GroupEvtConstr> COUNT(*) &gt;= 1 </GroupEvtConstr>
+	  <GroupByAttr>hostIpAddr,hostName,serviceName,servicePath</GroupByAttr>
+	</SubPattern>
+      </PatternClause>
+    </ClearCondition>
+  </Rule>
+
+  <!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
+  <Rule group="PH_SYS_RULE_Avail_App" id="PH_Rule_Cont_No_Service_Response" phIncidentCategory="Application">
+    <Name>Service Staying Down - No Response to STM</Name>
+    <active>false</active>
+    <Description>Detects a service staying down - that is went from up to down and did not come up and is no longer responding to end user monitoring probes.</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_NON_RESPONSIVE_SERVICE_CONTINUE" severity="10">
+      <ArgList>
+        hostName=AppDown.hostName,hostIpAddr=AppDown.hostIpAddr,appPort=AppDown.appPort,endUserMonitorName=AppDown.endUserMonitorName
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+       <SubPattern displayName="AppDown" name="AppDown">
+         <SingleEvtConstr> eventType = "PH_DEV_MON_EUM_FAIL" </SingleEvtConstr>
+	 <GroupEvtConstr> COUNT(*) &gt;= 1 </GroupEvtConstr>
+         <GroupByAttr>hostName,hostIpAddr,appPort,endUserMonitorName</GroupByAttr>
+       </SubPattern>
+       <Operator rank="0" type="NOT_FOLLOWED_BY"/>
+       <SubPattern displayName="AppStillDown" name="AppStillDown">
+         <SingleEvtConstr> eventType = "PH_DEV_MON_EUM_SUCCESS" </SingleEvtConstr>
+	 <GroupEvtConstr> COUNT(*) &gt;= 1 </GroupEvtConstr>
+         <GroupByAttr>hostName,hostIpAddr,appPort,endUserMonitorName</GroupByAttr>
+       </SubPattern>
+       <GlobalConstr>
+	 AppStillDown.hostName = AppDown.hostName, AppStillDown.hostIpAddr = AppDown.hostIpAddr, AppStillDown.appPort = AppDown.appPort, AppStillDown.endUserMonitorName = AppDown.endUserMonitorName
+       </GlobalConstr>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,reptDevIpAddr,hostName,hostIpAddr,appGroupName,appPort,endUserMonitorName,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+  </Rule>
+
+  <!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
+  <Rule group="PH_SYS_RULE_Avail_App" id="PH_Rule_Degraded_Service_Response" phIncidentCategory="Application">
+    <Name>Service Degraded - Slow Response to STM</Name>
+    <Description>Detects that the response time of a end user monitored service is greater than a defined threshold (average over 3 samples in 15 minutes is more than 5 seconds)</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_DEGRADED_SERVICE" severity="7">
+      <ArgList>
+        hostName=ResponseHigh.hostName,hostIpAddr=ResponseHigh.hostIpAddr,appPort=ResponseHigh.appPort,endUserMonitorName=ResponseHigh.endUserMonitorName,endUserMonitorStep=ResponseHigh.endUserMonitorStep,appResponseTimeMSec=ResponseHigh.AVG(appResponseTimeMSec)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="900">
+      <SubPattern displayName="ResponseHigh" name="ResponseHigh">
+        <SingleEvtConstr> eventType = "PH_DEV_MON_EUM_SUCCESS" </SingleEvtConstr>
+	<GroupEvtConstr> COUNT(*) &gt;= 3 AND (AVG(appResponseTimeMSec) > 5000) </GroupEvtConstr>
+        <GroupByAttr>hostName,hostIpAddr,appPort,endUserMonitorName,endUserMonitorStep</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,reptDevIpAddr,hostName,hostIpAddr,appGroupName,appName,endUserMonitorName,endUserMonitorStep,appResponseTimeMSec </AttrList>
+    </TriggerEventDisplay>
+  </Rule>
+
+  <!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
+  <Rule group="PH_SYS_RULE_Avail_Network" id="PH_Rule_Avail_21" phIncidentCategory="Network">
+    <Name>Network Device Hardware Warning</Name>
+    <Description>Detects a network device hardware issue that is of warning criticality.</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_NET_HW_WARN" severity="5">
+      <ArgList>
+        hostName=HwIssueWarn.hostName,hostIpAddr=HwIssueWarn.hostIpAddr,hwComponentName=HwIssueWarn.hwComponentName,hwComponentStatus = HwIssueWarn.hwComponentStatus
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="900">
+      <SubPattern displayName="HwIssueWarn" name="HwIssueWarn">
+        <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_HwProblem) AND eventSeverityCat = "MEDIUM" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Network) </SingleEvtConstr>
+	<GroupEvtConstr> COUNT(*) &gt;= 1  </GroupEvtConstr>
+        <GroupByAttr>hostName,hostIpAddr,hwComponentName,hwComponentStatus</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,hostName,hostIpAddr,hwStatusCode,hwComponentName,hwComponentStatus,hwFailReason,rawEventMsg</AttrList>
+    </TriggerEventDisplay>
+  </Rule>
+
+  <!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
+  <Rule group="PH_SYS_RULE_Avail_Network" id="PH_Rule_Avail_22" phIncidentCategory="Network">
+    <Name>Network Device Hardware Critical</Name>
+    <Description>Detects a critical network device hardware alert.</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_NET_HW_CRITICAL" severity="9">
+      <ArgList>
+        hostName=HwIssueCrit.hostName,hostIpAddr=HwIssueCrit.hostIpAddr,hwComponentName=HwIssueCrit.hwComponentName,hwComponentStatus = HwIssueCrit.hwComponentStatus
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="900">
+      <SubPattern displayName="HwIssueCrit" name="HwIssueCrit">
+        <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_HwProblem) AND eventSeverityCat = "HIGH" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Network) </SingleEvtConstr>
+	<GroupEvtConstr> COUNT(*) &gt;= 1  </GroupEvtConstr>
+        <GroupByAttr>hostName,hostIpAddr,hwComponentName,hwComponentStatus</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,hostName,hostIpAddr,hwStatusCode,hwComponentName,hwComponentStatus,hwFailReason,rawEventMsg</AttrList>
+    </TriggerEventDisplay>
+  </Rule>
+
+  <!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
+  <Rule group="PH_SYS_RULE_Avail_Server" id="PH_Rule_Avail_23"> phIncidentCategory="Server"
+    <Name>Server Hardware Warning</Name>
+    <Description>Detects a server hardware issue that is of warning criticality.</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_SERVER_HW_WARN" severity="5">
+      <ArgList>
+        hostName=HwIssueWarn.hostName,hostIpAddr=HwIssueWarn.hostIpAddr,hwComponentName=HwIssueWarn.hwComponentName,hwComponentStatus = HwIssueWarn.hwComponentStatus
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="900">
+      <SubPattern displayName="HwIssueWarn" name="HwIssueWarn">
+        <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_HwProblem) AND eventSeverityCat = "MEDIUM" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Server) </SingleEvtConstr>
+	<GroupEvtConstr> COUNT(*) &gt;= 1  </GroupEvtConstr>
+        <GroupByAttr>hostName,hostIpAddr,hwComponentName,hwComponentStatus</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,hostName,hostIpAddr,hwStatusCode,hwComponentName,hwComponentStatus,hwFailReason,rawEventMsg</AttrList>
+    </TriggerEventDisplay>
+  </Rule>
+
+  <!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
+  <Rule group="PH_SYS_RULE_Avail_Server" id="PH_Rule_Avail_24" phIncidentCategory="Server">
+    <Name>Server Hardware Critical</Name>
+    <Description>Detects a critical server hardware alert.</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_SERVER_HW_CRITICAL" severity="9">
+      <ArgList>
+        hostName=HwIssueCrit.hostName,hostIpAddr=HwIssueCrit.hostIpAddr,hwComponentName=HwIssueCrit.hwComponentName,hwComponentStatus = HwIssueCrit.hwComponentStatus
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="900">
+      <SubPattern displayName="HwIssueCrit" name="HwIssueCrit">
+        <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_HwProblem) AND eventSeverityCat = "HIGH" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Server) </SingleEvtConstr>
+	<GroupEvtConstr> COUNT(*) &gt;= 1  </GroupEvtConstr>
+        <GroupByAttr>hostName,hostIpAddr,hwComponentName,hwComponentStatus</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,hostName,hostIpAddr,hwStatusCode,hwComponentName,hwComponentStatus,hwFailReason,rawEventMsg</AttrList>
+    </TriggerEventDisplay>
+  </Rule>
+
+  <Rule group="PH_SYS_RULE_Avail_App" id="PH_Rule_Avail_25" phIncidentCategory="Server">
+    <Name>Server Network Low Port Staying Down </Name>
+    <Description>Detects a low TCP/UDP port on a server staying down - that is, went from up to down and did not come up in 10 min</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_NETWORK_PORT_STAY_DOWN" severity="10">
+      <ArgList>
+        hostName=PortDown.hostName,hostIpAddr=PortDown.hostIpAddr,serviceName=PortDown.serviceName,ipPort=PortDown.ipPort,ipProto=PortDown.ipProto
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+       <SubPattern displayName="PortDown" name="PortDown">
+         <SingleEvtConstr> eventType = "PH_DEV_MON_PORT_CLOSE" AND ipPort &lt;= 1024 AND hostIpAddr IN (Group@PH_SYS_DEVICE_Server) </SingleEvtConstr>
+	 <GroupEvtConstr> COUNT(*) &gt;= 1 </GroupEvtConstr>
+         <GroupByAttr>hostName,hostIpAddr,serviceName,ipProto,ipPort</GroupByAttr>
+       </SubPattern>
+       <Operator rank="0" type="NOT_FOLLOWED_BY"/>
+       <SubPattern displayName="PortStillDown" name="PortStillDown">
+         <SingleEvtConstr> eventType = "PH_DEV_MON_PORT_OPEN" AND ipPort &lt;= 1024 AND hostIpAddr IN (Group@PH_SYS_DEVICE_Server) </SingleEvtConstr>
+	 <GroupEvtConstr> COUNT(*) &gt;= 1 </GroupEvtConstr>
+         <GroupByAttr>hostName,hostIpAddr,serviceName,ipProto,ipPort</GroupByAttr>
+       </SubPattern>
+       <GlobalConstr>
+	 PortStillDown.hostName = PortDown.hostName, PortStillDown.hostIpAddr = PortDown.hostIpAddr, PortStillDown.serviceName = PortDown.serviceName, PortStillDown.ipPort = PortDown.ipPort, PortStillDown.ipProto = PortDown.ipProto
+       </GlobalConstr>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,reptDevIpAddr,hostName,hostIpAddr,serviceName,ipProto,ipPort,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+  </Rule>
+
+  <!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
+  <Rule group="PH_SYS_RULE_Avail_Network" id="PH_Rule_Avail_31" phIncidentCategory="Network">
+    <Name>BGP Neighbor Down </Name>
+    <active>true</active>
+    <Description> Detects that a BGP neighbor is down </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_BGP_NBR_DOWN" severity="9">
+      <ArgList>
+        srcIpAddr = BGPDown.reptDevIpAddr,destIpAddr = BGPDown.destIpAddr 
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="300">
+      <SubPattern displayName="BGPDown" name="BGPDown">
+        <SingleEvtConstr> eventType = "IOS-BGP-ADJCHANGE-TO-DOWN" </SingleEvtConstr>
+	<GroupEvtConstr> COUNT(*) &gt;= 1 </GroupEvtConstr>
+        <GroupByAttr>reptDevIpAddr,destIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,reptDevIpAddr,srcIpAddr,destIpAddr,srcASNum,destASNum,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "patternbased">
+      <ClearIncidentDef name="PH_RULE_BGP_NBR_DOWN_CLEAR">
+	<ArgList>srcIpAddr = BGPDown_CLEAR.reptDevIpAddr,destIpAddr = BGPDown_CLEAR.destIpAddr </ArgList>
+      </ClearIncidentDef>
+      <ClearConstr> PH_RULE_BGP_NBR_DOWN.srcIpAddr = PH_RULE_BGP_NBR_DOWN_CLEAR.srcIpAddr, PH_RULE_BGP_NBR_DOWN.destIpAddr = PH_RULE_BGP_NBR_DOWN_CLEAR.destIpAddr </ClearConstr>
+      <PatternClause window="300">
+	<SubPattern displayName="BGPDown_CLEAR" name="BGPDown_CLEAR">
+          <SingleEvtConstr> eventType = "IOS-BGP-ADJCHANGE-TO-UP"  </SingleEvtConstr>
+          <GroupEvtConstr> COUNT(*) &gt;= 1  </GroupEvtConstr>
+	  <GroupByAttr>reptDevIpAddr,destIpAddr</GroupByAttr>
+	</SubPattern>
+      </PatternClause>
+    </ClearCondition>
+  </Rule>
+
+  <!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
+  <Rule group="PH_SYS_RULE_Avail_Network" id="PH_Rule_Avail_32" phIncidentCategory="Network">
+    <Name>OSPF Neighbor Down </Name>
+    <active>true</active>
+    <Description> Detects that a OSPF neighbor is down </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_OSPF_NBR_DOWN" severity="9">
+      <ArgList>
+        srcIpAddr = OSPFDown.reptDevIpAddr,srcIntfName = OSPFDown.srcIntfName,destIpAddr = OSPFDown.destIpAddr 
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="300">
+      <SubPattern displayName="OSPFDown" name="OSPFDown">
+        <SingleEvtConstr> eventType = "IOS-OSPF-ADJCHG-TO-DOWN" </SingleEvtConstr>
+	<GroupEvtConstr> COUNT(*) &gt;= 1 </GroupEvtConstr>
+        <GroupByAttr>reptDevIpAddr,destIpAddr,srcIntfName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,reptDevIpAddr,srcIpAddr,destIpAddr,ospfAreaId,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "patternbased">
+      <ClearIncidentDef name="PH_RULE_OSPF_NBR_DOWN_CLEAR">
+	<ArgList>srcIpAddr = OSPFDown_CLEAR.reptDevIpAddr,destIpAddr = OSPFDown_CLEAR.destIpAddr </ArgList>
+      </ClearIncidentDef>
+      <ClearConstr> PH_RULE_OSPF_NBR_DOWN.srcIpAddr = PH_RULE_OSPF_NBR_DOWN_CLEAR.srcIpAddr, PH_RULE_OSPF_NBR_DOWN.destIpAddr = PH_RULE_OSPF_NBR_DOWN_CLEAR.destIpAddr </ClearConstr>
+      <PatternClause window="300">
+	<SubPattern displayName="OSPFDown_CLEAR" name="OSPFDown_CLEAR">
+          <SingleEvtConstr> eventType = "IOS-OSPF-ADJCHG-TO-UP"  </SingleEvtConstr>
+          <GroupEvtConstr> COUNT(*) &gt;= 1  </GroupEvtConstr>
+	  <GroupByAttr>reptDevIpAddr,destIpAddr</GroupByAttr>
+	</SubPattern>
+      </PatternClause>
+    </ClearCondition>
+  </Rule>
+
+  <!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
+  <Rule group="PH_SYS_RULE_Avail_Storage" id="PH_Rule_Avail_33" phIncidentCategory="Storage">
+    <Name>Storage Hardware Warning</Name>
+    <Description>Detects a storage hardware issue that is of warning criticality.</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_STORAGE_HW_WARN" severity="5">
+      <ArgList>
+        hostName=HwIssueWarn.hostName,hostIpAddr=HwIssueWarn.hostIpAddr,hwComponentName=HwIssueWarn.hwComponentName,hwComponentStatus = HwIssueWarn.hwComponentStatus
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="900">
+      <SubPattern displayName="HwIssueWarn" name="HwIssueWarn">
+        <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_HwProblem) AND eventSeverityCat = "MEDIUM" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Storage) </SingleEvtConstr>
+	<GroupEvtConstr> COUNT(*) &gt;= 1  </GroupEvtConstr>
+        <GroupByAttr>hostName,hostIpAddr,hwComponentName,hwComponentStatus</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,hostName,hostIpAddr,hwStatusCode,hwComponentName,hwComponentStatus,hwFailReason,rawEventMsg</AttrList>
+    </TriggerEventDisplay>
+  </Rule>
+
+  <!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
+  <Rule group="PH_SYS_RULE_Avail_Storage" id="PH_Rule_Avail_34" phIncidentCategory="Storage">
+    <Name>Storage Hardware Critical</Name>
+    <Description>Detects a critical storage hardware alert.</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_STORAGE_HW_CRITICAL" severity="9">
+      <ArgList>
+        hostName=HwIssueCrit.hostName,hostIpAddr=HwIssueCrit.hostIpAddr,hwComponentName=HwIssueCrit.hwComponentName,hwComponentStatus = HwIssueCrit.hwComponentStatus
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="900">
+      <SubPattern displayName="HwIssueCrit" name="HwIssueCrit">
+        <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_HwProblem) AND eventSeverityCat = "HIGH" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Storage) </SingleEvtConstr>
+	<GroupEvtConstr> COUNT(*) &gt;= 1  </GroupEvtConstr>
+        <GroupByAttr>hostName,hostIpAddr,hwComponentName,hwComponentStatus</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,hostName,hostIpAddr,hwStatusCode,hwComponentName,hwComponentStatus,hwFailReason,rawEventMsg</AttrList>
+    </TriggerEventDisplay>
+  </Rule>
+ 
+  <!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
+  <Rule group="PH_SYS_RULE_Avail_Storage" id="PH_Rule_Avail_35" phIncidentCategory="Storage">
+    <Name>Unregistered EMC Clariion Host</Name>
+    <Description>Detects that a host has logged in but not registered </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_STORAGE_CLARION_UNREG_HOST" severity="7">
+      <ArgList>
+        srcName=UnregHost.srcName,srcIpAddr=UnregHost.srcIpAddr,srcWWN=UnregHost.srcWWN,destName=UnregHost.destName,spPortName=UnregHost.spPortName
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="900">
+      <SubPattern displayName="UnregHost" name="UnregHost">
+        <SingleEvtConstr> eventType = "PH_RULE_CLARION_UNREG_HOST" </SingleEvtConstr>
+	<GroupEvtConstr> COUNT(*) &gt;= 1  </GroupEvtConstr>
+        <GroupByAttr>srcName,srcIpAddr,srcWWN,destName,spPortName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,srcName,srcIpAddr,srcWWN,destName,spPortName,destIpAddr,rawEventMsg</AttrList>
+    </TriggerEventDisplay>
+  </Rule>
+
+
+  <!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
+  <Rule group="PH_SYS_RULE_Avail_AccelOps" id="PH_Rule_Avail_36" phIncidentCategory="System">
+    <Name>SNMP Service Unavailable</Name>
+    <active>true</active>
+    <Description> Detects that SNMP service is unavailable </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_SNMP_DOWN" severity="10">
+      <ArgList>
+        hostIpAddr = SnmpDown.hostIpAddr, hostName = SnmpDown.hostName
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="240">
+       <SubPattern displayName="SnmpDown" name="SnmpDown">
+         <SingleEvtConstr> eventType = "PH_JOB_STAT" AND jobName = "SNMP_STATUS" AND jobStatus = 1 AND phEventCategory = 3 </SingleEvtConstr>
+	 <GroupEvtConstr> COUNT(*) &gt;= 1 </GroupEvtConstr>
+         <GroupByAttr>hostIpAddr,hostName </GroupByAttr>
+       </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,reptDevIpAddr,hostIpAddr,hostName,eventType,jobName,jobType,jobStatus,jobDetail,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "patternbased">
+      <ClearIncidentDef name="PH_RULE_SNMP_DOWN_CLEAR">
+	<ArgList>hostIpAddr=SnmpDown_CLEAR.hostIpAddr,hostName = SnmpDown_CLEAR.hostName
+        </ArgList>
+      </ClearIncidentDef>
+      <ClearConstr> PH_RULE_SNMP_DOWN.hostIpAddr = PH_RULE_SNMP_DOWN_CLEAR.hostIpAddr,
+                    PH_RULE_SNMP_DOWN.hostName = PH_RULE_SNMP_DOWN_CLEAR.hostName
+      </ClearConstr>
+      <PatternClause window="600">
+	<SubPattern displayName="SnmpDown_CLEAR" name="SnmpDown_CLEAR">
+          <SingleEvtConstr> eventType = "PH_JOB_STAT" AND jobName = "SNMP_STATUS" AND jobStatus = 0 AND phEventCategory = 3  </SingleEvtConstr>
+	  <GroupEvtConstr> COUNT(*) &gt;= 1 </GroupEvtConstr>
+	  <GroupByAttr>hostIpAddr,hostName </GroupByAttr>
+	</SubPattern>
+      </PatternClause>
+    </ClearCondition>
+  </Rule>
+
+  <!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
+  <Rule group="PH_SYS_RULE_Avail_AccelOps" id="PH_Rule_Avail_37" phIncidentCategory="System">
+    <Name>WMI Service Unavailable</Name>
+    <active>true</active>
+    <Description> Detects that WMI service is unavailable </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_WMI_DOWN" severity="10">
+      <ArgList>
+        hostIpAddr = WmiDown.hostIpAddr, hostName = WmiDown.hostName
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="240">
+       <SubPattern displayName="WmiDown" name="WmiDown">
+         <SingleEvtConstr> eventType = "PH_JOB_STAT" AND jobName = "WMI_STATUS" AND jobStatus = 1 AND phEventCategory = 3 </SingleEvtConstr>
+	 <GroupEvtConstr> COUNT(*) &gt;= 1 </GroupEvtConstr>
+         <GroupByAttr>hostIpAddr,hostName </GroupByAttr>
+       </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,reptDevIpAddr,hostIpAddr,hostName,eventType,jobName,jobType,jobStatus,jobDetail,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "patternbased">
+      <ClearIncidentDef name="PH_RULE_WMI_DOWN_CLEAR">
+	<ArgList>hostIpAddr=WmiDown_CLEAR.hostIpAddr,hostName = WmiDown_CLEAR.hostName
+        </ArgList>
+      </ClearIncidentDef>
+      <ClearConstr> PH_RULE_WMI_DOWN.hostIpAddr = PH_RULE_WMI_DOWN_CLEAR.hostIpAddr,
+                    PH_RULE_WMI_DOWN.hostName = PH_RULE_WMI_DOWN_CLEAR.hostName
+      </ClearConstr>
+      <PatternClause window="600">
+	<SubPattern displayName="WmiDown_CLEAR" name="WmiDown_CLEAR">
+          <SingleEvtConstr> eventType = "PH_JOB_STAT" AND jobName = "WMI_STATUS" AND jobStatus = 0 AND phEventCategory = 3  </SingleEvtConstr>
+	  <GroupEvtConstr> COUNT(*) &gt;= 1 </GroupEvtConstr>
+	  <GroupByAttr>hostIpAddr,hostName </GroupByAttr>
+	</SubPattern>
+      </PatternClause>
+    </ClearCondition>
+  </Rule>
+
+  <!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
+  <Rule group="PH_SYS_RULE_Avail_Server" id="PH_Rule_Avail_38" phIncidentCategory="Server">
+    <Name>Windows Disk controller problem</Name>
+    <Description>Detects windows disk controller issues</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_WIN_DISK_CONTROLLLER_PROBLEM" severity="9">
+      <ArgList>
+        reptDevIpAddr = WinDiskControl.reptDevIpAddr
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="300">
+       <SubPattern displayName="WinDiskControl" name="WinDiskControl">
+         <SingleEvtConstr> eventType IN ("Win-System-11","Win-System-51","Win-System-57") AND reptDevIpAddr IN (Group@PH_SYS_DEVICE_Server) </SingleEvtConstr>
+	  <GroupEvtConstr> COUNT(*) &gt;= 3 </GroupEvtConstr>
+          <GroupByAttr>reptDevIpAddr </GroupByAttr>
+       </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,reptDevIpAddr,hostIpAddr,eventSource,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "timebased">
+      <QuietPeriod>1200</QuietPeriod>
+    </ClearCondition>
+  </Rule>
+  
+  <Rule group="PH_SYS_RULE_Avail_Network" id="PH_Rule_Avail_39" phIncidentCategory="Network">
+     <Name>EIGRP Neighbor Down</Name>
+     <active>true</active>
+     <Description>Detects that a EIGRP neighbor is down</Description>
+     <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+     <IncidentDef eventType="PH_RULE_EIGRP_NBR_DOWN" severity="9">
+          <ArgList>srcIpAddr = EIGRPDown.reptDevIpAddr,destIpAddr = EIGRPDown.destIpAddr</ArgList>
+     </IncidentDef>
+     <PatternClause window="300">
+      <SubPattern displayName="EIGRPDown" name="EIGRPDown">
+        <SingleEvtConstr> eventType = "IOS-EIGRP-NBRCHANGE_DUAL-TO-DOWN" </SingleEvtConstr>
+	<GroupEvtConstr> COUNT(*) &gt;= 1 </GroupEvtConstr>
+        <GroupByAttr>reptDevIpAddr,destIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,reptDevIpAddr,srcIpAddr,destIpAddr,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+     <ClearCondition method="Auto" type="patternbased">
+          <ClearIncidentDef name="PH_RULE_EIGRP_NBR_DOWN_CLEAR">
+               <ArgList>srcIpAddr = EIGRPDown_CLEAR.reptDevIpAddr,destIpAddr = EIGRPDown_CLEAR.destIpAddr</ArgList>
+          </ClearIncidentDef>
+          <ClearConstr>PH_RULE_EIGRP_NBR_DOWN.srcIpAddr = PH_RULE_EIGRP_NBR_DOWN_CLEAR.srcIpAddr, PH_RULE_EIGRP_NBR_DOWN.destIpAddr = PH_RULE_EIGRP_NBR_DOWN_CLEAR.destIpAddr</ClearConstr>
+          <PatternClause window="300">
+               <SubPattern displayName="EIGRPDown_CLEAR" name="EIGRPDown_CLEAR">
+                    <SingleEvtConstr>eventType = "IOS-EIGRP-NBRCHANGE_DUAL-TO-UP"</SingleEvtConstr>
+                    <GroupEvtConstr>COUNT(*) &gt;= 1</GroupEvtConstr>
+                    <GroupByAttr>reptDevIpAddr,destIpAddr</GroupByAttr>
+               </SubPattern>
+          </PatternClause>
+     </ClearCondition>
+    </Rule>
+
+</Rules>

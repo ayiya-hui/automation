@@ -1,0 +1,56 @@
+<eventParser name="SyslogNGParser">
+  <deviceType>
+    <Vendor>SYSTEM</Vendor>
+    <Model>NG</Model>
+    <Version>ANY</Version>
+  </deviceType>
+
+  <!-- keep the white space at the end -->
+
+  <eventFormatRecognizer><![CDATA[<:gPatMon>\s+<:gPatDay> <:gPatTime> <:gPatIpV4Dot> ]]></eventFormatRecognizer>
+
+  <!-- this header processing xml will take care of both Syslog-NG header and SNMP for McAfee ePO 
+  <eventFormatRecognizer><![CDATA[(<:gPatMon>\s+<:gPatDay> <:gPatTime> <:gPatIpV4Dot>)|(<:gPatYear>-<:gPatMon>-<:gPatDay> <:gPatTime> <:gPatIpV4Dot>\(via) ]]></eventFormatRecognizer>
+  -->
+
+
+  <parsingInstructions>
+    <!-- parsing common fields -->
+    <!-- sample message 
+         <134>May 21 14:29:18 10.4.2.9 May 21 2007 14:00:34 : %ASA-6-302020: Built ICMP connection for faddr 10.2.3.14/0 gaddr asa70/0 laddr asa70/0
+           <134>Dec  6 00:56:03 192.168.19.1 %ASA-6-305012: Teardown dynamic TCP translation from inside:192.168.20.49/3991 to outside:64.81.25.66/5585 duration 0:00:30
+           -->
+
+    <switch>
+      <case>
+        <collectFieldsByRegex src="$_rawmsg">
+          <regex><![CDATA[<:gPatSyslogPRI><:gPatMon>\s+<:gPatDay> <:gPatTime> <_reptIp:gPatIpV4Dot> <_body:gPatMesgBody>]]></regex>
+        </collectFieldsByRegex>
+        <setEventAttribute attr="_syslogNGHeader">yes</setEventAttribute>
+      </case>
+
+      <!--case>
+        <collectFieldsByRegex src="$_rawmsg">
+          <regex><![CDATA[<:gPatYear>-<:gPatMon>-<:gPatDay> <:gPatTime> <_reptIp:gPatIpV4Dot>\(via]]></regex>
+        </collectFieldsByRegex>
+      </case-->
+    </switch>
+
+    <when test = "$_reptIp != '127.0.0.1'">
+      <setEventAttribute attr="reptDevIpAddr">$_reptIp</setEventAttribute>
+    </when>
+
+    <!--choose>
+      <when test = "$_ip != $relayDevIpAddr">
+        <setEventAttribute attr="reptDevIpAddr">$_ip</setEventAttribute>
+        <setEventAttribute attr="rawEventMsg">$_body</setEventAttribute>
+        <setEventAttribute attr="_reallyUseSyslogNG">yes</setEventAttribute>
+      </when>
+      <otherwise>
+        <setEventAttribute attr="_reallyUseSyslogNG">no</setEventAttribute>        
+      </otherwise>
+    </choose-->
+    
+  </parsingInstructions>
+
+</eventParser>

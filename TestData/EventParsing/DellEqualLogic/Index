@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+Dell-Equalogic-SNMP-Failed,DellEqualLogic_1,DellEqualLogic,$localhost,,syslog

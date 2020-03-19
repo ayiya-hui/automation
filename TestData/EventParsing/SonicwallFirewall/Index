@@ -1,0 +1,13 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+SonicOS-98,SonicwallFirewall_1,SonicwallFirewall,192.168.5.1,,syslog
+
+SonicOS-537,SonicwallFirewall_2,SonicwallFirewall,$localhost,,syslog
+SonicOS-346,SonicwallFirewall_3,SonicwallFirewall,$localhost,,syslog
+SonicOS-597,SonicwallFirewall_4,SonicwallFirewall,$localhost,,syslog
+SonicOS-175,SonicwallFirewall_5,SonicwallFirewall,$localhost,,syslog
+SonicOS-38,SonicwallFirewall_6,SonicwallFirewall,$localhost,,syslog
+SonicOS-98,SonicwallFirewall_7,SonicwallFirewall,$localhost,,syslog
+SonicOS-608,SonicwallFirewall_8,SonicwallFirewall,$localhost,,syslog
+SonicOS-609,SonicwallFirewall_9,SonicwallFirewall,$localhost,,syslog
+SonicOS-1155,SonicwallFirewall_10,SonicwallFirewall,$localhost,,syslog

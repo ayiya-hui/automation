@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+Checkpoint-GAIA-CommandExec,CheckpointGAIA_1,CheckpointGAIA,$localhost,,syslog

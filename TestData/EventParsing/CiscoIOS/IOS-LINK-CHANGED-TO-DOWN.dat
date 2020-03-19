@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<190>43: Dec 14 23:35:01.463: %LINK-5-CHANGED: Interface Ethernet2/1, changed state to down
+[params]
+rawEventMsg=any
+deviceTime=any
+isHostIntfCritical=No
+eventType=IOS-LINK-CHANGED-TO-DOWN
+phCustId=$sender
+intfName=Ethernet2/1
+reptModel=IOS
+eventId=any
+eventParsedOk=1
+eventSeverity=5
+hostIpAddr=$localhost
+eventName=Interface went down
+phEventCategory=0 (External)
+eventSeverityCat=MEDIUM
+collectorId=any
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Cisco

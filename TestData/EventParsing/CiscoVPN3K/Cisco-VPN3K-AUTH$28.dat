@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<189>393073 06/29/2009 21:28:41.380 SEV=4 AUTH/28 RPT=1112 99.129.50.155  User [wenyong] Group [HQ-Dev] disconnected:  Session Type: IPSec/UDP  Duration: 0:02:30  Bytes xmt: 752  Bytes rcv: 12744  Reason: User Requested--automator
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+srcIpAddr=192.168.16.10
+eventAction=0 (Permit)
+preNATDestIpAddr=99.129.50.155
+eventName=VPN logoff
+reptVendor=Cisco
+durationMSec=150000
+user=wenyong
+phEventCategory=0 (External)
+eventType=Cisco-VPN3K-AUTH/28
+reptDevIpAddr=$localhost
+userGrp=HQ-Dev
+reptModel=VPN 3K

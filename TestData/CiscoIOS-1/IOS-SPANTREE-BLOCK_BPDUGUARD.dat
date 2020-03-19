@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<186>30927:Aug 13 17:39:28:647 UTC:%SPANTREE-2-BLOCK_BPDUGUARD: Received BPDU on port Gi0/25 with BPDU Guard enabled. Disabling port.
+[params]
+deviceTime=any
+isHostIntfCritical=No
+eventType=IOS-SPANTREE-BLOCK_BPDUGUARD
+phCustId=$sender
+intfName=Gi0/25
+reptModel=IOS
+eventId=any
+eventParsedOk=1
+eventSeverity=8
+hostIpAddr=$localhost
+eventName=Port disabled by SPANTREE BPDU Guard
+phEventCategory=0
+eventSeverityCat=MEDIUM
+collectorId=any
+relayDevIpAddr=$localhost
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=Success(0)
+reptVendor=Cisco

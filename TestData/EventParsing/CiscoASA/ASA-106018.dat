@@ -1,0 +1,23 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>Dec 05 2008 13:02:16: %%ASA-2-106018: ICMP packet type echo denied by outbound list myAcl src 10.10.10.10 dest 20.20.20.20
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=8
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=MEDIUM
+destIpAddr=20.20.20.20
+eventAction=1 (Deny)
+eventName=Denied ICMP traffic
+srcIpAddr=10.10.10.10
+reptVendor=Cisco
+eventType=ASA-106018
+phEventCategory=0 (External)
+reptDevIpAddr=$reporter
+reptModel=ASA

@@ -1,0 +1,2 @@
+[eventMsg]
+<174>Apr 15 03:25:25 amonitor phPerfMonitor[2770]: [PH_DEV_MON_CHANGE_INST_SW]:[eventSeverity]=PHL_INFO,[procName]=phPerfMonitor,[fileName]=phSvnUpdate.cpp,[lineNumber]=271,[phCustId]=1,[hostName]=automator4Dot1Dot0Dot1,[hostIpAddr]=4.1.0.1,[oldSVNVersion]=320,[newSVNVersion]=341,[deletedItem]=Mozilla Firefox (3.0.16) ();,[addedItem]=Mozilla Firefox (3.0.19) ();,[phLogDetail]=

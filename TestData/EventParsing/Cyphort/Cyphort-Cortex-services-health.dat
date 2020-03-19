@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+2015-08-28 00:43:06.80239+00 cyphortcore-lkf-soc CEF:0|Cyphort|Cortex|3.3.1.46|3|services-health|5|desc=Behavior Engine is not running json={"status": "0", "service": "Behavior Engine"}
+[params]
+customer=Super
+eventId=any
+parserName=CyphortParser
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+count=1
+eventSeverity=1
+eventType=Cyphort-Cortex-services-health
+reptDevIpAddr=$localhost
+collectorId=any
+eventName=Cyphort services health
+reptVendor=Cyphort
+relayDevIpAddr=$localhost
+extEventRecvProto=Syslog
+phRecvTime=any
+msg=Behavior Engine is not running
+eventRuleTrigger=1
+reptDevName=any
+reptModel=Cortex

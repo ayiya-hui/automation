@@ -1,0 +1,22 @@
+[reptDevIpAddr(key)]
+72.72.72.72
+[eventMsg]
+<45>Jul  9 03:07:23 72.72.72.72 SteelBeltedLog	0	Jul 05 00:29:47 2008: Admin interface (GET): URI [/reports/lockedAccounts/ping] not found--automator
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+reptDevIpAddr=72.72.72.72
+eventParsedOk=1
+eventSeverity=3
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+eventAction=0 (Permit)
+eventName=Admin logon failed
+reptVendor=Juniper
+eventType=Juniper-Steelbelt-Admin-Login-Failure
+user=Admin
+phEventCategory=0 (External)
+reptDevName=any
+reptModel=Steel-Belted RADIUS

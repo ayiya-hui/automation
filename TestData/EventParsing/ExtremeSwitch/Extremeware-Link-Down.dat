@@ -1,0 +1,22 @@
+[reptDevIpAddr(key)]
+90.90.90.95
+[eventMsg]
+<134>Mar 29 15:59:01 $reporter SYST: Port 2 link down
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+eventSeverityCat=LOW
+eventParsedOk=1
+eventSeverity=3
+phRecvTime=any
+phCustId=$sender
+phEventCategory=0 (External)
+destIpAddr=$reporter
+eventAction=0 (Permit)
+eventName=Extremeware-Link-Down
+reptVendor=Extreme
+eventType=Extremeware-Link-Down
+devPort=2
+reptDevIpAddr=$reporter
+reptModel=Extremeware

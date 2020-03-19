@@ -1,0 +1,3982 @@
+<perfMonitor>
+  <!-- do not use this for Windows as it gives wrong time, 
+       for Windows use #21 instead -->
+  <perfObjectDefn id="1">
+    <method> SNMP </method>
+    <oids>
+      <oid>
+        <val>1.3.6.1.2.1.25.1.1</val>
+      </oid>
+    </oids>
+    <desc> Host System uptime </desc>
+    <type group="System" label="Uptime"> SYS_UPTIME </type>
+    <operation> NONE </operation>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+  <perfObjectDefn id ="2">
+    <method> SNMP </method>
+    <oids>
+      <oid>
+        <val>1.3.6.1.2.1.25.1.6</val>
+      </oid>
+    </oids>
+    <desc> System processes </desc>
+    <type group="System" label="Process Count"> SYS_PROCESSES </type>
+    <operation> NONE </operation>
+    <frequency>180</frequency>
+    <threshold>1</threshold>
+  </perfObjectDefn>
+  <perfObjectDefn id= "3">
+    <method> SNMP </method>
+    <oids>
+      <oid>
+        <val>1.3.6.1.2.1.25.3.3.1.2</val>
+      </oid>
+    </oids>
+    <desc> System cpu usage </desc>
+    <type group="System" label="CPU Util"> SYS_CPU </type>
+    <operation> UTILIZATION_CPU </operation>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+  <perfObjectDefn id = "4" >
+    <method> SNMP </method>
+    <oids>
+      <oid>
+        <val>1.3.6.1.2.1.25.2.3.1.6</val>
+      </oid>
+    </oids>
+    <desc> System real memory usage </desc>
+    <type group="System" label="Mem Util"> SYS_MEM </type>
+    <operation> UTILIZATION </operation>
+    <matchOid>
+      <val> 1.3.6.1.2.1.25.2.3.1.2 </val>
+      <attr> hrStorageRam </attr>
+    </matchOid>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+  <perfObjectDefn id = "5">
+    <method> SNMP </method>
+    <oids>
+      <oid>
+        <val>  1.3.6.1.2.1.25.2.3.1.6 </val>
+      </oid>
+    </oids>
+    <desc> System virtual memory usage </desc>
+    <type group="System" label="Virtual Mem Util"> SYS_MEM_VIRT </type>
+    <operation> UTILIZATION </operation>
+    <matchOid>
+      <val> 1.3.6.1.2.1.25.2.3.1.2 </val>
+      <attr> hrStorageVirtualMemory </attr>
+    </matchOid>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+  <perfObjectDefn id="6">
+    <method> SNMP </method>
+    <oids>
+      <oid>
+        <val>1.3.6.1.2.1.25.2.3.1.6</val>
+      </oid>
+    </oids>
+    <desc> System fixed disk usage </desc>
+    <type group="System" label="Disk Util"> SYS_DISK </type>
+    <operation> UTILIZATION </operation>
+    <matchOid>
+      <val> 1.3.6.1.2.1.25.2.3.1.2 </val>
+      <attr> hrStorageFixedDisk </attr>
+    </matchOid>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+  <perfObjectDefn id="7">
+    <method> SNMP </method>
+    <oids>
+      <oid>
+        <val>1.3.6.1.2.1.25.5.1.1.1</val>
+      </oid>
+    </oids>
+    <desc> Process Resource usage via SNMP </desc>
+    <type group="System" label="Process Util"> PROC_RESOURCE </type>
+    <operation> UTILIZATION </operation>
+    <frequency>180</frequency>
+    <threshold>5</threshold>
+  </perfObjectDefn>
+
+  <perfObjectDefn id="8">
+    <method> PING </method>
+    <desc> ICMP Ping Status </desc>
+    <type group="System" label="Ping Stat"> PING_STATUS </type>
+    <operation> NONE </operation>
+    <frequency>60</frequency>
+    <threshold>75</threshold>
+  </perfObjectDefn>
+
+  <perfObjectDefn id="9">
+    <method> WMI </method>
+    <desc> WMI Ping Status </desc>
+    <type group="System" label="WMI Ping Stat"> WMI_PING_STATUS </type>
+    <operation> NONE </operation>
+    <frequency>60</frequency>
+    <threshold>75</threshold>
+  </perfObjectDefn>
+
+  <perfObjectDefn id="10">
+    <method> SNMP </method>
+    <desc> SNMP Ping Status </desc>
+    <type group="System" label="SNMP Ping Stat"> SNMP_PING_STATUS </type>
+    <operation> NONE </operation>
+    <frequency>60</frequency>
+    <threshold>75</threshold>
+  </perfObjectDefn>
+
+  <perfObjectDefn id= "14">
+    <method> SNMP </method>
+    <oids>
+      <oid>
+        <val> 1.3.6.1.4.1.9.9.109.1.1.1.1.5 </val>
+      </oid>
+    </oids>
+    <desc> Cisco Network Device System cpu usage - every 3 min</desc>
+    <type group="System" label="CPU Util"> SYS_CPU </type>
+    <operation> UTILIZATION_CPU </operation>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+  <perfObjectDefn id = "15" >
+    <method> SNMP </method>
+    <oids>
+      <oid>
+        <val>  1.3.6.1.4.1.9.9.48.1.1.1.6.1 </val>
+      </oid>
+    </oids>
+    <desc> Cisco Network Device Free Processor Memory (KB) </desc>
+    <type group="System" label="Free Processor Mem"> SYS_MEM_FREE_PROC </type>
+    <operation> NONE </operation>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+  <perfObjectDefn id = "16" >
+    <method> SNMP </method>
+    <oids>
+      <oid>
+        <val>  1.3.6.1.4.1.9.9.48.1.1.1.6.2 </val>
+      </oid>
+    </oids>
+    <desc> Cisco Network Device Free IO Memory (KB) </desc>
+    <type group="System" label="Free I/O Mem"> SYS_MEM_FREE_IO </type>
+    <operation> NONE </operation>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+  <perfObjectDefn id = "17" >
+    <method> SNMP </method>
+    <oids>
+      <oid>
+        <val>  1.3.6.1.4.1.9.9.48.1.1.1.7.1 </val>
+      </oid>
+    </oids>
+    <desc> Cisco Network Device Free Contiguous Processor Memory (KB) </desc>
+    <type group="System" label="Free Contiguous Processor Mem"> SYS_MEM_FREE_PROC_CONTIG </type>
+    <operation> NONE </operation>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+  <perfObjectDefn id = "18" >
+    <method> SNMP </method>
+    <oids>
+      <oid>
+        <val>  1.3.6.1.4.1.9.9.48.1.1.1.7.2 </val>
+      </oid>
+    </oids>
+    <desc> Cisco Network Device Free Contiguous IO Memory (KB) </desc>
+    <type group="System" label="Free Contiguous I/O Mem"> SYS_MEM_FREE_IO_CONTIG </type>
+    <operation> NONE </operation>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+  <perfObjectDefn id = "19" >
+    <method> SNMP </method>
+    <oids>
+      <oid>
+        <val>  1.3.6.1.4.1.9.9.147.1.2.2.2.1.5.40.6 </val>
+      </oid>
+    </oids>
+    <desc>Cisco ASA/PIX Firewall Connection Utilization </desc>
+    <type group="System" label="Firewall Conn Count"> FW_CONN </type>
+    <operation>UTILIZATION_OID_IS_TOTAL</operation>
+    <matchOid>
+      <val>1.3.6.1.4.1.9.9.147.1.2.2.2.1.5.40.7</val>
+    </matchOid>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+  <perfObjectDefn id = "20" >
+    <method> SNMP </method>
+    <oids>
+      <oid>
+        <val>  1.3.6.1.4.1.9.9.48.1.1.1.6 </val>
+      </oid>
+    </oids>
+    <desc> Cisco Network Device Memory Utilization (x/(x+y)</desc>
+    <type group="System" label="Memory Util"> SYS_MEM </type>
+    <operation> UTILIZATION_AFTER_SUM</operation>
+    <matchOid>
+      <val> 1.3.6.1.4.1.9.9.48.1.1.1.5 </val>
+    </matchOid>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+  <perfObjectDefn id="21">
+    <method> SNMP </method>
+    <oids>
+      <oid>
+        <val>1.3.6.1.2.1.1.3</val>
+      </oid>
+    </oids>
+    <desc> Device uptime </desc>
+    <type group="System" label="Uptime"> SYS_UPTIME </type>
+    <operation> NONE </operation>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+  <perfObjectDefn id="22">
+    <method> SNMP </method>
+    <oids>
+      <oid>
+        <val> 1.3.6.1.2.1.1.3  </val>
+      </oid>
+    </oids>
+    <desc> Host System uptime </desc>
+    <type group="System" label="Uptime Change"> SYS_UPTIME_CHG </type>
+    <operation> DELTA </operation>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+  <perfObjectDefn id="23">
+    <method> SNMP </method>
+    <oids>
+      <oid>
+        <val>  1.3.6.1.2.1.25.6.1 </val>
+      </oid>
+    </oids>
+    <desc> Installed Software Change Via SNMP </desc>
+    <type group="System" label="Install Software Change"> INST_SW </type>
+    <operation> DELTA </operation>
+    <frequency>600</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+  <perfObjectDefn id="24">
+    <method> LOGIN </method>
+    <desc> Config Change </desc>
+    <type group="System" label="Config Change"> CONF </type>
+    <operation> DELTA </operation>
+    <frequency>600</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+  <perfObjectDefn id= "25">
+    <method> SNMP </method>
+    <oids>
+      <oid>
+        <val>1.3.6.1.4.1.3224.16.1.2 </val>
+      </oid>
+    </oids>
+    <desc> Juniper Firewall cpu usage - every 1 min</desc>
+    <type group="System" label="CPU Util"> SYS_CPU </type>
+    <operation> UTILIZATION_CPU </operation>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+  <perfObjectDefn id = "26" >
+    <method> SNMP </method>
+    <oids>
+      <oid>
+        <val>  1.3.6.1.4.1.3224.16.2.2 </val>
+      </oid>
+    </oids>
+    <desc> Juniper Firewall Device Free Memory (KB) </desc>
+    <type group="System" label="Free Memory"> SYS_MEM_FREE </type>
+    <operation> NONE </operation>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+  <perfObjectDefn id = "27" >
+    <method> SNMP </method>
+    <oids>
+      <oid>
+        <val>  1.3.6.1.4.1.3224.16.2.2 </val>
+      </oid>
+    </oids>
+    <desc> Juniper Firewall Device Memory  </desc>
+    <type group="System" label="Mem Util"> SYS_MEM </type>
+    <operation> UTILIZATION_AFTER_SUM</operation>
+    <matchOid>
+      <val> 1.3.6.1.4.1.3224.16.2.1 </val>
+    </matchOid>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+  <perfObjectDefn id= "28">
+    <method> SNMP </method>
+    <oids>
+      <oid>
+        <val> 1.3.6.1.4.1.2620.1.6.7.2.4 </val>
+      </oid>
+    </oids>
+    <desc> CheckPoint Firewall cpu usage </desc>
+    <type group="System" label="CPU Util"> SYS_CPU </type>
+    <operation> UTILIZATION_CPU </operation>
+    <frequency>300</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+  <perfObjectDefn id = "29" >
+    <method> SNMP </method>
+    <oids>
+      <oid>
+        <val>  1.3.6.1.4.1.2620.1.6.7.4.5 </val>
+      </oid>
+    </oids>
+    <desc> CheckPoint Firewall Free Memory (KB) </desc>
+    <type group="System" label="Free Memory"> SYS_MEM_FREE </type>
+    <operation> NONE </operation>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+  <perfObjectDefn id = "30" >
+    <method> SNMP </method>
+    <oids>
+      <oid>
+        <val>  1.3.6.1.4.1.2620.1.6.7.4.5 </val>
+      </oid>
+    </oids>
+    <desc> CheckPoint Firewall Device Memory  </desc>
+    <type group="System" label="Memory Util"> SYS_MEM </type>
+    <operation> UTILIZATION_AFTER_SUM</operation>
+    <matchOid>
+      <val> 1.3.6.1.4.1.2620.1.6.7.4.4 </val>
+    </matchOid>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+  <!-- Foundry -->
+  <perfObjectDefn id= "31">
+    <method> SNMP </method>
+    <oids>
+      <oid>
+        <val> 1.3.6.1.4.1.1991.1.1.2.1.50 </val>
+      </oid>
+    </oids>
+    <desc> Foundry System cpu usage </desc>
+    <type group="System" label="CPU Util"> SYS_CPU </type>
+    <operation> UTILIZATION_CPU </operation>
+    <frequency>300</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+  <perfObjectDefn id = "32" >
+    <method> SNMP </method>
+    <oids>
+      <oid>
+        <val>  1.3.6.1.4.1.1991.1.1.2.1.55 </val>
+      </oid>
+    </oids>
+    <desc> Foundry Network Device Free Memory (KB) </desc>
+    <type group="System" label="Free Memory"> SYS_MEM_FREE </type>
+    <operation> NONE </operation>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+  <perfObjectDefn id = "33" >
+    <method> SNMP </method>
+    <oids>
+      <oid>
+        <val>  1.3.6.1.4.1.1991.1.1.2.1.53 </val>
+      </oid>
+    </oids>
+    <desc> Foundry Network Device Memory  Utilization </desc>
+    <type group="System" label="Mem Util"> SYS_MEM_UTIL </type>
+    <operation> NONE</operation>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+  <!-- Ironport Mail Gateway -->
+  <perfObjectDefn id = "34" >
+    <method> SNMP </method>
+    <oids>
+      <oid>
+        <val>  1.3.6.1.4.1.15497.1.1.1.1 </val>
+      </oid>
+    </oids>
+    <desc> Ironport Memory Utilization</desc>
+    <type group="System" label="Mem Util"> SYS_MEM_UTIL </type>
+    <operation> NONE</operation>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+  <perfObjectDefn id = "35" >
+    <method> SNMP </method>
+    <oids>
+      <oid>
+        <val>  1.3.6.1.4.1.15497.1.1.1.2 </val>
+      </oid>
+    </oids>
+    <desc> IronPort CPU Utilization</desc>
+    <type group="System" label="CPU Util"> SYS_CPU </type>
+    <operation> UTILIZATION_CPU</operation>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+    
+  <perfObjectDefn id = "36" >
+    <method> SNMP </method>
+    <oids>
+      <oid>
+        <val>  1.3.6.1.4.1.15497.1.1.1.3 </val>
+      </oid>
+    </oids>
+    <desc> IronPort Disk I/O Utilization</desc>
+    <type group="System" label="Disk I/O Util"> SYS_DISKIO_UTIL </type>
+    <operation> NONE</operation>
+    <frequency>300</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+  <perfObjectDefn id = "37" >
+    <method> SNMP </method>
+    <oids>
+      <oid>
+        <val>  1.3.6.1.4.1.15497.1.1.1.4 </val>
+      </oid>
+    </oids>
+    <desc> IronPort Mail Queue Utilization</desc>
+    <type group="System" label="Mail Queue Util"> SYS_MAIL_QUEUE_UTIL </type>
+    <operation> NONE</operation>
+    <frequency>300</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+  <perfObjectDefn id = "38" >
+    <method> SNMP </method>
+    <oids>
+      <oid>
+        <val>  1.3.6.1.4.1.15497.1.1.1.19 </val>
+      </oid>
+    </oids>
+    <desc> IronPort Open Files</desc>
+    <type group="System" label="Open File Count"> SYS_OPEN_FILES </type>
+    <operation> NONE</operation>
+    <frequency>300</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+  <perfObjectDefn id = "39" >
+    <method> SNMP </method>
+    <oids>
+      <oid>
+        <val>  1.3.6.1.4.1.15497.1.1.1.20 </val>
+      </oid>
+    </oids>
+    <desc> IronPort Mail Transfer Threads</desc>
+    <type group="System" label="Mail Transfer Thread Count"> SYS_MAIL_TRANSFER_THREADS </type>
+    <operation> NONE</operation>
+    <frequency>300</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+  <perfObjectDefn id = "40" >
+    <method> SNMP </method>
+    <oids>
+      <oid>
+        <val>  1.3.6.1.4.1.15497.1.1.1.18.1 </val>
+      </oid>
+    </oids>
+    <desc> IronPort RAID Status </desc>
+    <type group="System" label="RAID Status"> IRONPORT_RAID_STATUS </type>
+    <operation> NONE</operation>
+    <frequency>300</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+   
+  <perfObjectDefn id = "41" >
+    <method> SNMP </method>
+    <oids>
+      <oid>
+        <val>  1.3.6.1.4.1.15497.1.1.1.15 </val>
+      </oid>
+    </oids>
+    <desc> IronPort Outstanding DNS Requests</desc>
+    <type group="System" label="Outstanding DNS Request"> IRONPORT_OUTSTAND_DNS_REQ </type>
+    <operation> NONE</operation>
+    <frequency>300</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+  <perfObjectDefn id = "42" >
+    <method> SNMP </method>
+    <oids>
+      <oid>
+        <val>1.3.6.1.4.1.15497.1.1.1.15</val>
+      </oid>
+    </oids>
+    <desc> IronPort Pending DNS Requests</desc>
+    <type group="System" label="Pending DNS Request"> IRONPORT_PEND_DNS_REQ </type>
+    <operation> NONE</operation>
+    <frequency>300</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+  <perfObjectDefn id="43">
+    <method> LOGIN </method>
+    <desc> Process Resource usage </desc>
+    <type group="System" label="Process Util"> PROC_RESOURCE </type>
+    <operation> UTILIZATION </operation>
+    <frequency>180</frequency>
+    <threshold>5</threshold>
+  </perfObjectDefn>
+  
+  <perfObjectDefn id= "44">
+    <method> SNMP </method>
+    <oids>
+      <oid>
+        <val>1.3.6.1.4.1.11.2.14.11.5.1.9.6.1.0</val>
+      </oid>
+    </oids>
+    <desc> HP Procurve System CPU usage </desc>
+    <type group="System" label="CPU Util"> SYS_CPU </type>
+    <operation> UTILIZATION_CPU </operation>
+    <frequency>90</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+  <perfObjectDefn id = "45" >
+    <method> SNMP </method>
+    <oids>
+      <oid>
+        <val>1.3.6.1.4.1.11.2.14.11.5.1.1.2.1.1.1.6.1</val>
+      </oid>
+    </oids>
+    <desc> HP Procurve Free Memory</desc>
+    <type group="System" label="Free Memory"> SYS_MEM</type>
+    <operation>NONE</operation>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+  <perfObjectDefn id = "46" >
+    <method> SNMP </method>
+    <oids>
+      <oid>
+        <val>1.3.6.1.4.1.11.2.14.11.5.1.1.2.1.1.1.6.1</val>
+      </oid>
+    </oids>
+    <desc> HP Procurve Memory Utilization </desc>
+    <type group="System" label="Mem Util"> SYS_MEM </type>
+    <operation> UTILIZATION_AFTER_SUM</operation>
+    <matchOid>
+      <val>1.3.6.1.4.1.11.2.14.11.5.1.1.2.1.1.1.7.1</val>
+    </matchOid>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+  <perfObjectDefn id= "47">
+    <method> SNMP </method>
+    <oids>
+      <oid>
+        <val> 1.3.6.1.4.1.9.9.109.1.1.1.1.8.1 </val>
+      </oid>
+    </oids>
+    <desc> Cisco IPS CPU Utilization</desc>
+    <type group="System" label="CPU Util"> SYS_CPU </type>
+    <operation> UTILIZATION_CPU </operation>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+   
+  <perfObjectDefn id = "48" >
+    <method> SNMP </method>
+    <oids>
+      <oid>
+        <val>1.3.6.1.4.1.9.9.221.1.1.1.1.8.1.1</val>
+      </oid>
+    </oids>
+    <desc> Cisco IPS Free Memory</desc>
+    <type group="System" label="Free Memory"> SYS_MEM</type>
+    <operation>NONE</operation>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+  <perfObjectDefn id = "49" >
+    <method>SNMP</method>
+    <oids>
+      <oid>
+        <val>1.3.6.1.4.1.9.9.221.1.1.1.1.8.1.1</val>
+      </oid>
+    </oids>
+    <desc> Cisco IPS Memory Utilization </desc>
+    <type group="System" label="Mem Util"> SYS_MEM </type>
+    <operation> UTILIZATION_AFTER_SUM</operation>
+    <matchOid>
+      <val>1.3.6.1.4.1.9.9.221.1.1.1.1.7.1.1</val>
+    </matchOid>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+  <perfObjectDefn id = "50" >
+    <method> SNMP </method>
+    <desc> Cisco IPS Packet Loss</desc>
+    <type group="System" label="IPS Packet Loss"> CISCO_IPS_PACKET_LOSS </type>
+    <operation>NONE</operation>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+   
+  <perfObjectDefn id = "51" >
+    <method> SNMP </method>
+    <desc> Cisco IPS Packet Denial Rate</desc>
+    <type group="System" label="IPS Denial Rate"> CISCO_IPS_PACKET_DENIAL_RATE </type>
+    <operation>NONE</operation>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+   
+  <perfObjectDefn id = "52" >
+    <method> SNMP </method>
+    <desc> Cisco IPS Sensor Active Flag</desc>
+    <type group="System" label="IPS Sensor Active Flag"> CISCO_IPS_SENSOR_ACTIVE_FLAG </type>
+    <operation>NONE</operation>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+  
+  <perfObjectDefn id= "53">
+    <method> SNMP </method>
+    <oids>
+      <oid>
+        <val>1.3.6.1.4.1.3076.2.1.2.25.1.2.0</val>
+      </oid>
+    </oids>
+    <desc>System cpu usage for Cisco VPN concentrator</desc>
+    <type group="System" label="CPU Util"> SYS_CPU </type>
+    <operation> UTILIZATION_CPU </operation>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+
+  <perfObjectDefn id= "54">
+    <method>SNMP</method>
+    <oids>
+      <oid>
+        <val>1.3.6.1.4.1.3076.2.1.2.17.1.1.0</val>
+      </oid>
+    </oids>
+    <desc>Active sessions for Cisco VPN concentrator </desc>
+    <type group="System" label="VPN Session">VPN_CONN </type>
+    <operation>NONE</operation>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+
+  <!-- Linux CPU -->
+  <perfObjectDefn id= "61">
+    <method> SNMP </method>
+    <oids>
+      <oid>
+        <val>1.3.6.1.4.1.2021.11.9.0</val>
+        <attr>userCpuUtil</attr>
+      </oid>
+      <oid>
+        <val>1.3.6.1.4.1.2021.11.10.0</val>
+        <attr>sysCpuUtil</attr>
+      </oid>
+      <oid>
+        <val>1.3.6.1.4.1.2021.11.11.0</val>
+        <attr>idleCpuUtil</attr>
+      </oid>
+    </oids>
+    <desc> System cpu usage </desc>
+    <type group="System" label="CPU Util"> SYS_CPU </type>
+    <operation> UTILIZATION_MULTI_OIDS </operation>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+  <perfObjectDefn id = "62" >
+    <method> SNMP </method>
+    <oids>
+      <oid>
+	<val>1.3.6.1.4.1.2021.4.3.0</val>
+	<attr>memTotalSwap</attr>
+      </oid>
+      <oid>
+	<val>1.3.6.1.4.1.2021.4.4.0</val>
+	<attr>memAvailSwap</attr>
+      </oid>
+      <oid>
+        <val>1.3.6.1.4.1.2021.4.6.0</val>
+        <attr>freeMemKB</attr>
+      </oid>
+      <oid>
+        <val>1.3.6.1.4.1.2021.4.5.0</val>
+        <attr>memSize</attr>
+      </oid>
+      <oid>
+        <val>1.3.6.1.4.1.2021.4.14.0</val>
+        <attr>bufMemKB</attr>
+      </oid>
+      <oid>
+        <val>1.3.6.1.4.1.2021.4.15.0</val>
+        <attr>cacheMemKB</attr>
+      </oid>
+      <oid>
+	<val>1.3.6.1.4.1.2021.4.12</val>
+	<attr>memMinimumSwap</attr>
+      </oid>
+      <oid>
+	<val>1.3.6.1.4.1.2021.4.100.0</val>
+	<attr>memSwapError</attr>
+      </oid>
+      <oid>
+	<val>1.3.6.1.4.1.2021.4.101.0</val>
+	<attr>memSwapErrorMsg</attr>
+      </oid>
+    </oids>
+    <desc> System real memory usage </desc>
+    <type group="System" label="Mem Util"> SYS_MEM </type>
+    <operation> UTILIZATION_MULTI_OIDS </operation>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+
+  <!-- Tippingpoint IPS CPU -->
+  <perfObjectDefn id= "63">
+    <method> SNMP </method>
+    <oids>
+      <oid>
+        <val>1.3.6.1.4.1.10734.3.3.2.5.4.1.0</val>
+      </oid>
+    </oids>
+    <desc>System cpu usage for TipingPoint IPS</desc>
+    <type group="System" label="CPU Util"> SYS_CPU </type>
+    <operation> UTILIZATION_CPU </operation>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+
+  <!-- Tippingpoint IPS Memory -->
+   <perfObjectDefn id = "64" >
+    <method> SNMP </method>
+    <oids>
+      <oid>
+        <val>1.3.6.1.4.1.10734.3.3.2.5.3.1.0</val>
+      </oid>
+    </oids>
+    <desc>TippingPoint IPS Memory  Utilization </desc>
+    <type group="System" label="Mem Util"> SYS_MEM_UTIL </type>
+    <operation> NONE</operation>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+
+  <!-- NetApp CPU Utilization-->
+  <perfObjectDefn id= "65">
+    <method>SNMP</method>
+    <oids>
+      <oid>
+        <val>1.3.6.1.4.1.789.1.2.1.3</val>
+      </oid>
+    </oids>
+    <desc>NetApp CPU usage</desc>
+    <type group="System" label="CPU Util"> SYS_CPU </type>
+    <operation> UTILIZATION_CPU </operation>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+
+  <!-- NetApp Disk Utilization-->
+  <perfObjectDefn id= "66">
+    <method>SNMP</method>
+    <oids>
+      <oid>
+        <val>NO_OID</val>
+      </oid>
+    </oids>
+    <desc>NetApp Disk usage</desc>
+    <type group="System" label="Disk Util"> SYS_DISK </type>
+    <operation> UTILIZATION </operation>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+
+  <!-- VMware monitoring -->  
+  <perfObjectDefn id= "67">
+    <method> VMSDK </method>
+    <desc> VMware Performance Metric Monitoring </desc>
+    <type group="System" label="VMware Performance Metric"> VMWARE_PERF_METRIC </type>
+    <operation> NONE </operation>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+
+  <perfObjectDefn id= "68">
+    <method> VMSDK </method>
+    <desc> VMware Hardware Status Monitoring </desc>
+    <type group="System" label="VMware Hardware Status"> VMWARE_HW_STAT </type>
+    <operation> NONE </operation>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+
+   <!-- Forinet CPU -->
+  <perfObjectDefn id= "69">
+    <method> SNMP </method>
+    <oids>
+      <oid>
+        <val>1.3.6.1.4.1.12356.1.8.0</val>
+      </oid>
+    </oids>
+    <desc>Fortinet firewall system cpu utilization</desc>
+    <type group="System" label="CPU Util"> SYS_CPU </type>
+    <operation> UTILIZATION_CPU </operation>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+
+  <!-- Fortinet Memory -->
+   <perfObjectDefn id = "70" >
+    <method> SNMP </method>
+    <oids>
+      <oid>
+        <val>1.3.6.1.4.1.12356.1.9.0</val>
+      </oid>
+    </oids>
+    <desc>Fortinet firewall Memory  Utilization </desc>
+    <type group="System" label="Mem Util"> SYS_MEM_UTIL </type>
+    <operation> NONE</operation>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+
+   <!-- Fortinet Session count -->
+   <perfObjectDefn id = "71" >
+    <method> SNMP </method>
+    <oids>
+      <oid>
+        <val>1.3.6.1.4.1.12356.1.10.0</val>
+      </oid>
+    </oids>
+    <desc>Fortinet firewall session count </desc>
+    <type group="System" label="Firewall Session Count"> FW_CONN </type>
+    <operation> NONE</operation>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+
+   <!-- Bluecoat CPU -->
+  <perfObjectDefn id= "72">
+    <method> SNMP </method>
+    <oids>
+      <oid>
+        <val>1.3.6.1.4.1.3417.2.4.1.1.1.4.1</val>
+      </oid>
+    </oids>
+    <desc>System cpu usage for Bluecoat webproxy appliance</desc>
+    <type group="System" label="CPU Util"> SYS_CPU </type>
+    <operation> UTILIZATION_CPU </operation>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+
+  <!-- JunOS CPU -->
+  <perfObjectDefn id= "73">
+    <method> SNMP </method>
+    <oids>
+      <oid>
+        <val> 1.3.6.1.4.1.2636.3.1.13.1.8.9.1.0.0 </val>
+      </oid>
+    </oids>
+    <desc> Juniper JunOS cpu usage</desc>
+    <type group="System" label="CPU Util"> SYS_CPU </type>
+    <operation> UTILIZATION_CPU </operation>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+
+  <!-- JunOS Memory -->
+  <perfObjectDefn id= "74">
+    <method> SNMP </method>
+    <oids>
+      <oid>
+        <val> 1.3.6.1.4.1.2636.3.1.13.1.11.9.1.0.0 </val>
+      </oid>
+    </oids>
+    <desc> Juniper JunOS memory utilization </desc>
+    <type group="System" label="CPU Util"> SYS_MEM_UTIL </type>
+    <operation> NONE </operation>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+
+  <!-- EMC Clariion storage processor usage -->
+  <perfObjectDefn id= "75">
+    <method> NAVISECCLI </method>
+    <desc>EMC Clariion storage processor utilization </desc>
+    <type group="System" label="Clariion Storage Processor Util"> EMC_CLARIION_SP_UTIL </type>
+    <operation> NONE </operation>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+
+  <!-- EMC Clariion port usage -->
+  <perfObjectDefn id= "76">
+    <method> NAVISECCLI </method>
+    <desc>EMC Clariion storage port utilization </desc>
+    <type group="System" label="Clariion Storage Port Util"> EMC_CLARIION_PORT_UTIL </type>
+    <operation> NONE </operation>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+
+  <!-- EMC Clariion hardware status -->
+  <perfObjectDefn id= "77">
+    <method> NAVISECCLI </method>
+    <desc>EMC Clariion hardware status </desc>
+    <type group="System" label="Clariion Hardware Status"> EMC_CLARIION_HW_STATUS </type>
+    <operation> NONE </operation>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+
+  <!-- EMC Clariion LUN usage -->
+  <perfObjectDefn id= "78">
+    <method> NAVISECCLI </method>
+    <desc>EMC Clariion LUN usage </desc>
+    <type group="System" label="Clariion LUN usage"> EMC_CLARIION_LUN_USAGE </type>
+    <operation> NONE </operation>
+    <frequency>360</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+
+
+  <!-- EMC Clariion HBA Login change -->
+  <perfObjectDefn id= "79">
+    <method> NAVISECCLI </method>
+    <desc>EMC Clariion Unregistered Host </desc>
+    <type group="System" label="Clariion HBA Login Change"> EMC_CLARIION_HBA_LOGIN_CHANGE </type>
+    <operation> NONE </operation>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+
+  <!-- APC UPS Health -->
+  <perfObjectDefn id= "80">
+    <method>SNMP</method>
+    <oids>
+      <oid>
+        <val>1.3.6.1.4.1.318.1.1.1.2.2.1.0</val>
+	<attr>upsRemainBatteryChargePct</attr>
+      </oid>
+      <oid>
+        <val>1.3.6.1.4.1.318.1.1.1.2.1.1.0</val>
+	<attr>upsBatteryStatus</attr>
+      </oid>
+      <oid>
+        <val>1.3.6.1.4.1.318.1.1.1.2.2.4.0</val>
+	<attr>upsReplaceBatteryIndicator</attr>
+      </oid>
+      <oid>
+        <val>1.3.6.1.4.1.318.1.1.1.2.1.2.0</val>
+	<attr>upsTimeOnBattery</attr>
+      </oid>
+      <oid>
+        <val>1.3.6.1.4.1.318.1.1.1.4.1.1.0</val>
+	<attr>upsBasicOutputStatus</attr>
+      </oid>
+      <oid>
+        <val>1.3.6.1.4.1.318.1.1.1.4.2.3.0</val>
+	<attr>upsAdvOutputLoad</attr>
+      </oid>
+      <oid>
+        <val>1.3.6.1.4.1.318.1.1.1.4.2.1.0</val>
+	<attr>upsAdvOutputVoltage</attr>
+      </oid>
+       <oid>
+        <val>1.3.6.1.4.1.318.1.1.1.4.2.2.0</val>
+	<attr>upsAdvOutputFreq</attr>
+      </oid>
+    </oids>
+    <desc>APC UPS Metrics</desc>
+    <type group="System" label="APC UPS Status"> APC_UPS_STATUS </type>
+    <operation> UTILIZATION_MULTI_OIDS </operation>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+
+  <!-- Liebert A/C Units temperature/humidity -->
+  <perfObjectDefn id= "81">
+    <method>SNMP</method>
+    <oids>
+      <oid>
+        <val>1.3.6.1.4.1.476.1.42.3.4.1.3.3.1.3.1</val>
+	<attr>envTempDegC</attr>
+      </oid>
+      <oid>
+        <val>1.3.6.1.4.1.476.1.42.3.4.1.3.3.1.4.1</val>
+	<attr>envTempHighThreshDegC</attr>
+      </oid>
+      <oid>
+        <val>1.3.6.1.4.1.476.1.42.3.4.1.3.3.1.5.1</val>
+	<attr>envTempLowThreshDegC</attr>
+      </oid>
+      <oid>
+        <val>1.3.6.1.4.1.476.1.42.3.4.2.2.3.1.3.1</val>
+	<attr>envHumidityRel</attr>
+      </oid>
+      <oid>
+        <val>1.3.6.1.4.1.476.1.42.3.4.2.2.3.1.4.1</val>
+	<attr>envHumidityRelHighThresh</attr>
+      </oid>
+      <oid>
+        <val>1.3.6.1.4.1.476.1.42.3.4.2.2.3.1.5.1</val>
+	<attr>envHumidityRelLowThresh</attr>
+      </oid>
+      <oid>
+        <val>1.3.6.1.4.1.476.1.42.3.4.3.1.0</val>
+	<attr>lgpSystemState</attr>
+      </oid>
+       <oid>
+        <val>1.3.6.1.4.1.476.1.42.3.4.3.2.0</val>
+	<attr>lgpCoolingState</attr>
+      </oid>
+       <oid>
+        <val>1.3.6.1.4.1.476.1.42.3.4.3.3.0</val>
+	<attr>lgpHeatingState</attr>
+      </oid>
+       <oid>
+        <val>1.3.6.1.4.1.476.1.42.3.4.3.4.0</val>
+	<attr>lgpHumidState</attr>
+      </oid>
+       <oid>
+        <val>1.3.6.1.4.1.476.1.42.3.4.3.5.0</val>
+	<attr>lgpDehumidState</attr>
+      </oid>
+       <oid>
+        <val>1.3.6.1.4.1.476.1.42.3.4.3.6.0</val>
+	<attr>lgpEconCycle</attr>
+      </oid>
+       <oid>
+        <val>1.3.6.1.4.1.476.1.42.3.4.3.7.0</val>
+	<attr>lgpFanState</attr>
+      </oid>
+       <oid>
+        <val>1.3.6.1.4.1.476.1.42.3.4.3.9.0</val>
+	<attr>envCoolCap</attr>
+      </oid>
+       <oid>
+        <val>1.3.6.1.4.1.476.1.42.3.4.3.10.0</val>
+	<attr>envHeatCap</attr>
+      </oid>
+    </oids>
+    <desc>Liebert HVAC Status</desc>
+    <type group="System" label="Liebert HVAC Status"> LIEBERT_HVAC_STATUS </type>
+    <operation> UTILIZATION_MULTI_OIDS </operation>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+
+  <!-- EMC Clariion RG usage -->
+  <perfObjectDefn id= "82">
+    <method> NAVISECCLI </method>
+    <desc>EMC Clariion RAID Group usage </desc>
+    <type group="System" label="Clariion RG usage"> EMC_CLARIION_RG_USAGE </type>
+    <operation> NONE </operation>
+    <frequency>360</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+
+  <!-- UPS Health (from UPS MIB) -->
+  <perfObjectDefn id= "83">
+    <method>SNMP</method>
+    <oids>
+      <oid>
+        <val>1.3.6.1.2.1.33.1.2.4</val>
+	<attr>upsRemainBatteryChargePct</attr>
+      </oid>
+      <oid>
+        <val>1.3.6.1.2.1.33.1.2.1</val>
+	<attr>upsBatteryStatus</attr>
+      </oid>
+      <oid>
+        <val>1.3.6.1.2.1.33.1.2.2</val>
+	<attr>upsTimeOnBattery</attr>
+      </oid>
+      <oid>
+        <val>1.3.6.1.2.1.33.1.2.3</val>
+	<attr>upsEstMinRemain</attr>
+      </oid>
+      <oid>
+        <val>1.3.6.1.2.1.33.1.2.5</val>
+	<attr>upsBatteryVoltage</attr>
+      </oid>
+      <oid>
+        <val>1.3.6.1.2.1.33.1.2.6</val>
+	<attr>upsBatteryCurrent</attr>
+      </oid>
+      <oid>
+        <val>1.3.6.1.2.1.33.1.2.7</val>
+	<attr>upsBatteryTemp</attr>
+      </oid>
+    </oids>
+    <desc>UPS Metrics</desc>
+    <type group="System" label="Gen UPS Status"> GEN_UPS_STATUS </type>
+    <operation> UTILIZATION_MULTI_OIDS </operation>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+
+  <!-- Liebert FPC metrics -->
+  <perfObjectDefn id= "84">
+    <method>SNMP </method>
+    <desc>Liebert FPC Metrics</desc>
+    <type group="System" label="Liebert FPC Metrics"> LIEBERT_FPC_STATUS </type>
+    <operation> NONE </operation>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+
+   <!-- Cisco WLAN AP Interface metrics-->
+  <perfObjectDefn id= "85">
+    <method>SNMP </method>
+    <desc>Cisco WLAN Radio Metrics</desc>
+    <type group="System" label="Cisco WLAN Radio Metrics"> CISCO_WLAN_RADIO_METRICS </type>
+    <operation> NONE </operation>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+
+  <!-- Aruba WLAN AP Interface metrics-->
+  <perfObjectDefn id= "86">
+    <method>SNMP </method>
+    <desc>Aruba WLAN Radio Metrics</desc>
+    <type group="System" label="Aruba WLAN Radio Metrics"> ARUBA_WLAN_RADIO_METRICS </type>
+    <operation> NONE </operation>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+
+   <!-- NetApp SDK perf metrics -->
+  <perfObjectDefn id= "87">
+    <method> ONTAPI </method>
+    <desc>NetApp SDK Perf Metrics </desc>
+    <type group="App" label="Advanced NetApp Metrics"> NETAPP_DETAILED_PERF_METRIC </type>
+    <operation> NONE </operation>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+
+  <!-- Juniper network interface utilization -->
+  <perfObjectDefn id="98">
+    <method> SNMP </method>
+    <oids>
+      <oid>
+        <val>1.3.6.1.4.1.3224.9</val>
+      </oid>
+    </oids>
+    <desc> Network Interface  Utilization </desc>
+    <type group="System" label="Net Intf Stat"> INTERFACE </type>
+    <operation> UTILIZATION_CUMMULATIVE </operation>
+    <frequency>180</frequency>
+    <threshold>0.1</threshold>
+  </perfObjectDefn>
+
+  <!-- All devices and hosts -->
+  <perfObjectDefn id="99">
+    <method> SNMP </method>
+    <oids>
+      <oid>
+        <val>1.3.6.1.2.1.2.2.1</val>
+      </oid>
+    </oids>
+    <desc> Network Interface  Utilization </desc>
+    <type group="System" label="Net Intf Stat"> INTERFACE </type>
+    <operation> UTILIZATION_CUMMULATIVE </operation>
+    <frequency>180</frequency>
+    <threshold>0.1</threshold>
+  </perfObjectDefn>
+
+  <perfObjectDefn id="100">
+    <method> WMI </method>
+    <desc> Installed Software Change Via WMI </desc>
+    <type group="System" label="Install Software Change"> INST_SW </type>
+    <operation> DELTA </operation>
+    <frequency>600</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+
+  <perfObjectDefn id="101">
+    <method> WMI </method>
+    <desc> Process Resource Usage via WMI </desc>
+    <type group="System" label="Process Util"> PROC_RESOURCE </type>
+    <operation> UTILIZATION </operation>
+    <frequency>180</frequency>
+    <threshold>5</threshold>
+  </perfObjectDefn>
+
+  <perfObjectDefn id="102">
+    <method> SNMP </method>
+    <oids>
+      <oid>
+        <val>1.3.6.1.4.1.11.2.3.1.1.1</val>
+      </oid>
+    </oids>
+    <desc> HP-UX Device uptime </desc>
+    <type group="System" label="Uptime"> SYS_UPTIME </type>
+    <operation> NONE </operation>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+
+  <perfObjectDefn id= "103">
+    <method> SNMP </method>
+    <oids>
+      <oid>
+        <val>1.3.6.1.4.1.11.2.3.1.1.15.0</val>
+        <attr>cpuUtil</attr>
+      </oid>
+      <oid>
+        <val>1.3.6.1.4.1.11.2.3.1.1.14.0</val>
+        <attr>sysCpuUtil</attr>
+      </oid>
+      <oid>
+        <val>1.3.6.1.4.1.11.2.3.1.1.13.0</val>
+        <attr>userCpuUtil</attr>
+      </oid>
+    </oids>
+    <desc> HP-UX System cpu usage </desc>
+    <type group="System" label="CPU Util"> SYS_CPU </type>
+    <operation> UTILIZATION_MULTI_OIDS </operation>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+
+  <!-- the function is 100*(1-first/second) -->
+  <perfObjectDefn id = "104" >
+    <method> SNMP </method>
+    <oids>
+      <oid>
+        <val>1.3.6.1.4.1.11.2.3.1.1.7.0</val>
+      </oid>
+    </oids>
+    <desc>HP-UX Memory Utilization </desc>
+    <type group="System" label="Memory Util"> SYS_MEM </type>
+    <operation>UTILIZATION_COMPLEMENT</operation>
+    <matchOid>
+      <val>1.3.6.1.4.1.11.2.3.1.1.8.0</val>
+    </matchOid>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+
+  <perfObjectDefn id="105">
+    <method> SNMP </method>
+    <oids>
+      <oid>
+        <val>1.3.6.1.4.1.11.2.3.1.1.2.0</val>
+        <attr>numUser</attr>
+      </oid>
+      <oid>
+        <val>1.3.6.1.4.1.11.2.3.1.1.4.0</val>
+        <attr>numJob</attr>
+      </oid>
+    </oids>
+    <desc> HP-UX Logged in Users and Avg System jobs (5 min)</desc>
+    <type group="System" label="System Status"> SYS_STAT </type>
+    <operation> UTILIZATION_MULTI_OIDS </operation>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+
+  <perfObjectDefn id ="106">
+    <method> SNMP </method>
+    <oids>
+      <oid>
+        <val>1.3.6.1.4.1.11.2.3.1.4.1.0</val>
+      </oid>
+    </oids>
+    <desc> System processes </desc>
+    <type group="System" label="Process Count"> SYS_PROCESSES </type>
+    <operation> NONE </operation>
+    <frequency>180</frequency>
+    <threshold>1</threshold>
+  </perfObjectDefn>
+
+  <perfObjectDefn id= "107">
+    <method>SNMP</method>
+    <oids>
+      <oid>
+        <val>NO_OID</val>
+      </oid>
+    </oids>
+    <desc>HP-UX Disk Utilization</desc>
+    <type group="System" label="Disk Util"> SYS_DISK </type>
+    <operation> NONE </operation>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+
+  <perfObjectDefn id="108">
+    <method> SNMP </method>
+    <desc> Process Resource Usage via SNMP </desc>
+    <type group="System" label="Process Util"> PROC_RESOURCE </type>
+    <operation> UTILIZATION </operation>
+    <frequency>180</frequency>
+    <threshold>5</threshold>
+  </perfObjectDefn>
+
+  <perfObjectDefn id="110">
+    <method> WMI </method>
+    <desc>Disk IO Util via WMI</desc>
+    <type group="System" label="Disk IO Util"> SYS_DISKIO_UTIL </type>
+    <operation> UTILIZATION </operation>
+    <frequency>180</frequency>
+    <threshold>5</threshold>
+  </perfObjectDefn>
+
+  <perfObjectDefn id="111">
+    <method> LOGIN </method>
+    <desc> Disk IO Util via SSH </desc>
+    <type group="System" label="Disk IO Util"> SYS_DISKIO_UTIL </type>
+    <operation> UTILIZATION </operation>
+    <frequency>180</frequency>
+    <threshold>5</threshold>
+  </perfObjectDefn>
+
+  <perfObjectDefn id= "112">
+    <method>WMI</method>
+    <desc> Windows System cpu usage via WMI</desc>
+    <type group="System" label="CPU Util"> SYS_CPU </type>
+    <operation>NONE</operation>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+
+  <perfObjectDefn id= "113">
+    <method>WMI</method>
+    <desc> Windows System memory usage via WMI</desc>
+    <type group="System" label="Mem Util"> SYS_MEM </type>
+    <operation>NONE</operation>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+
+  <perfObjectDefn id= "114">
+    <method>WMI</method>
+    <desc> Windows System disk usage via WMI</desc>
+    <type group="System" label="Disk Util"> SYS_DISK </type>
+    <operation>NONE</operation>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+
+   <perfObjectDefn id= "115">
+    <method>WMI</method>
+    <desc> Windows System network interface usage via WMI</desc>
+    <type group="System" label="Net Intf Stat"> INTERFACE </type>
+    <operation>NONE</operation>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+
+  <!-- Palo Alto Networks Session Utilization -->
+  <perfObjectDefn id= "116">
+    <method> SNMP </method>
+    <oids>
+      <oid>
+        <val>1.3.6.1.4.1.25461.2.1.2.3.1.0</val>
+        <attr>sessionUtil</attr>
+      </oid>
+      <oid>
+        <val></val>
+        <attr>activeFwSession</attr>
+      </oid>
+      <oid>
+        <val>1.3.6.1.4.1.2021.11.10.0</val>
+        <attr>activeTcpFwSession</attr>
+      </oid>
+      <oid>
+        <val>1.3.6.1.4.1.2021.11.10.0</val>
+        <attr>activeUdpFwSession</attr>
+      </oid>
+      <oid>
+        <val>1.3.6.1.4.1.2021.11.10.0</val>
+        <attr>activeIcmpFwSession</attr>
+      </oid>
+    </oids>
+    <desc>Firewall Session Usage</desc>
+    <type group="System" label="CPU Util"> MULTI_CONN </type>
+    <operation> UTILIZATION_MULTI_OIDS </operation>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+
+  <perfObjectDefn id="117">
+    <method> WMI </method>
+    <desc> Host System uptime via WMI </desc>
+    <type group="System" label="Uptime"> SYS_UPTIME </type>
+    <operation> NONE </operation>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+
+  <perfObjectDefn id = "118" >
+    <method> SNMP </method>
+    <oids>
+      <oid>
+        <val>1.3.6.1.3.25.17.3.1.2.0</val>
+        <attr>proxyCacheObjCount</attr>
+      </oid>
+      <oid>
+        <val>1.3.6.1.3.25.17.3.2.2.2.0</val>
+        <attr>proxy2ServerHttpErr</attr>
+      </oid>
+      <oid>
+        <val>1.3.6.1.3.25.17.3.2.2.1.0</val>
+        <attr>proxy2ServerHttpReq</attr>
+      </oid>
+      <oid>
+        <val>1.3.6.1.3.25.17.3.2.2.3.0</val>
+        <attr>server2ProxyHttpKBps</attr>
+      </oid>
+      <oid>
+        <val>1.3.6.1.3.25.17.3.2.2.4.0</val>
+        <attr>proxy2ServerHttpKBps</attr>
+      </oid>
+      <oid>
+        <val>1.3.6.1.3.25.17.3.2.1.1.0</val>
+        <attr>client2ProxyHttpReq</attr>
+      </oid>
+      <oid>
+        <val>1.3.6.1.3.25.17.3.2.1.2.0</val>
+        <attr>client2ProxyHttpCacheHit</attr>
+      </oid>
+      <oid>
+        <val>1.3.6.1.3.25.17.3.2.1.3.0</val>
+        <attr>client2ProxyHttpError</attr>
+      </oid>
+      <oid>
+        <val>1.3.6.1.3.25.17.3.2.1.4.0</val>
+        <attr>client2ProxyHttpKBps</attr>
+      </oid>
+      <oid>
+        <val>1.3.6.1.3.25.17.3.2.1.5.0</val>
+        <attr>proxy2ClientHttpKBps</attr>
+      </oid>
+    </oids>
+    <desc>Bluecoat performance metrics </desc>
+    <type group="System" label="HTTP Proxy Metrics"> BLUECOAT_PROXY_METRIC </type>
+    <operation> UTILIZATION_MULTI_OIDS </operation>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+
+  <perfObjectDefn id= "119">
+    <method> SNMP </method>
+    <oids>
+      <oid>
+        <val>1.3.6.1.4.1.664.5.53.1.4.4</val>
+      </oid>
+    </oids>
+    <desc> Adtran NetVanta CPU utilization (5 min average) </desc>
+    <type group="System" label="CPU Util"> SYS_CPU </type>
+    <operation> UTILIZATION_CPU </operation>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+
+  <!-- Sonicwall CPU utilization  -->
+  <perfObjectDefn id= "120">
+    <method> SNMP </method>
+    <oids>
+      <oid>
+        <val>1.3.6.1.4.1.8741.1.3.1.3.0</val>
+      </oid>
+    </oids>
+    <desc>Sonicwall CPU utilization </desc>
+    <type group="System" label="CPU Util"> SYS_CPU </type>
+    <operation> UTILIZATION_CPU </operation>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+
+  <!-- Sonicwall Memory utilization  -->
+  <perfObjectDefn id = "121" >
+    <method> SNMP </method>
+    <oids>
+      <oid>
+        <val>1.3.6.1.4.1.8741.1.3.1.4.0</val>
+      </oid>
+    </oids>
+    <desc>Sonicwall Memory  Utilization </desc>
+    <type group="System" label="Mem Util"> SYS_MEM_UTIL </type>
+    <operation> NONE</operation>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+
+  <!-- Sonicwall Session count -->
+   <perfObjectDefn id = "122" >
+    <method> SNMP </method>
+    <oids>
+      <oid>
+        <val>1.3.6.1.4.1.8741.1.3.1.2.0</val>
+      </oid>
+    </oids>
+    <desc>Fortinet firewall session count </desc>
+    <type group="System" label="Firewall Session Count"> FW_CONN </type>
+    <operation> NONE</operation>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+
+  <!-- Huawei VRP -->
+  <perfObjectDefn id= "123">
+    <method> SNMP </method>
+    <oids>
+      <oid>
+        <val> .1.3.6.1.4.1.2011.5.25.31.1.1.1.1.5.150994945 </val>
+      </oid>
+    </oids>
+    <desc> Huawei Network Device System cpu usage - every 3 min</desc>
+    <type group="System" label="CPU Util"> SYS_CPU </type>
+    <operation> UTILIZATION_CPU </operation> <!-- TODO-rui: operator NONE -->
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+  <perfObjectDefn id = "124" >
+    <method> SNMP </method>
+    <oids>
+      <oid>
+        <val>  1.3.6.1.4.1.2011.5.25.31.1.1.1.1.7.150994945 </val>
+      </oid>
+    </oids>
+    <desc> Huawei Network Device Memory Utilization </desc>
+    <type group="System" label="Memory Util"> SYS_MEM_UTIL </type>
+    <operation> NONE</operation>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+  
+   <perfObjectDefn id= "125">
+    <method>SNMP</method>
+    <oids>
+      <oid>
+        <val>NO_OID</val>
+      </oid>
+    </oids>
+    <desc>Printer metrics</desc>
+    <type group="System" label="Printer metrics"> PRINTER_METRICS </type>
+    <operation> NONE </operation>
+    <frequency>600</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+
+  <perfObjectDefn id="126">
+    <method> LOGIN </method>
+    <desc> AIX System Uptime via SSH </desc>
+    <type group="System" label="Uptime"> SYS_UPTIME </type>
+    <operation> NONE </operation>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+
+  <!-- Cisco NX-OS CPU utilization  -->
+  <perfObjectDefn id= "127">
+    <method> SNMP </method>
+    <oids>
+      <oid>
+        <val> 1.3.6.1.4.1.9.9.305.1.1.1 </val>
+      </oid>
+    </oids>
+    <desc> Cisco NX-OS System cpu usage</desc>
+    <type group="System" label="CPU Util"> SYS_CPU </type>
+    <operation> UTILIZATION_CPU </operation>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+
+  <!-- Cisco NX-OS Memory utilization  -->
+  <perfObjectDefn id = "128" >
+    <method> SNMP </method>
+    <oids>
+      <oid>
+        <val>1.3.6.1.4.1.9.9.305.1.1.2</val>
+      </oid>
+    </oids>
+    <desc>Cisco NX-OS Memory  Utilization </desc>
+    <type group="System" label="Mem Util"> SYS_MEM_UTIL </type>
+    <operation> NONE</operation>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+
+  <!-- Cisco NX-OS NX-OS uptime  -->
+  <perfObjectDefn id="129">
+    <method> SNMP </method>
+    <oids>
+      <oid>
+        <val>1.3.6.1.4.1.9.9.305.1.1.10</val>
+      </oid>
+    </oids>
+    <desc> Cisco NX-OS uptime </desc>
+    <type group="System" label="Uptime"> SYS_UPTIME </type>
+    <operation> NONE </operation>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+
+  <perfObjectDefn id= "130">
+    <method>SNMP</method>
+    <oids>
+      <oid>
+        <val>NO_OID</val>
+      </oid>
+    </oids>
+    <desc>OSPF metrics</desc>
+    <type group="System" label="OSPF metrics"> OSPF_METRICS </type>
+    <operation> NONE </operation>
+    <frequency>300</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+
+  <perfObjectDefn id= "131">
+    <method>SNMP</method>
+    <oids>
+      <oid>
+        <val>NO_OID</val>
+      </oid>
+    </oids>
+    <desc>BGP metrics</desc>
+    <type group="System" label="BGP metrics"> BGP_METRICS </type>
+    <operation> NONE </operation>
+    <frequency>300</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+
+  <!-- Avaya (nortel 8600) CPU -->
+  <perfObjectDefn id= "132">
+    <method> SNMP </method>
+    <oids>
+      <oid>
+        <val>1.3.6.1.4.1.2272.1.1.20</val>
+      </oid>
+    </oids>
+    <desc> System cpu usage </desc>
+    <type group="System" label="CPU Util"> SYS_CPU </type>
+    <operation> UTILIZATION_CPU </operation>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+
+  <!--UCD Extensible Commands-->
+  <perfObjectDefn id= "133">
+    <method> SNMP </method>
+    <oids>
+      <oid>
+	<val>1.3.6.1.4.1.2021.8.1</val>
+      </oid>
+    </oids>
+    <desc> Extensible commands and output </desc>
+    <type group="System" label="Extensible Command"> EXT_CMD </type>
+    <operation> NONE </operation>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+
+  <!-- EqualLogic Disk Utilization-->
+  <perfObjectDefn id= "134">
+    <method>SNMP</method>
+    <oids>
+      <oid>
+        <val>NO_OID</val>
+      </oid>
+    </oids>
+    <desc>EqualLogic Disk I/O </desc>
+    <type group="System" label="Disk I/O"> SYS_EQL_DISK_IO </type>
+    <operation> UTILIZATION </operation>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+
+  <!-- EqualLogic Connectiion Monitoring -->
+  <perfObjectDefn id= "135">
+    <method>SNMP</method>
+    <oids>
+      <oid>
+        <val>NO_OID</val>
+      </oid>
+    </oids>
+    <desc>EqualLogic Connection Performance </desc>
+    <type group="System" label="Connection Perf"> SYS_EQL_CONN_PERF </type>
+    <operation> UTILIZATION </operation>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+  
+  <!-- EqualLogic Group Level Info Monitoring -->
+  <perfObjectDefn id= "137">
+    <method>SNMP</method>
+    <oids>
+      <oid>
+        <val>NO_OID</val>
+      </oid>
+    </oids>
+    <desc>EqualLogic temperature </desc>
+    <type group="System" label="Group Stat"> SYS_EQL_GROUP_STAT </type>
+    <operation> UTILIZATION </operation>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+
+  <!-- Avaya (Nortel 5500/5600) CPU -->
+  <perfObjectDefn id= "138">
+    <method> SNMP </method>
+    <oids>
+      <oid>
+        <val>1.3.6.1.4.1.45.1.6.3.8.1.1.6</val>
+      </oid>
+    </oids>
+    <desc> System cpu usage (10 min avg)</desc>
+    <type group="System" label="CPU Util"> SYS_CPU </type>
+    <operation> UTILIZATION_CPU </operation>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+
+  <!-- Avaya (Nortel 5500/5600) Temp -->
+  <perfObjectDefn id= "139">
+    <method> SNMP </method>
+    <oids>
+      <oid>
+        <val>1.3.6.1.4.1.45.1.6.3.7.1.1.5</val>
+      </oid>
+    </oids>
+    <desc> System temp</desc>
+    <type group="System" label="Temp"> SYS_TEMP </type>
+    <operation> AVG </operation>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+
+  <!-- Avaya (Nortel 8600) Mem util -->
+  <perfObjectDefn id = "140" >
+    <method> SNMP </method>
+    <oids>
+      <oid>
+        <val>1.3.6.1.4.1.2272.1.1.47.0 </val>
+      </oid>
+    </oids>
+    <desc> System Memory  Utilization </desc>
+    <type group="System" label="Mem Util"> SYS_MEM_UTIL </type>
+    <operation> NONE</operation>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+
+  <perfObjectDefn id= "141">
+    <method> SNMP </method>
+    <oids>
+      <oid>
+        <val>1.3.6.1.4.1.2272.1.100.1.2.0</val>
+      </oid>
+    </oids>
+    <desc> System temp</desc>
+    <type group="System" label="Temp"> SYS_TEMP </type>
+    <operation>NONE</operation>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+
+  <!-- the function is 100*(1-first/second) -->
+  <perfObjectDefn id = "142" >
+    <method> SNMP </method>
+    <oids>
+      <oid>
+        <val>1.3.6.1.4.1.45.1.6.3.8.1.1.13.3.10.0</val>
+      </oid>
+    </oids>
+    <desc>Nortel 5500/5600 Memory Utilization </desc>
+    <type group="System" label="Memory Util"> SYS_MEM </type>
+    <operation>UTILIZATION_COMPLEMENT</operation>
+    <matchOid>
+      <val>1.3.6.1.4.1.45.1.6.3.8.1.1.12.3.10.0</val>
+    </matchOid>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+
+  <perfObjectDefn id="143">
+    <method> WMI </method>
+    <desc> Service status Change Via WMI </desc>
+    <type group="System" label="Service Status"> SYS_SVC_STAT </type>
+    <operation> NONE</operation>
+    <frequency>180</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+  
+  <!-- All devices and hosts -->
+  <perfObjectDefn id="144">
+    <method> SNMP </method>
+    <oids>
+      <oid>
+        <val>1.3.6.1.2.1.31.1.1</val>
+      </oid>
+    </oids>
+    <desc> High Speed Network Interface  Utilization </desc>
+    <type group="System" label="Net Intf Stat (HS)"> INTERFACE_HS </type>
+    <operation> UTILIZATION_CUMMULATIVE </operation>
+    <frequency>180</frequency>
+    <threshold>0.1</threshold>
+  </perfObjectDefn>
+
+  <!-- Hardware monitoring -->
+  <perfObjectDefn id="501">
+    <method> SNMP </method>
+    <desc> Hardware Status Monitoring </desc>
+    <type group="System" label="Hardware Status"> SYS_HW_STAT </type>
+    <operation> NONE </operation>
+    <frequency>180</frequency>
+    <threshold>1</threshold>
+  </perfObjectDefn>
+
+  <!-- Port monitoring -->
+  <!-- perfObjectDefn id="502">
+    <method> SNMP </method>
+    <desc> Port Monitoring </desc>
+    <type group="System" label="Port Change"> SYS_PORT </type>
+    <operation> DELTA </operation>
+    <frequency>180</frequency>
+    <threshold>1</threshold>
+  </perfObjectDefn -->
+
+
+  <!-- IP SLA-->
+  <perfObjectDefn id= "505">
+    <method>SNMP</method>
+    <oids>
+      <oid>
+        <val>NO_OID</val>m
+      </oid>
+    </oids>
+    <desc>IP SLA Monitoring</desc>
+    <type group="App" label="IP SLA Metrics"> APP_IP_SLA </type>
+    <operation> NONE </operation>
+    <frequency>300</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+
+  <!-- Class-Based QOS -->
+  <perfObjectDefn id= "506">
+    <method>SNMP</method>
+    <oids>
+      <oid>
+        <val>NO_OID</val>
+      </oid>
+    </oids>
+    <desc>Class-Based QOS Monitoring</desc>
+    <type group="App" label="Class-Based QOS Metrics"> APP_CB_QOS </type>
+    <operation> NONE </operation>
+    <frequency>300</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+
+  <!-- Cisco IPSec VPN monitoring -->
+  <perfObjectDefn id= "507">
+    <method>SNMP</method>
+    <oids>
+      <oid>
+        <val>NO_OID</val>
+      </oid>
+    </oids>
+    <desc>IPSec VPN Monitoring</desc>
+    <type group="App" label="Cisco IPSec VPN Metrics"> CISCO_IPSEC_VPN </type>
+    <operation> NONE </operation>
+    <frequency>300</frequency>
+    <threshold>0</threshold>
+  </perfObjectDefn>
+   
+
+  <!-- Application monitoring stuff -->
+  <perfObjectDefn id="5000">
+    <method> WMI </method>
+    <desc> Microsoft DNS Metric Monitoring  </desc>
+    <type group="App" label="DNS Metric"> APP_MS_DNS_METRIC </type>
+    <operation> NONE </operation>
+    <frequency>180</frequency>
+    <threshold>1</threshold>
+  </perfObjectDefn>
+  <perfObjectDefn id="5001">
+    <method> WMI </method>
+    <desc> Microsoft DHCP Metric Monitoring  </desc>
+    <type group="App" label="DHCP Metric"> APP_MS_DHCP_METRIC </type>
+    <operation> NONE </operation>
+    <frequency>180</frequency>
+    <threshold>1</threshold>
+  </perfObjectDefn>
+  <perfObjectDefn id="5002">
+    <method>JDBC</method>
+    <desc>MS-SQL Metric Monitoring</desc>
+    <type group="App" label="MS SQL Server Metric"> APP_MS_SQL_SERVER_METRIC </type>
+    <operation> NONE </operation>
+    <frequency>180</frequency>
+    <threshold>1</threshold>
+  </perfObjectDefn>
+  <perfObjectDefn id="5003">
+    <method>WMI</method>
+    <desc>IIS Metric Monitoring</desc>
+    <type group="App" label="IIS Metric"> APP_MS_IIS_METRIC </type>
+    <operation> NONE </operation>
+    <frequency>180</frequency>
+    <threshold>1</threshold>
+  </perfObjectDefn>
+  <perfObjectDefn id="5004">
+    <method>JMX</method>
+    <desc>Java App Server Metric Monitoring</desc>
+    <type group="App" label="App Server Metric"> APP_JAVA_APPSRVR_JMX_METRIC </type>
+    <operation> NONE </operation>
+    <frequency>180</frequency>
+    <threshold>1</threshold>
+  </perfObjectDefn>
+  <perfObjectDefn id="5005">
+    <method>WMI</method>
+    <desc>Exchange Metric Monitoring</desc>
+    <type group="App" label="MS Exchange Metric"> APP_MS_EXCHANGE_METRIC </type>
+    <operation> NONE </operation>
+    <frequency>180</frequency>
+    <threshold>1</threshold>
+  </perfObjectDefn>
+  <perfObjectDefn id="5006">
+    <method>HTTP/HTTPS</method>
+    <desc>Apache Metric Monitoring</desc>
+    <type group="App" label="Apache Metric"> APP_APACHE_METRIC </type>
+    <operation> NONE </operation>
+    <frequency>180</frequency>
+    <threshold>1</threshold>
+  </perfObjectDefn>
+  <perfObjectDefn id="5007">
+    <method>SNMP</method>
+    <desc>NFS Metric Monitoring</desc>
+    <type group="App" label="Basic NetApp Metric"> APP_NFS_METRIC </type>
+    <operation> NONE </operation>
+    <frequency>180</frequency>
+    <threshold>1</threshold>
+  </perfObjectDefn>
+  <perfObjectDefn id="5008">
+    <method>WMI</method>
+    <desc>Directory Service Metric Monitoring</desc>
+    <type group="App" label="MS Directory Service Metric"> APP_MS_DIRECTORY_SRVC </type>
+    <operation> NONE </operation>
+    <frequency>180</frequency>
+    <threshold>1</threshold>
+  </perfObjectDefn>
+  <perfObjectDefn id="5009">
+    <method>JDBC</method>
+    <desc>Oracle Metric Monitoring</desc>
+    <type group="App" label="Oracle Server Metric"> APP_ORACLE_SERVER_METRIC </type>
+    <operation> NONE </operation>
+    <frequency>180</frequency>
+    <threshold>1</threshold>
+  </perfObjectDefn>
+
+  <perfObjectDefn id="5010">
+    <method>WMI</method>
+    <desc>ASPNET Metric Monitoring</desc>
+    <type group="App" label="ASPNET Metric"> APP_MS_ASPNET_METRIC </type>
+    <operation> NONE </operation>
+    <frequency>180</frequency>
+    <threshold>1</threshold>
+  </perfObjectDefn>
+
+  <perfObjectDefn id="5011">
+    <method>WMI</method>
+    <desc>MS Exchange Database Whitespace Monitoring</desc>
+    <type group="App" label="MS Exchange DB Whitespace"> APP_MS_EXCHNGE_DB_WHITESPACE</type>
+    <operation> NONE </operation>
+    <frequency>180</frequency>
+    <threshold>1</threshold>
+  </perfObjectDefn>
+
+  <perfObjectDefn id="5012">
+    <method>WMI</method>
+    <desc>Citrix ICA Session Monitoring</desc>
+    <type group="App" label="ICA Session Metric"> APP_CITRIX_ICA_SESS_METRIC </type>
+    <operation> NONE </operation>
+    <frequency>180</frequency>
+    <threshold>1</threshold>
+  </perfObjectDefn>
+
+<!-- ***************************************************************** -->
+  <monitorTemplate id = "1" name = "Windows Server Monitoring template">
+    <deviceTypes>
+      <deviceType>
+        <vendor> Microsoft </vendor>
+        <model> Windows Server 2003 </model>
+        <version> ANY </version>
+      </deviceType>
+      <deviceType>
+        <vendor> Microsoft </vendor>
+        <model> Windows </model>
+        <version> ANY </version>
+      </deviceType>
+      <deviceType>
+        <vendor> Microsoft </vendor>
+        <model> Windows Server 2000 </model>
+        <version> ANY </version>
+      </deviceType>
+      <deviceType>
+        <vendor> Microsoft </vendor>
+        <model> Windows Server 2008 </model>
+        <version> ANY </version>
+      </deviceType>
+      <deviceType>
+        <vendor> Microsoft </vendor>
+        <model>Windows XP</model>
+        <version> ANY </version>
+      </deviceType>
+      <deviceType>
+        <vendor> Microsoft </vendor>
+        <model>Windows Vista</model>
+        <version> ANY </version>
+      </deviceType>
+    </deviceTypes>
+    <!-- ping -->
+    <item>
+      <perfObjectDefnRef refId="8"/>
+    </item> 
+    <!-- snmp ping -->
+    <item>
+      <perfObjectDefnRef refId="10"/>
+    </item> 
+     <!-- wmi ping -->
+    <item>
+      <perfObjectDefnRef refId="9"/>
+    </item> 
+    <!-- uptime -->
+    <item>
+      <perfObjectDefnRef refId="21"/>
+    </item>
+    <!-- uptime via WMI -->
+    <item>
+      <perfObjectDefnRef refId="117"/>
+    </item>
+    
+    <!-- process count -->
+    <item>
+      <perfObjectDefnRef refId="2"/>
+    </item>
+    <!-- CPU utilization -->
+    <item>
+      <perfObjectDefnRef refId="3"/>
+    </item>
+    <item>
+      <perfObjectDefnRef refId="112"/>
+    </item>
+    <!-- Real Memory utilization -->
+    <item>
+      <perfObjectDefnRef refId="4"/>
+    </item>
+    <item>
+      <perfObjectDefnRef refId="113"/>
+    </item>
+    <!-- Disk utilization -->
+    <item>
+      <perfObjectDefnRef refId="6"/>
+    </item>
+    <item>
+      <perfObjectDefnRef refId="114"/>
+    </item>
+    <!-- Process Resource (CPU/Memory) Utilization -->
+    <item>
+      <perfObjectDefnRef refId="7"/>
+    </item>
+    
+    <!-- Install Software Change -->
+    <item>
+      <perfObjectDefnRef refId="23"/>      
+    </item>
+    <!-- interface utilization -->
+    <item>
+      <perfObjectDefnRef refId="99"/>
+    </item>
+    <item>
+      <perfObjectDefnRef refId="115"/>
+    </item>
+    <!-- install sw via WMI -->
+    <item>
+      <perfObjectDefnRef refId="100"/>
+    </item>
+    <!-- resource utilization via WMI -->
+    <item>
+      <perfObjectDefnRef refId="101"/>
+    </item>
+    <!-- disk io util via WMI -->
+    <item>
+      <perfObjectDefnRef refId="110"/>
+    </item>
+    <!-- hardware status monitoring -->
+    <item>
+      <perfObjectDefnRef refId="501"/>
+    </item>
+    <!-- DNS metric monitoring -->
+    <item>
+      <perfObjectDefnRef refId="5000"/>
+    </item>
+    
+    <!-- DHCP metric monitoring -->
+    <item>
+      <perfObjectDefnRef refId="5001"/>
+    </item>
+    <!-- IIS metric monitoring -->
+    <item>
+      <perfObjectDefnRef refId="5003"/>
+    </item>
+    <!-- Apache metric monitoring -->
+    <item>
+      <perfObjectDefnRef refId="5006"/>
+    </item>
+    <!-- JMX metric monitoring -->
+    <item>
+      <perfObjectDefnRef refId="5004"/>
+    </item>
+    <!-- SQL Server metric monitoring -->
+    <item>
+      <perfObjectDefnRef refId="5002"/>
+    </item>
+    <!-- Exchange metric monitoring -->
+    <item>
+      <perfObjectDefnRef refId="5005"/>
+    </item>
+    <!-- NTDS metric monitoring -->
+    <item>
+      <perfObjectDefnRef refId="5008"/>
+    </item>
+    <!-- Oracle metric monitoring -->
+    <item>
+      <perfObjectDefnRef refId="5009"/>
+    </item>
+    <!-- ASP NET monitoring -->
+    <item>
+      <perfObjectDefnRef refId="5010"/>
+    </item>
+    <!-- Exchange whitespace monitoring -->
+    <item>
+      <perfObjectDefnRef refId="5011"/>
+    </item>
+    
+    <!-- ICA Session monitoring -->
+    <item>
+      <perfObjectDefnRef refId="5012"/>
+    </item>
+
+    <!-- VMware Performance Metric Monitoring -->
+    <item>
+      <perfObjectDefnRef refId="67"/>
+    </item>
+
+    <!-- VMware Hardware Status -->
+    <item>
+      <perfObjectDefnRef refId="68"/>
+    </item>
+
+    <!-- Windows Service Status -->
+    <item>
+      <perfObjectDefnRef refId="143"/>
+    </item>
+    
+  </monitorTemplate>
+  
+  <!--******************************************************** -->
+  <monitorTemplate id = "2" name = "Cisco Router/Switch Monitoring template">
+    <deviceTypes>
+      <deviceType>
+        <vendor> Cisco </vendor>
+        <model> IOS </model>
+        <version> ANY </version>
+      </deviceType>
+    </deviceTypes>
+    <!-- ping -->
+    <item>
+      <perfObjectDefnRef refId="8"/>
+    </item>
+    <!-- snmp ping -->
+    <item>
+      <perfObjectDefnRef refId="10"/>
+    </item>
+    <!-- CPU utilization (device provides average over last 3 min) -->
+    <item>
+      <perfObjectDefnRef refId="14"/>
+    </item>
+    <!-- Free Processor memory -->
+    <item>
+      <perfObjectDefnRef refId="15"/>
+    </item>
+    <!-- Free I/O memory -->
+    <item>
+      <perfObjectDefnRef refId="16"/>
+    </item>
+    <!-- Free Contiguous processor Memory -->
+    <item>
+      <perfObjectDefnRef refId="17"/>
+    </item>
+    <!-- Free Contiguous I/O memory -->
+    <item>
+      <perfObjectDefnRef refId="18"/>
+    </item>
+     <!-- Memory Utilization -->
+    <item>
+      <perfObjectDefnRef refId="20"/>
+    </item>
+    <!-- Uptime -->
+    <item>
+      <perfObjectDefnRef refId="21"/>
+    </item>
+    <!-- Config change (both (startup vs running) and (curr running vs prev running)-->
+    <item>
+      <perfObjectDefnRef refId="24"/>
+    </item>
+    <!-- Process Resource (CPU/Memory) Utilization -->
+    <item>
+      <perfObjectDefnRef refId="43"/>
+    </item>
+    <!-- network interface util and error -->
+    <item>
+      <perfObjectDefnRef refId="99"/>
+    </item>
+    <!-- hardware monitoring -->
+    <item>
+      <perfObjectDefnRef refId="501"/>
+    </item>
+
+    <!-- IP SLA monitoring -->
+    <item>
+      <perfObjectDefnRef refId="505"/>
+    </item>
+    <!-- CB QOS monitoring -->
+    <item>
+      <perfObjectDefnRef refId="506"/>
+    </item>
+    <!-- OSPF monitoring -->
+    <item>
+      <perfObjectDefnRef refId="130"/>
+    </item>
+    <!-- BGP monitoring -->
+    <item>
+      <perfObjectDefnRef refId="131"/>
+    </item>
+
+    <!-- IPSec VPN monitoring -->
+    <item>
+      <perfObjectDefnRef refId="507"/>
+    </item>
+    
+  </monitorTemplate>
+  
+  <!-- ************************************************************* -->
+  <monitorTemplate id = "3" name = "Cisco ASA/PIX Firewall Monitoring template">
+    <deviceTypes>
+      <deviceType>
+        <vendor> Cisco </vendor>
+        <model>  ASA </model>
+        <version> ANY </version>
+      </deviceType>
+      <deviceType>
+        <vendor> Cisco </vendor>
+        <model>  PIX </model>
+        <version> ANY </version>
+      </deviceType>
+
+      <deviceType>
+        <vendor> Cisco </vendor>
+        <model>  FWSM </model>
+        <version> ANY </version>
+      </deviceType>
+    </deviceTypes>
+
+    <!-- ping -->
+    <item>
+      <perfObjectDefnRef refId="8"/>
+    </item>
+    <!-- snmp ping -->
+    <item>
+      <perfObjectDefnRef refId="10"/>
+    </item>    
+    <!-- CPU utilization -->
+    <item>
+      <perfObjectDefnRef refId="14"/>
+    </item>
+    <!-- Free Processor Memory -->
+    <item>
+      <perfObjectDefnRef refId="15"/>
+    </item>
+    <!-- Free IO memory -->
+    <item>
+      <perfObjectDefnRef refId="17"/>
+    </item>
+    <!-- Firewall connection count -->
+    <item>
+      <perfObjectDefnRef refId="19"/>
+    </item>
+    <!-- Memory Utilization -->
+    <item>
+      <perfObjectDefnRef refId="20"/>
+    </item>
+    <!-- uptime -->
+    <item>
+      <perfObjectDefnRef refId="21"/>
+    </item>
+    <!-- Config change (both (startup vs running) and (curr running vs prev running)-->
+    <item>
+      <perfObjectDefnRef refId="24"/>
+    </item>
+    <!-- network interface util -->
+    <item>
+      <perfObjectDefnRef refId="99"/>
+    </item>
+
+    <!-- IPSec VPN monitoring -->
+    <item>
+      <perfObjectDefnRef refId="507"/>
+    </item>
+
+  </monitorTemplate>
+  
+  <monitorTemplate id = "4" name = "Juniper Firewall template ">
+    <deviceTypes>
+      <deviceType>
+        <vendor> Juniper </vendor>
+        <model> Netscreen ScreenOS </model>
+        <version> ANY </version>
+      </deviceType>
+      <deviceType>
+        <vendor> Juniper </vendor>
+        <model> SSG ScreenOS </model>
+        <version> ANY </version>
+      </deviceType>
+    </deviceTypes>
+    <!-- ping -->
+    <item>
+      <perfObjectDefnRef refId="8"/>
+    </item>
+    <!-- snmp ping -->
+    <item>
+      <perfObjectDefnRef refId="10"/>
+    </item>
+    <!-- uptime -->
+    <item>
+      <perfObjectDefnRef refId="21"/>
+    </item>
+    <!-- Config change (both (startup vs running) and (curr running vs prev running) -->
+    <item>
+      <perfObjectDefnRef refId="24"/>
+    </item>
+    <!-- CPU utilization -->
+    <item>
+      <perfObjectDefnRef refId="25"/>
+    </item>
+    <!-- Free memory -->
+    <item>
+      <perfObjectDefnRef refId="26"/>
+    </item>
+    <!-- Memory utilization -->
+    <item>
+      <perfObjectDefnRef refId="27"/>
+    </item>
+    <!-- network interface utilization -->
+    <item>
+      <perfObjectDefnRef refId="98"/>
+    </item>
+  </monitorTemplate>
+  
+  <!-- ******************************************************************** -->
+  <monitorTemplate id = "5" name = "Checkpoint Firewall template">
+    <deviceTypes>
+      <deviceType>
+        <vendor> Checkpoint </vendor>
+        <model> FireWall-1 </model>
+        <version> ANY </version>
+      </deviceType>
+    </deviceTypes>
+    <!-- ping -->
+    <item>
+      <perfObjectDefnRef refId="8"/>
+    </item>
+    <!-- snmp ping -->
+    <item>
+      <perfObjectDefnRef refId="10"/>
+    </item>
+    <!-- uptime -->
+    <item>
+      <perfObjectDefnRef refId="21"/>
+    </item>
+    <!-- CPU utilization -->
+    <item>
+      <perfObjectDefnRef refId="28"/>
+    </item>
+    <!-- Free Memory -->
+    <item>
+      <perfObjectDefnRef refId="29"/>
+    </item>
+    <!-- Memory utilization -->
+    <item>
+      <perfObjectDefnRef refId="62"/>
+    </item>
+    <!-- network interace utilization -->
+    <item>
+      <perfObjectDefnRef refId="99"/>
+    </item>
+  </monitorTemplate>
+  
+  <!-- ****************************************************************************-->
+  <monitorTemplate id = "6" name = "Foundry Ironware template">
+    <deviceTypes>
+      <deviceType>
+        <vendor>Foundry</vendor>
+        <model>Ironware</model>
+        <version> ANY </version>
+      </deviceType>
+    </deviceTypes>
+    <!-- ping -->
+    <item>
+      <perfObjectDefnRef refId="8"/>
+    </item>
+    <!-- snmp ping -->
+    <item>
+      <perfObjectDefnRef refId="10"/>
+    </item>
+    <!-- uptime -->
+    <item>
+      <perfObjectDefnRef refId="21"/>
+    </item>
+    <!-- config change -->
+    <item>
+      <perfObjectDefnRef refId="24"/>
+    </item>
+    <!-- CPU util -->
+    <item>
+      <perfObjectDefnRef refId="31"/>
+    </item>
+    <!-- Free Memory -->
+    <item>
+      <perfObjectDefnRef refId="32"/>
+    </item>
+    <!-- Memory Utilization -->
+    <item>
+      <perfObjectDefnRef refId="33"/>
+    </item>
+    <!-- Interface Util -->
+    <item>
+      <perfObjectDefnRef refId="99"/>
+    </item>
+  </monitorTemplate>
+  
+  <monitorTemplate id = "7" name = "Generic Network Device Monitoring template">
+    <deviceTypes>
+      <deviceType>
+        <vendor> Generic </vendor>
+        <model> Generic </model>
+        <version> ANY </version>
+      </deviceType>
+    </deviceTypes>
+    <!-- ping -->
+    <item>
+      <perfObjectDefnRef refId="8"/>
+    </item>
+    <!-- snmp ping -->
+    <item>
+      <perfObjectDefnRef refId="10"/>
+    </item>
+    <!-- uptime -->
+    <item>
+      <perfObjectDefnRef refId="21"/>
+    </item>
+    <!-- interface utilization -->
+    <item>
+      <perfObjectDefnRef refId="99"/>
+    </item>
+  </monitorTemplate>
+  <!-- ***************************************************************** -->
+  <monitorTemplate id = "8" name = "Linux Server Monitoring template">
+    <deviceTypes>
+      <deviceType>
+        <vendor> Generic </vendor>
+        <model> Linux </model>
+        <version> ANY </version>
+      </deviceType>
+      <deviceType>
+        <vendor> Redhat </vendor>
+        <model> Linux </model>
+        <version> ANY </version>
+      </deviceType>
+      <deviceType>
+        <vendor> Ubuntu </vendor>
+        <model> Linux </model>
+        <version> ANY </version>
+      </deviceType>
+      <deviceType>
+        <vendor> Fedora </vendor>
+        <model> Linux </model>
+        <version> ANY </version>
+      </deviceType>
+      <deviceType>
+        <vendor> SuSE </vendor>
+        <model> Linux </model>
+        <version> ANY </version>
+      </deviceType>
+      <deviceType>
+        <vendor> OpenSuSE </vendor>
+        <model> Linux </model>
+        <version> ANY </version>
+      </deviceType>
+      <deviceType>
+        <vendor> CentOS </vendor>
+        <model> Linux </model>
+        <version> ANY </version>
+      </deviceType>
+    </deviceTypes>
+    <!-- uptime -->
+    <item>
+      <perfObjectDefnRef refId="1"/>
+    </item>
+    
+    <!-- process count -->
+    <item>
+      <perfObjectDefnRef refId="2"/>
+    </item>
+    <!-- ping -->
+    <item>
+      <perfObjectDefnRef refId="8"/>
+    </item>
+    <!-- snmp ping -->
+    <item>
+      <perfObjectDefnRef refId="10"/>
+    </item>
+    <!-- CPU utilization -->
+    <item>
+      <perfObjectDefnRef refId="61"/>
+    </item>
+    <!-- Real Memory utilization -->
+    <item>
+      <perfObjectDefnRef refId="62"/>
+    </item>
+    <!-- Disk utilization -->
+    <item>
+      <perfObjectDefnRef refId="6"/>
+    </item>
+    <!-- Process Resource (CPU/Memory) Utilization -->
+    <item>
+      <perfObjectDefnRef refId="7"/>
+    </item>
+    
+    <!-- Install Software Change -->
+    <item>
+      <perfObjectDefnRef refId="23"/>
+    </item>
+    <!-- interface utilization -->
+    <item>
+      <perfObjectDefnRef refId="99"/>
+    </item>
+    <!-- disk io util via SSH Login -->
+    <item>
+      <perfObjectDefnRef refId="111"/>
+    </item>
+    <!-- hardware status monitoring -->
+    <item>
+      <perfObjectDefnRef refId="501"/>
+    </item>
+    <!-- Apache metric monitoring -->
+    <item>
+      <perfObjectDefnRef refId="5006"/>
+    </item>
+    <!-- JMX metric monitoring -->
+    <item>
+      <perfObjectDefnRef refId="5004"/>
+    </item>
+    <!-- Oracle metric monitoring -->
+    <item>
+      <perfObjectDefnRef refId="5009"/>
+    </item>
+  </monitorTemplate>
+   <!-- ***************************************************************** -->  
+   <monitorTemplate id = "9" name = "IronPort Mail Gateway Monitoring template">
+     <deviceTypes>
+       <deviceType>
+         <vendor>Cisco</vendor>
+         <model>IronPort Mail Gateway</model>
+         <version> ANY </version>
+       </deviceType>
+     </deviceTypes>
+       
+     <!-- ping -->
+     <item>
+       <perfObjectDefnRef refId="8"/>
+     </item>
+     <!-- snmp ping -->
+    <item>
+      <perfObjectDefnRef refId="10"/>
+    </item>
+     <!-- uptime -->
+     <item>
+       <perfObjectDefnRef refId="21"/>
+     </item>
+       
+     <!-- CPU utilization -->
+     <item>
+       <perfObjectDefnRef refId="35"/>
+     </item>
+       
+     <!-- Physical Memory utilization -->
+     <item>
+       <perfObjectDefnRef refId="34"/>
+     </item>
+       
+     <!-- interface utilization -->
+     <item>
+       <perfObjectDefnRef refId="99"/>
+     </item>
+   </monitorTemplate>
+   <!-- ***************************************************************** -->  
+   <monitorTemplate id = "10" name = "HP ProCurve Monitoring template">
+     <deviceTypes>
+       <deviceType>
+         <vendor>HP</vendor>
+         <model>ProCurve</model>
+         <version>ANY</version>
+       </deviceType>
+     </deviceTypes>
+
+     <!-- ping -->
+     <item>
+       <perfObjectDefnRef refId="8"/>
+     </item>
+     <!-- snmp ping -->
+    <item>
+      <perfObjectDefnRef refId="10"/>
+    </item>       
+     <!-- uptime -->
+     <item>
+       <perfObjectDefnRef refId="21"/>
+     </item>
+       
+     <!-- CPU utilization -->
+     <item>
+       <perfObjectDefnRef refId="44"/>
+     </item>
+     <!-- Free Memory -->
+     <item>
+       <perfObjectDefnRef refId="45"/>
+     </item>
+       
+     <!-- Physical Memory utilization -->
+     <item>
+       <perfObjectDefnRef refId="46"/>
+     </item>
+       
+     <!-- interface utilization -->
+     <item>
+       <perfObjectDefnRef refId="99"/>
+     </item>
+     <!-- config change -->
+     <item>
+       <perfObjectDefnRef refId="24"/>
+     </item>
+   </monitorTemplate>
+   <!-- ***************************************************************** -->  
+   <monitorTemplate id = "11" name = "Cisco IPS Monitoring template">
+     <deviceTypes>
+       <deviceType>
+         <vendor>Cisco</vendor>
+         <model>IPS</model>
+         <version>ANY</version>
+       </deviceType>
+     </deviceTypes>
+       
+     <!-- ping -->
+     <item>
+       <perfObjectDefnRef refId="8"/>
+     </item>
+     <!-- snmp ping -->
+    <item>
+      <perfObjectDefnRef refId="10"/>
+    </item>
+     <!-- uptime -->
+     <item>
+       <perfObjectDefnRef refId="21"/>
+     </item>
+       
+     <!-- CPU utilization -->
+     <item>
+       <perfObjectDefnRef refId="47"/>
+     </item>
+     <!-- Free Memory -->
+     <item>
+       <perfObjectDefnRef refId="48"/>
+     </item>
+       
+     <!-- Physical Memory utilization -->
+     <item>
+       <perfObjectDefnRef refId="49"/>
+     </item>
+       
+     <!-- interface utilization -->
+     <item>
+       <perfObjectDefnRef refId="99"/>
+     </item>
+   </monitorTemplate>
+   <!-- ***************************************************************** -->  
+   <monitorTemplate id = "12" name = "Cisco VPN Concentrator Monitoring template">
+     <deviceTypes>
+       <deviceType>
+         <vendor>Cisco</vendor>
+         <model>VPN 3K</model>
+         <version>ANY</version>
+       </deviceType>
+     </deviceTypes>
+       
+     <!-- ping -->
+     <item>
+       <perfObjectDefnRef refId="8"/>
+     </item>
+     <!-- snmp ping -->
+    <item>
+      <perfObjectDefnRef refId="10"/>
+    </item>
+     <!-- uptime -->
+     <item>
+       <perfObjectDefnRef refId="21"/>
+     </item>
+       
+     <!-- CPU utilization -->
+     <item>
+       <perfObjectDefnRef refId="53"/>
+     </item>
+     <!-- interface utilization -->
+     <item>
+       <perfObjectDefnRef refId="99"/>
+     </item>
+    </monitorTemplate>
+
+   <!-- ***************************************************************** -->  
+   <monitorTemplate id = "13" name = "TippingPoint IPS Monitoring template">
+     <deviceTypes>
+       <deviceType>
+         <vendor>3Com</vendor>
+         <model>TippingPoint UnityOne IPS</model>
+         <version>ANY</version>
+       </deviceType>
+     </deviceTypes>
+     
+     <!-- ping -->
+     <item>
+       <perfObjectDefnRef refId="8"/>
+     </item>
+     <!-- snmp ping -->
+    <item>
+      <perfObjectDefnRef refId="10"/>
+    </item>
+     <!-- uptime -->
+     <item>
+       <perfObjectDefnRef refId="21"/>
+     </item>
+       
+     <!-- CPU utilization -->
+     <item>
+       <perfObjectDefnRef refId="63"/>
+     </item>
+     <!-- Memory utilization -->
+     <item>
+       <perfObjectDefnRef refId="64"/>
+     </item>
+
+     <!-- interface utilization -->
+     <item>
+       <perfObjectDefnRef refId="99"/>
+     </item>
+    </monitorTemplate>
+
+    <!-- ***************************************************************** -->  
+   <monitorTemplate id = "14" name = "NetApp Monitoring template">
+     <deviceTypes>
+       <deviceType>
+         <vendor>NetApp</vendor>
+         <model>DataONTAP</model>
+         <version>ANY</version>
+       </deviceType>
+     </deviceTypes>
+     
+     <!-- ping -->
+     <item>
+       <perfObjectDefnRef refId="8"/>
+     </item>
+     <!-- snmp ping -->
+    <item>
+      <perfObjectDefnRef refId="10"/>
+    </item>
+     <!-- uptime -->
+     <item>
+       <perfObjectDefnRef refId="21"/>
+     </item>
+       
+     <!-- CPU utilization -->
+     <item>
+       <perfObjectDefnRef refId="65"/>
+     </item>
+
+     <!-- Disk utilization -->
+     <item>
+       <perfObjectDefnRef refId="66"/>
+     </item>
+
+    <!-- hardware monitoring -->
+    <item>
+      <perfObjectDefnRef refId="501"/>
+    </item>
+
+    <!-- NFS Metrics monitoring -->
+    <item>
+      <perfObjectDefnRef refId="5007"/>
+    </item>
+
+    <!-- Detailed perf metrics monitoring -->
+    <item>
+      <perfObjectDefnRef refId="87"/>
+    </item>
+  
+     
+  </monitorTemplate>
+
+  <!-- ***************************************************************** -->  
+  <monitorTemplate id = "15" name = "HP-UX Monitoring template">
+     <deviceTypes>
+       <deviceType>
+         <vendor>HP</vendor>
+         <model>HPUX</model>
+         <version>ANY</version>
+       </deviceType>
+     </deviceTypes>
+     
+     <!-- ping -->
+     <item>
+       <perfObjectDefnRef refId="8"/>
+     </item>
+     <!-- snmp ping -->
+    <item>
+      <perfObjectDefnRef refId="10"/>
+    </item>
+     <!-- uptime -->
+     <item>
+       <perfObjectDefnRef refId="102"/>
+     </item>
+       
+     <!-- CPU utilization -->
+     <item>
+       <perfObjectDefnRef refId="103"/>
+     </item>
+
+     <!-- memory utilization -->
+     <item>
+       <perfObjectDefnRef refId="104"/>
+     </item>
+
+     <!-- sys stats: logged in users, average jobs -->
+     <item>
+       <perfObjectDefnRef refId="105"/>
+     </item>
+
+     <!-- process count -->
+     <item>
+       <perfObjectDefnRef refId="106"/>
+     </item>
+    
+     <!-- disk util -->
+     <item>
+       <perfObjectDefnRef refId="107"/>
+     </item>
+     
+     <!-- proc util -->
+     <item>
+       <perfObjectDefnRef refId="108"/> 
+     </item>
+
+     <!-- interface util-->
+     <item>
+       <perfObjectDefnRef refId="99"/> 
+     </item>
+
+     <!-- disk io util -->
+     <item>
+       <perfObjectDefnRef refId="111"/>
+     </item>
+
+     <!-- Oracle metric monitoring -->
+    <item>
+      <perfObjectDefnRef refId="5009"/>
+    </item>
+
+     <!-- Apache metric monitoring -->
+    <item>
+      <perfObjectDefnRef refId="5006"/>
+    </item>
+
+    <!-- JMX metric monitoring -->
+    <item>
+      <perfObjectDefnRef refId="5004"/>
+    </item>
+
+  </monitorTemplate>
+
+  <!-- ***************************************************************** -->  
+  <monitorTemplate id = "16" name = "VMware ESX monitoring template">
+    <deviceTypes>
+      <deviceType>
+        <vendor>VMware</vendor>
+        <model>ESX Server</model>
+        <version>ANY</version>
+      </deviceType>
+      <deviceType>
+        <vendor>VMware</vendor>
+        <model>ESXi Server</model>
+        <version>ANY</version>
+      </deviceType>
+    </deviceTypes>
+
+    <!-- ping -->
+    <item>
+      <perfObjectDefnRef refId="8"/>
+    </item>
+    <!-- VMware Performance Metric Monitoring -->
+    <item>
+      <perfObjectDefnRef refId="67"/>
+    </item>
+
+    <!-- VMware Hardware Status -->
+    <item>
+      <perfObjectDefnRef refId="68"/>
+    </item>
+  </monitorTemplate>
+
+  <!-- ***************************************************************** -->
+  <monitorTemplate id = "17" name ="Unix (non-Linux, non-HPUX) Server Monitoring template">
+    <deviceTypes>
+      <deviceType>
+        <vendor> Sun </vendor>
+        <model> SunOS </model>
+        <version> ANY </version>
+      </deviceType>
+       <deviceType>
+        <vendor>Sun </vendor>
+        <model> Solaris </model>
+        <version> ANY </version>
+      </deviceType>
+    </deviceTypes>
+    <!-- ping -->
+    <item>
+      <perfObjectDefnRef refId="8"/>
+    </item>
+    <!-- snmp ping -->
+    <item>
+      <perfObjectDefnRef refId="10"/>
+    </item>
+    <!-- uptime -->
+    <item>
+      <perfObjectDefnRef refId="21"/>
+    </item>
+    <!-- process count -->
+    <item>
+      <perfObjectDefnRef refId="2"/>
+    </item>
+    <!-- CPU utilization -->
+    <item>
+      <perfObjectDefnRef refId="3"/>
+    </item>
+    <!-- Real Memory utilization -->
+    <item>
+      <perfObjectDefnRef refId="4"/>
+    </item>
+    <!-- Disk utilization -->
+    <item>
+      <perfObjectDefnRef refId="6"/>
+    </item>
+    <!-- Install Software Change -->
+    <item>
+      <perfObjectDefnRef refId="23"/>
+    </item>
+    <!-- interface utilization -->
+    <item>
+      <perfObjectDefnRef refId="99"/>
+    </item>
+    <!-- Apache metric monitoring -->
+    <item>
+      <perfObjectDefnRef refId="5006"/>
+    </item>
+    <!-- JMX metric monitoring -->
+    <item>
+      <perfObjectDefnRef refId="5004"/>
+    </item>
+    <!-- Oracle metric monitoring -->
+    <item>
+      <perfObjectDefnRef refId="5009"/>
+    </item>
+
+  </monitorTemplate>
+ <!-- ***************************************************************** -->
+  <monitorTemplate id = "18" name ="AIX Server Monitoring template">
+    <deviceTypes>
+       <deviceType>
+         <vendor>IBM</vendor>
+         <model>AIX</model>
+         <version>ANY</version>
+       </deviceType>
+    </deviceTypes>
+    <!-- ping -->
+    <item>
+      <perfObjectDefnRef refId="8"/>
+    </item>
+    <!-- snmp ping -->
+    <item>
+      <perfObjectDefnRef refId="10"/>
+    </item>
+    <!-- uptime -->
+    <item>
+      <perfObjectDefnRef refId="1"/>
+    </item>
+    <!-- process count -->
+    <item>
+      <perfObjectDefnRef refId="2"/>
+    </item>
+    <!-- CPU utilization -->
+    <item>
+      <perfObjectDefnRef refId="3"/>
+    </item>
+    <!-- Real Memory utilization -->
+    <item>
+      <perfObjectDefnRef refId="62"/>
+    </item>
+    <!-- Disk utilization -->
+    <item>
+      <perfObjectDefnRef refId="6"/>
+    </item>
+    <!-- Install Software Change -->
+    <item>
+      <perfObjectDefnRef refId="23"/>
+    </item>
+    <!-- interface utilization -->
+    <item>
+      <perfObjectDefnRef refId="99"/>
+    </item>
+    <!-- disk io utilization -->
+    <item>
+      <perfObjectDefnRef refId="111"/>
+    </item>
+    <!-- Apache metric monitoring -->
+    <item>
+      <perfObjectDefnRef refId="5006"/>
+    </item>
+    <!-- JMX metric monitoring -->
+    <item>
+      <perfObjectDefnRef refId="5004"/>
+    </item>
+    <!-- Oracle metric monitoring -->
+    <item>
+      <perfObjectDefnRef refId="5009"/>
+    </item>
+
+  </monitorTemplate>
+
+  <!-- ***************************************************************** -->
+  <monitorTemplate id = "19" name ="Cisco Call Manager and Unity Monitoring template">
+    <deviceTypes>
+      <deviceType>
+        <vendor> Cisco </vendor>
+        <model> Call Manager </model>
+        <version> ANY </version>
+      </deviceType>
+      <deviceType>
+        <vendor> Cisco </vendor>
+        <model> Unity Connection </model>
+        <version> ANY </version>
+      </deviceType>
+    </deviceTypes>
+    <!-- ping -->
+    <item>
+      <perfObjectDefnRef refId="8"/>
+    </item>
+    <!-- snmp ping -->
+    <item>
+      <perfObjectDefnRef refId="10"/>
+    </item>
+    <!-- uptime -->
+    <item>
+      <perfObjectDefnRef refId="21"/>
+    </item>
+    <!-- process count -->
+    <item>
+      <perfObjectDefnRef refId="2"/>
+    </item>
+    <!-- CPU utilization -->
+    <item>
+      <perfObjectDefnRef refId="3"/>
+    </item>
+    <!-- Real Memory utilization -->
+    <item>
+      <perfObjectDefnRef refId="4"/>
+    </item>
+    <!-- Disk utilization -->
+    <item>
+      <perfObjectDefnRef refId="6"/>
+    </item>
+    <!-- interface utilization -->
+    <item>
+      <perfObjectDefnRef refId="99"/>
+    </item>
+    <!-- hardware status -->
+    <item>
+      <perfObjectDefnRef refId="501"/>
+    </item>
+    <!-- Process Resource (CPU/Memory) Utilization -->
+    <item>
+      <perfObjectDefnRef refId="7"/>
+    </item>
+  </monitorTemplate>
+
+  <!--******************************************************** -->
+  <monitorTemplate id = "20" name = "Palo Alto Monitoring template">
+    <deviceTypes>
+      <deviceType>
+        <vendor>Palo Alto</vendor>
+        <model>PAN-OS</model>
+        <version> ANY </version>
+      </deviceType>
+    </deviceTypes>
+    <!-- ping -->
+    <item>
+      <perfObjectDefnRef refId="8"/>
+    </item>
+    <!-- snmp ping -->
+    <item>
+      <perfObjectDefnRef refId="10"/>
+    </item>
+    <!-- Uptime -->
+    <item>
+      <perfObjectDefnRef refId="21"/>
+    </item>
+    <!-- Config change (both (startup vs running) and (curr running vs prev running)-->
+    <item>
+      <perfObjectDefnRef refId="24"/>
+    </item>
+    <!-- interface utilization -->
+    <item>
+      <perfObjectDefnRef refId="99"/>
+    </item>
+  </monitorTemplate>
+
+  <!--******************************************************** -->
+  <monitorTemplate id = "21" name = "Fortinet Monitoring template">
+    <deviceTypes>
+      <deviceType>
+        <vendor>Fortinet</vendor>
+        <model>FortiOS</model>
+        <version> ANY </version>
+      </deviceType>
+    </deviceTypes>
+    <!-- ping -->
+    <item>
+      <perfObjectDefnRef refId="8"/>
+    </item>
+    <!-- snmp ping -->
+    <item>
+      <perfObjectDefnRef refId="10"/>
+    </item>
+    <!-- Uptime -->
+    <item>
+      <perfObjectDefnRef refId="21"/>
+    </item>
+    <!-- Config change (both (startup vs running) and (curr running vs prev running)-->
+    <item>
+      <perfObjectDefnRef refId="24"/>
+    </item>
+    <!-- cpu utilization -->
+    <item>
+      <perfObjectDefnRef refId="69"/>
+    </item>
+    <!-- mem utilization -->
+    <item>
+      <perfObjectDefnRef refId="70"/>
+    </item>
+    <!-- session count -->
+    <item>
+      <perfObjectDefnRef refId="71"/>
+    </item>
+    <!-- interface utilization -->
+    <item>
+      <perfObjectDefnRef refId="99"/>
+    </item>
+  </monitorTemplate>
+
+  <!--******************************************************** -->
+  <monitorTemplate id = "22" name = "Bluecoat webproxy monitoring template">
+    <deviceTypes>
+      <deviceType>
+        <vendor>Blue Coat</vendor>
+        <model>SGOS Web Proxy</model>
+        <version> ANY </version>
+      </deviceType>
+    </deviceTypes>
+    <!-- ping -->
+    <item>
+      <perfObjectDefnRef refId="8"/>
+    </item>
+    <!-- snmp ping -->
+    <item>
+      <perfObjectDefnRef refId="10"/>
+    </item>
+    <!-- Uptime -->
+    <item>
+      <perfObjectDefnRef refId="21"/>
+    </item>
+    <!-- cpu utilization -->
+    <item>
+      <perfObjectDefnRef refId="72"/>
+    </item>
+    <!-- interface utilization -->
+    <item>
+      <perfObjectDefnRef refId="99"/>
+    </item>
+    <!-- proxy metrics -->
+    <item>
+      <perfObjectDefnRef refId="118"/>
+    </item>
+  </monitorTemplate>
+
+  <!-- ***************************************************************** -->
+  <monitorTemplate id = "23" name = "Isilon OneFS Monitoring template">
+    <deviceTypes>
+      <deviceType>
+        <vendor> Isilon </vendor>
+        <model> OneFS </model>
+        <version> ANY </version>
+      </deviceType>
+    </deviceTypes>
+    <!-- ping -->
+    <item>
+      <perfObjectDefnRef refId="8"/>
+    </item>
+    <!-- snmp ping -->
+    <item>
+      <perfObjectDefnRef refId="10"/>
+    </item>
+    <!-- uptime -->
+    <item>
+      <perfObjectDefnRef refId="1"/>
+    </item>
+    <!-- process count -->
+    <item>
+      <perfObjectDefnRef refId="2"/>
+    </item>
+    <!-- CPU utilization -->
+    <item>
+      <perfObjectDefnRef refId="3"/>
+    </item>
+    <!-- Real Memory utilization -->
+    <item>
+      <perfObjectDefnRef refId="4"/>
+    </item>
+    <!-- Disk utilization -->
+    <item>
+      <perfObjectDefnRef refId="6"/>
+    </item>
+    <!-- Process Resource (CPU/Memory) Utilization -->
+    <item>
+      <perfObjectDefnRef refId="7"/>
+    </item>
+    <!-- interface utilization -->
+    <item>
+      <perfObjectDefnRef refId="99"/>
+    </item>
+  </monitorTemplate>
+
+  <!-- ***************************************************************** -->
+  <monitorTemplate id = "24" name = "Adtran NetVanta Monitoring template">
+    <deviceTypes>
+      <deviceType>
+        <vendor> Adtran </vendor>
+        <model> NetVanta </model>
+        <version> ANY </version>
+      </deviceType>
+    </deviceTypes>
+    <!-- ping -->
+    <item>
+      <perfObjectDefnRef refId="8"/>
+    </item>
+    <!-- snmp ping -->
+    <item>
+      <perfObjectDefnRef refId="10"/>
+    </item>
+    <!-- uptime -->
+    <item>
+      <perfObjectDefnRef refId="1"/>
+    </item>
+    <!-- CPU utilization -->
+    <item>
+      <perfObjectDefnRef refId="119"/>
+    </item>
+    <!-- interface utilization -->
+    <item>
+      <perfObjectDefnRef refId="99"/>
+    </item>
+  </monitorTemplate>
+
+  <!-- ***************************************************************** -->
+  <monitorTemplate id = "25" name = "Sonicwall Monitoring template">
+    <deviceTypes>
+      <deviceType>
+        <vendor>Sonicwall </vendor>
+        <model> SonicOS</model>
+        <version> ANY </version>
+      </deviceType>
+    </deviceTypes>
+    <!-- ping -->
+    <item>
+      <perfObjectDefnRef refId="8"/>
+    </item>
+    <!-- snmp ping -->
+    <item>
+      <perfObjectDefnRef refId="10"/>
+    </item>
+    <!-- CPU utilization -->
+    <item>
+      <perfObjectDefnRef refId="120"/>
+    </item>
+    <!-- memory utilization -->
+    <item>
+      <perfObjectDefnRef refId="121"/>
+    </item>
+    <!-- session count -->
+    <item>
+      <perfObjectDefnRef refId="122"/>
+    </item>
+  </monitorTemplate>
+  
+  <!--******************************************************** -->
+  <monitorTemplate id = "26" name = "Huawei Router/Switch Monitoring template">
+    <deviceTypes>
+      <deviceType>
+        <vendor> Huawei </vendor>
+        <model> VRP </model>
+        <version> ANY </version>
+      </deviceType>
+    </deviceTypes>
+    <!-- ping -->
+    <item>
+      <perfObjectDefnRef refId="8"/>
+    </item>
+    <!-- snmp ping -->
+    <item>
+      <perfObjectDefnRef refId="10"/>
+    </item>
+    <!-- CPU utilization (device provides average over last 3 min) -->
+    <item>
+      <perfObjectDefnRef refId="123"/>
+    </item>
+     <!-- Memory Utilization -->
+    <item>
+      <perfObjectDefnRef refId="124"/>
+    </item>
+    <!-- Uptime -->
+    <item>
+      <perfObjectDefnRef refId="21"/> 
+    </item>
+    <!-- Config change (both (startup vs running) and (curr running vs prev running)-->
+    <item>
+      <perfObjectDefnRef refId="24"/>
+    </item>
+    <!-- Process Resource (CPU/Memory) Utilization -->
+    <item>
+      <perfObjectDefnRef refId="43"/>
+    </item>
+    <!-- network interface util and error -->
+    <item>
+      <perfObjectDefnRef refId="99"/>
+    </item>
+    <!-- hardware monitoring -->
+    <item>
+      <perfObjectDefnRef refId="501"/>
+    </item>
+  </monitorTemplate>  
+
+  <!-- ***************************************************************** -->
+  <monitorTemplate id = "27" name = "FreeBSD Server Monitoring template">
+    <deviceTypes>
+      <deviceType>
+        <vendor> Generic </vendor>
+        <model> FreeBSD </model>
+        <version> ANY </version>
+      </deviceType>
+    </deviceTypes>
+    <!-- ping -->
+    <item>
+      <perfObjectDefnRef refId="8"/>
+    </item>
+    <!-- snmp ping -->
+    <item>
+      <perfObjectDefnRef refId="10"/>
+    </item>
+    <!-- uptime -->
+    <item>
+      <perfObjectDefnRef refId="1"/>
+    </item>
+    <!-- process count -->
+    <item>
+      <perfObjectDefnRef refId="2"/>
+    </item>
+    <!-- CPU utilization -->
+    <item>
+      <perfObjectDefnRef refId="61"/>
+    </item>
+    <!-- Real Memory utilization -->
+    <item>
+      <perfObjectDefnRef refId="62"/>
+    </item>
+    <!-- Disk utilization -->
+    <item>
+      <perfObjectDefnRef refId="6"/>
+    </item>
+    <!-- Process Resource (CPU/Memory) Utilization -->
+    <item>
+      <perfObjectDefnRef refId="7"/>
+    </item>
+    <!-- Install Software Change -->
+    <item>
+      <perfObjectDefnRef refId="23"/>
+    </item>
+    <!-- interface utilization -->
+    <item>
+      <perfObjectDefnRef refId="99"/>
+    </item>
+    <!-- disk io util -->
+    <item>
+      <perfObjectDefnRef refId="111"/>
+    </item>
+  </monitorTemplate>
+
+  <!-- ***************************************************************** -->
+  <monitorTemplate id = "28" name = "Juniper JunOS Monitoring template">
+    <deviceTypes>
+      <deviceType>
+        <vendor> Juniper </vendor>
+        <model> JunOS </model>
+        <version> ANY </version>
+      </deviceType>
+      <deviceType>
+        <vendor> Juniper </vendor>
+        <model>SRX JunOS</model>
+        <version> ANY </version>
+      </deviceType>
+    </deviceTypes>
+    <!-- ping -->
+    <item>
+      <perfObjectDefnRef refId="8"/>
+    </item>
+    <!-- snmp ping -->
+    <item>
+      <perfObjectDefnRef refId="10"/>
+    </item>
+    <!-- uptime -->
+    <item>
+      <perfObjectDefnRef refId="21"/>
+    </item>
+    <!-- interface utilization -->
+    <item>
+      <perfObjectDefnRef refId="99"/>
+    </item>
+    <!-- cpu -->
+    <item>
+      <perfObjectDefnRef refId="73"/>
+    </item>
+    <!-- memory -->
+    <item>
+      <perfObjectDefnRef refId="74"/>
+    </item>
+    <!-- config change -->
+    <item>
+      <perfObjectDefnRef refId="24"/>
+    </item>
+    <!-- hardware status monitoring -->
+    <item>
+      <perfObjectDefnRef refId="501"/>
+    </item>
+  </monitorTemplate>
+
+  <!-- ***************************************************************** -->
+  <monitorTemplate id = "29" name = "EMC CLariion Monitoring template">
+    <deviceTypes>
+      <deviceType>
+        <vendor> EMC </vendor>
+        <model> Clariion </model>
+        <version> ANY </version>
+      </deviceType>
+    </deviceTypes>
+
+    <!-- ping -->
+    <item>
+      <perfObjectDefnRef refId="8"/>
+    </item>
+
+    <!-- snmp ping -->
+    <item>
+      <perfObjectDefnRef refId="10"/>
+    </item>
+
+    <!-- EMC Clariion storage processor usage -->
+    <item>
+      <perfObjectDefnRef refId="75"/>
+    </item>
+
+    <!-- EMC Clariion port usage -->
+    <item>
+      <perfObjectDefnRef refId="76"/>
+    </item>
+
+    <!-- EMC Clariion hardware status -->
+    <item>
+      <perfObjectDefnRef refId="77"/>
+    </item>
+
+    <!--  EMC Clariion LUN usage -->
+    <item>
+      <perfObjectDefnRef refId="78"/>
+    </item>
+
+    <!-- EMC Clariion HBA Login change -->
+    <item>
+      <perfObjectDefnRef refId="79"/>
+    </item>
+
+    <!--  EMC Clariion RG usage -->
+    <item>
+      <perfObjectDefnRef refId="82"/>
+    </item>
+
+  </monitorTemplate>
+  
+  <!-- ***************************************************************** -->
+  <monitorTemplate id = "30" name = "APC UPS Monitoring template">
+    <deviceTypes>
+      <deviceType>
+        <vendor> APC </vendor>
+        <model> UPS </model>
+        <version> ANY </version>
+      </deviceType>
+    </deviceTypes>
+    <!-- ping -->
+    <item>
+      <perfObjectDefnRef refId="8"/>
+    </item>
+    <!-- snmp ping -->
+    <item>
+      <perfObjectDefnRef refId="10"/>
+    </item>
+    <!-- APC UPS -->
+    <item>
+      <perfObjectDefnRef refId="80"/>
+    </item>
+  </monitorTemplate>
+
+ <!-- ***************************************************************** -->
+  <monitorTemplate id = "31" name = "Liebert HVAC Monitoring template">
+    <deviceTypes>
+      <deviceType>
+        <vendor> Liebert </vendor>
+        <model> HVAC </model>
+        <version> ANY </version>
+      </deviceType>
+    </deviceTypes>
+
+     <!-- ping -->
+    <item>
+      <perfObjectDefnRef refId="8"/>
+    </item>
+
+    <!-- snmp ping -->
+    <item>
+      <perfObjectDefnRef refId="10"/>
+    </item>
+
+    <!-- Liebert A/C Unit monitoring template -->
+    <item>
+      <perfObjectDefnRef refId="81"/>
+    </item>
+  </monitorTemplate>
+
+  <!-- ***************************************************************** -->
+  <monitorTemplate id = "32" name = "Liebert UPS Monitoring template">
+    <deviceTypes>
+      <deviceType>
+        <vendor> Liebert </vendor>
+        <model> UPS </model>
+        <version> ANY </version>
+      </deviceType>
+    </deviceTypes>
+
+     <!-- ping -->
+    <item>
+      <perfObjectDefnRef refId="8"/>
+    </item>
+
+    <!-- snmp ping -->
+    <item>
+      <perfObjectDefnRef refId="10"/>
+    </item>
+
+    <!-- Liebert UPS monitoring template -->
+    <item>
+       <perfObjectDefnRef refId="83"/>
+    </item>
+  </monitorTemplate>
+
+  <!-- ***************************************************************** -->
+  <monitorTemplate id = "33" name = "Liebert FPC Monitoring template">
+    <deviceTypes>
+      <deviceType>
+        <vendor> Liebert </vendor>
+        <model> FPC </model>
+        <version> ANY </version>
+      </deviceType>
+    </deviceTypes>
+
+    <!-- snmp ping -->
+    <item>
+      <perfObjectDefnRef refId="10"/>
+    </item>
+
+
+    <!-- Liebert FPC monitoring template -->
+    <item>
+      <perfObjectDefnRef refId="84"/>
+    </item>
+  </monitorTemplate>
+
+  <!-- ***************************************************************** -->
+  <monitorTemplate id = "34" name = "Cisco WLAN Monitoring template">
+    <deviceTypes>
+      <deviceType>
+        <vendor> Cisco </vendor>
+        <model> WLAN Controller </model>
+        <version> ANY </version>
+      </deviceType>
+    </deviceTypes>
+
+    <!-- ping -->
+    <item>
+      <perfObjectDefnRef refId="8"/>
+    </item>
+
+    <!-- snmp ping -->
+    <item>
+      <perfObjectDefnRef refId="10"/>
+    </item>
+
+    <!-- Uptime -->
+    <item>
+      <perfObjectDefnRef refId="21"/>
+    </item>
+
+    <!-- interface utilization -->
+    <item>
+      <perfObjectDefnRef refId="99"/>
+    </item>
+
+    <!-- Cisco WLAN Radio interface monitoring template -->
+    <item>
+      <perfObjectDefnRef refId="85"/>
+    </item>
+  </monitorTemplate>
+
+  <!-- ***************************************************************** -->
+  <monitorTemplate id = "35" name = "Aruba WLAN Monitoring template">
+    <deviceTypes>
+      <deviceType>
+        <vendor> Aruba </vendor>
+        <model> ArubaOS WLAN Controller </model>
+        <version> ANY </version>
+      </deviceType>
+    </deviceTypes>
+
+    <!-- ping -->
+    <item>
+      <perfObjectDefnRef refId="8"/>
+    </item>
+
+    <!-- snmp ping -->
+    <item>
+      <perfObjectDefnRef refId="10"/>
+    </item>
+
+    <!-- Uptime -->
+    <item>
+      <perfObjectDefnRef refId="21"/>
+    </item>
+
+    <!-- interface utilization -->
+    <item>
+      <perfObjectDefnRef refId="99"/>
+    </item>
+
+    <!-- Aruba WLAN Radio interface monitoring template -->
+    <item>
+      <perfObjectDefnRef refId="86"/>
+    </item>
+  </monitorTemplate>
+
+  <!-- ***************************************************************** -->
+  <monitorTemplate id = "36" name = "Printer Monitoring template">
+    <deviceTypes>
+      <deviceType>
+        <vendor> HP </vendor>
+        <model> JetDirect </model>
+        <version> ANY </version>
+      </deviceType>
+      <deviceType>
+        <vendor> Sharp </vendor>
+        <model> AR </model>
+        <version> ANY </version>
+      </deviceType>
+      <deviceType>
+        <vendor> Xerox </vendor>
+        <model> Phaser </model>
+        <version> ANY </version>
+      </deviceType>
+      <deviceType>
+        <vendor> Tektronix </vendor>
+        <model> Phaser </model>
+        <version> ANY </version>
+      </deviceType>
+      <deviceType>
+        <vendor> Dell </vendor>
+        <model> MFP </model>
+        <version> ANY </version>
+      </deviceType>
+      <deviceType>
+        <vendor> HP </vendor>
+        <model> LaserJet </model>
+        <version> ANY </version>
+      </deviceType>
+      <deviceType>
+        <vendor> Toshiba </vendor>
+        <model> eStudio </model>
+        <version> ANY </version>
+      </deviceType>
+    </deviceTypes>
+
+     <!-- ping -->
+    <item>
+      <perfObjectDefnRef refId="8"/>
+    </item>
+
+    <!-- snmp ping -->
+    <item>
+      <perfObjectDefnRef refId="10"/>
+    </item>
+
+    <!-- uptime -->
+    <item>
+      <perfObjectDefnRef refId="21"/>
+    </item>
+
+    <!-- printer metrics -->
+    <item>
+      <perfObjectDefnRef refId="125"/>
+    </item>
+  </monitorTemplate>
+
+  <!--******************************************************** -->
+  <monitorTemplate id = "37" name = "Cisco NX-OS Monitoring template">
+    <deviceTypes>
+      <deviceType>
+        <vendor> Cisco </vendor>
+        <model> NX-OS </model>
+        <version> ANY </version>
+      </deviceType>
+    </deviceTypes>
+    <!-- ping -->
+    <item>
+      <perfObjectDefnRef refId="8"/>
+    </item>
+    <!-- snmp ping -->
+    <item>
+      <perfObjectDefnRef refId="10"/>
+    </item>
+    <!-- CPU utilization -->
+    <item>
+      <perfObjectDefnRef refId="127"/>
+    </item>
+    <!-- Memory utilization -->
+    <item>
+      <perfObjectDefnRef refId="128"/>
+    </item>
+    <!-- Uptime -->
+    <item>
+      <perfObjectDefnRef refId="129"/>
+    </item>
+    <!-- Config change (both (startup vs running) and (curr running vs prev running)-->
+    <item>
+      <perfObjectDefnRef refId="24"/>
+    </item>
+    <!-- network interface util and error -->
+    <item>
+      <perfObjectDefnRef refId="144"/>
+    </item>
+    <!-- hardware monitoring -->
+    <item>
+      <perfObjectDefnRef refId="501"/>
+    </item>
+    <!-- IP SLA monitoring -->
+    <item>
+      <perfObjectDefnRef refId="505"/>
+    </item>
+    <!-- CB QOS monitoring -->
+    <item>
+      <perfObjectDefnRef refId="506"/>
+    </item>
+  </monitorTemplate>
+
+  <monitorTemplate id = "38" name = "Nortel ERS Monitoring template">
+    <deviceTypes>
+      <deviceType>
+        <vendor> Nortel </vendor>
+        <model> ERS </model>
+        <version> ANY </version>
+      </deviceType>
+      <deviceType>
+        <vendor> Nortel </vendor>
+        <model> Passport </model>
+        <version> ANY </version>
+      </deviceType>
+      <deviceType>
+        <vendor> Avaya </vendor>
+        <model> ERS </model>
+        <version> ANY </version>
+      </deviceType>
+    </deviceTypes>
+    <!-- ping -->
+    <item>
+      <perfObjectDefnRef refId="8"/>
+    </item>
+    <!-- snmp ping -->
+    <item>
+      <perfObjectDefnRef refId="10"/>
+    </item>
+    <!-- uptime -->
+    <item>
+      <perfObjectDefnRef refId="21"/>
+    </item>
+    <!-- interface utilization -->
+    <item>
+      <perfObjectDefnRef refId="99"/>
+    </item>
+     <!-- cpu utilization (nortel 8600)-->
+    <item>
+      <perfObjectDefnRef refId="132"/>
+    </item>
+    <!-- cpu utilization (nortel 5500/5600)-->
+    <item>
+      <perfObjectDefnRef refId="138"/>
+    </item>
+    <!-- temp (nortel 5500/5600)-->
+    <item>
+      <perfObjectDefnRef refId="139"/>
+    </item>
+    <!-- temp (nortel 8600)-->
+    <item>
+      <perfObjectDefnRef refId="141"/>
+    </item>
+    <!-- memory (nortel 5500/5600)-->
+    <item>
+      <perfObjectDefnRef refId="142"/>
+    </item>
+    <!-- memory (nortel 8600)-->
+    <item>
+      <perfObjectDefnRef refId="140"/>
+    </item>
+
+  </monitorTemplate>
+
+  <monitorTemplate id = "39" name = "Barracuda Firewall template">
+    <deviceTypes>
+      <deviceType>
+        <vendor>Barracuda</vendor>
+        <model>Spam Firewall</model>
+        <version> ANY </version>
+      </deviceType>
+    </deviceTypes>
+    <!-- ping -->
+    <item>
+      <perfObjectDefnRef refId="8"/>
+    </item>
+    <!-- snmp ping -->
+    <item>
+      <perfObjectDefnRef refId="10"/>
+    </item>
+    <!-- Uptime -->
+    <item>
+      <perfObjectDefnRef refId="21"/>
+    </item>
+    <!-- cpu utilization -->
+    <item>
+      <perfObjectDefnRef refId="61"/>
+    </item>
+    <!-- mem utilization -->
+    <item>
+      <perfObjectDefnRef refId="62"/>
+    </item>
+    <!-- interface utilization -->
+    <item>
+      <perfObjectDefnRef refId="99"/>
+    </item>
+    <!-- extensible command -->
+    <item>
+      <perfObjectDefnRef refId="133"/>
+    </item>
+  </monitorTemplate>
+
+   <monitorTemplate id = "40" name = "Dell EqualLogic template">
+    <deviceTypes>
+      <deviceType>
+        <vendor>Dell</vendor>
+        <model>EqualLogic</model>
+        <version> ANY </version>
+      </deviceType>
+    </deviceTypes>
+    <!-- ping -->
+    <item>
+      <perfObjectDefnRef refId="8"/>
+    </item>
+    <!-- snmp ping -->
+    <item>
+      <perfObjectDefnRef refId="10"/>
+    </item>
+    <!-- Uptime -->
+    <item>
+      <perfObjectDefnRef refId="21"/>
+    </item>
+    <!-- interface utilization -->
+    <item>
+      <perfObjectDefnRef refId="99"/>
+    </item>
+    <!-- hardware status monitoring -->
+    <item>
+      <perfObjectDefnRef refId="501"/>
+    </item>
+    <!-- disk I/O monitoring -->
+    <item>
+      <perfObjectDefnRef refId="134"/>
+    </item>
+    <!-- connection perfomance -->
+    <item>
+      <perfObjectDefnRef refId="135"/>
+    </item>
+     <!-- group level statistics -->
+    <item>
+      <perfObjectDefnRef refId="137"/>
+    </item>
+  </monitorTemplate>
+</perfMonitor>         

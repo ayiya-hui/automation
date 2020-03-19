@@ -1,0 +1,32 @@
+[reptDevIpAddr(key)]
+10.1.2.242
+[eventMsg]
+2015-02-13T03:00:12Z WIN-2008-LAW-agent 10.1.2.242 AccelOps-WUA-InstSw [monitorStatus]="Success" [osObjAction]="Added" [appName]="Safari" [vendor]="Apple Inc." [appVersion]="5.34.57.2"
+[params]
+deviceTime=any
+parserName=AOWUA_WinParser
+appName=Safari
+eventType=AO-WUA-InstSw-Added
+reptModel=Windows
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+appVersion=5.34.57.2
+eventName=A software was installed
+extEventRecvProto=Windows Agent
+phEventCategory=0 (External)
+status=Success
+count=1
+appVendor=Apple Inc.
+eventSeverityCat=LOW
+collectorId=any
+hostVendor=Apple Inc.
+relayDevIpAddr=10.1.2.242
+rawEventMsg=any
+osObjAction=Added
+reptDevName=WIN-2008-LAW-agent
+customer=Super
+phRecvTime=any
+reptDevIpAddr=10.1.2.242
+eventAction=0 (Permit)
+reptVendor=Microsoft

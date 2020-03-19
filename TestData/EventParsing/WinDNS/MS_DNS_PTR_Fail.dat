@@ -1,0 +1,30 @@
+[reptDevIpAddr(key)]
+20.2.2.13
+[eventMsg]
+<13>Aug 10 19:13:06 $reporter MSDNSLog 0 20090810 19:12:41 15E0 PACKET 02A90CF0 UDP Snd 192.168.21.16 0410 R Q [8385 A DR NXDOMAIN] PTR (1)7(2)20(3)168(3)192(7)in-addr(4)arpa(0)
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+appTransportProto=UDP
+ipConnId=Snd
+count=1
+phCustId=$sender
+destName=192.168.20.7
+destIpAddr=192.168.21.16
+destIpPort=53 (DOMAIN)
+deviceTime=any
+errorNo=8385
+errorString=NXDOMAIN
+eventAction=1 (Deny)
+eventId=any
+eventName=Failed IP to domain name query
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=1
+eventSeverityCat=LOW
+eventType=MS_DNS_PTR_Fail
+ipProto=17 (UDP)
+reptDevIpAddr=$reporter
+reptModel=DNS
+reptVendor=Microsoft
+srcIpAddr=$reporter

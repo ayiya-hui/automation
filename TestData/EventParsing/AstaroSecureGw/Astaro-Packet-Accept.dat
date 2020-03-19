@@ -1,0 +1,31 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<30>2009:08:17-13:27:47 ulogd[3004]: id="2002" severity="info" sys="SecureNet" sub="packetfilter" name="Packet accepted" action="accept" fwrule="6" seq="0" initf="br0" outitf="br0" dstmac="00:90:0b:07:8f:ce" srcmac="00:90:0b:07:8f:ce" srcip="172.18.22.128" dstip="172.16.206.10" proto="17" length="71" tos="0x00" prec="0x00" ttl="128" srcport="24991" dstport="53" --automator
+[params]
+rawEventMsg=any
+deviceTime=any
+eventType=Astaro-Packet-Accept
+phCustId=$sender
+destIpAddr=172.16.206.10
+totBytes=71
+destIpPort=53 (DOMAIN)
+srcIpAddr=172.18.22.128
+reptModel=Security Gateway
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Packet accepted by Firewall
+phEventCategory=0 (External)
+srcIntfName=br0
+srcMACAddr=00:90:0b:07:8f:ce
+srcIpPort=24991
+eventSeverityCat=LOW
+destIntfName=br0
+ipProto=17 (UDP)
+reptDevIpAddr=$localhost
+count=1
+phRecvTime=any
+destMACAddr=00:90:0b:07:8f:ce
+eventAction=0 (Permit)
+reptVendor=Astaro

@@ -1,0 +1,142 @@
+[reptDevIpAddr(key)]
+$localhost (destName:vcenter01-mgmmm)
+[eventMsg]
+<0>Apr  8 23:17:12 vcenter01-mgmmm 2016-03-22T10:50:07.053Z [7FAF146FD700 warning 'VpxProfiler'] Local Stats [Local Stats Time] took 2052 ms
+[params]
+deviceTime=any
+parserName=VMwareVCenterParser
+eventType=Vmware_Generic
+reptModel=vCenter
+eventId=any
+eventTime=Tue Mar 22 10:50:07 CST 2016
+eventParsedOk=1
+eventSeverity=1
+eventName=VMware generic message
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+destName=vcenter01-mgmmm
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+reptDevName=vcenter01-mgmmm
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=VMware
+[reptDevIpAddr(key)]
+$localhost (destName:vcenter01-mgmb)
+[eventMsg]
+<0>Apr  8 23:17:01 vcenter01-mgmb [2016-03-22 10:41:02,206 pool-18-thread-1  INFO  com.vmware.vim.dataservices.federation.FederationReconfigurator] No peers reachable - skipping reconfiguration.
+[params]
+deviceTime=any
+parserName=VMwareVCenterParser
+eventType=Vmware_Generic
+reptModel=vCenter
+eventId=any
+eventTime=Tue Mar 22 10:41:02 CST 2016
+eventParsedOk=1
+eventSeverity=1
+eventName=VMware generic message
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+destName=vcenter01-mgmb
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+reptDevName=vcenter01-mgmb
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=VMware
+[reptDevIpAddr(key)]
+$localhost (destName:cidronpayll.com)
+[eventMsg]
+<166>2016-03-22T10:40:01.653Z cidronpayll.com hostd-probe: [FFC86B70 info 'Libs'] VThreadBase detected multiple threads.
+[params]
+deviceTime=any
+destGeoOrg=any
+parserName=VMwareVCenterParser
+eventType=Vmware_Generic
+destIpAddr=any
+destGeoCountry=any
+reptModel=vCenter
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=VMware generic message
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+destName=cidronpayll.com
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+reptDevName=cidronpayll.com
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=VMware
+[reptDevIpAddr(key)]
+$localhost (destName:esxi11.ad.elixir.cidronpayy.com)
+[eventMsg]
+<166>Section for VMware ESX,  esxi11.ad.elixir.cidronpayy.com hostd-probe: id=42648690, version=5.5.0, build=2068190, option=Release
+[params]
+destGeoOrg=any
+parserName=VMwareVCenterParser
+eventType=Vmware_Generic
+destIpAddr=any
+destGeoCountry=any
+reptModel=vCenter
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=VMware generic message
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+destName=esxi11.ad.elixir.cidronpayy.com
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+reptDevName=esxi11.ad.elixir.cidronpayy.com
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=VMware
+[reptDevIpAddr(key)]
+$localhost (destName:radius02-mgm)
+[eventMsg]
+<11>2016-03-22T11:40:30.335467+01:00 radius02-mgm setroubleshoot: Exception during AVC analysis: [Errno 32] Broken pipe
+[params]
+deviceTime=any
+parserName=VMwareVCenterParser
+eventType=Vmware_Generic
+reptModel=vCenter
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=VMware generic message
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+destName=radius02-mgm
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+reptDevName=radius02-mgm
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=VMware

@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>Dec 04 2008 20:00:45: %PIX-6-109006: Authentication failed for user admin from 10.10.10.10/8080 to 20.20.20.20/9996 on interface inside. --automator
+[params]
+rawEventMsg=any
+destIpAddr=20.20.20.20
+deviceTime=any
+eventType=PIX-109006
+phCustId=$sender
+destIpAddr=20.20.20.20
+srcIpAddr=10.10.10.10
+reptModel=PIX
+eventId=any
+eventParsedOk=any
+eventSeverity=1
+eventName=AAA Authen failed - likely bad credentials
+phEventCategory=0 (External)
+srcIntfName=inside
+srcIpPort=8080
+eventSeverityCat=LOW
+user=admin
+destIpPort=9996
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=1 (Deny)
+reptVendor=Cisco

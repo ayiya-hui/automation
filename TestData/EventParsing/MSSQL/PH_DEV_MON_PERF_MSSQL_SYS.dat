@@ -1,0 +1,42 @@
+[reptDevIpAddr(key)]
+70.70.70.1
+[eventMsg]
+<134>Jun 03 22:19:31 $reporter java: [PH_DEV_MON_PERF_MSSQL_SYS]:[eventSeverity]=PHL_INFO,[hostIpAddr]=$reporter,[hostName]=Host-$reporter,[rptIp]=$reporter,[relayIp]=$localhost,[dbDataFileSizeKB]= 53120,[dbLogFileUsedKB]= 2382,[dbLogGrowthCount]= 0,[dbLogShrinkCount]= 0,[dbTransPerSec]= 0.48,[dbLogFlushPerSec]= 0,[dbDeadLocksPerSec]= 0,[dbLogCacheHitRatio]= 55.32,[dbUserConn]= 1,[dbTargetServerMemoryKB]= 789016,[dbTotalServerMemoryKB]= 9472,[dbLatchWaitsPerSec]= 0.07,[dbPageReadsPerSec]= 0,[dbFullScansPerSec]= 0.08,[dbPageSplitsPerSec]= 0.05,[dbPageWritesPerSec]= 0,[dbBufferCacheHitRatio]= 99.87,[dbCount]= 4,[dbUserCount]= 20,[dbLoggedinUserCount]= 1
+[params]
+rawEventMsg=any
+phEventCategory=6 (Performance Event)
+count=1
+phCustId=$sender
+dbLogFlushPerSec=0.00
+dbLoggedinUserCount=1
+dbPageReadsPerSec=0.00
+dbLogShrinkCount=0
+dbFullScansPerSec=0.08
+dbLogGrowthCount=0
+dbTotalServerMemoryKB=9472
+dbLatchWaitsPerSec=0.07
+dbCount=4
+hostIpAddr=$reporter
+dbLogFileUsedKB=2382
+dbTargetServerMemoryKB=789016
+dbUserConn=1
+dbDeadLocksPerSec=0.00
+dbPageSplitsPerSec=0.05
+dbUserCount=20
+dbDataFileSizeKB=53120
+dbLogCacheHitRatio=55.32
+dbPageWritesPerSec=0.00
+dbTransPerSec=0.48
+dbBufferCacheHitRatio=99.87
+deviceTime=any
+eventId=any
+reptDevIpAddr=70.70.70.1
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+eventName=Metrics for the total SQL Server
+reptVendor=Fortinet
+eventType=PH_DEV_MON_PERF_MSSQL_SYS
+reptModel=FortiSIEM

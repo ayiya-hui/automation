@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+172.20.9.102
+[eventMsg]
+<134>Aug  2 09:02:08 172.20.9.102 6513:ACFPRDUAG1:172.20.9.102:SessionMgr:[MsgID: 60]Session E37CA870-677D-4682-A77E-3E838104B8A2 was started on trunk trunkoutlook (secure=1). The source IP address is 107.198.96.8.
+[params]
+deviceTime=any
+parserName=MicrosoftUAGParser
+eventType=Microsoft-UAG-Session_Started
+srcName=107-198-96-8.lightspeed.cicril.sbcglobal.net
+srcIpAddr=107.198.96.8
+reptModel=Forefront UAG
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Remote session started
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=172.20.9.102
+rawEventMsg=any
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=172.20.9.102
+reptVendor=Microsoft

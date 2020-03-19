@@ -1,0 +1,10 @@
+<perfTestSuite>
+	<testcases>
+		<perfTestCase run="True">
+			<url>https://192.168.20.116/phoenix/rest/config/domain</url>
+		</perfTestCase>
+		<perfTestCase run="True">
+			<url>https://192.168.20.116/phoenix/rest/config/device</url>
+		</perfTestCase>
+	</testcases>
+</perfTestSuite>

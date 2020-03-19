@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>Dec 04 2008 20:00:45: ASA-3-106010: Deny inbound udp src ether03:20.20.20.20/1050 dst ether05:192.168.20.20/1099
+[params]
+rawEventMsg=any
+srcIpPort=1050
+destIpPort=1099
+srcIpAddr=20.20.20.20
+srcIntfName=ether03
+destIntfName=ether05
+ipProto=17 (UDP)
+destIpAddr=192.168.20.20
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=5
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=MEDIUM
+eventAction=1 (Deny)
+eventName=Denied IP traffic by policy
+reptVendor=Cisco
+eventType=ASA-106010
+phEventCategory=0 (External)
+reptDevIpAddr=$reporter
+reptModel=ASA

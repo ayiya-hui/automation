@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+10.210.252.42
+[eventMsg]
+<13>Apr 28 14:24:08 10.210.252.42 netauto_core[17373]: netautoctl: Discovery Engine is not running correctly, attempting to start
+[params]
+customer=Super
+eventId=any
+parserName=InfoBloxAppParser
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+count=1
+eventSeverity=1
+eventType=InfoBlox-NiOS-netauto_core-Failed
+reptDevIpAddr=10.210.252.42
+collectorId=any
+extEventRecvProto=Syslog
+eventName=Netauto core failed
+reptVendor=InfoBlox
+relayDevIpAddr=10.210.252.42
+rawEventMsg=any
+phRecvTime=any
+reptDevName=any
+reptModel=NiOS

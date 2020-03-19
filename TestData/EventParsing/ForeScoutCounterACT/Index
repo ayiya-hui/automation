@@ -1,0 +1,7 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+ForeScout-CounterACT-Generic,ForeScoutCounterACT_1,ForeScoutCounterACT,$localhost,,syslog
+ForeScout-CounterACT-Generic,ForeScoutCounterACT_2,ForeScoutCounterACT,$localhost,,syslog
+ForeScout-CounterACT-Generic,ForeScoutCounterACT_3,ForeScoutCounterACT,$localhost,,syslog
+ForeScout-CounterACT-NACPolicyLog,ForeScoutCounterACT_4,ForeScoutCounterACT,$localhost,,syslog
+ForeScout-CounterACT-SystemPerfStat,ForeScoutCounterACT_5,ForeScoutCounterACT,$localhost,,syslog

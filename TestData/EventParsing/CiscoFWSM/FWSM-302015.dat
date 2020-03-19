@@ -1,0 +1,33 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<166>Oct 08 2009 16:40:10: %FWSM-6-302015: Built outbound UDP connection 145756969649070302 for dmz:204.56.160.151/15436 (71.40.88.151/15436) to outside:72.5.225.62/53 (72.5.225.62/53)--automator
+[params]
+rawEventMsg=any
+deviceTime=any
+eventType=FWSM-302015
+phCustId=$sender
+destIpAddr=72.5.225.62
+destIpPort=53 (DOMAIN)
+srcIpAddr=204.56.160.151
+reptModel=FWSM
+eventId=any
+ipConnId=145756969649070302
+eventParsedOk=1
+eventSeverity=1
+preNATDestIpAddr=72.5.225.62
+eventName=Built UDP connection
+phEventCategory=0 (External)
+srcIntfName=dmz
+srcIpPort=15436
+preNATDestIpPort=53 (DOMAIN)
+eventSeverityCat=LOW
+destIntfName=outside
+postNATSrcIpAddr=71.40.88.151
+ipProto=17 (UDP)
+postNATSrcIpPort=15436
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Cisco

@@ -1,0 +1,37 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<135>id=firewall sn=C0EAE44DFBF0 time="2015-10-15 15:03:38 UTC" fw=24.30.249.50 pri=7 c=32 m=608 msg="IPS Detection Alert: ICMP Destination Unreachable (Port Unreachable)" sid=310 ipscat="ICMP" ipspri=3  sess=None n=1697 src=78.140.155.9:53:X1 dst=10.216.1.19:52396:X0
+[params]
+ipsSeverity=3
+deviceTime=any
+parserName=SonicwallFirewallParser
+eventType=SonicOS-608
+destIpAddr=10.216.1.19
+srcName=any
+threatCategory=ICMP
+srcIpAddr=78.140.155.9
+reptModel=SonicOS
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=IPS Detection Alert: %s
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+eventRuleTrigger=1
+type=IPS_Detection_Alert
+count=1
+srcIntfName=X1
+srcIpPort=53
+eventSeverityCat=LOW
+collectorId=any
+destIntfName=X0
+relayDevIpAddr=$localhost
+destIpPort=52396
+reptDevName=any
+customer=Super
+ipsSignatureId=310
+phRecvTime=any
+reptDevIpAddr=$localhost
+ipsEventName=ICMP Destination Unreachable (Port Unreachable)
+reptVendor=Sonicwall

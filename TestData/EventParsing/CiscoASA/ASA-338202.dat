@@ -1,0 +1,35 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<164>Nov 23 2010 08:56:55: %ASA-4-338202: Dynamic Filter monitored greylisted TCP traffic from inside:10.200.200.107/54662 (24.97.162.243/45025) to outside:24.143.204.129/80 (24.143.204.129/80), destination 24.143.204.129 resolved from dynamic list: cdn11.sphere.com, threat-level: low, category: Ads    False Positive Tuning
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+count=1
+phCustId=$sender
+destIpAddr=24.143.204.129
+destIntfName=outside
+destIpPort=80 (HTTP)
+destDomain=cdn11.sphere.com
+deviceTime=any
+eventAction=0 (Permit)
+eventId=any
+eventName=Traffic to greylisted domain
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=5
+eventSeverityCat=MEDIUM
+eventType=ASA-338202
+ipProto=6 (TCP)
+postNATSrcIpAddr=24.97.162.243
+postNATSrcIpPort=45025
+preNATDestIpAddr=24.143.204.129
+preNATDestIpPort=80 (HTTP)
+reptDevIpAddr=$reporter
+reptModel=ASA
+reptVendor=Cisco
+srcIpAddr=10.200.200.107
+srcIntfName=inside
+srcIpPort=54662
+threatCategory=Ads
+threatLevel=low

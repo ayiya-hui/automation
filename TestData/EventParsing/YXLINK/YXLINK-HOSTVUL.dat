@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+Wed Jul  9 15:10:24 2014 AccelOps-YXLINK-HOSTVUL [eventType]=YXLINK-HOSTVUL [Vul_name]=name
+[params]
+customer=Super
+eventId=any
+parserName=YXLINKParser
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+count=1
+eventSeverity=1
+eventType=YXLINK-HOSTVUL
+reptDevIpAddr=$localhost
+collectorId=any
+extEventRecvProto=Syslog
+eventName=YXLINK-HOSTVUL
+reptVendor=YXLink
+relayDevIpAddr=$localhost
+rawEventMsg=any
+phRecvTime=any
+vulnName=name
+reptDevName=any
+reptModel=Vuln Scanner

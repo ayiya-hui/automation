@@ -1,0 +1,21 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>Jul 24 2008 03:19:07: %PIX-6-315011: SSH session from SJ-Dev-S-RH-VMW-01 on interface inside for user "pix" terminated normally--automator
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=any
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+eventAction=0 (Permit)
+eventName=SSH session ended
+reptVendor=Cisco
+eventType=PIX-315011
+phEventCategory=0 (External)
+reptDevIpAddr=$localhost
+reptModel=PIX

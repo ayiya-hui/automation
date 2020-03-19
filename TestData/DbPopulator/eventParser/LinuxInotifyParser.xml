@@ -1,0 +1,44 @@
+<eventParser name="LinuxInotifyParser">
+  <deviceType>
+    <Vendor>Generic</Vendor>
+    <Model>Generic</Model>
+    <Version>ANY</Version>
+  </deviceType>
+
+  <appType>
+    <Vendor>Generic</Vendor>
+    <Model>Linux Inotify</Model>
+    <Version>ANY</Version>
+    <Name>Linux Inotify File Monitor</Name>
+  </appType>
+
+  <eventFormatRecognizer><![CDATA[LINUX_FILE_CHANGE]]></eventFormatRecognizer>
+  
+  <testEvents>
+      <testEvent><![CDATA[Tue Oct 19 18:18:49 2010 myTesterAttr: [LINUX_FILE_CHANGE]: [objectType]=Dir,[objectName]=/MyAutomation/All,[objectAction]=ATTRIB,[targetObjType]=File,[targetObjName]="newFile2.txt",[user]=newUser]]></testEvent>
+  </testEvents>
+
+  <parsingInstructions>
+
+    <!--
+      Thu Sep 16 19:03:20 2010 PowerEdgeSC440A: [LINUX_FILE_CHANGE]: [objectType]=Dir,[objectName]=./,[objectAction]=OPEN,[targetObjType]=File,[targetObjName]="test2"
+    -->
+
+    <collectFieldsByRegex src="$_rawmsg">
+      <regex><![CDATA[\w+\s+<_mon:gPatMon>\s+<_day:gPatDay>\s+<_time:gPatTime>\s+<_year:gPatYear>\s+<hostName:gPatStrEndColon>:\s+\[<eventType:gPatStr>\]:\s+<_body:gPatMesgBody>]]></regex>
+    </collectFieldsByRegex>
+
+    <collectAndSetAttrByKeyValuePair sep=',' src="$_body">
+      <attrKeyMap attr="osObjType" key="[objectType]="/>
+      <attrKeyMap attr="osObjName" key="[objectName]="/>
+      <attrKeyMap attr="osObjAction" key="[objectAction]="/>
+      <attrKeyMap attr="targetOsObjType" key="[targetObjType]="/>
+      <attrKeyMap attr="targetOsObjName" key="[targetObjName]="/>
+      <attrKeyMap attr="user" key="[user]="/>
+    </collectAndSetAttrByKeyValuePair>
+    
+    <setEventAttribute attr="deviceTime">toDateTime($_mon, $_day, $_year, $_time)</setEventAttribute>
+    <setEventAttribute attr="eventSeverity">5</setEventAttribute>
+    
+  </parsingInstructions>
+</eventParser>

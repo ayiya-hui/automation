@@ -1,0 +1,59 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<182>1 2015-10-01T13:56:21-05:00 BHMCUCMVCSE tvcs - - [meta sequenceId="5944"] 2015-10-01T13:56:21-05:00 BHMCUCMVCSE tvcs: UTCTime="2015-10-01 18:56:21,673" Module="network.sip" Level="INFO":  Action="Received" Local-ip="192.168.254.250"  Local-port="5061"  Src-ip="104.2.198.13"  Src-port="42248"   Detail="Receive Request Method=REGISTER, CSeq=198, To=sip:48330@10.1.10.200, Call-ID=acd1b8bf-863e0006-0000686a-0000377f@192.168.200.28, From-Tag=acd1b8bf863e004b00002272-00005aa4, To-Tag=, Msg-Hash=5368229874447754155"
+[params]
+deviceTime=any
+parserName=CiscoTVCSParser
+eventType=Cisco-TVCS-Generic
+destIpAddr=192.168.254.250
+srcName=104-2-198-13.lightspeed.brhmal.sbcglobal.net
+srcIpAddr=104.2.198.13
+reptModel=Telepresence Video Comm Server
+eventId=any
+eventTime=Thu Oct 01 18:56:21 CST 2015
+eventParsedOk=1
+eventSeverity=1
+eventName=Generic Telepresence Video Comm Server code
+details=Receive Request Method=REGISTER, CSeq=198, To=sip:48330@10.1.10.200, Call-ID=acd1b8bf-863e0006-0000686a-0000377f@192.168.200.28, From-Tag=acd1b8bf863e004b00002272-00005aa4, To-Tag=, Msg-Hash=5368229874447754155
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+srcIpPort=42248
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+destIpPort=5061
+reptDevName=any
+customer=Super
+finalCalledPartyNumber=sip:48330@10.1.10.200,
+phRecvTime=any
+reptDevIpAddr=$localhost
+sipMethod=REGISTER,
+reptVendor=Cisco
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<38>1 2015-10-01T13:56:44-05:00 BHMCUCMVCSE sshdpfwd 18858 - [meta sequenceId="6036"] 2015-10-01T13:56:44-05:00 BHMCUCMVCSE sshdpfwd[18858]: Received disconnect from 10.1.10.204: 11: disconnected by user
+[params]
+customer=Super
+eventId=any
+parserName=CiscoTVCSParser
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+count=1
+eventSeverity=1
+eventType=Cisco-TVCS-Generic
+reptDevIpAddr=$localhost
+collectorId=any
+extEventRecvProto=Syslog
+eventName=Generic Telepresence Video Comm Server code
+reptVendor=Cisco
+relayDevIpAddr=$localhost
+rawEventMsg=any
+phRecvTime=any
+reptDevName=any
+reptModel=Telepresence Video Comm Server

@@ -1,0 +1,18 @@
+eventType,name,module,reptDevIpAddr,key,method
+LINUX_FILE_CHANGE,FileAttribute_1,LinuxInotify,$localhost,hostName:myTesterAttr,syslog
+LINUX_FILE_CHANGE,FileOpen_2,LinuxInotify,$localhost,hostName:myTesterOpen,syslog
+LINUX_FILE_CHANGE,FileAccess_3,LinuxInotify,$localhost,hostName:myTesterAccess,syslog
+LINUX_FILE_CHANGE,FileCloseNoWrite_4,LinuxInotify,$localhost,hostName:myTesterCloseNoWrite,syslog
+LINUX_FILE_CHANGE,FileCloseWrite_5,LinuxInotify,$localhost,hostName:myTesterCloseWrite,syslog
+LINUX_FILE_CHANGE,FileModify_6,LinuxInotify,$localhost,hostName:myTesterModify,syslog
+LINUX_FILE_CHANGE,FileCreate_7,LinuxInotify,$localhost,hostName:myTesterCreate,syslog
+LINUX_FILE_CHANGE,FileDelete_8,LinuxInotify,$localhost,hostName:myTesterDelete,syslog
+LINUX_FILE_CHANGE,FileMoveFrom_9,LinuxInotify,$localhost,hostName:myTesterMoveFrom,syslog
+LINUX_FILE_CHANGE,FileMoveTo_10,LinuxInotify,$localhost,hostName:myTesterMoveTo,syslog
+LINUX_FILE_CHANGE,DirectoryOpen_11,LinuxInotify,$localhost,hostName:myTesterDirOpen,syslog
+LINUX_FILE_CHANGE,DirectoryClose No Write_12,LinuxInotify,$localhost,hostName:myTesterDirCloseNoWrite,syslog
+LINUX_FILE_CHANGE,DirectoryCreate_13,LinuxInotify,$localhost,hostName:myTesterDirCreate,syslog
+LINUX_FILE_CHANGE,DirectoryAttribute_14,LinuxInotify,$localhost,hostName:myTesterDirAttr,syslog
+LINUX_FILE_CHANGE,DirectoryMoveFrom_15,LinuxInotify,$localhost,hostName:myTesterDirMoveFrom,syslog
+LINUX_FILE_CHANGE,DirectoryMoveTo_16,LinuxInotify,$localhost,hostName:myTesterDirMoveTo,syslog
+LINUX_FILE_CHANGE,DirectoryDelete_17,LinuxInotify,$localhost,hostName:myTesterDirDelete,syslog

@@ -1,0 +1,40 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+date=2016-02-19 time=11:23:45 log_id=20000010 msg_id=000139289631 device_id=FV-1KD3A15800072 vd="root" timezone="(GMT+8:00)Beijing,ChongQing,HongKong,Urumgi" type=attack subtype="waf_signature_detection" pri=alert trigger_policy="" severity_level=Medium proto=tcp service=http action=Alert policy="123" src=172.22.6.234 src_port=60554 dst=10.0.9.13 dst_port=80 http_method=get http_url="/preview.php?file==../" http_host="10.0.9.123" http_agent="Mozilla/5.0 (Windows NT 6.1; WOW64; rv:43.0) Gecko/20100101 Firefox/43.0" http_session_id=3B9864AEKNQSLLODNTILCG37M2FZ6A88 msg="[Signatures name: 123] [main class name: Generic Attacks(Extended)] [sub class name: Directory Traversal]: 060150002" signature_subclass="Directory Traversal" signature_id="060150002" srccountry="Reserved" content_switch_name="none" server_pool_name="123" false_positive_mitigation="none" log_type=LOG_TYPE_SCORE_SUM event_score=3 score_message="[score_type: total_score] [score_scope: TCP Session] [score_threshold: 5] [score_sum: 7]" entry_sequence="000139289630"
+[params]
+deviceTime=any
+parserName=FortiWebParser
+eventType=FortiWeb-20000010
+destIpAddr=10.0.9.13
+destIpPort=80 (HTTP)
+srcIpAddr=172.22.6.234
+usrMsg=[Signatures name: 123] [main class name: Generic Attacks(Extended)] [sub class name: Directory Traversal]: 060150002
+reptModel=FortiWeb
+eventId=any
+policyName=123
+eventParsedOk=1
+subtype=waf_signature_detection
+eventSeverity=7
+eventName=Traffic violating a policy was detected by the FortiWeb appliance.
+serviceName=http
+reptDevName=any
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+type=attack
+count=1
+srcIpPort=60554
+eventSeverityCat=MEDIUM
+collectorId=any
+httpMethod=get
+relayDevIpAddr=$localhost
+rawEventMsg=any
+ipProto=6 (TCP)
+vdom=root
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+infoURL=/preview.php?file==../
+reptVendor=Fortinet
+httpUserAgent=Mozilla/5.0 (Windows NT 6.1; WOW64; rv:43.0) Gecko/20100101 Firefox/43.0
+httpHost=10.0.9.123

@@ -1,0 +1,21 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+enterprises.14823.1.1.10 6 1121 enterprises.14823.2.3.1.11.1.1.60 x "07 D8 0B 06 11 10 24 00 2D 08 00" 	enterprises.14823.2.3.1.11.1.1.71.0 i 10351	enterprises.14823.2.3.1.11.1.1.51.0 a "192.168.20.78"	enterprises.14823.2.3.1.11.1.1.52.0 x "00 00 00 00 00 00" 	enterprises.14823.2.3.1.11.1.1.69.0 i 1
+[params]
+rawEventMsg=any
+eventSeverity=1
+eventSeverityCat=LOW
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+phRecvTime=any
+phCustId=$sender
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+eventName=Controller User configuration has changed
+reptVendor=Aruba
+eventType=Aruba-1121-wlsxUserEntryChanged
+phEventCategory=0 (External)
+reptModel=ArubaOS WLAN Controller

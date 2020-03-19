@@ -1,0 +1,135 @@
+[reptDevIpAddr(key)]
+$localhost(destIpAddr:2.2.2.2)
+[eventMsg]
+201: May 12 01:10:52: %OSPF-5-ADJCHG: Process 1, Nbr 2.2.2.2 on Ethernet0/0 from INIT to 2WAY, 2-Way Received
+[params]
+deviceTime=any
+destName=arennes-651-1-107-2.w2-2.abo.wanadoo.fr
+destIpAddr=2.2.2.2
+eventType=IOS-OSPF-ADJCHG-MISC
+phCustId=$sender
+reptModel=IOS
+eventId=any
+eventParsedOk=1
+eventSeverity=2
+hostIpAddr=$localhost
+eventName=Misc OSPF neighbor messages from DOWN to FULL state
+phEventCategory=0
+eventSeverityCat=LOW
+collectorId=any
+srcIntfName=Ethernet0/0
+relayDevIpAddr=$localhost
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=Success(0)
+reptVendor=Cisco
+msg=2-Way Received
+[reptDevIpAddr(key)]
+$localhost(destIpAddr:2.2.2.3)
+[eventMsg]
+201: May 12 01:10:52: %OSPF-5-ADJCHG: Process 1, Nbr 2.2.2.3 on Ethernet0/0 from DOWN to INIT, Received Hello
+[params]
+deviceTime=any
+destName=arennes-651-1-107-3.w2-2.abo.wanadoo.fr
+destIpAddr=2.2.2.3
+eventType=IOS-OSPF-ADJCHG-MISC
+phCustId=$sender
+reptModel=IOS
+eventId=any
+eventParsedOk=1
+eventSeverity=2
+hostIpAddr=$localhost
+eventName=Misc OSPF neighbor messages from DOWN to FULL state
+phEventCategory=0
+eventSeverityCat=LOW
+collectorId=any
+srcIntfName=Ethernet0/0
+relayDevIpAddr=$localhost
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=Success(0)
+reptVendor=Cisco
+msg=Received Hello
+[reptDevIpAddr(key)]
+$localhost(destIpAddr:2.2.2.4)
+[eventMsg]
+201: May 12 01:10:52: %OSPF-5-ADJCHG: Process 1, Nbr 2.2.2.4 on Ethernet0/0 from EXSTART to EXCHANGE, Negotiation Done
+[params]
+deviceTime=any
+destName=arennes-651-1-107-4.w2-2.abo.wanadoo.fr
+destIpAddr=2.2.2.4
+eventType=IOS-OSPF-ADJCHG-MISC
+phCustId=$sender
+reptModel=IOS
+eventId=any
+eventParsedOk=1
+eventSeverity=2
+hostIpAddr=$localhost
+eventName=Misc OSPF neighbor messages from DOWN to FULL state
+phEventCategory=0
+eventSeverityCat=LOW
+collectorId=any
+srcIntfName=Ethernet0/0
+relayDevIpAddr=$localhost
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=Success(0)
+reptVendor=Cisco
+msg=Negotiation Done
+[reptDevIpAddr(key)]
+$localhost(destIpAddr:2.2.2.5)
+[eventMsg]
+201: May 12 01:10:52: %OSPF-5-ADJCHG: Process 1, Nbr 2.2.2.5 on Ethernet0/0 from 2WAY to EXSTART, AdjOK?
+[params]
+deviceTime=any
+destName=arennes-651-1-107-5.w2-2.abo.wanadoo.fr
+destIpAddr=2.2.2.5
+eventType=IOS-OSPF-ADJCHG-MISC
+phCustId=$sender
+reptModel=IOS
+eventId=any
+eventParsedOk=1
+eventSeverity=2
+hostIpAddr=$localhost
+eventName=Misc OSPF neighbor messages from DOWN to FULL state
+phEventCategory=0
+eventSeverityCat=LOW
+collectorId=any
+srcIntfName=Ethernet0/0
+relayDevIpAddr=$localhost
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=Success(0)
+reptVendor=Cisco
+msg=AdjOK?
+[reptDevIpAddr(key)]
+$localhost(destIpAddr:2.2.2.6)
+[eventMsg]
+201: May 12 01:10:52: %OSPF-5-ADJCHG: Process 1, Nbr 2.2.2.6 on Ethernet0/0 from EXCHANGE to LOADING, Exchange Done
+[params]
+deviceTime=any
+destName=arennes-651-1-107-6.w2-2.abo.wanadoo.fr
+destIpAddr=2.2.2.6
+eventType=IOS-OSPF-ADJCHG-MISC
+phCustId=$sender
+reptModel=IOS
+eventId=any
+eventParsedOk=1
+eventSeverity=2
+hostIpAddr=$localhost
+eventName=Misc OSPF neighbor messages from DOWN to FULL state
+phEventCategory=0
+eventSeverityCat=LOW
+collectorId=any
+srcIntfName=Ethernet0/0
+relayDevIpAddr=$localhost
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=Success(0)
+reptVendor=Cisco
+msg=Exchange Done

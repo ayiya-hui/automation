@@ -1,0 +1,40 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<12>May  9 18:02:12 1,2010/05/09 18:02:12,0006C101167,THREAT,virus,6,2010/05/09 18:02:07,69.36.187.33,172.16.2.2,69.36.187.33,::172.16.255.78,DynamicDefault,,,web-browsing,vsys1,untrust,trust,ethernet1/2,ethernet1/1,syslog-172.16.20.152,2010/05/09 18:02:12,994,1,80,1138,80,48310,0x40,tcp,deny,"",Eicar Test File(100000),any,medium,1
+[params]
+rawEventMsg=any
+appName=web-browsing
+srcIpAddr=69.36.187.33
+virusName=""
+eventAction=1 (Deny)
+eventType=PAN-OS-THREAT-virus-100000-deny
+phCustId=$sender
+destIpAddr=172.16.2.2
+destIpPort=1138
+reptModel=PAN-OS
+eventId=any
+ipConnId=994
+eventParsedOk=1
+eventSeverity=5
+preNATDestIpAddr=172.16.255.78
+eventName=Eicar Virus threat denied
+appTransportProto=web-browsing
+phEventCategory=0 (External)
+paFwAction=deny
+webCategory=any
+srcIntfName=ethernet1/2
+srcFwZone=untrust
+srcIpPort=80
+preNATDestIpPort=48310
+eventSeverityCat=MEDIUM
+destIntfName=ethernet1/1
+postNATSrcIpAddr=69.36.187.33
+ipProto=6 (TCP)
+destFwZone=trust
+postNATSrcIpPort=80
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Palo Alto
+fwRule=DynamicDefault

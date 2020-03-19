@@ -1,0 +1,30 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+Nov  8 19:00:01 Time=2014-11-03T02:40:00,Category=Vulnerabilities,CriticalityLevel=Major,Desc=Duplicate Information Elements,device=a2:be:0e:59:1e:9b(a2:be:0e:59:1e:9b),sensor=fc:0a:81:12:7d:9b(FRA-SENS403EB[a,b,g,n])
+[params]
+deviceTime=any
+parserName=MotorolaAirDefenseParser
+eventType=Motorola-AirDefense-Vulnerabilities
+srcName=a2:be:0e:59:1e:9b
+reptModel=AirDefense
+eventId=any
+eventTime=Mon Nov 03 02:40:00 CST 2014
+eventParsedOk=1
+eventSeverity=5
+eventName=Motorola-AirDefense-Vulnerabilities
+appTransportProto=Syslog
+phEventCategory=0 (External)
+eventRuleTrigger=1
+destName=FRA-SENS403EB[a,b,g,n]
+count=1
+srcMACAddr=a2:be:0e:59:1e:9b
+eventSeverityCat=MEDIUM
+collectorId=any
+relayDevIpAddr=$localhost
+reptDevIpAddr=$localhost
+eventDesc=Duplicate Information Elements
+customer=Super
+phRecvTime=any
+destMACAddr=fc:0a:81:12:7d:9b
+reptVendor=Motorola

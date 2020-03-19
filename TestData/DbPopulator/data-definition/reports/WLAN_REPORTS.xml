@@ -1,0 +1,438 @@
+
+<Reports> 
+
+  <!-- ****************************************************************** -->
+  <Report id="PH_Report_WLAN_1" group="PH_SYS_REPORT_WLAN">
+    <Name>Top Reporting WLAN Controllers Ranked By Event Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks WLAN Controllers by the total number of events received </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr,reptVendor,reptModel,COUNT (*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT (*)</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WLAN_1" name="Filter_WLAN_1">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WLAN_CONTROLLER) </SingleEvtConstr>
+        <GroupByAttr>reptDevIpAddr,reptVendor,reptModel</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <!-- *************************************************************************** -->
+  <Report id="PH_Report_WLAN_2" group="PH_SYS_REPORT_WLAN,PH_SYS_REPORT_Freq">
+    <Name>Rogue APs detected </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Lists the rogue APs</Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr, srcMACAddr, eventType, COUNT (*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT (*)</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WLAN_2" name="Filter_WLAN_3">
+        <SingleEvtConstr> reptDevIpAddr IN (Group@PH_SYS_DEVICE_WLAN_CONTROLLER) AND eventType IN (Group@PH_SYS_EVENT_WirelessRogue) </SingleEvtConstr>
+        <GroupByAttr>reptDevIpAddr,srcMACAddr,eventType</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+  
+  <!-- *************************************************************************** -->
+  <Report id="PH_Report_WLAN_3" group="PH_SYS_REPORT_WLAN">
+    <Name>Rogue AP Detection Details</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Provides details of rogue AP events</Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr,srcMACAddr,destMACAddr,eventType,wlanSsid,wlanRadioId,hostLocation,wlanChannelId,rawEventMsg</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT (*)</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WLAN_3" name="Filter_WLAN_3">
+         <SingleEvtConstr> reptDevIpAddr IN (Group@PH_SYS_DEVICE_WLAN_CONTROLLER) AND eventType IN (Group@PH_SYS_EVENT_WirelessRogue) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <!-- *************************************************************************** -->
+  <Report id="PH_Report_WLAN_4" group="PH_SYS_REPORT_WLAN">
+    <Name>Wireless Logon Failure Details</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Provides details of wireless logon authentication failures</Description>
+    <SelectClause numEntries="All">
+      <AttrList>phRecvTime,reptDevIpAddr,srcMACAddr,srcIpAddr,user,eventType,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WLAN_4" name="Filter_WLAN_4">
+        <SingleEvtConstr> reptDevIpAddr IN (Group@PH_SYS_DEVICE_WLAN_CONTROLLER) AND eventType IN (Group@PH_SYS_EVENT_WirelessLogonFailure) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <!-- *************************************************************************** -->
+  <Report id="PH_Report_WLAN_5" group="PH_SYS_REPORT_WLAN">
+    <Name>Top Wireless Controllers, Users By Failed Logon Count</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Provides details of wireless logon authentication failures</Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,srcMACAddr,user,COUNT(*)</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WLAN_5" name="Filter_WLAN_5">
+        <SingleEvtConstr> reptDevIpAddr IN (Group@PH_SYS_DEVICE_WLAN_CONTROLLER) AND eventType IN (Group@PH_SYS_EVENT_WirelessLogonFailure) </SingleEvtConstr>
+	<GroupByAttr>reptDevIpAddr,srcMACAddr,user</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <!-- *************************************************************************** -->
+  <Report id="PH_Report_WLAN_6" group="PH_SYS_REPORT_WLAN">
+    <Name>Top Wireless Controllers, Users By Successful Logon Count</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks wireless controllers by successful logons</Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,srcMACAddr,user,COUNT(*)</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WLAN_6" name="Filter_WLAN_6">
+        <SingleEvtConstr> reptDevIpAddr IN (Group@PH_SYS_DEVICE_WLAN_CONTROLLER) AND eventType IN (Group@PH_SYS_EVENT_WirelessLogonSuccess) </SingleEvtConstr>
+	<GroupByAttr>reptDevIpAddr,srcMACAddr,user</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <!-- *************************************************************************** -->
+  <Report id="PH_Report_WLAN_7" group="PH_SYS_REPORT_WLAN">
+    <Name>Wireless Logon Activity</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report tracks wireless logon details</Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr,eventType,srcMACAddr,srcIpAddr,user,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WLAN_7" name="Filter_WLAN_7">
+         <SingleEvtConstr> reptDevIpAddr IN (Group@PH_SYS_DEVICE_WLAN_CONTROLLER) AND eventType IN (Group@PH_SYS_EVENT_WirelessLogonSuccess,Group@PH_SYS_EVENT_WirelessLogonFailure) </SingleEvtConstr>
+       </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+   </Report>
+
+  <!-- *************************************************************************** -->
+  <Report id="PH_Report_WLAN_8" group="PH_SYS_REPORT_WLAN">
+    <Name> WLAN Config Change </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>This report tracks all software, hardware and device configuration changes at WLAN Access points and Base stations. The report includes Original Reporting Controller IP, Event Type and MAC address of the AP or Controller where the event happened. If the MAC address is empty then, the event happened at the reporting Controller. </Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr,eventType,hostMACAddr,wlanSsid,wlanRadioId,hostLocation,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+       <SubPattern displayName="Filter_WLAN_8" name="Filter_WLAN_8">
+         <SingleEvtConstr> reptDevIpAddr IN (Group@PH_SYS_DEVICE_WLAN_CONTROLLER) AND eventType IN (Group@PH_SYS_EVENT_ConfigChange) </SingleEvtConstr>
+       </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+   </Report>
+
+  <!-- *************************************************************************** -->
+  <Report id="PH_Report_WLAN_9" group="PH_SYS_REPORT_WLAN,PH_SYS_REPORT_Freq">
+    <Name>Top WLAN IDS Alerts (Detailed)</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks WLAN IDS alerts</Description>
+    <SelectClause numEntries="All">
+      <AttrList>reptDevIpAddr,eventType,srcMACAddr,destMACAddr,COUNT(*) </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WLAN_9" name="Filter_WLAN_9">
+        <SingleEvtConstr> reptDevIpAddr IN (Group@PH_SYS_DEVICE_WLAN_CONTROLLER) AND eventType IN (Group@PH_SYS_EVENT_WirelessSig) </SingleEvtConstr>
+        <GroupByAttr>reptDevIpAddr, eventType,srcMACAddr,destMACAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+  
+   <!-- ********************************************* -->
+  <Report id="PH_Report_WLAN_10" group="PH_SYS_REPORT_WLAN">
+    <Name>Top Reporting WLAN Events By Severity, Count </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks WLAN events by severity and count </Description>
+    <SelectClause numEntries="All">
+        <AttrList>reptDevIpAddr, eventType, eventSeverity, COUNT (*)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT (*)</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WLAN_10" name="Filter_WLAN_10">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WLAN_CONTROLLER) </SingleEvtConstr>
+        <GroupByAttr>reptDevIpAddr, eventType,eventSeverity </GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <!-- ************************************************************* -->
+  <Report id="PH_Report_WLAN_11" group="PH_SYS_REPORT_WLAN">
+    <Name>Successful WLAN Admin Logon</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks successful admin logons to the WLAN Controller</Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr,eventType,srcIpAddr,user,rawEventMsg </AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>COUNT (*)</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WLAN_11" name="Filter_WLAN_11">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WLAN_CONTROLLER) AND eventType IN (Group@PH_SYS_EVENT_HostLogonSuccess)</SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <!-- ************************************************************* -->
+  <Report id="PH_Report_WLAN_12" group="PH_SYS_REPORT_WLAN">
+    <Name>Failed WLAN Admin Logon</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Tracks failed admin logons to the WLAN Controller</Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,reptDevIpAddr,eventType,srcIpAddr,user,rawEventMsg </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WLAN_12" name="Filter_WLAN_12">
+        <SingleEvtConstr>reptDevIpAddr IN (Group@PH_SYS_DEVICE_WLAN_CONTROLLER) AND eventType IN (Group@PH_SYS_EVENT_HostLogonFailure) </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <!-- ************************************************************* -->
+  <Report id="PH_Report_WLAN_16" group="PH_SYS_REPORT_WLAN">
+    <Name>Cisco WLAN AP Channel Stat</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Reports which hosts are behind which APs, SSIDs and signal strengths</Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,hostName,hostIpAddr,wlanProtocol,wlanChannelId,wlanSendUtil,wlanRecvUtil,wlanChannelUtil,wlanUserCount,wlanPoorSNRUserCount,ifLoadProfile,ifIntefProfile,ifCoverageProfile,ifNoiseProfile</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WLAN_12" name="Filter_WLAN_12">
+        <SingleEvtConstr>eventType = "PH_DEV_MON_CISCO_WLAN_RADIO_METRIC" </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>wlanContrIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <!-- ************************************************************* -->
+  <Report id="PH_Report_WLAN_17" group="PH_SYS_REPORT_WLAN">
+    <Name>Aruba WLAN AP Channel Stat</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Reports which hosts are behind which APs, SSIDs and signal strengths</Description>
+    <SelectClause numEntries="All">
+        <AttrList>phRecvTime,hostName,hostIpAddr,devPort,wlanProtocol,wlanChannelId,wlanChannelUtil,wlanUserCount,ifIntefIndx,ifCoverageIndx,ifNoiseIndx</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WLAN_12" name="Filter_WLAN_12">
+        <SingleEvtConstr>eventType = "PH_DEV_MON_ARUBA_WLAN_RADIO_METRIC" </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>wlanContrIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <!-- ************************************************************* -->
+  <Report id="PH_Report_WLAN_18" group="PH_SYS_REPORT_WLAN">
+    <Name>Top Cisco WLAN AP Channels By Poor SNR User Count</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the Cisco WLAN AP Channels by the number of users receiving poor SNRs </Description>
+    <SelectClause numEntries="All">
+        <AttrList>hostName,hostIpAddr,wlanProtocol,wlanChannelId,AVG(wlanPoorSNRUserCount)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>AVG(wlanPoorSNRUserCount) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WLAN_12" name="Filter_WLAN_12">
+        <SingleEvtConstr>eventType = "PH_DEV_MON_CISCO_WLAN_RADIO_METRIC" </SingleEvtConstr>
+	<GroupByAttr>hostName,hostIpAddr,wlanProtocol,wlanChannelId</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>wlanContrIpAddr</RelevantFilterAttr>
+  </Report>
+  
+  <!-- ************************************************************* -->
+  <Report id="PH_Report_WLAN_19" group="PH_SYS_REPORT_WLAN">
+    <Name>Top Cisco WLAN AP Channels By User Count</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the Cisco WLAN AP Channels by the number of users</Description>
+    <SelectClause numEntries="All">
+      <AttrList>hostName,hostIpAddr,wlanProtocol,wlanChannelId,AVG(wlanUserCount)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>AVG(wlanUserCount) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WLAN_12" name="Filter_WLAN_12">
+        <SingleEvtConstr>eventType = "PH_DEV_MON_CISCO_WLAN_RADIO_METRIC" </SingleEvtConstr>
+	<GroupByAttr>hostName,hostIpAddr,wlanProtocol,wlanChannelId</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>wlanContrIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <!-- ************************************************************* -->
+  <Report id="PH_Report_WLAN_20" group="PH_SYS_REPORT_WLAN">
+    <Name>Top Cisco WLAN AP Channels By Channel Utilization (detailed)</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the Cisco WLAN AP Channels by channel utilization. This report has detailed version also includes send and receive utilization and the number of WLAN users</Description>
+    <SelectClause numEntries="All">
+      <AttrList>hostName,hostIpAddr,wlanProtocol,wlanChannelId,AVG(wlanChannelUtil),AVG(wlanSendUtil),AVG(wlanRecvUtil),AVG(wlanUserCount)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>AVG(wlanChannelUtil) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WLAN_12" name="Filter_WLAN_12">
+        <SingleEvtConstr>eventType = "PH_DEV_MON_CISCO_WLAN_RADIO_METRIC" </SingleEvtConstr>
+	<GroupByAttr>hostName,hostIpAddr,wlanProtocol,wlanChannelId</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>wlanContrIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <!-- ************************************************************* -->
+  <Report id="PH_Report_WLAN_21" group="PH_SYS_REPORT_WLAN">
+    <Name>Top Cisco WLAN AP Channels By Channel Utilization </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the Cisco WLAN AP Channels by channel utilization. </Description>
+    <SelectClause numEntries="All">
+      <AttrList>hostName,hostIpAddr,wlanProtocol,wlanChannelId,AVG(wlanChannelUtil)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>AVG(wlanChannelUtil) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WLAN_12" name="Filter_WLAN_12">
+        <SingleEvtConstr>eventType = "PH_DEV_MON_CISCO_WLAN_RADIO_METRIC" </SingleEvtConstr>
+	<GroupByAttr>hostName,hostIpAddr,wlanProtocol,wlanChannelId</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>wlanContrIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <!-- ************************************************************* -->
+  <Report id="PH_Report_WLAN_22" group="PH_SYS_REPORT_WLAN">
+    <Name>Top Aruba WLAN AP Channels By Channel Utilization </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the Aruba WLAN AP Channels by channel utilization. </Description>
+    <SelectClause numEntries="All">
+      <AttrList>hostName,hostIpAddr,wlanProtocol,wlanChannelId,AVG(wlanChannelUtil)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>AVG(wlanChannelUtil) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WLAN_12" name="Filter_WLAN_12">
+        <SingleEvtConstr>eventType = "PH_DEV_MON_ARUBA_WLAN_RADIO_METRIC" </SingleEvtConstr>
+	<GroupByAttr>hostName,hostIpAddr,wlanProtocol,wlanChannelId</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>wlanContrIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <!-- ************************************************************* -->
+  <Report id="PH_Report_WLAN_23" group="PH_SYS_REPORT_WLAN">
+    <Name>Top Aruba WLAN AP Channels By Channel Utilization (detailed version)</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the Aruba WLAN AP Channels by channel utilization. This report has detailed version also includes packet and byte rates and the number of WLAN users</Description>
+    <SelectClause numEntries="All">
+      <AttrList>hostName,hostIpAddr,wlanProtocol,wlanChannelId,AVG(wlanChannelUtil),AVG(totBytesPerSec),AVG(totPktsPerSec),AVG(wlanUserCount)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>AVG(wlanChannelUtil) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WLAN_12" name="Filter_WLAN_12">
+        <SingleEvtConstr>eventType = "PH_DEV_MON_ARUBA_WLAN_RADIO_METRIC" </SingleEvtConstr>
+	<GroupByAttr>hostName,hostIpAddr,wlanProtocol,wlanChannelId</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>wlanContrIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <!-- ************************************************************* -->
+  <Report id="PH_Report_WLAN_24" group="PH_SYS_REPORT_WLAN">
+    <Name>Top Aruba WLAN AP Channels By Noise Index (detailed version)</Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the Aruba WLAN AP Channels by channel utilization. This report has detailed version also includes packet and byte rates and the number of WLAN users</Description>
+    <SelectClause numEntries="All">
+      <AttrList>hostName,hostIpAddr,wlanProtocol,wlanChannelId,AVG(ifNoiseIndx),AVG(ifIntefIndx),AVG(ifCoverageIndx)</AttrList>
+    </SelectClause>
+    <OrderByClause><AttrList>AVG(ifNoiseIndx) DESC</AttrList></OrderByClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WLAN_12" name="Filter_WLAN_12">
+        <SingleEvtConstr>eventType = "PH_DEV_MON_ARUBA_WLAN_RADIO_METRIC" </SingleEvtConstr>
+	<GroupByAttr>hostName,hostIpAddr,wlanProtocol,wlanChannelId</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>wlanContrIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <!-- ************************************************************* -->
+  <Report id="PH_Report_WLAN_25" group="PH_SYS_REPORT_WLAN">
+    <Name>Aruba WLAN AP to Host Association Report </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the Aruba WLAN AP Channels by channel utilization. This report has detailed version also includes packet and byte rates and the number of WLAN users</Description>
+    <SelectClause numEntries="All">
+      <AttrList>phRecvTime,hostIpAddr,user,wlanProtocol,wlanSsid,wlanChannelId,wlanRssi,wlanApAssocUpTime,nepDevIpAddr,nepDevName,wlanContrIpAddr,wlanContrHostName</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WLAN_12" name="Filter_WLAN_12">
+        <SingleEvtConstr>phEventCategory = 3 AND eventType = "PH_DISCOV_ARUBA_WLAN_HOST_LOCATION" </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>wlanContrIpAddr</RelevantFilterAttr>
+  </Report>
+
+  <!-- ************************************************************* -->
+  <Report id="PH_Report_WLAN_26" group="PH_SYS_REPORT_WLAN">
+    <Name>Cisco WLAN AP to Host Association Report </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks the Cisco WLAN AP Channels by channel utilization. This report has detailed version also includes packet and byte rates and the number of WLAN users</Description>
+    <SelectClause numEntries="All">
+      <AttrList>phRecvTime,hostIpAddr,user,wlanProtocol,wlanSsid,wlanRssi,wlanSnr,nepDevIpAddr,nepDevName,wlanContrIpAddr,wlanContrHostName</AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WLAN_12" name="Filter_WLAN_12">
+        <SingleEvtConstr>phEventCategory = 3 AND eventType = "PH_DISCOV_CISCO_WLAN_HOST_LOCATION" </SingleEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>wlanContrIpAddr</RelevantFilterAttr>
+  </Report>
+
+   <!-- *************************************************************************** -->
+  <Report id="PH_Report_WLAN_27" group="PH_SYS_REPORT_WLAN,PH_SYS_REPORT_Freq">
+    <Name>Top WLAN IDS Alerts </Name>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <Description>Ranks WLAN IDS alerts</Description>
+    <SelectClause numEntries="All">
+      <AttrList>eventType,COUNT(*) </AttrList>
+    </SelectClause>
+    <ReportInterval><Window unit="Hourly" val="1"/></ReportInterval>
+    <PatternClause window="3600">
+      <SubPattern displayName="Filter_WLAN_9" name="Filter_WLAN_9">
+        <SingleEvtConstr> reptDevIpAddr IN (Group@PH_SYS_DEVICE_WLAN_CONTROLLER) AND eventType IN (Group@PH_SYS_EVENT_WirelessSig) </SingleEvtConstr>
+        <GroupByAttr>eventType</GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <RelevantFilterAttr>reptDevIpAddr</RelevantFilterAttr>
+  </Report>
+
+</Reports>

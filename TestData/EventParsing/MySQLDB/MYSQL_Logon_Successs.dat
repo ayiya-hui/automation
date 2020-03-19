@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+172.16.22.227
+[eventMsg]
+<134>Jun 03 09:39:14 172.16.22.227 java: [MYSQL_Logon_Successs]:[eventSeverity]=PHL_INFO, [eventTime]=2013-06-03 09:38:50.0, [rptIp]=172.16.22.227, [relayIp]=172.16.22.227, [srcIp]=192.168.64.243, [user]=admin, [logonTime]=2013-06-03 09:38:50.0, [actionName]=Connect,
+[params]
+deviceTime=any
+parserName=MySQLDBParser
+eventType=MYSQL_Logon_Successs
+srcIpAddr=192.168.64.243
+reptModel=MySQL
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=MYSQL_Logon_Successs
+extEventRecvProto=JDBC
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=172.16.22.227
+user=admin
+rawEventMsg=any
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=172.16.22.227
+reptVendor=Oracle

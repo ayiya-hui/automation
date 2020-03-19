@@ -1,0 +1,33 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+date=2012-07-16 time=12:22:56 device_id=FE100C3909600504 log_id=0200001075 type=statistics pri=information session_id="q6GJMuPu003642-q6GJMuPv003642" client_name="[172.20.140.94]" dst_ip="172.20.140.92" endpoint="" from="user@external.lab" to="user5@external.lab" subject="" mailer="mta" resolved="OK" direction="in" virus="" disposition="Reject" classifier="Recipient Verification" message_length="188"
+[params]
+deviceTime=any
+parserName=FortiMailParser
+eventType=FortiMail-History-Reject-OK
+destIpAddr=172.20.140.92
+reptModel=FortiMail
+eventId=any
+srcUser=user@external.lab
+eventSeverity=1
+eventName=FortiMail-History-Reject-OK
+destUser=user5@external.lab
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+type=History
+destName=[172.20.140.94]
+status=OK
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+eventParsedOk=1
+msgLen=188
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+sessionId=q6GJMuPu003642-q6GJMuPv003642
+reptVendor=Fortinet
+classifier=Recipient Verification

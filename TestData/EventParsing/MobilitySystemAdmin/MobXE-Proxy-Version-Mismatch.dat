@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+1.1.1.1
+[eventMsg]
+<134>Sep 27 06:09:01 1.1.1.1 nmservic.exe[1016]: Proxy: Client RPC system version mismatch, User name: SHARED\ChapmaD, Device Identity [None], server version: 9.10 build: 19168, client version: 7.21 build: 49889
+[params]
+rawEventMsg=any
+domain=SHARED
+deviceTime=any
+eventType=MobXE-Proxy-Version-Mismatch
+phCustId=$sender
+hostName=[None]
+procName=nmservic.exe
+reptModel=Mobility XE
+eventId=any
+eventParsedOk=1
+eventSeverity=7
+eventName=NetMotion MobilityXE client and server RPC application version mismatch
+phEventCategory=0 (External)
+appClientVersion=7.21
+eventSeverityCat=MEDIUM
+collectorId=any
+user=ChapmaD
+appServerVersion=9.10
+reptDevName=any
+count=1
+phRecvTime=any
+reptDevIpAddr=1.1.1.1
+reptVendor=NetMotion

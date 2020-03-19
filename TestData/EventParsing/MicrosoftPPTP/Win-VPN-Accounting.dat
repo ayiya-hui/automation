@@ -1,0 +1,29 @@
+[reptDevIpAddr(key)]
+192.168.24.11
+[eventMsg]
+<13>Apr  1 09:28:09 dev-v-win03-vc MSPPTPLog    0       192.168.24.11,administrator,04/01/2009,09:28:08,RAS,DEV-V-WIN03-VC,4,192.168.24.11,6,2,7,1,5,129,61,5,64,1,65,1,31,192.168.20.38,66,192.168.20.38,25,311 1 192.168.24.11 04/01/2009 16:12:12 3,44,29,8,192.168.24.235,12,1500,50,3,51,1,55,1238603288,45,2,40,1,4108,192.168.24.11,4147,311,4148,MSRASV5.20,4120,0x014445562D562D57494E30332D5643,4294967206,4,4154,Use Windows authentication for all users,4136,4,4142,0
+[params]
+rawEventMsg=any
+deviceTime=any
+eventType=Win-VPN-Accounting
+phCustId=$sender
+srcIpAddr=192.168.20.38
+reptModel=PPTP/L2TP VPN
+eventId=any
+ipConnId=29
+eventParsedOk=1
+eventSeverity=1
+testEvent=Real Event(0)
+eventName=Windows L2TP/PPTP VPN Accounting message
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+collectorId=any
+user=administrator
+reptDevName=DEV-V-WIN03-VC
+count=1
+phRecvTime=any
+reptDevIpAddr=192.168.24.11
+eventAction=0 (Permit)
+reptVendor=Microsoft
+nepDevIpAddr=192.168.24.11
+relayDevName=RAS

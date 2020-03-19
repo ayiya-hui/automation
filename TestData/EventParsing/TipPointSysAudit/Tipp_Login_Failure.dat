@@ -1,0 +1,126 @@
+[reptDevIpAddr(key)]
+$localhost (srcIpAddr:192.168.64.7)
+[eventMsg]
+<5>NOV 05 18:59:02 2009  PH-QA-TIP1 [audit] user=[SYS] src=192.168.64.7 iface=1 access=0 Login failure - user myUser not found
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+reptDevIpAddr=$localhost
+eventParsedOk=1
+eventSeverity=3
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+srcIpAddr=192.168.64.7
+eventName=Tipping Point IPS Administrative login failed
+reptVendor=3Com
+eventType=Tipp_Login_Failure
+user=myUser
+phEventCategory=0 (External)
+reptModel=TippingPoint UnityOne IPS
+[reptDevIpAddr(key)]
+$localhost (srcIpAddr:192.168.64.8)
+[eventMsg]
+<5>NOV 05 18:59:02 2009  PH-QA-TIP1 [audit] user=[SYS] src=192.168.64.8 iface=1 access=0 Login failure - user my New User not found
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+reptDevIpAddr=$localhost
+eventParsedOk=1
+eventSeverity=3
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+srcIpAddr=192.168.64.8
+eventName=Tipping Point IPS Administrative login failed
+reptVendor=3Com
+eventType=Tipp_Login_Failure
+user=my New User
+phEventCategory=0 (External)
+reptModel=TippingPoint UnityOne IPS
+[reptDevIpAddr(key)]
+$localhost (srcIpAddr:192.168.64.9)
+[eventMsg]
+<5>NOV 05 18:59:02 2009  PH-QA-TIP1 [audit] user=[phoenix_agent] src=192.168.64.9 iface=3 access=0 Login failed for user new_agent
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+reptDevIpAddr=$localhost
+eventParsedOk=1
+eventSeverity=3
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+srcIpAddr=192.168.64.9
+eventName=Tipping Point IPS Administrative login failed
+reptVendor=3Com
+eventType=Tipp_Login_Failure
+user=new_agent
+phEventCategory=0 (External)
+reptModel=TippingPoint UnityOne IPS
+[reptDevIpAddr(key)]
+$localhost (srcIpAddr:192.168.64.10)
+[eventMsg]
+<5>NOV 05 18:59:02 2009  PH-QA-TIP1 [audit] user=[phoenix_agent] src=192.168.64.10 iface=3 access=0 Login failed for user Chong Yan
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+reptDevIpAddr=$localhost
+eventParsedOk=1
+eventSeverity=3
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+srcIpAddr=192.168.64.10
+eventName=Tipping Point IPS Administrative login failed
+reptVendor=3Com
+eventType=Tipp_Login_Failure
+user=Chong Yan
+phEventCategory=0 (External)
+reptModel=TippingPoint UnityOne IPS
+[reptDevIpAddr(key)]
+$localhost (srcIpAddr:192.168.64.11)
+[eventMsg]
+<5>NOV 05 18:59:02 2009  PH-QA-TIP1 [audit] user=[phoenix_agent] src=192.168.64.11 iface=3 access=0 Invalid password for my_agent
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+reptDevIpAddr=$localhost
+eventParsedOk=1
+eventSeverity=3
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+srcIpAddr=192.168.64.11
+eventName=Tipping Point IPS Administrative login failed
+reptVendor=3Com
+eventType=Tipp_Login_Failure
+user=my_agent
+phEventCategory=0 (External)
+reptModel=TippingPoint UnityOne IPS
+[reptDevIpAddr(key)]
+$localhost (srcIpAddr:192.168.64.12)
+[eventMsg]
+<5>NOV 05 18:59:02 2009  PH-QA-TIP1 [audit] user=[phoenix_agent] src=192.168.64.12 iface=3 access=0 Invalid password for my1 agent
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+reptDevIpAddr=$localhost
+eventParsedOk=1
+eventSeverity=3
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+srcIpAddr=192.168.64.12
+eventName=Tipping Point IPS Administrative login failed
+reptVendor=3Com
+eventType=Tipp_Login_Failure
+user=my1 agent
+phEventCategory=0 (External)
+reptModel=TippingPoint UnityOne IPS

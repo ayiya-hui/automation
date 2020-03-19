@@ -1,0 +1,13 @@
+$arubaWLANFrameType,
+,
+0,associateRequest
+1,associateResponse
+2,reassociateRequest
+3,reassociateResponse
+4,probeRequest
+5,probeResponse
+8,beacon
+9,atim
+10,disassociate
+11,auth
+12,deauth

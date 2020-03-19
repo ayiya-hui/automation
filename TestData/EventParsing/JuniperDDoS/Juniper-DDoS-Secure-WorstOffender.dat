@@ -1,0 +1,91 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>Juniper: Start: 78.188.140.231 : TUR: Worst Offender: (Valid IP) : Defending 66.144.15.117
+[params]
+destGeoOrg=any
+parserName=JuniperDDoSParser
+eventType=Juniper-DDoS-Secure-WorstOffender
+destGeoState=any
+destIpAddr=66.144.15.117
+srcName=78.188.140.231.static.ttnet.com.tr
+srcIpAddr=78.188.140.231
+destGeoCountry=any
+reptModel=DDoS Secure
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Juniper-DDoS-Secure-WorstOffender
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Juniper
+destGeoCity=any
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>Juniper: End : 117.217.141.32 : IND: Worst Offender: Last Defended 66.145.37.254: TCP Attack - Port Scan (Peak 55/s, Occurred 554)
+[params]
+destGeoOrg=any
+parserName=JuniperDDoSParser
+eventType=Juniper-DDoS-Secure-WorstOffender
+destGeoState=any
+destIpAddr=66.145.37.254
+srcIpAddr=117.217.141.32
+destGeoCountry=any
+reptModel=DDoS Secure
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Juniper-DDoS-Secure-WorstOffender
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Juniper
+destGeoCity=any
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>Juniper: End : 115.133.201.203 : MYS: Worst Offender: Last Defended 156.63.106.246: TCP Attack - Port Scan (Peak 19/s, Occurred 136)
+[params]
+destGeoOrg=any
+parserName=JuniperDDoSParser
+eventType=Juniper-DDoS-Secure-WorstOffender
+destGeoState=any
+destIpAddr=156.63.106.246
+srcIpAddr=115.133.201.203
+destGeoCountry=any
+reptModel=DDoS Secure
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Juniper-DDoS-Secure-WorstOffender
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Juniper
+destGeoCity=any

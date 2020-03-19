@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+1.2.3.4
+[eventMsg]
+Wed Feb  4 14:37:41 2015 1.2.3.4 AccelOps-FileLog-AvayaCM [Time of day-hours]="11" [Time of day-minutes]="36" [Duration-hours]="0" [Duration-minutes]="00" [Duration-tenths of minutes]="5" [Condition code]="9" [Dialed number]="5908" [Calling number]="2565522011" [FRL]="5" [Incoming circuit ID]="001" [Feature flag]="0" [Attendant console]="8" [Incoming TAC]="01 1" [INS]="0" [IXC]="00" [Packet count]="12" [TSC flag]="1"
+[params]
+deviceTime=any
+originalCalledPartyNumber=5908
+parserName=AvayaCMParser
+eventType=Avaya-CM-CDR
+reptModel=Communication Manager
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Avaya-CM-CDR
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=1.2.3.4
+rawEventMsg=any
+reptDevName=any
+customer=Super
+finalCalledPartyNumber=2565522011
+phRecvTime=any
+reptDevIpAddr=1.2.3.4
+reptVendor=Avaya
+durationMSec=30000

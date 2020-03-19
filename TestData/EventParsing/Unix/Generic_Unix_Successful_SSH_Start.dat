@@ -1,0 +1,98 @@
+[reptDevIpAddr(key)]
+1.2.3.4
+[eventMsg]
+<86>Dec 14 16:53:39 1.2.3.4 sshd[14666]: pam_unix(sshd:session): session opened for user partha by (uid=0)--automator
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=1.2.3.4
+eventAction=0 (Permit)
+eventName=SSH session started
+reptVendor=Generic
+eventType=Generic_Unix_Successful_SSH_Start
+user=partha
+phEventCategory=0 (External)
+reptDevIpAddr=1.2.3.4
+reptModel=Unix
+[reptDevIpAddr(key)]
+1.2.3.5
+[eventMsg]
+<86>Mar 25 16:11:01 $reporter sshd[9599]: pam_unix(sshd:session): session opened for user root by (uid=0) --automator
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=$reporter
+eventAction=0 (Permit)
+eventName=SSH session started
+reptVendor=Generic
+eventType=Generic_Unix_Successful_SSH_Start
+user=root
+phEventCategory=0 (External)
+reptDevIpAddr=$reporter
+reptModel=Unix
+[reptDevIpAddr(key)]
+1.2.3.6
+[eventMsg]
+<86>Apr 9 13:20:49 1.2.3.6 sshd[11204]: pam_unix(sshd:session): session opened for user root by (uid=0)
+[params]
+rawEventMsg=any
+eventId=any
+count=1
+deviceTime=any
+eventParsedOk=1
+eventSeverityCat=LOW
+eventSeverity=1
+eventType=Generic_Unix_Successful_SSH_Start
+phCustId=$sender
+phEventCategory=0 (External)
+eventAction=0 (Permit)
+collectorId=any
+eventName=SSH session started
+reptVendor=Generic
+user=root
+phRecvTime=any
+destName=HOST-1.2.3.6
+reptDevName=any
+reptModel=Unix
+[reptDevIpAddr(key)]
+1.2.3.7
+[eventMsg]
+<86>Apr 9 13:20:49 1.2.3.7 sshd[11204]: pam_unix(sshd:session): session opened for user root by (uid=0)
+[params]
+rawEventMsg=any
+deviceTime=any
+destGeoOrg=any
+eventType=Generic_Unix_Successful_SSH_Start
+phCustId=$sender
+destIpAddr=1.2.3.7
+destGeoCountry=any
+reptModel=Unix
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=SSH session started
+phEventCategory=0 (External)
+destName=HOST-1.2.3.7
+eventSeverityCat=LOW
+collectorId=any
+user=root
+reptDevName=any
+count=1
+phRecvTime=any
+reptDevIpAddr=1.2.3.7
+eventAction=0 (Permit)
+reptVendor=Generic

@@ -1,0 +1,54 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>Nov 28 2007 17:20:48: %PIX-6-302020: Built ICMP connection for faddr 192.168.0.30/0 gaddr 192.168.0.1/0 laddr 192.168.0.1/0--automator
+[params]
+rawEventMsg=any
+destIpAddr=192.168.0.1
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=any
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=192.168.0.1
+eventAction=0 (Permit)
+preNATDestIpAddr=192.168.0.1
+icmpType=0 (Echo Reply)
+eventName=Built ICMP connection
+srcIpAddr=192.168.0.30
+reptVendor=Cisco
+eventType=PIX-302020
+phEventCategory=4 (Traffic)
+ipProto=1 (ICMP)
+reptDevIpAddr=$localhost
+reptModel=PIX
+[reptDevIpAddr(key)]
+45.45.45.47
+[eventMsg]
+<134>Mar 24 11:47:24 $reporter %PIX-6-302020: Built outbound ICMP connection for faddr 172.16.0.254/0 gaddr 192.168.20.117/21369 laddr 192.168.20.117/21369--automator
+[params]
+rawEventMsg=any
+destIpAddr=172.16.0.254
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=any
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=172.16.0.254
+eventAction=0 (Permit)
+icmpType=0 (Echo Reply)
+eventName=Built ICMP connection
+srcIpAddr=192.168.20.117
+reptVendor=Cisco
+eventType=PIX-302020
+postNATSrcIpAddr=192.168.20.117
+phEventCategory=4 (Traffic)
+ipProto=1 (ICMP)
+reptDevIpAddr=$reporter
+reptModel=PIX

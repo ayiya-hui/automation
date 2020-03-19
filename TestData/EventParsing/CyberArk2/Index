@@ -1,0 +1,5 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+CyberArk-Vault-Connection-restored,CyberArk2_1,CyberArk2,$localhost,,syslog
+CyberArk-Vault-Connection-failed,CyberArk2_2,CyberArk2,$localhost,,syslog
+CyberArk-Vault-fetch-password-failed,CyberArk2_3,CyberArk2,$localhost,,syslog

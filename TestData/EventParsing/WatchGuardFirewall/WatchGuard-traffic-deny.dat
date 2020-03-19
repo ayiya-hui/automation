@@ -1,0 +1,36 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<143>2010-09-30 10:36:27 HKHDCFIR01 disp="Deny"   pri="1" policy="Unhandled External Packet-00" src_ip="174.37.188.122" dst_ip="125.215.194.221" pr="27200/tcp" src_port="80" dst_port="27200" src_intf="0-External" dst_intf="1-Trusted"   tcpinfo="offset 5 SA 3119459433 win 65535"   rc="101" msg="denied" pckt_len="40" ttl="100"
+[params]
+rawEventMsg=any
+deviceTime=any
+destGeoOrg=any
+eventType=WatchGuard-traffic-deny
+phCustId=$sender
+destIpAddr=125.215.194.221
+ipProto=6 (TCP)
+destGeoCountry=any
+srcIpAddr=174.37.188.122
+usrMsg=denied
+reptModel=Firebox
+eventId=any
+policyName=Unhandled External Packet-00
+eventParsedOk=1
+eventSeverity=5
+eventName=WatchGuard Denied network traffic
+phEventCategory=0 (External)
+destGeoState=00
+srcIntfName=0-External
+srcIpPort=80
+eventSeverityCat=MEDIUM
+collectorId=any
+destIntfName=1-Trusted
+relayDevIpAddr=$localhost
+destIpPort=27200
+reptDevName=any
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=WatchGuard
+destGeoCity=any

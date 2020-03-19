@@ -1,0 +1,2 @@
+[eventMsg]
+Wed Mar 18 09:30:05 2020 Ubuntu18: [FSM_LINUX_FILE_MODIFY]: [objectType]=Directory,[objectName]=/mlm,[objectAction]=MODIFY,[targetObjType]=File,[targetObjName]="/mlm/lmao.txt",[hashCode]=852f54ffbee2a8c1d91b1845d3f59317,[hashAlgo]=md5,[user]=root

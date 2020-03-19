@@ -1,0 +1,54 @@
+[reptDevIpAddr(key)]
+10.200.3.2
+[eventMsg]
+<162>Original Address=$reporter Nov 17 2010 11:48:14: %ASA-2-106001: Inbound TCP connection denied from 95.27.93.249/1425 to 72.44.221.103/445 flags SYN  on interface outside
+[params]
+rawEventMsg=any
+phEventCategory=4 (Traffic)
+count=1
+phCustId=$sender
+destIpAddr=72.44.221.103
+destIpPort=445 (MICROSOFT-DS)
+deviceTime=any
+eventAction=1 (Deny)
+eventId=any
+eventName=Denied IP traffic by policy
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=8
+eventSeverityCat=MEDIUM
+eventType=ASA-106001
+ipProto=6 (TCP)
+reptDevIpAddr=$reporter
+reptModel=ASA
+reptVendor=Cisco
+srcIpAddr=95.27.93.249
+srcIntfName=outside
+srcIpPort=1425
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>Dec 04 2008 20:00:45: %ASA-2-106001: Inbound TCP connection denied from 192.168.20.20/21 to 20.20.20.20/21 flags 3 on interface ether03
+[params]
+rawEventMsg=any
+deviceTime=any
+eventType=ASA-106001
+phCustId=$sender
+destIpAddr=20.20.20.20
+destIpPort=21 (FTP)
+srcIpAddr=192.168.20.20
+reptModel=ASA
+eventId=any
+eventParsedOk=1
+eventSeverity=8
+eventName=Denied IP traffic by policy
+phEventCategory=4 (Traffic)
+srcIntfName=ether03
+srcIpPort=21
+eventSeverityCat=MEDIUM
+ipProto=6 (TCP)
+count=1
+phRecvTime=any
+reptDevIpAddr=$reporter
+eventAction=1 (Deny)
+reptVendor=Cisco

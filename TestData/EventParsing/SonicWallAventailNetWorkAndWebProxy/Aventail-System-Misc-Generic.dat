@@ -1,0 +1,275 @@
+[reptDevIpAddr(key)]
+75.75.75.1
+[eventMsg]
+<182>Oct 16 05:52:49 $reporter logserver: [16/Oct/2010:05:52:49.886538 -0700] COS-Node-1 000000 ev 0000020a Info    Misc    <KERNEL> Client OS=Microsoft Windows XP, x86, Professional  <40114d4b>
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+appName=policy service
+ipConnId=0000020a
+count=1
+phCustId=$sender
+deviceTime=any
+eventId=any
+eventName=Aventail generic system misc log
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=3
+eventSeverityCat=LOW
+eventType=Aventail-System-Misc-Generic
+hostName=COS-Node-1
+procName=network tunnel service--kernel component
+reptDevIpAddr=$reporter
+reptModel=Aventail VPN
+reptVendor=Sonicwall
+usrMsg=Client OS=Microsoft Windows XP, x86, Professional  <40114d4b>
+[reptDevIpAddr(key)]
+$localhost (ipConnId:0000020a)
+[eventMsg]
+<180>Oct 16 05:26:35 syslog-ng@COS-Node-1 logserver: [16/Oct/2010:05:26:35.813143 -0700] COS-Node-1 000000 ev 0000020a Warning Misc    <KERNEL> validate_pkt dropping packet for invalid session (17 172.18.6.68:30718->255.255.255.255:30718) <40114b66>
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+appName=policy service
+ipConnId=0000020a
+count=1
+phCustId=$sender
+deviceTime=any
+eventId=any
+eventName=Aventail generic system misc log
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=5
+eventSeverityCat=MEDIUM
+eventType=Aventail-System-Misc-Generic
+hostName=COS-Node-1
+procName=network tunnel service--kernel component
+errReason=validate_pkt dropping packet for invalid session (17 172.18.6.68:30718->255.255.255.255:30718) <40114b66>
+reptDevIpAddr=$reporter
+reptModel=Aventail VPN
+reptVendor=Sonicwall
+[reptDevIpAddr(key)]
+$localhost (ipConnId:10000000)
+[eventMsg]
+<179>Oct 16 05:26:47 syslog-ng@COS-Node-1 logserver: [16/Oct/2010:05:26:47.294470 -0700] COS-Node-1 020619 ew 10000000 Error   Misc    ::ERROR:: Unable to determine internal URL from request
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+appName=Web proxy service
+ipConnId=10000000
+count=1
+phCustId=$sender
+deviceTime=any
+eventId=any
+eventName=Aventail generic system misc log
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=7
+eventSeverityCat=MEDIUM
+eventType=Aventail-System-Misc-Generic
+hostName=COS-Node-1
+procName=Web proxy service
+errReason=Unable to determine internal URL from request
+reptDevIpAddr=$reporter
+reptModel=Aventail VPN
+reptVendor=Sonicwall
+[reptDevIpAddr(key)]
+$localhost (ipConnId:0000021a)
+[eventMsg]
+<179>Oct 16 05:40:00 syslog-ng@COS-Node-1 logserver: [16/Oct/2010:05:40:00.721010 -0700] COS-Node-1 000000 kt 0000021a Error   Misc    <KERNEL> tunnel_receive:decrypt failed(-22) <40114cb0>
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+appName=policy service
+ipConnId=0000021a
+count=1
+phCustId=$sender
+deviceTime=any
+eventId=any
+eventName=Aventail generic system misc log
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=7
+eventSeverityCat=MEDIUM
+eventType=Aventail-System-Misc-Generic
+hostName=COS-Node-1
+procName=kernel tunnel component
+errReason=tunnel_receive:decrypt failed(-22) <40114cb0>
+reptDevIpAddr=$reporter
+reptModel=Aventail VPN
+reptVendor=Sonicwall
+[reptDevIpAddr(key)]
+$localhost (ipConnId:0000022a)
+[eventMsg]
+<182>Oct 16 05:52:49 syslog-ng@COS-Node-1 logserver: [16/Oct/2010:05:52:49.886552 -0700] COS-Node-1 000000 ev 0000022a Info    Misc    <KERNEL> Client OS Version=5.1.2600 Service Pack 3 Build 2600  <40114d4b>
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+appName=policy service
+ipConnId=0000022a
+count=1
+phCustId=$sender
+deviceTime=any
+eventId=any
+eventName=Aventail generic system misc log
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=3
+eventSeverityCat=LOW
+eventType=Aventail-System-Misc-Generic
+hostName=COS-Node-1
+procName=network tunnel service--kernel component
+reptDevIpAddr=$reporter
+reptModel=Aventail VPN
+reptVendor=Sonicwall
+usrMsg=Client OS Version=5.1.2600 Service Pack 3 Build 2600  <40114d4b>
+[reptDevIpAddr(key)]
+$localhost (ipConnId:0000023a)
+[eventMsg]
+<182>Oct 16 05:52:49 syslog-ng@COS-Node-1 logserver: [16/Oct/2010:05:52:49.962265 -0700] COS-Node-1 000000 ev 0000023a Info    Misc    <KERNEL> Client Version=10.4.18 <40114d4b>
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+appName=policy service
+ipConnId=0000023a
+count=1
+phCustId=$sender
+deviceTime=any
+eventId=any
+eventName=Aventail generic system misc log
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=3
+eventSeverityCat=LOW
+eventType=Aventail-System-Misc-Generic
+hostName=COS-Node-1
+procName=network tunnel service--kernel component
+reptDevIpAddr=$reporter
+reptModel=Aventail VPN
+reptVendor=Sonicwall
+usrMsg=Client Version=10.4.18 <40114d4b>
+[reptDevIpAddr(key)]
+$localhost (ipConnId:0000024a)
+[eventMsg]
+<182>Oct 16 05:52:50 syslog-ng@COS-Node-1 logserver: [16/Oct/2010:05:52:50.168126 -0700] COS-Node-1 000000 ev 0000024a Info    Misc    <KERNEL> handler is UP (172.18.6.55) username=wooa <40114d4b>
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+appName=policy service
+ipConnId=0000024a
+count=1
+phCustId=$sender
+deviceTime=any
+eventId=any
+eventName=Aventail generic system misc log
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=3
+eventSeverityCat=LOW
+eventType=Aventail-System-Misc-Generic
+hostName=COS-Node-1
+procName=network tunnel service--kernel component
+reptDevIpAddr=$reporter
+reptModel=Aventail VPN
+reptVendor=Sonicwall
+usrMsg=handler is UP (172.18.6.55) username=wooa <40114d4b>
+[reptDevIpAddr(key)]
+$localhost (ipConnId:0000025a)
+[eventMsg]
+<182>Oct 16 05:52:50 syslog-ng@COS-Node-1 logserver: [16/Oct/2010:05:52:50.039994 -0700] COS-Node-1 000000 ev 0000025a Info    Misc    <KERNEL>   suffix0=ci.seattle.wa.us
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+appName=policy service
+ipConnId=0000025a
+count=1
+phCustId=$sender
+deviceTime=any
+eventId=any
+eventName=Aventail generic system misc log
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=3
+eventSeverityCat=LOW
+eventType=Aventail-System-Misc-Generic
+hostName=COS-Node-1
+procName=network tunnel service--kernel component
+reptDevIpAddr=$reporter
+reptModel=Aventail VPN
+reptVendor=Sonicwall
+usrMsg=suffix0=ci.seattle.wa.us
+[reptDevIpAddr(key)]
+$localhost (ipConnId:0000026a)
+[eventMsg]
+<182>Oct 16 05:52:50 syslog-ng@COS-Node-1 logserver: [16/Oct/2010:05:52:50.039976 -0700] COS-Node-1 000000 ev 0000026a Info    Misc    <KERNEL>   dns0=156.74.1.1
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+appName=policy service
+ipConnId=0000026a
+count=1
+phCustId=$sender
+deviceTime=any
+eventId=any
+eventName=Aventail generic system misc log
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=3
+eventSeverityCat=LOW
+eventType=Aventail-System-Misc-Generic
+hostName=COS-Node-1
+procName=network tunnel service--kernel component
+reptDevIpAddr=$reporter
+reptModel=Aventail VPN
+reptVendor=Sonicwall
+usrMsg=dns0=156.74.1.1
+[reptDevIpAddr(key)]
+$localhost (ipConnId:0000027a)
+[eventMsg]
+<182>Oct 16 05:52:50 syslog-ng@COS-Node-1 logserver: [16/Oct/2010:05:52:50.039967 -0700] COS-Node-1 000000 ev 0000027a Info    Misc    <KERNEL> VINFO TO CLIENT: ndns=2, nwins=0, nsuffixes=5
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+appName=policy service
+ipConnId=0000027a
+count=1
+phCustId=$sender
+deviceTime=any
+eventId=any
+eventName=Aventail generic system misc log
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=3
+eventSeverityCat=LOW
+eventType=Aventail-System-Misc-Generic
+hostName=COS-Node-1
+procName=network tunnel service--kernel component
+reptDevIpAddr=$reporter
+reptModel=Aventail VPN
+reptVendor=Sonicwall
+usrMsg=VINFO TO CLIENT: ndns=2, nwins=0, nsuffixes=5
+[reptDevIpAddr(key)]
+$localhost (ipConnId:0000028a)
+[eventMsg]
+<182>Oct 16 05:52:50 syslog-ng@COS-Node-1 logserver: [16/Oct/2010:05:52:50.039924 -0700] COS-Node-1 000000 ev 0000028a Info    Misc    <KERNEL> User=wooa These local addresses may conflict with the remote network: 172.16.100.22 <40114d4b>
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+appName=policy service
+ipConnId=0000028a
+count=1
+phCustId=$sender
+deviceTime=any
+eventId=any
+eventName=Aventail generic system misc log
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=3
+eventSeverityCat=LOW
+eventType=Aventail-System-Misc-Generic
+hostName=COS-Node-1
+procName=network tunnel service--kernel component
+reptDevIpAddr=$reporter
+reptModel=Aventail VPN
+reptVendor=Sonicwall
+usrMsg=User=wooa These local addresses may conflict with the remote network: 172.16.100.22 <40114d4b>

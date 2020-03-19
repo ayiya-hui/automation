@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<149>May 14 23:17:11 sudo: [ID 702911 local2.notice]  wenyong : TTY=pts/2 ; PWD=/Desktop ; USER=root ; COMMAND=/usr/local/sbin/tcpdump
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=4
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=$localhost
+eventAction=0 (Permit)
+eventName=Linux_Successful_SUDO_Exec
+targetUser=root
+reptVendor=Sun
+command=/usr/local/sbin/tcpdump
+user=wenyong
+phEventCategory=0 (External)
+eventType=Linux_Successful_SUDO_Exec
+reptDevIpAddr=$localhost
+reptModel=Solaris

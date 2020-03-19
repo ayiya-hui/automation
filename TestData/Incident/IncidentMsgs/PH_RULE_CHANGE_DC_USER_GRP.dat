@@ -1,0 +1,2 @@
+[eventMsg]
+<13>Dec 12 10:09:00 4.1.0.1 MSWinEventLog	1	Security	1756	Wed Dec 12 10:08:53 2007	625	Security	SYSTEM	User	Success Audit	ADS-PRI	User Account Type Change		Caller User Name: Administrator  Caller Domain: PROSPECTHILLS  Caller Logon ID: (0x0, 0x158E87) 	Target Account Name: johnDoe  Target Domain: PROSPECTHILLS  Target Account ID: PROSPECTHILLS\johnDoe  New Type: Writer

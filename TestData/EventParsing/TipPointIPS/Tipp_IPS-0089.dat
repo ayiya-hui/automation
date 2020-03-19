@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+172.16.20.41
+[eventMsg]
+<36>Oct 28 13:10:45 172.16.20.41 ALT,v4,20091028T131045+0480,"PH-QA-TIP1"/$reporter,835197,1,Permit,Minor,00000002-0002-0002-0002-000000000089,"0089: IP: Short Time To Live (1)","0089: IP: Short Time To Live (1)",ip," ",172.16.10.1:0,224.0.0.5:0,20091028T130945+0480,6," ",0,1A-1B
+[params]
+rawEventMsg=any
+count=6
+eventId=any
+reptDevIpAddr=172.16.20.41
+eventParsedOk=1
+reptVendor=3Com
+eventSeverity=3
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=224.0.0.5
+eventName=Detects IP packets with a Time To Live (TTL) value of 1.
+ipProto=255
+appTransportProto=ip
+eventType=Tipp_IPS-0089
+srcIpAddr=172.16.10.1
+remedyAction=Permit
+phEventCategory=0 (External)
+destIpPort=0
+srcIpPort=0
+reptModel=TippingPoint UnityOne IPS

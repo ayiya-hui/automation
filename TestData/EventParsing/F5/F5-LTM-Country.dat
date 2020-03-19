@@ -1,0 +1,31 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+Hostname=f5-51-01.safehost.net,Entity=Country,AVRProfileName=/FLA_PROD_WEB/FLA_PROD_WEB_ANALYTICS,AggrInterval=299,EOCTimestamp=1387536600,HitCount=1,ApplicationName=<Unassigned>,VSName=/FLA_PROD_WEB/FLA-PROD-CRM-SSL,GeoCode=BE,TPSMax=0.000000,ClientLatencyHitCount=0,ClientLatencyMax=0,ClientLatencyTotal=0,ServerLatencyMax=2605,ServerLatencyTotal=2605,ThroughputReqMax=0,ThroughputReqTotal=54801,ThroughputRespMax=0,ThroughputRespTotal=2828,UserSessionsConcurrentTotal=0,UserSessionsNewTotal=1
+[params]
+rawEventMsg=any
+deviceTime=any
+averageClientNetworkTime=0
+parserName=F5Parser
+eventType=F5-LTM-Country
+phCustId=$sender
+reptModel=Big-IPOS
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=F5 HTTP country
+phEventCategory=0 (External)
+customer=Super
+eventSeverityCat=LOW
+collectorId=any
+serverNetworkTimeMax=2605
+activeSessions=0
+relayDevIpAddr=$localhost
+ruleName=/FLA_PROD_WEB/FLA_PROD_WEB_ANALYTICS
+reptDevName=f5-51-01.safehost.net
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=F5
+averageServerNetworkTime=2605
+clientNetworkTimeMax=0

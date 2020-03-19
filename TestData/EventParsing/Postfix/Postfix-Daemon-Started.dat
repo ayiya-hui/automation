@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<22>Feb  2 17:25:37 $localhost postfix/master[355]: daemon started -- version 2.11.0, configuration /etc/postfix
+[params]
+deviceTime=any
+parserName=PostfixParser
+eventType=Postfix-Daemon-Started
+procName=master
+reptGeoState=Shanghai
+reptModel=Postfix
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Postfix daemon started
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+eventRuleTrigger=1
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+reptDevName=any
+customer=Super
+reptGeoCity=any
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Generic

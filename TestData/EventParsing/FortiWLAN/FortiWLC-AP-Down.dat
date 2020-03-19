@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+172.18.65.202
+[eventMsg]
+Mar 21 12:56:51 172.18.65.202 ALARM: 1206084411l | system | info | ALR | AP DOWN CRITICAL Access Point Pat-AP300 (2) at time Fri Mar 21 07:26:51 2008
+[params]
+customer=Super
+eventId=any
+parserName=FortiWLANParser
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+count=1
+eventSeverity=1
+eventType=FortiWLC-AP-Down
+reptDevIpAddr=172.18.65.202
+collectorId=any
+extEventRecvProto=Syslog
+eventName=FortiAP down
+reptVendor=Fortinet
+relayDevIpAddr=172.18.65.202
+rawEventMsg=any
+phRecvTime=any
+hostName=Pat-AP300 (2)
+reptDevName=any
+reptModel=FortiWLC

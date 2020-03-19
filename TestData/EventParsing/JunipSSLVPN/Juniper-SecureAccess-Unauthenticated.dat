@@ -1,0 +1,23 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>Juniper: 2008-10-28 04:34:43 - ive - [192.168.20.82] System()[] - Connection from IP 192.168.20.82 not authenticated yet (URL=/dana-na/imgs/space.gif)
+[params]
+rawEventMsg=any
+user=System
+srcIpAddr=192.168.20.82
+count=1
+phEventCategory=0 (External)
+eventName=Connection is not authenticated
+deviceTime=any
+phCustId=$sender
+reptDevIpAddr=$reporter
+reptVendor=Juniper
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+reptModel=Secure Access
+eventType=Juniper-SecureAccess-Unauthenticated
+eventSeverityCat=LOW
+eventAction=0 (Permit)
+eventId=any

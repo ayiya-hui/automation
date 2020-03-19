@@ -1,0 +1,22 @@
+[reptDevIpAddr(key)]
+137.146.28.76
+[eventMsg]
+<21>Mar 10 19:29:45 137.146.28.76 1938172504  POP.USER.LOGOUT        clr[216.227.9.57]:              dswinn plaintext              210
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+srcIpAddr=216.227.9.57
+eventName=User Logged Out of Mailbox via POP
+reptVendor=Sendmail.org
+eventType=SENDMAIL_POP_LOGOUT
+user=dswinn
+phEventCategory=0 (External)
+reptDevIpAddr=137.146.28.76
+reptModel=Sendmail Mail Server

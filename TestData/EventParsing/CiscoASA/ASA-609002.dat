@@ -1,0 +1,23 @@
+[reptDevIpAddr(key)]
+53.53.53.54
+[eventMsg]
+<135>Mar 29 18:21:57 $reporter %ASA-7-609002: Teardown local-host outside:209.235.239.78 duration 0:00:00
+[params]
+rawEventMsg=any
+srcIntfName=outside
+srcIpAddr=209.235.239.78
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+eventAction=0 (Permit)
+eventName=Network state container removed
+reptVendor=Cisco
+eventType=ASA-609002
+phEventCategory=0 (External)
+reptDevIpAddr=$reporter
+reptModel=ASA

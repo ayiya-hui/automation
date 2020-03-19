@@ -1,0 +1,32 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>Jul 30 15:28:33 tmm1 info tmm1[7562]: 01070417: 134: ICSA: non-session UDP packet accepted, source: 12.120.125.48 port: 10144, destination: 216.58.240.252 port: 53
+[params]
+rawEventMsg=any
+deviceTime=any
+destGeoOrg=any
+eventType=F5-LTM-Packet-Accept
+phCustId=$sender
+destIpAddr=216.58.240.252
+ipProto=17 (UDP)
+destGeoCountry=any
+srcIpAddr=12.120.125.48
+reptModel=Big-IPOS
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+testEvent=Real Event(0)
+eventName=F5 permitted packet
+phEventCategory=0 (External)
+destGeoState=Nebraska
+srcIpPort=10144
+eventSeverityCat=LOW
+collectorId=any
+destIpPort=53 (DOMAIN)
+reptDevName=any
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=F5
+destGeoCity=any

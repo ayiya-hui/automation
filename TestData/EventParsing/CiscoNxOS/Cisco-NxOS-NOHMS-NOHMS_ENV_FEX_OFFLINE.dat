@@ -1,0 +1,54 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<186>: 2014 Oct 31 15:55:47 CDT: %NOHMS-2-NOHMS_ENV_FEX_OFFLINE: FEX-7 Off-line (Serial Number QCI1612A9NQ)
+[params]
+deviceTime=any
+parserName=CiscoNxOSParser
+totFlows=1
+eventType=Cisco-NxOS-NOHMS-NOHMS_ENV_FEX_OFFLINE
+reptModel=NX-OS
+eventId=any
+eventParsedOk=1
+eventSeverity=8
+hostIpAddr=$localhost
+eventName=Fex off-line
+phEventCategory=0 (External)
+eventRuleTrigger=1
+count=1
+eventSeverityCat=MEDIUM
+collectorId=any
+relayDevIpAddr=$localhost
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Cisco
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<186>: 2014 Oct 31 15:55:47 CDT: %NOHMS-2-NOHMS_ENV_FEX_OFFLINE: FEX-7 Off-line (Serial Number QCI1612A9NQ)
+[params]
+deviceTime=any
+parserName=CiscoNxOSParser
+totFlows=1
+eventType=Cisco-NxOS-NOHMS-NOHMS_ENV_FEX_OFFLINE
+reptModel=NX-OS
+eventId=any
+eventParsedOk=1
+eventSeverity=8
+hostIpAddr=$localhost
+eventName=Fex off-line
+phEventCategory=0 (External)
+eventRuleTrigger=1
+count=1
+eventSeverityCat=MEDIUM
+collectorId=any
+relayDevIpAddr=$localhost
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Cisco

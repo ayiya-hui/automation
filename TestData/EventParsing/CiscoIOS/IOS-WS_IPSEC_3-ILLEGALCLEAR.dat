@@ -1,0 +1,29 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<189>Jun  2 16:27:00 p1eibzrv01 21253: Jun  2 16:27:00%WS_IPSEC_3-5-ILLEGALCLEAR: slot 4/0 Illegal Clear Packet: Src =9.17.249.178, Dst =9.44.14.46, Proto =6
+[params]
+rawEventMsg=any
+deviceTime=any
+isHostIntfCritical=No
+eventType=IOS-WS_IPSEC_3-ILLEGALCLEAR
+phCustId=$sender
+hostName=p1eibzrv01
+destIpAddr=9.44.14.46
+srcIpAddr=9.17.249.178
+intfName=slot 4/0
+reptModel=IOS
+eventId=any
+eventParsedOk=1
+eventSeverity=2
+hostIpAddr=$localhost
+eventName=An unexpected clear packet received from WAN
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+collectorId=any
+ipProto=6 (TCP)
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Cisco

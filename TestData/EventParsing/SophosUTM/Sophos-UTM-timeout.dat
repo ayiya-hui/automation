@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<28>2016:03:11-09:58:35 ActiveUTM-2 confd[3811]: W main::cleanup_sessions:1038() => id="3100" severity="warn" sys="System" sub="confd" name="timeout: removing session" user="system" srcip="127.0.0.1" sid="ZfFqombzpJTVivFuyNjf" facility="system" client="websecreporter"
+[params]
+parserName=SophosUTMParser
+eventType=Sophos-UTM-timeout
+procName=confd
+srcIpAddr=$localhost
+reptModel=UTM
+eventId=any
+eventParsedOk=1
+eventSeverity=5
+eventName=Sophos UTM session timeout
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+eventRuleTrigger=1
+count=1
+eventSeverityCat=MEDIUM
+collectorId=any
+relayDevIpAddr=$localhost
+user=system
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Sophos

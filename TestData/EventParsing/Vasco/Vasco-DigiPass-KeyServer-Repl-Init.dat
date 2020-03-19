@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+70.70.70.70
+[eventMsg]
+May 17 18:43:21 70.70.70.70 ikeyserver[3582]: {Info}, {Replication}, {I-002006}, {The Replication library has been initialized successfully.}, {0x0ABAA6AFB0670D9E76D8C795B0174ECD}, {Version:1.4.6.66}, {Configuration Details:Enabled=true, Repl-Server=10.1.2.3, File-Path=/var/repldata}
+[params]
+customer=Super
+eventId=any
+eventSeverityCat=LOW
+eventParsedOk=1
+phEventCategory=0 (External)
+parserName=VascoParser
+count=1
+eventSeverity=1
+eventType=Vasco-DigiPass-KeyServer-Repl-Init
+reptDevIpAddr=70.70.70.70
+collectorId=any
+eventName=The Replication library has been initialized successfully
+reptVendor=Vasco
+relayDevIpAddr=70.70.70.70
+phRecvTime=any
+msg=The Replication library has been initialized successfully.
+eventRuleTrigger=1
+appTransportProto=Syslog
+reptDevName=any
+reptModel=DigiPass

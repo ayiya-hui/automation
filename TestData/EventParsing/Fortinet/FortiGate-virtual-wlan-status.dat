@@ -1,0 +1,33 @@
+[reptDevIpAddr(key)]
+88.88.88.88
+[eventMsg]
+date=2015-09-29 time=15:30:40 logid=0100022923 type=event subtype=system level=notice vd="vd1" logdesc="Virtual WAN Link status" interface="port2" msg="The service(FTP_APP) will be redirected to the member 2 (interface port2)(link-cost-factor: Jitter; Latency: 0.280; Jitter: 0.15; Packet-Loss: 3.33%;Bandwidth: 5 Mbps; Custom-Profile-1:50
+[params]
+deviceTime=any
+parserName=FortinetParser
+totFlows=1
+eventType=FortiGate-virtual-wlan-status
+intfName=port2
+usrMsg=The service(FTP_APP) will be redirected to the member 2 (interface port2)(link-cost-factor: Jitter; Latency: 0.280; Jitter: 0.15; Packet-Loss: 3.33%;Bandwidth: 5 Mbps; Custom-Profile-1:50
+reptModel=FortiOS
+eventId=any
+logID=100022923
+eventParsedOk=1
+eventSeverity=3
+eventName=FortiGate-virtual-wlan-status
+isHostIntfCritical=No
+reptDevName=any
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+eventDesc=Virtual WAN Link status
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=88.88.88.88
+rawEventMsg=any
+vdom=vd1
+customer=Super
+phRecvTime=any
+reptDevIpAddr=88.88.88.88
+eventAction=0 (Permit)
+reptVendor=Fortinet

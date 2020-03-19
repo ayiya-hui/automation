@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eventParser name="HuaweiVRPParser">
+  <deviceType>
+    <Vendor>Huawei</Vendor>
+    <Model>VRP</Model>
+    <Version>ANY</Version>
+  </deviceType>
+
+        <!--
+		<188>Apr 13 2008 08:39:59 SH-Quidway-SW1 %%01SHELL/4/TELNETFAILED(l): Login through telnet failed( ip=192.168.20.36 times=1).
+        -->
+	
+  <!-- pattern definitions -->
+  <patternDefinitions>
+    <pattern name="patHuaweiVRPMod" list="begin"><![CDATA[6OVER4|AAA|ACL|ACL6|ACLE|ACM|ACTIVE|ADA|ADDR|ALML|ANCP|APS|ARP|ARPBAS|ARPLINK|ARPRRSEPA|ATM|BFD|BGP|BULKSTAT|CFM|CHAT|CHECK|CLK|CMD|CONTROL-VLAN|CSPF|]]></pattern>
+    <pattern name="patHuaweiVRPMod" list="continue"><![CDATA[DC|DEFD|DEFEND|DESCRIPTION|DHCP|DHCPACC|DHCPR|DHCPS|DHCPSNP|DISPLAY|DLDP|DOMAIN|DRV|DSMS|EFM|ENTEXT|ENTMIB|EOAM1AG|ETH|ETRUNK|FIB|FILTER|FLD|FPI|FR|FSP|FTPS|]]></pattern>
+    <pattern name="patHuaweiVRPMod" list="continue"><![CDATA[GRE|GTL|GTSM|HA|HGMP|HWCM|IFNET|IGMP|IMS|INFO|INTRA|IP|IP6TOKEN|IPC|IPRAN|IPV4-IPV6|IPV6FIBAGENT|IPV6PP|IPV6TCP|ISIS|ISSU|KEYCH|KEYCHAIN|Keychain|]]></pattern>
+    <pattern name="patHuaweiVRPMod" list="continue"><![CDATA[L2ADP|L2IF|L2MC|L2MCADP|L2TP|L2V|L3AD|L3ADA|L3VPN|L3VPN6|LACP|LAM|LDP|LDT|LINE|LLDP|LOAD|LSPAGENT|LSPC|LSPM|MAC-LIMIT|MBUF|MCAST|MD|MEM|MEP|MFIB|MLD|MODEM|MRM|MSDP|MSTP|]]></pattern>
+    <pattern name="patHuaweiVRPMod" list="continue"><![CDATA[NAP|NATPT|ND|NE5KQOS|NETCONF|NETSTREAM|NQA|NSADP|NTP|OAM|OAMMGR|OSPF|OSPFV3|PAF|PATCH|PDF|PES|PHY|PICK|PIM|PING|PORTSWITCH|PPP|PREFACE|PTP|]]></pattern>
+    <pattern name="patHuaweiVRPMod" list="continue"><![CDATA[QINQ|QOS|QOSADA|QinQ|QoS|QoS_log|RDS|REMOTE-MEP|RESET|RESTART|RING|RIP|RIPNG|RIPng|RM|RMON|RMON2|RPR|RRPP|RSA|RSVP|]]></pattern>
+    <pattern name="patHuaweiVRPMod" list="continue"><![CDATA[SEC|Sec|SECAPP|SECE|SEP|SEP-SEGMENT|SET|SHELL|SHUTDOWN|SINDEX|SMLK|SNMP|SNOOPING|SNPG|SOCKET|SRM|SSH|STARTUP|STAT|STP|SYSMIB|]]></pattern>
+    <pattern name="patHuaweiVRPMod" list="end"><![CDATA[TAC|TAD|TELNET|TFTP|TNLM|TRACE|TRAFSTAT|TRUNK|TUNN|TUNNEL|TUNN_PS|Trunk|UCM|USERLOG|VFS|VLAN|VOS|VOSCPU|VOSMEM|VRRP|VTRUNK|VTY]]></pattern>
+    <pattern name="patLogType"><![CDATA[d|l|t3]]></pattern>
+    <pattern name="patIpV4Dot"><![CDATA[\w.\w.\d{1,3}.\d{1,3}]]></pattern>
+    <pattern name="patComm"><![CDATA[[^,]+]]></pattern>
+    <pattern name="patUpDown"><![CDATA[up|down]]></pattern>
+    <pattern name="patHostName"><![CDATA[[^\s,]+]]></pattern>
+    <pattern name="patSyslogNGHeader"><![CDATA[\w{3}\s+\d{1,2}\s+\d{2,4}\s+\d{1,2}:\d{1,2}:\d{1,2}]]></pattern>
+  </patternDefinitions>
+
+  <eventFormatRecognizer><![CDATA[%%<:gPatInt><:patHuaweiVRPMod>/<:gPatInt>/<:gPatWord>\(<:patLogType>\):]]></eventFormatRecognizer>
+  
+  <testEvents>
+      <testEvent><![CDATA[<188>Apr 13 2008 08:39:59 SH-Quidway-SW1 %%01SHELL/4/TELNETFAILED(l): Login through telnet failed( ip=192.168.20.36 times=1).]]></testEvent>
+      <testEvent><![CDATA[<190>Apr 13 2008 19:27:43 SH-Quidway-SW1 %%01DRV/6/LINKDOWN(l): Port Ethernet0/0/3 is down because the link layer is down.]]></testEvent>
+      <testEvent><![CDATA[<188>Apr 13 2008 19:27:43 SH-Quidway-SW1 %%01IFNET/4/UPDOWN(l): The state of interface Ethernet0/0/3 was changed to DOWN.]]></testEvent>
+      <testEvent><![CDATA[<187>Apr 14 2008 00:01:06 SH-Quidway-SW1 %%01FIB/3/REFRESH_END(l): FIB refreshing end, the refresh group map is 0!]]></testEvent>
+  </testEvents>
+
+  <parsingInstructions>
+    <!-- parsing common fields -->
+    <collectFieldsByRegex src="$_rawmsg">
+      <regex><![CDATA[<:gPatSyslogPRI>?<_header:gPatMesgBody> %%<:gPatInt><_evIdPrefix:patHuaweiVRPMod>/<_severity:gPatInt>/<_evIdSuffix:gPatWord>\(<:patLogType>\): <_body:gPatMesgBody>]]></regex>
+    </collectFieldsByRegex>
+    <setEventAttribute attr="eventType">combineMsgId("VRP-", $_evIdPrefix, "-", $_evIdSuffix)</setEventAttribute>
+    <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+    <!-- parse header -->
+    <switch>
+      <case>
+        <collectFieldsByRegex src="$_header">
+          <regex><![CDATA[<_NGHeader:patSyslogNGHeader>\s+<reptDevName:gPatMesgBody>]]></regex>
+        </collectFieldsByRegex>
+        <collectFieldsByRegex src="$_NGHeader">
+          <regex><![CDATA[<_mon:gPatMon>\s+<_day:gPatDay>\s+<_year:gPatYear>\s+<_time:gPatTime>]]></regex>
+        </collectFieldsByRegex>
+	<setEventAttribute attr="hostName">$reptDevName</setEventAttribute>
+        <setEventAttribute attr="deviceTime">toDateTime($_mon, $_day, $_year, $_time)</setEventAttribute>
+      </case>
+      <default/>
+    </switch>
+
+    <setEventAttribute attr="eventAction">0</setEventAttribute>
+    <!-- event severity -->
+    <choose>
+      <when test='$_severity IN "5, 6, 7"'>
+        <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+      </when>
+      <when test='$_severity = "0"'>
+        <setEventAttribute attr="eventSeverity">10</setEventAttribute>
+      </when>
+      <when test='$_severity = "1"'>
+        <setEventAttribute attr="eventSeverity">8</setEventAttribute>
+      </when>
+      <when test='$_severity IN "2, 3"'>
+        <setEventAttribute attr="eventSeverity">5</setEventAttribute>
+      </when>
+      <when test='$_severity = "4"'>
+        <setEventAttribute attr="eventSeverity">3</setEventAttribute>
+      </when>
+    </choose>
+
+    <!-- message specific parsing -->
+    <choose> <!-- TODO-rui: event category -->
+      <when test='$eventType IN "VRP-SHELL-LOGIN, VRP-SHELL-LOGOUT"'>
+        <!--
+	  <189>Apr 13 2008 18:42:07 SH-Quidway-SW1 %%01SHELL/5/LOGIN(l):  admin login from 10.1.20.21.
+	  <189>Apr 13 2008 18:41:43 SH-Quidway-SW1 %%01SHELL/5/LOGOUT(l):  admin logout from 10.1.20.21.
+        -->
+        <collectAndSetAttrByRegex src="$_body">
+          <regex><![CDATA[<user:gPatStr>\s+<_action:gPatStr>\s+from\s+<srcIpAddr:gPatIpV4Dot>.*]]></regex>
+        </collectAndSetAttrByRegex>
+      </when>
+
+      <when test='$eventType = "VRP-SHELL-TIMEOUT"'>
+        <!--
+	  <189>Apr 13 2008 17:56:23 SH-Quidway-SW1 %%01SHELL/5/TIMEOUT(l):  admin login from 192.168.26.10 is time out.
+          -->
+        <collectAndSetAttrByRegex src="$_body">
+          <regex><![CDATA[<user:gPatStr>\s+<_action:gPatStr>\s+from\s+<srcIpAddr:gPatIpV4Dot>\s+is\s+time\s+out.*]]></regex>
+        </collectAndSetAttrByRegex>
+      </when>
+
+      <when test='$eventType = "VRP-SHELL-TELNETFAILED"'>
+        <!--
+	  <188>Apr 13 2008 18:12:30 SH-Quidway-SW1 %%01SHELL/4/TELNETFAILED(l): Login through telnet failed( ip=10.1.20.21 times=1).
+          -->
+        <collectAndSetAttrByRegex src="$_body">
+          <regex><![CDATA[Login\s+through\s+<appTransportProto:gPatStr>\s+failed\(\s+ip=<srcIpAddr:gPatIpV4Dot>\s+times=<_count:gPatInt>\).*]]></regex>
+        </collectAndSetAttrByRegex>
+	<setEventAttribute attr="eventAction">1</setEventAttribute>
+	<when test='$_count = "3"'>
+	  <setEventAttribute attr="eventSeverity">5</setEventAttribute>	  
+	</when>
+      </when>
+
+      <when test='$eventType = "VRP-SHELL-AUTHCMDNONEED"'>
+        <!--
+	  <189>Apr 13 2008 18:01:43 SH-Quidway-SW1 %%01SHELL/5/AUTHCMDNONEED(l): 'User admin doesn't need command authorization.' from 10.1.20.21 by VTY.
+          -->
+        <collectAndSetAttrByRegex src="$_body">
+          <regex><![CDATA['User\s+<user:gPatStr>\s+doesn't\s+need\s+command\s+authorization\.'\s+from\s+<srcIpAddr:gPatIpV4Dot>\s+by\s+<_user:gPatStr>\.]]></regex>
+        </collectAndSetAttrByRegex>
+      </when>
+
+      <when test='$eventType IN "VRP-SHELL-CMDRECORD, VRP-SHELL-DISPLAY_CMDRECORD"'>
+        <!--
+	  <189>Apr 13 2008 18:01:35 SH-Quidway-SW1 %%01SHELL/5/CMDRECORD(l): task: vt0 ip: 10.1.20.21 user: admin command: quit.
+	  <190>Apr 13 2008 18:01:28 SH-Quidway-SW1 %%01SHELL/6/DISPLAY_CMDRECORD(l): task: vt0 ip: 10.1.20.21 user: admin command: display version.
+          -->
+        <collectAndSetAttrByRegex src="$_body">
+          <regex><![CDATA[task:\s+<_taskName:gPatStr>\s+ip:\s+<srcIpAddr:gPatIpV4Dot>\s+user:\s+<user:gPatStr>\s+command:\s+<command:gPatMesgBody>\.]]></regex>
+        </collectAndSetAttrByRegex>
+      </when>
+
+      <when test='$eventType IN "VRP-DRV-LINKUP, VRP-DRV-LINKDOWN"'>
+        <!--
+	  <190>Apr 13 2008 19:27:43 SH-Quidway-SW1 %%01DRV/6/LINKDOWN(l): Port Ethernet0/0/3 is down because the link layer is down.
+	  <190>Apr 13 2008 19:28:20 SH-Quidway-SW1 %%01DRV/6/LINKUP(l): Port Ethernet0/0/3 is up because the link layer is up.
+          -->
+        <collectAndSetAttrByRegex src="$_body">
+          <regex><![CDATA[Port\s+<srcIntfName:gPatStr>\s+is\s+<_action:gPatStr>\s+because\s+the\s+link\s+layer\s+is\s+<_action2:gPatStr>\.]]></regex>
+        </collectAndSetAttrByRegex>
+	<when test='$_action = "down"'>
+	  <setEventAttribute attr="eventSeverity">3</setEventAttribute>
+	  <setEventAttribute attr="eventAction">1</setEventAttribute>
+	</when>
+      </when>
+
+      <when test='$eventType = "VRP-IFNET-UPDOWN"'>
+        <!--
+	  <188>Apr 13 2008 19:27:43 SH-Quidway-SW1 %%01IFNET/4/UPDOWN(l): The state of interface Ethernet0/0/3 was changed to DOWN.
+	  <188>Apr 13 2008 19:28:23 SH-Quidway-SW1 %%01IFNET/4/UPDOWN(l): The state of interface Ethernet0/0/3 was changed to UP.
+          -->
+        <collectAndSetAttrByRegex src="$_body">
+          <regex><![CDATA[The\s+state\s+of\s+interface\s+<srcIntfName:gPatStr>\s+was\s+changed\s+to\s+<_action:gPatStr>\.]]></regex>
+        </collectAndSetAttrByRegex>
+	<choose>
+	  <when test='$_action = "UP"'>
+	    <setEventAttribute attr="eventType">combineMsgId("VRP-", $_evIdPrefix, "-", $_evIdSuffix, "-", "TO-UP")</setEventAttribute>
+	  </when>
+	  <when test='$_action = "DOWN"'>
+	    <setEventAttribute attr="eventType">combineMsgId("VRP-", $_evIdPrefix, "-", $_evIdSuffix, "-", "TO-DOWN")</setEventAttribute>
+	    <setEventAttribute attr="eventAction">1</setEventAttribute>
+	  </when>
+	</choose>
+      </when>
+
+      <when test='$eventType IN "VRP-FIB-REFRESH_START, VRP-FIB-REFRESH_END"'>
+        <!--
+	  <187>Apr 14 2008 00:01:03 SH-Quidway-SW1 %%01FIB/3/REFRESH_START(l): FIB refreshing start, the refresh group map is 4294967295!
+	  <187>Apr 14 2008 00:01:06 SH-Quidway-SW1 %%01FIB/3/REFRESH_END(l): FIB refreshing end, the refresh group map is 0!
+          -->
+        <collectAndSetAttrByRegex src="$_body">
+          <regex><![CDATA[FIB\s+refreshing\s+<_action:gPatStr>,\s+the\s+refresh\s+group\s+map\s+is\s+<_groupMap:gPatInt>!]]></regex>
+        </collectAndSetAttrByRegex>
+      </when>
+
+    </choose>
+    <when test="exist _mac">
+      <setEventAttribute attr="hostMACAddr">normalizeMAC($_mac)</setEventAttribute>
+    </when>
+    
+  </parsingInstructions>
+</eventParser>

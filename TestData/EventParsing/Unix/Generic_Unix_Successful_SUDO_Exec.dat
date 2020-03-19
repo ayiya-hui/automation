@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+1.2.3.4
+[eventMsg]
+<85>Oct 17 16:38:44 1.2.3.4 sudo:   jtxiong : TTY=pts/1 ; PWD=/home/jtxiong ; USER=root ; COMMAND=/bin/vi /var/log/messages
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=4
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=1.2.3.4
+eventAction=0 (Permit)
+eventName=Successful Privileged command execution
+targetUser=root
+reptVendor=Generic
+command=/bin/vi /var/log/messages
+user=jtxiong
+phEventCategory=0 (External)
+eventType=Generic_Unix_Successful_SUDO_Exec
+reptDevIpAddr=1.2.3.4
+reptModel=Unix

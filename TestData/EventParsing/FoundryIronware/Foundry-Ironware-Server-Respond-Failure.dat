@@ -1,0 +1,31 @@
+[reptDevIpAddr(key)]
+20.20.20.21
+[eventMsg]
+<12>Jul 13 09:27:57 20.20.20.21 NTP: server 64.90.182.55 failed to respond
+[params]
+destGeoOrg=any
+parserName=FoundryIronwareParserPlus
+totFlows=1
+eventType=Foundry-Ironware-Server-Respond-Failure
+destGeoState=New York
+destIpAddr=64.90.182.55
+destGeoCountry=any
+reptModel=Ironware
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Server failured to respond
+phEventCategory=0 (External)
+eventRuleTrigger=1
+destName=64.90.182.55.static.nyinternet.net
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=20.20.20.21
+reptDevName=any
+reptIpAddr=20.20.20.21
+customer=Super
+phRecvTime=any
+eventAction=0 (Permit)
+reptVendor=Foundry
+destGeoCity=any

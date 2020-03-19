@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+20.20.20.39
+[eventMsg]
+<14>Jul 14 17:49:39 20.20.20.39 System: PoE: Power disabled on port 1/1/4 because of PD disconnection.
+[params]
+parserName=FoundryIronwareParserPlus
+totFlows=1
+eventType=Foundry-Ironware-Power-Disable
+destIpAddr=20.20.20.39
+reptModel=Ironware
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Power disabled on a port
+phEventCategory=0 (External)
+eventRuleTrigger=1
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=20.20.20.39
+devPort=1/1/4
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=20.20.20.39
+eventAction=0 (Permit)
+reptVendor=Foundry

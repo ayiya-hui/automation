@@ -1,0 +1,14 @@
+eventType,name,module,reptDevIpAddr,key,method
+PAN-OS-TRAFFIC-start-allow,PaloAlto_1,PaloAlto,$localhost,,syslog
+PAN-OS-TRAFFIC-end-allow,PaloAlto_2,PaloAlto,$localhost,,syslog
+PAN-OS-SYSTEM-login-success,PaloAlto_3,PaloAlto,$localhost,,syslog
+PAN-OS-SYSTEM-login-failed,PaloAlto_4,PaloAlto,$localhost,,syslog
+PAN-OS-SYSTEM-login-failed,PaloAlto_5,PaloAlto,172.16.1.2,,syslog
+PAN-OS-SYSTEM-login-success,PaloAlto_6,PaloAlto,30.30.30.1,,syslog
+PAN-OS-SYSTEM-login-success,PaloAlto_7,PaloAlto,30.30.30.2,,syslog
+PAN-OS-THREAT-url-9999-deny,PaloAlto_8,PaloAlto,$localhost,,syslog
+PAN-OS-THREAT-virus-100000-deny,PaloAlto_9,PaloAlto,$localhost,,syslog
+PAN-OS-TRAFFIC-start-allow,PaloAlto_10,PaloAlto,20.20.20.23,,syslog
+PAN-OS-THREAT-url-9999-alert,PaloAlto_11,PaloAlto,$localhost,,syslog
+PAN-OS-SYSTEM-VPN-Login-Failed,PaloAlto_12,PaloAlto,$localhost,,syslog
+PAN-OS-SYSTEM-VPN-Login-Success,PaloAlto_13,PaloAlto,$localhost,,syslog

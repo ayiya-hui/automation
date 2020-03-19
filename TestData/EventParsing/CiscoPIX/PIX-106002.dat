@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>Dec 04 2008 20:00:45: %PIX-2-106002: TCP Connection denied by outbound list 55678 src 10.10.10.10 dest 20.20.20.20 --automator
+[params]
+rawEventMsg=any
+destIpAddr=20.20.20.20
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=any
+eventSeverity=8
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=MEDIUM
+destIpAddr=20.20.20.20
+eventAction=1 (Deny)
+eventName=Denied IP traffic by policy
+srcIpAddr=10.10.10.10
+reptVendor=Cisco
+eventType=PIX-106002
+phEventCategory=4 (Traffic)
+ipProto=6 (TCP)
+reptDevIpAddr=$localhost
+reptModel=PIX

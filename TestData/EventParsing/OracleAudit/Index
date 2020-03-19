@@ -1,0 +1,11 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+ORADB-Audit-Generic,OracleAudit_1,OracleAudit,$localhost,,syslog
+ORADB-Audit-Generic,OracleAudit_2,OracleAudit,$localhost,,syslog
+ORADB-Audit-Generic,OracleAudit_3,OracleAudit,$localhost,,syslog
+ORADB-Audit-Generic,OracleAudit_4,OracleAudit,$localhost,,syslog
+ORADB-Audit-Generic,OracleAudit_5,OracleAudit,$localhost,,syslog
+ORADB-Audit-Generic,OracleAudit_6,OracleAudit,$localhost,,syslog
+ORADB-Audit-AuthenticatedByOS,OracleAudit_7,OracleAudit,$localhost,,syslog
+ORADB-Audit-AuthenticatedByDB,OracleAudit_8,OracleAudit,$localhost,,syslog
+ORADB-Audit-AuthenticatedByDB,OracleAudit_9,OracleAudit,$localhost,,syslog

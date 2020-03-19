@@ -1,0 +1,31 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+date=2014-04-10 time=18:03:39 log_id=19999498 msg_id=000044305882 device_id=FV-1KD3A13800002 vd="root" timezone="(GMT+8:00)Beijing,ChongQing,HongKong,Urumgi" type=event subtype="system" pri=alert trigger_policy="" user=daemon ui=daemon action=check-resource status=failed msg="policy test concurrent session exceed threshold"
+[params]
+deviceTime=any
+parserName=FortiWebParser
+eventType=FortiWeb-19999498
+usrMsg=policy test concurrent session exceed threshold
+reptModel=FortiWeb
+eventId=any
+eventParsedOk=1
+eventSeverity=7
+eventName=The maximum number of concurrent sessions has been reached.
+reptDevName=any
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+type=event
+status=failed
+count=1
+eventSeverityCat=MEDIUM
+collectorId=any
+relayDevIpAddr=$localhost
+user=daemon
+rawEventMsg=any
+vdom=root
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+subtype=system
+reptVendor=Fortinet

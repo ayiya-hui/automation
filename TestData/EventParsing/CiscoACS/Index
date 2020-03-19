@@ -1,0 +1,5 @@
+eventType,name,module,reptDevIpAddr,key,method
+CisACS_01_PassedAuth,CiscoACS_1,CiscoACS,33.33.33.33,,syslog
+CisACS_02_FailedAuth,CiscoACS_2,CiscoACS,33.33.33.34,,syslog
+CisACS_13_AdminAudit_Success,CiscoACS_3,CiscoACS,33.33.33.35,,syslog
+CisACS_13_AdminAudit_Fail,CiscoACS_4,CiscoACS,33.33.33.36,,syslog

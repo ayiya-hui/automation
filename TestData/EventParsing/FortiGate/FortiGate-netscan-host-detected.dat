@@ -1,0 +1,31 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<181>date=2013-05-01 time=11:20:50 devname=FortiGate80C devid=FGT80C3912622808 logid=1100004104 type=utm subtype=netscan eventtype=discovery level=notice vd=root action=host-detection dstip=1.1.1.1 method=ARP assetid=1 assetname=Test Asset
+[params]
+deviceTime=any
+destGeoOrg=any
+eventType=FortiGate-netscan-host-detected
+phCustId=$sender
+destIpAddr=1.1.1.1
+destGeoCountry=any
+reptModel=FortiOS
+eventId=any
+eventParsedOk=1
+eventSeverity=3
+hostIpAddr=1.1.1.1
+eventName=Network scan detected new host
+phEventCategory=0 (External)
+hostGeoLongitude=133
+eventSeverityCat=LOW
+collectorId=any
+hostGeoLatitude=-27
+relayDevIpAddr=$localhost
+reptDevName=any
+count=1
+hostGeoCountry=Australia
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Fortinet
+hostGeoOrg=APNIC Debogon Project

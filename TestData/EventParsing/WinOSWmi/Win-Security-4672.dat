@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+20.20.20.120
+[eventMsg]
+Fri Oct 30 18:19:58 2009 $reporter AccelOps-WinLog-WMI  [Category]="12548" [CategoryString]="Special Logon" [ComputerName]="sf1dc03.jha.local" [Data]="NULL" [EventCode]="4672" [EventIdentifier]="4672" [EventType]="4" [Logfile]="Security" [RecordNumber]="184035301" [SourceName]="Microsoft-Windows-Security-Auditing" [TimeGenerated]="20100505222910.681375-000" [TimeWritten]="20100505222910.681375-000" [Type]="Audit Success" [User]="(null)" [[Subject]][Security ID]="S-1-5-21-2090294290-982477196-2044928816-8675" [Account Name]="riverbedAdmin" [Account Domain]="JHA" [Privileges]="SeSecurityPrivilege,SeBackupPrivilege,SeRestorePrivilege,SeTakeOwnershipPrivilege,SeDebugPrivilege,SeSystemEnvironmentPrivilege,SeLoadDriverPrivilege,SeImpersonatePrivilege,SeEnableDelegationPrivilege,SeAssignPrimaryTokenPrivilege"
+[params]
+rawEventMsg=any
+type=Audit Success
+eventAction=0 (Permit)
+count=1
+eventId=any
+domain=JHA
+deviceTime=any
+eventParsedOk=any
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=$reporter
+eventName=Windows administrator equivalent successful logon
+reptVendor=Microsoft
+eventType=Win-Security-4672
+user=riverbedAdmin
+phEventCategory=0 (External)
+reptDevIpAddr=$reporter
+reptModel=Windows

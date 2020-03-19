@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+192.168.5.43
+[eventMsg]
+<190> Apr 13 15:19:32 192.168.5.43-1 CLI_WEB[103917236]: cmd_logger_api.c(260) 5199 %% [CLI:admin:192.168.5.15] User has succesfully logged in
+[params]
+deviceTime=any
+parserName=DellPowerConnectParser
+eventType=Dell-PowerConnect-Login
+srcIpAddr=192.168.5.15
+reptModel=PowerConnect
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Dell-PowerConnect-Login
+appTransportProto=CLI
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=192.168.5.43
+user=admin
+rawEventMsg=any
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=192.168.5.43
+reptVendor=Dell

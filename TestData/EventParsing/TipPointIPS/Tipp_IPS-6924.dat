@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+172.16.20.41
+[eventMsg]
+<37>Oct 24 17:45:16 172.16.20.41 ALT,v4,20091024T174516+0480,"PH-QA-TIP1"/$reporter,588402,1,Permit,Low,00000002-0002-0002-0002-000000006924,"6924: DNS: NXDOMAIN Response","6924: DNS: NXDOMAIN Response",udp," ",172.16.10.15:64898,192.175.48.6:53,20091024T173502+0480,1," ",0,ANY-ANY
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+reptDevIpAddr=172.16.20.41
+eventParsedOk=1
+reptVendor=3Com
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=192.175.48.6
+eventName=Detects a normal Domain Name System response indicating that the requested name does not exist.
+ipProto=17 (UDP)
+appTransportProto=udp
+eventType=Tipp_IPS-6924
+srcIpAddr=172.16.10.15
+remedyAction=Permit
+phEventCategory=0 (External)
+destIpPort=53 (DOMAIN)
+srcIpPort=64898
+reptModel=TippingPoint UnityOne IPS

@@ -1,0 +1,77 @@
+[reptDevIpAddr(key)]
+50.50.50.1
+[eventMsg]
+<2> Jun 25 11:15:33 SJ-QA-W-FDR-Test-01.prospect-hills.net BluecoatWebLog	0	2010-06-25 18:13:34 2021 192.168.22.21 200 TCP_TUNNELED 820 1075 CONNECT tcp accelops.webex.com 443 / - - - NONE 172.16.0.141 - - "WebEx Outlook Integration Http Agent" PROXIED "none" - 50.50.50.1
+[params]
+rawEventMsg=any
+user=-
+httpReferrer=-
+virusName=-
+uriQuery=-
+userGrp=-
+deviceTime=any
+webCategory=none
+eventType=Bluecoat-SGOS-Web-Request-Success
+phCustId=$sender
+destIpAddr=172.16.0.141
+srcIpAddr=192.168.22.21
+reptModel=SGOS Web Proxy
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Web request successful
+phEventCategory=0 (External)
+destName=accelops.webex.com
+httpContentType=-
+recvBytes=1075
+eventSeverityCat=LOW
+httpMethod=CONNECT
+destIpPort=443 (HTTPS)
+httpStatusCode=200 (The request has succeeded)
+count=1
+uriStem=/
+phRecvTime=any
+reptDevIpAddr=$reporter
+eventAction=0 (Permit)
+reptVendor=Blue Coat
+durationMSec=2021
+httpUserAgent=WebEx Outlook Integration Http Agent
+sentBytes=820
+[reptDevIpAddr(key)]
+50.50.50.2
+[eventMsg]
+<2> Jun 25 11:35:34 SJ-QA-W-FDR-Test-01.prospect-hills.net BluecoatWebLog	0	2010-06-25 18:34:03 1 192.168.22.21 0 - 0 162 GET http 172.16.0.141 80 /proxy_pac_file - - - NONE - - - "8080; DIRECT%22;" PROXIED "none" - 50.50.50.2
+[params]
+rawEventMsg=any
+httpReferrer=-
+virusName=-
+uriQuery=-
+userGrp=-
+user=-
+uriStem=/proxy_pac_file
+httpContentType=-
+deviceTime=any
+eventType=Bluecoat-SGOS-Web-Request-Success
+phCustId=$sender
+srcIpAddr=192.168.22.21
+reptModel=SGOS Web Proxy
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Web request successful
+phEventCategory=0 (External)
+destName=172.16.0.141
+webCategory=none
+recvBytes=162
+eventSeverityCat=LOW
+httpMethod=GET
+destIpPort=80
+httpStatusCode=0
+count=1
+phRecvTime=any
+reptDevIpAddr=$reporter
+eventAction=0 (Permit)
+reptVendor=Blue Coat
+durationMSec=1
+httpUserAgent=8080; DIRECT%22;
+sentBytes=0

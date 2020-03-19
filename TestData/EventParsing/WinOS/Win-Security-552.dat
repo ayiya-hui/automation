@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+20.20.20.20
+[eventMsg]
+<13>Jan 14 18:58:00 20.20.20.20 MSWinEventLog	1	Security	9182	Wed Jan 14 18:57:56 2009	552	Security	SYSTEM	User	Success Audit	ADS-PRI	Logon/Logoff		Logon attempt using explicit credentials:    Logged on user:     User Name: ADS-PRI$     Domain: PROSPECTHILLS     Logon ID: (0x0,0x3E7)     Logon GUID: -    User whose credentials were used:     Target User Name: Administrator     Target Domain: PROSPECTHILLS     Target Logon GUID: -      Target Server Name: localhost    Target Server Info: localhost    Caller Process ID: 824    Source Network Address: -    Source Port: -    	8620  Automation
+[params]
+rawEventMsg=any
+srcIpPort=0
+eventAction=0 (Permit)
+count=1
+eventId=any
+domain=PROSPECTHILLS
+deviceTime=any
+eventParsedOk=1
+eventSeverity=3
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=any
+winLogonId=(0x0,0x3E7)
+eventName=Windows logon as a different account using explicit credentials
+targetUser=Administrator
+reptVendor=Microsoft
+eventType=Win-Security-552
+user=ADS-PRI$
+phEventCategory=0 (External)
+reptDevIpAddr=20.20.20.20
+targetDomain=PROSPECTHILLS
+reptModel=Windows

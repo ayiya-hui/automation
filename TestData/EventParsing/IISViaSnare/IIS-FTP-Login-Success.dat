@@ -1,0 +1,35 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<46>Jan 28 15:51:08 Filer.ProspectHills.net FTPSvcLog	0	2009-01-28 23:51:08 172.16.20.120 administrator MSFTPSVC1 FILER 192.168.0.40 21 [120]PASS - - 230 0 0 0 0 FTP - - - -
+[params]
+rawEventMsg=any
+deviceTime=any
+eventSeverityCat=LOW
+reptVendor=Microsoft
+ftpMethod=[120]PASS
+eventType=IIS-FTP-Login-Success
+phCustId=$sender
+destIpAddr=192.168.0.40
+srvInstName=MSFTPSVC1
+ftpStatusCode=230 (User logged in, proceed)
+srcIpAddr=172.16.20.120
+reptModel=IIS
+eventId=any
+ipConnId=120
+eventParsedOk=1
+eventSeverity=1
+eventName=Successful FTP login
+phEventCategory=0 (External)
+destName=FILER
+recvBytes=0
+user=administrator
+destIpPort=21
+count=1
+uriStem=-
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+uriQuery=-
+durationMSec=0
+sentBytes=0

@@ -1,0 +1,23 @@
+[reptDevIpAddr(key)]
+137.146.28.72
+[eventMsg]
+<21>Mar 10 19:15:51 137.146.28.72 sendmail-in[24209]: [ID 801593 mail.notice] o2B0Ffcv024209: ruleset=check_rcpt, arg1=<ldmeader@colby.edu>, relay=[124.50.112.176], reject=550 5.7.1 <ldmeader@colby.edu>... Mail from 124.50.112.176 REFUSED.  See http://www.spamhaus.org/query/bl?ip=124.50.112.176
+[params]
+rawEventMsg=any
+eventAction=1 (Deny)
+count=1
+eventId=any
+reptDevIpAddr=137.146.28.72
+eventParsedOk=1
+eventSeverity=3
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+errReason=550 5.7.1 <ldmeader@colby.edu>... Mail from 124.50.112.176 REFUSED. See http://www.spamhaus.org/query/bl?ip=124.50.112.176
+eventName=Message Rejected by Sendmail Server
+srcIpAddr=124.50.112.176
+reptVendor=Sendmail.org
+eventType=SENDMAIL_REJECT
+user=ldmeader
+phEventCategory=0 (External)
+reptModel=Sendmail Mail Server

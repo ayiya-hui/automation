@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+192.168.24.11
+[eventMsg]
+<134>Nov 18 16:42:54 192.168.24.11 java: [VMware_UserLoginSessionEvent], [eventTime]=2009-11-18 16:37:53:013, [rptIp]=192.168.24.11, [user]=Administrator, [vmwEventId]=67350, [vmwEventCat]=info, [srcIpAddr]=127.0.0.1, [vmwEventMsg]=User Administrator@127.0.0.1 logged in
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+vmwEventCat=info
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=192.168.24.11
+vmwEventMsg=User Administrator@127.0.0.1 logged in
+eventName=User logon
+srcIpAddr=192.168.24.11
+reptVendor=VMware
+eventType=VMware_UserLoginSessionEvent
+user=Administrator
+phEventCategory=0 (External)
+reptDevIpAddr=192.168.24.11
+reptModel=Generic

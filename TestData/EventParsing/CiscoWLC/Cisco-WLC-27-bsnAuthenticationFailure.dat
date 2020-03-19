@@ -1,0 +1,21 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+enterprises.14179.2.6.3.27	enterprises.14179.2.6.2.2.0 i 2	enterprises.14179.2.6.2.1.0 s "PROSPECTHILLS\wenyong"
+[params]
+rawEventMsg=any
+eventSeverity=1
+eventSeverityCat=LOW
+user=PROSPECTHILLS\wenyong
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+phRecvTime=any
+phCustId=$sender
+reptDevIpAddr=$localhost
+eventName=Wireless client authentication failed at switch
+reptVendor=Cisco
+eventType=Cisco-WLC-27-bsnAuthenticationFailure
+phEventCategory=0 (External)
+reptModel=WLAN Controller

@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>Dec 05 2008 13:02:16: %ASA-7-108006: Detected ESMTP size violation from ether03:20.20.20.20|8080 to ether05:192.168.20.20|80;declared size is: 4058, actual size is 4050.
+[params]
+rawEventMsg=any
+destIpAddr=192.168.20.20
+srcIpPort=8080
+destIntfName=ether05
+destIpPort=80
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+srcIpAddr=20.20.20.20
+eventAction=1 (Deny)
+eventName=Detected ESMTP message size violation
+reptVendor=Cisco
+eventType=ASA-108006
+phEventCategory=0 (External)
+srcIntfName=ether03
+reptDevIpAddr=$reporter
+reptModel=ASA

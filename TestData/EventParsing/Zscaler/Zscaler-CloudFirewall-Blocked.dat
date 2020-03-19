@@ -1,0 +1,53 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+"Mon Jan 01 01:01:01 2001","example","HTTP","1.2.3.4/","Blocked","General Browsing","General Browsing","123","321","78","78","General Surfing","Miscellaneous","Miscellaneous or Unknown","Clean Transaction","None","0","None","None","Example","Default Department","4.3.2.1","1.2.3.4","head","403 - Forbidden","example ua","None"
+[params]
+deviceTime=any
+destGeoOrg=any
+virusName=None
+appName=General Browsing
+eventType=Zscaler-CloudFirewall-Blocked
+destIpAddr=1.2.3.4
+appGroupName=General Browsing
+srcName=any
+srcIpAddr=4.3.2.1
+hostLocation=Example
+reptModel=Cloud Firewall
+eventId=any
+latency=78.00
+eventParsedOk=1
+parserName=ZscalerParser
+virusType=Clean Transaction
+eventSeverity=1
+threatScore=0
+eventName=Zscaler blocked firewall traffic
+appTransportProto=HTTP
+dlpEngineVer=None
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+destName=any
+appCategory=Miscellaneous
+count=1
+errorString=Forbidden
+recvBytes=321
+eventSeverityCat=LOW
+collectorId=any
+destGeoCountry=any
+httpMethod=head
+dlpCategory=None
+relayDevIpAddr=$localhost
+user=example
+rawEventMsg=any
+httpStatusCode=403 (Forbidden - The server understood the request, but is refusing to fulfill it. Authorization will not help)
+reptDevName=any
+customer=Super
+actionName=Blocked
+phRecvTime=any
+reptDevIpAddr=$localhost
+appSubcategory=Miscellaneous or Unknown
+infoURL=1.2.3.4/
+webCategory=General Surfing
+reptVendor=Zscaler
+httpUserAgent=example ua
+sentBytes=123

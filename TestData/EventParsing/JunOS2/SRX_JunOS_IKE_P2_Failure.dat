@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+86.86.86.86
+[eventMsg]
+<27>Nov 18 11:33:09 CL-GW-ISP-01 CL-GW-ISP-01: kmd[57362]: IKE Phase-2 Failure: IKE Phase-2 negotiation retry limit reached [spi=647c4736, src_ip=209.152.215.6, dst_ip=74.114.44.2
+[params]
+deviceTime=any
+eventType=SRX_JunOS_IKE_P2_Failure
+phCustId=$sender
+destIpAddr=74.114.44.2
+srcIpAddr=209.152.215.6
+reptModel=SRX JunOS
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=SRX_JunOS_IKE_P2_Failure
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=86.86.86.86
+reptDevName=any
+count=1
+phRecvTime=any
+reptDevIpAddr=86.86.86.86
+destName=any
+reptVendor=Juniper

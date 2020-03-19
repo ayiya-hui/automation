@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>Dec 04 2008 20:00:45: %ASA-2-106007: Deny inbound UDP from 20.20.20.20/5667 to 192.168.20.20/8080 due to DNS {Response}
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=8
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=MEDIUM
+destIpAddr=192.168.20.20
+eventAction=1 (Deny)
+eventName=Denied IP traffic by policy
+ipProto=17 (UDP)
+reptVendor=Cisco
+eventType=ASA-106007
+srcIpAddr=20.20.20.20
+phEventCategory=0 (External)
+destIpPort=8080
+reptDevIpAddr=$reporter
+srcIpPort=5667
+reptModel=ASA

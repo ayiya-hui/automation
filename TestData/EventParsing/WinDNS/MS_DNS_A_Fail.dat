@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+20.2.2.11
+[eventMsg]
+<13>Aug 10 19:14:36 $reporter MSDNSLog 0 20090810 19:13:43 15F0 PACKET 02068360 UDP Rcv 68.94.156.1 fe99 R Q [8381 DR NXDOMAIN] A (12)autodiscover(8)accelops(3)net(0)
+[params]
+rawEventMsg=any
+phEventCategory=0 (External)
+appTransportProto=UDP
+ipConnId=Rcv
+count=1
+phCustId=$sender
+destName=autodiscover.accelops.net
+destIpPort=53 (DOMAIN)
+deviceTime=any
+errorNo=8381
+errorString=NXDOMAIN
+eventAction=1 (Deny)
+eventId=any
+eventName=Failed domain name to IP query
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=1
+eventSeverityCat=LOW
+eventType=MS_DNS_A_Fail
+ipProto=17 (UDP)
+reptDevIpAddr=$reporter
+reptModel=DNS
+reptVendor=Microsoft

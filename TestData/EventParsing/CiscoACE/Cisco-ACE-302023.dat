@@ -1,0 +1,36 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<166>Jun  4 2010 10:06:37 FLOODCERT_DMZ: %ACE-6-302023: Teardown TCP connection 0xacaa3 for vlan747:10.7.46.151/49656 (10.7.46.151/49656) to vlan746:10.3.1.75/80 (10.3.1.75/80) duration 0:00:15 bytes 2052 TCP FINs
+[params]
+rawEventMsg=any
+virtContext=FLOODCERT_DMZ
+postNATSrcIpPort=49656
+totBytes=2052
+durationMSec=15000
+deviceTime=any
+eventType=Cisco-ACE-302023
+phCustId=$sender
+destIpAddr=10.3.1.75
+destIpPort=80 (HTTP)
+srcIpAddr=10.7.46.151
+reptModel=ACE
+eventId=any
+ipConnId=707235
+eventParsedOk=1
+eventSeverity=1
+preNATDestIpAddr=10.3.1.75
+eventName=Teardown TCP connection
+phEventCategory=0 (External)
+srcIntfName=vlan747
+srcIpPort=49656
+preNATDestIpPort=80 (HTTP)
+eventSeverityCat=LOW
+destIntfName=vlan746
+postNATSrcIpAddr=10.7.46.151
+ipProto=6 (TCP)
+count=1
+phRecvTime=any
+reptDevIpAddr=$reporter
+eventAction=0 (Permit)
+reptVendor=Cisco

@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134> 2013/10/18:20:07:02  NYNSVPX01 0-PPE-0 : UI CMD_EXECUTED 13609 0 :  User nsroot - Remote_ip 10.55.38.82 - Command login nsroot ******** - Status Success
+[params]
+rawEventMsg=any
+deviceTime=any
+totFlows=1
+eventType=NETSCALER-UI-CMD_EXECUTED-SUCCESS
+phCustId=$sender
+reptModel=NetScaler
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+hostIpAddr=10.55.38.82
+eventName=Command executed successfully in Netscalar appliance via GUI/CLI
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+collectorId=any
+user=nsroot
+reptDevName=any
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Citrix
+command=login nsroot ********

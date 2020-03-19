@@ -1,0 +1,177 @@
+<eventParser name="SophosParser">
+ 
+  <deviceType>
+    <Vendor>Generic</Vendor>
+    <Model>Generic</Model>
+    <Version>ANY</Version>
+  </deviceType>
+
+  <appType>
+    <Vendor>Sophos</Vendor>
+    <Model>Sophos Endpoint Control</Model>
+    <Version>ANY</Version>
+    <Name>Sophos Endpoint Security and Control</Name>
+  </appType>
+
+  <eventFormatRecognizer><![CDATA[SNMPv2-SMI::enterprises\.2604]]></eventFormatRecognizer>
+  
+  <testEvents>
+      <testEvent><![CDATA[2011-05-03 18:22:32 172.15.30.8(via UDP: [172.15.30.8]:1216) TRAP, SNMP v1, community public          SNMPv2-SMI::enterprises.2604.2.1.1.1 Enterprise Specific Trap (1) Uptime: 5:59:55.31       SNMPv2-SMI::enterprises.2604.2.1.1.2.1.1 = STRING: "File \"C:\WINDOWS\system32\LDPackage.dll\" belongs to virus/spyware 'Mal/Generic-S'."        SNMPv2-SMI::enterprises.2604.2.1.1.2.2.2 = STRING: "9.5.5"]]></testEvent>
+  </testEvents>
+
+  <!-- pattern definitions -->
+  <patternDefinitions>
+  <pattern name="patPath"><![CDATA[[\S\s\d\\]*]]></pattern>
+    <pattern name="patStrQuote"><![CDATA[[^"]*]]></pattern>
+    <pattern name="patStrSingleQuote"><![CDATA[[^']*]]></pattern>
+  </patternDefinitions>
+ 
+  <parsingInstructions>
+
+     <switch>
+      <case>
+        <collectFieldsByRegex src="$_rawmsg">
+          <regex><![CDATA[<_year:gPatYear>-<_mon:gPatMonNum>-<_day:gPatDay>\s+<_time:gPatTime>\s+<:gPatIpV4Dot>\(via UDP:\s+\[<_reptIp:gPatIpV4Dot>\]:\d+\)<_body:gPatMesgBody>]]>
+          </regex>
+        </collectFieldsByRegex>
+      </case>
+      <case>
+        <collectFieldsByRegex src="$_rawmsg">
+          <regex><![CDATA[<_year:gPatYear>-<_mon:gPatMonNum>-<_day:gPatDay>\s+<_time:gPatTime>\s+<hostName:gPatStr>\s+\[<:gPatIpV4Dot>\]\s+\(via UDP:\s+\[<_reptIp:gPatIpV4Dot>\]:\d+\)<_body:gPatMesgBody>]]>
+          </regex>
+        </collectFieldsByRegex>
+      </case>
+    </switch>
+
+    <setEventAttribute attr="deviceTime">toDateTime($_mon, $_day, $_year, $_time)</setEventAttribute>
+    <setEventAttribute attr="eventType">"Sophos-Generic"</setEventAttribute>
+    <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+
+    <!-- parse reporting ip -->
+    <when test='exist _reptIp'>
+	<when test='$_reptIp != "127.0.0.1"'>
+		<when test='$_reptIp != "0.0.0.0"'>
+			<setEventAttribute attr="reptDevIpAddr">$_reptIp</setEventAttribute>
+		</when>
+	</when>
+    </when>
+
+    
+      <when test='matches($_body,"SNMPv2-SMI::enterprises.2604.2.1.1.1")'>
+	<collectAndSetAttrByKeyValuePair sep='SNMP' src="$_body">
+ 	  <attrKeyMap attr="_eventType" key="SNMPv2-SMI::enterprises.2604.2.1.1.2.1."/>
+	  <attrKeyMap attr="appVersion" key="SNMPv2-SMI::enterprises.2604.2.1.1.2.2.2 = STRING: "/>
+	</collectAndSetAttrByKeyValuePair>
+     </when>
+        <when test='exist _eventType'>
+	    <collectFieldsByRegex src="$_eventType">
+	      <regex><![CDATA[<_num:gPatInt>\s+=\s+STRING:\s+<_body:gPatMesgBody>]]></regex>
+    	    </collectFieldsByRegex>
+        </when>
+
+        <when test='exist _num'>
+		<when test='$_num = "1"'>
+			<switch>
+				<case>
+					<collectFieldsByRegex src="$_body">
+						<regex><![CDATA["Virus/spyware\s+'<virusName:patStrSingleQuote>'\s+has been removed\.]]></regex>
+					</collectFieldsByRegex>
+					<setEventAttribute attr="eventType">"Sophos-Malware-Removed"</setEventAttribute>
+					<setEventAttribute attr="eventSeverity">7</setEventAttribute>
+				</case>
+				<case>
+					<collectFieldsByRegex src="$_body">
+						<regex><![CDATA["File\s+\\"<fileName:patStrQuote>"\s+belongs to virus/spyware '<virusName:patStrSingleQuote>'\.]]></regex>
+					</collectFieldsByRegex>
+					<setEventAttribute attr="eventType">"Sophos-Malware-Found"</setEventAttribute>
+					<setEventAttribute attr="eventSeverity">8</setEventAttribute>
+				</case>
+			</switch>
+		</when>
+		<when test='$_num = "3"'>
+			<switch>
+				<case>
+					<collectFieldsByRegex src="$_body">
+						<regex><![CDATA["File\s+\\"<fileName:patStrQuote>"\s+has been identified as suspicious file of type\s+'<virusName:patStrSingleQuote>'.*]]></regex>
+					</collectFieldsByRegex>
+					<setEventAttribute attr="eventType">"Sophos-HIPS-Suspicious-File"</setEventAttribute>
+					<setEventAttribute attr="eventSeverity">7</setEventAttribute>
+				</case>
+				<case>
+					<collectFieldsByRegex src="$_body">
+						<regex><![CDATA["Process\s+\\"<procName:patStrQuote>"\s+exhibiting suspicious behavior pattern\s+'<virusName:patStrSingleQuote>'.*]]></regex>
+					</collectFieldsByRegex>
+					<setEventAttribute attr="eventType">"Sophos-HIPS-Suspicious-Process"</setEventAttribute>
+					<setEventAttribute attr="eventSeverity">7</setEventAttribute>
+				</case>
+				<case>
+					<collectFieldsByRegex src="$_body">
+						<regex><![CDATA["Access to location \\"<infoURL:patStrQuote>"\s+was blocked for user\s+<user:gPatStr>]]></regex>
+					</collectFieldsByRegex>
+					<setEventAttribute attr="eventType">"Sophos-WebURL-Block"</setEventAttribute>
+					<setEventAttribute attr="eventSeverity">1</setEventAttribute>
+				</case>
+			</switch>
+		</when>
+		<when test='$_num = "5"'>
+			<collectFieldsByRegex src="$_body">
+				<regex><![CDATA["An\s+\\"<:patStrQuote>"\s+action was taken\.\s+Username:\s+<user:gPatStr>\s+Rule names:\s+'<fwRule:patStrSingleQuote>'\s+User action:\s+<:gPatStr>\s+<:gPatStr>\s+(?:Application Name:\s+<_app:gPatStr>\s+)?Data Control action:\s+<virusAction:gPatStr><:gPatMesgBody>]]></regex>
+			</collectFieldsByRegex>
+			<setEventAttribute attr="eventType">"Sophos-DLP-Violation"</setEventAttribute>
+			<setEventAttribute attr="eventSeverity">11</setEventAttribute>
+		</when>
+	</when>
+	<when test='exist targetDomain'>
+	  <switch>
+		<case>
+		<collectFieldsByRegex src="$targetDomain">
+			<regex><![CDATA[<targetDomain:patPath>\\]]></regex>
+		</collectFieldsByRegex>
+		</case>
+		<default />
+	 </switch>
+        </when>
+	<when test='exist fileName'>
+	  <switch>
+		<case>
+		<collectFieldsByRegex src="$fileName">
+			<regex><![CDATA[<fileName:patPath>\\]]></regex>
+		</collectFieldsByRegex>
+		</case>
+		<default />
+	 </switch>
+	 </when>
+	 <when test='exist procName'>
+	  <switch>
+		<case>
+		<collectFieldsByRegex src="$procName">
+			<regex><![CDATA[<procName:patPath>\\]]></regex>
+		</collectFieldsByRegex>
+		</case>
+		<default />
+	 </switch>
+        </when>
+	 <when test='exist user'>
+	  <switch>
+		<case>
+		<when test='matches($user, "\\")'>
+		<collectAndSetAttrByPos src="$user" sep="\">
+ 			<attrPosMap attr="domain" pos="1" /> 
+ 			<attrPosMap attr="user" pos="2" /> 
+  		</collectAndSetAttrByPos>	
+		</when>
+		</case>
+		<default />
+	 </switch>
+        </when>
+	 <when test='exist _app'>
+		<when test='$_app != " "'>
+		<setEventAttribute attr="appName">$_app</setEventAttribute>
+		</when>
+        </when>
+
+     
+	
+  </parsingInstructions>
+  
+</eventParser>

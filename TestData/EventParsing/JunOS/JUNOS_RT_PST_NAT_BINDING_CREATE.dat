@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<15>Nov 19 15:08:06 RT_NAT: RT_PST_NAT_BINDING_CREATE: Pst NAT (Query    ) binding created, lsys_id: 0, internal ip/port/protocol: 172.16.240.32/61888/17, reflexive ip/port/protocol: 209.152.215.78/33869/17
+[params]
+rawEventMsg=any
+deviceTime=any
+eventType=JUNOS_RT_PST_NAT_BINDING_CREATE
+phCustId=$sender
+destIpAddr=209.152.215.78
+srcIpAddr=172.16.240.32
+reptModel=JunOS
+eventId=any
+eventParsedOk=1
+eventSeverity=5
+eventName=NAT binding created
+phEventCategory=0 (External)
+srcIpPort=61888
+eventSeverityCat=MEDIUM
+collectorId=any
+destIpPort=33869
+reptDevName=any
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Juniper

@@ -1,0 +1,22 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>Jul 24 2008 03:29:15: %PIX-6-113005: AAA user authentication Rejected : reason = AAA failure : server = 192.168.0.40 : user = wenyong
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=any
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+eventAction=1 (Deny)
+eventName=IPsec/WebVPN AAA user authentication failed
+reptVendor=Cisco
+eventType=PIX-113005
+user=wenyong
+phEventCategory=0 (External)
+reptDevIpAddr=$localhost
+reptModel=PIX

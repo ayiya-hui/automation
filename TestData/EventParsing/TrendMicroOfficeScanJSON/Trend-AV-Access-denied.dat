@@ -1,0 +1,36 @@
+[reptDevIpAddr(key)]
+1.1.1.1
+[eventMsg]
+{"@tstamp":"2016-04-30T18:17:18+00:00","timereported":"2016-04-30T18:17:18+00:00","timereceived":"2016-05-01T01:17:18.473497+00:00","loghost":"server.com","fromhost":"server.com","fromhostip":"1.1.1.1","severity":"notice","facility":"local0","syslogtag":"TMCM:","vtype":"misc","msg":"SLF_INCIDENT_EVT_GRAYWARE_FOUND_QUARANTINE_SUCCESS Security product=\"OfficeScan\" Security product node=\"server2\" Security product IP=\"2.2.2.2\" Event time=\"5\/1\/2016 1:13:45 AM\" Grayware\/Spyware=\"ADW_OPENCANDY.GB\" Result=\"Access denied\" Infection destination=\"server2\" Infection destination IP=\"server2\" Destination IP=\"\" Source IP=\"\" Domain=\"servers\" ScanMethod=\"Unknown\" Infected file=\"D:\\Home\\user1\\Desktop\\dir\\tools\\badfile.exe\" File path=\"N\/A\" User=\"userA\" Managing server entity=\"server3\""}
+[params]
+domain=servers
+deviceTime=any
+parserName=TrendMicroOfficeScanJSONParser
+isHostIntfCritical=No
+eventType=Trend-AV-Access-denied
+intfName=local0
+reptModel=Antivirus Manager
+eventId=any
+eventTime=Sun May 01 02:17:18 CST 2016
+eventParsedOk=1
+eventSeverity=1
+eventName=Virus action denied
+virusAction=Access denied
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+msg=SLF_INCIDENT_EVT_GRAYWARE_FOUND_QUARANTINE_SUCCESS Security product="OfficeScan" Security product node="server2" Security product IP="2.2.2.2" Event time="5/1/2016 1:13:45 AM" Grayware/Spyware="ADW_OPENCANDY.GB" Result="Access denied" Infection destination="server2" Infection destination IP="server2" Destination IP="" Source IP="" Domain="servers" ScanMethod="Unknown" Infected file="D:\Home\user1\Desktop\dir\tools\badfile.exe" File path="N/A" User="userA" Managing server entity="server3"
+eventRuleTrigger=1
+destName=any
+count=1
+eventSeverityCat=LOW
+collectorId=any
+fileName=D:\Home\user1\Desktop\dir\tools\badfile.exe
+virusName=ADW_OPENCANDY.GB
+relayDevIpAddr=1.1.1.1
+user=userA
+rawEventMsg=any
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=1.1.1.1
+reptVendor=TrendMicro

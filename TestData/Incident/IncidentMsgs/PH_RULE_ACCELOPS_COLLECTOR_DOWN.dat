@@ -1,0 +1,5 @@
+[eventMsg]
+<174>Nov 07 16:46:37 [PH_COLLECTOR_DOWN]:[phEventCategory]=3,[phCustId]=111,[procName]=AppServer,[eventSeverity]=PHL_INFO,[phCollectorName]=111,[customer]=customer111,[phLogDetail]=Collector down
+
+[clearEventMsg]
+<174>Nov 07 16:56:37 [PH_COLLECTOR_UP]:[phEventCategory]=3,[phCustId]=111,[procName]=AppServer,[eventSeverity]=PHL_INFO,[phCollectorName]=111,[customer]=customer111,[phLogDetail]=Collector up

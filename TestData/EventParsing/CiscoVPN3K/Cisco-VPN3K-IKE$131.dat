@@ -1,0 +1,21 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<189>393043 06/29/2009 21:26:09.750 SEV=4 IKE/131 RPT=530 99.129.50.155  Group [HQ-Dev] User [wenyong] Received unknown transaction mode attribute: 28684--automator
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+eventAction=0 (Permit)
+eventName=Cisco-VPN3K-IKE/131
+reptVendor=Cisco
+eventType=Cisco-VPN3K-IKE/131
+phEventCategory=0 (External)
+reptDevIpAddr=$localhost
+reptModel=VPN 3K

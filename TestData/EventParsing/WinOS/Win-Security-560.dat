@@ -1,0 +1,30 @@
+[reptDevIpAddr(key)]
+52.52.52.52
+[eventMsg]
+<13>Dec 12 10:09:00 $reporter MSWinEventLog	1	Security	1756	Wed Dec 12 10:08:53 2007	560	Security	SYSTEM	User	Success Audit	ADS-PRI	Object Open		Client User Name: partha   Client Domain: PROSPECTHILLS   Client Logon ID: (0x0,0x401CAEA)  Object Type: File  Handle ID: 144 	Image File Name: C:\WINDOWS\system32\notepad.exe Object Name: C:\ConfidentialFiles\ProjectPlan.doc.txt  Accesses: WriteData (or AddFile) AppendData (or AddSubdirectory or CreatePipeInstance)
+[params]
+rawEventMsg=any
+domain=PROSPECTHILLS
+eventAction=0 (Permit)
+deviceTime=any
+eventType=Win-Security-560
+phCustId=$sender
+osObjType=File
+procName=C:\WINDOWS\system32\notepad.exe
+osObjName=C:\ConfidentialFiles\ProjectPlan.doc.txt
+reptModel=Windows
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Windows object opened
+phEventCategory=0 (External)
+destIpAddr=$reporter
+eventSeverityCat=LOW
+osObjAccessType=WriteData
+user=partha
+osObjHandleID=144
+count=1
+winLogonId=(0x0,0x401CAEA)
+phRecvTime=any
+reptDevIpAddr=$reporter
+reptVendor=Microsoft

@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+2015-11-11T12:52:20.437659-06:00 ustxnf1housrfs600001 %SMRT-5-COV_HOLE_RECOVERY_DONE: Radio ustxnf1hous-ap10:R2 power changed from 19 to 14
+[params]
+radioBand=R2
+parserName=MotorolaWiNGParser
+eventType=Motorola-WiNG-SMRT-COV_HOLE_RECOVERY_DONE
+hostName=ustxnf1hous-ap10
+reptModel=WiNG WLAN AP
+eventId=any
+eventParsedOk=1
+eventSeverity=2
+eventName=Motorola WLAN AP: Coverage hole recovery done
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+eventRuleTrigger=1
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+eventDesc=Radio ustxnf1hous-ap10:R2 power changed from 19 to 14
+reptDevName=ustxnf1housrfs600001
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Motorola

@@ -1,0 +1,49 @@
+$winKerbFailCode,Desc
+0x1,Client entry in database expired
+0x2,Server entry in database expired
+0x3,Protocol version not supported
+0x4,Client's key encrypted in old master key
+0x5,Server's key encrypted in old master key
+0x6,Client not found in kerberos database
+0x7,Server not found in kerberos database
+0x8,Multiple principal entries in database
+0x9,Client or server has a null key
+0xA,Ticket not eligibale for postdating
+0xB,Request start time is later than end time
+0xC,KDC policy rejects request
+0xD,KDC cannot accomodate requested option
+0xE,KDC has no support for encryption type
+0xF,KDC has no support for checksum type
+0x10,KDC has no support for padata type
+0x11,KDC has no support for transited type
+0x12,Client credentials have been revoked
+0x13,Server credentials have been revoked
+0x14,TGT has beren revoked
+0x15,Client not yet valid - try later
+0x16,Server not yet valid - try later
+0x17,User password expired
+0x18,Pre-authentication info invalid
+0x19,Addition pre-authentication required
+0x1F,Integrity check on decrypted field failed
+0x20,Ticket expired
+0x21,Ticket not yet valid
+0x22,Request is a replay
+0x23,Ticket not for us
+0x24,Ticket and authenticator don't match
+0x25,Clock skew too great
+0x26,Incorrect net address
+0x27,Protocol version mismatch
+0x28,Invalid message type
+0x29,Message stream modified
+0x2A,Message out of order
+0x2C,Specified key version not available
+0x2D,Service key not available
+0x2E,Mutual authentication failed
+0x2F,Incorrect message direction
+0x30,Alternative auth method required
+0x31,Incorrect sequence number in message
+0x32,Inappropriate checksum type in message
+0x3C,Generic error
+0x3D,Field too long
+
+

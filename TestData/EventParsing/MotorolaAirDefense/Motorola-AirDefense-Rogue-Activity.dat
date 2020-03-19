@@ -1,0 +1,30 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<40>Nov 12 13:51:00 Time=2015-11-09T08:52:00,Category=Rogue Activity,CriticalityLevel=Severe,Desc=Sanctioned Client Association to Unsanctioned Virtual WIFI,device=68:09:27:70:fc:b6(68:09:27:70:fc:b6),sensor=fc:0a:81:12:7a:91(FRA-SENS307WD[a,b,g,n])
+[params]
+deviceTime=any
+parserName=MotorolaAirDefenseParser
+eventType=Motorola-AirDefense-Rogue-Activity
+srcName=68:09:27:70:fc:b6
+reptModel=AirDefense
+eventId=any
+eventTime=Mon Nov 09 08:52:00 CST 2015
+eventParsedOk=1
+eventSeverity=9
+eventName=Motorola-AirDefense-Rogue-Activity
+appTransportProto=Syslog
+phEventCategory=0 (External)
+eventRuleTrigger=1
+destName=FRA-SENS307WD[a,b,g,n]
+count=1
+srcMACAddr=68:09:27:70:fc:b6
+eventSeverityCat=HIGH
+collectorId=any
+relayDevIpAddr=$localhost
+reptDevIpAddr=$localhost
+eventDesc=Sanctioned Client Association to Unsanctioned Virtual WIFI
+customer=Super
+phRecvTime=any
+destMACAddr=fc:0a:81:12:7a:91
+reptVendor=Motorola

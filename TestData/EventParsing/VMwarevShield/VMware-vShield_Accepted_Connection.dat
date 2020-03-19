@@ -1,0 +1,32 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<4>Jul 21 18:39:10 vse-5441d8af-cc50-4e0a-be50-10e98fa62fb2-0 firewall[]: [c37e9140-76dd-4e5b-a481-6e85f482526d]: ACCEPT_87IN= OUT=vNic_0 SRC=10.13.8.18 DST=10.23.0.12 LEN=52 TOS=0x02 PREC=0x00 TTL=127 ID=19364 DF PROTO=TCP SPT=59332 DPT=55004 WINDOW=8192 RES=0x00 CWR ECE SYN URGP=0 MARK=0x3
+[params]
+deviceTime=any
+parserName=VMwarevShieldParser
+eventType=VMware-vShield_Accepted_Connection
+destIpAddr=10.23.0.12
+ipProto=6 (TCP)
+srcIpAddr=10.13.8.18
+reptModel=vShield
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=VMware vShield firewall accepted connection between two VMs
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+ruleId=87
+srcIpPort=59332
+eventSeverityCat=LOW
+collectorId=any
+destIntfName=vNic_0
+relayDevIpAddr=$localhost
+rawEventMsg=any
+destIpPort=55004
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=VMware

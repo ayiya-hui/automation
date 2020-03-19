@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+date=2012-08-09 time=10:45:27 device_id=FE100C3909600504 log_id=0400005355 type=encrypt pri=information session_id="q79EiV8S007017-q79EiV8T0070170001474" msg="User user1@1.ca read secure message, id:'q79EiV8S007017-q79EiV8T0070170001474', sent from: 'user2@2.ca', subject: 'ppt file'"
+[params]
+deviceTime=any
+parserName=FortiMailParser
+eventType=FortiMail-Encryption-Generic
+usrMsg=User user1@1.ca read secure message, id:'q79EiV8S007017-q79EiV8T0070170001474', sent from: 'user2@2.ca', subject: 'ppt file'
+reptModel=FortiMail
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Generic FortiMail Encryption events
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+type=Encryption
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+sessionId=q79EiV8S007017-q79EiV8T0070170001474
+reptVendor=Fortinet

@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<189>3755145: Mar 16 21:08:17: %AUTHMGR-5-START: Starting 'mab' for client (0018.8b5b.fcd1) on Interface Gi1/0/8 AuditSessionID AC103215000035FBD0A4A1CE
+[params]
+rawEventMsg=any
+deviceTime=any
+eventType=IOS-AUTHMGR-START
+phCustId=$sender
+procName=mab
+reptModel=IOS
+eventId=any
+ipConnId=AC103215000035FBD0A4A1CE
+eventParsedOk=1
+eventSeverity=2
+hostIpAddr=$localhost
+eventName=IOS-AUTHMGR-START
+phEventCategory=0 (External)
+srcIntfName=Gi1/0/8
+srcMACAddr=00:18:8b:5b:fc:d1
+eventSeverityCat=LOW
+collectorId=any
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Cisco

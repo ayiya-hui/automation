@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<46>Jan 05 21:35:25 login.cgi: [DCauditLogs] SrcFireMgr: admin@10.1.85.101, Logout, Logout Success
+[params]
+deviceTime=any
+parserName=Sourcefire3Parser
+eventType=Sourcefire-Audit-Logout-Success
+reptModel=FirePOWER
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+hostIpAddr=10.1.85.101
+eventName=FirePOWER logout succeeded
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+eventRuleTrigger=1
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+user=admin
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Cisco

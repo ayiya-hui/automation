@@ -1,0 +1,19 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<6>OCT 15 15:59:39 2009 PH-QA-TIP1 [sys] Port 1B link state is now DOWN
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+reptDevIpAddr=$localhost
+eventParsedOk=1
+eventSeverity=9
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=HIGH
+eventName=Tipping Point IPS Network Interface down
+reptVendor=3Com
+eventType=Tipp_Link_Down
+phEventCategory=0 (External)
+reptModel=TippingPoint UnityOne IPS

@@ -1,0 +1,390 @@
+<Rules>
+
+  <!-- ***************************************************** -->
+  <Rule group="PH_SYS_RULE_Perf_Server" id="PH_Rule_Perf_8" phIncidentCategory="Server">
+    <Name> High Process CPU: Server </Name>
+    <active>true</active>
+    <Description>Detects high CPU usage by a server application on the basis of 3 consecutive measurements in a 15 minute period </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_HIGH_CPU_APPL_SERVER" severity="8">
+      <ArgList>
+        hostIpAddr = HighProcessCPU.hostIpAddr, appName = HighProcessCPU.appName, cpuUtil = HighProcessCPU.AVG(cpuUtil)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="900">
+       <SubPattern displayName="HighProcessCPU" name="HighProcessCPU">
+	 <SingleEvtConstr>eventType = "PH_DEV_MON_PROC_RESOURCE_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Server) </SingleEvtConstr>
+         <GroupEvtConstr> AVG(cpuUtil) &gt;= 85 AND COUNT(*) &gt;= 3 </GroupEvtConstr>
+         <GroupByAttr> hostIpAddr, appName </GroupByAttr>
+       </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,hostIpAddr,appName,cpuUtil,memUtil,reptDevIpAddr,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "timebased">
+      <QuietPeriod>1200</QuietPeriod>
+    </ClearCondition>
+  </Rule>
+
+  <!-- ***************************************************** -->
+  <Rule group="PH_SYS_RULE_Perf_Server" id="PH_Rule_Perf_9" phIncidentCategory="Server">
+    <Name>High Process Memory: Server</Name>
+    <active>true</active>
+    <Description>Detects high memory usage by a server application on the basis of 3 consecutive measurements in a 15 minute period </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_HIGH_MEM_APPL_SERVER" severity="8">
+      <ArgList>
+        hostIpAddr = HighProcessMemory.hostIpAddr, appName = HighProcessMemory.appName, memUtil = HighProcessMemory.AVG(memUtil)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="900">
+       <SubPattern displayName="HighProcessMemory" name="HighProcessMemory">
+	 <SingleEvtConstr>eventType = "PH_DEV_MON_PROC_RESOURCE_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Server) </SingleEvtConstr>
+         <GroupEvtConstr> AVG(memUtil) &gt;= 80 AND COUNT(*) &gt;= 3 </GroupEvtConstr>
+         <GroupByAttr> hostIpAddr, appName </GroupByAttr>
+       </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,hostIpAddr,appName,cpuUtil,memUtil,reptDevIpAddr,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "timebased">
+      <QuietPeriod>1200</QuietPeriod>
+    </ClearCondition>
+  </Rule>
+  
+  <!-- ***************************************************** -->
+  <Rule group="PH_SYS_RULE_Perf_Server" id="PH_Rule_Perf_10" phIncidentCategory="Server">
+    <Name>Server Process Count Anomaly </Name>
+    <active>true</active>
+    <Description> Detects the process count at a server to be twice the average </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_STAT_HIGH_PROC_COUNT" severity="9">
+      <ArgList>
+        hostIpAddr = ExcessProcessCount.hostIpAddr, procCount = ExcessProcessCount.AVG(procCount)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="600">
+      <SubPattern displayName="ExcessProcessCount" name="ExcessProcessCount">
+	<SingleEvtConstr> eventType = "PH_DEV_MON_SYS_PROC_COUNT" </SingleEvtConstr>
+        <GroupEvtConstr> PH_FUNC_DIFF_STAT_AVG_1(AVG(procCount), 2.0) &gt;= 0 AND COUNT(*) &gt;= 3 </GroupEvtConstr>
+        <GroupByAttr> hostIpAddr </GroupByAttr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,hostIpAddr,procCount,reptDevIpAddr,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "timebased">
+      <QuietPeriod>1200</QuietPeriod>
+    </ClearCondition>
+  </Rule>
+
+  <!-- ***************************************************** -->
+  <Rule group="PH_SYS_RULE_Perf_Network" id="PH_Rule_Perf_21" phIncidentCategory="Network">
+    <Name>Network Device Health: Critical</Name>
+    <active>false</active>
+    <Description>Detects that the health of a network device is critical and needs immediate attention based average CPU, memory and interface utilization and interface errors - at least one of the measured attributes has crossed the specified HIGH threshold </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+
+    <IncidentDef eventType="PH_RULE_HEALTH_NET_DEV_CRITICAL" severity="9">
+      <ArgList>
+        hostIpAddr = NetHealthCrit.hostIpAddr,hostName = NetHealthCrit.hostName
+      </ArgList>
+    </IncidentDef>
+
+    <PatternClause window="540">
+      <SubPattern displayName="NetHealthCrit" name="NetHealthCrit">
+	<Description>CPU, memory, interface util/error critical</Description>
+	<SingleEvtConstr>eventType IN ("PH_RULE_NET_CPU_CRIT","PH_RULE_NET_MEM_CRIT", "PH_RULE_NET_INTF_UTIL_CRIT","PH_RULE_NET_INTF_ERR_CRIT") AND hostIpAddr IN (Group@PH_SYS_DEVICE_Network) </SingleEvtConstr>
+        <GroupByAttr>hostIpAddr,hostName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>    
+    
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,hostIpAddr,hostName, eventType,rawEventMsg </AttrList>
+    </TriggerEventDisplay> 
+  </Rule>
+
+  <!-- ***************************************************** -->
+  <Rule group="PH_SYS_RULE_Perf_Server" id="PH_Rule_Perf_22" phIncidentCategory="Server">
+    <Name>Windows Server Health: Critical</Name>
+    <active>false</active>
+    <Description>Detects that the health of a windows server is critical and needs immediate attention based average CPU, memory, disk and interface utilization and interface errors - at least one of the measured attributes has crossed the specified HIGH threshold </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+
+    <IncidentDef eventType="PH_RULE_HEALTH_WIN_SERVER_CRITICAL" severity="9">
+      <ArgList>
+        hostIpAddr = WinHealthCrit.hostIpAddr, hostName = WinHealthCrit.hostName
+      </ArgList>
+    </IncidentDef>
+    
+    <PatternClause window="540">
+      <SubPattern displayName="WinHealthCrit" name="WinHealthCrit">
+	<Description>CPU, Memory, Disk space or interface critical</Description>
+	<SingleEvtConstr>eventType IN ("PH_RULE_SERVER_CPU_CRIT","PH_RULE_SERVER_MEM_CRIT","PH_RULE_SERVER_DISK_SPACE_CRIT", "PH_RULE_SERVER_INTF_UTIL_CRIT","PH_RULE_SERVER_INTF_ERR_CRIT") AND hostIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER) </SingleEvtConstr>
+        <GroupByAttr>hostIpAddr, hostName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>    
+
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,reptDevIpAddr,hostIpAddr,hostName,rawEventMsg </AttrList>
+    </TriggerEventDisplay> 
+  </Rule>
+
+  <!-- ******************************************************* -->
+  <Rule group="PH_SYS_RULE_Perf_Server" id="PH_Rule_Perf_24" phIncidentCategory="Server">
+    <Name>Unix Server Health: Critical</Name>
+    <active>false</active>
+    <Description>Detects that the health of a unix server is critical and needs immediate attention based average CPU, memory, disk and interface utilization and interface errors - at least one of the measured attributes has crossed the specified HIGH threshold </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+
+    <IncidentDef eventType="PH_RULE_HEALTH_UNIX_SERVER_CRITICAL" severity="9">
+      <ArgList>
+        hostIpAddr = UnixHealthCrit.hostIpAddr, hostName = UnixHealthCrit.hostName
+      </ArgList>
+    </IncidentDef>
+    
+    <PatternClause window="540">
+      <SubPattern displayName="UnixHealthCrit" name="UnixHealthCrit">
+	<Description></Description>
+	<SingleEvtConstr>eventType IN ("PH_RULE_SERVER_CPU_CRIT","PH_RULE_SERVER_MEM_CRIT","PH_RULE_SERVER_DISK_SPACE_CRIT", "PH_RULE_SERVER_INTF_UTIL_CRIT","PH_RULE_SERVER_INTF_ERR_CRIT") AND hostIpAddr IN (Group@PH_SYS_DEVICE_UNIX_SERVER) </SingleEvtConstr>
+        <GroupByAttr>hostIpAddr, hostName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>    
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,reptDevIpAddr,hostIpAddr,cpuUtil,memUtil,diskUtil,freeDiskMB,diskIOUtil,intfName,inIntfUtil,outIntfUtil,inIntfPktErrPct,outIntfPktErrPct,reptDevIpAddr,rawEventMsg </AttrList>
+    </TriggerEventDisplay> 
+  </Rule>
+
+  <!-- ***************************************************** -->
+  <Rule group="PH_SYS_RULE_Perf_Network" id="PH_Rule_Perf_28" phIncidentCategory="Network">
+    <Name>Network Device Health: Warning</Name>
+    <active>false</active>
+    <Description>Detects that the health of a network device need to be watched carefully based average CPU, memory and interface utilization and interface errors- at least one of the measured attributes has crossed the specified LOW threshold but has not yet crossed the specified HIGH threshold </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_HEALTH_NET_DEV_WATCH" severity="5">
+      <ArgList>
+        hostIpAddr = NetHealthWarn.hostIpAddr, hostName = NetHealthWarn.hostName
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="540">
+      <SubPattern displayName="NetHealthWarn" name="NetHealthWarn">
+	<Description>CPU, memory, interface util/error warning</Description>
+	<SingleEvtConstr>eventType IN ("PH_RULE_NET_CPU_WARN","PH_RULE_NET_MEM_WARN", "PH_RULE_NET_INTF_UTIL_WARN","PH_RULE_NET_INTF_ERR_WARN") AND hostIpAddr IN (Group@PH_SYS_DEVICE_Network) </SingleEvtConstr>
+        <GroupByAttr>hostIpAddr,hostName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>    
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,hostIpAddr,hostName,rawEventMsg </AttrList>
+    </TriggerEventDisplay> 
+  </Rule>
+
+  <!-- ***************************************************** -->
+  <Rule group="PH_SYS_RULE_Perf_Server" id="PH_Rule_Perf_29" phIncidentCategory="Server">
+    <Name>Windows Server Health: Warning</Name>
+    <active>false</active>
+    <Description>Detects that the health of a windows server need to be watched carefully based average CPU, memory, disk and interface utilization and interface errors- at least one of the measured attributes has crossed the specified LOW threshold but has not yet crossed the specified HIGH threshold </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+
+    <IncidentDef eventType="PH_RULE_HEALTH_WIN_SERVER_WATCH" severity="5" phEventCategory="1">
+      <ArgList>
+        hostIpAddr = WinHealthWarn.hostIpAddr, hostName = WinHealthWarn.hostName
+      </ArgList>
+    </IncidentDef>
+
+    <PatternClause window="540">
+      <SubPattern displayName="WinHealthWarn" name="WinHealthWarn">
+	<Description></Description>
+	<SingleEvtConstr>eventType IN ("PH_RULE_SERVER_CPU_WARN","PH_RULE_SERVER_MEM_WARN","PH_RULE_SERVER_DISK_SPACE_WARN", "PH_RULE_SERVER_INTF_UTIL_WARN","PH_RULE_SERVER_INTF_ERR_WARN") AND hostIpAddr IN (Group@PH_SYS_DEVICE_WINDOWS_SERVER) </SingleEvtConstr>
+        <GroupByAttr>hostIpAddr,hostName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>    
+    
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,reptDevIpAddr,hostIpAddr,cpuUtil,memUtil,diskUtil,diskIOUtil,intfName,inIntfUtil,outIntfUtil,inIntfPktErrPct,outIntfPktErrPct,reptDevIpAddr,rawEventMsg </AttrList>
+    </TriggerEventDisplay> 
+  </Rule>
+
+  <!-- ***************************************************** -->
+  <Rule group="PH_SYS_RULE_Perf_Server" id="PH_Rule_Perf_30" phIncidentCategory="Server">
+    <Name>Unix Server Health: Warning </Name>
+    <active>false</active>
+    <Description>Detects that the health of a unix server need to be watched carefully based average CPU, memory, disk and interface utilization and interface errors- at least one of the measured attributes has crossed the specified LOW threshold but has not yet crossed the specified HIGH threshold </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+
+    <IncidentDef eventType="PH_RULE_HEALTH_UNIX_SERVER_WATCH" severity="5" phEventCategory="1">
+      <ArgList>
+        hostIpAddr = UnixHealthWarn.hostIpAddr, hostName = UnixHealthWarn.hostName
+      </ArgList>
+    </IncidentDef>
+
+    <PatternClause window="540">
+      <SubPattern displayName="UnixHealthWarn" name="UnixHealthWarn">
+	<Description></Description>
+	<SingleEvtConstr>eventType IN ("PH_RULE_SERVER_CPU_WARN","PH_RULE_SERVER_MEM_WARN","PH_RULE_SERVER_DISK_SPACE_WARN", "PH_RULE_SERVER_INTF_UTIL_WARN","PH_RULE_SERVER_INTF_ERR_WARN") AND hostIpAddr IN (Group@PH_SYS_DEVICE_UNIX_SERVER) </SingleEvtConstr>
+        <GroupByAttr>hostIpAddr,hostName</GroupByAttr>
+      </SubPattern>
+    </PatternClause>    
+
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,hostIpAddr,hostName, rawEventMsg </AttrList>
+    </TriggerEventDisplay> 
+  </Rule>
+
+  <!-- ***************************************************** -->
+  <Rule group="PH_SYS_RULE_Perf_Network" id="PH_Rule_Perf_31" phIncidentCategory="Network">
+    <Name>High Process CPU: Network Device</Name>
+    <active>true</active>
+    <Description>Detects high CPU usage by an application on the basis of 3 consecutive measurements in a 15 minute period </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_HIGH_CPU_APPL_NET_DEV" severity="8">
+      <ArgList>
+        hostIpAddr = NetProcCPUHigh.hostIpAddr, appName = NetProcCPUHigh.appName, cpuUtil = NetProcCPUHigh.AVG(cpuUtil)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="900">
+       <SubPattern displayName="NetProcCPUHigh" name="NetProcCPUHigh">
+	 <SingleEvtConstr>eventType = "PH_DEV_MON_PROC_RESOURCE_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Network) </SingleEvtConstr>
+         <GroupEvtConstr> AVG(cpuUtil) &gt;= 85 AND COUNT(*) &gt;= 3 </GroupEvtConstr>
+         <GroupByAttr> hostIpAddr, appName </GroupByAttr>
+       </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,hostIpAddr,appName,cpuUtil,memUtil,reptDevIpAddr,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "timebased">
+      <QuietPeriod>1200</QuietPeriod>
+    </ClearCondition>
+  </Rule>
+
+  <!-- ***************************************************** -->
+  <Rule group="PH_SYS_RULE_Perf_Network" id="PH_Rule_Perf_32" phIncidentCategory="Network">
+    <Name>High Process Memory: Network Device</Name>
+    <active>true</active>
+    <Description>Detects high memory usage by an application on the basis of 3 consecutive measurements in a 15 minute period </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_HIGH_MEM_APPL_NET_DEV" severity="8">
+      <ArgList>
+        hostIpAddr = NetProcMemHigh.hostIpAddr, appName = NetProcMemHigh.appName, memUtil = NetProcMemHigh.AVG(memUtil)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="900">
+       <SubPattern displayName="NetProcMemHigh" name="NetProcMemHigh">
+	 <SingleEvtConstr>eventType = "PH_DEV_MON_PROC_RESOURCE_UTIL" AND hostIpAddr IN (Group@PH_SYS_DEVICE_Network) </SingleEvtConstr>
+         <GroupEvtConstr> AVG(memUtil) &gt;= 80 AND COUNT(*) &gt;= 3 </GroupEvtConstr>
+         <GroupByAttr>hostIpAddr, appName </GroupByAttr>
+       </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,hostIpAddr,appName,cpuUtil,memUtil,reptDevIpAddr,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+    <ClearCondition method="Auto" type = "timebased">
+      <QuietPeriod>1200</QuietPeriod>
+    </ClearCondition>
+  </Rule>
+
+  <!-- ***************************************************** -->
+  <Rule group="PH_SYS_RULE_Perf_Server" id="PH_Rule_Perf_43" phIncidentCategory="Virtualization">
+    <Name>Virtual Machine Health: Warning </Name>
+    <active>false</active>
+    <Description>Detects that the health of a virtual machine need to be watched carefully based on specific VM metrics such as CPU ready percent, memory swapping rates and disk I/O activity- at least one of the measured attributes has crossed the specified LOW threshold but has not yet crossed the specified HIGH threshold </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+
+    <IncidentDef eventType="PH_RULE_HEALTH_VM_WATCH" severity="5">
+      <ArgList>
+        hostIpAddr = VMHealthWarn.hostIpAddr,hostName = VMHealthWarn.hostName,phyMachIpAddr = VMHealthWarn.phyMachIpAddr,phyMachName = VMHealthWarn.phyMachName
+      </ArgList>
+    </IncidentDef>
+
+    <PatternClause window="540">
+       <SubPattern displayName="VMHealthWarn" name="VMHealthWarn">
+	 <Description>VM CPU, memory or disk I/O issue </Description>
+	 <SingleEvtConstr>eventType IN ("PH_RULE_VM_CPU_WARN", "PH_RULE_VM_MEM_WARN", "PH_RULE_VM_DISKIO_WARN")  </SingleEvtConstr>
+         <GroupByAttr>hostName,hostIpAddr,phyMachIpAddr,phyMachName</GroupByAttr>
+       </SubPattern>
+    </PatternClause>    
+
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,hostName,hostIpAddr,phyMachIpAddr,phyMachName,rawEventMsg </AttrList>
+    </TriggerEventDisplay> 
+  </Rule>
+
+  <!-- ***************************************************** -->
+  <Rule group="PH_SYS_RULE_Perf_Server" id="PH_Rule_Perf_44" phIncidentCategory="Virtualization">
+    <Name>Virtual Machine Health: Critical </Name>
+    <active>false</active>
+    <Description>Detects that the health of a virtual machine is critical based on specific VM metrics such as CPU ready percent, memory swapping rates and disk I/O activity- at least one of the measured attributes has crossed the specified HIGH threshold </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+
+    <IncidentDef eventType="PH_RULE_HEALTH_VM_CRITICAL" severity="9">
+      <ArgList>
+        hostIpAddr = VMHealthCrit.hostIpAddr,hostName = VMHealthCrit.hostName,phyMachIpAddr = VMHealthCrit.phyMachIpAddr,phyMachName = VMHealthCrit.phyMachName
+      </ArgList>
+    </IncidentDef>
+
+    <PatternClause window="540">
+       <SubPattern displayName="VMHealthCrit" name="VMHealthCrit">
+	 <Description>VM CPU, memory or disk I/O issue </Description>
+	 <SingleEvtConstr>eventType IN ("PH_RULE_VM_CPU_CRIT", "PH_RULE_VM_MEM_CRIT", "PH_RULE_VM_DISKIO_CRIT")  </SingleEvtConstr>
+         <GroupByAttr>hostName,hostIpAddr,phyMachIpAddr,phyMachName</GroupByAttr>
+       </SubPattern>
+    </PatternClause>    
+
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,hostName,hostIpAddr,phyMachIpAddr,phyMachName,rawEventMsg </AttrList>
+    </TriggerEventDisplay> 
+  </Rule>
+
+  <!-- *************************************************************************** -->
+  <Rule group="PH_SYS_RULE_Perf_Server" id="PH_Rule_Perf_47" phIncidentCategory="Virtualization">
+    <Name>ESX Server Health: Warning </Name>
+    <active>false</active>
+    <Description>Detects that the health of an ESX server is to be watched carefully since either the performance of one of the component VMs has entered a watched state or the ESX server itself is showing high resource utilization at the aggregate level.</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+
+    <IncidentDef eventType="PH_RULE_HEALTH_ESX_WATCH" severity="7">
+      <ArgList>
+        hostIpAddr = VMHealthWatch.hostIpAddr, hostName = VMHealthWatch.hostName
+      </ArgList>
+    </IncidentDef>
+    
+    <PatternClause window="600">
+      <SubPattern displayName="VMHealthWatch" name="VMHealthWatch">
+	<Description> </Description>
+	<SingleEvtConstr>eventType IN ("PH_RULE_ESX_CPU_WARN","PH_RULE_ESX_MEM_WARN","PH_RULE_ESX_DISKIO_WARN", "PH_RULE_ESX_INTF_WARN")  </SingleEvtConstr>
+        <GroupByAttr>hostName,hostIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause>    
+
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,hostIpAddr,hostName,rawEventMsg </AttrList>
+    </TriggerEventDisplay> 
+  </Rule>
+
+
+  <!-- *************************************************************************** -->
+  <Rule group="PH_SYS_RULE_Perf_Server" id="PH_Rule_Perf_48" phIncidentCategory="Virtualization">
+    <Name>ESX Server Health: Critical </Name>
+    <active>false</active>
+    <Description>Detects that the health of an ESX server is critical since either the performance of one of the component VMs is in critical state or the ESX server itself is showing critical resource utilization at the aggregate level.</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+
+    <IncidentDef eventType="PH_RULE_HEALTH_ESX_CRITICAL" severity="9">
+      <ArgList>
+        hostName = VMHealthWatch.hostName,hostIpAddr = VMHealthWatch.hostIpAddr
+      </ArgList>
+    </IncidentDef>
+
+    <PatternClause window="600">
+      <SubPattern displayName="VMHealthWatch" name="VMHealthWatch">
+	<Description> </Description>
+	<SingleEvtConstr>eventType IN ("PH_RULE_ESX_CPU_CRIT","PH_RULE_ESX_MEM_CRIT","PH_RULE_ESX_DISKIO_CRIT", "PH_RULE_ESX_INTF_CRIT")  </SingleEvtConstr>
+        <GroupByAttr>hostName,hostIpAddr</GroupByAttr>
+      </SubPattern>
+    </PatternClause> 
+
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,reptDevIpAddr,hostIpAddr,hostName,rawEventMsg </AttrList>
+    </TriggerEventDisplay> 
+  </Rule>
+
+</Rules>

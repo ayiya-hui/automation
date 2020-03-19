@@ -1,0 +1,31 @@
+[reptDevIpAddr(key)]
+10.1.2.65
+[eventMsg]
+<13>Feb 3 06:29:39 $reporter MSWinEventLog	1	Security	5883084	Wed Feb 03 06:29:33 2016	4776	Microsoft-Windows-Security-Auditing	N/A	N/A	Information	DC3.copera.org	None	The computer attempted to validate the credentials for an account. Authentication Package: MICROSOFT_AUTHENTICATION_PACKAGE_V1_0 Logon Account: $discovery	Source Workstation: AO	Error Code: 0x0	5875524
+[params]
+deviceTime=any
+parserName=WinOSParser
+eventType=Win-Security-4776
+destIpAddr=$reporter
+computer=AO
+eventSource=Microsoft-Windows-Security-Auditing
+reptModel=Windows
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=The domain controller attempted to validate the credentials for an account
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+eventRuleTrigger=1
+type=Information
+count=1
+seqNum=5883084
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$reporter
+user=$discovery
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$reporter
+reptVendor=Microsoft
+winLogonFailCode2=0x0

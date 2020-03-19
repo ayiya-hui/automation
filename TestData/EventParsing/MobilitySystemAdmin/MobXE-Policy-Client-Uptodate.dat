@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+1.1.1.1
+[eventMsg]
+<134>Sep 27 05:31:25 1.1.1.1 nmservic.exe[1016]: Policy: Policy (SPUDWWCREW), NAC (None) on Client is up-to-date, it will not be downloaded - user: (SPU\ELLISD) device: (01C8D87CB1F371880015C5EA691F00F).
+[params]
+rawEventMsg=any
+domain=SPU
+deviceTime=any
+eventType=MobXE-Policy-Client-Uptodate
+phCustId=$sender
+hostName=any
+procName=nmservic.exe
+reptModel=Mobility XE
+eventId=any
+policyName=SPUDWWCREW
+eventParsedOk=1
+eventSeverity=1
+eventName=Mobility XE Client NAC policy uptodate
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+collectorId=any
+user=ELLISD
+reptDevName=any
+count=1
+phRecvTime=any
+reptDevIpAddr=1.1.1.1
+reptVendor=NetMotion

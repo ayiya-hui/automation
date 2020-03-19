@@ -1,0 +1,44 @@
+[reptDevIpAddr(key)]
+87.87.87.87
+[eventMsg]
+<14>Nov 10 14:22:59 RT_FLOW: RT_FLOW_SESSION_CLOSE: session closed TCP FIN: 172.16.5.120/64140->172.20.20.10/135 junos-ms-rpc-tcp 172.16.5.120/64140->172.20.20.10/135 None None 6 domain-membership__dnc-client__server dnc-client trust 20138595 8(828) 6(792) 16 UNKNOWN UNKNOWN N/A(N/A) reth3.5 UNKNOWN
+[params]
+rawEventMsg=any
+deviceTime=any
+eventType=JUNOS_RT_FLOW_SESSION_CLOSE
+phCustId=$sender
+destIpAddr=172.20.20.10
+totBytes=1620
+destIpPort=135 (MSRPC)
+preNATDestIpAddr=172.20.20.10
+srcIpAddr=172.16.5.120
+reptModel=JunOS
+eventId=any
+policyName=domain-membership__dnc-client__server
+ipConnId=20138595
+eventParsedOk=1
+eventSeverity=1
+sentPkts=6
+eventName=A security session was closed
+serviceName=junos-ms-rpc-tcp
+phEventCategory=0 (External)
+srcFwZone=dnc-client
+recvBytes=828
+srcIpPort=64140
+preNATDestIpPort=135 (MSRPC)
+eventSeverityCat=LOW
+collectorId=any
+totPkts=14
+postNATSrcIpAddr=172.16.5.120
+ipProto=6 (TCP)
+destFwZone=trust
+postNATSrcIpPort=64140
+reptDevName=any
+count=1
+phRecvTime=any
+reptDevIpAddr=87.87.87.87
+recvPkts=8
+eventAction=0 (Permit)
+reptVendor=Juniper
+durationMSec=16
+sentBytes=792

@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+CryptoAuditor-Connection_received,CryptoAuditor_1,CryptoAuditor,$localhost,,syslog

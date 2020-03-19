@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<22>Feb 15 16:29:23 IronPort-Mail: Info: MID 1750789 SPF: mailfrom identity Q73JZ8-2G50X-EHONX-9MNUAG-RG1TUC-H-M2-20130215-646e92704e03d408e@aairlines.bounce.ed10.net Fail (v=spf1)
+[params]
+deviceTime=any
+parserName=IronportMailParser
+eventType=Cisco-IronPort-Mail-SPF-MailfromFail
+reptModel=IronPort AsyncOS Mail
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Cisco-IronPort-Mail-SPF-MailfromFail
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+customer=Super
+senderMailAddr=Q73JZ8-2G50X-EHONX-9MNUAG-RG1TUC-H-M2-20130215-646e92704e03d408e@aairlines.bounce.ed10.net
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Cisco
+ironportMailMID=1750789

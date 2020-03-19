@@ -1,0 +1,37 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>[2016-04-26 16:10:11] EFW: ALG: prio=1 id=00200001 rev=1 event=alg_session_open algmod=ftp algsesid=95238 connipproto=TCP connrecvif=If1 connsrcip=52.1.157.217 connsrcport=59576 conndestif=core conndestip=208.68.133.205 conndestport=21 origsent=100 termsent=44
+[params]
+deviceTime=any
+destGeoOrg=any
+parserName=ClavisterParser
+eventType=Clavister-alg-session-open
+destGeoState=any
+destIpAddr=208.68.133.205
+srcName=any
+ipProto=6 (TCP)
+destGeoCountry=any
+srcIpAddr=52.1.157.217
+reptModel=cOS Firewall
+eventId=any
+logID=200001
+eventParsedOk=1
+eventSeverity=1
+eventName=Clavister-alg-session-open
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+srcIpPort=59576
+eventSeverityCat=LOW
+collectorId=any
+destIntfName=core
+relayDevIpAddr=$localhost
+rawEventMsg=any
+destIpPort=21 (FTP)
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Clavister
+destGeoCity=any

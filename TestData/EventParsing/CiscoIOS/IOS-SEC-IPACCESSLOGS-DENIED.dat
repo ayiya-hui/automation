@@ -1,0 +1,22 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<190>Apr 26 07:51:34.540 EDT: %SEC-6-IPACCESSLOGS: list 110 denied 110.120.59.83 1 packet
+[params]
+rawEventMsg=any
+deviceTime=any
+eventType=IOS-SEC-IPACCESSLOGS-DENIED
+phCustId=$sender
+reptModel=IOS
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+hostIpAddr=$localhost
+phEventCategory=4 (Traffic)
+eventSeverityCat=LOW
+collectorId=any
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=1 (Deny)
+reptVendor=Cisco

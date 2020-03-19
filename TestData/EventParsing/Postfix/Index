@@ -1,0 +1,10 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+Postfix-Daemon-Started,Postfix_1,Postfix,$localhost,,syslog
+Postfix-Mail-Reject,Postfix_2,Postfix,$localhost,,syslog
+Postfix-Mail-Start,Postfix_3,Postfix,$localhost,,syslog
+Postfix-Mail-Stop,Postfix_4,Postfix,$localhost,,syslog
+Postfix-Connect-From,Postfix_5,Postfix,$localhost,,syslog
+Postfix-Disconnect-From,Postfix_6,Postfix,$localhost,,syslog
+Postfix-Mail-Accept-Stat,Postfix_7,Postfix,$localhost,,syslog
+Postfix-Generic,Postfix_8,Postfix,$localhost,,syslog

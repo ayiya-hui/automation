@@ -1,0 +1,31 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+"[21/Feb/2012:11:44:19  -0500]  """"""""""""    ""10.200.11.170 200 """"GET http://www.cnn.com/ HTTP/1.1"""" """"General News"""" """"Minimal Risk"""" """"text/html"""" 101527 """""""" """""""" """"57""""""
+[params]
+rawEventMsg=any
+deviceTime=any
+eventType=McAfee-WebGw-Blocked-ExcessDomain
+phCustId=$sender
+srcIpAddr=10.200.11.170
+reptModel=WebGateway
+eventId=any
+eventParsedOk=1
+eventSeverity=9
+testEvent=Real Event(0)
+eventName=Web traffic blocked due to excessive domains in email
+phEventCategory=0 (External)
+webCategory=General News
+eventSeverityCat=HIGH
+collectorId=any
+httpMethod=GET
+httpStatusCode=200 (The request has succeeded)
+reptDevName=any
+httpVersion=HTTP/1.1
+count=1
+uriStem=http://www.cnn.com/
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=McAfee
+httpContentType=text/html
+sentBytes=101527

@@ -1,0 +1,2 @@
+eventType,name,module,reptDevIpAddr,key,method
+PH_DEV_MON_PERF_ORADB,OracleDB_1,OracleDB,70.70.70.3,,syslog

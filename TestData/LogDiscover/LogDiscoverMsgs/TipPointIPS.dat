@@ -1,0 +1,2 @@
+[eventMsg]
+<6>OCT 28 13:10:46 2009  PH-QA-TIP1 [sys] Invalid SESSIONID for 192.168.1.20.  Could be logon attempt(OK - should not be followed by same message) or attempt to spoof connection(BAD - watch for multiples).

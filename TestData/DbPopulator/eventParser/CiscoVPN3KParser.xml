@@ -1,0 +1,272 @@
+<eventParser name="CiscoVPN3KParser">
+  <deviceType>
+    <Vendor>Cisco</Vendor>
+    <Model>VPN 3K</Model>
+    <Version>ANY</Version>
+  </deviceType>
+    
+  <!-- pattern definitions -->
+  <patternDefinitions>
+    <pattern name="patSev"><![CDATA[SEV=\d+]]></pattern>
+    <pattern name="patRPT"><![CDATA[RPT=\d+]]></pattern>
+    <pattern name="patQueryNum"><![CDATA[#\d+:]]></pattern>
+    <pattern name="patStrComma"><![CDATA[[^,]*]]></pattern>
+    <pattern name="patStrSingleQuote"><![CDATA[[^']*]]></pattern>
+    <pattern name="patStrDoubleQuote"><![CDATA[[^"]*]]></pattern>
+  </patternDefinitions>
+  
+  <eventFormatRecognizer><![CDATA[<:patSev> <_type:gPatStr> <:patRPT>]]></eventFormatRecognizer>
+  
+  <testEvents>
+      <testEvent><![CDATA[<189>18174 01/07/1999 20:25:27.210 SEV=5 AUTH/31 RPT=14  User [ admin ] Protocol [ Telnet ] attempted ADMIN logon. Status: <REFUSED> authentication failure]]></testEvent>
+  </testEvents>
+
+  <parsingInstructions>
+    <!-- parsing common fields
+	<189>1697 01/07/1999 01:05:26.750 SEV=5 AUTH/36 RPT=8 192.168.0.10  User [ admin ] Protocol [ HTTP ] attempted ADMIN logon. Status: <ACCESS GRANTED> 
+         -->
+
+    <!-- header -->
+    <switch>
+      <case>
+        <collectFieldsByRegex src="$_rawmsg">
+          <regex><![CDATA[<:gPatSyslogPRI><:gPatInt> <_mon:gPatMonNum>/<_day:gPatDay>/<_year:gPatYear> <_time:gPatTime>\.<:gPatMSec> SEV=<_severity:gPatInt> <_type:gPatStr> <:patRPT>\s+<_body:gPatMesgBody>]]></regex>
+        </collectFieldsByRegex>        
+      </case>
+      <case>
+        <collectFieldsByRegex src="$_rawmsg">
+          <regex><![CDATA[<:gPatSyslogPRI><_NGHeader:gPatSyslogNGHeader> <:gPatInt> <_mon:gPatMonNum>/<_day:gPatDay>/<_year:gPatYear> <_time:gPatTime>\.<:gPatMSec> SEV=<_severity:gPatInt> <_type:gPatStr> <:patRPT>\s+<_body:gPatMesgBody>]]></regex>
+        </collectFieldsByRegex>
+        <!--collectFieldsByRegex src="$_NGHeader">
+          <regex><![CDATA[<:gPatMon>\s+<:gPatDay>\s<:gPatTime>\s<reptDevIpAddr:gPatIpV4Dot>]]></regex>
+        </collectFieldsByRegex-->
+      </case>
+    </switch>
+
+    <setEventAttribute attr="eventType">combineMsgId("Cisco", "-", "VPN3K", "-", $_type)</setEventAttribute>
+    <setEventAttribute attr="deviceTime">toDateTime($_mon, $_day, $_year, $_time)</setEventAttribute>
+    <setEventAttribute attr="eventAction">0</setEventAttribute>
+    <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+
+
+    <!-- event severity -->
+    <choose>
+      <when test='$_severity = "1"'>
+        <setEventAttribute attr="eventSeverity">10</setEventAttribute>
+      </when>
+
+      <when test='$_severity = "2"'>
+        <setEventAttribute attr="eventSeverity">9</setEventAttribute>
+      </when>
+
+      <when test='$_severity = "3"'>
+        <setEventAttribute attr="eventSeverity">5</setEventAttribute>
+      </when>
+
+      <when test='$_severity IN "4, 5"'>
+        <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+      </when>
+    </choose>
+
+    <choose>
+
+      <!-- message specific parsing
+           SUCCESSFUL ADMIN LOGIN VIA HTTP
+           <189>1697 01/07/1999 01:05:26.750 SEV=5 AUTH/36 RPT=8 192.168.0.10  User [ admin ] Protocol [ HTTP ] attempted ADMIN logon. Status: <ACCESS GRANTED> 
+               -->
+
+      <when test='$_type = "AUTH/36"'>
+	<collectAndSetAttrByRegex src="$_body">
+	  <regex><![CDATA[<srcIpAddr:gPatIpV4Dot>  User \[ <user:gPatStr> \] Protocol \[ <_accessProto:gPatStr> \] attempted ADMIN logon. <:gPatMesgBody>]]></regex>
+	</collectAndSetAttrByRegex>
+      <setEventAttribute attr="eventSeverity">4</setEventAttribute>
+      </when>
+      
+
+      <!-- message specific parsing
+           FAILED ADMIN LOGON VIA SSH - part 2 ~~ part 1 for SSH is AUTH/31 - this has src ip as addnl info
+           
+           <188>1763 02/29/2008 18:55:17.030 SEV=3 SSH/33 RPT=1 192.168.20.45  Login Failure for 'partha' (try1)
+             -->
+      
+      <when test='$_type = "SSH/33"'>
+	<collectAndSetAttrByRegex src="$_body">
+	  <regex><![CDATA[<srcIpAddr:gPatIpV4Dot>  Login Failure for '<user:patStrSingleQuote>' <:gPatMesgBody>]]></regex>
+	</collectAndSetAttrByRegex>
+        <setEventAttribute attr="eventAction">1</setEventAttribute>
+        <setEventAttribute attr="eventSeverity">6</setEventAttribute>
+	<setEventAttribute attr="destIpAddr">$reptDevIpAddr</setEventAttribute>
+      </when>
+
+      <!-- message specific parsing
+           
+           FAILED ADMIN LOGON VIA HTTP - part 2 (has src ip as addl info)
+
+         <188>1696 01/07/1999 01:04:41.830 SEV=3 HTTP/7 RPT=10 192.168.0.10  HTTP 401 Unauthorized: Authorization Failed
+        -->
+      
+      <when test='$_type = "HTTP/7"'>
+	<collectAndSetAttrByRegex src="$_body">
+	  <regex><![CDATA[<srcIpAddr:gPatIpV4Dot>  HTTP 401 Unauthorized: <:gPatMesgBody>]]></regex>
+	</collectAndSetAttrByRegex>
+        <setEventAttribute attr="eventAction">1</setEventAttribute>
+	<setEventAttribute attr="eventSeverity">6</setEventAttribute>
+	<setEventAttribute attr="destIpAddr">$reptDevIpAddr</setEventAttribute>
+      </when>
+      
+
+      <!-- message specific parsing
+             
+         FAILED ADMIN LOGON VIA TELNET - part 2 \-\- part 1 for TELNET is AUTH/31 - this has src ip as addnl info
+
+         <188>1784 02/29/2008 19:00:11.290 SEV=3 PSH/23 RPT=1 192.168.20.45  PSH - Telnet user "partha" failed login
+        -->
+
+      <when test='$_type = "PSH/23"'>
+	<collectAndSetAttrByRegex src="$_body">
+	  <regex><![CDATA[<srcIpAddr:gPatIpV4Dot>  PSH - Telnet user "<user:patStrDoubleQuote>" <:gPatMesgBody>]]></regex>
+	</collectAndSetAttrByRegex>
+        <setEventAttribute attr="eventAction">1</setEventAttribute>
+        <setEventAttribute attr="eventSeverity">6</setEventAttribute>
+        <setEventAttribute attr="destIpAddr">$reptDevIpAddr</setEventAttribute>
+      </when>   
+      
+      <!-- message specific parsing
+
+           
+           FAILED ADMIN LOGON VIA HTTP/SSH - part 1
+           
+           <189>1694 01/07/1999 01:04:41.830 SEV=5 AUTH/31 RPT=3  User [ admin ] Protocol [ HTTP ] attempted ADMIN logon. Status: <REFUSED> authentication failure
+               
+               <189>1782 02/29/2008 19:00:11.280 SEV=5 AUTH/31 RPT=10  User [ partha ] Protocol [ Telnet ] attempted ADMIN logon. Status: <REFUSED> authentication  failure
+                   
+         <189>1764 02/29/2008 18:55:26.620 SEV=5 AUTH/31 RPT=5  User [ partha ] Protocol [ SSH ] attempted ADMIN logon. Status: <REFUSED> authentication failure
+             -->
+      
+      <when test='$_type = "AUTH/31"'>
+        
+	<collectAndSetAttrByRegex src="$_body">
+	  <regex><![CDATA[User \[ <user:gPatStr> \] Protocol \[ <_accessProto:gPatWord> \] <:gPatMesgBody>]]></regex>
+	</collectAndSetAttrByRegex>
+        
+        <setEventAttribute attr="eventAction">1</setEventAttribute>
+        <setEventAttribute attr="eventSeverity">6</setEventAttribute>
+        <setEventAttribute attr="destIpAddr">$reptDevIpAddr</setEventAttribute>
+
+        <!--
+            AUTH/31 does not have src ip but related events SSH/33, HTTP/7, PSH/23 does - so pick src ip info from those events -->
+          <when test='exist _accessProto'>
+		<choose>
+		  <when test = '$_accessProto = "SSH"'>
+		    <collectAndSetAttrFromAnotherEvent AnotherEventType = "Cisco-VPN3K-SSH/33" >
+		      <when test = '$user = $AnotherEvent.user'>
+			<when test = 'withinTimeSec = 60'>
+			  <setEventAttribute attr="srcIpAddr">$AnotherEvent.srcIpAddr</setEventAttribute>
+			</when>
+		      </when>
+		    </collectAndSetAttrFromAnotherEvent>
+		  </when>	
+		  
+		  <when test = '$_accessProto = "HTTP"'>
+		    <collectAndSetAttrFromAnotherEvent AnotherEventType = "Cisco-VPN3K-HTTP/7" >
+		      <when test = '$deviceTime = $AnotherEvent.deviceTime'>             
+			<when test = 'withinTimeSec = 5'>
+			  <setEventAttribute attr="srcIpAddr">$AnotherEvent.srcIpAddr</setEventAttribute>
+			</when>
+		      </when>                  
+		    </collectAndSetAttrFromAnotherEvent>
+		  </when>	
+		  
+		  <when test = '$_accessProto = "TELNET"'>
+		    <collectAndSetAttrFromAnotherEvent AnotherEventType = "Cisco-VPN3K-PSH/23" >
+		      <when test = '$user = $AnotherEvent.user'>
+			<when test = 'withinTimeSec = 60'>
+			  <setEventAttribute attr="srcIpAddr">$AnotherEvent.srcIpAddr</setEventAttribute>
+			</when>
+		      </when>
+		    </collectAndSetAttrFromAnotherEvent>
+		  </when>
+		</choose>
+	</when>
+      </when>
+      
+
+      
+      <!-- message specific parsing
+           
+           ADMIN LOGOFF
+           
+           <189>1700 01/07/1999 01:08:28.560 SEV=4 AUTH/29 RPT=8  Management user admin disconnected: duration 0:03:01
+             -->
+      
+      <when test='$_type = "AUTH/29"'>
+	<collectAndSetAttrByRegex src="$_body">
+	  <!--regex><![CDATA[Management user <user:gPatStr> disconnected: duration <_connDuration:gPatTime>]]></regex-->
+	  <regex><![CDATA[Management user <user:gPatStr> disconnected: duration <_connDuration:gPatTime>]]></regex>
+	</collectAndSetAttrByRegex>
+        <setEventAttribute attr="durationMSec">calculateMSec($_connDuration)</setEventAttribute>
+        <setEventAttribute attr="eventSeverity">4</setEventAttribute>
+	<setEventAttribute attr="destIpAddr">$reptDevIpAddr</setEventAttribute>
+      </when>
+      
+
+      <!-- message specific parsing
+             
+         SUCCESSFUL IPSEC VPN Logon 
+
+         <189>1646 01/06/1999 23:56:11.840 SEV=5 IKE/25 RPT=35 69.236.102.208  Group [HQ-Dev] User [automationUser] Received remote Proxy Host data in ID Payload:  Address 192.168.16.11, Protocol 0, Port 0
+        -->
+
+	<when test='$_type = "IKE/25"'>
+	  <collectAndSetAttrByRegex src="$_body">
+	    <regex><![CDATA[<preNATDestIpAddr:gPatIpV4Dot>  Group \[<userGrp:gPatStr>\] User \[<user:gPatStr>\] Received remote Proxy Host data in ID Payload:\s+Address <srcIpAddr:gPatIpV4Dot>, <:gPatMesgBody>]]></regex>
+	  </collectAndSetAttrByRegex>
+        <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+	</when>      
+        
+      <!-- message specific parsing
+             
+         SUCCESSFUL IPSEC VPN Logoff
+         
+         <189>1665 01/06/1999 23:56:49.490 SEV=4 AUTH/28 RPT=29 69.236.102.208  User [automationUser] Group [HQ-Dev] disconnected:  Session Type: IPSec/UDP  Duration:  0:00:37  Bytes xmt: 0  Bytes rcv: 5216  Reason: User Requested
+
+***   DEBUG HERE ?preNATSrcIpAddr to preNATDestSrcIpAddr
+        -->      
+
+      <when test='$_type = "AUTH/28"'>
+	<collectAndSetAttrByRegex src="$_body">
+	  <regex><![CDATA[<preNATDestIpAddr:gPatIpV4Dot>  User \[<user:gPatStr>\] Group \[<userGrp:gPatStr>\] disconnected:  Session Type: IPSec/UDP  Duration:\s+<_connDuration:gPatTime>  Bytes xmt: <_sentBytes:gPatInt>  Bytes rcv: <_recvBytes:gPatInt> <:gPatMesgBody>]]></regex>
+	</collectAndSetAttrByRegex>
+        
+        <setEventAttribute attr="durationMSec">calculateMSec($_connDuration)</setEventAttribute>
+        
+        <collectAndSetAttrFromAnotherEvent AnotherEventType = "Cisco-VPN3K-IKE/25">
+          <when test = '$preNATDestIpAddr = $AnotherEvent.preNATDestIpAddr'>
+            <setEventAttribute attr="srcIpAddr">$AnotherEvent.srcIpAddr</setEventAttribute>
+          </when>
+        </collectAndSetAttrFromAnotherEvent>
+        <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+        
+      </when>
+      
+      
+      <!-- message specific parsing
+           
+           FAILED IPSEC VPN Logon 
+           
+           <188>1711 01/07/1999 01:17:33.180 SEV=3 AUTH/5 RPT=14 99.129.50.157  Authentication rejected: Reason = Unspecified handle = 181, server = 192.168.0.10, user = partha, domain = <not specified>
+               -->
+      
+      <when test='$_type = "AUTH/5"'>
+	<collectAndSetAttrByRegex src="$_body">
+	  <regex><![CDATA[<srcIpAddr:gPatIpV4Dot>\s+Authentication rejected: Reason = Unspecified handle = \d+, server = <authServerIpAddr:gPatIpV4Dot>,\s+user = <user:patStrComma>, <:gPatMesgBody>]]></regex>
+	</collectAndSetAttrByRegex>
+        <setEventAttribute attr="eventAction">1</setEventAttribute>
+        <setEventAttribute attr="eventSeverity">3</setEventAttribute>
+      </when>
+    
+    </choose>
+
+  </parsingInstructions>
+</eventParser>
+

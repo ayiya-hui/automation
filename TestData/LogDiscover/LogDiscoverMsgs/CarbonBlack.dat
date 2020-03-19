@@ -1,0 +1,2 @@
+[eventMsg]
+2015-07-29 13:20:05 [3279] <warning>  reason=watchlist.hit type=module md5=9108540E866F75C7AF2B91DD921A8091 host='ADFS01-PC' sensor_id=2 watchlist_id=6 watchlist_name='Newly Loaded Modules' timestamp='1438190405.48' first_seen='2015-07-29T17:06:31.313Z' group=['Default Group'] desc='ApiSet Stub DLL' company_name='Microsoft Corporation' product_name='Microsoft® Windows® Operating System' product_version='6.2.9200.16492' file_version='6.2.9200.16492 (win8_gdr_oobssr.130113-0015)' signed='Signed'

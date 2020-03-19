@@ -1,0 +1,34 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<132>[2016-04-26 16:11:09] EFW: CONN: prio=3 id=00600012 rev=1 event=no_new_conn_for_this_packet action=reject protocol=tcp rule=LogOpenFails recvif=If3 srcip=192.168.99.13 destip=199.255.228.50 ipproto=TCP ipdatalen=63 srcport=43300 destport=443 tcphdrlen=32 ack=1 psh=1
+[params]
+deviceTime=any
+tcpLen=32
+parserName=ClavisterParser
+eventType=Clavister-no-new-conn-for-this-packet
+ipProto=6 (TCP)
+srcIpAddr=192.168.99.13
+reptModel=cOS Firewall
+eventId=any
+logID=600012
+eventParsedOk=1
+eventSeverity=4
+fwAction=reject
+eventName=Clavister-no-new-conn-for-this-packet
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+ipTotalLength=63
+count=1
+srcIpPort=43300
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+destIpPort=443 (HTTPS)
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Clavister
+fwRule=LogOpenFails

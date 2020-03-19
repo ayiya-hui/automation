@@ -1,0 +1,7 @@
+eventType,name,module,reptDevIpAddr,key,method
+Squid-Web-Request-Success,Squid_1,Squid,$localhost,,syslog
+Squid-Web-Request-Redirect,Squid_2,Squid,$localhost,,syslog
+Squid-Web-Request-Success,Squid_3,Squid,172.16.10.34,,syslog
+Squid-Web-Request-Redirect,Squid_4,Squid,172.16.10.34,,syslog
+Squid-Web-Bad-Request,Squid_5,Squid,$localhost,,syslog
+Squid-Web-Forbidden-Access-Denied,Squid_6,Squid,$localhost,,syslog

@@ -1,0 +1,1322 @@
+3COM-TSMUX,UDP/106,
+3DS-LM,"TCP/1538,UDP/1538",
+3L-L1,"TCP/1511,UDP/1511",
+3M-IMAGE-LM,"TCP/1550,UDP/1550",Image Storage license manager 3M Company
+914C-G,"TCP/211,UDP/211",Texas Instruments 914C/G Terminal
+9PFS,"TCP/564,UDP/564",plan 9 file service
+AAL-LM,"TCP/1469,UDP/1469",Active Analysis Limited License Manager
+ABBACCURAY,"TCP/1546,UDP/1546",
+ABOUT,UDP/2019,
+ABYSS,TCP/9999,Abyss web server remote web management interface
+ACAP,TCP/674,ACAP server of Communigate (www.stalker.com)
+ACAS,"TCP/62,UDP/62",ACA Services
+ACCESSBUILDER,"TCP/888,UDP/888",or Audio CD Database
+ACI,"TCP/187,UDP/187",Application Communication Interface
+ACMAINT_DBD,UDP/774,
+ACMAINT_TRANSD,UDP/775,
+ACMSODA,"TCP/6969,UDP/6969",BitTorrent tracker
+ACP,"TCP/599,UDP/599",Aeolon Core Protocol
+ACR-NEMA,"TCP/104,UDP/104",ACR-NEMA Digital Imag. & Comm. 300
+ACTIVESYNC,TCP/5679,Microsoft ActiveSync PDY synchronization
+ACTIVESYNC-NOTIFY,UDP/1034,Windows Mobile device ActiveSync Notifications
+ADAPT-SNA,"TCP/1365,UDP/1365",Network Software Associates
+ADMD,TCP/5100,(chili!soft asp admin port) or Yahoo pager
+ADMDOG,TCP/5101,(chili!soft asp)
+ADMENG,TCP/5102,(chili!soft asp)
+ADVOCENTKVM,TCP/2068,Advocent KVM Server
+AED-512,"TCP/149,UDP/149",AED 512 Emulation Service
+AF,"TCP/1411,UDP/1411",AudioFile
+AFP,"TCP/548,UDP/548",AFP over TCP
+AFS,"TCP/1483,UDP/1483",AFS License Manager
+AFS3-BOS,"TCP/7007,UDP/7007",basic overseer process
+AFS3-CALLBACK,"TCP/7001,UDP/7001",callbacks to cache managers
+AFS3-ERRORS,"TCP/7006,UDP/7006",error interpretation service
+AFS3-FILESERVER,"TCP/7000,UDP/7000","file server itself, msdos"
+AFS3-KASERVER,"TCP/7004,UDP/7004",AFS/Kerberos authentication service
+AFS3-PRSERVER,"TCP/7002,UDP/7002",users & groups database
+AFS3-RMTSYS,"TCP/7009,UDP/7009",remote cache manager service
+AFS3-UPDATE,"TCP/7008,UDP/7008",server-to-server updater
+AFS3-VLSERVER,"TCP/7003,UDP/7003",volume location database
+AFS3-VOLSER,"TCP/7005,UDP/7005",volume managment server
+AIRPORT-ADMIN,TCP/5009,Apple AirPort WAP Administration
+AIRS,"TCP/1481,UDP/1481",
+AJP12,TCP/8007,Apache JServ Protocol 1.x
+AJP13,TCP/8009,Apache JServ Protocol 1.3
+ALPES,"TCP/463,UDP/463",
+ALTA-ANA-LM,"TCP/1346,UDP/1346",Alta Analytics License Manager
+AMANDA,UDP/10080,Amanda Backup Util
+AMANDAIDX,TCP/10082,Amanda indexing
+AMIDXTAPE,TCP/10083,Amanda tape indexing
+AMPR-INFO,"TCP/1535,UDP/1535",
+AMPR-INTER,"TCP/1536,UDP/1536",
+AMPR-RCMD,"TCP/459,UDP/459",
+ANALOGX,TCP/6588,AnalogX HTTP proxy port
+ANET,"TCP/212,UDP/212",ATEXSSTR
+ANSANOTIFY,"TCP/116,UDP/116",ANSA REX Notify
+ANSATRADER,"TCP/124,UDP/124",ANSA REX Trader
+ANSOFT-LM-1,"TCP/1083,UDP/1083",Anasoft License Manager
+ANSOFT-LM-2,"TCP/1084,UDP/1084",Anasoft License Manager
+ANYNETGATEWAY,"TCP/1491,UDP/1491",
+AOL,"TCP/5190,UDP/5190",America-Online.  Also can be used by ICQ
+AOL-1,"TCP/5191,UDP/5191",AmericaOnline1
+AOL-2,"TCP/5192,UDP/5192",AmericaOnline2
+AOL-3,"TCP/5193,UDP/5193",AmericaOnline3
+APERTUS-LDP,"TCP/539,UDP/539",Apertus Technologies Load Determination
+APPLE-IMAP-ADMIN,TCP/626,Apple IMAP mail admin
+APPLE-IPHOTO,TCP/8770,Apple iPhoto sharing
+APPLE-LICMAN,"TCP/1381,UDP/1381",Apple Network License Manager
+APPLE-XSRVR-ADMIN,TCP/625,Apple Mac Xserver admin
+APPLEQTC,"TCP/458,UDP/458",apple quick time
+APPLEQTCSRVR,UDP/545,
+APPLIX,UDP/999,Applix ac
+APRI-LM,"TCP/1447,UDP/1447",Applied Parallel Research LM
+ARCISDMS,"TCP/262,UDP/262",
+ARCSERVE,TCP/6050,ARCserve agent
+ARIEL1,"TCP/419,UDP/419",
+ARIEL2,"TCP/421,UDP/421",
+ARIEL3,"TCP/422,UDP/422",
+ARNS,"TCP/384,UDP/384",A Remote Network Server System
+AS-SERVERMAP,"TCP/449,UDP/449",AS Server Mapper
+ASA,"TCP/386,UDP/386",ASA Message Router Object Def.
+ASA-APPL-PROTO,"TCP/502,UDP/502",
+ASIP-WEBADMIN,"TCP/311,UDP/311",appleshare ip webadmin
+ASPECLMD,"TCP/1544,UDP/1544",
+ASPENTEC-LM,"TCP/6142,UDP/6142",Aspen Technology License Manager
+AT-3,"TCP/203,UDP/203",AppleTalk Unused
+AT-5,"TCP/205,UDP/205",AppleTalk Unused
+AT-7,"TCP/207,UDP/207",AppleTalk Unused
+AT-8,"TCP/208,UDP/208",AppleTalk Unused
+AT-ECHO,"TCP/204,UDP/204",AppleTalk Echo
+AT-NBP,"TCP/202,UDP/202",AppleTalk Name Binding
+AT-RTMP,"TCP/201,UDP/201",AppleTalk Routing Maintenance
+AT-ZIS,"TCP/206,UDP/206",AppleTalk Zone Information
+ATEX_ELMD,"TCP/1385,UDP/1385",Atex Publishing License Manager
+ATLS,"TCP/216,UDP/216",Access Technology License Server
+ATM-ZIP-OFFICE,"TCP/1520,UDP/1520",atm zip office
+ATS,"TCP/2201,UDP/2201",Advanced Training System Program
+AUDIO-ACTIVMAIL,"TCP/1397,UDP/1397",Audio Active Mail
+AUDIONEWS,"TCP/114,UDP/114",Audio News Multicast
+AUDIT,"TCP/182,UDP/182",Unisys Audit SITP
+AUDITD,"TCP/48,UDP/48",Digital Audit Daemon
+AURORA-CMGR,"TCP/364,UDP/364",
+AURP,"TCP/387,UDP/387",Appletalk Update-Based Routing Pro.
+AUTH,"TCP/113,UDP/113","ident, tap, Authentication Service"
+AUTODESK-LM,"TCP/1422,UDP/1422",Autodesk License Manager
+AVIAN,UDP/486,
+AXON-LM,"TCP/1548,UDP/1548",Axon License Manager
+BACKORIFICE,UDP/31337,cDc Back Orifice remote admin tool
+BACKUPEXEC,TCP/6101,Backup Exec UNIX and 95/98/ME Aent
+BANYAN-RPC,"TCP/567,UDP/567",
+BANYAN-VIP,"TCP/573,UDP/573",
+BBN-MMC,"TCP/1347,UDP/1347",multi media conferencing
+BBN-MMX,"TCP/1348,UDP/1348",multi media conferencing
+BDP,"TCP/581,UDP/581",Bundle Discovery Protocol
+BFTP,"TCP/152,UDP/152",Background File Transfer Program
+BGMP,TCP/264,
+BGP,"TCP/179,UDP/179",Border Gateway Protocol
+BGPD,TCP/2605,BGPd vty
+BGS-NSI,TCP/482,
+BH611,"TCP/354,UDP/354",
+BHEVENT,"TCP/357,UDP/357",
+BHFHS,"TCP/248,UDP/248",
+BHMDS,"TCP/310,UDP/310",
+BIFF,UDP/512,comsat
+BIGBROTHER,TCP/1984,Big Brother monitoring server - www.bb4.com
+BIIMENU,"TCP/18000,UDP/18000","Beckman Instruments, Inc."
+BITTORRENT-TRACKER,TCP/6881,BitTorrent tracker
+BL-IDM,"TCP/142,UDP/142",Britton-Lee IDM
+BLACKBOARD,"TCP/2032,UDP/2032",
+BLACKICE-ALERTS,TCP/8082,BlackIce Alerts sent to this port
+BLACKICE-ICECAP,TCP/8081,ICECap user console
+BLACKJACK,UDP/1025,network blackjack
+BLUEBERRY-LM,"TCP/1432,UDP/1432",Blueberry Software License Manager
+BMAP,"TCP/3421,UDP/3421",Bull Apprise portmapper
+BNET,"TCP/415,UDP/415",
+BO2K,"TCP/14141,TCP/15151,TCP/54320,UDP/54321",Back Orifice 2K BoPeep mouse/keyboard input
+BOINC,"TCP/1043,UDP/1043,TCP/31416",BOINC Client Control or Microsoft IIS
+BOOTCLIENT,UDP/2017,
+BOOTSERVER,"TCP/2016,UDP/2016",
+BTX,TCP/20005,xcept4 (Interacts with German Telekom's CEPT videotext service)
+BUSBOY,TCP/998,
+BWNFS,UDP/650,BW-NFS DOS Authentication
+BYTEX,"TCP/1375,UDP/1375",
+CAB-PROTOCOL,"TCP/595,UDP/595",
+CABLEPORT-AX,"TCP/282,UDP/282",cable port a/x
+CACP,UDP/190,Gateway Access Control Protocol
+CADIS-1,"TCP/1441,UDP/1441",Cadis License Management
+CADIS-2,"TCP/1442,UDP/1442",Cadis License Management
+CADKEY-LICMAN,"TCP/1399,UDP/1399",Cadkey License Manager
+CADKEY-TABLET,"TCP/1400,UDP/1400",Cadkey Tablet Daemon
+CADLOCK,"TCP/770,UDP/770,TCP/1000",
+CADSI-LM,"TCP/1387,UDP/1387",Computer Aided Design Software Inc LM
+CAL,"TCP/588,UDP/588",
+CALLBOOK,"TCP/2000,UDP/2000",
+CANNA,TCP/5680,Canna (Japanese Input)
+CARBONCOPY,TCP/1680,
+CARRACHO,"TCP/6700,TCP/6701",Carracho file sharing
+CCE3X,TCP/1139,ClearCommerce Engine 3.x ( www.clearcommerce.com)
+CCE4X,TCP/12000,ClearCommerce Engine 4.x (www.clearcommerce.com)
+CCMAIL,"TCP/3264,UDP/3264",cc:mail/lotus
+CCPROXY-FTP,TCP/2121,CCProxy FTP Proxy
+CCPROXY-HTTP,TCP/808,CCProxy HTTP/Gopher/FTP (over HTTP) proxy
+CDC,"TCP/223,UDP/223",Certificate Distribution Center
+CDFUNC,"TCP/2045,UDP/2045",
+CFDPTKT,"TCP/120,UDP/120",
+CFENGINE,"TCP/5308,UDP/5308",
+CFS,"TCP/3049,UDP/3049",cryptographic file system (nfs) (proposed)
+CHARGEN,"TCP/19,UDP/19",ttytst source Character Generator
+CHECKSUM,"TCP/1386,UDP/1386",CheckSum License Manager
+CHROMAGRAFX,"TCP/1373,UDP/1373",
+CHSHELL,"TCP/562,UDP/562",chcmd
+CICHILD-LM,"TCP/1523,UDP/1523",
+CICHLID,"TCP/1377,UDP/1377",Cichlid License Manager
+CISCO-FNA,"TCP/130,UDP/130",cisco FNATIVE
+CISCO-SYS,"TCP/132,UDP/132",cisco SYSMAINT
+CISCO-TNA,"TCP/131,UDP/131",cisco TNATIVE
+CISCOPOP,UDP/45000,Cisco Postoffice Protocol for Cisco Secure IDS
+CITADEL,"TCP/504,UDP/504",
+CITRIX-ICA,"TCP/1494,UDP/1494",
+CL-1,"TCP/172,UDP/172",Network Innovations CL/1
+CLEARCASE,"TCP/371,UDP/371",
+CLOANTO-NET-1,"TCP/356,UDP/356",Cloanto Net 1
+CLVM-CFG,"TCP/1476,UDP/1476",
+CMIP-AGENT,TCP/164,CMIP/TCP Agent
+CMIP-MAN,"TCP/163,UDP/163",CMIP/TCP Manager
+COAUTHOR,UDP/1529,oracle
+CODAAUTH2,"TCP/370,UDP/370",
+CODASRV,"TCP/2432,UDP/2432",
+CODASRV-SE,"TCP/2433,UDP/2433",
+COLDFUSION-AUTH,"TCP/44442,TCP/44443",ColdFusion Advanced Security/Siteminder Authentication Port (by Allaire/Netegrity)
+COMMERCE,"TCP/542,UDP/542",
+COMMPLEX-LINK,"TCP/5001,UDP/5001",
+COMPAQDIAG,"TCP/2301,TCP/49400",Compaq remote diagnostic/management
+COMPRESSNET,"TCP/2,UDP/2,TCP/3,UDP/3",Management Utility
+COMSCM,"TCP/437,UDP/437",
+CON,"TCP/759,UDP/759",
+CONCERT,"TCP/786,UDP/786",
+CONF,TCP/2008,
+CONFERENCE,"TCP/531,UDP/531",chat
+CONFLUENT,"TCP/1484,UDP/1484",Confluent License Manager
+CONNECT-PROXY,TCP/5490,Many HTTP CONNECT proxies 
+CONNLCLI,"TCP/1358,UDP/1358",
+CONTENTSERVER,"TCP/454,UDP/454",
+CONTROLIT,TCP/799,Remotely possible
+CORBALOC,TCP/2809,Corba
+COURIER,"TCP/530,UDP/530",rpc
+COVIA,"TCP/64,UDP/64",Communications Integrator (CI)
+CREATIVEPARTNR,"TCP/455,UDP/455",
+CREATIVESERVER,"TCP/453,UDP/453",
+CRONUS,"TCP/148,UDP/148",CRONUS-SUPPORT
+CRS,"TCP/507,UDP/507",
+CRYSTALENTERPRISE,TCP/6401,Seagate Crystal Enterprise
+CRYSTALREPORTS,TCP/6400,Seagate Crystal Reports
+CSDM,"TCP/1468,UDP/1468,TCP/1472,UDP/1472",
+CSDMBASE,"TCP/1467,UDP/1467,TCP/1471,UDP/1471",
+CSI-SGWP,"TCP/348,UDP/348",Cabletron Management Protocol
+CSNET-NS,"TCP/105,UDP/105",Mailbox Name Nameserver
+CTF,"TCP/84,UDP/84",Common Trace Facility
+CUCME-1,UDP/7648,cucme live video/audio server
+CUCME-2,UDP/7649,cucme live video/audio server
+CUCME-3,UDP/7650,cucme live video/audio server
+CUCME-4,UDP/7651,cucme live video/audio server
+CUILLAMARTIN,"TCP/1356,UDP/1356",CuillaMartin Company
+CUSTIX,"TCP/528,UDP/528",Customer IXChange
+CVC,"TCP/1495,UDP/1495",
+CVC_HOSTD,"TCP/442,UDP/442",
+CVSPSERVER,"TCP/2401,UDP/2401",CVS network server
+CYBERCASH,"TCP/551,UDP/551",
+CYCLESERV,"TCP/763,UDP/763",
+CYCLESERV2,"TCP/772,UDP/772",
+CYPRESS,TCP/2015,
+CYPRESS-STAT,TCP/2017,
+DASP,"TCP/439,UDP/439",
+DATASURFSRV,"TCP/461,UDP/461",
+DATASURFSRVSEC,"TCP/462,UDP/462",
+DATEX-ASN,"TCP/355,UDP/355",
+DAYNA,"TCP/244,UDP/244",
+DAYTIME,"TCP/13,UDP/13",
+DBASE,"TCP/217,UDP/217",dBASE Unix
+DBBROWSE,"TCP/47557,UDP/47557",Databeam Corporation
+DBEREGISTER,"TCP/1479,UDP/1479",
+DBREPORTER,"TCP/1379,UDP/1379",Integrity Solutions
+DBSA-LM,"TCP/1407,UDP/1407",DBSA License Manager
+DBSTAR,"TCP/1415,UDP/1415",
+DC,TCP/2001,or nfr20 web queries
+DCA,"TCP/1456,UDP/1456",
+DCP,"TCP/93,UDP/93",Device Control Protocol
+DCS,"TCP/1367,UDP/1367",
+DDM-DFM,"TCP/447,UDP/447",
+DDM-RDB,"TCP/446,UDP/446",
+DDM-SSL,"TCP/448,UDP/448",ddm-byte
+DEC-NOTES,"TCP/3333,UDP/3333",DEC Notes
+DECAP,"TCP/403,UDP/403",
+DECAUTH,"TCP/316,UDP/316",
+DECBSRV,"TCP/579,UDP/579",
+DECLADEBUG,"TCP/410,UDP/410",DECLadebug Remote Debug Protocol
+DECTALK,TCP/2007,
+DECVMS-SYSMGT,"TCP/441,UDP/441",
+DEOS,"TCP/76,UDP/76",Distributed External Object Store
+DESLOGIN,"TCP/2005,TCP/3005",encrypted symmetric telnet/login
+DESLOGIND,TCP/3006,
+DEVICE,"TCP/801,UDP/801",
+DEVICE2,"TCP/2030,UDP/2030",
+DEVICESHARE,"TCP/552,UDP/552",
+DHCPC,"TCP/68,UDP/68",DHCP/Bootstrap Protocol Client
+DHCPS,"TCP/67,UDP/67",DHCP/Bootstrap Protocol Server
+DHCPV6-CLIENT,"TCP/546,UDP/546",DHCPv6 Client
+DHCPV6-SERVER,"TCP/547,UDP/547",DHCPv6 Server
+DIAGMOND,"TCP/1508,UDP/1508",
+DICT,TCP/2628,Dictionary service (RFC2229)
+DIGITAL-VRC,"TCP/466,UDP/466",
+DIRECT,"TCP/242,UDP/242",
+DIS,"TCP/393,UDP/393",Data Interpretation System
+DISCARD,"TCP/9,UDP/9",sink null
+DISTCCD,TCP/3632,Distributed compiler daemon
+DIXIE,"TCP/96,UDP/96",DIXIE Protocol Specification
+DLIP,"TCP/7201,UDP/7201",
+DLS,"TCP/197,UDP/197,TCP/2047,UDP/2047",Directory Location Service
+DLS-MON,"TCP/198,UDP/198",Directory Location Service Monitor
+DLS-MONITOR,"TCP/2048,UDP/2048",
+DLSRPN,"TCP/2065,UDP/2065",Data Link Switch Read Port Number
+DLSWPN,"TCP/2067,UDP/2067",Data Link Switch Write Port Number
+DMDOCBROKER,"TCP/1489,UDP/1489",
+DN6-NLM-AUD,"TCP/195,UDP/195",DNSIX Network Level Module Audit
+DN6-SMM-RED,"TCP/196,UDP/196",DNSIX Session Mgt Module Audit Redir
+DNA-CML,"TCP/436,UDP/436",
+DNET-KEYPROXY,TCP/2064,A closed-source client for solving the RSA cryptographic challenge. This is the keyblock proxy port.
+DNET-TSTPROXY,TCP/3064,distributed.net (a closed source crypto-cracking project) proxy test port
+DNSIX,"TCP/90,UDP/90",DNSIX Securit Attribute Token Map
+DOCSTOR,"TCP/1488,UDP/1488",
+DOMAIN,"TCP/53,UDP/53",Domain Name Server
+DOOM,"TCP/666,UDP/666",Id Software Doom
+DOWN,TCP/2022,
+DPSI,"TCP/315,UDP/315",
+DRAGONIDSCONSOLE,TCP/9111,Dragon IDS Console 
+DSETOS,"TCP/378,UDP/378",NEC Corporation
+DSF,"TCP/555,UDP/555",
+DSFGW,"TCP/438,UDP/438",
+DSP,"TCP/33,UDP/33",Display Support Protocol
+DSP3270,"TCP/246,UDP/246",Display Systems Protocol
+DTAG-STE-SB,"TCP/352,UDP/352","DTAG, or bhoedap4"
+DTK,"TCP/365,UDP/365",Deception Tool Kit (www.all.net) 
+DTSPC,TCP/6112,CDE subprocess control
+DVL-ACTIVEMAIL,"TCP/1396,UDP/1396",DVL Active Mail
+DVS,TCP/481,
+DWF,"TCP/1450,UDP/1450",Tandem Distributed Workbench Facility
+ECHO,"TCP/7,UDP/7",
+EDITBENCH,"TCP/1350,UDP/1350",Registration Network Protocol
+EDONKEY,"TCP/4662,UDP/4666",eDonkey file sharing (Donkey)
+EFS,TCP/520,extended file name server
+EICON-SERVER,"TCP/1438,UDP/1438",Eicon Security Agent/Server
+EICON-SLP,"TCP/1440,UDP/1440",Eicon Service Location Protocol
+EICON-X25,"TCP/1439,UDP/1439",Eicon X25/SNA Gateway
+EIMS-ADMIN,TCP/4199,Eudora Internet Mail Service (EIMS) admin
+EKLOGIN,"TCP/2105,UDP/2105",Kerberos (v4) encrypted rlogin
+EKSHELL,"TCP/545,TCP/2106,UDP/2106",Kerberos encrypted remote shell -kfall
+ELAN,"TCP/1378,UDP/1378",Elan License Manager
+ELCSD,"TCP/704,UDP/704",errlog copy/server daemon
+ELITE,TCP/31337,Sometimes interesting stuff can be found here
+ELLPACK,TCP/2025,
+EMBL-NDT,"TCP/394,UDP/394",EMBL Nucleic Data Transfer
+EMCE,UDP/2004,CCWS mm conf
+EMFIS-CNTL,"TCP/141,UDP/141",EMFIS Control Service
+EMFIS-DATA,"TCP/140,UDP/140",EMFIS Data Service
+ENTOMB,TCP/775,
+ENTRUSTMANAGER,"TCP/709,UDP/709",EntrustManager - NorTel DES auth network see 389/tcp
+ENTRUSTTIME,"TCP/309,UDP/309",
+EQUATIONBUILDER,"TCP/1351,UDP/1351",Digital Tool Works (MIT)
+ERPC,"TCP/121,UDP/121",Encore Expedited Remote Pro.Call
+ESL-LM,"TCP/1455,UDP/1455",ESL License Manager
+ESRO-GEN,TCP/259,efficient short remote operations
+ESSBASE,"TCP/1423,UDP/1423",Essbase Arbor Software
+EUDORA-SET,"TCP/592,UDP/592",
+EVB-ELM,"TCP/1504,UDP/1504",EVB Software Engineering License Manager
+EXEC,TCP/512,BSD rexecd(8)
+EXTENSISPORTFOLIO,TCP/2903,Portfolio Server by Extensis Product Group
+EYELINK,"TCP/589,UDP/589",
+FASTTRACK,"TCP/1214,UDP/1214",Kazaa File Sharing
+FATSERV,"TCP/347,UDP/347",Fatmen Server
+FAX,TCP/4557,FlexFax FAX transmission service
+FC-CLI,"TCP/1371,UDP/1371",Fujitsu Config Protocol
+FC-SER,"TCP/1372,UDP/1372",Fujitsu Config Protocol
+FCP,"TCP/510,UDP/510",FirstClass Protocol
+FHC,"TCP/1499,UDP/1499",Federico Heinz Consultora
+FILEMAKER,"TCP/5003,UDP/5003",Filemaker Server - http://www.filemaker.com/ti/104289.html
+FINGER,"TCP/79,UDP/79,TCP/2003",
+FIREWALL1-RDP,UDP/259,Firewall 1 proprietary RDP protocol http://www.inside-security.de/fw1_rdp_poc.html
+FLEXLM,"TCP/744,UDP/744",Flexible License Manager
+FLEXLM0,TCP/27000,FlexLM license manager additional ports
+FLEXLM1,TCP/27001,FlexLM license manager additional ports
+FLEXLM10,TCP/27010,FlexLM license manager additional ports
+FLEXLM2,TCP/27002,FlexLM license manager additional ports
+FLEXLM3,TCP/27003,FlexLM license manager additional ports
+FLEXLM4,TCP/27004,FlexLM license manager additional ports
+FLEXLM5,TCP/27005,FlexLM license manager additional ports
+FLEXLM6,TCP/27006,FlexLM license manager additional ports
+FLEXLM7,TCP/27007,FlexLM license manager additional ports
+FLEXLM8,TCP/27008,FlexLM license manager additional ports
+FLEXLM9,TCP/27009,FlexLM license manager additional ports
+FLN-SPX,"TCP/221,UDP/221",Berkeley rlogind with SPX auth
+FODMS,"TCP/7200,UDP/7200",FODMS FLIP
+FONT-SERVICE,"TCP/7100,UDP/7100",X Font Service
+FREECIV,TCP/5555,ACE/Server services
+FTP,"TCP/21,UDP/21",File Transfer [Control]
+FTP-AGENT,"TCP/574,UDP/574",FTP Software Agent System
+FTP-DATA,"TCP/20,UDP/20",File Transfer [Default Data]
+FTP-PROXY,TCP/8021,Common FTP proxy port
+FTPS,TCP/990,"ftp protocol, control, over TLS/SSL"
+FTPS-DATA,TCP/989,"ftp protocol, data, over TLS/SSL"
+FTSRV,"TCP/1359,UDP/1359",
+FUJITSU-DEV,"TCP/747,UDP/747",Fujitsu Device Control
+FUJITSU-DTC,"TCP/1513,UDP/1513","Fujitsu Systems Business of America, Inc"
+FUJITSU-DTCNS,"TCP/1514,UDP/1514","Fujitsu Systems Business of America, Inc"
+FUNKPROXY,"TCP/1505,UDP/1505","Funk Software, Inc."
+FW1-MC-FWMODULE,TCP/257,FW1 management console for communication w/modules and also secure electronic transaction (set) port
+FW1-MC-GUI,TCP/258,also yak winsock personal chat
+FW1-OR-BGMP,UDP/264,FW1 secureremote alternate
+FW1-SECUREREMOTE,TCP/256,"also ""rap"""
+GACP,TCP/190,Gateway Access Control Protocol
+GANDALF-LM,"TCP/1421,UDP/1421",Gandalf License Manager
+GARCON,TCP/999,
+GDOMAP,"TCP/538,UDP/538",
+GDP-PORT,"TCP/1997,UDP/1997",cisco Gateway Discovery Protocol
+GENIE,"TCP/402,UDP/402",Genie Protocol
+GENIE-LM,"TCP/1453,UDP/1453",Genie License Manager
+GENRAD-MUX,"TCP/176,UDP/176",
+GINAD,"TCP/634,UDP/634",
+GKRELLM,TCP/19150,GKrellM remote system activity meter daemon
+GLOBALCATLDAP,TCP/3268,Global Catalog LDAP
+GLOBALCATLDAPSSL,TCP/3269,Global Catalog LDAP over ssl
+GLOBE,"TCP/2002,UDP/2002",
+GLOGGER,"TCP/2033,UDP/2033",
+GNUTELLA,"TCP/6346,UDP/6346",Gnutella file sharing protocol,PH_SYS_PROTOGRP_P2P
+GNUTELLA2,"TCP/6347,UDP/6347",Gnutella2 file sharing protocol,PH_SYS_PROTOGRP_P2P
+GO-LOGIN,"TCP/491,UDP/491",
+GOLDLEAF-LICMAN,"TCP/1401,UDP/1401",Goldleaf License Manager
+GOPHER,"TCP/70,UDP/70",
+GPPITNP,"TCP/103,UDP/103","Genesis Point-to-Point Trans Net, or x400 ISO Email"
+GRAPHICS,"TCP/41,UDP/41",
+GRIDGEN-ELMD,"TCP/1542,UDP/1542",
+GSS-HTTP,"TCP/488,UDP/488",
+GSS-XLICEN,"TCP/128,UDP/128",GSS X License Verification
+GTEGSC-LM,"TCP/1452,UDP/1452",GTE Government Systems License Man
+GV-US,"TCP/1369,UDP/1369",GlobalView to Unix Shell
+GWHA,"TCP/1383,UDP/1383",GW Hannaway Network License Manager
+H.323/Q.931,TCP/1720,Interactive media
+HACL-CFG,"TCP/5302,UDP/5302",HA cluster configuration
+HACL-GS,"TCP/5301,UDP/5301",HA cluster general services
+HACL-HB,"TCP/5300,UDP/5300",HA cluster heartbeat
+HACL-LOCAL,"TCP/5304,UDP/5304",
+HACL-PROBE,"TCP/5303,UDP/5303",HA cluster probing
+HACL-TEST,"TCP/5305,UDP/5305",
+HALFLIFE,UDP/27015,Half-life game server
+HASSLE,"TCP/375,UDP/375",
+HDAP,"TCP/263,UDP/263",
+HDDTEMP,TCP/7634,A cross-platform hard disk temperature monitoring daemon
+HECMTL-DB,"TCP/1551,UDP/1551",
+HEMS,"TCP/151,UDP/151",
+HERE-LM,"TCP/1409,UDP/1409",Here License Manager
+HERETIC2,UDP/28910,Heretic 2 game server
+HERMES,"TCP/1248,UDP/1248",
+HEXEN2,UDP/26900,Hexen 2 game server
+HIQ,"TCP/1410,UDP/1410",HiQ License Manager
+HOSTNAME,"TCP/101,UDP/101",hostnames NIC Host Name Server
+HOSTS2-NS,"TCP/81,UDP/81",HOSTS2 Name Server
+HOTLINE,"TCP/1234,TCP/5500",
+HP-3000-TELNET,TCP/2564,HP 3000 NS/VT block mode telnet
+HP-ALARM-MGR,"TCP/383,UDP/383",hp performance data alarm manager
+HP-COLLECTOR,"TCP/381,UDP/381,TCP/781,UDP/781",hp performance data collector
+HP-MANAGED-NODE,"TCP/382,UDP/382,TCP/782,UDP/782",hp performance data managed node
+HPNPD,"TCP/22370,UDP/22370",Hewlett-Packard Network Printer daemon
+HTTP,"TCP/80,UDP/80",World Wide Web HTTP
+HTTP-ALT,"TCP/591,UDP/591,TCP/8000","FileMaker, Inc. - HTTP Alternate"
+HTTP-MGMT,"TCP/280,UDP/280",
+HTTP-PROXY,TCP/8080,Common HTTP proxy/second web server port
+HTTP-RPC-EPMAP,"TCP/593,UDP/593",HTTP RPC Ep Map
+HTTPS,"TCP/443,UDP/443",secure http (SSL)
+HTTPS-ALT,TCP/8443,Common alternative https port
+HYBRID,"TCP/1424,UDP/1424",Hybrid Encryption Protocol
+HYBRID-POP,"TCP/473,UDP/473",
+HYLAFAX,TCP/4559,HylaFAX client-server protocol
+HYPER-G,"TCP/418,UDP/418",
+IAD1,"TCP/1030,UDP/1030",BBN IAD
+IAD2,"TCP/1031,UDP/1031",BBN IAD
+IAD3,"TCP/1032,UDP/1032",BBN IAD
+IAFDBASE,UDP/480,
+IAFSERVER,"TCP/479,UDP/479",
+IASD,"TCP/432,UDP/432",
+IBM-APP,"TCP/385,UDP/385",IBM Application
+IBM-CICS,"TCP/1435,UDP/1435",
+IBM-DB2,"TCP/523,UDP/523",
+IBM-MQSERIES,"TCP/1414,UDP/1414",IBM MQSeries
+IBM-PPS,"TCP/1376,UDP/1376",IBM Person to Person Software
+IBM-RES,"TCP/1405,UDP/1405",IBM Remote Execution Starter
+IBM_WRLESS_LAN,"TCP/1461,UDP/1461",IBM Wireless LAN
+ICAD-EL,"TCP/425,UDP/425",
+ICB,TCP/7326,Internet Citizen's Band
+ICLPV-DM,"TCP/1389,UDP/1389",Document Manager
+ICLPV-NLC,"TCP/1394,UDP/1394",Network Log Client
+ICLPV-NLS,"TCP/1393,UDP/1393",Network Log Server
+ICLPV-PM,"TCP/1392,UDP/1392",Print Manager
+ICLPV-SAS,"TCP/1391,UDP/1391",Storage Access Server
+ICLPV-SC,"TCP/1390,UDP/1390",Storage Controller
+ICLPV-WSM,"TCP/1395,UDP/1395",PC Workstation Manager software
+ICQ,UDP/4000,AOL ICQ instant messaging clent-server communication
+IDFP,"TCP/549,UDP/549",
+IES-LM,"TCP/1443,UDP/1443",Integrated Engineering Software
+IFOR-PROTOCOL,"TCP/1515,UDP/1515",
+IGI-LM,"TCP/1404,UDP/1404",Infinite Graphics License Manager
+IIIMSF,"TCP/50000,TCP/50002",Internet/Intranet Input Method Server Framework
+IIOP,"TCP/535,UDP/535",
+IIS,TCP/1027,nterm remote_login network_terminal
+IISRPC-OR-VAT,UDP/3456,also VAT default data
+IMAP,"TCP/143,UDP/143",Interim Mail Access Protocol v2,PH_SYS_PROTOGRP_MAIL
+IMAP3,"TCP/220,UDP/220",Interactive Mail Access Protocol v3,PH_SYS_PROTOGRP_MAIL
+IMAP4-SSL,"TCP/585,UDP/585","IMAP4+SSL (use of 585 is not recommended,",PH_SYS_PROTOGRP_MAIL
+IMAPS,TCP/993,imap4 protocol over TLS/SSL,PH_SYS_PROTOGRP_MAIL
+IMSLDOC,"TCP/2035,UDP/2035",
+IMSP,"TCP/406,UDP/406",Interactive Mail Support Protocol,PH_SYS_PROTOGRP_MAIL
+IMTC-MCS,"TCP/1503,UDP/1503",Databeam
+INFOMAN,"TCP/1451,UDP/1451",IBM Information Management
+INFORMATIK-LM,"TCP/1428,UDP/1428",Informatik License Manager
+INFOSEEK,"TCP/414,UDP/414",
+INGRES-NET,"TCP/134,UDP/134",INGRES-NET Service
+INGRESLOCK,"TCP/1524,UDP/1524",ingres
+INNOSYS,"TCP/1412,UDP/1412",
+INNOSYS-ACL,"TCP/1413,UDP/1413",
+INSITU-CONF,"TCP/1490,UDP/1490",
+INSTL_BOOTC,"TCP/1068,UDP/1068",Installation Bootstrap Proto. Cli.
+INSTL_BOOTS,"TCP/1067,UDP/1067",Installation Bootstrap Proto. Serv.
+INTECOURIER,"TCP/495,UDP/495",
+INTEGRA-SME,"TCP/484,UDP/484",Integra Software Management Environment
+INTELLISTOR-LM,"TCP/1539,UDP/1539",Intellistor License Manager
+INTERBASE,"TCP/2041,UDP/2041",
+INTERHDL_ELMD,"TCP/1454,UDP/1454",interHDL License Manager
+INTRINSA,"TCP/503,UDP/503",
+INTUITIVE-EDGE,"TCP/1355,UDP/1355",Intuitive Edge
+INVOKATOR,TCP/2006,
+IPCD,"TCP/576,UDP/576",
+IPCSERVER,"TCP/600,UDP/600",Sun IPC server
+IPDD,"TCP/578,UDP/578",
+IPP,TCP/631,Internet Printing Protocol
+IPX,"TCP/213,UDP/213",
+IRC,"TCP/194,UDP/194,TCP/529,UDP/529,TCP/6665,TCP/6666,TCP/6667,TCP/6668,TCP/6669,TCP/6670",Internet Relay Chat
+IRCS,TCP/994,irc protocol over TLS/SSL
+IS99C,"TCP/379,UDP/379",TIA/EIA/IS-99 modem client
+IS99S,"TCP/380,UDP/380",TIA/EIA/IS-99 modem server
+ISAKMP,"TCP/500,UDP/500",
+ISDNINFO,"TCP/6105,TCP/6106",isdninfo
+ISI-GL,"TCP/55,UDP/55",ISI Graphics Language
+ISIS,"TCP/2042,UDP/2042",
+ISIS-BCAST,"TCP/2043,UDP/2043",
+ISO-ILL,"TCP/499,UDP/499",ISO ILL Protocol
+ISO-IP,"TCP/147,UDP/147",
+ISO-TP0,"TCP/146,UDP/146",
+ISO-TSAP,"TCP/102,UDP/102",tsap ISO-TSAP Class 0
+ISO-TSAP-C2,"TCP/399,UDP/399",ISO-TSAP Class 2
+ISODE-DUA,"TCP/17007,UDP/17007",
+ISQLPLUS,TCP/5560,Oracle web enabled SQL interface (version 10g+),PH_SYS_PROTOGRP_DB
+ISS-CONSOLE-MGR,TCP/903,ISS Console Manager
+ISS-REALSEC,TCP/2998,ISS RealSecure IDS Remote Console Admin port
+ISS-REALSECURE,TCP/902,ISS RealSecure Sensor
+ISSA,TCP/9991,ISS System Scanner Agent
+ISSC,TCP/9992,ISS System Scanner Console
+ISSD,"TCP/1600,UDP/1600",
+IVS-VIDEO,"TCP/2232,UDP/2232",IVS Video default
+IVSD,"TCP/2241,UDP/2241",IVS Daemon
+JAVA-OR-OTGFILESHARE,TCP/1050,"J2EE nameserver, also OTG, also called Disk/Application extender. Could also be MiniCommand backdoor OTGlicenseserv"
+JETDIRECT,"TCP/9100,TCP/9101,TCP/9102,TCP/9103,TCP/9104,TCP/9105,TCP/9106,TCP/9107",HP JetDirect card
+KADEMLIA,UDP/3246,Kademlia P2P (mlnet)
+KAUTH,TCP/2120,Remote kauth
+KDM,TCP/1024,K Display Manager (KDE version of xdm)
+KERBEROS,"TCP/750,UDP/750",kdc Kerberos (v4)
+KERBEROS-ADM,"TCP/749,UDP/749",Kerberos 5 admin/changepw
+KERBEROS-SEC,"TCP/88,UDP/88",Kerberos (v5)
+KERBEROS_MASTER,"TCP/751,UDP/751",Kerberos `kadmin' (v4)
+KEYSERVER,"TCP/584,UDP/584",
+KIP,TCP/2112,IP over kerberos
+KIS,"TCP/186,UDP/186",KIS Protocol
+KLOGIN,"TCP/543,UDP/543",Kerberos (v4/v5)
+KNET-CMP,"TCP/157,UDP/157",KNET/VM Command/Message Protocol
+KNETD,TCP/2053,A closed-source client for solving the RSA cryptographic challenge. This is the keyblock proxy port.
+KPASSWD,TCP/761,Kerberos (v4)
+KPASSWD5,"TCP/464,UDP/464",Kerberos (v5)
+KPOP,TCP/1109,Pop with Kerberos
+KRB524,"TCP/4444,UDP/4444",Kerberos 5 to 4 ticket xlator
+KRBUPDATE,TCP/760,kreg Kerberos (v4) registration
+KRB_PROP,TCP/754,kerberos/v5 server propagation
+KRYPTOLAN,"TCP/398,UDP/398",
+KSHELL,"TCP/544,UDP/544",krcmd Kerberos (v4/v5)
+KUANG2,TCP/17300,Kuang2 backdoor
+KX,TCP/2111,X over kerberos
+L2TP,UDP/1701,
+LA-MAINT,"TCP/51,UDP/51",IMP Logical Address Maintenance
+LAM,"TCP/2040,UDP/2040",
+LANDESK-CBA,"TCP/38037,UDP/38037,TCP/38292,UDP/38293",Sometimes an RPC port
+LANDESK-RC,"TCP/1761,TCP/1762,TCP/1763,TCP/1764",LANDesk Remote Control
+LANSERVER,"TCP/637,UDP/637",LDAP over SSL
+LANSOURCE,"TCP/1485,UDP/1485",
+LAPLINK,"TCP/1547,UDP/1547",
+LDAP,"TCP/389,UDP/389",Lightweight Directory Access Protocol
+LDAPSSL,TCP/636,LDAP over SSL
+LEGENT-1,"TCP/373,UDP/373",Legent Corporation (now Computer Associates Intl.)
+LEGENT-2,"TCP/374,UDP/374",Legent Corporation (now Computer Associates Intl.)
+LGTOMAPPER,TCP/7938,Legato portmapper
+LIBERTY-LM,"TCP/1496,UDP/1496",
+LICENSEDAEMON,"TCP/1986,UDP/1986",cisco license management
+LINK,"TCP/245,UDP/245",
+LINUXCONF,TCP/98,linuxconf
+LINX,"TCP/1361,UDP/1361",
+LISTEN,TCP/2766,System V listener port
+LJK-LOGIN,"TCP/472,UDP/472",
+LOADSRV,TCP/480,
+LOCALINFOSRVR,"TCP/1487,UDP/1487",
+LOCKD,"TCP/4045,UDP/4045",
+LOCUS-CON,"TCP/127,UDP/127",Locus PC-Interface Conn Server
+LOCUS-MAP,"TCP/125,UDP/125",Locus PC-Interface Net Map Ser
+LOGIN,TCP/513,BSD rlogind(8)
+LONEWOLF-LM,"TCP/6146,UDP/6146",Lone Wolf Systems License Manager
+LOTUSNOTES,"TCP/1352,UDP/1352",Lotus Note
+LSA-OR-NTERM,TCP/1026,nterm remote_login network_terminal
+LSNR,TCP/1158,Oracle DB listener,PH_SYS_PROTOGRP_DB
+LUPA,"TCP/1212,UDP/1212",
+MAC-SRVR-ADMIN,"TCP/660,UDP/660",MacOS Server Admin
+MACON,"TCP/456,UDP/456",
+MAGENTA-LOGIC,"TCP/313,UDP/313",
+MAILBOX,TCP/2004,
+MAILBOX-LM,"TCP/505,UDP/505",
+MAILQ,"TCP/174,UDP/174",
+MAITRD,"TCP/997,UDP/997",
+MAN,"TCP/9535,UDP/9535",
+MAPPER-MAPETHD,"TCP/3985,UDP/3985",MAPPER TCP/IP server
+MAPPER-NODEMGR,"TCP/3984,UDP/3984",MAPPER network node manager
+MAPPER-WS_ETHD,"TCP/3986,UDP/3986",MAPPER workstation server
+MARCAM-LM,"TCP/1444,UDP/1444",Marcam License Management
+MATIP-TYPE-A,"TCP/350,UDP/350",MATIP Type A
+MATIP-TYPE-B,"TCP/351,UDP/351",MATIP Type B or bhoetty also safetp
+MAYBE-FW1,TCP/265,FW1 secureremote alternate
+MAYBE-VERITAS,"TCP/4987,TCP/4998",Radmin (www.radmin.com) remote PC control software
+MCIAUTOREG,"TCP/1528,UDP/1528",
+MCIDAS,"TCP/112,UDP/112",McIDAS Data Transmission Protocol
+MDBS_DAEMON,"TCP/800,UDP/800",
+MEETINGMAKER,TCP/3292,Meeting maker time management software
+META-CORP,"TCP/6141,UDP/6141",Meta Corporation License Manager
+METAGRAM,"TCP/99,UDP/99",Metagram Relay
+METER,"TCP/570,UDP/570",demon
+MFCOBOL,"TCP/86,UDP/86",Micro Focus Cobol
+MFTP,"TCP/349,UDP/349",
+MICOM-PFS,"TCP/490,UDP/490",
+MICROMUSE-LM,"TCP/1534,UDP/1534",
+MICROSOFT-DS,"TCP/445,UDP/445",SMB directly over IP
+MIMER,"TCP/1360,UDP/1360",
+MIROCONNECT,"TCP/1532,UDP/1532",
+MIT-DOV,"TCP/91,UDP/91",MIT Dover Spooler
+MIT-ML-DEV,"TCP/83,UDP/83,TCP/85,UDP/85",MIT ML Device
+MITEKSYS-LM,"TCP/1482,UDP/1482",Miteksys License Manager
+MLCHAT-PROXY,TCP/4002,mlnet - MLChat P2P chat proxy
+MLOADD,"TCP/1427,UDP/1427",mloadd monitoring tool
+MM-ADMIN,"TCP/534,UDP/534",MegaMedia Admin
+MMCC,"TCP/5050,UDP/5050",multimedia conference control tool
+MNOTES,TCP/603,CommonTime Mnotes PDA Synchronization
+MOBILEIP-AGENT,"TCP/434,UDP/434",
+MOBILIP-MN,"TCP/435,UDP/435",
+MOLLY,"TCP/1374,UDP/1374",EPI Software Systems
+MONDEX,"TCP/471,UDP/471",
+MONITOR,"TCP/561,UDP/561",
+MONTAGE-LM,"TCP/6147,UDP/6147",Montage License Manager
+MORTGAGEWARE,"TCP/367,UDP/367",
+MOSMIG,TCP/4660,OpenMOSix MIGrates local processes
+MOUNT,UDP/635,NFS Mount Service
+MPM,"TCP/45,UDP/45",Message Processing Module [recv]
+MPM-FLAGS,"TCP/44,UDP/44",MPM FLAGS Protocol
+MPM-SND,"TCP/46,UDP/46",MPM [default send]
+MPP,"TCP/218,UDP/218",Netix Message Posting Protocol
+MPTN,"TCP/397,UDP/397",Multi Protocol Trans. Net.
+MS-LSA,"UDP/1028,TCP/1029",nterm remote_login network_terminal
+MS-ROME,"TCP/569,UDP/569",Microsoft rome
+MS-SHUTTLE,"TCP/568,UDP/568",Microsoft shuttle
+MS-SNA-BASE,"TCP/1478,UDP/1478",
+MS-SNA-SERVER,"TCP/1477,UDP/1477",
+MS-SQL-M,"TCP/1434,UDP/1434",Microsoft-SQL-Monitor,PH_SYS_PROTOGRP_DB
+MS-SQL-S,"TCP/1433,UDP/1433",Microsoft-SQL-Server,PH_SYS_PROTOGRP_DB
+MS-SQL2000,TCP/9152,Dragon IDS Console 
+MS-TERM-SERV,TCP/3389,Microsoft Remote Display Protocol
+MSDTC,TCP/3372,MS distributed transaction coordinator
+MSG-AUTH,"TCP/31,UDP/31",MSG Authentication
+MSG-ICP,"TCP/29,UDP/29",MSG ICP
+MSL_LMD,"TCP/1464,UDP/1464",MSL License Manager
+MSP,"TCP/18,UDP/18",Message Send Protocol
+MSQL,"TCP/1112,TCP/4333",mini-sql server,PH_SYS_PROTOGRP_DB
+MSRPC,"TCP/135,UDP/135",Microsoft RPC services
+MULTIPLEX,"TCP/171,UDP/171",Network Innovations Multiplex
+MUMPS,"TCP/188,UDP/188",Plus Five's MUMPS
+MVX-LM,"TCP/1510,UDP/1510",Midland Valley Exploration Ltd. Lic. Man.
+MYLEX-MAPD,"TCP/467,UDP/467",
+MYSQL,TCP/3306,MySQL,PH_SYS_PROTOGRP_DB
+MYTHTV,"TCP/6543,TCP/6544",Seagate Crystal Enterprise
+NAMESERVER,"TCP/42,UDP/42",Host Name Server
+NAMP,"TCP/167,UDP/167",
+NAPSTER,TCP/6699,Napster File (MP3) sharing  software,PH_SYS_PROTOGRP_P2P
+NCD-CONF,TCP/5999,NCD configuration telnet port
+NCD-CONF-TCP,TCP/5979,NCD configuration tcp port
+NCD-DIAG,TCP/5998,NCD diagnostic telnet port
+NCD-DIAG-TCP,TCP/5978,NCD diagnostic tcp port
+NCD-PREF,TCP/5997,NCD preferences telnet port
+NCD-PREF-TCP,TCP/5977,NCD preferences tcp port
+NCED,"TCP/404,UDP/404",
+NCLD,"TCP/405,UDP/405",
+NCP,"TCP/524,UDP/524",
+NCUBE-LM,UDP/1521,nCube License Manager
+NDM-REQUESTER,"TCP/1363,UDP/1363",Network DataMover Requester
+NDM-SERVER,"TCP/1364,UDP/1364",Network DataMover Server
+NDSAUTH,"TCP/353,UDP/353",
+NERV,"TCP/1222,UDP/1222",SNI R&D network
+NESSUS,"TCP/1241,TCP/3001",Nessus or remote message server
+NEST-PROTOCOL,"TCP/489,UDP/489",
+NETBACKUP,"TCP/13701,TCP/13702,TCP/13705,TCP/13706,TCP/13708,TCP/13709,TCP/13710,TCP/13711,TCP/13712,TCP/13713,TCP/13714,TCP/13715,TCP/13716,TCP/13717,TCP/13718,TCP/13720,TCP/13721,TCP/13722,TCP/13782,TCP/13783",vmd           server
+NETBIOS-DGM,"TCP/138,UDP/138",NETBIOS Datagram Service
+NETBIOS-NS,"TCP/137,UDP/137",NETBIOS Name Service
+NETBIOS-SSN,"TCP/139,UDP/139",NETBIOS Session Service
+NETBUS,"TCP/12345,TCP/12346",NetBus backdoor trojan or Trend Micro Office Scan
+NETCHEQUE,"TCP/4008,UDP/4008",NetCheque accounting
+NETCP,"TCP/395,UDP/395,TCP/740,UDP/740",NETscout Control Protocol
+NETGW,"TCP/741,UDP/741",
+NETINFO,TCP/1033,Netinfo is apparently on many OS X boxes.
+NETLABS-LM,"TCP/1406,UDP/1406",NetLabs License Manager
+NETMAP_LM,"TCP/1493,UDP/1493",
+NETNEWS,"TCP/532,UDP/532",readnews
+NETOP-RC,"TCP/6502,UDP/6502",NetOp Remote Control (by Danware Data A/S)
+NETPROWLER-MANAGER,TCP/61439,Back Orifice 2K Default Port
+NETPROWLER-MANAGER2,TCP/61440,Back Orifice 2K Default Port
+NETPROWLER-SENSOR,TCP/61441,Back Orifice 2K Default Port
+NETRCS,"TCP/742,UDP/742",Network based Rev. Cont. Sys.
+NETRJS-1,"TCP/71,UDP/71",Remote Job Service
+NETRJS-2,"TCP/72,UDP/72",Remote Job Service
+NETRJS-3,"TCP/73,UDP/73",Remote Job Service
+NETRJS-4,"TCP/74,UDP/74",Remote Job Service
+NETSAINT,TCP/1040,Netsaint status daemon
+NETSC-DEV,"TCP/155,UDP/155",
+NETSC-PROD,"TCP/154,UDP/154",
+NETSTAT,TCP/15,
+NETVENUECHAT,TCP/1023,"Nortel NetVenue Notification, Chat, Intercom"
+NETVIEW-AIX-1,"TCP/1661,UDP/1661",
+NETVIEW-AIX-10,"TCP/1670,UDP/1670",
+NETVIEW-AIX-11,"TCP/1671,UDP/1671",
+NETVIEW-AIX-12,"TCP/1672,UDP/1672",
+NETVIEW-AIX-2,"TCP/1662,UDP/1662",
+NETVIEW-AIX-3,"TCP/1663,UDP/1663",
+NETVIEW-AIX-4,"TCP/1664,UDP/1664",
+NETVIEW-AIX-5,"TCP/1665,UDP/1665",
+NETVIEW-AIX-6,"TCP/1666,UDP/1666",
+NETVIEW-AIX-7,"TCP/1667,UDP/1667",
+NETVIEW-AIX-8,"TCP/1668,UDP/1668",
+NETVIEW-AIX-9,"TCP/1669,UDP/1669",
+NETVIEWDM1,"TCP/729,UDP/729",IBM NetView DM/6000 Server/Client
+NETVIEWDM2,"TCP/730,UDP/730",IBM NetView DM/6000 send/tcp
+NETVIEWDM3,"TCP/731,UDP/731",IBM NetView DM/6000 receive/tcp
+NETWALL,"TCP/533,UDP/533",for emergency broadcasts
+NETWARE-CSP,"TCP/1366,UDP/1366",Novell NetWare Comm Service Platform
+NETWARE-IP,"TCP/396,UDP/396",Novell Netware over IP
+NEW-RWHO,"TCP/550,UDP/550",new-who
+NEWACCT,TCP/100,[unauthorized use]
+NEWS,"TCP/144,UDP/144,TCP/2009",NewS window system
+NEXTSTEP,"TCP/178,UDP/178",NextStep Window Server
+NFA,"TCP/1155,UDP/1155",Network File Access
+NFS,"TCP/2049,UDP/2049",networked file system
+NFS-OR-IIS,TCP/1025,"IIS, NFS, or listener RFS remote_file_sharing"
+NFSD-KEEPALIVE,UDP/1110,Client status info
+NFSD-STATUS,TCP/1110,Cluster status info
+NI-FTP,"TCP/47,UDP/47",NI FTP
+NI-MAIL,"TCP/61,UDP/61",NI MAIL
+NIM,"TCP/1058,UDP/1058",
+NIMREG,"TCP/1059,UDP/1059",
+NIP,"TCP/376,UDP/376",Amiga Envoy Network Inquiry Proto
+NKD,"TCP/1650,UDP/1650",
+NLOGIN,"TCP/758,UDP/758",
+NMS,"TCP/1429,UDP/1429",Hypercom NMS
+NMSP,"TCP/537,UDP/537",Networked Media Streaming Protocol
+NMS_TOPO_SERV,"TCP/1486,UDP/1486",
+NNSP,"TCP/433,UDP/433","Usenet, Network News Transfer"
+NNTP,"TCP/119,UDP/119",Network News Transfer Protocol
+NOTIFY,UDP/773,
+NOVASTORBAKCUP,"TCP/308,UDP/308",novastor backup
+NOVELL-LU6.2,"TCP/1416,UDP/1416",Novell LU6.2
+NPMP-GUI,"TCP/611,UDP/611",
+NPMP-LOCAL,"TCP/610,UDP/610",
+NPMP-TRAP,"TCP/609,UDP/609",
+NPP,"TCP/92,UDP/92",Network Printing Protocol
+NQS,"TCP/607,UDP/607",
+NRCABQ-LM,"TCP/1458,UDP/1458",Nichols Research Corp.
+NS,UDP/760,
+NSIIOPS,"TCP/261,UDP/261",iiop name service over tls/ssl
+NSREXECD,TCP/7937,Legato NetWorker
+NSS-ROUTING,"TCP/159,UDP/159",
+NSW-FE,"TCP/27,UDP/27",NSW User System FE
+NTALK,"TCP/518,UDP/518",(talkd)
+NTP,"TCP/123,UDP/123",Network Time Protocol
+NUCLEUS,"TCP/1463,UDP/1463",
+NUTS_BOOTP,"TCP/4133,UDP/4133",NUTS Bootp Server
+NUTS_DEM,"TCP/4132,UDP/4132",NUTS Daemon
+OBJCALL,"TCP/94,UDP/94",Tivoli Object Dispatcher
+OBJECTIVE-DBC,"TCP/1388,UDP/1388",Objective Solutions DataBase Cache
+OBJECTMANAGER,"TCP/2038,UDP/2038",
+OC-LM,"TCP/1448,UDP/1448",OpenConnect License Manager
+OCBINDER,"TCP/183,UDP/183",
+OCEANSOFT-LM,"TCP/1466,UDP/1466",Ocean Software License Manager
+OCK,UDP/1000,
+OCSERVER,"TCP/184,UDP/184",
+OCS_AMU,"TCP/429,UDP/429",
+OCS_CMU,"TCP/428,UDP/428",
+ODMR,"TCP/366,UDP/366",
+OFTEP-RPC,TCP/950,Often RPC.statd (on Redhat Linux)
+OHIMSRV,"TCP/506,UDP/506",
+OMAD,UDP/32768,OpenMosix Autodiscovery Daemon
+OMFS,TCP/723,OpenMosix File System
+OMID,UDP/5428,OpenMosix Info Dissemination
+OMSERV,"TCP/764,UDP/764",
+ONMUX,"TCP/417,UDP/417",Meeting maker
+OPALIS-RDV,"TCP/536,UDP/536",
+OPALIS-ROBOT,"TCP/314,UDP/314",
+OPC-JOB-START,"TCP/423,UDP/423",IBM Operations Planning and Control Start
+OPC-JOB-TRACK,"TCP/424,UDP/424",IBM Operations Planning and Control Track
+OPENMANAGE,TCP/7273,Dell OpenManage
+OPENMATH,"TCP/1473,UDP/1473",
+OPENPORT,"TCP/260,UDP/260",
+OPENVMS-SYSIPC,"TCP/557,UDP/557",
+OPSEC-CVP,TCP/18181,Check Point OPSEC
+OPSEC-ELA,TCP/18187,Check Point OPSEC
+OPSEC-LEA,TCP/18184,Check Point OPSEC
+OPSEC-OMI,TCP/18185,Check Point OPSEC
+OPSEC-SAM,TCP/18183,Check Point OPSEC
+OPSEC-UFP,TCP/18182,Check Point OPSEC
+ORA-LM,"TCP/1446,UDP/1446",Optical Research Associates License Manager
+ORACLE,"TCP/1521,UDP/1525,UDP/2005",Oracle Database,PH_SYS_PROTOGRP_DB
+ORASRV,TCP/1525,oracle or Prospero Directory Service non-priv
+OS-LICMAN,"TCP/1384,UDP/1384",Objective Solutions License Manager
+OSPFD,TCP/2604,OSPFd vty
+OSU-NMS,"TCP/192,UDP/192",OSU Network Monitoring System
+OSXWEBADMIN,TCP/16080,Apple OS X WebAdmin
+OVERNET,"TCP/16444,UDP/16444",Overnet file sharing
+PACERFORUM,"TCP/1480,UDP/1480",
+PADL2SIM,"TCP/5236,UDP/5236",
+PASSGO,"TCP/511,UDP/511",
+PASSWORD-CHG,"TCP/586,UDP/586",
+PAWSERV,"TCP/345,UDP/345",Perf Analysis Workbench
+PCANYWHERE,TCP/65301,Back Orifice 2K Default Port
+PCANYWHEREDATA,TCP/5631,
+PCANYWHERESTAT,"TCP/5632,UDP/5632",
+PCDUO,TCP/5405,RemCon PC-Duo - new port
+PCDUO-OLD,TCP/5400,RemCon PC-Duo - old port
+PCIARRAY,"TCP/1552,UDP/1552",
+PCM,TCP/1827,PCM Agent (AutoSecure Policy Compliance Manager
+PCMAIL-SRV,"TCP/158,UDP/158",PCMail Server
+PCNFS,UDP/640,PC-NFS DOS Authentication
+PDAP,"TCP/344,UDP/344",Prospero Data Access Protocol
+PDAP-NP,"TCP/1526,UDP/1526",Prospero Data Access Prot non-priv
+PEERENABLER,"TCP/3531,UDP/3531",P2PNetworking/PeerEnabler protocol
+PEGBOARD,"TCP/1357,UDP/1357",Electronic PegBoard
+PEHELP,"TCP/2307,UDP/2307",
+PEPORT,"TCP/1449,UDP/1449",
+PERF-PORT,"TCP/1995,UDP/1995",cisco perf port
+PERSONAL-LINK,"TCP/281,UDP/281",
+PH,UDP/481,
+PHILIPS-VC,"TCP/583,UDP/583",Philips Video-Conferencing
+PHONE,UDP/1167,conference calling
+PHONEBOOK,"TCP/767,UDP/767",phone
+PHOTURIS,"TCP/468,UDP/468",Photuris Key Management
+PIM-RP-DISC,"TCP/496,UDP/496",
+PIP,"TCP/321,UDP/321",
+PIPES,"TCP/1465,UDP/1465",Pipes Platform
+PIPE_SERVER,UDP/2010,Also used by NFR
+PIRP,"TCP/553,UDP/553",
+PKSD,TCP/11371,PGP Public Key Server
+POLIPO,TCP/8123,Polipo open source web proxy cache
+POP2,"TCP/109,UDP/109",PostOffice V.2,PH_SYS_PROTOGRP_MAIL
+POP3,"TCP/110,UDP/110",PostOffice V.3,PH_SYS_PROTOGRP_MAIL
+POP3PW,TCP/106,Eudora compatible PW changer
+POP3S,TCP/995,POP3 protocol over TLS/SSL,PH_SYS_PROTOGRP_MAIL
+POSTGRES,TCP/5432,PostgreSQL database server,PH_SYS_PROTOGRP_DB
+POV-RAY,"TCP/494,UDP/494",
+POWERBURST,"TCP/485,UDP/485",Air Soft Power Burst
+POWERCHUTE,TCP/3052,cryptographic file system (nfs)
+POWERCHUTEPLUS,"TCP/6547,TCP/6548,UDP/6549",Seagate Crystal Enterprise
+PPP,TCP/3000,"User-level ppp daemon, or chili!soft asp"
+PPTP,TCP/1723,Point-to-point tunnelling protocol
+PRINT-SRV,"TCP/170,UDP/170",Network PostScript
+PRINTER,"TCP/515,UDP/515",spooler (lpd)
+PRIV-DIAL,"TCP/75,UDP/75",any private dial out service
+PRIV-FILE,"TCP/59,UDP/59",any private file service
+PRIV-MAIL,"TCP/24,UDP/24",any private mail system
+PRIV-PRINT,"TCP/35,UDP/35",any private printer server
+PRIV-RJE,"TCP/77,UDP/77","any private RJE service, netrjs"
+PRIV-TERM,"TCP/57,UDP/57",any private terminal access
+PRIV-TERM-L,TCP/87,"any private terminal link, ttylink"
+PRIVOXY,TCP/8118,"Privoxy, www.privoxy.org"
+PRM-NM,"TCP/409,UDP/409",Prospero Resource Manager Node Man.
+PRM-NM-NP,"TCP/1403,UDP/1403",Prospero Resource Manager
+PRM-SM,"TCP/408,UDP/408",Prospero Resource Manager Sys. Man.
+PRM-SM-NP,"TCP/1402,UDP/1402",Prospero Resource Manager
+PROFILE,"TCP/136,UDP/136",PROFILE Naming System
+PROSHARE1,"TCP/1459,UDP/1459",Proshare Notebook Application
+PROSHARE2,"TCP/1460,UDP/1460",Proshare Notebook Application
+PROSHAREAUDIO,"TCP/5713,UDP/5713",proshare conf audio
+PROSHAREDATA,"TCP/5715,UDP/5715",proshare conf data
+PROSHARENOTIFY,"TCP/5717,UDP/5717",proshare conf notify
+PROSHAREREQUEST,"TCP/5716,UDP/5716",proshare conf request
+PROSHAREVIDEO,"TCP/5714,UDP/5714",proshare conf video
+PROSPERO,"TCP/191,UDP/191",Prospero Directory Service
+PROXIMA-LM,"TCP/1445,UDP/1445",Proxima License Manager
+PROXY-PLUS,TCP/4480,Proxy+ HTTP proxy port
+PRSVP,"TCP/3455,UDP/3455",RSVP Port
+PTCNAMESERVICE,"TCP/597,UDP/597",PTC Name Service
+PUPARP,UDP/998,
+PWDGEN,"TCP/129,UDP/129",Password Generator Protocol
+PYTHONDS,TCP/7464,Python Documentation Server
+QAZ,TCP/7597,Quaz trojan worm
+QBIKGDP,"TCP/368,UDP/368",
+QFT,"TCP/189,UDP/189",Queued File Transport
+QMQP,TCP/628,Qmail Quick Mail Queueing
+QOTD,"TCP/17,UDP/17",Quote of the Day
+QRH,"TCP/752,UDP/752",
+QUAKE,UDP/26000,Quake game server
+QUAKE2,UDP/27910,Quake 2 game server
+QUAKE3,UDP/27960,Quake 3 Arena Server
+QUAKEWORLD,UDP/27500,Quake world
+QUICKTIME,TCP/1220,Apple Darwin and QuickTime Streaming Administration Servers
+QUOTAD,"TCP/762,UDP/762",
+RADACCT,"UDP/1646,UDP/1813",radius accounting
+RADIUS,"UDP/1645,UDP/1812",radius authentication
+RADMIN,TCP/4899,Radmin (www.radmin.com) remote PC control software
+RADMIND,"TCP/6222,TCP/6662",Radmind protocol
+RAID-AC,UDP/2012,
+RAID-AM,"UDP/2007,TCP/2013",
+RAID-CC,"UDP/2006,TCP/2011",raid
+RAID-CD,UDP/2013,
+RAID-CS,UDP/2015,
+RAID-SF,UDP/2014,
+RAP,"TCP/38,UDP/38,UDP/256",Route Access Protocol
+RAP-LISTEN,"TCP/1531,UDP/1531",
+RAP-SERVICE,"TCP/1530,UDP/1530",
+RCP,"TCP/469,UDP/469",Radio Control Protocol
+RDS,"TCP/1540,UDP/1540",
+RDS2,"TCP/1541,UDP/1541",
+RE-MAIL-CK,"TCP/50,UDP/50",Remote Mail Checking Protocol
+REACHOUT,TCP/43188,Sygate Firewall management port version 3.0 build 521 and above
+REALSERVER,TCP/7070,onlinet uninterruptable power supplies
+RELIEF,"TCP/1353,UDP/1353",Relief Consulting
+RELLPACK,UDP/2018,
+REMOTE-KIS,"TCP/185,UDP/185",
+REMOTEANYTHING,"UDP/3996,UDP/3997,UDP/3998,TCP/3999,TCP/4000",neoworx remote-anything slave daemon
+REMOTEFS,"TCP/556,UDP/556","rfs, rfs_server, Brunhoff remote filesystem"
+RENDEZVOUS,TCP/3689,Rendezvous Zeroconf (used by Apple/iTunes)
+RESVC,TCP/691,The Microsoft Exchange 2000 Server Routing Service          
+RETROSPECT,"TCP/497,UDP/497",
+RETS-OR-BACKUPEXEC,TCP/6103,Backup Exec Agent Accelerator and Remote Agent also sql server and cisco works blue
+RFA,"TCP/4672,UDP/4672",remote file access server
+RFE,"TCP/5002,UDP/5002",Radio Free Ethernet
+RFX-LM,"TCP/1497,UDP/1497",
+RGTP,"TCP/1431,UDP/1431",Reverse Gossip Transport
+RICARDO-LM,"TCP/6148,UDP/6148",Ricardo North America License Manager
+RIGHTBRAIN,"TCP/1354,UDP/1354",RightBrain Software
+RIMSL,"TCP/2044,UDP/2044",
+RIPD,TCP/2602,RIPd vty
+RIPNG,"TCP/521,UDP/521",
+RIPNGD,TCP/2603,RIPngd vty
+RIS,"TCP/180,UDP/180",Intergraph
+RIS-CM,"TCP/748,UDP/748",Russell Info Sci Calendar Manager
+RJE,"TCP/5,UDP/5",Remote Job Entry
+RKINIT,"TCP/2108,UDP/2108",Kerberos (v4) remote initialization
+RLP,"TCP/39,UDP/39",Resource Location Protocol
+RMONITOR,"TCP/560,UDP/560",rmonitord
+RMONITOR_SECURE,"TCP/5145,UDP/5145",
+RMT,"TCP/411,UDP/411",Remote MT Protocol
+RNA-LM,"TCP/1522,UDP/1522",Ricardo North America License Manager
+RNDC,TCP/953,RNDC is used by BIND 9 (& probably other NS)
+ROBCAD-LM,"TCP/1509,UDP/1509","Robcad, Ltd. License Manager"
+ROUTE,UDP/520,router routed -- RIP
+RPASSWD,TCP/774,
+RPC2PORTMAP,"TCP/369,UDP/369",
+RPCBIND,"TCP/111,UDP/111","portmapper, rpcbind"
+RPLAY,UDP/5555,
+RRH,"TCP/753,UDP/753",
+RSH-SPX,"TCP/222,UDP/222",Berkeley rshd with SPX auth
+RSVD,"TCP/168,UDP/168",
+RSVP_TUNNEL,"TCP/363,UDP/363",
+RSYNC,TCP/873,Rsync server ( http://rsync.samba.org )
+RTELNET,"TCP/107,UDP/107",Remote Telnet
+RTIP,"TCP/771,UDP/771",
+RTMP,TCP/1935,Macromedia FlasComm Server
+RTSCLIENT,"TCP/2501,UDP/2501",Resource Tracking system client
+RTSP,"TCP/554,UDP/554",Real Time Stream Control Protocol
+RTSSERV,"TCP/2500,UDP/2500",Resource Tracking system server
+RWHOIS,"TCP/4321,UDP/4321",Remote Who Is
+RWW,TCP/4125,Microsoft Remote Web Workplace on Small Business Server
+RXE,UDP/761,
+S-NET,"TCP/166,UDP/166",Sirius Systems
+SAE-URN,"TCP/4500,UDP/4500",
+SAFT,"TCP/487,UDP/487",saft Simple Asynchronous File Transfer
+SAMBA-SWAT,TCP/901,Samba SWAT tool.  Also used by ISS RealSecure.
+SAPCOMM,TCP/3398,SAPcomm
+SAPEPS,TCP/3399,SAP EPS
+SAPOSS,TCP/3397,SAP Oss
+SAPROUTER,TCP/3299,SAProuter
+SAS-1,"TCP/1426,UDP/1426",Satellite-data Acquisition System 1
+SAS-2,"TCP/1436,UDP/1436",Satellite-data Acquisition System 2
+SAS-3,"TCP/1501,UDP/1501",Satellite-data Acquisition System 3
+SBOOK,"TCP/1349,UDP/1349",Registration Network Protocol
+SCC-SECURITY,"TCP/582,UDP/582",
+SCO-DTMGR,"TCP/617,UDP/617",SCO Desktop Administration Server or Arkeia (www.akriea.com) backup software
+SCO-WEBSRVRMG3,"TCP/598,UDP/598",SCO Web Server Manager 3
+SCOHELP,"TCP/457,UDP/457",
+SCOI2ODIALOG,"TCP/360,UDP/360",
+SCOREMGR,"TCP/2034,UDP/2034",
+SCRABBLE,"TCP/2026,UDP/2026",
+SCREENCAST,"TCP/1368,UDP/1368",
+SCX-PROXY,"TCP/470,UDP/470",
+SD,"TCP/9876,UDP/9876",Session Director
+SDADMIND,TCP/5550,ACE/Server services
+SDFUNC,"TCP/2046,UDP/2046",
+SDLOG,TCP/5520,ACE/Server services
+SDNSKMP,"TCP/558,UDP/558",
+SDREPORT,TCP/5540,ACE/Server services
+SDSC-LM,"TCP/1537,UDP/1537",
+SDSERV,TCP/5530,ACE/Server services
+SDXAUTHD,UDP/5540,ACE/Server services
+SEARCH,TCP/2010,Or nfr411
+SECUREIDPROP,TCP/5510,ACE/Server services
+SECURENETPRO-SENSOR,TCP/975,RNDC is used by BIND 9 (& probably other NS)
+SECURID,UDP/5500,SecurID
+SEMANTIX,"TCP/361,UDP/361",
+SEND,"TCP/169,UDP/169",
+SEOSLOAD,TCP/8892,From the new Computer Associates eTrust ACX
+SERVEXEC,TCP/2021,
+SERVSERV,UDP/2011,
+SET,UDP/257,secure electronic transaction
+SFS-CONFIG,"TCP/452,UDP/452",Cray SFS config server
+SFS-SMP-NET,"TCP/451,UDP/451",Cray Network Semaphore server
+SFTP,"TCP/115,UDP/115",Simple File Transfer Protocol
+SGCP,"TCP/440,UDP/440",
+SGI-DGL,TCP/5232,SGI Distributed Graphics
+SGMP,"TCP/153,UDP/153",
+SGMP-TRAPS,"TCP/160,UDP/160",
+SHADOWSERVER,"TCP/2027,UDP/2027",
+SHELL,TCP/514,BSD rshd(8)
+SHIVADISCOVERY,"TCP/1502,UDP/1502",Shiva
+SHIVAHOSE,TCP/1549,Shiva Hose
+SHIVASOUND,UDP/1549,Shiva Sound
+SHIVA_CONFSRVR,"TCP/1651,UDP/1651",
+SHRINKWRAP,"TCP/358,UDP/358",
+SIAM,"TCP/498,UDP/498",
+SIFT-UFT,"TCP/608,UDP/608",Sender-Initiated/Unsolicited File Transfer
+SILC,TCP/706,Secure Internet Live Conferencing -- http://silcnet.org
+SILVERPLATTER,"TCP/416,UDP/416",
+SIMBA-CS,"TCP/1543,UDP/1543",
+SIP,"TCP/5060,UDP/5060",Session Initiation Protocol (SIP)
+SJ3,TCP/3086,SJ3 (kanji input)
+SKKSERV,TCP/1178,SKK (kanji input)
+SKRONK,"TCP/460,UDP/460",
+SLNP,"TCP/3025,TCP/3045,TCP/8076",SLNP (Simple Library Network Protocol) by Sisis Informationssysteme GmbH
+SMAKYNET,"TCP/122,UDP/122",
+SMARTSDP,"TCP/426,UDP/426",
+SMIP-AGENT,UDP/164,CMIP/TCP Agent
+SMPTE,"TCP/420,UDP/420",
+SMSD,"TCP/596,UDP/596",
+SMSP,"TCP/413,UDP/413",
+SMTP,"TCP/25,UDP/25",Simple Mail Transfer,PH_SYS_PROTOGRP_MAIL
+SMTPS,"TCP/465,UDP/465",smtp protocol over TLS/SSL (was ssmtp),PH_SYS_PROTOGRP_MAIL
+SMUX,"TCP/199,UDP/199",SNMP Unix Multiplexer
+SNAGAS,"TCP/108,UDP/108",SNA Gateway Access Server
+SNARE,"TCP/509,UDP/509",
+SNET-SENSOR-MGMT,TCP/10000,SecureNet Pro Sensor https management server or apple airport admin
+SNEWS,"TCP/563,UDP/563",
+SNMP,"TCP/161,UDP/161",
+SNMP-TCP-PORT,"TCP/1993,UDP/1993",cisco SNMP TCP port
+SNMPTRAP,"TCP/162,UDP/162",snmp-trap
+SNPP,"TCP/444,UDP/444",Simple Network Paging Protocol
+SNS_CREDIT,TCP/1076,Shared Network Services (SNS) for Canadian credit card authorizations
+SNTP-HEARTBEAT,"TCP/580,UDP/580",
+SOCKS,"TCP/1080,UDP/1080",
+SOFTCM,"TCP/6110,UDP/6110",HP SoftBench CM
+SOFTPC,"TCP/215,UDP/215",Insignia Solutions
+SOMETIMES-RPC1,UDP/1012,This is rstatd on my openBSD box
+SOMETIMES-RPC10,UDP/32773,Sometimes an RPC port on my Solaris box (rquotad)
+SOMETIMES-RPC11,TCP/32774,Sometimes an RPC port on my Solaris box (rusersd)
+SOMETIMES-RPC12,UDP/32774,Sometimes an RPC port on my Solaris box (rusersd)
+SOMETIMES-RPC13,TCP/32775,Sometimes an RPC port on my Solaris box (status)
+SOMETIMES-RPC14,UDP/32775,Sometimes an RPC port on my Solaris box (status)
+SOMETIMES-RPC15,TCP/32776,Sometimes an RPC port on my Solaris box (sprayd)
+SOMETIMES-RPC16,UDP/32776,Sometimes an RPC port on my Solaris box (sprayd)
+SOMETIMES-RPC17,TCP/32777,Sometimes an RPC port on my Solaris box (walld)
+SOMETIMES-RPC18,UDP/32777,Sometimes an RPC port on my Solaris box (walld)
+SOMETIMES-RPC19,TCP/32778,Sometimes an RPC port on my Solaris box (rstatd)
+SOMETIMES-RPC2,UDP/737,Rusersd on my OpenBSD box
+SOMETIMES-RPC20,UDP/32778,Sometimes an RPC port on my Solaris box (rstatd)
+SOMETIMES-RPC21,TCP/32779,Sometimes an RPC port on my Solaris box
+SOMETIMES-RPC22,UDP/32779,Sometimes an RPC port on my Solaris box
+SOMETIMES-RPC23,TCP/32780,Sometimes an RPC port on my Solaris box
+SOMETIMES-RPC24,UDP/32780,Sometimes an RPC port on my Solaris box
+SOMETIMES-RPC25,TCP/32786,Sometimes an RPC port (mountd)
+SOMETIMES-RPC26,UDP/32786,Sometimes an RPC port
+SOMETIMES-RPC27,TCP/32787,Sometimes an RPC port dmispd (DMI Service Provider)
+SOMETIMES-RPC28,UDP/32787,Sometimes an RPC port
+SOMETIMES-RPC3,TCP/32770,Sometimes an RPC port on my Solaris box
+SOMETIMES-RPC4,UDP/32770,Sometimes an RPC port on my Solaris box
+SOMETIMES-RPC5,TCP/32771,Sometimes an RPC port on my Solaris box (rusersd)
+SOMETIMES-RPC6,UDP/32771,Sometimes an RPC port on my Solaris box (rusersd)
+SOMETIMES-RPC7,TCP/32772,Sometimes an RPC port on my Solaris box (status)
+SOMETIMES-RPC8,UDP/32772,Sometimes an RPC port on my Solaris box (status)
+SOMETIMES-RPC9,TCP/32773,Sometimes an RPC port on my Solaris box (rquotad)
+SONAR,"TCP/572,UDP/572",
+SOPHIA-LM,"TCP/1408,UDP/1408",Sophia License Manager
+SPAMASSASSIN,TCP/783,Apache SpamAssassin spamd
+SPC,"TCP/6111,UDP/6111",HP SoftBench Sub-Process Control
+SPSC,"TCP/478,UDP/478",
+SQL*NET,"TCP/66,UDP/66",Oracle SQL*NET,PH_SYS_PROTOGRP_DB
+SQL-NET,"TCP/150,UDP/150",,PH_SYS_PROTOGRP_DB
+SQLSERV,"TCP/118,UDP/118",SQL Services,PH_SYS_PROTOGRP_DB
+SQLSRV,"TCP/156,UDP/156",SQL Service,PH_SYS_PROTOGRP_DB
+SQUID-HTCP,UDP/4827,Squid proxy HTCP port
+SQUID-HTTP,TCP/3128,SJ3 (kanji input)
+SQUID-IPC,UDP/3130,SJ3 (kanji input)
+SQUID-SNMP,UDP/3401,Squid proxy SNMP port
+SRC,"TCP/200,UDP/200",IBM System Resource Controller
+SRMP,"TCP/193,UDP/193",Spider Remote Monitoring Protocol
+SRSSEND,"TCP/362,UDP/362",SRS Send
+SS7NS,"TCP/477,UDP/477",
+SSH,"TCP/22,UDP/22",Secure Shell Login
+SSSERVER,TCP/1270,Sun StorEdge Configuration Service
+SSTATS,TCP/486,
+STATSCI1-LM,"TCP/6144,UDP/6144",StatSci License Manager - 1
+STATSCI2-LM,"TCP/6145,UDP/6145",StatSci License Manager - 2
+STATSRV,"TCP/133,UDP/133",Statistics Service
+STEL,TCP/10005,Secure telnet
+STMF,"TCP/501,UDP/501",
+STONE-DESIGN-1,"TCP/1492,UDP/1492",
+STREETTALK,TCP/566,
+STUN-P1,"TCP/1990,UDP/1990",cisco STUN Priority 1 port
+STUN-P2,"TCP/1991,UDP/1991",cisco STUN Priority 2 port
+STUN-P3,"TCP/1992,UDP/1992",cisco STUN Priority 3 port
+STUN-PORT,"TCP/1994,UDP/1994",cisco serial tunnel port
+STX,"TCP/527,UDP/527",Stock IXChange
+SU-MIT-TG,"TCP/89,UDP/89",SU/MIT Telnet Gateway
+SUBMISSION,"TCP/587,UDP/587",
+SUBMIT,TCP/773,
+SUBMITSERVER,"TCP/2028,UDP/2028",
+SUBNTBCST_TFTP,"TCP/247,UDP/247",
+SUBSEVEN,"TCP/16959,TCP/27374",Subseven trojan
+SUN-ANSWERBOOK,TCP/8888,Sun Answerbook HTTP server.  Or gnump3d streaming music server
+SUN-MANAGECONSOLE,TCP/898,Solaris Management Console Java listener (Solaris 8 & 9)
+SUPDUP,"TCP/95,UDP/95",BSD supdupd(8)
+SUPFILEDBG,TCP/1127,SUP debugging
+SUPFILESRV,TCP/871,SUP server
+SUPPORT,TCP/1529,cygnus bug tracker
+SUR-MEAS,"TCP/243,UDP/243",Survey Measurement
+SVRLOC,"TCP/427,UDP/427",Server Location
+SWGPS,TCP/15126,Nortel Java S/WGPS Global Payment Solutions for US credit card authorizations
+SWIFT-RVF,"TCP/97,UDP/97",Swift Remote Virtural File Protocol
+SYBASE,TCP/2638,Sybase database
+SYGATEFW,UDP/39213,Sygate Firewall management port version 3.0 build 521 and above
+SYMANTEC-AV,UDP/2967,Symantec AntiVirus (rtvscan.exe)
+SYMPLEX,"TCP/1507,UDP/1507",
+SYNOPTICS-TRAP,"TCP/412,UDP/412",Trap Convention Port
+SYNOTICS-BROKER,"TCP/392,UDP/392",SynOptics Port Broker Port
+SYNOTICS-RELAY,"TCP/391,UDP/391",SynOptics SNMP Relay Port
+SYSLOG,UDP/514,BSD syslogd(8)
+SYSTAT,"TCP/11,UDP/11",Active Users
+TABULA,"TCP/1437,UDP/1437",
+TACACS,"TCP/49,UDP/49",Login Host Protocol (TACACS)
+TACACS-DS,"TCP/65,UDP/65",TACACS-Database Service
+TACNEWS,UDP/98,TAC News
+TALIGENT-LM,"TCP/1475,UDP/1475",Taligent License Manager
+TALK,"TCP/517,UDP/517","like tenex link, but across"
+TAM,"TCP/209,UDP/209",Trivial Authenticated Mail Protocol
+TCP-ID-PORT,"TCP/1999,UDP/1999",cisco identification port
+TCPMUX,"TCP/1,UDP/1",TCP Port Service Multiplexer [rfc-1078]
+TCPNETHASPSRV,"TCP/475,UDP/475",
+TEEDTAP,"TCP/559,UDP/559",
+TELEFINDER,"TCP/1474,UDP/1474",
+TELELPATHATTACK,"TCP/5011,UDP/5011",
+TELELPATHSTART,"TCP/5010,UDP/5010",
+TELESIS-LICMAN,"TCP/1380,UDP/1380",Telesis Network License Manager
+TELNET,"TCP/23,UDP/23",
+TELNETS,TCP/992,telnet protocol over TLS/SSL
+TEMPO,"TCP/526,UDP/526",newdate
+TENEBRIS_NTS,"TCP/359,UDP/359",Tenebris Network Trace Service
+TERMINALDB,"UDP/2008,TCP/2018",
+TFTP,"TCP/69,UDP/69",Trivial File Transfer
+TICF-1,"TCP/492,UDP/492",Transport Independent Convergence for FNA
+TICF-2,"TCP/493,UDP/493",Transport Independent Convergence for FNA
+TIMBUKTU,"TCP/407,UDP/407",
+TIMBUKTU-SRV1,"TCP/1417,UDP/1417",Timbuktu Service 1 Port
+TIMBUKTU-SRV2,"TCP/1418,UDP/1418",Timbuktu Service 2 Port
+TIMBUKTU-SRV3,"TCP/1419,UDP/1419",Timbuktu Service 3 Port
+TIMBUKTU-SRV4,"TCP/1420,UDP/1420",Timbuktu Service 4 Port
+TIME,"TCP/37,UDP/37",timserver
+TIMED,"TCP/525,UDP/525",timeserver
+TIMEFLIES,"TCP/1362,UDP/1362",
+TINYFW,TCP/44334,tiny personal firewall admin port
+TLISRV,"TCP/1527,UDP/1527",oracle
+TN-TL-FD1,"TCP/476,UDP/476",
+TN-TL-W1,TCP/474,
+TN-TL-W2,UDP/474,
+TNETOS,"TCP/377,UDP/377",NEC Corporation
+TNS-CML,"TCP/590,UDP/590",
+TOR-CONTROL,TCP/9051,"Tor ControlPort, www.torproject.org"
+TOR-SOCKS,TCP/9050,"Tor SocksPort, www.torproject.org"
+TOR-TRANS,TCP/9040,"Tor TransPort, www.torproject.org"
+TPDU,"TCP/1430,UDP/1430",Hypercom TPDU
+TPIP,"TCP/594,UDP/594",
+TR-RSRB-P1,"TCP/1987,UDP/1987",cisco RSRB Priority 1 port
+TR-RSRB-P2,"TCP/1988,UDP/1988",cisco RSRB Priority 2 port
+TR-RSRB-P3,"TCP/1989,UDP/1989",cisco RSRB Priority 3 port
+TR-RSRB-PORT,"TCP/1996,UDP/1996",cisco Remote SRB port
+TRACK,TCP/3462,software distribution
+TRINOO_BCAST,UDP/27444,Trinoo distributed attack tool Master
+TRINOO_MASTER,TCP/27665,Trinoo distributed attack tool Master server control port
+TRINOO_REGISTER,UDP/31335,Trinoo distributed attack tool Bcast Daemon registration port
+TROFF,TCP/2014,
+TSERVER,"TCP/450,UDP/450",
+TTYINFO,TCP/2012,
+UAAC,"TCP/145,UDP/145",UAAC Protocol
+UAIACT,"TCP/1470,UDP/1470",Universal Analytics
+UARPS,"TCP/219,UDP/219",Unisys ARPs
+UDT_OS,"TCP/3900,UDP/3900",Unidata UDT OS
+UFSD,"TCP/1008,UDP/1008",UFS-aware server
+UIS,"TCP/390,UDP/390",
+ULISTSERV,"TCP/372,UDP/372",Unix Listserv
+ULP,"TCP/522,UDP/522",
+ULPNET,"TCP/483,UDP/483",
+UMETER,"TCP/571,UDP/571",udemon
+UNICALL,"TCP/4343,UDP/4343",
+UNIDATA-LDM,"TCP/388,UDP/388",Unidata LDM Version 4
+UNIFY,"TCP/181,UDP/181",
+UNITARY,"TCP/126,UDP/126",Unisys Unitary Login
+UPNP,"TCP/1900,UDP/1900,TCP/5000,UDP/5000",Universal PnP
+UPS,"TCP/401,UDP/401",Uninterruptible Power Supply
+UPS-ONLINET,"TCP/7010,UDP/7010",onlinet uninterruptable power supplies
+URM,"TCP/606,UDP/606",Cray Unified Resource Manager
+US-GV,"TCP/1370,UDP/1370",Unix Shell to GlobalView
+UTCD,"TCP/1506,UDP/1506",Universal Time daemon (utcd)
+UTIME,"TCP/519,UDP/519",unixtime
+UTMPCD,"TCP/431,UDP/431",
+UTMPSD,"TCP/430,UDP/430",
+UUCP,"TCP/540,UDP/540",uucpd
+UUCP-PATH,"TCP/117,UDP/117",UUCP Path Service
+UUCP-RLOGIN,"TCP/541,UDP/541",
+VALISYS-LM,"TCP/1457,UDP/1457",Valisys License Manager
+VAT,TCP/3456,VAT default data
+VAT-CONTROL,"TCP/3457,UDP/3457",VAT default control
+VEMMI,"TCP/575,UDP/575",
+VENUS,"TCP/2430,UDP/2430",
+VENUS-SE,"TCP/2431,UDP/2431",
+VETTCP,"TCP/78,UDP/78",
+VIA-FTP,"TCP/63,UDP/63",VIA Systems - FTP & whois++
+VID,"TCP/769,UDP/769",
+VIDEO-ACTIVMAIL,"TCP/1398,UDP/1398",Video Active Mail
+VIDEOTEX,"TCP/516,UDP/516",
+VIRTUAL-PLACES,"TCP/1533,UDP/1533",Virtual Places Software
+VISTIUM-SHARE,"TCP/1545,UDP/1545",
+VLSI-LM,"TCP/1500,UDP/1500",VLSI License Manager
+VMNET,"TCP/175,UDP/175",
+VMODEM,"TCP/3141,UDP/3141",
+VMPWSCS,"TCP/214,UDP/214",
+VNAS,"TCP/577,UDP/577",
+VNC,TCP/5900,Virtual Network Computer display 0
+VNC-1,TCP/5901,Virtual Network Computer display 1
+VNC-2,TCP/5902,Virtual Network Computer display 2
+VNC-3,TCP/5903,Virtual Network Computer display 3
+VNC-HTTP,TCP/5800,"Virtual Network Computer HTTP Access, display 0"
+VNC-HTTP-1,TCP/5801,"Virtual Network Computer HTTP Access, display 1"
+VNC-HTTP-2,TCP/5802,"Virtual Network Computer HTTP Access, display 2"
+VNC-HTTP-3,TCP/5803,"Virtual Network Computer HTTP Access, display 3"
+VPAC,"TCP/1517,UDP/1517",Virtual Places Audio control
+VPAD,"TCP/1516,UDP/1516",Virtual Places Audio data
+VPVC,"TCP/1519,UDP/1519",Virtual Places Video control
+VPVD,"TCP/1518,UDP/1518",Virtual Places Video data
+VSINET,UDP/996,
+VSLMP,"TCP/312,UDP/312",
+WAP-PUSH,UDP/2948,Windows Mobile devices often have this
+WASTE,TCP/1337,Nullsoft WASTE encrypted P2P app
+WATCOM-SQL,"TCP/1498,UDP/1498",
+WATERSHED-LM,"TCP/6143,UDP/6143",Watershed License Manager
+WDBRPC,UDP/17185,vxWorks WDB remote debugging ONCRPC
+WEBSTER,"TCP/765,UDP/765,TCP/2627,UDP/2627",
+WHO,UDP/513,BSD rwhod(8)
+WHOAMI,"TCP/565,UDP/565",
+WHOIS,"TCP/43,UDP/43",nicname
+WHOSOCKAMI,"UDP/2009,TCP/2019",
+WINCIM,TCP/4144,pc windows compuserve.com protocol
+WINDOWS-ICFW,TCP/1002,Windows Internet Connection Firewall or Internet Locator Server for NetMeeting.
+WINS,"TCP/1512,UDP/1512",Microsoft's Windows Internet Name Service
+WIZARD,UDP/2001,curry
+WMS,TCP/1755,Windows media service
+WNN6,TCP/22273,Wnn6 (Japanese input)
+WNN6_CN,TCP/22289,Wnn6 (Chinese input)
+WNN6_DS,TCP/26208,Wnn6 (Dserver)
+WNN6_KR,TCP/22305,Wnn6 (Korean input)
+WNN6_TW,TCP/22321,Wnn6 (Taiwanse input)
+WORK-SOL,"TCP/400,UDP/400",Workstation Solutions
+WORLD-LM,"TCP/1462,UDP/1462",World License Manager
+WPAGES,"TCP/776,UDP/776",
+WPGS,"TCP/780,UDP/780",
+WWW-DEV,"TCP/2784,UDP/2784",world wide web - development
+X11,TCP/6000,X Window server
+X11:1,TCP/6001,X Window server
+X11:2,TCP/6002,X Window server
+X11:3,TCP/6003,X Window server
+X11:4,TCP/6004,X Window server
+X11:5,TCP/6005,X Window server
+X11:6,TCP/6006,X Window server
+X11:7,TCP/6007,X Window server
+X11:8,TCP/6008,X Window server
+X11:9,TCP/6009,X Window server
+X25-SVC-PORT,"TCP/1998,UDP/1998",cisco X.25 service (XOT)
+XAUDIO,TCP/1103,X Audio Server
+XDMCP,"TCP/177,UDP/177",X Display Mgr. Control Proto
+XDSXDM,"TCP/6558,UDP/6558",
+XFER,"TCP/82,UDP/82",XFER Utility
+XINUEXPANSION1,UDP/2021,
+XINUEXPANSION2,UDP/2022,
+XINUEXPANSION3,"TCP/2023,UDP/2023",
+XINUEXPANSION4,"TCP/2024,UDP/2024",
+XINUPAGESERVER,"TCP/2020,UDP/2020",
+XLOG,UDP/482,
+XMAIL-CTRL,TCP/6017,XMail CTRL server
+XNMP,"TCP/1652,UDP/1652",
+XNS-AUTH,"TCP/56,UDP/56",XNS Authentication
+XNS-CH,"TCP/54,UDP/54",XNS Clearinghouse
+XNS-COURIER,"TCP/165,UDP/165",Xerox
+XNS-MAIL,"TCP/58,UDP/58",XNS Mail
+XNS-TIME,"TCP/52,UDP/52",XNS Time Protocol
+XRIBS,UDP/2025,
+XTELL,TCP/4224,Xtell messenging server
+XTREELIC,TCP/996,XTREE License Server
+XVTTP,"TCP/508,UDP/508",
+XYPLEX-MUX,"TCP/173,UDP/173",
+YAK-CHAT,UDP/258,yak winsock personal chat
+Z39.50,"TCP/210,UDP/210","wais, ANSI Z39.50"
+ZANNET,"TCP/317,UDP/317",
+ZEBRA,TCP/2601,zebra vty
+ZEBRASRV,TCP/2600,zebra service
+ZEPHYR-CLT,UDP/2103,Zephyr serv-hm connection
+ZEPHYR-HM,UDP/2104,Zephyr hostmanager
+ZEROCONF,UDP/5353,Mac OS X Bonjour/Zeroconf port 
+ZEUS-ADMIN,TCP/9090,Zeus admin server
+ZION-LM,"TCP/1425,UDP/1425",Zion Software License Manager
+ZSERV,"TCP/346,UDP/346",Zebra server
+PHMONITOR,TCP/7900,ProspectHills AccelOps Monitor
+PHPARSER,"TCP/7914,TCP/7912",ProspectHills AccelOps Parser
+PHQUERYMASTER,TCP/7918,ProspectHills AccelOps QueryMaster
+PHQUERYWORKER,TCP/7916,ProspectHills AccelOps QueryWorker 
+PHRULEMASTER,TCP/7922,ProspectHills AccelOps RuleMaster
+PHRULEWORKER,TCP/7924,ProspectHills AccelOps RuleWorker 
+PHREPORTMASTER,TCP/7934,ProspectHills AccelOps ReportMaster
+PHREPORTWORKER,TCP/7932,ProspectHills AccelOps ReportWorker 
+PHIDENTITYMASTER,TCP/7938,ProspectHills AccelOps IdentityMaster
+PHIDENTITYWORKER,TCP/7940,ProspectHills AccelOps IdentityWorker 
+PHDISCOVER,TCP/7928,ProspectHills AccelOps Discover
+PHDATAMANAGER,TCP/7920,ProspectHills AccelOps DataManager
+PHAGENTMANAGER,TCP/7926,ProspectHills AccelOps AgentManager
+PHEVENTPACKAGER,TCP/7936,ProspectHills AccelOps EventPackager
+PHCHECKPOINTAGENT,TCP/7930,ProspectHills AccelOps CheckpointAgent
+,,

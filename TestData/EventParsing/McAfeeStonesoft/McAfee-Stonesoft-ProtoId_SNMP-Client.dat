@@ -1,0 +1,35 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<6>CEF:0|McAfee|IPS|5.5.7|75473|ProtoId_SNMP-Client|1|spt=42109 deviceExternalId=PANASONIC-PCI-V2 node 1 dmac=03:3D:53:98:A0:00 dst=192.168.94.43 cat=Content Identification app=UDP/4444 rt=Apr 08 2016 00:26:02 deviceFacility=Inspection act=Permit deviceOutboundInterface=Interface #2 deviceInboundInterface=Interface #2 proto=17 dpt=4444 src=192.168.94.45 dvc=192.168.94.51 dvchost=192.168.94.51 smac=EC:29:53:98:A0:00 cs1Label=RuleId cs1=147.0
+[params]
+domain=PANASONIC-PCI-V2 node 1
+destMACAddr=03:3D:53:98:A0:00
+parserName=McAfeeStonesoftParser
+eventType=McAfee-Stonesoft-ProtoId_SNMP-Client
+devEventTypeGrp=Content Identification
+destIpAddr=192.168.94.43
+destIpPort=4444 (KRB524)
+srcIpAddr=192.168.94.45
+reptModel=Stonesoft IPS
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+fwAction=Permit
+eventName=SNMP protocol context
+appTransportProto=UDP/4444
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+eventRuleTrigger=1
+count=1
+srcMACAddr=EC:29:53:98:A0:00
+srcIpPort=42109
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+ipProto=17 (UDP)
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=McAfee

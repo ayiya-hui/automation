@@ -1,0 +1,4 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+IBM-Director-Generic,IBMDirector_1,IBMDirector,172.16.10.18,,syslog
+IBM-Director-Alert,IBMDirector_2,IBMDirector,172.16.10.18,,syslog

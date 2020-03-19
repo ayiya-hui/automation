@@ -1,0 +1,82 @@
+<eventParser name="NessusParser">
+
+  <deviceType>
+    <Vendor>Generic</Vendor>
+    <Model>Generic</Model>
+    <Version>ANY</Version>
+  </deviceType>
+
+  <appType>
+    <Vendor>Nessus</Vendor>
+    <Model>Vulnerability Scanner</Model>
+    <Version>ANY</Version>
+    <Name>Nessus Vulnerability Scanner</Name>
+  </appType>
+
+  <patternDefinitions>
+    <pattern name="patStrEndWithRightSquareBracket"><![CDATA[[^\]]*]]></pattern>
+    <pattern name="patStrEndBrack"><![CDATA[[^\]+]]></pattern>
+  </patternDefinitions>
+
+  <eventFormatRecognizer><![CDATA[\[Nessus-]]></eventFormatRecognizer>
+  
+  <testEvents>
+      <testEvent><![CDATA[<134>Apr 09 16:43:00 60.60.60.60 java: [Nessus-Vuln-Detected]:[eventSeverity]=PHL_INFO, [reptVendor]=Nessus, [reptModel]=Scan Report, [nessusUserName]=kai, [nessusDate]=Wed May 19 10:19:42 2010, [nessusScanName]=Network Scan -Test2, [nessusScanedIP]=10.1.2.26, [nessusScanedHostName]=QA-1.accelops.net.cn, [nessusOS]=Linux Kernel 2.6, [nessusVulnCategory]=Web Servers, [nessusScanedPort]=9443, [nessusVulnTittle]=The web server running on the remote host has an information disclosure vulnerability., [nessusVulnSeverity]=1, [nessusVulnCveId]=CVE-2009-0783, [nessusVulnBugTraqID]=35416, [nessusVulnCvssScore]=3.6, [nessusVulnConseq]=According to its self-reported version number, the remote host is running a vulnerable version of Apache Tomcat. Affected versions permit a web application to replace the XML parser used to process the XML and TLD files of other applications. This could allow a malicious web app to read or modify 'web.xml', 'context.xml', or TLD files of arbitrary web applications.]]></testEvent>
+  </testEvents>
+
+  <parsingInstructions>
+
+    <!-- sample event
+	 <134>Apr 09 16:43:00 172.16.10.60 java: [Nessus_Report_Vuln]:[eventSeverity]=PHL_INFO, [reptVendor]=Nessus, [reptModel]=Scan Report, [nessusUserName]=kai, [nessusDate]=Wed May 19 10:19:42 2010, [nessusScanName]=Network Scan -Test2, [nessusScanedIP]=10.1.2.26, [nessusOS]=Linux Kernel 2.6, [nessusVulnCategory]=Web Servers, [nessusScanedPort]=9443, [nessusVulnTittle]=The web server running on the remote host has an information disclosure vulnerability., [nessusVulnSeverity]=1, [nessusVulnCveId]=CVE-2009-0783, [nessusVulnBugTraqID]=35416, [nessusVulnCvssScore]=3.6, [nessusVulnConseq]=According to its self-reported version number, the remote host is running a vulnerable version of Apache Tomcat. Affected versions permit a web application to replace the XML parser used to process the XML and TLD files of other applications. This could allow a malicious web app to read or modify 'web.xml', 'context.xml', or TLD files of arbitrary web applications.
+	 -->
+
+    <collectFieldsByRegex src="$_rawmsg">
+      <regex><![CDATA[<:gPatSyslogPRI><:gPatMon>\s+<:gPatDay>\s+<:gPatTime>\s+<serverName:gPatStr>\s+java:\s*\[<eventType:patStrEndWithRightSquareBracket>\]:<_body:gPatMesgBody>]]></regex>
+    </collectFieldsByRegex>
+
+    <when test='$eventType = "Nessus-Get-Error"'>
+      <setEventAttribute attr="eventSeverity">8</setEventAttribute>
+    </when>
+
+    <collectAndSetAttrByKeyValuePair sep=', [' src="$_body">
+      <attrKeyMap attr="reptVendor" key="[reptVendor]="/>
+      <attrKeyMap attr="user" key="[nessusUserName]="/>
+      <attrKeyMap attr="_reptTime" key="[nessusDeviceTime]="/>
+      <attrKeyMap attr="scanProfile" key="[nessusScanName]="/>
+      <attrKeyMap attr="hostIpAddr" key="[nessusScanedIP]="/>
+      <attrKeyMap attr="osType" key="[nessusOS]="/>
+      <attrKeyMap attr="vulnType" key="[nessusVulnCategory]="/>
+      <attrKeyMap attr="vulnName" key="[nessusVulnTittle]="/>
+      <attrKeyMap attr="_severity" key="[nessusVulnSeverity]="/>
+      <attrKeyMap attr="vulnCVEId" key="[nessusVulnCveId]="/>
+      <attrKeyMap attr="vulnBugTraqID" key="[nessusVulnBugTraqID]="/>
+      <attrKeyMap attr="vulnConseq" key="[nessusVulnConseq]="/>
+      <attrKeyMap attr="ipPort" key="[nessusScanedPort]="/>
+      <attrKeyMap attr="vulnScore" key="[nessusVulnCvssScore]="/>
+      <attrKeyMap attr="hostName" key="[nessusScanedHostName]="/>
+      <attrKeyMap attr="errorString" key="[nessusErrorContent]="/>
+    </collectAndSetAttrByKeyValuePair>
+
+    <when test='$eventType = "Nessus-Vuln-Detected"'>
+      <when test='exist _reptTime'>
+	      <collectFieldsByRegex src="$_reptTime">
+		<regex><![CDATA[<:gPatStr> <_mon:gPatMon> <_day:gPatDay> <_time:gPatTime> <_year:gPatYear>]]></regex>
+	      </collectFieldsByRegex>
+	      <setEventAttribute attr="scanEnd">toDateTime($_mon, $_day, $_year, $_time)</setEventAttribute>
+       </when>
+       <choose>
+	      <when test='$_severity = "1"'>
+		<setEventAttribute attr="eventSeverity">4</setEventAttribute>
+	      </when>
+	      <when test='$_severity = "2"'>
+		<setEventAttribute attr="eventSeverity">7</setEventAttribute>
+	      </when>
+	      <when test='$_severity = "3"'>
+		<setEventAttribute attr="eventSeverity">10</setEventAttribute>
+	      </when>
+	    </choose>
+    </when>
+
+	   
+  </parsingInstructions>
+</eventParser>

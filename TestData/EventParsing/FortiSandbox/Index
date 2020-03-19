@@ -1,0 +1,4 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+FortiSandbox-Malware-Detected,FortiSandbox_1,FortiSandbox,$localhost,,syslog
+FortiSandbox-System,FortiSandbox_2,FortiSandbox,$localhost,,syslog

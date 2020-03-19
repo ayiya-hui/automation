@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<161>snort[2242]: [1:1475:9] WEB-CGI mailit.pl access [Classification: Misc activity] [Priority: 3]: {UDP} 192.168.19.1:6555 -> 172.16.2.5:514
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+reptDevIpAddr=$localhost
+eventParsedOk=1
+eventSeverity=8
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=MEDIUM
+destIpAddr=172.16.2.5
+eventAction=0 (Permit)
+eventName=WEB-CGI mailit.pl access
+ipProto=17 (UDP)
+reptVendor=Snort-org
+eventType=Snort-1475
+srcIpAddr=192.168.19.1
+phEventCategory=0 (External)
+destIpPort=514 (SYSLOG)
+srcIpPort=6555
+reptModel=Snort IPS
+devEventTypeGrp=Misc activity

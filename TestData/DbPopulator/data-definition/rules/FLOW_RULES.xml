@@ -1,0 +1,427 @@
+<Rules>
+
+  <Rule group="PH_SYS_RULE_Exploits" id="PH_Rule_Flow_1" phIncidentCategory="Network">
+    <Name> Heavy TCP Host Scan </Name>
+    <active>true</active>
+    <Description> Detects excessive half-open TCP sessions from the same source to many distinct destinations in a short period of time. The threshold is 200 flows within 3 minutes. Scanning may be a precursor to exploits. However, network management and mapping tools often scan the network for discovery purposes and authorized scanners need to be blacklisted. P2P clients also exhibit this behavior when they attempt to establish connections to (non-existent) peers.</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_HEAVY_TCP_HOST_SCAN" severity="7">
+      <ArgList>
+        srcIpAddr = HostScanTCP.srcIpAddr, incidentCount = HostScanTCP.COUNT (DISTINCT destIpAddr)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="180">
+      <SubPattern displayName="HostScanTCP" name="HostScanTCP">
+        <SingleEvtConstr> eventType = "IOS-NETFLOW-BI" AND srcDestTCPFlags = 2 AND ipProto = 6 AND srcIpAddr NOT IN (Group@PH_SYS_APP_ACCELOPS) </SingleEvtConstr>
+	<GroupByAttr> srcIpAddr </GroupByAttr>
+	<GroupEvtConstr>COUNT (DISTINCT destIpAddr) &gt;= 200</GroupEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,srcIpAddr,destIpAddr,ipProto,srcIpPort,destIpPort,srcDestTCPFlags,reptDevIpAddr,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+  </Rule>
+
+  <Rule group="PH_SYS_RULE_Exploits" id="PH_Rule_Flow_2" phIncidentCategory="Network">
+    <Name> Heavy TCP Host Scan On Fixed Port </Name>
+    <active>true</active>
+    <Description> Detects excessive half-open TCP sessions from the same source to many distinct destinations and on the same destination port in a short period of time. The threshold is 200 flows within 3 minutes. A fixed destination port may indicate that the scanning host is attempting to find hosts on a well known port (with a vulnerability). Scanning may be a precursor to exploits. However, network management and mapping tools often scan the network for discovery purposes and authorized scanners need to be blacklisted. P2P clients also exhibit this behavior when they attempt to establish connections to (non-existent) peers. </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_HEAVY_TCP_HOST_SCAN_FIXED_PORT" severity="9">
+      <ArgList>
+        srcIpAddr = HostScanFixedTCPPort.srcIpAddr, destIpPort = HostScanFixedTCPPort.destIpPort, incidentCount = HostScanFixedTCPPort.COUNT (DISTINCT destIpAddr)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="180">
+      <SubPattern displayName="HostScanFixedTCPPort" name="HostScanFixedTCPPort">
+        <SingleEvtConstr> eventType = "IOS-NETFLOW-BI" AND srcDestTCPFlags = 2 AND ipProto = 6 AND srcIpAddr NOT IN (Group@PH_SYS_APP_ACCELOPS) </SingleEvtConstr>
+	<GroupByAttr> srcIpAddr, destIpPort </GroupByAttr>
+	<GroupEvtConstr>COUNT (DISTINCT destIpAddr) &gt;= 100 </GroupEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,srcIpAddr,destIpAddr,ipProto,srcIpPort,destIpPort,srcDestTCPFlags,reptDevIpAddr,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+  </Rule>
+
+  <Rule group="PH_SYS_RULE_Exploits" id="PH_Rule_Flow_3" phIncidentCategory="Network">
+    <Name> Heavy UDP Host Scan </Name>
+    <active>true</active>
+    <Description> Detects excessive number of UDP connections from the same source to many distinct destinations in a short period of time. The threshold is 200 flows within 3 minutes. Scanning may be a precursor to exploits. However, network management and mapping tools often scan the network for discovery purposes and authorized scanners need to be blacklisted. P2P clients also exhibit this behavior when they attempt to establish connections to (non-existent) peers.</Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_HEAVY_UDP_HOST_SCAN" severity="7">
+      <ArgList>
+        srcIpAddr = HostScanUDP.srcIpAddr, incidentCount = HostScanUDP.COUNT (DISTINCT destIpAddr)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="180">
+      <SubPattern displayName="HostScanUDP" name="HostScanUDP">
+        <SingleEvtConstr> eventType = "IOS-NETFLOW-BI" AND ipProto = 17 AND srcIpAddr NOT IN (Group@PH_SYS_APP_ACCELOPS) </SingleEvtConstr>
+	<GroupByAttr> srcIpAddr </GroupByAttr>
+	<GroupEvtConstr>COUNT (DISTINCT destIpAddr) &gt;= 200</GroupEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,srcIpAddr,destIpAddr,ipProto,srcIpPort,destIpPort,reptDevIpAddr,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+  </Rule>
+
+  <Rule group="PH_SYS_RULE_Exploits" id="PH_Rule_Flow_4" phIncidentCategory="Network">
+    <Name> Heavy UDP Host Scan On Fixed Port </Name>
+    <active>true</active>
+    <Description> Detects excessive number of UDP connections from the same source to many distinct destinations and on the same destination port in a short period of time. The threshold is 200 flows within 3 minutes. A fixed destination port may indicate that the scanning host is attempting to find hosts on a well known port (with a vulnerability). Scanning may be a precursor to exploits. However, network management and mapping tools often scan the network for discovery purposes and authorized scanners need to be blacklisted. P2P clients also exhibit this behavior when they attempt to establish connections to (non-existent) peers.  </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_HEAVY_UDP_HOST_SCAN_FIXED_PORT" severity="9">
+      <ArgList>
+        srcIpAddr = HostScanFixedUDPPort.srcIpAddr, destIpPort = HostScanFixedUDPPort.destIpPort, incidentCount = HostScanFixedUDPPort.COUNT (DISTINCT destIpAddr)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="120">
+      <SubPattern displayName="HostScanFixedUDPPort" name="HostScanFixedUDPPort">
+        <SingleEvtConstr> eventType = "IOS-NETFLOW-BI" AND ipProto = 17 AND srcIpAddr NOT IN (Group@PH_SYS_APP_ACCELOPS) </SingleEvtConstr>
+	<GroupByAttr> srcIpAddr, destIpPort </GroupByAttr>
+	<GroupEvtConstr> COUNT (DISTINCT destIpAddr) &gt;= 100</GroupEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,srcIpAddr,destIpAddr,ipProto,srcIpPort,destIpPort,reptDevIpAddr,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+  </Rule>
+
+  <Rule group="PH_SYS_RULE_Exploits" id="PH_Rule_Flow_5" phIncidentCategory="Network">
+    <Name> Heavy ICMP Ping sweep </Name>
+    <active>true</active>
+    <Description> Detects excessive number of ICMP echo request packets from the same source to many distinct destinations in a short period of time. Nachi worm exploited pings to spread. The threshold is 50 pings within 3 minutes. Scanning may be a precursor to exploits. However, network management and mapping tools often scan the network for discovery purposes and authorized scanners need to be blacklisted. </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_HEAVY_ICMP_PING_SWEEP" severity="7">
+      <ArgList>
+        srcIpAddr = PingSweep.srcIpAddr, incidentCount = PingSweep.COUNT (DISTINCT destIpAddr)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="180">
+      <SubPattern displayName="PingSweep" name="PingSweep">
+        <SingleEvtConstr> eventType = "IOS-NETFLOW-BI" AND ipProto = 1 AND icmpType = 8 AND srcIpAddr NOT IN (Group@PH_SYS_APP_ACCELOPS) </SingleEvtConstr>
+	<GroupByAttr> srcIpAddr </GroupByAttr>
+	<GroupEvtConstr> COUNT (DISTINCT destIpAddr) &gt;= 50 </GroupEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,srcIpAddr,destIpAddr,ipProto,icmpType,icmpCode,reptDevIpAddr,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+  </Rule>
+
+  <Rule group="PH_SYS_RULE_Exploits" id="PH_Rule_Flow_6" phIncidentCategory="Network">
+    <Name> TCP DDOS Attack </Name>
+    <active>true</active>
+    <Description>Detects excessive number of half-open TCP connections from many distinct sources to the same destination host and on the same port in a short period of time. This may indicate that the destination server is under some sort of attack. </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_TCP_DDOS_ATTACK" severity="9">
+      <ArgList>
+        destIpAddr = DDOS_TCP.destIpAddr, destIpPort = DDOS_TCP.destIpPort, incidentCount = DDOS_TCP.COUNT (DISTINCT srcIpAddr)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="180">
+      <SubPattern displayName="DDOS_TCP" name="DDOS_TCP">
+        <SingleEvtConstr> eventType = "IOS-NETFLOW-BI" AND srcDestTCPFlags = 2 AND ipProto = 6 </SingleEvtConstr>
+	<GroupByAttr> destIpAddr, destIpPort </GroupByAttr>
+	<GroupEvtConstr>COUNT (DISTINCT srcIpAddr) &gt;= 200</GroupEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,srcIpAddr,destIpAddr,ipProto,srcIpPort,destIpPort,srcDestTCPFlags,reptDevIpAddr,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+  </Rule>
+
+  <Rule group="PH_SYS_RULE_Exploits" id="PH_Rule_Flow_8" phIncidentCategory="Network">
+    <Name> Excessive Denied Connections From Same Src  </Name>
+    <active>true</active>
+    <Description> Detects excessive denies from the same source to many distinct destinations on the same port in a short period of time. The intent could be malicious or some sort of misconfiguration. </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_EXCESS_DENY_SRC" severity="8">
+      <ArgList>
+        srcIpAddr = ExcessDenySameSrc.srcIpAddr, destIpPort = ExcessDenySameSrc.destIpPort, incidentCount = ExcessDenySameSrc.COUNT (DISTINCT destIpAddr)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="180">
+      <SubPattern displayName="ExcessDenySameSrc" name="ExcessDenySameSrc">
+        <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_DenyTraffic) </SingleEvtConstr>
+	<GroupByAttr> srcIpAddr, destIpPort </GroupByAttr>
+	<GroupEvtConstr>COUNT (DISTINCT destIpAddr) &gt;= 100</GroupEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,srcIpAddr,destIpAddr,ipProto,srcIpPort,destIpPort,reptDevIpAddr,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+  </Rule>
+
+  <Rule group="PH_SYS_RULE_Exploits" id="PH_Rule_Flow_9" phIncidentCategory="Network">
+    <Name> Excessive Denied Connections To Same Destination </Name>
+    <active>true</active>
+    <Description> Detects excessive denies from many distinct sources to the same destination on the same destination port </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_EXCESS_DENY_DEST" severity="8">
+      <ArgList>
+        destIpAddr = ExcessDenySameDest.destIpAddr, destIpPort = ExcessDenySameDest.destIpPort, incidentCount = ExcessDenySameDest.COUNT (DISTINCT srcIpAddr)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="180">
+      <SubPattern displayName="ExcessDenySameDest" name="ExcessDenySameDest">
+        <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_DenyTraffic) </SingleEvtConstr>
+	<GroupByAttr> destIpAddr, destIpPort </GroupByAttr>
+	<GroupEvtConstr>COUNT (DISTINCT srcIpAddr) &gt;= 100</GroupEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,srcIpAddr,destIpAddr,ipProto,srcIpPort,destIpPort,reptDevIpAddr,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+  </Rule>
+
+  <Rule group="PH_SYS_RULE_Exploits" id="PH_Rule_Flow_10" phIncidentCategory="Network">
+    <Name> Unusually Large ICMP Echo Packets </Name>
+    <active>true</active>
+    <Description> Detects large (> 200 bytes/pkt) ICMP echo request and response packets - this is unusual since ICMP packets carry minimal information and are small in size. THis may indicate that some other traffic is being carried over ICMP protocol. </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_LARGE_ICMP_ECHO" severity="9">
+      <ArgList>
+        srcIpAddr = LargeICMPEchoReq.srcIpAddr, destIpAddr = LargeICMPEchoReq.destIpAddr
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="300">
+      <SubPattern displayName="LargeICMPEchoReq" name="LargeICMPEchoReq">
+        <SingleEvtConstr> eventType IN ("IOS-NETFLOW-BI", Group@PH_SYS_EVENT_PermitTraffic) AND icmpType = 8 </SingleEvtConstr>
+	<GroupByAttr> srcIpAddr, destIpAddr </GroupByAttr>
+	<GroupEvtConstr> SUM(sentBytes)/SUM(sentPkts) &gt;= 200 </GroupEvtConstr>
+      </SubPattern>
+      <Operator rank="0" type="AND"/>
+      <SubPattern displayName="LargeICMPEchoResp" name="LargeICMPEchoResp">
+        <SingleEvtConstr> eventType IN ("IOS-NETFLOW-BI", Group@PH_SYS_EVENT_PermitTraffic) AND icmpType = 0 </SingleEvtConstr>
+	<GroupByAttr> srcIpAddr, destIpAddr </GroupByAttr>
+	<GroupEvtConstr> SUM(sentBytes)/SUM(sentPkts) &gt;= 200 </GroupEvtConstr>
+      </SubPattern>
+      <GlobalConstr>LargeICMPEchoReq.srcIpAddr = LargeICMPEchoResp.destIpAddr, LargeICMPEchoReq.destIpAddr = LargeICMPEchoResp.srcIpAddr </GlobalConstr>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,srcIpAddr,destIpAddr,ipProto,icmpType,icmpCode,sentPkts,recvPkts,sentBytes,recvBytes,reptDevIpAddr,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+  </Rule>
+
+  <Rule group="PH_SYS_RULE_Exploits" id="PH_Rule_Flow_11" phIncidentCategory="Application">
+    <Name> Excessive Denied End User Mail To Unauthorized Mail Gateways </Name>
+    <active>true</active>
+    <Description> Detects a scenario where a host, that is itself not an authorized mail gateway, is unsuccessfully trying to send excessive emails to unauthorized mail gateways. Authorized mail gateways are represented by the "Mail Gateway" group. Such requests would be typically denied because, either the firewall would block SMTP from end hosts and/or mail gateways only receive mail from other authorized mail gateways. This behavior may indicate malware running on an end host that is trying to send spam or privileged information to its own set of mail servers (which may be compromised). </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_EXCESS_DENY_MAIL" severity="8">
+      <ArgList>
+        srcIpAddr = EndUserMailToUnauthMailGw.srcIpAddr
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="300">
+      <SubPattern displayName="EndUserMailToUnauthMailGw" name="EndUserMailToUnauthMailGw">
+        <SingleEvtConstr> destIpPort = 25 AND destIpAddr NOT IN (Group@PH_SYS_DEVICE_SEC_GW, Group@PH_SYS_APP_MAIL_SERVER) AND srcIpAddr NOT IN (Group@PH_SYS_DEVICE_SEC_GW,Group@PH_SYS_APP_MAIL_SERVER) AND srcIpAddr IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) </SingleEvtConstr>
+	<GroupByAttr> srcIpAddr </GroupByAttr>
+	<GroupEvtConstr> COUNT (DISTINCT destIpAddr) &gt;= 5 </GroupEvtConstr>
+      </SubPattern>
+      <Operator rank="1" type="AND"/>
+      <SubPattern displayName="ExcessDeniedMail" name="ExcessDeniedMail">
+        <SingleEvtConstr> eventType IN (Group@PH_SYS_EVENT_DenyTraffic) AND destIpPort = 25 AND srcIpAddr NOT IN (Group@PH_SYS_DEVICE_SEC_GW,Group@PH_SYS_APP_MAIL_SERVER) AND srcIpAddr IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) </SingleEvtConstr>
+	<GroupByAttr> srcIpAddr </GroupByAttr>
+	<GroupEvtConstr> COUNT (*) &gt;= 30</GroupEvtConstr>
+      </SubPattern>
+      <Operator rank="0" type="OR"/>
+      <SubPattern displayName="ExcessPermitMail" name="ExcessPermitMail">
+        <SingleEvtConstr> eventType = "IOS-NETFLOW-BI" AND srcDestTCPFlags = 2 AND ipProto = 6 AND destIpPort = 25 AND srcIpAddr NOT IN (Group@PH_SYS_DEVICE_SEC_GW,Group@PH_SYS_APP_MAIL_SERVER) AND srcIpAddr IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) </SingleEvtConstr>
+	<GroupByAttr> srcIpAddr </GroupByAttr>
+	<GroupEvtConstr> COUNT (*) &gt;= 30 </GroupEvtConstr>
+      </SubPattern>
+      <GlobalConstr> EndUserMailToUnauthMailGw.srcIpAddr = ExcessDeniedMail.srcIpAddr AND ExcessDeniedMail.srcIpAddr = ExcessPermitMail.srcIpAddr</GlobalConstr>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,srcIpAddr,destIpAddr,ipProto,srcIpPort,destIpPort,srcDestTCPFlags,reptDevIpAddr,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+  </Rule>
+
+  <Rule group="PH_SYS_RULE_Exploits" id="PH_Rule_Flow_12" phIncidentCategory="Network">
+    <Name> End User DNS Queries to Unauthorized DNS Servers </Name>
+    <active>true</active>
+    <Description> Detects a scenario where a host, that is itself not a DNS server, is trying to send DNS requests to unauthorized DNS servers. Authorized DNS servers are represented by the "DNS Server" group. In a typical scenario, end hosts always send DNS requests to authrozed DNS servers which in turn communicate to other DNS servers - so this behavior may indicate malware running on the end host. </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_UNAUTH_DNS_QUERY" severity="7">
+      <ArgList>
+        srcIpAddr = UnauthDNS.srcIpAddr, incidentCount = UnauthDNS.COUNT (DISTINCT destIpAddr)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="300">
+      <SubPattern displayName="UnauthDNS" name="UnauthDNS">
+        <SingleEvtConstr> destIpPort = 53 AND destIpAddr NOT IN (Group@PH_SYS_APP_DNS_SERVER) AND srcIpAddr NOT IN (Group@PH_SYS_APP_DNS_SERVER,Group@PH_SYS_APP_ACCELOPS) AND srcIpAddr IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) </SingleEvtConstr>
+	<GroupByAttr> srcIpAddr</GroupByAttr>
+	<GroupEvtConstr> COUNT (DISTINCT destIpAddr) &gt;= 10 </GroupEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,srcIpAddr,destIpAddr,ipProto,srcIpPort,destIpPort,reptDevIpAddr,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+  </Rule>
+
+  <Rule group="PH_SYS_RULE_Exploits" id="PH_Rule_Flow_13" phIncidentCategory="Application">
+    <Name> Excessive End User DNS Queries </Name>
+    <active>true</active>
+    <Description> Detects a scenario where a host, that is itself not an DNS server, is sending excessive DNS requests. Authorized DNS servers are represented by the "DNS Server" group. In a typical scenario, the frequency of end host DNS requests is not high unless, there is a script running - this might indicate the presence of malware on the end host. </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_EXCESS_DNS_QUERY" severity="7">
+      <ArgList>
+        srcIpAddr = ExcessiveDNSFromFlow.srcIpAddr, srcIpAddr = ExcessiveDNSFromServer.srcIpAddr, incidentCount = ExcessiveDNSFromFlow.COUNT(*), incidentCount = ExcessiveDNSFromServer.COUNT(DISTINCT destName)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="300">
+      <SubPattern displayName="ExcessiveDNSFromFlow" name="ExcessiveDNSFromFlow">
+        <SingleEvtConstr> destIpPort = 53 AND srcIpAddr NOT IN (Group@PH_SYS_APP_DNS_SERVER) AND reptDevIpAddr IN (Group@PH_SYS_DEVICE_FIREWALL,Group@PH_SYS_DEVICE_ROUTER_SWITCH) AND srcIpAddr NOT IN (Group@PH_SYS_APP_ACCELOPS) AND srcIpAddr IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) </SingleEvtConstr>
+	<GroupByAttr> srcIpAddr </GroupByAttr>
+	<GroupEvtConstr> COUNT (*) &gt;= 500 </GroupEvtConstr>
+      </SubPattern>
+      <Operator rank="0" type="OR"/>
+      <SubPattern displayName="ExcessiveDNSFromServer" name="ExcessiveDNSFromServer">
+        <SingleEvtConstr> srcIpAddr NOT IN (Group@PH_SYS_APP_DNS_SERVER) AND reptDevIpAddr IN (Group@PH_SYS_APP_DNS_SERVER) AND (eventType CONTAIN "BIND_DNS" OR eventType CONTAIN "MS_DNS") AND srcIpAddr NOT IN (Group@PH_SYS_APP_ACCELOPS) AND srcIpAddr IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) </SingleEvtConstr>
+	<GroupByAttr> srcIpAddr </GroupByAttr>
+	<GroupEvtConstr> COUNT (DISTINCT destName) &gt;= 200 </GroupEvtConstr>
+      </SubPattern>
+      <GlobalConstr>ExcessiveDNSFromFlow.srcIpAddr = ExcessiveDNSFromServer.srcIpAddr</GlobalConstr>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,srcIpAddr,destIpAddr,destName,ipProto,srcIpPort,destIpPort,reptDevIpAddr,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+  </Rule>
+
+  <Rule group="PH_SYS_RULE_Exploits" id="PH_Rule_Flow_14" phIncidentCategory="Application">
+    <Name> Excessive Denied DNS Queries </Name>
+    <active>true</active>
+    <Description> Detects a scenario where a host, has a very high frequency of denied DNS traffic.  </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_EXCESS_DENY_DNS_QUERY" severity="6">
+      <ArgList>
+        srcIpAddr = DeniedDNS.srcIpAddr, incidentCount = DeniedDNS.COUNT (*)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="300">
+      <SubPattern displayName="DeniedDNS" name="DeniedDNS">
+        <SingleEvtConstr> destIpPort = 53 AND eventType IN (Group@PH_SYS_EVENT_DenyTraffic) </SingleEvtConstr>
+	<GroupByAttr> srcIpAddr </GroupByAttr>
+	<GroupEvtConstr> COUNT (*) &gt;= 100 </GroupEvtConstr>
+      </SubPattern>
+
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,srcIpAddr,destIpAddr,ipProto,srcIpPort,destIpPort,reptDevIpAddr,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+  </Rule>
+
+  <Rule group="PH_SYS_RULE_Exploits" id="PH_Rule_Flow_15" phIncidentCategory="Application">
+    <Name>Excessive Malware Domain Name Queries </Name>
+    <active>true</active>
+    <Description> Detects bad domain name queries which indicate malware infected end hosts. </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_BAD_DOMAIN_DNS_QUERY" severity="6">
+      <ArgList>
+        srcIpAddr = MalwareDNS.srcIpAddr, incidentCount =  MalwareDNS.COUNT(DISTINCT destName)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="300">
+      <SubPattern displayName="MalwareDNS" name="MalwareDNS">
+        <SingleEvtConstr> eventType IN ("BIND_DNS_A_Query","MS_DNS_A_Query","MS_DNS_A_Success","MS_DNS_A_Fail") AND destName IN (Group@PH_SYS_ROOT_MalwareSite) </SingleEvtConstr>
+	<GroupByAttr> srcIpAddr</GroupByAttr>
+	<GroupEvtConstr> COUNT (DISTINCT destName) &gt;= 5 </GroupEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,srcIpAddr,destName,reptDevIpAddr,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+  </Rule>
+
+  <Rule group="PH_SYS_RULE_Exploits" id="PH_Rule_Flow_16" phIncidentCategory="Application">
+    <Name> Suspicious Botnet like End host DNS Behavior </Name>
+    <active>true</active>
+    <Description> Detects an end host meeting at least 3 requirements for suspicious use of DNS requests - this indicates that a bot is likely running on the end host </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_BOTNET_LIKELY" severity="6">
+      <ArgList>
+        srcIpAddr = BotnetSymptom.srcIpAddr 
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="300">
+      <SubPattern displayName="BotnetSymptom" name="BotnetSymptom">
+        <SingleEvtConstr> eventType IN ("PH_RULE_UNAUTH_DNS_QUERY","PH_RULE_EXCESS_DNS_QUERY","PH_RULE_EXCESS_DENY_DNS_QUERY","PH_RULE_BAD_DOMAIN_DNS_QUERY", "PH_RULE_UNCOMMON_DNS_QUERY") </SingleEvtConstr>
+	<GroupByAttr> srcIpAddr </GroupByAttr>
+	<GroupEvtConstr> COUNT (DISTINCT eventType) &gt;= 3 </GroupEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,srcIpAddr,reptDevIpAddr,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+  </Rule>
+
+  <Rule group="PH_SYS_RULE_Exploits" id="PH_Rule_Flow_17" phIncidentCategory="Application">
+    <Name> Excessive Uncommon DNS Queries </Name>
+    <active>true</active>
+    <Description> Detects the same host that is not a DNS server, doing an excessive amount of uncommon domain name queries - this indicates the host is likely infected with malware. An end host typically needs to perform only A and PTR queries; any other query inidicates the likely presence of malware. </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_UNCOMMON_DNS_QUERY" severity="6">
+      <ArgList>
+        srcIpAddr = UncommonDNS.srcIpAddr, incidentCount =UncommonDNS.COUNT (*)   
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="300">
+      <SubPattern displayName="UncommonDNS" name="UncommonDNS">
+        <SingleEvtConstr> srcIpAddr NOT IN (Group@PH_SYS_APP_DNS_SERVER) AND eventType NOT IN ("BIND_DNS_A_Query", "BIND_DNS_PTR_Query", "MS_DNS_A_Query","MS_DNS_PTR_Query", "MS_DNS_A_Success", "MS_DNS_A_Fail", "MS_DNS_PTR_Success", "MS_DNS_PTR_Success", "MS_DNS_PTR_Fail") AND (eventType CONTAIN "BIND_DNS" OR eventType CONTAIN "MS_DNS") </SingleEvtConstr>
+	<GroupByAttr> srcIpAddr,eventType </GroupByAttr>
+	<GroupEvtConstr> COUNT (*) &gt;= 50 </GroupEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,srcIpAddr,destName,reptDevIpAddr,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+  </Rule>
+
+  <Rule group="PH_SYS_RULE_Exploits" id="PH_Rule_Flow_18" phIncidentCategory="Application">
+    <Name> Excessive Repeated DNS Queries To Same Domain </Name>
+    <active>true</active>
+    <Description> Detects an usually high frequency of DNS name resolution queries from the same host to the same domain name in a short period of time. This is not expected behavior since, in a typical scenario, the domain name resolution is cached at the end point. Repeated queries indicates that a special DNS client is likely running at the end host that is trying to make use of fast flux techniques to get back many infected hosts behind a crafted domain name. </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_DNS_QUERY_SAME_DOMAIN" severity="6">
+      <ArgList>
+        srcIpAddr = ExcessRepeatDNS.srcIpAddr, destName =ExcessRepeatDNS.destName, incidentCount = ExcessRepeatDNS.COUNT (*)   
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="300">
+      <SubPattern displayName="ExcessRepeatDNS" name="ExcessRepeatDNS">
+        <SingleEvtConstr> eventType IN ("BIND_DNS_A_Query","MS_DNS_A_Query","MS_DNS_A_Success","MS_DNS_A_Fail") </SingleEvtConstr>
+	<GroupByAttr> srcIpAddr, destName </GroupByAttr>
+	<GroupEvtConstr> COUNT (*) &gt;= 100 </GroupEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,srcIpAddr,destName,reptDevIpAddr,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+  </Rule>
+
+  <Rule group="PH_SYS_RULE_Exploits" id="PH_Rule_Flow_19" phIncidentCategory="Application">
+    <Name>Excessive End User Mail</Name>
+    <active>true</active>
+    <Description> Detects a scenario where a host, that is itself not an authorized mail gateway, is sending excessive emails (more than 20 emails in 2 minutes). This behavior may indicate malware running on an end host that is trying to send spam or privileged information to its own set of mail servers (which may be compromised). </Description>
+    <CustomerScope groupByEachCustomer="true"> <Include all="true"/> <Exclude/> </CustomerScope>
+    <IncidentDef eventType="PH_RULE_EXCESS_END_USER_MAIL" severity="8">
+      <ArgList>
+        srcIpAddr = EndUserExcessMail.srcIpAddr,incidentCount = EndUserExcessMail.COUNT(*)
+      </ArgList>
+    </IncidentDef>
+    <PatternClause window="120">
+      <SubPattern displayName="EndUserExcessMail" name="EndUserExcessMail">
+        <SingleEvtConstr> destIpPort = 25 AND srcIpAddr NOT IN (Group@PH_SYS_DEVICE_SEC_GW,Group@PH_SYS_APP_MAIL_SERVER) AND srcIpAddr IN (Group@PH_SYS_NETWORK_ENTERPRISE_INTERNAL_NET) </SingleEvtConstr>
+	<GroupByAttr> srcIpAddr </GroupByAttr>
+	<GroupEvtConstr> COUNT(*) &gt;= 20 </GroupEvtConstr>
+      </SubPattern>
+    </PatternClause>
+    <TriggerEventDisplay>
+      <AttrList> phRecvTime,eventType,srcIpAddr,destIpAddr,ipProto,srcIpPort,destIpPort,srcDestTCPFlags,reptDevIpAddr,rawEventMsg </AttrList>
+    </TriggerEventDisplay>
+  </Rule>
+
+</Rules>

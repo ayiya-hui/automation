@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<190>date=2010-06-09 time=00:48:39 devname=FortiGate-Shangha device_id=APS3012404201140 log_id=0104032003 type=event subtype=admin pri=information vd=root user="admin" ui=https(10.1.20.204) action=logout status=success reason=exit msg="Administrator admin logged out from https(10.1.20.204)"
+[params]
+srcIpAddr=10.1.20.204
+appTransportProto=https
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+eventAction=0 (Permit)
+eventName=Admin logoff
+reptVendor=Fortinet
+eventType=FortiGate-event-admin-logout
+user=admin
+phEventCategory=0 (External)
+relayDevIpAddr=$reporter
+reptDevIpAddr=$reporter
+usrMsg=Administrator admin logged out from https(10.1.20.204)
+reptModel=FortiOS

@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+172.18.37.201
+[eventMsg]
+Oct 13 11:11:31 172.18.37.201 ALARM: 1255432835l | system | info | ALR | ROGUE AP DETECTED CRITICAL CONTROLLER (1:13) ROGUE AP DETECTED. AP mac=00:1f:28:57:fa:b7 bss=00:1f:28:57:fa:b7 cch= 6 ess=Integral by AP AP-204 (204)
+[params]
+customer=Super
+eventId=any
+parserName=FortiWLANParser
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+count=1
+eventSeverity=1
+eventType=FortiWLC-Rogue-AP-Detected
+reptDevIpAddr=172.18.37.201
+collectorId=any
+extEventRecvProto=Syslog
+eventName=Rogue AP detected
+reptVendor=Fortinet
+relayDevIpAddr=172.18.37.201
+rawEventMsg=any
+phRecvTime=any
+reptDevName=any
+reptModel=FortiWLC

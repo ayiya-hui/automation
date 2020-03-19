@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+VMware-VCNS-BACKUP-SUCCESS,VMwareVCNS_1,VMwareVCNS,$localhost,,syslog

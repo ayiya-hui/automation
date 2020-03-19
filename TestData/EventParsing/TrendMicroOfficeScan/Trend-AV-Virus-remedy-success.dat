@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+enterprises.6101 6 5 enterprises.6101.141 s "Virus/Malware: Eicar_test_file Computer: SJDEVVWINDB05 Domain: Prospecthills File: C:\\DOCUME~1\\ADMINI~1\\LOCALS~1\\Temp\\yc8eayj0.com Date/Time: 4/10/2008 14:23:26 Result: Virus successfully detected, cannot perform the Clean action (Quarantine) "
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+domain=Prospecthills
+deviceTime=any
+eventParsedOk=1
+virusName=Eicar_test_file
+reptVendor=TrendMicro
+eventSeverity=9
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=HIGH
+eventAction=0 (Permit)
+fileName=C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\yc8eayj0.com
+eventName=Scanning detected and successfully remedied a virus infection
+computer=SJDEVVWINDB05
+eventType=Trend-AV-Virus-remedy-success
+eventTime=any
+phEventCategory=0 (External)
+reptDevIpAddr=$localhost
+reptModel=Antivirus Manager

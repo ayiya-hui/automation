@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>Sep 10 11:33:19 pf:     10.100.0.213.67 > 255.255.255.255.68: BOOTP/DHCP, Reply, length 304, xid 0x9733ce5, Flags [Broadcast]
+[params]
+deviceTime=any
+parserName=PfSenseParser
+eventType=pfSense-DHCP-Reply
+srcIpAddr=10.100.0.213
+reptModel=BSD Firewall
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=pfSense-DHCP-Reply
+phEventCategory=0 (External)
+eventRuleTrigger=1
+destName=255.255.255.255
+count=1
+srcIpPort=67
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+destIpPort=68
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=pfSense

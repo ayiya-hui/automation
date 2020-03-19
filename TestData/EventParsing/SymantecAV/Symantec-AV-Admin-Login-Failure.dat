@@ -1,0 +1,23 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<54>Jun 11 12:24:38 SymantecServer $localhost: Site: Site sjdevswinapp05,Server: sjdevswinapp05,Domain: Default,Admin: admin,Administrator  log on failed --automator
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+domain=Default
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+eventName=Symantec failed admin login
+reptVendor=Symantec
+eventType=Symantec-AV-Admin-Login-Failure
+user=admin
+phEventCategory=0 (External)
+reptDevIpAddr=$localhost
+destName=sjdevswinapp05
+reptModel=Endpoint Protection Service

@@ -1,0 +1,23 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>Dec 05 2008 13:02:16: %ASA-1-107001: RIP auth failed from 20.20.20.20: version=3.0, type=Update, mode=Passive, sequence=456789 on interface ripLocal
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=10
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=HIGH
+srcIpAddr=20.20.20.20
+eventAction=1 (Deny)
+eventName=RIP auth failed
+reptVendor=Cisco
+eventType=ASA-107001
+phEventCategory=0 (External)
+srcIntfName=ripLocal
+reptDevIpAddr=$reporter
+reptModel=ASA

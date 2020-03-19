@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+AP_Join_Trap,Ruckus_1,Ruckus,$localhost,,syslog

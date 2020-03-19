@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+Microsoft-Azure-ClassicCompute-virtualmachines-shutdown,MicrosoftAzureAudit_1,MicrosoftAzureAudit,$localhost,,syslog

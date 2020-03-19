@@ -1,0 +1,97 @@
+[reptDevIpAddr(key)]
+$localhost (ipConnId:76117)
+[eventMsg]
+<134>Nov 28 2007 17:20:48: %ASA-6-302015: Built inbound UDP connection 76117 for sanJose:99.129.50.158/53 (99.129.50.158/53) to stataClara:192.168.0.10/1041 (99.129.50.157/1411)
+[params]
+rawEventMsg=any
+deviceTime=any
+eventType=ASA-302015
+phCustId=$sender
+destIpAddr=192.168.0.10
+destIpPort=1041
+srcIpAddr=99.129.50.158
+reptModel=ASA
+eventId=any
+ipConnId=76117
+eventParsedOk=1
+eventSeverity=1
+preNATDestIpAddr=99.129.50.157
+eventName=Built UDP connection
+phEventCategory=4 (Traffic)
+srcIntfName=sanJose
+srcIpPort=53
+preNATDestIpPort=1411 (AF)
+eventSeverityCat=LOW
+destIntfName=stataClara
+postNATSrcIpAddr=99.129.50.158
+ipProto=17 (UDP)
+postNATSrcIpPort=53
+count=1
+phRecvTime=any
+reptDevIpAddr=$reporter
+eventAction=0 (Permit)
+reptVendor=Cisco
+[reptDevIpAddr(key)]
+$localhost (ipConnId:76116)
+[eventMsg]
+<134>Nov 28 2007 17:20:48: %ASA-6-302015: Built outbound UDP connection 76116 for sanJose:99.129.50.158/53 (99.129.50.158/53) to stataClara:192.168.0.10/1041 (99.129.50.157/1411)
+[params]
+rawEventMsg=any
+deviceTime=any
+eventType=ASA-302015
+phCustId=$sender
+destIpAddr=192.168.0.10
+destIpPort=1041
+srcIpAddr=99.129.50.158
+reptModel=ASA
+eventId=any
+ipConnId=76116
+eventParsedOk=1
+eventSeverity=1
+preNATDestIpAddr=99.129.50.157
+eventName=Built UDP connection
+phEventCategory=4 (Traffic)
+srcIntfName=sanJose
+srcIpPort=53
+preNATDestIpPort=1411 (AF)
+eventSeverityCat=LOW
+destIntfName=stataClara
+postNATSrcIpAddr=99.129.50.158
+ipProto=17 (UDP)
+postNATSrcIpPort=53
+count=1
+phRecvTime=any
+reptDevIpAddr=$reporter
+eventAction=0 (Permit)
+reptVendor=Cisco
+[reptDevIpAddr(key)]
+77.74.136.4
+[eventMsg]
+<166>Original Address=77.74.136.4 Nov 28 2013 23:40:23 gateway01 : %ASA-6-302015: Built inbound UDP connection 1573056625 for MGMT:procurve_manager_172.16.0.106/53 (procurve_manager_172.16.0.106/53)(schaumann\ADM-Holste) to Transfer-Intranet:PBG-DC01_192.170.171.10/53 (PBG-DC01_192.170.171.10/53)
+[params]
+rawEventMsg=any
+deviceTime=any
+totFlows=1
+eventType=ASA-302015
+phCustId=$sender
+destIpPort=53 (DOMAIN)
+reptModel=ASA
+eventId=any
+ipConnId=1573056625
+eventParsedOk=1
+eventSeverity=1
+eventName=Built UDP connection
+phEventCategory=4 (Traffic)
+srcIntfName=MGMT
+srcIpPort=53
+preNATDestIpPort=53 (DOMAIN)
+eventSeverityCat=LOW
+collectorId=any
+destIntfName=Transfer-Intranet
+ipProto=17 (UDP)
+postNATSrcIpPort=53
+count=1
+phRecvTime=any
+reptDevIpAddr=77.74.136.4
+eventAction=0 (Permit)
+reptVendor=Cisco

@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+10.4.253.39
+[eventMsg]
+<189>Jan 18 10:37:33 10.4.253.39 Kiwi_Syslog_Server : 2016 Jan 18 09:26:43.514 EST: %LIBIFMGR-5-INTF_COUNTERS_CLEARED: Interface Ethernet1/25, counters cleared by user
+[params]
+deviceTime=any
+parserName=CiscoNxOSParser
+totFlows=1
+eventType=Cisco-NxOS-LIBIFMGR-INTF_COUNTERS_CLEARED
+reptModel=NX-OS
+eventId=any
+eventParsedOk=1
+eventSeverity=2
+hostIpAddr=10.4.253.39
+eventName=Cisco-NxOS-LIBIFMGR-INTF_COUNTERS_CLEARED
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+eventRuleTrigger=1
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=10.4.253.39
+customer=Super
+phRecvTime=any
+reptDevIpAddr=10.4.253.39
+eventAction=0 (Permit)
+reptVendor=Cisco

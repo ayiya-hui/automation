@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+83.83.83.83
+[eventMsg]
+Sep 18 12:43:38 83.83.83.83 CEF :0|PowerTech|Interact|2.0|UNR1901|A Database Server Initialization transaction was rejected for user JERRYB.|3| src =10.0.1.34 dst =10.0.1.179 msg=TYPE:JRN CLS :IDS JJOB :QZDASOINIT JUSER :JERRYB JNBR :064953 PGM :PLKR108JEL OBJECT : LIBRARY : MEMBER: DETAIL: OB JERRYB *SQL INIT QZDASOINIT LNS0800 000111 00014 JERRYB    *SQL
+[params]
+rawEventMsg=any
+eventId=any
+count=1
+eventSeverityCat=LOW
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverity=3
+eventType=OS400-UNR1901-INIT
+phCustId=$sender
+reptDevIpAddr=83.83.83.83
+destIpAddr=10.0.1.179
+collectorId=any
+testEvent=Real Event(0)
+eventName=OS400-UNR1901-INIT
+reptVendor=IBM
+user=JERRYB
+phRecvTime=any
+srcIpAddr=10.0.1.34
+opName=INIT
+reptDevName=any
+reptModel=OS400

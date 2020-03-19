@@ -1,0 +1,24 @@
+[reptDevIpAddr(key)]
+10.1.2.53
+[eventMsg]
+<134>Jan 07 16:09:15 10.1.2.53 java: [VMware_UserLogoutSessionEvent], [eventTime]=2010-01-08 00:04:03:329, [rptIp]=10.1.2.53, [user]=root, [vmwEventId]=720, [vmwEventCat]=info, [vmwEventMsg]=User root logged out
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+vmwEventCat=info
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=10.1.2.53
+vmwEventMsg=User root logged out
+eventName=User logoff
+reptVendor=VMware
+eventType=VMware_UserLogoutSessionEvent
+user=root
+phEventCategory=0 (External)
+reptDevIpAddr=10.1.2.53
+reptModel=Generic

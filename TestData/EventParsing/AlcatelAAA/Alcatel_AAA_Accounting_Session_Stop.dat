@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+91.91.91.1
+[eventMsg]
+<38>Nov 12 08:20:13 ETC-AAA AAA: Acctounting session stopped: User-Name=, NAS=192.168.32.169, Port-ID=0/0/1/301, Port=0, MAC=80-A1-D7-A6-5A-D9, Acct-Session-Id=000E54EC, IP-Address=
+[params]
+rawEventMsg=any
+deviceTime=any
+parserName=AlcatelAAAParser
+eventType=Alcatel_AAA_Accounting_Session_Stop
+phCustId=$sender
+reptModel=8950 AAA
+eventId=any
+nepDevPort=0/0/1/301
+eventParsedOk=1
+eventSeverity=1
+eventName=AAA accounting session stopped
+phEventCategory=0 (External)
+customer=Super
+srcMACAddr=80-A1-D7-A6-5A-D9
+srcIpPort=0
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=91.91.91.1
+reptDevName=any
+count=1
+phRecvTime=any
+reptDevIpAddr=91.91.91.1
+reptVendor=Alcatel-Lucent

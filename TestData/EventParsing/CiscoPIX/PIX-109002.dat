@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>Dec 04 2008 20:00:45: %PIX-6-109002: Auth from 10.10.10.10/8080 to 20.20.20.20/9996 failed (192.168.20.20 failed) on interface inside. --automator
+[params]
+rawEventMsg=any
+destIpAddr=20.20.20.20
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=any
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=20.20.20.20
+eventAction=1 (Deny)
+eventName=AAA Authen failed - no response from one AAA server
+srcIpAddr=10.10.10.10
+reptVendor=Cisco
+eventType=PIX-109002
+phEventCategory=0 (External)
+destIpPort=9996
+srcIntfName=inside
+reptDevIpAddr=$localhost
+srcIpPort=8080
+reptModel=PIX

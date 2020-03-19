@@ -1,0 +1,13 @@
+$upsBasicOutputStatus,Description
+1,Unknown
+2,On line
+3,On Battery
+4,On Smart Boost
+5,Timed Sleeping
+6,Switched Bypass
+7,Off
+8,Rebooting
+9,Switched Bypass
+10,Hardware Failure Bypass
+11,Sleeping until power returns
+12,On Smart Trim

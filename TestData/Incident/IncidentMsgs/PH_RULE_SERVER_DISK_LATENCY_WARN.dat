@@ -1,0 +1,2 @@
+[eventMsg]
+[PH_DEV_MON_DISK_IO_UTIL]:[eventSeverity]=PHL_INFO,[fileName]=phPerfJob.cpp,[lineNumber]=3178,[diskName]=/Label,[hostName]=automator89Dot15Dot0Dot1,[hostIpAddr]=89.15.0.1,[reptDevIpAddr]=89.15.0.1,[devDiskRdLatency]=30,[devDiskWrLatency]=46

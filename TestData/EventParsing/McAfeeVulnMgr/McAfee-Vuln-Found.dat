@@ -1,0 +1,34 @@
+[reptDevIpAddr(key)]
+60.60.60.60
+[eventMsg]
+<134>Apr 09 16:43:00 60.60.60.60 java: [McAfee-Vuln-Found]:[eventSeverity]=PHL_INFO,[reptVendor]=McAfee,[reptModel]=Scan Report,[user]=admin,[deviceTime]=Wed May 19 10:19:42 2010,[hostIpAddr]=10.1.2.26,[osType]=Linux Kernel 2.6,[vulnType]=Web Servers,[ipPort]=9443,[vulnName]=The web server running on the remote host has an information disclosure vulnerability.,[eventSeverity]=1,[vulnCveId]=CVE-2009-0783,[vulnScore]=3.6,[vulnConseq]=According to its self-reported version number, the remote host is running a vulnerable version of Apache Tomcat. Affected versions permit a web application to replace the XML parser used to process the XML and TLD files of other applications. This could allow a malicious web app to read or modify 'web.xml', 'context.xml', or TLD files of arbitrary web applications.
+[params]
+deviceTime=any
+vulnConseq=According to its self-reported version number, the remote host is running a vulnerable version of Apache Tomcat. Affected versions permit a web application to replace the XML parser used to process the XML and TLD files of other applications. This could allow a malicious web app to read or modify 'web.xml', 'context.xml', or TLD files of arbitrary web applications.
+parserName=McAfeeVulnMgrParser
+eventType=McAfee-Vuln-Found
+ipPort=9443
+osType=Linux Kernel 2.6
+reptModel=Scan Report
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+serverName=60.60.60.60
+hostIpAddr=10.1.2.26
+eventName=Vulnerability detected by McAfee VulnMgr
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=60.60.60.60
+user=admin
+rawEventMsg=any
+vulnScore=4
+vulnName=The web server running on the remote host has an information disclosure vulnerability.
+reptDevName=any
+customer=Super
+vulnType=Web Servers
+phRecvTime=any
+reptDevIpAddr=60.60.60.60
+reptVendor=McAfee

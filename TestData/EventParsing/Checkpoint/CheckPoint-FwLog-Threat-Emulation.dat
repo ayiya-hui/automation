@@ -1,0 +1,40 @@
+[reptDevIpAddr(key)]
+170.77.2.2
+[eventMsg]
+[CHECKPOINT],[entity]=lea_server_1,[fieldid]=1444235722,[filename]=fw.log,[record_no]=3771372,[time]=7Oct2015 13:35:31,[orig]=170.77.2.2,[i/f_dir]=inbound,[i/f_name]=,[product]=Threat Emulation,[origin_sic_name]=CN=fw1-danbury-new_O=dhsimgrfw..vgkw2c,[has_accounting]=0,[uuid]=<00000000_00000000_00000000_00000000>,[log_id]=4005,[special_properties]=1,[file_type]=docx,[malware_detected]=1,[malware_detected_last_day]=0,[malware_detected_last_week]=0,[malware_detected_last_month]=0,[scanned]=6040,[scanned_last_day]=0,[scanned_last_week]=747,[scanned_last_month]=6040,[threatcloud_scanned]=6040,[threatcloud_scanned_last_day]=0,[threatcloud_scanned_last_week]=747,[threatcloud_scanned_last_month]=6040,[threatcloud_malware]=10,[threatcloud_malware_detected_last_day]=0,[threatcloud_malware_detected_last_week]=0,[threatcloud_malware_detected_last_month]=0,[filter_by_static_analysis]=0,[filter_by_static_analysis_last_day]=0,[filter_by_static_analysis_last_week]=0,[filter_by_static_analysis_last_month]=0,[cache_hit_rate]=2999,[cache_hit_rate_last_day]=0,[cache_hit_rate_last_week]=411,[cache_hit_rate_last_month]=2999,[error_count]=4,[error_count_last_day]=0,[error_count_last_week]=2,[error_count_last_month]=4,[no_resource_count]=0,[no_resource_count_last_day]=0,[no_resource_count_last_week]=0,[no_resource_count_last_month]=0,[orig_mgmt_ip]=170.77.2.104
+[params]
+deviceTime=any
+parserName=CheckpointParser
+totFlows=1
+eventType=CheckPoint-FwLog-Threat-Emulation
+product=Threat Emulation
+reptGeoState=Connecticut
+eventId=any
+threatFiles=6040
+reptModel=FireWall-1
+errorNo=4
+logID=4005
+eventParsedOk=1
+eventSeverity=1
+fileType=docx
+eventName=CheckPoint-FwLog-Threat-Emulation
+cacheHit=2999
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+eventRuleTrigger=1
+count=1
+direction=inbound
+eventSeverityCat=LOW
+collectorId=any
+fileName=fw.log
+relayDevIpAddr=170.77.2.104
+scannedFiles=6040
+malwareThreat=10
+reptDevName=any
+customer=Super
+reptGeoCity=any
+phRecvTime=any
+reptDevIpAddr=170.77.2.2
+malwareDetected=1
+origin_sic_name=CN=fw1-danbury-new_O=dhsimgrfw..vgkw2c
+reptVendor=Checkpoint

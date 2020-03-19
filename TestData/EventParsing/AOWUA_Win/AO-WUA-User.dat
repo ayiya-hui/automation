@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+10.1.2.242
+[eventMsg]
+2015-02-25T07:08:50Z WIN-2008-LAW-agent 10.1.2.242 AccelOps-WUA-User [monitorStatus]="Success" [msg]="this is the new line added at 02251508"
+[params]
+deviceTime=any
+parserName=AOWUA_WinParser
+eventType=AO-WUA-User
+reptModel=Windows
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=AO-WUA-User
+extEventRecvProto=Windows Agent
+phEventCategory=0 (External)
+msg=this is the new line added at 02251508
+status=Success
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=10.1.2.242
+rawEventMsg=any
+reptDevName=WIN-2008-LAW-agent
+customer=Super
+phRecvTime=any
+reptDevIpAddr=10.1.2.242
+eventAction=0 (Permit)
+reptVendor=Microsoft

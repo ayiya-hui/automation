@@ -1,0 +1,31 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<51>Jan 16 17:42:12 SymantecServer $localhost: MShobe,Device Manager Message The device was disabled successfully.   [name]:Zune   [class]:Other devices   [guid]:4d36e97e-e325-11ce-bfc1-08002be10318   [deviceID]:USB\VID_045E&PID_0710\E0029FEF-CF81-13E0-82D8-26EEADCC0CE8,Local: 172.19.20.76,Local: 00219B65F83B,Remote: ,Remote: 0.0.0.0,Remote: 000000000000,Unknown,0,,Begin: 2014-01-16 17:41:02,End: 2014-01-16 17:41:02,Occurrences: 1,Application:  ,Location: Default,User: ,Domain: ,Local Port 0,Remote Port 0,CIDS Signature ID: 0,CIDS Signature string: ,CIDS Signature SubID: 0,Intrusion URL: ,Intrusion Payload URL:
+[params]
+deviceTime=any
+parserName=SymantecAVParser
+eventType=Symantec-CIDS-The-device-was-disabled-successfully
+phCustId=$sender
+hostName=MShobe
+computer=MShobe
+reptModel=Endpoint Protection Service
+eventId=any
+eventParsedOk=1
+uuid=USB\VID_045E&PID_0710\E0029FEF-CF81-13E0-82D8-26EEADCC0CE8
+eventSeverity=5
+hostModel=Zune
+eventName=Symantec-CIDS-The-device-was-disabled-successfully
+phEventCategory=0 (External)
+type=Other devices
+customer=Super
+direction=Unknown
+eventSeverityCat=MEDIUM
+collectorId=any
+relayDevIpAddr=$localhost
+ipProto=0 (IPv6 Hop-by-Hop Option)
+reptDevIpAddr=$localhost
+count=1
+phRecvTime=any
+destMACAddr=00:21:9b:65:f8:3b
+reptVendor=Symantec

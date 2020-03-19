@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>Dec 04 2008 20:00:45: %PIX-2-106021: Deny TCP reverse path check from 20.20.20.20 to 10.10.10.10 on interface outside
+[params]
+rawEventMsg=any
+destIpAddr=10.10.10.10
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=any
+eventSeverity=8
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=MEDIUM
+destIpAddr=10.10.10.10
+eventAction=1 (Deny)
+eventName=Denied IP traffic - spoofed packet
+srcIpAddr=20.20.20.20
+reptVendor=Cisco
+eventType=PIX-106021
+phEventCategory=0 (External)
+ipProto=6 (TCP)
+srcIntfName=outside
+reptDevIpAddr=$localhost
+reptModel=PIX

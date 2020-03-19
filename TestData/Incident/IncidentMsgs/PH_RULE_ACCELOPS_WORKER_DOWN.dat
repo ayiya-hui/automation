@@ -1,0 +1,5 @@
+[eventMsg]
+[PH_WORKER_DOWN]:[phEventCategory]=3,[phCustId]=1101,[procName]=AppServer,[eventSeverity]=PHL_INFO,[phWorkerName]=1101,[customer]=customer1101,[hostIpAddr]=$appServer,[phLogDetail]=Worker down
+
+[clearEventMsg]
+[PH_WORKER_UP]:[phEventCategory]=3,[phCustId]=1101,[procName]=AppServer,[eventSeverity]=PHL_INFO,[phWorkerName]=1101,[customer]=customer1101,,[hostIpAddr]=$appServer,[phLogDetail]=Worker up

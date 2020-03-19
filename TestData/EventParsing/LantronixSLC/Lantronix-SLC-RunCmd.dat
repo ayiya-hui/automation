@@ -1,0 +1,24 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<182>xasd: sw/info-Running /etc/rc.d/init.d/ntpd
+[params]
+customer=Super
+eventId=any
+eventSeverityCat=LOW
+eventParsedOk=1
+phEventCategory=0 (External)
+parserName=LantronixSLCParser
+count=1
+eventSeverity=1
+eventType=Lantronix-SLC-RunCmd
+reptDevIpAddr=$localhost
+collectorId=any
+eventName=Lantronix command
+reptVendor=Lantronix
+relayDevIpAddr=$localhost
+phRecvTime=any
+command=/etc/rc.d/init.d/ntpd
+eventRuleTrigger=1
+appTransportProto=Syslog
+reptModel=SLC Console Manager

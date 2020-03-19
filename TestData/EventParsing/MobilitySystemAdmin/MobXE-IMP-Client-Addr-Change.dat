@@ -1,0 +1,31 @@
+[reptDevIpAddr(key)]
+1.1.1.1
+[eventMsg]
+<134>Sep 27 06:09:02 1.1.1.1 nmservic.exe[1016]: IMP: Roaming Event on session 0x1865694d user: SHARED\ChapMan. Peer's POP address changed from 156.74.250.7:9677 to 156.74.134.219:1040
+[params]
+rawEventMsg=any
+domain=SHARED
+deviceTime=any
+eventType=MobXE-IMP-Client-Addr-Change
+phCustId=$sender
+hostName=any
+procName=nmservic.exe
+srcIpAddr=156.74.134.219
+reptModel=Mobility XE
+eventId=any
+ipConnId=0x1865694d
+eventParsedOk=1
+eventSeverity=1
+eventName=NetMotion MobilityXE IMP client POP address change
+phEventCategory=0 (External)
+prevSrcIpAddr=156.74.250.7
+srcIpPort=1040
+eventSeverityCat=LOW
+collectorId=any
+user=ChapMan
+reptDevName=any
+count=1
+phRecvTime=any
+reptDevIpAddr=1.1.1.1
+reptVendor=NetMotion
+prevSrcIpPort=9677

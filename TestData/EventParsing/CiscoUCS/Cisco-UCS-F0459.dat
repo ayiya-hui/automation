@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<187>: 2014 Oct 31 15:55:53 CDT: %UCSM-3-CMC_VIF_DOWN: [F0459][major][cmc-vif-down][sys/chassis-7/fabric-A/vc-7] IOM 7 / 2 (A) management VIF 7 down, reason Module removed
+[params]
+errorNo=459
+customer=Super
+eventSeverityCat=MEDIUM
+eventParsedOk=1
+phEventCategory=0 (External)
+parserName=CiscoUCSParser
+count=1
+eventSeverity=5
+eventType=Cisco-UCS-F0459
+reptDevIpAddr=$localhost
+collectorId=any
+extEventRecvProto=Syslog
+eventName=Cisco-UCS-F0459
+reptVendor=Cisco
+relayDevIpAddr=$localhost
+rawEventMsg=any
+phRecvTime=any
+eventId=any
+reptDevName=any
+reptModel=UCS

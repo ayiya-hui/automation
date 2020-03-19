@@ -1,0 +1,40 @@
+[reptDevIpAddr(key)]
+10.146.68.73
+[eventMsg]
+<25>Oct 11 14:29:56 10.146.68.68 20101011, 58469175, 2010/10/11 18:29:53, 2010/10/11 18:33:38, global.IDP, 0, par-real-idp200, 10.146.68.73, traffic, arp hw changed for ip, (NULL), (NULL), 10.248.9.229, 0, 0.0.0.0, 0, (NULL), (NULL), 10.248.9.53, 0, 0.0.0.0, 0, hopopt, SYSTEM, 0, unknown, none, 0, accepted, info, no, (NULL), (NULL), (NULL), (NULL), 0, 0, 0, 0, 0, 0, 0, 0, no, 15, Not
+[params]
+phEventCategory=0 (External)
+count=1
+phCustId=$sender
+destFwZone=(NULL)
+destIpAddr=10.248.9.53
+destIpPort=0
+deviceTime=any
+durationMSec=0
+eventId=any
+eventName=Juniper_IDP-arp hw changed for ip
+eventParsedOk=1
+phRecvTime=any
+eventSeverity=2
+eventSeverityCat=LOW
+eventType=Juniper_IDP-arp hw changed for ip
+ipProto=255
+policyName=unknown
+postNATSrcIpAddr=10.248.9.229
+postNATSrcIpPort=0
+preNATDestIpAddr=10.248.9.53
+preNATDestIpPort=0
+recvPkts=0
+recvBytes=0
+relayDevIpAddr=10.146.68.68
+reptDevName=par-real-idp200
+reptDevIpAddr=$reporter
+reptModel=IDP
+reptVendor=Juniper
+sentBytes=0
+sentPkts=0
+srcFwZone=(NULL)
+srcIpAddr=10.248.9.229
+srcIpPort=0
+totBytes=0
+totPkts=0

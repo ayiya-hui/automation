@@ -1,0 +1,147 @@
+<eventParser name="SonicWallAventailNetWorkAndWebProxyParser">
+  <deviceType>
+    <Vendor>Sonicwall</Vendor>
+    <Model>Aventail VPN</Model>
+    <Version>ANY</Version>
+  </deviceType>
+  
+  <eventFormatRecognizer><![CDATA["<:gPatDay>/<:gPatMon>/<:gPatYear>:<:gPatTime>(?:\.\d+)?\s+[\+-]\d{4}"\s+]]></eventFormatRecognizer>
+  
+  <testEvents>
+      <testEvent><![CDATA[]]></testEvent>
+  </testEvents>
+  
+  <!-- pattern definitions -->
+  <patternDefinitions>
+    <pattern name="patTimeStamp"><![CDATA[<:gPatDay>/<:gPatMon>/<:gPatYear>:<:gPatTime>(?:\.\d+)?\s+[\+-]\d{4}]]></pattern>
+  </patternDefinitions>
+  
+  <parsingInstructions>
+    
+    <!-- parsing common fields -->
+    <collectFieldsByRegex src="$_rawmsg">
+      <regex><![CDATA[<:gPatSyslogPRI><_mon:gPatMon>\s+<_day:gPatDay>\s+<_time:gPatTime>\s+<hostName:gPatStr>\s+<procName:gPatStr>:\s+<_body:gPatMesgBody>]]></regex>
+    </collectFieldsByRegex>
+    <setEventAttribute attr="deviceTime">toDateTime($_mon, $_day, $_time)</setEventAttribute>
+
+    <switch>
+        <case>
+            <collectFieldsByRegex src="$_body">
+                <regex><![CDATA[<:gPatIpV4Dot>:<:gPatIpPort>.*]]></regex>
+            </collectFieldsByRegex>
+            <setEventAttribute attr="eventType">Aventail-Network-</setEventAttribute>
+            <collectAndSetAttrByPosWithNestedSep src="$_body" L1Sep=' ' L2Sep='""'>
+                <attrPosMap attr="_srcIpAddr" pos='1'/>
+                <attrPosMap attr="_auth" pos='2'/>
+                <attrPosMap attr="_user" pos='3'/>
+                <attrPosMap attr="_time" pos='4'/>
+                <attrPosMap attr="appVersion" pos='5'/>
+                <attrPosMap attr="command" pos='6'/>
+                <attrPosMap attr="_destIpAddr" pos='7'/>
+                <attrPosMap attr="aventailStatusCode" pos='8'/>
+                <attrPosMap attr="recvBytes" pos='9'/>
+                <attrPosMap attr="sentBytes" pos='10'/>
+                <attrPosMap attr="durationMSec" pos='11'/>
+            </collectAndSetAttrByPosWithNestedSep>
+	    <choose>
+		<when test='$aventailStatusCode = "0"'>
+		  <setEventAttribute attr="eventType">Aventail-Net-Traffic-Permit</setEventAttribute>
+		  <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+		</when>
+		<otherwise>
+		  <setEventAttribute attr="eventType">Aventail-Net-Traffic-Denied</setEventAttribute>
+		  <setEventAttribute attr="eventSeverity">5</setEventAttribute>
+		</otherwise>
+	    </choose>
+        </case>
+        <case>
+          <collectFieldsByRegex src="$_body">
+            <regex><![CDATA[<:gPatIpV4Dot>\s+.*]]></regex>
+          </collectFieldsByRegex>
+          <collectAndSetAttrByPosWithNestedSep src="$_body" L1Sep=' ' L2Sep='""'>
+            <attrPosMap attr="srcIpAddr" pos='1'/>
+            <attrPosMap attr="_identity" pos='2'/>
+            <attrPosMap attr="_user" pos='3'/>
+            <attrPosMap attr="_userLongName" pos='4'/>
+            <attrPosMap attr="_time" pos='5'/>
+            <attrPosMap attr="_request" pos='6'/>
+            <attrPosMap attr="httpStatusCode" pos='7'/>
+            <attrPosMap attr="recvBytes" pos='8'/>
+          </collectAndSetAttrByPosWithNestedSep>
+	  
+          <choose>
+	    <when test='$httpStatusCode = "0"'>
+	      <setEventAttribute attr="eventType">Aventail-Web-Request-Success</setEventAttribute>
+	      <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+	    </when>
+	    <when test="matches($httpStatusCode, '^2')">
+	      <setEventAttribute attr="eventType">Aventail-Web-Request-Success</setEventAttribute>
+	      <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+	    </when>
+	    
+	    <when test="matches($httpStatusCode, '^3')">
+	      <setEventAttribute attr="eventType">Aventail-Web-Request-Redirect</setEventAttribute>
+	      <setEventAttribute attr="eventSeverity">1</setEventAttribute>
+	    </when>
+	    
+	    <when test='$httpStatusCode = "401"'>
+	      <setEventAttribute attr="eventType">Aventail-Web-Client-Access-Denied</setEventAttribute>
+	      <setEventAttribute attr="eventSeverity">5</setEventAttribute>
+	    </when>
+	    
+	    <when test='$httpStatusCode = "403"'>
+	      <setEventAttribute attr="eventType">Aventail-Web-Forbidden-Access-Denied</setEventAttribute>
+	      <setEventAttribute attr="eventSeverity">5</setEventAttribute>
+	    </when>
+	    
+	    <when test='$httpStatusCode = "400"'>
+	      <setEventAttribute attr="eventType">Aventail-Web-Bad-Request</setEventAttribute>
+	      <setEventAttribute attr="eventSeverity">5</setEventAttribute>
+	    </when>
+	    
+	    <when test='$httpStatusCode = "411"'>
+	      <setEventAttribute attr="eventType">Aventail-Web-Length-Reqd-Access-Denied</setEventAttribute>
+	      <setEventAttribute attr="eventSeverity">5</setEventAttribute>
+	    </when>
+	    
+	    <when test="matches($httpStatusCode, '^4')">
+	      <setEventAttribute attr="eventType">Aventail-Web-Client-Error</setEventAttribute>
+	      <setEventAttribute attr="eventSeverity">5</setEventAttribute>
+	      <setEventAttribute attr="eventAction">1</setEventAttribute>
+	    </when>
+	    
+	    <when test="matches($httpStatusCode, '^5')">
+	      <setEventAttribute attr="eventType">Aventail-Web-Server-Error</setEventAttribute>
+	      <setEventAttribute attr="eventSeverity">6</setEventAttribute>
+	      <setEventAttribute attr="eventAction">1</setEventAttribute>
+	    </when>
+	  </choose>
+	</case>
+    </switch>
+    
+    <switch>
+      <case>
+        <collectFieldsByRegex src="_user">
+          <regex><![CDATA[(?:\(<srcIpAddr:gPatIpV4Dot>\s+)?\(<user:gPatStr>\)+@\(<domain:gPatMesgBody>\)]]></regex>
+        </collectFieldsByRegex>
+      </case>
+    </switch>
+    
+    <switch>
+      <case>
+        <collectFieldsByRegex src="_srcIpAddr">
+          <regex><![CDATA[<srcIpAddr:gPatIpV4Dot>:<srcIpPort:gPatStr>]]></regex>
+        </collectFieldsByRegex>
+      </case>
+    </switch>
+    
+    <switch>
+      <case>
+        <collectFieldsByRegex src="_destIpAddr">
+          <regex><![CDATA[<destIpAddr:gPatIpV4Dot>:<destIpPort:gPatStr>]]></regex>
+        </collectFieldsByRegex>
+      </case>
+    </switch>
+    
+  </parsingInstructions>
+</eventParser>

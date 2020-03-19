@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<109>Aug  9 15:21:18 SyslogAlertForwarder: AttackName:SNMP: TrapWatcher Msg Length Buffer Overflow,AttackTime:2011-08-09 15:21:09 PDT,AttackSeverity:Medium,SourceIp:172.16.22.100,SourcePort:58107,DestinationIp:192.168.20.116,DistinationPort:162,AlertId:5620781725332537356,AlertType:Signature,AttackId:0x40a00500,AttackSignature:snmp-msg-length-buffer-overflow,AttackConfidence:Medium,AdminDomain:My Company,SensorName:accelopsips,Interface:1B,Category:Exploit,SubCategory:dos,Direction:Unknown,ResultStatus:May be successful,DetectionMechanism:application-anomaly,ApplicationProtocol:snmp,NetworkProtocol:udp,Relevance:N/A,Quarantine_End_Time:N/A
+[params]
+domain=My Company
+deviceTime=any
+eventType=McAfee-Intrushield-SNMP: TrapWatcher Msg Length Buffer Overflow
+phCustId=$sender
+destIpAddr=192.168.20.116
+ipsFPCheckStatus=0 (Couldnot determine)
+srcIpAddr=172.16.22.100
+reptModel=Intrushield
+eventId=any
+eventParsedOk=1
+eventSeverity=6
+eventName=McAfee-Intrushield-SNMP: TrapWatcher Msg Length Buffer Overflow
+phEventCategory=0 (External)
+srcIntfName=1B
+srcIpPort=58107
+eventSeverityCat=MEDIUM
+relayDevIpAddr=$localhost
+reptDevName=accelopsips
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=McAfee

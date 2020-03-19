@@ -1,0 +1,10 @@
+$winLogonFailCode,Desc
+0xC000006A, Login failed - invalid password
+0xC000006F, Login failed - time-of-day policy violation
+0xC0000064,Login failed - invalid username
+0xC0000070, Login failed - account not allowed to logon
+0xC0000071,Logon failed - password expired
+0xC0000072,Logon failed - account disabled
+0xC0000193,Logon failed - account expired
+0xC0000224,Logon failed - password need to be changed before logon
+0xC0000234,Logon failed - account locked out

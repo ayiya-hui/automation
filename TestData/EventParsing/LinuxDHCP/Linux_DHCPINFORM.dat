@@ -1,0 +1,23 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<13>Aug 26 19:33:30 DNS-Pri dhcpd: DHCPINFORM from 172.16.10.200 via eth0: not authoritative for subnet 172.16.10.0
+[params]
+rawEventMsg=any
+eventSeverity=1
+eventSeverityCat=LOW
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+phRecvTime=any
+phCustId=$sender
+hostName=DNS-Pri
+srcIpAddr=172.16.10.200
+eventAction=0 (Permit)
+eventName=DHCP Query for Auxillary Information
+reptVendor=Generic
+eventType=Linux_DHCPINFORM
+phEventCategory=0 (External)
+reptDevIpAddr=$localhost
+reptModel=Linux DHCP

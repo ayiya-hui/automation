@@ -1,0 +1,4 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+Trend-IDF-Reset,TrendMicroIDF_1,TrendMicroIDF,$localhost,,syslog
+Trend-IDF-$variable,TrendMicroIDF_2,TrendMicroIDF,$localhost,,syslog

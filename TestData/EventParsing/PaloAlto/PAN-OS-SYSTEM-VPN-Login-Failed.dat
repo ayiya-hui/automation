@@ -1,0 +1,31 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<14>Mar 14 14:36:12 STN-PAN1.purestorage.com 1,2016/03/14 14:36:12,001801026212,SYSTEM,globalprotect,0,2016/03/14 14:36:12,,globalprotectgateway-regist-fail,STN-GP_Gateway-N,0,0,general,informational,"GlobalProtect gateway user login failed. Login from: 14.240.168.18, User name: joeuser, error: Existing user session found.",233798,0x0
+[params]
+deviceTime=any
+parserName=PaloAltoParser
+totFlows=1
+eventType=PAN-OS-SYSTEM-VPN-Login-Failed
+destIpAddr=$localhost
+srcName=any
+srcIpAddr=14.240.168.18
+reptModel=PAN-OS
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=PAN-OS-SYSTEM-VPN-Login-Failed
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+eventRuleTrigger=1
+errReason=Existing user session found
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+user=joeuser
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Palo Alto

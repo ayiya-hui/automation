@@ -1,0 +1,30 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134> 11/25/2013:11:06:40  clxns 0-PPE-0 : TCP CONN_TERMINATE 12304705 0 :  Source 172.20.20.168:4443 - Destination 172.22.36.76:52292 - Start Time 11/25/2013:11:06:40  - End Time 11/25/2013:11:06:40  - Total_bytes_send 0 - Total_bytes_recv 1
+[params]
+rawEventMsg=any
+deviceTime=any
+totFlows=1
+eventType=NETSCALER-TCP-CONN_TERMINATE
+phCustId=$sender
+destIpAddr=172.22.36.76
+srcIpAddr=172.20.20.168
+reptModel=NetScaler
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=NetScaler TCP connection terminated
+phEventCategory=0 (External)
+recvBytes=1
+srcIpPort=4443
+eventSeverityCat=LOW
+collectorId=any
+destIpPort=52292
+reptDevName=any
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Citrix
+sentBytes=0

@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+78.78.78.78
+[eventMsg]
+<132>Nov 19 13:49:34 78.78.78.78 CEF:0|Trend Micro|Deep Security Manager|7.7.59|771|Contact by Unrecognized Client|6|src=172.16.146.157 suser=System msg=A connection to IDF Server Plug-in was initiated by a client not identifiable as a managed computer: 172.16.214.142:57530.  Either the client is not a managed IDF component, or a secure communication channel could not be established.
+[params]
+deviceTime=any
+parserName=TrendMicroDeepSecurityParser
+eventType=Trend-DeepSecurity-Contact_by_Unrecognized_Client-771
+srcIpAddr=172.16.146.157
+reptModel=Deep Security Manager
+eventId=any
+eventParsedOk=1
+eventSeverity=6
+eventName=A connection to IDF Server Plug-in was initiated by a client not identifiable as a managed computer
+phEventCategory=0 (External)
+msg=A connection to IDF Server Plug-in was initiated by a client not identifiable as a managed computer: 172.16.214.142:57530.  Either the client is not a managed IDF component, or a secure communication channel could not be established.
+eventRuleTrigger=1
+count=1
+eventSeverityCat=MEDIUM
+collectorId=any
+relayDevIpAddr=78.78.78.78
+srcUser=System
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=78.78.78.78
+reptVendor=TrendMicro

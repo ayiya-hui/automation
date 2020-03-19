@@ -1,0 +1,17 @@
+eventType,name,module,reptDevIpAddr,key,method
+Symantec-AV-Admin-Login-Failure,SymantecAV_1,SymantecAV,$localhost,,syslog
+Symantec-AV-Admin-Login-Success,SymentecAV_2,SymantecAV,$localhost,,syslog
+Symantec-AV-Admin-Logout,SymentecAV_3,SymantecAV,$localhost,,syslog
+Symantec-AV-Virus-Found,SymantecAV_4,SymantecAV,$localhost,,syslog
+Symantec-AV-Traffic-Deny,SymantecAV_5,SymantecAV,$localhost,,syslog
+Symantec-AV-Traffic-Permit,SymantecAV_6,SymantecAV,$localhost,,syslog
+
+Symantec-CIDS-The-device-was-disabled-successfully,SymantecAV_7,SymantecAV,$localhost,,syslog
+Symantec-CIDS-55000-IRCIdentificationSignature,SymantecAV_8,SymantecAV,$localhost,,syslog
+Symantec-CIDS-26876-WebAttack:ExploitToolkitWebsite50,SymantecAV_9,SymantecAV,$localhost,,syslog
+Symantec-AV-Group-Update,SymantecAV_10,SymantecAV,$localhost,,syslog
+Symantec-AV-Info-Submitted,SymantecAV_11,SymantecAV,$localhost,,syslog
+Symantec-AV-Download-Failed,SymantecAV_12,SymantecAV,$localhost,,syslog
+Symantec-AV-Download-Success,SymantecAV_13,SymantecAV,$localhost,,syslog
+Symantec-AV-Updated,SymantecAV_14,SymantecAV,$localhost,,syslog
+Symantec-AV-Submit-Failed,SymantecAV_15,SymantecAV,$localhost,,syslog

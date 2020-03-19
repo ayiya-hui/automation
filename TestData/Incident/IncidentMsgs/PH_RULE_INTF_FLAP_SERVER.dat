@@ -1,0 +1,3 @@
+[eventMsg]
+[PH_DEV_MON_INTF_ADMIN_UP_TO_DOWN]:[eventSeverity]=PHL_INFO,[procName]=phMonitorSupervisor,[fileName]=phSystemStatus.cpp,[lineNumber]=78,[intfName]=Ethernet01,[intfAlias]=in,[hostName]=myHost,[hostIpAddr]=145.145.145.1,[phLogDetail]=
+[PH_DEV_MON_INTF_ADMIN_DOWN_TO_UP]:[eventSeverity]=PHL_INFO,[procName]=phMonitorSupervisor,[fileName]=phSystemStatus.cpp,[lineNumber]=78,[intfName]=Ethernet01,[intfAlias]=in,[hostName]=myHost,[hostIpAddr]=145.145.145.1,[phLogDetail]=

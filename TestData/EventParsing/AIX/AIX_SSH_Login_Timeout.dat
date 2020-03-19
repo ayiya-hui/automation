@@ -1,0 +1,24 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<35>Dec  2 15:55:25 Message forwarded from fiona: tsm: /dev/pts/2: 3004-038 Login timed out after 60 seconds.
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=1
+eventSeverity=3
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=$localhost
+eventAction=3
+swProcName=tsm
+eventName=SSH logon timeout
+reptVendor=IBM
+durationMSec=60000
+phEventCategory=0 (External)
+eventType=AIX_SSH_Login_Timeout
+reptDevIpAddr=$localhost
+reptModel=AIX

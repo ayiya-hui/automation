@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+172.18.48.151
+[eventMsg]
+Apr 13 19:48:23 172.18.48.151 ALARM: 1271169441l | system | info | ALR | 802.1X AUTHENTICATION FAILURE INFO Access Request rejected for User: <harsh>, NAS IP: <172.18.48.151>, SSID: <wpa2h>, Calling Station ID: <00:1f:3b:83:21:13>, Called Station ID: <00:90:0b:0a:82:48>, Authentication Type: <802.1X>, Reason: <Bad Username or Password>, AP Id: <1>
+[params]
+customer=Super
+eventId=any
+parserName=FortiWLANParser
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+count=1
+eventSeverity=1
+eventType=FortiWLC-802.1X-Radius-Access-Reject-With-Bad-Username
+reptDevIpAddr=172.18.48.151
+collectorId=any
+extEventRecvProto=Syslog
+eventName=RADIUS authentication failure
+reptVendor=Fortinet
+relayDevIpAddr=172.18.48.151
+rawEventMsg=any
+phRecvTime=any
+reptDevName=any
+reptModel=FortiWLC

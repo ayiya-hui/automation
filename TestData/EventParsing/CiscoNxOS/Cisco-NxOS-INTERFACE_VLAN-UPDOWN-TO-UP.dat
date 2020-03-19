@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<189>: 2012 Jul 10 10:52:05 EST: %INTERFACE_VLAN-5-UPDOWN: Line Protocol on Interface vlan 242, changed state to up
+[params]
+rawEventMsg=any
+deviceTime=any
+isHostIntfCritical=No
+eventType=Cisco-NxOS-INTERFACE_VLAN-UPDOWN-TO-UP
+phCustId=$sender
+intfName=Vlan242
+reptModel=NX-OS
+eventId=any
+eventParsedOk=1
+eventSeverity=4
+testEvent=Real Event(0)
+hostIpAddr=$localhost
+eventName=Cisco-NxOS-INTERFACE_VLAN-UPDOWN-TO-UP
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+collectorId=any
+reptDevName=any
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Cisco

@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<46>Mar 09 10:35:56 ActionQueueScrape.pl: [DCauditLogs] NdcSrcFireMgr.staples.com: Default User@Default User IP, System > Local > Registration > High Availability, Synchronization - Update IPRepVersion
+[params]
+deviceTime=any
+parserName=Sourcefire3Parser
+eventType=Sourcefire-Audit-Synchronization
+reptModel=FirePOWER
+eventId=any
+osObjAction=System > Local > Registration > High Availability
+eventSeverity=1
+eventName=FirePOWER high availability synchronization
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+user=Default User
+rawEventMsg=any
+eventParsedOk=1
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Cisco

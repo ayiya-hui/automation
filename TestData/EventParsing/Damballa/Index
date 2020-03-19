@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+Damballa-Failsafe-Asset-Infected,Damballa_1,Damballa,$localhost,,syslog

@@ -1,0 +1,31 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<14>Mar 14 16:36:16 MTV-L42-PAN1.purestorage 1,2016/03/14 16:36:16,007701000616,SYSTEM,globalprotect,0,2016/03/14 16:36:16,,globalprotectgateway-auth-succ,VPN Gateway-N,0,0,general,informational,"GlobalProtect gateway user authentication succeeded. Login from: 208.66.51.186, User name: jane.user, Auth type: profile.",31346091,0x0
+[params]
+deviceTime=any
+parserName=PaloAltoParser
+totFlows=1
+eventType=PAN-OS-SYSTEM-VPN-Login-Success
+destIpAddr=$localhost
+srcName=any
+srcIpAddr=208.66.51.186
+reptModel=PAN-OS
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=PAN-OS-SYSTEM-VPN-Login-Success
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+eventRuleTrigger=1
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+user=jane.user
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Palo Alto
+authenMethod=profile

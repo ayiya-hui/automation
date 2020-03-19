@@ -1,0 +1,33 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<133>id=firewall sn=0017C5148478 time="2015-04-26 17:13:55" fw=74.203.128.131 pri=5 c=256 gcat=4 m=38 msg="ICMP packet dropped due to Policy" srcMac=b0:a8:6e:32:3f:cb src=212.91.8.194::X1 srcZone=WAN dstMac=02:17:c5:14:84:79 dst=74.203.128.131 type=3 icmpCode=1 rcvd=56 n=11484
+[params]
+deviceTime=any
+destGeoOrg=any
+parserName=SonicwallFirewallParser
+eventType=SonicOS-38
+destGeoState=Florida
+destIpAddr=74.203.128.131
+destGeoCountry=any
+srcIpAddr=212.91.8.194
+reptModel=SonicOS
+eventId=any
+eventParsedOk=1
+eventSeverity=2
+icmpType=3 (Destination unreachable)
+eventName=ICMP packet dropped due to policy
+phEventCategory=0 (External)
+eventRuleTrigger=1
+count=1
+srcIntfName=X1
+recvBytes=56
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Sonicwall
+destGeoCity=any

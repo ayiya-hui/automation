@@ -1,0 +1,74 @@
+[reptDevIpAddr(key)]
+81.81.81.81 (srcIpAddr:172.16.3.139)
+[eventMsg]
+<133>SH-QA-A-Jnp-FW-01: NetScreen device_id=SH-QA-A-Jnp-FW-01  [Root]system-notification-00257(traffic): start_time="2001-10-21 18:09:12" duration=1 policy_id=2 service=dns proto=17 src zone=Trust dst zone=Untrust action=Permit sent=80 rcvd=401 src=172.16.3.139 dst=172.16.10.8 src_port=1026 dst_port=53 src-xlated ip=172.16.3.27 port=1026 dst-xlated ip=172.16.10.8 port=53 session_id=4028 reason=Close - RESP.
+[params]
+rawEventMsg=any
+deviceTime=any
+eventType=Juniper-SSG-traffic-permit
+phCustId=$sender
+destIpAddr=172.16.10.8
+totBytes=481
+destIpPort=53 (DOMAIN)
+srcIpAddr=172.16.3.139
+reptModel=SSG ScreenOS
+eventId=any
+policyName=2
+eventParsedOk=1
+eventSeverity=1
+testEvent=Real Event(0)
+preNATDestIpAddr=172.16.10.8
+eventName=Permitted network traffic
+phEventCategory=4 (Traffic)
+recvBytes=401
+srcIpPort=1026
+eventSeverityCat=LOW
+collectorId=any
+postNATSrcIpAddr=172.16.3.27
+ipProto=17 (UDP)
+postNATSrcIpPort=1026
+reptDevName=any
+count=1
+phRecvTime=any
+reptDevIpAddr=81.81.81.81
+eventAction=0 (Permit)
+reptVendor=Juniper
+durationMSec=1
+sentBytes=80
+[reptDevIpAddr(key)]
+81.81.81.81 (srcIpAddr:10.253.131.97)
+[eventMsg]
+<165>Oct 30 14:58:11 81.81.81.81 CBUBOT1-SENSATA-FW-2: NetScreen device_id=CBUBOT1-SENSATA-FW-2  [Root]system-notification-00257(traffic): start_time=2013-10-30 16:25:03 duration=3 policy_id=698 service=dns proto=17 src zone=Untrust dst zone=Untrust action=Permit sent=91 rcvd=251 src=10.253.131.97 dst=8.8.4.4 src_port=59722 dst_port=53 src-xlated ip=10.253.131.97 port=59722 dst-xlated ip=8.8.4.4 port=53 session_id=2006 reason=Close - RESP
+[params]
+rawEventMsg=any
+deviceTime=any
+eventType=Juniper-SSG-traffic-permit
+phCustId=$sender
+destIpAddr=8.8.4.4
+totBytes=342
+destIpPort=53 (DOMAIN)
+srcIpAddr=10.253.131.97
+reptModel=SSG ScreenOS
+eventId=any
+policyName=698
+eventParsedOk=1
+eventSeverity=1
+preNATDestIpAddr=8.8.4.4
+eventName=Permitted network traffic
+phEventCategory=4 (Traffic)
+destName=any
+recvBytes=251
+srcIpPort=59722
+eventSeverityCat=LOW
+collectorId=any
+postNATSrcIpAddr=10.253.131.97
+ipProto=17 (UDP)
+postNATSrcIpPort=59722
+reptDevName=any
+count=1
+phRecvTime=any
+reptDevIpAddr=81.81.81.81
+eventAction=0 (Permit)
+reptVendor=Juniper
+durationMSec=3
+sentBytes=91

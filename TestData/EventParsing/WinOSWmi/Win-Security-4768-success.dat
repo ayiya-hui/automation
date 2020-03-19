@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+20.20.20.120
+[eventMsg]
+Fri Oct 30 18:19:58 2009 $reporter AccelOps-WinLog-WMI  [Category]="14339" [CategoryString]="Kerberos Authentication Service" [ComputerName]="sf1dc03.jha.local" [Data]="NULL" [EventCode]="4768" [EventIdentifier]="4768" [EventType]="4" [Logfile]="Security" [RecordNumber]="184035048" [SourceName]="Microsoft-Windows-Security-Auditing" [TimeGenerated]="20100505222857.665500-000" [TimeWritten]="20100505222857.665500-000" [Type]="Audit Success" [User]="(null)" [[Account Information]][Account Name]="kpotter" [Supplied Realm Name]="jha.local" [User ID]="S-1-5-21-2090294290-982477196-2044928816-4043" [[Service Information]][Service Name]="krbtgt" [Service ID]="S-1-5-21-2090294290-982477196-2044928816-502" [[Network Information]][Client Address]="::ffff:10.0.2.66" [Client Port]="64640" [[Additional Information]][Ticket Options]="0x40810010" [Result Code]="0x0" [Ticket Encryption Type]="0x17" [Pre-Authentication Type]="2" [[Certificate Information]][Certificate Issuer Name]="		" [Certificate Serial Number]="	" [Certificate Thumbprint]="
+[params]
+rawEventMsg=any
+type=Audit Success
+eventAction=0 (Permit)
+count=1
+eventId=any
+domain=jha.local
+deviceTime=any
+eventParsedOk=1
+eventSeverity=1
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+destIpAddr=$reporter
+eventName=Windows kerberos domain authentication successful
+srcIpAddr=10.0.2.66
+reptVendor=Microsoft
+eventType=Win-Security-4768-success
+user=kpotter
+phEventCategory=0 (External)
+reptDevIpAddr=20.20.20.120
+srcIpPort=64640
+reptModel=Windows
+eventSource=Microsoft-Windows-Security-Auditing

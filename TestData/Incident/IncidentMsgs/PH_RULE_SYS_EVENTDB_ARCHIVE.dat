@@ -1,0 +1,3 @@
+[eventMsg]
+[PH_SYSTEM_DISK_ARCHIVING_FINISHED]:[eventSeverity]=PHL_INFO,[procName]=phMonitorSupervisor,[fileName]=phSystemStatus.cpp,[lineNumber]=78,[phLogDetail]=Finish archiving events from eventDB myDb to archive team (total bytes archived: 150 purged: 200),[totBytes]=150
+[PH_SYSTEM_DISK_ARCHIVING_FINISHED]:[eventSeverity]=PHL_INFO,[procName]=phDataManager,[fileName]=DiskUChecker.cpp,[lineNumber]=508,[totBytes64]=7403659264,[phLogDetail]=Finish archiving events from eventDB /data/eventdb to archive /data/cuiping (total bytes archived: 6915973120 purged: 7403659264)

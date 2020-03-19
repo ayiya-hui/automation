@@ -1,0 +1,30 @@
+[reptDevIpAddr(key)]
+192.168.10.1
+[eventMsg]
+May 11 10:17:59 192.168.10.1 1 948136486.721741837 MX60 flows src=192.168.10.254 dst=8.8.8.8 mac=00:18:0A:12:34:56 protocol=udp sport=9562 dport=53 pattern: allow all
+[params]
+destGeoOrg=any
+parserName=CiscoMerakiParser
+eventType=Cisco-Meraki-Flow-Permit
+destIpAddr=8.8.8.8
+ipProto=17 (UDP)
+destGeoCountry=any
+srcIpAddr=192.168.10.254
+reptModel=Meraki Firewall
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Flow permitted
+phEventCategory=4 (Traffic)
+eventRuleTrigger=1
+hostMACAddr=00:18:0a:12:34:56
+count=1
+srcIpPort=9562
+eventSeverityCat=LOW
+collectorId=any
+destIpPort=53 (DOMAIN)
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=192.168.10.1
+reptVendor=Cisco

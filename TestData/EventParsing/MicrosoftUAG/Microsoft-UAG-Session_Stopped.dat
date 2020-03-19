@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+172.20.9.102
+[eventMsg]
+<134>Aug  2 09:02:32 172.20.9.102 6513:ACFPRDUAG1:172.20.9.102:SessionMgr:[MsgID: 61]Session EF8372CC-1CBA-4A86-9F7F-B9A2DA2617A3 was stopped on trunk trunkoutlook (secure=1). The source IP address is 107.198.96.8.
+[params]
+deviceTime=any
+parserName=MicrosoftUAGParser
+eventType=Microsoft-UAG-Session_Stopped
+srcName=107-198-96-8.lightspeed.cicril.sbcglobal.net
+srcIpAddr=107.198.96.8
+reptModel=Forefront UAG
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Remote session stopped
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=172.20.9.102
+rawEventMsg=any
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=172.20.9.102
+reptVendor=Microsoft

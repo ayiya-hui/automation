@@ -1,0 +1,29 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<134>Nov 28 2007 17:22:18: %PIX-6-106023: Deny udp src inside:192.168.20.31/3530 dst outside:99.129.50.157/123 by access-group "inside_to_outside"[0x2a89d901,0x0]--automator
+[params]
+rawEventMsg=any
+destIpAddr=99.129.50.157
+deviceTime=any
+eventType=PIX-106023
+phCustId=$sender
+destIpAddr=99.129.50.157
+destIpPort=123 (NTP)
+srcIpAddr=192.168.20.31
+reptModel=PIX
+eventId=any
+eventParsedOk=any
+eventSeverity=1
+eventName=Denied IP traffic by policy
+phEventCategory=4 (Traffic)
+srcIntfName=inside
+srcIpPort=3530
+eventSeverityCat=LOW
+destIntfName=outside
+ipProto=17 (UDP)
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=1 (Deny)
+reptVendor=Cisco

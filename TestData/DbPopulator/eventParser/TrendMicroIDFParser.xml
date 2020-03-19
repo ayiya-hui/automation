@@ -1,0 +1,71 @@
+<eventParser name="TrendMicroIDFParser">
+  <deviceType>
+    <Vendor>TrendMicro</Vendor>
+    <Model>IDF</Model>
+    <Version>ANY</Version>
+  </deviceType>
+
+  <patternDefinitions>
+    <pattern name="patStrIDFMod"><![CDATA[dsa_mpf|dsa_mpld]]></pattern>
+    <pattern name="patStrMAC"><![CDATA[\w+:\w+:\w+:\w+:\w+:\w+]]></pattern>
+  </patternDefinitions>
+
+  <eventFormatRecognizer><![CDATA[<:patStrIDFMod>]]></eventFormatRecognizer>
+  
+  <testEvents>
+      <testEvent><![CDATA[<134>May 31 15:24:34 DSK-FT11XL1 dsa_mpld: REASON=PLD:Disallow_Web_Proxy_Autodiscovery_Protocol REV IN= OUT=Local_Area_Connection MAC=00:26:B9:80:74:71:2C:6B:F5:35:4E:00:08:00 SRC=192.168.20.2 DST=192.168.13.39 LEN=133 PROTO=UDP SPT=53 DPT=58187 CNT=1 act=Reset POS=0 SPOS=0 NOTE=CVE-2007-5355 FLAGS=0]]></testEvent>
+  </testEvents>
+
+  <parsingInstructions>
+
+    <!--
+      <134>May 31 15:24:34 DSK-FT11XL1 dsa_mpld: REASON=PLD:Disallow_Web_Proxy_Autodiscovery_Protocol REV IN= OUT=Local_Area_Connection MAC=00:26:B9:80:74:71:2C:6B:F5:35:4E:00:08:00 SRC=192.168.20.2 DST=192.168.13.39 LEN=133 PROTO=UDP SPT=53 DPT=58187 CNT=1 act=Reset POS=0 SPOS=0 NOTE=CVE-2007-5355 FLAGS=0
+    -->
+
+    <collectFieldsByRegex src="$_rawmsg">
+      <regex><![CDATA[<:gPatSyslogPRI><_mon:gPatMon>\s+<_day:gPatDay> <_time:gPatTime> <hostName:gPatStr> <:patStrIDFMod>: <_body:gPatMesgBody>]]></regex>
+    </collectFieldsByRegex>
+
+    <setEventAttribute attr="deviceTime">toDateTime($_mon, $_day, $_time)</setEventAttribute>
+    <setEventAttribute attr="eventType">Trend_IDF_Generic</setEventAttribute>
+
+    <collectAndSetAttrByKeyValuePair sep=' ' src="$_body">
+      <attrKeyMap attr="fwRule" key="REASON="/>
+      <attrKeyMap attr="fwAction" key="act="/>
+      <attrKeyMap attr="srcIntfName" key="IN="/>
+      <attrKeyMap attr="destIntfName" key="OUT="/>
+      <attrKeyMap attr="_macAddr" key="MAC="/>
+      <attrKeyMap attr="srcIpAddr" key="SRC="/>
+      <attrKeyMap attr="destIpAddr" key="DST="/>
+      <attrKeyMap attr="_length" key="LEN="/>
+      <attrKeyMap attr="_proto" key="PROTO="/>
+      <attrKeyMap attr="srcIpPort" key="SPT="/>
+      <attrKeyMap attr="destIpPort" key="DPT="/>
+      <attrKeyMap attr="_flag" key="FLAG="/>
+    </collectAndSetAttrByKeyValuePair>
+
+    <when test = 'exist fwAction'>
+      <setEventAttribute attr="eventType">combineMsgId("Trend-IDF-", $fwAction)</setEventAttribute>
+    </when>
+
+    <choose>
+      <when test = 'exist srcIntfName'>
+        <setEventAttribute attr="direction">inbound</setEventAttribute>
+      </when>
+      <when test = 'exist destIntfName'>
+        <setEventAttribute attr="direction">outbound</setEventAttribute>
+      </when>
+    </choose>
+
+    <when test = 'exist _macAddr'>
+      <collectFieldsByRegex src="$_macAddr">
+        <regex><![CDATA[<destMACAddr:patStrMAC>:<srcMACAddr:patStrMAC>:.*]]></regex>
+      </collectFieldsByRegex>
+    </when>
+
+    <when test='exist _proto'>
+      <setEventAttribute attr="ipProto">convertStrToIntIpProto($_proto)</setEventAttribute>
+    </when>
+
+  </parsingInstructions>
+</eventParser>

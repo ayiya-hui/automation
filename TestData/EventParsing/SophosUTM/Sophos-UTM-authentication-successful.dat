@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<30>2016:03:11-10:00:27 ActiveUTM-1 confd[14677]: I Role::authenticate:177() => id="3106" severity="info" sys="System" sub="confd" name="authentication successful" user="ha_sync" srcip="198.19.250.2" sid="ZSWfuwabEKboKJfMKHgN" facility="system" client="vpnreporter" call="new"<31>Mar 11 10:00:27 confd[14677]: D sys::AUTOLOAD:302() => id="3100" severity="debug" sys="System" sub="confd" name="external call" user="ha_sync" srcip="198.19.250.2" facility="system" client="vpnreporter" lock="none" method="get_SID"
+[params]
+parserName=SophosUTMParser
+eventType=Sophos-UTM-authentication-successful
+procName=confd
+srcIpAddr=198.19.250.2
+reptModel=UTM
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Sophos UTM authentication successful
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+eventRuleTrigger=1
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+user=ha_sync
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Sophos

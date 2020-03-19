@@ -1,0 +1,21 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<133>Jul 24 2008 03:14:34: %PIX-5-111001: Begin configuration: SJ-Dev-S-RH-VMW-01 writing to memory
+[params]
+rawEventMsg=any
+count=1
+eventId=any
+deviceTime=any
+eventParsedOk=any
+eventSeverity=2
+phRecvTime=any
+phCustId=$sender
+eventSeverityCat=LOW
+eventAction=0 (Permit)
+eventName=Begin configuration - writing to device
+reptVendor=Cisco
+eventType=PIX-111001
+phEventCategory=0 (External)
+reptDevIpAddr=$localhost
+reptModel=PIX

@@ -1,0 +1,23 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<181>date=2013-05-01 time=11:20:50 devname=FortiGate80C devid=FGT80C3912622808 logid=1101004096 type=utm subtype=netscan eventtype=vulnerability level=notice vd=root action=scan status=stop engine=1.2345 plugin=1.6789
+[params]
+eventId=any
+count=1
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+eventSeverity=3
+eventType=FortiGate-netscan-scan-performed
+phCustId=$sender
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+collectorId=any
+eventName=Network scan performed
+reptVendor=Fortinet
+relayDevIpAddr=$localhost
+phRecvTime=any
+reptDevName=any
+reptModel=FortiOS

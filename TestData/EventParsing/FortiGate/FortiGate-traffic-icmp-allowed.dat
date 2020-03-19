@@ -1,0 +1,35 @@
+[reptDevIpAddr(key)]
+$localhost (durationMSec:0)
+[eventMsg]
+<189>date=2013-11-08 time=22:39:21 devname=FGT8003607502485 device_id=FGT8003607502485 log_id=0038000005 type=traffic subtype=other pri=notice vd=root src=86.18.150.158 src_port=0 src_int="yyyyy" dst=205.217.21.10 dst_port=769 dst_int="xxxxx" SN=210739947 status=accept policyid=35 dst_country="United States" src_country="United Kingdom" dir_disp=org tran_disp=noop service=3/1/icmp proto=1 duration=0 sent=0 rcvd=0 sent_pkt=0 rcvd_pkt=0
+[params]
+deviceTime=any
+eventType=FortiGate-traffic-icmp-allowed
+phCustId=$sender
+totBytes=0
+reptModel=FortiOS
+eventId=any
+eventParsedOk=1
+eventSeverity=3
+sentPkts=0
+eventName=Permitted icmp traffic
+phEventCategory=4 (Traffic)
+srcIntfName=yyyyy
+srcHostName=cpc4-bmly8-2-0-cust669.2-3.cable.virginm.net
+srcIpAddr=86.18.150.158
+recvBytes=0
+eventSeverityCat=LOW
+collectorId=any
+totPkts=0
+destIntfName=xxxxx
+relayDevIpAddr=$localhost
+ipProto=1 (ICMP)
+reptDevName=any
+count=1
+phRecvTime=any
+reptDevIpAddr=$localhost
+recvPkts=0
+eventAction=0 (Permit)
+reptVendor=Fortinet
+durationMSec=0
+sentBytes=0

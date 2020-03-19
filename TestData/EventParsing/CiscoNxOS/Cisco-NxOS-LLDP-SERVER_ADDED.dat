@@ -1,0 +1,54 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<189>: 2014 Dec 16 21:35:10 CST: %LLDP-FEX6  -5-SERVER_ADDED: Server with Chassis ID d48c.b51f.0096 Port ID d48c.b51f.009d management address NIL discovered on local port Eth6/1/3 in vlan 0 with enabled capability None
+[params]
+deviceTime=any
+parserName=CiscoNxOSParser
+totFlows=1
+eventType=Cisco-NxOS-LLDP-SERVER_ADDED
+reptModel=NX-OS
+eventId=any
+eventParsedOk=1
+eventSeverity=2
+hostIpAddr=$localhost
+eventName=A peer is discovered
+phEventCategory=0 (External)
+eventRuleTrigger=1
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Cisco
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<189>: 2014 Dec 16 21:35:10 CST: %LLDP-FEX6  -5-SERVER_ADDED: Server with Chassis ID d48c.b51f.0096 Port ID d48c.b51f.009d management address NIL discovered on local port Eth6/1/3 in vlan 0 with enabled capability None
+[params]
+deviceTime=any
+parserName=CiscoNxOSParser
+totFlows=1
+eventType=Cisco-NxOS-LLDP-SERVER_ADDED
+reptModel=NX-OS
+eventId=any
+eventParsedOk=1
+eventSeverity=2
+hostIpAddr=$localhost
+eventName=A peer is discovered
+phEventCategory=0 (External)
+eventRuleTrigger=1
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+eventAction=0 (Permit)
+reptVendor=Cisco

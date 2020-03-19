@@ -1,0 +1,34 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<132>[2016-04-26 16:10:38] EFW: IP_PROTO: prio=3 id=07000014 rev=1 event=ttl_low action=drop ttl=1 ttlmin=3 rule=TTLOnLowMulticast recvif=If2 srcip=192.168.12.122 destip=224.0.0.252 ipproto=UDP ipdatalen=36 srcport=53717 destport=5355 udptotlen=36
+[params]
+deviceTime=any
+parserName=ClavisterParser
+eventType=Clavister-ttl-low
+logID=7000014
+ipProto=17 (UDP)
+srcIpAddr=192.168.12.122
+reptModel=cOS Firewall
+eventId=any
+udpLen=36
+eventParsedOk=1
+eventSeverity=4
+fwAction=drop
+eventName=Clavister-ttl-low
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+ipTotalLength=36
+count=1
+srcIpPort=53717
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+destIpPort=5355
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Clavister
+fwRule=TTLOnLowMulticast

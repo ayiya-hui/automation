@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+1.1.1.1
+[eventMsg]
+<134>Sep 27 05:32:58 1.1.1.1 nmservic.exe[1016]: Proxy: Client TDI RPC session termination indication, virtual address: 172.16.103.98, IMP handle: 0x1865654d, how: Abort, reason: Application inactivity timeout.
+[params]
+rawEventMsg=any
+eventId=any
+count=1
+ipConnId=0x1865654d
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+eventSeverity=1
+eventType=MobXE-Proxy-Sess-End
+phCustId=$sender
+reptDevIpAddr=1.1.1.1
+collectorId=any
+hostVirtIpAddr=172.16.103.98
+eventName=NetMotion MobilityXE client-to-mobility server proxy session end
+procName=nmservic.exe
+reptVendor=NetMotion
+phRecvTime=any
+hostName=any
+reptDevName=any
+reptModel=Mobility XE

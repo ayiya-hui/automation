@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+76.76.76.76
+[eventMsg]
+<46>Dec 13 06:07:08 76.76.76.76 OracleAlertLog    0       ORA-00312: online log 3 thread 1: 'C:\APP\ADMINISTRATOR\ORADATA\ORCL\REDO03.LOG'
+[params]
+rawEventMsg=any
+eventId=any
+count=1
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=MEDIUM
+eventSeverity=5
+eventType=ORADB-ORA-00312
+phCustId=$sender
+reptDevIpAddr=76.76.76.76
+collectorId=any
+fileName=Alert.log
+eventName=online log string thread string: 'string'
+reptVendor=Oracle
+testEvent=Real Event(0)
+phRecvTime=any
+hostName=76.76.76.76
+eventDesc=ORA-00312: online log 3 thread 1: 'C:\APP\ADMINISTRATOR\ORADATA\ORCL\REDO03.LOG'
+reptDevName=any
+reptModel=Database Server

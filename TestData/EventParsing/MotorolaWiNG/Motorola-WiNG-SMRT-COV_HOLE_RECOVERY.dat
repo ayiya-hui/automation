@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+2015-11-11T13:59:10.197845-05:00 ustnnf1memp-ap01 %SMRT-5-COV_HOLE_RECOVERY: Radio ustnnf1memp-ap12:R1 power changed from 11 to 14 on AP 84-24-8D-1B-91-34 due to client 70-48-0F-69-DE-2
+[params]
+parserName=MotorolaWiNGParser
+eventType=Motorola-WiNG-SMRT-COV_HOLE_RECOVERY
+reptModel=WiNG WLAN AP
+eventId=any
+eventParsedOk=1
+eventSeverity=2
+eventName=Motorola WLAN AP: Coverage hole recovery
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+eventDesc=Radio ustnnf1memp-ap12:R1 power changed from 11 to 14 on AP 84-24-8D-1B-91-34 due to client 70-48-0F-69-DE-2
+hostMACAddr=84:24:8d:1b:91:34
+count=1
+srcMACAddr=70:48:0f:69:de:02
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+eventRuleTrigger=1
+reptDevName=ustnnf1memp-ap01
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Motorola

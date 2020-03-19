@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+192.168.24.11
+[eventMsg]
+<13>Apr  1 09:03:52 dev-v-win03-vc MSPPTPLog    0       192.168.24.11,administrator,04/01/2009,09:03:52,RAS,DEV-V-WIN03-VC,25,311 1 192.168.24.11 04/01/2009 15:57:16 3,4127,4,4130,DEV-V-WIN03-VC\administrator,4129,DEV-V-WIN03-VC\administrator,4154,Use Windows authentication for all users,4155,1,4136,3,4142,16
+[params]
+rawEventMsg=any
+deviceTime=any
+eventType=Win-VPN-FailedLogon
+phCustId=$sender
+reptModel=PPTP/L2TP VPN
+eventId=any
+eventParsedOk=1
+eventSeverity=3
+testEvent=Real Event(0)
+eventName=Failed Windows L2TP/PPTP VPN logon attempt
+phEventCategory=0 (External)
+winIASFailCode=16 (IAS_AUTH_FAILURE)
+eventSeverityCat=LOW
+collectorId=any
+user=administrator
+reptDevName=DEV-V-WIN03-VC
+count=1
+phRecvTime=any
+reptDevIpAddr=192.168.24.11
+eventAction=1 (Deny)
+reptVendor=Microsoft
+nepDevIpAddr=192.168.24.11
+relayDevName=RAS
