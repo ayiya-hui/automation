@@ -1,0 +1,3 @@
+config="""<config><customers>$customers</customers></config>"""
+
+customer="""<customer custId="$cust_id"><name>customer$cust_id</name><fullName>Test Customer $cust_id</fullName><description>Customer$cust_id account</description><adminUser>cust$cust_id</adminUser><adminPwd>cust*$cust_id</adminPwd><adminEmail>not_set</adminEmail><eventCollectorId>$co_id</eventCollectorId><svcUser>10004</svcUser><svcPwd>Prospect@Hi123</svcPwd><custResource><diskQuote>536870912000</diskQuote><eps>1000</eps><configItem>550</configItem><duration>365</duration></custResource></customer>"""

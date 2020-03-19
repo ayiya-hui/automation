@@ -1,0 +1,2 @@
+class logDiscoverHandler:
+    pass

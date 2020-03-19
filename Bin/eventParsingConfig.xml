@@ -1,0 +1,12 @@
+<testConfig>
+	<testType>Test</testType>
+	<threadPool>30</threadPool>
+	<threadWaitTime>1</threadWaitTime>
+	<testServer>
+		<allInOne>192.168.20.218</allInOne>
+	</testServer>
+	<testTask>
+		<taskName>EventParsing</taskName>
+		<taskFiles>CiscoIOS</taskFiles>
+	</testTask>
+</testConfig>

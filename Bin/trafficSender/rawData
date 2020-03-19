@@ -1,0 +1,63 @@
+<134>Nov 28 17:20:48 $ip %ASA-6-302013: Built outbound TCP connection 76118 for outside:207.68.178.55/80 (207.68.178.99/80) to inside:192.168.20.66/3530 (99.129.50.157/5967)
+<134>Nov 28 17:22:08 $ip %ASA-6-302014: Teardown TCP connection 76121 for outside:77.67.126.83/80 to inside:192.168.20.31/3531 duration 0:01:05 bytes 6410 TCP Reset-I
+<134>Nov 28 17:20:48 $ip %ASA-6-302015: Built outbound UDP connection 76116 for outside:99.129.50.158/53 (99.129.50.158/53) to inside:192.168.0.10/1041 (99.129.50.157/1411)
+<134>Nov 28 17:20:48 $ip %ASA-6-302016: Teardown UDP connection 76116 for outside:99.129.50.158/53 to inside:192.168.0.10/1041 duration 0:00:00 bytes 268
+<134>Nov 28 17:20:48 $ip %ASA-6-302020: Built ICMP connection for faddr 192.168.0.30/0 gaddr 192.168.0.1/0 laddr 192.168.0.1/0
+<134>Nov 28 17:20:50 $ip %ASA-6-302021: Teardown ICMP connection for faddr 192.168.0.30/0 gaddr 192.168.0.1/0 laddr 192.168.0.1/0
+<134>Nov 28 17:20:48 $ip %ASA-6-305011: Built dynamic TCP translation from inside:192.168.20.31/3530 to outside:99.129.50.157/5967
+<134>Nov 28 17:22:18 $ip %ASA-6-305012: Teardown dynamic TCP translation from inside:192.168.20.31/3530 to outside:99.129.50.157/5967 duration 0:01:30
+<134>Dec 04 20:00:45 $ip %ASA-6-106015: Deny TCP (no connection) from 64.81.25.70/443 to 207.215.153.182/5898 flags FIN ACK on interface outside
+<134>Nov 28 17:22:18 $ip %ASA-6-106023: Deny udp src inside:192.168.20.31/3530 dst outside:99.129.50.157/123 by access-group "inside_to_outside"[0x2a89d901,0x0]
+<133>Jul 24 03:14:34 $ip %ASA-5-111001: Begin configuration: SJ-Dev-S-RH-VMW-01 writing to memory
+<133>Jul 24 03:14:39 $ip %ASA-5-111004: SJ-Dev-S-RH-VMW-01 end configuration: OK
+<133>Jul 24 03:14:32 $ip %ASA-5-111005: SJ-Dev-S-RH-VMW-01 end configuration: OK
+<133>Jul 24 03:14:07 $ip %ASA-5-111007: Begin configuration: SJ-Dev-S-RH-VMW-01 reading from terminal
+<133>Jul 24 03:14:07 $ip %ASA-5-111008: User 'enable_15' executed the 'configure terminal' command.
+<134>Jul 24 03:19:07 $ip %ASA-6-315011: SSH session from SJ-Dev-S-RH-VMW-01 on interface inside for user "pix" terminated normally
+<134>Jul 24 03:23:37 $ip %ASA-6-113004: AAA user authentication Successful : server =  192.168.0.40 : user = wenyong
+<134>Jul 24 03:29:15 $ip %ASA-6-113005: AAA user authentication Rejected : reason = AAA failure : server = 192.168.0.40 : user = wenyong
+<134>Jul 24 03:23:37 $ip %ASA-6-113008: AAA transaction status ACCEPT : user = wenyong
+<134>Jul 24 03:23:37 $ip %ASA-6-611101: User authentication succeeded: Uname: wenyong
+<134>Jul 24 03:29:15 $ip %ASA-6-611102: User authentication failed: Uname: wenyong
+<134>Jul 24 03:29:15 $ip %ASA-6-605004: Login denied from SJ-Dev-S-RH-VMW-01/44206 to inside:192.168.19.1/telnet for user "wenyong"
+<134>Jul 24 03:19:06 $ip %ASA-6-605005: Login permitted from SJ-Dev-S-RH-VMW-01/44190 to inside:192.168.19.1/ssh for user "pix"
+<133>Jul 24 03:23:37 $ip %ASA-5-502103: User priv level changed: Uname: enable_15 From: 1 To: 15   
+<134>Aug  3 14:07:43 $ip %ASA-6-722022: Group <AnyConnPolicy> User <admin> IP <99.129.50.155> TCP SVC connection established with compression 
+<166>Dec 14 10:06:58 $ip %ASA-6-713228: Group = ciscoclient, Username = adair, IP = 75.212.186.35, Assigned private IP address 10.2.15.62 to remote user 
+<134>Aug  3 16:48:26 $ip %ASA-6-722023: Group <AnyConnPolicy> User <admin> IP <99.129.50.155> UDP SVC connection terminated without compression
+<134>Dec 04 20:00:45 $ip %ASA-2-106002: TCP Connection denied by outbound list 5555 src 20.20.20.20 dest 192.168.20.20 
+<134>Dec 05 13:02:16 $ip %ASA-2-106006: Deny inbound UDP from 20.20.20.20/9996 to 10.10.10.10/8080 on interface outside	
+<134>Dec 04 20:00:45 $ip %ASA-2-106007: Deny inbound UDP from 20.20.20.20/5667 to 192.168.20.20/8080 due to DNS {Response} 
+<134>Dec 04 20:00:45 $ip %ASA-3-106010: Deny inbound udp src ether03:20.20.20.20/1050 dst ether05:192.168.20.20/1099 
+<134>Dec 04 20:00:45 $ip %ASA-6-106012: Deny IP from 192.168.20.20 to 10.20.20.20, IP options 6F.
+<134>Dec 04 20:00:45 $ip %ASA-2-106013: Dropping echo request from 20.20.20.20 to PAT address 192.168.50.50 
+<134>Dec 04 20:00:45 $ip %ASA-3-106014: Deny inbound icmp src ether03: 20.20.20.20 dst ether05: 192.168.20.20 (type 12, code 05)
+<134>Dec 04 20:00:45 $ip %ASA-2-106016: Deny IP spoof from (20.20.20.20) to 192.168.20.20 on interface ether05.
+<134>Dec 04 20:00:45 $ip %ASA-2-106017: Deny IP due to Land Attack from 20.20.20.20 to 192.168.20.20 
+<134>Dec 05 13:02:16 $ip %%ASA-2-106018: ICMP packet type echo denied by outbound list myAcl src 10.10.10.10 dest 20.20.20.20
+<134>Dec 04 20:00:45 $ip %ASA-2-106020: Deny IP teardrop fragment (size =5675 offset = 56) from 20.20.20.20 to 192.168.20.20 
+<134>Dec 04 20:00:45 $ip %ASA-2-106021: Deny tcp reverse path check from 20.20.20.20 to 192.168.20.20 on interface ether04
+<134>Dec 04 20:00:45 $ip %ASA-2-106022: Deny tcp connection spoof from 20.20.20.20 to 192.168.20.20 on interface ether04
+<134>Dec 04 20:00:45 $ip %ASA-2-106100: access-list 56456 permitted tcp ether05/192.168.20.20(8080) -> ether06/20.20.20.20(80) hit-cnt 1000 (first hit)
+<134>Dec 05 13:02:16 $ip %ASA-1-107001: RIP auth failed from 20.20.20.20: version=3.0, type=Update, mode=Passive, sequence=456789 on interface ripLocal
+<134>Dec 05 13:02:16 $ip %ASA-2-108003: Terminating ESMTP/SMTP connection; malicious pattern detected in the mail address from ether03:20.20.20.20/588 to ether05:192.168.20.20. Data:"This is a real situation." 
+<134>Dec 05 13:02:16 $ip %ASA-2-108002: SMTP replaced "This is a real thing.": out 192.168.20.20 in 20.20.20.20 data: "This is a test."
+<134>Dec 05 13:02:16 $ip %ASA-7-108006: Detected ESMTP size violation from ether03:20.20.20.20|8080 to ether05:192.168.20.20|80;declared size is: 4058, actual size is 4050.
+<134>Dec 05 13:02:16 $ip %ASA-6-109002: Auth from 20.20.20.20/6776 to 192.168.20.20/8080 failed (192.168.20.50 failed) on interface eth04.-
+<134>Dec 05 13:02:16 $ip %ASA-6-109003: Auth from 192.168.20.15 to 20.20.20.11/56 failed (all servers failed) on eth04.
+<134>Dec 05 13:02:16 $ip %ASA-6-109005: Authentication succeeded for user admin from 20.20.20.10/1559 to 192.168.20.55/8080 on eth04.
+<134>Dec 05 13:02:16 $ip %ASA-6-109006: Authentication failed for user admin from 10.10.10.10/2456 to 192.168.20.20/1537 on interface eth04.
+<134>Dec 05 13:02:16 $ip %ASA-3-109010: Auth from 192.168.30.50/1758 to 64.56.77.124/8080 failed (too many pending auths) on interface outside.
+<135>Nov 28 17:21:17 $ip %ASA-7-710005: UDP request discarded from 192.168.0.10/138 to inside:192.168.15.255/138
+<134>Mar 29 18:21:57 $ip %ASA-6-305011: Built dynamic TCP translation from inside:192.168.20.37/64033 to outside:216.156.83.134/16887
+<134>Mar 29 18:21:57 $ip %ASA-6-305012: Teardown dynamic TCP translation from inside:192.168.20.40/2946 to outside:216.156.83.134/29158 duration 0:00:30 
+<135>Mar 29 18:21:57 $ip %ASA-7-609002: Teardown local-host outside:209.235.239.78 duration 0:00:00 
+<164>Jun 08 14:14:14 $ip %ASA-4-716007: Group <Tech_Policy> User <Chris.durkin> IP <82.132.139.15> WebVPN Unable to creatte session.
+<164>Nov 23 08:56:55 $ip %ASA-4-338202: Dynamic Filter monitored greylisted TCP traffic from inside:10.200.200.107/54662 (24.97.162.243/45025) to outside:24.143.204.129/80 (24.143.204.129/80), destination 24.143.204.129 resolved from dynamic list: cdn11.sphere.com, threat-level: low, category: Ads    False Positive Tuning
+<165>Nov 23 08:55:32 $ip %ASA-5-338303: Address 128.242.240.180 (twitter.com) timed out. Removing rule  N/A  False Positive Tuning
+<166>Nov 23 08:55:28 $ip %ASA-6-338301: Intercepted DNS reply for name tags.bluekai.com from outside:24.92.226.11/53 to inside:10.201.201.16/60457, matched blacklist    False Positive Tuning
+<165>Nov 23 08:55:28 $ip %ASA-5-338302: Address 216.239.116.48 discovered for domain ad.cnet-basic-performance.akadns.net from greylist. Adding rule  N/A  False Positive Tuning
+<164>Nov 23 08:55:12 $ip %ASA-4-338002: Dynamic Filter monitored blacklisted TCP traffic from inside:10.200.200.104/56328 (24.97.162.243/23179) to outside:72.14.204.156/80 (72.14.204.156/80), destination 72.14.204.156 resolved from dynamic list: pagead.l.doubleclick.net, threat-level: low, category: Ads    False Positive Tuning
+<166>Nov 23 06:58:37 $ip %ASA-6-338304: Successfully downloaded dynamic filter data file from updater server https://update-manifests.ironport.com  N/A  False Positive Tuning
+<164>Original Address=$ip Nov 17 11:48:09 $ip %ASA-4-106023: Deny tcp src outside:88.200.232.120/2611 dst inside:72.44.221.101/445 by access-group "acl_out" [0x0, 0x0]
+<162>Original Address=$ip Nov 17 11:48:14 $ip %ASA-2-106001: Inbound TCP connection denied from 95.27.93.249/1425 to 72.44.221.103/445 flags SYN  on interface outside  

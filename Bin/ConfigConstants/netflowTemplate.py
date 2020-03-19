@@ -1,0 +1,1 @@
+netflow_msg="""version=5,count=$flow_count,dstIp=$dest_ip,srcIp=$src_ip,option=srcPort,srcPort=9890,dstPort=80,nextHop=2.22.0.254,protocol=tcp"""

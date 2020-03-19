@@ -1,0 +1,122 @@
+from AutoTestUtil.testPrepare import getTestConfig
+from ConfigConstants.TestConstant import supported_tasks, default_config_file_path, incident_query_report_interval
+from TestModules.runPopulator import populatorTest
+from TestModules.runDiscover import discoverTest
+from TestModules.runEventParsing import eventParsingTest
+from TestModules.runIncident import incidentTest
+from TestModules.runRestApi import restApiTest
+from TestModules.runLogDiscover import logDiscoverTest
+from Core.testThreading import testThread
+from Models.autoTestResultClass import AutoTestResult
+import ConfigConstants.TestConstant as TestConstant
+from Report.testReportHandler import testReport
+from Util.testUtility import processList
+import Util.classUtility as classUtility
+import Queue
+import time
+
+threads_pool=50
+
+tokenDict={'DbPopulator':populatorTest,
+           'EventParsing':eventParsingTest,
+           'Incident':incidentTest,
+           'Discover':discoverTest,
+           'RestApi':restApiTest,
+           'LogDiscover':logDiscoverTest,}  
+
+def autoTest(file):
+    """starting point to run automation test."""
+    testConfig=getTestConfig(file) 
+    threads=[]
+    taskNames=[]
+    queue=Queue.Queue()
+    return_queue=Queue.Queue()
+    for task in testConfig.testTask:
+        taskNames.append(task.taskName)
+        if not task.taskName in supported_tasks:
+            print 'test task: %s is not supported at current time.' % task.taskName
+            exit()          
+        testObj=tokenDict[task.taskName](task, testConfig)
+        id=1
+        commData=testObj.getCommonData()
+        if commData:
+            setattr(testConfig, 'commonData', commData)
+        globalData=testObj.getGlobalData()
+        if globalData:
+            setattr(testConfig, 'globalData', globalData)
+        tests=testObj.getTestList(task.taskFiles)
+
+        if not tests:
+            print 'no tests performed.'
+            exit()
+        miss, extra, common=processList(tests.keys(), commData.keys())
+        miss_map={}
+        if miss:
+            print 'NOT implemented:\n' 
+            for item in miss:
+                print 'Id: %s Name: %s\n' % (item, tests[item].name)
+                miss_map[item]=tests[item].name  
+
+        for testKey in common:
+            map={}
+            map['name']=task.taskName
+            map['task']=tests[testKey]
+            map['key']=testKey
+            map['obj']=tokenDict[task.taskName](task, testConfig)
+            queue.put(map)
+        
+        if len(common)>threads_pool:
+            thread_size=threads_pool
+        else:
+            thread_size=len(common)
+            
+        for i in range(thread_size):          
+            thread=testThread(queue, return_queue)
+            thread.setDaemon(True)
+            thread.start()
+            threads.append(thread)
+            time.sleep(60)
+            
+             
+    queue.join() 
+    fullResult=[]
+    while not return_queue.empty():
+        item=return_queue.get_nowait()
+        if item:
+            fullResult.append(item)
+       
+                 
+    print "Main Test Thread Exiting"
+    autoRet=AutoTestResult()
+    autoRet.name='-'.join(taskNames)
+    autoRet.testType=testConfig.testType
+    autoRet.runTime=testConfig.runTime
+    autoRet.runVersion=testConfig.buildVersion
+    autoRet.localhost=testConfig.localhost
+    autoRet.testFolder=TestConstant.default_result_path+testConfig.name
+    if miss_map:
+        setattr(autoRet, 'miss', miss_map)
+    if classUtility.getType(testConfig.sendEmail)!='NoneType':
+        autoRet.sendEmail=True
+    for item in fullResult:
+        for count in TestConstant.test_result_counters:
+            value=getattr(autoRet, count)
+            value+=getattr(item, count)
+            setattr(autoRet, count, value)
+        autoRet.suiteList.append(item)
+    
+    msg=testReport().generateReport(autoRet)
+    
+    return msg
+    
+if __name__=='__main__':
+    import sys
+    file=default_config_file_path+sys.argv[1]+'.xml'
+    msg=autoTest(file)
+    
+    print 'Done'
+
+    
+
+
+
