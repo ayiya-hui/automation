@@ -1,0 +1,12 @@
+<testConfig>
+	<testType>Official</testType>
+        <sendEmail>True</sendEmail>
+	<testServer>
+		<allInOne>10.30.2.211</allInOne>
+	</testServer>
+	<testTask>
+		<taskName>LogDiscover</taskName>
+		<taskFiles>ALL</taskFiles>
+	</testTask>
+	<recipient>hhuang</recipient>
+</testConfig>

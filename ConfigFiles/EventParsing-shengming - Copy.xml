@@ -1,0 +1,12 @@
+<testConfig>
+        <testType>Test</testType>
+        <sendEmail>True</sendEmail>
+        <testServer>
+                <allInOne>10.30.20.33</allInOne>
+        </testServer>
+        <testTask>
+                <taskName>EventParsing</taskName>
+                <taskFiles>AOWUA_Win</taskFiles>
+        </testTask>
+	<recipient> sheng.ming</recipient>
+</testConfig>
