@@ -1,7 +1,7 @@
 incidentType,name,reptDevIpAddr,createDevice,deviceName,deviceType,domainController,count,method
 PH_RULE_IMPORTANT_APP_DOWN,Important process down,10.1.0.1,TRUE,automator10Dot1Dot0Dot1,linux,,1,syslog
 PH_RULE_NETWORK_PORT_STAY_DOWN,Server Network Low Port Staying Down,10.2.0.1,TRUE,automator10Dot2Dot0Dot1,linux,,1,syslog
-PH_RULE_NON_RESPONSIVE_SERVICE,Service Down-No Response to STM,10.4.0.1,,automator10Dot4Dot0Dot1,,,2,syslog
+PH_RULE_NON_RESPONSIVE_SERVICE_IP,Service Down: No Response to STM,10.4.0.1,,automator10Dot4Dot0Dot1,,,2,syslog
 PH_RULE_DEGRADED_SERVICE,Service Degraded-Slow Response to STM,10.3.0.1,,automator10Dot3Dot0Dot1,,,3,syslog
 PH_RULE_NON_RESPONSIVE_SERVICE_CONTINUE,Service Staying Down-No Response to STM,10.5.0.1,,automator10Dot5Dot0Dot1,,,4,syslog
 PH_RULE_FPC_CHD_HIGH,FPC Current THD high,15.0.1.1,,Automator15Dot0Dot1Dot1,,,2,syslog
@@ -169,7 +169,7 @@ PH_RULE_BOGON_TRAFFIC,Traffic to bogon networks,20.0.0.1,TRUE,automator20Dot0Dot
 PH_RULE_SYS_DEVICE_NO_EVENTS,No Events Reported In Last Hour,$localhost,,,,,1,syslog
 PH_RULE_DOWN_INTF_NET_NONCRIT,Non-critical Network Device Interface Staying Down,$localhost,,,,,1,syslog
 PH_RULE_ADD_DOMAIN_ADMIN,User added to Domain Admin Group,40.0.0.1,TRUE,automator40Dot0Dot0Dot1,win,TRUE,1,syslog
-PH_RULE_DELETE_DOMAIN_ADMIN,User deleted from Domain Admin Group,40.0.0.2,TRUE,automator40Dot0Dot0Dot1,win,TRUE,1,syslog
+PH_RULE_DELETE_DOMAIN_ADMIN,User deleted from Domain Admin Group,40.0.0.2,TRUE,automator40Dot0Dot0Dot2,win,TRUE,1,syslog
 PH_RULE_ADD_WIN_ADMINISTRATOR,User added to Administrator Group,40.0.0.3,TRUE,automator40Dot0Dot0Dot3,win,,1,syslog
 PH_RULE_DELETE_WIN_ADMINISTRATOR,User deleted from Administrator Group,40.0.0.4,TRUE,automator40Dot0Dot0Dot4,win,,1,syslog
 PH_RULE_ADD_REMOTE_DESKTOP_USER,User added to Remote Desktop User Group,40.0.0.5,TRUE,automator40Dot0Dot0Dot5,win,,1,syslog
@@ -177,7 +177,7 @@ PH_RULE_DELETE_REMOTE_DESKTOP_USER,User deleted from Remote Desktop User Group,4
 PH_RULE_ADD_BACKUP_OPERATOR,User added to Backup Operator Group,40.0.0.7,TRUE,automator40Dot0Dot0Dot7,win,,1,syslog
 PH_RULE_DELETE_BACKUP_OPERATOR,User deleted from Backup Operator Group,40.0.0.8,TRUE,automator40Dot0Dot0Dot8,win,,1,syslog
 PH_RULE_ADD_DNS_ADMIN,User added to DNS Admin Group,40.0.0.9,TRUE,automator40Dot0Dot0Dot9,win,1,1,syslog
-PH_RULE_DELETE_DNS_ADMIN,User deleted from DNS Admins Group,40.0.0.10,TRUE,automator40Dot0Dot0Dot4,win,TRUE,1,syslog
+PH_RULE_DELETE_DNS_ADMIN,User deleted from DNS Admins Group,40.0.0.10,TRUE,automator40Dot0Dot0Dot10,win,TRUE,1,syslog
 PH_RULE_EMERGING_THREAT_SHADOW_SERVER,Traffic to Emerging Threat Shadow server List,20.0.0.2,TRUE,automator20Dot0Dot0Dot2,juniper-ssg,,1,syslog
 PH_RULE_EMERGING_THREAT_RBN,Traffic to Emerging Threat RBN List,20.20.20.27,TRUE,automator20Dot20Dot20Dot27,juniper-ssg,,1,syslog
 PH_RULE_EMERGING_THREAT_DSHIELD,Traffic to Emerging Threat Dshield List,20.20.20.28,TRUE,automator20Dot20Dot20Dot28,juniper-ssg,,1,syslog
@@ -207,7 +207,7 @@ PH_RULE_CONCURRENT_SUCCESS_AUTH_MULTI_COUNTRY,Concurrent Successful Authenticati
 PH_RULE_CONCURRENT_FAILED_AUTH_MULTI_COUNTRY,Concurrent Failed Authentications To Same Account  From Multiple Countries,$localhost,,,,,1,syslog
 PH_RULE_CONCURRENT_FAILED_AUTH_MULTI_CITY,Concurrent Failed Authentications To Same Account From Multiple Cities,$localhost,,,,,1,syslog
 PH_RULE_INVALID_TCP_FLAG_HIGH,Invalid TCP Flags - High Intensity,121.121.121.11,,,,,501,netflow
-PH_RULE_INVALID_TCP_FLAG_MEDIUM,Invalid TCP Flags - Medium Intensity,121.121.121.1,,,,,200,syslog
+PH_RULE_INVALID_TCP_FLAG_MEDIUM,Invalid TCP Flags - Medium Intensity,121.121.121.1,,,,,200,netflow
 PH_RULE_INAPPROPRIATE_WEB_TRAFFIC,Inappropriate Website access detected,$localhost,,,,,1,syslog
 PH_RULE_SUCCESS_ACTIVITY_ON_DISABLED_ACCT,Successful Account Activity On a Disabled Account,$localhost,,,,,1,syslog
 PH_RULE_FAILED_ACTIVITY_ON_DISABLED_ACCT,Failed Account Activity On Disabled Account,$localhost,,,,,1,syslog

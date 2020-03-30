@@ -14,7 +14,7 @@ class sendEmailHandler:
         #self.user='notify'
         #self.pwd='(jWohE68N'
 	self.user='accelopsautomation'
-        self.pwd='(jWohE68N'
+        self.pwd='ProspectHills!'
         self.recipt=filter(None,[i.strip() for i in recipt])
         self.domaind='fortinet.com'
 		#self.domaind='accelops.com'
