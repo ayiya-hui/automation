@@ -25,7 +25,7 @@ DEFAULT_SNMP_METHOD='SNMP_Public'
 IPACCESS_WRAP='ipAccessMappings'
 DISCOVER_RUN='discovery/run'
 DISCOVERY_RANGES='discoveryIpRanges'
-DOMAIN_CONTROLLER_MSG='<13>$time $ip MSWinEventLog    1    Security    9162    $fullTime   673    Security    SYSTEM    User    Success Audit    SJQAVWINADS    Account Logon        Service Ticket Request:     User Name: PARTHA_LAPTOP$@PROSPECT-HILLS.NET     User Domain: PROSPECT-HILLS.NET     Service Name: krbtgt     Service ID: %{S-1-5-21-3383442562-1768178646-255068551-502}     Ticket Options: 0x60810010     Ticket Encryption Type: 0x17     Client Address: 192.168.20.33     Failure Code: -     Logon GUID: {7bf641ec-0dcb-7718-cefa-3ba07f269654}     Transited Services: -        8604'
+DOMAIN_CONTROLLER_MSG='<13>$time $ip MSWinEventLog\t1\tSecurity\t9162\t$fullTime\t673\tSecurity\tSYSTEM\tUser\tSuccess Audit\tSJQAVWINADS\tAccount Logon\t\tService Ticket Request: User Name: PARTHA_LAPTOP$@PROSPECT-HILLS.NET    User Domain: PROSPECT-HILLS.NET    Service Name: krbtgt   Service ID: %{S-1-5-21-3383442562-1768178646-255068551-502}   Ticket Options: 0x60810010    Ticket Encryption Type: 0x17   Client Address: 192.168.20.33 Failure Code: - Logon GUID: {7bf641ec-0dcb-7718-cefa-3ba07f269654}  Transited Services: -        8604'
 
 class deviceHandler:
     def __init__(self, appServer, user=False, password=False):
