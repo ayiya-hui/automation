@@ -45,6 +45,8 @@ incident_query="SELECT * FROM ph_incident;"
 
 incident_delete="DELETE FROM ph_incident;"
 
+ip_in_privatenet=['PH_RULE_EXCESS_DENY_DEST']
+
 class incidentTest(baseTest):
     def __init__(self, task, testConfig):
         baseTest.__init__(self, task, testConfig)
@@ -190,9 +192,15 @@ class incidentTest(baseTest):
                         while repeat:
                             ip=randomGen.getRandomIPAddr()
                             if ip not in randomIPs:
-                                msg=msg.replace('$randomIP', ip)
-                                randomIPs.append(ip)
-                                repeat=False
+                                if testConf.incidentType not in ip_in_privatenet:
+                                    msg=msg.replace('$randomIP', ip)
+                                    randomIPs.append(ip)
+                                    repeat=False
+                                else:
+                                    if ip.split('.')[0] in ['10']:
+                                        msg = msg.replace('$randomIP', ip)
+                                        randomIPs.append(ip)
+                                        repeat = False
                     if '$randomNum' in line:
                         num_repeat=True
                         while num_repeat:
@@ -229,13 +237,14 @@ class incidentTest(baseTest):
                     time.sleep(sleeper)
                     if not self.sendNoEvent:
                         mySendEvent.sendoutEvent(send_msg, utf_8=False)
-                        sendSleep=60
+
                     else:
                         print 'No event sent being configured.'
                     self.msgList.append(msg)
             #retrieve incident
+            sendSleep = 120
             time.sleep(sendSleep)
-            timeout=int(ruleType.triggerWindow)+60
+            timeout=int(ruleType.triggerWindow)+180
             myParams={}
             myParams['constr']=incident_query_params['SingleEvtConstr'] % (testConf.reptDevIpAddr, incidentType)
             if self.sendNoEvent:
