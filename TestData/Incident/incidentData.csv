@@ -213,7 +213,6 @@ PH_RULE_SUCCESS_ACTIVITY_ON_DISABLED_ACCT,Successful Account Activity On a Disab
 PH_RULE_FAILED_ACTIVITY_ON_DISABLED_ACCT,Failed Account Activity On Disabled Account,$localhost,,,,,1,syslog
 PH_RULE_P2P_TRAFFIC,P2P traffic detected,30.0.1.22,TRUE,automator30Dot0Dot1Dot22,snort_ips,,1,syslog
 PH_RULE_TUNNEL_TRAFFIC,Tunneled traffic detected,30.0.3.23,TRUE,automator30Dot0Dot3Dot23,fortinet,,1,syslog
-PH_RULE_CHANGE_RUN_CONFIG_LOGIN,Running Config Change (with login info),5.2.0.1,,,,,1,syslog
 PH_RULE_CHANGE_STARTUP_CONFIG_LOGIN,Startup Config Change (with login info),50.20.0.2,,,,,1,syslog
 PH_RULE_HIGH_SEV_SEC_IPS_IN_PERMIT,High Severity Inbound Permitted IPS Exploit,30.0.3.13,TRUE,automator30Dot0Dot3Dot13,fortinet,,1,syslog
 PH_RULE_HIGH_SEV_SEC_IPS_IN_DENY,High Severity Inbound Denied Security Exploit,30.0.3.23,TRUE,automator30Dot0Dot3Dot23,fortinet,,1,syslog
