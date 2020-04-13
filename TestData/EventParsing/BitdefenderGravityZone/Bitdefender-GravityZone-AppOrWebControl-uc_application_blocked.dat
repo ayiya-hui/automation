@@ -1,0 +1,33 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<20>Mar 15 23:24:06 gz gravityzone: [uc] {"computer_name":"example","computer_ip":"10.1.1.1","computer_id":"532806300678598e738b4571","product_installed":"EPS","uc_type":"application","application_path":"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe","status":"uc_application_blocked","last_blocked":"2015-03-15T21:23:33.000Z","count":3,"module":"uc"}
+[params]
+deviceTime=any
+parserName=BitdefenderGravityZoneParser
+eventType=Bitdefender-GravityZone-AppOrWebControl-uc_application_blocked
+hostName=example
+module=uc
+threatCategory=application
+incidentLastSeen=Mon Mar 16 05:23:33 CST 2015
+reptModel=GravityZone
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+hostIpAddr=10.1.1.1
+eventName=Bitdefender GravityZone AppOrWebControl uc application blocked
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+filePath=C:\Program Files\Google\Chrome\Application\chrome.exe
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+reptDevName=any
+customer=Super
+countAllocated=3
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Bitdefender
+machineGUID=532806300678598e738b4571

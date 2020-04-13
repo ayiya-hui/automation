@@ -1,0 +1,32 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+02-21-2018 16:20:21 Auth.Warning 192.168.0.220 1 2018-02-21T14:20:06.156238+00:00 CENTER CEF 6076 LdapBruteForceSecurityAlert 0|Microsoft|Azure ATP|2.22.4228.22540|LdapBruteForceSecurityAlert|Brute force attack using LDAP simple bind|5|start=2018-02-21T14:19:41.7422810Z app=Ldap suser=Wofford Thurston shost=CLIENT1 msg=A brute force attack using the Ldap protocol was attempted on Wofford Thurston (Software Engineer) from CLIENT1 (100 guess attempts). cnt=100 externalId=2004 cs1Label=url cs1=https://contoso-corp.atp.azure.com/securityAlert/57b8ac96-7907-4971-9b27-ec77ad8c029a
+[params]
+deviceTime=any
+parserName=MicrosoftAzureATPParser
+eventType=MS-AzureATP-LdapBruteForceSecurityAlert
+srcName=CLIENT1
+reptModel=Azure ATP
+eventId=any
+eventParsedOk=1
+eventSeverity=7
+eventName=Brute force attack using LDAP simple bind
+appTransportProto=Ldap
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+msg=A brute force attack using the Ldap protocol was attempted on Wofford Thurston (Software Engineer) from CLIENT1 (100 guess attempts).
+count=100
+extEventId=2004
+eventSeverityCat=MEDIUM
+collectorId=any
+relayDevIpAddr=$localhost
+user=Wofford Thurston
+rawEventMsg=any
+reptDevName=any
+alertCategory=LdapBruteForceSecurityAlert
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+infoURL=https://contoso-corp.atp.azure.com/securityAlert/57b8ac96-7907-4971-9b27-ec77ad8c029a
+reptVendor=Microsoft

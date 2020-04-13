@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+Sophos-Central-Endpoint-UpdateSuccess,SophosCentral_1,SophosCentral,$localhost,,syslog

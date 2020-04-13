@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<14>May 9 15:06:40 pfnac-03-zrh1 api-frontend[6707]: t=2019-05-09T15:06:40+0100 lvl=info msg="API login for user system for tenant 0" pid=6707 request-uuid=aaec017e-7263-11e9-ba5d-0050568ce639
+[params]
+customer=Super
+eventId=any
+parserName=PacketFence2Parser
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+count=1
+eventSeverity=1
+eventType=PacketFence-NAC-APILogon
+reptDevIpAddr=$localhost
+collectorId=any
+extEventRecvProto=Syslog
+eventName=API login for user system for tenant
+reptVendor=PacketFence
+relayDevIpAddr=$localhost
+rawEventMsg=any
+phRecvTime=any
+reptDevName=any
+reptModel=Network Access Control

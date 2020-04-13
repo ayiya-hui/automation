@@ -1,0 +1,48 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+Tue Sep 19 18:00:06 2017 AWS_VPC_FLOW_ACCEPT [accountName]=abc@cda.com,[awsRegion]=us-east-2,[groupName]=logGroupName,[streamName]=eni-1780864b-all,[version]=2,[accountId]=658308615768,[srcIntfName]=eni-1780864b,[srcIpPort]=22,[destIpPort]=16931,[ipProto]=6,[sentPkts64]=13,[sentBytes64]=3171,[sentPktsReverse]=14,[sentBytesReverse]=1268,[startTime]=1505808418,[endTime]=1505808460,[status]=OK,[srcAction]=ACCEPT,[destAction]=ACCEPT,[srcIpAddr]=10.0.0.244,[destIpAddr]=10.112.150.78
+[params]
+deviceTime=any
+startTime=Tue Sep 19 16:06:58 CST 2017
+parserName=AwsFlowLogParser
+destAction=ACCEPT
+eventType=AWS_VPC_FLOW_ACCEPT
+destIpAddr=10.112.150.78
+srcAction=ACCEPT
+srcName=HOST-10.0.0.244
+destIpPort=16931
+srcIntfName=eni-1780864b
+srcIpAddr=10.0.0.244
+accountId=658308615768
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+accountName=abc@cda.com
+eventName=AWS flow log accept
+groupName=logGroupName
+version=2
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+reptModel=AWS CloudWatch
+destName=HOST-10.112.150.78
+status=OK
+count=1
+streamName=eni-1780864b-all
+sentBytes64=3171
+srcIpPort=22
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+ipProto=6 (TCP)
+sentPktsReverse=14
+reptDevName=any
+customer=Super
+sentBytesReverse=1268
+phRecvTime=any
+reptDevIpAddr=$localhost
+awsRegion=us-east-2
+sentPkts64=13
+reptVendor=Amazon
+endTime=Tue Sep 19 16:07:40 CST 2017

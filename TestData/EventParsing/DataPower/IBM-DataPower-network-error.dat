@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<11>Sep 29 10:43:32 datapower [0x80e00173][network][error] trans(1711): TCP connection attempt refused from 10.1.2.3 to 10.1.2.3 port 6443
+[params]
+deviceTime=any
+parserName=DataPowerParser
+eventType=IBM-DataPower-network-error
+reptModel=DataPower
+eventId=any
+eventParsedOk=1
+eventSeverity=7
+eventName=IBM DataPower network error
+serviceName=Error
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+serviceType=Transaction Error
+errorString=0x80e00173
+eventSeverityCat=MEDIUM
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=IBM

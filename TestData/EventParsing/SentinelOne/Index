@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+SentinelOne-EPP-Syslog_Test,SentinelOne_1,SentinelOne,$localhost,,syslog

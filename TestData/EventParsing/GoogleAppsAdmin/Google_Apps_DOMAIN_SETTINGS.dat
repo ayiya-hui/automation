@@ -1,0 +1,35 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+[Google_Apps_DOMAIN_SETTINGS]:[eventSeverity]=PHL_INFO,[actor.callerType]=USER,[actor.profileId]=117858279951236905887,[id.applicationName]=admin,[kind]=admin#reports#activity,[ipAddress]=1.1.1.1,[event.name]=AUTHORIZE_API_CLIENT_ACCESS,[id.time]=2016-08-05T09:39:35.754Z,[id.customerId]=C01lzy8ye,[id.uniqueQualifier]=-4646109273668679000,[event.type]=DOMAIN_SETTINGS,[actor.email]=api1@example.net,[etag]="K7weO5KXLrPU3p64O3h2OrP24p0/fvu47GM2VmvY0bIeOS3Qy9aGgZE",[event.parameters.DOMAIN_NAME]=example.org
+[params]
+deviceTime=any
+parserName=GoogleAppsAdminParser
+eventType=Google_Apps_DOMAIN_SETTINGS
+activityType=admin#reports#activity
+srcName=HOST-1.1.1.1
+srcIpAddr=1.1.1.1
+reptModel=Google Apps
+eventId=any
+eventParsedOk=1
+uuid=-4646109273668679000
+eventSeverity=1
+eventName=Google_Apps_DOMAIN_SETTINGS
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+targetDomain=example.org
+appCategory=admin
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+user=api1@example.net
+rawEventMsg=any
+reptDevName=any
+customer=Super
+actionName=AUTHORIZE_API_CLIENT_ACCESS
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Google
+caller=USER
+srcGeoCountryCodeStr=any

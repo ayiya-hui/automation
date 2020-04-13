@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+LINUX_Auditd_CRYPTO_KEY_USER,LinuxAuditd_1,LinuxAuditd,$localhost,,syslog

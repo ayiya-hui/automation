@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+10.10.10.1
+[eventMsg]
+<14> 2013-06-29T18:44:42.420Z 10.10.10.1 CEF:0|Vormetric, Inc.|dsm|5.2.0.1|DAO0048I|update host|3|cs4Label=logger cs4=DAO spid=4322 rt=1388986263954 dvchost=example.com suser=USER_1 shost=test_cpu
+[params]
+customer=Super
+eventId=any
+eventSeverityCat=LOW
+eventParsedOk=1
+phEventCategory=0 (External)
+parserName=McAfeeVormetricParser
+count=1
+eventSeverity=3
+eventType=Vormetric-update-host
+reptDevIpAddr=10.10.10.1
+collectorId=any
+extEventRecvProto=Syslog
+srcName=test_cpu
+eventName=Vormetric update host
+reptVendor=Thales
+relayDevIpAddr=10.10.10.1
+user=USER_1
+rawEventMsg=any
+phRecvTime=any
+reptDevName=any
+reptModel=Vormetric Data Security Manager

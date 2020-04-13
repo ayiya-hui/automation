@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+CodeGreen-DLP-ViolationFound,CodeGreenDLP_1,CodeGreenDLP,$localhost,,syslog

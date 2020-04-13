@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+FortiAuthenticator-Admin_GUI_Logout,FortiAuthenticator_1,FortiAuthenticator,$localhost,,syslog

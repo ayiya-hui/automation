@@ -1,0 +1,35 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<129>May 17 10:31:58 eppserver EPP-172.24.6.76: EPP-IP - 172.24.6.79 - Device Control - File Read: [Event Name] File Read | [Client Computer] USER-PC | [IP Address] 10.85.98.52 | [MAC Address] 48-4d-7e-e4-bd-be | [Client User] user | [Device Type] Windows Portable Device (Media Transfer Protocol) | [Device] HUAWEI VNS-L53/Huawei Technologies Co., Ltd. | [Device VID] 12d1 | [Device PID] 107e | [Device Serial] G2R4C16C28004601 | [File Name] F:/Autorun.inf | [File Type] Setup Information | [File Size] 72 | [Date/Time(Server)]  2019-05-17 10:31:58 | [Date/Time(Client)] 2019-05-17 10:31:53
+[params]
+deviceTime=any
+parserName=CoSoSysEndpointProtector
+eventType=CoSoSys-EPP-File_Read
+hostName=USER-PC
+srcName=HUAWEI VNS-L53/Huawei Technologies Co., Ltd.
+srcIpAddr=10.85.98.52
+reptModel=Endpoint Protector
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+fileType=Setup Information
+eventName=Endpoint protector detected an opened file on a portable device
+deviceType=Windows Portable Device (Media Transfer Protocol)
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+srcMACAddr=48-4d-7e-e4-bd-be
+eventSeverityCat=LOW
+collectorId=any
+fileName=F:/Autorun.inf
+relayDevIpAddr=$localhost
+fileSize=72
+rawEventMsg=any
+reptDevName=any
+serialNumber=G2R4C16C28004601
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=CoSoSys
+user=user

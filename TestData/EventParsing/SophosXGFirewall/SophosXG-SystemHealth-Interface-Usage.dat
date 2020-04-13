@@ -1,0 +1,36 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<30>device=SFW" date=2019-03-08 time=11:31:37 timezone="WET" device_name="XG310" device_id=C320ABC48D7MTC6 log_id=123526618031 log_type="System Health" log_component="Interface" log_subtype="Usage" priority=Information interface=Port7 receivedkbits=0.00 transmittedkbits=0.00 receivederrors=0.00 transmitteddrops=0.00 collisions=0.00 transmittederrors=0.00 receiveddrops=0.00"
+[params]
+deviceTime=any
+parserName=SophosXGFirewallParser
+eventType=SophosXG-SystemHealth-Interface-Usage
+recvPktDrop=0
+eventId=any
+inIntfPktErr=0
+reptModel=XG Firewall
+sentBitsPerSec=0.00
+logID=123526618031
+eventParsedOk=1
+eventSeverity=1
+fwAction=Usage
+eventName=Interface Usage
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+customer=Super
+srcIntfName=Port7
+recvBitsPerSec=0.00
+componentName=Interface
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+reptDevName=any
+deviceIdentification=C320ABC48D7MTC6
+phRecvTime=any
+reptDevIpAddr=$localhost
+outIntfPktErr=0
+count=1
+reptVendor=Sophos
+sentPktDrop=0

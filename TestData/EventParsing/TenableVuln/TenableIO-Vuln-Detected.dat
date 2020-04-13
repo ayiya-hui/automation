@@ -1,0 +1,40 @@
+[reptDevIpAddr(key)]
+10.10.10.10
+[eventMsg]
+[TenableIO-Vuln-Detected] : [phCustId]=1, [serverIp]=10.10.10.10, [serverName]=cloud.tenable.com, [Plugin ID]="54615", [CVE]=, [CVSS]=0.0, [Risk]=None, [Host]=10.10.10.10, [Protocol]=TCP, [Port]=0, [Name]=Device Type, [Synopsis]=It is possible to guess the remote device type., [Description]=Based on the remote operating system, it is possible to determine what the remote system type is (eg: a printer, router, general-purpose computer, etc)., [Solution]=n/a, [See Also]=, [Plugin Output]=Remote device type : general-purpose Confidence level : 54, [Asset UUID]=f7a945d5-1417-4fc1-9621-bbd70941c548, [Vulnerability State]=Resurfaced, [IP Address]=10.10.10.10, [FQDN]=ec2-10-10-10-10.us-west-2.compute.amazonaws.com, [NetBios]=, [OS]=Linux Kernel 2.2, [MAC Address]=, [Plugin Family]=General, [CVSS Base Score]=, [CVSS Temporal Score]=, [CVSS Temporal Vector]=, [CVSS Vector]=, [CVSS3 Base Score]=, [CVSS3 Temporal Score]=, [CVSS3 Temporal Vector]=, [CVSS3 Vector]=, [System Type]=general-purpose, [Host Start]=2018-11-07T16:00:33.851Z, [Host End]=2018-11-07T16:07:58.566Z
+[params]
+nessusPluginId=54615
+startTime=Thu Nov 08 00:00:33 CST 2018
+parserName=TenableVulnParser
+vulnReportStatus=Resurfaced
+eventType=TenableIO-Vuln-Detected
+hostName=ec2-10-10-10-10.us-west-2.compute.amazonaws.com
+ipPort=0
+osType=general-purpose
+nessusPluginOutput=Remote device type : general-purpose Confidence level : 54
+reptModel=Tenable.io
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+serverName=cloud.tenable.com
+vulnCvssScore=0.00
+hostIpAddr=10.10.10.10
+eventName=Vulnerability detected by Tenable.io scanner
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+description=Based on the remote operating system, it is possible to determine what the remote system type is (eg: a printer, router, general-purpose computer, etc).
+serverIpAddr=10.10.10.10
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=10.10.10.10
+rawEventMsg=any
+ipProto=6 (TCP)
+vulnName=Device Type
+reptDevName=any
+customer=Super
+vulnSolution=n/a
+phRecvTime=any
+reptDevIpAddr=10.10.10.10
+reptVendor=Tenable
+endTime=Thu Nov 08 00:07:58 CST 2018

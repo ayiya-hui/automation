@@ -1,0 +1,31 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+2018-11-14 11:10:26 [Falcon-data-replicator] [1] [cn.bing.com]:{"AgentIdString":"","CustomerIdString":"89b2d0df98e64922aa5ed93c239212c6","EventType":"Event_ExternalApiEvent","ExternalApiType":"Event_AuthActivityAuditEvent","Nonce":1,"OperationName":"validateEntitlementsHmac","ServiceName":"CrowdStrike Authentication","Success":false,"UTCTimestamp":1542100966649,"UserId":"Customer","UserIp":"10.20.12.246","cid":"89b2d0df98e64922aa5ed93c239212c6","eid":118,"timestamp":"2018-11-13T09:22:46Z"}
+[params]
+parserName=FalconDataRepParser
+eventType=Crowdstrike-Falcon-AuthActivityAuditEvent-validateEntitlementsHmac-failure
+hostName=HOST-10.20.12.246
+userId=Customer
+reptModel=Falcon
+eventId=any
+isSuccess=false
+eventParsedOk=1
+eventSeverity=1
+hostIpAddr=10.20.12.246
+eventName=Failed Crowdstrike entitlement validation
+serviceName=CrowdStrike Authentication
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+opName=validateEntitlementsHmac
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=CrowdStrike
+relayDevName=cn.bing.com

@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+OneIdentity-Safeguard-After-NAT-mapping,OneIdentity_1,OneIdentity,$localhost,,syslog

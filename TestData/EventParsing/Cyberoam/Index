@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+Cyberoam-Firewall-Allow,Cyberoam_1,Cyberoam,$localhost,,syslog

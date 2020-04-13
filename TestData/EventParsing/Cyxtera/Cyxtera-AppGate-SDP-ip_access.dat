@@ -1,0 +1,43 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+{"id":"a51e7e7d-ab5f-444c-b7f8-ca72e4bb940b","timestamp":"2018-10-09T10:23:43.992Z","event_type":"ip_access","version":8,"distinguished_name":"CN=0f1a40d612f741228d7cb73a4308bea8,CN=johndoe,OU=ACME","entitlement_token_id":"78174080-a34c-43e1-984d-0ddaa2b2d1df","action":"allow","direction":"down","client_ip":"1.1.1.1","client_port":1392,"packet_size":40,"protocol":"TCP","source_ip":"10.1.1.1","destination_ip":"10.1.1.1","source_port":56100,"destination_port":59721,"connection_type":"established","rule_name":"rule1"}
+[params]
+parserName=CyxteraParser
+eventType=Cyxtera-AppGate-SDP-ip_access
+destIpAddr=10.1.1.1
+srcName=HOST-1.1.1.1
+destIpPort=59721
+srcIpAddr=1.1.1.1
+reptModel=AppGate SDP
+eventId=any
+eventParsedOk=1
+uuid=0f1a40d612f741228d7cb73a4308bea8
+eventSeverity=1
+destProto=TCP
+fwAction=allow
+eventName=Client attempted to access an endpoint
+version=8
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+destName=HOST-10.1.1.1
+count=1
+direction=down
+srcIpPort=1392
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+postNATSrcIpAddr=10.1.1.1
+rawEventMsg=any
+ipProto=6 (TCP)
+postNATSrcIpPort=56100
+reptDevName=any
+customer=Super
+actionTime=Tue Oct 09 10:23:43 CST 2018
+phRecvTime=any
+reptDevIpAddr=$localhost
+token=78174080-a34c-43e1-984d-0ddaa2b2d1df
+reptVendor=Cyxtera
+srcGeoCountryCodeStr=any
+fwRule=rule1
+user=johndoe

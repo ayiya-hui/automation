@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+CiscoAMP-Policy-Update,CiscoAMP_1,CiscoAMP,$localhost,,syslog

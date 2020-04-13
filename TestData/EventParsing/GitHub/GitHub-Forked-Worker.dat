@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<14>Nov 24 02:56:33 10-1-1-1 github_resque[2016-11-24T02]: 56:33.273312 # 25173]  INFO Resqued::Worker -- Forked worker 26356
+[params]
+customer=Super
+eventId=any
+parserName=GitHubParser
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+count=1
+eventSeverity=1
+eventType=GitHub-Forked-Worker
+reptDevIpAddr=$localhost
+collectorId=any
+extEventRecvProto=Syslog
+eventName=GitHub Forked Worker
+reptVendor=GitHub.com
+relayDevIpAddr=$localhost
+rawEventMsg=any
+phRecvTime=any
+reptDevName=any
+reptModel=GitHub

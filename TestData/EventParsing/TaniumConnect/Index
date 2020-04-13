@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+TaniumConnect-security-user-authenticated,TaniumConnect_1,TaniumConnect,$localhost,,syslog

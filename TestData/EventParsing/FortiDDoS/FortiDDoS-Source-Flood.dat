@@ -1,0 +1,32 @@
+[reptDevIpAddr(key)]
+172.30.84.114
+[eventMsg]
+Jan 10 16:01:50 172.30.84.114 devid=FI400B3913000032 date=2015-01-23 time=17:42:00 type=attack SPP=1 evecode=1 evesubcode=8 dir=0 protocol=1 sIP=0.0.0.0 dIP=0.0.0.0 dropCount=312
+[params]
+deviceTime=any
+parserName=FortiDDoSParser
+eventType=FortiDDoS-Source-Flood
+srcName=HOST-0.0.0.0
+reptModel=FortiDDoS
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=FortiDDoS  Source  Flood
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+type=attack
+destName=HOST-0.0.0.0
+count=1
+direction=0
+sppNum=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=172.30.84.114
+rawEventMsg=any
+ipProto=1 (ICMP)
+reptDevName=any
+totPktDrop=312
+customer=Super
+phRecvTime=any
+reptDevIpAddr=172.30.84.114
+reptVendor=Fortinet

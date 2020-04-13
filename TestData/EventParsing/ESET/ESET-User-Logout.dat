@@ -1,0 +1,34 @@
+[reptDevIpAddr(key)]
+10.0.0.4
+[eventMsg]
+<14>1 2019-12-06T23:15:13.507Z ESET01-Kor ERAServer 5840 - - {"event_type":"Audit_Event","ipv4":"10.0.0.4","hostname":"ESET01-Kor","source_uuid":"cf212018-32c9-44e8-99f9-38bfb9ab2fca","occured":"06-Dec-2019 23:15:13","severity":"Information","domain":"Native user","action":"Logout","target":"Administrator","detail":"Logging out native user 'Administrator'.","user":"Administrator","result":"Success"}
+[params]
+domain=Native user
+deviceTime=any
+parserName=ESETParser
+eventType=ESET-User-Logout
+hostName=ESET01-Kor
+targetName=Administrator
+reptModel=Nod32
+eventId=any
+eventTime=Fri Dec 06 23:15:13 CST 2019
+eventParsedOk=1
+eventSeverity=1
+eventName=ESET User Logout
+details=Logging out native user 'Administrator'.
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+destName=Administrator
+count=1
+testResult=Success
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=10.0.0.4
+user=Administrator
+rawEventMsg=any
+osObjAction=Logout
+reptDevName=ESET01-Kor
+customer=Super
+phRecvTime=any
+reptDevIpAddr=10.0.0.4
+reptVendor=ESET

@@ -1,0 +1,30 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+CEF:0|Fortinet|FortiTester|3.8|Event|information|category=System deviceExternalId=FTS2KET618000005 msg=The system is started deviceCustomDate1=2019-11-05-15:12:30 cs1= cs1Label=Description
+[params]
+deviceTime=any
+parserName=FortiTesterParser
+eventType=FortiTester-Event-System
+reptModel=FortiTester
+eventId=any
+eventParsedOk=1
+eventSeverity=2
+eventName=FortiTester System Event
+version=3.8
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+msg=The system is started
+type=Event
+customer=Super
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+reptDevName=any
+deviceIdentification=FTS2KET618000005
+phRecvTime=any
+reptDevIpAddr=$localhost
+count=1
+reptVendor=Fortinet
+categoryType=System

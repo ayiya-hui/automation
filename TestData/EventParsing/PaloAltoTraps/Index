@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+PAN-TrapsESM-TrapsServiceStatusChange,PaloAltoTraps_1,PaloAltoTraps,172.16.183.173,,syslog

@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+ArubaOS-system-313023,ArubaOSSyslog_1,ArubaOSSyslog,$localhost,,syslog

@@ -1,0 +1,38 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+[OFFICE365_EVENT_DATA] = {"CreationTime": "2016-08-08T06:24:04UTC","Id": "7f2091c5-6cc2-47b9-9f65-08d3bf5498aa","Operation": "AddedToGroup","OrganizationId": "aeb99171-1141-4105-a603-914f9c94f0ba","RecordType": "14","UserKey": "i:0h.f|membership|user@example.com","UserType": "0","Version": "1","Workload": "SharePoint","ClientIP": "211.144.207.10","ObjectId": "https://example.com/s","UserId": "user@example.com","EventSource": "SharePoint","ItemType": "Web","Site": "b88744b4-7bfd-4d79-9bdd-0632398cecd6","UserAgent": "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101 Safari/537.36","WebId": "5350d28c-b372-42cf-9015-864789db0636","EventData": "<Group>ssssss Members</Group>","TargetUserOrGroupType": "Member","TargetUserOrGroupName": "user@example.com"}
+[params]
+deviceTime=any
+parserName=Office365Parser
+eventType=MS_OFFICE365_SharePoint_AddedToGroup
+userId=user@example.com
+srcName=HOST-211.144.207.10
+eventSource=SharePoint
+srcIpAddr=211.144.207.10
+reptModel=Office365
+eventId=any
+eventParsedOk=1
+eventSeverity=7
+eventName=User added a member or guest to a SharePoint group
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+opName=AddedToGroup
+count=1
+oid=https://example.com/s
+eventSeverityCat=MEDIUM
+collectorId=any
+targetUserGrp=Member
+office365UserType=0 (A regular user)
+relayDevIpAddr=$localhost
+rawEventMsg=any
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+targetOsObjType=Web
+targetUser=user@example.com
+reptVendor=Microsoft
+srcGeoCountryCodeStr=any
+office365RecordType=14 (SharePointSharingOperation - SharePoint sharing events)
+httpUserAgent=Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101 Safari/537.36

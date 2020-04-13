@@ -1,0 +1,48 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<123>2018-10-08T22:59:49+08:00 hostname.company zorp/scb_rdp[31769]: core.debug(4): (svc/i9CTbTzV2wrRur3quVRzF4/GET_gateway_rdp:498:2): After NAT mapping; nat_type='0', src_addr='AF_INET(1.1.1.1:0)', dst_addr='AF_INET(1.1.1.2:3389)', new_addr='AF_INET(1.1.1.3:0)'
+[params]
+procId=31769
+deviceTime=any
+parserName=OneIdentityParser
+eventType=OneIdentity-Safeguard-After-NAT-mapping
+destGeoState=any
+destIpAddr=1.1.1.2
+srcName=HOST-1.1.1.1
+destGeoCountry=any
+srcIpAddr=1.1.1.1
+reptModel=Safeguard
+eventId=any
+postNATSrcGeoLatitude=any
+eventParsedOk=1
+destGeoLongitude=any
+eventSeverity=1
+connMode=GET_gateway_rdp
+eventName=After NAT mapping
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+destName=HOST-1.1.1.2
+postNATSrcGeoState=any
+count=1
+destGeoCountryCodeStr=any
+srcIpPort=0
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+postNATSrcIpAddr=1.1.1.3
+rawEventMsg=any
+destIpPort=3389
+postNATSrcIpPort=0
+reptDevName=any
+customer=Super
+postNATSrcGeoCountryCodeStr=any
+postNATSrcGeoCity=any
+phRecvTime=any
+reptDevIpAddr=$localhost
+postNATSrcGeoCountry=any
+reptVendor=One Identity
+destGeoLatitude=any
+srcGeoCountryCodeStr=any
+destGeoCity=any
+postNATSrcGeoLongitude=any

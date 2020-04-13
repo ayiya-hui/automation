@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+MobileIron-Sentry-DNS-Available,MobileIron_1,MobileIron,$localhost,,syslog

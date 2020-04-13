@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+PacketFence-NAC-authentication-match,PacketFence_1,PacketFence,10.2.204.81,,syslog

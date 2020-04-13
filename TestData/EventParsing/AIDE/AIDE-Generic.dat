@@ -1,0 +1,25 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<133>Jan 26 23:00:58 pci-dev-apps01 AIDE  Total number of files:	37956
+[params]
+customer=Super
+eventId=any
+parserName=AIDEParser
+deviceTime=any
+eventParsedOk=1
+phEventCategory=0 (External)
+eventSeverityCat=LOW
+count=1
+eventSeverity=1
+eventType=AIDE-Generic
+reptDevIpAddr=$localhost
+collectorId=any
+extEventRecvProto=Syslog
+eventName=AIDE-Generic
+reptVendor=Sourceforge
+relayDevIpAddr=$localhost
+rawEventMsg=any
+phRecvTime=any
+reptDevName=any
+reptModel=AIDE

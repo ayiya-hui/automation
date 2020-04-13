@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<190>May  8 14:03:49 dops-gerrit-17 gerrit-sshd [2019-05-08 14:03:49,894 -0700] a94a7cab boweiliu a/1000341 LOGOUT
+[params]
+deviceTime=any
+parserName=GerritLogParser
+eventType=Gerrit-SSH-Logout
+reptModel=Code Review
+eventId=any
+srcUser=boweiliu
+eventSeverity=1
+eventName=Gerrit SSH Logout
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=LOW
+collectorId=any
+fileName=gerrit-sshd
+relayDevIpAddr=$localhost
+rawEventMsg=any
+eventParsedOk=1
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+infoURL=a94a7cab boweiliu a/1000341 LOGOUT
+reptVendor=Gerrit

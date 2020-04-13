@@ -1,0 +1,24 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+[FSM-AWSKinesis] Sample AWS Kinesis message
+[params]
+customer=Super
+eventId=any
+eventSeverityCat=LOW
+eventParsedOk=1
+phEventCategory=0 (External)
+parserName=AwsKinesisParser
+count=1
+eventSeverity=1
+eventType=AWSKinesis-Generic
+reptDevIpAddr=$localhost
+collectorId=any
+extEventRecvProto=Syslog
+eventName=Amazon AWS Kinesis generic event
+reptVendor=Amazon
+relayDevIpAddr=$localhost
+rawEventMsg=any
+phRecvTime=any
+reptDevName=any
+reptModel=AWS Kinesis

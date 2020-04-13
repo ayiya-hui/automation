@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+ESET-User-Logout,ESET_1,ESET,10.0.0.4,,syslog

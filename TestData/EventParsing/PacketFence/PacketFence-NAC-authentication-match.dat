@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+10.2.204.81
+[eventMsg]
+Oct 9 11:29:34 10.2.204.81 1 2018-10-09T11:29:34.04189+01:00 example.com packetfence.log - - - Oct 11 15:42:00 httpd.aaa(4765) WARN: [mac:40:83:1d:12:2a:cb] Calling match with empty/invalid rule class. Defaulting to 'authentication' (pf::authentication::match)
+[params]
+procId=4765
+deviceTime=any
+parserName=PacketFenceParser
+eventType=PacketFence-NAC-authentication-match
+reptModel=Network Access Control
+eventId=any
+eventParsedOk=1
+eventSeverity=5
+eventName=Using sources for matching
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+srcMACAddr=40:83:1d:12:2a:cb
+eventSeverityCat=MEDIUM
+collectorId=any
+fileName=packetfence.log
+relayDevIpAddr=10.2.204.81
+rawEventMsg=any
+reptDevName=example.com
+customer=Super
+phRecvTime=any
+reptDevIpAddr=10.2.204.81
+reptVendor=PacketFence

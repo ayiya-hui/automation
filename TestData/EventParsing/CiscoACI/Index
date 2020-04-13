@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+Cisco_ACI_Tenant_Health,CiscoACI_1,CiscoACI,$localhost,,syslog

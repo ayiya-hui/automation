@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+TenableIO-Vuln-Detected,TenableVuln_1,TenableVuln,10.10.10.10,,syslog

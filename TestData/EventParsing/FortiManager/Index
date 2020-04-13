@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+FMGR-objcfg-Cdbevlog,FortiManager_1,FortiManager,$localhost,,syslog

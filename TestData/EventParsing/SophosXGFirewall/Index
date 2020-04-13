@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+SophosXG-SystemHealth-Interface-Usage,SophosXGFirewall_1,SophosXGFirewall,$localhost,,syslog

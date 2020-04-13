@@ -1,0 +1,41 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+1.1.1.1,,9/1/2018 14:51,15098,DNSmasq DNS And DHCP Multiple Remote Vulnerabilities,POTENTIAL,H,53,tcp,Linux 2.x,Y,-,7.5,4,Dnsmasq provides functionality for serving DNS  DHCP  router advertisements and network boot.&lt;P&gt; Dnsmasq  DNS server is exposed to following vulnerabilities:  - CVE-2017-14491 Heap based overflow (2 bytes).  - CVE-2017-14495 Lack of free().  - CVE-2017-14496 Invalid boundary checks. Integer underflow leading to a huge memcpy.  - CVE-2017-13704 Denial of Service. Dnsmasq DHCP server is exposed to following vulnerabilities:.  - CVE-2017-14492 Heap based overflow.  - CVE-2017-14493 Stack Based overflow. Affected Versions:&lt;BR&gt; DNSmasq DNS And DHCP prior to 2.78&lt;BR&gt;&lt;P&gt; QID Detection Logic (Unauthenticated):&lt;BR&gt; This QID matches vulnerable versions based on the exposed banner information under the DNS service&lt;P&gt; ,Successful exploitation may allow an attacker to execute code remotely. ,The vendor has released a fix to resolve the issue  please refer to &lt;A HREF= http://www.thekelleys.org.uk/dnsmasq/CHANGELOG  TARGET= _blank &gt;DNSmasq CHANGELOG&lt;/A&gt; for more information.&lt;P&gt; ,5.9,DNS and BIND,Vulnerable version of DNSmasq dnsmasq-2.76 detected on port 53,101085:99954:101977,CVE-2017-14496:CVE-2017-13704:CVE-2017-14491:CVE-2017-14492:CVE-2017-14493:CVE-2017-14494:CVE-2017-14495
+[params]
+vulnConseq=Successful exploitation may allow an attacker to execute code remotely.
+parserName=RaxSecureWorksScanParser
+eventType=Qualys-Vuln-Detected
+hostName=HOST-1.1.1.1
+vulnCVEId=CVE-2017-14496:CVE-2017-13704:CVE-2017-14491:CVE-2017-14492:CVE-2017-14493:CVE-2017-14494:CVE-2017-14495
+vulnBugTraqID=101085:99954:101977
+ipPort=53
+osType=Linux 2.x
+reptModel=SecureWorks Vulnerability Scan
+eventId=any
+eventParsedOk=1
+eventSeverity=8
+vulnPCIFlag=0
+hostIpAddr=1.1.1.1
+eventName=Vulnerability detected by QualysGuard scanner
+appTransportProto=tcp
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=MEDIUM
+collectorId=any
+qualysQID=15098
+hostGeoCountryCodeStr=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+ipProto=6 (TCP)
+vulnName=DNSmasq DNS And DHCP Multiple Remote Vulnerabilities
+reptDevName=any
+customer=Super
+vulnCvssBaseScore=7.50
+vulnSolution=The vendor has released a fix to resolve the issue  please refer to <A HREF= http://www.thekelleys.org.uk/dnsmasq/CHANGELOG  TARGET= _blank >DNSmasq CHANGELOG</A> for more information.<P>
+vulnType=DNS and BIND
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Rackspace
+vulnCvssBaseTemporal=5.90

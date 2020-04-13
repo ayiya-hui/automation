@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+Bro-known_devices,SecurityOnionBro_1,SecurityOnionBro,$localhost,,syslog

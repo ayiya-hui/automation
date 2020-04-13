@@ -1,0 +1,31 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+Apr  3 01:00:02 mobile-apptunnel.xxxxx.com miserviceswatch: PRODUCT=Sentry_9.4.0_4,2019-04-03 01:00:00,323  DNS, success, DNS server 11.11.11.11 is reachable., DNS server 10.1.1.1 is reachable.,
+[params]
+deviceTime=any
+parserName=MobileIronParser
+eventType=MobileIron-Sentry-DNS-Available
+hostName=mobile-apptunnel.xxxxx.com
+destIpAddr=10.1.1.1
+procName=miserviceswatch
+reptModel=MobileIron
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=MobileIron DNS server is available
+version=9.4.0_4
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+msg=DNS server 10.1.1.1 is available
+destName=HOST-10.1.1.1
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=MobileIron

@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+Qualys-Vuln-Detected,RaxSecureWorksScan_1,RaxSecureWorksScan,$localhost,,syslog

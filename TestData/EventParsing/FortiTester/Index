@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+FortiTester-Event-System,FortiTester_1,FortiTester,$localhost,,syslog

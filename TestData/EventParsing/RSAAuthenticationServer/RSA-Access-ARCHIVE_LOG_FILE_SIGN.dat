@@ -1,0 +1,32 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<14>2019-03-25 01:00:00,149, example.domain, example.com.xxx.rsa.ims.RollingLogFile, INFO, b4bb1f6b1a0a000a463e74c7605510d9,61564c101a0a000a08026c4b75e8e481,,10.10.10.26,ARCHIVE_LOG_FILE_SIGN,16241,SUCCESS,,,,,,,,,./system_2018-12-14_0.log,,,,,,
+[params]
+appClientVersion=./system_2018-12-14_0.log
+deviceTime=any
+parserName=RSAAuthenticationServerParser
+logLevel=INFO
+eventType=RSA-Access-ARCHIVE_LOG_FILE_SIGN
+procName=example.com.xxx.rsa.ims.RollingLogFile
+authServerName=example.domain
+reptModel=Authentication Server
+eventId=any
+eventParsedOk=1
+eventSeverity=3
+eventName=RSA archive log file sign
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+status=SUCCESS
+count=1
+serverIpAddr=10.10.10.26
+funName=ARCHIVE_LOG_FILE_SIGN
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=RSA

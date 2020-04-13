@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+Arbor-PolicyViolation-etpro-snort_sig_1_35591,ArborSpectrum_1,ArborSpectrum,$localhost,,syslog

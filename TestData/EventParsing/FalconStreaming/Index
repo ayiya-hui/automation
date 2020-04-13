@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+Crowdstrike-Falcon-AuthActivityAuditEvent-validateEntitlementsHmac-failure,FalconStreaming_1,FalconStreaming,$localhost,,syslog

@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+Bitdefender-GravityZone-AppOrWebControl-uc_application_blocked,BitdefenderGravityZone_1,BitdefenderGravityZone,$localhost,,syslog

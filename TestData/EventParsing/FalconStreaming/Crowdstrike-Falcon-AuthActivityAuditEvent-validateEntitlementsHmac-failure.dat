@@ -1,0 +1,30 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+2018-09-29 17:56:00 [CrowdStrike-Falcon-Streaming] [1] [AuthActivityAuditEvent]:{"OperationName":"validateEntitlementsHmac","ServiceName":"CrowdStrike Authentication","Success":false,"UTCTimestamp":1538214960941,"UserId":"Customer","UserIp":"10.20.10.21"}
+[params]
+parserName=FalconStreamingParser
+eventType=Crowdstrike-Falcon-AuthActivityAuditEvent-validateEntitlementsHmac-failure
+hostName=HOST-10.20.10.21
+userId=Customer
+reptModel=Falcon
+eventId=any
+isSuccess=false
+eventParsedOk=1
+eventSeverity=1
+hostIpAddr=10.20.10.21
+eventName=Failed Crowdstrike entitlement validation
+serviceName=CrowdStrike Authentication
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+opName=validateEntitlementsHmac
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=CrowdStrike

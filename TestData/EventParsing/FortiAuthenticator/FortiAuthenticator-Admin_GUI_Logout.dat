@@ -1,0 +1,30 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<14>Aug 14 22:32:52 db[16987]:  category="Event" subcategory="Authentication" typeid=20995 level="information" user="admin" nas="" action="Logout" status="" Administrator 'admin' logged out
+[params]
+deviceTime=any
+parserName=FortiAuthenticatorParser
+logLevel=information
+eventType=FortiAuthenticator-Admin_GUI_Logout
+reptModel=FortiAuthenticator
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=FortiAuthenticator admin logout via GUI
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+msg=Administrator 'admin' logged out
+appCategory=Event
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+user=admin
+rawEventMsg=any
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+subtype=Authentication
+reptVendor=Fortinet

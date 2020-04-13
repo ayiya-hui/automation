@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<13>May 2 10:43:27 sec-sensor-ps bro_known_devices: {"ts":"2019-05-02T10:23:30.392726Z","mac":"00:15:5d:5d:51:12","dhcp_host_name":"minikube"}
+[params]
+parserName=SecurityOnionBroParser
+eventType=Bro-known_devices
+computer=minikube
+reptModel=BRO
+eventId=any
+eventTime=Thu May 02 18:23:30 CST 2019
+eventParsedOk=1
+eventSeverity=1
+eventName=Bro known devices
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+hostMACAddr=00:15:5d:5d:51:12
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Security Onion

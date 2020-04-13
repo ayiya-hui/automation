@@ -1,0 +1,45 @@
+[reptDevIpAddr(key)]
+1.1.1.1
+[eventMsg]
+<133>1 2019-09-18T06:42:18.000Z 1.1.1.1 enSilo - - - Organization: Demo;Organization ID: 156646;Event ID: 458478;Raw Data ID: 1270886879;Device Name: WIN10-VICTIM;Operating System: Windows 10 Pro N;Process Name: svchost.exe;Process Path: \Device\HarddiskVolume4\Windows\System32\svchost.exe;Process Type: 64bit;Severity: Critical;Classification: Suspicious;Destination: File Creation;First Seen: 18-Sep-2019, 02:42:18;Last Seen: 18-Sep-2019, 02:42:18;Action: Blocked;Count: 1;Certificate: yes;Rules List: File Encryptor - Suspicious file modification;Users: WIN10-VICTIM\U;MAC Address: 00-0C-29-D4-75-EC;Script: N/A;Script Path: N/A;Autonomous System: N/A;Country: N/A
+[params]
+imageSigned=yes
+startTime=Wed Sep 18 02:42:18 CST 2019
+parserName=FortiEDRParser
+eventType=FortiEDR-Security-Suspicious-Blocked
+hostName=WIN10-VICTIM
+procName=svchost.exe
+osType=Windows 10 Pro N
+reptGeoState=any
+reptModel=FortiEDR
+eventId=any
+eventParsedOk=1
+certInfo=yes
+script=N/A
+eventSeverity=8
+fwAction=Blocked
+eventName=FortiEDR blocked suspicious file
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+hostMACAddr=00-0C-29-D4-75-EC
+inCustomerId=156646
+count=1
+reptGeoCountryCodeStr=any
+extEventId=1270886879
+filePath=N/A
+eventSeverityCat=MEDIUM
+collectorId=any
+fileName=svchost.exe
+relayDevIpAddr=1.1.1.1
+user=WIN10-VICTIM\U
+rawEventMsg=any
+ruleName=File Encryptor - Suspicious file modification
+osObjAction=File Creation
+reptDevName=any
+customer=Super
+reptGeoCity=any
+phRecvTime=any
+reptDevIpAddr=1.1.1.1
+inCustomerName=Demo
+reptVendor=Fortinet
+endTime=Wed Sep 18 02:42:18 CST 2019

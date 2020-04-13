@@ -1,0 +1,35 @@
+[reptDevIpAddr(key)]
+1.1.1.11
+[eventMsg]
+[GITLAB_EVENT_DATA] = {"action_name":"pushed to","author":{"avatar_url":"https://secure.gravatar.com/avatar/62e30f8b2d3cbc60ed22c217c5fa4e57?s=80&d=identicon","id":185,"name":"gitmirror","state":"active","username":"gitmirror","web_url":"https://dgit.xyz.com/gitmirror"},"author_id":185,"author_username":"gitmirror","created_at":"2018-11-01T22:26:59.883Z","project_id":553,"push_data":{"action":"pushed","commit_count":1,"commit_from":"eea723957400d686063bf54eb2470661a28ae427","commit_title":"*Problem Description:schema upgrade","commit_to":"f1d7196b0cb458f6094dfabc983b6366d482faca","ref":"releases/FCS5_2_0","ref_type":"branch"},"serverIp":"1.1.1.11","serverName":"dgit.xyz.com","target_id":null,"target_iid":null,"target_title":null,"target_type":null}
+[params]
+comment=*Problem Description:schema upgrade
+deviceTime=any
+parserName=GitLabParser
+eventType=GitLab-branch-pushed-to
+userId=185
+reptGeoState=any
+targetName=releases/FCS5_2_0
+reptModel=GitLab
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Branch is pushed-to in GitLab
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+opName=pushed
+status=active
+count=1
+reptGeoCountryCodeStr=any
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=1.1.1.11
+user=gitmirror
+rawEventMsg=any
+reptDevName=dgit.xyz.com
+customer=Super
+targetType=branch
+reptGeoCity=any
+phRecvTime=any
+reptDevIpAddr=1.1.1.11
+reptVendor=GitLab

@@ -1,0 +1,31 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<29>1 2019-05-29T15:43:47.0Z example.com EPOEvents - EventFwd [agentInfo@3401 tenantId="1" bpsId="1" tenantGUID="{00000000-0000-0000-0000-000000000000}" tenantNodePath="1\2"] ?<?xml version="1.0" encoding="utf-8"?><UpdateEvents><MachineInfo><AgentGUID>{9cfbda9c-8223-11e9-3935-9c7bef95b7c8}</AgentGUID><MachineName>L-74348</MachineName><RawMACAddress>9C7BEF95B7C8</RawMACAddress><IPAddress>1.2.3.4</IPAddress><AgentVersion>5.5.1.388</AgentVersion><OSName>Windows 10</OSName><TimeZoneBias>240</TimeZoneBias><UserName></UserName></MachineInfo><McAfeeCommonUpdater ProductName="McAfee Agent" ProductVersion="5.0.0" ProductFamily="TVD"><UpdateEvent><EventID>2411</EventID><Severity>0</Severity><GMTTime>2019-05-29T15:39:13</GMTTime><ProductID>EEGO____1000</ProductID><Locale>0409</Locale><Error>0</Error><Type>Install</Type><Version>7.2.8</Version><InitiatorID>EPOSERVER_RUNNOW</InitiatorID><InitiatorType>DeploymentTask</InitiatorType><SiteName>ePO_CBOPUBMEPO1001V</SiteName></UpdateEvent></McAfeeCommonUpdater></UpdateEvents>
+[params]
+deviceTime=any
+parserName=McAfeeXmlParser
+eventType=McAfee-EPO-Generic
+hostName=L-74348
+reptModel=ePolicy Orchestrator
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+hostIpAddr=1.2.3.4
+eventName=McAfee-EPO-Generic
+version=5.5.1.388
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=LOW
+collectorId=any
+hostGeoCountryCodeStr=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+osName=Windows 10
+reptVendor=McAfee
+machineGUID={9cfbda9c-8223-11e9-3935-9c7bef95b7c8}

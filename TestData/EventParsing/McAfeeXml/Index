@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+McAfee-EPO-Generic,McAfeeXml_1,McAfeeXml,$localhost,,syslog

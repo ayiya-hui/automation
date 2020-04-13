@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+AWSKinesis-Generic,AwsKinesis_1,AwsKinesis,$localhost,,syslog

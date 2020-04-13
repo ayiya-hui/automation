@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+IBM-DataPower-network-error,DataPower_1,DataPower,$localhost,,syslog

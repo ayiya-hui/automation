@@ -1,0 +1,26 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<182>May 17 16:49:56 supervisor-001 audit_log: type=CRYPTO_KEY_USER msg=audit(1558111787.626:1224732): user pid=32540 uid=0 auid=4294967295 ses=4294967295 msg='op=destroy kind=server fp=34:77:0d:e0:4d:c4:bf:bc:ed:a7:11:a4:e7:f3:98:b2 direction=? spid=32540 suid=0 exe="/usr/sbin/sshd" hostname=? addr=10.10.170.86 terminal=? res=success'
+[params]
+customer=Super
+eventId=any
+eventSeverityCat=LOW
+eventParsedOk=1
+phEventCategory=0 (External)
+parserName=LinuxAuditdParser
+count=1
+eventSeverity=1
+eventType=LINUX_Auditd_CRYPTO_KEY_USER
+reptDevIpAddr=$localhost
+userId=0
+collectorId=any
+extEventRecvProto=Syslog
+eventName=LINUX_Auditd_CRYPTO_KEY_USER
+reptVendor=Generic
+relayDevIpAddr=$localhost
+rawEventMsg=any
+phRecvTime=any
+msg=op=destroy kind=server fp=34:77:0d:e0:4d:c4:bf:bc:ed:a7:11:a4:e7:f3:98:b2 direction=? spid=32540 suid=0 exe="/usr/sbin/sshd" hostname=? addr=10.10.170.86 terminal=? res=success
+reptDevName=any
+reptModel=Linux

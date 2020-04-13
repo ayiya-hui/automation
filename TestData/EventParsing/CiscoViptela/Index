@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+VIPTELA-OMP-PEER-STATE-CHANGE,CiscoViptela_1,CiscoViptela,$localhost,,syslog

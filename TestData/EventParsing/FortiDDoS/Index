@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+FortiDDoS-Source-Flood,FortiDDoS_1,FortiDDoS,172.30.84.114,,syslog

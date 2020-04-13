@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+Symantec-SAP-EVENT-JOB-QUEUE-IMPORT-FAVORITE,SymantecSAP_1,SymantecSAP,10.6.204.128,,syslog

@@ -1,0 +1,32 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<187>154: *Aug 23 19:57:51.681: %Cisco-SDWAN-RP_0-OMPD-3-ERRO-400002: R0/0: OMPD: vSmart peer 1.1.1.5 state changed to Init
+[params]
+parserName=CiscoViptelaParser
+eventType=VIPTELA-OMP-PEER-STATE-CHANGE
+destGeoState=any
+destIpAddr=1.1.1.5
+destGeoCountry=any
+reptModel=Viptela
+eventId=any
+eventParsedOk=1
+destGeoLongitude=any
+eventSeverity=7
+eventName=VIPTELA-OMP-PEER-STATE-CHANGE
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+destName=HOST-1.1.1.5
+count=1
+destGeoCountryCodeStr=any
+eventSeverityCat=MEDIUM
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Cisco
+destGeoLatitude=any
+destGeoCity=any

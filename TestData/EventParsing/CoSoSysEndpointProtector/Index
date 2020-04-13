@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+CoSoSys-EPP-File_Read,CoSoSysEndpointProtector_1,CoSoSysEndpointProtector,$localhost,,syslog

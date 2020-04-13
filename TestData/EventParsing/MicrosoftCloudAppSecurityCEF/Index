@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+MS-Azure-CloudAppSec-Microsoft-Azure-EVENT-LOGIN,MicrosoftCloudAppSecurityCEF_1,MicrosoftCloudAppSecurityCEF,$localhost,,syslog

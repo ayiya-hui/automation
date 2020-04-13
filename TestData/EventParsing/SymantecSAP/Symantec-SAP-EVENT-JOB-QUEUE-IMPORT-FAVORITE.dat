@@ -1,0 +1,32 @@
+[reptDevIpAddr(key)]
+10.6.204.128
+[eventMsg]
+<45>Mar 7 21:39:09 10.6.204.128 1 2019-03-08T03:33:02+00:00 672294-bc-sat6 php 5488 - [meta sequenceId="10"] snlog: sn="ec:f4:bb:cc:c6:3f" id="DS" m="69" c="11" event="EVENT_JOB_QUEUE_IMPORT_FAVORITE" category="FAVORITE" ip="1.1.1.1" model="R720xd" msg="logmsg=model.sys_log::options.event.job_queue_import_favorite.started, user=, time=03:33:02, day=03/08/2019, job_id=8421, report_name="
+[params]
+deviceTime=any
+parserName=SymantecSAPParser
+logLevel=snlog
+eventType=Symantec-SAP-EVENT-JOB-QUEUE-IMPORT-FAVORITE
+hostName=HOST-1.1.1.1
+jobId=8421
+procName=php
+reptModel=Security Analytics Platform
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+hostIpAddr=1.1.1.1
+eventName=Symantec-SAP-EVENT-JOB-QUEUE-IMPORT-FAVORITE
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+msg=logmsg=model.sys_log::options.event.job_queue_import_favorite.started, user=, time=03:33:02, day=03/08/2019, job_id=8421, report_name=
+count=1
+eventSeverityCat=LOW
+collectorId=any
+hostGeoCountryCodeStr=any
+relayDevIpAddr=10.6.204.128
+rawEventMsg=any
+reptDevName=672294-bc-sat6
+customer=Super
+phRecvTime=any
+reptDevIpAddr=10.6.204.128
+reptVendor=Symantec

@@ -1,0 +1,43 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<9>May  8 11:36:39 example.com arbor-spectrum: Policy Violation: src=1.1.1.1|dst=1.1.1.2|dst_port=80|proto=6|severity=1|alerting_host=example.com|policy_src=etpro|sig_id=snort_sig_1_35591|sig_name=ET TROJAN JS/Nemucod requesting EXE payload 2016-02-01|reference=Unknown
+[params]
+deviceTime=any
+parserName=ArborSpectrumParser
+eventType=Arbor-PolicyViolation-etpro-snort_sig_1_35591
+destGeoState=any
+hostName=example.com
+destIpAddr=1.1.1.2
+srcName=HOST-1.1.1.1
+destIpPort=80 (HTTP)
+destGeoCountry=any
+srcIpAddr=1.1.1.1
+reptModel=Spectrum
+eventId=any
+eventParsedOk=1
+destGeoLongitude=any
+eventSeverity=9
+eventName=ET TROJAN JS/Nemucod requesting EXE payload 2016-02-01
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+srcApp=etpro
+destName=HOST-1.1.1.2
+count=1
+destGeoCountryCodeStr=any
+eventSeverityCat=HIGH
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+ipProto=6 (TCP)
+reptDevName=any
+customer=Super
+ipsSignatureId=0
+signatureName=ET TROJAN JS/Nemucod requesting EXE payload 2016-02-01
+phRecvTime=any
+reptDevIpAddr=$localhost
+exchMsgReference=Unknown
+reptVendor=Arbor
+destGeoLatitude=any
+srcGeoCountryCodeStr=any
+destGeoCity=any

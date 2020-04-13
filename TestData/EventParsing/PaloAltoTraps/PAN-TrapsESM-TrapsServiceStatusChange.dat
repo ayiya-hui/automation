@@ -1,0 +1,28 @@
+[reptDevIpAddr(key)]
+172.16.183.173
+[eventMsg]
+Sep 28 2016 17:38:48 172.16.183.173 CEF:0|Palo Alto Networks|Traps Agent|3.4.1.16709|Traps Service Status Change|Agent|6|rt=Sep 28 2016 17:38:48 dhost=traps-win7x86 duser=Traps msg=Agent Service Status Changed: Stopped-> Running
+[params]
+deviceTime=any
+parserName=PaloAltoTrapsParser
+eventType=PAN-TrapsESM-TrapsServiceStatusChange
+reptModel=Traps Endpoint Security Manager
+eventId=any
+eventParsedOk=1
+eventSeverity=6
+eventName=The agent status has changed
+destUser=Traps
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+msg=Agent Service Status Changed: Stopped-> Running
+destName=traps-win7x86
+count=1
+eventSeverityCat=MEDIUM
+collectorId=any
+relayDevIpAddr=172.16.183.173
+rawEventMsg=any
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=172.16.183.173
+reptVendor=Palo Alto

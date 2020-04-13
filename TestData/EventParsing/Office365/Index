@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+MS_OFFICE365_SharePoint_AddedToGroup,Office365_1,Office365,$localhost,,syslog

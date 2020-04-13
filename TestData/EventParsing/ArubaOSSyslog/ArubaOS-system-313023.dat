@@ -1,0 +1,32 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<158>Sep 1 13:36:01 2017 ZWT-AC7210 fpapps[3771]: <313023> <INFO> <ZWT-AC7210 10.1.1.3> Adding Tunnel 0x104bb to Vlan 103
+[params]
+procId=3771
+errorNo=313023
+parserName=ArubaOSSyslogParser
+eventType=ArubaOS-system-313023
+hostName=ZWT-AC7210
+module=fpapps
+reptModel=ArubaOS Switch
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=System is adding a tunnel to VLAN
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+msg=Adding Tunnel 0x104bb to Vlan 103
+count=1
+serverIpAddr=10.1.1.3
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+vpnTunnelName=0x104bb
+rawEventMsg=any
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Aruba
+hostVLAN=103

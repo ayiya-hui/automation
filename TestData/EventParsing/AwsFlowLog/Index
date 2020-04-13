@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+AWS_VPC_FLOW_ACCEPT,AwsFlowLog_1,AwsFlowLog,$localhost,,syslog

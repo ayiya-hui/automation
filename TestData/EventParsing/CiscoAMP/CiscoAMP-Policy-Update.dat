@@ -1,0 +1,31 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+[FSM-CiscoAMPStream] [1] {"id":6724209538876047392,"timestamp":1565602035,"timestamp_nanoseconds":747000000,"date":"2019-08-12T09:27:15+00:00","event_type":"Policy Update","event_type_id":553648130,"connector_guid":"98be064e-2ba5-4482-8405-4a9268ae9f2e","group_guids":["3c025f05-a2c4-4613-9186-343365f53853"],"computer":{"connector_guid":"98be064e-2ba5-4482-8405-4a9268ae9f2e","hostname":"host1","external_ip":"1.2.3.4","active":true,"network_addresses":[{"ip":"1.2.3.5","mac":"00:21:97:1e:1c:05"}],"links":{"computer":"https://api.amp.cisco.com/v1/computers/98be064e-2ba5-4482-8405-4a9268ae9f2e","trajectory":"https://api.amp.cisco.com/v1/computers/98be064e-2ba5-4482-8405-4a9268ae9f2e/trajectory","group":"https://api.amp.cisco.com/v1/groups/3c025f05-a2c4-4613-9186-343365f53853"}}}
+[params]
+deviceTime=any
+parserName=CiscoAMPParser
+eventType=CiscoAMP-Policy-Update
+hostName=host1
+reptModel=AMP
+eventId=any
+eventParsedOk=1
+connectorGUID=98be064e-2ba5-4482-8405-4a9268ae9f2e
+eventSeverity=1
+hostIpAddr=1.2.3.5
+eventName=An agent has been told to fetch policy
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+hostMACAddr=00:21:97:1e:1c:05
+count=1
+serverIpAddr=1.2.3.4
+eventSeverityCat=LOW
+collectorId=any
+hostGeoCountryCodeStr=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=Cisco

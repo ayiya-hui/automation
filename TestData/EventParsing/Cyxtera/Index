@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+Cyxtera-AppGate-SDP-ip_access,Cyxtera_1,Cyxtera,$localhost,,syslog

@@ -1,0 +1,30 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<189>date=2018-10-03 time=10:10:12 devname=FMG-VM64 device_id=FMG-VM0A15001575 log_id=0021030002 type=event subtype=objcfg pri=notice desc="cdb event log for object changed" user="admin" userfrom="" msg="dev=global,adom=root,type=wireless_controller_wtp,act=edit,pkgname=1302629-3,key=FP221C3X16003670,_r1-oper-chan=6(1),_r1-oper-txpower=18(17),_r2-client-count=5(4),_rogue-ap-count=92(90)" adom="root"
+[params]
+domain=root
+parserName=FortiManagerParser
+eventType=FMGR-objcfg-Cdbevlog
+usrMsg=dev=global,adom=root,type=wireless_controller_wtp,act=edit,pkgname=1302629-3,key=FP221C3X16003670,_r1-oper-chan=6(1),_r1-oper-txpower=18(17),_r2-client-count=5(4),_rogue-ap-count=92(90)
+reptModel=FortiManager
+eventId=any
+logID=21030002
+eventParsedOk=1
+eventSeverity=3
+eventName=FortiManager Object Change
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+eventDesc=cdb event log for object changed
+customer=Super
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+user=admin
+rawEventMsg=any
+reptDevName=any
+deviceIdentification=FMG-VM0A15001575
+phRecvTime=any
+reptDevIpAddr=$localhost
+count=1
+reptVendor=Fortinet

@@ -1,0 +1,30 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<13>Jan  5 01:23:45 dops-git application.log: Failed Login: username=domain1\user1 ip=172.30.1.1
+[params]
+domain=domain1
+deviceTime=any
+parserName=GitLabLogParser
+eventType=GitLab-Login-Failure
+srcName=HOST-172.30.1.1
+srcIpAddr=172.30.1.1
+reptModel=GitLab
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=User failed login in GitLab
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=LOW
+collectorId=any
+fileName=application.log
+relayDevIpAddr=$localhost
+user=user1
+rawEventMsg=any
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=GitLab

@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+Vormetric-update-host,McAfeeVormetric_1,McAfeeVormetric,10.10.10.1,,syslog

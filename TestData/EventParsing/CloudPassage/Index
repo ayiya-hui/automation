@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+CloudPassage-Halo-csm_rule_failed,CloudPassage_1,CloudPassage,$localhost,,syslog

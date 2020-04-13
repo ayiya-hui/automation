@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+BOX_ITEM_RENAME,Box_1,Box,$localhost,,syslog

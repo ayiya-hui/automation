@@ -1,0 +1,37 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+[FSM-CloudPassage] [1]:{"id": "cb3d0112c57211e68572091dd19d92a2", "type": "csm_rule_failed", "name": "Configuration rule matched", "message": "Server configuration rule zxc / test matched on Windows server 2012 (1.2.3.4, i039b9cfc7671567bb).(source: Scan)", "server_id": "1f8fb232c13111e6a10113d2fb59ad2b", "created_at": "2016-12-18T22:39:10.830Z", "critical": true, "server_platform": "Windows", "server_hostname": "host1", "server_group_name": "WIN_test", "server_ip_address": "1.2.3.4", "server_reported_fqdn": "WIN-8P86VNPOH0V", "server_label": "2012", "server_primary_ip_address": "2001:0:D58:1EF1:34E4:174F:F5FE:D75F", "tag": null, "server_group_path": null, "ec2_instance_id": "i-039b9cfc7671567bb", "ec2_account_id": "856192027328", "scan_id": "cb1183acc57211e68572091dd19d92a2", "finding_id": { "n": 270014413046021232053630591725217878690, "s": "cb22e264-c572-11e6-8572-091dd19d92a2" }, "rule_name": "zxc / test", "rule_reference_identifiers": [] }
+[params]
+deviceTime=any
+parserName=CloudPassageParser
+eventType=CloudPassage-Halo-csm_rule_failed
+hostName=host1
+accountId=856192027328
+eventId=any
+eventParsedOk=1
+uuid=cb3d0112c57211e68572091dd19d92a2
+eventSeverity=9
+serverIpAddr=1.2.3.4
+hostModel=Windows
+hostIpAddr=any
+eventName=Configuration rule matched
+groupName=WIN_test
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+reptModel=Halo
+type=csm_rule_failed
+count=1
+description=Server configuration rule zxc / test matched on Windows server 2012 (1.2.3.4, i039b9cfc7671567bb).(source: Scan)
+ruleId=0
+eventSeverityCat=HIGH
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+ruleName=zxc / test
+reptDevName=any
+customer=Super
+ec2InstanceId=i-039b9cfc7671567bb
+phRecvTime=any
+reptDevIpAddr=$localhost
+reptVendor=CloudPassage

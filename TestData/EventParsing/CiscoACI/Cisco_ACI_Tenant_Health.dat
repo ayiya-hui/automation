@@ -1,0 +1,27 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+[Cisco_ACI_Tenant_Health]:[attributes]={"childAction":"","descr":"","dn":"uni/tn-CliQr","lcOwn":"local","modTs":"2016-09-02T06:58:34.511+00:00","monPolDn":"uni/tn-common/monepg-default","name":"CliQr","ownerKey":"","ownerTag":"","status":"","uid":"15374"},[health]={"childAction":"","chng":"0","cur":"100","maxSev":"cleared","prev":"100","rn":"health","status":"","twScore":"100","updTs":"2016-09-02T08:32:56.730+00:00"}
+[params]
+parserName=CiscoACIParser
+eventType=Cisco_ACI_Tenant_Health
+reptModel=Cisco ACI
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=Cisco ACI Tenant Health
+reptVendor=Cisco
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+rawEventMsg=any
+reptDevName=any
+customer=Super
+phRecvTime=any
+reptDevIpAddr=$localhost
+healthScore=100
+tenantName=CliQr
+sysDN=uni/tn-CliQr

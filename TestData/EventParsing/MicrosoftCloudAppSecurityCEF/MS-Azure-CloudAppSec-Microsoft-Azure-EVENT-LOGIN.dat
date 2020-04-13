@@ -1,0 +1,41 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<109>2018-05-22T04:17:28.340Z SP204 CEF:0|MCAS|SIEM_Agent|0.123.162|EVENT_CATEGORY_LOGIN|Log on|0|externalId=70e988af3b82e19b872d12a91860d300d968f47e0bb245a0e765d9dbfbdb02ce rt=1526962648340 start=1526962648340 end=1526962648340 msg=Log on suser=yanlong@shashiaccelops.onmicrosoft.com destinationServiceName=Microsoft Azure dvc=43.254.220.13 requestClientApplication=;Windows 10;Edge 17.17134; cs1Label=portalURL cs1=https://shashiaccelops.us2.portal.cloudappsecurity.com/#/audits?activity.id\=eq(70e988af3b82e19b872d12a91860d300d968f47e0bb245a0e765d9dbfbdb02ce,) cs2Label=uniqueServiceAppIds cs2=APPID_AZURE cs3Label=targetObjects cs3=Azure Portal,yanlong,yanlong cs4Label=policyIDs cs4= c6a1Label="Device IPv6 Address" c6a1=
+[params]
+deviceTime=any
+startTime=Tue May 22 12:17:28 CST 2018
+parserName=MicrosoftCloudAppSecurityCEFParser
+appName=Microsoft Azure
+eventType=MS-Azure-CloudAppSec-Microsoft-Azure-EVENT-LOGIN
+activityType=Log on
+srcName=HOST-43.254.220.13
+appSvrName=APPID_AZURE
+srcIpAddr=43.254.220.13
+targetName=Azure Portal,yanlong,yanlong
+reptModel=Cloud App Security
+eventId=any
+eventTime=Tue May 22 12:17:28 CST 2018
+eventParsedOk=1
+uuid=70e988af3b82e19b872d12a91860d300d968f47e0bb245a0e765d9dbfbdb02ce
+eventSeverity=1
+appVersion=0.123.162
+eventName=MS-Azure-CloudAppSec-Microsoft-Azure-EVENT-LOGIN
+details=Log on
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=$localhost
+user=yanlong@shashiaccelops.onmicrosoft.com
+rawEventMsg=any
+reptDevName=any
+customer=Super
+srcAppVersion=;Windows 10;Edge 17.17134;
+phRecvTime=any
+reptDevIpAddr=$localhost
+infoURL=https://shashiaccelops.us2.portal.cloudappsecurity.com/#/audits?activity.id\=eq(70e988af3b82e19b872d12a91860d300d968f47e0bb245a0e765d9dbfbdb02ce,)
+reptVendor=Microsoft
+srcGeoCountryCodeStr=any
+endTime=Tue May 22 12:17:28 CST 2018

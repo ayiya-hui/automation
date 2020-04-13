@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+Gerrit-SSH-Logout,GerritLog_1,GerritLog,$localhost,,syslog

@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+GitLab-Login-Failure,GitLabLog_1,GitLabLog,$localhost,,syslog

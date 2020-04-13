@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+AIDE-Generic,AIDE_1,AIDE,$localhost,,syslog

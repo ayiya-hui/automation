@@ -1,0 +1,32 @@
+[reptDevIpAddr(key)]
+11.22.11.22
+[eventMsg]
+<38>Apr 20 06:36:11 11.22.11.22 CSCOacs_01_PassedAuth phvdc8d 1 0 Message-Type=Authen OK,User-Name=joeUser,NAS-IP-Address=192.168.19.18,Caller-ID=192.168.29.8,NAS-Port=6,Group-Name=Default Group,Filter Information=No Filters activated.,Access Device=SJ-Dev-A-IOS-Lab-01
+[params]
+deviceTime=any
+parserName=CiscoACSParserPlus
+eventType=CSCOacs_01_PassedAuth
+reptGeoState=any
+reptModel=Cisco Secure ACS
+eventId=any
+eventParsedOk=1
+eventSeverity=1
+eventName=AAA authentication successful
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+count=1
+reptGeoCountryCodeStr=any
+eventSeverityCat=LOW
+collectorId=any
+relayDevIpAddr=11.22.11.22
+user=joeUser
+rawEventMsg=any
+reptDevName=any
+customer=Super
+reptGeoCity=any
+phRecvTime=any
+reptDevIpAddr=11.22.11.22
+eventAction=0 (Permit)
+sessionId=phvdc8d
+reptVendor=Cisco
+nepDevIpAddr=192.168.19.18

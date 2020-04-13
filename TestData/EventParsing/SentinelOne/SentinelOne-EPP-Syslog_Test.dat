@@ -1,0 +1,24 @@
+[reptDevIpAddr(key)]
+$localhost
+[eventMsg]
+<14>SentinelOne Syslog connection established successfully!
+[params]
+customer=Super
+eventId=any
+eventSeverityCat=LOW
+eventParsedOk=1
+phEventCategory=0 (External)
+parserName=SentinelOneParser
+count=1
+eventSeverity=1
+eventType=SentinelOne-EPP-Syslog_Test
+reptDevIpAddr=$localhost
+collectorId=any
+extEventRecvProto=Syslog
+eventName=SentinelOne-EPP-Syslog_Test
+reptVendor=SentinelOne
+relayDevIpAddr=$localhost
+rawEventMsg=any
+phRecvTime=any
+reptDevName=any
+reptModel=Endpoint Protection Service

@@ -1,0 +1,41 @@
+[reptDevIpAddr(key)]
+10.30.30.161
+[eventMsg]
+2018-08-17T02:46:33.983Z 10.30.30.161 [eventType]=Rapid7-InsightVM-Vuln-Detected,[assetId]=2,[assetIp]=10.30.30.164,[assetMac]=00:0C:29:8B:83:4E,[assetOs]=Linux 2.6.32,[assetRawRiskScore]=8600.03809,[assetRiskScore]=8600.03809,[assetVersion]=2.6.32,[siteId]=1,[siteName]=test, [VulnPublished]=2010-01-01,[VulnRiskScore]=565.97,[VulnSeverity]=Severe,[VulnSeverityScore]=5,[VulnTitle]=Database Open Access,[VulnModified]=2015-07-29,[VulnDescription]=The database allows any remote system the ability to connect to it. It is recommended to limit direct access to trusted systems because databases may contain sensitive data, and new vulnerabilities and exploits are discovered routinely for them. For this reason, it is a violation of PCI DSS section 1.3.6 to have databases listening on ports accessible from the Internet, even when protected with secure authentication mechanisms.,[VulnExploits]=0,[VulnAdded]=2010-08-19,[VulnCves]=,[VulnCategories]=Database,Network,[VulnCvssv2ExploitScore]=0,[VulnCvssv2ImpactScore]=0,[VulnCvssv2Score]=0,[VulnFoundSince]=2018-08-17T02:46:33.983Z,[VulnId]=database-open-access,[VulnStatus]=vulnerable
+[params]
+parserName=Rapid7InsightVMVulnParser
+vulnCvssScore=0.00
+eventType=Rapid7-InsightVM-Vuln-Detected
+hostName=HOST-10.30.30.164
+site=test, [VulnPublished]=2010-01-01
+threatCategory=Database,Network
+osType=Linux 2.6.32
+vulnIdStr=database-open-access
+reptModel=InsightVM
+eventId=any
+eventParsedOk=1
+eventSeverity=10
+isExploitable=0
+description=The database allows any remote system the ability to connect to it. It is recommended to limit direct access to trusted systems because databases may contain sensitive data, and new vulnerabilities and exploits are discovered routinely for them. For this reason, it is a violation of PCI DSS section 1.3.6 to have databases listening on ports accessible from the Internet, even when protected with secure authentication mechanisms.
+hostIpAddr=10.30.30.164
+eventName=Vulnerability detected by Rapid7 InsightVM scanner
+extEventRecvProto=Syslog
+phEventCategory=0 (External)
+hostMACAddr=00:0C:29:8B:83:4E
+status=vulnerable
+count=1
+vulnerableSince=Fri Aug 17 02:46:33 CST 2018
+eventSeverityCat=HIGH
+collectorId=any
+relayDevIpAddr=10.30.30.161
+rawEventMsg=any
+vulnScore=566
+osVersion=2.6.32
+vulnName=Database Open Access
+reptDevName=any
+customer=Super
+vulnCvssBaseScore=10.00
+phRecvTime=any
+reptDevIpAddr=10.30.30.161
+reptVendor=Rapid7
+riskScore=8600

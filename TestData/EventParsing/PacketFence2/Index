@@ -1,0 +1,3 @@
+eventType,name,module,reptDevIpAddr,key,method
+
+PacketFence-NAC-APILogon,PacketFence2_1,PacketFence2,$localhost,,syslog
