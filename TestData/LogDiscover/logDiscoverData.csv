@@ -1,13 +1,17 @@
 name,reptDevIpAddr,model,vendor,isApp
 AIX,30.200.1.1,AIX,IBM,
+Apache,30.200.2.1,Apache Tomcat,Apache,TRUE
 Aruba,30.200.3.1,ArubaOS WLAN Controller,Aruba,
 AS400,30.200.4.1,OS400,IBM,
 Astaro,30.200.5.1,Security Gateway,Astaro,
 BarracudaFirewall,30.200.6.1,Spam Firewall,Barracuda,
+BindDNS,30.200.7.1,BIND DNS,ISC,TRUE
 Bluecoat,30.200.8.1,SGOS Web Proxy,Blue Coat,
 Checkpoint,30.200.9.1,FireWall-1,Checkpoint,
 CiscoACE,30.200.10.1,ACE,Cisco,
+CiscoACS,30.200.11.1,Cisco Secure ACS,Cisco,TRUE
 CiscoASA,30.200.12.1,ASA,Cisco,
+CiscoCSA,30.200.13.1,CSA Management Center,Cisco,TRUE
 CiscoFWSM,30.200.14.1,FWSM,Cisco,
 CiscoIOS,30.200.15.1,IOS,Cisco,
 CiscoIPS,30.200.16.1,IPS,Cisco,
@@ -15,19 +19,26 @@ CiscoNXOS,30.200.17.1,NX-OS,Cisco,
 CiscoPIX,30.200.18.1,PIX,Cisco,
 CiscoVPN3K,30.200.19.1,VPN 3K,Cisco,
 CiscoWLC,30.200.20.1,WLAN Controller,Cisco,
+Dell,30.200.21.1,Generic,Generic,
+DHCP,30.200.22.1,Generic,Generic,
+ESETNode,30.200.23.1,Nod32,ESET,TRUE
 Extremeware,30.200.24.1,Extremeware,Extreme,
 ForeScoutCounterACT,30.200.25.1,CounterACT,ForeScout,
 Fortinet,30.200.26.1,FortiOS,Fortinet,
 Foundry,30.200.27.1,Ironware,Foundry,
+HP,30.200.28.1,Generic,Generic,
 Huawei,30.200.29.1,VRP,Huawei,
 IIS,30.200.30.1,IIS,Microsoft,TRUE
 ISA,30.200.31.1,ISA Server,Microsoft,TRUE
+JEEAppServer,30.200.32.1,JEE App Server,Generic,TRUE
+JuniperSteelBelt,30.200.33.1,Steel-Belted RADIUS,Juniper,TRUE
 JuniperIDP,30.200.34.1,IDP,Juniper,
 JuniperSSG,30.200.35.1,SSG ScreenOS,Juniper,
 JuniperSSLVPN,30.200.36.1,Secure Access,Juniper,
 JuniperOS,30.200.37.1,JunOS,Juniper,
 LinuxDHCP,30.200.38.1,Linux DHCP,Generic,TRUE
 LinuxInotify,30.200.39.1,Linux,Generic,
+McAfeeAV,30.200.40.1,ePolicy Orchestrator,McAfee,TRUE
 McAfeeFirewall,30.200.41.1,Sidewinder Firewall,McAfee,
 McAfeeIPS,30.200.42.1,Intrushield,McAfee,
 MicrosoftIAS,30.200.43.1,IAS,Microsoft,TRUE
@@ -35,23 +46,40 @@ MicrosoftIASODBC,30.200.44.1,IAS,Microsoft,TRUE
 MicrosoftPPTP,30.200.45.1,PPTP/L2TP VPN,Microsoft,TRUE
 MicrosoftSQL,30.200.46.1,SQL Server,Microsoft,TRUE
 MobilitySystem,30.200.47.1,Mobility XE,NetMotion,TRUE
+Nagios,30.200.48.1,Mgmt Server,Nagios,TRUE
+NCircle,30.200.49.1,Suite360,nCircle,TRUE
+Nessus,30.200.50.1,Nessus Security Scanner,Tenable,TRUE
+NeXpose,30.200.51.1,NeXpose Security Scanner,Rapid7,TRUE
+OracleDB,30.200.52.1,Database Server,Oracle,TRUE
+OracleviaSnare,30.200.53.1,Database Server,Oracle,TRUE
 PaloAlto,30.200.54.1,PAN-OS,Palo Alto,
 Radvision,30.200.57.1,IP/VC Gateway,Radvision,
 Reconnext,30.200.58.1,Cisco Secure ACS,McAfee,TRUE
+Sendmail,30.200.59.1,Sendmail Mail Server,Sendmail.org,TRUE
+SendmailPopImap,30.200.60.1,Sendmail Mail Server,Sendmail.org,TRUE
 Snort,30.200.61.1,Snort IPS,Snort-org,
 Solaris,30.200.62.1,Solaris,Sun,
 SonicwallAventailSyslog,30.200.63.1,Aventail VPN,Sonicwall,
 SonicwallAventailWorkPlace,30.200.64.1,Aventail VPN,Sonicwall,
 SonicwallFirewall,30.200.65.1,SonicOS,Sonicwall,
+Sophos,30.200.66.1,Sophos Endpoint Control,Sophos,TRUE
+Squid,30.200.67.1,Squid Web Proxy,Squid-cache-org,TRUE
+SymantecAV,30.200.68.1,Endpoint Protection Service,Symantec,TRUE
 TipPointIPS,30.200.69.1,TippingPoint UnityOne IPS,3Com,
 TipPointNMS,30.200.70.1,TippingPoint UnityOne IPS,3Com,
 TipPointSys,30.200.71.1,TippingPoint UnityOne IPS,3Com,
 TrendMicroIDF,30.200.72.1,IDF,TrendMicro,
+TrendMicroAV,30.200.73.1,Antivirus Manager,TrendMicro,TRUE
 UCMCDR,30.200.74.1,Call Manager,Cisco,
 Unix,30.200.75.1,Unix,Generic,
 UntangleWebProxy,30.200.76.1,Untangle Security Gateway,Untangle,
+VMware,30.200.77.1,Generic,VMware,TRUE
 WatchGuardFirewall,30.200.78.1,Firebox,Watchguard,
+WebLogic,30.200.79.1,WebLogic App Server,Oracle,TRUE
+WebsenseMail,30.200.80.1,Mail Security,Websense,TRUE
+WebsenseWeb,30.200.81.1,Web Security,Websense,TRUE
 WindowsDHCP,30.200.82.1,DHCP,Microsoft,TRUE
+WindowsDNS,30.200.83.1,DNS,Microsoft,TRUE
 WindowsOS,30.200.84.1,Windows,Microsoft,
 WindowsOSWmi,30.200.86.1,Windows,Microsoft,
 ZenithARCA,30.200.87.1,Zenith ARCA,Zenith Infotech,TRUE
@@ -66,6 +94,8 @@ Bit9,30.200.96.1,Security Platform,Bit9,
 CarbonBlack,30.200.97.1,Security Platform,Carbon Black,
 BrocadeSanSwitch,30.200.98.1,San Switch,Brocade,
 CiscoCM,30.200.99.1,Call Manager,Cisco,
+CiscoMeraki,30.200.100.1,Meraki Firewall,Cisco,
+CiscoMerakiTrap,30.200.101.1,Meraki Cloud Controller,Cisco,
 CiscoNCM,30.200.102.1,CiscoWorks NCM,Cisco,
 CiscoONSTrap,30.200.103.1,ONS,Cisco,
 CiscoTVCS,30.200.104.1,Telepresence Video Comm Server,Cisco,
@@ -87,7 +117,10 @@ Emc,30.200.119.1,VNX,EMC,
 F5AFM,30.200.120.1,Big-IPOS,F5,
 FireEye,30.200.122.1,MPS,FireEye,
 H3CComwareHP,30.200.123.1,Comware,H3C,
+HPProCurve,30.200.124.1,ProCurve,HP,
 HX,30.200.125.1,HX,FireEye,
+IBMDB2Audit,30.200.126.1,DB2,IBM,TRUE
+IBMDirector,30.200.127.1,Systems Director,IBM,TRUE
 IBMGuardium,30.200.128.1,Guardium,IBM,
 IBMTownsend,30.200.130.1,OS400,IBM,
 InfoBloxAudit,30.200.131.1,NiOS,InfoBlox,
@@ -99,17 +132,22 @@ JunipSSGFirewallLog,30.200.136.1,SSG ScreenOS,Juniper,
 JunOS2,30.200.137.1,SRX JunOS,Juniper,
 LantronixSLC,30.200.138.1,SLC Console Manager,Lantronix,
 McAfeeStonesoft,30.200.139.1,Stonesoft IPS,McAfee,
+McAfeeVulnMgr,30.200.140.1,Vulnerability Manager,McAfee,TRUE
 McAfeeWebGateway,30.200.143.1,WebGateway,McAfee,
 MicrosoftDHCPTrap,30.200.144.1,DHCP,Microsoft,TRUE
 MicrosoftExchangeTrackingLog,30.200.145.1,Exchange Server,Microsoft,TRUE
 MicrosoftUAG,30.200.146.1,Forefront UAG,Microsoft,
 MotorolaAirDefense,30.200.147.1,AirDefense,Motorola,
 MotorolaWiNG,30.200.148.1,WiNG WLAN AP,Motorola,
+MySQLDB,30.200.149.1,MySQL,Oracle,TRUE
 NetApp,30.200.150.1,DataONTAP,NetApp,
 NetBotzCMCTrap,30.200.151.1,NetBotz,APC,
+Nginx,30.200.152.1,Web Server,Nginx,TRUE
 Okta,30.200.153.1,OKTA,OKTA.com,
+OracleAudit,30.200.154.1,Database Server,Oracle,TRUE
 PfSense,30.200.156.1,BSD Firewall,pfSense,
 PulseSecure,30.200.158.1,Pulse Connect,Pulse Secure,
+Postfix,30.200.159.1,Postfix,Generic,TRUE
 QNAP,30.200.160.1,Turbo NAS,QNAP,
 QOSMOS,30.200.161.1,DeepFlow,Qosmos,
 QualysWAF,30.200.162.1,Web Application Firewall,Qualys,
@@ -120,9 +158,64 @@ SonicWallAventailNetWorkAndWebProxy,30.200.167.1,Aventail VPN,Sonicwall,
 SophosUTM,30.200.168.1,UTM,Sophos,
 SophosWebFilter,30.200.169.1,Web Filter,Sophos,
 Sourcefire,30.200.170.1,Sourcefire3D IPS,Sourcefire,
+SymantecDLP,30.200.171.1,Data Loss Prevention,Symantec,TRUE
+TrendMicroDeepSecurity,30.200.172.1,Deep Security Manager,TrendMicro,TRUE
 Tufin,30.200.173.1,SecureTrack,Tufin,
 Vasco,30.200.174.1,DigiPass,Vasco,
+VeeamBackup,30.200.175.1,Backup and Replication,Veeam,TRUE
+VMwareVCenter,30.200.176.1,vCenter,VMware,TRUE
+VMwareVCNS,30.200.177.1,vCNS Manager,VMware,TRUE
 WVSS,30.200.178.1,WVSS,Green League,
 YXLINK,30.200.179.1,Vuln Scanner,YXLink,
 FortiWeb,30.200.180.1,FortiWeb,Fortinet,
 FortiMail,30.200.181.1,FortiMail,Fortinet,
+AlcatelOmniSwitches,30.200.182.1,OmniSwitch,Alcatel,
+Cyberoam,30.200.183.1,Cyberoam,Sophos,
+Radware,30.200.184.1,DefensePro,Radware,
+Rapid7InsightVMVuln,30.200.185.1,InsightVM,Rapid7,
+Cyxtera,30.200.186.1,AppGate SDP,Cyxtera,
+IPswitchWS_FTP,30.200.187.1,WS_FTP,IPswitch,
+RaxSecureWorksScan,30.200.188.1,SecureWorks Vulnerability Scan,Rackspace,
+DataPower,30.200.189.1,DataPower,IBM,
+Isilon,30.200.190.1,OneFS,Isilon,
+RSAAuthenticationServer,30.200.191.1,Authentication Server,RSA,
+SecurityOnionBro,30.200.192.1,BRO,Security Onion,
+ArborSpectrum,30.200.193.1,Spectrum,Arbor,
+ArubaOSSyslog,30.200.195.1,ArubaOS Switch,Aruba,
+EDirectoryCEF,30.200.196.1,eDirectory,NetIQ,
+EpicSecuritySIEM,30.200.197.1,Security-SIEM,Epic,
+Kaspersky,30.200.198.1,Security Center,Kaspersky,
+Lastline,30.200.199.1,Network Defender,Lastline,
+AwsFlowLog,30.200.200.1,AWS CloudWatch,Amazon,
+AwsKinesis,30.200.201.1,AWS Kinesis,Amazon,
+AzureEventHub,30.200.202.1,Azure Event Hub,Microsoft,
+Malwarebytes,30.200.203.1,Endpoint Protection,Malwarebytes,
+SophosXGFirewall,30.200.204.1,XG Firewall,Sophos,
+Sourcefire2,30.200.205.1,FirePOWER,Cisco,
+BarracudaWebFilter,30.200.206.1,Web Filter,Barracuda,
+Sourcefire3,30.200.207.1,FirePOWER,Cisco,
+BitdefenderGravityZone,30.200.208.1,GravityZone,Bitdefender,
+FireEyeETP,30.200.210.1,Email Threat Prevention,FireEye,
+FireEyeJson,30.200.211.1,Web MPS,FireEye,
+SymantecSAPCEF,30.200.212.1,Security Analytics Platform,Symantec,
+MicrosoftAzureATP,30.200.213.1,Azure ATP,Microsoft,
+FireMon,30.200.215.1,Security Manager,FireMon,
+FlowTraq,30.200.216.1,FlowTraq,Riverbed,
+MicrosoftCloudAppSecurityCEF,30.200.217.1,Cloud App Security,Microsoft,
+TaniumConnect,30.200.218.1,Tanium Connect,Tanium,
+ForcepointESGCEF,30.200.219.1,Email Security Gateway,Forcepoint,
+CheckpointGAIA,30.200.220.1,FireWall-1 GAIA,Checkpoint,
+FortiADC,30.200.221.1,FortiADC,Fortinet,
+CimTrak,30.200.222.1,CimTrak Integrity Suite,Cimcor,
+FortiAuthenticator,30.200.223.1,FortiAuthenticator,Fortinet,
+MicrosoftNPS,30.200.224.1,Network Policy Server,Microsoft,
+TrendMicroApexCentral,30.200.225.1,Apex Central,TrendMicro,
+FortiClient,30.200.226.1,FortiClient,Fortinet,
+CiscoACI,30.200.227.1,Cisco ACI,Cisco,
+FortiDDoS,30.200.228.1,FortiDDoS,Fortinet,
+FortiDeceptor,30.200.229.1,FortiDeceptor,Fortinet,
+MikroTikFirewall,30.200.230.1,Firewall,MikroTik,
+FortiEDR,30.200.231.1,FortiEDR,Fortinet,
+MobileIron,30.200.232.1,MobileIron,MobileIron,
+TrendMicroInterscanWebSecurity,30.200.233.1,Interscan Web Security,TrendMicro,
+CiscoAMP,30.200.234.1,AMP,Cisco,

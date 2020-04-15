@@ -1,0 +1,2 @@
+[eventMsg]
+2011-05-03 18:22:32 30.200.66.1(via UDP: [30.200.66.1]:1216) TRAP, SNMP v1, community public          SNMPv2-SMI::enterprises.2604.2.1.1.1 Enterprise Specific Trap (1) Uptime: 5:59:55.31       SNMPv2-SMI::enterprises.2604.2.1.1.2.1.1 = STRING: "File \"C:\WINDOWS\system32\LDPackage.dll\" belongs to virus/spyware 'Mal/Generic-S'."        SNMPv2-SMI::enterprises.2604.2.1.1.2.2.2 = STRING: "9.5.5"

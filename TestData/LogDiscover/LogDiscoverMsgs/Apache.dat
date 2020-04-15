@@ -1,0 +1,2 @@
+[eventMsg]
+<142>Sep 17 13:27:37 SJ-Dev-S-RH-VMW-01 ApacheLog  216.67.1.91 - leon [01/Jul/2002:12:11:52 +0000] "GET /index.html HTTP/1.1" 401 431"http://www.loganalyzer.net/" "Mozilla/4.05 [en] (WinNT; I)" "USERID=CustomerA;IMPID=01234"

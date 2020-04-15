@@ -1,0 +1,2 @@
+[eventMsg]
+<130>abc.com: <Mon, 18 Sep 2017 10:00:48,IST> [EVT_URL_BLOCKING|LOG_CRIT] Blocked URL log tk_username=1.1.1.1,tk_date_field=2017-09-18 10:00:48+0530,tk_protocol=https,tk_url=https://google.com:443/,tk_malicious_entity=,tk_file_name=,tk_entity_name=,tk_action=,tk_scan_type=user defined,tk_blocked_by=rule,tk_rule_name=google.com,tk_opp_id=0,tk_group_name=None,tk_category=URL Blocking,tk_uid=0099253425-0ecd0076872a9d0ace16,tk_filter_action=0

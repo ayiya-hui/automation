@@ -1,0 +1,2 @@
+[eventMsg]
+<172>Oracle Audit[25487]: LENGTH : '153' ACTION :[004] 'bjn' DATABASE USER:[9] 'user' PRIVILEGE :[4] 'NONE' CLIENT USER:[9] 'user' CLIENT TERMINAL:[14] 'terminal' STATUS:[1] '0'

@@ -1,0 +1,2 @@
+[eventMsg]
+<22>sendmail[31905]: o2UIStEp031905: to=hongbo.zhu@accelops.net, ctladdr=bugzilla-daemon@prospecthills.net (48/48), delay=00:00:00, xdelay=00:00:00, mailer=relay, pri=31300, relay=mailhost.prospecthills.net. [172.16.10.8], dsn=2.0.0, stat=Sent (o2UIStU2023690 Message accepted for delivery)

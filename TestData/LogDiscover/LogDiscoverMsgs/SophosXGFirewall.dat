@@ -1,0 +1,2 @@
+[eventMsg]
+<30>device=SFW" date=2019-03-08 time=11:31:37 timezone="WET" device_name="XG310" device_id=C320ABC48D7MTC6 log_id=123526618031 log_type="System Health" log_component="Interface" log_subtype="Usage" priority=Information interface=Port7 receivedkbits=0.00 transmittedkbits=0.00 receivederrors=0.00 transmitteddrops=0.00 collisions=0.00 transmittederrors=0.00 receiveddrops=0.00"

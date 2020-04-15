@@ -1,0 +1,2 @@
+[eventMsg]
+<9>May  8 11:36:39 example.com arbor-spectrum: Policy Violation: src=1.1.1.1|dst=1.1.1.2|dst_port=80|proto=6|severity=1|alerting_host=example.com|policy_src=etpro|sig_id=snort_sig_1_35591|sig_name=ET TROJAN JS/Nemucod requesting EXE payload 2016-02-01|reference=Unknown

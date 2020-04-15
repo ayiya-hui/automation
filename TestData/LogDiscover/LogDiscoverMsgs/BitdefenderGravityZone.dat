@@ -1,0 +1,2 @@
+[eventMsg]
+<20>Mar 15 23:24:06 gz gravityzone: [uc] {"computer_name":"example","computer_ip":"10.1.1.1","computer_id":"532806300678598e738b4571","product_installed":"EPS","uc_type":"application","application_path":"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe","status":"uc_application_blocked","last_blocked":"2015-03-15T21:23:33.000Z","count":3,"module":"uc"}

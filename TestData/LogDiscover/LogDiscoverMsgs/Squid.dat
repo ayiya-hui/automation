@@ -1,0 +1,2 @@
+[eventMsg]
+<166>May  6 17:55:24 squid[1773]: [ID 702911 local4.info] 192.168.20.39 1703 66.94.228.100 172.16.10.6 3128 731 - - - - - [06/May/2008:17:55:24 -0700] CONNECT "edit.yahoo.com:443" HTTP/1.1 200 92621 196 "-" "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.14) Gecko/20080404 Firefox/2.0.0.14" TCP_MISS:DIRECT

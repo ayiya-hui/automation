@@ -1,0 +1,2 @@
+[eventMsg]
+2013-06-27 19:14:46 30.200.175.1(via UDP: [30.200.175.1]:59321) TRAP, SNMP v1, community B35412-RO    SNMPv2-SMI::enterprises.31023.1.1.1 Enterprise Specific Trap (1) Uptime: 4 days, 3:33:22.40		SNMPv2-SMI::enterprises.31023.1.1.101 = STRING: "d6273707-f690-420e-be69-5b50773f98d8"     SNMPv2-SMI::enterprises.31023.1.1.102 = STRING: "WS-SVR-VIE01"          SNMPv2-SMI::enterprises.31023.1.1.103 = STRING: "Success"            SNMPv2-SMI::enterprises.31023.1.1.104 = ""

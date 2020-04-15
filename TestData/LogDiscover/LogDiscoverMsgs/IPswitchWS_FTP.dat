@@ -1,0 +1,2 @@
+[eventMsg]
+<13>Jan 25 07:02:40 FTP01 channel: SFTP subsystem started in channel s_Id: 112, c_Id: 256, c_Window: 2147483628, c_MaxPacket: 16384, s_Window: 300000, s_MaxPacket: 30000 <Host=splawn-ftp-fwa, SessionID=43965182, Listener=172.16.1.9:22, Client=10.251.189.75:5491, User=abc.waters>

@@ -1,0 +1,2 @@
+[eventMsg]
+<132>Nov 19 13:46:39 HOST-30.200.172.1 CEF:0|Trend Micro|Deep Security Manager|7.7.59|771|Contact by Unrecognized Client|6|src=172.16.146.157 suser=System msg=A connection to IDF Server Plug-in was initiated by a client not identifiable as a managed computer: 172.16.215.31:49923.  Either the client is not a managed IDF component, or a secure communication channel could not be established.

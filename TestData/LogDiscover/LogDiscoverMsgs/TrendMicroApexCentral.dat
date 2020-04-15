@@ -1,0 +1,2 @@
+[eventMsg]
+<133>Apr 24 2019 20:59:54 example.trendmicro.com CEF:0|Trend Micro|Apex Central|7.0SP1|800101|Pattern Update Status|3|rt=Apr 17 2019 10:06:12 GMT+00:00 shost=05TX-LSB03 cs1Label=Operating_System cs1=Windows 10 cs2Label=Product/Endpoint_IP cs2=10.5.40.114 cs3Label=Update_Agent cs3=0 cs4Label=Domain cs4=Castle cn1Label=Connection_Status cn1=100 cn2Label=Pattern/Rule cn2=1207959584 cs5Label=Pattern/Rule_Version cs5=1.247.00 cn3Label=Pattern/Rule_Status cn3=1 cs6Label=AUComponent_Type cs6=2 deviceFacility=Apex One

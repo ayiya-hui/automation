@@ -1,0 +1,2 @@
+[eventMsg]
+<134>1 2018-09-06T00:13:28.549000+00:00 tanium-server-1 Tanium 7844 - [Tanium-IOC-Detect@017472 Event-Name=security.user.authenticated Timestamp=2018-09-06T00:13:26.095Z Priority=low Severity=info User-Id=7 User-Name=csoc-tanium-user-1 User-Domain= Other-Parameters=]

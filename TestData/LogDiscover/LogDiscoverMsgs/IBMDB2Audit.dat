@@ -1,0 +1,2 @@
+[eventMsg]
+<134>May 29 02:16:27 30.200.126.1 java: [IBMDB2_CHECKING_OBJECT]:[eventSeverity]=PHL_INFO, [objName]=SYSSH200, [srcApp]=DB2HMON, [dbName]=SAMPLE, [eventTime]=2013-05-10-08.47.08.802001, [srcName]=WIN-6IDDILU233L, [user]=db2admin,

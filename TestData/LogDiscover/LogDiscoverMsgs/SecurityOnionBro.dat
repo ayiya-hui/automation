@@ -1,0 +1,2 @@
+[eventMsg]
+<13>May 2 10:43:27 sec-sensor-ps bro_known_devices: {"ts":"2019-05-02T10:23:30.392726Z","mac":"00:15:5d:5d:51:12","dhcp_host_name":"minikube"}

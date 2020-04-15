@@ -1,0 +1,2 @@
+[eventMsg]
+Apr 10 13:01:26 partha-desktop java: [Websense_Web_Deny]:[eventSeverity]=PHL_INFO, [retCode]=1, [eventTime]=2009-04-01 21:27:35.0, [rptIp]=30.200.81.1, [relayIp]=200.0.0.1, [srcIp]=192.168.20.35, [destPort]=80, [destIp]=205.178.145.65, [destName]=www.prospecthills.net, [destCategory]=Productivity,

@@ -1,0 +1,2 @@
+[eventMsg]
+2019-09-03T16:14:55 device=FortiDeceptor version=1.2 devhost=FortiDeceptor devid=FDC-VM0000000264 logver=25 tzone=-14400 tz=EDT date=2019-09-03 time=16:14:55 logid=0106000001 type=event subtype=system level=information user=admin ui=GUI action=Login status=success msg='Administrator admin logged into website successfully from 192.168.11.116'" device_id=SYSLOG-C0A80B0C devname=FortiDeceptor-VM-Lab

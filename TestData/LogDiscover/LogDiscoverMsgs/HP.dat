@@ -1,0 +1,2 @@
+[eventMsg]
+2011-11-02 19:20:21 30.200.2.23(via UDP: [30.200.2.23]:32773) TRAP, SNMP v1, community public	SNMPv2-SMI::enterprises.232.6 Enterprise Specific Trap (1) Uptime: 0:00:00.30	SNMPv2-MIB::sysName.0 = STRING: Insight

@@ -1,0 +1,2 @@
+[eventMsg]
+<134>Mar 15 09:11:38 30.200.216.1 1 2019-03-15T14:11:38.798033+00:00 example.com flowtraq 22743 ft_login0 [ft_login0@41180 username="john0850" from="::FFFF:127.0.0.1" result="ok" method="ldap"] user john0850 from ::FFFF:127.0.0.1 ldap login success

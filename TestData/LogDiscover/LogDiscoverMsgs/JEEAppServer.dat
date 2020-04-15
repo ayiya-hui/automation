@@ -1,0 +1,2 @@
+[eventMsg]
+<190>Apr 10 13:07:10 30.200.32.1 java: [JEE_AppServer_Perf]:[eventSeverity]=PHL_INFO, [rptIp]=30.200.32.1, [upTime]=153097644, [cpuUtil]=58, [heapUsedKB]=251503, [heapMaxKB]=516224, [heapCommitKB]=516224, [heapUtil]=48, [nonHeapUsedKB]=157904, [nonHeapMaxKB]=245760, [nonHeapCommitKB]=217841664, [nonHeapUtil]=64, [liveThreads]=979, [liveThreadsMax]=979, [loadedClasses]=30864169,

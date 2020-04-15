@@ -1,0 +1,2 @@
+[eventMsg]
+May 11 10:17:59 30.200.100.1 1 948136486.721741837 MX60 flows src=192.168.10.254 dst=8.8.8.8 mac=00:18:0A:12:34:56 protocol=udp sport=9562 dport=53 pattern: allow all

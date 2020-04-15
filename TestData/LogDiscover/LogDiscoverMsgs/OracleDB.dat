@@ -1,0 +1,2 @@
+[eventMsg]
+<134>Apr 10 12:51:42 partha-desktop java: [ORADB_PH_Logoff]:[eventSeverity]=PHL_INFO, [retCode]=0, [eventTime]=2009-04-10 14:29:22:111420, [rptIp]=30.200.52.1, [srcIp]=QA-V-CtOS-ora.prospect-hills.net, [user]=DBSNMP, [logonTime]=2009-04-10 14:29:22:111420, [logoffTime]=2009-04-10 14:29:22, [privUsed]=CREATE_SESSION,

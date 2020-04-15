@@ -1,0 +1,2 @@
+[eventMsg]
+<14>Jun  4 17:00:08 30.200.177.1 [SystemEvent] Time:'Wed Jun 04 17:00:08.023 GMT 2014', Severity:'Informational', Event Source:'Take Backup', Code:'9009', Event Message:'Backup of vShield Manager successfully completed.', Module:'vShield DB Backup'

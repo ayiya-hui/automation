@@ -1,0 +1,2 @@
+[eventMsg]
+<6>date=2019-06-12 time=13:05:52 device_id=FAD2KD3114000026 log_id=0000000100 type=event subtype=config pri=information vd=root msg_id=71118385 user=user1 ui=GUI(1.2.3.4) action=add cfgpath=log setting remote cfgobj=<No.> cfgattr=1 logdesc=Change the configuration msg="added a new entry '1' for "log setting remote" on domain "root""

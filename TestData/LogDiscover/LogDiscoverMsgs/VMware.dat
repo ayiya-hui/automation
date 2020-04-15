@@ -1,0 +1,2 @@
+[eventMsg]
+<134>Nov 18 16:42:54 30.200.77.1 java: [VMware_UserLoginSessionEvent], [eventTime]=2009-11-18 16:37:53:013, [rptIp]=30.200.77.1, [user]=Administrator, [vmwEventId]=67350, [vmwEventCat]=info, [srcIpAddr]=127.0.0.1, [vmwEventMsg]=User Administrator@127.0.0.1 logged in

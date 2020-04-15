@@ -1,0 +1,3 @@
+[eventMsg]
+<21>Mar 10 19:29:45 30.200.60.1 1938172504  POP.USER.LOGOUT        clr[216.227.9.57]:              dswinn plaintext              210]]></testEvent>
+      <testEvent><![CDATA[<21>Mar 10 19:33:17 137.146.28.76 1938176090  IMAP.USER.LOGIN ssl[67.223.64.86]:             neblanch             plaintext

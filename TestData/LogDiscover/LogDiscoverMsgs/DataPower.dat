@@ -1,0 +1,2 @@
+[eventMsg]
+<11>Sep 29 10:43:32 datapower [0x80e00173][network][error] trans(1711): TCP connection attempt refused from 10.1.2.3 to 10.1.2.3 port 6443

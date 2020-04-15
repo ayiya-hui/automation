@@ -1,0 +1,2 @@
+[eventMsg]
+<14>Aug 14 22:32:52 db[16987]:  category="Event" subcategory="Authentication" typeid=20995 level="information" user="admin" nas="" action="Logout" status="" Administrator 'admin' logged out

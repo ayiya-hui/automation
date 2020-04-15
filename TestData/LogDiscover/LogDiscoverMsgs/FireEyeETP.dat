@@ -1,0 +1,2 @@
+[eventMsg]
+2019-06-03T19:19:54.247Z hostname CEF:0|FireEye|ETP|2.0|etp|malicious email|10|rt=Mon, 03 Jun 2019 19:17:30 +0000 suser=user1@example1.com duser=user2@example2.com dusercc= emailsubj=Flyte Enquiry malfename=Phish.URL malname=hxxp://celticdragonsnetball.com/wp-content/group-4/Zantac-300mg-150mg/ fileHash=1e2600e324a839a9f2ab5ee28e863047 etpurl=https://etp.us.fireeye.com/alert/80268794/ client=user3 clientd=example3.com atiLevel= atiAttrib= atiType= atiName=

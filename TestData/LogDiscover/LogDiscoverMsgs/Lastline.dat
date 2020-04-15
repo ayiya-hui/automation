@@ -1,0 +1,2 @@
+[eventMsg]
+Aug 13 14:48:37 fortisiem CEF:0|Lastline|Enterprise|7.10|appliance-status|Appliance Status|1|cat=Online cs1=SENSOR cs1Label=deviceType cs2=https://example/portal#/appliances/config/status/76b80c7ac11a4d37bc6b29e66726b01d cs2Label=deviceStatusLink deviceExternalId=76b80c7ac11a4d37bc6b29e66726b01d dvc=30.200.199.1 dvchost=example.com end=Aug 13 2018 16:48:37 CEST rt=Aug 13 2018 16:48:37 CEST start=Aug 13 2018 16:48:37 CEST

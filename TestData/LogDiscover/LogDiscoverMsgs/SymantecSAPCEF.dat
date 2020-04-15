@@ -1,0 +1,2 @@
+[eventMsg]
+<25>Mar 7 18:42:07 30.200.212.1 1 2019-03-08T00:36:01+00:00 host6 offboxd - - [meta sequenceId="1"] CEF:0|Symantec Corporation|Security Analytics Platform|7.3.5|100|Alert|10|src=10.6.42.148 spt=54966 dst=10.1.1.1 dpt=80 start=1552005341453 end=1552005341455 smac=00:17:0f:9b:14:00 dmac= msg="Rule: 'posture-test' was triggered by Indicator: 'posture_url-test'"

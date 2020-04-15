@@ -1,0 +1,2 @@
+[eventMsg]
+2011-11-02 18:25:43 30.200.49.1(via UDP: [30.200.49.1]:32773) TRAP, SNMP v1, community public	SNMPv2-SMI::enterprises.11833 Enterprise Specific Trap (1003) Uptime: 0:00:00.30	     SNMPv2-SMI::enterprises.11833.2.2.1.1.1.2.1.1 = STRING: "MyDevice" SNMPv2-SMI::enterprises.11833.2.2.1.1.1.2.2.1.1 = STRING: "Appliance not responding" SNMPv2-SMI::enterprises.11833.2.2.1.1.1.2.2.2.5 = STRING: "15:34:33"

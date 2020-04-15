@@ -1,0 +1,2 @@
+[eventMsg]
+<134>Jun 03 09:39:14 30.200.149.1 java: [MYSQL_Logon_Successs]:[eventSeverity]=PHL_INFO, [eventTime]=2013-06-03 09:38:50.0, [rptIp]=30.200.149.1, [relayIp]=30.200.149.1, [srcIp]=192.168.64.243, [user]=admin, [logonTime]=2013-06-03 09:38:50.0, [actionName]=Connect,

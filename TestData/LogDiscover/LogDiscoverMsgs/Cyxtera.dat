@@ -1,0 +1,2 @@
+[eventMsg]
+{"id":"a51e7e7d-ab5f-444c-b7f8-ca72e4bb940b","timestamp":"2018-10-09T10:23:43.992Z","event_type":"ip_access","version":8,"distinguished_name":"CN=0f1a40d612f741228d7cb73a4308bea8,CN=johndoe,OU=ACME","entitlement_token_id":"78174080-a34c-43e1-984d-0ddaa2b2d1df","action":"allow","direction":"down","client_ip":"1.1.1.1","client_port":1392,"packet_size":40,"protocol":"TCP","source_ip":"10.1.1.1","destination_ip":"10.1.1.1","source_port":56100,"destination_port":59721,"connection_type":"established","rule_name":"rule1"}

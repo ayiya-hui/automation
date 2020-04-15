@@ -1,0 +1,2 @@
+[eventMsg]
+<13>Apr 19 14:52:11 example1.com CEF:0|Forcepoint|Email Security|8.4.0|Message|Message|5| dvc=10.10.164.55 dvchost=example2.com rt=1555685561000 externalId=5813617053960722202 messageId=716572042407142108 suser=user1@example3.com duser=user2@example4.com msg=RE: 202 Campus Drive, Franklin Township, NJ in=38289 trueSrc=1.1.1.1 from="user3" <user3@example5.com> to="user4" <user4@example6.com> cc= x-mailer= fname= url=

@@ -1,0 +1,2 @@
+[eventMsg]
+<44>Apr  2 15:52:15 ABC SFIMS: [Primary Detection Engine (851f464c-5b8c-11e4-879b-975d667e1ccb)][IPS_com][119:2:1] Snort Alert [Classification: Not Suspicious Traffic] User: Unknown, Application: Unknown, Client: Unknown, App Protocol: Unknown, Interface Ingress: s2p3, Interface Egress: s2p4, Security Zone Ingress: External-Corp1, Security Zone Egress: Internal-Corp1, [Priority: 3] {TCP} 1.1.1.1:10540 -> 2.2.2.2:80

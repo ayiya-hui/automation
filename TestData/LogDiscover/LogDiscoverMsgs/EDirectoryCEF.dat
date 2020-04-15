@@ -1,0 +1,2 @@
+[eventMsg]
+Jan 28 03:31:00 ldap1.local eDirectory: CEF:0|eDirectory|eDirectory|9.1.1|CEF0B0230|DSA_READ|0|dvc=1.1.1.1 dvchost=ldap1.local rt=Jan 28 2019 03:31:00 dtz=IST sourceServiceName=CN\=edir,OU\=servers,O\=system sproc=eDirectory#DS src=1.1.1.1 spt=0 suser=CN\=edir,OU\=servers,O\=system duser=CN\=dirxml,OU\=sa,O\=system cs2Label=Class Name cs2=User cs3Label=Tree Name cs3=EXTERNAL-TREE cs4Label=Correlation ID cs4=eDirectory#0# flexString2Label=SubEvent flexString2=DSE_DSA_READ flexNumber2Label=Grouping flexNumber2=220520 cat=Objects reason=0 outcome=Success
