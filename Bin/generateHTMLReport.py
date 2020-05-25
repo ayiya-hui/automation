@@ -6,7 +6,7 @@ def generateReportHTML(testResult):
     outReport=testResult.testFolder+"/report.html"
     outFile=open(outReport,'w')
     outFile.write("<HTML>\n")
-    outFile.write("<Title>Accelops Automation Test Report</Title>\n")
+    outFile.write("<Title>FortiSIEM Automation Test Report</Title>\n")
     outFile.write("<BODY>\n")
     outFile.write("<H1>Test Report</H1>\n")
     outFile.write("<HR>\n")

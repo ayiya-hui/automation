@@ -1,2 +1,2 @@
 [eventMsg]
-version=5,count=25,srcIp=10.10.10.1,dstIp=$randomIP,option=dstIp,srcPort=19890,dstPort=80,nextHop=10.10.10.254,protocol=tcp,tcpFlag=2
+version=5,count=1,srcIp=10.10.10.1,dstIp=$randomIP,option=dstIp,srcPort=19890,dstPort=80,nextHop=10.10.10.254,protocol=tcp,tcpFlag=2

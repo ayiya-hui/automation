@@ -1,0 +1,2 @@
+[eventMsg]
+<182>1 2015-10-01T13:56:21-05:00 BHMCUCMVCSE tvcs - - [meta sequenceId="5944"] 2015-10-01T13:56:21-05:00 BHMCUCMVCSE tvcs: UTCTime="2015-10-01 18:56:21,673" Module="network.sip" Level="INFO":  Action="Received" Local-ip="192.168.254.250"  Local-port="5061"  Src-ip="104.2.198.13"  Src-port="42248"   Detail="Receive Request Method=REGISTER, CSeq=198, To=sip:48330@10.1.10.200, Call-ID=acd1b8bf-863e0006-0000686a-0000377f@192.168.200.28, From-Tag=acd1b8bf863e004b00002272-00005aa4, To-Tag=, Msg-Hash=5368229874447754155"

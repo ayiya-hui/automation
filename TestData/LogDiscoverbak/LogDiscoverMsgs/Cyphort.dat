@@ -1,0 +1,2 @@
+[eventMsg]
+2016-03-17 01:42:38.439745+00 cyphortcore-lkf-soc CEF:0|Cyphort|Cortex|3.3.1.46|3|appliance-connect-health|5|desc=Lost connection to core panasonic all (192.168.15.53) for 11 minutes json={"ip": "192.168.15.53", "age": 11.072577, "type": "core", "appliance": "panasonic all", "pretty_age": "11 minutes"}

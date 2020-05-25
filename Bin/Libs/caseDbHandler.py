@@ -170,7 +170,10 @@ class caseDbHandler:
         myWrite.write(obj.eventMsg+'\n')
         myWrite.write('[params]\n')
         for item in obj.params.keys():
-            myWrite.write(item+'='+obj.params[item]+'\n')
+            if ('Geo' in item) or ('name' in item and 'HOST-' in obj.params[item]):
+                myWrite.write(item + '=' + 'any\n')
+            else:
+                myWrite.write(item+'='+obj.params[item]+'\n')
         myWrite.close()
 
     token_write={'EventParsing':writeEventParsing,}

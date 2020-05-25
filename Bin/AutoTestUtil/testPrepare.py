@@ -41,7 +41,7 @@ def getTestConfig(config, src=None):
         my_password=testConfig.credential.password
     else:
         my_user='super/admin'
-        my_password='admin*1'
+        my_password='Admin*11'
     setattr(testConfig, 'user', my_user)
     setattr(testConfig, 'password', my_password)
     systemInfo=restApiDataHandler(server.split('-')[0], user=my_user, password=my_password).getData('health', module='cloudStatus')

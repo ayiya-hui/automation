@@ -1,0 +1,2 @@
+[eventMsg]
+<133>DC42-egress-fw1: NetScreen device_id=DC42-egress-fw1 [Root]system-notification-00257(traffic): start_time="2013-03-04 12:16:42" duration=2 policy_id=372 service=smtp (tcp) proto=6 src zone=Trust dst zone=Untrust action=Permit sent=41038 rcvd=8674 src=10.2.1.19 dst=4.3.2.1 src_port=38931 dst_port=25 src-xlated ip=199.127.104.59 port=38931 dst-xlated ip=1.2.3.4 port=25 session_id=98308 reason=Close - TCP RST

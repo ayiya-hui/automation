@@ -19,7 +19,7 @@ no_raw_send=['WinOSWmi_30','WinOSWmi_31', 'WinOSWmi_32']
 ignore_param=set(['eventName',])
 parser_holdon_module=['CiscoFWSM','IronportMail','CiscoPIX','IISViaSnare','MicrosoftIAS','WinOS']
 parser_holdon_eventtype=['Cisco-IronPort-Mail-Bytes','Cisco-IronPort-Mail-Subject','Cisco-IronPort-Mail-PolicyMatch','Cisco-IronPort-Mail-Final-SpamNegative','Cisco-IronPort-Mail-Interim-SpamNegative','Cisco-IronPort-Mail-AVPositive-Dropped','Cisco-IronPort-Mail-AVNegative','FWSM-302014','PIX-302014','IIS-FTP-Login-Failure','Win-IAS-FailedAuth','Win-Security-592','Win-Security-593','Win-Security-576','Win-Security-560','Win-Security-578','Win-Security-567']
-
+sendevent_holdon_module=['IronportMail']
 
 class eventParsingTest(baseTest):
     def __init__(self, task, testConfig):
@@ -27,7 +27,7 @@ class eventParsingTest(baseTest):
         self.appServer=testConfig.testServer.appServer
         self.user=testConfig.user
         self.password=testConfig.password
-	self.testType=testConfig.testType
+        self.testType=testConfig.testType
         self.excludeModules=self.getExcludes(testConfig.testTask)
         self.queryHandler=queryHandler(self.appServer, user=self.user, password=self.password)
         if hasattr(testConfig, 'posix'):
@@ -92,6 +92,9 @@ class eventParsingTest(baseTest):
         params={}
         path=self.path+'/'+module
         mySendEvent=''
+        # Ironportweb events will use IronportMailparser if IronportMail events come first -- by design.
+        if module in sendevent_holdon_module:
+            time.sleep(480)
         for key in etype.keys():
             myVal=etype[key]
             if myVal.key:

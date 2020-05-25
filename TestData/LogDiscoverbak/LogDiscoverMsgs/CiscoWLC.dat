@@ -1,0 +1,2 @@
+[eventMsg]
+2011-11-02 18:59:08 0.0.0.0(via UDP: [30.200.2.15]:32773) TRAP2, SNMP v2c, community public	. Cold Start Trap (0) Uptime: 0:00:00.00	DISMAN-EVENT-MIB::sysUpTimeInstance = Timeticks: (30) 0:00:00.30	SNMPv2-MIB::snmpTrapOID.0 = OID: SNMPv2-SMI::enterprises.14179.2.6.3.1	SNMPv2-SMI::enterprises.14179.2.6.2.35.0 = Hex-STRING: 00 21 55 4D 66 B0 	SNMPv2-SMI::enterprises.14179.2.6.2.34.0 = Hex-STRING: 00 21 55 7A 4C E2

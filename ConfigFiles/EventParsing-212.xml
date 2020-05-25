@@ -2,11 +2,11 @@
         <testType>Test</testType>
         <sendEmail>True</sendEmail>
         <testServer>
-                <allInOne>10.30.2.211</allInOne>
+                <allInOne>10.30.2.212</allInOne>
         </testServer>
         <testTask>
                 <taskName>EventParsing</taskName>
-                <taskFiles>IronportMail</taskFiles>
+                <taskFiles>ALL</taskFiles>
         </testTask>
 	<recipient>hhuang</recipient>
 </testConfig>

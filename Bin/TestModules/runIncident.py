@@ -45,7 +45,7 @@ incident_query="SELECT * FROM ph_incident;"
 
 incident_delete="DELETE FROM ph_incident;"
 
-ip_in_privatenet=['PH_RULE_EXCESS_DENY_DEST']
+ip_in_privatenet=['PH_RULE_EXCESS_DENY_DEST', 'PH_RULE_TCP_DDOS_ATTACK']
 
 class incidentTest(baseTest):
     def __init__(self, task, testConfig):
@@ -162,7 +162,6 @@ class incidentTest(baseTest):
             if not myData.dataMap:
                 print 'Fail to get test data. Exit.'
                 exit()
-            now,sendTime,utcnow,utcsendTime=timeUtility.getTimeNow()
             rept={}
             rept['$localhost']=self.testConfig.localhost
             rept['$dataCollector']=self.testConfig.testServer.dataCollector
@@ -182,6 +181,7 @@ class incidentTest(baseTest):
             randomNums=[]
             ip=''
             num=''
+            now,sendTime,utcnow,utcsendTime=timeUtility.getTimeNow()
             for i in range(int(testConf.count)):
                 for line in eventMsgs:
                     msg=generalUtility.multiReplace(line, rept)
@@ -237,7 +237,6 @@ class incidentTest(baseTest):
                     time.sleep(sleeper)
                     if not self.sendNoEvent:
                         mySendEvent.sendoutEvent(send_msg, utf_8=False)
-
                     else:
                         print 'No event sent being configured.'
                     self.msgList.append(msg)
@@ -282,7 +281,7 @@ class incidentTest(baseTest):
                 testRet.info='incidentId from SQL: '+incident_id_sql
                 setattr(oriRet, 'reasons', failDetail)
             else:
-                print '%s: no incident triggered' % incidentType
+                print '%s(%s): no incident triggered' % (testRet.name, incidentType)
                 testRet.info='incidentId: None'
                 setattr(oriRet, 'reasons', failDetail)
             aggmsgList=[]

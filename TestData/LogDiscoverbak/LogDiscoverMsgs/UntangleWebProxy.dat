@@ -1,0 +1,2 @@
+[eventMsg]
+<134>Jan 21 09:05:52 30.200.76.1 Web_Filter[3]: Block # endpoints: create-date=Wed Jan 21 09:05:51 PST 2009, session-id=1071047667, protocol=TCP, policy=Default Rack, client-iface=inside, client-addr=10.0.0.182, client-port=51591, server-addr=216.163.137.3, server-port=80, server-iface=outside, client-addr=10.1.1.127, client-port=10197, server-addr=216.163.137.3, server-port=80 # info: url=http://www.playboy.com/, action=block, reason=BLOCK_CATEGORY, category=Pornography #

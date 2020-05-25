@@ -1,0 +1,2 @@
+[eventMsg]
+<182>Oct 16 05:26:40 syslog-ng@COS-Node-1 logserver: [16/Oct/2010:05:26:40.634484 -0700] COS-Node-1 020619 ew 10000017 Info    Audit   VirtualHost='mocha.seattle.gov' StartTime='16/Oct/2010 05:26:40 -0700' Src='122.98.30.4' User='(pair)@(COS Standard VPN)' Method='GET' HTTPVersion='0x3e9' Request='GET http://127.0.0.1:8085/workplace/assets/aventail/transparent.gif HTTP/1.1' Status='200' Bytes='43' EquipmentId='-'

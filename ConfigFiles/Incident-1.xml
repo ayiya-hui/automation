@@ -1,0 +1,15 @@
+<testConfig>
+	<testType>Official</testType>
+	<threadPool>30</threadPool>
+	<threadWaitTime>2</threadWaitTime>
+	<sendEmail>True</sendEmail>
+	<advance>clear</advance>
+	<testServer>
+		<allInOne>10.30.2.151</allInOne>
+	</testServer>
+	<testTask>
+		<taskName>Incident</taskName>
+		<taskFiles>PH_RULE_EXCESS_DENY_PORT</taskFiles>
+	</testTask>
+	<recipient>hhuang</recipient>
+</testConfig>

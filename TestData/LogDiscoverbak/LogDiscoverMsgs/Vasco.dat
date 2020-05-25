@@ -1,0 +1,2 @@
+[eventMsg]
+May 17 18:41:55 HOST-30.200.174.1 ikeyserver[20663]: {Error}, {Communication}, {E-000001}, {A system error has occurred.}, {0xE54C52917A67AB0313FF0E16E716BCEA}, {Area:SEAL message processing}, {Operation:IdentikeySealMessage creation}, {Error Code:-3}, {Error Message:Memory error}, {Error Details:}

@@ -13,7 +13,7 @@ class sendEmailHandler:
         self.port=25
         #self.user='notify'
         #self.pwd='(jWohE68N'
-	self.user='accelopsautomation'
+        self.user='accelopsautomation'
         self.pwd='ProspectHills!'
         self.recipt=filter(None,[i.strip() for i in recipt])
         self.domaind='fortinet.com'
@@ -44,7 +44,7 @@ class sendEmailHandler:
         self.smtp.login(sender, self.pwd)
 
         myMail=MIMEMultipart('alternative')
-        myMail['Subject']='%s-AccelOps VA automation result(%s)' % (test_name,run_version)
+        myMail['Subject']='%s-FortiSIEM VA automation result(%s)' % (test_name,run_version)
         myMail['From']=sender
         myMail['To']=";".join(recipts)
         html=MIMEText(msg,'html')

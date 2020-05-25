@@ -1,0 +1,2 @@
+[eventMsg]
+<164>fenotify-45640.alert: CEF:0|FireEye|MPS|6.0.0.62528|MC|malware-callback|9|rt=Apr 16 2012 15:54:41 src=192.168.26.142 spt=0 smac=00:14:f1:90:c8:01 dst=2.2.2.2 dpt=80 dmac=00:10:db:ff:50:00 cn1Label=vlan cn1=202 cn2Label=sid cn2=33335390 cs1Label=sname cs1=Trojan.Gen.MFC cs4Label=link cs4=https://10.10.10.10/event_stream/events_for_bot?ev_id\=45640 cs5Label=ccName cs5=3.3.3.3 cn3Label=ccPort cn3=80 proto=tcp cs6Label=ccChannel cs6= shost=abc.org <http://abc.org>  dvchost=HOST-30.200.122.1 dvc=30.200.122.1 externalId=45640

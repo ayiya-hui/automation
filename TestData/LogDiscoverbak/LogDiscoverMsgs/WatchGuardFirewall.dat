@@ -1,0 +1,2 @@
+[eventMsg]
+<143>2010-09-30 10:34:11 HKHDCFIR01 disp="Allow"   pri="1" policy="HTTP-incoming-00" src_ip="202.64.210.178" dst_ip="125.215.194.243" pr="http/tcp" src_port="27822" dst_port="80" src_intf="0-External" dst_intf="1-Trusted"   tcpinfo="offset 7 S 3758778056 win 65535"   rc="100" msg="allowed, mss not exceeding 1460, idle timeout=43205 sec" pckt_len="48" ttl="119" 

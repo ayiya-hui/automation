@@ -90,7 +90,7 @@ PH_RULE_EXCESS_FAILED_LOGON_DB,Multiple Logon Failures: Database,3.4.1.1,,,,,5,s
 PH_RULE_EXCESS_FAILED_LOGON_APPL,Multiple Logon Failures: Misc App,3.4.2.1,,,,,5,syslog
 PH_RULE_EXCESS_FAILED_LOGON_WEB,Multiple Logon Failures: Web Server,3.4.3.1,,,,,5,syslog
 PH_RULE_ACCOUNT_LOCKOUT_NET_DEV,Network Device Account Lockout,3.2.3.1,TRUE,automator3Dot2Dot3Dot1,fortinet,,1,syslog
-PH_RULE_EXCESS_FAILED_LOGON_NET_DEV,Multiple Admin Logon Failures: Net Device (no Source IP),3.2.1.1,TRUE,automator3Dot2Dot1Dot1,juniper_secure_access,,5,syslog
+PH_RULE_EXCESS_FAILED_LOGON_NET_DEV,Multiple Admin Logon Failures: Net Device (no Source IP),3.2.1.1,TRUE,automator3Dot2Dot1Dot1,cisco,,5,syslog
 PH_RULE_EXCESS_FAILED_LOGON_2_NET_DEV,Multiple Admin Logon Failures: Net Device,3.2.2.1,TRUE,automator3Dot2Dot2Dot1,juniper_secure_access,,5,syslog
 PH_RULE_ACCOUNT_LOCKOUT_DOMAIN,Domain Account Lockout,3.1.1.1,TRUE,automator3Dot1Dot1Dot1,win,1,1,syslog
 PH_RULE_EXCESS_FAILED_LOGON_DOMAIN,Multiple Logon Failures: Domain,3.1.2.1,TRUE,automator3Dot1Dot2Dot1,win,1,5,syslog
@@ -117,7 +117,7 @@ PH_RULE_EXCESS_HTTP_CLIENT_ERR,Excessive HTTP Client Side Errors,2.9.1.1,,,,,6,s
 PH_RULE_LARGE_ICMP_ECHO,Unusually Large ICMP Echo Packets,$localhost,,,,,22,netflow
 PH_RULE_BAD_DOMAIN_DNS_QUERY,Excessive Malware Domain Name Queries,2.10.1.1,,,,,1,syslog
 PH_RULE_MULTIPLE_IPS_SAME_SRC,Multiple Distinct IPS Events From Same Src,2.16.0.1,TRUE,snortIPS,snort_ips,,2,syslog
-PH_RULE_SCAN_IPS_SAME_SRC,Multiple IPS Scans From Same Src,2.16.0.2,TRUE,ciscoIPS,cisco_ips,,2,syslog
+PH_RULE_SCAN_IPS_SAME_SRC,Multiple IPS Scans From Same Src,2.16.0.2,TRUE,ciscoIPS,cisco_ips,,1,syslog
 PH_RULE_HEAVY_ICMP_PING_SWEEP,Heavy ICMP Ping Sweep,2.16.0.3,,,,,52,syslog
 PH_RULE_DNS_QUERY_SAME_DOMAIN,Excessive Repeated DNS Queries To Same Domain,2.11.1.1,,,,,105,syslog
 PH_RULE_HEAVY_TCP_HOST_SCAN,Heavy TCP Host Scan,2.11.1.5,,,,,210,syslog
@@ -197,8 +197,8 @@ PH_RULE_ACCELOPS_WORKER_DOWN,System Worker Down,$appServer,,,,,1,syslog
 PH_RULE_LARGE_INBOUND_XFER_OUTSIDE_COUNTRY,Large Inbound Transfer From Outside My Country,30.0.0.1,TRUE,automator30Dot0Dot0Dot1,juniper-ssg,,1,syslog
 PH_RULE_LARGE_OUTBOUND_XFER_OUTSIDE_COUNTRY,Large Outbound Transfer To Outside My Country,30.0.0.11,TRUE,automator130Dot0Dot0Dot11,juniper-ssg,,1,syslog
 PH_RULE_LARGE_OUTBOUND_XFER,Large Outbound Transfer,30.0.0.12,TRUE,automator30Dot0Dot0Dot12,juniper-ssg,,1,syslog
-PH_RULE_IPS_SQL_INJECTION,SQL Injection Attack,30.0.0.2,TRUE,automator30Dot0Dot0Dot2,fortinet,,1,syslog
-PH_RULE_IRC_TRAFFIC,IRC traffic detected,30.0.0.22,TRUE,automator30Dot0Dot0Dot2,snort_ips,,1,syslog
+PH_RULE_IPS_SQL_INJECTION,SQL Injection Attack detected by NIPS,30.0.0.2,TRUE,automator30Dot0Dot0Dot2,fortinet,,1,syslog
+PH_RULE_IRC_TRAFFIC,IRC traffic detected,30.0.0.22,TRUE,automator30Dot0Dot0Dot22,snort_ips,,1,syslog
 PH_RULE_VPN_LOGON_SUCCESS_OUTSIDE_COUNTRY,Successful VPN Logon From Outside My Country,$localhost,,,,,1,syslog
 PH_RULE_VPN_FAILED_LOGON_OUTSIDE_COUNTRY,Failed VPN Logon From Outside My Country,$localhost,,,,,3,syslog
 PH_RULE_CONCURRENT_VPN_AUTH_MULTI_CITY,Concurrent VPN Authentications To Same Account From Different Cities,$localhost,,,,,1,syslog
@@ -206,8 +206,8 @@ PH_RULE_CONCURRENT_SUCCESS_AUTH_MULTI_CITY,Concurrent Successful Authentications
 PH_RULE_CONCURRENT_SUCCESS_AUTH_MULTI_COUNTRY,Concurrent Successful Authentications To Same Account From Multiple Countries,$localhost,,,,,1,syslog
 PH_RULE_CONCURRENT_FAILED_AUTH_MULTI_COUNTRY,Concurrent Failed Authentications To Same Account  From Multiple Countries,$localhost,,,,,1,syslog
 PH_RULE_CONCURRENT_FAILED_AUTH_MULTI_CITY,Concurrent Failed Authentications To Same Account From Multiple Cities,$localhost,,,,,1,syslog
-PH_RULE_INVALID_TCP_FLAG_HIGH,Invalid TCP Flags - High Intensity,121.121.121.11,,,,,501,netflow
-PH_RULE_INVALID_TCP_FLAG_MEDIUM,Invalid TCP Flags - Medium Intensity,121.121.121.1,,,,,200,netflow
+PH_RULE_INVALID_TCP_FLAG_HIGH,Invalid TCP Flags: High Intensity,121.121.121.11,,,,,501,netflow
+PH_RULE_INVALID_TCP_FLAG_MEDIUM,Invalid TCP Flags: Medium Intensity,121.121.121.1,,,,,200,netflow
 PH_RULE_INAPPROPRIATE_WEB_TRAFFIC,Inappropriate Website access detected,$localhost,,,,,1,syslog
 PH_RULE_SUCCESS_ACTIVITY_ON_DISABLED_ACCT,Successful Account Activity On a Disabled Account,$localhost,,,,,1,syslog
 PH_RULE_FAILED_ACTIVITY_ON_DISABLED_ACCT,Failed Account Activity On Disabled Account,$localhost,,,,,1,syslog
@@ -222,14 +222,14 @@ PH_RULE_ZEUS_BLOCKED_IP,Traffic to Zeus Blocked IP List,30.0.4.22,TRUE,automator
 PH_RULE_MULTI_ACCOUNT_DISABLED,Multiple Accounts Disabled by Administrator,$localhost,,,,,1,syslog
 PH_RULE_DOWN_INTF_NET_NONCRIT,Non-critical Network Device Interface Staying Down,30.0.4.44,TRUE,automator30Dot0Dot4Dot44,cisco,,1,syslog
 PH_RULE_P2P_TRAFFIC_HIGH_BW,P2P traffic using up high network bandwidth,40.0.0.1,TRUE,automator40Dot0Dot0Dot1,snort_ips,,1,syslog
-PH_RULE_SYS_ARCHIVING_FAILED,System Archiving Failed,$localhost,,,,,1,syslog
+PH_RULE_SYS_ONLINE_ARCHIVE_FAILED,FortiSIEM Online Event Database Archiving Failed,$localhost,,,,,1,syslog
 PH_RULE_SYS_ARCHIVE_PURGE_LOW_SPACE,System Archive Purging Completed - Low Available Space,$localhost,,,,,1,syslog
-PH_RULE_SYS_EVENTDB_ARCHIVE,System EventDB Archiving Completed,$localhost,,,,,1,syslog
+PH_RULE_SYS_ONLINE_ARCHIVE_COMPLETED,FortiSIEM Online Event Database Archiving Completed,$localhost,,,,,1,syslog
 PH_RULE_SQL_SRV_LOW_BUFF_CACHE_HIT,SQL Server Low Buffer Cache Hit Ratio,48.48.48.48,,,,,2,syslog
 PH_RULE_SQL_SRV_EXCESS_FULL_SCAN,SQL Server Excessive Full Scan,$localhost,,,,,2,syslog
 PH_RULE_ORADB_NONSYS_TABLESPACE_HIGH,High Oracle Non-System Table Space Usage,20.20.20.20,,,,,2,syslog
 PH_RULE_ORADB_SYSTEM_TABLESPACE_HIGH,High Oracle System Table Space Usage,20.20.20.25,,,,,2,syslog
-PH_RULE_HEAVY_HO_TCP_HOST_SCAN_FIXED_PORT,Heavy Half-Open TCP Host Scan On Fixed Port,20.20.20.26,,,,,105,netflow
+PH_RULE_HEAVY_HO_TCP_HOST_SCAN_FIXED_PORT,Heavy Half Open TCP Host Scan On Fixed Port,20.20.20.26,,,,,105,netflow
 PH_RULE_HEAVY_HO_TCP_HOST_SCAN,Heavy Half-Open TCP Host Scan,20.20.20.27,,,,,105,netflow
 PH_RULE_HEAVY_HO_TCP_PORT_SCAN,Heavy Half-Open TCP Port Scan: Single Destination,20.20.20.28,,,,,23,netflow
 PH_RULE_REPEAT_HEAVY_HO_TCP_PORT_SCAN,Heavy Half-Open TCP Port Scan: Multiple Destinations,$appServer,,,,,1,netflow

@@ -1,0 +1,2 @@
+[eventMsg]
+Jul 7 15:38:18 30.200.58.1 RTS:CEF:0|Reconnex|iGuard|3.2|-test-rule1|3|cs1=-chein-prevent cs1Label=policies cn1=0 cn1Label=MatchCount src=51.0.16.172 dst=53.0.16.172 spt= 5281 dpt= 25 suser= duser= cs2="testing" cs2Label=Subject filename="specscdrom.pdf"

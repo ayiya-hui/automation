@@ -1,0 +1,2 @@
+[eventMsg]
+<29>May 27 17:27:28 ProxySG: E0000 Access Log FTP (main): Connecting to primary 10.1.20.21 server 10.1.20.21:21.(0) NORMAL_EVENT ../alog_ftp_client.cpp 110

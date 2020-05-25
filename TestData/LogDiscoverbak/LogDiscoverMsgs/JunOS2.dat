@@ -1,0 +1,2 @@
+[eventMsg]
+<27>Nov 18 11:33:09 HOST-30.200.137.1 CL-GW-ISP-01: kmd[57362]: IKE Phase-2 Failure: IKE Phase-2 negotiation retry limit reached [spi=647c4736, src_ip=209.152.215.6, dst_ip=74.114.44.2]

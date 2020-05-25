@@ -1,0 +1,2 @@
+[eventMsg]
+Nov 3 17:07:28 HOST-30.200.130.1 CEF:0|PATownsend|IBM-QAUDJRN|1.28|1056|SV-System value changed|10|msg=SV-System value changed act=D-Adjust UTC actual_type=SV-D system_value=ADJUTC new_value=2751703461974520 old_value=2751703461991213 jrn_seq=158268434 timestamp=20151103170728328000 dproc=QTOTNTP suser=QNTP job_number=758502 eff_user=QNTP

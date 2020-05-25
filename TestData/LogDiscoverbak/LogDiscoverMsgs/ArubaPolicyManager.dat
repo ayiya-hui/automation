@@ -1,0 +1,2 @@
+[eventMsg]
+<143>2012-05-30 16:07:55,484  192.168.1.68 AO361 0 1 0 protocol=RADIUS,username=test1,login_status=REJECT,request_timestamp=2012-05-30 16:06:23-07,connection_dest_ip_address=192.168.1.68,connection_nad_ip_address=192.168.26.7,

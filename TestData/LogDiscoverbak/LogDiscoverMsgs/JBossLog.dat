@@ -1,0 +1,2 @@
+[eventMsg]
+<45>Sep 21 01:58:03 30.200.134.1 JBossEventLog 0 2015-09-01 00:08:50,156 ERROR [org.apache.coyote.ajp.AjpMessage] (ajp-0.0.0.0-8009-1) Invalid message received with signature 18245
