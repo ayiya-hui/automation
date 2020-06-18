@@ -131,6 +131,8 @@ class restApiDataHandler:
         for key in data.keys():
             mydata=data[key]
             if type(mydata.clearEventFilters)!=types.NoneType:
+                # print ('key is %s, mydata is %s')%(key, mydata)
+                # print type(mydata.clearEventFilters)
                 filterId=mydata.clearEventFilters.split('@')[-1].strip()
                 if filterId in clearEventFilters.keys():
                     setattr(mydata, 'clearEventFilters', clearEventFilters[filterId])

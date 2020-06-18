@@ -4,7 +4,7 @@ except ImportError:
     print 'No pexpect module installed'
 
 default_user='root'
-default_password='ProspectHills'
+default_password='Admin*11'
 default_prompt='#'
 exp_deny='Permission denied'
 cmd='ssh -o stricthostkeychecking=no %s@%s'
