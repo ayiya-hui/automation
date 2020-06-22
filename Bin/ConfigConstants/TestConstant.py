@@ -44,7 +44,7 @@ compare_skip_extras=['ownerId', 'custId', 'id', 'Attribute-id', 'xmlId', 'dataCh
 #constants for test setup
 default_user='admin'
 default_cust='super'
-default_password='admin*1'
+default_password='Admin*11'
 test_option_check='Check'
 test_option_nocheck='NoCheck'
 #constants for object index and xml wraper
@@ -180,7 +180,7 @@ query_xml_create_delete_attrs=['inline', 'active', 'orderBy', 'PatternClause->Gl
 
 #restApi default
 restApi_user='super/admin'
-restApi_password='admin*1'
+restApi_password='Admin*11'
 restApi_path='/phoenix/rest'
 restApi_query='query/eventQuery'
 restApi_event='query/events/%s'
