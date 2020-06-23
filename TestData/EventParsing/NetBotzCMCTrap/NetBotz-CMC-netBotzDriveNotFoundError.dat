@@ -1,7 +1,7 @@
 [reptDevIpAddr(key)]
 $localhost
 [eventMsg]
-2012-01-18 14:49:17 0.0.0.0(via UDP: [192.168.20.247]:161) TRAP2, SNMP v2c, community public                . Cold Start Trap (0) Uptime: 0:00:00.00          DISMAN-EVENT-MIB::sysUpTimeInstance = Timeticks: (50430787) 5 days, 20:05:07.87     SNMPv2-MIB::snmpTrapOID.0 = OID: SNMPv2-SMI::enterprises.5528.100.10.3.0.12          SNMPv2-SMI::enterprises.5528.100.11.1 = STRING: ""0""    SNMPv2-SMI::enterprises.5528.100.11.2 = STRING: ""0""              SNMPv2-SMI::enterprises.5528.100.11.3 = STRING: ""0""    SNMPv2-SMI::enterprises.5528.100.11.4 = STRING: ""0""              SNMPv2-SMI::enterprises.5528.100.11.5 = STRING: ""0""    SNMPv2-SMI::enterprises.5528.100.11.6 = STRING: ""0""              SNMPv2-SMI::enterprises.5528.100.11.7 = STRING: ""0""    SNMPv2-SMI::enterprises.5528.100.11.8 = STRING: ""0""              SNMPv2-SMI::enterprises.5528.100.11.9 = STRING: ""0""    SNMPv2-SMI::enterprises.5528.100.11.10 = INTEGER: 0 SNMPv2-SMI::enterprises.5528.100.11.11 = INTEGER: 0          SNMPv2-SMI::enterprises.5528.100.11.12 = INTEGER: 0 SNMPv2-SMI::enterprises.5528.100.11.13 = INTEGER: 0          SNMPv2-SMI::enterprises.5528.100.11.14 = STRING: ""0""           SNMPv2-SMI::enterprises.5528.100.11.15 = INTEGER: 0          SNMPv2-SMI::enterprises.5528.100.11.16 = INTEGER: 0
+2012-01-18 14:49:17 0.0.0.0(via UDP: [192.168.20.247]:161) TRAP2, SNMP v2c, community public                . Cold Start Trap (0) Uptime: 0:00:00.00          DISMAN-EVENT-MIB::sysUpTimeInstance = Timeticks: (50430787) 5 days, 20:05:07.87     SNMPv2-MIB::snmpTrapOID.0 = OID: SNMPv2-SMI::enterprises.5528.100.10.3.0.12          SNMPv2-SMI::enterprises.5528.100.11.1 = STRING: "0"    SNMPv2-SMI::enterprises.5528.100.11.2 = STRING: "0"              SNMPv2-SMI::enterprises.5528.100.11.3 = STRING: "0"    SNMPv2-SMI::enterprises.5528.100.11.4 = STRING: "0"              SNMPv2-SMI::enterprises.5528.100.11.5 = STRING: "0"    SNMPv2-SMI::enterprises.5528.100.11.6 = STRING: "0"              SNMPv2-SMI::enterprises.5528.100.11.7 = STRING: "0"    SNMPv2-SMI::enterprises.5528.100.11.8 = STRING: "0"              SNMPv2-SMI::enterprises.5528.100.11.9 = STRING: "0"    SNMPv2-SMI::enterprises.5528.100.11.10 = INTEGER: 0 SNMPv2-SMI::enterprises.5528.100.11.11 = INTEGER: 0          SNMPv2-SMI::enterprises.5528.100.11.12 = INTEGER: 0 SNMPv2-SMI::enterprises.5528.100.11.13 = INTEGER: 0          SNMPv2-SMI::enterprises.5528.100.11.14 = STRING: "0"           SNMPv2-SMI::enterprises.5528.100.11.15 = INTEGER: 0          SNMPv2-SMI::enterprises.5528.100.11.16 = INTEGER: 0
 [params]
 rawEventMsg=any
 eventType=NetBotz-CMC-netBotzDriveNotFoundError
@@ -16,11 +16,11 @@ sensorValueInt=0
 phEventCategory=0 (External)
 eventSeverityCat=LOW
 collectorId=any
-devPort== STRING: ""0
-sensorValue== STRING: ""0
+devPort=0
+sensorValue=0
 count=1
 phRecvTime=any
 reptDevIpAddr=$localhost
 sensorValueFraction=0.00
 reptVendor=APC
-devPortLabel== STRING: ""0
+devPortLabel=0

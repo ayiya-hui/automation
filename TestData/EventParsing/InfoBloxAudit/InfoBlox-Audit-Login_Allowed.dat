@@ -6,9 +6,8 @@
 deviceTime=any
 parserName=InfoBloxAuditParser
 eventType=InfoBlox-Audit-Login_Allowed
-destIpAddr=10.1.2.3
-srcName=HOST-10.10.10.10
-srcIpAddr=10.10.10.10
+srcName=HOST-10.1.2.3
+srcIpAddr=10.1.2.3
 reptModel=NiOS
 eventId=any
 eventParsedOk=1
